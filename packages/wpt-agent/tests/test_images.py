@@ -109,7 +109,7 @@ def test_a_failed_apt_update_is_tried_again_and_then_told_as_it_is(monkeypatch):
     # so the message names apt's error, not the base
     runs = []
     answers = [UPDATE_ERROR, UPDATE_ERROR, GOOD_POLICY]
-    monkeypatch.setattr(images, "PAUSE", 0)
+    monkeypatch.setattr(images, "PAUSES", (0, 0))
     monkeypatch.setattr(images, "_docker", lambda *args, **_: runs.append(args) or answers[len(runs) - 1])
     images._check_snapshot("layer", "debian:trixie")
     assert len(runs) == 3
@@ -151,7 +151,7 @@ def fake_build(monkeypatch, tmp_path, answers):
         (tmp_path / "id").write_text(answer)
         return b""
 
-    monkeypatch.setattr(images, "PAUSE", 0)
+    monkeypatch.setattr(images, "PAUSES", (0, 0))
     monkeypatch.setattr(images.docker, "run", run)
     return runs
 
@@ -203,7 +203,7 @@ def test_an_update_that_fetches_no_package_list_is_tried_again_like_a_failed_one
     # prints the same marker: that is no old apt either
     runs = []
     answers = [NO_LIST, GOOD_POLICY]
-    monkeypatch.setattr(images, "PAUSE", 0)
+    monkeypatch.setattr(images, "PAUSES", (0, 0))
     monkeypatch.setattr(images, "_docker", lambda *args, **_: runs.append(args) or answers[len(runs) - 1])
     images._check_snapshot("layer", "ubuntu:noble")
     assert len(runs) == 2
