@@ -93,7 +93,9 @@ def test_the_scheduler_s_times_can_be_read_from_a_run_s_record_on_the_same_setup
     answers = iter(["the", ""])
     monkeypatch.setattr("builtins.input", lambda prompt: next(answers))
     main([str(folder), "--scheduler-costs", "run", "--max-new-tokens", "3"])
-    assert capsys.readouterr().out.splitlines()[-1].startswith("the")
+    # the 3 tokens are random and may hold line breaks, so "the" starts a line
+    # of the output but that line is not always the last one
+    assert "\nthe" in capsys.readouterr().out
     with pytest.raises(SystemExit, match=f"ValueError: .*another setup: draft {block - 1}, here {block}"):
         main([str(folder), "--scheduler-costs", "other"])
     with pytest.raises(SystemExit, match="MissingObject"):
