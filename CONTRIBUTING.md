@@ -271,3 +271,13 @@ tests keep their pinned and built image in `.pytest_cache/` and in Docker, so
 only the first check on a machine, and every CI run, which starts empty, pays
 for locking and building it (maintainer's decision, 2026-10-20;
 `docs/architecture.md`, "Checks").
+
+A test checks that the code works, not that it works well (maintainer's
+decision, 2026-10-21): it runs without crashing, its computation is valid
+(finite numbers, values in their range, tokens come out, training changes
+the weights it reaches), and two routes the code says are the same give the
+same result within rounding. Whether a method is efficient or a good idea
+is a question for an evaluation (`wpt-eval`, docs/evaluation.md), never for
+a test: a test that asks for a quality, such as a trained part beating a
+simple one, fails on one processor and passes on another, by rounding and
+chance, not by a bug.

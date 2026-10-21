@@ -141,7 +141,9 @@ class Telemetry:
     def __init__(self, store, folder, command, live, echo, owner, parent=None):
         self.store, self.folder, self.command = store, folder, command
         self._live, self._echo, self._owner = live, echo, owner
-        self._lock = threading.Lock()
+        # re-entrant: an interruption (the flush thread's, or Ctrl+C) can land just after the main
+        # thread took it and leave it taken; the main thread can then still take it again in close()
+        self._lock = threading.RLock()
         self._broken = None  # why the store refused a part; then everything is refused
         self._started, self._clock = time.time(), time.monotonic()
         self._closed = False
