@@ -12,6 +12,9 @@ import pytest
 from wpt_dataset import manifest
 from wpt_dataset.errors import (BadPath, ChecksumMismatch, CrawlForbidden, CutFailed, LicenseMapError, NotText, PatchFailed,
                                 UnsupportedEntry)
+from protego import Protego
+
+from wpt_dataset import robots
 from wpt_dataset.robots import RobotsUnreachable
 from wpt_dataset.sources import compute_upstream, source_tree
 
@@ -216,7 +219,22 @@ def test_a_robots_txt_refusal_skips_that_address_and_the_next_mirror_is_tried(ki
     assert set(compute_upstream(data, data["address"], store)) == {"book.txt"}
 
 
-@pytest.mark.parametrize("answer, usable", [(410, True), (403, False), (429, False)])
+def test_robots_txt_is_asked_without_the_user_name_of_the_address(monkeypatch):
+    # a submodule address like https://user@host/... is valid, but "user@host" is not a host to ask
+    asked = []
+
+    def rules(robots_url, user_agent):
+        asked.append(robots_url)
+        return Protego.parse("User-agent: *\nDisallow: /private\n")
+
+    monkeypatch.setattr(robots, "_rules", rules)
+    robots.check("https://LeoNatan@github.com:8443/LeoNatan/repo", "git", "wpt-test")
+    assert asked == ["https://github.com:8443/robots.txt"]
+    with pytest.raises(CrawlForbidden, match="forbids"):  # the rules still apply to the address
+        robots.check("https://LeoNatan@github.com/private/repo", "git", "wpt-test")
+
+
+@pytest.mark.parametrize("answer, usable",[(410, True), (403, False), (429, False)])
 def test_only_a_missing_robots_txt_means_no_rules(answer, usable, store):
     # 404 and 410 say the site has no policy; any other answer leaves its policy unknown
     class Handler(http.server.BaseHTTPRequestHandler):

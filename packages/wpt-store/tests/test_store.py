@@ -208,3 +208,27 @@ def test_reading_documents_from_a_remote_store_keeps_at_most_one_shard_on_disk(t
             assert copies() == []  # the shard being read is already released
             seen.append((document, source, tokens.tolist()))
         assert seen == [("s/0", "s", [0, 0]), ("s/again", "s", [0, 0]), ("s/1", "s", [1, 0]), ("s/2", "s", [2, 0])]
+
+
+def test_a_refused_replace_of_an_object_already_stored_counts_as_stored(tmp_path, monkeypatch):
+    # on Windows, two processes storing the same object at once: replacing a file
+    # another process has open is refused, and the name is the content's hash
+    store = open_store((tmp_path / "store").as_uri())
+    source = tmp_path / "data.bin"
+    source.write_bytes(b"same bytes\n")
+    sha = store.put_file(source)
+    target = tmp_path / "store" / "objects" / sha[:2] / sha
+
+    def refuse(tmp, to):
+        raise PermissionError(5, "Access denied")
+
+    monkeypatch.setattr("wpt_store.os.replace", refuse)
+    store._raw_put(sha, source)  # what put_file does when both workers saw no object
+    assert target.read_bytes() == b"same bytes\n"
+    assert [p.name for p in target.parent.iterdir()] == [sha]
+
+    # nothing stored under that name: the refusal is a real failure
+    target.unlink()
+    with pytest.raises(PermissionError):
+        store.put_file(source)
+    assert list(target.parent.iterdir()) == []

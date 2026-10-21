@@ -59,15 +59,19 @@ class RobotsUnreachable(OSError):
 
 def check(address: str, kind: str, user_agent: str):
     """Raise CrawlForbidden when the robots.txt of address's site forbids
-    fetching it. For git, the two paths a download asks for are checked too."""
+    fetching it. The robots.txt is asked at the host and port alone: a user
+    name in the address is no part of the site's address (protego compares
+    only path and query, so the checked addresses keep it). For git, the two
+    paths a download asks for are checked too."""
     parsed = urlparse(address)
+    host = parsed.netloc.rpartition("@")[2]
     if parsed.scheme not in ("http", "https"):
         return
     urls = [address]
     if kind == "git":
         base = address.rstrip("/")
         urls += [f"{base}/info/refs?service=git-upload-pack", f"{base}/git-upload-pack"]
-    rules = _rules(urlunparse((parsed.scheme, parsed.netloc, "/robots.txt", "", "", "")), user_agent)
+    rules = _rules(urlunparse((parsed.scheme, host, "/robots.txt", "", "", "")), user_agent)
     for agent in ("*", WPT_AGENT, *TRAINING_CRAWLERS):
         for url in urls:
             if not rules.can_fetch(url, agent):
