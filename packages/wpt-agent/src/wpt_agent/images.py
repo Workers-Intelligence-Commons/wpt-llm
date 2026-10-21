@@ -48,8 +48,10 @@ import io
 import json
 import re
 import tarfile
+import tempfile
 import time
 from datetime import UTC, datetime
+from pathlib import Path
 
 from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
@@ -68,8 +70,10 @@ Acquire::https::snapshot.ubuntu.com::Verify-Peer "false";
 """
 SNAPSHOT_FILE = "/etc/apt/apt.conf.d/50wpt-snapshot"
 SNAPSHOT_HOSTS = ("https://snapshot.debian.org/", "https://snapshot.ubuntu.com/")
-UPDATE_ATTEMPTS = 3  # `apt-get update` in the snapshot layer: the archive's server may refuse requests for a while
-UPDATE_PAUSE = 10  # seconds between two attempts
+ATTEMPTS = 3  # `apt-get update` in the snapshot layer, and `docker build`: the archive may refuse requests for a while
+PAUSE = 10  # seconds between two attempts
+STEP_FAILED = re.compile(r"^------\n > ", re.MULTILINE)  # where BuildKit starts the block of the step that failed
+TAIL_LINES = 20  # lines of a failed build's output kept when no step is named
 UPDATE_FAILED = "apt-get update failed"  # first line the check prints when the update fails, then apt's errors
 # The update counts as failed when it exits non-zero, and also when it exits 0 but leaves no remote package
 # list (a misbehaving server): the policy then shows only dpkg's own status, an address starting with "/".
@@ -194,13 +198,43 @@ def _build(where, base, snapshot, arguments) -> str:
             info = tarfile.TarInfo(path)
             info.size, info.mode = len(data), 0o644
             archive.addfile(info, io.BytesIO(data))
-    _docker("build", "-q", "-t", layer, "--build-arg", f"BASE={base}", "-", stdin=context.getvalue())
+    _docker_build(["-t", layer, "--build-arg", f"BASE={base}"], context.getvalue())
     try:
         _check_snapshot(layer, base)
-        return _docker("build", "-q", "--build-arg", f"BASE={layer}", *arguments, "-",
-                       stdin=_context(where)).strip()
+        return _docker_build(["--build-arg", f"BASE={layer}", *arguments], _context(where))
     finally:
         _docker("rmi", layer)  # only the tag: the image built on it keeps the layer
+
+
+def _docker_build(arguments, stdin) -> str:
+    """The id of the image `docker build ARGUMENTS -` builds from the
+    context in stdin. A failed build is tried again, ATTEMPTS times in all
+    (the archive may have been down for a moment), then refused with the end
+    of docker's output: the step that failed. Docker missing or unable to
+    start is refused at once."""
+    with tempfile.TemporaryDirectory() as folder:
+        idfile = Path(folder, "id")
+        for attempt in range(1, ATTEMPTS + 1):
+            try:
+                docker.run("build", "--progress=plain", "--iidfile", str(idfile), *arguments, "-", stdin=stdin)
+                return idfile.read_text(encoding="utf-8").strip()
+            except DockerFailed as error:
+                if error.stderr is None:
+                    raise ImageError(str(error)) from None
+                if attempt == ATTEMPTS:
+                    raise ImageError(f"docker build failed after {attempt} attempts: "
+                                     f"{_failed_step(error.stderr.decode(errors='replace')) or error}") from None
+            time.sleep(PAUSE)
+
+
+def _failed_step(stderr) -> str:
+    """The end of a failed build's output: from the last block BuildKit
+    opens for a step (a line of dashes, then ` > STEP`), else its last
+    TAIL_LINES lines."""
+    starts = [found.start() for found in STEP_FAILED.finditer(stderr)]
+    if starts:
+        return stderr[starts[-1]:].strip()
+    return "\n".join(stderr.strip().splitlines()[-TAIL_LINES:])
 
 
 def _context(where) -> bytes:
@@ -218,16 +252,16 @@ def _check_snapshot(layer, base):
     """ImageError unless every package list apt reads, after an update,
     comes from a snapshot host: an apt older than APT::Snapshot ignores it
     and reads today's archive, which no lock pins. A failed update, or one
-    that fetches no package list, is tried again, UPDATE_ATTEMPTS times in
+    that fetches no package list, is tried again, ATTEMPTS times in
     all, then refused with apt's errors."""
-    for attempt in range(1, UPDATE_ATTEMPTS + 1):
+    for attempt in range(1, ATTEMPTS + 1):
         policy = _docker("run", "--rm", layer, "sh", "-c", CHECK)
         if not policy.startswith(UPDATE_FAILED):
             break
-        if attempt == UPDATE_ATTEMPTS:
+        if attempt == ATTEMPTS:
             errors = policy.removeprefix(UPDATE_FAILED).strip()
             raise ImageError(f"{base}: apt-get update failed in the snapshot layer after {attempt} attempts: {errors}")
-        time.sleep(UPDATE_PAUSE)
+        time.sleep(PAUSE)
     lists = [address for address in READ_FROM.findall(policy) if not address.startswith("/")]  # not dpkg's own status
     other = sorted({address for address in lists if not address.startswith(SNAPSHOT_HOSTS)})
     if other:  # CHECK passes only a policy with a remote list, so `lists` is not empty here

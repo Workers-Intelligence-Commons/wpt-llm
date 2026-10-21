@@ -2,10 +2,12 @@ import json
 import os
 import re
 import subprocess
+from contextlib import nullcontext
 
 import pytest
 
 from wpt_agent import ImageError
+from wpt_agent import docker
 from wpt_agent import images
 from wpt_agent.cli import main
 from wpt_dataset.repo import Repo
@@ -106,7 +108,7 @@ def test_a_failed_apt_update_is_tried_again_and_then_told_as_it_is(monkeypatch):
     # so the message names apt's error, not the base
     runs = []
     answers = [UPDATE_ERROR, UPDATE_ERROR, GOOD_POLICY]
-    monkeypatch.setattr(images, "UPDATE_PAUSE", 0)
+    monkeypatch.setattr(images, "PAUSE", 0)
     monkeypatch.setattr(images, "_docker", lambda *args, **_: runs.append(args) or answers[len(runs) - 1])
     images._check_snapshot("layer", "debian:trixie")
     assert len(runs) == 3
@@ -120,6 +122,75 @@ def test_a_failed_apt_update_is_tried_again_and_then_told_as_it_is(monkeypatch):
     assert "use a base of" not in str(refused.value)
 
 
+BUILD_ERROR = b"""#5 [2/2] RUN echo line-from-run; echo err-from-run >&2; exit 100
+------
+ > [2/2] RUN echo line-from-run; echo err-from-run >&2; exit 100:
+0.145 line-from-run
+0.145 err-from-run
+------
+Dockerfile:2
+--------------------
+   1 |     FROM busybox
+   2 | >>> RUN echo line-from-run; echo err-from-run >&2; exit 100
+   3 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/sh -c ..." did not complete successfully: exit code: 100
+"""
+
+
+def fake_build(monkeypatch, tmp_path, answers):
+    """Docker's `build` answers one by one: an image id, or the stderr of a failed build."""
+    runs = []
+
+    def run(*args, stdin=b""):
+        runs.append(args)
+        answer = answers[len(runs) - 1]
+        if isinstance(answer, bytes):
+            raise docker.failed("build", 1, answer)
+        (tmp_path / "id").write_text(answer)
+        return b""
+
+    monkeypatch.setattr(images, "PAUSE", 0)
+    monkeypatch.setattr(images.docker, "run", run)
+    return runs
+
+
+def test_a_failed_docker_build_is_tried_again_and_then_told_with_the_step_that_failed(tmp_path, monkeypatch):
+    runs = fake_build(monkeypatch, tmp_path, [BUILD_ERROR, BUILD_ERROR, "sha256:abc\n"])
+    monkeypatch.setattr(images.tempfile, "TemporaryDirectory", lambda: nullcontext(str(tmp_path)))
+    assert images._docker_build(["-t", "layer"], b"context") == "sha256:abc"
+    assert len(runs) == 3
+    assert runs[0][:3] == ("build", "--progress=plain", "--iidfile") and runs[0][-3:] == ("-t", "layer", "-")
+
+    runs = fake_build(monkeypatch, tmp_path, [BUILD_ERROR] * 3)
+    with pytest.raises(ImageError, match=r"^docker build failed after 3 attempts: ------\n > \[2/2\] RUN ") as refused:
+        images._docker_build([], b"context")
+    assert len(runs) == 3
+    assert "0.145 line-from-run\n0.145 err-from-run\n" in str(refused.value)
+    assert str(refused.value).endswith("exit code: 100")
+    assert "#5" not in str(refused.value)
+
+
+def test_a_failed_docker_build_without_a_step_keeps_the_last_20_lines(tmp_path, monkeypatch):
+    fake_build(monkeypatch, tmp_path, ["\n".join(f"line {number}" for number in range(1, 31)).encode()] * 3)
+    with pytest.raises(ImageError) as refused:
+        images._docker_build([], b"context")
+    assert str(refused.value).split(": ", 1)[1] == "\n".join(f"line {number}" for number in range(11, 31))
+
+
+def test_a_docker_that_cannot_start_is_not_tried_again(monkeypatch):
+    runs = []
+
+    def run(*args, stdin=b""):
+        runs.append(args)
+        raise docker.DockerFailed("docker build: [Errno 2] No such file or directory")
+
+    monkeypatch.setattr(images.docker, "run", run)
+    with pytest.raises(ImageError, match="^docker build: .*No such file"):
+        images._docker_build([], b"context")
+    assert len(runs) == 1
+
+
 NO_LIST = "apt-get update failed\nW: Failed to fetch https://snapshot.ubuntu.com/ Connection timed out\n"
 OTHER_POLICY = " 500 http://deb.debian.org/debian bookworm/main amd64 Packages\n"
 REMOTE = " 500 https://snapshot.debian.org/archive/debian/1 trixie/main amd64 Packages\n"
@@ -131,7 +202,7 @@ def test_an_update_that_fetches_no_package_list_is_tried_again_like_a_failed_one
     # prints the same marker: that is no old apt either
     runs = []
     answers = [NO_LIST, GOOD_POLICY]
-    monkeypatch.setattr(images, "UPDATE_PAUSE", 0)
+    monkeypatch.setattr(images, "PAUSE", 0)
     monkeypatch.setattr(images, "_docker", lambda *args, **_: runs.append(args) or answers[len(runs) - 1])
     images._check_snapshot("layer", "ubuntu:noble")
     assert len(runs) == 2

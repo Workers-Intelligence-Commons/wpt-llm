@@ -13,13 +13,18 @@ from wpt_utils.programs import MissingTool, program
 class DockerFailed(Exception):
     """Docker is missing, could not start, or exited with an error; the
     message names the docker command and what it printed, or its exit code
-    when it printed nothing."""
+    when it printed nothing. When docker ran and exited non-zero, `stderr`
+    holds what it printed; otherwise it is None."""
+
+    stderr: bytes | None = None
 
 
 def failed(command: str, code: int, stderr: bytes) -> DockerFailed:
     """The failure of `docker COMMAND` that exited with code, having printed
     stderr: "docker exec: <stderr>", or "docker exec: exit 137"."""
-    return DockerFailed(f"docker {command}: {stderr.decode(errors='replace').strip() or f'exit {code}'}")
+    error = DockerFailed(f"docker {command}: {stderr.decode(errors='replace').strip() or f'exit {code}'}")
+    error.stderr = stderr
+    return error
 
 
 def path() -> str:
