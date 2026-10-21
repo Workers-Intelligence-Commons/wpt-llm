@@ -21,7 +21,11 @@ uv run scripts/check.py
 
 It runs what CI runs, the same way (CI calls this script): `uv.lock`
 matches the project files, the Python tests, the Rust tests, the data
-rules, the changed sources (fetched and checked) and the commits (sign-off
+rules on every source (read, not downloaded), one small source fetched
+and checked (`standardebooks-joseph-conrad-ford-madox-ford-the-nature-of-a-crime-5366b0f3`,
+a short book fixed at one git commit: it proves the fetch works; the sources
+a pull request adds or changes are fetched by the maintainer with
+`check --fetch`) and the commits (sign-off
 on every commit, an allowed signature on every commit that changes a
 `decision`), compared with what a push would send. A green run means a
 green CI. It needs a git clone with an upstream branch; elsewhere pass

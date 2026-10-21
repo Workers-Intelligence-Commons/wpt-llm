@@ -462,10 +462,13 @@ branch, as a push would:
   their text), patches are numbered without gaps, mixture
   weights add up to 1 and pool expressions parse, recipes name existing
   recipes.
-- `wpt-dataset check --changed <base>`: changed sources are fetched; their
-  checksum, cuts, patches, license map and text are checked. When anything
-  under `data/images/` changed, every source with files in the `task`
-  format is checked too, so a task naming a missing image is caught.
+- `wpt-dataset check --fetch standardebooks-joseph-conrad-ford-madox-ford-the-nature-of-a-crime-5366b0f3`:
+  one short book, fixed at one git commit so its download never changes,
+  is fetched, and its checksum, cuts, patches, license map and text are
+  checked, which proves the fetch and its checks work. The sources a pull
+  request adds or changes are not fetched here: the maintainer runs
+  `wpt-dataset check --fetch` on them before merging (maintainer's
+  decision, 2026-10-21).
 - `wpt-dataset check-commits <range>`: DCO sign-off on every commit, and a
   signature from an allowed key on every commit that changes a decision.
 

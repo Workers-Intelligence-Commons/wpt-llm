@@ -236,11 +236,10 @@ task's `files/`; every other file of the format is a task folder's `check`
 or under its `files/`. `wpt-dataset check --fetch` checks each folder
 against `packages/wpt-dataset/src/wpt_dataset/schemas/task.schema.json`,
 and checks that its `image` is a folder of `data/images/` holding a
-`Dockerfile`. CI checks the sources a change touches
-(`wpt-dataset check --changed`, run by `scripts/check.py`); when anything
-under `data/images/` changed, it also checks every source with files in the
-`task` format, so a task naming an image that is gone is caught before the
-change merges. The same check refuses a task whose sizes break the rule
+`Dockerfile`. CI does not fetch the sources a change touches: the
+maintainer runs `wpt-dataset check --fetch` on a pull request's sources
+before merging, which catches a task naming an image that is gone
+(maintainer's decision, 2026-10-21). The same check refuses a task whose sizes break the rule
 on `disk` and `memory` above, naming its `task.json`. The step reads the tasks whose `task.json` carries the tag.
 Like every file of a source, task files are UTF-8 text.
 

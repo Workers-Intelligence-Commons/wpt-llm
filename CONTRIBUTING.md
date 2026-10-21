@@ -258,8 +258,14 @@ uv run scripts/check.py      # every check CI runs, before you push
 ```
 
 `scripts/check.py` is what CI runs too: the tests of every package, the Rust
-tests, the data rules, and the checks on changed sources and on your commits,
-compared with the upstream branch. A green run means a green CI. There is no
+tests, the data rules on every source (read, not downloaded), the download and
+check of one small source (`standardebooks-joseph-conrad-ford-madox-ford-the-nature-of-a-crime-5366b0f3`,
+a short book fixed at one git commit, so its download never changes), which
+proves the fetch and its checks work, and the checks on your commits, compared with the
+upstream branch. A green run means a green CI. Neither check.py nor CI
+downloads the sources a pull request adds or changes: the maintainer runs
+`uv run wpt-dataset check --fetch` on them before merging (maintainer's
+decision, 2026-10-21). There is no
 local hook. The tests run in parallel, each process with one PyTorch thread and
 no GPU, as in CI (a plain `uv run pytest` uses the GPU), on as many processes
 as both 75% of the cores and 75% of the available memory (2.5 GB per process)

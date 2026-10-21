@@ -18,8 +18,9 @@ In order, each one run even when an earlier one failed:
               every test, serially)
     rust      the tokenizer's Rust tests
     data      wpt-dataset check: the data rules
-    sources   wpt-dataset check --changed BASE: changed sources fetched and checked
-              (every source with tasks too when data/images/ changed)
+    sources   wpt-dataset check --fetch SMALL_SOURCE: one small source fetched and
+              checked, to prove the fetch and its checks work; the sources a
+              pull request adds or changes are fetched by the maintainer
     commits   wpt-dataset check-commits RANGE: sign-offs and decision signatures
 
 BASE defaults to where this branch left its upstream branch (for example
@@ -49,6 +50,10 @@ IMAGE_CODE = ("packages/wpt-agent/src/wpt_agent/images.py", "packages/wpt-agent/
               "packages/wpt-dataset/src/wpt_dataset/schemas/image-licenses.schema.json")
 # whether an image's folder changed since the revision: only the service layer names the data folder
 IMAGES_CHANGED = "import sys; from wpt_dataset.repo import Repo; print(Repo('.').changed_since(sys.argv[1])[1])"
+# the one source fetched, a short book fixed at one git commit, so its download never
+# changes: it proves the fetch and its checks work; the sources a pull request adds or
+# changes are fetched by the maintainer (maintainer's decision, 2026-10-21)
+SMALL_SOURCE = "standardebooks-joseph-conrad-ford-madox-ford-the-nature-of-a-crime-5366b0f3"
 
 
 def available_memory():
@@ -135,7 +140,7 @@ def checks(base, range_):
          f"{sizing}\n{why}"),
         ("rust", [[UV, "run", "rustc", "--version"], [UV, "run", "cargo", "test"]], rust, None),
         ("data", [[UV, "run", "wpt-dataset", "check"]], ROOT, None),
-        ("sources", [[UV, "run", "wpt-dataset", "check", "--changed", base]], ROOT, None),
+        ("sources", [[UV, "run", "wpt-dataset", "check", "--fetch", SMALL_SOURCE]], ROOT, None),
         ("commits", [[UV, "run", "wpt-dataset", "check-commits", range_]], ROOT, None),
     ]
 
@@ -154,7 +159,7 @@ def run(commands, folder):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--base", help="revision to compare sources with (default: where HEAD left its upstream)")
+    parser.add_argument("--base", help="revision the push starts from, which decides whether the image build test runs (default: where HEAD left its upstream)")
     parser.add_argument("--range", dest="range_", help="commits to check (default: BASE..HEAD)")
     args = parser.parse_args()
     base = args.base or upstream_base()
