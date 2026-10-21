@@ -552,6 +552,11 @@ BSD-4-Clause, the old OpenSSL license, "responsible AI" and model licenses
   (`package.json`, `Cargo.toml`, `composer.json`, `pyproject.toml`), with
   that license's official text in `text`. A folder that declares no
   license stays out (maintainer's decision, 2026-10-16).
+- **A license notice without the license's text** (a `LICENSE` that only
+  says, for example, "Licensed under the Apache License, Version 2.0" and
+  links to it) counts like a license declared in package metadata: the
+  entry's `text` holds the notice, then that license's official text
+  (maintainer's decision, 2026-10-21).
 - **A git submodule** is another repository with its own license. Its
   files enter at the commit the parent pins, with a license entry of
   their own when that license is on the allowed list (a parent under
