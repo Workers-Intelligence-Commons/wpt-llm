@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/englee_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:3e62b36a9dd538d2969f1d2b83d5b3fd43610982db786b0b90c3c72f47afc647",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "englee_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Isaac Leeser Tanakh, eBible.org, https://ebible.org/englee/",
+      "text": "Isaac Leeser Tanakh, eBible.org, https://ebible.org/englee/\n\nThe edition's own statement of rights (from eBible.org's page for this\ntranslation):\n> \"Isaac Leeser Tanakh\nThe Isaac Leeser Tanakh (Jewish Bible)\nPublic Domain\nLanguage: English\nDialect: archaic British\nTranslation by: Isaac Leeser\"\n\nWhy this is public domain:\nFirst published in 1853-1854 (revised edition 1894) in the United States. Isaac Leeser died in 1868 (Wikidata), so the work is public domain in the United States (its country of origin) and in the United Kingdom.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain\ntext, a front file, the copyright page (copr.htm, left out of the source),\nand eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page\n(https://ebible.org/details.php?id=englee) and the edition's own files.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "en",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

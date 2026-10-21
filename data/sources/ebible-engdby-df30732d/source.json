@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/engDBY_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:539a6136b333643c6280e9c24eb8414a4aa522ca6ca61c5d3d6f3d001a5a0925",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "engDBY_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Darby Translation, eBible.org, https://ebible.org/engDBY/",
+      "text": "Darby Translation, eBible.org, https://ebible.org/engDBY/\n\nThe edition's own statement of rights (from eBible.org's page for this translation):\n> \"Public Domain\nLanguage: English\nDialect: archaic British\nTranslation by: J. N. Darby\"\n(from eBible.org's page for this translation, https://ebible.org/engDBY/copyright.htm)\n\nWhy this is public domain:\nTranslator: John Nelson Darby, 1800-1882 (died 1882, United Kingdom). The edition used is the 1884 printing (the eBible/Crosswire module name is engDBY1884eb). Its US status: published in 1884, before 1931, so public domain in the United States. Its origin-country status: Darby died in 1882 in the United Kingdom, so the work is public domain there under life plus 70 years (expired 1953). No other translator or reviser is named by eBible for this text.\n\nSources of these facts:\neBible.org copyright page (https://ebible.org/engDBY/copyright.htm) and details page (https://ebible.org/details.php?id=engDBY); Darby's life dates from English Wikipedia (https://en.wikipedia.org/wiki/John_Nelson_Darby).\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "en",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

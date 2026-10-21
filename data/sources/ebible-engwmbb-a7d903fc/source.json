@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/engwmbb_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:51745b8a680f86cd20240e29b68c6ac8c1821e797a45059400950845cd2abcde",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "engwmbb_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "World Messianic Bible British Edition, eBible.org, https://ebible.org/engwmbb/",
+      "text": "World Messianic Bible British Edition, eBible.org, https://ebible.org/engwmbb/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/engwmbb/copyright.htm):\n> The World Messianic Bible is not copyrighted, however \"World Messianic Bible\" is a Trademark.\n> You may copy, publish, proclaim, distribute, redistribute, sell, give away, quote, memorize, read publicly, broadcast, transmit, share, back up, post on the Internet, print, reproduce, preach, teach from,\n> and use the World Messianic Bible as much as you want, and others may also do so. All we ask is that if you CHANGE the actual text of the World Messianic Bible in any way, you not call the result the World Messianic Bible\n> any more. This is to avoid confusion, not to limit your freedom. The Holy Bible is God's Word. It belongs to God. He gave it to us freely, and we who have worked on this translation freely give it to you by dedicating it\n> to the Public Domain.\n> Donations to help with the expenses of this project and thus help others have free access to the Word of God may be made to us, but are not required.\n> Please see https://MLJohnson.org/partner/ for more about partnering with us.\n> This edition uses British/International spelling.\n> August 2022 stable text\n\nWhy this is public domain:\nText: the World Messianic Bible, British edition, August 2022 stable text, derived from the World English Bible; no Apocrypha. Editor and main translator: Michael Paul Johnson (living, United States), who is also the owner of eBible.org (WEB FAQ: \"The senior editor and main translator is Michael Paul Johnson\"; eBible.org's legal page names eBible.org a registered business name running mljohnson.org and WorldEnglish.Bible). The other contributors are not listed (WEB FAQ: \"We don't publish a complete list\"); the project's dedication covers them. Base text: the American Standard Version, first published in 1901 in the United States, public domain there since it was published before 1931. The maintainer's rule (2026-10-16): a translation project's own public-domain dedication, in the project's own words and contradicted by nothing from the same holder, counts as the authors' own. The statement asks that a changed text not be called by the translation's name, \"a condition of our trademark use\" (WEB FAQ). The maintainer's decision (2026-10-16): this restricts only the name, not copying or changing the text, so it does not contradict the dedication.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=engwmbb), the edition's copyright page (https://ebible.org/engwmbb/copyright.htm), https://ebible.org/eng-web/webfaq.htm; https://ebible.org/legal.php; https://mljohnson.org/; https://worldenglish.bible/; https://copyright.cornell.edu/publicdomain.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "en",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

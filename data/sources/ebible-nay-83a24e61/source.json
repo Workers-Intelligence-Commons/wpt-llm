@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/nay_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:118c8cb7d7988565802b65f1073951ab4f36e67a9de47a317889980ddf525425",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "nay_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Tungarar Jehobald YARILDEWALLIN, eBible.org, https://ebible.org/nay/",
+      "text": "Tungarar Jehobald YARILDEWALLIN, eBible.org, https://ebible.org/nay/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/nay/copyright.htm):\n> Extracts from the Holy Bible in the Narriyeri language of Australia\n> Public Domain\n> Language: Ngarrindjeri (Narrinyeri)\n> 2019-05-24\n\nWhy this is public domain:\nTranslator: George Taplin, 1831-1879, credited on the title page. Text: extracts from Genesis, Exodus, Matthew and John, published in 1864 in South Australia (reprinted 1926). US: published before 1931. Australia: life plus 70 years ended in 1949.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=nay), the edition's copyright page (https://ebible.org/nay/copyright.htm), https://en.wikipedia.org/wiki/George_Taplin; https://en.wikipedia.org/wiki/List_of_countries%27_copyright_lengths; https://copyright.cornell.edu/publicdomain.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "nay",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

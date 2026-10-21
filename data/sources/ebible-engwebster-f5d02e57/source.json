@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/engwebster_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:d2b9bb70a5ddba1c8e8ffd330828abe2e76e4a434ce4d5f7bf3611549f43c6c3",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "engwebster_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Noah Webster Bible, eBible.org, https://ebible.org/engwebster/",
+      "text": "Noah Webster Bible, eBible.org, https://ebible.org/engwebster/\n\nThe edition's own statement of rights (from eBible.org's page for this\ntranslation):\n> \"Noah Webster Bible\nThe Holy Bible, Containing the Old and New Testaments, in the Common Version, with Amendments of the language by Noah Webster, LL.D.\nPublic Domain\nLanguage: English\nDialect: archaic American\nTranslation by: Noah Webster\"\n\nWhy this is public domain:\nFirst published in 1833 in the United States. Noah Webster died in 1843 (Wikidata), so the work is public domain in the United States (its country of origin, and published long before 1931).\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain\ntext, a front file, the copyright page (copr.htm, left out of the source),\nand eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page\n(https://ebible.org/details.php?id=engwebster) and the edition's own files.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "en",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

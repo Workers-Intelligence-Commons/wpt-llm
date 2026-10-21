@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/engwmb_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:6a7008a093dd0a35d94f98dcd49d01d2c7082a88bb63adc270175d60c0168c36",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "engwmb_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "World Messianic Bible, eBible.org, https://ebible.org/engwmb/ The World Messianic Bible\nThe World Messianic Bible is not copyrighted, however \"World Messianic Bible\" is a Trademark.",
+      "text": "World Messianic Bible, eBible.org, https://ebible.org/engwmb/\n\nThe edition's own statement of rights (from eBible.org's page for this\ntranslation):\n> \"The World Messianic Bible is a Public Domain translation of the Holy Bible into modern English as spoken among Messianic Jews. It has also been called the World English Bible: Messianic Edition and the Hebrew Names Version.\"\n> \"The World Messianic Bible\nThe World Messianic Bible is not copyrighted, however \"World Messianic Bible\" is a Trademark.\"\n> \"You may copy, publish, proclaim, distribute, redistribute, sell, give away, quote, memorize, read publicly, broadcast, transmit, share, back up, post on the Internet, print, reproduce, preach, teach from,\nand use the World Messianic Bible as much as you want, and others may also do so. All we ask is that if you CHANGE the actual text of the World Messianic Bible in any way, you not call the result the World Messianic Bible\nany more. This is to avoid confusion, not to limit your freedom. The Holy Bible is God's Word. It belongs to God. He gave it to us freely, and we who have worked on this translation freely give it to you by dedicating it\nto the Public Domain.\"\n\nWhy this is public domain:\nA Messianic edition of the World English Bible. eBible.org states that it is not copyrighted and the translation team dedicates it to the public domain, as quoted below; a dedication of this kind applies everywhere, in the United States and in the country of origin.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain\ntext, a front file, the copyright page (copr.htm, left out of the source),\nand eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page\n(https://ebible.org/details.php?id=engwmb) and the edition's own files.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "en",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

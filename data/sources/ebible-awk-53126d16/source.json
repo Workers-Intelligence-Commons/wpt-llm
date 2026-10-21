@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/awk_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:edd3d38ab82107568767653668bba95cec5ac81fbadb8b44cd3ea7c353ad5f50",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "awk_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "EUANGELION UNNI TA JESU-ÚBA CHRIST-KO-BA UPATOARA LUKA-UMBA, eBible.org, https://ebible.org/awk/",
+      "text": "EUANGELION UNNI TA JESU-ÚBA CHRIST-KO-BA UPATOARA LUKA-UMBA, eBible.org, https://ebible.org/awk/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/awk/copyright.htm):\n> The Gospel According to Luke in the Awabakal language of Australia\n> Public Domain\n> Language: Awabakalkoba (Awabakal)\n> 2020-03-03\n\nWhy this is public domain:\nTranslator: Lancelot Edward Threlkeld, 1788-1859; editor: John Fraser, 1834-1904. Text: part 2 of \"An Australian Language as Spoken by the Awabakal\", Sydney, Government Printer Charles Potter, 1892. US: published before 1931. Australia: life plus 70 years; Fraser died in 1904, so the term ended in 1974.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=awk), the edition's copyright page (https://ebible.org/awk/copyright.htm), https://en.wikipedia.org/wiki/Lancelot_Threlkeld; https://en.wikipedia.org/wiki/John_Fraser_(ethnologist); https://en.wikipedia.org/wiki/List_of_countries%27_copyright_lengths; https://copyright.cornell.edu/publicdomain.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "awk",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

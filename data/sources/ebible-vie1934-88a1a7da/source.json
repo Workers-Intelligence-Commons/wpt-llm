@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/vie1934_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:9e008dfaa0f18479950cb7df5825f60ea35c065a28d944b99d0a56d48dd60063",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "vie1934_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Kinh Thánh, eBible.org, https://ebible.org/vie1934/",
+      "text": "Kinh Thánh, eBible.org, https://ebible.org/vie1934/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/vie1934/copyright.htm):\n> The Holy Bible in the Vietnamese language (1923)\n> Public Domain\n> Language: Tiếng Việt (Vietnamese)\n> Translation by: William Cadman (1883-1948)\n> Contributor: Christian and Missionary Alliance\n> This free Bible is provided to you courtesy of eBible.org.\n> NT first published 1923, OT first published 1925. The New Testament permanently and irrevocably entered the Public Domain on January 1, 2019 due to copyright expiration. The Old Testament entered the Public Domain on January 1, 2021. It was probably already in the Public Domain due to failure to comply with formalities earlier.\n> 2022-06-09\n\nWhat was found:\nText: the Vietnamese Bible of William Cadman (1883-1948), Grace Hazenberg Cadman (1876-1946), John Drange Olsen and Phan Khôi (1887-1959); New Testament 1923, Old Testament 1925-26, complete Bible 1934.\n\nWhy it stays out: missing fact: whether eBible's text matches the 1923 and 1925-26 printings or holds changes made for the 1934 edition, and John Drange Olsen's death year.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=vie1934), the edition's copyright page (https://ebible.org/vie1934/copyright.htm), https://en.wikipedia.org/wiki/Bible_translations_into_Vietnamese; https://en.wikipedia.org/wiki/Phan_Kh%C3%B4i.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "vi",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "missing fact: whether eBible's text matches the 1923 and 1925-26 printings or holds changes made for the 1934 edition, and John Drange Olsen's death year"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

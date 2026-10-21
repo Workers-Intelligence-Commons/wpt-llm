@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/engWycliffe_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:e206742ff74751a89957802ec09a285878bb665fc5d0f33a20c5d2ed21687ac7",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "engWycliffe_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Wycliffe Bible, eBible.org, https://ebible.org/engWycliffe/",
+      "text": "Wycliffe Bible, eBible.org, https://ebible.org/engWycliffe/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/engWycliffe/copyright.htm):\n> This is the Pentateuch and Gospels from The Holy Bible, containing the Old and New Testaments, with the apocryphal books, in the earliest English version made from the latin Vulgate by John Wycliffe and his followers. c.1395\n> Public Domain\n> Language: Middle English (English)\n> Dialect: Middle\n> Translation by: John Wycliffe\n> 2016-11-08\n\nWhy this is public domain:\nText: the later Wycliffite version (about 1395), Pentateuch and Gospels, as edited by Josiah Forshall (1795-1863) and Frederic Madden (1801-1873), Oxford, The University Press, 1850. Translators: John Wycliffe (1328-1384), John Purvey (about 1353-1428), Nicholas of Hereford (active 1382-1391). US: published before 1931. United Kingdom: life plus 70 years; the last named editor died in 1873. The digital transcription writes the letter yogh as \"y\", a mechanical change that adds no author.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=engWycliffe), the edition's copyright page (https://ebible.org/engWycliffe/copyright.htm), https://en.wikipedia.org/wiki/Wycliffe%27s_Bible; https://archive.org/details/ENGW850_DBS_HS; English Wikipedia pages of Wycliffe and Madden; https://en.wikipedia.org/wiki/List_of_countries%27_copyright_lengths; https://copyright.cornell.edu/publicdomain.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "en",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

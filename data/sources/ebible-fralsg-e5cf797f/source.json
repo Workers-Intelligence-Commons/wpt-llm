@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/fraLSG_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:b746be52c7936e4f94dfcbc8fb9cff59756719eb68413887055efb0f8a375586",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "fraLSG_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Louis Segond 1910, eBible.org, https://ebible.org/fraLSG/",
+      "text": "Louis Segond 1910, eBible.org, https://ebible.org/fraLSG/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/fraLSG/copyright.htm):\n> The Holy Bible in French, Louis Segond version of 1910\n> Public Domain\n> Language: français (French)\n> Translation by: Louis Segond\n> Contributor: Public Domain\n> The first edition of the Bible Segond was published in 1910\n> Cette Bible est dans le domaine public. Il n'est pas protégé par copyright.\n> This Bible is in the Public Domain. It is not copyrighted.\n> 2026-10-13\n\nWhat was found:\nText: Louis Segond's Bible (Segond died 1885) in the British and Foreign Bible Society's 1910 revision, with modern introductions and headings of unknown authorship.\n\nWhy it stays out: missing fact: the author, source and date of the modern book introductions, section headings and cross-references in eBible's text, and whether the 1910 revision names its revisers.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=fraLSG), the edition's copyright page (https://ebible.org/fraLSG/copyright.htm), https://en.wikipedia.org/wiki/Louis_Segond; https://fr.wikipedia.org/wiki/Bible_Segond; https://ebible.org/fraLSG/GEN01.htm.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "fr",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "missing fact: the author, source and date of the modern book introductions, section headings and cross-references in eBible's text, and whether the 1910 revision names its revisers"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

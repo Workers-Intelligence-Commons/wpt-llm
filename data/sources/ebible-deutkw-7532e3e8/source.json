@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/deutkw_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:492d5d2f50974b7ab378bf2dd4a4229836d00ba485468298b3a1d3e1e9f2d94a",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "deutkw_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Textbibel von Kautzsch und Weizsäcker, eBible.org, https://ebible.org/deutkw/",
+      "text": "Textbibel von Kautzsch und Weizsäcker, eBible.org, https://ebible.org/deutkw/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/deutkw/copyright.htm):\n> The Holy Bible in German, translation by Kautzsch und Weizsäcker 1906\n> Public Domain\n> Language: Deutsch (German, Standard)\n> Dieser Textbibel wird Ihnen mit freundlicher Genehmigung von eBible.org zur Verfügung gestellt, mit der Hilfe unserer Partner, die für den Erhalt unserer Dienste spenden.\n> This Public Domain Bible text is provided to you courtesy of eBible.org with help from our partners who donate to keep our servers and services running.\n> Quelle: Textbibel.de (Hans J. Herbst Mitarbeit bei der Digitalisierung) ist frei!\n> 2025-08-30\n\nWhy this is public domain:\nText: the Kautzsch-Weizsäcker \"Textbibel\", 2nd edition, Tübingen, J. C. B. Mohr, 1906. People: Emil Kautzsch 1841-1910, Carl Heinrich Weizsäcker 1822-1899 (New Testament), and the Old Testament contributors Friedrich Baethgen 1849-1905, Hermann Guthe 1849-1936, Adolf Kamphausen 1829-1910, Rudolf Kittel 1853-1929, Max Löhr 1864-1931, Karl Marti 1855-1925, Wilhelm Rothstein 1853-1926, Rudolf Rüetschi 1820-1903, Viktor Ryssel 1849-1905, Carl Siegfried 1830-1903, Albert Socin 1844-1899. US: published before 1931. Germany: life plus 70 years; the last death, Guthe's, was in 1936, so the term ended in 2006. eBible names Textbibel.de and Hans J. Herbst for the digitization, which adds no author.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=deutkw), the edition's copyright page (https://ebible.org/deutkw/copyright.htm), https://de.wikipedia.org/wiki/Textbibel; https://archive.org/details/text-1906-nt-apg; Wikidata entries of each contributor; https://de.wikipedia.org/wiki/Carl_Siegfried; https://en.wikipedia.org/wiki/List_of_countries%27_copyright_lengths; https://copyright.cornell.edu/publicdomain.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "de",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

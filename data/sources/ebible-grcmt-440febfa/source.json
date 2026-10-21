@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/grcmt_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:2f31d32cfea6c9080fedd7a7c0c36f3c1067223a187da0aaceea5fd66ec0fd80",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "grcmt_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Η Καινή Διαθήκη, eBible.org, https://ebible.org/grcmt/",
+      "text": "Η Καινή Διαθήκη, eBible.org, https://ebible.org/grcmt/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/grcmt/copyright.htm):\n> The Greek New Testament according to the Byzantine Text form. Robinson-Pierpont 2018 edition\n> Public Domain\n> Language: Ελληνικά (Greek, Ancient)\n> Dialect: Koine\n> Translation by: Maurice A. Robinson and William G. Pierpont\n> This public domain Bible translation is brought to you courtesy of eBible.org.\n> If you would like to make a donation to help keep free Bible access like this going, please visit https://eBible.org/give.php.\n> 2024-01-09\n\nWhy this is public domain:\nText: the Robinson-Pierpont Byzantine Textform Greek New Testament, 2018 edition, United States. The Robinson-Pierpont Byzantine Textform's notice reads: \"This compilation is Copyright (C) 2018 by Maurice A. Robinson. Anyone is permitted to copy ... All rights to this text are released to everyone\" (https://byzantinetext.com/wp-content/uploads/2021/03/robinson-pierpont-2018-gnt-edition.pdf; the 2005 edition's notice, https://byzantinetext.com/?p=111, is the same in substance). The maintainer's decision (2026-10-16): a copyright line beside a full release of all rights counts as a public-domain dedication. Editors: Maurice A. Robinson (living, United States) and William G. Pierpont.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=grcmt), the edition's copyright page (https://ebible.org/grcmt/copyright.htm), https://byzantinetext.com/wp-content/uploads/2021/03/robinson-pierpont-2018-gnt-edition.pdf; https://byzantinetext.com/?p=111.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "grc",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

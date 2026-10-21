@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/pon_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:3cb7de62fd5a112ab52e0778d9b0e5782e890c30843cdd885cd6efbafa5406bf",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "pon_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Kadede Kap Pjam Akan, eBible.org, https://ebible.org/pon/",
+      "text": "Kadede Kap Pjam Akan, eBible.org, https://ebible.org/pon/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/pon/copyright.htm):\n> The New Testament and Psalms in the Pohnpeian language of the Federated States of Micronesia (old translation, using old alphabet)\n> Public Domain\n> Language: Pohnpeian\n> 2023-07-17\n\nWhat was found:\nText: the New Testament and Psalms in old Pohnpeian spelling; eBible's file name says 1922, and no translator is named anywhere reached.\n\nWhy it stays out: missing fact: the translators and their death years, and the year and place of publication of this old Pohnpeian text.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=pon), the edition's copyright page (https://ebible.org/pon/copyright.htm), https://ebible.org/pdf/pon/pon_prt.pdf.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "pon",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "missing fact: the translators and their death years, and the year and place of publication of this old Pohnpeian text"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

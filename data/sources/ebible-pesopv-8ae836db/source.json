@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/pesOPV_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:0f09340ea337832b38807187863d375d6a9436db2466db11e8868e51f6da90c9",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "pesOPV_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "ترجمه قدیم, eBible.org, https://ebible.org/pesOPV/",
+      "text": "ترجمه قدیم, eBible.org, https://ebible.org/pesOPV/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/pesOPV/copyright.htm):\n> The Old Persian Version of the Holy Bible in the Persian language of Iran\n> Public Domain\n> Language: فارسی (Persian)\n> Translation by: Wycliffe Bible Translators\n> 2015-04-21\n\nWhat was found:\nText: the Persian Old Version (Henry Martyn 1812, William Glen 1845, revised by Robert Bruce, published 1895); eBible's text uses modern Persian spelling and has a section heading.\n\nWhy it stays out: missing fact: whether eBible's text is the 1895 edition unchanged or a modern edit (modern spelling and headings), the place of the 1895 publication, and the translators' death years.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=pesOPV), the edition's copyright page (https://ebible.org/pesOPV/copyright.htm), https://www.bible.com/versions/136.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "fa",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "missing fact: whether eBible's text is the 1895 edition unchanged or a modern edit (modern spelling and headings), the place of the 1895 publication, and the translators' death years"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

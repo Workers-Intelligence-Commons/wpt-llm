@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/nld_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:cbe2b33c2a0941b3dd1ca033f235f678229d8550ff96e270706b262069e39d4c",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "nld_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "De Heilige Schrift 1917, eBible.org, https://ebible.org/nld/",
+      "text": "De Heilige Schrift 1917, eBible.org, https://ebible.org/nld/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/nld/copyright.htm):\n> The Holy Bible in Dutch, 1917\n> Public Domain\n> Language: Nederlands (Dutch)\n> 2023-01-23\n\nWhat was found:\nText: the Statenvertaling (1637), titled 1917 by eBible, in spelling from after 1947.\n\nWhy it stays out: missing fact: which edition of the Statenvertaling supplied eBible's text (its spelling is from after 1947), and whether that edition's holder claims rights in its spelling changes.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=nld), the edition's copyright page (https://ebible.org/nld/copyright.htm), https://nl.wikipedia.org/wiki/Statenvertaling.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "nl",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "missing fact: which edition of the Statenvertaling supplied eBible's text (its spelling is from after 1947), and whether that edition's holder claims rights in its spelling changes"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

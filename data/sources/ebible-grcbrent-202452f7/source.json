@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/grcbrent_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:f1d99e3dfe299aa947703a40d332f70d21d34f7fba8e5681c919a1adbd6d3f01",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "grcbrent_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "μετάφραση των εβδομήκοντα, eBible.org, https://ebible.org/grcbrent/",
+      "text": "μετάφραση των εβδομήκοντα, eBible.org, https://ebible.org/grcbrent/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/grcbrent/copyright.htm):\n> The Greek Septuagint with Apocrypha, compiled by Sir Lancelot C. L. Brenton\n> Public Domain\n> Language: Ἑλληνική (Greek, Ancient)\n> Dialect: Koine\n> 2026-04-08\n\nWhy this is public domain:\nCompiler: Sir Lancelot Charles Lee Brenton, 1807-1862, United Kingdom; the Greek text itself is ancient. Text: the Greek of his Septuagint with Apocrypha, London, Samuel Bagster and Sons. US: published before 1931. United Kingdom: life plus 70 years ended in 1932.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=grcbrent), the edition's copyright page (https://ebible.org/grcbrent/copyright.htm), https://en.wikipedia.org/wiki/Lancelot_Charles_Lee_Brenton; https://archive.org/details/septuagintversio00bren; https://archive.org/details/septuagintversio1900bren; https://www.legislation.gov.uk/ukpga/1988/48/section/12; https://copyright.cornell.edu/publicdomain.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "grc",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

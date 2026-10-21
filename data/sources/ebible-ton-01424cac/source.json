@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/ton_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:95fca9ccfa67fda782383cc6c85e64611db067f94e8ba06de8eb2164f521afde",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "ton_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "KO E TOHI TAPU KĀTOA, eBible.org, https://ebible.org/ton/",
+      "text": "KO E TOHI TAPU KĀTOA, eBible.org, https://ebible.org/ton/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/ton/copyright.htm):\n> The Holy Bible in the Tongan language of Tonga, Revised West Version\n> Public Domain\n> Language: Tongan\n> Translation by: James Baxley\n> Cover and title page artist: Kitione Vailea\n> Digital editions and layout: Michael Johnson\n> Web site: https://ebible.org/ton/\n> Translator support: https://worldoutreach.org/325\n> 2025-10-25\n\nWhat was found:\nText: the Revised West Version (2014), revised by James Baxley from Thomas West's Wesleyan text (London 1860-62).\n\nWhy it stays out: missing fact: a public-domain dedication in James Baxley's own words, and whether the Bible Society of the South Pacific holds rights in the Revised West Version.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=ton), the edition's copyright page (https://ebible.org/ton/copyright.htm), https://worldoutreach.org/325; https://ebible.org/details.php?id=ton.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "to",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "missing fact: a public-domain dedication in James Baxley's own words, and whether the Bible Society of the South Pacific holds rights in the Revised West Version"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

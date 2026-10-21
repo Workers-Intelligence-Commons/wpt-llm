@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/spaRV1909_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:82d3448995f78c72d4d31c2b1039bbbe147ed9622f3e46db3de27581bed987a6",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "spaRV1909_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Santa Biblia — Reina Valera 1909, eBible.org, https://ebible.org/spaRV1909/",
+      "text": "Santa Biblia — Reina Valera 1909, eBible.org, https://ebible.org/spaRV1909/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/spaRV1909/copyright.htm):\n> The Holy Bible in Spanish, Reina Valera translation of 1909\n> Public Domain\n> Language: Español (Spanish)\n> Dialect: Castellano 1909\n> Translation by: Reina y Valera\n> Dominio Público\n> 2013-12-13\n\nWhat was found:\nText: the Reina-Valera revision called 1909, by a committee (Victoriano D. Baez, Carlos W. Dress, Enrique C. Thomson, Juan Howland, Francisco Diez) according to Spanish Wikisource.\n\nWhy it stays out: missing fact: the year and place of first publication of this revision (1909 or 1923), whether its 5-member committee is named in it, and if so their death years.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=spaRV1909), the edition's copyright page (https://ebible.org/spaRV1909/copyright.htm), https://es.wikisource.org/wiki/Biblia_Reina-Valera_1909.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "es",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "missing fact: the year and place of first publication of this revision (1909 or 1923), whether its 5-member committee is named in it, and if so their death years"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

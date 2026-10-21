@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/engoebcw_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:58161abaad258b010b58ac9c2b9af67af6819dc43f014864eb2278e517ac66cd",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "engoebcw_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Open English Bible (Commonwealth Spelling), eBible.org, https://ebible.org/engoebcw/",
+      "text": "Open English Bible (Commonwealth Spelling), eBible.org, https://ebible.org/engoebcw/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/engoebcw/copyright.htm):\n> The Holy Bible, Open English Bible translation, with Commonwealth spelling\n> Public Domain\n> Language: English\n> Translation by: OpenEnglishBible.org\n> Please see OpenEnglishBible.org/ for information about this translation.\n> 2026-10-13\n\nWhat was found:\nText: the Open English Bible, Commonwealth spelling, release 2025.6, by Russell Allen and contributors (living), dedicated by the project: \"The OEB is under a Creative Commons Zero licence - that is, it is in the public domain.\" Its preface says the Old Testament leans on \"the work of James Moffatt\" (1870-1944) without naming the edition.\n\nWhy it stays out: missing fact: which edition of James Moffatt's Old Testament the Open English Bible's Old Testament leans on (1924-25 would be public domain in the US, the 1935 revision may not be).\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=engoebcw), the edition's copyright page (https://ebible.org/engoebcw/copyright.htm), https://openenglishbible.org/; https://openenglishbible.org/faq/; https://raw.githubusercontent.com/openenglishbible/Open-English-Bible/master/legal/CONTRIBUTORS.md.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "en",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "missing fact: which edition of James Moffatt's Old Testament the Open English Bible's Old Testament leans on (1924-25 would be public domain in the US, the 1935 revision may not be)"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

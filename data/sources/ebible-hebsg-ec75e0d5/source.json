@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/hebsg_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:5d55481a9594ec5a02d601d2ca8ecf359478397a0a2a7904b2b921e7af0482a0",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "hebsg_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "הברית החדשה של סלקינסון, eBible.org, https://ebible.org/hebsg/",
+      "text": "הברית החדשה של סלקינסון, eBible.org, https://ebible.org/hebsg/\n\nThe edition's own statement of rights (from eBible.org's page for this\ntranslation):\n> \"The New Testament in Modern Hebrew, translated by Salkinson and Ginsberg\nPublic Domain\nLanguage: עברית (Hebrew)\"\n\nWhy this is public domain:\nTranslators: Isaac Edward Salkinson (born 1820 in Vilna, died 5 June 1883 in Vienna) and Christian David Ginsburg (born 25 December 1831 in Warsaw, died 7 March 1914 in Palmers Green, England). The New Testament was published posthumously under Ginsburg's supervision in Vienna in 1886.\nUnited States: first published in 1886, before 1931, so public domain in the United States.\nCountry of origin (Austria, where it was published): life plus 70 years. Salkinson's term ended at the end of 1953, so the text is public domain there from 1954. Ginsburg's term ended at the end of 1984, which is also before 2026 under the United Kingdom's life plus 70 rule, his country.\n\nSources of these facts:\nhttps://en.wikipedia.org/wiki/Isaac_Salkinson (dates and the 1886 Vienna publication)\nhttps://en.wikipedia.org/wiki/Christian_David_Ginsburg (dates)\nhttps://ebible.org/hebsg/copyright.htm (statement and title)\nhttps://ebible.org/details.php?id=hebsg (translators, file name hebsg1886eb)\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "he",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

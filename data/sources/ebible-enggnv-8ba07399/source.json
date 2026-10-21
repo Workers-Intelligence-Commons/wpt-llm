@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/enggnv_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:33bf65e7a89dbd8be13b42d41ebaa3eea2f1185163bf4184353743d2fc75721b",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "enggnv_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Geneva Bible 1599, eBible.org, https://ebible.org/enggnv/",
+      "text": "Geneva Bible 1599, eBible.org, https://ebible.org/enggnv/\n\nThe edition's own statement of rights (from eBible.org's page for this\ntranslation):\n> \"Geneva Bible 1599\nThe Geneva Bible in Old English of 1599\nPublic Domain\nLanguage: English\nDialect: Old\n\nThis digital copy is freely available world-wide, with no copyright restrictions, courtesy of eBible.org and many others. Note that the spelling used is the original spelling, which is not modern English.\"\n\nWhy this is public domain:\nFirst published in 1599 in Geneva and London. Everyone who made it died more than three centuries ago, so it is public domain in the United Kingdom (its country of origin) and in the United States.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain\ntext, a front file, the copyright page (copr.htm, left out of the source),\nand eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page\n(https://ebible.org/details.php?id=enggnv) and the edition's own files.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "en",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

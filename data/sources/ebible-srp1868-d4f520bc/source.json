@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/srp1868_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:a89e513347278ca7f659cc07c6de2343a9c97aaa207dfccb95511be740960069",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "srp1868_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Свето писмо или Библија Превод Даничић-Караџић, eBible.org, https://ebible.org/srp1868/",
+      "text": "Свето писмо или Библија Превод Даничић-Караџић, eBible.org, https://ebible.org/srp1868/\n\nThe edition's own statement of rights (from eBible.org's page for this translation):\n> \"Public Domain\nLanguage: српски (Serbian)\nОвај превод Библије је у јавном власништву (није заштићен ауторским правима).\"\n(from eBible.org's page for this translation, https://ebible.org/srp1868/copyright.htm)\n\nWhy this is public domain:\nTranslators: Vuk Stefanović Karadžić, 1787-1864 (New Testament, first published in Vienna in 1847); Đuro Daničić, 1825-1882 (Old Testament, published in Belgrade in 1867, died in Zagreb in 1882). The two were combined and printed together in 1868 (per English Wikipedia's Serbian Bible article, https://en.wikipedia.org/wiki/Serbian_Bible). US: published 1847 to 1868, before 1931, so public domain in the United States. Origin country: Serbia (publication in Vienna and Belgrade). Both translators died long enough ago that their works are public domain under any term from 50 to 70 years: Karadžić in 1864 and Daničić in 1882. Both translators died in 1882 or earlier, so the text is public domain in every country with a term of life + 140 years or less, whatever the exact rule of Serbia or Austria.\n\nSources of these facts:\neBible.org copyright page (https://ebible.org/srp1868/copyright.htm); life dates from English Wikipedia (https://en.wikipedia.org/wiki/Vuk_Karad%C5%BEi%C4%87 and https://en.wikipedia.org/wiki/%C4%90ura_Dani%C4%8Di%C4%87) and the publication history from https://en.wikipedia.org/wiki/Serbian_Bible.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "sr",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

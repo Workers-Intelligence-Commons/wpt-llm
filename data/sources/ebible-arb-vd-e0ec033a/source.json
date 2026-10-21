@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/arb-vd_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:bdc607b69cd1fd705babf20f5ad426bbd4aed18213709d4bbd0a9dd26027fb98",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "arb-vd_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "الكتاب المقدس باللغة العربية، فان دايك, eBible.org, https://ebible.org/arb-vd/",
+      "text": "الكتاب المقدس باللغة العربية، فان دايك, eBible.org, https://ebible.org/arb-vd/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/arb-vd/copyright.htm):\n> Arabic Van Dyck translation of the Holy Bible\n> Public Domain\n> Language: العربية (Arabic)\n> Dialect: standard\n> Translation by: Syrian Mission\n> Contributor: American Bible Society\n> 2020-08-03\n\nWhat was found:\nText: the Van Dyck Arabic Bible (New Testament 1860, Old Testament 1865, Beirut; its translators died by 1895), with modern section headings of unknown authorship.\n\nWhy it stays out: missing fact: the author, date and edition of the modern section headings in eBible's text (the 1865 Van Dyck text itself is public domain).\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=arb-vd), the edition's copyright page (https://ebible.org/arb-vd/copyright.htm), https://en.wikipedia.org/wiki/Eli_Smith; https://ebible.org/arb-vd/MAT05.htm.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "ar",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "missing fact: the author, date and edition of the modern section headings in eBible's text (the 1865 Van Dyck text itself is public domain)"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

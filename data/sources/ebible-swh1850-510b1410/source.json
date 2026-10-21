@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/swh1850_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:a260f35b0ed20c1382e9fd975a094121a352744a1129decfc1dab0f2d26a169e",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "swh1850_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Biblia Takatifu, eBible.org, https://ebible.org/swh1850/",
+      "text": "Biblia Takatifu, eBible.org, https://ebible.org/swh1850/\n\nThe edition's own statement of rights (from eBible.org's page for this translation):\n> \"Public Domain\nLanguage: Kiswahili (Swahili)\nDialect: Kimvita\nTranslation by: Dr. Johann Ludvig Krapf\"\n(from eBible.org's page for this translation, https://ebible.org/swh1850/copyright.htm)\n\nWhy this is public domain:\nTranslator: Johann Ludwig Krapf, 1810-1881, a German missionary in East Africa; eBible says his translation of portions of the New Testament was completed in 1850. US: a work published before 1931 is public domain in the United States, and a work left unpublished is public domain there 70 years after its author's death (Krapf's ended in 1951). Origin country: Krapf lived until 1881, so the text is public domain in every country with a term of life + 140 years or less, whatever its country of first publication. Nobody besides Krapf is named for this text.\n\nSources of these facts:\neBible.org copyright page (https://ebible.org/swh1850/copyright.htm) and details page (https://ebible.org/details.php?id=swh1850); Krapf's life dates from English Wikipedia (https://en.wikipedia.org/wiki/Johann_Ludwig_Krapf).\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "sw",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

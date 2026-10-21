@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/dif_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:e3d8535c2c0b5212d076e08e234a2b35d83a76fe1a3a2c1d3c8e7487f58f24ec",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "dif_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "TESTAMENTA MARRA, eBible.org, https://ebible.org/dif/",
+      "text": "TESTAMENTA MARRA, eBible.org, https://ebible.org/dif/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/dif/copyright.htm):\n> The New Testament in the Dieri language of Australia\n> Public Domain\n> Language: Dieri\n> Translation by: J. G. REUTHER, C. STREHLOW, jaura jinkmietja wulana\n> 2023-07-26\n\nWhy this is public domain:\nTranslators: Johann Georg Reuther, 1861-1914, and Carl Strehlow, 1871-1922, with Dieri speakers named in eBible's statement as a group. Text: \"Testamenta marra\", Tanunda, South Australia, G. Auricht, 1897 (preface dated Bethesda, November 1895). US: published before 1931. Australia: life plus 70 years; Strehlow died in 1922, so the term ended in 1992.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=dif), the edition's copyright page (https://ebible.org/dif/copyright.htm), https://en.wikipedia.org/wiki/Carl_Strehlow; Wikidata Q94531617; https://nla.gov.au/nla.obj-1184515693/view; https://en.wikipedia.org/wiki/List_of_countries%27_copyright_lengths; https://copyright.cornell.edu/publicdomain.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "dif",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

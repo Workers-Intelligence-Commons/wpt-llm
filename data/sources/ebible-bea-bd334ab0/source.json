@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/bea_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:568cac3f0f873b923e8c3f0ec779185e7ca3bec2ac5ee463685b3656ef70af1f",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "bea_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "OOTECH OOCHU TAKEHNIYA TINKLES ST. MARK, eBible.org, https://ebible.org/bea/",
+      "text": "OOTECH OOCHU TAKEHNIYA TINKLES ST. MARK, eBible.org, https://ebible.org/bea/\n\nThe edition's own statement of rights (from eBible.org's page for this translation):\n> \"Public Domain\nLanguage: Dane Zaa (Beaver)\nTranslation by: Rev. A. C. Garrioch\nOriginally published in 1886 by the British and Foriegn Bible Society. This book is now in the PUBLIC DOMAIN.\"\n(from eBible.org's page for this translation, https://ebible.org/bea/copyright.htm)\n\nWhy this is public domain:\nTranslator: Rev. Alfred Campbell Garrioch, 1848-1934 (died 1934, Canada; the Church Missionary Society Anglican missionary who was born in Manitoba and retired to Portage la Prairie). First publication: 1886 (eBible says British and Foreign Bible Society; the Canadiana catalogue record at https://www.canadiana.ca/view/oocihm.14252 lists an SPCK London edition in 1886). US: published in 1886, before 1931, so public domain in the United States. Origin country: Canada (translator's country) and the United Kingdom (place of publication). Canada's life plus 50 years ended in 1985 for a 1934 death; the United Kingdom's life plus 70 years ended in 2005. The translator died in 1934, so the text is public domain in every country with a term of life + 90 years or less, whatever the exact rule of Canada or the United Kingdom. Nobody besides Garrioch is named for this text.\n\nSources of these facts:\neBible.org copyright page (https://ebible.org/bea/copyright.htm); Garrioch's life dates and publication history from bible.com (https://www.bible.com/versions/2327-be86sy-makr and https://www.bible.com/versions/1664) and the Canadiana record (https://www.canadiana.ca/view/oocihm.14252).\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "bea",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

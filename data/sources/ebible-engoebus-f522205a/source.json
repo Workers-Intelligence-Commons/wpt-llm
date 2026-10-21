@@ -1,0 +1,50 @@
+{
+  "schema": 5,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/engoebus_readaloud.zip",
+  "revision": "2026-10-21",
+  "checksum": "sha256:21c8f472fb51f2f4bbfc882e64e432fb3b6f7c6d579241fccdeaae00d237665c",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "engoebus_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Open English Bible (U. S. spelling), eBible.org, https://ebible.org/engoebus/",
+      "text": "Open English Bible (U. S. spelling), eBible.org, https://ebible.org/engoebus/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/engoebus/copyright.htm):\n> The Holy Bible, Open English Bible translation, U. S. spelling edition\n> Public Domain\n> Language: English\n> Translation by: OpenEnglishBible.org\n> Please see OpenEnglishBible.org/ for information about this translation.\n> 2026-10-13\n\nWhat was found:\nText: the Open English Bible, release 2025.6, by Russell Allen and contributors (living), dedicated by the project: \"The OEB is under a Creative Commons Zero licence - that is, it is in the public domain.\" Its bases: the Twentieth Century New Testament (1904, anonymous), John Edgar McFadyen's Psalms (1916; he died 1933), Charles Foster Kent (1910-1922, US), the Jewish Publication Society 1917 (US). Its preface says the Old Testament leans on \"the work of James Moffatt\" (1870-1944) without naming the edition.\n\nWhy it stays out: missing fact: which edition of James Moffatt's Old Testament the Open English Bible's Old Testament leans on (1924-25 would be public domain in the US, the 1935 revision may not be).\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=engoebus), the edition's copyright page (https://ebible.org/engoebus/copyright.htm), https://openenglishbible.org/; https://openenglishbible.org/faq/; https://raw.githubusercontent.com/openenglishbible/Open-English-Bible/master/legal/CONTRIBUTORS.md.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "en",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "missing fact: which edition of James Moffatt's Old Testament the Open English Bible's Old Testament leans on (1924-25 would be public domain in the US, the 1935 revision may not be)"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}
