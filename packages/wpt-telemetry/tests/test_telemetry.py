@@ -290,6 +290,22 @@ def test_a_ctrl_c_while_a_broken_record_closes_still_ends_in_record_error(tmp_pa
     assert "end.json" not in store.record_files(telemetry.folder)
 
 
+def test_an_interruption_that_left_the_lock_taken_does_not_stop_the_record_from_closing(tmp_path):
+    # an interruption can land just after the main thread took the lock and
+    # leave it taken; close() must still return, not wait for that hold
+    store = open_store((tmp_path / "store").as_uri())
+    closed = threading.Event()
+
+    def run():  # stands for the main thread; a daemon, so that a hang cannot hold the tests
+        telemetry = Telemetry.start(store, "wpt-example", [], "d", env_file=tmp_path / ".env", environ={})
+        telemetry._lock.acquire()  # never released
+        telemetry.close()
+        closed.set()
+
+    threading.Thread(target=run, daemon=True).start()
+    assert closed.wait(10)
+
+
 def test_a_record_failure_while_the_record_starts_ends_in_record_error_not_a_stop(tmp_path, monkeypatch):
     # a background send that fails must never reach start() as a Ctrl+C:
     # that would end the command with 130, the code of a stop by the user
