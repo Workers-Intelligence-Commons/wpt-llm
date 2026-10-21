@@ -309,9 +309,13 @@ machine (the base by digest, the snapshot, every package as
 the lock pins. Like `lock-image`, and through the same code, it first
 checks that apt, after `apt-get update`, reads its package lists only
 from snapshot.debian.org or snapshot.ubuntu.com, and refuses to build
-otherwise. A failed `docker build` (in `lock-image` or `build-image`) is
-tried again, 3 times in all, and its error ends with the output of the
-step that failed. The `grpo` step never builds an image: it stops before any
+otherwise. A failed `docker build` (in `lock-image` or `build-image`) and
+a failed `apt-get update` in that check are tried again by the same rule,
+6 times in all, with a growing pause before each new try: 10 s, 30 s,
+1 min, 2 min and 5 min, about 9 minutes of waiting, because
+snapshot.ubuntu.com was once down for over 2 hours (maintainer's decision,
+2026-10-21). The error of a failed build ends with the output of the step
+that failed. The `grpo` step never builds an image: it stops before any
 attempt when a task's image is not built for the folder's current files,
 and names the command that builds it. A changed Dockerfile or lock needs
 a new build.
