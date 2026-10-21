@@ -636,7 +636,10 @@ for that check.
     ... All rights to this text are released to everyone"). A label written
     by a distributor counts only when the distributor is the project, as
     eBible.org's owner is the World English Bible's editor (maintainer's
-    decisions, 2026-10-16).
+    decisions, 2026-10-16). Exception: Robert Adam Boyd's three editions
+    on eBible.org (`ebible-engasvbt`, `ebible-englxxup`, `ebible-grctr`)
+    are admitted on eBible.org's label alone, as no statement in Boyd's
+    own words was found (maintainer's decision alone, 2026-10-21).
   - **A text revised by an unnamed committee or reviser** and published
     before 1926 is an anonymous work, in the public domain everywhere; the
     named people (the original translator) are still checked
@@ -660,6 +663,10 @@ for that check.
 - **A distributor's date is not proof of the edition**: compare a passage
   with the edition it names; modern spelling, section headings or
   introductions mean a later edition, whose editors must be found.
+  Exception: the Arabic Van Dyck Bible (`ebible-arb-vd`), whose vowel
+  marks, absent from the 1867 printing, are by unnamed editors, is
+  admitted because they change no word (maintainer's decision alone,
+  2026-10-21).
 - **"No AI training" wishes are honored** even when the license would allow
   use: a statement by the owner in a README or a machine-readable
   text-and-data-mining reservation (EU Directive 2019/790, article 4) leaves
