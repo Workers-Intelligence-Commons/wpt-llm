@@ -379,6 +379,12 @@ License (its section 1.12).
 
 **When in doubt, refuse.** A doubtful content is left out rather than used.
 
+**The linking test.** A license is allowed only if, were the content code,
+a program under the project's license (AGPL-3.0-or-later) could statically
+link it and be distributed. This holds inside every family below: a license
+that fails it is refused, whatever its family (maintainer's decision,
+2026-10-21).
+
 The allowed list below is closed: `packages/wpt-dataset/src/wpt_dataset/licenses.py`
 holds it, and these are the licenses we recommend to contributors. Each one
 lets its content end up inside AGPL-3.0-or-later weights: it is permissive,
@@ -409,14 +415,6 @@ says so in its row.
 | `Artistic-2.0` | FSF: compatible through its section 4(c)(ii) | Artistic-1.0 (old Perl) is refused; Perl's "Artistic or GPL" is written as an expression (below) |
 | `BlueOak-1.0.0` | Blue Oak Council's model permissive license | no FSF ruling; its text sets no condition the AGPL forbids |
 
-### Data
-
-| License (SPDX) | Why it is allowed | What to check |
-| --- | --- | --- |
-| `PDDL-1.0` | public-domain dedication for databases; Open Definition: recommended | |
-| `CDLA-Permissive-2.0` | section 3.1: no restriction on Results, which section 5.4 says include machine learning models | sharing the data itself needs the license text, which WPT never does (it holds pointers) |
-| `CDLA-Sharing-1.0` | section 3.5: no obligation on Results (maintainer's decision) | Results may hold no more than a de minimis part of the data (section 1.11): measure memorization (`wpt-eval FOLDER memorization`) before publishing weights trained on it |
-
 ### GPLv3 family
 
 | License (SPDX) | Why it is allowed | What to check |
@@ -435,21 +433,11 @@ says so in its row.
 | `CECILL-2.1` | FSF: "explicitly compatible with the GNU GPL" | CeCILL-B and CeCILL-C are refused |
 | `EPL-2.0 OR GPL-2.0-or-later`, with or without `WITH Classpath-exception-2.0` | the GPL "secondary license" the file designates | EPL-2.0 alone is refused (FSF: incompatible without that designation) |
 
-### Credit only: Creative Commons and the public sector
+### Credit only: Creative Commons Attribution 4.0
 
 | License (SPDX) | Why it is allowed | What to check |
 | --- | --- | --- |
-| `CC-BY-4.0` | FSF: "compatible with all versions of the GNU GPL"; credit may be given "in any reasonable manner", including a link (section 3(a)(2)); Creative Commons: for training, credit "could be a simple link to the source of the dataset" | NC and ND variants are refused; the credit names the creator, the copyright notice, the license, a link and whether the work was changed; a label that names no version (peS2o's "CCBY") is CC BY, written `CC-BY-4.0` with a note in `text` that no version is named: every version permits the use (maintainer's decision, 2026-10-16) |
-| `CC-BY-1.0`, `CC-BY-2.0`, `CC-BY-2.5`, `CC-BY-2.5-AU`, `CC-BY-3.0`, `CC-BY-3.0-AT`, `CC-BY-3.0-AU`, `CC-BY-3.0-DE`, `CC-BY-3.0-IGO`, `CC-BY-3.0-NL`, `CC-BY-3.0-US`, `LicenseRef-CC-BY-2.0-FR` | Open Definition: open; no FSF ruling (maintainer's decision) | these versions ask to keep the license's address with every copy, which `text` carries; another country version is added to the list by name when a source needs it |
-| `ODC-By-1.0` | Open Definition: recommended | it covers a database, not the documents in it: each document needs its own license |
-| `OGL-UK-3.0` | the licence states it is "compatible with the Creative Commons Attribution License 4.0 and the Open Data Commons Attribution License" | it excludes personal data, third-party rights and logos; default credit: "Contains public sector information licensed under the Open Government Licence v3.0." |
-| `OGL-Canada-2.0` | Open Definition: conformant | |
-| `etalab-2.0` | Licence Ouverte 2.0, built to be compatible with CC BY (2.0 and later), the OGL and ODC-BY | credit: the source (at least the licensor's name) and the date of its last update |
-| `DL-DE-BY-2.0`, `DL-DE-ZERO-2.0` | Open Definition: conformant; allows change, merging and any purpose | BY: the provider's name, "dl-de/by-2-0" with its link, the dataset's link; changes are marked as such |
-| `NLOD-2.0` | its section 9 states compatibility with the OGL | |
-| `LicenseRef-IODL-2.0` | Italian Open Data License 2.0, a variant of the UK OGL | not in SPDX: its text comes from the publisher |
-| `LicenseRef-PDL-1.0` | Japan's Public Data License 1.0; the Japanese government states it is compatible with CC BY 4.0 | each dataset may add limits in an "Important note" section, often only in Japanese: read it |
-| `LicenseRef-OPL-UK-3.0` | the UK Open Parliament Licence v3.0, modelled on `OGL-UK-3.0` with the same terms: free use with attribution (maintainer's decision, 2026-10-16) | it excludes third-party material, personal data and the Parliament's logos; not in SPDX: its text comes from the publisher; credit: "Contains Parliamentary information licensed under the Open Parliament Licence v3.0." |
+| `CC-BY-4.0` | FSF: "compatible with all versions of the GNU GPL"; credit may be given "in any reasonable manner", including a link (section 3(a)(2)); Creative Commons: for training, credit "could be a simple link to the source of the dataset" | NC and ND variants are refused; the credit names the creator, the copyright notice, the license, a link and whether the work was changed; a label that names no version (peS2o's "CCBY") is CC BY, written `CC-BY-4.0` with a note in `text` that no version is named (maintainer's decision, 2026-10-16, kept on 2026-10-21 on that decision alone: its first reason, that every version permits the use, fell when the versions before 4.0 failed the linking test) |
 
 ### Several licenses on one file
 
@@ -504,6 +492,40 @@ License, CDDL-1.0, EPL-1.0, EPL-2.0 alone, EUPL-1.1,
 MPL-2.0-no-copyleft-exception, CeCILL-B, CeCILL-C, Artistic-1.0,
 BSD-4-Clause, the old OpenSSL license, "responsible AI" and model licenses
 (RAIL, Llama), and anything without a license or with all rights reserved.
+
+Creative Commons Attribution before 4.0 fails the linking test: the FSF
+rules only on 4.0 ("compatible with all versions of the GNU GPL"), and
+Creative Commons states that its licenses "are currently not compatible
+with the major software licenses"
+(<https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software>).
+Refused: `CC-BY-1.0`, `CC-BY-2.0`, `CC-BY-2.5`, `CC-BY-2.5-AU`,
+`CC-BY-3.0`, `CC-BY-3.0-AT`, `CC-BY-3.0-AU`, `CC-BY-3.0-DE`,
+`CC-BY-3.0-IGO`, `CC-BY-3.0-NL`, `CC-BY-3.0-US` and
+`LicenseRef-CC-BY-2.0-FR`; a file under one of them is left out
+(maintainer's decision, 2026-10-21).
+
+### Waiting for the linking test
+
+The data and public-sector licenses below were allowed before the linking
+test. None has a ruling on linking with GPL or AGPL code, so each one is a
+doubt and stays refused until it is checked against the test, one by one
+(maintainer's decision, 2026-10-21). The facts gathered for each are kept
+for that check.
+
+| License (SPDX) | Why it was allowed | What to check |
+| --- | --- | --- |
+| `PDDL-1.0` | public-domain dedication for databases; Open Definition: recommended | |
+| `CDLA-Permissive-2.0` | section 3.1: no restriction on Results, which section 5.4 says include machine learning models | sharing the data itself needs the license text, which WPT never does (it holds pointers) |
+| `CDLA-Sharing-1.0` | section 3.5: no obligation on Results (maintainer's decision) | Results may hold no more than a de minimis part of the data (section 1.11): measure memorization (`wpt-eval FOLDER memorization`) before publishing weights trained on it |
+| `ODC-By-1.0` | Open Definition: recommended | it covers a database, not the documents in it: each document needs its own license |
+| `OGL-UK-3.0` | the licence states it is "compatible with the Creative Commons Attribution License 4.0 and the Open Data Commons Attribution License" | it excludes personal data, third-party rights and logos; default credit: "Contains public sector information licensed under the Open Government Licence v3.0." |
+| `OGL-Canada-2.0` | Open Definition: conformant | |
+| `etalab-2.0` | Licence Ouverte 2.0, built to be compatible with CC BY (2.0 and later), the OGL and ODC-BY | credit: the source (at least the licensor's name) and the date of its last update |
+| `DL-DE-BY-2.0`, `DL-DE-ZERO-2.0` | Open Definition: conformant; allows change, merging and any purpose | BY: the provider's name, "dl-de/by-2-0" with its link, the dataset's link; changes are marked as such |
+| `NLOD-2.0` | its section 9 states compatibility with the OGL | |
+| `LicenseRef-IODL-2.0` | Italian Open Data License 2.0, a variant of the UK OGL | not in SPDX: its text comes from the publisher |
+| `LicenseRef-PDL-1.0` | Japan's Public Data License 1.0; the Japanese government states it is compatible with CC BY 4.0 | each dataset may add limits in an "Important note" section, often only in Japanese: read it |
+| `LicenseRef-OPL-UK-3.0` | the UK Open Parliament Licence v3.0, modelled on `OGL-UK-3.0` with the same terms: free use with attribution (maintainer's decision, 2026-10-16) | it excludes third-party material, personal data and the Parliament's logos; not in SPDX: its text comes from the publisher; credit: "Contains Parliamentary information licensed under the Open Parliament Licence v3.0." |
 
 ## Rules
 
