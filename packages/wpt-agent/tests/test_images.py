@@ -120,6 +120,58 @@ def test_a_failed_apt_update_is_tried_again_and_then_told_as_it_is(monkeypatch):
     assert "use a base of" not in str(refused.value)
 
 
+NO_LIST = "apt-get update failed\nW: Failed to fetch https://snapshot.ubuntu.com/ Connection timed out\n"
+OTHER_POLICY = " 500 http://deb.debian.org/debian bookworm/main amd64 Packages\n"
+REMOTE = " 500 https://snapshot.debian.org/archive/debian/1 trixie/main amd64 Packages\n"
+DPKG = " 100 /var/lib/dpkg/status\n"
+
+
+def test_an_update_that_fetches_no_package_list_is_tried_again_like_a_failed_one(monkeypatch):
+    # apt-get update exits 0 when the server misbehaves, and the check then
+    # prints the same marker: that is no old apt either
+    runs = []
+    answers = [NO_LIST, GOOD_POLICY]
+    monkeypatch.setattr(images, "UPDATE_PAUSE", 0)
+    monkeypatch.setattr(images, "_docker", lambda *args, **_: runs.append(args) or answers[len(runs) - 1])
+    images._check_snapshot("layer", "ubuntu:noble")
+    assert len(runs) == 2
+
+    runs.clear()
+    answers[:] = [NO_LIST] * 3
+    with pytest.raises(ImageError, match=r"^ubuntu:noble: apt-get update failed in the snapshot layer after 3 attempts: "
+                                         r"W: Failed to fetch https://snapshot\.ubuntu\.com/ Connection timed out$") as refused:
+        images._check_snapshot("layer", "ubuntu:noble")
+    assert len(runs) == 3
+    assert "use a base of" not in str(refused.value)
+
+
+def test_a_base_that_reads_other_hosts_is_refused_at_once(monkeypatch):
+    runs = []
+    monkeypatch.setattr(images, "_docker", lambda *args, **_: runs.append(args) or OTHER_POLICY)
+    with pytest.raises(ImageError, match=r"^debian:bookworm: apt reads http://deb\.debian\.org/debian, not the dated archive"):
+        images._check_snapshot("layer", "debian:bookworm")
+    assert len(runs) == 1
+
+
+@pytest.mark.skipif(os.name == "nt", reason="the check is a shell command")
+@pytest.mark.parametrize("update_exits, policy, prints", [
+    (0, REMOTE + DPKG, REMOTE + DPKG),
+    (0, DPKG, "apt-get update failed\nW: a warning\n"),  # exit 0, yet no remote package list
+    (100, REMOTE, "apt-get update failed\nW: a warning\n"),
+])
+def test_the_check_prints_the_policy_only_when_the_update_left_a_remote_list(tmp_path, monkeypatch, update_exits,
+                                                                              policy, prints):
+    stand_ins = tmp_path / "bin"
+    stand_ins.mkdir()
+    (stand_ins / "apt-get").write_text(f"#!/bin/sh\necho 'W: a warning'\nexit {update_exits}\n")
+    (stand_ins / "apt-cache").write_text(f"#!/bin/sh\nprintf '%s' '{policy}'\n")
+    for stand_in in stand_ins.iterdir():
+        stand_in.chmod(0o755)
+    monkeypatch.setenv("PATH", f"{stand_ins}{os.pathsep}{os.environ['PATH']}")
+    check = images.CHECK.replace("/tmp/", f"{tmp_path}/")  # the container's own /tmp, here the test's folder
+    assert subprocess.run(["sh", "-c", check], capture_output=True, text=True).stdout == prints
+
+
 def a_repository(tmp_path):
     for folder in ("data/sources", "data/images/tiny"):
         (tmp_path / folder).mkdir(parents=True)
