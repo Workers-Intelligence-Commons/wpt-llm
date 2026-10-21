@@ -316,14 +316,27 @@ x86 machine with `ATEN_CPU_CAPABILITY=avx512 OMP_NUM_THREADS=2` (or
 `avx2`), where one to six tokens' counts in a layer move to the next bin
 and no token goes to other experts.
 
-The drafter test (`test_sampling.py`) asks that a drafter trained for 40
-steps be kept more often than a uniform one by 0.01 of the drafts. The
-uniform drafter is kept at 0.473; the trained one at 0.492 with
-`ATEN_CPU_CAPABILITY=avx512` and 0.516 with `avx2` on 2 threads, and 0.522
-on GitHub's runner, when the whole file runs, and the value also moves with
-the tests run before it in the same process. The margin was 0.05 and is
-lowered because the processor's rounding moves the trained drafter's
-choices (maintainer's decision, 2026-10-18).
+A test that trains in segments and compares the gradients with the whole
+window's (`assert_same` in `test_parts.py`) accepts a difference of 2e-5
+of the largest gradient, beyond a relative 1e-3 (maintainer's decision,
+2026-10-21). The difference is the rounding of each math library path:
+on GitHub's runners, up to 8.3e-7 on AMD EPYC processors and 8.2e-6 on
+Intel Xeon ones, which their math libraries compute by other routes; on
+AMD, 4.4e-6 with oneDNN switched off and 4.3e-5 with
+`MKL_CBWR=COMPATIBLE`. The former limit, 1e-6, failed on every Intel
+runner.
+
+The drafter test (`test_sampling.py`) checks only that training works:
+the losses of a few steps are finite, every weight they reach changes,
+and the writer verifies the trained drafter's drafts. It does not ask
+that they be kept more often than uniform drafts (maintainer's decision,
+2026-10-21, replacing the 0.01 margin of 2026-10-18): the test's model has
+random weights, so its next-token distribution is nearly uniform
+(entropy 3.75 of at most 3.91), uniform drafts are already kept at about
+0.78 per position, and over 6 seeds a drafter trained for 40 or 200 steps
+was kept no more often than uniform drafts on average (+0.0003), and less
+often after 400. With one seed the margin went from -0.031 on Intel
+runners to +0.075 on AMD ones.
 
 ### Strategies: how the hardware is used
 

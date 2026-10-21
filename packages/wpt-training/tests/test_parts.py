@@ -122,7 +122,9 @@ def assert_routed_alike(got, expected, routing):
         assert (bins - bins_w).abs().max() <= 1
 
 
-def assert_same(got, expected, routing, tolerance=1e-6):
+def assert_same(got, expected, routing, tolerance=2e-5):
+    # tolerance: of the largest gradient; whole and in segments differ by up to 8.3e-7
+    # on GitHub's AMD runners and 8.2e-6 on its Intel ones (docs/training.md)
     (loss, indexer, grads, routed), (loss_w, indexer_w, grads_w, routed_w) = got, expected
     assert abs(loss - loss_w) < 1e-5 * abs(loss_w) and abs(indexer - indexer_w) < 1e-4 * abs(indexer_w)
     assert indexer_w > 0
