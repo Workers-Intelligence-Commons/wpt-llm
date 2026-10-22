@@ -61,9 +61,17 @@ def test_a_key_can_only_be_added_by_an_allowed_key(kit, wpt_git, tmp_path):
         "but is not signed by an allowed key"]
 
 
-def test_gpg_signed_decisions_pass_with_an_allowed_gpg_key(kit, wpt_git, tmp_path):
+@pytest.fixture
+def gnupg_home(tmp_path):
+    """A GnuPG home whose agent is stopped when the test ends."""
     home = tmp_path / "gnupg"
     home.mkdir(mode=0o700)
+    yield home
+    subprocess.run([shutil.which("gpgconf"), "--homedir", str(home), "--kill", "all"], capture_output=True)
+
+
+def test_gpg_signed_decisions_pass_with_an_allowed_gpg_key(kit, wpt_git, gnupg_home):
+    home = gnupg_home
     env = {**os.environ, "GNUPGHOME": str(home)}
     subprocess.run(["gpg", "--batch", "--passphrase", "", "--quick-gen-key", "T <t@example.org>", "ed25519", "sign", "never"],
                    env=env, capture_output=True, check=True)

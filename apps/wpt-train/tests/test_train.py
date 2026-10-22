@@ -20,6 +20,7 @@ import wpt_telemetry
 from wpt_store import LocalStore
 from wpt_telemetry import FLUSH_THREAD
 from wpt_tokenizer import Tokenizer
+from wpt_utils.device import select_device
 from wpt_train import main
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -99,7 +100,7 @@ def test_training_ends_with_the_drafter_against_the_final_weights_and_the_schedu
                                                            ).hexdigest()
     recorded = built.store.read_record(run.folder, COSTS_FILE)
     # maintainer's decision, 2026-10-18: the times carry the setup they were measured on
-    setup = costs_setup(load_model(folder).config, 1, DRAFT, "cpu")
+    setup = costs_setup(load_model(folder).config, 1, DRAFT, select_device())
     assert json.loads(recorded)["setup"] == setup
     costs = replayed_costs(recorded, setup)
     assert len(costs) == DRAFT + 1 and all(seconds > 0 for seconds in costs)

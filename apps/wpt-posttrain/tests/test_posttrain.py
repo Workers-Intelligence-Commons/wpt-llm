@@ -25,6 +25,7 @@ from wpt_store import LocalStore
 from wpt_telemetry import RECORD_FAILED, Telemetry
 from wpt_tokenizer import Tokenizer, chat
 from wpt_train import main as train
+from wpt_utils.device import select_device
 
 
 def one_stage(steps, block_size=16, batch_size=4):
@@ -106,7 +107,7 @@ def test_post_training_records_the_scheduler_s_times_and_replays_them_only_on_th
     main([trained.recipe("tune", posttrain=[str(check)]), str(trained.folder), str(tmp_path / "tuned")])
     [run] = trained.records("wpt-posttrain")
     recorded = trained.store.read_record(run.folder, COSTS_FILE)
-    setup = costs_setup(load_model(tmp_path / "tuned").config, 1, DRAFT, "cpu")
+    setup = costs_setup(load_model(tmp_path / "tuned").config, 1, DRAFT, select_device())
     assert len(replayed_costs(recorded, setup)) == DRAFT + 1
     assert "scheduler.costs" in {event.get("name") for event in run.events}
 
