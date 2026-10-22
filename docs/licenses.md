@@ -405,7 +405,7 @@ says so in its row.
 
 | License (SPDX) | Why it is allowed | What to check |
 | --- | --- | --- |
-| `LicenseRef-public-domain` | no rights left | public domain both in the United States and in the country of origin, for every person whose words are in the text (author, translator, editor of notes); the entry's `text` gives the proof and its sources |
+| `LicenseRef-public-domain` | no rights left | public domain under the law of the country of first publication alone (Rules, "Public domain"), for every person whose words are in the text (author, translator, editor of notes); the entry's `text` gives the proof and its sources |
 | `CC0-1.0`, `Unlicense` | public-domain dedications; FSF: compatible | a dedication by the right person: a site cannot dedicate what it does not own |
 | `MIT`, `MIT-0`, `0BSD`, `BSD-1-Clause`, `BSD-2-Clause`, `BSD-2-Clause-Patent`, `BSD-3-Clause`, `ISC`, `X11`, `NCSA`, `PostgreSQL`, `UPL-1.0`, `HPND`, `W3C`, `curl` | FSF: GPL-compatible (BSD-2-Clause-Patent: Blue Oak Gold) | the copyright line of the source's own license file goes into `text` with the license |
 | `Apache-2.0` | FSF: compatible with GPLv3 (not v2) | the source's `NOTICE` file, if any: its content follows the license in `text` |
@@ -585,34 +585,40 @@ for that check.
   MIT and a submodule under Apache-2.0 give two entries); a submodule
   under another license, or one that cannot be fetched, is excluded
   (maintainer's decision, 2026-10-16).
-- **Public domain** means public domain both in the United States and in the
-  work's country of origin (the Wikimedia Commons rule). A work can still be
-  protected in the country someone publishes from. A label that says only
-  "public domain in the United States" (Project Gutenberg, collections of
-  books published before 1929) is not enough: in its home country such a
-  work may still have all rights reserved. How to decide, for every person
-  whose words are in the text (author, translator, reviser, editor of
-  notes):
-  - **First published in the United States** before the moving limit (1931
-    in 2026): the United States rule settles the country of origin too,
-    whatever the death years.
-  - **Everyone lived until 1925 or earlier**: public domain in every country
-    (the longest term, Mexico's life + 100 years, ended by 2026), so the
-    exact country of first publication does not matter.
-  - **Everyone lived until 1955 or earlier**: public domain in every country
+- **Public domain** means public domain under the law of the country where
+  the work was first published, and that law alone: a Russian book under
+  Russian law, a French book under French law, whatever another country
+  says (maintainer's decision, 2026-10-22). A text is in the public domain
+  in one of two ways: every person whose words are in it has died and the
+  terms below have ended, or its authors placed it in the public domain
+  themselves (a dedication, below) (maintainer's decision, 2026-10-22).
+  A term runs to the end of the calendar year in which it ends: life + 70
+  years for a person who died in 1955 ends on 31 December 2025. How to
+  decide, for every person whose words are in the text (author,
+  translator, reviser, editor of notes):
+  - **The country of first publication is known**: that country's term
+    and its own rules decide: France (wartime extensions of about 6 to 8
+    years for works published before 1948, more for an author "mort pour
+    la France"), Spain (life + 80 for authors who died before 1987),
+    Colombia (life + 80), Mexico (life + 100), Russia (4 more years for
+    people who worked or fought in the Second World War). A country whose
+    law counts a work's term from its publication rather than from a
+    death counts it so, and a condition that law set, such as a renewal
+    of the copyright it required, counts too: the edition's own statement
+    that the text is in the public domain in that country is proof that
+    it was met (maintainer's decisions, 2026-10-22).
+  - **The country of first publication is unknown**: the work is free only
+    when every country where it could first have appeared has ended its
+    term. Everyone lived until 1925 or earlier: public domain in every
+    country (the longest term, Mexico's life + 100 years, ended by 2026).
+    Everyone lived until 1955 or earlier: public domain in every country
     whose term is life + 70 years or shorter, which covers the
-    English-speaking countries and most of Europe, so an unknown country or
-    a publication in two such countries at once changes nothing. The
-    countries with longer terms still need their own check: France (wartime
-    extensions of about 6 to 8 years for works published before 1948, more
-    for an author "mort pour la France"), Spain (life + 80 for authors who
-    died before 1987), Colombia (life + 80), Mexico (life + 100), Russia
-    (4 more years for people who worked or fought in the Second World War).
-  - **Someone lived until 1956 or later**: public domain only where the
-    country of first publication is known and its term has ended, or
-    through the United States rule above. A publication in the United
-    States and another country within 30 days needs the shorter-term
-    country to be named.
+    English-speaking countries and most of Europe; a country with a longer
+    term (above) that it could have appeared in still needs its own check.
+    Someone lived until 1956 or later: the country must be found.
+  - **First published in two countries within 30 days**: its country is the
+    one whose term is shorter (Berne Convention, article 5(4)), which must
+    be named.
   - **A translation is two layers**: the original is settled by its own
     author (an author who lived until 1925 or earlier, or an anonymous or
     traditional work written before 1800, frees the original everywhere,

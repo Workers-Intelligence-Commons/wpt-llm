@@ -70,8 +70,8 @@ together.
 1. Check the license against [docs/licenses.md](docs/licenses.md). It must be
    on the allowed list, clearly; its "What to check" column says where each
    kind of license hides a trap. CC BY-SA 4.0, the one grey-zone license,
-   is refused until a lawyer confirms it. Public domain must hold in the
-   United States and in the work's country of origin.
+   is refused until a lawyer confirms it. Public domain must hold under the law
+   of the country where the work was first published.
 2. Choose the id: `uv run wpt-dataset source-id <origin> [<item>] <address>`.
    For a git repository on GitHub, write the address without `.git`:
    GitHub's robots.txt forbids `/*.git` addresses to AI training
