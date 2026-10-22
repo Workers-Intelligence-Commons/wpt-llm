@@ -17,12 +17,13 @@ type Summary = {
 };
 type Detail = { id: string; document: Record<string, unknown> | null; version: string; problems: string[] };
 
-const DECISIONS = ["refused", "admitted", "retired", "all"];
+// "not admitted": under review and refused together (maintainer's decision, 2026-10-22)
+const DECISIONS = ["not admitted", "under-review", "admitted", "refused", "all"];
 
 function List() {
   const [rows, setRows] = useState<Summary[] | null>(null);
   const [problems, setProblems] = useState<string[]>([]);
-  const [decision, setDecision] = useState("refused");
+  const [decision, setDecision] = useState("not admitted");
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -33,7 +34,7 @@ function List() {
     () =>
       (rows ?? []).filter(
         (r) =>
-          (decision === "all" || r.decision === decision) &&
+          (decision === "all" || r.decision === decision || (decision === "not admitted" && r.decision !== "admitted")) &&
           (search === "" || `${r.id} ${r.address} ${r.licenses.join(" ")}`.toLowerCase().includes(search.toLowerCase())),
       ),
     [rows, decision, search],

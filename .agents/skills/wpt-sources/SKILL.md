@@ -56,8 +56,8 @@ binary file, a license that is not allowed, a doubt, a maintainer's
 decision), and say which in `extract.note`. Draft licenses, credits,
 formats and tags from the source's own files with a script, never from
 memory, and show the maintainer one full `source.json` as the pattern for
-the batch before writing the rest. A new source starts refused, under
-review, as `CONTRIBUTING.md` says.
+the batch before writing the rest. A new source starts `under-review`, as
+`CONTRIBUTING.md` says.
 
 ## 4. Check every source
 
@@ -71,9 +71,9 @@ file. Report what each source gives (entries, documents) to the
 maintainer. A robots.txt refusal on one address moves to the next mirror;
 a source whose every address fails stops. Never download it another way.
 
-## 5. Commit the sources as refused
+## 5. Commit the sources under review
 
-Commit the new sources with their `refused` decisions (the `wpt` skill's
+Commit the new sources with their `under-review` decisions (the `wpt` skill's
 rules apply: `scripts/check.py`, sign-off, no personal paths).
 
 ## 6. Admission needs the maintainer's explicit yes

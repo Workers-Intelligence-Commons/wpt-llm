@@ -230,7 +230,7 @@ def test_line_and_paragraph_separators_are_escaped_even_in_values_a_save_keeps(k
     assert repo.source(sid).data["licenses"][0]["attribution"] == "A. Person\u2028notes\x85\u2029"
 
 
-def test_an_empty_license_text_is_allowed_only_while_the_decision_is_refused(kit, repo, store):
+def test_an_empty_license_text_is_allowed_only_while_the_source_is_not_admitted(kit, repo, store):
     from wpt_dataset import build, conversations, tasks
     from wpt_dataset.errors import InvalidFile
 
@@ -241,6 +241,9 @@ def test_an_empty_license_text_is_allowed_only_while_the_decision_is_refused(kit
     admitted = {**document, "decision": {"decision": "admitted", "by": "A. Person", "date": "2026-10-18"}}
     with pytest.raises(InvalidFile):
         repo.save("source", sid, admitted, repo.version("source", sid))
+    refused = {**document, "decision": {"decision": "refused", "by": "A. Person", "date": "2026-10-22", "reason": "r"}}
+    repo.save("source", sid, refused, repo.version("source", sid))
+    assert repo.check() == [] and repo.source(sid).unwritten
     with pytest.raises(RuleViolation, match="license text first"):
         repo.create_source("mine", "other", document, {"notes.txt": b"x\n"}, "first", store)
 

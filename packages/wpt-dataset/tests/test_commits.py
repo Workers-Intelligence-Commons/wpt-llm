@@ -33,7 +33,7 @@ def commit(kit, root, decision, *flags):
 
 def test_signed_and_signed_off_decisions_pass(kit, wpt_git):
     commit(kit, wpt_git, "admitted", "-s", "-S")
-    commit(kit, wpt_git, "retired", "-s", "-S")
+    commit(kit, wpt_git, "under-review", "-s", "-S")
     assert check_commits(Repo(wpt_git), "HEAD") == []
 
 

@@ -50,14 +50,14 @@ def test_migrate_rewrites_files_that_are_behind(kit, repo, store, git_upstream):
         "type": "git", "address": git_upstream[0], "revision": git_upstream[1]})
     path = repo.root / "data" / "sources" / sid / "source.json"
     # a made-up next shape: "type" renamed to "kind"
-    step = {5: lambda doc, _path: {**{k: v for k, v in doc.items() if k != "type"}, "kind": doc["type"], "schema": 6}}
-    current = {"source": 6, "mixture": 1, "model": 1, "tokenizer": 1, "lock": 1}
+    step = {6: lambda doc, _path: {**{k: v for k, v in doc.items() if k != "type"}, "kind": doc["type"], "schema": 7}}
+    current = {"source": 7, "mixture": 1, "model": 1, "tokenizer": 1, "lock": 1}
 
     changed = migrate(repo, migrations={"source": step, "mixture": {}, "model": {}, "tokenizer": {}, "lock": {}},
                       current=current, log=lambda _: None)
     assert changed == [path.relative_to(repo.root).as_posix()]
     document = json.loads(path.read_text())
-    assert document["schema"] == 6 and document["kind"] == "git" and "type" not in document
+    assert document["schema"] == 7 and document["kind"] == "git" and "type" not in document
     assert path.read_text() == dump_json(document)
 
 
@@ -75,7 +75,7 @@ def test_migrating_a_shape_1_source_asks_a_person_for_attribution_text_and_forma
     with pytest.raises(InvalidFile, match=re.escape(str(path))):
         migrate(repo, log=lambda _: None)
     document = json.loads(path.read_text())
-    assert document["schema"] == 5
+    assert document["schema"] == 6
     assert document["licenses"] == [{"license": "MIT", "paths": ["**"], "attribution": "", "text": ""}]
     assert document["formats"] == []
 
@@ -147,6 +147,30 @@ def test_migrating_to_shape_4_moves_a_licenseref_text_into_source_json(kit, repo
     assert migrate(repo, log=lambda _: None) == [path.relative_to(repo.root).as_posix()]
     assert json.loads(path.read_text())["licenses"][0]["text"] == proof
     assert not (folder / "LicenseRef-public-domain.txt").exists()
+    assert repo.check() == []
+
+
+def test_migrating_to_shape_6_gives_each_source_one_of_three_states(kit, repo, store, git_upstream):
+    # maintainer's decision, 2026-10-22: under-review, admitted, refused; a
+    # refusal "under review" was a review, a retired source is a refused one
+    by = {"by": "Test Reviewer", "date": "2026-10-14"}
+    old = {"review": {"decision": "refused", **by, "reason": "under review"},
+           "moved": {"decision": "retired", **by, "reason": "replaced by example-new-0123abcd", "note": "kept"},
+           "refused": {"decision": "refused", **by, "reason": "missing fact"},
+           "admitted": {"decision": "admitted", **by}}
+    paths = {}
+    for suffix, (item, decision) in zip(("", "/.", "/./", "//"), old.items()):
+        sid = kit.add_source(repo, store, "example", item, {
+            "type": "git", "address": git_upstream[0] + suffix, "revision": git_upstream[1]})
+        paths[item] = repo.root / "data" / "sources" / sid / "source.json"
+        paths[item].write_text(dump_json({**json.loads(paths[item].read_text()), "schema": 5, "decision": decision}))
+
+    assert sorted(migrate(repo, log=lambda _: None)) == sorted(p.relative_to(repo.root).as_posix() for p in paths.values())
+    decisions = {item: json.loads(path.read_text())["decision"] for item, path in paths.items()}
+    assert decisions == {"review": {"decision": "under-review", **by},
+                         "moved": {"decision": "refused", **by, "reason": "replaced by example-new-0123abcd",
+                                   "note": "kept"},
+                         "refused": old["refused"], "admitted": old["admitted"]}
     assert repo.check() == []
 
 

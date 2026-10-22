@@ -79,7 +79,8 @@ together.
 3. Create `data/sources/<id>/source.json` (see
    [docs/architecture.md](docs/architecture.md)), with `checksum` set to
    `sha256:` followed by 64 zeros for now, and a `decision` stating
-   `"refused"` with the reason "under review".
+   `"under-review"`, with your name (`by`) and today's `date` (see
+   "Decisions are signed").
 4. `uv run wpt-dataset fill-checksum <id>` downloads it once, excludes in
    `extract` every file that is not UTF-8 text (binary files), each by its
    exact path, writes the checksum in `source.json`, and checks the source
@@ -135,11 +136,12 @@ together.
 Text written for WPT, by you, lives in the repository itself, as the
 patches of an `empty` source (see [docs/architecture.md](docs/architecture.md)).
 The simplest way is the "New source" page of `uv run wpt-web`: write or
-paste your text, and the page makes the source, under review, with your
-text as its first patch; its "Conversations" and "Tasks" pages write
-post-training conversations and tasks the same way, and every page shows
-which data files git sees as changed. `uv run wpt-dataset new-source` does
-the same on the command line. By hand:
+paste your text, and the page makes the source, under review
+(`under-review`), with your text as its first patch; its "Conversations"
+and "Tasks" pages write post-training conversations and tasks the same
+way, and every page shows which data files git sees as changed.
+`uv run wpt-dataset new-source` does the same on the command line. By
+hand:
 
 1. Choose its id: `uv run wpt-dataset source-id <origin> [<item>] empty:<name>`.
 2. Create `data/sources/<id>/source.json` with `"type": "empty"`, the
@@ -163,16 +165,25 @@ you find license texts; they never decide.
 
 ## Decisions are signed
 
+A source is in exactly one of three states, its `decision` (maintainer's
+decision, 2026-10-22): `under-review`, a source not yet decided, where every
+new source starts; `admitted`; or `refused`. Each gives who set it (`by`)
+and when (`date`). The builds, the post-training readers and
+`check --fetch` without ids read only admitted sources: an `under-review`
+source is left out of them exactly as a refused one is.
+
 A maintainer admits a source by setting `decision` to `admitted`, with their
 name and the date. An admission needs no reason: the license map and its
 texts already say why the source is allowed. It carries one only for an
 exception, such as an explicit permission for content without a license.
-Refusing or retiring a source always gives the reason, so nobody reviews it
-again from scratch. A commit that changes any `decision` must be
-signed (`git commit -S`) by an SSH key listed in `data/allowed-signers` or a
-GPG key in `data/allowed-gpg-keys.asc`; CI checks the signature against the
-lists as they stood before the commit, so a new key can only be added by a
-commit signed with a key already listed.
+Refusing a source always gives the reason, so nobody reviews it again from
+scratch; a source under review may give one, and needs none. A refused
+source stays in the repository as a reference: it is never deleted
+(maintainer's decision, 2026-10-22). A commit that changes any `decision`
+must be signed (`git commit -S`) by an SSH key listed in
+`data/allowed-signers` or a GPG key in `data/allowed-gpg-keys.asc`; CI
+checks the signature against the lists as they stood before the commit, so
+a new key can only be added by a commit signed with a key already listed.
 
 This applies to every commit that changes a decision, including the commit
 that first adds a source. A pull request proposing a source therefore fails
@@ -187,9 +198,10 @@ decisions.
 
 - **New upstream revision**: update `revision` and `checksum` in place, and
   redo its cuts and patches in the same commit.
-- **New address**: that is a new source with a new id; retire the old one
-  (`"decision": "retired"`), update the mixtures naming it, and move its
-  erasure cuts.
+- **New address**: that is a new source with a new id; refuse the old one
+  (`"decision": "refused"`, its `reason` naming the new source's id;
+  maintainer's decision, 2026-10-22), update the mixtures naming it, and
+  move its erasure cuts.
 - **Patches**: `0001-<name>.patch`, `0002-<name>.patch`... in git's format,
   applied in order after the erasure cuts. Removal patches are welcome.
 
@@ -235,9 +247,10 @@ FORMAT=PATTERN` declares a format entry, such as `markdown=**/*.md` or
 error, not a text to write later); you then write the license text
 (`wpt-dataset save source`, or the "Sources" page of `wpt-web`), and the
 check names the source until you do (maintainer's decision, 2026-10-18:
-the text may be empty only while the decision is refused, and builds and
-checks leave such a source out with a note), then add your files, in any
-format. People write their texts themselves. When a
+the text may be empty only while the source is not admitted, that is
+`under-review` or `refused` since the maintainer's decision of 2026-10-22,
+and builds and checks leave such a source out with a note), then add your
+files, in any format. People write their texts themselves. When a
 person asks an assistant only to change the form of a text they wrote
 (line endings, spacing, splitting into files), the assistant may move it
 with scripts that transform whole files mechanically and report only its

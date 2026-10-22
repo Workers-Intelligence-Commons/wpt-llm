@@ -705,10 +705,16 @@ for that check.
 ## Who decides
 
 A human decides every source; the decision is recorded in `source.json`
-(`decision`, with a reason for a refusal, a retirement or an exceptional
-admission) and its commit must be signed by an allowed key (see
-[CONTRIBUTING.md](../CONTRIBUTING.md)). There is no automatic filtering or
-tagging.
+(`decision`, with a reason for a refusal or an exceptional admission) and
+its commit must be signed by an allowed key (see
+[CONTRIBUTING.md](../CONTRIBUTING.md)). A source has exactly three states
+(maintainer's decision, 2026-10-22): `under-review` (not yet decided, where
+every new source starts; a reason is optional), `admitted` and `refused`;
+only an admitted source enters a build. A source replaced because its
+address moved is refused, its reason naming the new source's id. A
+refused source stays in the repository as a reference: it is never
+deleted (maintainer's decision, 2026-10-22). There is no automatic
+filtering or tagging.
 
 A license question the maintainer cannot settle alone goes into
 [LEGAL-QUESTIONS.html](../LEGAL-QUESTIONS.html), the page for legal

@@ -91,7 +91,7 @@ from .errors import DataAccessRefused, InvalidFile, NotFound, OutdatedSchema, Ru
 from .licenses import check_license
 from .pools import parse
 
-CURRENT_SCHEMA = {"source": 5, "mixture": 1, "model": 5, "tokenizer": 2, "lock": 2, "conversation": 3, "task": 1,
+CURRENT_SCHEMA = {"source": 6, "mixture": 1, "model": 5, "tokenizer": 2, "lock": 2, "conversation": 3, "task": 1,
                   "image-lock": 1, "image-licenses": 1}
 ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}")
 PATCH = re.compile(r"(\d{4})-[A-Za-z0-9._-]+\.patch")
@@ -361,7 +361,8 @@ class Source:
     @property
     def unwritten(self) -> bool:
         """Whether a license entry has no text yet (the schema allows that
-        only while the decision is refused: a person writes it later)."""
+        only while the source is not admitted (under review or refused): a
+        person writes it later)."""
         return any(entry["text"] == "" for entry in self.data["licenses"])
 
     @property
@@ -387,13 +388,14 @@ def empty_source(name: str, *, license: str, attribution: str, text: str, by: st
                  tags=(), started: str | None = None) -> dict:
     """The source.json of a new `empty` source (CONTRIBUTING.md, "Adding your
     own texts"): text written for WPT, under one license for all its files,
-    each file's format by its path, under review until a maintainer decides."""
+    each file's format by its path, under review ("under-review") until a
+    maintainer decides."""
     today = started or date.today().isoformat()
     document = {"schema": CURRENT_SCHEMA["source"], "type": "empty", "address": f"empty:{name}", "revision": today,
                 "checksum": EMPTY_CHECKSUM,
                 "licenses": [{"license": license, "paths": ["**"], "attribution": attribution, "text": text}],
                 "formats": [{"format": kind, "paths": [path]} for path, kind in formats.items()],
-                "decision": {"decision": "refused", "by": by, "date": today, "reason": "under review"}}
+                "decision": {"decision": "under-review", "by": by, "date": today}}
     if tags:
         document["tags"] = [{"tags": list(tags), "paths": ["**"]}]
     return document

@@ -66,8 +66,8 @@ def test_a_persons_text_starts_an_empty_source_and_every_change_is_a_patch(web):
     request, repo, store = web
     sid = new_source(request, {"notes/one.md": {"format": "markdown", "text": TEXT}})
     assert [p.name for p in repo.source(sid).patches] == ["0001-first-texts.patch"]
-    assert repo.source(sid).data["decision"] == {"decision": "refused", "by": "A. Person",
-                                                 "date": repo.source(sid).data["revision"], "reason": "under review"}
+    assert repo.source(sid).data["decision"] == {"decision": "under-review", "by": "A. Person",
+                                                 "date": repo.source(sid).data["revision"]}
     status, listing = request("GET", f"/api/sources/{sid}/files")
     assert status == 200 and listing["files"] == {"notes/one.md": {"mode": "100644", "size": len(TEXT),
                                                                   "format": "markdown", "tags": ["en"]}}

@@ -34,7 +34,8 @@ natural item (lowercase `a-z 0-9 -`), for example `gutenberg-1342-05bda734`.
 reused.
 
 When a source moves to a new address, it becomes a new source with a new id;
-the old one is retired (`"decision": "retired"`), mixtures naming it are
+the old one is refused (`"decision": "refused"`), its reason naming the new
+source's id (maintainer's decision, 2026-10-22), mixtures naming it are
 updated, and its erasure cuts move to the new folder. When it publishes a new
 revision, the folder is updated in place: `revision` and `checksum` change,
 and its cuts and patches are redone in the same commit. Rebuilding an old
@@ -44,7 +45,7 @@ recipe then needs the old commit of this repository.
 
 ```json
 {
-  "schema": 5,
+  "schema": 6,
   "type": "http-archive",
   "address": "https://www.gutenberg.org/cache/epub/1342/pg1342-h.zip",
   "revision": "2026-03-01",
@@ -103,10 +104,16 @@ recipe then needs the old commit of this repository.
 - `submodules` (git only): the address of each submodule the source reads,
   by its path.
 - `cuts`: erasure cuts; see [erasure.md](erasure.md).
-- `decision`: the human decision on the source (required): `admitted`,
-  `refused` or `retired`, by whom and when. `reason` (why) is required to
-  refuse or retire; an admission gives one only for an exception, such as
-  an explicit permission for content without a license.
+- `decision`: the human decision on the source (required), one of three
+  states (maintainer's decision, 2026-10-22): `under-review` (every new
+  source, until a maintainer decides), `admitted` or `refused`, by whom
+  and when. `reason` (why) is required to refuse, optional under review;
+  an admission gives one only for an exception, such as an explicit
+  permission for content without a license. The builds, the post-training
+  readers and `check --fetch` without ids read only admitted sources; an
+  `under-review` source is left out of them as a refused one is. A refused
+  source stays in the repository as a reference and is never deleted
+  (maintainer's decision, 2026-10-22).
 - Every object may hold a free-text `note`. It is data, so it survives
   migrations (comments would not).
 
@@ -307,14 +314,15 @@ and versions, never a path under `data/`.
   the repository, and the lock file stays in the git folder, or at the
   root of a folder that is not a git working tree (maintainer's decision,
   2026-10-18: kept as built).
-- A license entry's `text` may be empty only while the source's decision
-  is refused (maintainer's decision, 2026-10-18): the schema says so, and a
+- A license entry's `text` may be empty only while the source is not
+  admitted (maintainer's decision, 2026-10-18), that is `under-review` or
+  `refused` (maintainer's decision, 2026-10-22): the schema says so, and a
   person writes the text later (`wpt-dataset save source`, or the "Sources"
   page). Every reader of the sources (`wpt-dataset build`, the post-training
   readers of chat and task files, `check --fetch`, `check --changed`)
   leaves such a source out with a note naming it, instead of failing, and
   `wpt-dataset check` names it too, as a note that is not a failure. A
-  source that is not refused needs its text, and a source with an empty
+  source that is admitted needs its text, and a source with an empty
   text takes no files until it is written.
 - JSON is written with two spaces of indent, characters outside ASCII kept
   as they are, except U+2028, U+2029 and U+0085, always written as
@@ -487,4 +495,7 @@ check then names each file to fill in. Shape 4 adds each license's `text`:
 the migration moves a `LicenseRef-<name>.txt` file into it and leaves any
 other text empty for a person to fill. Shape 5 adds the `huggingface`
 type, the `records` format and a license entry's `values`; only the
-number changes.
+number changes. Shape 6 gives a source three states (maintainer's
+decision, 2026-10-22): the migration turns a refusal whose reason is
+"under review" into `under-review` without that reason, and turns
+`retired` into `refused`, keeping its reason.

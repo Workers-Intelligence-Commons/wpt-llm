@@ -72,7 +72,7 @@ where a step needs them, run through Docker Desktop.
 | the kinds of data files, their names, one file | `uv run wpt-dataset kinds`, `list KIND`, `show KIND NAME` | `data/`, through the service layer | prints them (version and problems on stderr) |
 | write a data file people write | `uv run wpt-dataset save KIND NAME FILE --version VERSION` (`''`: a new file) | the file | that file, after the rules of `check`; refused when it changed since VERSION |
 | a source's files, tags and git status | `uv run wpt-dataset files ID`, `tags ID PATH [TAG ...] --version V`, `remove ID PATH --patch NAME --version V`, `status` | the source | `source.json`, or the next patch |
-| a new empty source, without its texts | `uv run wpt-dataset new-source ORIGIN [ITEM] NAME --license L --attribution TEXT --by NAME [--tag TAG ...] [--chat PATH ...] [--format FORMAT=PATTERN ...]` (never `--file` or `--license-text`: the person writes the license text, then the files) | | `data/sources/ID/source.json`, its license text empty |
+| a new empty source, without its texts | `uv run wpt-dataset new-source ORIGIN [ITEM] NAME --license L --attribution TEXT --by NAME [--tag TAG ...] [--chat PATH ...] [--format FORMAT=PATTERN ...]` (never `--file` or `--license-text`: the person writes the license text, then the files) | | `data/sources/ID/source.json`, `under-review`, its license text empty |
 | a person's texts (people only, never an AI assistant) | `read`, `write`, `conversation`, `save-conversation`, `task`, `save-task`, and `new-source --file` and `--license-text` (marked `*` in `--help`) | | |
 | conversation and task structure | `uv run wpt-dataset conversations ID PATH` (roles, drafts), `tasks ID` (image, limits, files) | the source | prints them |
 | edit every kind of data in a browser | `uv run wpt-web` (needs Bun), then http://127.0.0.1:8410/ (HTTP API described at `/api/openapi.json`) | `data/`, a WPT model folder for drafts, `packages/wpt-web/ui` | data files through the service layer; `ui/node_modules`, `ui/dist` |
@@ -115,8 +115,9 @@ decision), `CONTRIBUTING.md` ("Adding a source"), `docs/data-selection.md`
 and `docs/chat-format.md`. Read them before writing or reviewing a source,
 and follow the `wpt-sources` skill for the order of work. Never apply a
 rule they do not hold: a case they do not settle is a question for the
-maintainer, and the answer goes into the documentation with its date. Only
-a maintainer admits a source, in a signed commit.
+maintainer, and the answer goes into the documentation with its date. A
+new source starts `under-review`; only a maintainer admits a source, in a
+signed commit (CONTRIBUTING.md, "Decisions are signed").
 
 ## The service layer
 

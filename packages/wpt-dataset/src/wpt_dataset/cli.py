@@ -50,12 +50,13 @@ A source's files change only through patches (as unpack, an edit and patch):
     wpt-dataset new-source ORIGIN [ITEM] NAME --license L --attribution TEXT [--license-text FILE *]
                 --by NAME [--tag TAG ...] [--file PATH=FILE ... *] [--chat PATH ...] [--format FORMAT=PATTERN ...]
                 [--patch NAME]
-                                          a new empty source for text written for WPT, under review:
-                                          its files (Markdown for .md, else text), and chat files to
-                                          write with save-conversation; --format declares a format
-                                          entry (markdown=**/*.md) with no file, for files added later;
-                                          without --license-text, the license text is left for a
-                                          person to write (`save source`), and files come after it
+                                          a new empty source for text written for WPT, under review
+                                          (decision "under-review"): its files (Markdown for .md, else
+                                          text), and chat files to write with save-conversation;
+                                          --format declares a format entry (markdown=**/*.md) with no
+                                          file, for files added later; without --license-text, the
+                                          license text is left for a person to write (`save source`),
+                                          and files come after it
     wpt-dataset files ID                  its final files: mode, size, format, tags, path
     wpt-dataset read ID PATH              print one file *
     wpt-dataset write ID PATH FILE --patch NAME --version VERSION

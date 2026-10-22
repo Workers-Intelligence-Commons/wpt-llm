@@ -11,11 +11,11 @@ from wpt_web.server import make_server
 ADDRESS = "https://example.org/book.git"
 SID = f"example-book-{address_hash(ADDRESS)}"
 DOCUMENT = {
-    "schema": 5, "type": "git", "address": ADDRESS, "revision": "0" * 40, "checksum": "sha256:" + "0" * 64,
+    "schema": 6, "type": "git", "address": ADDRESS, "revision": "0" * 40, "checksum": "sha256:" + "0" * 64,
     "licenses": [{"license": "MIT", "paths": ["**"], "attribution": "Copyright (c) 2026 Test Author",
                   "text": "Copyright (c) 2026 Test Author\n\nPermission is hereby granted.\n"}],
     "formats": [{"format": "text", "paths": ["**"]}],
-    "decision": {"decision": "refused", "by": "Test Reviewer", "date": "2026-10-15", "reason": "under review"},
+    "decision": {"decision": "under-review", "by": "Test Reviewer", "date": "2026-10-15"},
 }
 
 
@@ -50,8 +50,9 @@ def test_a_source_is_listed_read_and_saved_only_through_the_source_rules(web):
     # as every data file is; anything the check would refuse is not written
     request, path = web
     status, listing = request("GET", "/api/sources")
-    assert status == 200 and listing == [{"id": SID, "address": ADDRESS, "schema": 5, "type": "git", "decision": "refused",
-                                          "reason": "under review", "licenses": ["MIT"], "problems": []}]
+    assert status == 200 and listing == [{"id": SID, "address": ADDRESS, "schema": 6, "type": "git",
+                                          "decision": "under-review", "reason": None, "licenses": ["MIT"],
+                                          "problems": []}]
     status, detail = request("GET", f"/api/sources/{SID}")
     assert status == 200 and detail["document"] == DOCUMENT and detail["problems"] == []
 

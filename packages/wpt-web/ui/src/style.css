@@ -22,8 +22,8 @@ th { color: var(--muted); font-weight: 600; }
 td:first-child { font-family: ui-monospace, monospace; font-size: .82rem; }
 .pill { display: inline-block; padding: 0 8px; border-radius: 99px; border: 1px solid currentColor; font-size: .8rem; }
 .pill.admitted, .good { color: var(--good); }
-.pill.refused { color: var(--warn); }
-.pill.retired, .bad { color: var(--bad); }
+.pill.under-review, .pill.refused { color: var(--warn); }
+.bad { color: var(--bad); }
 .problems { color: var(--bad); border-left: 3px solid var(--bad); padding: 6px 6px 6px 24px; background: var(--panel); white-space: pre-wrap; }
 .links { display: flex; flex-direction: column; gap: 2px; word-break: break-all; }
 .object { display: grid; gap: 10px; padding-left: 12px; border-left: 2px solid var(--line); }

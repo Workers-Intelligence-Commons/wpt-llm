@@ -99,8 +99,8 @@ def routes(context):
               body={"type": "object", "required": ["document", "version"],
                     "properties": {"document": {}, "version": VERSION}}, answer=SAVED),
         Route("POST", "/api/sources", new_source,
-              "start an empty source for a person's own text (under review): each file's format entry, and the "
-              "files with text as its first patch (a chat file with no text yet gets only its entry)",
+              "start an empty source for a person's own text (decision \"under-review\"): each file's format entry, "
+              "and the files with text as its first patch (a chat file with no text yet gets only its entry)",
               body={"type": "object", "required": ["origin", "name", "license", "attribution", "license_text", "by",
                                                    "files", "patch"],
                     "properties": {"origin": STRING, "item": {"type": ["string", "null"]}, "name": STRING,

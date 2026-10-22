@@ -1,8 +1,8 @@
 // "New source": text a person writes for WPT, written or pasted here, becomes
 // a new empty source (CONTRIBUTING.md, "Adding your own texts"): its
-// source.json, under review until a maintainer decides, and its text as the
-// first patch. Or a source for conversations, written next in the
-// conversation editor.
+// source.json, under review ("under-review") until a maintainer decides, and
+// its text as the first patch. Or a source for conversations, written next in
+// the conversation editor.
 
 import { useState } from "react";
 import { part, post } from "../api";

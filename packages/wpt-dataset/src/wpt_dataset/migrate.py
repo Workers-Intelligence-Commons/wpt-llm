@@ -81,6 +81,23 @@ def _source_4_to_5(document, _path):
 MIGRATIONS["source"][4] = _source_4_to_5
 
 
+def _source_5_to_6(document, _path):
+    """Shape 6 gives a source exactly three states, "under-review",
+    "admitted" and "refused" (maintainer's decision, 2026-10-22): a refusal
+    whose reason was "under review" becomes "under-review" without that
+    reason, and "retired" becomes "refused", keeping its reason (which names
+    the source that replaced it)."""
+    decision = document["decision"]
+    if decision["decision"] == "refused" and decision.get("reason") == "under review":
+        decision = {key: value for key, value in decision.items() if key != "reason"} | {"decision": "under-review"}
+    elif decision["decision"] == "retired":
+        decision = {**decision, "decision": "refused"}
+    return {**document, "schema": 6, "decision": decision}
+
+
+MIGRATIONS["source"][5] = _source_5_to_6
+
+
 def _model_1_to_2(document, _path):
     """Shape 2 holds the numbers of the architecture in docs/model.md. The
     window, the layers and the width carry over, and the old heads become
