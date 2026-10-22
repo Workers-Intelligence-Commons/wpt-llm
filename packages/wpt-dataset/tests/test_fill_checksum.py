@@ -14,14 +14,18 @@ from wpt_store import open_store
 BINARY = b"\x89PNG\r\n\x1a\n\x00\xff\xfe"
 
 
-def plumbing_commit(kit, folder, message, changes, parents=()):
+def plumbing_commit(kit, folder, message, changes, parents=(), links=None):
     """A commit made from git objects only, so paths such as `odd*name?.dat`
-    work on Windows too: the first parent's tree with changes applied."""
+    work on Windows too: the first parent's tree with changes applied, and
+    links {path: target} added as symbolic links."""
     env = {"GIT_INDEX_FILE": str(folder / ".git" / "plumbing-index")}
     kit.run("git", "read-tree", *(parents[:1] or ["--empty"]), cwd=folder, env=env)
     for path, content in changes.items():
         blob = kit.run("git", "hash-object", "-w", "--stdin", cwd=folder, input=content).decode().strip()
         kit.run("git", "update-index", "--add", "--cacheinfo", f"100644,{blob},{path}", cwd=folder, env=env)
+    for path, target in (links or {}).items():
+        blob = kit.run("git", "hash-object", "-w", "--stdin", cwd=folder, input=target.encode()).decode().strip()
+        kit.run("git", "update-index", "--add", "--cacheinfo", f"120000,{blob},{path}", cwd=folder, env=env)
     tree = kit.run("git", "write-tree", cwd=folder, env=env).decode().strip()
     return kit.run("git", "commit-tree", tree, *(a for p in parents for a in ("-p", p)), "-m", message,
                    cwd=folder).decode().strip()
@@ -117,3 +121,23 @@ def test_fill_checksum_fills_every_draft_and_lists_the_failures_at_the_end(kit, 
     assert err.split("1 of 2 fetched sources failed:\n")[1].startswith(f"{gone}: FetchFailed: {gone}: ")
     assert repo.source(gone).data["checksum"] == "sha256:" + "0" * 64  # nothing written for it
     assert main(["--root", str(repo.root), "fill-checksum", good]) == 1  # filled already: refused
+
+
+def test_fill_checksum_fills_a_source_whose_symbolic_link_no_format_entry_maps(kit, repo, store, tmp_path,
+                                                                               monkeypatch, capsys):
+    """A symbolic link is no document, so it needs no format entry, as in
+    github-addyosmani-agent-skills-dae9f025's `.opencode/skills`."""
+    monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    folder = tmp_path / "upstream"
+    folder.mkdir()
+    kit.run("git", "init", "-q", cwd=folder)
+    for setting in ("uploadpack.allowFilter", "uploadpack.allowAnySHA1InWant"):
+        kit.run("git", "config", setting, "true", cwd=folder)
+    since = plumbing_commit(kit, folder, "start", {"README.md": b"a project\n", "src/one.md": b"one\n"})
+    head = plumbing_commit(kit, folder, "link", {"src/one.md": b"one, again\n"}, [since],
+                           links={".tool/skills": "../src"})
+    sid = draft(kit, repo, store, str(folder), since, head)
+
+    assert main(["--root", str(repo.root), "fill-checksum", sid]) == 0
+    assert f"{sid}: checksum " in capsys.readouterr().out
+    assert main(["--root", str(repo.root), "check", "--fetch", sid]) == 0

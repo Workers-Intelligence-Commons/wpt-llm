@@ -865,6 +865,7 @@ class Repo:
         pointer tasks point to read from their sources and checked against
         their sha256). Returns (entries, Markdown documents, {records file:
         what it left out})."""
+        from .manifest import SYMLINK
         from .markdown import documents, format_of
         from .sources import source_tree
         from .tasks import fill, of_source
@@ -873,7 +874,9 @@ class Repo:
         tree, _ = source_tree(source, store, telemetry)
         skipped = {}
         # the task folders are parsed once, by of_source below, not again by documents
-        others = {path for path in tree if format_of(source, path)["format"] != "task"}
+        # a symbolic link is no document, so it needs no format entry
+        others = {path for path, entry in tree.items()
+                  if entry.mode != SYMLINK and format_of(source, path)["format"] != "task"}
         converted = sum(1 for _ in documents(source, tree, store, self, skipped, only=others))
         fill(list(of_source(source, tree, store, self).values()), self, store)
         return len(tree), converted, skipped
