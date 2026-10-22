@@ -201,6 +201,23 @@ def test_conversations_hold_line_and_paragraph_separators(kit, repo, store):
     assert repo.conversations(sid, "sft/talks.jsonl", store)[1] == [conversation, conversation]
 
 
+def test_an_assistant_message_may_hold_no_block_but_no_other_message_may(kit):
+    # a model that closes its turn at once is recorded as it happened (maintainer's decision, 2026-10-22);
+    # the attempts files go through the same parse as a source's chat files
+    from wpt_dataset import conversations
+    from wpt_dataset.errors import InvalidFile
+
+    def line(role):
+        messages = [{"role": "user", "content": [{"type": "text", "text": "hi"}]}, {"role": role, "content": []}]
+        return (json.dumps({"schema": 3, "messages": messages}) + "\n").encode()
+
+    parsed = conversations.parse("record", "attempts.jsonl", line("assistant"))
+    assert parsed[0]["messages"][1] == {"role": "assistant", "content": []}
+    for role in ("system", "user", "tool"):
+        with pytest.raises(InvalidFile, match="should be non-empty"):
+            conversations.parse("record", "attempts.jsonl", line(role))
+
+
 def test_line_and_paragraph_separators_are_escaped_even_in_values_a_save_keeps(kit, repo, store):
     sid = own_source(repo, store, {"notes.txt": "text"})
     path = repo.root / "data" / "sources" / sid / "source.json"

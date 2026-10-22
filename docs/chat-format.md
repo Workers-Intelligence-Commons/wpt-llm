@@ -53,7 +53,10 @@ person then edits or confirms, and its metadata records that
 - `messages`: in order. Each message has a `role` (`system`, `user`,
   `assistant` or `tool`) and a `content` list of blocks, in the order they
   happened: thinking, then a call, then more thinking, then text, stays in
-  that order. A message may also hold `metadata`, a JSON object never
+  that order. An `assistant` message may have no block: when a model closes
+  its turn without writing anything, the record says exactly that
+  (maintainer's decision, 2026-10-22). A message of any other role holds at
+  least one block. A message may also hold `metadata`, a JSON object never
   written as tokens; its one named field is `draft`
   ([Model drafts](#model-drafts)).
 - `metadata`: optional. What identifies the conversation where it was
