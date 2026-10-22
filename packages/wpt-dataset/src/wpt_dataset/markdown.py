@@ -39,7 +39,10 @@ Markdown, never on the file itself:
   records.py), at the path `<file>#<record id>`; its text field is read as
   `text` above, or kept as it is when the entry says `"as": "markdown"`.
 
-A file whose Markdown is empty gives no document.
+A file whose Markdown is empty gives no document, and neither does a git
+history's order file (`.git/history/order`): it stays in the source's tree
+and its checksum, and the builder reads it, but it is not a training
+document (maintainer's decision, 2026-10-22).
 """
 
 import posixpath
@@ -52,7 +55,7 @@ from lxml import etree
 
 from . import conversations, records, tasks
 from .errors import FormatMapError, NotText
-from .manifest import SYMLINK, glob_match_any, license_entries
+from .manifest import ORDER, SYMLINK, glob_match_any, license_entries
 
 EPUB_TYPE = "{http://www.idpf.org/2007/ops}type"
 SKIPPED = {"head", "script", "style", "img", "svg", "math", "audio", "video", "object", "template", "noscript"}
@@ -86,11 +89,14 @@ class Converted(NamedTuple):
     record: records.Record | None  # for a records file, the record it comes from
 
 
-def documents(source, tree, store, repo, skipped: dict | None = None) -> Iterator[Converted]:
+def documents(source, tree, store, repo, skipped: dict | None = None, only=None) -> Iterator[Converted]:
     """Each document of a final tree, in file path order; links, chat and
-    task files and documents whose Markdown is empty are left out; repo
-    holds the images task folders name. skipped, when given, receives
-    file -> records.Skipped for each records file.
+    task files, a git history's order file (ORDER) and documents whose
+    Markdown is empty are left out; repo holds the images task folders
+    name. skipped, when given, receives file -> records.Skipped for each
+    records file. only, when given, is the set of files whose documents
+    are wanted: the others are not read, and the task folders are not
+    checked.
     Raises FormatMapError when a path matches no format entry or several,
     NotText when an xhtml file is not well-formed, InvalidFile when a chat or
     records file holds a line that is not valid or a task folder is not."""
@@ -108,8 +114,10 @@ def documents(source, tree, store, repo, skipped: dict | None = None) -> Iterato
             return None
         return next((e for e in page(path).iter() if isinstance(e.tag, str) and e.get("id") == element_id), None)
 
-    for path in sorted(files, key=str.encode):
+    for path in sorted(files if only is None else files.keys() & only, key=str.encode):
         entry, kind = formats[path], formats[path]["format"]
+        if path == ORDER and source.data["type"] == "git":
+            continue  # part of the history, never a document, whatever its format (maintainer's decision, 2026-10-22)
         if kind == "records":
             yield from _records(source, path, entry, store.path(files[path].sha256), skipped)
             continue
@@ -129,7 +137,18 @@ def documents(source, tree, store, repo, skipped: dict | None = None) -> Iterato
             markdown = Page(path, note).render(page(path))
         if markdown.strip():
             yield Converted(path, markdown, path, None)
-    tasks.of_source(source, tree, store, repo)
+    if only is None:
+        tasks.of_source(source, tree, store, repo)
+
+
+def chosen(source, tree, store, repo, paths) -> dict[str, bytes]:
+    """{document path: Markdown} of those documents of a final tree that
+    paths names (a file's path, or <file>#<record id>) and it holds; only
+    their files are read."""
+    files = {path[:end] for path in paths for end in [len(path), *(i for i, c in enumerate(path) if c == "#")]
+             if path[:end] in tree}
+    return {found.path: found.markdown for found in documents(source, tree, store, repo, only=files)
+            if found.path in paths}
 
 
 def _records(source, path, entry, file, skipped):

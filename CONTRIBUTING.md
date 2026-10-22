@@ -113,7 +113,8 @@ together.
    A git source may add its history: `"history": {"since": "<commit>"}`
    gives one file `.git/history/<commit>` per commit from `since` to the
    revision (merges left out), in `git format-patch` layout and limited
-   to the files `extract` keeps. `since` is the commit from which the root
+   to the files `extract` keeps, and `.git/history/order`, the commits'
+   order with the merges marked. `since` is the commit from which the root
    license file holds the license the source lists; give these files a
    `code` format with the language `patch` and a license entry of their
    own, `.git/history/**`: an entry written `**` covers only the tree's

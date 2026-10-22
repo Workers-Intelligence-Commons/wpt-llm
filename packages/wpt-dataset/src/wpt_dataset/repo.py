@@ -9,6 +9,7 @@ Every file under data/ is opened here and nowhere else
     data/recipes/models/<name>.json       data, architecture, training and post-training of one model
     data/images/<name>/Dockerfile         a container image of agentic tasks (and any file it copies)
                       + lock.json, licenses.json (written by `wpt-agent lock-image`)
+                      + tools.json, the shared pool of tools its programs answer (optional)
     data/allowed-signers                  SSH keys allowed to sign decisions
     data/allowed-gpg-keys.asc             GPG keys allowed to sign decisions (optional)
 
@@ -92,7 +93,7 @@ from .licenses import check_license
 from .pools import parse
 
 CURRENT_SCHEMA = {"source": 6, "mixture": 1, "model": 5, "tokenizer": 2, "lock": 2, "conversation": 3, "task": 1,
-                  "image-lock": 1, "image-licenses": 1}
+                  "image-lock": 1, "image-licenses": 1, "image-tools": 1}
 ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}")
 PATCH = re.compile(r"(\d{4})-[A-Za-z0-9._-]+\.patch")
 NAME = re.compile(r"[a-z0-9][a-z0-9._-]*")
@@ -128,11 +129,14 @@ KINDS = {kind.name: kind for kind in (
     Kind("image-lock", "json", "an image's lock: its base, archive date and packages", "image-lock",
          "wpt-agent lock-image"),
     Kind("image-licenses", "json", "an image's packages and their licenses", "image-licenses", "wpt-agent lock-image"),
+    Kind("image-tools", "json", "an image's shared pool of tools, each answered by a program in the image",
+         "image-tools"),
     Kind("allowed-signers", "text", "SSH keys allowed to sign decisions", single="allowed-signers"),
     Kind("allowed-gpg-keys", "text", "GPG keys allowed to sign decisions", single="allowed-gpg-keys.asc"),
 )}
 RECIPE_FOLDERS = {"mixture": "mixtures", "tokenizer": "tokenizers", "model": "models"}
-IMAGE_FILES = {"dockerfile": "Dockerfile", "image-lock": "lock.json", "image-licenses": "licenses.json"}
+IMAGE_FILES = {"dockerfile": "Dockerfile", "image-lock": "lock.json", "image-licenses": "licenses.json",
+               "image-tools": "tools.json"}
 
 
 def address_hash(address: str) -> str:
@@ -725,6 +729,8 @@ class Repo:
                 self._check_recipe(kind, name)
             elif kind == "dockerfile":
                 self._image_folder(name)
+            elif kind == "image-tools":
+                self.image_tools(name)
             elif KINDS[kind].single:
                 self._check_signers(kind, self._path(kind, name).read_text(encoding="utf-8"))
             else:
@@ -792,13 +798,31 @@ class Repo:
         """RuleViolation unless data/images/<name>/ holds a Dockerfile."""
         self._image_folder(name)
 
+    def image_tools(self, name: str) -> list[dict]:
+        """The declarations of data/images/<name>/tools.json, the image's
+        shared pool of tools ([] without the file), validated; RuleViolation
+        as check_image, InvalidFile for a pool the check refuses."""
+        self._image_folder(name)
+        return self._check_image_tools(name) if self.exists("image-tools", name) else []
+
+    def _check_image_tools(self, name) -> list[dict]:
+        from .tasks import check_declared
+
+        document = load_json(self._path("image-tools", name), "image-tools")
+        check_declared(self.relative("image-tools", name), [tool["name"] for tool in document["tools"]])
+        return document["tools"]
+
     def image_files(self, name: str) -> dict[str, tuple[bool, bytes]]:
         """{path in the image's folder: (executable, content)} of every file
-        there, the Dockerfile, its lock and licenses included; RuleViolation
-        as check_image."""
+        there, the Dockerfile, its lock and licenses included, but none git
+        ignores (a __pycache__ a Python run left): the image, and its tag,
+        come from the files the repository can hold; RuleViolation as
+        check_image."""
         folder = self._image_folder(name)
+        found = [p for p in sorted(folder.rglob("*")) if p.is_file()]
+        ignored = self._ignored([p.relative_to(self.root).as_posix() for p in found])
         return {p.relative_to(folder).as_posix(): (bool(p.stat().st_mode & 0o100), p.read_bytes())
-                for p in sorted(folder.rglob("*")) if p.is_file()}
+                for p in found if p.relative_to(self.root).as_posix() not in ignored}
 
     # -- the rules -------------------------------------------------------------
     def check(self) -> list[str]:
@@ -837,15 +861,21 @@ class Repo:
     def check_fetched(self, sid: str, store, telemetry=None) -> tuple[int, int, dict]:
         """The rules on a fetched source, as `wpt-dataset check --fetch`
         applies them: its checksum, cuts, patches, license and format maps,
-        and each file converted (chat and task files checked). Returns
-        (entries, Markdown documents, {records file: what it left out})."""
-        from .markdown import documents
+        and each file converted (chat and task files checked, the texts
+        pointer tasks point to read from their sources and checked against
+        their sha256). Returns (entries, Markdown documents, {records file:
+        what it left out})."""
+        from .markdown import documents, format_of
         from .sources import source_tree
+        from .tasks import fill, of_source
 
         source = self.source(sid)
         tree, _ = source_tree(source, store, telemetry)
         skipped = {}
-        converted = sum(1 for _ in documents(source, tree, store, self, skipped))
+        # the task folders are parsed once, by of_source below, not again by documents
+        others = {path for path in tree if format_of(source, path)["format"] != "task"}
+        converted = sum(1 for _ in documents(source, tree, store, self, skipped, only=others))
+        fill(list(of_source(source, tree, store, self).values()), self, store)
         return len(tree), converted, skipped
 
     def fill_checksum(self, sid: str, store) -> tuple[str, list[str]]:
@@ -892,6 +922,7 @@ class Repo:
         for kind in ("image-lock", "image-licenses"):
             if self.exists(kind, name):
                 load_json(self._path(kind, name), kind)
+        self.image_tools(name)
 
     def _check_recipe(self, kind, name, document=None):
         if not NAME.fullmatch(name):
@@ -927,6 +958,11 @@ class Repo:
             self._check_source_document(name, content)
         elif kind == "mixture":
             check_mixture(content, where)
+        elif kind == "image-tools":
+            from .tasks import check_declared
+
+            self._image_folder(name)
+            check_declared(where, [tool["name"] for tool in content["tools"]])
         if kind in RECIPE_FOLDERS:
             self._check_recipe(kind, name, content)
         elif found.single:
@@ -1382,6 +1418,19 @@ class Repo:
     def _git(self, *args, check=True) -> subprocess.CompletedProcess:
         return subprocess.run([program("git"), "-C", str(self.root), *args], capture_output=True, check=check)
 
+    def _ignored(self, paths) -> set[str]:
+        """Those of the paths (relative to the root) that git ignores and does
+        not track; none when the repository is not a git working tree, or git
+        is not installed, so nothing tells what it ignores."""
+        git = shutil.which("git")
+        if not paths or git is None:
+            return set()
+        result = subprocess.run([git, "-C", str(self.root), "check-ignore", "-z", "--stdin"],
+                                input="\0".join(paths).encode() + b"\0", capture_output=True, check=False)
+        if result.returncode not in (0, 1):  # 1: none ignored; otherwise not a git working tree
+            return set()
+        return {path.decode() for path in result.stdout.split(b"\0") if path}
+
     def status(self) -> list[dict] | None:
         """[{path, state}] of every file under data/ that git sees changed or
         new (state: git's two status letters, such as " M" or "??"); None
@@ -1401,13 +1450,15 @@ class Repo:
                 index += 1  # the path it was renamed or copied from
         return found
 
-    def changed_since(self, revision: str) -> tuple[list[str], bool]:
+    def changed_since(self, revision: str) -> tuple[list[str], bool, list[str]]:
         """(ids of the existing sources whose folder changed since the git
-        revision, whether anything under data/images/ changed)."""
+        revision, whether anything under data/images/ changed, ids of the
+        sources whose folder is gone)."""
         out = self._git("diff", "--name-only", revision, "--", "data/sources", "data/images").stdout.decode()
         changed = out.splitlines()
         ids = {p.split("/")[2] for p in changed if p.startswith("data/sources/") and p.count("/") >= 3}
-        return sorted(ids & set(self.source_ids())), any(p.startswith("data/images/") for p in changed)
+        existing = set(self.source_ids())
+        return sorted(ids & existing), any(p.startswith("data/images/") for p in changed), sorted(ids - existing)
 
     def _show(self, commit: str, path: str) -> bytes | None:
         result = self._git("show", f"{commit}:{path}", check=False)
@@ -1449,8 +1500,8 @@ class Repo:
         found = [("source", sid) for sid in self.source_ids()]
         found += [(kind, name) for kind in RECIPE_FOLDERS for name in self.names(kind)]
         found += [("lock", name) for name in self.names("tokenizer") if self.exists("lock", name)]
-        found += [(kind, name) for name in self.image_names() for kind in ("image-lock", "image-licenses")
-                  if self.exists(kind, name)]
+        found += [(kind, name) for name in self.image_names()
+                  for kind in ("image-lock", "image-licenses", "image-tools") if self.exists(kind, name)]
         return found
 
     def raw(self, kind: str, name: str):

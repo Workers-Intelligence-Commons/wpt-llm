@@ -129,11 +129,41 @@ other line keeps its bytes.
 | `thinking` | `text` | reasoning written before or between other blocks |
 | `tool_call` | `id`, `name`, `arguments` | a call to one of `tools`; `arguments` is a JSON object that matches the tool's `parameters` |
 | `tool_result` | `call`, `content`, `error` (optional, `true` when the call failed) | the answer to the `tool_call` whose `id` is `call`; `content` is a list of blocks |
-| `json` | `value` | a structured output: any JSON value |
+| `json` | `value` | a structured output: any JSON value; an attempt at a task ends with one ([The answer](#the-answer)) |
 | `file` | `sha256`, `media_type` | a media file such as a screenshot, stored next to the record and named by its sha256 |
 
 A new kind of element gets a new block type; existing blocks keep their
 meaning, and raising `schema` with a migration covers any change to them.
+
+## The answer
+
+Every attempt at a task ends with a `json` block holding the answer and
+the confidence, file-changing tasks included (maintainer's decision,
+2026-10-18). The model learns the block from each task's own
+instructions, which state it: the harness adds no sentence to the opening
+(maintainer's decision, 2026-10-22):
+
+```json
+{"type": "json", "value": {"answer": "calc.py adds instead of subtracting; fixed line 12.", "confidence": 0.8}}
+```
+
+- `answer`: a string. In a file-changing task it is a short summary of
+  what was changed, so every task ends with the same block (maintainer's
+  decision, 2026-10-22).
+- `confidence`: a number from 0 to 1. In a file-changing task it is how
+  sure the model is that the task's check will pass (maintainer's
+  decision, 2026-10-18).
+
+The block counted is the last `json` block of the attempt's last
+`assistant` message; one whose value is not an object of exactly these
+two fields, of these types, counts as missing. The agent loop
+(`wpt_agent.loop`) keeps its value, or `null`, as the `answer` of the
+attempt's `metadata`, which the task's check reads
+([post-training.md](post-training.md), "Scores"). A missing or malformed
+block scores the whole attempt 0, a rule of the shared check library
+that every check calls (maintainer's decision, 2026-10-18). There is no
+way to abstain: "I don't know" is never a way out that costs nothing
+(maintainer's decision, 2026-10-18).
 
 ## Files
 
@@ -188,6 +218,7 @@ END
 <|im_start|>user\n{text}<|im_end|>\n
 <|im_start|>assistant\n<think>\n{thinking}\n</think>\n\n{text}\n<tool_call>\n{"name": ..., "arguments": {...}}\n</tool_call><|im_end|>\n
 <|im_start|>user\n<tool_response>\n{result}\n</tool_response><|im_end|>\n
+<|im_start|>assistant\n{text}\n<json>\n{value}\n</json><|im_end|>\n
 ```
 
 - A message's blocks keep their order. Blocks after the first are
@@ -196,7 +227,12 @@ END
   message of their own.
 - A `tool` message is written as a `user` turn of `<tool_response>` blocks,
   as Qwen does.
-- `json` blocks are written as JSON text.
+- A `json` block is written as its JSON text between `<json>` and
+  `</json>`, in a tool result too, so the model sees a structured output
+  and tells it apart from text (maintainer's decision, 2026-10-18: the
+  template shows `json` blocks to the model). When the model writes a
+  `json` block whose text is not JSON (`NaN` and `Infinity` included), it
+  stays text, tags included, as a tool call that does not parse does.
 - Recorded but not written as tokens yet: `file` blocks (no model reads
   media yet) and a `tool_result`'s `error` flag.
 - Never written as tokens: `metadata`.
@@ -214,7 +250,7 @@ Special tokens have fixed ids, the same in every vocabulary, so the
 template never depends on a vocabulary
 ([tokenizer.md](tokenizer.md)):
 
-- Ids 257 to 512 are reserved for special tokens. 256 ids, 10 in use.
+- Ids 257 to 512 are reserved for special tokens. 256 ids, 12 in use.
 - Merges start at 513.
 
 | Id | Token | Id | Token |
@@ -224,6 +260,8 @@ template never depends on a vocabulary
 | 259 | `<think>` | 264 | `</tool_call>` |
 | 260 | `</think>` | 265 | `<tool_response>` |
 | 261 | `<tools>` | 266 | `</tool_response>` |
+|  |  | 267 | `<json>` |
+|  |  | 268 | `</json>` |
 
 An id once given never changes. A new special token takes the next free id
 up to 512, in `SPECIAL` (`packages/wpt-tokenizer/src/wpt_tokenizer/__init__.py`);

@@ -45,7 +45,9 @@ WORKER_MEMORY = 2.5e9  # bytes: the measured memory of one test worker (about 2.
 SHARE = 0.75  # the share of the cores and of the available memory the test workers may take
 # what the image build test covers: a change to any of these, or to an image's folder, runs it
 IMAGE_CODE = ("packages/wpt-agent/src/wpt_agent/images.py", "packages/wpt-agent/tests/test_images.py",
+              "packages/wpt-agent/tests/test_agent_image.py",
               "packages/wpt-agent/tests/conftest.py",
+              "packages/wpt-dataset/src/wpt_dataset/repo.py",  # Repo.image_files: what the image's tag covers
               "packages/wpt-dataset/src/wpt_dataset/schemas/image-lock.schema.json",
               "packages/wpt-dataset/src/wpt_dataset/schemas/image-licenses.schema.json")
 # whether an image's folder changed since the revision: only the service layer names the data folder

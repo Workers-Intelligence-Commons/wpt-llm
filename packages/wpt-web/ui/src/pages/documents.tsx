@@ -127,8 +127,8 @@ export const recipes = documentsPage("recipes", "Recipes",
   "Model, mixture and tokenizer recipes (docs/model.md), and the locks that build-tokenizer writes.",
   ["model", "mixture", "tokenizer", "lock"]);
 export const images = documentsPage("images", "Images",
-  "The container images of agentic tasks: each Dockerfile, and the lock and license list that lock-image writes.",
-  ["dockerfile", "image-lock", "image-licenses"]);
+  "The container images of agentic tasks: each Dockerfile, its pool of tools, and the lock and license list that lock-image writes.",
+  ["dockerfile", "image-tools", "image-lock", "image-licenses"]);
 export const signers = documentsPage("signers", "Signers",
   "The keys allowed to sign a commit that changes a decision (docs/licenses.md).",
   ["allowed-signers", "allowed-gpg-keys"]);

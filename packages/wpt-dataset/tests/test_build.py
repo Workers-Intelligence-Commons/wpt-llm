@@ -3,7 +3,7 @@ import json
 
 import pytest
 
-from wpt_dataset.build import build_dataset
+from wpt_dataset.build import build_dataset, document_list
 from wpt_dataset.cli import main
 from wpt_dataset.errors import ChecksumMismatch, LockedDocumentsMissing, LockMismatch, PoolError, TokenizerVersionNeeded
 from wpt_store import open_store
@@ -100,6 +100,18 @@ def test_held_out_documents_never_reach_training(kit, repo, store, tmp_path):
     assert held and trained and not held & trained
     assert record["documents"]["held_out"] == len(held)
     assert record["contamination"]["held_out_documents"] == len(held)
+
+    # maintainer's decision, 2026-10-22: the build keeps, found from the
+    # dataset id, every document's id, Markdown sha256 and tag, so a task
+    # reader learns the held-out texts without converting any source
+    dataset_id = record["id"]
+    listed = document_list(store, dataset_id)
+    assert {entry["id"] for entry in listed if entry["tag"] == "held-out"} == held
+    training = {entry["id"] for entry in listed if entry["tag"] == "training"}
+    assert len(training) == record["documents"]["training"] and trained <= training  # the shards draw some
+    for entry in listed:  # the sha256 of the document's Markdown, the text training reads
+        number = int(entry["id"].rsplit("/t", 1)[1].removesuffix(".txt"))
+        assert f"document number {number} says hello.".encode() in store.get_bytes(entry["sha256"])
 
 
 def test_too_many_passes_over_a_pool_is_refused(kit, repo, store, corpus):

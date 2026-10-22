@@ -8,12 +8,15 @@ token (wpt_tokenizer.SPECIAL), so no text inside a message can imitate one:
     <|im_start|>user\\n{text}<|im_end|>\\n
     <|im_start|>assistant\\n<think>\\n{thinking}\\n</think>\\n\\n{text}\\n<tool_call>\\n{"name": ..., "arguments": {...}}\\n</tool_call><|im_end|>\\n
     <|im_start|>user\\n<tool_response>\\n{result}\\n</tool_response><|im_end|>\\n
+    <|im_start|>assistant\\n{text}\\n<json>\\n{value}\\n</json><|im_end|>\\n
 
 A message's blocks keep their order; blocks after the first are separated by
 a line break, and a thinking block ends with a blank line. Tools offered in
 a conversation without a system message get a system message of their own.
 A `tool` message is written as a user turn of <tool_response> blocks, as
-Qwen does. `json` blocks are written as JSON text. Left out, while recorded:
+Qwen does. A `json` block is written as its JSON text between <json> and
+</json>, so a structured output is told apart from text, also inside a
+tool result. Left out, while recorded:
 `file` blocks (no model reads media yet) and a tool_result's `error` flag.
 """
 
@@ -26,6 +29,7 @@ THINK, THINK_END = SPECIAL["<think>"], SPECIAL["</think>"]
 TOOLS, TOOLS_END = SPECIAL["<tools>"], SPECIAL["</tools>"]
 CALL, CALL_END = SPECIAL["<tool_call>"], SPECIAL["</tool_call>"]
 RESPONSE, RESPONSE_END = SPECIAL["<tool_response>"], SPECIAL["</tool_response>"]
+JSON, JSON_END = SPECIAL["<json>"], SPECIAL["</json>"]
 NAMES = {i: name for name, i in SPECIAL.items()}
 
 
@@ -69,7 +73,8 @@ def show(tokenizer, ids) -> str:
 def reply(tokenizer, ids) -> list[dict]:
     """The blocks of an assistant message from its generated tokens (up to,
     not including, <|im_end|>). A tool call whose text is not a JSON object
-    with a name and arguments stays text, tags included."""
+    with a name and arguments, and a json block whose text is not JSON,
+    stay text, tags included."""
     blocks, text, inside, buffer, calls = [], [], None, [], 0
 
     def flush_text():
@@ -79,7 +84,7 @@ def reply(tokenizer, ids) -> list[dict]:
         text.clear()
 
     for i in ids:
-        if inside is None and i in (THINK, CALL):
+        if inside is None and i in (THINK, CALL, JSON):
             flush_text()
             inside, buffer = i, []
         elif inside == THINK and i == THINK_END:
@@ -93,6 +98,12 @@ def reply(tokenizer, ids) -> list[dict]:
                 calls += 1
                 blocks.append({"type": "tool_call", "id": f"call-{calls}", **call})
             inside = None
+        elif inside == JSON and i == JSON_END:
+            try:
+                blocks.append({"type": "json", "value": _json(_words(tokenizer, buffer))})
+            except ValueError:  # not JSON, or NaN or Infinity, which no JSON file holds
+                text += [JSON, *buffer, JSON_END]
+            inside = None
         elif inside is not None:
             buffer.append(i)
         else:
@@ -105,6 +116,12 @@ def reply(tokenizer, ids) -> list[dict]:
 
 def _words(tokenizer, ids) -> str:
     return show(tokenizer, ids).strip("\n")
+
+
+def _json(text):
+    def refuse(constant):
+        raise ValueError(constant)
+    return json.loads(text, parse_constant=refuse)
 
 
 def _call(text):
@@ -138,17 +155,26 @@ def _turns(tokenizer, conversation):
             if kind == "text":
                 parts.append(text(block["text"]))
             elif kind == "json":
-                parts.append(text(json.dumps(block["value"], ensure_ascii=False)))
+                parts.append(wrapped(JSON, JSON_END, json.dumps(block["value"], ensure_ascii=False)))
             elif kind == "thinking":
                 parts.append([*wrapped(THINK, THINK_END, block["text"]), *text("\n\n")])
             elif kind == "tool_call":
                 call = {"name": block["name"], "arguments": block["arguments"]}
                 parts.append(wrapped(CALL, CALL_END, json.dumps(call, ensure_ascii=False)))
             elif kind == "tool_result":
-                parts.append(wrapped(RESPONSE, RESPONSE_END, "\n".join(
-                    b["text"] if b["type"] == "text" else json.dumps(b["value"], ensure_ascii=False)
-                    for b in block["content"] if b["type"] != "file")))
+                parts.append([RESPONSE, *result(block["content"]), RESPONSE_END])
         return parts
+
+    def result(blocks):  # "\n{each block, one per line}\n", the text between json blocks encoded at once
+        ids, words = [], ["\n"]
+        for n, block in enumerate(b for b in blocks if b["type"] != "file"):
+            words.append("\n" if n else "")
+            if block["type"] == "json":
+                ids += [*text("".join(words)), *wrapped(JSON, JSON_END, json.dumps(block["value"], ensure_ascii=False))]
+                words = []
+            else:
+                words.append(block["text"])
+        return ids + text("".join(words) + "\n")
 
     tools = conversation.get("tools") or []
     listed = [TOOLS, *text("\n" + "\n".join(json.dumps(t, ensure_ascii=False) for t in tools) + "\n"), TOOLS_END]

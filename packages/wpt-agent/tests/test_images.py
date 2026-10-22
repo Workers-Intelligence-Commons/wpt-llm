@@ -76,6 +76,26 @@ def test_an_image_without_a_lock_is_not_built(root):
         images.build(root, "other")
 
 
+def test_the_tag_comes_from_the_files_git_does_not_ignore(tmp_path):
+    # a __pycache__ that a Python run left in an image's folder is ignored
+    # by git: it changes neither the tag nor what docker gets, so two
+    # machines with the same commit build the same tag; a new file git
+    # does not ignore changes it
+    folder = tmp_path / "data" / "images" / "tiny"
+    folder.mkdir(parents=True)
+    (folder / "Dockerfile").write_text(DOCKERFILE)
+    (folder / "check.py").write_text("print(1)\n")
+    (tmp_path / ".gitignore").write_text("__pycache__/\n")
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
+    before = images.tag(tmp_path, "tiny")
+    (folder / "__pycache__").mkdir()
+    (folder / "__pycache__" / "check.cpython-314.pyc").write_bytes(b"\0compiled")
+    assert images.tag(tmp_path, "tiny") == before and sorted(images.files(tmp_path, "tiny")) == ["Dockerfile",
+                                                                                                 "check.py"]
+    (folder / "notes.txt").write_text("new\n")
+    assert images.tag(tmp_path, "tiny") != before
+
+
 IGNORES_SNAPSHOT = (r"apt reads http://deb\.debian\.org/debian.*not the dated archive.*"
                     r"use a base of Debian 13 \(trixie\) or Ubuntu 24\.04")
 

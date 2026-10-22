@@ -4,7 +4,7 @@
   "title": "WPT task (the task.json of a task folder, in a file of the task format; docs/post-training.md)",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "instructions", "image", "limits"],
+  "required": ["schema", "instructions", "image", "limits", "needs"],
   "properties": {
     "schema": {"const": 1, "description": "shape version of the task"},
     "instructions": {"type": "string", "minLength": 1, "description": "what the model is asked to do: the user message that starts every attempt"},
@@ -30,6 +30,108 @@
         "cpus": {"type": "number", "exclusiveMinimum": 0, "description": "CPUs' worth of time"}
       }
     },
+    "needs": {
+      "type": "array",
+      "description": "the tools the task cannot be done without; each entry lists the variants of one need, and every attempt is offered exactly one of them (docs/post-training.md, \"Tools\")",
+      "items": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/variant"}}
+    },
+    "answered_by": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "the looking tools (read, bash, a declared tool marked looks) that can answer what the task leaves open: an attempt asks the user only after at least one look through one of them (wpt_check.asked_last); required with replies",
+      "items": {"$ref": "#/$defs/name"}
+    },
+    "replies": {
+      "type": "array",
+      "minItems": 1,
+      "description": "the user's replies, written in advance, to the ask tool, which only a task with replies offers: the first reply whose pattern matches the question is given",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["pattern", "reply"],
+        "properties": {
+          "pattern": {"type": "string", "minLength": 1, "description": "a Python regular expression, searched for anywhere in the question"},
+          "reply": {"type": "string", "minLength": 1, "description": "what the user answers"}
+        }
+      }
+    },
+    "tools": {
+      "type": "array",
+      "description": "tools the task offers beyond read, write, edit, bash and ask, each answered by a program in the image",
+      "items": {"$ref": "#/$defs/tool"}
+    },
+    "tool_files": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "paths under files/ (a file, or a folder and everything in it) that go to the tools' programs instead of /work: the model's own tools cannot read them",
+      "items": {"type": "string", "pattern": "^[^/]+(/[^/]+)*$"}
+    },
+    "pointers": {
+      "type": "array",
+      "description": "texts the task takes from documents of sources, filled in from the store when the task is read: the repository holds the pointer, never the text (docs/post-training.md, \"Pointer tasks\")",
+      "items": {"oneOf": [{"$ref": "#/$defs/text_pointer"}, {"$ref": "#/$defs/repository_pointer"}]}
+    },
     "note": {"type": "string"}
+  },
+  "$defs": {
+    "text_pointer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["for", "path", "source", "document", "span", "sha256"],
+      "properties": {
+        "for": {"enum": ["files", "check"], "description": "files: the text is a file under files/ (tool_files may hide it); check: a file next to the check"},
+        "path": {"type": "string", "pattern": "^[^/]+(/[^/]+)*$", "description": "the file's path there"},
+        "source": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}$", "description": "the id of the source the document belongs to"},
+        "document": {"type": "string", "minLength": 1, "description": "the document's path in its source: a file's path, or <file>#<record id>"},
+        "span": {"$ref": "#/$defs/span", "description": "[start, end): bytes of the document's Markdown"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$", "description": "the sha256 of the span's bytes"},
+        "removed": {"type": "array", "items": {"$ref": "#/$defs/span"}, "description": "the parts of the span the builder left out, in order, in the document's bytes"},
+        "note": {"type": "string"}
+      }
+    },
+    "repository_pointer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["for", "source", "document", "checksum"],
+      "description": "/work made a git repository from a commit of a git source's history: at the real state just before the commit (every later commit undone, newest first, in the history's order), the commit's changes in its working tree and not committed, with a bare repository outside /work, at /tmp/origin.git, as its origin",
+      "properties": {
+        "for": {"const": "repository"},
+        "source": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}$", "description": "the id of the git source whose history holds the commit"},
+        "document": {"type": "string", "pattern": "^\\.git/history/[0-9a-f]{40,64}$", "description": "the commit's history file: .git/history/<commit>"},
+        "checksum": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$", "description": "the source's checksum when the task was built: the task is refused once it changes"},
+        "note": {"type": "string"}
+      }
+    },
+    "variant": {
+      "description": "one way to meet a need: a tool's name, or tools offered together and the paths under files/ that go to the tools' programs, as tool_files, in an attempt offered this variant only",
+      "oneOf": [
+        {"$ref": "#/$defs/name"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["tools"],
+          "properties": {
+            "tools": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/name"}},
+            "tool_files": {"type": "array", "uniqueItems": true, "description": "paths under files/, or /tmp/origin.git, a repository pointer's remote", "items": {"anyOf": [{"type": "string", "pattern": "^[^/]+(/[^/]+)*$"}, {"const": "/tmp/origin.git"}]}}
+          }
+        }
+      ]
+    },
+    "span": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "integer", "minimum": 0}},
+    "name": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]*$", "maxLength": 64},
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "description", "parameters", "program"],
+      "properties": {
+        "name": {"$ref": "#/$defs/name"},
+        "description": {"type": "string", "minLength": 1, "description": "what the model reads about the tool"},
+        "parameters": {"type": "object", "description": "the JSON Schema of the call's arguments"},
+        "program": {"type": "string", "pattern": "^/", "description": "the absolute path, in the image, of the program that answers a call"},
+        "names": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/name"}, "description": "other names an attempt may offer the tool under"},
+        "looks": {"type": "boolean", "description": "whether a call of the tool looks at sources, as read does (search, fetch, a file search); answered_by names only looking tools (docs/post-training.md, \"The check library\")"}
+      }
+    }
   }
 }

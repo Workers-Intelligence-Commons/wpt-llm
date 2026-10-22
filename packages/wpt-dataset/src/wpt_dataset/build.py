@@ -15,6 +15,12 @@
 The dataset id is the fingerprint of every input, so building the same
 recipe on the same data again is a lookup.
 
+Beside its record, every dataset keeps its document list (write_document_list;
+maintainer's decision, 2026-10-22): each document's id, the sha256 of its
+Markdown and its tag, training or held-out, under a ref named by the
+dataset id, so the base model's provenance finds it. A dataset built
+before builds wrote one never gets one (maintainer's decision, 2026-10-22).
+
 A source that fails (its checksum differs, every address fails, a file is
 broken) stops the build, unless the build is asked to skip such sources:
 the record then lists each one with its error under `skipped`. A missing
@@ -61,6 +67,8 @@ DEFAULT_MAX_EPOCHS = 4
 SHARD_TOKENS = 1 << 26  # about 64M tokens (256 MB of uint32) per shard
 NGRAM = 13  # contamination check: runs of 13 words, as in the GPT-3 paper
 STREAM_READERS = 16  # documents read at once from a streamed build's token objects
+DOCUMENT_LIST = "dataset-documents"  # the kind of the ref, named by the dataset id, of a dataset's document list
+TRAINING, HELD_OUT = "training", "held-out"  # a listed document's tag
 
 
 @dataclass(frozen=True)
@@ -296,6 +304,32 @@ def is_held_out(document_id: str, share: float) -> bool:
     return int.from_bytes(hashlib.sha256(document_id.encode()).digest()) < share * 2**256
 
 
+def write_document_list(store, dataset_id: str, documents, held_ids, telemetry) -> str:
+    """Store a dataset's document list and return its object: one JSON line
+    per document, in the build's order, holding its id, the sha256 of its
+    Markdown (the one the dataset id's fingerprint reads) and its tag,
+    HELD_OUT for the ids in held_ids (the split the build cut its shards
+    by), TRAINING otherwise, kept under the ref DOCUMENT_LIST/<dataset id>.
+    The ref is recorded in telemetry's record before it is set
+    (wpt_telemetry.set_ref)."""
+    lines = (json.dumps({"id": d.id, "sha256": d.sha256, "tag": HELD_OUT if d.id in held_ids else TRAINING},
+                        ensure_ascii=False, sort_keys=True) for d in documents)
+    listed = store.put_bytes("".join(f"{line}\n" for line in lines).encode())
+    telemetry.output(dataset_documents=listed)
+    set_ref(store, DOCUMENT_LIST, dataset_id, listed, telemetry)
+    return listed
+
+
+def document_list(store, dataset_id: str) -> list[dict] | None:
+    """[{id, sha256, tag}] of every document of a dataset, as
+    write_document_list stored them; None for a dataset built before builds
+    wrote its list."""
+    listed = store.get_ref(DOCUMENT_LIST, dataset_id)
+    if listed is None:
+        return None
+    return [json.loads(line) for line in store.get_bytes(listed).splitlines()]
+
+
 # -- tokenizer ------------------------------------------------------------------
 
 def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, telemetry=None):
@@ -455,8 +489,8 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
         log(f"dataset {dataset_id} is already built")
         return dataset_id
 
-    held_out = [d for d in documents if is_held_out(d.id, recipe["held_out"])]
-    held_ids = {d.id for d in held_out}
+    held_ids = {d.id for d in documents if is_held_out(d.id, recipe["held_out"])}
+    held_out = [d for d in documents if d.id in held_ids]
     training = [d for d in documents if d.id not in held_ids]
     with tempfile.TemporaryDirectory(prefix="wpt-build-") as tmp:
         with telemetry.span("tokens", documents=len(documents)):
@@ -510,6 +544,8 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
         # recorded, and in the store, before the ref is set: a record that cannot be written leaves no dataset
         # under this id
         telemetry.output(dataset=dataset_id, dataset_record=record_object)
+        # before the dataset's ref: a dataset is never there without its list
+        write_document_list(store, dataset_id, documents, held_ids, telemetry)
         set_ref(store, "datasets", dataset_id, record_object, telemetry)
     log(f"dataset {dataset_id}: {record['total_tokens']:,} training tokens in {len(shards)} shards")
     return dataset_id

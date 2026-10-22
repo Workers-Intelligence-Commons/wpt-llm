@@ -563,7 +563,10 @@ for that check.
   `.git/history/`, so a tree entry written `**` means every file of the
   tree and does not match the history files (maintainer's
   decision, 2026-10-20); a pattern starting with `.git/history/` matches
-  no file of the tree.
+  no file of the tree. The order file, `.git/history/order` (the commits
+  newest first, merges marked), is part of the history and gets its
+  license entry by the same rule, from the patterns that start with
+  `.git/history/` (maintainer's decision, 2026-10-22).
 - **Every file whose license allows it comes in.** Only binary files (the
   repository reads UTF-8 text), license refusals and doubts leave a file
   out; configuration, build files, license files and edition pages are

@@ -28,7 +28,7 @@ BASE_SIZE = FIRST_MERGE  # 256 bytes, END and the 256 reserved ids
 # changes, and a new one takes the next free id up to 512.
 SPECIAL = {name: END + 1 + i for i, name in enumerate([
     "<|im_start|>", "<|im_end|>", "<think>", "</think>", "<tools>", "</tools>",
-    "<tool_call>", "</tool_call>", "<tool_response>", "</tool_response>"])}
+    "<tool_call>", "</tool_call>", "<tool_response>", "</tool_response>", "<json>", "</json>"])}
 
 
 class Tokenizer:

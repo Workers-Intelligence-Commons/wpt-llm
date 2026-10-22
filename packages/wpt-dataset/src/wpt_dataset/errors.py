@@ -102,6 +102,13 @@ class LockedDocumentsMissing(DatasetError):
     that holds it, or raise the recipe's `version`."""
 
 
+class DocumentListMissing(DatasetError):
+    """Reading pointer tasks needs the base model's dataset's document list,
+    and that dataset predates document lists (or no dataset is named): such
+    a base model is used with the repository at the commit that built it,
+    with no fallback (maintainer's decision, 2026-10-22)."""
+
+
 class RoundTripFailed(DatasetError):
     """A document does not decode back to its exact bytes."""
 

@@ -45,3 +45,25 @@ def test_a_generated_reply_reads_back_into_the_blocks_it_was_written_from():
     assert chat.reply(TOKENIZER, body) == [*ASSISTANT[:2], {**ASSISTANT[2], "id": "call-1"}]
     broken = [SPECIAL["<tool_call>"], *TOKENIZER.encode(b"not json"), SPECIAL["</tool_call>"]]
     assert chat.reply(TOKENIZER, broken) == [{"type": "text", "text": "<tool_call>not json</tool_call>"}]
+
+
+def test_a_structured_output_is_told_apart_from_text_and_reads_back_as_json():
+    # an attempt ends with a json block (docs/chat-format.md, "The answer"):
+    # its tags are special tokens, so JSON typed as text never passes for
+    # one, and the block the model wrote comes back as its value
+    answer = {"type": "json", "value": {"answer": "Fixed calc.py.", "confidence": 0.75}}
+    typed = {"type": "text", "text": '{"answer": "typed", "confidence": 1}'}
+    ids = chat.encode(TOKENIZER, {"schema": 3, "messages": [{"role": "assistant", "content": [typed, answer]}]})[0]
+    assert chat.show(TOKENIZER, ids).endswith(
+        '{"answer": "typed", "confidence": 1}\n<json>\n{"answer": "Fixed calc.py.", "confidence": 0.75}\n</json>'
+        "<|im_end|>\n")
+    body = ids[ids.index(SPECIAL["<|im_start|>"]) + 1 + len(TOKENIZER.encode(b"assistant\n")):
+               ids.index(SPECIAL["<|im_end|>"])]
+    assert chat.reply(TOKENIZER, body) == [typed, answer]
+    for broken in (b"not json", b"NaN"):
+        ids = [SPECIAL["<json>"], *TOKENIZER.encode(broken), SPECIAL["</json>"]]
+        assert chat.reply(TOKENIZER, ids) == [{"type": "text", "text": f"<json>{broken.decode()}</json>"}]
+    result = {"role": "tool", "content": [{"type": "tool_result", "call": "c1", "content": [
+        {"type": "text", "text": "found"}, {"type": "json", "value": [1]}, {"type": "text", "text": "end"}]}]}
+    assert chat.show(TOKENIZER, chat.encode(TOKENIZER, {"messages": [result]})[0]) == (
+        "<|im_start|>user\n<tool_response>\nfound\n<json>\n[1]\n</json>\nend\n</tool_response><|im_end|>\n")

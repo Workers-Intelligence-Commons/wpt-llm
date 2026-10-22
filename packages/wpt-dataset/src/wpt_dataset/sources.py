@@ -286,27 +286,38 @@ def apply_cuts(source_id: str, tree: dict[str, Entry], cuts: list[dict], store) 
 def apply_patches(source_id: str, tree: dict[str, Entry], patches: list[Patch], store) -> dict[str, Entry]:
     """Apply git-format patches to the tree inside a temporary git index:
     no files are written out, so modes and symlinks behave the same on every
-    operating system."""
+    operating system. The paths git's index refuses (any .git/ path, such
+    as a history's files) are set aside and come back exactly as they
+    were; a patch that names one fails, as git refuses it (maintainer's
+    decision, 2026-10-22)."""
     if not patches:
         return tree
     with tempfile.TemporaryDirectory(prefix="wpt-patch-") as tmp:
         git, env = temporary_git(tmp)
         load_index(git, tree, store)
+        held = {path for path, _, _ in _index(git)}
+        aside = {path: entry for path, entry in tree.items() if path not in held}
         for patch in patches:
             try:
                 git("apply", "--cached", "--whitespace=nowarn", "-", input=patch.data)
             except subprocess.CalledProcessError as error:
                 raise PatchFailed(f"{source_id}: {patch.name}: {error.stderr.decode(errors='replace').strip()}") from error
-        listing = [r for r in git("ls-files", "-s", "-z").split(b"\0") if r]
-        records = []
-        for record in listing:
-            meta, path = record.split(b"\t", 1)
-            mode, object_id, _stage = meta.decode().split()
-            records.append((path.decode(), mode, object_id))
+        records = _index(git)
         with contextlib.closing(manifest._git_blobs(env["GIT_DIR"], [r[2] for r in records])) as contents:
             patched = {path: Entry(mode, store.put_bytes(content)) for (path, mode, _), content in zip(records, contents)}
+    patched = aside | patched
     manifest.check_paths(patched)
     return patched
+
+
+def _index(git) -> list[tuple[str, str, str]]:
+    """(path, mode, object id) of every entry of the temporary index."""
+    records = []
+    for record in filter(None, git("ls-files", "-s", "-z").split(b"\0")):
+        meta, path = record.split(b"\t", 1)
+        mode, object_id, _stage = meta.decode().split()
+        records.append((path.decode(), mode, object_id))
+    return records
 
 
 def temporary_git(tmp):
@@ -324,7 +335,9 @@ def temporary_git(tmp):
 
 
 def load_index(git, tree: dict[str, Entry], store):
-    """Make the temporary index hold exactly this tree."""
+    """Make the temporary index hold this tree minus the paths git refuses:
+    git silently drops any .git/ path (such as a history's files), so a
+    caller that needs those must handle them itself."""
     git("read-tree", "--empty")
     paths = sorted(tree)
     if not paths:

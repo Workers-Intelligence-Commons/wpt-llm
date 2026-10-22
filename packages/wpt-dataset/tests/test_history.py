@@ -4,6 +4,8 @@ import pytest
 
 from wpt_dataset import manifest
 from wpt_dataset.build import gather
+from wpt_dataset.edit import unpack, write_patch
+from wpt_dataset.errors import EditError, PatchFailed
 from wpt_dataset.sources import compute_upstream, source_tree
 
 
@@ -39,6 +41,8 @@ def test_a_git_history_gives_one_patch_per_commit_since_the_license_limited_to_k
     documents, _, _ = gather(repo, store, log=lambda _: None)
 
     ids = sorted(d.id for d in documents)
+    # the order file stays in the stored tree but is not a document (maintainer's decision, 2026-10-22)
+    assert manifest.ORDER in source_tree(repo.source(sid), store)[0]
     assert ids == sorted([f"{sid}/.git/history/{since}", f"{sid}/.git/history/{change}", f"{sid}/LICENSE",
                           f"{sid}/main.py"])
     assert before not in " ".join(ids) and vendored not in " ".join(ids)
@@ -63,12 +67,55 @@ def test_a_tree_entry_written_everywhere_leaves_the_history_files_to_their_own_e
 
     tree, _ = source_tree(repo.source(sid), store)  # the license map check passes
 
-    history = [f".git/history/{c}" for c in (head, since)]
+    # the order file is part of the history, under the same entry (maintainer's decision, 2026-10-22)
+    history = [f".git/history/{c}" for c in (head, since)] + [manifest.ORDER]
     entry_for_history, entry_for_tree = kit.WITH_HISTORY
     assert sorted(tree) == sorted([*history, "LICENSE", "main.py"])
     for path in tree:
         expected = entry_for_history if path in history else entry_for_tree
         assert manifest.license_entries(kit.WITH_HISTORY, path) == [expected]
+
+
+def test_a_patched_git_source_keeps_its_history_and_order_and_no_patch_touches_them(kit, repo, store, tmp_path):
+    # maintainer's decision, 2026-10-22: git's index silently drops .git/ paths, so patches are applied with the
+    # history files and the order file set aside; they come back exactly, and a patch naming one is refused
+    folder = tmp_path / "upstream"
+    folder.mkdir()
+    kit.run("git", "init", "-q", cwd=folder)
+    since = commit(kit, folder, "add the license", {"LICENSE": kit.LICENSE_TEXT.encode(), "main.py": b"print(1)\n"})
+    head = commit(kit, folder, "print two", {"main.py": b"print(2)\n"})
+    data = {"type": "git", "address": str(folder), "revision": head, "history": {"since": since},
+            "licenses": kit.WITH_HISTORY, "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
+                                                      {"format": "text", "paths": ["LICENSE", "main.py"]}]}
+    sid = kit.add_source(repo, store, "example", "history", data)
+    before, _ = source_tree(repo.source(sid), store)
+    history = {path: entry for path, entry in before.items() if path.startswith(manifest.HISTORY)}
+    assert sorted(history) == sorted([f".git/history/{since}", f".git/history/{head}", manifest.ORDER])
+
+    edited = tmp_path / "edited"
+    unpack(repo, repo.source(sid), store, edited)
+    (edited / "main.py").write_bytes(b"print(3)\n")
+    write_patch(repo, repo.source(sid), store, edited, "print-three")
+
+    after, _ = source_tree(repo.source(sid), store)
+    assert {path: entry for path, entry in after.items() if path.startswith(manifest.HISTORY)} == history
+    assert store.get_bytes(after["main.py"].sha256) == b"print(3)\n" and after["LICENSE"] == before["LICENSE"]
+
+    # an edited folder whose history files differ cannot be recorded as a patch, and leaves no patch
+    (edited / ".git" / "history" / "order").write_bytes(b"")
+    with pytest.raises(EditError, match=re.escape(f"{manifest.ORDER}: a patch cannot change")):
+        write_patch(repo, repo.source(sid), store, edited, "empty-order")
+    assert len(repo.source(sid).patches) == 1
+
+    # a patch that removes a history file is refused
+    order = store.get_bytes(before[manifest.ORDER].sha256).decode()
+    lines = order.splitlines()
+    removal = (f"diff --git a/{manifest.ORDER} b/{manifest.ORDER}\ndeleted file mode 100644\n--- a/{manifest.ORDER}\n"
+               f"+++ /dev/null\n@@ -1,{len(lines)} +0,0 @@\n" + "".join(f"-{line}\n" for line in lines))
+    other = kit.add_source(repo, store, "example", "history-removed", {**data, "address": str(folder) + "/"},
+                           patches=[removal])
+    with pytest.raises(PatchFailed, match=re.escape(manifest.ORDER)):
+        source_tree(repo.source(other), store)
 
 
 def test_a_submodule_replacing_a_folder_keeps_the_folder_s_excluded_file_out_of_the_patch(kit, store, tmp_path):
@@ -169,7 +216,7 @@ def test_history_files_are_the_bytes_of_one_format_patch_per_commit(kit, store, 
             first = head
         if number == 20:
             side = plumbing_commit(kit, folder, "on a branch", {"side.txt": b"side\n"}, [head])
-    head = plumbing_commit(kit, folder, "merge the branch", {"side.txt": b"side\n"}, [head, side])  # left out
+    head = merge = plumbing_commit(kit, folder, "merge the branch", {"side.txt": b"side\n"}, [head, side])  # left out
     head = plumbing_commit(kit, folder, "rename", {"src/a.py": None, "src/renamed.py": b"x = 40\n"}, [head])
     many = {f"long/{'folder-' * 12}{i:04d}.txt": b"line\n" for i in range(300)}  # 300 paths > 32,767 characters
     head = plumbing_commit(kit, folder, "many files", {**many, "vendor/many.py": b"m\n"}, [head])
@@ -182,8 +229,18 @@ def test_history_files_are_the_bytes_of_one_format_patch_per_commit(kit, store, 
     manifest.read_git_history(folder, root, head, extractor)
 
     written = {path: store.get_bytes(entry.sha256) for path, entry in extractor.tree.items()}
+    order = written.pop(manifest.ORDER).decode().splitlines()
     expected = history_one_call_per_commit(folder, root, head, manifest.Extractor(store, extract))
     assert written == expected
+    # maintainer's decision, 2026-10-22: the order file lists every commit since root, the merge and the commits
+    # that changed no kept path included, newest first, each before its parents, and marks the merge
+    listed = [line.split(" ")[0] for line in order]
+    every = kit.run("git", "rev-list", head, cwd=folder).decode().split()
+    assert sorted(listed) == sorted(every) and listed[0] == head
+    assert [line for line in order if " " in line] == [f"{merge} merge"]
+    for commit in listed:
+        parents = kit.run("git", "rev-list", "--parents", "-n", "1", commit, cwd=folder).decode().split()[1:]
+        assert all(listed.index(parent) > listed.index(commit) for parent in parents)
     assert len(written) == 40 + quoted  # 36 of the 40 changes (4 change vendor/ only), root, side, rename, many
     commits = manifest._history_commits(folder, root, head)
     whole = [c for c, changes in manifest._changed_paths(folder, commits).items()

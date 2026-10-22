@@ -1,0 +1,61 @@
+#!/usr/bin/python3 -I
+"""search_text: the lines of the files of /work (or of one file or
+folder there) that a regular expression matches, as grep -rn prints them:
+path:line:text. Symbolic links are not followed, and files that are not
+UTF-8 text are left out."""
+
+import os
+import re
+import stat
+
+from wpt_tools import arguments, fail, in_work
+
+MOST = 200  # lines given
+
+
+def lines(expression, path, descriptor, folder):
+    """[path:number:line] of the matching lines."""
+    found = []
+
+    def scan(name, opened):
+        with os.fdopen(opened, "rb") as file:
+            if not stat.S_ISREG(os.fstat(file.fileno()).st_mode):
+                return  # a pipe or a device: nothing to read, or no end
+            try:
+                text = file.read().decode("utf-8")
+            except UnicodeDecodeError:
+                return  # not text
+        found.extend(f"{name}:{number}:{line}" for number, line in enumerate(text.splitlines(), start=1)
+                     if expression.search(line))
+
+    if not folder:
+        scan(path, descriptor)
+        return found
+    for parent, folders, files, inside in os.fwalk(".", dir_fd=descriptor):
+        folders.sort()
+        for name in sorted(files):
+            try:
+                opened = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=inside)
+            except OSError:  # a symbolic link
+                continue
+            scan(os.path.normpath(os.path.join(path, parent, name)).replace(os.sep, "/"), opened)
+    return found
+
+
+def main():
+    given = arguments(["pattern"], ["path"])
+    try:
+        expression = re.compile(given["pattern"])
+    except re.error as error:
+        fail(f"the pattern is not a regular expression: {error}")
+    path = given.get("path", ".")
+    descriptor = in_work(path)  # a file's or a folder's
+    folder = stat.S_ISDIR(os.fstat(descriptor).st_mode)
+    found = lines(expression, os.path.normpath(path), descriptor, folder)
+    print("\n".join(found[:MOST]) if found else "No matches")
+    if len(found) > MOST:
+        print(f"... and {len(found) - MOST} more")
+
+
+if __name__ == "__main__":
+    main()

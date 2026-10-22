@@ -87,12 +87,21 @@ def read_folder(folder: Path, store, known: dict[str, Entry]) -> dict[str, Entry
 
 
 def _diff(before, after, store) -> bytes:
+    """The patch from before to after. EditError when they differ in a path
+    git's index refuses (any .git/ path, such as a history's files): a
+    patch cannot change those (maintainer's decision, 2026-10-22)."""
     with tempfile.TemporaryDirectory(prefix="wpt-edit-") as tmp:
         git, _ = temporary_git(tmp)
-        trees = []
+        trees, refused = [], []
         for tree in (before, after):
             load_index(git, tree, store)
+            held = {path.decode() for path in filter(None, git("ls-files", "-z").split(b"\0"))}
+            refused.append({path: entry for path, entry in tree.items() if path not in held})
             trees.append(git("write-tree").decode().strip())
+        if refused[0] != refused[1]:
+            changed = sorted(refused[0].keys() ^ refused[1].keys()
+                             | {p for p in refused[0].keys() & refused[1].keys() if refused[0][p] != refused[1][p]})
+            raise EditError(f"the folder changes {', '.join(changed)}: a patch cannot change a .git/ path")
         return git("diff-tree", "-p", "--no-color", "--no-renames", "--full-index", *trees)
 
 

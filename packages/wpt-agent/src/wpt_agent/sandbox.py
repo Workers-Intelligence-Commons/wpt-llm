@@ -14,6 +14,23 @@ their owners (CHOWN, DAC_OVERRIDE, FOWNER), which a non-root user's
 commands do not hold, and nothing in it can gain privileges (no setuid);
 the check's, as root, keeps docker's default capabilities.
 
+The files only a task's tools read (tool_files) are unpacked into
+TOOL_FILES, a folder owned by root that only the group TOOLS enters
+(750); what it holds belongs to TOOL, with no access for others (folders
+750, files 640). A tool's program runs as TOOL: the model's user with the
+group TOOLS, so it reads those files, may change them (the push tool's
+hidden remote), and changes /work as the model's own tools do, while the
+model's commands, in group AGENT, cannot enter TOOL_FILES; they cannot
+reach the program's process either, since another group keeps the kernel
+from letting one look into the other (ptrace access, /proc/<pid>/fd and
+/mem). Folders a task puts outside /work (`outside`, such as a
+repository's remote at /tmp/origin.git) are unpacked at their absolute
+paths under /tmp, with the user as their owner, as /work's files are.
+save() and restore() carry hidden files and such folders to a check's
+container: docker cp cannot read /tmp, a tmpfs, so they are read while
+the container still runs, which changes nothing the model's commands
+reach.
+
 Every command is started by a shell that first prints STARTED, so a run
 tells docker's own failure to start it (no such container, a container
 that is not running, a refusal of the daemon or of the runtime) from the
@@ -37,10 +54,11 @@ import io
 import posixpath
 import subprocess
 import tarfile
+import tempfile
 import threading
 import time
 from dataclasses import dataclass
-from typing import NamedTuple
+from typing import BinaryIO, NamedTuple
 
 from wpt_dataset.manifest import EXECUTABLE, SYMLINK
 
@@ -49,6 +67,8 @@ from .docker import DockerFailed
 
 WORK = "/work"
 AGENT, ROOT = "1000:1000", "0:0"  # user:group of the model's commands, and of the check's
+TOOL = "1000:1001"  # user:group of a tool's program: the model's user, in the group that reads TOOL_FILES
+TOOL_FILES, TOOLS_GROUP = "/tmp/wpt-tools", 1001  # the files only the tools' programs read, and their group
 GRACE = 5  # seconds between timeout's TERM and its KILL
 WAIT = 30  # seconds docker itself may take beyond a command's own limit
 STOPPED = {124, 137}  # timeout's exit codes when it stopped the command: by TERM, or by KILL after GRACE
@@ -93,10 +113,13 @@ class Ran(NamedTuple):
 
 class Sandbox:
     """A running container of `image` holding `files` ({path under /work:
-    (manifest mode, content)}), whose commands run as `user`. Use it in a
-    with block: leaving it removes the container."""
+    (manifest mode, content)}), whose commands run as `user`, tool_files,
+    the same way, under TOOL_FILES, and outside ({absolute folder under
+    /tmp: its files, the same way}). Use it in a with block: leaving it
+    removes the container."""
 
-    def __init__(self, image: str, files: dict[str, tuple[str, bytes]], *, user: str, limits: Limits):
+    def __init__(self, image: str, files: dict[str, tuple[str, bytes]], *, user: str, limits: Limits,
+                 tool_files: dict[str, tuple[str, bytes]] | None = None, outside: dict[str, dict] | None = None):
         self.image, self.user, self.limits, self.container = image, user, limits, None
         confined = [*CONFINED, "--security-opt", "no-new-privileges"] if user != ROOT else []
         created = self._docker(
@@ -112,6 +135,14 @@ class Sandbox:
             self._docker("start", self.container)
             work = {posixpath.join(WORK, path): entry for path, entry in files.items()}
             self._unpack(work, owner=user, folders={WORK.strip("/")} | {f for path in work for f in _parents(path)})
+            if outside:
+                placed = {posixpath.join(place, path): entry for place, found in outside.items()
+                          for path, entry in found.items()}
+                self._unpack(placed, owner=user, folders={f for path in placed for f in _parents(path)} - {"tmp"})
+            if tool_files:
+                hidden = {posixpath.join(TOOL_FILES, path): entry for path, entry in tool_files.items()}
+                self._unpack(hidden, owner=TOOL, private=True, guarded={TOOL_FILES.strip("/")},
+                             folders={f for path in hidden for f in _parents(path)} - {"tmp"})
         except BaseException as error:  # a failing close is added to it as a note, as in __exit__
             try:
                 self.close()
@@ -132,15 +163,17 @@ class Sandbox:
                 raise
             error.add_note(str(failed))
 
-    def run(self, argv: list[str], *, seconds: float, limit: int, stdin: bytes = b"", merged: bool = False) -> Ran:
-        """Run argv in /work as the sandbox's user; with merged, stderr goes
-        into stdout, in the order the command wrote them. Of an output
-        longer than limit bytes, the first and last limit / 2 are kept.
+    def run(self, argv: list[str], *, seconds: float, limit: int, stdin: bytes = b"", merged: bool = False,
+            user: str | None = None) -> Ran:
+        """Run argv in /work as the sandbox's user (or `user`, such as
+        TOOL); with merged, stderr goes into stdout, in the order the
+        command wrote them. Of an output longer than limit bytes, the first
+        and last limit / 2 are kept.
         SandboxFull when docker could not start it in a container the
         sandbox's commands filled; SandboxError for docker's other
         failures."""
         started = time.monotonic()
-        process = self._start("exec", "-i", "-u", self.user, self.container, "sh", "-c", LAUNCH, "sh",
+        process = self._start("exec", "-i", "-u", user or self.user, self.container, "sh", "-c", LAUNCH, "sh",
                               "timeout", "-k", str(GRACE), str(seconds), *argv,
                               stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                               stderr=subprocess.STDOUT if merged else subprocess.PIPE)
@@ -184,6 +217,41 @@ class Sandbox:
             self._docker("pause", self.container)
         elif not oom:
             raise SandboxError(f"container {self.container} is not running")
+
+    def save(self, root: str, paths) -> BinaryIO | None:
+        """A tar archive, in a temporary file of the host, of these paths
+        under the folder root (TOOL_FILES, or / for a folder outside
+        /work), read while the container runs; a path the model removed is
+        left out. None when it no longer runs (memory ran out) or the
+        model's processes fill it, so that nothing can be read: the check
+        then finds them missing."""
+        archive = tempfile.TemporaryFile()
+        try:
+            ran = self._start("exec", "-u", ROOT, self.container, "tar", "-c", "-f", "-", "--ignore-failed-read",
+                              "-C", root, "--", *paths, stdout=archive, stderr=subprocess.PIPE)
+            errors = ran.communicate()[1]
+            if ran.returncode:
+                if not self._state()[0] or self._full():
+                    archive.close()
+                    return None
+                raise SandboxError(f"container {self.container}: reading {', '.join(paths)} from {root}: "
+                                   f"{errors.decode(errors='replace').strip()[-ERRORS:]}")
+        except BaseException:
+            archive.close()
+            raise
+        archive.seek(0)
+        return archive
+
+    def restore(self, archive, root: str, paths):
+        """Put the paths save() read under the folder root (/work, or /),
+        in place of whatever is there."""
+        ran = self._start("exec", "-i", "-u", ROOT, self.container, "sh", "-c",
+                          'cd "$0" && rm -rf -- "$@" && exec tar -x -f -', root, *paths,
+                          stdin=archive, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+        errors = ran.communicate()[1]
+        if ran.returncode:
+            raise SandboxError(f"container {self.container}: putting {', '.join(paths)} in {root}: "
+                               f"{errors.decode(errors='replace').strip()[-ERRORS:]}")
 
     def copy_work(self, into: "Sandbox"):
         """Copy /work, as it is now, into another sandbox's /work; freeze
@@ -238,19 +306,23 @@ class Sandbox:
                                     self.container).split()
         return running == b"true", oom == b"true"
 
-    def _unpack(self, files, owner, folders):
+    def _unpack(self, files, owner, folders, private=False, guarded=()):
         """Copy files given by absolute path into the container, with
         `folders` (paths without the leading /, mode 755), through one tar
         stream that root unpacks: every entry belongs to owner, and a listed
         folder that exists takes that owner and mode. A missing folder that
         is not listed is created owned by root; one that exists is left as
-        it is."""
+        it is. private: no access for others (folders 750, files 640, or
+        750 when executable). guarded: folders made as `folders` are, but
+        owned by root, in owner's group."""
         uid, gid = map(int, owner.split(":"))
+        others = 0o750 if private else 0o777  # what each mode keeps
         buffer = io.BytesIO()
         with tarfile.open(fileobj=buffer, mode="w") as archive:
-            for folder in sorted(folders):
+            for folder in sorted({*folders, *guarded}):
                 info = tarfile.TarInfo(folder)
-                info.type, info.mode, info.uid, info.gid = tarfile.DIRTYPE, 0o755, uid, gid
+                info.type, info.mode, info.gid = tarfile.DIRTYPE, 0o755 & others, gid
+                info.uid = 0 if folder in guarded else uid
                 archive.addfile(info)
             for path, (mode, content) in sorted(files.items()):
                 info = tarfile.TarInfo(path.lstrip("/"))
@@ -259,7 +331,7 @@ class Sandbox:
                     info.type, info.linkname = tarfile.SYMTYPE, content.decode()
                     archive.addfile(info)
                 else:
-                    info.size, info.mode = len(content), 0o755 if mode == EXECUTABLE else 0o644
+                    info.size, info.mode = len(content), (0o755 if mode == EXECUTABLE else 0o644) & others
                     archive.addfile(info, io.BytesIO(content))
         self._docker("exec", "-i", "-u", ROOT, self.container, "tar", "-x", "-f", "-", "-C", "/",
                      stdin=buffer.getvalue())

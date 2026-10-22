@@ -1,0 +1,51 @@
+#!/usr/bin/python3 -I
+"""find_files: the files of /work whose paths match a glob pattern, such
+as **/*.py: * and ? within one folder, ** across any number of folders.
+Symbolic links are listed, never followed."""
+
+import os
+import re
+
+from wpt_tools import arguments, in_work
+
+MOST = 500  # paths given
+
+
+def pattern(glob):
+    """The regular expression of a glob pattern."""
+    parts, i = [], 0
+    while i < len(glob):
+        if glob.startswith("**/", i):
+            parts.append("(?:[^/]*/)*")
+            i += 3
+        elif glob.startswith("**", i):
+            parts.append(".*")
+            i += 2
+        else:
+            parts.append("[^/]*" if glob[i] == "*" else "[^/]" if glob[i] == "?" else re.escape(glob[i]))
+            i += 1
+    return re.compile("".join(parts))
+
+
+def found(glob, descriptor):
+    wanted = pattern(glob.removeprefix("./").removeprefix("/work/"))
+    paths = []
+    for folder, folders, files, _ in os.fwalk(".", dir_fd=descriptor):
+        folders.sort()
+        for name in sorted(files) + folders:
+            path = os.path.normpath(os.path.join(folder, name)).replace(os.sep, "/")
+            if wanted.fullmatch(path):
+                paths.append(path)
+    return sorted(paths)
+
+
+def main():
+    given = arguments(["pattern"])
+    paths = found(given["pattern"], in_work(".", folder=True))
+    print("\n".join(paths[:MOST]) if paths else "No files found")
+    if len(paths) > MOST:
+        print(f"... and {len(paths) - MOST} more")
+
+
+if __name__ == "__main__":
+    main()

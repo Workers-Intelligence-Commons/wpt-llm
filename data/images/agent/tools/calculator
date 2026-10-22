@@ -1,0 +1,48 @@
+#!/usr/bin/python3 -I
+"""calculator: the value of an arithmetic expression: numbers, + - * / //
+% **, parentheses, and the functions and constants of FUNCTIONS."""
+
+import ast
+import math
+import operator
+
+from wpt_tools import arguments, fail
+
+OPERATORS = {ast.Add: operator.add, ast.Sub: operator.sub, ast.Mult: operator.mul, ast.Div: operator.truediv,
+             ast.FloorDiv: operator.floordiv, ast.Mod: operator.mod, ast.Pow: operator.pow,
+             ast.USub: operator.neg, ast.UAdd: operator.pos}
+FUNCTIONS = {"sqrt": math.sqrt, "log": math.log, "exp": math.exp, "sin": math.sin, "cos": math.cos,
+             "tan": math.tan, "abs": abs, "round": round, "pi": math.pi, "e": math.e}
+LARGEST_POWER = 10000  # an exponent above it would take the call's whole time
+
+
+def value(node):
+    if isinstance(node, ast.Expression):
+        return value(node.body)
+    if isinstance(node, ast.Constant) and type(node.value) in (int, float):
+        return node.value
+    if isinstance(node, ast.BinOp) and type(node.op) in OPERATORS:
+        left, right = value(node.left), value(node.right)
+        if isinstance(node.op, ast.Pow) and abs(right) > LARGEST_POWER:
+            raise ValueError(f"an exponent above {LARGEST_POWER}")
+        return OPERATORS[type(node.op)](left, right)
+    if isinstance(node, ast.UnaryOp) and type(node.op) in OPERATORS:
+        return OPERATORS[type(node.op)](value(node.operand))
+    if isinstance(node, ast.Name) and isinstance(FUNCTIONS.get(node.id), float):
+        return FUNCTIONS[node.id]
+    if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and callable(FUNCTIONS.get(node.func.id)) \
+            and not node.keywords:
+        return FUNCTIONS[node.func.id](*map(value, node.args))
+    raise ValueError("only numbers, + - * / // % **, parentheses and " + ", ".join(FUNCTIONS))
+
+
+def main():
+    expression = arguments(["expression"])["expression"]
+    try:
+        print(value(ast.parse(expression, mode="eval")))
+    except (SyntaxError, ValueError, TypeError, ArithmeticError) as error:
+        fail(f"cannot calculate {expression!r}: {error}")
+
+
+if __name__ == "__main__":
+    main()

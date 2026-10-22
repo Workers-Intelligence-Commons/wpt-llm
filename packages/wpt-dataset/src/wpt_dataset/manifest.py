@@ -274,6 +274,9 @@ def _git_tree(repo, revision, prefix):
 
 
 HISTORY = ".git/history/"
+# the history's commit order, merges included, part of the history (maintainer's decision, 2026-10-22)
+ORDER = HISTORY + "order"
+MERGE = "merge"  # an ORDER line's mark of a merge
 # git's output must not depend on the settings of the machine that fetches
 PLAIN_GIT = {**os.environ, "GIT_CONFIG_NOSYSTEM": "1", "GIT_CONFIG_GLOBAL": os.devnull,
              # an object a partial fetch left out is an error, never a download of its own
@@ -297,8 +300,17 @@ def read_git_history(repo: Path, since: str, revision: str, extractor: Extractor
     commit (author, date, message, changed files, diff), limited to the
     paths the extractor keeps. A commit that changes no kept path gives no
     file. git never allows a `.git` folder in a tree, so these paths cannot
-    meet a file of the commit itself."""
-    commits = _history_commits(repo, since, revision)
+    meet a file of the commit itself.
+
+    One more file, ORDER, lists every commit from `since` to `revision`,
+    merges included, newest first in an order where a commit always comes
+    before its parents (git's topological order), one per line: the commit,
+    then " merge" for a merge (maintainer's decision, 2026-10-22). It is
+    part of the tree, so the source checksum covers the order too."""
+    order = _history_order(repo, since, revision)
+    extractor.add(ORDER, FILE, "".join(f"{commit} {MERGE}\n" if merge else f"{commit}\n"
+                                       for commit, merge in order).encode())
+    commits = [commit for commit, merge in order if not merge]
     changed = {commit: [path for path, _ in changes] for commit, changes in _changed_paths(repo, commits).items()}
     limits = {}  # commit -> None when every path it changes is kept, else the pathspecs of the kept paths
     for commit in commits:
@@ -375,13 +387,27 @@ def _group_patches(repo, commits) -> dict[str, bytes]:
 
 
 def _history_commits(repo, since, revision) -> list[str]:
-    """The commits from `since` to `revision`, merges left out, newest first."""
+    """The commits from `since` to `revision`, merges left out, in ORDER's order."""
+    return [commit for commit, merge in _history_order(repo, since, revision) if not merge]
+
+
+def _history_order(repo, since, revision) -> list[tuple[str, bool]]:
+    """(commit, whether it is a merge) of every commit from `since` to
+    `revision`, newest first, each before its parents (ORDER). The one
+    walk every list of history commits comes from."""
+    lines = _git(repo, "rev-list", "--topo-order", "--parents", revision, "--not",
+                 *_since_parents(repo, since, revision)).decode().splitlines()
+    return [(line.split()[0], len(line.split()) > 2) for line in lines]
+
+
+def _since_parents(repo, since, revision) -> list[str]:
+    """The parents of `since`, where the history stops; UnsupportedEntry
+    when `since` is not an ancestor of the revision."""
     ancestor = subprocess.run(["git", "-C", str(repo), "merge-base", "--is-ancestor", since, revision],
                               capture_output=True, env=PLAIN_GIT)
     if ancestor.returncode != 0:
         raise UnsupportedEntry(f"history.since {since} is not an ancestor of the revision {revision}")
-    parents = _git(repo, "rev-parse", f"{since}^@").decode().split()
-    return _git(repo, "rev-list", "--no-merges", revision, "--not", *parents).decode().split()
+    return _git(repo, "rev-parse", f"{since}^@").decode().split()
 
 
 def _changed_paths(repo, commits) -> dict[str, list[tuple[str, list[str]]]]:

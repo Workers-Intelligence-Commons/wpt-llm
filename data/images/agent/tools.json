@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "tools": [
+    {
+      "name": "list_files",
+      "description": "List the files and folders in a folder of the working folder; folders end with /.",
+      "parameters": {"type": "object", "properties": {"path": {"type": "string", "description": "the folder, by default the working folder"}}},
+      "program": "/usr/local/lib/wpt-tools/list_files",
+      "looks": true,
+      "names": ["ls", "list_directory"]
+    },
+    {
+      "name": "find_files",
+      "description": "Find the files whose paths match a glob pattern such as **/*.py, in the working folder.",
+      "parameters": {"type": "object", "properties": {"pattern": {"type": "string"}}, "required": ["pattern"]},
+      "program": "/usr/local/lib/wpt-tools/find_files",
+      "looks": true,
+      "names": ["glob", "find"]
+    },
+    {
+      "name": "search_text",
+      "description": "Search the files of the working folder, or one file or folder in it, for lines matching a regular expression; returns path:line:text for each.",
+      "parameters": {"type": "object", "properties": {"pattern": {"type": "string"}, "path": {"type": "string"}}, "required": ["pattern"]},
+      "program": "/usr/local/lib/wpt-tools/search_text",
+      "looks": true,
+      "names": ["grep", "search_files"]
+    },
+    {
+      "name": "calculator",
+      "description": "Calculate the value of an arithmetic expression, such as (3 + 4) * sqrt(2).",
+      "parameters": {"type": "object", "properties": {"expression": {"type": "string"}}, "required": ["expression"]},
+      "program": "/usr/local/lib/wpt-tools/calculator",
+      "names": ["calc", "evaluate"]
+    }
+  ]
+}

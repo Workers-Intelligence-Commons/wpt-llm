@@ -1,0 +1,52 @@
+#!/usr/bin/python3 -I
+"""push: push the current branch of a git repository of /work to the
+remote it tracks, as `git push` does, and return what git printed.
+
+When the task's variant hides the remote (docs/post-training.md, "The
+agent image"), it is among the hidden files under its own absolute path:
+a local remote outside /work (such as /tmp/origin.git) whose counterpart
+under TOOL_FILES exists (/tmp/wpt-tools/tmp/origin.git) is pushed to
+there, and only this program reaches it; git push through bash does not.
+
+git reads the repository's own settings, which the model can change, and
+this program runs in the group that reads a task's hidden files: hooks and
+the file system monitor are turned off, and a task whose hidden files are
+more than the remote it pushes to must not offer this tool."""
+
+import os
+import posixpath
+import subprocess
+
+from wpt_tools import TOOL_FILES, arguments, fail, in_work, relative, text
+
+GIT = ["git", "-c", "core.hooksPath=/dev/null", "-c", "core.fsmonitor=false"]
+
+
+def git(*args) -> subprocess.CompletedProcess:
+    return subprocess.run([*GIT, *args], stdin=subprocess.DEVNULL, capture_output=True)
+
+
+def hidden_remote() -> list[str]:
+    """The setting that sends the push to the hidden copy of the remote
+    git push would use, when there is one; [] otherwise."""
+    url, top = (text(git(*args).stdout).strip() for args in (("ls-remote", "--get-url"),
+                                                              ("rev-parse", "--show-toplevel")))
+    if not url or not top or "://" in url or ":" in url.split("/", 1)[0]:  # not a local path
+        return []
+    path = posixpath.normpath(posixpath.join(top, url))  # git reads a relative address from the top folder
+    hidden = TOOL_FILES + path
+    return ["-c", f"url.{hidden}.insteadOf={url}"] if relative(path) is None and os.path.isdir(hidden) else []
+
+
+def main():
+    given = arguments(optional=["path"])
+    os.fchdir(in_work(given.get("path", "."), folder=True))
+    ran = subprocess.run([*GIT, *hidden_remote(), "push"], stdin=subprocess.DEVNULL, capture_output=True)
+    output = (text(ran.stdout) + text(ran.stderr)).strip()
+    if ran.returncode:
+        fail(output or f"git push failed with exit code {ran.returncode}")
+    print(output or "Everything up-to-date")
+
+
+if __name__ == "__main__":
+    main()

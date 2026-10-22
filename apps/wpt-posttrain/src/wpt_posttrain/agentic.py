@@ -2,16 +2,19 @@
 and `token-efficiency` steps share (docs/post-training.md, "The grpo
 step").
 
-    prepare(context, tag)          the tasks tagged `tag` and their built images, or Unready when
-                                   the step cannot start
+    prepare(context, tag)          the tasks tagged `tag`, their built images and the images' pools
+                                   of tools, or Unready when the step cannot start
     frozen_routers(model)          the routed expert layers' routers, unchanged while it lasts
     written(attempt)               how many tokens the model wrote in an attempt
-    Learner(...).play(task, n, k)  n attempts, each in a fresh container, written together in one
-                                   batch from one reading of the task's opening (the model's
-                                   generation cache), by the model alone (no drafter); then each
-                                   one's routes (R3) and score, handed to k as soon as it is scored
-    Learner(...).attempts(...)     play, and keep each attempt as a line of the step's attempts
-                                   file as soon as it is scored
+    Learner(...).play(t, n, k, o)  n attempts at t, each in a fresh container and offered its
+                                   tools (o), written together in one batch from one reading of what
+                                   their openings share (the model's generation cache), by the
+                                   model alone (no drafter); then each one's routes (R3) and
+                                   score, handed to k as soon as it is scored
+    Learner(...).attempts(...)     each attempt's tools chosen from a generator seeded with the
+                                   step's seed, the task, the round, the group and the attempt
+                                   (wpt_agent.offer), play, and keep each attempt as a line of the
+                                   step's attempts file as soon as it is scored
     Learner(...).train(...)        rounds of groups of attempts: advantage = reward minus the group
                                    mean, the loss over the tokens the model wrote, one update per
                                    TASKS_PER_UPDATE tasks; drops, skips and failures as grpo says
@@ -23,8 +26,10 @@ length. Everything else is the same for both.
 Every attempt, a dropped one included, becomes one line of
 `<step>-attempts.jsonl` in the run's record folder (context.telemetry;
 docs/post-training.md, "Runs"): a conversation in the chat format
-(docs/chat-format.md) whose `metadata` identifies the attempt; a dropped
-attempt's conversation is only its opening (wpt_agent.opening). The
+(docs/chat-format.md) whose `metadata` identifies the attempt, next to
+the tools' real names and the answer block the attempt's own metadata
+holds (wpt_agent.loop); a dropped attempt's conversation is only its
+opening (wpt_agent.opening). The
 attempt's span, its
 group's event and its round's event name the file and the line numbers.
 A line the store refuses raises wpt_telemetry.RecordError, which stops
@@ -33,6 +38,7 @@ the command (exit code 3).
 
 import json
 import math
+import random
 from contextlib import contextmanager
 from dataclasses import dataclass
 
@@ -41,6 +47,7 @@ import torch.nn.functional as F
 
 import wpt_agent
 from wpt_agent import images
+from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
 from wpt_inference import Writer
 from wpt_model import Routes
@@ -75,18 +82,20 @@ class Unready(Exception):
 
 def prepare(context, tag=None):
     """(tasks tagged `tag`, by default the running step's name, {image name:
-    built image}), or Unready. An attempt has no context limit: the model
-    reads it through its generation cache, past block_size, until the
-    task's max_tokens."""
+    built image}, {image name: its pool of tools, data/images/<name>/tools.json}),
+    or Unready. An attempt has no context limit: the model reads it through
+    its generation cache, past block_size, until the task's max_tokens."""
     tasks = context.tasks(tag)
     if not tasks:
         raise Unready(f"no tasks: no admitted source has task files tagged {tag or context.step}")
+    names = sorted({task.image for task in tasks})
     try:
-        root = Repo.find().root
-        built = {name: images.built(root, name) for name in sorted({task.image for task in tasks})}
-    except wpt_agent.ImageError as error:
+        repo = Repo.find()
+        built = {name: images.built(repo.root, name) for name in names}
+        pools = {name: repo.image_tools(name) for name in names}
+    except (wpt_agent.ImageError, DatasetError) as error:
         raise Unready(str(error)) from None
-    return tasks, built
+    return tasks, built, pools
 
 
 @contextmanager
@@ -115,28 +124,33 @@ class Learner:
     The model alone writes the attempts, never a drafter: the tokens drawn
     then depend on the seed alone, never on how fast this machine's passes
     are. attempts() keeps each attempt in telemetry's record, as a line of
-    `<name>-attempts.jsonl`."""
+    `<name>-attempts.jsonl`. pools: {image name: its pool of tools}."""
 
-    def __init__(self, name, model, tokenizer, device, built, settings, telemetry=None):
+    def __init__(self, name, model, tokenizer, device, built, settings, telemetry=None, pools=None):
         self.name, self.model, self.tokenizer, self.device = name, model, tokenizer, device
-        self.built, self.settings = built, settings
+        self.built, self.settings, self.pools = built, settings, pools or {}
         self.sampling = torch.Generator(device=device).manual_seed(settings.seed)
         self.telemetry = telemetry or Telemetry.off()
         self.file = f"{name}-attempts.jsonl"
 
-    def play(self, task, count, keep):
-        """count attempts at the task, each in a fresh container, written
-        together; then, attempt by attempt in order, its score and its
+    def play(self, task, count, keep, offers):
+        """count attempts at the task, each in a fresh container and offered
+        its tools (offers, one wpt_agent.Offer each), which also say what
+        its variants hide from /work, written together;
+        then, attempt by attempt in order, its score and its
         container's removal, and at once keep(index, outcome), index from
         1, outcome (attempt, its routes, score) or the wpt_agent.SandboxError
         that dropped it (Docker failed). Returns what keep returned, in
         order."""
         settings = self.settings
         limits = wpt_agent.Limits(**task.container)  # the task format's sizes, raised by the task (wpt_dataset.tasks)
-        outcomes, boxes, writers = {}, {}, []
+        outcomes, boxes, writers, outside = {}, {}, [], {}
         for i in range(count):
             try:
-                boxes[i] = wpt_agent.Sandbox(self.built[task.image], task.files, user=wpt_agent.AGENT, limits=limits)
+                # what the attempt's variants hide moved
+                files, tool_files, outside[i] = wpt_agent.arranged(task, offers[i])
+                boxes[i] = wpt_agent.Sandbox(self.built[task.image], files, user=wpt_agent.AGENT, limits=limits,
+                                             tool_files=tool_files, outside=outside[i])
             except wpt_agent.SandboxError as error:
                 outcomes[i] = error
 
@@ -150,13 +164,15 @@ class Learner:
             rows = {i: row for row, i in enumerate(boxes)}
             if boxes:
                 done = wpt_agent.attempts(task, list(boxes.values()), self.tokenizer, start,
-                                          result_bytes=settings.result_bytes)
+                                          result_bytes=settings.result_bytes, offers=[offers[i] for i in boxes])
                 outcomes.update(zip(boxes, done))
             for i in range(count):
                 outcome, why = outcomes[i], None
                 if not isinstance(outcome, wpt_agent.SandboxError):
                     try:
-                        score, why = wpt_agent.score(boxes[i], task.check, settings.check_seconds)
+                        score, why = wpt_agent.score(boxes[i], task.check, settings.check_seconds,
+                                                     outcome.conversation, task.check_files, offers[i].hidden,
+                                                     tuple(outside[i]))
                         outcome = outcome, writers[-1].routes[rows[i]], score or 0.0
                     except wpt_agent.SandboxError as error:
                         outcome = error
@@ -184,6 +200,10 @@ class Learner:
         numbered from 1; reward(task, attempt, score) is what an attempt is
         worth, None for one never trained on. A dropped attempt (Docker
         failed) is kept too. RecordError when the store refuses a line."""
+        offers = [wpt_agent.offer(task, self.pools.get(task.image, []),
+                                  random.Random(f"{self.settings.seed}/{task.id}/{round_}/{group}/{index}"))
+                  for index in range(1, count + 1)]
+
         def keep(index, outcome):
             with self.telemetry.span(f"{self.name}.attempt", task=task.id, round=round_, group=group,
                                      attempt=index) as span:
@@ -195,25 +215,26 @@ class Learner:
                     attempt, routes, score = outcome
                     one = Kept(0, attempt, routes, score, None if reward is None else reward(task, attempt, score),
                                None)
-                one.line = self._keep(task, round_, group, index, one)
+                one.line = self._keep(task, round_, group, index, one, offers[index - 1])
                 span.set(file=self.file, line=one.line, dropped=one.attempt is None,
                          **({} if one.attempt is None else {"ended": one.attempt.ended, "score": one.score,
                                                             "reward": one.reward, "written": written(one.attempt)}))
             return one
 
         with self.telemetry.span(f"{self.name}.play", task=task.id, round=round_, group=group, attempts=count):
-            return self.play(task, count, keep)
+            return self.play(task, count, keep, offers)
 
-    def _keep(self, task, round_, group, index, kept) -> int:
-        """Add the attempt's line to self.file, its conversation with the
-        attempt's metadata; its line number, from 1."""
+    def _keep(self, task, round_, group, index, kept, offer) -> int:
+        """Add the attempt's line to self.file, its conversation (a dropped
+        attempt's opening, with the tools it was offered) with the attempt's
+        metadata added to its own; its line number, from 1."""
         attempt = kept.attempt
         metadata = {"step": self.name, "task": task.id, "round": round_, "group": group, "attempt": index,
                     "dropped": attempt is None, "error": None if kept.error is None else str(kept.error),
                     "ended": None if attempt is None else attempt.ended, "score": kept.score,
                     "reward": kept.reward, "written": None if attempt is None else written(attempt)}
-        conversation = wpt_agent.opening(task) if attempt is None else attempt.conversation
-        line = {**conversation, "metadata": metadata}
+        conversation = wpt_agent.opening(task, offer) if attempt is None else attempt.conversation
+        line = {**conversation, "metadata": {**conversation["metadata"], **metadata}}
         self.telemetry.append_file(self.file, (json.dumps(line, ensure_ascii=False) + "\n").encode("utf-8"))
         key = (self.telemetry.folder, self.file)
         _lines[key] = _lines.get(key, 0) + 1

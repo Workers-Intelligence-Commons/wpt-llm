@@ -1,0 +1,43 @@
+#!/usr/bin/python3 -I
+"""fetch: a page's text, answered from the task's own pages.
+
+The page at https://example.org/lamp is the file
+/tmp/wpt-tools/web/example.org/lamp (search says the same); an address that
+ends with / is that folder's file index. The scheme, the query and the
+fragment do not count. A page that is not there fails as a web fetch does,
+with 404 Not Found.
+"""
+
+import os
+import re
+
+from wpt_tools import TOOL_FILES, arguments, fail, relative
+
+PAGES = os.path.join(TOOL_FILES, "web")
+
+
+def page(address, root=PAGES):
+    """The page's text, or None."""
+    path = re.sub(r"^[A-Za-z][A-Za-z0-9+.-]*://", "", address).split("#")[0].split("?")[0]
+    path = path + "index" if path.endswith("/") else path
+    inside = relative(path, root)
+    if not inside:
+        return None
+    for candidate in (inside, inside + "/index"):
+        full = os.path.join(root, candidate)
+        if os.path.isfile(full):
+            with open(full, encoding="utf-8", errors="replace") as file:
+                return file.read()
+    return None
+
+
+def main():
+    address = arguments(["url"])["url"]
+    found = page(address)
+    if found is None:
+        fail(f"fetch failed: 404 Not Found: {address}")
+    print(found, end="")
+
+
+if __name__ == "__main__":
+    main()

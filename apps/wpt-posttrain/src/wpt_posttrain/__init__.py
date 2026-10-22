@@ -22,7 +22,9 @@ repository holding the current folder. The runner records those sources.
 A step that trains on tasks reads them the same way with context.tasks():
 the task folders whose task.json carries the step's name (the `grpo` step
 reads those tagged `grpo`), or context.tasks(tag) those of another tag
-(the `token-efficiency` step reads the tasks tagged `grpo`).
+(the `token-efficiency` step reads the tasks tagged `grpo`); the
+measure-only tasks (tagged `eval`, or held out by the base model's recipe)
+never reach a step.
 
 After the last step, the run trains a fresh drafter for the new weights
 (wpt_inference.drafting; docs/model.md, "The drafter"), the model frozen,
@@ -155,10 +157,19 @@ class Context:
     def tasks(self, tag: str | None = None) -> list[task_files.Task]:
         """The tasks of the admitted sources whose task.json files are
         tagged `tag`, by default the running step's name, in source and
-        folder order (docs/post-training.md); a step that trains on another
-        step's tasks names that step's tag. Raises a wpt_dataset DatasetError
-        when a source or a task folder breaks the rules."""
-        found, sources = task_files.read(Repo.find(), self.store, tag or self.step)
+        folder order (docs/post-training.md), their pointers filled in; a
+        step that trains on another step's tasks names that step's tag.
+        The measure-only tasks are left out: those tagged `eval`, and the
+        share of every task source that the base model's recipe holds out
+        (its data.held_out, the rule that held its documents out), and the
+        tasks pointing into the text of a held-out document of the base
+        model's dataset (its document list). Raises a wpt_dataset
+        DatasetError when a source or a task folder breaks the rules, or
+        when tasks point into documents and that dataset has no document
+        list."""
+        found, sources = task_files.read(Repo.find(), self.store, tag or self.step,
+                                         self.provenance["recipe"]["data"]["held_out"],
+                                         dataset=self.provenance["dataset"])
         self.sources.update(sources)
         return found
 

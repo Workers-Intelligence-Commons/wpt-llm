@@ -98,9 +98,20 @@ recipe then needs the old commit of this repository.
   commit that also changes files `extract` leaves out gets a diff limited
   to the kept paths; when a kept path is also the folder of paths left out
   (a submodule replacing a folder of the same name), those paths are
-  excluded from the diff by name. Only patterns starting with
-  `.git/history/` give these files their license entry: `**` covers the
-  tree's files only (docs/licenses.md, "Rules").
+  excluded from the diff by name. One more file, `.git/history/order`,
+  holds the commit order: every commit from `since` to the revision,
+  merges included, newest first and each before its parents (git's
+  topological order), one per line, a merge's line ending in ` merge`
+  (maintainer's decision, 2026-10-22). Being part of the stored tree, the
+  order is covered by the source checksum, so a git source with a history
+  gets a new checksum once it is fetched with its order file; until then
+  its stored tree has no order file and gives no commit-and-push task.
+  The order file is not a training document: `markdown.documents`, which
+  every list of documents reads, leaves it out (maintainer's decision,
+  2026-10-22).
+  Only patterns starting with `.git/history/` give these files their
+  license entry: `**` covers the tree's files only (docs/licenses.md,
+  "Rules").
 - `submodules` (git only): the address of each submodule the source reads,
   by its path.
 - `cuts`: erasure cuts; see [erasure.md](erasure.md).
@@ -165,6 +176,14 @@ git index, each patch handed to git on its standard input, so no file is
 written to a disk and modes and symlinks behave the same everywhere. Git is therefore a dependency of data processing. A patch
 can add, change, delete files and change modes.
 
+A git index silently drops every path under `.git/`, so every such path
+(the files of a git history, `.git/history/<commit>` and
+`.git/history/order`, or any other) is set aside while the patches apply
+and comes back exactly as it was; a patch that names one fails, as git
+refuses it (maintainer's decision, 2026-10-22). For the same reason
+`wpt-dataset patch` refuses a folder whose `.git/` files differ from the
+source's: a patch cannot change them.
+
 Patches are not written by hand: `wpt-dataset unpack <id> <folder>` writes a
 source's final files (after cuts and patches) into a folder outside the
 repository; after editing them, `wpt-dataset patch <id> <folder> <name>`
@@ -216,7 +235,7 @@ tree, as its `formats` entry says
 | `xhtml` | web pages written as strict XML, such as EPUB books, read by lxml (a malformed file stops the build): headings, paragraphs, lists, quotations, emphasis, tables; a dialogue row becomes `**Speaker:** words`; a note reference becomes a Markdown note (`[^12]`) with the note's text at the end of the document that refers to it, or is dropped when the note is not in the source |
 | `records` | a dataset file holding many documents (JSON Lines, optionally `.gz` or `.zst`, or Parquet): each record whose license value an entry lists, and that the `keep` rules keep, is one document, `<file>#<record id>`; its text field is read as `text` above, or kept as it is with `"as": "markdown"` |
 | `chat` | conversations for post-training, one JSON object per line ([chat-format.md](chat-format.md)); each line is checked, and the file gives no pre-training document: only the post-training step named by its tags reads it |
-| `task` | the files of task folders for agentic post-training (`task.json`, `files/`, `check`; [post-training.md](post-training.md)); each folder is checked, and its files give no pre-training document: only a post-training step that asks for a tag of its `task.json` reads it: by default each step asks for its own name, and `token-efficiency` asks for `grpo` |
+| `task` | the files of task folders for agentic post-training (`task.json`, `files/`, `check`; [post-training.md](post-training.md)); each folder is checked, and its files give no pre-training document: only a post-training step that asks for a tag of its `task.json` reads it: by default each step asks for its own name, and `token-efficiency` asks for `grpo`. A task built by a program holds pointers into the documents of other sources, never their text, which the readers fill in from the store ([post-training.md](post-training.md), "Pointer tasks") |
 
 A file whose Markdown is empty is no document: an EPUB file that holds only
 notes gives none, since its notes moved into the texts that refer to them.
@@ -237,6 +256,18 @@ of its inputs, including WPT's own code version.
 
 So "already done" is a lookup: nothing is downloaded or applied twice, and
 changing one patch rebuilds only that source.
+
+Beside the dataset's record (the ref `datasets/<id>`), the build keeps the
+dataset's document list under the ref `dataset-documents/<id>`: one JSON
+line per document, in the build's order, with its `id`, the `sha256` of
+its Markdown (the one the dataset fingerprint reads) and its `tag`,
+`training` or `held-out`, from the same split its shards are cut by
+(maintainer's decision, 2026-10-22). A new build writes the list before
+the record's ref, so a dataset is never there without it; a dataset built
+before builds kept the list never gets one (maintainer's decision,
+2026-10-22). The task reader takes the held-out texts from it
+([data-selection.md](data-selection.md), "Held-out text and
+contamination").
 
 `wpt-dataset build --stream` (or `WPT_STREAM=1`) keeps less: each source is
 fetched into a throwaway store, turned into Markdown and tokens, and the
@@ -272,7 +303,8 @@ The store also holds the record of every run of `wpt-dataset build`,
 `packages/wpt-dataset/src/wpt_dataset/repo.py` is the only code that reads
 or writes the repository's data: the
 sources and their patches, the chat files and task files inside them, the
-model, tokenizer and mixture recipes, the image Dockerfiles, and the two
+model, tokenizer and mixture recipes, the image Dockerfiles and their
+pools of tools (`tools.json`), and the two
 signer lists (`allowed-signers`, `allowed-gpg-keys.asc`). Every command
 that uses this data goes through it: `wpt-dataset` (`check`, `migrate`,
 `build`, `check-commits` and the rest), `wpt-train`, `wpt-posttrain`, the
@@ -415,7 +447,7 @@ tree. Nothing is committed by `wpt-web`, so every change shows in
 
 | Package | Role |
 | --- | --- |
-| `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; the service layer (`repo.py`), the only code that reads or writes `data/`; command `wpt-dataset` |
+| `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; the service layer (`repo.py`), the only code that reads or writes `data/`; the task builder (`builder.py`, run by `scripts/build_tasks.py`); command `wpt-dataset` |
 | `wpt-store` | the content-addressed store (local or S3), its record folders, and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules |
 | `wpt-telemetry` | the record of one command run in the store, sent live to an OpenTelemetry backend when one is set ([observability.md](observability.md)) |
 | `wpt-tokenizer` | the byte-level BPE tokenizer, Rust inside |
@@ -424,7 +456,7 @@ tree. Nothing is committed by `wpt-web`, so every change shows in
 | `wpt-training` | the training loop (global batch, evaluation, checkpoints, resuming), with two plug points: strategies (how the hardware is used) and methods (how the model learns) |
 | `wpt-inference` | sampling through the model's generation cache: several rows from one prompt, speculative decoding with a drafter and its scheduler, the scheduler's pass times (measured, recorded, replayed); training a model's drafter (`drafting.py`), which `wpt-train` and `wpt-posttrain` run at the end of every run, so it uses `wpt-model` |
 | `wpt-utils` | helpers several packages share, one submodule each: `wpt_utils.device` picks the best GPU, else the CPU; `wpt_utils.programs` starts the outside programs WPT runs (`program(name)`, with a clear error when one is missing) and reads the repository commit (`repository()`), without importing PyTorch; `wpt_utils.files.sha256_file` is the one way a file is hashed, by the store, the model folders and the run records alike |
-| `wpt-agent` | the agent harness of agentic post-training: the four tools, one Docker container per attempt, the images of `data/images/` and their locks, the agent loop and the task's check; commands `wpt-agent lock-image` and `wpt-agent build-image` |
+| `wpt-agent` | the agent harness of agentic post-training: the tools (the four built-in ones, `ask`, and those a task or its image's pool declares, answered by programs in the image) and each attempt's choice of them, one Docker container per attempt, the images of `data/images/` and their locks, the agent loop and the task's check; commands `wpt-agent lock-image` and `wpt-agent build-image` |
 | `wpt-train`, `wpt-eval`, `wpt-posttrain`, `wpt-chat` | the applications |
 
 ## Checks
@@ -446,12 +478,16 @@ branch, as a push would:
   memory of one test process rounded up, and at least 1; where the memory
   cannot be read, the cores alone decide. The check prints the number and
   both inputs (maintainer's decision, 2026-10-20).
-- The image build test (marked `image_build`, in
-  `packages/wpt-agent/tests/test_images.py`) locks and builds a real image,
-  which takes minutes. It runs only when the push changes image code:
-  `packages/wpt-agent/src/wpt_agent/images.py`,
-  `packages/wpt-agent/tests/test_images.py`,
-  `packages/wpt-agent/tests/conftest.py`, the schemas
+- The image build tests (marked `image_build`, in
+  `packages/wpt-agent/tests/test_images.py`, and the test of the agent
+  image's tools and check library in `test_agent_image.py`) lock and build
+  real images, which takes minutes. They run only when the push changes
+  image code: `packages/wpt-agent/src/wpt_agent/images.py`,
+  `packages/wpt-agent/tests/test_images.py`, `test_agent_image.py`,
+  `packages/wpt-agent/tests/conftest.py`,
+  `packages/wpt-dataset/src/wpt_dataset/repo.py` (its `Repo.image_files`
+  decides which files an image's tag covers; maintainer's decision,
+  2026-10-22), the schemas
   `image-lock.schema.json` and `image-licenses.schema.json` in
   `packages/wpt-dataset/src/wpt_dataset/schemas/`, or anything under
   `data/images/`. Otherwise the check leaves it out and says so; a plain

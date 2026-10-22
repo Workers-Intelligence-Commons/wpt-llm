@@ -1,0 +1,89 @@
+#!/usr/bin/python3 -I
+"""search: a web search answered from the task's own pages.
+
+The pages are the files under /tmp/wpt-tools/web/ (a task's tool_files),
+each the text of the page whose address is https:// and its path there:
+web/example.org/lamp is https://example.org/lamp. A query ranks the pages'
+paragraphs by BM25 (k1 1.2, b 0.75) and gives, as a search engine does, the
+best pages in order, each with its title (its first heading, else its
+first line), its address and a snippet of its best paragraph.
+"""
+
+import math
+import os
+import re
+from collections import Counter
+
+from wpt_tools import TOOL_FILES, arguments
+
+PAGES = os.path.join(TOOL_FILES, "web")
+RESULTS = 5  # pages given
+SNIPPET = 300  # characters of a snippet
+K1, B = 1.2, 0.75
+WORD = re.compile(r"\w+")
+
+
+def words(text):
+    return [word.casefold() for word in WORD.findall(text)]
+
+
+def pages(root=PAGES):
+    """{address: text} of every page."""
+    found = {}
+    for folder, _, files in os.walk(root):
+        for name in files:
+            path = os.path.join(folder, name)
+            with open(path, encoding="utf-8", errors="replace") as file:
+                found["https://" + os.path.relpath(path, root).replace(os.sep, "/")] = file.read()
+    return found
+
+
+def title(text):
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    heading = next((line.lstrip("#").strip() for line in lines if line.startswith("#")), None)
+    return (heading or (lines[0] if lines else "(untitled)"))[:100]
+
+
+def snippet(paragraph, query):
+    flat = " ".join(paragraph.split())
+    lowered = flat.casefold()
+    first = min((lowered.find(word) for word in query if word in lowered), default=0)
+    start = max(0, min(first - SNIPPET // 3, len(flat) - SNIPPET))
+    cut = flat[start:start + SNIPPET]
+    return ("..." if start else "") + cut + ("..." if start + SNIPPET < len(flat) else "")
+
+
+def search(query, found):
+    """[(address, title, snippet)] of the best pages for the query."""
+    asked = set(words(query))
+    paragraphs = [(address, part) for address, text in sorted(found.items())
+                  for part in re.split(r"\n\s*\n", text) if part.strip()]
+    counted = [Counter(words(part)) for _, part in paragraphs]
+    if not asked or not paragraphs:
+        return []
+    mean = sum(sum(counts.values()) for counts in counted) / len(counted)
+    holding = Counter(word for counts in counted for word in asked & counts.keys())
+    best = {}
+    for (address, part), counts in zip(paragraphs, counted):
+        length = sum(counts.values())
+        score = sum(math.log(1 + (len(counted) - holding[word] + 0.5) / (holding[word] + 0.5))
+                    * counts[word] * (K1 + 1) / (counts[word] + K1 * (1 - B + B * length / mean))
+                    for word in asked if counts[word])
+        if score > 0 and score > best.get(address, (0, ""))[0]:
+            best[address] = score, part
+    ranked = sorted(best.items(), key=lambda item: (-item[1][0], item[0]))[:RESULTS]
+    return [(address, title(found[address]), snippet(part, asked)) for address, (_, part) in ranked]
+
+
+def main():
+    query = arguments(["query"])["query"]
+    results = search(query, pages() if os.path.isdir(PAGES) else {})
+    if not results:
+        print(f"No results found for: {query}")
+        return
+    print("\n\n".join(f"{number}. {name}\n   {address}\n   {text}"
+                      for number, (address, name, text) in enumerate(results, start=1)))
+
+
+if __name__ == "__main__":
+    main()

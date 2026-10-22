@@ -1,15 +1,18 @@
+import dataclasses
+import json
+import random
 import re
 import subprocess
 import time
 
 import pytest
 
-from wpt_agent import AGENT, Limits, Sandbox, SandboxError, attempt, attempts, docker, opening, score
+from wpt_agent import AGENT, Limits, Sandbox, SandboxError, arranged, attempt, attempts, docker, offer, opening, plain, score
 from wpt_agent.loop import ANSWERED, CONTEXT, FULL, TOKENS, TURNS
 from wpt_agent.sandbox import ROOT
-from wpt_agent.tools import call
+from wpt_agent.tools import ASK, NOT_KNOWN, OTHER_NAMES, TOOLS, call
 from wpt_dataset.manifest import EXECUTABLE, FILE
-from wpt_dataset.tasks import Task
+from wpt_dataset.tasks import ASK as ASK_NAME, BUILT_IN, REMOTE, Task, Variant
 from wpt_tokenizer import Tokenizer, chat
 
 TOKENIZER = Tokenizer([])  # bytes only: any text encodes
@@ -21,9 +24,12 @@ def sandbox(image, files=None, limits=LIMITS):
 
 
 def task(**limits):
-    return Task("example/hello", "Say hello in out.txt.", "tiny", limits.get("max_turns", 8),
-                limits.get("max_tokens", 10_000), limits.get("command_seconds", 10), {"notes.txt": (FILE, b"start\n")},
+    """The example task; limits sets max_turns, max_tokens, command_seconds,
+    or any other field of the Task."""
+    made = Task("example/hello", "Say hello in out.txt.", "tiny", limits.pop("max_turns", 8),
+                limits.pop("max_tokens", 10_000), limits.pop("command_seconds", 10), {"notes.txt": (FILE, b"start\n")},
                 b"#!/bin/sh\ngrep -q hello out.txt && echo 1 || echo 0\n")
+    return dataclasses.replace(made, **limits)
 
 
 def turn(*blocks) -> list[int]:
@@ -64,6 +70,11 @@ def results(done):
             for block in message["content"]]
 
 
+def test_the_tools_offered_are_the_names_the_task_format_allows():
+    # wpt_dataset refuses a declared tool that takes one of these names
+    assert [tool["name"] for tool in TOOLS] == list(BUILT_IN) and ASK["name"] == ASK_NAME
+
+
 def test_tool_calls_run_in_the_container_and_the_check_scores_what_they_left(image):
     # the model's calls change the container's files, each result comes back
     # as the next turn, and only the tokens the model wrote are learned
@@ -76,7 +87,7 @@ def test_tool_calls_run_in_the_container_and_the_check_scores_what_they_left(ima
              turn({"type": "text", "text": "Done."})]
     with sandbox(image) as box:
         done = attempt(task(), box, TOKENIZER, scripted(*turns), result_bytes=1000)
-        assert score(box, task().check, 10) == (1.0, "")
+        assert score(box, task().check, 10, done.conversation) == (1.0, "")
 
     assert done.ended == ANSWERED
     assert results(done) == ["start\n", "edited out.txt", "wrote 1 bytes to deep/er/new.txt", "hello\n"]
@@ -105,9 +116,9 @@ def test_a_command_counts_as_stopped_only_when_it_ran_out_of_time(image):
     # exiting 124 is the command's own code, while one that ignores TERM is
     # killed after the grace and still reported as stopped
     with sandbox(image, {}) as box:
-        assert call(box, "bash", {"command": "exit 124"}, 10, 1000) == ("[exit code 124]", True)
+        assert call(box, "bash", {"command": "exit 124"}, 10, 1000, plain(task())) == ("[exit code 124]", True)
         started = time.monotonic()
-        assert call(box, "bash", {"command": "trap '' TERM; sleep 60"}, 1, 1000) == ("[stopped after 1 seconds]", True)
+        assert call(box, "bash", {"command": "trap '' TERM; sleep 60"}, 1, 1000, plain(task())) == ("[stopped after 1 seconds]", True)
     assert time.monotonic() - started < 30
 
 
@@ -119,7 +130,7 @@ def test_an_argument_with_a_nul_or_a_lone_surrogate_fails_for_the_model():
                                 ("write", {"path": text, "content": "x"}),
                                 ("edit", {"path": "out.txt", "old_string": text, "new_string": "x"}),
                                 ("edit", {"path": "out.txt", "old_string": "x", "new_string": text})]:
-            result, failed = call(None, name, arguments, 10, 1000)
+            result, failed = call(None, name, arguments, 10, 1000, plain(task()))
             assert failed and result.startswith(f"{name}: "), result
 
 
@@ -127,7 +138,7 @@ def test_a_command_that_prints_without_end_never_fills_the_host_s_memory(image):
     # the output is cut while it is read: `yes` writes gigabytes in two
     # seconds, and the result still holds only its start and its end
     with sandbox(image, {}) as box:
-        text, failed = call(box, "bash", {"command": "timeout 2 yes; echo done"}, 10, 1000)
+        text, failed = call(box, "bash", {"command": "timeout 2 yes; echo done"}, 10, 1000, plain(task()))
     cut = int(re.search(r"\[cut: (\d+) bytes\]", text)[1])
     printed = cut + 1000  # bytes: "y\n" many times, then "done\n"
     assert not failed and cut > 10_000_000
@@ -136,8 +147,8 @@ def test_a_command_that_prints_without_end_never_fills_the_host_s_memory(image):
 
 def test_edit_refuses_a_file_that_is_not_utf8_and_leaves_it_as_it_was(image):
     with sandbox(image, {"data.bin": (FILE, b"caf\xe9 au lait\n")}) as box:
-        text, failed = call(box, "edit", {"path": "data.bin", "old_string": "lait", "new_string": "miel"}, 10, 1000)
-        assert failed and text == "data.bin is not UTF-8 text (byte 3), so edit cannot rewrite it; change it with bash"
+        text, failed = call(box, "edit", {"path": "data.bin", "old_string": "lait", "new_string": "miel"}, 10, 1000, plain(task()))
+        assert failed and text == "data.bin is not UTF-8 text (byte 3), so edit cannot rewrite it"
         assert box.run(["cat", "data.bin"], seconds=10, limit=100).stdout == b"caf\xe9 au lait\n"
 
 
@@ -154,7 +165,7 @@ def test_the_model_s_commands_run_without_root_inside_the_limits(image):
               "touch /etc/x 2>/dev/null || echo read-only; "
               "head -c 20M /dev/zero > big 2>/dev/null || echo full; du -m big | cut -f1")
     with sandbox(image, {"sub/a.txt": (FILE, b"a\n")}) as box:
-        text, failed = call(box, "bash", {"command": script}, 10, 1000)
+        text, failed = call(box, "bash", {"command": script}, 10, 1000, plain(task()))
     assert text == (f"1000\n{256 << 20}\n64\n100000 100000\n0000000000000000\n000000000000000b\n1\n"
                     "1000:1000 755\n1000:1000 755\n1000:1000 644\nread-only\nfull\n16\n")
 
@@ -164,8 +175,8 @@ def test_finished_background_processes_never_fill_the_process_limit(image):
     # left more finished background processes than the limit can still run
     with sandbox(image, {}, Limits(memory=256, disk=16, processes=16, cpus=1.0)) as box:
         for _ in range(3):
-            call(box, "bash", {"command": "for i in $(seq 10); do (true &); done"}, 10, 1000)
-        assert call(box, "bash", {"command": "echo still running"}, 10, 1000) == ("still running\n", False)
+            call(box, "bash", {"command": "for i in $(seq 10); do (true &); done"}, 10, 1000, plain(task()))
+        assert call(box, "bash", {"command": "echo still running"}, 10, 1000, plain(task())) == ("still running\n", False)
 
 
 def test_a_model_that_fills_its_process_limit_ends_its_attempt_and_is_scored(image):
@@ -178,7 +189,7 @@ def test_a_model_that_fills_its_process_limit_ends_its_attempt_and_is_scored(ima
              turn(bash("echo still here"))]
     with sandbox(image, {}, limits) as box:
         done = attempt(task(command_seconds=5), box, TOKENIZER, scripted(*turns), result_bytes=1000)
-        assert score(box, task().check, 10) == (1.0, "")
+        assert score(box, task().check, 10, done.conversation) == (1.0, "")
     assert done.ended == FULL
     assert len(results(done)) == 1 and "OCI" not in results(done)[0]
     assert done.conversation["messages"][-1]["role"] == "assistant"
@@ -194,7 +205,7 @@ def test_a_model_whose_files_fill_the_memory_ends_its_attempt_and_is_scored(imag
     with sandbox(image, {}, limits) as box:
         done = attempt(task(command_seconds=5, max_turns=20), box, TOKENIZER, Scripted(lambda count: filling[:count]),
                        result_bytes=1000)
-        scored, why = score(box, task().check, 10)
+        scored, why = score(box, task().check, 10, done.conversation)
     assert done.ended == FULL and scored in (0.0, 1.0) and why == ""
     assert not any("OCI" in text for text in results(done))
 
@@ -208,11 +219,11 @@ def test_docker_s_own_failures_never_pass_for_the_command_s(image):
             docker.run("exec", box.container, "sh", "-c", "exit 137")
         subprocess.run(["docker", "kill", box.container], capture_output=True, check=True)
         with pytest.raises(SandboxError, match=f"^container {box.container}: docker exec: .*not running"):
-            call(box, "bash", {"command": "echo hi"}, 10, 1000)
+            call(box, "bash", {"command": "echo hi"}, 10, 1000, plain(task()))
         with pytest.raises(SandboxError, match=f"^container {box.container}: docker exec: .*not running"):
             box.run(["cat", "notes.txt"], seconds=10, limit=1000)
         with pytest.raises(SandboxError, match=f"^container {box.container} is not running$"):
-            score(box, task().check, 10)
+            score(box, task().check, 10, {})
 
 
 def test_a_file_put_into_tmp_leaves_tmp_writable_by_everyone(image):
@@ -296,8 +307,9 @@ def test_the_check_sees_only_the_attempt_s_work_folder_once_its_processes_are_st
     check = b"#!/bin/sh\ntest -e out.txt && ! test -e /tmp/planted && ! test -e /tmp/later && echo 1 || echo 0\n"
     with sandbox(image) as box:
         call(box, "bash", {"command": "echo hello > out.txt; echo planted > /tmp/planted; "
-                                      "(sleep 1; echo later > /tmp/later) > /dev/null 2>&1 &"}, 10, 1000)
-        assert score(box, check, 10) == (1.0, "")
+                                      "(sleep 1; echo later > /tmp/later) > /dev/null 2>&1 &"}, 10, 1000,
+             plain(task()))
+        assert score(box, check, 10, {}) == (1.0, "")
         state = subprocess.run(["docker", "inspect", "-f", "{{.State.Paused}}", box.container],
                                capture_output=True, text=True, check=True).stdout
     assert state == "true\n"
@@ -338,4 +350,161 @@ def test_a_check_that_prints_no_score_gives_none_and_says_why(image):
         (b"#!/bin/sh\necho 0.5\nexit 124\n", (0.5, "")),  # timeout's code, but the check was not stopped
     ]:
         with sandbox(image, {}) as box:
-            assert score(box, check, 1 if b"sleep" in check else 10) == scored
+            assert score(box, check, 1 if b"sleep" in check else 10, {}) == scored
+
+
+def test_the_ask_tool_answers_from_the_replies_written_in_advance_and_the_attempt_goes_on():
+    # the first reply whose pattern is found in the question is given, a
+    # question no pattern matches gets "I don't know that", and the attempt
+    # goes on after each; a task without replies offers no ask tool
+    asking = task(replies=(("(?i)which colou?r", "Blue."), ("colou?r", "The other one.")))
+
+    def ask(question, n=1):
+        return {"type": "tool_call", "id": f"call-{n}", "name": "ask", "arguments": {"question": question}}
+
+    done = attempt(asking, None, TOKENIZER, scripted(turn(ask("Which colour do you want?"), ask("Any colour?", 2)),
+                                                     turn(ask("What now?")), turn({"type": "text", "text": "Blue."})),
+                   result_bytes=1000)
+    assert results(done) == ["Blue.", "The other one.", NOT_KNOWN] and done.ended == ANSWERED
+    assert "ask" in [tool["name"] for tool in opening(asking)["tools"]]
+    assert "ask" not in [tool["name"] for tool in opening(task())["tools"]]
+    assert call(None, "ask", {"question": "Which colour?"}, 10, 1000, plain(task())) == (
+        "unknown tool 'ask'; the tools are read, write, edit, bash", True)
+
+
+def test_an_attempt_records_its_answer_block_and_a_malformed_one_as_missing():
+    # every attempt ends with a json block holding the answer and the
+    # confidence (docs/chat-format.md, "The answer"); a block of another
+    # shape counts as missing, which the check library scores 0
+    good = {"answer": "Wrote hello into out.txt.", "confidence": 0.8}
+    for value, kept in [(good, good), ({"answer": "Done.", "confidence": 1.5}, None),
+                        ({"answer": "Done.", "confidence": True}, None), ({"answer": "Done."}, None), ("Done.", None)]:
+        done = attempt(task(), None, TOKENIZER, scripted(turn({"type": "text", "text": "Done."},
+                                                              {"type": "json", "value": value})), result_bytes=10)
+        assert done.conversation["metadata"]["answer"] == kept
+    done = attempt(task(), None, TOKENIZER, scripted(turn({"type": "text", "text": "Done."})), result_bytes=10)
+    assert done.conversation["metadata"] == {"tools": {name: name for name in ["read", "write", "edit", "bash"]},
+                                             "looking": ["read", "bash"], "answered_by": [], "answer": None}
+
+
+def test_the_opening_lists_the_offered_tools_that_look_by_their_real_names():
+    # one definition of looking (maintainer's decision, 2026-10-22): read,
+    # bash and each declared tool marked looks; the check library reads the
+    # list from the conversation, whatever names the attempt saw
+    fetch = {"name": "fetch", "description": "Fetch a page's text.", "program": "/usr/local/bin/fetch",
+             "parameters": {"type": "object"}, "names": ["get_page"], "looks": True}
+    put = {"name": "put_file", "description": "Put a file.", "program": "/usr/local/bin/put",
+           "parameters": {"type": "object"}}
+    made = task(tools=(put,))
+    for seed in range(20):
+        chosen = offer(made, [fetch], random.Random(seed))
+        offered = set(chosen.names.values())
+        looking = opening(made, chosen)["metadata"]["looking"]
+        assert sorted(looking) == sorted(offered & {"read", "bash", "fetch"})
+
+
+def test_a_needed_tool_is_always_offered_and_the_others_vary_with_the_seed():
+    # each attempt gets one variant of every needed tool under its own
+    # name; the other tools of the task and of the image's pool are left
+    # out or kept, renamed or not, in any order, and the same seed gives
+    # the same offer again; the mapping names each real tool
+    pool = [{"name": "fetch", "description": "Fetch a page's text.", "program": "/usr/local/bin/fetch",
+             "parameters": {"type": "object"}, "names": ["get_page"]}]
+    put = {"name": "put_file", "description": "Put a file.", "program": "/usr/local/bin/put",
+           "parameters": {"type": "object"}}
+    needing = task(needs=((Variant(("write",)), Variant(("put_file",))), (Variant(("ask",)),)), replies=(("x", "y"),),
+                   tools=(put,))
+    seen, renamed, orders = set(), set(), set()
+    for seed in range(200):
+        chosen = offer(needing, pool, random.Random(seed))
+        assert chosen == offer(needing, pool, random.Random(seed))
+        assert [tool["name"] for tool in chosen.tools] == list(chosen.names)
+        real = list(chosen.names.values())
+        assert real.count("ask") == 1 and chosen.names["ask"] == "ask"
+        assert sorted(name for name in real if name in ("write", "put_file")) in (["put_file"], ["write"])
+        for shown, actual in chosen.names.items():
+            assert shown == actual or shown in OTHER_NAMES.get(actual, []) + (["get_page"] if actual == "fetch" else [])
+            renamed |= {actual} if shown != actual else set()
+        seen |= set(real)
+        orders.add(tuple(chosen.names))
+    assert seen == {"read", "write", "put_file", "edit", "bash", "ask", "fetch"}
+    assert renamed >= {"read", "edit", "bash", "fetch"} and len(orders) > 100
+    assert all(len(offer(needing, pool, random.Random(seed)).tools) < 7 for seed in range(3))
+    assert list(plain(needing).names) == ["read", "write", "edit", "bash", "ask", "put_file"]
+
+
+def test_each_attempt_gets_one_way_of_a_need_with_the_files_that_way_hides():
+    # maintainer's decision, 2026-10-22: a commit-and-push attempt pushes one
+    # way, the seeded choice of a variant: git through bash, no push tool
+    # offered; or the push tool with the remote, a folder outside /work,
+    # hidden among the tools' files under its own path
+    push = {"name": "push", "description": "Push.", "program": "/usr/local/bin/push", "parameters": {"type": "object"}}
+    remote = {"HEAD": (FILE, b"ref: refs/heads/main\n"), "config": (FILE, b"[core]\n")}
+    pushing = task(needs=((Variant(("bash",)), Variant(("bash", "push"), (REMOTE,))),), tools=(push,),
+                   outside={REMOTE: remote})
+    ways = set()
+    for seed in range(40):
+        chosen = offer(pushing, [], random.Random(seed))
+        files, hidden, outside = arranged(pushing, chosen)
+        offered = set(chosen.names.values())
+        assert "bash" in offered and ("push" in offered) == bool(chosen.hidden) and files == pushing.files
+        moved = {f"tmp/origin.git/{path}": entry for path, entry in remote.items()}
+        assert (hidden, outside) == ((moved, {}) if chosen.hidden else ({}, {REMOTE: remote}))
+        ways.add("push" in offered)
+    assert ways == {True, False}
+
+
+def test_attempts_offered_other_tools_share_the_start_of_their_openings():
+    # the model reads once what the openings share, then each row the rest
+    # of its own, so every attempt holds exactly its own opening
+    offers = [offer(task(), [], random.Random(seed)) for seed in (1, 2)]
+    assert offers[0].names != offers[1].names
+    model = Scripted(lambda count: [chat.IM_END], lambda count: [chat.IM_END])
+    done = attempts(task(), [None, None], TOKENIZER, model, result_bytes=10, offers=offers)
+    prompts = [chat.prompt(TOKENIZER, opening(task(), chosen)) for chosen in offers]
+    [(shared, rows)] = model.read
+    assert rows == 2 and all(prompt[:len(shared)] == shared for prompt in prompts) and prompts[0] != prompts[1]
+    assert [one.ids for one in done] == [prompt + [chat.IM_END] for prompt in prompts]
+    assert [one.conversation["metadata"]["tools"] for one in done] == [chosen.names for chosen in offers]
+
+
+def test_a_tool_s_program_reads_the_files_hidden_from_the_model_s_own_tools(image):
+    # a task's tool is answered by a program in the container, which reads
+    # its arguments as JSON and the task's tool_files; the model's own
+    # commands can neither list nor read those files
+    program = b"#!/bin/sh\nid -u; id -g; cat /tmp/wpt-tools/corpus/a.txt; cat; echo; echo made > made.txt\n"
+    search = {"name": "search", "description": "Search the notes.", "program": "/tmp/wpt-test/search",
+              "parameters": {"type": "object"}}
+    failing = {**search, "name": "broken", "program": "/tmp/wpt-test/broken"}
+    searching = task(tools=(search, failing), tool_files={"corpus/a.txt": (FILE, b"hidden text\n")})
+    with Sandbox(image, searching.files, user=AGENT, limits=LIMITS, tool_files=searching.tool_files) as box:
+        box.put("/tmp/wpt-test/search", program, EXECUTABLE)  # stands for a program the image holds
+        box.put("/tmp/wpt-test/broken", b"#!/bin/sh\necho no such page >&2; exit 3\n", EXECUTABLE)
+        turns = [turn({"type": "tool_call", "id": "call-1", "name": "search", "arguments": {"query": "caf\u00e9"}},
+                      {"type": "tool_call", "id": "call-2", "name": "broken", "arguments": {}},
+                      bash("cat /tmp/wpt-tools/corpus/a.txt; ls /tmp/wpt-tools; cat made.txt", 3)),
+                 turn({"type": "text", "text": "Done."})]
+        done = attempt(searching, box, TOKENIZER, scripted(*turns), result_bytes=1000)
+    found, broken, seen = results(done)
+    assert found == '1000\n1001\nhidden text\n{"query": "caf\\u00e9"}\n'
+    assert broken == "no such page"
+    assert seen.count("Permission denied") == 2 and "hidden" not in seen and "made\n" in seen
+    errors = [block.get("error", False) for m in done.conversation["messages"] if m["role"] == "tool"
+              for block in m["content"]]
+    assert errors == [False, True, False]  # bash ends with cat made.txt, which works
+
+
+def test_the_check_reads_the_attempt_s_conversation_next_to_it(image):
+    # the check scores the trace and the answer block too, from the
+    # conversation file beside it, which maps the names the model saw
+    renamed = next(chosen for chosen in (offer(task(), [], random.Random(seed)) for seed in range(50))
+                   if any(shown != actual for shown, actual in chosen.names.items()))
+    shown, actual = next((shown, actual) for shown, actual in renamed.names.items() if shown != actual)
+    check = (f'#!/bin/sh\nc="$(dirname "$0")/conversation.json"\ngrep -qF \'"{shown}": "{actual}"\' "$c" && '
+             f'grep -qF \'"answer": {{"answer": "Nothing to change.", "confidence": 0.25}}\' "$c" '
+             f'&& echo 0.25 || echo 0\n')
+    end = turn({"type": "json", "value": {"answer": "Nothing to change.", "confidence": 0.25}})
+    with sandbox(image, {}) as box:
+        done = attempt(task(), box, TOKENIZER, scripted(end), result_bytes=10, offer=renamed)
+        assert done.conversation["metadata"]["tools"] == renamed.names
+        assert score(box, check.encode(), 10, done.conversation) == (0.25, "")

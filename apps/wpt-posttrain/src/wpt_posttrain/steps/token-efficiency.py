@@ -60,14 +60,14 @@ SEED = 0  # the reference attempts, the order of the tasks in each round, and th
 
 def run(context):
     try:
-        tasks, built = agentic.prepare(context, TAG)
+        tasks, built, pools = agentic.prepare(context, TAG)
     except agentic.Unready as error:
         return Outcome.failure(str(error))
     settings = agentic.Settings(ROUNDS, TASKS_PER_UPDATE, GROUP, LEARNING_RATE, WEIGHT_DECAY, TEMPERATURE, TOP_K,
                                 CHECK_SECONDS, RESULT_BYTES, SEED)
     with agentic.frozen_routers(context.model):
         learner = agentic.Learner("token-efficiency", context.model, context.tokenizer, context.device, built,
-                                  settings, context.telemetry)
+                                  settings, context.telemetry, pools)
         context.model.eval()
         references, zero, lost = _references(learner, tasks)
         kept = [task for task in tasks if task.id in references]

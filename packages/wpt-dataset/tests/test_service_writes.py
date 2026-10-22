@@ -20,11 +20,11 @@ import pytest
 
 from wpt_dataset.edit import unpack, write_patch
 from wpt_dataset import repo as service
-from wpt_dataset.errors import NotText, RuleViolation, StaleFile
+from wpt_dataset.errors import InvalidFile, NotText, RuleViolation, StaleFile
 from wpt_dataset.repo import empty_source
 
 TASK = {"schema": 1, "instructions": "Print hello.", "image": "tiny",
-        "limits": {"max_turns": 2, "max_tokens": 100, "command_seconds": 5}}
+        "limits": {"max_turns": 2, "max_tokens": 100, "command_seconds": 5}, "needs": []}
 
 
 def own_source(repo, store, formats):
@@ -250,7 +250,7 @@ def test_an_empty_license_text_is_allowed_only_while_the_source_is_not_admitted(
     notes = []  # every reader leaves it out with a note naming it
     assert build.gather(repo, store, notes.append)[:2] == ([], {})
     assert conversations.read(repo, store, "sft", log=notes.append) == ([], {})
-    assert tasks.read(repo, store, "grpo", log=notes.append) == ([], {})
+    assert tasks.read(repo, store, "grpo", 0, log=notes.append) == ([], {})
     assert [n for n in notes if n == repo.source(sid).note] == [repo.source(sid).note] * 3 and sid in notes[0]
 
 
@@ -335,3 +335,20 @@ def test_a_task_save_writes_only_what_changed_and_keeps_other_files_as_they_are(
     with pytest.raises(StaleFile):
         repo.save_task(sid, "tasks/hello", found["task"], found["check"], files, "same", stale, store)
     assert len(repo.source(sid).patches) == 2
+
+
+def test_an_image_s_pool_of_tools_is_written_and_read_after_the_check(repo):
+    # the pool (data/images/<name>/tools.json) is written like any file
+    # people write, and a tool taking the name of one every task has is
+    # refused before anything is written
+    repo.save("dockerfile", "tiny", "FROM debian:trixie-slim\n", "")
+    fetch = {"name": "fetch", "description": "Fetch a page's text.", "program": "/usr/local/bin/fetch",
+             "parameters": {"type": "object", "properties": {"url": {"type": "string"}}, "required": ["url"]},
+             "names": ["get_page"]}
+    assert repo.image_tools("tiny") == []
+    repo.save("image-tools", "tiny", {"schema": 1, "tools": [fetch]}, "")
+    assert repo.image_tools("tiny") == [fetch] and repo.problems("image-tools", "tiny") == []
+    version = repo.version("image-tools", "tiny")
+    with pytest.raises(InvalidFile, match="the tool 'bash' is declared twice, or takes the name of a tool every task"):
+        repo.save("image-tools", "tiny", {"schema": 1, "tools": [{**fetch, "name": "bash"}]}, version)
+    assert repo.image_tools("tiny") == [fetch]

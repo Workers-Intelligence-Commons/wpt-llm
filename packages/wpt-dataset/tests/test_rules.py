@@ -194,7 +194,8 @@ def test_command_line_builds_a_dataset_and_prints_its_id(kit, repo, store, git_u
     [folder] = store.record_folders()
     assert "-wpt-dataset-build-d-" in folder  # named after the recipe it built
     ids = json.loads(store.read_record(folder, "ids.json"))
-    assert ids["outputs"] == {"dataset": dataset_id, "dataset_record": store.get_ref("datasets", dataset_id)}
+    assert ids["outputs"] == {"dataset": dataset_id, "dataset_record": store.get_ref("datasets", dataset_id),
+                              "dataset_documents": store.get_ref("dataset-documents", dataset_id)}
     assert list(ids["inputs"]["sources"]) == repo.source_ids()
     events = [json.loads(line) for line in store.read_record(folder, "events.jsonl").splitlines()]
     fetched = {e["attributes"]["source"] for e in events if e.get("name") == "source" and e["kind"] == "span_start"}

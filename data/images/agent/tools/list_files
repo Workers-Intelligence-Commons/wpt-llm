@@ -1,0 +1,26 @@
+#!/usr/bin/python3 -I
+"""list_files: the entries of a folder of /work, as ls -p lists them:
+sorted, a folder's name ending with /, a symbolic link's with @."""
+
+import os
+import stat
+
+from wpt_tools import arguments, in_work
+
+
+def listing(descriptor):
+    entries = []
+    for name in sorted(os.listdir(descriptor)):
+        mode = os.stat(name, dir_fd=descriptor, follow_symlinks=False).st_mode
+        entries.append(name + ("/" if stat.S_ISDIR(mode) else "@" if stat.S_ISLNK(mode) else ""))
+    return entries
+
+
+def main():
+    given = arguments(optional=["path"])
+    entries = listing(in_work(given.get("path", "."), folder=True))
+    print("\n".join(entries) if entries else "(empty folder)")
+
+
+if __name__ == "__main__":
+    main()

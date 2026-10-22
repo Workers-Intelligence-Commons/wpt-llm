@@ -6,12 +6,14 @@ Reads the tasks of every admitted source whose task files are tagged
 machine first (`wpt-agent build-image NAME`). For each task the model makes
 GROUP attempts, each in a fresh container of the task's image with no
 network and limited sizes (wpt_agent), written together in one batch from
-one reading of the task's opening (the model's generation cache): it
-writes a turn, its read, write,
-edit and bash calls run in the container as a non-root user, their results
-come back as the next turn, until it stops or a limit is reached. Then the
-attempt's processes are stopped and the task's check scores, from 0 to 1,
-a copy of the attempt's /work in a fresh container; a check that prints no
+one reading of what the attempts' openings share (the model's generation
+cache), each attempt offered its own choice of the task's tools
+(wpt_agent.offer, seeded with SEED): it writes a turn, its tool calls run
+in the container as a non-root user, their results come back as the next
+turn, until it stops or a limit is reached. Then the attempt's processes
+are stopped and the task's check scores, from 0 to 1, a copy of the
+attempt's /work in a fresh container, next to the attempt's conversation;
+a check that prints no
 such number counts as 0. An attempt whose own processes or files fill
 its container so that no command can start there ends, and is scored
 the same way. When Docker fails, which is not the model's doing, the
@@ -66,12 +68,12 @@ SEED = 0  # the order of the tasks in each round, and the sampled tokens
 
 def run(context):
     try:
-        tasks, built = agentic.prepare(context)
+        tasks, built, pools = agentic.prepare(context)
     except agentic.Unready as error:
         return Outcome.failure(str(error))
     settings = agentic.Settings(ROUNDS, TASKS_PER_UPDATE, GROUP, LEARNING_RATE, WEIGHT_DECAY, TEMPERATURE, TOP_K,
                                 CHECK_SECONDS, RESULT_BYTES, SEED)
     with agentic.frozen_routers(context.model):
         learner = agentic.Learner("grpo", context.model, context.tokenizer, context.device, built, settings,
-                                  context.telemetry)
+                                  context.telemetry, pools)
         return learner.train(tasks)

@@ -108,8 +108,8 @@ from .errors import DatasetError, InvalidFile
 from .migrate import migrate
 from .repo import KINDS, Repo, empty_source, source_id
 from .markdown_check import check_markdown
-from .sources import compute_upstream
-from .tasks import has_tasks
+from .sources import compute_upstream, source_tree
+from .tasks import has_tasks, pointed_sources
 from .tokenizer_check import check_tokenizer
 
 
@@ -127,9 +127,14 @@ def cmd_check(args, repo):
         print(note)
     ids = []
     if args.changed:
-        ids, images_changed = repo.changed_since(args.changed)
+        ids, images_changed, removed = repo.changed_since(args.changed)
         if images_changed:  # a task may name an image that changed or went
             ids = sorted(set(ids) | {s.id for s in repo.sources() if has_tasks(s)})
+        elif ids or removed:  # a pointer task breaks when the source it points into changed or went
+            store = _store(repo)
+            changed = set(ids) | set(removed)  # a task source that cannot be read is checked too: the check names why
+            ids = sorted(set(ids) | {s.id for s in repo.sources() if has_tasks(s) and not s.unwritten
+                                    and ((pointed := _points_into(repo, s, store)) is None or pointed & changed)})
     elif args.fetch is not None:
         ids = args.fetch or [s.id for s in repo.sources() if s.admitted]
     ids = [sid for sid in ids if sid not in unwritten]  # no text to fetch or check yet: named above
@@ -140,6 +145,16 @@ def cmd_check(args, repo):
             _check_fetched(repo, sid, store, failed)
     print(f"checked {len(repo.source_ids())} sources and their recipes")
     return _failures(failed, len(ids))
+
+
+def _points_into(repo, source, store) -> set[str] | None:
+    """The sources the pointer tasks of a task source point into; None for
+    a task source that cannot be read (also one whose pointers name a
+    source that was deleted)."""
+    try:
+        return pointed_sources(source, source_tree(source, store)[0], store, repo)
+    except (DatasetError, StoreError, MissingTool):
+        return None
 
 
 def _check_fetched(repo, sid, store, failed: list[str]):

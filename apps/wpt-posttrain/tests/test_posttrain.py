@@ -14,6 +14,7 @@ import wpt_agent
 import wpt_posttrain
 from wpt_agent import images
 from wpt_dataset import manifest
+from wpt_dataset.build import is_held_out
 from wpt_dataset.repo import address_hash, dump_json
 from wpt_dataset.sources import compute_upstream
 from wpt_inference import COSTS_FILE, DRAFT, costs_setup, replayed_costs
@@ -281,13 +282,20 @@ def test_grpo_says_so_and_writes_nothing_until_a_source_holds_tasks(trained, tmp
 
 
 TASK = {"schema": 1, "instructions": "Write hello into out.txt.", "image": "tiny",
-        "limits": {"max_turns": 2, "max_tokens": 6, "command_seconds": 5}}
+        "limits": {"max_turns": 2, "max_tokens": 6, "command_seconds": 5}, "needs": []}
 
 
 def task_source(built, root, upstream, check='#!/bin/bash\necho "0.$RANDOM"\n') -> str:
     """Writes data/images/tiny/Dockerfile and an admitted source of one task
     tagged grpo, whose check by default prints scores that differ; returns
-    its id."""
+    its id. The source's upstream is the folder upstream, or the first
+    upstream-N whose task the recipes' held_out of 0.5 leaves to training
+    (wpt_dataset.tasks.measure_only)."""
+    for number in range(100):
+        candidate = upstream.with_name(f"{upstream.name}-{number}") if number else upstream
+        if not is_held_out(f"example-tasks-{address_hash(str(candidate))}/hello", 0.5):
+            upstream = candidate
+            break
     (root / "data" / "images" / "tiny").mkdir(parents=True)
     (root / "data" / "images" / "tiny" / "Dockerfile").write_text("ARG BASE=ubuntu:24.04\nFROM ${BASE}\nARG PACKAGES\n")
     (upstream / "hello" / "files").mkdir(parents=True)
@@ -411,9 +419,9 @@ def test_a_group_whose_scores_are_all_equal_never_dilutes_the_update(monkeypatch
     scores = {"differ": [1.0, 0.0], "equal": [0.5, 0.5]}
     played = {}
 
-    def play(task, count, keep):
+    def play(task, count, keep, offers):
         ids = [0, 1, 2, 3] if task.id == "differ" else [0, 4, 5, 6, 7, 1, 2]
-        attempt = wpt_agent.Attempt({}, ids, [False] + [True] * (len(ids) - 1), "answered")
+        attempt = wpt_agent.Attempt({"metadata": {}}, ids, [False] + [True] * (len(ids) - 1), "answered")
         return [keep(index, (attempt, None, next(played[task.id]))) for index in range(1, count + 1)]
 
     losses, update = [], agentic.update
@@ -423,7 +431,8 @@ def test_a_group_whose_scores_are_all_equal_never_dilutes_the_update(monkeypatch
                                 learning_rate=grpo.LEARNING_RATE, weight_decay=grpo.WEIGHT_DECAY,
                                 temperature=grpo.TEMPERATURE, top_k=grpo.TOP_K, check_seconds=grpo.CHECK_SECONDS,
                                 result_bytes=grpo.RESULT_BYTES, seed=grpo.SEED)
-    task = lambda name: type("Task", (), {"id": name, "image": "tiny"})
+    task = lambda name: type("Task", (), {"id": name, "image": "tiny", "needs": (), "replies": (), "tools": (),
+                                         "answered_by": ()})
     for names in (["differ", "equal"], ["differ"]):
         played = {name: iter(values) for name, values in scores.items()}
         tasks = [task(name) for name in names]
@@ -551,7 +560,7 @@ def attempt_of(written, read=3):
     """An attempt whose model wrote `written` tokens between the `read`
     tokens of its instructions and a tool result of `read` tokens."""
     learn = [False] * read + [True] * written + [False] * read + [True]
-    return wpt_agent.Attempt({}, [0] * len(learn), learn, "answered")
+    return wpt_agent.Attempt({"metadata": {}}, [0] * len(learn), learn, "answered")
 
 
 def test_token_efficiency_rewards_a_passing_attempt_by_how_few_tokens_it_wrote():
@@ -582,23 +591,27 @@ def test_each_attempt_s_line_is_kept_as_soon_as_it_is_scored(monkeypatch):
         def close(self):
             pass
 
-    def attempts(task, boxes, tokenizer, start, result_bytes):
+    def attempts(task, boxes, tokenizer, start, result_bytes, offers):
         start([0], len(boxes), ())
         return [wpt_agent.Attempt({}, [0, 1], [False, True], "answered") for _ in boxes]
 
     kept, scored = [], []
     monkeypatch.setattr(wpt_agent, "Sandbox", Box)
     monkeypatch.setattr(wpt_agent, "attempts", attempts)
-    monkeypatch.setattr(wpt_agent, "score", lambda box, check, seconds: scored.append(list(kept)) or (1.0, None))
+    monkeypatch.setattr(wpt_agent, "score",
+                        lambda box, check, seconds, conversation, beside, hidden, outside: scored.append(list(kept)) or
+                        (1.0, None))
     monkeypatch.setattr(agentic, "Writer", lambda model, ids, rows, **kwargs: type("W", (), {"routes": [None] * rows}))
     grpo = step_module(GRPO)
     settings = agentic.Settings(rounds=1, tasks_per_update=1, group=3, learning_rate=grpo.LEARNING_RATE,
                                 weight_decay=grpo.WEIGHT_DECAY, temperature=grpo.TEMPERATURE, top_k=grpo.TOP_K,
                                 check_seconds=grpo.CHECK_SECONDS, result_bytes=grpo.RESULT_BYTES, seed=grpo.SEED)
     learner = agentic.Learner("grpo", _Logits(), None, "cpu", {"tiny": None}, settings)
-    monkeypatch.setattr(learner, "_keep", lambda task, round_, group, index, one: kept.append(index) or len(kept))
-    task = type("Task", (), {"id": "t", "image": "tiny", "files": None, "check": None,
-                         "container": {"memory": 1, "disk": 1, "processes": 1, "cpus": 1}})
+    monkeypatch.setattr(learner, "_keep",
+                        lambda task, round_, group, index, one, offer: kept.append(index) or len(kept))
+    task = type("Task", (), {"id": "t", "image": "tiny", "files": None, "check": None, "needs": (), "replies": (),
+                             "tools": (), "tool_files": {}, "outside": {}, "check_files": {}, "answered_by": (), "container": {"memory": 1, "disk": 1, "processes": 1,
+                                                                         "cpus": 1}})
     played = learner.attempts(task, 1, 1, 3, lambda task, attempt, score: score)
     assert scored == [[], [1, 2]]  # attempt 1 scored before any line, attempt 3 after the lines of 1 and 2
     assert kept == [1, 2, 3] and [one.attempt is None for one in played] == [False, True, False]
@@ -614,8 +627,9 @@ def test_token_efficiency_takes_the_mean_length_of_the_attempts_that_reach_the_b
     class Learner(agentic.Learner):
         def __init__(self):  # no model: play() stands for the attempts, attempts() keeps them as the step does
             self.name, self.file, self.telemetry = "token-efficiency", "token-efficiency-attempts.jsonl", Telemetry.off()
+            self.settings, self.pools = type("Settings", (), {"seed": 0}), {}
 
-        def play(self, task, count, keep):
+        def play(self, task, count, keep, offers):
             outcomes = [(score, length) for score, length in plays[task.id][:count]]
             outcomes += [wpt_agent.SandboxError("docker create: no space left on device")] * (count - len(outcomes))
             return [keep(index, outcome if isinstance(outcome, Exception)
@@ -623,7 +637,8 @@ def test_token_efficiency_takes_the_mean_length_of_the_attempts_that_reach_the_b
                     for index, outcome in enumerate(outcomes, 1)]
 
     step.REFERENCE = 4
-    tasks = [type("Task", (), {"id": name, "instructions": "Say hello."}) for name in plays]
+    tasks = [type("Task", (), {"id": name, "instructions": "Say hello.", "image": "tiny", "needs": (), "replies": (),
+                               "tools": (), "answered_by": ()}) for name in plays]
     references, zero, lost = step._references(Learner(), tasks)
     assert references == {"mixed": (0.75, pytest.approx(15.0))}
     assert (zero, lost) == (1, 1)

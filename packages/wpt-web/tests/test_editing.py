@@ -254,7 +254,7 @@ def test_tasks_recipes_dockerfiles_and_signers_go_through_the_checks_rules(web):
 
     sid = new_source(request, {"notes.txt": {"format": "text", "text": TEXT}})
     task = {"schema": 1, "instructions": "Print hello.", "image": "tiny",
-            "limits": {"max_turns": 2, "max_tokens": 100, "command_seconds": 5}}
+            "limits": {"max_turns": 2, "max_tokens": 100, "command_seconds": 5}, "needs": []}
     status, tasks = request("GET", f"/api/sources/{sid}/tasks")
     status, saved = request("PUT", f"/api/sources/{sid}/tasks/{path('tasks/hello')}", {
         "task": task, "check": "#!/bin/sh\necho 1\n", "files": {"README": "say hello\n"}, "patch": "hello",

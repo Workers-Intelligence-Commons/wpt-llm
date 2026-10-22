@@ -13,7 +13,11 @@ tags.
 
 A git source with `history` adds one document per commit,
 `<source id>/.git/history/<commit>`: the commit as `git format-patch`
-writes it, limited to the files the source keeps.
+writes it, limited to the files the source keeps. Its order file,
+`.git/history/order` ([architecture.md](architecture.md), `history`),
+stays a file of the source's stored tree, covered by its checksum, but it
+is not a training document: the build, the vocabulary and every other
+list of documents leave it out (maintainer's decision, 2026-10-22).
 
 **Exact duplicates are removed**: when several documents have the same
 content, the first by source id, then by path, keeps it. Nothing judges
@@ -93,6 +97,23 @@ contamination report and the tool versions used.
 A fixed share of every source's documents (`held_out`), chosen by a hash of
 the document id, never enters training; it goes to separate held-out shards
 used to measure the model.
+
+Every dataset build stores, beside the dataset's record, the list of all
+its documents: each one's id, the sha256 of its Markdown (the same sha256
+the dataset id's fingerprint reads) and its tag, `training` or `held-out`
+(maintainer's decision, 2026-10-22). It is found from the dataset id,
+which a model's `provenance.json` names, so post-training learns which
+texts its base model held out from that list alone: a pointer task whose
+document's text is one of them is measure-only, and no source is
+converted to Markdown to find out ([post-training.md](post-training.md),
+"Measure tasks"). A dataset built before builds kept the list has none,
+and keeps none: reading pointer tasks against it is refused
+(`DocumentListMissing`), saying that the base model's dataset predates
+document lists and that such a base is used with the repository at the
+commit that built it. Nothing falls back and nothing is rebuilt
+(maintainer's decision, 2026-10-22). A dataset the store does not hold
+at all is refused the same way, the message saying it is not in the
+store.
 
 Contamination is evaluation text that also appears in training text. The
 build checks held-out documents for runs of 13 words also found in training
