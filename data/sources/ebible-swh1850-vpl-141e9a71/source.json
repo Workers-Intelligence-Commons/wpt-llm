@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/swh1850_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:f41024c3f4375222272583210af784553dd6b34e93e1af4ebc16b466e5e01441",
+  "extract": {
+    "exclude": [
+      "swh1850_about.htm",
+      "swh1850_vpl.sql",
+      "swh1850_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Biblia Takatifu, eBible.org, https://ebible.org/swh1850/",
+      "text": "Biblia Takatifu, eBible.org, https://ebible.org/swh1850/\n\nThe edition's own statement of rights (from eBible.org's page for this translation):\n> \"Public Domain\nLanguage: Kiswahili (Swahili)\nDialect: Kimvita\nTranslation by: Dr. Johann Ludvig Krapf\"\n(from eBible.org's page for this translation, https://ebible.org/swh1850/copyright.htm)\n\nWhy this is public domain:\nTranslator: Johann Ludwig Krapf, 1810-1881, a German missionary in East Africa; eBible says his translation of portions of the New Testament was completed in 1850. US: a work published before 1931 is public domain in the United States, and a work left unpublished is public domain there 70 years after its author's death (Krapf's ended in 1951). Origin country: Krapf lived until 1881, so the text is public domain in every country with a term of life + 140 years or less, whatever its country of first publication. Nobody besides Krapf is named for this text.\n\nSources of these facts:\neBible.org copyright page (https://ebible.org/swh1850/copyright.htm) and details page (https://ebible.org/details.php?id=swh1850); Krapf's life dates from English Wikipedia (https://en.wikipedia.org/wiki/Johann_Ludwig_Krapf).\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "swh1850_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-swh1850-510b1410, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/englxxup_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:d494d0d1083a94b63f8c195018eb759932e4b7e1adba410f907190e099e3ded7",
+  "extract": {
+    "exclude": [
+      "englxxup_about.htm",
+      "englxxup_vpl.sql",
+      "englxxup_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Updated Brenton English Septuagint, eBible.org, https://ebible.org/englxxup/",
+      "text": "Updated Brenton English Septuagint, eBible.org, https://ebible.org/englxxup/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/englxxup/copyright.htm):\n> Spelling and formatting update of the Brenton English Septuagint with Apocrypha\n> Public Domain\n> Language: English\n> Dialect: Mixed\n> Translation by: Sir Lancelot C. L. Brenton\n> Contributor: Adam Boyd\n> Original work was by Sir Lancelot C. L. Brenton in 1851.\n> CC0 Public Domain dedication on language updates by Adam Boyd in 2020.\n> 2026-02-18\n\nWhat was found:\nText: Brenton's Septuagint (Brenton died 1862) with language updates by Robert Adam Boyd (living), 2020.\n\nWhy it is admitted: Admitted as an exception on the maintainer's decision alone (2026-10-21): the only public-domain statement for Robert Adam Boyd's changes is eBible.org's label, and eBible.org is not Boyd's project; the same exception covers his three editions on eBible.org (engasvbt, englxxup, grctr).\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=englxxup), the edition's copyright page (https://ebible.org/englxxup/copyright.htm), https://ebible.org/details.php?id=englxxup.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "englxxup_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-englxxup-6a809069, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

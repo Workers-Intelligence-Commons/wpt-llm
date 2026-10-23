@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/eng-asv_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:d2aeedfd7d5337a17abf9fc4b400ab599ce3f0f91098246480a20410849581a1",
+  "extract": {
+    "exclude": [
+      "eng-asv_about.htm",
+      "eng-asv_vpl.sql",
+      "eng-asv_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "American Standard Version (1901), eBible.org, https://ebible.org/eng-asv/",
+      "text": "American Standard Version (1901), eBible.org, https://ebible.org/eng-asv/\n\nThe edition's own statement of rights (from eBible.org's page for this\ntranslation):\n> \"American Standard Version (1901)\nThe American Standard Version of the Holy Bible, first published in 1901.\nPublic Domain\nLanguage: English\nDialect: Archaic American\n\nThis public domain Bible translation is brought to you courtesy of eBible.org.\nIf you would like to make a donation to help keep free Bible access like this going, please visit https://eBible.org/give.php.\"\n\nWhy this is public domain:\nFirst published in 1901 in the United States (Thomas Nelson & Sons). Its translators and revisers died in the early twentieth century, more than 70 years ago, so the work is public domain in the United States (published before 1931) and in its country of origin (life plus 70 years has long passed).\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n\nSources of these facts: eBible.org's details page\n(https://ebible.org/details.php?id=eng-asv) and the edition's own files.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "eng-asv_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-eng-asv-4c4cd18b, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

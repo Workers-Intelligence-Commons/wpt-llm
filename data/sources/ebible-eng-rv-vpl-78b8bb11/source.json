@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/eng-rv_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:90243e175c894c1362a770239b7a9179abe09ecf9d538d5c7c2cae85c0da31c5",
+  "extract": {
+    "exclude": [
+      "eng-rv_about.htm",
+      "eng-rv_vpl.sql",
+      "eng-rv_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Revised Version with Apocrypha (1895), eBible.org, https://ebible.org/eng-rv/",
+      "text": "Revised Version with Apocrypha (1895), eBible.org, https://ebible.org/eng-rv/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/eng-rv/copyright.htm):\n> The Revised Version of the Holy Bible (1895) with Apocrypha\n> Public Domain\n> Language: English\n> Dialect: archaic British\n> This work is in the Public Domain. You may copy and use it freely.\n> 2026-10-13\n\nWhy this is public domain:\nText: the Revised Version, as printed in 1895 for the Universities of Oxford and Cambridge (scan hosted by eBible.org). New Testament published 1881 (preface dated 11 November 1880), Old Testament 1885 (preface signed Jerusalem Chamber, Westminster Abbey, 10 July 1884): neither preface names a reviser, so both are anonymous works published before 1926. The maintainer's rule (2026-10-16): a text revised by an unnamed committee or reviser and published before 1926 is an anonymous work, in the public domain everywhere. Its deuterocanonical books come from the Apocrypha of the Revised Version (Oxford and Cambridge University Presses, preface dated January 1895, United Kingdom), whose preface names its revisers, so the life-plus-70 rule applies to each: Charles John Ellicott 1819-1905, George Moberly 1803-1885, Robert Scott 1811-1887, Edward Bickersteth 1814-1892, Joseph Angus 1816-1902, William Gilson Humphry 1815-1886, Richard Chenevix Trench 1807-1886, Arthur Penrhyn Stanley 1815-1881, Edwin Palmer 1824-1895, F. H. A. Scrivener 1813-1891, J. B. Lightfoot 1828-1889, Joseph Williams Blakesley 1808-1885, F. J. A. Hort 1828-1892, B. F. Westcott 1825-1901, William Fiddian Moulton 1835-1898, John Troutbeck 1832-1899, J. J. S. Perowne 1823-1904, J. Rawson Lumby 1831-1895, William Robertson Smith 1846-1894, Robert Lubbock Bensly 1831-1893, T. K. Cheyne 1841-1915, William Aldis Wright 1831-1914, Frederick Field 1801-1885, Charles Wordsworth 1806-1892, Charles John Vaughan 1816-1897, David Brown 1803-1897, Samuel Newth 1821-1898, George Vance Smith 1816-1902, William Milligan 1821-1893, Benjamin Hall Kennedy 1804-1889, Alexander Roberts 1826-1901, William Lee 1815-1883. The last of them died in 1915, so the United Kingdom's life plus 70 years ended in 1985; published in 1895, it is public domain in the United States. The 1895 title page's \"All Rights reserved\" is the printing's own notice, ended under both rules.\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=eng-rv), the edition's copyright page (https://ebible.org/eng-rv/copyright.htm), https://eBible.org/eng-rv/RevisedVersionHolyBible1895.pdf; https://en.wikipedia.org/wiki/Revised_Version; https://hc.edu/museums/dunham-bible-museum/reprints-from-the-collection/prefaces-to-major-bible-editions/revised-version-of-new-testament-1880/; the Revised Version Apocrypha (https://archive.org/details/apocryphatransla00oxfo); life dates from the English Wikipedia page of each reviser and Wikidata (Q8009009, Q7347030, Q5079548, Q5341885, Q18672905, Q5346735, Q5231795, Q18734771, Q18954224, Q8015646, Q4219395, Q15627347, Q5083718); https://www.legislation.gov.uk/ukpga/1988/48/section/12; https://copyright.cornell.edu/publicdomain.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "eng-rv_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-eng-rv-1bf33f98, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

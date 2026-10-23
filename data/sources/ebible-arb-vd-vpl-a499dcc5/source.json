@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/arb-vd_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:db4e9a10c5db71fc834da6048fd6d683351569e528f6a9a68b06d9409bf7acdd",
+  "extract": {
+    "exclude": [
+      "arb-vd_about.htm",
+      "arb-vd_vpl.sql",
+      "arb-vd_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "الكتاب المقدس باللغة العربية، فان دايك, eBible.org, https://ebible.org/arb-vd/",
+      "text": "الكتاب المقدس باللغة العربية، فان دايك, eBible.org, https://ebible.org/arb-vd/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/arb-vd/copyright.htm):\n> Arabic Van Dyck translation of the Holy Bible\n> Public Domain\n> Language: العربية (Arabic)\n> Dialect: standard\n> Translation by: Syrian Mission\n> Contributor: American Bible Society\n> 2020-08-03\n\nWhat was found:\nText: the Van Dyck Arabic Bible (New Testament 1860, Old Testament 1865, Beirut), translated by Eli Smith, Cornelius Van Dyck and their Arab colleagues, all of whom died by 1895 (https://en.wikipedia.org/wiki/Eli_Smith; https://en.wikipedia.org/wiki/Bible_translations_into_Arabic: \"The New Testament was completed on March 9, 1860, followed by the Old Testament on March 10, 1865\"). eBible.org's USFM files add modern section headings of unknown authorship, but the read-aloud archive used here leaves them out. Its front file says: \"This set of files contains a script of canonical text, chapter by chapter ... All footnotes, introductions, and verse numbers have been stripped out\". None of the 1,703 distinct headings in https://ebible.org/Scriptures/arb-vd_usfm.zip occurs in the archive's 1,193 chapter files, and its Psalm titles are part of the translation. The wording matches the 1867 Beirut printing (John 3:16-19 compared with the scan at https://archive.org/details/ARBVDV_DBS_HS). Every person whose words are in the text lived until 1925 or earlier, and the originals are ancient, so the text is in the public domain in every country.\n\nThe vowel marks: eBible's text is fully vowelled, while the 1867 scan compared has none, and nobody is named for the vowels; under the rules modern spelling means a later edition whose editors must be found. Admitted as an exception on the maintainer's decision alone (2026-10-21): the vowel marks change no word.\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=arb-vd), the edition's copyright page (https://ebible.org/arb-vd/copyright.htm), https://en.wikipedia.org/wiki/Eli_Smith; https://ebible.org/arb-vd/MAT05.htm.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "arb-vd_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-arb-vd-e0ec033a, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/nay_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:218223f0950f667f3ad4b410e86ce045fef4b8820deb45f119891791b2bdce1b",
+  "extract": {
+    "exclude": [
+      "nay_about.htm",
+      "nay_vpl.sql",
+      "nay_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Tungarar Jehobald YARILDEWALLIN, eBible.org, https://ebible.org/nay/",
+      "text": "Tungarar Jehobald YARILDEWALLIN, eBible.org, https://ebible.org/nay/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/nay/copyright.htm):\n> Extracts from the Holy Bible in the Narriyeri language of Australia\n> Public Domain\n> Language: Ngarrindjeri (Narrinyeri)\n> 2019-05-24\n\nWhy this is public domain:\nTranslator: George Taplin, 1831-1879, credited on the title page. Text: extracts from Genesis, Exodus, Matthew and John, published in 1864 in South Australia (reprinted 1926). US: published before 1931. Australia: life plus 70 years ended in 1949.\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=nay), the edition's copyright page (https://ebible.org/nay/copyright.htm), https://en.wikipedia.org/wiki/George_Taplin; https://en.wikipedia.org/wiki/List_of_countries%27_copyright_lengths; https://copyright.cornell.edu/publicdomain.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "nay_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-nay-83a24e61, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

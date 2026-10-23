@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/latVUC_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:cb347927b790d302af06a6826d0a8bbbf50702f0dfda11cd39df2d7f77e58ad9",
+  "extract": {
+    "exclude": [
+      "latVUC_about.htm",
+      "latVUC_vpl.sql",
+      "latVUC_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Bibbia Vulgata Clementina na 1598, eBible.org, https://ebible.org/latVUC/",
+      "text": "Bibbia Vulgata Clementina na 1598, eBible.org, https://ebible.org/latVUC/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/latVUC/copyright.htm):\n> Clementine Vulgate of 1598 with Glossa Ordinaria Migne edition 1880 in Latin\n> Public Domain\n> Language: Latine (Latin)\n> Translation by: Jerome\n> 2014-08-23\n\nWhy this is public domain:\nText: the Clementine Vulgate (Rome, 1598) with the Glossa Ordinaria from Migne's Patrologia Latina, volumes 113-114 (Paris, about 1880). People: Jerome (died 420); Robert Bellarmine (1542-1621) and the other Clementine editors of the 1590s; the school of Anselm of Laon (died 1117) for the Glossa; Jacques Paul Migne (1800-1875). US: published before 1931. Origin: Rome (Vatican City, life plus 70 years) and France (life plus 70 years); every named person died before 1876. The digital transcription is unnamed; copying a text adds no author.\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=latVUC), the edition's copyright page (https://ebible.org/latVUC/copyright.htm), https://en.wikipedia.org/wiki/Sixto-Clementine_Vulgate; https://en.wikipedia.org/wiki/Glossa_Ordinaria; English Wikipedia pages of Jerome, Bellarmine and Migne; https://en.wikipedia.org/wiki/List_of_countries%27_copyright_lengths; https://copyright.cornell.edu/publicdomain.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "latVUC_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-latvuc-0f207d4f, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

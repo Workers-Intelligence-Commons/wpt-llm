@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/awk_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:fe90042f4731d7fdf7ac4ed7cfd4574b64d9635690f8fea4dd71aa40ecff27a7",
+  "extract": {
+    "exclude": [
+      "awk_about.htm",
+      "awk_vpl.sql",
+      "awk_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "EUANGELION UNNI TA JESU-ÚBA CHRIST-KO-BA UPATOARA LUKA-UMBA, eBible.org, https://ebible.org/awk/",
+      "text": "EUANGELION UNNI TA JESU-ÚBA CHRIST-KO-BA UPATOARA LUKA-UMBA, eBible.org, https://ebible.org/awk/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/awk/copyright.htm):\n> The Gospel According to Luke in the Awabakal language of Australia\n> Public Domain\n> Language: Awabakalkoba (Awabakal)\n> 2020-03-03\n\nWhy this is public domain:\nTranslator: Lancelot Edward Threlkeld, 1788-1859; editor: John Fraser, 1834-1904. Text: part 2 of \"An Australian Language as Spoken by the Awabakal\", Sydney, Government Printer Charles Potter, 1892. US: published before 1931. Australia: life plus 70 years; Fraser died in 1904, so the term ended in 1974.\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=awk), the edition's copyright page (https://ebible.org/awk/copyright.htm), https://en.wikipedia.org/wiki/Lancelot_Threlkeld; https://en.wikipedia.org/wiki/John_Fraser_(ethnologist); https://en.wikipedia.org/wiki/List_of_countries%27_copyright_lengths; https://copyright.cornell.edu/publicdomain.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "awk_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-awk-53126d16, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

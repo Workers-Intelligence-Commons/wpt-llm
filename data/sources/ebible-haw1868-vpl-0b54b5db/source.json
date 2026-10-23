@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/haw1868_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:eccca6403b8e659bf0e856e48da91a6944d4c4b7e3b96a576032cc5258a94858",
+  "extract": {
+    "exclude": [
+      "haw1868_about.htm",
+      "haw1868_vpl.sql",
+      "haw1868_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Baibala Hemolele, eBible.org, https://ebible.org/haw1868/",
+      "text": "Baibala Hemolele, eBible.org, https://ebible.org/haw1868/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/haw1868/copyright.htm):\n> The Holy Bible in the Hawaiian language of the United States, 1868 revision\n> Public Domain\n> Language: 'Olelo Hawai'i (Hawaiian)\n> Translation by: na na misionari i pai\n> 2015-11-10\n\nWhy this is public domain:\nText: the 1868 revision of the Hawaiian Bible; the 1908 American Bible Society reprint's title page says it was \"newly revised\" and names no reviser. Translators of the earlier text: Hiram Bingham I 1789-1869, Asa Thurston 1787-1868, Lorrin Andrews 1795-1868, Sheldon Dibble 1809-1845, Artemas Bishop 1795-1872, Ephraim Weston Clark 1799-1878. eBible's text has no ʻokina or kahakō, so it is not the 2018 re-edition. US origin: published in 1868, before 1931. The maintainer's rule (2026-10-16): a text revised by an unnamed committee or reviser and published before 1926 is an anonymous work, in the public domain everywhere.\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=haw1868), the edition's copyright page (https://ebible.org/haw1868/copyright.htm), https://en.wikipedia.org/wiki/Bible_translations_into_the_languages_of_Hawaii; https://archive.org/details/kabaibalahemolel00bibl; Wikidata Q497096, Q18921120, Q14981692, Q7493478, Q61722005, Q19359553; https://copyright.cornell.edu/publicdomain.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "haw1868_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-haw1868-823891db, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

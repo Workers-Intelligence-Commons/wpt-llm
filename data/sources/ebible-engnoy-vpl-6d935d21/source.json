@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/engnoy_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:06f13d42d9e9244f58b1980e11d1096b8ac9f680c755708099dedd9ede368cff",
+  "extract": {
+    "exclude": [
+      "engnoy_about.htm",
+      "engnoy_vpl.sql",
+      "engnoy_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "George Noyes Bible, eBible.org, https://ebible.org/engnoy/",
+      "text": "George Noyes Bible, eBible.org, https://ebible.org/engnoy/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/engnoy/copyright.htm):\n> The Holy Bible, translated into English by George Noyes (1869)\n> Public Domain\n> Language: English\n> Dialect: archaic British\n> Translation by: George Noyes\n> 2019-10-24\n\nWhy this is public domain:\nTranslator: George Rapall Noyes, 1798-1868, United States. Text: Job (1827), Psalms (1827), the Prophets (1843), Proverbs, Ecclesiastes and Song of Songs (1846), and the New Testament (Boston, American Unitarian Association, 1869). No other editor is named. US origin: published before 1931.\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=engnoy), the edition's copyright page (https://ebible.org/engnoy/copyright.htm), https://en.wikipedia.org/wiki/George_R._Noyes; https://archive.org/details/newtestament00noye; https://copyright.cornell.edu/publicdomain.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "engnoy_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-engnoy-46637fd7, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

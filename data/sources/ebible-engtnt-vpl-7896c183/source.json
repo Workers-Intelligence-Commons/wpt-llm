@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/engtnt_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:2134ae07bea35c3088b8e01112006f72d8db2fca86eb6dc2049925b6b4566bcf",
+  "extract": {
+    "exclude": [
+      "engtnt_about.htm",
+      "engtnt_vpl.sql",
+      "engtnt_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Tyndale New Testament, eBible.org, https://ebible.org/engtnt/",
+      "text": "Tyndale New Testament, eBible.org, https://ebible.org/engtnt/\n\nThe edition's own statement of rights (from eBible.org's page for this\ntranslation):\n> \"Tyndale New Testament\nThe Tyndale New Testament (1534)\nPublic Domain\nLanguage: English\nDialect: archaic British\nTranslation by: William Tyndale\"\n\nWhy this is public domain:\nFirst published in 1534. William Tyndale died in 1536 (Wikidata), so the work is public domain in the United Kingdom (its country of origin) and in the United States.\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n\nSources of these facts: eBible.org's details page\n(https://ebible.org/details.php?id=engtnt) and the edition's own files.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "engtnt_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-engtnt-87334236, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

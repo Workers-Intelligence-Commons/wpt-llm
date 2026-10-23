@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/grcbrent_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:6edb1c5a8e9509bfc010a7194594c7c984ffd15ad4f76e43a1f05c3c146e9421",
+  "extract": {
+    "exclude": [
+      "grcbrent_about.htm",
+      "grcbrent_vpl.sql",
+      "grcbrent_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "μετάφραση των εβδομήκοντα, eBible.org, https://ebible.org/grcbrent/",
+      "text": "μετάφραση των εβδομήκοντα, eBible.org, https://ebible.org/grcbrent/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/grcbrent/copyright.htm):\n> The Greek Septuagint with Apocrypha, compiled by Sir Lancelot C. L. Brenton\n> Public Domain\n> Language: Ἑλληνική (Greek, Ancient)\n> Dialect: Koine\n> 2026-04-08\n\nWhy this is public domain:\nCompiler: Sir Lancelot Charles Lee Brenton, 1807-1862, United Kingdom; the Greek text itself is ancient. Text: the Greek of his Septuagint with Apocrypha, London, Samuel Bagster and Sons. US: published before 1931. United Kingdom: life plus 70 years ended in 1932.\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=grcbrent), the edition's copyright page (https://ebible.org/grcbrent/copyright.htm), https://en.wikipedia.org/wiki/Lancelot_Charles_Lee_Brenton; https://archive.org/details/septuagintversio00bren; https://archive.org/details/septuagintversio1900bren; https://www.legislation.gov.uk/ukpga/1988/48/section/12; https://copyright.cornell.edu/publicdomain.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "grcbrent_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-grcbrent-202452f7, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

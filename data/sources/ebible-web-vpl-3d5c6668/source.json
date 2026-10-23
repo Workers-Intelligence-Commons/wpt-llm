@@ -1,0 +1,52 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/engwebp_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:e9ed8c6daf48e466619fa2eb9c2030c000afe24344b4390b52255fec424bd367",
+  "extract": {
+    "exclude": [
+      "engwebp_about.htm",
+      "engwebp_vpl.sql",
+      "engwebp_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "World English Bible (WEB), 2020 stable text edition, eBible.org, https://ebible.org/engwebp/. \"World English Bible\" is a trademark of eBible.org.",
+      "note": "eBible.org asks that a changed text no longer be called the World English Bible: a patch that changes its words must also take that name out of this attribution.",
+      "text": "Public domain.\n\nThe World English Bible's copyright page (https://ebible.org/engwebp/copyright.htm) says:\n\"The World English Bible is in the Public Domain. That means that it is not copyrighted.\"\nIts only condition concerns the name: if the text is changed, the result is not to be called the\nWorld English Bible. \"World English Bible\" is a trademark of eBible.org.\n\neBible.org publishes it from the United States. The page states no restriction on AI or machine\nlearning use.\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "engwebp_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-web-07317969, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

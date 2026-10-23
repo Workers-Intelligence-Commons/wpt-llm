@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/engwebster_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:bb8957b9f405d44decda6c5aed2d6ce0f7eba18aad82ad5b944533b1fd290f09",
+  "extract": {
+    "exclude": [
+      "engwebster_about.htm",
+      "engwebster_vpl.sql",
+      "engwebster_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Noah Webster Bible, eBible.org, https://ebible.org/engwebster/",
+      "text": "Noah Webster Bible, eBible.org, https://ebible.org/engwebster/\n\nThe edition's own statement of rights (from eBible.org's page for this\ntranslation):\n> \"Noah Webster Bible\nThe Holy Bible, Containing the Old and New Testaments, in the Common Version, with Amendments of the language by Noah Webster, LL.D.\nPublic Domain\nLanguage: English\nDialect: archaic American\nTranslation by: Noah Webster\"\n\nWhy this is public domain:\nFirst published in 1833 in the United States. Noah Webster died in 1843 (Wikidata), so the work is public domain in the United States (its country of origin, and published long before 1931).\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n\nSources of these facts: eBible.org's details page\n(https://ebible.org/details.php?id=engwebster) and the edition's own files.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "engwebster_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-engwebster-f5d02e57, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

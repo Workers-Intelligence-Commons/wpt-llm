@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/bla_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:21793e4465413155d6da17d1bdc765d4bf5ed9631f9d3a58fe24a543a57a3aa3",
+  "extract": {
+    "exclude": [
+      "bla_about.htm",
+      "bla_vpl.sql",
+      "bla_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "ŎKHS' I TSĬN IK SĬN NI ST. MATTHEW OT SĬN AI PI., eBible.org, https://ebible.org/bla/",
+      "text": "ŎKHS' I TSĬN IK SĬN NI ST. MATTHEW OT SĬN AI PI., eBible.org, https://ebible.org/bla/\n\nThe edition's own statement of rights (from eBible.org's page for this\ntranslation):\n> \"This C. M. S. publication by the British and Foreign Bible Society in 1890 is in the\nPUBLIC DOMAIN (not copyrighted). Conversion to USFM was courtesy of the Digital Bible Society.\"\n\nWhy this is public domain:\nThe only person whose words are in this text is the translator, Rev. John William Tims\n(born 24 December 1857 in Oxford, England; died 11 September 1945 in Calgary, Alberta, Canada).\nThe Gospel of Matthew in Roman script was first published in 1890 by the British and Foreign\nBible Society, in the United Kingdom (country of origin). In the United States, a work published\nbefore 1931 is in the public domain, so this text is public domain in the US. In the United\nKingdom, the term is the author's life plus 70 years; Tims died in 1945, so the term ended on\n31 December 2015 and the text is public domain in the UK.\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n\nSources of these facts: eBible.org's details page\n(https://ebible.org/details.php?id=bla), the edition's copyright page\n(https://ebible.org/bla/copyright.htm), and the Wikipedia article on the translator\n(https://en.wikipedia.org/wiki/John_Tims) for his birth and death dates and the 1890 publication.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "bla_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-bla-a95122e2, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

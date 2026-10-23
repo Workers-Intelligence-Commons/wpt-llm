@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/grcmt_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:1a248bcacd8717ad46cd6996e5f7bece35dfc5dc867ecc29f217fc6be9544b29",
+  "extract": {
+    "exclude": [
+      "grcmt_about.htm",
+      "grcmt_vpl.sql",
+      "grcmt_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Η Καινή Διαθήκη, eBible.org, https://ebible.org/grcmt/",
+      "text": "Η Καινή Διαθήκη, eBible.org, https://ebible.org/grcmt/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/grcmt/copyright.htm):\n> The Greek New Testament according to the Byzantine Text form. Robinson-Pierpont 2018 edition\n> Public Domain\n> Language: Ελληνικά (Greek, Ancient)\n> Dialect: Koine\n> Translation by: Maurice A. Robinson and William G. Pierpont\n> This public domain Bible translation is brought to you courtesy of eBible.org.\n> If you would like to make a donation to help keep free Bible access like this going, please visit https://eBible.org/give.php.\n> 2024-01-09\n\nWhy this is public domain:\nText: the Robinson-Pierpont Byzantine Textform Greek New Testament, 2018 edition, United States. The Robinson-Pierpont Byzantine Textform's notice reads: \"This compilation is Copyright (C) 2018 by Maurice A. Robinson. Anyone is permitted to copy ... All rights to this text are released to everyone\" (https://byzantinetext.com/wp-content/uploads/2021/03/robinson-pierpont-2018-gnt-edition.pdf; the 2005 edition's notice, https://byzantinetext.com/?p=111, is the same in substance). The maintainer's decision (2026-10-16): a copyright line beside a full release of all rights counts as a public-domain dedication. Editors: Maurice A. Robinson (living, United States) and William G. Pierpont.\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=grcmt), the edition's copyright page (https://ebible.org/grcmt/copyright.htm), https://byzantinetext.com/wp-content/uploads/2021/03/robinson-pierpont-2018-gnt-edition.pdf; https://byzantinetext.com/?p=111.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "grcmt_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-grcmt-440febfa, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

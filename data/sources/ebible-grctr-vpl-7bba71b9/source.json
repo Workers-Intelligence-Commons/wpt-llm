@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/grctr_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:a1b104568c19360c6f6647850ca776eedac998f09712dfc292075b53e88fa8bb",
+  "extract": {
+    "exclude": [
+      "grctr_about.htm",
+      "grctr_vpl.sql",
+      "grctr_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Η Καινή Διαθήκη, eBible.org, https://ebible.org/grctr/",
+      "text": "Η Καινή Διαθήκη, eBible.org, https://ebible.org/grctr/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/grctr/copyright.htm):\n> The Greek Textus Receptus New Testament with manuscript annotations by Adam Boyd\n> Public Domain\n> Language: Ελληνικά (Greek, Ancient)\n> Manuscript comparison footnotes dedicated to the Public Domain by Adam Boyd. The Greek Textus Receptus New Testament is firmly in the Public Domain due to its age.\n> 2026-10-13\n\nWhat was found:\nText: a Textus Receptus compiled by Robert Adam Boyd (living, 2022) from the editions of Stephanus (1550), the Elzevirs (1624) and Scrivener (1881), with his footnotes.\n\nWhy it is admitted: Admitted as an exception on the maintainer's decision alone (2026-10-21): the only public-domain statement for Robert Adam Boyd's changes is eBible.org's label, and eBible.org is not Boyd's project; the same exception covers his three editions on eBible.org (engasvbt, englxxup, grctr).\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=grctr), the edition's copyright page (https://ebible.org/grctr/copyright.htm), https://ebible.org/details.php?id=grctr.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "grctr_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-grctr-71f7c29c, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

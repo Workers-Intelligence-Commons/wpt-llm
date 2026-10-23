@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/bea_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:42b16513fdbd41cd5650459c5d4e3fc2c57d30aac61f2ecb5e124df8cb42c3eb",
+  "extract": {
+    "exclude": [
+      "bea_about.htm",
+      "bea_vpl.sql",
+      "bea_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "OOTECH OOCHU TAKEHNIYA TINKLES ST. MARK, eBible.org, https://ebible.org/bea/",
+      "text": "OOTECH OOCHU TAKEHNIYA TINKLES ST. MARK, eBible.org, https://ebible.org/bea/\n\nThe edition's own statement of rights (from eBible.org's page for this translation):\n> \"Public Domain\nLanguage: Dane Zaa (Beaver)\nTranslation by: Rev. A. C. Garrioch\nOriginally published in 1886 by the British and Foriegn Bible Society. This book is now in the PUBLIC DOMAIN.\"\n(from eBible.org's page for this translation, https://ebible.org/bea/copyright.htm)\n\nWhy this is public domain:\nTranslator: Rev. Alfred Campbell Garrioch, 1848-1934 (died 1934, Canada; the Church Missionary Society Anglican missionary who was born in Manitoba and retired to Portage la Prairie). First publication: 1886 (eBible says British and Foreign Bible Society; the Canadiana catalogue record at https://www.canadiana.ca/view/oocihm.14252 lists an SPCK London edition in 1886). US: published in 1886, before 1931, so public domain in the United States. Origin country: Canada (translator's country) and the United Kingdom (place of publication). Canada's life plus 50 years ended in 1985 for a 1934 death; the United Kingdom's life plus 70 years ended in 2005. The translator died in 1934, so the text is public domain in every country with a term of life + 90 years or less, whatever the exact rule of Canada or the United Kingdom. Nobody besides Garrioch is named for this text.\n\nSources of these facts:\neBible.org copyright page (https://ebible.org/bea/copyright.htm); Garrioch's life dates and publication history from bible.com (https://www.bible.com/versions/2327-be86sy-makr and https://www.bible.com/versions/1664) and the Canadiana record (https://www.canadiana.ca/view/oocihm.14252).\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "bea_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-bea-bd334ab0, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

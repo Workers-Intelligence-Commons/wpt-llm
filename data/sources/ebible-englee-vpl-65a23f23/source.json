@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/englee_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:5d65ef511048829ec934b7075ebf7045f96bc64b099d2bec50c15cba1faac15e",
+  "extract": {
+    "exclude": [
+      "englee_about.htm",
+      "englee_vpl.sql",
+      "englee_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "Isaac Leeser Tanakh, eBible.org, https://ebible.org/englee/",
+      "text": "Isaac Leeser Tanakh, eBible.org, https://ebible.org/englee/\n\nThe edition's own statement of rights (from eBible.org's page for this\ntranslation):\n> \"Isaac Leeser Tanakh\nThe Isaac Leeser Tanakh (Jewish Bible)\nPublic Domain\nLanguage: English\nDialect: archaic British\nTranslation by: Isaac Leeser\"\n\nWhy this is public domain:\nFirst published in 1853-1854 (revised edition 1894) in the United States. Isaac Leeser died in 1868 (Wikidata), so the work is public domain in the United States (its country of origin) and in the United Kingdom.\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n\nSources of these facts: eBible.org's details page\n(https://ebible.org/details.php?id=englee) and the edition's own files.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "englee_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-englee-58e5fa53, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}

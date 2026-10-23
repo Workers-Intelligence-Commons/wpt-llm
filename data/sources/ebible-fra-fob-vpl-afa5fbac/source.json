@@ -1,0 +1,51 @@
+{
+  "schema": 6,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/fra_fob_vpl.zip",
+  "revision": "2026-10-23",
+  "checksum": "sha256:b1beb236ee002735984862655f84cb559b6ddf0793e37dca2c8a6e5227ae9fe5",
+  "extract": {
+    "exclude": [
+      "fra_fob_about.htm",
+      "fra_fob_vpl.sql",
+      "fra_fob_vpl.xml",
+      "haiola.css",
+      "signature.txt.asc"
+    ],
+    "note": "only the verse-per-line text is kept: the SQL and XML files repeat it, and the rest is eBible.org's own pages and signature, for which eBible.org states no license"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "La Sainte Bible, eBible.org, https://ebible.org/fra_fob/",
+      "text": "La Sainte Bible, eBible.org, https://ebible.org/fra_fob/\n\nThe edition's own statement of rights (from eBible.org's page for this translation):\n> \"Public Domain\nLanguage: français (French)\nTranslation by: Ostervald\"\n(from eBible.org's page for this translation, https://ebible.org/fra_fob/copyright.htm)\n\nWhy this is public domain:\nTranslator: Jean-Frédéric Ostervald, 1663-1747 (died 14 April 1747 in Neuchâtel, Switzerland). The text is his revision of the Geneva pastors' Bible, first published in 1744 (per French Wikipedia, https://fr.wikipedia.org/wiki/Jean-Fr%C3%A9d%C3%A9ric_Ostervald, and the eBible module name fraFOB1744eb). US: published in 1744, before 1931, so public domain in the United States. Origin country: Switzerland (Neuchâtel). Life plus 70 years ended in 1817, so it is public domain there under any term from 50 to 70 years. The Geneva revisers died long before 1747.\n\nSources of these facts:\neBible.org copyright page (https://ebible.org/fra_fob/copyright.htm) and details page (https://ebible.org/details.php?id=fra_fob); life dates and the 1744 publication from French Wikipedia (https://fr.wikipedia.org/wiki/Jean-Fr%C3%A9d%C3%A9ric_Ostervald).\n\nThe verse-per-line archive holds the Bible text in one file, one verse per line, each line starting with its reference (book, chapter:verse); its SQL and XML copies of the same text, eBible.org's description page, style sheet and signature are left out of the source.\n"
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "fra_fob_vpl.txt"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "verse-numbers"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  },
+  "note": "The verse-numbered twin of ebible-fra-fob-2cde3b46, for the parallel verses measure only (#35): its tag is verse-numbers alone, which no mixture selects, so it never enters training. eBible.org rebuilds this zip often; the checksum covers the files inside."
+}
