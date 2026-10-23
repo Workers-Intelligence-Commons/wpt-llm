@@ -98,6 +98,28 @@ A fixed share of every source's documents (`held_out`), chosen by a hash of
 the document id, never enters training; it goes to separate held-out shards
 used to measure the model.
 
+A source may hold out documents together, whatever source they belong to:
+its optional `held_out_by` field gives a pattern (a Python regular
+expression) searched in each document's path, and where it is found, the
+hash reads the pattern's groups joined by one space (its whole match when
+it has no group) instead of the document id. Documents of any source with
+the same groups then share their fate. A document whose path the pattern
+is not found in keeps its id's fate.
+
+The held-out chapters of eBible's Bibles are chosen by book and chapter,
+so that the same chapter is held out in every translation at once, since
+another translation of a held-out verse would otherwise leak it
+(maintainer's decision, 2026-10-23). The read-aloud sources do it with
+`held_out_by`: the pattern `_([A-Z0-9]{3})_0*([1-9][0-9]*)_read\.txt$`
+on their chapter files (`<code>_<NNN>_<BOOK>_<CC>_read.txt`) gives the
+book and chapter, such as `GEN 1`, as the group. The `bible_verses`
+measure reads the same field of the read-aloud twin to know which
+chapters are held out, so the rule has one owner
+([evaluation.md](evaluation.md), "Text measures"). A document's group is part of the dataset id's fingerprint, so
+a dataset holding those sources gets a new id when it is built again, and
+the document list records the split the groups give; a dataset without
+such sources keeps its id.
+
 Every dataset build stores, beside the dataset's record, the list of all
 its documents: each one's id, the sha256 of its Markdown (the same sha256
 the dataset id's fingerprint reads) and its tag, `training` or `held-out`

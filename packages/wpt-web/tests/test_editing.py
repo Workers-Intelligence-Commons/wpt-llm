@@ -289,6 +289,45 @@ def test_tasks_recipes_dockerfiles_and_signers_go_through_the_checks_rules(web):
     assert status == 422 and repo.check() == []
 
 
+def test_the_rating_page_lists_a_runs_attempts_and_records_a_persons_verdict(web):
+    # the attempts come from a wpt-eval run's record folder in the store,
+    # with the weights it measured; the verdict becomes a line of a rating
+    # file of an empty source (docs/evaluation.md, "People's ratings"); an
+    # attempt Docker dropped is listed as its line says, and a last line a
+    # stopped run cut short is left out instead of failing the page
+    request, repo, store = web
+    folder, weights = "20261023T090000Z-wpt-eval-aaaaaaaa-0123abcd", {"model.safetensors": "a" * 64}
+    tried = {"task": "mine-tasks-0123abcd/tasks/hello", "kind": "tasks", "index": 1, "plain": False, "dropped": False,
+             "score": 1.0, "changes": "--- /dev/null\n+++ b/out.txt\n@@ -0,0 +1 @@\n+hello\n",
+             "conversation": {"messages": [text("user", "Say hello."), text("assistant", "Hello.")],
+                              "metadata": {"tools": {}, "looking": [], "answered_by": [], "answer": None}}}
+    dropped = {"task": tried["task"], "kind": "tasks", "index": 2, "plain": False, "dropped": True,
+               "error": "docker create: no space left on device",
+               "conversation": {"messages": [text("user", "Say hello.")], "metadata": {}}}
+    store.write_record(folder, "ids.json", json.dumps({"inputs": {"weights": weights}, "outputs": {}}).encode())
+    store.append_record(folder, "attempts.jsonl", (json.dumps(tried) + "\n" + json.dumps(dropped) + "\n").encode())
+    store.append_record(folder, "attempts.jsonl", json.dumps(tried).encode()[:40])
+    store.write_record("20261023T080000Z-wpt-train-tiny-0123abcd", "ids.json", b"{}")
+    assert request("GET", "/api/runs") == (200, [folder])
+    assert request("GET", f"/api/runs/{folder}/attempts") == (200, {"weights": weights, "attempts": [tried, dropped]})
+    assert request("GET", "/api/runs/20261023T080000Z-wpt-train-tiny-0123abcd/attempts")[0] == 404
+
+    sid = new_source(request, {"notes.txt": {"format": "text", "text": TEXT}})
+    status, listing = request("GET", f"/api/sources/{sid}/ratings/{path('ratings/terse.jsonl')}")
+    assert status == 200 and listing["ratings"] == []
+    rating = {"schema": 1, "task": tried["task"], "weights": weights, "record": folder, "attempt": 1, "plain": False,
+              "verdict": "pass", "by": "A. Person", "date": "2026-10-23"}
+    status, saved = request("PUT", f"/api/sources/{sid}/ratings/{path('ratings/terse.jsonl')}/new",
+                            {"rating": rating, "patch": "rated", "version": listing["version"]})
+    assert status == 200, saved
+    assert request("GET", f"/api/sources/{sid}/ratings/{path('ratings/terse.jsonl')}")[1] == {
+        "version": saved["version"], "ratings": [rating]}
+    status, refused = request("PUT", f"/api/sources/{sid}/ratings/{path('ratings/terse.jsonl')}/1",
+                              {"rating": {**rating, "verdict": "maybe"}, "patch": "wrong", "version": saved["version"]})
+    assert status == 422 and "at verdict" in refused["problems"][0]
+    assert repo.check() == []
+
+
 def test_every_route_is_in_the_openapi_description_and_bodies_follow_it(web):
     request, repo, _ = web
     status, description = request("GET", "/api/openapi.json")

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Workers-Intelligence-Commons/wpt-llm/schemas/rating.schema.json",
+  "title": "WPT rating (one line of a file in the rating format: a person's pass or fail on one attempt of a wpt-eval run; docs/evaluation.md)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "task", "weights", "record", "attempt", "plain", "verdict", "by", "date"],
+  "properties": {
+    "schema": {"const": 1, "description": "shape version of the rating"},
+    "task": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}(/[^/]+)+$", "description": "the id of the task the attempt was made on: <source id>/<task folder>, as attempts.jsonl names it"},
+    "weights": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "description": "the sha256 of each weight file of the model that made the attempt, as the run record's ids.json names them (inputs.weights)"},
+    "record": {"type": "string", "pattern": "^[A-Za-z0-9_-][A-Za-z0-9._-]*$", "description": "the wpt-eval run record folder whose attempts.jsonl holds the attempt (records/<folder>/ in the store)"},
+    "attempt": {"type": "integer", "minimum": 0, "description": "the attempt's index, as attempts.jsonl holds it"},
+    "plain": {"type": "boolean", "description": "whether the attempt was offered every tool under its real name, as attempts.jsonl holds it: with the index, it tells apart the attempts of one task in one record"},
+    "verdict": {"enum": ["pass", "fail"], "description": "the person's verdict: is this what a co-worker would have delivered"},
+    "by": {"type": "string", "minLength": 1, "description": "who rated"},
+    "date": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$", "description": "when, as YYYY-MM-DD"}
+  }
+}

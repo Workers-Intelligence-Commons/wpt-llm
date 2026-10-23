@@ -115,6 +115,12 @@ recipe then needs the old commit of this repository.
 - `submodules` (git only): the address of each submodule the source reads,
   by its path.
 - `cuts`: erasure cuts; see [erasure.md](erasure.md).
+- `held_out_by`: a `pattern` (a Python regular expression) searched in each
+  document's path; where it is found, the held-out hash reads its groups
+  instead of the document id, so documents of any source with the same
+  groups are held out together; see
+  [data-selection.md](data-selection.md), "Held-out text and
+  contamination".
 - `decision`: the human decision on the source (required), one of three
   states (maintainer's decision, 2026-10-22): `under-review` (every new
   source, until a maintainer decides), `admitted` or `refused`, by whom
@@ -236,6 +242,7 @@ tree, as its `formats` entry says
 | `records` | a dataset file holding many documents (JSON Lines, optionally `.gz` or `.zst`, or Parquet): each record whose license value an entry lists, and that the `keep` rules keep, is one document, `<file>#<record id>`; its text field is read as `text` above, or kept as it is with `"as": "markdown"` |
 | `chat` | conversations for post-training, one JSON object per line ([chat-format.md](chat-format.md)); each line is checked, and the file gives no pre-training document: only the post-training step named by its tags reads it |
 | `task` | the files of task folders for agentic post-training (`task.json`, `files/`, `check`; [post-training.md](post-training.md)); each folder is checked, and its files give no pre-training document: only a post-training step that asks for a tag of its `task.json` reads it: by default each step asks for its own name, and `token-efficiency` asks for `grpo`. A task built by a program holds pointers into the documents of other sources, never their text, which the readers fill in from the store ([post-training.md](post-training.md), "Pointer tasks") |
+| `rating` | people's pass or fail on the attempts of a `wpt-eval` run, one rating per line ([evaluation.md](evaluation.md), "People's ratings"); each line is checked, and the file gives no pre-training document: a measure only, which no training step reads |
 
 A file whose Markdown is empty is no document: an EPUB file that holds only
 notes gives none, since its notes moved into the texts that refer to them.
@@ -302,7 +309,7 @@ The store also holds the record of every run of `wpt-dataset build`,
 
 `packages/wpt-dataset/src/wpt_dataset/repo.py` is the only code that reads
 or writes the repository's data: the
-sources and their patches, the chat files and task files inside them, the
+sources and their patches, the chat, task and rating files inside them, the
 model, tokenizer and mixture recipes, the image Dockerfiles and their
 pools of tools (`tools.json`), and the two
 signer lists (`allowed-signers`, `allowed-gpg-keys.asc`). Every command
@@ -366,9 +373,10 @@ and versions, never a path under `data/`.
   the key the saved document puts before it, and a new key or item is
   written with the indent and spacing of the last member of its object or
   array (maintainer's decision, 2026-10-18).
-- Conversations and tasks are written only in an `empty` source, text
-  written for WPT ([chat-format.md](chat-format.md), "Writing a chat file";
-  [post-training.md](post-training.md), "Tasks").
+- Conversations, tasks and ratings are written only in an `empty` source,
+  text written for WPT ([chat-format.md](chat-format.md), "Writing a chat
+  file"; [post-training.md](post-training.md), "Tasks";
+  [evaluation.md](evaluation.md), "People's ratings").
 - A source's text changes only through a patch: the layer unpacks the
   source into a temporary folder, puts the change in, and records the
   difference as the next patch, kept only when the source then gives
@@ -424,6 +432,7 @@ request body against the same description), and `wpt-dataset` commands.
 | a source's files | `files ID`, `read ID PATH`, `write ID PATH FILE`, `remove ID PATH`, `tags ID PATH [TAG ...]` | `/api/sources/{id}/files[/{path}]`, `/api/sources/{id}/tags/{path}` |
 | conversations | `conversations ID PATH`, `conversation ID PATH LINE`, `save-conversation ID PATH LINE` (or `new`) | `/api/sources/{id}/conversations/{path}[/{line}]`, `POST /api/drafts`; page "Conversations" |
 | tasks | `tasks ID`, `task ID FOLDER`, `save-task ID FOLDER` | `/api/sources/{id}/tasks[/{folder}]`; page "Tasks" |
+| people's ratings of attempts ([evaluation.md](evaluation.md), "People's ratings") | `ratings ID PATH`, `save-rating ID PATH LINE` (or `new`) | `/api/sources/{id}/ratings/{path}[/{line}]`, and the attempts of `wpt-eval` runs from the store, `/api/runs[/{folder}/attempts]`; page "Ratings" |
 | git's status of `data/` | `status` | `/api/status`, on every page |
 
 The HTTP API answers 404 when the thing does not exist, 409 for a stale
@@ -454,9 +463,9 @@ tree. Nothing is committed by `wpt-web`, so every change shows in
 | `wpt-web` | a local web interface over the service layer: one small server on 127.0.0.1, one file per page (Python routes, React page), an editor for every kind of data, a conversation editor that asks a WPT model folder for drafts, and its OpenAPI description; its interface is built with Bun when it starts; command `wpt-web` |
 | `wpt-model` | the WPT network ([model.md](model.md)) and its drafter, its safetensors model folders, and their license documents (`LICENSE`, `NOTICE`, model card) |
 | `wpt-training` | the training loop (global batch, evaluation, checkpoints, resuming), with two plug points: strategies (how the hardware is used) and methods (how the model learns) |
-| `wpt-inference` | sampling through the model's generation cache: several rows from one prompt, speculative decoding with a drafter and its scheduler, the scheduler's pass times (measured, recorded, replayed); training a model's drafter (`drafting.py`), which `wpt-train` and `wpt-posttrain` run at the end of every run, so it uses `wpt-model` |
+| `wpt-inference` | sampling through the model's generation cache: several rows from one prompt, the model's next chat message (`next_message`, which `wpt-chat --chat` and the text measures of `wpt-eval` both write with), speculative decoding with a drafter and its scheduler, the scheduler's pass times (measured, recorded, replayed); training a model's drafter (`drafting.py`), which `wpt-train` and `wpt-posttrain` run at the end of every run, so it uses `wpt-model` |
 | `wpt-utils` | helpers several packages share, one submodule each: `wpt_utils.device` picks the best GPU, else the CPU; `wpt_utils.programs` starts the outside programs WPT runs (`program(name)`, with a clear error when one is missing) and reads the repository commit (`repository()`), without importing PyTorch; `wpt_utils.files.sha256_file` is the one way a file is hashed, by the store, the model folders and the run records alike |
-| `wpt-agent` | the agent harness of agentic post-training: the tools (the four built-in ones, `ask`, and those a task or its image's pool declares, answered by programs in the image) and each attempt's choice of them, one Docker container per attempt, the images of `data/images/` and their locks, the agent loop and the task's check; commands `wpt-agent lock-image` and `wpt-agent build-image` |
+| `wpt-agent` | the agent harness of agentic post-training: the tools (the four built-in ones, `ask`, and those a task or its image's pool declares, answered by programs in the image) and each attempt's choice of them, one Docker container per attempt, the images of `data/images/` and their locks, the agent loop and the task's check, and the playing of a task's attempts (`wpt_agent.play`), which the `grpo` and `token-efficiency` steps and the agent measures of `wpt-eval` share, so `wpt-eval` does not depend on `wpt-posttrain`; commands `wpt-agent lock-image` and `wpt-agent build-image` |
 | `wpt-train`, `wpt-eval`, `wpt-posttrain`, `wpt-chat` | the applications |
 
 ## Checks

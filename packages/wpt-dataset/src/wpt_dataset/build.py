@@ -3,7 +3,11 @@
     documents      the Markdown of every file of every admitted source's final
                    tree (see markdown.py); exact duplicates removed (the first by
                    source id, then path, keeps it)
-    held-out       documents whose id hashes below the recipe's held_out share
+    held-out       documents whose id hashes below the recipe's held_out share;
+                   a document of a source with held_out_by hashes its held-out
+                   group instead, so documents of any source with the same
+                   group are held out together (eBible's chapters, by book
+                   and chapter: maintainer's decision, 2026-10-23)
     pools          each training document goes to the first pool, in mixture
                    order, whose expression matches its tags
     shares         a pool fills weight x total_tokens by whole passes over its
@@ -61,7 +65,7 @@ from wpt_tokenizer import __version__ as TOKENIZER_VERSION
 from . import manifest, markdown, pools
 from .errors import DatasetError, LockedDocumentsMissing, LockMismatch, PoolError, TokenizerVersionNeeded
 from .repo import Repo
-from .sources import VERSION, check_license_map, fingerprint, source_tree, tags_of, tree_key
+from .sources import VERSION, check_license_map, fingerprint, held_out_group, source_tree, tags_of, tree_key
 
 DEFAULT_MAX_EPOCHS = 4
 SHARD_TOKENS = 1 << 26  # about 64M tokens (256 MB of uint32) per shard
@@ -77,6 +81,12 @@ class Document:
     source: str
     sha256: str
     tags: frozenset[str]
+    group: str | None = None  # its held-out group (sources.held_out_group), hashed instead of its id
+
+    @property
+    def held_out_key(self) -> str:
+        """What the held-out hash reads: its group, or its id without one."""
+        return self.group or self.id
 
 
 def gather(repo: Repo, store, log=print, skipped=None, telemetry=None):
@@ -103,7 +113,8 @@ def gather(repo: Repo, store, log=print, skipped=None, telemetry=None):
                         continue
                     mine.add(sha256)
                     document_id = f"{source.id}/{converted.path}"
-                    found.append(Document(document_id, source.id, sha256, tags_of(source, converted.file)))
+                    found.append(Document(document_id, source.id, sha256, tags_of(source, converted.file),
+                                          held_out_group(source, converted.path)))
                     if converted.record:
                         credits.append(json.dumps({"document": document_id, "license": converted.record.license,
                                                    "credit": converted.record.credit}, ensure_ascii=False,
@@ -183,6 +194,7 @@ def streamed_documents(repo: Repo, telemetry=None, log=print):
                     continue
                 seen.add(sha256)
                 count += 1
+                # no held-out group: its only reader, tokenizer training, never splits off a held-out share
                 document = Document(f"{source.id}/{converted.path}", source.id, sha256, tags_of(source, converted.file))
                 yield document, converted.markdown
             # an event, not a span: the reader of this generator runs between its documents
@@ -256,7 +268,8 @@ def gather_streamed(repo: Repo, store, tokenizer, vocabulary: str, log=print, sk
                     continue
                 seen.add(entry["sha256"])
                 document_id = f"{source.id}/{entry['path']}"
-                documents.append(Document(document_id, source.id, entry["sha256"], tags_of(source, entry["file"])))
+                documents.append(Document(document_id, source.id, entry["sha256"], tags_of(source, entry["file"]),
+                                          held_out_group(source, entry["path"])))
                 tokens.add(document_id, summary["tokens"], entry)
                 if "record" in entry:
                     credits.append(json.dumps({"document": document_id, **entry["record"]}, ensure_ascii=False,
@@ -300,8 +313,10 @@ def _rank(*parts) -> bytes:
     return hashlib.sha256("|".join(map(str, parts)).encode()).digest()
 
 
-def is_held_out(document_id: str, share: float) -> bool:
-    return int.from_bytes(hashlib.sha256(document_id.encode()).digest()) < share * 2**256
+def is_held_out(key: str, share: float) -> bool:
+    """Whether a document (key: its id, or its held-out group, Document.held_out_key) or a task (key: its id)
+    is in the held-out share."""
+    return int.from_bytes(hashlib.sha256(key.encode()).digest()) < share * 2**256
 
 
 def write_document_list(store, dataset_id: str, documents, held_ids, telemetry) -> str:
@@ -480,7 +495,8 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
         log(f"skipped {failed['source']}: {failed['error']}")
     dataset_id = fingerprint({
         "kind": "dataset", "wpt_dataset": VERSION, "recipe": recipe, "mixture": mixture, "vocabulary": vocabulary,
-        "documents": [[d.id, d.sha256, sorted(d.tags)] for d in documents],
+        # a document's held-out group only when it has one, so earlier ids stay the same
+        "documents": [[d.id, d.sha256, sorted(d.tags), *([d.group] if d.group is not None else [])] for d in documents],
         "sources": sources_info,  # the record copies their licenses and attribution: a change rebuilds it
         **({"skipped": skipped} if skipped else {}),  # absent when none, so earlier ids stay the same
     })
@@ -489,7 +505,7 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
         log(f"dataset {dataset_id} is already built")
         return dataset_id
 
-    held_ids = {d.id for d in documents if is_held_out(d.id, recipe["held_out"])}
+    held_ids = {d.id for d in documents if is_held_out(d.held_out_key, recipe["held_out"])}
     held_out = [d for d in documents if d.id in held_ids]
     training = [d for d in documents if d.id not in held_ids]
     with tempfile.TemporaryDirectory(prefix="wpt-build-") as tmp:

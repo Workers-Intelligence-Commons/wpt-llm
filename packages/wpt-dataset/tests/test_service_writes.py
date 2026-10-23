@@ -352,3 +352,59 @@ def test_an_image_s_pool_of_tools_is_written_and_read_after_the_check(repo):
     with pytest.raises(InvalidFile, match="the tool 'bash' is declared twice, or takes the name of a tool every task"):
         repo.save("image-tools", "tiny", {"schema": 1, "tools": [{**fetch, "name": "bash"}]}, version)
     assert repo.image_tools("tiny") == [fetch]
+
+
+RATING = {"schema": 1, "task": "mine-tasks-0123abcd/tasks/hello", "weights": {"model.safetensors": "a" * 64},
+          "record": "20261023T090000Z-wpt-eval-aaaaaaaa-0123abcd", "attempt": 0, "plain": False, "verdict": "pass",
+          "by": "A. Person", "date": "2026-10-23"}
+
+
+def test_ratings_are_lines_of_a_rating_file_of_an_empty_source_and_never_a_document(kit, repo, store, tmp_path):
+    # a person's pass or fail on an attempt is stored as a file of an empty
+    # source, so the measure is reproducible, and is a measure only: never
+    # a pre-training document (maintainer's decision, 2026-10-18)
+    from wpt_dataset.markdown import documents
+    from wpt_dataset.sources import source_tree
+
+    sid = own_source(repo, store, {"notes.txt": "text"})
+    version = repo.save_rating(sid, "ratings/terse.jsonl", None, RATING, "rated", repo.source_version(sid), store)
+    other = {**RATING, "attempt": 1, "verdict": "fail", "by": "B. Person"}
+    version = repo.save_rating(sid, "ratings/terse.jsonl", None, other, "more", version, store)
+    version = repo.save_rating(sid, "ratings/terse.jsonl", 1, {**RATING, "verdict": "fail"}, "changed", version, store)
+    assert repo.ratings(sid, "ratings/terse.jsonl", store) == (version, [{**RATING, "verdict": "fail"}, other])
+    source = repo.source(sid)
+    assert {"format": "rating", "paths": ["ratings/terse.jsonl"]} in source.data["formats"]
+    assert [found.path for found in documents(source, source_tree(source, store)[0], store, repo)] == []
+    assert repo.check() == [] and repo.check_fetched(sid, store)[:2] == (1, 0)
+
+    for wrong, error in (({**RATING, "verdict": "maybe"}, "at verdict"),
+                         ({**RATING, "date": "2026-02-30"}, "is not a day of the calendar"),
+                         ({k: v for k, v in RATING.items() if k != "plain"}, "'plain' is a required property")):
+        with pytest.raises(InvalidFile, match=error):
+            repo.save_rating(sid, "ratings/terse.jsonl", None, wrong, "wrong", version, store)
+    with pytest.raises(RuleViolation, match="in the text format, not rating"):
+        repo.save_rating(sid, "notes.txt", None, RATING, "wrong", version, store)
+    assert len(repo.source(sid).patches) == 3  # the three ratings saved, nothing refused
+
+    upstream = kit.git_project(tmp_path / "upstream", symlinks={})
+    other_sid = kit.add_source(repo, store, "example", "project", {"type": "git", "address": upstream[0],
+                                                                  "revision": upstream[1]})
+    with pytest.raises(RuleViolation, match="is a git source"):
+        repo.save_rating(other_sid, "ratings.jsonl", None, RATING, "rated", repo.source_version(other_sid), store)
+
+
+def test_a_person_s_newer_rating_of_an_attempt_replaces_their_earlier_one(repo, store):
+    # maintainer's decision, 2026-10-23: one rating per person per attempt;
+    # adding a newer one replaces the earlier line, another person's rating
+    # of the same attempt stays, and a file holding two ratings by one
+    # person of one attempt is refused however it is saved
+    sid = own_source(repo, store, {"notes.txt": "text"})
+    version = repo.save_rating(sid, "ratings/terse.jsonl", None, RATING, "rated", repo.source_version(sid), store)
+    other = {**RATING, "by": "B. Person"}
+    version = repo.save_rating(sid, "ratings/terse.jsonl", None, other, "more", version, store)
+    newer = {**RATING, "verdict": "fail", "date": "2026-10-24"}
+    version = repo.save_rating(sid, "ratings/terse.jsonl", None, newer, "again", version, store)
+    assert repo.ratings(sid, "ratings/terse.jsonl", store) == (version, [newer, other])
+    with pytest.raises(InvalidFile, match="line 2: B. Person rated this attempt on line 1 already"):
+        repo.save_rating(sid, "ratings/terse.jsonl", 1, other, "twice", version, store)
+    assert repo.ratings(sid, "ratings/terse.jsonl", store) == (version, [newer, other])

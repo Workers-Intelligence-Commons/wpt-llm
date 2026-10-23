@@ -1,7 +1,7 @@
 """Run tests on a trained model and record their results in its model card.
 
 Usage:
-    wpt-eval MODEL_FOLDER [EVAL ...]
+    wpt-eval MODEL_FOLDER [EVAL ...] [--attempts N]
 
 EVAL is the name of a built-in test (the files in wpt_eval/evals/) or the
 path of any Python file; with none, every built-in test runs. A test file
@@ -14,6 +14,15 @@ provenance and the documents of the dataset it was trained on, read from the
 store named by WPT_STORE (environment or .env) and checked against their
 recorded hashes. The result carries data for programs and the same findings
 as text for people.
+
+The agent measures share one run of attempts (wpt_eval.attempts):
+context.attempts(plain) plays N attempts (--attempts, WPT_ATTEMPTS, default
+4) at every measure-only task of the repository holding the current folder
+(read once per command), each in a container of the task's image (built
+first with `wpt-agent build-image NAME`, as for grpo), scored by the task's
+check, once per command for each value of plain; every test of the run
+reads the same records. Every attempt is also kept in the run's record
+folder, one JSON line each in attempts.jsonl, a dropped one marked so.
 
 Each result goes to MODEL_FOLDER/evals/<name>.json, and the model card
 (README.md) is written again to show it. A test that fails stops the run;
@@ -43,6 +52,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
+from wpt_agent import Unready
 from wpt_model import WPT, TokenizerMismatch, load_model, load_tokenizer, weight_hashes
 from wpt_model.notice import CARD_NAME, EVALS_NAME, documents
 from wpt_store import Store, StoreError, store_from_settings
@@ -51,6 +61,9 @@ from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry, short
 from wpt_tokenizer import Tokenizer
 from wpt_utils.device import describe, select_device
 from wpt_utils.files import sha256_file
+
+from . import attempts as shared
+from .attempts import Record
 
 BUILT_IN = Path(__file__).parent / "evals"
 VERSION = importlib.metadata.version("wpt-eval")
@@ -84,17 +97,45 @@ class Context:
     provenance: dict
     store: Store
     telemetry: Telemetry = field(default_factory=Telemetry.off)  # the run's record, for a test's own events
+    attempts_per_task: int = shared.ATTEMPTS  # wpt-eval's --attempts
+    _attempts: dict = field(default_factory=dict, repr=False)  # {plain: [Record]}, played once per command
+    _tasks: list | None = field(default=None, repr=False)  # the measure-only tasks, read once per command
 
-    def documents(self, part) -> Iterator[Document]:
+    def measure_tasks(self) -> list:
+        """The measure-only tasks (wpt_eval.attempts.measure_tasks), read on
+        the first call, then given again."""
+        if self._tasks is None:
+            self._tasks = shared.measure_tasks(self.store, self.provenance)
+        return self._tasks
+
+    def attempts(self, plain=False) -> list[Record]:
+        """The shared run of attempts at the measure-only tasks
+        (wpt_eval.attempts): attempts_per_task attempts at each, scored by
+        its check, each offered its seeded variation of the tools, or with
+        plain only the tools of the same variants of the task's needs,
+        under their real names. Played on the first call for each value of
+        plain, then given again to every later test of the same command;
+        every attempt is also a line of attempts.jsonl in the run's record
+        folder, and only the scored ones are records here. [] when there is
+        no measure task. wpt_agent.Unready when the tasks cannot be read or
+        an image is not built, which stops the command."""
+        if plain not in self._attempts:
+            self._attempts[plain] = shared.run(self, plain, self.attempts_per_task)
+        return self._attempts[plain]
+
+    def documents(self, part, passes=None) -> Iterator[Document]:
         """"training" or "held_out": each document of that part once, in
         shard order (a document repeated by the mixture appears once). They
         are read one shard at a time, each shard checked before its
         documents are given, so a dataset larger than memory can be read;
-        call again to read them again."""
+        call again to read them again. passes, a collections.Counter when
+        given, counts how many times the part holds each document (its
+        rows), whole once every document was read
+        (wpt_store.shards.documents)."""
         if part not in ("training", "held_out"):
             raise ValueError(f"part {part!r}: choose 'training' or 'held_out'")
-        for document, source, tokens in documents_of(self.store,
-                                                     self.provenance["shards" if part == "training" else "held_out_shards"]):
+        for document, source, tokens in documents_of(
+                self.store, self.provenance["shards" if part == "training" else "held_out_shards"], passes):
             yield Document(document, source, tokens)
 
 
@@ -165,7 +206,7 @@ def _write_documents(folder, telemetry):
         raise
 
 
-def open_context(folder, store, device, telemetry=None) -> Context:
+def open_context(folder, store, device, telemetry=None, attempts=shared.ATTEMPTS) -> Context:
     folder = Path(folder)
     try:
         provenance = json.loads((folder / "provenance.json").read_text(encoding="utf-8"))
@@ -180,13 +221,32 @@ def open_context(folder, store, device, telemetry=None) -> Context:
     except (TokenizerMismatch, ValueError) as error:
         raise EvalError(str(error)) from None
     model.eval()
-    return Context(folder, model, tokenizer, device, provenance, store, telemetry or Telemetry.off())
+    return Context(folder, model, tokenizer, device, provenance, store, telemetry or Telemetry.off(), attempts)
+
+
+def _count(text) -> int:
+    try:
+        value = int(text)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"{text!r} is not a whole number") from None
+    if value < 1:
+        raise argparse.ArgumentTypeError("at least 1")
+    return value
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("model", help="model folder written by wpt-train")
     parser.add_argument("evals", nargs="*", help=f"built-in test names or .py files (default: {', '.join(built_in_names())})")
+    default = shared.ATTEMPTS
+    if "WPT_ATTEMPTS" in os.environ:
+        try:
+            default = _count(os.environ["WPT_ATTEMPTS"])
+        except argparse.ArgumentTypeError as error:
+            parser.error(f"WPT_ATTEMPTS={os.environ['WPT_ATTEMPTS']!r}: {error}")
+    parser.add_argument("--attempts", type=_count, default=default,
+                        help=f"attempts at each measure task in the agent measures' shared run (WPT_ATTEMPTS; "
+                             f"default {shared.ATTEMPTS})")
     args = parser.parse_args(argv)
     try:
         store = store_from_settings(Path.cwd() / ".env")
@@ -200,7 +260,7 @@ def main(argv=None):
     try:
         with Telemetry.start(store, "wpt-eval", sys.argv[1:] if argv is None else list(argv),
                              short(next(iter(weights.values()), "none")),
-                             inputs={"model_folder": args.model, "evals": evals},
+                             inputs={"model_folder": args.model, "evals": evals, "attempts": args.attempts},
                              env_file=Path.cwd() / ".env") as telemetry:
             try:
                 with telemetry.span("inputs"):
@@ -208,12 +268,12 @@ def main(argv=None):
                         find(eval_)  # an unknown test stops the run before any other has run
                     device = select_device()
                     telemetry.log(f"device: {describe(device)}")
-                    context = open_context(args.model, store, device, telemetry)
+                    context = open_context(args.model, store, device, telemetry, args.attempts)
                     telemetry.input(weights=weights, dataset=context.provenance.get("dataset"))
                 for eval_ in evals:
                     record = run_eval(context, eval_)
                     telemetry.log(f"\n{record['name']}\n{record['text'].rstrip()}")
-            except (StoreError, EvalError) as error:
+            except (StoreError, EvalError, Unready) as error:
                 sys.exit(f"{type(error).__name__}: {error}")  # end.json records it
             telemetry.log(f"\nresults in {Path(args.model) / EVALS_NAME}, model card {Path(args.model) / 'README.md'}")
     except RecordError as error:

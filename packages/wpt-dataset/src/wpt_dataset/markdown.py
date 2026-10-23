@@ -35,6 +35,9 @@ Markdown, never on the file itself:
 - `task`: the files of task folders for post-training (see tasks.py).
   Each folder is checked, and its files give no document: only the
   post-training step named by the tags of its task.json reads it.
+- `rating`: people's pass or fail ratings of measure attempts, one per
+  line (see ratings.py). Each rating is checked, and the file gives no
+  document: a measure only, never a training signal.
 - `records`: one document per record whose license enters (see
   records.py), at the path `<file>#<record id>`; its text field is read as
   `text` above, or kept as it is when the entry says `"as": "markdown"`.
@@ -53,7 +56,7 @@ from urllib.parse import unquote, urlparse
 
 from lxml import etree
 
-from . import conversations, records, tasks
+from . import conversations, ratings, records, tasks
 from .errors import FormatMapError, NotText
 from .manifest import ORDER, SYMLINK, glob_match_any, license_entries
 
@@ -90,16 +93,16 @@ class Converted(NamedTuple):
 
 
 def documents(source, tree, store, repo, skipped: dict | None = None, only=None) -> Iterator[Converted]:
-    """Each document of a final tree, in file path order; links, chat and
-    task files, a git history's order file (ORDER) and documents whose
+    """Each document of a final tree, in file path order; links, chat,
+    task and rating files, a git history's order file (ORDER) and documents whose
     Markdown is empty are left out; repo holds the images task folders
     name. skipped, when given, receives file -> records.Skipped for each
     records file. only, when given, is the set of files whose documents
     are wanted: the others are not read, and the task folders are not
     checked.
     Raises FormatMapError when a path matches no format entry or several,
-    NotText when an xhtml file is not well-formed, InvalidFile when a chat or
-    records file holds a line that is not valid or a task folder is not."""
+    NotText when an xhtml file is not well-formed, InvalidFile when a chat,
+    rating or records file holds a line that is not valid or a task folder is not."""
     files = {path: entry for path, entry in tree.items() if entry.mode != SYMLINK}
     formats = {path: format_of(source, path) for path in files}
     pages = {}  # parsed xhtml files, also read for the notes they hold
@@ -126,6 +129,9 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None)
             continue
         if kind == "task":
             continue  # checked by folder, below
+        if kind == "rating":
+            ratings.parse(source.id, path, store.get_bytes(files[path].sha256))
+            continue
         data = store.get_bytes(files[path].sha256)
         if kind == "markdown":
             markdown = data

@@ -20,6 +20,7 @@ import importlib.metadata
 import itertools
 import json
 import os
+import re
 import shutil
 import subprocess
 import tempfile
@@ -436,3 +437,26 @@ def check_license_map(source: Source, tree: dict[str, Entry]):
 def tags_of(source: Source, path: str) -> frozenset[str]:
     return frozenset(t for e in source.data.get("tags", []) if glob_match_any(path, e["paths"])
                      for t in e["tags"])
+
+
+def held_out_group(source: Source, path: str) -> str | None:
+    """The held-out group of the source's document at path (its path in the
+    source, as markdown.documents gives it), which the held-out hash reads
+    instead of the document's id (build.is_held_out): where the source's
+    `held_out_by` pattern is found in path, the pattern's groups joined by
+    one space, or its whole match when it has none; otherwise None, and the
+    id decides. Documents of any source with the same group are held out
+    together: eBible's read-aloud sources hold their chapters out this way,
+    by book and chapter in every translation at once (maintainer's
+    decision, 2026-10-23)."""
+    rule = source.data.get("held_out_by")
+    found = re.search(rule["pattern"], path) if rule else None
+    if found is None:
+        return None
+    return " ".join(group or "" for group in found.groups()) if found.groups() else found[0]
+
+
+def in_store(source: Source, store) -> bool:
+    """Whether the store holds the source's upstream files, so reading its
+    tree downloads nothing."""
+    return store.get_ref("upstream", source.data["checksum"].removeprefix("sha256:")) is not None

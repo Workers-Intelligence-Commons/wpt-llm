@@ -50,7 +50,9 @@ step: (the confidences of the drafts the model verified, how many of them
 it kept), what a drafter's calibration learns from (wpt_inference.drafting).
 
 The writer has no idea what the tokens mean; the caller says which tokens
-end a turn (stops) and how many tokens each row may write.
+end a turn (stops) and how many tokens each row may write. next_message
+is the one exception, shared by wpt-chat --chat and the text measures: the
+tokens of the assistant's next message, through the chat template.
 """
 
 import json
@@ -60,6 +62,7 @@ from dataclasses import asdict
 import torch
 import torch.nn.functional as F
 
+from wpt_tokenizer import END, chat
 from wpt_utils.device import processor_name
 
 DRAFT = 5  # draft tokens per row and step: the most DSpark's production drafter proposes (docs/model.md)
@@ -341,6 +344,23 @@ def _cut(tokens, stops, limit):
             tokens = tokens[:i + 1]
             break
     return tokens[:limit]
+
+
+def next_message(model, tokenizer, conversation, *, max_new_tokens, temperature=0.8, top_k=40, generator=None,
+                 drafter=None, costs=None) -> list[int]:
+    """The tokens the model writes for the assistant's next message after
+    conversation (docs/chat-format.md), read through the chat template
+    (wpt_tokenizer.chat.prompt): up to <|im_end|> or the end of a document,
+    which are left out, or max_new_tokens; the sampling as sample_tokens.
+    chat.reply(tokenizer, tokens) gives its blocks."""
+    written = []
+    for token in sample_tokens(model, chat.prompt(tokenizer, conversation), max_new_tokens=max_new_tokens,
+                               temperature=temperature, top_k=top_k, generator=generator, drafter=drafter,
+                               costs=costs):
+        if token in (chat.IM_END, END):
+            break
+        written.append(token)
+    return written
 
 
 @torch.no_grad()

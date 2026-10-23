@@ -3,7 +3,7 @@ import json
 
 import pytest
 
-from wpt_dataset.build import build_dataset, document_list
+from wpt_dataset.build import build_dataset, document_list, is_held_out
 from wpt_dataset.cli import main
 from wpt_dataset.errors import ChecksumMismatch, LockedDocumentsMissing, LockMismatch, PoolError, TokenizerVersionNeeded
 from wpt_store import open_store
@@ -112,6 +112,46 @@ def test_held_out_documents_never_reach_training(kit, repo, store, tmp_path):
     for entry in listed:  # the sha256 of the document's Markdown, the text training reads
         number = int(entry["id"].rsplit("/t", 1)[1].removesuffix(".txt"))
         assert f"document number {number} says hello.".encode() in store.get_bytes(entry["sha256"])
+
+
+def test_documents_with_the_same_held_out_group_share_their_fate_in_every_source(kit, repo, store, tmp_path):
+    # maintainer's decision, 2026-10-23: eBible's chapters are held out by
+    # book and chapter, so the same chapter is held out in every translation
+    # at once; a source's held_out_by pattern gives the group its hash reads
+    pattern = {"pattern": r"_([A-Z0-9]{3})_0*([1-9][0-9]*)_read\.txt$"}
+    sources = []
+    for code, digits in (("aaa", 2), ("bbb", 3)):  # chapter numbers written with 2 and 3 digits
+        files = {f"{code}_002_GEN_{n:0{digits}d}_read.txt": f"{code} genesis chapter {n} text. ".encode() * 5
+                 for n in range(1, 21)}
+        files["notes.txt"] = f"notes of {code}. ".encode() * 5
+        folder, commit = kit.git_project(tmp_path / code, files=files, executable=set(), symlinks={})
+        sources.append(kit.add_source(repo, store, "example", code, {
+            "type": "git", "address": folder, "revision": commit, "held_out_by": pattern,
+            "tags": [{"tags": ["all"], "paths": ["**"]}]}))
+    kit.write_recipe(repo, "mixture", "all", {"pools": [{"name": "all", "select": "all", "weight": 1}]})
+    kit.write_recipe(repo, "tokenizer", "all", {"version": 1, "mixture": "all", "vocab_size": 556})
+    kit.write_model_recipe(repo, "split", {"mixture": "all", "tokenizer": "all", "total_tokens": 100,
+                                           "held_out": 0.5})
+
+    dataset_id = build_dataset(repo, "split", store, log=lambda _: None)
+    record = record_of(store, dataset_id)
+    held = {doc for _, _, doc, _, _ in rows_of(store, record["held_out_shards"])}
+    for n in range(1, 21):  # a chapter's fate is its group's, "GEN <n>", in both sources
+        chapter = {f"{sources[0]}/aaa_002_GEN_{n:02d}_read.txt", f"{sources[1]}/bbb_002_GEN_{n:03d}_read.txt"}
+        assert (chapter <= held) if is_held_out(f"GEN {n}", 0.5) else not chapter & held
+    assert 0 < sum(is_held_out(f"GEN {n}", 0.5) for n in range(1, 21)) < 20  # both fates occur
+    for sid in sources:  # a path the pattern is not found in keeps its id's fate
+        assert (f"{sid}/notes.txt" in held) == is_held_out(f"{sid}/notes.txt", 0.5)
+    listed = document_list(store, dataset_id)  # the document list says the same
+    assert {entry["id"] for entry in listed if entry["tag"] == "held-out"} == held
+
+    # the groups are part of the dataset id: the same documents without them are another dataset
+    for sid in sources:
+        path = repo.root / "data" / "sources" / sid / "source.json"
+        data = json.loads(path.read_text())
+        del data["held_out_by"]
+        path.write_text(json.dumps(data, indent=2) + "\n")
+    assert build_dataset(repo, "split", store, log=lambda _: None) != dataset_id
 
 
 def test_too_many_passes_over_a_pool_is_refused(kit, repo, store, corpus):

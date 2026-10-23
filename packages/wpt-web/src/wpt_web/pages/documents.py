@@ -10,7 +10,8 @@ from wpt_dataset.repo import KINDS, schema
 from ..server import Route
 from .common import SAVED, STRING, VERSION, refusals
 
-INSIDE_SOURCES = ("conversation", "task")  # shapes of files inside a source: a chat file's lines, a task.json
+# shapes of files inside a source: a chat file's lines, a task.json, a rating file's lines
+INSIDE_SOURCES = ("conversation", "task", "rating")
 
 
 def routes(context):

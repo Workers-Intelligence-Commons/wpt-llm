@@ -9,9 +9,12 @@ generator (one variant of each need, its tools under their own names and
 the files it hides; each other tool of the task and of the pool left out
 or kept, under its own name or another, with even odds; every tool in a
 shuffled order), plain() offers every tool of the task under its own
-name and hides nothing more. arranged() gives an attempt's files: the
-task's, those its offer hides moved among the tool_files (a folder outside
-/work, such as a repository's remote, under its own path there). call()
+name and hides nothing more, and needed() offers the tools of the same
+variants offer() chooses with the same generator, under their own names,
+and nothing else. arranged() gives an attempt's arrangement: the task's
+files, those its offer hides moved among the tool_files (a folder outside
+/work, such as a repository's remote, under its own path there), and the
+image's folders the task shows empty (absent). call()
 runs one call in a sandbox under the
 name the model saw and returns its result text and whether it failed. A
 relative path is read from /work, the sandbox's working folder.
@@ -41,6 +44,7 @@ import posixpath
 import random
 import re
 from dataclasses import dataclass
+from typing import NamedTuple
 
 from wpt_dataset.tasks import ASK as ASK_NAME
 
@@ -102,7 +106,7 @@ def offer(task, pool, rng: random.Random) -> Offer:
     free; every tool in a shuffled order."""
     real = available(task, pool)
     variants = {name for need in task.needs for variant in need for name in variant.tools}
-    chosen = [rng.choice(need) for need in task.needs]
+    chosen = _variants(task, rng)
     shown = {name: name for variant in chosen for name in variant.tools}
     for name in [name for name in real if name not in variants and rng.random() < 0.5]:
         free = [other for other in real[name].get("names", OTHER_NAMES.get(name, []))
@@ -114,20 +118,49 @@ def offer(task, pool, rng: random.Random) -> Offer:
                   tuple(path for variant in chosen for path in variant.tool_files))
 
 
-def arranged(task, offer: Offer) -> tuple[dict, dict, dict]:
-    """(files, tool_files, outside) of an attempt offered `offer`: the
-    task's, the files under each path the offer hides moved from /work
-    among the files only the tools' programs read, and each folder outside
-    /work it hides (task.outside) moved there too, under its own absolute
-    path (/tmp/origin.git's files under tmp/origin.git/)."""
+def needed(task, rng: random.Random) -> Offer:
+    """The tools of the variants offer(task, pool, rng) chooses from a
+    generator in the same state, one of each of the task's needs, under
+    their own names, in the needs' order, with the same tool_files hidden:
+    nothing renamed, shuffled or added, so that an attempt offered it
+    differs from the varied one only in the tools it sees."""
+    chosen = _variants(task, rng)
+    names = {name: name for variant in chosen for name in variant.tools}
+    # a need names only the task's own tools (wpt_dataset.tasks), never the pool's
+    return _offer(names, available(task), tuple(path for variant in chosen for path in variant.tool_files))
+
+
+def _variants(task, rng):
+    """One variant of each of the task's needs, drawn from rng: the first
+    draws offer() and needed() make."""
+    return [rng.choice(need) for need in task.needs]
+
+
+class Arranged(NamedTuple):
+    """What one attempt's container holds, from its task and its offer."""
+    files: dict  # {path under /work: (manifest mode, content)}
+    tool_files: dict  # the same, for the files only the tools' programs read
+    outside: dict  # {absolute folder outside /work: its files, as files}
+    absent: tuple  # the image's folders the attempt sees empty (the task's absent)
+
+
+def arranged(task, offer: Offer) -> Arranged:
+    """The arrangement of an attempt offered `offer`: the task's files, the
+    files under each path the offer hides moved from /work among the files
+    only the tools' programs read, each folder outside /work it hides
+    (task.outside) moved there too, under its own absolute path
+    (/tmp/origin.git's files under tmp/origin.git/), and the image's
+    folders the task shows empty."""
     if not offer.hidden:
-        return task.files, task.tool_files, task.outside
+        return Arranged(task.files, task.tool_files, task.outside, task.absent)
     moved = {path: entry for path, entry in task.files.items()
              if any(path == hidden or path.startswith(hidden + "/") for hidden in offer.hidden)}
     moved |= {posixpath.join(place.lstrip("/"), path): entry for place, files in task.outside.items()
               if place in offer.hidden for path, entry in files.items()}
-    return ({path: entry for path, entry in task.files.items() if path not in moved}, {**task.tool_files, **moved},
-            {place: files for place, files in task.outside.items() if place not in offer.hidden})
+    return Arranged({path: entry for path, entry in task.files.items() if path not in moved},
+                    {**task.tool_files, **moved},
+                    {place: files for place, files in task.outside.items() if place not in offer.hidden},
+                    task.absent)
 
 
 def _offer(names, real, hidden=()):

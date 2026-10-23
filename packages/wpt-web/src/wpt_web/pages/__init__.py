@@ -2,7 +2,7 @@
 TypeScript file in ui/src/pages/ (listed in ui/src/pages/index.ts)."""
 
 from ..drafts import Drafter
-from . import conversations, documents, sources, tasks
+from . import conversations, documents, ratings, sources, tasks
 from .common import Context
 
 
@@ -12,4 +12,5 @@ def routes(repo, store=None, drafter=None):
     writes model drafts (default: a Drafter)."""
     context = Context(repo, store)
     return [*sources.routes(context), *documents.routes(context),
-            *conversations.routes(context, drafter or Drafter()), *tasks.routes(context)]
+            *conversations.routes(context, drafter or Drafter()), *tasks.routes(context),
+            *ratings.routes(context)]

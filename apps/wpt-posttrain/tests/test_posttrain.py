@@ -11,8 +11,9 @@ import torch
 from safetensors.torch import load_file
 
 import wpt_agent
+import wpt_inference
 import wpt_posttrain
-from wpt_agent import images
+from wpt_agent import images, played
 from wpt_dataset import manifest
 from wpt_dataset.build import is_held_out
 from wpt_dataset.repo import address_hash, dump_json
@@ -417,12 +418,12 @@ def test_a_group_whose_scores_are_all_equal_never_dilutes_the_update(monkeypatch
     # the loss is averaged over the tokens written in the groups that teach
     # something: a skipped group, whose scores are all equal, adds none
     scores = {"differ": [1.0, 0.0], "equal": [0.5, 0.5]}
-    played = {}
+    given = {}
 
     def play(task, count, keep, offers):
         ids = [0, 1, 2, 3] if task.id == "differ" else [0, 4, 5, 6, 7, 1, 2]
         attempt = wpt_agent.Attempt({"metadata": {}}, ids, [False] + [True] * (len(ids) - 1), "answered")
-        return [keep(index, (attempt, None, next(played[task.id]))) for index in range(1, count + 1)]
+        return [keep(index, wpt_agent.Played(attempt, next(given[task.id]))) for index in range(1, count + 1)]
 
     losses, update = [], agentic.update
     monkeypatch.setattr(agentic, "update", lambda *args: losses.append(update(*args)) or losses[-1])
@@ -434,7 +435,7 @@ def test_a_group_whose_scores_are_all_equal_never_dilutes_the_update(monkeypatch
     task = lambda name: type("Task", (), {"id": name, "image": "tiny", "needs": (), "replies": (), "tools": (),
                                          "answered_by": ()})
     for names in (["differ", "equal"], ["differ"]):
-        played = {name: iter(values) for name, values in scores.items()}
+        given = {name: iter(values) for name, values in scores.items()}
         tasks = [task(name) for name in names]
         learner = agentic.Learner("grpo", _Logits(), None, "cpu", {"tiny": None}, settings)
         learner.play = play
@@ -453,7 +454,7 @@ def test_grpo_fails_and_writes_nothing_when_every_attempt_of_a_round_is_dropped(
         raise wpt_agent.SandboxError("docker create: no space left on device")
 
     monkeypatch.setattr(images, "built", lambda root, name: f"wpt-agent/{name}:test")  # no image to build
-    monkeypatch.setattr(wpt_agent, "Sandbox", refused)
+    monkeypatch.setattr(played, "Sandbox", refused)
     recipe = built.recipe("agent", training=one_stage(1, 1024), posttrain=["grpo"])
     with pytest.raises(SystemExit, match=r"step grpo failed: round 1: every attempt was dropped, Docker failed "
                                          r"8 times; the last time: docker create: no space left on device"):
@@ -498,7 +499,7 @@ def test_a_refused_attempt_line_stops_the_run_with_the_record_error_code(built, 
         real(self, folder, name, data)
 
     monkeypatch.setattr(images, "built", lambda root, name: f"wpt-agent/{name}:test")
-    monkeypatch.setattr(wpt_agent, "Sandbox", refused)  # a dropped attempt is kept too: no Docker needed
+    monkeypatch.setattr(played, "Sandbox", refused)  # a dropped attempt is kept too: no Docker needed
     monkeypatch.setattr(LocalStore, "_raw_append_record", disk_full)
     recipe = built.recipe("agent", training=one_stage(1, 1024), posttrain=["grpo"])
     with pytest.raises(SystemExit) as stopped:
@@ -596,12 +597,13 @@ def test_each_attempt_s_line_is_kept_as_soon_as_it_is_scored(monkeypatch):
         return [wpt_agent.Attempt({}, [0, 1], [False, True], "answered") for _ in boxes]
 
     kept, scored = [], []
-    monkeypatch.setattr(wpt_agent, "Sandbox", Box)
-    monkeypatch.setattr(wpt_agent, "attempts", attempts)
-    monkeypatch.setattr(wpt_agent, "score",
+    monkeypatch.setattr(played, "Sandbox", Box)
+    monkeypatch.setattr(played, "attempts", attempts)
+    monkeypatch.setattr(played, "score",
                         lambda box, check, seconds, conversation, beside, hidden, outside: scored.append(list(kept)) or
                         (1.0, None))
-    monkeypatch.setattr(agentic, "Writer", lambda model, ids, rows, **kwargs: type("W", (), {"routes": [None] * rows}))
+    monkeypatch.setattr(wpt_inference, "Writer",
+                        lambda model, ids, rows, **kwargs: type("W", (), {"routes": [None] * rows}))
     grpo = step_module(GRPO)
     settings = agentic.Settings(rounds=1, tasks_per_update=1, group=3, learning_rate=grpo.LEARNING_RATE,
                                 weight_decay=grpo.WEIGHT_DECAY, temperature=grpo.TEMPERATURE, top_k=grpo.TOP_K,
@@ -610,11 +612,11 @@ def test_each_attempt_s_line_is_kept_as_soon_as_it_is_scored(monkeypatch):
     monkeypatch.setattr(learner, "_keep",
                         lambda task, round_, group, index, one, offer: kept.append(index) or len(kept))
     task = type("Task", (), {"id": "t", "image": "tiny", "files": None, "check": None, "needs": (), "replies": (),
-                             "tools": (), "tool_files": {}, "outside": {}, "check_files": {}, "answered_by": (), "container": {"memory": 1, "disk": 1, "processes": 1,
+                             "tools": (), "tool_files": {}, "outside": {}, "check_files": {}, "answered_by": (), "absent": (), "container": {"memory": 1, "disk": 1, "processes": 1,
                                                                          "cpus": 1}})
-    played = learner.attempts(task, 1, 1, 3, lambda task, attempt, score: score)
+    outcomes = learner.attempts(task, 1, 1, 3, lambda task, attempt, score: score)
     assert scored == [[], [1, 2]]  # attempt 1 scored before any line, attempt 3 after the lines of 1 and 2
-    assert kept == [1, 2, 3] and [one.attempt is None for one in played] == [False, True, False]
+    assert kept == [1, 2, 3] and [one.attempt is None for one in outcomes] == [False, True, False]
 
 
 def test_token_efficiency_takes_the_mean_length_of_the_attempts_that_reach_the_best_start_score():
@@ -633,7 +635,7 @@ def test_token_efficiency_takes_the_mean_length_of_the_attempts_that_reach_the_b
             outcomes = [(score, length) for score, length in plays[task.id][:count]]
             outcomes += [wpt_agent.SandboxError("docker create: no space left on device")] * (count - len(outcomes))
             return [keep(index, outcome if isinstance(outcome, Exception)
-                         else (attempt_of(outcome[1] - 1), None, outcome[0]))
+                         else wpt_agent.Played(attempt_of(outcome[1] - 1), outcome[0]))
                     for index, outcome in enumerate(outcomes, 1)]
 
     step.REFERENCE = 4

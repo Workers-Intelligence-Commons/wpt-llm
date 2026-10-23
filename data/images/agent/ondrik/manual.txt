@@ -1,0 +1,45 @@
+ONDRIK(1)
+
+NAME
+    ondrik - seals of texts and knots of numbers
+
+SYNOPSIS
+    ondrik press [--turns N] TEXT
+    ondrik tie [--give] A B
+
+DESCRIPTION
+    ondrik prints the seal of a text, or the knot of two whole numbers,
+    on one line.
+
+COMMANDS
+    press [--turns N] TEXT
+        Print the seal of TEXT: 10 signs, digits and lowercase letters.
+        Give TEXT as one argument; quote it when it holds spaces. TEXT
+        does not start with -, which starts an option.
+
+        --turns N
+            Fold the seal N times (N is from 1 to 1000000). Without
+            it the seal is folded once. "The seal of TEXT folded 3
+            times" is `ondrik press --turns 3 TEXT`.
+
+    tie [--give] A B
+        Print the knot of the whole numbers A and B: 6 digits, zeros
+        at the start kept. The knot of A and B is not the knot of B
+        and A.
+
+        --give
+            Tie the slack knot instead. "The slack knot of 12 and 40"
+            is `ondrik tie --give 12 40`.
+
+    The options come right after the command, before its other
+    arguments.
+
+EXIT STATUS
+    0 when it printed its result; 2 when it cannot read its arguments,
+    with a message on standard error.
+
+EXAMPLES
+    ondrik press hello
+    ondrik press --turns 4 "a b c"
+    ondrik tie 7 99
+    ondrik tie --give 7 99

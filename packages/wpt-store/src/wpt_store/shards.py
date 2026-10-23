@@ -95,7 +95,7 @@ def read_verified(store, shard) -> list:
     return rows
 
 
-def documents(store, shards):
+def documents(store, shards, passes=None):
     """Yield (document id, source id, tokens) of every document in these
     shards once, in shard order (a document the mixture repeats comes
     once), each shard checked (read_verified) before its documents are
@@ -104,12 +104,16 @@ def documents(store, shards):
     one shard only when the shards were not already local (wpt-train
     --stream, whose ShardStream released each one, and wpt-posttrain);
     copies already there, as after wpt-train without --stream, go one by
-    one as they are read."""
+    one as they are read. passes, a collections.Counter when given, counts
+    each document's rows, the times the shards hold it: whole once every
+    document was given."""
     seen = set()
     for shard in shards:
         rows = read_verified(store, shard)
         store.release(shard["object"])  # its rows are in memory now
         for tokens, source, document, _, _ in rows:
+            if passes is not None:
+                passes[document] += 1
             if document not in seen:
                 seen.add(document)
                 yield document, source, tokens

@@ -52,6 +52,7 @@ machinery is wpt_posttrain/agentic.py, which steps/token-efficiency.py
 shares.
 """
 
+import wpt_agent
 from wpt_posttrain import Outcome, agentic
 
 ROUNDS = 10  # passes over every task
@@ -69,7 +70,7 @@ SEED = 0  # the order of the tasks in each round, and the sampled tokens
 def run(context):
     try:
         tasks, built, pools = agentic.prepare(context)
-    except agentic.Unready as error:
+    except wpt_agent.Unready as error:
         return Outcome.failure(str(error))
     settings = agentic.Settings(ROUNDS, TASKS_PER_UPDATE, GROUP, LEARNING_RATE, WEIGHT_DECAY, TEMPERATURE, TOP_K,
                                 CHECK_SECONDS, RESULT_BYTES, SEED)

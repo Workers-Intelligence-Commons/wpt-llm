@@ -29,7 +29,7 @@ import io
 import sys
 from pathlib import Path
 
-from wpt_inference import COSTS_FILE, costs_setup, measure_costs, replayed_costs, sample_tokens
+from wpt_inference import COSTS_FILE, costs_setup, measure_costs, next_message, replayed_costs, sample_tokens
 from wpt_model import TokenizerMismatch, load_drafter, load_model, load_tokenizer
 from wpt_model.notice import LICENSE, NOTICE_NAME, OUTPUT_LICENSE, REPOSITORY
 from wpt_store import StoreError, store_from_settings
@@ -59,12 +59,8 @@ def answer(model, tokenizer, conversation, max_new_tokens=MAX_NEW_TOKENS, drafte
            costs=None) -> tuple[list[dict], str]:
     """The assistant's next message: its blocks, and its text with tags
     shown; drafter and costs as continue_text's."""
-    generated = []
-    for next_id in sample_tokens(model, chat.prompt(tokenizer, conversation), max_new_tokens=max_new_tokens,
-                                 drafter=drafter, costs=costs):
-        if next_id in (chat.IM_END, Tokenizer.END):
-            break
-        generated.append(next_id)
+    generated = next_message(model, tokenizer, conversation, max_new_tokens=max_new_tokens, drafter=drafter,
+                             costs=costs)
     return chat.reply(tokenizer, generated), chat.show(tokenizer, generated)
 
 

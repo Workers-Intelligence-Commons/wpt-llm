@@ -12,10 +12,10 @@ Python started with -P or -I:
 
     load()                       the attempt's conversation, next to the check
     calls(c)                     every tool call, in order, by its real tool's name
-    answer(c)                    the answer block's value: {"answer": ..., "confidence": ...}, or None
-    answer_text(c)               the answer block's answer, "" without one
-    scored(c, score)             score, or 0 when the answer block is missing or malformed
-    brier(c, correct)            (confidence - correct) squared, 1 without an answer block
+    answer(c)                    the answer: {"answer": ..., "confidence": ...}, or None without one
+    answer_text(c)               the answer's text, "" without one
+    scored(c, score)             score, or 0 without an answer
+    brier(c, correct)            (confidence - correct) squared, 1 without an answer
     before(c, first, then)       whether every call to a tool of `then` comes after a call to one of `first`
     read_before_write(c, new)    whether every file written or edited was read first
     sources_first(c)             whether the sources were looked at before anything was changed or asked
@@ -23,6 +23,8 @@ Python started with -P or -I:
                                  looking tool that can answer (the task's answered_by)
     read_before_ask(c, text)     whether every question to the user came after a look whose result showed text
     programs(command)            the programs a bash command runs
+    path_of(path)                a tool's path argument as an absolute path (a relative one starts at /work)
+    mentions(command, path)      whether a shell command names the file at path
     beside(name)                 the text of a file next to the check (one a task's pointer put there)
     file_text(path)              the text of a file the attempt left in /work, "" when there is none
     holds(text, expected)        whether text holds expected's words, in order, case and marks aside
@@ -122,28 +124,31 @@ def calls(conversation: dict) -> list[Call]:
 
 
 def answer(conversation: dict) -> dict | None:
-    """The answer block's value, as the agent loop kept it in the
-    conversation's metadata (docs/chat-format.md, "The answer"): None when
-    the block is missing or malformed."""
+    """The answer, as the agent loop built it in the conversation's
+    metadata (docs/chat-format.md, "The answer"): the final reply's text
+    and the confidence the model gave when asked after it, from 0 to 1;
+    None when the attempt ended with no final reply or its reply to the
+    confidence question was not a number from 0 to 100."""
     return conversation.get("metadata", {}).get("answer")
 
 
 def answer_text(conversation: dict) -> str:
-    """The answer block's answer, "" when the block is missing or malformed."""
+    """The answer's text, the model's final reply, "" without an answer."""
     found = answer(conversation)
     return "" if found is None else found["answer"]
 
 
 def scored(conversation: dict, score: float) -> float:
-    """The attempt's score: score, or 0 when the answer block is missing or
-    malformed, whatever the files hold (maintainer's decision, 2026-10-18)."""
+    """The attempt's score: score, or 0 without an answer (no final reply,
+    or no confidence from 0 to 100 after it), whatever the files hold
+    (maintainer's decisions, 2026-10-18 and 2026-10-23)."""
     return score if answer(conversation) is not None else 0.0
 
 
 def brier(conversation: dict, correct: bool) -> float:
     """The Brier score of the confidence: (confidence - 1 or 0) squared, 0
     for a confidence that was exactly right, 1 for one exactly wrong, and 1
-    without an answer block, since no confidence was given."""
+    without an answer, since no confidence was given."""
     found = answer(conversation)
     return 1.0 if found is None else (found["confidence"] - (1.0 if correct else 0.0)) ** 2
 
@@ -237,7 +242,7 @@ def path_of(path: str) -> str:
     return posixpath.normpath(posixpath.join(WORK, path))
 
 
-def _mentions(command: str, path: str) -> bool:
+def mentions(command: str, path: str) -> bool:
     """Whether a shell command names the file at path (absolute, or relative to /work)."""
     names = {path, posixpath.relpath(path, WORK)} if path.startswith(WORK + "/") else {path}
     return any(re.search(rf"(?<![\w./-])(\./)?{re.escape(name)}(?![\w/.-])", command) for name in names)
@@ -256,7 +261,7 @@ def read_before_write(conversation: dict, new=()) -> bool:
         if call.tool not in ("read", *WRITES) or not isinstance(path, str):
             continue
         path = path_of(path)
-        if call.tool in WRITES and path not in known and not any(_mentions(command, path) for command in commands):
+        if call.tool in WRITES and path not in known and not any(mentions(command, path) for command in commands):
             return False
         if not call.failed:
             known.add(path)

@@ -64,19 +64,19 @@ where a step needs them, run through Docker Desktop.
 | check the Markdown of sources | `uv run wpt-dataset markdown-check [ID ...]` | the sources | prints notes and problems per source |
 | train | `uv run wpt-train RECIPE DATASET_ID [--out FOLDER] [--stream] [--recompute] [--segment N] [--run NAME] [--scheduler-costs RECORD_FOLDER] [options]`, started detached (skill `wpt-training-run`; ends by training the model's drafter; `--scheduler-costs`: replay the drafter scheduler's pass times an earlier run recorded on the same setup; a checkpoint is always written just before the drafter, so a drafter failure resumes with `--resume`; `--stream`: a few shards on disk at a time; `--recompute`: much less memory, about a third slower; `--segment N`: windows longer than N tokens run as segments of N, the same training in the memory of N tokens plus what the segments hand on, up to twice the time; with `--strategy split`, each process's slice runs in segments of N; `--run`: the checkpoint in the store, so another machine can continue) | the model recipe, the store | a model folder; its run record `records/<folder>/` in the store (one per command, over restarts); `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
 | train on several GPUs | `uv run wpt-train RECIPE DATASET_ID --strategy ddp --processes N [options]`, or `--strategy split` to split each window between the GPUs (windows too long for one; DeepSeek-V4's contextual parallelism) (several machines: `torchrun ... -m wpt_train`, Linux only) | the store | the same |
-| evaluate | `uv run wpt-eval FOLDER [EVAL ...]` | the folder, the store | `FOLDER/evals/<name>.json`, `README.md`; its run record `records/<folder>/` in the store |
+| evaluate | `uv run wpt-eval FOLDER [EVAL ...] [--attempts N]` (from inside the repository; the agent measures play N attempts, default 4, at every measure task, so each task's image must be built) | the folder, the store, the measure tasks | `FOLDER/evals/<name>.json`, `README.md`; its run record `records/<folder>/` in the store, with `attempts.jsonl` |
 | post-train | `uv run wpt-posttrain RECIPE BASE NEW [--scheduler-costs RECORD_FOLDER]` (the steps are the recipe's `posttrain` list; ends by training a fresh drafter and measuring, or replaying, the scheduler's pass times) | the model recipe, the base folder, the store | the new folder, only if every step succeeded; its run record `records/<folder>/` in the store, always |
-| build program-built tasks | `uv run scripts/build_tasks.py KIND SOURCE --count N [--seed S] [--select EXPRESSION]` (kinds `find-the-passage`, `evidence-removed`, `look-or-ask`, `commit-and-push`; SOURCE an empty source a person made; docs/post-training.md, "The task builder") | admitted sources in the store | everything under `KIND/` in SOURCE, as its next patch |
+| build program-built tasks | `uv run scripts/build_tasks.py KIND SOURCE --count N [--seed S] [--select EXPRESSION]` (kinds `find-the-passage`, `evidence-removed`, `look-or-ask`, `commit-and-push`, `read-the-manual`; SOURCE an empty source a person made; docs/post-training.md, "The task builder") | admitted sources in the store | everything under `KIND/` in SOURCE, as its next patch |
 | lock an image of agentic tasks | `uv run wpt-agent lock-image NAME [--force]` (needs Docker; `--force` replaces an existing lock) | `data/images/NAME/Dockerfile`, the base image's registry, the dated package archive | `data/images/NAME/lock.json` and `licenses.json` (commit them) |
-| build an image of agentic tasks | `uv run wpt-agent build-image NAME` (needs Docker; before `wpt-posttrain` with `grpo` or `token-efficiency`) | `data/images/NAME/`, the base image's registry, the dated package archive | a local Docker image |
+| build an image of agentic tasks | `uv run wpt-agent build-image NAME` (needs Docker; before `wpt-posttrain` with `grpo` or `token-efficiency`, and before `wpt-eval`'s agent measures) | `data/images/NAME/`, the base image's registry, the dated package archive | a local Docker image |
 | continue text | `uv run wpt-chat FOLDER` (`--about` prints its NOTICE; `--chat` talks to a post-trained model; `--scheduler-costs RECORD_FOLDER` reads the scheduler's pass times a run recorded on the same setup instead of measuring them) | the folder; with `--scheduler-costs`, the store | |
 | the kinds of data files, their names, one file | `uv run wpt-dataset kinds`, `list KIND`, `show KIND NAME` | `data/`, through the service layer | prints them (version and problems on stderr) |
 | write a data file people write | `uv run wpt-dataset save KIND NAME FILE --version VERSION` (`''`: a new file) | the file | that file, after the rules of `check`; refused when it changed since VERSION |
 | a source's files, tags and git status | `uv run wpt-dataset files ID`, `tags ID PATH [TAG ...] --version V`, `remove ID PATH --patch NAME --version V`, `status` | the source | `source.json`, or the next patch |
 | a new empty source, without its texts | `uv run wpt-dataset new-source ORIGIN [ITEM] NAME --license L --attribution TEXT --by NAME [--tag TAG ...] [--chat PATH ...] [--format FORMAT=PATTERN ...]` (never `--file` or `--license-text`: the person writes the license text, then the files) | | `data/sources/ID/source.json`, `under-review`, its license text empty |
-| a person's texts (people only, never an AI assistant) | `read`, `write`, `conversation`, `save-conversation`, `task`, `save-task`, and `new-source --file` and `--license-text` (marked `*` in `--help`) | | |
-| conversation and task structure | `uv run wpt-dataset conversations ID PATH` (roles, drafts), `tasks ID` (image, limits, files) | the source | prints them |
-| edit every kind of data in a browser | `uv run wpt-web` (needs Bun), then http://127.0.0.1:8410/ (HTTP API described at `/api/openapi.json`) | `data/`, a WPT model folder for drafts, `packages/wpt-web/ui` | data files through the service layer; `ui/node_modules`, `ui/dist` |
+| a person's texts (people only, never an AI assistant) | `read`, `write`, `conversation`, `save-conversation`, `task`, `save-task`, `save-rating`, and `new-source --file` and `--license-text` (marked `*` in `--help`) | | |
+| conversation, task and rating structure | `uv run wpt-dataset conversations ID PATH` (roles, drafts), `tasks ID` (image, limits, files), `ratings ID PATH` (the attempt each rates, who, when; never the verdict) | the source | prints them |
+| edit every kind of data in a browser | `uv run wpt-web` (needs Bun), then http://127.0.0.1:8410/ (HTTP API described at `/api/openapi.json`; page "Ratings": people's pass or fail on the attempts of a `wpt-eval` run, a measure only, docs/evaluation.md) | `data/`, a WPT model folder for drafts, the store's `wpt-eval` run records for ratings, `packages/wpt-web/ui` | data files through the service layer; `ui/node_modules`, `ui/dist` |
 
 Everything that changes a model comes from its model recipe
 (`data/recipes/models/NAME.json`: data, architecture, method and settings,
@@ -153,13 +153,16 @@ the name of the step that reads them (`sft`), one conversation per line as
 docs/chat-format.md says. Tasks for agentic post-training are `task`
 files of such a source, one folder per task, tagged `grpo`; the
 `token-efficiency` step, after `grpo`, reads the same tasks
-(docs/post-training.md). Committed text
+(docs/post-training.md). People's pass or fail on a model's measure
+attempts are `rating` files of such a source, one rating per line, a
+measure only that no training step reads (docs/evaluation.md, "People's
+ratings"). Committed text
 stays in the repository's history for good.
 
 As an AI assistant, use the `wpt-dataset` commands only for structure and
 metadata, never to read or write people's texts (CONTRIBUTING.md, "Models
 and generated text"): never run `read`, `write`, `conversation`,
-`save-conversation`, `task` or `save-task`, and never call the matching
+`save-conversation`, `task`, `save-task` or `save-rating`, and never call the matching
 `wpt-web` routes. You may run `new-source` without `--file` and
 `--license-text`, never with them (maintainer's decision, 2026-10-18). People write
 their texts in `wpt-web` or with those commands themselves. An `assistant`
@@ -246,7 +249,9 @@ from wpt_eval import Result
 def run(context):  # context: model, tokenizer, device, folder, provenance, store,
                    # telemetry (the run's record), documents("training") and
                    # documents("held_out"), read one shard at a time:
-                   # iterate, never assume a list
+                   # iterate, never assume a list; attempts(plain=False),
+                   # the agent measures' shared run of attempts at the
+                   # measure tasks, played once per command
     ...
     return Result(data={...}, text="the same findings, for people")
 ```
@@ -313,8 +318,9 @@ def run(context):  # context: model (change it in place), tokenizer, device,
 
 The built-in steps are `sft`, `grpo` and `token-efficiency` (after `grpo`,
 on the same tasks: the same result with fewer written tokens); `grpo` and
-`token-efficiency` share `wpt_posttrain/agentic.py`, which writes their
-attempts with the model alone (no drafter) and keeps every attempt as a
+`token-efficiency` share `wpt_posttrain/agentic.py`, which plays their
+attempts through `wpt_agent.play` with the model alone (no drafter), as
+the agent measures of `wpt-eval` do, and keeps every attempt as a
 line of `<step>-attempts.jsonl` in the run's record folder: a chat-format
 conversation whose `metadata` identifies the attempt. After the last step,
 every run trains a fresh drafter for the new weights; the drafter is not a
@@ -331,10 +337,11 @@ attempts) goes through `wpt_inference`, never through a loop of its own
 over `model(ids)`:
 
 ```python
-from wpt_inference import Writer, sample_tokens
+from wpt_inference import Writer, next_message, sample_tokens
 
 for token in sample_tokens(model, ids, max_new_tokens=200):  # one text
     ...
+reply = next_message(model, tokenizer, conversation, max_new_tokens=512)  # the next chat message, as wpt-chat --chat
 writer = Writer(model, prompt, rows=8, stops=[...], routes=True)  # several attempts from one prompt
 written = writer.write({row: tokens_it_reads_first}, {row: most_tokens_it_may_write})
 ```
@@ -349,7 +356,9 @@ once (`measure_costs`) and records with the setup they were measured on
 (`costs_setup`, `costs_file`), or replays on the same setup only
 (`replayed_costs`); without them every draft is verified. For agentic
 tasks, `wpt_agent.attempts` runs several attempts in one batch, and
-`agentic.Learner.attempts(...)` scores them one by one and keeps each line as soon as it is scored. What a layer passes
+`wpt_agent.play(...)` (what the post-training steps and the agent measures
+share) scores them one by one and hands each to the caller as soon as it
+is scored. What a layer passes
 on to later tokens is said once, in its `passes_on()` (`carry.py`), which
 training's segments and slices (`sequence.py`) and the cache (`cache.py`)
 both read: a change to a layer's computation changes its description

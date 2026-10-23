@@ -227,11 +227,21 @@ folder per task:
  "replies": [{"pattern": "(?i)python.*version", "reply": "Python 3.13."}]}
 ```
 
-- `instructions`: the user message that starts every attempt. Every
-  task's instructions state the closing answer block
-  ([chat-format.md](chat-format.md), "The answer"): the model learns the
-  block from each task's own instructions, and the harness adds no
-  sentence to the opening (maintainer's decision, 2026-10-22).
+- `instructions`: the user message that starts every attempt. No task's
+  instructions state an answer block: the model's final reply is its
+  answer, as text, and the harness asks for its confidence after it
+  ([chat-format.md](chat-format.md), "The answer"; maintainer's decision,
+  2026-10-23). The harness adds no sentence to the opening (maintainer's
+  decision, 2026-10-22).
+- `terse` (optional): the same request in one line, for the measure of
+  terse against full requests ([evaluation.md](evaluation.md), "Terse
+  and full requests"): a task can hold its request in two forms, its full
+  `instructions` and this one-line form (maintainer's decision,
+  2026-10-23). The agent loop opens an attempt with `instructions`, or
+  with `terse` when its caller asks (`wpt_agent.attempts(...,
+  terse=True)`; a task without the field is refused there). It holds no
+  line break: `wpt-dataset check --fetch` refuses one, naming the
+  `task.json`.
 - `image`: the folder in `data/images/` the attempt's container comes from.
 - `limits`: `max_turns`, the assistant turns in one attempt; `max_tokens`,
   the tokens the model writes in one attempt, over every turn;
@@ -265,6 +275,12 @@ folder per task:
 - `tool_files` (optional): paths under `files/`, each a file or a folder
   with everything in it, that only the tools' programs read: they go to
   `/tmp/wpt-tools/` instead of `/work`.
+- `absent` (optional): absolute folders of the image, outside `/work`
+  and `/tmp`, their names made of letters, digits, `.`, `_`, `+` and `-`,
+  that the attempts do not see: each is covered by an empty,
+  read-only folder kept in memory (Docker's `--tmpfs`), so a task removes
+  what its image installs there, such as the manual of `ondrik` ("The
+  agent image", below). The check's container shows the image as it is.
 - `pointers` (optional): the texts the task takes from documents of other
   sources ("Pointer tasks", below).
 
@@ -283,8 +299,9 @@ taking a built-in name or `ask`, or declared twice; a need naming a tool
 the task does not offer (`ask` without replies included); a tool in two
 needs; a task with replies and no `answered_by`, or an `answered_by`
 naming a tool that is not a looking tool; a reply pattern that is not a
-regular expression; a `tool_files` entry that names nothing under
-`files/`; a pointer that names a source that does not exist or takes the
+regular expression; a `terse` that holds a line break; a `tool_files`
+entry that names nothing under `files/`; an `absent` entry that is `/work`
+or `/tmp`, lies under them, or holds `.` or `..`; a pointer that names a source that does not exist or takes the
 place of another file, or whose text cannot be filled in ("Pointer tasks",
 below). The step reads the tasks whose `task.json` carries the tag. Like
 every file of a source, task files are UTF-8 text.
@@ -405,7 +422,10 @@ applies:
   from the base model's `provenance.json`, the recipe whose `held_out`
   kept its documents out.
 
-A pointer task built from a held-out document is measure-only too, and so
+A pointer task built from a held-out document is measure-only too (a
+document of a source with `held_out_by` is held out by its group, as the
+build holds it out: [data-selection.md](data-selection.md), "Held-out text
+and contamination"; maintainer's decision, 2026-10-23), and so
 is a pointer task whose document's text equals a held-out document's
 (maintainer's decision, 2026-10-22): when the pointers are filled in
 (`tasks.fill`), the sha256 of each named document's whole Markdown is kept,
@@ -427,7 +447,11 @@ it is not in the store. A held-out document never reaches training
 through a task. A repository pointer names only its commit's document:
 the other files of the repository's tree are not looked at by this rule.
 The measures read exactly the measure-only tasks
-(`read(..., measure=True)`).
+(`read(..., measure=True)`), whatever their tags (`tag=None`): those
+tagged `eval`, the hash share of every task source and the pointer tasks
+on held-out text, all in one run of attempts that every agent measure
+reads (maintainer's decision, 2026-10-23; [evaluation.md](evaluation.md),
+"The shared run of attempts").
 
 ### Tools
 
@@ -591,7 +615,7 @@ a new build.
 
 `data/images/agent/` is the first image of agentic tasks (maintainer's
 decision, 2026-10-18): Debian 13 with `bash`, `git` and Python 3, and
-three parts of its own, which its Dockerfile copies in:
+four parts of its own, which its Dockerfile copies in:
 
 - `wpt_check.py`, the shared check library ("The check library", below),
   in `/usr/lib/python3/dist-packages/`, where every `python3` finds it, `-I`
@@ -599,7 +623,16 @@ three parts of its own, which its Dockerfile copies in:
 - the programs that answer tools, in `/usr/local/lib/wpt-tools/`, written
   in Python and started as `python3 -I`, with the helpers they share,
   `wpt_tools.py`, next to the library;
-- `tools.json`, its pool of working tools.
+- `tools.json`, its pool of working tools;
+- `ondrik`, a small program written for WPT, so no training text
+  describes it, in `/usr/local/bin/`, and its manual,
+  `/usr/share/doc/ondrik/manual.txt` (maintainer's decision, 2026-10-23;
+  `ondrik/` in the image's folder), for the task builder's
+  `read-the-manual` ("The task builder", below). It is compiled
+  (maintainer's decision, 2026-10-23): its source, `ondrik/ondrik.c`, is
+  compiled in a build stage of the Dockerfile, and the image keeps only
+  the binary, owned by root, which the model's user may run but not
+  read, and no compiler.
 
 A task declares the two emulations it uses as its own tools:
 
@@ -655,6 +688,20 @@ that reads the hidden files: it turns hooks and the file system monitor
 off, and a task whose hidden files are more than the remote it pushes to
 must not offer it.
 
+`ondrik` prints results that only it gives, by rules of its own: `ondrik
+press [--turns N] TEXT` the seal of a text (10 signs, folded `N` times),
+and `ondrik tie [--give] A B` the knot of two whole numbers (6 digits;
+with `--give`, the slack knot). It prints no help of its own: a call it
+cannot read fails with code 2 and names its manual, so a model that has
+not read the manual can only guess the commands and options. The manual
+is a plain text file under `/usr/share/doc/`, since the image installs
+no program that shows manual pages. A task removes it by naming its
+folder, `/usr/share/doc/ondrik`, in `absent` ("Tasks", above). Without
+the manual, nothing in the image documents the program: the binary
+cannot be read by the model's user, so its source, its strings and its
+rules stay out of reach. The text of a seal starts with no `-`, so it
+never reads as an option, and `--turns` takes 1 to 1,000,000.
+
 A change to the library or to a program changes the image's folder, so
 every machine builds the image again (`wpt-agent build-image agent`); a
 change to its packages also locks it again (`lock-image agent --force`).
@@ -683,12 +730,14 @@ this library; the example weighs nothing yet.
 The rules read the attempt's trace by real tool names (`metadata.tools`
 maps each name the model saw to the real one):
 
-- `scored(conversation, score)`: the missing-block rule. The attempt's
-  score is 0 when its answer block is missing or malformed, whatever its
-  files hold ([chat-format.md](chat-format.md), "The answer").
+- `scored(conversation, score)`: the missing-answer rule. The attempt's
+  score is 0 when it has no answer, whatever its files hold: no final
+  reply, or a reply to the confidence question that is not a number from
+  0 to 100 ([chat-format.md](chat-format.md), "The answer"; maintainer's
+  decisions, 2026-10-18 and 2026-10-23).
 - `brier(conversation, correct)`: the Brier score of the confidence,
   `(confidence - 1)²` for a right result and `confidence²` for a wrong one;
-  1, the worst, without an answer block.
+  1, the worst, without an answer.
 - `read_before_write(conversation, new=())`: every file written or edited
   was read first, by `read`, by an earlier `bash` command that names it,
   or written by the attempt itself; `new` lists the files the task expects
@@ -707,8 +756,9 @@ maps each name the model saw to the real one):
   2026-10-22).
 - `before(conversation, first, then)`: every call to a tool of `then`
   after a call to one of `first`; `calls` gives the trace, each call by
-  its real tool's name and whether it looks, `answer` the answer block's
-  value and `answer_text` its answer, `""` without one.
+  its real tool's name and whether it looks, `answer` the answer the loop
+  built, `{"answer": ..., "confidence": ...}` or `None`, and `answer_text`
+  its text, the final reply's, `""` without one.
 - `holds(text, expected)`: `text` holds the words of `expected` one after
   the other, letter case, punctuation, Markdown marks and spacing aside.
 - `not_enough(conversation, missing="", words=None)`: the answer starts
@@ -777,12 +827,12 @@ gives no task, and the run says how many were left out. Each task's folder
 is `KIND/<16 hex digits of the sha256 of its task.json>`, so an unchanged
 task keeps its id over reruns, and with it its place in or out of the
 measure-only share ("Measure tasks", above). Every task runs in the agent
-image, ends with the answer block ([chat-format.md](chat-format.md), "The
-answer"), and its check calls the check library. Every kind's instructions
-state that block, `{"answer": ..., "confidence": ...}`, and what each
-field holds: the model learns it from the task's own instructions, and
-the harness adds nothing to the opening (maintainer's decision,
-2026-10-22).
+image, and its check calls the check library, which reads the attempt's
+answer: the final reply's text and the confidence the model gave when the
+harness asked for it after that reply ([chat-format.md](chat-format.md),
+"The answer"). No kind's instructions say anything about a block or how
+to answer (maintainer's decision, 2026-10-23), and the harness adds
+nothing to the opening (maintainer's decision, 2026-10-22).
 
 The three kinds built on text take the documents of the sources that
 `--select`, a pool expression ([data-selection.md](data-selection.md)),
@@ -841,9 +891,9 @@ source's address and the document).
   commit is a repository pointer naming the source's checksum ("Pointer
   tasks", above), and `/work` is the repository, its remote outside it. The
   model is asked only "Based on the current diffs, could you commit and
-  push the changes in this repository?", followed by the answer block's
-  sentence every task's instructions carry; it writes its own commit
-  message, then pushes. The check is `pushed`: exactly one new commit
+  push the changes in this repository?", with nothing after it
+  (maintainer's decisions, 2026-10-22 and 2026-10-23); it writes its own
+  commit message, then pushes. The check is `pushed`: exactly one new commit
   pushed to the remote branch, whose tree is the commit's own tree, its
   message any that is not empty, never compared (maintainer's decision,
   2026-10-22). Each attempt pushes one way, the seeded
@@ -857,17 +907,40 @@ source's address and the document).
   attempts both ways come up, so no habit is tied to one way of pushing
   (maintainer's decision, 2026-10-18). Its commits come from the admitted
   GitHub repositories (admitted on 2026-10-21).
+- `read-the-manual` (maintainer's decision, 2026-10-23): each task asks
+  for a result only the image's `ondrik` gives ("The agent image",
+  above): the seal of a drawn text (8 hex digits) folded a drawn number
+  of times (2 to 9), or the slack knot of two drawn numbers (100 to
+  99,999). The instructions name the program and the result, never the
+  option that gives it, and are the same whether the manual is there or
+  not. The halves are crossed: every other task names the manual's
+  folder in `absent`, so its attempts run without the manual, and every
+  other pair asks for a seal instead of a knot. The task needs `bash`
+  only (`[["bash"]]`) and has no files. Its check runs the program, by
+  its absolute path, in the check's own container, which the model's
+  files cannot change, and wants the program's output in the answer
+  (`holds`). It reads no source and takes no `--select`. It is the
+  agent form of the reading-gain measure ([evaluation.md](evaluation.md),
+  "Reading the manual"). Its tasks are for the measures only
+  (maintainer's decision, 2026-10-23): `builder.write` tags the kind's
+  folder `eval` in the task source's `source.json`, through the service
+  layer, when no entry tags it so, and the task reader gives tasks tagged
+  `eval` to the measures only ("Measure tasks", below). A model trained
+  on them would learn `ondrik` from the attempts themselves, and the
+  measure would no longer tell whether it reads the manual.
 
-A task acts or checks by its whole kind (maintainer's decision,
-2026-10-22): `commit-and-push` acts; `find-the-passage`, `evidence-removed`
-and `look-or-ask` check (`ACTS` in `builder.py`). After each run,
-`scripts/build_tasks.py` reports what the task source holds: its built
-tasks of each kind, and the shares of them that act and that check
+Each kind is marked as acting, checking or both (maintainer's decision,
+2026-10-23; `CLASSES` in `builder.py`): `commit-and-push` acts;
+`find-the-passage`, `evidence-removed` and `look-or-ask` check;
+`read-the-manual` does both, since it runs a program and checks its
+output. After each run, `scripts/build_tasks.py` reports what the task
+source holds: its built tasks of each kind, and the shares of them that
+act only, that check only and that do both, which sum to 100%
 (`builder.shares`), such as:
 
 ```text
 2500 look-or-ask tasks written into <source id>
-<source id> holds 10,000 built tasks (find-the-passage 2,500, evidence-removed 2,500, look-or-ask 2,500, commit-and-push 2,500): act 25.0%, check 75.0%
+<source id> holds 10,000 built tasks (find-the-passage 2,500, evidence-removed 2,500, look-or-ask 2,500, commit-and-push 2,500, read-the-manual 0): acting only 25.0%, checking only 75.0%, both 0.0%
 ```
 
 The first committed task set holds all 4 kinds, about 2,500 tasks of
@@ -918,11 +991,15 @@ results come back as a tool turn; and the model writes the next turn. The
 attempt ends when a turn closes without a tool call, when the model writes
 the end of a document, after `max_turns` turns (the last turn's calls still
 run), or when `max_tokens` is reached in the middle of a turn, whose calls
-then do not run (maintainer's decision, 2026-10-17). Every attempt ends
-with its answer block, the answer and the confidence
-([chat-format.md](chat-format.md), "The answer"); the loop keeps its
-value, or `null` when it is missing or malformed, in the conversation's
-`metadata.answer`, next to `metadata.tools`, the map from each name the
+then do not run (maintainer's decision, 2026-10-17). The turn that closes
+without a tool call is the final reply, the answer; the loop then adds one
+user turn asking for the confidence, a number from 0 to 100 and nothing
+else, and the model replies; that turn counts against `max_tokens` and
+the context, not `max_turns` ([chat-format.md](chat-format.md), "The
+answer"; maintainer's decision, 2026-10-23). The loop builds
+`{"answer": <the final reply's text>, "confidence": <number / 100>}`, or
+`null` when there is no final reply or the reply is not such a number,
+and keeps it in the conversation's `metadata.answer`, next to `metadata.tools`, the map from each name the
 model saw to the real tool, `metadata.looking`, the real names of the
 offered tools that look at sources, and `metadata.answered_by`, the
 task's ("The check library", above). The model's
@@ -963,8 +1040,8 @@ conversation in the chat format, as the attempts file keeps it (Runs,
 below) but with only the attempt's own `metadata`: `tools`, the map from
 each name the model saw to the real tool; `looking`, the real names of
 the offered tools that look at sources ("The check library", below);
-`answered_by`, the task's; and `answer`, the answer block's value or
-`null`. It is written as ASCII JSON, any other character
+`answered_by`, the task's; and `answer`, the answer the loop built
+(the final reply's text and the confidence) or `null`. It is written as ASCII JSON, any other character
 escaped. A check finds it as `"$(dirname "$0")/conversation.json"`, and
 scores everything: the files, the trace of tool calls and the confidence
 (maintainer's decision, 2026-10-18). The texts the task's pointers put
@@ -1069,14 +1146,16 @@ which attempt it is, so the file passes the same check as any `chat` file:
 
 - `tools`, `messages`: the attempt: the tools it was offered, as the
   model saw them, the instructions, every assistant turn as the model's
-  tokens read, every tool result as the model received it. A dropped
+  tokens read, every tool result as the model received it, and after the
+  final reply the confidence question and the model's reply to it. A dropped
   attempt has only the tools and the instructions, the conversation it
   would have started from.
 - `metadata.tools`: each name the model saw, mapped to the real tool's;
   `metadata.looking`: the real names of the offered tools that look at
   sources; `metadata.answered_by`: the task's; `metadata.answer`: the
-  answer block's value, `null` when missing or malformed, and absent for
-  a dropped attempt.
+  answer the loop built, the final reply's text and the confidence, `null`
+  without a final reply or a confidence from 0 to 100, and absent for a
+  dropped attempt.
 - `step`, `task`: the step and the task's id.
 - `round`: the round, from 1; `null` for an attempt made before the rounds
   (the `token-efficiency` step's reference, below).
@@ -1117,7 +1196,8 @@ groups of `GROUP` attempts, the advantage as the reward minus the group's
 mean, the loss over the tokens the model wrote, R3 routes and routers that
 do not change, dropped attempts and the same failures. Only the reward
 differs. Its code is `steps/token-efficiency.py`; the machinery both steps
-share is `apps/wpt-posttrain/src/wpt_posttrain/agentic.py`. Until a source
+share is `apps/wpt-posttrain/src/wpt_posttrain/agentic.py`, which plays
+attempts through `wpt_agent.play`, as the agent measures do. Until a source
 holds tasks tagged `grpo`, it fails with "no tasks" and writes nothing.
 
 First, the reference. Before any update, the incoming model makes

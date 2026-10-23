@@ -11,8 +11,9 @@ task, written together, exactly as grpo's attempts run and are scored. A task's 
 score is the best score among them; an attempt "passes" when its score is
 at least that best score, and the task's reference length is the mean
 length of its passing attempts. A length counts only the tokens the model
-wrote, the same tokens the loss learns (never the instructions, the tool
-results or the template's own tokens). The reference stays fixed for the
+wrote, the same tokens the loss learns, its reply to the confidence
+question after its final reply included (never the instructions, the
+tool results, the confidence question or the template's own tokens). The reference stays fixed for the
 whole step, and its attempts are not trained on. A task whose every
 reference attempt scored 0 has nothing to keep and is left out, and so is
 a task whose every reference attempt was dropped because Docker failed;
@@ -42,6 +43,7 @@ wpt-posttrain. The machinery is wpt_posttrain/agentic.py, shared with
 steps/grpo.py.
 """
 
+import wpt_agent
 from wpt_posttrain import Outcome, agentic
 
 TAG = "grpo"  # the tasks it trains on: grpo's own
@@ -61,7 +63,7 @@ SEED = 0  # the reference attempts, the order of the tasks in each round, and th
 def run(context):
     try:
         tasks, built, pools = agentic.prepare(context, TAG)
-    except agentic.Unready as error:
+    except wpt_agent.Unready as error:
         return Outcome.failure(str(error))
     settings = agentic.Settings(ROUNDS, TASKS_PER_UPDATE, GROUP, LEARNING_RATE, WEIGHT_DECAY, TEMPERATURE, TOP_K,
                                 CHECK_SECONDS, RESULT_BYTES, SEED)

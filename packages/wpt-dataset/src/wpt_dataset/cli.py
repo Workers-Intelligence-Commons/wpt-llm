@@ -36,7 +36,7 @@
 Reading and writing the data files, through the service layer (wpt_dataset.repo;
 wpt-web's HTTP API does the same). Every write applies the rules of `check` and
 is refused when the file changed since VERSION, the version `show` (or `files`,
-`conversations`, `tasks`) printed; VERSION '' writes a new file:
+`conversations`, `tasks`, `ratings`) printed; VERSION '' writes a new file:
 
     wpt-dataset kinds                     the kinds of data files, and who writes each
     wpt-dataset list KIND                 the names of the files of a kind
@@ -72,6 +72,9 @@ A source's files change only through patches (as unpack, an edit and patch):
     wpt-dataset task ID FOLDER            print a task folder as JSON {task, check, files} *
     wpt-dataset save-task ID FOLDER [FILE] [--remove] --patch NAME --version VERSION
                                           write or remove a task folder from that JSON *
+    wpt-dataset ratings ID PATH           the ratings of a rating file: the attempt each rates, who, when
+    wpt-dataset save-rating ID PATH LINE|new [FILE] [--remove] --patch NAME --version VERSION
+                                          replace, add or remove a person's pass or fail on an attempt *
 
 * reads or writes a person's text. An AI assistant uses only the other
 commands and options, for structure and metadata, never these: it may run
@@ -484,6 +487,25 @@ def cmd_save_task(args, repo):
     return 0
 
 
+def cmd_ratings(args, repo):
+    version, found = repo.ratings(args.id, args.path, _store(repo))
+    for line, rating in enumerate(found, start=1):  # the verdict is the person's: not shown here
+        print(f"line {line}: {rating['task']}, attempt {rating['attempt']}{' (plain)' if rating['plain'] else ''} "
+              f"of record {rating['record']}; by {rating['by']}, {rating['date']}")
+    _versioned(version)
+    return 0
+
+
+def cmd_save_rating(args, repo):
+    line = None if args.line == "new" else int(args.line)
+    if args.remove == bool(args.file):
+        raise InvalidFile("give FILE, or --remove")
+    rating = None if args.remove else _json(_input(args.file), args.file)
+    version = repo.save_rating(args.id, args.path, line, rating, args.patch, args.version, _store(repo))
+    print(f"recorded as the next patch of {args.id}, version {version}")
+    return 0
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="wpt-dataset", description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -607,6 +629,10 @@ def _data_commands(commands):
     command("tasks", cmd_tasks, "id")
     command("task", cmd_task, "id", "folder", text=True)
     save = writes(command("save-task", cmd_save_task, "id", "folder", text=True))
+    save.add_argument("file", nargs="?")
+    save.add_argument("--remove", action="store_true")
+    command("ratings", cmd_ratings, "id", "path")
+    save = writes(command("save-rating", cmd_save_rating, "id", "path", "line", text=True))
     save.add_argument("file", nargs="?")
     save.add_argument("--remove", action="store_true")
 

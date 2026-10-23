@@ -12,6 +12,7 @@ import json
 import os
 import random
 import re
+import shlex
 import shutil
 import subprocess
 import sys
@@ -20,7 +21,7 @@ from pathlib import Path
 
 import pytest
 
-from wpt_agent import AGENT, Limits, Sandbox, arranged, attempt, images, offer, score
+from wpt_agent import AGENT, Limits, Sandbox, arranged, attempt, attempt_box, images, offer, score
 from wpt_dataset import builder
 from wpt_dataset.manifest import FILE, ORDER, Entry
 from wpt_dataset.repo import Repo
@@ -48,8 +49,9 @@ LOOKING = {tool["name"] for tool in [{"name": "read"}, {"name": "bash"}, SEARCH,
 
 
 def load(name):
-    """A file of the image's folder as a module, its folder on the path as
-    in the image (the programs import wpt_tools)."""
+    """A file of the image's folder as a module, the library's or a tool's
+    program, its folder on the path as in the image (the programs import
+    wpt_tools)."""
     if str(FOLDER) not in sys.path:
         sys.path.insert(0, str(FOLDER))
     path = FOLDER / (f"{name}.py" if name.startswith("wpt_") else f"tools/{name}")
@@ -92,7 +94,8 @@ def conversation(calls, tools=None, answer=None, answered_by=(), results=None):
     """An attempt's conversation: each call (name, arguments) in a turn of
     its own with its result (results, one text each, or "ok"), then in
     metadata the offered tools that look (LOOKING), as the agent loop
-    writes them, the answer block's value and the task's answered_by."""
+    writes them, the answer (the final reply's text and the confidence,
+    None without one) and the task's answered_by."""
     messages = [{"role": "user", "content": [{"type": "text", "text": "Fix calc.py."}]}]
     for n, (name, arguments) in enumerate(calls):
         messages += [{"role": "assistant", "content": [{"type": "tool_call", "id": f"c{n}", "name": name,
@@ -105,9 +108,11 @@ def conversation(calls, tools=None, answer=None, answered_by=(), results=None):
                          "answered_by": list(answered_by), "answer": answer}}
 
 
-def test_a_missing_answer_block_scores_0_and_the_confidence_gets_its_brier_score():
-    # every check scores a missing or malformed block 0, whatever the files
-    # hold, and gives a confidence its Brier score (maintainer's decision, 2026-10-18)
+def test_a_missing_answer_scores_0_and_the_confidence_gets_its_brier_score():
+    # every check scores 0 an attempt without an answer (no final reply, or
+    # a reply to the confidence question that is not a number from 0 to 100),
+    # whatever the files hold, and gives a confidence its Brier score
+    # (maintainer's decisions, 2026-10-18 and 2026-10-23)
     check = load("wpt_check")
     given = conversation([], answer={"answer": "Fixed the sign.", "confidence": 0.8})
     missing = conversation([])
@@ -237,7 +242,7 @@ def test_a_built_check_scores_the_rest_of_the_paragraph_or_not_enough(tmp_path):
     # but letter case and marks aside, scores 1; a missing passage wants
     # "not enough" naming the paragraph asked for by its quoted start
     # (maintainer's decision, 2026-10-22), and an answerable one refuses it;
-    # no answer block, 0
+    # no answer, 0
     def said(text):
         return conversation([], answer={"answer": text, "confidence": 0.5})
 
@@ -454,7 +459,7 @@ def test_in_the_agent_image_the_tools_answer_and_the_check_library_scores(agent)
     turns = [turn(call(1, "search", {"query": "lamp dusk"}), call(2, "fetch", {"url": f"{WEB}/lighthouse"}),
                   call(3, listing, {"path": "/tmp/wpt-tools"}), call(4, listing, {}),
                   call(5, "bash", {"command": "cat /tmp/wpt-tools/web/example.org/lighthouse"})),
-             turn({"type": "json", "value": {"answer": "The keeper lights it at dusk.", "confidence": 0.9}})]
+             turn({"type": "text", "text": "The keeper lights it at dusk."}), turn({"type": "text", "text": "90"})]
     limits = Limits(memory=256, disk=16, processes=64, cpus=1.0)
     with Sandbox(image, made.files, user=AGENT, limits=limits, tool_files=made.tool_files) as box:
         done = attempt(made, box, TOKENIZER, Scripted(*turns), result_bytes=4000, offer=chosen)
@@ -495,12 +500,99 @@ def test_in_the_agent_image_each_attempt_pushes_one_way_and_the_check_reads_the_
     tool = next(shown for shown, actual in with_tool.names.items() if actual == "push")
     by_tool = call(2, tool, {})
     for chosen, push, scored in ((with_git, by_git, 1.0), (with_tool, by_git, 0.0), (with_tool, by_tool, 1.0)):
-        turns = [turn(commit, push), turn({"type": "json", "value": {"answer": "Committed, pushed.", "confidence": 1}})]
-        work, hidden, outside = arranged(made, chosen)
-        with Sandbox(image, work, user=AGENT, limits=limits, tool_files=hidden, outside=outside) as box:
+        turns = [turn(commit, push), turn({"type": "text", "text": "Committed, pushed."}),
+                 turn({"type": "text", "text": "100"})]
+        found = arranged(made, chosen)
+        with Sandbox(image, found.files, user=AGENT, limits=limits, tool_files=found.tool_files,
+                     outside=found.outside) as box:
             done = attempt(made, box, TOKENIZER, Scripted(*turns), result_bytes=4000, offer=chosen)
-            assert score(box, made.check, 30, done.conversation, beside, chosen.hidden, tuple(outside)) == \
+            assert score(box, made.check, 30, done.conversation, beside, chosen.hidden, tuple(found.outside)) == \
                 (scored, "")
         status, pushing = (block["content"][0]["text"] for block in done.conversation["messages"][2]["content"])
         assert status.splitlines() == [" M lamps.py", "?? count.md"]
         assert ("does not appear to be a git repository" in pushing) == (not scored)
+
+
+def ondrik(image, *args, user=AGENT) -> subprocess.CompletedProcess:
+    """ondrik run in the image, by default as the model's user."""
+    return subprocess.run(["docker", "run", "--rm", "--network", "none", "-u", user, image, builder.PROGRAM, *args],
+                          capture_output=True, text=True)
+
+
+@pytest.mark.image_build
+@pytest.mark.xdist_group("agent-image")  # one worker builds the image: two would share its snapshot layer
+def test_in_the_agent_image_ondrik_does_what_its_manual_says_and_the_model_cannot_read_it(agent):
+    # the read-the-manual tasks' program, compiled so that the image holds no
+    # readable documentation of it besides its manual (maintainer's decision,
+    # 2026-10-23): every example of its manual runs, a seal is 10 signs and a
+    # knot 6 digits, each option and the order of a knot's numbers change the
+    # result, the same call gives the same result; what it cannot read, --help
+    # included, fails with code 2 and names the manual; the model's user runs
+    # it but cannot read it, and the image holds no compiler
+    _, image = agent
+    manual = (FOLDER / "ondrik" / "manual.txt").read_text(encoding="utf-8")
+    examples = [shlex.split(line) for line in manual.split("EXAMPLES\n")[1].splitlines() if line.strip()]
+    assert examples and all(words[0] == "ondrik" for words in examples)
+    for words in examples:
+        ran = ondrik(image, *words[1:])
+        assert ran.returncode == 0 and len(ran.stdout.splitlines()) == 1, words
+    seal = ondrik(image, "press", "a1b2").stdout
+    assert re.fullmatch(r"[0-9a-hjkmnp-tv-z]{10}\n", seal) and ondrik(image, "press", "a1b2").stdout == seal
+    assert ondrik(image, "press", "--turns", "1", "a1b2").stdout == seal  # folded once without the option
+    assert len({seal, ondrik(image, "press", "--turns", "3", "a1b2").stdout, ondrik(image, "press", "a1b3").stdout}) == 3
+    knot = ondrik(image, "tie", "12", "40").stdout
+    assert re.fullmatch(r"\d{6}\n", knot) and ondrik(image, "tie", "012", "40").stdout == knot
+    assert len({knot, ondrik(image, "tie", "--give", "12", "40").stdout, ondrik(image, "tie", "40", "12").stdout}) == 3
+    for args in ([], ["--help"], ["press", "--help"], ["tie", "--help"], ["seal", "a1b2"], ["press", "-h"],
+                 ["press", "--folds", "3", "a1b2"], ["press", "--turns", "0", "x"], ["press", "a", "b"],
+                 ["tie", "--slack", "12", "40"], ["tie", "12", "forty"]):
+        ran = ondrik(image, *args)
+        assert (ran.returncode, ran.stdout) == (2, "") and "see /usr/share/doc/ondrik/manual.txt" in ran.stderr, args
+    looked = subprocess.run(["docker", "run", "--rm", "--network", "none", "-u", AGENT, image, "sh", "-c",
+                             f"stat -c '%U %a' {builder.PROGRAM}; cat {builder.PROGRAM} > /dev/null; echo $?; "
+                             f"command -v gcc cc || echo no compiler"], capture_output=True, text=True)
+    assert looked.stdout.splitlines() == ["root 711", "1", "no compiler"]
+
+
+@pytest.mark.image_build
+@pytest.mark.xdist_group("agent-image")  # one worker builds the image: two would share its snapshot layer
+def test_in_the_agent_image_a_built_read_the_manual_check_wants_the_program_s_output(agent):
+    # the check runs the program itself, in its own container, so the answer
+    # must hold what the program prints; no answer, 0
+    root, image = agent
+    argv = [builder.PROGRAM, "tie", "--give", "12", "40"]
+    knot, other = ondrik(image, *argv[1:]).stdout.strip(), ondrik(image, "tie", "12", "40").stdout.strip()
+    check = builder.CHECK_TEXT.format(right=builder.CHECKS["program"].format(argv=argv)).encode()
+    limits = Limits(memory=256, disk=16, processes=64, cpus=1.0)
+    for answer, expected in ((f"The slack knot is {knot}.", 1.0), (other, 0.0), (None, 0.0)):
+        found = None if answer is None else {"answer": answer, "confidence": 0.9}
+        with Sandbox(image, {}, user=AGENT, limits=limits) as box:
+            assert score(box, check, 30, conversation([], answer=found), {}) == (expected, "")
+
+
+@pytest.mark.image_build
+@pytest.mark.xdist_group("agent-image")  # one worker builds the image: two would share its snapshot layer
+def test_in_the_agent_image_ondrik_runs_and_a_task_can_remove_its_manual(agent):
+    # maintainer's decision, 2026-10-23: the image installs ondrik on its
+    # path with its manual; a task that names the manual's folder in absent
+    # sees it empty, and the check, in its own container, finds the
+    # program's output in the answer either way
+    _, image = agent
+    seal = ondrik(image, "press", "--turns", "3", "a1b2").stdout.strip()
+    check = builder.CHECK_TEXT.format(right=builder.CHECKS["program"].format(
+        argv=[builder.PROGRAM, "press", "--turns", "3", "a1b2"])).encode()
+    limits = Limits(memory=256, disk=16, processes=64, cpus=1.0)
+    for absent, listed in (((), "manual.txt\n"), ((builder.MANUAL,), "")):
+        made = Task("example/manual", "Find the seal.", "agent", 8, 10_000, 10, {}, check,
+                    needs=((Variant(("bash",)),),), absent=absent)
+        command = f"ls {builder.MANUAL}; ondrik press --turns 3 a1b2"
+        turns = [turn(call(1, "bash", {"command": command})),
+                 turn({"type": "text", "text": seal}), turn({"type": "text", "text": "90"})]
+        chosen = offer(made, [], random.Random(1))
+        box, _ = attempt_box(image, made, chosen)  # the task's absent folders come with its arrangement
+        with box:
+            done = attempt(made, box, TOKENIZER, Scripted(*turns), result_bytes=4000, offer=chosen)
+            assert score(box, made.check, 30, done.conversation, {}) == (1.0, "")
+        [shown] = [block["content"][0]["text"] for m in done.conversation["messages"] if m["role"] == "tool"
+                   for block in m["content"]]
+        assert shown == f"{listed}{seal}\n"

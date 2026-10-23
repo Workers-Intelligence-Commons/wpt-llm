@@ -129,7 +129,7 @@ other line keeps its bytes.
 | `thinking` | `text` | reasoning written before or between other blocks |
 | `tool_call` | `id`, `name`, `arguments` | a call to one of `tools`; `arguments` is a JSON object that matches the tool's `parameters` |
 | `tool_result` | `call`, `content`, `error` (optional, `true` when the call failed) | the answer to the `tool_call` whose `id` is `call`; `content` is a list of blocks |
-| `json` | `value` | a structured output: any JSON value; an attempt at a task ends with one ([The answer](#the-answer)) |
+| `json` | `value` | a structured value: any JSON value; a harness builds it, the model never writes one ([The answer](#the-answer)) |
 | `file` | `sha256`, `media_type` | a media file such as a screenshot, stored next to the record and named by its sha256 |
 
 A new kind of element gets a new block type; existing blocks keep their
@@ -137,33 +137,54 @@ meaning, and raising `schema` with a migration covers any change to them.
 
 ## The answer
 
-Every attempt at a task ends with a `json` block holding the answer and
-the confidence, file-changing tasks included (maintainer's decision,
-2026-10-18). The model learns the block from each task's own
-instructions, which state it: the harness adds no sentence to the opening
-(maintainer's decision, 2026-10-22):
+The model never writes JSON, except its tool calls, which other harnesses
+parse as JSON: it writes text and special tokens, and the harness builds
+every `json` block and value in the records, in a shape that can later go
+back into sources, as `sft` data for example (maintainer's decision,
+2026-10-23).
+
+The model's final reply, its last assistant message, one with no tool
+call, is its answer, as text. The agent loop (`wpt_agent.loop`) then adds
+one user turn that asks for its confidence, a number from 0 to 100 and
+nothing else, the same question for every task (`CONFIDENCE` in
+`wpt_agent/loop.py`, the one place it is written). The model's reply to
+it is read, divided by 100, and the loop builds the attempt's
+`metadata.answer`, which the task's check reads
+([post-training.md](post-training.md), "Scores") (maintainer's decision,
+2026-10-23):
 
 ```json
-{"type": "json", "value": {"answer": "calc.py adds instead of subtracting; fixed line 12.", "confidence": 0.8}}
+{"answer": "calc.py adds instead of subtracting; fixed line 12.", "confidence": 0.8}
 ```
 
-- `answer`: a string. In a file-changing task it is a short summary of
-  what was changed, so every task ends with the same block (maintainer's
-  decision, 2026-10-22).
-- `confidence`: a number from 0 to 1. In a file-changing task it is how
-  sure the model is that the task's check will pass (maintainer's
-  decision, 2026-10-18).
+- `answer`: the final reply's text, its text blocks one per line, its
+  thinking left out. In a file-changing task it is the reply's text too
+  (maintainer's decision, 2026-10-23).
+- `confidence`: the reply to the question, from 0 to 100, divided by 100.
+  In a file-changing task it is how sure the model is that the task's
+  check will pass (maintainer's decision, 2026-10-18).
 
-The block counted is the last `json` block of the attempt's last
-`assistant` message; one whose value is not an object of exactly these
-two fields, of these types, counts as missing. The agent loop
-(`wpt_agent.loop`) keeps its value, or `null`, as the `answer` of the
-attempt's `metadata`, which the task's check reads
-([post-training.md](post-training.md), "Scores"). A missing or malformed
-block scores the whole attempt 0, a rule of the shared check library
-that every check calls (maintainer's decision, 2026-10-18). There is no
-way to abstain: "I don't know" is never a way out that costs nothing
+The reply counts when its text, spaces around it aside, is a number from
+0 to 100 written with digits and at most one decimal point (`80`,
+`72.5`), and nothing else: thinking before it is not part of its text,
+and a tool call, a `%`, a word or a number above 100 make it count as
+none. A final reply closed by the end of a document instead of
+`<|im_end|>` is a final reply too. A reply that is not such a number, or
+that a limit cuts, scores the attempt 0, as a missing block did; so does
+an attempt that ends with no final reply, stopped by a limit or by the
+end of a document written in a turn with a tool call: its `metadata.answer` is `null`, and the shared check library
+that every check calls scores it 0 (maintainer's decisions, 2026-10-18
+and 2026-10-23). The confidence turn counts against `max_tokens` and the
+context, not against `max_turns`. No task's instructions ask for a block
+or say how to answer (maintainer's decision, 2026-10-23). There is no way
+to abstain: "I don't know" is never a way out that costs nothing
 (maintainer's decision, 2026-10-18).
+
+The text measures ask their questions the same way: the prompt never
+asks for JSON, the model's reply is text, and the measure keeps it, with
+its confidence where the measure asks one through the same question, as
+a `json` block in its records (maintainer's decision, 2026-10-23;
+[evaluation.md](evaluation.md), "Text measures").
 
 ## Files
 
@@ -218,7 +239,7 @@ END
 <|im_start|>user\n{text}<|im_end|>\n
 <|im_start|>assistant\n<think>\n{thinking}\n</think>\n\n{text}\n<tool_call>\n{"name": ..., "arguments": {...}}\n</tool_call><|im_end|>\n
 <|im_start|>user\n<tool_response>\n{result}\n</tool_response><|im_end|>\n
-<|im_start|>assistant\n{text}\n<json>\n{value}\n</json><|im_end|>\n
+<|im_start|>user\n{text}\n<json>\n{value}\n</json><|im_end|>\n
 ```
 
 - A message's blocks keep their order. Blocks after the first are
@@ -227,12 +248,15 @@ END
   message of their own.
 - A `tool` message is written as a `user` turn of `<tool_response>` blocks,
   as Qwen does.
-- A `json` block is written as its JSON text between `<json>` and
-  `</json>`, in a tool result too, so the model sees a structured output
-  and tells it apart from text (maintainer's decision, 2026-10-18: the
-  template shows `json` blocks to the model). When the model writes a
-  `json` block whose text is not JSON (`NaN` and `Infinity` included), it
-  stays text, tags included, as a tool call that does not parse does.
+- A `json` block of a system or user message, or of a tool result, is
+  written as its JSON text between `<json>` and `</json>`, so the model
+  sees a structured value and tells it apart from text (maintainer's
+  decision, 2026-10-18: the template shows `json` blocks to the model).
+- The model never writes JSON but its tool calls ([The answer](#the-answer)):
+  a `json` block in an assistant message, which only a harness builds, is
+  never written as tokens, so no conversation teaches the model to write
+  one, and when the model writes `<json>` tags they stay text in its
+  message (`chat.reply` reads text, thinking and tool calls only).
 - Recorded but not written as tokens yet: `file` blocks (no model reads
   media yet) and a `tool_result`'s `error` flag.
 - Never written as tokens: `metadata`.

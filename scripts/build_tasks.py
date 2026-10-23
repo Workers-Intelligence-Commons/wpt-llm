@@ -3,21 +3,24 @@
 Usage:
     uv run scripts/build_tasks.py KIND SOURCE --count N [--seed S] [--select EXPRESSION]
 
-KIND is find-the-passage, evidence-removed, look-or-ask or commit-and-push
-(docs/post-training.md, "The task builder"). SOURCE is the id of an
+KIND is find-the-passage, evidence-removed, look-or-ask, commit-and-push or
+read-the-manual (docs/post-training.md, "The task builder"). SOURCE is the id of an
 `empty` source a person made for the tasks (`wpt-dataset new-source`, its
 license text written, tagged `grpo`); everything under KIND/ in it becomes
 the N tasks drawn with seed S (default 1) as one new patch, checked as
 `wpt-dataset check --fetch` checks it. The texts come from the admitted
 sources already in the store (WPT_STORE) whose documents the pool
 expression selects (required for the three text kinds); commit-and-push
-reads the git sources with a history. Rerunning with other arguments
+reads the git sources with a history, and read-the-manual no source (its
+tasks ask for results of a program of the agent image). Rerunning with other arguments
 adds, removes or varies tasks. The first committed task set is one run
 per kind with --count 2500.
 
 After writing, it reports what the task source holds: its tasks of each
-kind, and the shares of those that act (commit-and-push) and that check
-(the other kinds; maintainer's decision, 2026-10-22).
+kind, and the shares of those whose kind acts only (commit-and-push),
+checks only (find-the-passage, evidence-removed, look-or-ask) or does
+both (read-the-manual), which sum to 100% (maintainer's decision,
+2026-10-23; builder.CLASSES).
 """
 
 import argparse
@@ -49,7 +52,7 @@ def main():
     print(f"{len(built)} {arguments.kind} tasks written into {arguments.source}")
     counts = ", ".join(f"{kind} {count:,}" for kind, count in report["tasks"].items())
     print(f"{arguments.source} holds {sum(report['tasks'].values()):,} built tasks ({counts}): "
-          f"act {report['act']:.1%}, check {report['check']:.1%}")
+          f"acting only {report['act']:.1%}, checking only {report['check']:.1%}, both {report['both']:.1%}")
 
 
 if __name__ == "__main__":

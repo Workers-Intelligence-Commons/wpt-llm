@@ -140,7 +140,10 @@ The simplest way is the "New source" page of `uv run wpt-web`: write or
 paste your text, and the page makes the source, under review
 (`under-review`), with your text as its first patch; its "Conversations"
 and "Tasks" pages write post-training conversations and tasks the same
-way, and every page shows which data files git sees as changed.
+way, its "Ratings" page your pass or fail on a model's attempts (a
+measure only, never a training signal:
+[docs/evaluation.md](docs/evaluation.md), "People's ratings"), and every
+page shows which data files git sees as changed.
 `uv run wpt-dataset new-source` does the same on the command line. By
 hand:
 
@@ -238,7 +241,8 @@ commands only for structure and metadata: the kinds and names of files,
 `source.json`, recipes, file lists, tags, git's status; never to read or
 write people's texts, so it never runs the commands and options that do
 (`read`, `write`, `conversation`, `save-conversation`, `task`,
-`save-task`, and `new-source`'s `--file` and `--license-text`, marked `*`
+`save-task`, `save-rating`, and `new-source`'s `--file` and
+`--license-text`, marked `*`
 in `uv run wpt-dataset --help`). It may start a new source with
 `new-source` without `--file` and `--license-text` (maintainer's
 decision, 2026-10-18): the source is made with its license, attribution,

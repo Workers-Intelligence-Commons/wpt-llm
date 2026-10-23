@@ -2,8 +2,9 @@
 
 Files in the `task` format form task folders, one folder per task:
 
-    <folder>/task.json   instructions, image, limits, container sizes, the tools it needs and offers, the
-                         user's replies to the ask tool (schemas/task.schema.json)
+    <folder>/task.json   instructions (and, optionally, the same request in one line, terse), image,
+                         limits, container sizes, the tools it needs and offers, the user's replies to
+                         the ask tool (schemas/task.schema.json)
     <folder>/files/...   the starting files, copied into the attempt's container; those task.json's
                          tool_files names go where only the tools' programs read them
     <folder>/check       any program; run after the attempt, it prints a score from 0 to 1
@@ -27,7 +28,11 @@ offers. Every
 reply's pattern must compile, and every tool_files entry, a variant's
 included, must name a file of files/ (or one a pointer makes) or a
 folder holding some; a variant's may also name REMOTE, a repository
-pointer's remote outside /work.
+pointer's remote outside /work. Each `absent` entry is a folder of the
+image, outside /work and /tmp (OWN), that the task's attempts see empty:
+the image installs something there that the task removes, such as the
+manual of the read-the-manual tasks' program. A task's terse form is one
+line: no line break, as str.splitlines() finds them.
 
 A task built by a program is a pointer task: task.json's `pointers` name,
 for each text it needs, the source, the document (its path in the
@@ -73,7 +78,7 @@ from . import markdown
 from .errors import DocumentListMissing, InvalidFile, RuleViolation
 from .manifest import FILE, HISTORY, MERGE, ORDER, SYMLINK
 from .repo import Repo, validate
-from .sources import load_index, source_tree, tags_of, temporary_git
+from .sources import held_out_group, load_index, source_tree, tags_of, temporary_git
 
 TASK, CHECK, FILES = "task.json", "check", "files/"
 # the containers' sizes when task.json asks for no more: MiB of memory (the files in /work and /tmp included),
@@ -91,6 +96,7 @@ BRANCH = "main"  # the branch of a repository pointer's repository and of its re
 # a repository pointer's bare remote, outside /work, so that `git add -A` in /work never takes it (maintainer's
 # decision, 2026-10-22); a variant hides it by naming this path in its tool_files
 REMOTE = "/tmp/origin.git"
+OWN = ("/work", "/tmp")  # the attempt's own folders, kept in memory, which `absent` may not name
 PATCHES = 200  # history files undone per `git apply`, so the command line stays short
 
 
@@ -136,6 +142,9 @@ class Task:
     pointers: tuple = ()  # the Pointers fill() has not filled in yet
     answered_by: tuple = ()  # the looking tools that can answer what the task leaves open (wpt_check.asked_last)
     documents: tuple = ()  # (source, document, sha256 of its Markdown or None) of each document its pointers name
+    held_out_keys: tuple = ()  # what the held-out hash reads for each of them: its held-out group, or its id
+    absent: tuple = ()  # the image's folders the attempts see empty (task.json's `absent`)
+    terse: str = ""  # the same request as instructions, in one line; "" when the task has none
 
 
 def folders(paths) -> dict[str, list[str]]:
@@ -188,6 +197,9 @@ def parse(source_id: str, entries: dict, store, repo: Repo) -> dict[str, Task]:
             raise InvalidFile(f"{where}{TASK}: /work and /tmp may hold {container['disk']} MiB each, which with "
                               f"{HEADROOM} MiB for the processes needs more than {container['memory']} MiB of "
                               f"memory; raise container.memory above {2 * container['disk'] + HEADROOM}")
+        terse = document.get("terse", "")
+        if terse and terse.splitlines() != [terse]:
+            raise InvalidFile(f"{where}{TASK}: terse is the request in one line, and it holds a line break")
         limits = document["limits"]
         files = {path.removeprefix(prefix + FILES): (entries[path].mode, store.get_bytes(entries[path].sha256))
                  for path in sorted(paths) if path.startswith(prefix + FILES)}
@@ -197,6 +209,11 @@ def parse(source_id: str, entries: dict, store, repo: Repo) -> dict[str, Task]:
                             Variant(tuple(variant["tools"]), tuple(variant.get("tool_files", [])))
                             for variant in variants) for variants in document["needs"])
         answered_by = tuple(document.get("answered_by", []))
+        absent = tuple(document.get("absent", []))
+        for place in absent:
+            if posixpath.normpath(place) != place or any(place == own or place.startswith(own + "/") for own in OWN):
+                raise InvalidFile(f"{where}{TASK}: absent names {place!r}; it names a folder of the image, "
+                                  f"written without . or .., outside {' and '.join(OWN)}")
         pointed, made = _check_pointers(f"{where}{TASK}", document.get("pointers", []), files, known)
         if document["image"] not in pools:  # read once per image
             pools[document["image"]] = repo.image_tools(document["image"])
@@ -215,7 +232,7 @@ def parse(source_id: str, entries: dict, store, repo: Repo) -> dict[str, Task]:
                              {path: entry for path, entry in files.items() if path not in hidden},
                              store.get_bytes(check.sha256), container, needs, replies, tools,
                              {path: files[path] for path in hidden if path in files}, pointers=pointers,
-                             answered_by=answered_by)
+                             answered_by=answered_by, absent=absent, terse=terse)
     return tasks
 
 
@@ -272,9 +289,9 @@ def fill(tasks, repo: Repo, store) -> tuple[list[Task], dict]:
     for task in tasks:
         for pointer in task.pointers:  # a repository pointer's history file is a document too
             wanted.setdefault(pointer.source, set()).add(pointer.document)
-    texts, trees, sources, checksums = {}, {}, {}, {}
+    texts, trees, sources, checksums, read_sources = {}, {}, {}, {}, {}
     for sid, paths in sorted(wanted.items()):
-        source = repo.source(sid)
+        source = read_sources[sid] = repo.source(sid)
         if not source.admitted:
             raise InvalidFile(f"{sid}: tasks point into it, but it is not admitted")
         trees[sid], _ = source_tree(source, store)
@@ -289,6 +306,7 @@ def fill(tasks, repo: Repo, store) -> tuple[list[Task], dict]:
         read = {(pointer.source, pointer.document) for pointer in task.pointers}
         documents = tuple((sid, path, hashlib.sha256(texts[sid, path]).hexdigest() if (sid, path) in texts else None)
                           for sid, path in sorted(read))
+        keys = tuple(held_out_group(read_sources[sid], path) or f"{sid}/{path}" for sid, path in sorted(read))
         for pointer in task.pointers:
             where = f"{task.id}/{TASK}: the pointer to {pointer.path!r}"
             if pointer.to == "repository":
@@ -314,7 +332,8 @@ def fill(tasks, repo: Repo, store) -> tuple[list[Task], dict]:
             if cut is not None:  # a byte inside a UTF-8 character
                 raise InvalidFile(f"{where}: byte {cut} cuts a character of {pointer.source}/{pointer.document}")
             parts[pointer.to][pointer.path] = (FILE, b"".join(pieces))
-        filled.append(replace(task, **parts, pointers=(), documents=task.documents + documents))
+        filled.append(replace(task, **parts, pointers=(), documents=task.documents + documents,
+                              held_out_keys=task.held_out_keys + keys))
     return filled, sources
 
 
@@ -459,13 +478,40 @@ def measure_only(task: Task, tags, share: float, held=frozenset()) -> bool:
     2026-10-18 and 2026-10-22): tagged EVAL; or in the share `share` of
     every task source that a hash of the task id holds out, the rule that
     holds documents out of training (the model recipe's held_out); or, once
-    filled (fill), pointing into a document that rule holds out, or one
-    whose Markdown's sha256 is in held, the texts of the held-out documents
+    filled (fill), pointing into a document that rule holds out (by its
+    held-out group when it has one: the source's held_out_by,
+    sources.held_out_group; Task.held_out_keys), or one whose Markdown's
+    sha256 is in held, the texts of the held-out documents
     (held_out_texts): the same text under another id."""
     from .build import is_held_out
 
     return EVAL in tags or is_held_out(task.id, share) \
-        or any(is_held_out(f"{sid}/{path}", share) or sha256 in held for sid, path, sha256 in task.documents)
+        or any(is_held_out(key, share) for key in task.held_out_keys) \
+        or any(sha256 in held for _, _, sha256 in task.documents)
+
+
+def document_tags(repo: Repo, store, sid: str, document: str) -> frozenset[str]:
+    """The tags of a document a task points to (Task.documents), through
+    sources.tags_of: a file's, a record's file's (<file>#<record id>), and
+    for a repository pointer's history file (HISTORY + commit), the tags of
+    every file the commit changes (changed_paths)."""
+    source = repo.source(sid)
+    if not document.startswith(HISTORY):
+        return tags_of(source, document.split("#", 1)[0])
+    tree, _ = source_tree(source, store)
+    return frozenset(tag for path in changed_paths(store.get_bytes(tree[document].sha256))
+                     for tag in tags_of(source, path))
+
+
+def changed_paths(history: bytes) -> list[str]:
+    """The paths a history file's commit changes (what `git format-patch`
+    wrote for it, manifest.read_git_history), as `git apply --numstat`
+    reads them from its diff."""
+    with tempfile.TemporaryDirectory(prefix="wpt-changed-") as tmp:
+        git, _ = temporary_git(tmp)
+        listed = git("apply", "--numstat", "-z", input=history)
+    return [record.split(b"\t", 2)[2].decode("utf-8", errors="replace")
+            for record in listed.split(b"\0") if record.count(b"\t") >= 2]
 
 
 def held_out_texts(store, dataset: str | None) -> set[str]:
@@ -574,10 +620,11 @@ def pointed_sources(source, tree, store, repo: Repo) -> set[str]:
     return {pointer.source for task in of_source(source, tree, store, repo).values() for pointer in task.pointers}
 
 
-def read(repo: Repo, store, tag: str, held_out: float, log=print, measure=False,
+def read(repo: Repo, store, tag: str | None, held_out: float, log=print, measure=False,
          dataset: str | None = None) -> tuple[list[Task], dict]:
     """([Task], {source id: address, revision, licenses}) for every task of
-    an admitted source whose task.json is tagged `tag` and that is not
+    an admitted source whose task.json is tagged `tag` (any tag or none,
+    when tag is None: the measures read every measure-only task) and that is not
     measure-only (measure_only, with held_out the model recipe's share and,
     when a task points into documents, the texts of the held-out documents
     of `dataset`, the base model's, read once for the pass: held_out_texts,
@@ -588,12 +635,12 @@ def read(repo: Repo, store, tag: str, held_out: float, log=print, measure=False,
     with a note naming it."""
     found, sources = [], {}
     for source in repo.sources(log):
-        if not source.admitted:
+        if not source.admitted or not has_tasks(source):  # no tree read for a source without tasks
             continue
         tree, _ = source_tree(source, store)
         for folder, task in of_source(source, tree, store, repo).items():
             tags = tags_of(source, _prefix(folder) + TASK)
-            if tag in tags:
+            if tag is None or tag in tags:
                 found.append((task, tags, source))
     filled, pointed = fill([task for task, _, _ in found], repo, store)
     held = held_out_texts(store, dataset) if any(task.documents for task in filled) else set()

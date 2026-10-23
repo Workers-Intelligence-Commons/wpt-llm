@@ -7,7 +7,8 @@
   "required": ["schema", "instructions", "image", "limits", "needs"],
   "properties": {
     "schema": {"const": 1, "description": "shape version of the task"},
-    "instructions": {"type": "string", "minLength": 1, "description": "what the model is asked to do: the user message that starts every attempt"},
+    "instructions": {"type": "string", "minLength": 1, "description": "what the model is asked to do, in full: the user message that starts every attempt, unless it opens with terse"},
+    "terse": {"type": "string", "minLength": 1, "description": "the same request in one line (no line break: tasks.py refuses one), for the measure of terse against full requests: an attempt may open with it instead of instructions (docs/post-training.md, \"Tasks\")"},
     "image": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$", "description": "the image the attempt's container runs: a folder name in data/images/"},
     "limits": {
       "type": "object",
@@ -66,6 +67,12 @@
       "uniqueItems": true,
       "description": "paths under files/ (a file, or a folder and everything in it) that go to the tools' programs instead of /work: the model's own tools cannot read them",
       "items": {"type": "string", "pattern": "^[^/]+(/[^/]+)*$"}
+    },
+    "absent": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "absolute folders of the image, outside /work and /tmp, that the attempts' containers show empty: the task removes what the image installs there (docs/post-training.md, \"Tasks\")",
+      "items": {"type": "string", "pattern": "^(/[A-Za-z0-9._+-]+)+$"}
     },
     "pointers": {
       "type": "array",

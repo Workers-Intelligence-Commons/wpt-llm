@@ -2013,6 +2013,7 @@ version = "0.1.0"
 source = { editable = "packages/wpt-agent" }
 dependencies = [
     { name = "wpt-dataset" },
+    { name = "wpt-inference" },
     { name = "wpt-tokenizer" },
     { name = "wpt-utils" },
 ]
@@ -2020,6 +2021,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "wpt-dataset", editable = "packages/wpt-dataset" },
+    { name = "wpt-inference", editable = "packages/wpt-inference" },
     { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
     { name = "wpt-utils", editable = "packages/wpt-utils" },
 ]
@@ -2080,6 +2082,9 @@ version = "0.1.0"
 source = { editable = "apps/wpt-eval" }
 dependencies = [
     { name = "numpy" },
+    { name = "wpt-agent" },
+    { name = "wpt-dataset" },
+    { name = "wpt-inference" },
     { name = "wpt-model" },
     { name = "wpt-store" },
     { name = "wpt-telemetry" },
@@ -2090,6 +2095,9 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "numpy", specifier = ">=2" },
+    { name = "wpt-agent", editable = "packages/wpt-agent" },
+    { name = "wpt-dataset", editable = "packages/wpt-dataset" },
+    { name = "wpt-inference", editable = "packages/wpt-inference" },
     { name = "wpt-model", editable = "packages/wpt-model" },
     { name = "wpt-store", editable = "packages/wpt-store" },
     { name = "wpt-telemetry", editable = "packages/wpt-telemetry" },
@@ -2103,12 +2111,14 @@ version = "0.1.0"
 source = { editable = "packages/wpt-inference" }
 dependencies = [
     { name = "wpt-model" },
+    { name = "wpt-tokenizer" },
     { name = "wpt-utils" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "wpt-model", editable = "packages/wpt-model" },
+    { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
     { name = "wpt-utils", editable = "packages/wpt-utils" },
 ]
 
@@ -2327,6 +2337,7 @@ dependencies = [
     { name = "wpt-inference" },
     { name = "wpt-model" },
     { name = "wpt-store" },
+    { name = "wpt-telemetry" },
     { name = "wpt-tokenizer" },
     { name = "wpt-utils" },
 ]
@@ -2338,6 +2349,7 @@ requires-dist = [
     { name = "wpt-inference", editable = "packages/wpt-inference" },
     { name = "wpt-model", editable = "packages/wpt-model" },
     { name = "wpt-store", editable = "packages/wpt-store" },
+    { name = "wpt-telemetry", editable = "packages/wpt-telemetry" },
     { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
     { name = "wpt-utils", editable = "packages/wpt-utils" },
 ]

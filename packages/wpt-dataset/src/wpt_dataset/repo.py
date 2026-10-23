@@ -93,7 +93,7 @@ from .licenses import check_license
 from .pools import parse
 
 CURRENT_SCHEMA = {"source": 6, "mixture": 1, "model": 5, "tokenizer": 2, "lock": 2, "conversation": 3, "task": 1,
-                  "image-lock": 1, "image-licenses": 1, "image-tools": 1}
+                  "rating": 1, "image-lock": 1, "image-licenses": 1, "image-tools": 1}
 ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}")
 PATCH = re.compile(r"(\d{4})-[A-Za-z0-9._-]+\.patch")
 NAME = re.compile(r"[a-z0-9][a-z0-9._-]*")
@@ -919,6 +919,11 @@ class Repo:
         for cut in document.get("cuts", []):
             if cut["end"] <= cut["start"]:
                 raise RuleViolation(f"{sid}: cut on {cut['path']} ends at or before its start")
+        if "held_out_by" in document:
+            try:
+                re.compile(document["held_out_by"]["pattern"])
+            except re.error as error:
+                raise RuleViolation(f"{sid}: held_out_by's pattern is not a regular expression: {error}") from None
 
     def _check_image(self, name):
         self._image_folder(name)
@@ -1100,14 +1105,15 @@ class Repo:
 
     @_locked
     def change_source_files(self, sid: str, changes: dict[str, bytes | None], patch: str, version: str, store,
-                            formats=()) -> str:
+                            formats=(), tags=()) -> str:
         """Change, add (bytes) or remove (None) final files of the source, as
         `wpt-dataset unpack`, an edit and `wpt-dataset patch` would: the
         difference becomes the next patch, NNNN-<patch>.patch, kept only if
         the source then gives exactly those files and passes the rules of
         `wpt-dataset check --fetch`. formats: format entries source.json gets
-        first, for new files no entry covers yet; they are undone when the
-        patch is refused. version is the source_version the caller read.
+        first, for new files no entry covers yet; tags: tag entries it gets
+        first, the same way; both are undone when the patch is refused.
+        version is the source_version the caller read.
         A path that is a symbolic link, or lies under one, is refused
         (RuleViolation), except for removing the link itself: a write never
         follows a link. Returns the new one."""
@@ -1118,9 +1124,10 @@ class Repo:
         source_path = self._path("source", sid)
         before = source_path.read_bytes()
         try:
-            if formats:
+            if formats or tags:
                 document = json.loads(before)
-                self.save("source", sid, {**document, "formats": document["formats"] + list(formats)},
+                self.save("source", sid, {**document, "formats": document["formats"] + list(formats),
+                                          **({"tags": document.get("tags", []) + list(tags)} if tags else {})},
                           _sha256(before))
             with tempfile.TemporaryDirectory(prefix="wpt-change-") as tmp:
                 folder = Path(tmp) / sid
@@ -1233,12 +1240,7 @@ class Repo:
         current shape; an absent file has none."""
         from .conversations import parse
 
-        self._editable_chat(sid, path)
-        try:
-            version, data = self.read_source_file(sid, path, store)
-        except NotFound:
-            return self.source_version(sid), []
-        return version, parse(sid, path, data)
+        return self._lines(sid, path, "chat", parse, store)
 
     @_locked
     def save_conversation(self, sid: str, path: str, line: int | None, conversation: dict | None, patch: str,
@@ -1254,46 +1256,98 @@ class Repo:
         drafts included. Returns the new version."""
         from .conversations import mark_drafts, parse
 
+        return self._save_line(sid, path, line, None if conversation is None else mark_drafts(conversation), "chat",
+                               parse, patch, version, store)
+
+    # -- ratings: lines of a rating file ----------------------------------------------
+    def ratings(self, sid: str, path: str, store) -> tuple[str, list[dict]]:
+        """(version, ratings) of a rating file of the source (people's pass
+        or fail on measure attempts; ratings.py); an absent file has none."""
+        from .ratings import parse
+
+        return self._lines(sid, path, "rating", parse, store)
+
+    @_locked
+    def save_rating(self, sid: str, path: str, line: int | None, rating: dict | None, patch: str, version: str,
+                    store) -> str:
+        """Replace the rating on line `line` (from 1), add one (line None),
+        or remove one (rating None), through a patch (change_source_files),
+        in a rating file of an `empty` source, as save_conversation does with
+        conversations. A rating added by a person who rated the same attempt
+        already replaces their earlier line (maintainer's decision,
+        2026-10-23; ratings.attempt_of); any other goes at the end. A new
+        rating file gets its own `rating` format entry when none covers it.
+        The whole file must pass the rating rules (ratings.py). Returns the
+        new version."""
+        from .ratings import attempt_of, parse
+
+        return self._save_line(sid, path, line, rating, "rating", parse, patch, version, store, same=attempt_of)
+
+    def _lines(self, sid, path, format, parse, store) -> tuple[str, list[dict]]:
+        """(version, parse's documents) of a file of the source in format
+        (chat, rating), one document per line; an absent file has none."""
+        self._editable(sid, path, format)
+        try:
+            version, data = self.read_source_file(sid, path, store)
+        except NotFound:
+            return self.source_version(sid), []
+        return version, parse(sid, path, data)
+
+    def _save_line(self, sid, path, line, document, format, parse, patch, version, store, same=None) -> str:
+        """Replace, add or remove one line of a file in format (chat,
+        rating) of an `empty` source, as the next patch, keeping a replaced
+        line's layout where its meaning did not change; the whole file must
+        pass parse. same, when given, says what a document is the same as:
+        a document added (line None) replaces the line whose document gives
+        the same same(). A new file gets its own format entry when none
+        covers it. The caller holds the lock (_locked)."""
         self._written_for_wpt(sid)
-        self._editable_chat(sid, path)
+        self._editable(sid, path, format)
         try:
             _, data = self.read_source_file(sid, path, store)
-            lines = data.decode("utf-8").splitlines()  # as conversations.parse numbers them
+            lines = data.decode("utf-8").splitlines()  # as parse numbers them
         except NotFound:
             lines = []
         except UnicodeDecodeError:
             raise InvalidFile(f"{sid}/{path}: not UTF-8 text") from None
         if line is not None and not 1 <= line <= len(lines):
             raise NotFound(f"{sid}/{path} has no line {line}")
-        if conversation is None:
+        if line is None and document is not None and same is not None and lines:
+            try:
+                key = same(document)
+            except (KeyError, TypeError):  # a document that is not whole: parse names what it lacks
+                key = None
+            found = [number for number, earlier in enumerate(parse(sid, path, data), start=1)
+                     if key is not None and same(earlier) == key]
+            line = found[0] if found else None
+        if document is None:
             if line is None:
-                raise RuleViolation("give the line of the conversation to remove")
+                raise RuleViolation("give the line to remove")
             del lines[line - 1]
+        elif line is None:
+            lines.append(json_text(document))
         else:
-            conversation = mark_drafts(conversation)
-            if line is None:
-                lines.append(json_text(conversation))
-            else:
-                lines[line - 1] = keep_layout(lines[line - 1], conversation, json_text)
+            lines[line - 1] = keep_layout(lines[line - 1], document, json_text)
         content = ("\n".join(lines) + "\n").encode("utf-8") if lines else None
         if content is not None:
             parse(sid, path, content)
-        formats = [] if self._format_entry(sid, path) else [{"format": "chat", "paths": [path]}]
+        formats = [] if self._format_entry(sid, path) else [{"format": format, "paths": [path]}]
         return self.change_source_files(sid, {path: content}, patch, version, store, formats)
 
     def _written_for_wpt(self, sid, source: Source | None = None):
         """RuleViolation unless the source (read here when not given) is an
-        `empty` one: conversations and tasks are text written for WPT
-        (CONTRIBUTING.md, "Adding your own texts"), never a change to
+        `empty` one: conversations, tasks and ratings are text written for
+        WPT (CONTRIBUTING.md, "Adding your own texts"), never a change to
         upstream's files."""
         kind = (source or self.source(sid)).data["type"]
         if kind != "empty":
-            raise RuleViolation(f"{sid} is a {kind} source: conversations and tasks are written in an empty source")
+            raise RuleViolation(f"{sid} is a {kind} source: conversations, tasks and ratings are written in an "
+                                f"empty source")
 
-    def _editable_chat(self, sid, path):
+    def _editable(self, sid, path, format):
         entry = self._format_entry(sid, path)
-        if entry is not None and entry["format"] != "chat":
-            raise RuleViolation(f"{sid}/{path} is in the {entry['format']} format, not chat")
+        if entry is not None and entry["format"] != format:
+            raise RuleViolation(f"{sid}/{path} is in the {entry['format']} format, not {format}")
         if entry is not None and "tree" in entry:
             raise RuleViolation(f"{sid}/{path} is read as a message tree (upstream's records): not editable here")
 

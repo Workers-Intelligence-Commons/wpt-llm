@@ -1,4 +1,5 @@
 import dataclasses
+import hashlib
 import json
 import random
 import re
@@ -7,11 +8,12 @@ import time
 
 import pytest
 
-from wpt_agent import AGENT, Limits, Sandbox, SandboxError, arranged, attempt, attempts, docker, offer, opening, plain, score
-from wpt_agent.loop import ANSWERED, CONTEXT, FULL, TOKENS, TURNS
+from wpt_agent import (AGENT, Limits, Sandbox, SandboxError, arranged, attempt, attempts, changes, docker, needed,
+                       offer, opening, plain, score)
+from wpt_agent.loop import ANSWERED, CONFIDENCE, CONTEXT, FULL, TOKENS, TURNS
 from wpt_agent.sandbox import ROOT
 from wpt_agent.tools import ASK, NOT_KNOWN, OTHER_NAMES, TOOLS, call
-from wpt_dataset.manifest import EXECUTABLE, FILE
+from wpt_dataset.manifest import EXECUTABLE, FILE, SYMLINK
 from wpt_dataset.tasks import ASK as ASK_NAME, BUILT_IN, REMOTE, Task, Variant
 from wpt_tokenizer import Tokenizer, chat
 
@@ -59,9 +61,13 @@ class Scripted:
         return {row: self.writes[row](limit) for row, limit in limits.items()}
 
 
+SURE = {"type": "text", "text": "50"}  # a reply to the loop's confidence question
+
+
 def scripted(*turns):
-    """A model that writes the given turns, one per call."""
-    pending = list(turns)
+    """A model that writes the given turns, one per call, then SURE when
+    the loop asks for its confidence after its final reply."""
+    pending = [*turns, turn(SURE)]
     return Scripted(lambda count: pending.pop(0)[:count])
 
 
@@ -91,10 +97,10 @@ def test_tool_calls_run_in_the_container_and_the_check_scores_what_they_left(ima
 
     assert done.ended == ANSWERED
     assert results(done) == ["start\n", "edited out.txt", "wrote 1 bytes to deep/er/new.txt", "hello\n"]
-    assert [i for i, learned in zip(done.ids, done.learn) if learned] == [i for t in turns for i in t]
+    assert [i for i, learned in zip(done.ids, done.learn) if learned] == [i for t in [*turns, turn(SURE)] for i in t]
     assert done.ids[:len(chat.prompt(TOKENIZER, opening(task())))] == chat.prompt(TOKENIZER, opening(task()))
     shown = chat.show(TOKENIZER, done.ids)
-    assert shown.count("<|im_start|>assistant\n") == 4 and "<tool_response>\nhello\n\n</tool_response>" in shown
+    assert shown.count("<|im_start|>assistant\n") == 5 and "<tool_response>\nhello\n\n</tool_response>" in shown
 
 
 def test_limits_stop_a_command_cut_a_long_result_and_end_the_attempt(image):
@@ -331,13 +337,29 @@ def test_attempts_written_together_read_the_opening_once_and_end_apart():
     # one row answers in two short pieces, the other writes without end
     # until the task's max_tokens: each ends on its own, and the model read
     # the task's opening once, for both
-    pieces = [[ord("o"), ord("k")], [chat.IM_END]]
+    pieces = [[ord("o"), ord("k")], [chat.IM_END], [ord("7"), chat.IM_END]]
     model = Scripted(lambda count: pieces.pop(0)[:count], lambda count: [ord("a")] * min(count, 3))
     answered, cut = attempts(task(max_tokens=10), [None, None], TOKENIZER, model, result_bytes=10)
     prompt = chat.prompt(TOKENIZER, opening(task()))
     assert model.read == [(prompt, 2)]
-    assert answered.ended == ANSWERED and answered.ids == prompt + [ord("o"), ord("k"), chat.IM_END]
+    assert answered.ended == ANSWERED and answered.ids[:len(prompt) + 3] == prompt + [ord("o"), ord("k"), chat.IM_END]
+    assert answered.conversation["metadata"]["answer"] == {"answer": "ok", "confidence": 0.07}
     assert cut.ended == TOKENS and cut.ids == prompt + [ord("a")] * 10 and sum(cut.learn) == 10
+
+
+def test_an_attempt_opens_with_the_full_request_or_with_its_one_line_form():
+    # the measure of terse against full requests gives the same task in
+    # either form (maintainer's decision, 2026-10-23); the model reads the
+    # form asked for as the user's message
+    both = task(terse="Say hello.")
+    [full, terse] = [attempt(both, None, TOKENIZER, scripted(turn({"type": "text", "text": "Done."})),
+                             result_bytes=10, terse=form) for form in (False, True)]
+    assert [done.conversation["messages"][0]["content"][0]["text"] for done in (full, terse)] == [
+        "Say hello in out.txt.", "Say hello."]
+    assert terse.ids[:len(chat.prompt(TOKENIZER, opening(both, terse=True)))] == chat.prompt(
+        TOKENIZER, opening(both, terse=True))
+    with pytest.raises(ValueError, match="no one-line form"):
+        opening(task(), terse=True)
 
 
 def test_a_check_that_prints_no_score_gives_none_and_says_why(image):
@@ -372,19 +394,44 @@ def test_the_ask_tool_answers_from_the_replies_written_in_advance_and_the_attemp
         "unknown tool 'ask'; the tools are read, write, edit, bash", True)
 
 
-def test_an_attempt_records_its_answer_block_and_a_malformed_one_as_missing():
-    # every attempt ends with a json block holding the answer and the
-    # confidence (docs/chat-format.md, "The answer"); a block of another
-    # shape counts as missing, which the check library scores 0
-    good = {"answer": "Wrote hello into out.txt.", "confidence": 0.8}
-    for value, kept in [(good, good), ({"answer": "Done.", "confidence": 1.5}, None),
-                        ({"answer": "Done.", "confidence": True}, None), ({"answer": "Done."}, None), ("Done.", None)]:
-        done = attempt(task(), None, TOKENIZER, scripted(turn({"type": "text", "text": "Done."},
-                                                              {"type": "json", "value": value})), result_bytes=10)
-        assert done.conversation["metadata"]["answer"] == kept
-    done = attempt(task(), None, TOKENIZER, scripted(turn({"type": "text", "text": "Done."})), result_bytes=10)
-    assert done.conversation["metadata"] == {"tools": {name: name for name in ["read", "write", "edit", "bash"]},
-                                             "looking": ["read", "bash"], "answered_by": [], "answer": None}
+def test_the_final_reply_is_the_answer_and_the_confidence_comes_from_the_question_after_it():
+    # the model writes text only: its final reply is the answer, then the
+    # loop asks CONFIDENCE and builds metadata.answer from the reply, a
+    # number from 0 to 100 divided by 100 (docs/chat-format.md, "The answer");
+    # any other reply gives no answer, which the check library scores 0
+    final = turn({"type": "thinking", "text": "It is written."}, {"type": "text", "text": "Wrote hello into out.txt."})
+    thought = {"type": "thinking", "text": "Fairly sure."}
+    for reply, kept in [([{"type": "text", "text": "80"}], 0.8), ([{"type": "text", "text": " 72.5\n"}], 0.725),
+                        ([thought, {"type": "text", "text": "100"}], 1.0), ([{"type": "text", "text": "0"}], 0.0),
+                        ([{"type": "text", "text": "101"}], None), ([{"type": "text", "text": "80%"}], None),
+                        ([{"type": "text", "text": "About 80."}], None), ([{"type": "text", "text": "-5"}], None),
+                        ([], None), ([bash("echo 80")], None)]:
+        done = attempt(task(), None, TOKENIZER, scripted(final, turn(*reply)), result_bytes=10)
+        assert done.ended == ANSWERED
+        assert done.conversation["metadata"]["answer"] == (
+            None if kept is None else {"answer": "Wrote hello into out.txt.", "confidence": kept})
+    messages = done.conversation["messages"]
+    assert [m["role"] for m in messages] == ["user", "assistant", "user", "assistant"]
+    assert messages[2]["content"] == [{"type": "text", "text": CONFIDENCE}]
+    assert chat.show(TOKENIZER, done.ids).endswith(
+        f"<|im_start|>user\n{CONFIDENCE}<|im_end|>\n<|im_start|>assistant\n" + chat.show(TOKENIZER, turn(*reply)))
+    learned = [i for i, kept in zip(done.ids, done.learn) if kept]
+    assert learned == final + turn(*reply)  # the question is read, never learned
+
+
+def test_an_attempt_without_a_final_reply_or_a_whole_confidence_has_no_answer():
+    # a limit before the final reply, or one that cuts the reply to the
+    # confidence question, leaves no answer: the attempt scores 0
+    unknown = {"type": "tool_call", "id": "call-1", "name": "nothing", "arguments": {}}  # runs without a sandbox
+    done = attempt(task(max_turns=1), None, TOKENIZER, scripted(turn(unknown)), result_bytes=10)
+    assert done.ended == TURNS and done.conversation["metadata"] == {
+        "tools": {name: name for name in ["read", "write", "edit", "bash"]}, "looking": ["read", "bash"],
+        "answered_by": [], "answer": None}
+    final = turn({"type": "text", "text": "Done."})
+    sure = turn({"type": "text", "text": "90"})
+    done = attempt(task(max_tokens=len(final) + 1), None, TOKENIZER, scripted(final, sure), result_bytes=10)
+    assert done.ended == TOKENS and done.conversation["metadata"]["answer"] is None
+    assert done.conversation["messages"][-1] == {"role": "assistant", "content": [{"type": "text", "text": "9"}]}
 
 
 def test_the_opening_lists_the_offered_tools_that_look_by_their_real_names():
@@ -445,13 +492,74 @@ def test_each_attempt_gets_one_way_of_a_need_with_the_files_that_way_hides():
     ways = set()
     for seed in range(40):
         chosen = offer(pushing, [], random.Random(seed))
-        files, hidden, outside = arranged(pushing, chosen)
+        found = arranged(pushing, chosen)
         offered = set(chosen.names.values())
-        assert "bash" in offered and ("push" in offered) == bool(chosen.hidden) and files == pushing.files
+        assert "bash" in offered and ("push" in offered) == bool(chosen.hidden) and found.files == pushing.files
         moved = {f"tmp/origin.git/{path}": entry for path, entry in remote.items()}
-        assert (hidden, outside) == ((moved, {}) if chosen.hidden else ({}, {REMOTE: remote}))
+        assert (found.tool_files, found.outside) == ((moved, {}) if chosen.hidden else ({}, {REMOTE: remote}))
         ways.add("push" in offered)
     assert ways == {True, False}
+
+
+def test_the_needed_tools_are_the_varied_attempt_s_variants_under_their_real_names():
+    # an attempt offered only what it needs gets the same variant of each
+    # need, and so the same hidden files, as the varied attempt drawn from a
+    # generator in the same state, and nothing renamed, shuffled or added;
+    # the task's absent folders come with the arrangement either way
+    push = {"name": "push", "description": "Push.", "program": "/usr/local/bin/push", "parameters": {"type": "object"}}
+    pushing = task(needs=((Variant(("bash",)), Variant(("bash", "push"), (REMOTE,))), (Variant(("read",)),)),
+                   tools=(push,), outside={REMOTE: {"HEAD": (FILE, b"ref: refs/heads/main\n")}},
+                   absent=("/usr/share/doc/thing",))
+    pool = [{"name": "fetch", "description": "Fetch.", "program": "/usr/local/bin/fetch",
+             "parameters": {"type": "object"}}]
+    ways = set()
+    for seed in range(40):
+        varied, only = offer(pushing, pool, random.Random(seed)), needed(pushing, random.Random(seed))
+        expected = ["bash", "push", "read"] if varied.hidden else ["bash", "read"]
+        assert only.names == {name: name for name in expected} and [t["name"] for t in only.tools] == expected
+        assert only.hidden == varied.hidden and set(only.names) <= set(varied.names.values())
+        assert arranged(pushing, only) == arranged(pushing, varied)
+        assert arranged(pushing, only).absent == ("/usr/share/doc/thing",)
+        ways.add(only.hidden)
+    assert len(ways) == 2
+
+
+def test_an_attempt_s_changes_to_work_are_a_diff_naming_what_is_not_text():
+    # what the rating page shows of an attempt: each changed text file as a
+    # unified diff, a binary or large file named with its size, a change of
+    # mode named, nothing for a file left as it was; the whole cut past its limit
+    def left(mode, content):
+        return mode, content, len(content), hashlib.sha256(content).hexdigest()
+
+    before = {"same.txt": (FILE, b"one\n"), "edit.txt": (FILE, b"a\nb\n"), "gone.txt": (FILE, b"bye\n"),
+              "run.sh": (FILE, b"echo hi\n"), "data.bin": (FILE, b"\0\1")}
+    after = {"same.txt": left(FILE, b"one\n"), "edit.txt": left(FILE, b"a\nc"), "run.sh": left(EXECUTABLE, b"echo hi\n"),
+             "data.bin": left(FILE, b"\0\2"), "new.txt": left(FILE, b"hello\n"), "link": left(SYMLINK, b"new.txt"),
+             "big.txt": (FILE, None, 1 << 20, "0" * 64)}
+    text = changes(before, after)
+    assert text == ("big.txt: added, not shown (1048576 bytes, not UTF-8 text or more than 65536)\n"
+                    "data.bin: changed, not shown (2 bytes, not UTF-8 text or more than 65536)\n"
+                    "--- a/edit.txt\n+++ b/edit.txt\n@@ -1,2 +1,2 @@\n a\n-b\n+c\n\\ No newline at end of file\n"
+                    "--- a/gone.txt\n+++ /dev/null\n@@ -1 +0,0 @@\n-bye\n"
+                    "--- /dev/null\n+++ b/link\n@@ -0,0 +1 @@\n+-> new.txt\n"
+                    "--- /dev/null\n+++ b/new.txt\n@@ -0,0 +1 @@\n+hello\n"
+                    f"mode of run.sh: {FILE} -> {EXECUTABLE}\n")
+    assert changes(before, {path: left(*entry) for path, entry in before.items()}) == ""
+    cut = changes(before, after, limit=40)
+    assert cut.startswith(text[:40]) and cut.endswith(f" more bytes of changes]\n") and len(cut) < 100
+
+
+def test_the_files_an_attempt_left_in_work_are_read_with_their_modes_and_hashes(image):
+    # what changes() compares: every file and link in /work at the end, a
+    # file larger than the limit hashed but not kept
+    with sandbox(image, {"notes.txt": (FILE, b"start\n")}) as box:
+        call(box, "bash", {"command": "echo hello > out.txt; chmod +x out.txt; head -c 300 /dev/zero > big; "
+                                      "mkdir -p sub; ln -s ../out.txt sub/link; rm notes.txt"}, 10, 1000, plain(task()))
+        box.freeze()
+        found = box.work_files(100)
+    assert found == {"out.txt": (EXECUTABLE, b"hello\n", 6, hashlib.sha256(b"hello\n").hexdigest()),
+                     "big": (FILE, None, 300, hashlib.sha256(bytes(300)).hexdigest()),
+                     "sub/link": (SYMLINK, b"../out.txt", 10, hashlib.sha256(b"../out.txt").hexdigest())}
 
 
 def test_attempts_offered_other_tools_share_the_start_of_their_openings():
@@ -464,7 +572,8 @@ def test_attempts_offered_other_tools_share_the_start_of_their_openings():
     prompts = [chat.prompt(TOKENIZER, opening(task(), chosen)) for chosen in offers]
     [(shared, rows)] = model.read
     assert rows == 2 and all(prompt[:len(shared)] == shared for prompt in prompts) and prompts[0] != prompts[1]
-    assert [one.ids for one in done] == [prompt + [chat.IM_END] for prompt in prompts]
+    assert [one.ids[:len(prompt) + 1] for one, prompt in zip(done, prompts)] == [
+        prompt + [chat.IM_END] for prompt in prompts]
     assert [one.conversation["metadata"]["tools"] for one in done] == [chosen.names for chosen in offers]
 
 
@@ -495,7 +604,7 @@ def test_a_tool_s_program_reads_the_files_hidden_from_the_model_s_own_tools(imag
 
 
 def test_the_check_reads_the_attempt_s_conversation_next_to_it(image):
-    # the check scores the trace and the answer block too, from the
+    # the check scores the trace and the answer too, from the
     # conversation file beside it, which maps the names the model saw
     renamed = next(chosen for chosen in (offer(task(), [], random.Random(seed)) for seed in range(50))
                    if any(shown != actual for shown, actual in chosen.names.items()))
@@ -503,8 +612,9 @@ def test_the_check_reads_the_attempt_s_conversation_next_to_it(image):
     check = (f'#!/bin/sh\nc="$(dirname "$0")/conversation.json"\ngrep -qF \'"{shown}": "{actual}"\' "$c" && '
              f'grep -qF \'"answer": {{"answer": "Nothing to change.", "confidence": 0.25}}\' "$c" '
              f'&& echo 0.25 || echo 0\n')
-    end = turn({"type": "json", "value": {"answer": "Nothing to change.", "confidence": 0.25}})
+    end = turn({"type": "text", "text": "Nothing to change."})
     with sandbox(image, {}) as box:
-        done = attempt(task(), box, TOKENIZER, scripted(end), result_bytes=10, offer=renamed)
+        done = attempt(task(), box, TOKENIZER, scripted(end, turn({"type": "text", "text": "25"})), result_bytes=10,
+                       offer=renamed)
         assert done.conversation["metadata"]["tools"] == renamed.names
         assert score(box, check.encode(), 10, done.conversation) == (0.25, "")

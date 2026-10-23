@@ -26,6 +26,9 @@ from letting one look into the other (ptrace access, /proc/<pid>/fd and
 /mem). Folders a task puts outside /work (`outside`, such as a
 repository's remote at /tmp/origin.git) are unpacked at their absolute
 paths under /tmp, with the user as their owner, as /work's files are.
+Folders of the image a task removes (`absent`) are each covered by an
+empty, read-only folder kept in memory, so the container shows them
+empty.
 save() and restore() carry hidden files and such folders to a check's
 container: docker cp cannot read /tmp, a tmpfs, so they are read while
 the container still runs, which changes nothing the model's commands
@@ -50,6 +53,7 @@ its end are kept, so a command that prints without end never fills the
 host's memory. Docker is started through docker.py.
 """
 
+import hashlib
 import io
 import posixpath
 import subprocess
@@ -60,7 +64,7 @@ import time
 from dataclasses import dataclass
 from typing import BinaryIO, NamedTuple
 
-from wpt_dataset.manifest import EXECUTABLE, SYMLINK
+from wpt_dataset.manifest import EXECUTABLE, FILE, SYMLINK
 
 from . import docker
 from .docker import DockerFailed
@@ -69,6 +73,7 @@ WORK = "/work"
 AGENT, ROOT = "1000:1000", "0:0"  # user:group of the model's commands, and of the check's
 TOOL = "1000:1001"  # user:group of a tool's program: the model's user, in the group that reads TOOL_FILES
 TOOL_FILES, TOOLS_GROUP = "/tmp/wpt-tools", 1001  # the files only the tools' programs read, and their group
+EMPTY = "4k"  # the size of the empty folder that covers each of a task's absent folders
 GRACE = 5  # seconds between timeout's TERM and its KILL
 WAIT = 30  # seconds docker itself may take beyond a command's own limit
 STOPPED = {124, 137}  # timeout's exit codes when it stopped the command: by TERM, or by KILL after GRACE
@@ -115,11 +120,13 @@ class Sandbox:
     """A running container of `image` holding `files` ({path under /work:
     (manifest mode, content)}), whose commands run as `user`, tool_files,
     the same way, under TOOL_FILES, and outside ({absolute folder under
-    /tmp: its files, the same way}). Use it in a with block: leaving it
-    removes the container."""
+    /tmp: its files, the same way}), each folder of the image in absent
+    shown empty. Use it in a with block: leaving it removes the
+    container."""
 
     def __init__(self, image: str, files: dict[str, tuple[str, bytes]], *, user: str, limits: Limits,
-                 tool_files: dict[str, tuple[str, bytes]] | None = None, outside: dict[str, dict] | None = None):
+                 tool_files: dict[str, tuple[str, bytes]] | None = None, outside: dict[str, dict] | None = None,
+                 absent=()):
         self.image, self.user, self.limits, self.container = image, user, limits, None
         confined = [*CONFINED, "--security-opt", "no-new-privileges"] if user != ROOT else []
         created = self._docker(
@@ -127,6 +134,7 @@ class Sandbox:
             "--mount", f"type=volume,dst={WORK},volume-driver=local,volume-opt=type=tmpfs,volume-opt=device=tmpfs,"
                        f"volume-opt=o=size={limits.disk}m",
             "--tmpfs", f"/tmp:rw,exec,size={limits.disk}m",
+            *(option for folder in absent for option in ("--tmpfs", f"{folder}:ro,size={EMPTY},mode=0555")),
             "--memory", f"{limits.memory}m", "--memory-swap", f"{limits.memory}m",
             "--pids-limit", str(limits.processes), "--cpus", str(limits.cpus),
             image, "sleep", "infinity")
@@ -277,6 +285,43 @@ class Sandbox:
             if process.returncode:
                 raise SandboxError(f"copying /work from {self.container} into {into.container}: "
                                    f"{errors.decode(errors='replace').strip()}")
+
+    def work_files(self, limit: int) -> dict[str, tuple[str, bytes | None, int, str]]:
+        """{path under /work: (manifest mode, content, size, sha256 of the
+        content)} of every file and symbolic link /work holds now (a link's
+        content is its target), read with docker cp; freeze first, so no
+        process changes it on the way. A file larger than limit bytes has
+        the content None: its bytes are hashed as they come, never kept."""
+        reading = self._start("cp", f"{self.container}:{WORK}", "-", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        read = _Kept(ERRORS)
+        drain = threading.Thread(target=_drain, args=(reading.stderr, read), daemon=True)
+        drain.start()
+        found, broken = {}, ""
+        try:
+            with tarfile.open(fileobj=reading.stdout, mode="r|") as archive:  # read as it comes, never seeked
+                for member in archive:
+                    path = member.name.split("/", 1)[1] if "/" in member.name else ""
+                    if member.issym():
+                        target = member.linkname.encode()
+                        found[path] = (SYMLINK, target, len(target), hashlib.sha256(target).hexdigest())
+                    elif member.isfile():
+                        digest, kept, stream = hashlib.sha256(), bytearray(), archive.extractfile(member)
+                        while chunk := stream.read(CHUNK):
+                            digest.update(chunk)
+                            if member.size <= limit:
+                                kept += chunk
+                        found[path] = (EXECUTABLE if member.mode & 0o100 else FILE,
+                                       bytes(kept) if member.size <= limit else None, member.size, digest.hexdigest())
+        except tarfile.TarError as error:  # docker stopped sending, or sent no archive
+            broken = str(error)
+        finally:
+            reading.stdout.close()
+            reading.wait()
+            drain.join()
+        if reading.returncode or broken:
+            raise SandboxError(f"reading /work of {self.container}: "
+                               f"{read.bytes().decode(errors='replace').strip() or broken}")
+        return found
 
     def close(self):
         """Remove the container and its processes; SandboxError when docker refuses."""

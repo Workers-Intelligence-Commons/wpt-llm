@@ -1,5 +1,6 @@
 import hashlib
 import json
+import re
 import shutil
 from pathlib import Path
 
@@ -97,6 +98,18 @@ def pointer(source, text, path, start, end, removed=(), to="files"):
     """A pointer to text[start:end] of the source's notes.txt, its sha256 included."""
     return {"for": to, "path": path, "source": source.id, "document": "notes.txt", "span": [start, end],
             "sha256": hashlib.sha256(text[start:end]).hexdigest(), "removed": [list(part) for part in removed]}
+
+
+def test_a_task_holds_its_request_in_full_and_in_one_line(kit, repo, store, tmp_path):
+    # the measure of terse against full requests opens the same task with
+    # either form (maintainer's decision, 2026-10-23); a task without the
+    # one-line form keeps "" for it
+    files = {"tasks/a/task.json": json.dumps({**TASK, "terse": "Say hello."}).encode(), "tasks/a/check": CHECK,
+             "tasks/b/task.json": json.dumps(TASK).encode(), "tasks/b/check": CHECK}
+    add(kit, repo, store, tmp_path / "work", files, [{"tags": ["grpo"], "paths": ["**"]}])
+    found, _ = tasks.read(repo, store, "grpo", 0)
+    assert [(task.instructions, task.terse) for task in found] == [("Write hello into out.txt.", "Say hello."),
+                                                                   ("Write hello into out.txt.", "")]
 
 
 def test_a_pointer_task_gets_its_texts_from_the_document_it_points_into(kit, repo, store, tmp_path):
@@ -254,6 +267,32 @@ def test_a_task_on_the_text_of_a_held_out_document_is_measure_only(kit, repo, st
     assert {task.id for task in measured} == {f"{work.id}/tasks/{name}" for name in names} - (ids - copied)
 
 
+def test_a_task_pointing_into_a_document_held_out_by_its_group_is_measure_only(kit, repo, store, tmp_path):
+    # a document of a source with held_out_by (as eBible's chapters are held
+    # out by book and chapter: maintainer's decision, 2026-10-23) is held out
+    # by its group, not its id; a task pointing into it is measure-only by
+    # the same rule, whatever its own id and its id say
+    path = "notes.txt"
+    group = next(path[i:j] for i in range(len(path)) for j in range(i + 1, len(path) + 1)
+                 if is_held_out(path[i:j], 0.5))  # a part of the path whose hash holds it out
+    book = next(source for number in range(16)  # a source whose document's own id is not held out
+                for source in [add(kit, repo, store, tmp_path / f"book{number}", {path: BOOK}, [])]
+                if not is_held_out(f"{source.id}/{path}", 0.5))
+    data = json.loads((repo.root / "data" / "sources" / book.id / "source.json").read_text())
+    (repo.root / "data" / "sources" / book.id / "source.json").write_text(
+        json.dumps({**data, "held_out_by": {"pattern": f"({re.escape(group)})"}}, indent=2) + "\n")
+    tree, _ = source_tree(book, store)
+    [text] = [c.markdown for c in documents(book, tree, store, repo)]
+    names = [f"t{i}" for i in range(12)]
+    files = {f"tasks/{name}/{part}": content for name in names for part, content in (
+        ("task.json", json.dumps({**TASK, "pointers": [pointer(book, text, "a.txt", 0, 10)]}).encode()),
+        ("check", CHECK))}
+    add(kit, repo, store, tmp_path / "work", files, [{"tags": ["grpo"], "paths": ["**"]}])
+    training, _ = tasks.read(repo, store, "grpo", 0.5, dataset=listed(store))
+    measured, _ = tasks.read(repo, store, "grpo", 0.5, measure=True, dataset=listed(store))
+    assert training == [] and len(measured) == len(names)
+
+
 def test_pointer_tasks_are_refused_when_the_base_dataset_kept_no_document_list(kit, repo, store, tmp_path):
     # maintainer's decisions, 2026-10-22: a dataset built before builds kept
     # their document list cannot say which texts are held out; reading
@@ -309,8 +348,15 @@ def test_pointer_tasks_are_refused_when_the_base_dataset_kept_no_document_list(k
         {"for": "files", "path": "a.txt", "source": "example-gone-0123abcd", "document": "notes.txt", "span": [0, 1],
          "sha256": "0" * 64}]}).encode(), "tasks/a/check": CHECK},
      "tasks/a/task.json: a pointer names the source 'example-gone-0123abcd', which does not exist"),
+    # the one-line form of the request is one line (maintainer's decision, 2026-10-23)
+    ({"tasks/a/task.json": json.dumps({**TASK, "terse": "Write hello.\n"}).encode(), "tasks/a/check": CHECK},
+     "tasks/a/task.json: terse is the request in one line, and it holds a line break"),
     ({"tasks/a/task.json": json.dumps({**TASK, "image": "missing"}).encode(), "tasks/a/check": CHECK},
      "tasks/a/task.json: no image 'missing': data/images/missing/Dockerfile does not exist"),
+    # absent names a folder of the image: /work and /tmp are the attempt's own, and a path with .. could reach them
+    *(({"tasks/a/task.json": json.dumps({**TASK, "absent": [place]}).encode(), "tasks/a/check": CHECK},
+       rf"tasks/a/task.json: absent names '{place}'; it names a folder of the image")
+      for place in ("/work", "/tmp/wpt-tools", "/usr/../tmp")),
     # /work and /tmp full, at 2 x 2048 MiB, would leave the processes no memory in the default 4096 MiB
     ({"tasks/a/task.json": json.dumps({**TASK, "container": {"disk": 2048}}).encode(), "tasks/a/check": CHECK},
      r"tasks/a/task.json: /work and /tmp may hold 2048 MiB each, .* more than 4096 MiB of memory; "

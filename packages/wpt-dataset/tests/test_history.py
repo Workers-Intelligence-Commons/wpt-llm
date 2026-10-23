@@ -247,3 +247,29 @@ def test_history_files_are_the_bytes_of_one_format_patch_per_commit(kit, store, 
              if not any(path.startswith("vendor/") for path, _ in changes)]
     cut = sum(len(manifest._group_patches(folder, whole[i:i + group])) for i in range(0, len(whole), group))
     assert cut == (0 if quoted and group == 500 else len(whole))  # every group cut, or the one group not
+
+
+def test_a_repository_pointer_takes_the_tags_of_the_files_its_commit_changes(kit, repo, store, tmp_path):
+    # maintainer's decision, 2026-10-23: a task pointing to a commit is a code
+    # task when a file the commit changes is tagged code; a file pointer takes
+    # its own file's tags
+    from wpt_dataset.tasks import document_tags
+
+    folder = tmp_path / "upstream"
+    folder.mkdir()
+    kit.run("git", "init", "-q", cwd=folder)
+    since = commit(kit, folder, "add the license", {"LICENSE": kit.LICENSE_TEXT.encode()})
+    code = commit(kit, folder, "print two", {"src/main.py": b"print(2)\n"})
+    notes = commit(kit, folder, "write the notes", {"docs/notes.txt": b"Two.\n"})
+    sid = kit.add_source(repo, store, "example", "history", {
+        "type": "git", "address": str(folder), "revision": notes, "history": {"since": since},
+        "licenses": kit.WITH_HISTORY,
+        "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
+                    {"format": "code", "language": "python", "paths": ["**/*.py"]},
+                    {"format": "text", "paths": ["LICENSE", "docs/**"]}],
+        "tags": [{"tags": ["code"], "paths": ["src/**"]}, {"tags": ["en"], "paths": ["docs/**"]}]})
+
+    assert document_tags(repo, store, sid, f".git/history/{code}") == {"code"}
+    assert document_tags(repo, store, sid, f".git/history/{notes}") == {"en"}
+    assert document_tags(repo, store, sid, "docs/notes.txt") == {"en"}
+    assert document_tags(repo, store, sid, "src/main.py#3") == {"code"}

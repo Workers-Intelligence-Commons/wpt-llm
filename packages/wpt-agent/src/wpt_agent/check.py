@@ -11,9 +11,9 @@ so the model's files are its current folder: a check must not start an
 interpreter that loads code from there (docs/post-training.md, "Scores").
 Next to the check, in its folder, is CONVERSATION: the attempt's
 conversation in the chat format, whose metadata maps each tool's name as
-the model saw it to the real tool's and holds the answer block's value
-(loop.py), so the check scores the files, the trace of tool calls and the
-confidence; the check finds it as "$(dirname "$0")/conversation.json".
+the model saw it to the real tool's and holds the answer, the final
+reply's text and the confidence the loop built (loop.py), so the check
+scores the files, the trace of tool calls and the confidence; the check finds it as "$(dirname "$0")/conversation.json".
 The task's check_files (the texts its pointers put there,
 wpt_dataset.tasks) are there too, by their paths. The files the attempt's
 variant hid (tools.Offer.hidden, such as the push tool's remote) are in

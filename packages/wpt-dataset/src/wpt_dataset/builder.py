@@ -34,20 +34,36 @@ pointers (tasks.Pointer), filled in when a task is read:
   bare `origin` outside /work (tasks.REMOTE), with no push tool offered,
   or the declared push tool, with the remote hidden so that only the
   tool's program reaches it.
+- read-the-manual: the result of ondrik, a program of the agent image
+  written for WPT, so that no training text describes it, and compiled,
+  so that the half without the manual has no readable documentation of
+  it (maintainer's decision, 2026-10-23). A task asks for the seal of a
+  drawn text folded a drawn number of times, or the slack knot of two
+  drawn numbers, each given by an option the instructions do not name. Half the tasks remove
+  the program's manual (`absent`: its folder in the image is shown
+  empty); the check runs the program in its own container and wants its
+  output in the answer. Neither sources nor a pool expression are read.
+  These tasks are measure-only (maintainer's decision, 2026-10-23):
+  training on them would teach the program, against "no training text
+  describes it". write() tags their folder `eval` (tasks.EVAL), so the
+  task reader gives them to the measures only (MEASURE_ONLY).
 
-Every kind's instructions state the closing answer block (ANSWER): the
-model learns it from them, and the harness adds nothing to the opening
-(maintainer's decision, 2026-10-22). commit-and-push is the kind that
-acts, the others check (ACTS; maintainer's decision, 2026-10-22):
-shares() gives a task source's act and check shares.
+No kind's instructions state an answer block: the model's final reply is
+its answer, as text, and the harness asks for its confidence after it
+(maintainer's decision, 2026-10-23; docs/chat-format.md, "The answer").
+Each kind acts, checks, or both (CLASSES; maintainer's decisions,
+2026-10-22 and 2026-10-23): commit-and-push acts, find-the-passage,
+evidence-removed and look-or-ask check, read-the-manual does both.
+shares() gives a task source's shares of tasks that act only, check only
+and do both, which add up to 1.
 
 A text is a window of whole paragraphs of a document's Markdown, at most
 WINDOW bytes, so a read tool's result (4000 bytes) holds it whole. A
 paragraph a task asks for is plain text (no heading, list, quotation,
 table, code or markup at its start), and its quoted start appears in no
-other text of the task, letter case and marks aside. Every task ends with
-the answer block (docs/chat-format.md, "The answer"), and its check calls
-the shared check library (wpt_check, in the agent image).
+other text of the task, letter case and marks aside. Every task's check
+calls the shared check library (wpt_check, in the agent image), which
+reads the attempt's answer.
 
 A task's folder is <kind>/<the first 16 hex digits of the sha256 of its
 task.json>, so a task keeps its id, and so its measure-only share, over
@@ -66,10 +82,15 @@ from . import markdown, pools
 from .errors import InvalidFile, RuleViolation
 from .manifest import HISTORY, ORDER
 from .repo import Repo
-from .sources import source_tree, tags_of
-from .tasks import CHECK, FILES, LOOKING, REMOTE, TASK, Pointer, looks, repository, undoable
+from .sources import in_store, source_tree, tags_of
+from .tasks import CHECK, EVAL, FILES, LOOKING, REMOTE, TASK, Pointer, looks, repository, undoable
 
-KINDS = ("find-the-passage", "evidence-removed", "look-or-ask", "commit-and-push")
+READ_THE_MANUAL = "read-the-manual"
+KINDS = ("find-the-passage", "evidence-removed", "look-or-ask", "commit-and-push", READ_THE_MANUAL)
+ACT, CHECK_KIND, BOTH = "act", "check", "both"
+CLASSES = {"find-the-passage": CHECK_KIND, "evidence-removed": CHECK_KIND, "look-or-ask": CHECK_KIND,
+           "commit-and-push": ACT, READ_THE_MANUAL: BOTH}  # what each kind's tasks do
+MEASURE_ONLY = (READ_THE_MANUAL,)  # the kinds whose folder write() tags eval
 IMAGE = "agent"
 LIMITS = {"max_turns": 20, "max_tokens": 4000, "command_seconds": 30}
 WINDOW = 3000  # bytes of a text at most
@@ -92,9 +113,10 @@ PUSH = {"name": "push", "description": "Push the commits of the current branch o
                                                                  "the repository's folder, by default the working "
                                                                  "folder"}}},
         "program": "/usr/local/lib/wpt-tools/push", "names": ["git_push", "push_changes"]}
-ANSWER = (' End with a JSON block {"answer": ..., "confidence": ...}: your answer as a string, and a number from 0 '
-          'to 1 saying how sure you are that it is right.')
-ACTS = ("commit-and-push",)  # the kinds whose tasks act; the others check
+PROGRAM = "/usr/local/bin/ondrik"  # the program of the read-the-manual tasks, in the agent image
+MANUAL = "/usr/share/doc/ondrik"  # the folder of its manual, which half those tasks remove
+TURNS = (2, 9)  # the folds of a seal a task asks for, at least and at most
+KNOTTED = (100, 99999)  # the numbers of a knot, at least and at most
 # the tools that can read NOTES.md's text, kept when they look (tasks.looks) and the task or the image's pool offers them
 ANSWERED_BY = ("read", "bash", "search_text")
 INSTRUCTIONS = {
@@ -106,8 +128,13 @@ INSTRUCTIONS = {
     "look-or-ask": "quote.txt holds the start of a paragraph of one of the documents in docs/. Write the rest of "
                    "that paragraph, word for word, into the file the user wants it in, and answer with a short "
                    "summary of what you did.",
-    # maintainer's decision, 2026-10-22: these words only; the model writes its own commit message
+    # maintainer's decision, 2026-10-22: these words only; the model writes its own commit message. No answer
+    # block after them (maintainer's decision, 2026-10-23)
     "commit-and-push": "Based on the current diffs, could you commit and push the changes in this repository?",
+    "seal": "Use the program ondrik, installed in this container, to find the seal of the text \"{text}\" folded "
+            "{turns} times, and give the seal as your answer.",
+    "knot": "Use the program ondrik, installed in this container, to find the slack knot of {first} and {second}, "
+            "and give the knot as your answer.",
 }
 NOTES = "# Notes\n\nThe documents are in docs/.\n"
 WHERE = "Put results in {name}.\n"
@@ -123,6 +150,11 @@ CHECKS = {
     "noted": "right = wpt_check.holds(wpt_check.file_text({name!r}), wpt_check.beside('rest.txt')) "
              "and wpt_check.asked_last(conversation) and wpt_check.read_before_ask(conversation, {where!r})",
     "pushed": "right = wpt_check.pushed()",
+    # the program's output, from the check's own container, where the model's files cannot change it
+    "program": "import subprocess\n"
+               "expected = subprocess.run({argv!r}, stdin=subprocess.DEVNULL, capture_output=True, "
+               "text=True).stdout.strip()\n"
+               "right = expected != '' and wpt_check.holds(wpt_check.answer_text(conversation), expected)",
 }
 CHECK_TEXT = """#!/usr/bin/python3 -I
 import wpt_check
@@ -154,6 +186,8 @@ def build(repo: Repo, store, kind: str, count: int, seed: int, select: str | Non
     rng = random.Random(f"{kind}:{seed}")
     if kind == "commit-and-push":
         made = _commits(repo, store, count, rng, log)
+    elif kind == READ_THE_MANUAL:
+        made = [_manual(number, rng) for number in range(count)]
     else:
         if not select:
             raise RuleViolation(f"{kind}: say which sources' documents the tasks come from (a pool expression)")
@@ -173,8 +207,9 @@ def write(repo: Repo, store, sid: str, kind: str, built: dict, version: str) -> 
     """Write the built tasks into the task source sid, an `empty` source a
     person made: everything under <kind>/ becomes exactly these task
     folders, through one patch (Repo.change_source_files, which applies
-    the rules of `check --fetch`, pointers filled in). Returns the new
-    version."""
+    the rules of `check --fetch`, pointers filled in); a kind of
+    MEASURE_ONLY gets its folder tagged eval in source.json first, when no
+    entry tags it so. Returns the new version."""
     source = repo.source(sid)
     if source.data["type"] != "empty":
         raise RuleViolation(f"{sid} is a {source.data['type']} source: built tasks go into an empty source")
@@ -186,21 +221,22 @@ def write(repo: Repo, store, sid: str, kind: str, built: dict, version: str) -> 
         changes |= {f"{folder}/{FILES}{path}": text.encode() for path, text in files.items()}
     covered = any(entry["format"] == "task" and f"{kind}/**" in entry["paths"] for entry in source.data["formats"])
     formats = [] if covered else [{"format": "task", "paths": [f"{kind}/**"]}]
-    return repo.change_source_files(sid, changes, f"build-{kind}", version, store, formats)
+    tagged = any(EVAL in entry["tags"] and f"{kind}/**" in entry["paths"] for entry in source.data.get("tags", []))
+    tags = [{"tags": [EVAL], "paths": [f"{kind}/**"]}] if kind in MEASURE_ONLY and not tagged else []
+    return repo.change_source_files(sid, changes, f"build-{kind}", version, store, formats, tags)
 
 
 def shares(repo: Repo, store, sid: str) -> dict:
     """What the task source sid holds of each built kind: {"tasks": {kind:
-    its task folders}, "act": the share of them whose kind acts (ACTS),
-    "check": the share whose kind checks}, each share from 0 to 1 (0 for
-    a source without built tasks)."""
+    its task folders}, "act", "check", "both": the shares of them whose
+    kind acts only, checks only, or does both (CLASSES)}, each from 0 to 1
+    and adding up to 1 (each 0 for a source without built tasks)."""
     _, existing = repo.source_files(sid, store)
     found = {kind: sum(1 for path in existing if path.startswith(kind + "/") and path.count("/") == 2
                        and path.endswith("/" + TASK)) for kind in KINDS}
     total = sum(found.values())
-    acting = sum(found[kind] for kind in ACTS)
-    return {"tasks": found, "act": acting / total if total else 0.0,
-            "check": (total - acting) / total if total else 0.0}
+    return {"tasks": found, **{what: sum(found[kind] for kind in KINDS if CLASSES[kind] == what) / total
+                               if total else 0.0 for what in (ACT, CHECK_KIND, BOTH)}}
 
 
 # -- texts ----------------------------------------------------------------------
@@ -258,7 +294,7 @@ def _text(document, first, last, found) -> Text:
                 (found[first][0], _end(document["markdown"], found[last][1])), found[first:last + 1])
 
 
-def _cut(text: bytes, span) -> int | None:
+def quote_end(text: bytes, span) -> int | None:
     """Where the quoted start ends: a space near 40% of the paragraph, with
     at least QUOTED words before it and REST after it."""
     spaces = [m.start() for m in re.finditer(rb" ", text[span[0]:span[1]])]
@@ -267,14 +303,14 @@ def _cut(text: bytes, span) -> int | None:
     return min(good, key=lambda at: abs(at - span[0] - 0.4 * (span[1] - span[0])), default=None)
 
 
-def _words(data: bytes) -> list[bytes]:
+def words(data: bytes) -> list[bytes]:
     return [word.lower() for word in WORD.findall(data)]
 
 
-def _occurs(needle: list, texts) -> int:
+def occurs(needle: list, texts) -> int:
     """How many times the words of needle occur in the texts."""
-    return sum(sum(words[i:i + len(needle)] == needle for i in range(len(words) - len(needle) + 1))
-               for words in (_words(text) for text in texts))
+    return sum(sum(found[i:i + len(needle)] == needle for i in range(len(found) - len(needle) + 1))
+               for found in (words(text) for text in texts))
 
 
 def _documents(repo, store, expression, wanted, rng, log):
@@ -286,7 +322,7 @@ def _documents(repo, store, expression, wanted, rng, log):
     for source in repo.sources(log):
         if not source.admitted or source.data["type"] == "empty":
             continue
-        if not store.get_ref("upstream", source.data["checksum"].removeprefix("sha256:")):
+        if not in_store(source, store):
             absent += 1
             continue
         tree, _ = source_tree(source, store)
@@ -344,7 +380,7 @@ def _passage(kind, documents, rng, pages, removed, ask, answered_by):
     for _ in range(TRIES):
         document = rng.choice(documents)
         text, found = document["markdown"], paragraphs(document["markdown"])
-        candidates = [n for n, p in enumerate(found) if plain(text, p) and _cut(text, p) is not None]
+        candidates = [n for n, p in enumerate(found) if plain(text, p) and quote_end(text, p) is not None]
         if not candidates:
             continue
         target = rng.choice(candidates)
@@ -354,10 +390,10 @@ def _passage(kind, documents, rng, pages, removed, ask, answered_by):
         main = _text(document, first, last, found)
         others = _others(documents, document, (first, last), texts - 1, rng)
         start, end = found[target]
-        cut = _cut(text, found[target])
-        quoted = _words(text[start:cut])
-        if _occurs(quoted, [main.markdown[main.span[0]:main.span[1]], *(t.markdown[t.span[0]:t.span[1]]
-                                                                         for t in others)]) != 1:
+        cut = quote_end(text, found[target])
+        quoted = words(text[start:cut])
+        if occurs(quoted, [main.markdown[main.span[0]:main.span[1]], *(t.markdown[t.span[0]:t.span[1]]
+                                                                        for t in others)]) != 1:
             continue
         return _task(kind, main, others, target - first, cut, rng, pages, removed, ask, answered_by)
     return None
@@ -429,14 +465,14 @@ def _task(kind, main: Text, others, target, cut, rng, pages, removed, ask, answe
     if kind == "look-or-ask":
         name = f"result-{rng.getrandbits(24):06x}.txt"
         where = WHERE.format(name=name)
-        task |= {"instructions": INSTRUCTIONS[kind] + ANSWER,
+        task |= {"instructions": INSTRUCTIONS[kind],
                  "needs": [["read", "bash"], ["write"], *([["ask"]] if ask else [])],
                  "replies": [{"pattern": ASKED, "reply": REPLY.format(name=name)}], "answered_by": answered_by}
         files["NOTES.md"] = NOTES + ("" if ask else where)
         right = CHECKS["file"].format(name=name) if ask else CHECKS["noted"].format(name=name, where=where.strip())
     else:
         task |= {"instructions": INSTRUCTIONS["pages" if pages else "given"]
-                 + (INSTRUCTIONS["removed"] if kind == "evidence-removed" else "") + ANSWER,
+                 + (INSTRUCTIONS["removed"] if kind == "evidence-removed" else ""),
                  "needs": [["read", "bash"], *([["search"], ["fetch"]] if pages else [])]}
         if pages:
             task |= {"tools": [SEARCH, FETCH], "tool_files": ["web"]}
@@ -466,7 +502,7 @@ def _commits(repo, store, count, rng, log) -> list:
     sources = [s for s in repo.sources(log) if s.admitted and s.data["type"] == "git" and s.data.get("history")]
     candidates, absent, unordered = [], 0, 0
     for source in sources:
-        if not store.get_ref("upstream", source.data["checksum"].removeprefix("sha256:")):
+        if not in_store(source, store):
             absent += 1
             continue
         tree, _ = source_tree(source, store)
@@ -507,8 +543,30 @@ def _commit(source, tree, document, store, log):
     except InvalidFile as error:  # a commit that cannot be made is left out, named
         log(f"{source.id}/{document}: left out, {error}")
         return None
-    return ({"schema": 1, "instructions": INSTRUCTIONS["commit-and-push"] + ANSWER,
+    return ({"schema": 1, "instructions": INSTRUCTIONS["commit-and-push"],
              # one way to push per attempt: git through bash, or the push tool with the remote hidden
              "image": IMAGE, "limits": LIMITS, "tools": [PUSH],
              "needs": [["bash", {"tools": ["bash", "push"], "tool_files": [REMOTE]}]],
              "pointers": [pointer]}, CHECK_TEXT.format(right=CHECKS["pushed"]), {})
+
+
+# -- the program's manual -------------------------------------------------------
+
+def _manual(number, rng):
+    """(task.json, check, files) of the read-the-manual task `number`:
+    the halves crossed, the manual removed in every other task, and the
+    seal or the knot in every other pair. The instructions are the same
+    with and without the manual."""
+    if number // 2 % 2 == 0:
+        text, turns = f"{rng.getrandbits(32):08x}", rng.randint(*TURNS)
+        instructions = INSTRUCTIONS["seal"].format(text=text, turns=turns)
+        argv = [PROGRAM, "press", "--turns", str(turns), text]
+    else:
+        first, second = rng.randint(*KNOTTED), rng.randint(*KNOTTED)
+        instructions = INSTRUCTIONS["knot"].format(first=first, second=second)
+        argv = [PROGRAM, "tie", "--give", str(first), str(second)]
+    task = {"schema": 1, "instructions": instructions, "image": IMAGE, "limits": LIMITS,
+            "needs": [["bash"]]}
+    if number % 2 == 0:
+        task["absent"] = [MANUAL]
+    return task, CHECK_TEXT.format(right=CHECKS["program"].format(argv=argv)), {}

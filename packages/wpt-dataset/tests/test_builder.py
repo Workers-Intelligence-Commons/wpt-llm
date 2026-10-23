@@ -8,6 +8,7 @@ from wpt_dataset import builder, manifest, tasks
 from wpt_dataset.build import write_document_list
 from wpt_dataset.repo import empty_source
 from wpt_dataset.sources import source_tree
+from wpt_dataset.tasks import EVAL
 from wpt_telemetry import Telemetry
 
 # a book of plain paragraphs, each long enough to be asked for, their starts all different
@@ -54,15 +55,17 @@ def books(kit, repo, store, tmp_path):
     return sid
 
 
-def built(repo, store, kind, count, seed=1):
+def built(repo, store, kind, count, seed=1, measure=False):
+    """The tasks built and the tasks read back, those a training step reads
+    or, with measure, those the measures read."""
     made = builder.build(repo, store, kind, count, seed, "en", log=lambda _: None)
     sid = task_source(repo, store)
     builder.write(repo, store, sid, kind, made, repo.source_version(sid))
     # the base model's dataset, its document list kept, and nothing held out
     write_document_list(store, "d" * 64, [], set(), Telemetry.off())
-    found, _ = tasks.read(repo, store, "grpo", 0, dataset="d" * 64)
-    # maintainer's decision, 2026-10-22: the model learns the closing answer block from each task's instructions
-    assert all('a JSON block {"answer": ..., "confidence": ...}' in task.instructions for task in found)
+    found, _ = tasks.read(repo, store, "grpo", 0, measure=measure, dataset="d" * 64)
+    # maintainer's decision, 2026-10-23: the final reply is the answer, as text; no instructions ask for JSON
+    assert not any("JSON" in task.instructions or "confidence" in task.instructions for task in found)
     return made, sorted(found, key=lambda task: task.id)
 
 
@@ -140,6 +143,28 @@ def test_look_or_ask_tasks_hide_the_file_name_in_the_notes_or_in_the_user_s_repl
     assert asked == 2
 
 
+def test_read_the_manual_tasks_ask_for_a_result_of_ondrik_and_half_remove_its_manual(kit, repo, store, tmp_path):
+    # maintainer's decision, 2026-10-23: a result only the image's program
+    # gives, with and without its manual installed; seals and knots are
+    # crossed with the two halves, the instructions never name the option
+    # that gives the result, and the check runs the program for it; the
+    # tasks are for the measures only, their folder tagged eval by the
+    # builder through the service layer, so no training step reads them
+    images(repo)
+    _, found = built(repo, store, "read-the-manual", 8, measure=True)
+    [sid] = {task.id.split("/", 1)[0] for task in found}
+    assert {"tags": [EVAL], "paths": ["read-the-manual/**"]} in repo.source(sid).data["tags"]
+    assert tasks.read(repo, store, "grpo", 0, dataset="d" * 64)[0] == []
+    halves = {}
+    for task in found:
+        assert task.needs == ((tasks.Variant(("bash",)),),) and task.files == {}
+        command = "press" if "the seal of the text" in task.instructions else "tie"
+        assert f"[{builder.PROGRAM!r}, {command!r}, ".encode() in task.check
+        assert "--turns" not in task.instructions and "--give" not in task.instructions
+        halves[task.absent, command] = halves.get((task.absent, command), 0) + 1
+    assert halves == {((), "press"): 2, ((), "tie"): 2, ((builder.MANUAL,), "press"): 2, ((builder.MANUAL,), "tie"): 2}
+
+
 def lamps(kit, repo, store, folder, revision, since, cuts=()):
     """The id of an admitted git source of folder's history from since to revision, in the store."""
     sid = kit.add_source(repo, store, "example", "lamps", {
@@ -164,8 +189,8 @@ def test_a_commit_and_push_task_makes_work_the_repository_before_the_commit(kit,
     # with the commit's changes in its working tree; its remote is outside
     # /work, so `git add -A` there never takes it; what the check expects is
     # the commit's tree on top of that parent. Maintainer's decisions,
-    # 2026-10-22: the instructions are the decided words and the answer
-    # block's, and the model writes its own message, so none is given or
+    # 2026-10-22 and 2026-10-23: the instructions are the decided words
+    # alone, and the model writes its own message, so none is given or
     # expected
     images(repo)
     folder = tmp_path / "upstream"
@@ -181,7 +206,7 @@ def test_a_commit_and_push_task_makes_work_the_repository_before_the_commit(kit,
     assert expected["tree"] == kit.run("git", "rev-parse", f"{head}^{{tree}}", cwd=folder).decode().strip()
     assert expected["remote"] == tasks.REMOTE == "/tmp/origin.git"
     assert task.instructions == ("Based on the current diffs, could you commit and push the changes in this "
-                                 "repository?" + builder.ANSWER)
+                                 "repository?")
     # /work holds the repository only, its files at the top, no message to copy; the remote is outside it
     assert "message" not in expected and sorted(path for path in task.files if not path.startswith(".git/")) == \
         ["LICENSE", "docs/count.md", "lamps.py"]
@@ -323,9 +348,11 @@ def test_a_commit_whose_source_changed_is_refused_until_it_is_built_again(kit, r
 
 
 def test_the_builder_reports_the_act_and_check_shares_of_a_task_source(kit, repo, store, tmp_path):
-    # maintainer's decision, 2026-10-22: commit-and-push acts, the other
-    # kinds check; a task source's shares count its built tasks by kind
-    books(kit, repo, store, tmp_path)
+    # maintainer's decision, 2026-10-23: each kind acts, checks or does
+    # both (commit-and-push acts, read-the-manual does both, the others
+    # check); a task source's shares count its built tasks by kind and sum
+    # to 1
+    books(kit, repo, store, tmp_path)  # the agent image too, which read-the-manual tasks run in
     folder = tmp_path / "upstream"
     folder.mkdir()
     kit.run("git", "init", "-q", cwd=folder)
@@ -338,10 +365,12 @@ def test_the_builder_reports_the_act_and_check_shares_of_a_task_source(kit, repo
         "tags": [{"tags": ["code"], "paths": ["**"]}]})
     source_tree(repo.source(lamps), store)
     sid = task_source(repo, store)
-    assert builder.shares(repo, store, sid) == {"tasks": dict.fromkeys(builder.KINDS, 0), "act": 0.0, "check": 0.0}
-    for kind, count in (("find-the-passage", 3), ("commit-and-push", 1)):
+    assert builder.shares(repo, store, sid) == {"tasks": dict.fromkeys(builder.KINDS, 0), "act": 0.0, "check": 0.0,
+                                                "both": 0.0}
+    for kind, count in (("find-the-passage", 3), ("commit-and-push", 1), ("read-the-manual", 2)):
         builder.write(repo, store, sid, kind, builder.build(repo, store, kind, count, 1, "en", log=lambda _: None),
                       repo.source_version(sid))
     assert builder.shares(repo, store, sid) == {
-        "tasks": {"find-the-passage": 3, "evidence-removed": 0, "look-or-ask": 0, "commit-and-push": 1},
-        "act": 0.25, "check": 0.75}
+        "tasks": {"find-the-passage": 3, "evidence-removed": 0, "look-or-ask": 0, "commit-and-push": 1,
+                  "read-the-manual": 2},
+        "act": pytest.approx(1 / 6), "check": 0.5, "both": pytest.approx(1 / 3)}
