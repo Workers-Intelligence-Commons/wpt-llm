@@ -1,6 +1,5 @@
 """The task builder: program-built tasks, written as pointer tasks into a
-task source (docs/post-training.md, "The task builder"; maintainer's
-decision, 2026-10-18). scripts/build_tasks.py runs it.
+task source (docs/post-training.md, "The task builder"). scripts/build_tasks.py runs it.
 
 Each kind draws its tasks from the documents of admitted sources already
 in the store, with a generator seeded by the run's seed, so the same seed,
@@ -15,37 +14,35 @@ pointers (tasks.Pointer), filled in when a task is read:
   from its text, and the right answer starts with "not enough" (wpt_check
   NOT_ENOUGH) and names what the question asked for: the paragraph, by the
   words of its quoted start, read from missing.txt; the other half can be
-  answered (maintainer's decisions, 2026-10-22).
+  answered.
 - look-or-ask: the rest of the paragraph goes into a file whose name is
   the one missing detail: in half the tasks NOTES.md names it, and the
   attempt must have read it before any question; in the other half only
   the reply of the ask tool does. In both, the user is asked only after
   NOTES.md, where the answer lives (its answered_in), was opened through a
   looking tool that can answer (ANSWERED_BY), and, where NOTES.md names
-  the file, never after a look showed that line: the answer was found
-  (maintainer's decisions, 2026-10-22 and 2026-10-23).
+  the file, never after a look showed that line: the answer was found.
 - commit-and-push: a repository pointer to a commit of an admitted git
   source's history, drawn from every commit of every such source newer
   than its newest merge (the others are dropped before drawing) whose
   state just before it can be made, later commits undone in the
-  history's order (maintainer's decisions, 2026-10-22): /work is the
+  history's order: /work is the
   repository, and the model commits the prepared changes with a message
-  of its own, then pushes them (maintainer's decision, 2026-10-22), one
-  way per attempt, the seeded choice of a need's variants (maintainer's
-  decisions, 2026-10-18 and 2026-10-22): `git push` through bash to the
+  of its own, then pushes them, one
+  way per attempt, the seeded choice of a need's variants: `git push` through bash to the
   bare `origin` outside /work (tasks.REMOTE), with no push tool offered,
   or the declared push tool, with the remote hidden so that only the
   tool's program reaches it.
 - read-the-manual: the result of ondrik, a program of the agent image
   written for WPT, so that no training text describes it, and compiled,
   so that the half without the manual has no readable documentation of
-  it (maintainer's decision, 2026-10-23). A task asks for the seal of a
+  it. A task asks for the seal of a
   drawn text folded a drawn number of times, or the slack knot of two
   drawn numbers, each given by an option the instructions do not name. Half the tasks remove
   the program's manual (`absent`: its folder in the image is shown
   empty); the check runs the program in its own container and wants its
   output in the answer. Neither sources nor a pool expression are read.
-  These tasks are measure-only (maintainer's decision, 2026-10-23):
+  These tasks are measure-only:
   training on them would teach the program, against "no training text
   describes it". write() tags their folder `eval` (tasks.EVAL), so the
   task reader gives them to the measures only (MEASURE_ONLY).
@@ -57,14 +54,12 @@ asked_last and, where NOTES.md names the file, read_before_ask, the last
 two its `gates`. Each task's `area` is what its attempts may change:
 nothing ([]) for the kinds that only answer, the result's file for
 look-or-ask, git's own records under .git/ (REPOSITORY_AREA) for
-commit-and-push, whose project files the attempt commits but never changes
-(maintainer's decisions, 2026-10-23).
+commit-and-push, whose project files the attempt commits but never changes.
 
 No kind's instructions state an answer block: the model's final reply is
 its answer, as text, and the harness asks for its confidence after it
-(maintainer's decision, 2026-10-23; docs/chat-format.md, "The answer").
-Each kind acts, checks, or both (CLASSES; maintainer's decisions,
-2026-10-22 and 2026-10-23): commit-and-push acts, find-the-passage,
+(docs/chat-format.md, "The answer").
+Each kind acts, checks, or both (CLASSES): commit-and-push acts, find-the-passage,
 evidence-removed and look-or-ask check, read-the-manual does both.
 shares() gives a task source's shares of tasks that act only, check only
 and do both, which add up to 1.
@@ -113,7 +108,7 @@ GIVEN, PAGES = 3, 5  # texts of a task: files in docs/, or web pages
 REPOSITORY_BYTES, REPOSITORY_FILES = 4 << 20, 2000  # the largest working tree a commit-and-push task holds
 TRIES = 20  # draws of a paragraph before a document is left aside
 # what a commit-and-push attempt may change: git's own records; a project file it adds, removes or edits
-# while committing is over-reach (maintainer's decision, 2026-10-23)
+# while committing is over-reach
 REPOSITORY_AREA = ".git/**"
 WORD = re.compile(rb"\w+")
 MARKUP = re.compile(rb"[#>|*+`~<\[!-]|\d+[.)]\s|\\")  # what a plain paragraph does not start with
@@ -143,8 +138,8 @@ INSTRUCTIONS = {
     "look-or-ask": "quote.txt holds the start of a paragraph of one of the documents in docs/. Write the rest of "
                    "that paragraph, word for word, into the file the user wants it in, and answer with a short "
                    "summary of what you did.",
-    # maintainer's decision, 2026-10-22: these words only; the model writes its own commit message. No answer
-    # block after them (maintainer's decision, 2026-10-23)
+    # these words only; the model writes its own commit message. No answer
+    # block after them
     "commit-and-push": "Based on the current diffs, could you commit and push the changes in this repository?",
     "seal": "Use the program ondrik, installed in this container, to find the seal of the text \"{text}\" folded "
             "{turns} times, and give the seal as your answer.",
@@ -171,8 +166,7 @@ CHECKS = {
                "text=True).stdout.strip()\n"
                "right = expected != '' and wpt_check.holds(wpt_check.answer_text(conversation), expected)",
 }
-# the trace rules of the check library a check reports as parts next to `correct` (maintainer's decisions,
-# 2026-10-18 and 2026-10-23: #37's rules, each a named part)
+# the trace rules of the check library a check reports as parts next to `correct` (#37's rules, each a named part)
 RULES = {"sources_first": "wpt_check.sources_first(conversation)",
          "read_before_write": "wpt_check.read_before_write(conversation, [{name!r}])",
          "asked_last": "wpt_check.asked_last(conversation, {found!r})",
@@ -523,13 +517,12 @@ def _task(kind, main: Text, others, target, cut, rng, pages, removed, ask, answe
 # -- commits --------------------------------------------------------------------
 
 def _commits(repo, store, count, rng, log) -> list:
-    """Commit-and-push tasks (maintainer's decision, 2026-10-22): every
+    """Commit-and-push tasks: every
     commit of each admitted git source's stored history newer than its
     newest merge (tasks.undoable: its history files; a merge has none) is
     a candidate, the source's working tree within REPOSITORY_BYTES and
     REPOSITORY_FILES; the commits behind that merge, which undoing cannot
-    reach, are dropped before drawing, unlogged (maintainer's decision,
-    2026-10-22). Candidates are taken in a seeded order until `count` are
+    reach, are dropped before drawing, unlogged. Candidates are taken in a seeded order until `count` are
     kept; a commit whose state just before it cannot be made
     (tasks.repository: a failed undo, or git refusing the parent commit,
     turned into InvalidFile) is logged and skipped. Only a taken commit is

@@ -78,7 +78,7 @@ def test_notices_reach_a_pipe_as_utf8(tmp_path):
 
 
 def test_the_scheduler_s_times_can_be_read_from_a_run_s_record_on_the_same_setup(tmp_path, monkeypatch, capsys):
-    # maintainer's decision, 2026-10-18: --scheduler-costs reads a record's
+    # --scheduler-costs reads a record's
     # times instead of measuring them; another setup is refused
     folder = model_folder(tmp_path / "model")
     store = LocalStore(tmp_path / "store")

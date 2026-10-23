@@ -2,7 +2,7 @@
 
 A file whose encoding is stated in the file itself is text in that
 encoding, decoded to Unicode, and whatever the pipeline stores or emits
-from it is UTF-8 (maintainer's decision, 2026-10-23). Every reader of a
+from it is UTF-8. Every reader of a
 source's files as text decodes them here: the check and fill-checksum
 (sources.not_text), the Markdown of every format (markdown.py, so the
 build and markdown-check too), wpt-web's file views and the evaluations

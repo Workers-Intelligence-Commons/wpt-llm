@@ -54,7 +54,7 @@ IMAGE_CODE = ("packages/wpt-agent/src/wpt_agent/images.py", "packages/wpt-agent/
 IMAGES_CHANGED = "import sys; from wpt_dataset.repo import Repo; print(Repo('.').changed_since(sys.argv[1])[1])"
 # the one source fetched, a short book fixed at one git commit, so its download never
 # changes: it proves the fetch and its checks work; the sources a pull request adds or
-# changes are fetched by the maintainer (maintainer's decision, 2026-10-21)
+# changes are fetched by the maintainer
 SMALL_SOURCE = "standardebooks-joseph-conrad-ford-madox-ford-the-nature-of-a-crime-5366b0f3"
 
 

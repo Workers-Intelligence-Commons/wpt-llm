@@ -6,10 +6,9 @@ Every file of an admitted source's final tree (after cuts and patches) is a
 document, identified as `<source id>/<path>`. Symlinks are not documents.
 A document is the file's Markdown, read in the encoding the file states,
 else UTF-8, and written as UTF-8 ([architecture.md](architecture.md),
-"Encodings"; maintainer's decision, 2026-10-23); an image in a web page
+"Encodings"); an image in a web page
 (`xhtml` or `html`) leaves the marker `[image]` or `[image: ALT]` where it
-was ([architecture.md](architecture.md), "Documents are Markdown";
-maintainer's decision, 2026-10-23).
+was ([architecture.md](architecture.md), "Documents are Markdown").
 
 A file in the `records` format (a dataset holding many documents, such as a
 JSON Lines or Parquet file) is not one document: each of its records whose
@@ -23,7 +22,7 @@ writes it, limited to the files the source keeps. Its order file,
 `.git/history/order` ([architecture.md](architecture.md), `history`),
 stays a file of the source's stored tree, covered by its checksum, but it
 is not a training document: the build, the vocabulary and every other
-list of documents leave it out (maintainer's decision, 2026-10-22).
+list of documents leave it out.
 
 **Exact duplicates are removed**: when several documents have the same
 content, the first by source id, then by path, keeps it. Nothing judges
@@ -33,8 +32,8 @@ content. Near-duplicates stay.
 
 Tags describe paths in `source.json` (language, domain...). They come from
 the source's own statements or from a person, never from a guess: GitHub
-repositories carry only `code`, since their human language is not stated
-(maintainer's decision, 2026-10-16). A pool selects documents by a tag
+repositories carry only `code`, since their human language is not stated.
+A pool selects documents by a tag
 expression:
 
 | Expression | Selects |
@@ -112,36 +111,30 @@ it has no group) instead of the document id. Documents of any source with
 the same groups then share their fate. A document whose path the pattern
 is not found in keeps its id's fate.
 
-The held-out chapters of eBible's Bibles are chosen by book and chapter,
-so that the same chapter is held out in every translation at once, since
-another translation of a held-out verse would otherwise leak it
-(maintainer's decision, 2026-10-23). The read-aloud sources do it with
-`held_out_by`: the pattern `_([A-Z0-9]{3})_0*([1-9][0-9]*)_read\.txt$`
-on their chapter files (`<code>_<NNN>_<BOOK>_<CC>_read.txt`) gives the
-book and chapter, such as `GEN 1`, as the group. The `bible_verses`
-measure reads the same field of the read-aloud twin to know which
-chapters are held out, so the rule has one owner
-([evaluation.md](evaluation.md), "Text measures"). A document's group is part of the dataset id's fingerprint, so
-a dataset holding those sources gets a new id when it is built again, and
-the document list records the split the groups give; a dataset without
-such sources keeps its id.
+Translations of one text are held out together: sources whose documents
+are translations of each other give them the same groups through
+`held_out_by` (such as a book and chapter), so the same part is held out
+in every language at once, since another translation of a held-out
+passage would otherwise leak it. A measure that needs to know which parts
+are held out reads the same field, so the rule has one owner
+([evaluation.md](evaluation.md), "Text measures"). A document's group is
+part of the dataset id's fingerprint, so a dataset holding such sources
+gets a new id when it is built again, and the document list records the
+split the groups give; a dataset without such sources keeps its id.
 
 Every dataset build stores, beside the dataset's record, the list of all
 its documents: each one's id, the sha256 of its Markdown (the same sha256
-the dataset id's fingerprint reads) and its tag, `training` or `held-out`
-(maintainer's decision, 2026-10-22). It is found from the dataset id,
+the dataset id's fingerprint reads) and its tag, `training` or `held-out`.
+It is found from the dataset id,
 which a model's `provenance.json` names, so post-training learns which
 texts its base model held out from that list alone: a pointer task whose
 document's text is one of them is measure-only, and no source is
 converted to Markdown to find out ([post-training.md](post-training.md),
-"Measure tasks"). A dataset built before builds kept the list has none,
-and keeps none: reading pointer tasks against it is refused
-(`DocumentListMissing`), saying that the base model's dataset predates
-document lists and that such a base is used with the repository at the
-commit that built it. Nothing falls back and nothing is rebuilt
-(maintainer's decision, 2026-10-22). A dataset the store does not hold
-at all is refused the same way, the message saying it is not in the
-store.
+"Measure tasks"). Reading pointer tasks against a dataset that has no
+document list is refused (`DocumentListMissing`): such a base model is
+used with the repository at the commit that built its dataset. Nothing
+falls back and nothing is rebuilt. A dataset the store does not hold at
+all is refused the same way, the message saying it is not in the store.
 
 Contamination is evaluation text that also appears in training text. The
 build checks held-out documents for runs of 13 words also found in training
@@ -155,16 +148,16 @@ license rules.
 As many languages as possible, plus translation as a capability. Clean
 parallel text is scarce. It comes from:
 
-- public-domain pairs: old works and their public-domain translations
-  (Project Gutenberg, Wikisource), aligned by sentence;
-- Europarl and EU texts (CC BY 4.0) and Tatoeba (CC BY 2.0 FR), whose
-  licenses are on the allowed list (see [licenses.md](licenses.md));
+- public-domain works and their public-domain translations, aligned by
+  sentence;
+- texts published in several languages under a license on the allowed list
+  ([licenses.md](licenses.md));
 - translations contributed under the DCO.
 
 ## Models in training
 
-WPT's own models may be used in training, their output included
-(maintainer's decision, 2026-10-18): as a reference a reward compares
+WPT's own models may be used in training, their output included: as a
+reference a reward compares
 with, such as a model's own full attempt in the terse-versus-full reward
 of the `grpo` step ([post-training.md](post-training.md), "Rewards"), as
 a draft a person edits or confirms ([chat-format.md](chat-format.md),

@@ -41,7 +41,7 @@ def test_a_git_history_gives_one_patch_per_commit_since_the_license_limited_to_k
     documents, _, _ = gather(repo, store, log=lambda _: None)
 
     ids = sorted(d.id for d in documents)
-    # the order file stays in the stored tree but is not a document (maintainer's decision, 2026-10-22)
+    # the order file stays in the stored tree but is not a document
     assert manifest.ORDER in source_tree(repo.source(sid), store)[0]
     assert ids == sorted([f"{sid}/.git/history/{since}", f"{sid}/.git/history/{change}", f"{sid}/LICENSE",
                           f"{sid}/main.py"])
@@ -52,7 +52,7 @@ def test_a_git_history_gives_one_patch_per_commit_since_the_license_limited_to_k
 
 
 def test_a_tree_entry_written_everywhere_leaves_the_history_files_to_their_own_entry(kit, repo, store, tmp_path):
-    # maintainer's decision, 2026-10-20: a history file counts only against entries whose patterns start with
+    # a history file counts only against entries whose patterns start with
     # .git/history/, so `**` means every file of the tree; each file then maps to exactly one entry
     folder = tmp_path / "upstream"
     folder.mkdir()
@@ -67,7 +67,7 @@ def test_a_tree_entry_written_everywhere_leaves_the_history_files_to_their_own_e
 
     tree, _ = source_tree(repo.source(sid), store)  # the license map check passes
 
-    # the order file is part of the history, under the same entry (maintainer's decision, 2026-10-22)
+    # the order file is part of the history, under the same entry
     history = [f".git/history/{c}" for c in (head, since)] + [manifest.ORDER]
     entry_for_history, entry_for_tree = kit.WITH_HISTORY
     assert sorted(tree) == sorted([*history, "LICENSE", "main.py"])
@@ -77,7 +77,7 @@ def test_a_tree_entry_written_everywhere_leaves_the_history_files_to_their_own_e
 
 
 def test_a_patched_git_source_keeps_its_history_and_order_and_no_patch_touches_them(kit, repo, store, tmp_path):
-    # maintainer's decision, 2026-10-22: git's index silently drops .git/ paths, so patches are applied with the
+    # git's index silently drops .git/ paths, so patches are applied with the
     # history files and the order file set aside; they come back exactly, and a patch naming one is refused
     folder = tmp_path / "upstream"
     folder.mkdir()
@@ -232,7 +232,7 @@ def test_history_files_are_the_bytes_of_one_format_patch_per_commit(kit, store, 
     order = written.pop(manifest.ORDER).decode().splitlines()
     expected = history_one_call_per_commit(folder, root, head, manifest.Extractor(store, extract))
     assert written == expected
-    # maintainer's decision, 2026-10-22: the order file lists every commit since root, the merge and the commits
+    # the order file lists every commit since root, the merge and the commits
     # that changed no kept path included, newest first, each before its parents, and marks the merge
     listed = [line.split(" ")[0] for line in order]
     every = kit.run("git", "rev-list", head, cwd=folder).decode().split()
@@ -250,7 +250,7 @@ def test_history_files_are_the_bytes_of_one_format_patch_per_commit(kit, store, 
 
 
 def test_a_repository_pointer_takes_the_tags_of_the_files_its_commit_changes(kit, repo, store, tmp_path):
-    # maintainer's decision, 2026-10-23: a task pointing to a commit is a code
+    # a task pointing to a commit is a code
     # task when a file the commit changes is tagged code; a file pointer takes
     # its own file's tags
     from wpt_dataset.tasks import document_tags

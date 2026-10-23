@@ -72,11 +72,10 @@ def test_steps_that_succeed_give_a_new_folder_and_leave_the_base_untouched(train
 
 
 def test_every_run_trains_a_fresh_drafter_against_the_new_weights(trained, tmp_path, monkeypatch):
-    # maintainer's decision, 2026-10-17: a model and its drafter are one
+    # a model and its drafter are one
     # unit; after the steps, the run trains a new drafter, the model frozen,
     # on the beginnings of the base model's training documents, and the new
-    # folder holds it, named against the new weights. Maintainer's decision,
-    # 2026-10-18: its training answers stop at <|im_end|> too
+    # folder holds it, named against the new weights. Its training answers stop at <|im_end|> too
     stops, real = [], wpt_posttrain.train_drafter
     monkeypatch.setattr(wpt_posttrain, "train_drafter", lambda *args, **kwargs: stops.append(kwargs["stops"])
                         or real(*args, **kwargs))
@@ -99,7 +98,7 @@ def test_every_run_trains_a_fresh_drafter_against_the_new_weights(trained, tmp_p
 
 
 def test_post_training_records_the_scheduler_s_times_and_replays_them_only_on_their_setup(trained, tmp_path):
-    # maintainer's decision, 2026-10-18: wpt-posttrain measures the
+    # wpt-posttrain measures the
     # scheduler's pass times for the new weights, records them with their
     # setup, and replays an earlier run's; another setup is refused before
     # any step runs
@@ -163,7 +162,7 @@ def test_a_failed_step_stops_the_run_with_its_reason_and_writes_nothing(trained,
 
 
 def test_a_recipe_entry_s_settings_reach_its_step_typed_from_the_step_s_defaults(trained, tmp_path):
-    # maintainer's decision, 2026-10-23: a posttrain entry may carry the
+    # a posttrain entry may carry the
     # settings it changes, typed from the step file's SETTINGS as a training
     # method's are; the new folder records them, and an unknown or mistyped
     # setting stops the run before any step has run
@@ -481,7 +480,7 @@ def scripted(calls=0, confidence=0.5):
 
 
 def test_an_attempt_s_parts_add_up_by_their_weights_and_a_broken_gate_or_no_answer_scores_0():
-    # maintainer's decision, 2026-10-23: correct 1, calibration 0.5 (Brier:
+    # correct 1, calibration 0.5 (Brier:
     # 1 - (confidence - correct)²), each rule 0.25, each tool call -0.01; a
     # gated rule below 1, or no answer, makes the whole attempt worth 0
     settings = step_module(GRPO).SETTINGS
@@ -498,7 +497,7 @@ def test_an_attempt_s_parts_add_up_by_their_weights_and_a_broken_gate_or_no_answ
 
 
 def test_each_terse_attempt_is_rewarded_for_its_closeness_to_the_full_attempt_of_the_same_index(monkeypatch):
-    # maintainer's decision, 2026-10-23: a task with a one-line form is
+    # a task with a one-line form is
     # played in full, then terse, both forms one group, so each advantage is
     # taken from the mean of all their attempts; terse attempt i adds,
     # weighed, how alike its changes to /work are to full attempt i's; an
@@ -682,7 +681,7 @@ def test_token_efficiency_rewards_a_passing_attempt_by_how_few_tokens_it_wrote()
 
 
 def test_each_attempt_s_line_is_kept_as_soon_as_it_is_scored(monkeypatch):
-    # maintainer's decision, 2026-10-18: a task's attempts are written
+    # a task's attempts are written
     # together, but each attempt's line is kept right after it is scored,
     # before the next one is, as when attempts ran one by one; a dropped
     # attempt takes its place in the order

@@ -39,8 +39,7 @@ def test_a_linux_processor_is_named_by_its_model_name_line():
 
 def test_an_arm_processor_without_a_model_name_is_named_from_its_codes():
     # as lscpu does, from Arm's published implementer and part names, each
-    # kind of core once in the order the cores give them (maintainer's
-    # decision, 2026-10-18)
+    # kind of core once in the order the cores give them
     assert cpuinfo_name(BIG_LITTLE) == "Arm Limited Cortex-X925 + Cortex-A725"
     assert cpuinfo_name(board(("0x41", "0xd0b"))) == "Arm Limited Cortex-A76"
 
@@ -59,7 +58,7 @@ def test_without_a_model_name_or_codes_the_name_is_left_to_the_architecture():
 
 
 def test_a_missing_sysctl_on_macos_names_the_architecture(monkeypatch):
-    # a missing sysctl never stops a run (maintainer's decision, 2026-10-18)
+    # a missing sysctl never stops a run
     def missing(name):
         raise wpt_utils.programs.MissingTool(f"{name} is not installed (or not on the search path)")
 

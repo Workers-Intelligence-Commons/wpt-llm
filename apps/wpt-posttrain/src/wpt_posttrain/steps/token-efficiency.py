@@ -26,8 +26,7 @@ Then grpo's learning, unchanged except for the reward: rounds of `group`
 attempts per task, in its full form only, in fresh containers, advantage =
 reward minus the mean reward of the group (not divided by the standard deviation), the loss over
 the tokens the model wrote, R3 routes and frozen routers, dropped attempts
-and the same failures (steps/grpo.py says each). An attempt's reward
-(maintainer's decision, 2026-10-23) is 0 when it fails, its score below
+and the same failures (steps/grpo.py says each). An attempt's reward is 0 when it fails, its score below
 the task's best start score, and when it passes, its parts weighed
 together as grpo weighs them (agentic.combined, with this step's weight_
 settings) times the

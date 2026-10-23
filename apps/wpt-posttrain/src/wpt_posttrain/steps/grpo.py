@@ -26,7 +26,7 @@ a terse attempt's reward adds, weighed, its closeness to the full attempt
 of the same index (how alike their changes to /work are; none on a task
 whose area is empty, which only answers), so the model's own full result
 is its reference, and, where closeness counts, a terse attempt whose
-full attempt was dropped is not trained on (maintainer's decisions, 2026-10-18 and 2026-10-23). An
+full attempt was dropped is not trained on. An
 attempt whose own processes or files fill
 its container so that no command can start there ends, and is scored
 the same way. When Docker fails, which is not the model's doing, the

@@ -113,7 +113,7 @@ def test_a_missing_answer_scores_0_and_the_confidence_gets_its_brier_score():
     # every check scores 0 an attempt without an answer (no final reply, or
     # a reply to the confidence question that is not a number from 0 to 100),
     # whatever the files hold, and gives a confidence its Brier score
-    # (maintainer's decisions, 2026-10-18 and 2026-10-23)
+    #
     check = load("wpt_check")
     given = conversation([], answer={"answer": "Fixed the sign.", "confidence": 0.8})
     missing = conversation([])
@@ -144,7 +144,7 @@ def test_the_trace_rules_read_each_tool_by_its_real_name():
 
 
 def test_looking_is_a_looking_tool_or_bash_running_a_reading_program():
-    # maintainer's decision, 2026-10-22: every looking tool opens a source,
+    # every looking tool opens a source,
     # the pool's among them, and a bash call looks when its command, parsed,
     # runs one of the image's reading programs; a word that only names one
     # does not
@@ -179,7 +179,7 @@ def test_looking_is_a_looking_tool_or_bash_running_a_reading_program():
 
 
 def test_asking_comes_after_every_file_where_the_answer_lives_was_opened():
-    # maintainer's decisions, 2026-10-22 and 2026-10-23: a question counts
+    # a question counts
     # only after every file of the task's answered_in was opened through one
     # of the looking tools the task names as able to answer (a bash call
     # counts when it names the file and runs a program that shows what it
@@ -216,7 +216,7 @@ def test_asking_comes_after_every_file_where_the_answer_lives_was_opened():
 
 
 def test_a_question_comes_after_a_look_that_showed_the_notes():
-    # maintainer's decision, 2026-10-22: where NOTES.md holds the detail,
+    # where NOTES.md holds the detail,
     # the attempt reads it, through any looking tool, before any question
     check = load("wpt_check")
     names = {"view": "read", "shell": "bash", "grep": "search_text", "question": "ask"}
@@ -260,7 +260,7 @@ def test_a_built_check_scores_the_rest_of_the_paragraph_or_not_enough(tmp_path):
     # the task builder's checks: the rest of the paragraph, word for word
     # but letter case and marks aside, scores 1; a missing passage wants
     # "not enough" naming the paragraph asked for by its quoted start
-    # (maintainer's decision, 2026-10-22), and an answerable one refuses it;
+    #, and an answerable one refuses it;
     # no answer, 0
     def said(text):
         return conversation([], answer={"answer": text, "confidence": 0.5})
@@ -286,7 +286,7 @@ def test_a_built_check_scores_the_rest_of_the_paragraph_or_not_enough(tmp_path):
 
 
 def test_a_built_look_or_ask_check_reports_its_trace_rules_as_parts(tmp_path):
-    # maintainer's decision, 2026-10-23: a check prints its rules as named
+    # a check prints its rules as named
     # parts next to correct (#37's trace rules), which the task's gates and
     # the step's weights then read; here no file was left, so correct is 0,
     # and the question came after the notes showed the name: asked_last is 0
@@ -350,7 +350,7 @@ def test_pushed_wants_one_new_commit_with_the_next_commit_s_tree_and_any_message
     # the commit-and-push check reads the remote: exactly one new commit on
     # its branch, on top of the commit it started from, its tree the next
     # commit's; the model writes its own message, which is not compared but
-    # must not be empty (maintainer's decision, 2026-10-22)
+    # must not be empty
     check = load("wpt_check")
     files, remote, expected = prepared(tmp_path)
 
@@ -393,7 +393,7 @@ def test_search_ranks_the_pages_by_the_query_and_fetch_gives_a_page_s_text(tmp_p
 
 
 def test_the_pool_s_tools_answer_as_the_tools_they_stand_for(tmp_path):
-    # padding tools really work (maintainer's decision, 2026-10-22): a
+    # padding tools really work: a
     # listing, a glob, a grep and a calculator, links never followed
     (tmp_path / "src" / "deep").mkdir(parents=True)
     (tmp_path / "src" / "a.py").write_text("import os\nx = 1\n")
@@ -465,8 +465,7 @@ def agent(docker_runs, tmp_path_factory):
 @pytest.mark.image_build
 @pytest.mark.xdist_group("agent-image")  # one worker builds the image: two would share its snapshot layer
 def test_the_reading_programs_are_programs_the_agent_image_holds(agent):
-    # wpt_check.READERS names the image's reading programs (maintainer's
-    # decision, 2026-10-22): each of them is on the image's path
+    # wpt_check.READERS names the image's reading programs: each of them is on the image's path
     _, image = agent
     readers = sorted(load("wpt_check").READERS)
     listed = subprocess.run(["docker", "run", "--rm", "--network", "none", image, "bash", "-c",
@@ -515,7 +514,7 @@ def test_in_the_agent_image_the_tools_answer_and_the_check_library_scores(agent)
 @pytest.mark.image_build
 @pytest.mark.xdist_group("agent-image")  # one worker builds the image: two would share its snapshot layer
 def test_in_the_agent_image_each_attempt_pushes_one_way_and_the_check_reads_the_remote(agent):
-    # maintainer's decision, 2026-10-22: the seeded choice of a variant
+    # the seeded choice of a variant
     # gives each commit-and-push attempt one way to push. With git, no push
     # tool is offered and git push through bash reaches the remote; with the
     # push tool, the remote is hidden, git push through bash cannot reach it
@@ -562,8 +561,7 @@ def ondrik(image, *args, user=AGENT) -> subprocess.CompletedProcess:
 @pytest.mark.xdist_group("agent-image")  # one worker builds the image: two would share its snapshot layer
 def test_in_the_agent_image_ondrik_does_what_its_manual_says_and_the_model_cannot_read_it(agent):
     # the read-the-manual tasks' program, compiled so that the image holds no
-    # readable documentation of it besides its manual (maintainer's decision,
-    # 2026-10-23): every example of its manual runs, a seal is 10 signs and a
+    # readable documentation of it besides its manual: every example of its manual runs, a seal is 10 signs and a
     # knot 6 digits, each option and the order of a knot's numbers change the
     # result, the same call gives the same result; what it cannot read, --help
     # included, fails with code 2 and names the manual; the model's user runs
@@ -612,7 +610,7 @@ def test_in_the_agent_image_a_built_read_the_manual_check_wants_the_program_s_ou
 @pytest.mark.image_build
 @pytest.mark.xdist_group("agent-image")  # one worker builds the image: two would share its snapshot layer
 def test_in_the_agent_image_ondrik_runs_and_a_task_can_remove_its_manual(agent):
-    # maintainer's decision, 2026-10-23: the image installs ondrik on its
+    # the image installs ondrik on its
     # path with its manual; a task that names the manual's folder in absent
     # sees it empty, and the check, in its own container, finds the
     # program's output in the answer either way

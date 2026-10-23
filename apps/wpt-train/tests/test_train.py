@@ -83,7 +83,7 @@ def test_a_training_run_records_what_it_read_every_step_and_what_it_wrote(built,
 
 def test_training_ends_with_the_drafter_against_the_final_weights_and_the_scheduler_s_times(built, tmp_path,
                                                                                              capsys):
-    # maintainer's decision, 2026-10-17: a model and its drafter are one
+    # a model and its drafter are one
     # unit; the run trains the drafter at its end, the model frozen, and
     # measures the scheduler's pass times once, into its record; a later run
     # replays them
@@ -99,7 +99,7 @@ def test_training_ends_with_the_drafter_against_the_final_weights_and_the_schedu
     assert run.ids["outputs"]["drafter"] == hashlib.sha256((folder / "drafter" / "model.safetensors").read_bytes()
                                                            ).hexdigest()
     recorded = built.store.read_record(run.folder, COSTS_FILE)
-    # maintainer's decision, 2026-10-18: the times carry the setup they were measured on
+    # the times carry the setup they were measured on
     setup = costs_setup(load_model(folder).config, 1, DRAFT, select_device())
     assert json.loads(recorded)["setup"] == setup
     costs = replayed_costs(recorded, setup)
@@ -123,7 +123,7 @@ def test_training_ends_with_the_drafter_against_the_final_weights_and_the_schedu
 
 
 def test_drafter_feature_layers_the_model_does_not_have_are_refused_before_training(built, tmp_path, capsys):
-    # maintainer's decision, 2026-10-18: checked against the model's layers at startup
+    # checked against the model's layers at startup
     with pytest.raises(SystemExit) as refused:
         main([built.recipe("three", training=one_stage(3), drafter={"features": [9]}), built.dataset_id, "--out",
               "model"])
@@ -134,7 +134,7 @@ def test_drafter_feature_layers_the_model_does_not_have_are_refused_before_train
 def test_a_drafter_that_cannot_be_trained_refuses_the_run_and_can_always_be_resumed(built, tmp_path, capsys):
     # held_out keeps both prompts apart: nothing is left to learn from. The
     # run saved its checkpoint just before the drafter, even with no
-    # checkpoint during training (maintainer's decision, 2026-10-18), so
+    # checkpoint during training, so
     # --resume takes no step and trains the drafter again
     failing = built.recipe("three", training=one_stage(3), drafter={"prompts": 2, "held_out": 0.9})
     with pytest.raises(SystemExit) as refused:
@@ -707,8 +707,7 @@ def test_a_new_model_that_cannot_take_the_place_of_its_own_checkpoint_is_kept_an
                                                                                       capsys):
     # without --run, the checkpoint saved before the drafter is the target's
     # only content: a refused rename keeps the new model, which has no other
-    # copy, names it, and leaves the checkpoint for --resume (maintainer's
-    # decision, 2026-10-18)
+    # copy, names it, and leaves the checkpoint for --resume
     real = os.replace
 
     def refuse_the_new_one(source, target):

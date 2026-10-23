@@ -42,24 +42,20 @@ The rules every write follows:
   holds on a file in the repository's git folder (fcntl.flock on Linux and
   macOS, msvcrt.locking on Windows), which it releases when the process
   ends, crash included, so a lock is never left behind; inside a process an
-  RLock shared by every Repo of one root, for its threads (maintainer's
-  decision, 2026-10-18);
+  RLock shared by every Repo of one root, for its threads;
 - a write through a symbolic link (a data file that is one, or a folder
   between the repository and it) writes the link's target when that target
-  is inside the repository, and is refused (RuleViolation) when it is not
-  (maintainer's decision, 2026-10-18); a change of a source's file whose
+  is inside the repository, and is refused (RuleViolation) when it is not; a change of a source's file whose
   path is a link or lies under one is refused (removing the link itself is
   allowed);
 - JSON is written as dump_json writes it, and U+2028, U+2029 and U+0085
   are always written as escapes, even in values a save keeps unchanged, so
-  that no line splitter breaks a line of JSON (maintainer's decision,
-  2026-10-18); a save over an existing JSON file keeps its bytes when the
+  that no line splitter breaks a line of JSON; a save over an existing JSON file keeps its bytes when the
   meaning is the same (those escapes aside), and otherwise rewrites only
   the values that changed, keeping the layout and key order of the rest
-  (keep_layout; where a new key goes and the indent of what it writes:
-  maintainer's decision, 2026-10-18);
+  (keep_layout; where a new key goes and the indent of what it writes);
 - an audit hook (sys.addaudithook), set in every process when its first
-  Repo is made (maintainer's decision, 2026-10-18), refuses with
+  Repo is made, refuses with
   DataAccessRefused any opening, listing, removal or renaming of a path
   under a Repo's data folder, symbolic links resolved, whose nearest caller
   in the project's own code is neither this file nor a test (under a tests/
@@ -1274,8 +1270,7 @@ class Repo:
         or remove one (rating None), through a patch (change_source_files),
         in a rating file of an `empty` source, as save_conversation does with
         conversations. A rating added by a person who rated the same attempt
-        already replaces their earlier line (maintainer's decision,
-        2026-10-23; ratings.attempt_of); any other goes at the end. A new
+        already replaces their earlier line (ratings.attempt_of); any other goes at the end. A new
         rating file gets its own `rating` format entry when none covers it.
         The whole file must pass the rating rules (ratings.py). Returns the
         new version."""

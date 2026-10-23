@@ -17,7 +17,7 @@ type Summary = {
 };
 type Detail = { id: string; document: Record<string, unknown> | null; version: string; problems: string[] };
 
-// "not admitted": under review and refused together (maintainer's decision, 2026-10-22)
+// "not admitted": under review and refused together
 const DECISIONS = ["not admitted", "under-review", "admitted", "refused", "all"];
 
 function List() {

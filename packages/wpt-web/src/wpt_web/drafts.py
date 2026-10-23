@@ -5,8 +5,7 @@ person then edits the draft or confirms it as it is; the editor saves it
 with the metadata.draft this module returns, whose `edited` the service
 layer sets at save against the drafted content's sha256
 (docs/chat-format.md, "Model drafts"). The server checks nothing else of
-that metadata.draft: it is a claim the client makes (maintainer's
-decision, 2026-10-18).
+that metadata.draft: it is a claim the client makes.
 
 A model and its drafter are one unit (docs/model.md, "The drafter"):
 load_model refuses a folder whose drafter is missing or was trained
@@ -25,8 +24,7 @@ that does not match, a state dict whose names or shapes do not fit. A fault
 of the machine (out of memory, a GPU driver error) is not the folder's: it
 is answered with 500, saying so. Any other exception (a bug, for example)
 is answered with 500 too, saying the fault is unknown, with its type and
-text: it blames neither the machine nor the folder (maintainer's decision,
-2026-10-18).
+text: it blames neither the machine nor the folder.
 """
 
 import threading

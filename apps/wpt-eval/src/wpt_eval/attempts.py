@@ -16,7 +16,7 @@ model's own held-out share and dataset. The attempts are played by
 wpt_agent.play, as the grpo step plays its own: each in a fresh container
 of the task's image, written together by the model alone, then scored by
 the task's check. The model always writes its likeliest token
-(wpt_agent.GREEDY; maintainer's decision, 2026-10-23), so the attempts at
+(wpt_agent.GREEDY), so the attempts at
 one task differ only in the tools they are offered. plain=False offers
 each attempt its seeded variation of the tools (wpt_agent.offer, from a
 generator seeded with SEED, the task and the attempt); plain=True offers
@@ -27,14 +27,13 @@ workspace, so only the tools differ between the two runs.
 
 Every model runs the same way, a pre-trained one included: an attempt
 without an answer (no final reply, or no confidence from 0 to 100 after
-it) scores what its check gives, 0 with the check library's rule
-(maintainer's decision, 2026-10-23).
+it) scores what its check gives, 0 with the check library's rule.
 
 Every attempt is a line of RECORD_FILE: a scored one with its
 conversation, its score and its changes to /work (wpt_agent.changes: a
 text diff from its start to its end, a file that is not text or is too
 large named, never shown, the whole cut past a size), which the rating
-page shows (maintainer's decision, 2026-10-23); one Docker dropped
+page shows; one Docker dropped
 (wpt_agent.SandboxError, not the model's doing), marked dropped, with
 the error and the opening it would have started from, as the grpo step
 keeps its own. A dropped attempt has no Record: it is printed and

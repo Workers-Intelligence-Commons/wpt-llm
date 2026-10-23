@@ -92,8 +92,7 @@ def assert_routed_alike(got, expected, routing):
     """Two passes over the same tokens give each routed layer the same
     scores within ROUNDING (routing.ROUNDING), and the same routing and
     balancing counts for every token whose choice is clear. That bound on
-    the scores is what limits the differences to near ties (maintainer's
-    decision, 2026-10-18): a token whose choice is decided by two values
+    the scores is what limits the differences to near ties: a token whose choice is decided by two values
     no farther apart than the passes moved them (the token's own score
     differences, plus ARITHMETIC) may go either way. The rerouting and bin
     checks below document this, by testing it for the scores at hand; they

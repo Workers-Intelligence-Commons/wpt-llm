@@ -2,8 +2,7 @@
 docs/architecture.md, "The service layer"): a write through a symbolic link
 lands on its target inside the repository and nowhere outside it, one lock
 around each version check and its write, across threads and processes,
-JSON that no line splitter breaks (those three, maintainer's decisions,
-2026-10-18), a save that keeps a file's layout where the meaning did not
+JSON that no line splitter breaks (those three), a save that keeps a file's layout where the meaning did not
 change, conversations and tasks only in an empty source, a task's links
 kept as they are, and a new source that leaves nothing behind when it
 fails."""
@@ -202,7 +201,7 @@ def test_conversations_hold_line_and_paragraph_separators(kit, repo, store):
 
 
 def test_an_assistant_message_may_hold_no_block_but_no_other_message_may(kit):
-    # a model that closes its turn at once is recorded as it happened (maintainer's decision, 2026-10-22);
+    # a model that closes its turn at once is recorded as it happened;
     # the attempts files go through the same parse as a source's chat files
     from wpt_dataset import conversations
     from wpt_dataset.errors import InvalidFile
@@ -362,7 +361,7 @@ RATING = {"schema": 1, "task": "mine-tasks-0123abcd/tasks/hello", "weights": {"m
 def test_ratings_are_lines_of_a_rating_file_of_an_empty_source_and_never_a_document(kit, repo, store, tmp_path):
     # a person's pass or fail on an attempt is stored as a file of an empty
     # source, so the measure is reproducible, and is a measure only: never
-    # a pre-training document (maintainer's decision, 2026-10-18)
+    # a pre-training document
     from wpt_dataset.markdown import documents
     from wpt_dataset.sources import source_tree
 
@@ -394,7 +393,7 @@ def test_ratings_are_lines_of_a_rating_file_of_an_empty_source_and_never_a_docum
 
 
 def test_a_person_s_newer_rating_of_an_attempt_replaces_their_earlier_one(repo, store):
-    # maintainer's decision, 2026-10-23: one rating per person per attempt;
+    # one rating per person per attempt;
     # adding a newer one replaces the earlier line, another person's rating
     # of the same attempt stays, and a file holding two ratings by one
     # person of one attempt is refused however it is saved

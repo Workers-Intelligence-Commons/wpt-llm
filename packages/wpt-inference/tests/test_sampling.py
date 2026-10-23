@@ -49,7 +49,7 @@ def test_rows_written_through_the_cache_get_the_tokens_the_whole_text_gives(rout
     # one of them reading a tool result midway: the same seed draws the
     # same tokens as reading each row's whole text again for every token.
     # The cache's routes may differ from the whole text's at near ties only
-    # (maintainer's decision, 2026-10-18): a row's tokens are then the
+    #: a row's tokens are then the
     # same up to the token drawn from the first position that went to other
     # experts, and the same everywhere when no position did
     model = wpt()
@@ -193,7 +193,7 @@ def test_a_dspark_drafter_trains_and_its_drafts_are_verified():
     # gives finite losses and changes every weight it reaches, and the
     # writer verifies the trained drafter's drafts; how often they are kept
     # is not asked: this random model is nearly uniform, so no drafter
-    # beats uniform drafts on it (maintainer's decision, 2026-10-21)
+    # beats uniform drafts on it
     model, prompt = wpt(), [0, 5, 7, 9]
     teacher = Writer(model, prompt, 8, temperature=1.0, top_k=None, generator=torch.Generator().manual_seed(1))
     for _ in range(48):

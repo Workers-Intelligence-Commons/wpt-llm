@@ -39,7 +39,7 @@ def with_drafter(model, folder):
 
 
 def test_a_model_loads_only_with_the_drafter_trained_against_its_weights(tmp_path):
-    # maintainer's decision, 2026-10-17: a model and its drafter are one
+    # a model and its drafter are one
     # unit; load_model refuses a folder whose drafter is missing, was not
     # saved whole, or names other weights by their sha256, and no option
     # skips the check

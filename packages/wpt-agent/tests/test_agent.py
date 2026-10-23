@@ -349,7 +349,7 @@ def test_attempts_written_together_read_the_opening_once_and_end_apart():
 
 def test_an_attempt_opens_with_the_full_request_or_with_its_one_line_form():
     # the measure of terse against full requests gives the same task in
-    # either form (maintainer's decision, 2026-10-23); the model reads the
+    # either form; the model reads the
     # form asked for as the user's message
     both = task(terse="Say hello.")
     [full, terse] = [attempt(both, None, TOKENIZER, scripted(turn({"type": "text", "text": "Done."})),
@@ -363,7 +363,7 @@ def test_an_attempt_opens_with_the_full_request_or_with_its_one_line_form():
 
 
 def test_a_check_prints_its_named_parts_or_one_number_and_anything_else_gives_no_score(image):
-    # maintainer's decision, 2026-10-23: one JSON object of parts from 0 to
+    # one JSON object of parts from 0 to
     # 1, "correct" among them; a bare number is the correct part alone
     refused = "not a number from 0 to 1 nor an object of such parts holding 'correct'"
     for check, scored in [
@@ -442,7 +442,7 @@ def test_an_attempt_without_a_final_reply_or_a_whole_confidence_has_no_answer():
 
 
 def test_the_opening_lists_the_offered_tools_that_look_by_their_real_names():
-    # one definition of looking (maintainer's decision, 2026-10-22): read,
+    # one definition of looking: read,
     # bash and each declared tool marked looks; the check library reads the
     # list from the conversation, whatever names the attempt saw
     fetch = {"name": "fetch", "description": "Fetch a page's text.", "program": "/usr/local/bin/fetch",
@@ -458,7 +458,7 @@ def test_the_opening_lists_the_offered_tools_that_look_by_their_real_names():
 
 
 def test_the_opening_names_the_starting_files_where_the_answer_lives():
-    # maintainer's decision, 2026-10-23: asked_last waits for the files
+    # asked_last waits for the files
     # under /work that the task's answered_in matches; a file the attempt's
     # tools hide is not in /work, and a pattern that matches no file names none
     files = {"NOTES.md": (FILE, b"Put it in a.txt.\n"), "docs/a.md": (FILE, b"a\n"), "docs/b.md": (FILE, b"b\n"),
@@ -503,7 +503,7 @@ def test_a_needed_tool_is_always_offered_and_the_others_vary_with_the_seed():
 
 
 def test_each_attempt_gets_one_way_of_a_need_with_the_files_that_way_hides():
-    # maintainer's decision, 2026-10-22: a commit-and-push attempt pushes one
+    # a commit-and-push attempt pushes one
     # way, the seeded choice of a variant: git through bash, no push tool
     # offered; or the push tool with the remote, a folder outside /work,
     # hidden among the tools' files under its own path
@@ -643,7 +643,7 @@ def test_the_check_reads_the_attempt_s_conversation_next_to_it(image):
 
 
 def test_a_path_changed_outside_the_task_s_area_breaks_within_area_and_a_gate_on_it_scores_0(monkeypatch):
-    # maintainer's decision, 2026-10-23: an attempt may change only the
+    # an attempt may change only the
     # paths its task's area matches; within_area is 1 when it kept to them,
     # 0 otherwise, and a task without an area gets no such part. A gated
     # part below 1 makes the score 0, whatever correct says

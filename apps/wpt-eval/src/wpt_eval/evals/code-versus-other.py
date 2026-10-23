@@ -3,8 +3,7 @@
 The pass rates of the shared run's attempts (context.attempts()) at code
 tasks against those at every other task, with their counts. A task is a
 code task when any document it points to is tagged code; for a repository
-pointer, the tags of the files the commit changes count (maintainer's
-decision, 2026-10-23): wpt_dataset.tasks.document_tags. A task that
+pointer, the tags of the files the commit changes count: wpt_dataset.tasks.document_tags. A task that
 points to no document is another task. The gap should stay small.
 """
 

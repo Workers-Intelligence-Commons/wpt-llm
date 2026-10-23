@@ -65,7 +65,7 @@ def model():
 
 
 def test_written_answers_never_reach_the_drafter_s_training(monkeypatch):
-    # maintainer's decision, 2026-10-17: the prompts are the beginnings of
+    # the prompts are the beginnings of
     # the training documents, and the model alone writes the answers; the
     # rest of each document, text people wrote, is never read, and every
     # sequence the drafter learns from or is calibrated on is a prompt and
@@ -124,7 +124,7 @@ def test_the_recipe_s_drafter_section_gives_the_shape_and_the_training():
     assert shape == DrafterConfig.for_model(CONFIG, block=3) and training == Settings(epochs=2)
     with pytest.raises(ValueError, match="drafter settings: epoch unknown"):
         settings(CONFIG, {"epoch": 2})
-    # maintainer's decision, 2026-10-18: feature layers the model does not have are refused with the settings,
+    # feature layers the model does not have are refused with the settings,
     # before any training
     assert settings(CONFIG, {"features": [1, 4]})[0].features == (1, 4)
     with pytest.raises(ValueError, match=r"features \[2, 5\]: 5 is not a layer of a 4-layer model \(layers 1 to 4\)"):
@@ -137,8 +137,7 @@ def test_the_scheduler_s_pass_times_are_replayed_only_on_the_setup_they_were_mea
     # measured once per run, written into its record with the model config,
     # rows, drafter block and device they were measured on, the CPU by its
     # processor's name; a replay on another setup, another processor
-    # included, is refused, naming each difference (maintainer's decisions,
-    # 2026-10-18)
+    # included, is refused, naming each difference
     costs = measure_costs(model(), 1, DRAFT, context=8, repeats=1)
     assert len(costs) == DRAFT + 1 and all(seconds > 0 for seconds in costs)
     setup = costs_setup(CONFIG, 1, DRAFT, "cpu")

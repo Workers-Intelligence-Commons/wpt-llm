@@ -74,7 +74,7 @@ _lines: dict[tuple[str | None, str], int] = {}
 
 CORRECT = "correct"  # the check's part for the task's own judgement (wpt_agent.check)
 
-# the weights of an attempt's parts (maintainer's decision, 2026-10-23), starting values until experiments on
+# the weights of an attempt's parts, starting values until experiments on
 # the 1B model set them (#53); weight_correct stays above weight_calibration (check)
 WEIGHTS = {
     "weight_correct": 1.0,
@@ -86,8 +86,7 @@ WEIGHTS = {
 
 def check(settings):
     """ValueError when weight_correct is not above weight_calibration:
-    stating a low confidence must never pay more than being right
-    (maintainer's decision, 2026-10-23). The runner calls a step file's
+    stating a low confidence must never pay more than being right. The runner calls a step file's
     check(settings) before any step has run."""
     if settings["weight_correct"] <= settings["weight_calibration"]:
         raise ValueError(f"weight_correct ({settings['weight_correct']}) must be above weight_calibration "
@@ -134,8 +133,7 @@ def tool_calls(attempt) -> int:
 
 
 def combined(task, attempt, parts, settings, closeness=None) -> float:
-    """What the attempt's parts are worth together (maintainer's decision,
-    2026-10-23): 0 when the check gave no score, the attempt has no answer
+    """What the attempt's parts are worth together: 0 when the check gave no score, the attempt has no answer
     (no final reply, or no confidence from 0 to 100) or a gate of the task
     is broken (wpt_agent.gated); otherwise the weighted sum of `correct`,
     the calibration 1 - (confidence - correct)², each other part (a rule,
@@ -177,7 +175,7 @@ class Learner:
     machine's passes are. attempts() keeps each attempt in telemetry's
     record, as a line of `<name>-attempts.jsonl`. pools: {image name: its
     pool of tools}. With terse, train plays a task that has a one-line form
-    in both forms (maintainer's decision, 2026-10-23)."""
+    in both forms."""
 
     def __init__(self, name, model, tokenizer, device, built, settings, telemetry=None, pools=None, terse=False):
         self.name, self.model, self.tokenizer, self.device = name, model, tokenizer, device
@@ -259,11 +257,9 @@ class Learner:
         played) is what an attempt is worth, by default combined(), and
         measure names it in what the step prints and in its failures. With
         self.terse, a task with a one-line form is played in its full form,
-        then in its one-line form, and both forms' attempts make one group
-        (maintainer's decision, 2026-10-23): each terse attempt's reward
+        then in its one-line form, and both forms' attempts make one group: each terse attempt's reward
         adds, weighed, its closeness to the full attempt of the same index,
-        except on a task whose area is empty (it answers only; maintainer's
-        decision, 2026-10-23), and, where closeness is part of the reward, a
+        except on a task whose area is empty (it answers only), and, where closeness is part of the reward, a
         terse attempt whose full attempt Docker dropped is kept but not
         trained on: its reward would lack the part every other terse attempt
         has. The model is left in eval mode."""

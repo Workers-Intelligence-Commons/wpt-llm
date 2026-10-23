@@ -19,8 +19,7 @@ per kind with --count 2500.
 After writing, it reports what the task source holds: its tasks of each
 kind, and the shares of those whose kind acts only (commit-and-push),
 checks only (find-the-passage, evidence-removed, look-or-ask) or does
-both (read-the-manual), which sum to 100% (maintainer's decision,
-2026-10-23; builder.CLASSES).
+both (read-the-manual), which sum to 100% (builder.CLASSES).
 """
 
 import argparse

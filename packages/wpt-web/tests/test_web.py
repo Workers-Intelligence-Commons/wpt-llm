@@ -61,9 +61,9 @@ def test_a_source_is_listed_read_and_saved_only_through_the_source_rules(web):
     assert status == 200 and path.read_text(encoding="utf-8") == dump_json(noted)
 
     before = path.read_text(encoding="utf-8")
-    grey = {**noted, "licenses": [{**DOCUMENT["licenses"][0], "license": "CC-BY-SA-4.0"}]}
-    status, refused = request("PUT", f"/api/sources/{SID}", {"document": grey, "version": saved["version"]})
-    assert status == 422 and refused["problems"] == [f"{SID}: license CC-BY-SA-4.0 is not on the allowed list"]
+    noncommercial = {**noted, "licenses": [{**DOCUMENT["licenses"][0], "license": "CC-BY-NC-4.0"}]}
+    status, refused = request("PUT", f"/api/sources/{SID}", {"document": noncommercial, "version": saved["version"]})
+    assert status == 422 and refused["problems"] == [f"{SID}: license CC-BY-NC-4.0 is not on the allowed list"]
     status, stale = request("PUT", f"/api/sources/{SID}", {"document": noted, "version": detail["version"]})
     assert status == 409 and "changed on disk" in stale["problems"][0]
     assert path.read_text(encoding="utf-8") == before

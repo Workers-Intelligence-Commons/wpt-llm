@@ -33,13 +33,13 @@ natural item (lowercase `a-z 0-9 -`), for example `gutenberg-1342-05bda734`.
 `wpt-dataset source-id <origin> [<item>] <address>` prints it. An id is never
 reused.
 
-When a source moves to a new address, it becomes a new source with a new id;
-the old one is refused (`"decision": "refused"`), its reason naming the new
-source's id (maintainer's decision, 2026-10-22), mixtures naming it are
-updated, and its erasure cuts move to the new folder. When it publishes a new
-revision, the folder is updated in place: `revision` and `checksum` change,
-and its cuts and patches are redone in the same commit. Rebuilding an old
-recipe then needs the old commit of this repository.
+When a source moves to a new address, it becomes a new source with a new
+id; the old one is refused (`"decision": "refused"`), its reason naming the
+new source's id, mixtures naming it are updated, and its erasure cuts move
+to the new folder. When it publishes a new revision, the folder is updated
+in place: `revision` and `checksum` change, and its cuts and patches are
+redone in the same commit. Rebuilding an old recipe then needs the old
+commit of this repository.
 
 ### source.json
 
@@ -64,9 +64,9 @@ recipe then needs the old commit of this repository.
 ```
 
 - `schema`: the shape version of the file, for migrations.
-- `type`: `http-file`, `http-archive` (tar, tar.gz, tar.bz2, tar.xz or zip),
-  `git`, `mercurial`, `huggingface` (a dataset on huggingface.co, pinned to
-  its commit), or `empty` for text written for WPT: it downloads
+- `type`: `http-file`, `http-archive` (tar, tar.gz, tar.bz2, tar.xz or
+  zip), `git`, `mercurial`, `huggingface` (a dataset on huggingface.co,
+  pinned to its commit), or `empty` for text written for WPT: it downloads
   nothing and starts with no files, and its patches hold every file. Its
   `address` is a name, `empty:<name>`, its `revision` the date it was
   started, and its `checksum` that of an empty manifest,
@@ -91,46 +91,42 @@ recipe then needs the old commit of this repository.
 - `formats`: how each file becomes Markdown, mapped to paths like
   `licenses`: every path matches exactly one entry. Training reads only
   Markdown (see "Documents are Markdown" below).
-- `tags`: describe paths (language, domain); pools select documents by tags.
+- `tags`: describe paths (language, domain); pools select documents by
+  tags.
 - `mirrors`: other addresses expected to give the same checksum.
 - `history` (git only): adds one file per commit from `since` to the
-  revision, `.git/history/<commit>`, in `git format-patch` layout. A
-  commit that also changes files `extract` leaves out gets a diff limited
-  to the kept paths; when a kept path is also the folder of paths left out
-  (a submodule replacing a folder of the same name), those paths are
-  excluded from the diff by name. One more file, `.git/history/order`,
-  holds the commit order: every commit from `since` to the revision,
-  merges included, newest first and each before its parents (git's
-  topological order), one per line, a merge's line ending in ` merge`
-  (maintainer's decision, 2026-10-22). Being part of the stored tree, the
-  order is covered by the source checksum, so a git source with a history
-  gets a new checksum once it is fetched with its order file; until then
-  its stored tree has no order file and gives no commit-and-push task.
+  revision, `.git/history/<commit>`, in `git format-patch` layout. A commit
+  that also changes files `extract` leaves out gets a diff limited to the
+  kept paths; when a kept path is also the folder of paths left out (a
+  submodule replacing a folder of the same name), those paths are excluded
+  from the diff by name. One more file, `.git/history/order`, holds the
+  commit order: every commit from `since` to the revision, merges included,
+  newest first and each before its parents (git's topological order), one
+  per line, a merge's line ending in ` merge`. Being part of the stored
+  tree, the order is covered by the source checksum, so a git source with a
+  history gets a new checksum once it is fetched with its order file; until
+  then its stored tree has no order file and gives no commit-and-push task.
   The order file is not a training document: `markdown.documents`, which
-  every list of documents reads, leaves it out (maintainer's decision,
-  2026-10-22).
-  Only patterns starting with `.git/history/` give these files their
-  license entry: `**` covers the tree's files only (docs/licenses.md,
-  "Rules").
+  every list of documents reads, leaves it out. Only patterns starting with
+  `.git/history/` give these files their license entry: `**` covers the
+  tree's files only (docs/licenses.md, "Rules").
 - `submodules` (git only): the address of each submodule the source reads,
   by its path.
 - `cuts`: erasure cuts; see [erasure.md](erasure.md).
 - `held_out_by`: a `pattern` (a Python regular expression) searched in each
   document's path; where it is found, the held-out hash reads its groups
   instead of the document id, so documents of any source with the same
-  groups are held out together; see
-  [data-selection.md](data-selection.md), "Held-out text and
-  contamination".
+  groups are held out together; see [data-selection.md](data-selection.md),
+  "Held-out text and contamination".
 - `decision`: the human decision on the source (required), one of three
-  states (maintainer's decision, 2026-10-22): `under-review` (every new
-  source, until a maintainer decides), `admitted` or `refused`, by whom
-  and when. `reason` (why) is required to refuse, optional under review;
-  an admission gives one only for an exception, such as an explicit
-  permission for content without a license. The builds, the post-training
-  readers and `check --fetch` without ids read only admitted sources; an
-  `under-review` source is left out of them as a refused one is. A refused
-  source stays in the repository as a reference and is never deleted
-  (maintainer's decision, 2026-10-22).
+  states: `under-review` (every new source, until a maintainer decides),
+  `admitted` or `refused`, by whom and when. `reason` (why) is required to
+  refuse, optional under review; an admission gives one only for an
+  exception, such as an explicit permission for content without a license.
+  The builds, the post-training readers and `check --fetch` without ids
+  read only admitted sources; an `under-review` source is left out of them
+  as a refused one is. A refused source stays in the repository as a
+  reference and is never deleted.
 - Every object may hold a free-text `note`. It is data, so it survives
   migrations (comments would not).
 
@@ -180,7 +176,7 @@ exclude them in `extract`.
 A file whose encoding is stated in the file itself is text in that
 encoding: it is decoded to Unicode, and everything the pipeline stores or
 emits from it (Markdown, tokens, wpt-web's views) is UTF-8; every encoding
-stated this way converts without loss (maintainer's decision, 2026-10-23).
+stated this way converts without loss.
 One function decides a file's encoding for every reader
 (`packages/wpt-dataset/src/wpt_dataset/encoding.py`): the check,
 `fill-checksum`, the Markdown of every format, `markdown-check`, the build,
@@ -227,9 +223,8 @@ A git index silently drops every path under `.git/`, so every such path
 (the files of a git history, `.git/history/<commit>` and
 `.git/history/order`, or any other) is set aside while the patches apply
 and comes back exactly as it was; a patch that names one fails, as git
-refuses it (maintainer's decision, 2026-10-22). For the same reason
-`wpt-dataset patch` refuses a folder whose `.git/` files differ from the
-source's: a patch cannot change them.
+refuses it. For the same reason `wpt-dataset patch` refuses a folder whose
+`.git/` files differ from the source's: a patch cannot change them.
 
 Patches are not written by hand: `wpt-dataset unpack <id> <folder>` writes a
 source's final files (after cuts and patches) into a folder outside the
@@ -279,8 +274,8 @@ tree, as its `formats` entry says
 | `markdown` | the file as it is |
 | `text` | paragraphs as written; each line break inside a paragraph is a Markdown line break; Markdown's own characters are escaped, so the text reads exactly as written |
 | `code` | one fenced code block whose opening line names the language and the path: ```` ```python path="./src/main.py" ```` (the entry's `language`); in a git or Mercurial source the path starts with `./`, the repository's root, and in any other source it is written as it is (```` ```python path="src/main.py" ````), since no repository root exists |
-| `xhtml` | web pages written as strict XML, such as EPUB books, read by lxml (a malformed file stops the build): headings, paragraphs, lists, quotations, emphasis, tables; a dialogue row becomes `**Speaker:** words`; a note reference becomes a Markdown note (`[^12]`) with the note's text at the end of the document that refers to it, or is dropped when the note is not in the source; a label already taken by another note gets a number, `[^12-2]`, then `[^12-3]` (maintainer's decision, 2026-10-23); an image becomes a marker, below |
-| `html` | web pages that are not strict XML, such as Project Gutenberg's, read by lxml's HTML parser (which refuses no page) and converted as `xhtml` pages are (maintainer's decision, 2026-10-23); EPUB's note marks exist only in XML, so an html page's notes are Project Gutenberg's: a link of class `fnanchor` (or `noteref`, `noteRef`) to an element of class `footnote` or `fndiv`, or to anything inside one, in the same page, is a note reference, and that element (or, when it holds the targets of links in several of its children, the child holding the target) becomes a Markdown note as an EPUB note does, with one label however many links refer to it; inside such a note, a link back to a reference (or to the empty anchor just before one), and the element of class `label` holding it, are left out; a note no such link refers to, and every other link, stay ordinary text where the page prints them, so `markdown-check` finds no unpaired note (maintainer's decision, 2026-10-23); printed page numbers, such as Gutenberg's `{92}` (class `pagenum`), stay as the page shows them (maintainer's decision, 2026-10-23) |
+| `xhtml` | web pages written as strict XML, such as EPUB books, read by lxml (a malformed file stops the build): headings, paragraphs, lists, quotations, emphasis, tables; a dialogue row becomes `**Speaker:** words`; a note reference becomes a Markdown note (`[^12]`) with the note's text at the end of the document that refers to it, or is dropped when the note is not in the source; a label already taken by another note gets a number, `[^12-2]`, then `[^12-3]`; an image becomes a marker, below |
+| `html` | web pages that are not strict XML, such as Project Gutenberg's, read by lxml's HTML parser (which refuses no page) and converted as `xhtml` pages are; EPUB's note marks exist only in XML, so an html page's notes are Project Gutenberg's: a link of class `fnanchor` (or `noteref`, `noteRef`) to an element of class `footnote` or `fndiv`, or to anything inside one, in the same page, is a note reference, and that element (or, when it holds the targets of links in several of its children, the child holding the target) becomes a Markdown note as an EPUB note does, with one label however many links refer to it; inside such a note, a link back to a reference (or to the empty anchor just before one), and the element of class `label` holding it, are left out; a note no such link refers to, and every other link, stay ordinary text where the page prints them, so `markdown-check` finds no unpaired note; printed page numbers, such as Gutenberg's `{92}` (class `pagenum`), stay as the page shows them |
 | `records` | a dataset file holding many documents (JSON Lines, optionally `.gz` or `.zst`, or Parquet): each record whose license value an entry lists, and that the `keep` rules keep, is one document, `<file>#<record id>`; its text field is read as `text` above, or kept as it is with `"as": "markdown"` |
 | `chat` | conversations for post-training, one JSON object per line ([chat-format.md](chat-format.md)); each line is checked, and the file gives no pre-training document: only the post-training step named by its tags reads it |
 | `task` | the files of task folders for agentic post-training (`task.json`, `files/`, `check`; [post-training.md](post-training.md)); each folder is checked, and its files give no pre-training document: only a post-training step that asks for a tag of its `task.json` reads it: by default each step asks for its own name, and `token-efficiency` asks for `grpo`. A task built by a program holds pointers into the documents of other sources, never their text, which the readers fill in from the store ([post-training.md](post-training.md), "Pointer tasks") |
@@ -290,8 +285,7 @@ In `xhtml` and `html` pages, an image the page shows (`<img>`, or an
 inline `<svg>`) is never dropped silently: in its place the Markdown holds
 the marker `[image]`, or `[image: ALT]` when it has alt text (an svg's
 `<title>`), ALT being that text with its white space collapsed and
-Markdown's characters escaped, so models learn where images were
-(maintainer's decision, 2026-10-23). A printed caption (`figcaption`,
+Markdown's characters escaped, so models learn where images were. A printed caption (`figcaption`,
 `caption`) stays ordinary text; math, audio and video are left out.
 
 A file whose Markdown is empty is no document: an EPUB file that holds only
@@ -316,13 +310,12 @@ changing one patch rebuilds only that source.
 
 Beside the dataset's record (the ref `datasets/<id>`), the build keeps the
 dataset's document list under the ref `dataset-documents/<id>`: one JSON
-line per document, in the build's order, with its `id`, the `sha256` of
-its Markdown (the one the dataset fingerprint reads) and its `tag`,
-`training` or `held-out`, from the same split its shards are cut by
-(maintainer's decision, 2026-10-22). A new build writes the list before
-the record's ref, so a dataset is never there without it; a dataset built
-before builds kept the list never gets one (maintainer's decision,
-2026-10-22). The task reader takes the held-out texts from it
+line per document, in the build's order, with its `id`, the `sha256` of its
+Markdown (the one the dataset fingerprint reads) and its `tag`, `training`
+or `held-out`, from the same split its shards are cut by. A new build
+writes the list before the record's ref, so a dataset is never there
+without it; a dataset built before builds kept the list never gets one. The
+task reader takes the held-out texts from it
 ([data-selection.md](data-selection.md), "Held-out text and
 contamination").
 
@@ -340,7 +333,7 @@ Because the cache is keyed by the wpt-dataset version, every change to
 what the Markdown converter (`markdown.py`) makes of a file raises that
 version in `packages/wpt-dataset/pyproject.toml` (then `uv lock`), in the
 same change, so no cached source keeps its old Markdown; every dataset id
-changes with it, which is accepted (maintainer's decision, 2026-10-23).
+changes with it, which is accepted.
 Without `--stream`, the store keeps everything, as above.
 
 The store is set by one setting, `WPT_STORE`, in the environment or in
@@ -381,53 +374,48 @@ and versions, never a path under `data/`.
   first, and replaces the file in one step (a temporary file, then a
   rename), so a refused or interrupted save leaves the old file. Text files
   are written with `\n` line endings.
-- One lock per repository holds each version check together with the
-  write it allows, across processes as well as threads (maintainer's
-  decision, 2026-10-18): two saves of one version, from two tabs of
-  `wpt-web`, a double click, or `wpt-web` and `wpt-dataset` at the same
-  moment, cannot both pass; the second is a stale save. Between processes
-  it is a lock the operating system holds on the file `wpt-data.lock` in
-  the repository's git folder (`.git`, or the folder a worktree's `.git`
-  file names; `.wpt-data.lock` at the root of a folder that is not a git
-  working tree), with `fcntl.flock` on Linux and macOS and
-  `msvcrt.locking` on Windows. The system releases it when the process
-  ends, a crash included, so a lock is never left behind to block the next
-  save. Inside a process, the threads share one lock per repository
-  (`wpt-web` serves each request on its own thread).
-- A write through a symbolic link writes the link's target when that
-  target is inside the repository, and is refused otherwise (maintainer's
-  decision, 2026-10-18): a data file that is a link, or lies in a folder
-  that is one, is written at the place the links lead to, after every link
-  is resolved, and a place outside the repository refuses the write. So a
-  write never lands outside the repository, whatever a link points to.
-  The same rule holds for a link inside a source's own files (maintainer's
-  decision, 2026-10-18): a change to a source's file whose path is a link,
-  or lies under one, lands on the link's target when that target is inside
-  the source, and is refused otherwise; removing the link itself stays
-  allowed, whatever it points to. A link's target may be anywhere inside
-  the repository, and the lock file stays in the git folder, or at the
-  root of a folder that is not a git working tree (maintainer's decision,
-  2026-10-18: kept as built).
+- One lock per repository holds each version check together with the write
+  it allows, across processes as well as threads: two saves of one version,
+  from two tabs of `wpt-web`, a double click, or `wpt-web` and
+  `wpt-dataset` at the same moment, cannot both pass; the second is a stale
+  save. Between processes it is a lock the operating system holds on the
+  file `wpt-data.lock` in the repository's git folder (`.git`, or the
+  folder a worktree's `.git` file names; `.wpt-data.lock` at the root of a
+  folder that is not a git working tree), with `fcntl.flock` on Linux and
+  macOS and `msvcrt.locking` on Windows. The system releases it when the
+  process ends, a crash included, so a lock is never left behind to block
+  the next save. Inside a process, the threads share one lock per
+  repository (`wpt-web` serves each request on its own thread).
+- A write through a symbolic link writes the link's target when that target
+  is inside the repository, and is refused otherwise: a data file that is a
+  link, or lies in a folder that is one, is written at the place the links
+  lead to, after every link is resolved, and a place outside the repository
+  refuses the write. So a write never lands outside the repository,
+  whatever a link points to. The same rule holds for a link inside a
+  source's own files: a change to a source's file whose path is a link, or
+  lies under one, lands on the link's target when that target is inside the
+  source, and is refused otherwise; removing the link itself stays allowed,
+  whatever it points to. A link's target may be anywhere inside the
+  repository, and the lock file stays in the git folder, or at the root of
+  a folder that is not a git working tree.
 - A license entry's `text` may be empty only while the source is not
-  admitted (maintainer's decision, 2026-10-18), that is `under-review` or
-  `refused` (maintainer's decision, 2026-10-22): the schema says so, and a
+  admitted, that is `under-review` or `refused`: the schema says so, and a
   person writes the text later (`wpt-dataset save source`, or the "Sources"
-  page). Every reader of the sources (`wpt-dataset build`, the post-training
-  readers of chat and task files, `check --fetch`, `check --changed`)
-  leaves such a source out with a note naming it, instead of failing, and
-  `wpt-dataset check` names it too, as a note that is not a failure. A
-  source that is admitted needs its text, and a source with an empty
-  text takes no files until it is written.
+  page). Every reader of the sources (`wpt-dataset build`, the
+  post-training readers of chat and task files, `check --fetch`, `check
+  --changed`) leaves such a source out with a note naming it, instead of
+  failing, and `wpt-dataset check` names it too, as a note that is not a
+  failure. A source that is admitted needs its text, and a source with an
+  empty text takes no files until it is written.
 - JSON is written with two spaces of indent, characters outside ASCII kept
-  as they are, except U+2028, U+2029 and U+0085, always written as
-  escapes, even in values a save keeps unchanged, so that no line splitter
-  cuts a line (maintainer's decision, 2026-10-18). A save over an existing
-  JSON file keeps its bytes when its meaning is the same (key order and
-  those escapes aside), and otherwise rewrites only the values that
-  changed, the rest keeping its layout and key order; a new key goes after
-  the key the saved document puts before it, and a new key or item is
-  written with the indent and spacing of the last member of its object or
-  array (maintainer's decision, 2026-10-18).
+  as they are, except U+2028, U+2029 and U+0085, always written as escapes,
+  even in values a save keeps unchanged, so that no line splitter cuts a
+  line. A save over an existing JSON file keeps its bytes when its meaning
+  is the same (key order and those escapes aside), and otherwise rewrites
+  only the values that changed, the rest keeping its layout and key order;
+  a new key goes after the key the saved document puts before it, and a new
+  key or item is written with the indent and spacing of the last member of
+  its object or array.
 - Conversations, tasks and ratings are written only in an `empty` source,
   text written for WPT ([chat-format.md](chat-format.md), "Writing a chat
   file"; [post-training.md](post-training.md), "Tasks";
@@ -436,8 +424,8 @@ and versions, never a path under `data/`.
   source into a temporary folder, puts the change in, and records the
   difference as the next patch, kept only when the source then gives
   exactly those files and passes the checks of `wpt-dataset check --fetch`
-  ([Patches](#patches)). A new chat file or task folder gets its own
-  format entry in `source.json` when none covers it.
+  ([Patches](#patches)). A new chat file or task folder gets its own format
+  entry in `source.json` when none covers it.
 - Generated files (a tokenizer's `.lock.json`, an image's `lock.json` and
   `licenses.json`) are readable everywhere and written only by the command
   that makes them (`wpt-dataset build-tokenizer`, `wpt-agent lock-image`),
@@ -449,28 +437,27 @@ and versions, never a path under `data/`.
 
 Two checks hold the rule. A test
 (`packages/wpt-dataset/tests/test_data_access.py`) reads the source code of
-every package, application and script and fails when code outside
-`repo.py` names the data folder in a way that could open a file under it:
-the name `data` as a part of a path (either side of `/`, or an argument of
-a call that builds or reaches a path, such as `Path()`, `joinpath()`,
+every package, application and script and fails when code outside `repo.py`
+names the data folder in a way that could open a file under it: the name
+`data` as a part of a path (either side of `/`, or an argument of a call
+that builds or reaches a path, such as `Path()`, `joinpath()`,
 `os.path.join()`, `os.walk()`, `os.listdir()`, `glob()` or `open()`), a
 name bound to `"data"` or a comparison with it, a string or an f-string
-that starts with `data/` or holds `/data/` or `:data/`, or a private
-member of the service layer used from outside. A docstring, a command's
-help text and a message (inside a `raise`, or given to `print()`, a log
-call or `sys.exit()`) may name the folder for people. A syntax scan cannot
-follow every way to build a path, so the service layer also sets an audit
-hook (Python's `sys.addaudithook`) in every process, when its first `Repo`
-is made (maintainer's decision, 2026-10-18): any opening, listing, removal
-or renaming of a path under a `Repo`'s data folder, as written or with its
-symbolic links resolved, whose nearest caller in the project's own code
-(not Python's library, not an installed package) is neither `repo.py` nor
-a test fails with `DataAccessRefused` before it happens, in every command
-and in the test suite. A test is a `conftest.py` or a file under a
-`tests` folder, both inside the project's checkout (maintainer's decision,
-2026-10-18): a folder named `tests` above the checkout, or a `conftest.py`
-outside it, does not make its code a test. The tests are left out of both: they build the repositories
-they check and read what a command wrote.
+that starts with `data/` or holds `/data/` or `:data/`, or a private member
+of the service layer used from outside. A docstring, a command's help text
+and a message (inside a `raise`, or given to `print()`, a log call or
+`sys.exit()`) may name the folder for people. A syntax scan cannot follow
+every way to build a path, so the service layer also sets an audit hook
+(Python's `sys.addaudithook`) in every process, when its first `Repo` is
+made: any opening, listing, removal or renaming of a path under a `Repo`'s
+data folder, as written or with its symbolic links resolved, whose nearest
+caller in the project's own code (not Python's library, not an installed
+package) is neither `repo.py` nor a test fails with `DataAccessRefused`
+before it happens, in every command and in the test suite. A test is a
+`conftest.py` or a file under a `tests` folder, both inside the project's
+checkout: a folder named `tests` above the checkout, or a `conftest.py`
+outside it, does not make its code a test. The tests are left out of both:
+they build the repositories they check and read what a command wrote.
 
 ### Two interfaces
 
@@ -533,15 +520,14 @@ branch, as a push would:
 - `uv.lock` matches every `pyproject.toml`.
 - The tests of every package, and the Rust tests. None needs a server: the
   S3 test runs against moto, which answers S3 requests inside the test
-  process. The tests run in parallel (pytest-xdist), each process limited to
-  one PyTorch thread and kept off the GPU, as in CI, since a GPU that shares
-  the machine's memory gives every process its own share of it; a plain
-  `uv run pytest` still uses the GPU (maintainer's decisions, 2026-10-20). The
-  number of processes is the smaller of 75% of the cores and 75% of the
-  memory available when the check starts divided by 2.5 GB, the measured
-  memory of one test process rounded up, and at least 1; where the memory
-  cannot be read, the cores alone decide. The check prints the number and
-  both inputs (maintainer's decision, 2026-10-20).
+  process. The tests run in parallel (pytest-xdist), each process limited
+  to one PyTorch thread and kept off the GPU, as in CI, since a GPU that
+  shares the machine's memory gives every process its own share of it; a
+  plain `uv run pytest` still uses the GPU. The number of processes is the
+  smaller of 75% of the cores and 75% of the memory available when the
+  check starts divided by 2.5 GB, the measured memory of one test process
+  rounded up, and at least 1; where the memory cannot be read, the cores
+  alone decide. The check prints the number and both inputs.
 - The image build tests (marked `image_build`, in
   `packages/wpt-agent/tests/test_images.py`, and the test of the agent
   image's tools and check library in `test_agent_image.py`) lock and build
@@ -550,33 +536,29 @@ branch, as a push would:
   `packages/wpt-agent/tests/test_images.py`, `test_agent_image.py`,
   `packages/wpt-agent/tests/conftest.py`,
   `packages/wpt-dataset/src/wpt_dataset/repo.py` (its `Repo.image_files`
-  decides which files an image's tag covers; maintainer's decision,
-  2026-10-22), the schemas
+  decides which files an image's tag covers), the schemas
   `image-lock.schema.json` and `image-licenses.schema.json` in
   `packages/wpt-dataset/src/wpt_dataset/schemas/`, or anything under
   `data/images/`. Otherwise the check leaves it out and says so; a plain
-  `uv run pytest` runs it with every other test (maintainer's decision,
-  2026-10-20).
+  `uv run pytest` runs it with every other test.
 - The two GRPO tests that run attempts in a real image
   (`apps/wpt-posttrain/tests/test_posttrain.py`) keep its lock in
   `.pytest_cache/` and the built image in Docker, for as long as the
   image's files and `wpt_agent/images.py` stay the same. Only the first
   check on a machine, and every CI run (which starts empty), pays for
   locking and building it; when those files change, the next check locks
-  and builds again and removes the old image (maintainer's decision,
-  2026-10-20).
+  and builds again and removes the old image.
 - `wpt-dataset check`: every file matches its schema and current shape,
   source ids match their address, licenses are on the allowed list (with
-  their text), patches are numbered without gaps, mixture
-  weights add up to 1 and pool expressions parse, recipes name existing
-  recipes.
-- `wpt-dataset check --fetch standardebooks-joseph-conrad-ford-madox-ford-the-nature-of-a-crime-5366b0f3`:
-  one short book, fixed at one git commit so its download never changes,
-  is fetched, and its checksum, cuts, patches, license map and text are
+  their text), patches are numbered without gaps, mixture weights add up to
+  1 and pool expressions parse, recipes name existing recipes.
+- `wpt-dataset check --fetch
+  standardebooks-joseph-conrad-ford-madox-ford-the-nature-of-a-crime-5366b0f3`:
+  one short book, fixed at one git commit so its download never changes, is
+  fetched, and its checksum, cuts, patches, license map and text are
   checked, which proves the fetch and its checks work. The sources a pull
   request adds or changes are not fetched here: the maintainer runs
-  `wpt-dataset check --fetch` on them before merging (maintainer's
-  decision, 2026-10-21).
+  `wpt-dataset check --fetch` on them before merging.
 - `wpt-dataset check-commits <range>`: DCO sign-off on every commit, and a
   signature from an allowed key on every commit that changes a decision.
 
@@ -587,15 +569,14 @@ is no local hook: run it before pushing.
 
 Each data file carries its shape version (`schema`). When a shape changes,
 the change comes with a migration step in
-`packages/wpt-dataset/src/wpt_dataset/migrate.py`, and `wpt-dataset migrate`
-rewrites every file that is behind. Nobody edits the files by hand for it,
-except where a new field holds something only a person can write: shape 2 of
-`source.json` adds `attribution`, which the migration leaves empty, and the
-check then names each file to fill in. Shape 4 adds each license's `text`:
-the migration moves a `LicenseRef-<name>.txt` file into it and leaves any
-other text empty for a person to fill. Shape 5 adds the `huggingface`
-type, the `records` format and a license entry's `values`; only the
-number changes. Shape 6 gives a source three states (maintainer's
-decision, 2026-10-22): the migration turns a refusal whose reason is
-"under review" into `under-review` without that reason, and turns
-`retired` into `refused`, keeping its reason.
+`packages/wpt-dataset/src/wpt_dataset/migrate.py`, and `wpt-dataset
+migrate` rewrites every file that is behind. Nobody edits the files by hand
+for it, except where a new field holds something only a person can write:
+shape 2 of `source.json` adds `attribution`, which the migration leaves
+empty, and the check then names each file to fill in. Shape 4 adds each
+license's `text`: the migration moves a `LicenseRef-<name>.txt` file into
+it and leaves any other text empty for a person to fill. Shape 5 adds the
+`huggingface` type, the `records` format and a license entry's `values`;
+only the number changes. Shape 6 gives a source three states: the migration
+turns a refusal whose reason is "under review" into `under-review` without
+that reason, and turns `retired` into `refused`, keeping its reason.

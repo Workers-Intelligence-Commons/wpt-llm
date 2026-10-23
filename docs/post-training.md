@@ -12,28 +12,27 @@ is systematic.
 
 - Text written by people: existing sources under allowed licenses, original
   texts written for the project, and contributions under the DCO.
-- No output of another company's language model, and no synthetic data
-  that a WPT model did not make. WPT's own models may be used in
-  training, their output included (maintainer's decision, 2026-10-18;
-  [data-selection.md](data-selection.md), "Models in training"), such as
-  a model's own attempt as the reference of a reward ("Rewards", below).
+- No output of another company's language model, and no synthetic data that
+  a WPT model did not make. WPT's own models may be used in training, their
+  output included ([data-selection.md](data-selection.md), "Models in
+  training"), such as a model's own attempt as the reference of a reward
+  ("Rewards", below).
 - A demonstration's `assistant` message may start as a draft written by a
-  WPT model, in the conversation editor of `wpt-web`: the person edits it or
-  confirms it as it is, and the message's `metadata.draft` records the model
-  folder, the sha256 of its weights and of the draft, and whether the
+  WPT model, in the conversation editor of `wpt-web`: the person edits it
+  or confirms it as it is, and the message's `metadata.draft` records the
+  model folder, the sha256 of its weights and of the draft, and whether the
   person changed it ([chat-format.md](chat-format.md), "Model drafts"). An
   unedited confirmed draft is allowed.
 - An AI assistant (a coding agent helping a contributor) works with the
   data only through the `wpt-dataset` commands for structure and metadata,
   never through the ones that read or write people's texts; it may start a
   source with `new-source` without `--file` and `--license-text`
-  (CONTRIBUTING.md, "Models and generated text"; maintainer's decision,
-  2026-10-18).
+  (CONTRIBUTING.md, "Models and generated text").
 - Environments use no fake web pages or apps: they replay recorded content,
   only when the project has the authorization to use it. A task's replies
   to the `ask` tool are content a person wrote and the task records, which
   the environment replays: no person waits for the model's question
-  (maintainer's decision, 2026-10-18; "Tools", below).
+  ("Tools", below).
 - Scores come from programs or from humans, never from another company's
   model.
 
@@ -58,13 +57,15 @@ never pre-training documents either.
 
 ## Record format
 
-JSON Lines: one record per line. Media such as screenshots are separate
-files named by their sha256 and referenced from the record. Each record
-carries its provenance: the contributor, the commit that added it (signed
-off under the DCO), the reference of the authorization it relies on, and its
-license. A conversation in a record follows [chat-format.md](chat-format.md):
-one JSON object holding every element, turned into tokens by a template
-before training.
+The shape of recorded demonstrations and environment recordings is not
+settled yet. Today the code reads three kinds of records, each a format of
+a source's files: conversations (`chat`, one JSON object per line, as
+[chat-format.md](chat-format.md) says, turned into tokens by a template
+before training, with media such as screenshots as separate files named by
+their sha256), tasks (`task`, "Tasks", below) and people's ratings
+(`rating`, [evaluation.md](evaluation.md), "People's ratings"). Whatever
+the shape, a record's license, credit and decision are its source's, and
+its contributor is the signed-off commit that adds it.
 
 ## Running post-training
 
@@ -75,26 +76,25 @@ uv run wpt-posttrain <model recipe> <base model folder> <new model folder>
 The steps are the model recipe's `posttrain` list, run in order; the new
 folder's provenance records the recipe's name.
 
-Each entry of the list is a step, or a step with the settings it changes
-(maintainer's decision, 2026-10-23):
+Each entry of the list is a step, or a step with the settings it changes:
 
 ```json
 "posttrain": ["sft", {"step": "grpo", "settings": {"group": 16, "weight_tool_call": -0.02}}]
 ```
 
-A step file declares its settings and their defaults as `SETTINGS`, the
+A step file may declare its settings and their defaults as `SETTINGS`, the
 same pattern as a training method's `training.settings`
 ([training.md](training.md)): each setting the entry gives takes its
 default's type (an integer where a number is expected is taken, text is
-converted), and the step reads the result as `context.settings`. A
-setting the step does not declare, or one of another type, stops the run
-before any step has run, naming the step's file and its settings; so does
-an unknown step, and so do settings that cannot go together, which a step
-file refuses in an optional `check(settings)` by raising `ValueError`
-with the reason. Every step file is read before the first step runs. The
-new folder's `provenance.json` records each step's settings next to its
-file and sha256. The shared rule is `wpt_utils.settings.typed`, which
-`wpt-train` uses for a method too.
+converted), and the step reads the result as `context.settings`. A setting
+the step does not declare, or one of another type, stops the run before any
+step has run, naming the step's file and its settings; so does an unknown
+step, and so do settings that cannot go together, which a step file refuses
+in an optional `check(settings)` by raising `ValueError` with the reason.
+Every step file is read before the first step runs. The new folder's
+`provenance.json` records each step's settings next to its file and sha256.
+The shared rule is `wpt_utils.settings.typed`, which `wpt-train` uses for a
+method too.
 
 A step is one Python file (or the name of a built-in one, in
 `apps/wpt-posttrain/src/wpt_posttrain/steps/`) that defines `run`:
@@ -176,42 +176,39 @@ reserves the chat template's ids. Talk to the result with
 
 ## The drafter
 
-Maintainer's decisions, 2026-10-17: a model and its drafter for
-speculative decoding ([model.md](model.md), "The drafter") are one unit
-and a hard dependency, with separate weights, and the drafter is no longer
-a post-training step. After the last step succeeded, every run trains a
-fresh drafter against the post-trained weights; the base folder's drafter,
-trained against other weights, is never used or copied. A base folder
-whose drafter is missing or was trained against other weights is refused
-before any step runs (`load_model`), and no option skips either.
+A model and its drafter for speculative decoding ([model.md](model.md),
+"The drafter") are one unit and a hard dependency, with separate weights,
+and the drafter is not a post-training step. After the last step succeeded,
+every run trains a fresh drafter against the post-trained weights; the base
+folder's drafter, trained against other weights, is never used or copied. A
+base folder whose drafter is missing or was trained against other weights
+is refused before any step runs (`load_model`), and no option skips either.
 
 The drafter's shape and training come from the model recipe's `drafter`
 section, as after pre-training. Its prompts are the beginnings of the base
 model's training documents (the dataset its `provenance.json` names, read
 from the store), each the document start and its first tokens, and the
 post-trained model alone writes the answers, each up to the end of a
-document or `<|im_end|>`, the end of a turn (maintainer's decision,
-2026-10-18): no text people wrote as an answer, and no conversation of a
-step, reaches it. The model is frozen
+document or `<|im_end|>`, the end of a turn: no text people wrote as an
+answer, and no conversation of a step, reaches it. The model is frozen
 while the drafter learns DSpark's three losses from random anchors in the
-answers; a tenth of the prompts is held out, and on them the drafter
-drafts for the model, every draft verified, to calibrate its confidence on
-the drafts the model kept and rejected and to measure how many it keeps.
-The run records its settings, each update's losses, the calibration (each
+answers; a tenth of the prompts is held out, and on them the drafter drafts
+for the model, every draft verified, to calibrate its confidence on the
+drafts the model kept and rejected and to measure how many it keeps. The
+run records its settings, each update's losses, the calibration (each
 position's temperature, the calibration error before and after) and the
-measure through the run's record. A drafter that cannot be trained (too
-few prompts, a loss that is not finite, no draft verified) fails the run
-with `DrafterFailed`, and nothing is written.
+measure through the run's record. A drafter that cannot be trained (too few
+prompts, a loss that is not finite, no draft verified) fails the run with
+`DrafterFailed`, and nothing is written.
 
 Then the run measures the drafter scheduler's pass times for the new
 weights once and writes them into its record as `scheduler-costs.json`,
 with the setup they were measured on; `--scheduler-costs FOLDER` replays
-those an earlier run recorded in its record folder `FOLDER` instead,
-and times recorded on another setup are refused before any step runs
-(maintainer's decision, 2026-10-18; [model.md](model.md), "The drafter",
-says exactly what a replay guarantees). Drafter settings that cannot be,
-such as feature layers the model does not have, are refused before any
-step runs too.
+those an earlier run recorded in its record folder `FOLDER` instead, and
+times recorded on another setup are refused before any step runs
+([model.md](model.md), "The drafter", says exactly what a replay
+guarantees). Drafter settings that cannot be, such as feature layers the
+model does not have, are refused before any step runs too.
 
 The new folder holds it in `drafter/`, with its own `provenance.json`: the
 command and recipe that trained it, the dataset, the sha256 of each weight
@@ -257,86 +254,80 @@ folder per task:
 - `instructions`: the user message that starts every attempt. No task's
   instructions state an answer block: the model's final reply is its
   answer, as text, and the harness asks for its confidence after it
-  ([chat-format.md](chat-format.md), "The answer"; maintainer's decision,
-  2026-10-23). The harness adds no sentence to the opening (maintainer's
-  decision, 2026-10-22).
+  ([chat-format.md](chat-format.md), "The answer"). The harness adds no
+  sentence to the opening.
 - `terse` (optional): the same request in one line, for the measure of
-  terse against full requests ([evaluation.md](evaluation.md), "Terse
-  and full requests"): a task can hold its request in two forms, its full
-  `instructions` and this one-line form (maintainer's decision,
-  2026-10-23). The agent loop opens an attempt with `instructions`, or
-  with `terse` when its caller asks (`wpt_agent.attempts(...,
-  terse=True)`; a task without the field is refused there). It holds no
-  line break: `wpt-dataset check --fetch` refuses one, naming the
-  `task.json`.
+  terse against full requests ([evaluation.md](evaluation.md), "Terse and
+  full requests"): a task can hold its request in two forms, its full
+  `instructions` and this one-line form. The agent loop opens an attempt
+  with `instructions`, or with `terse` when its caller asks
+  (`wpt_agent.attempts(..., terse=True)`; a task without the field is
+  refused there). It holds no line break: `wpt-dataset check --fetch`
+  refuses one, naming the `task.json`.
 - `image`: the folder in `data/images/` the attempt's container comes from.
 - `limits`: `max_turns`, the assistant turns in one attempt; `max_tokens`,
   the tokens the model writes in one attempt, over every turn;
   `command_seconds`, how long one tool call may run.
 - `container` (optional): sizes above the defaults (Attempts, below):
   `memory` and `disk` in MiB, `processes`, `cpus`. Each can only raise its
-  default; a smaller value leaves the default. Since `/work` and `/tmp`
-  are kept in memory, the sizes that result must leave room for the
-  processes: 2 x `disk` + 1024 MiB (`HEADROOM`) must stay below `memory`.
-  A task that raises `disk` must raise `memory` with it; the defaults leave
-  1024 MiB more than that.
-- `needs`: the tools the task cannot be done without, each need the list
-  of its variants (two different tools that write a file, say); every
-  attempt is offered exactly one variant of each need ("Tools", below).
-  `[]` when the task needs none.
+  default; a smaller value leaves the default. Since `/work` and `/tmp` are
+  kept in memory, the sizes that result must leave room for the processes:
+  2 x `disk` + 1024 MiB (`HEADROOM`) must stay below `memory`. A task that
+  raises `disk` must raise `memory` with it; the defaults leave 1024 MiB
+  more than that.
+- `needs`: the tools the task cannot be done without, each need the list of
+  its variants (two different tools that write a file, say); every attempt
+  is offered exactly one variant of each need ("Tools", below). `[]` when
+  the task needs none.
 - `replies` (optional): the user's replies, written in advance, to the
   `ask` tool, each a `pattern` and its `reply`; only a task with replies
   offers `ask`.
 - `answered_by` (required with `replies`): the looking tools that can
   answer what the task leaves open, `read`, `bash` or a declared tool
   marked `looks` (the task's or its image's pool's), through which an
-  attempt opens the files of `answered_in` (maintainer's decision,
-  2026-10-22).
+  attempt opens the files of `answered_in`.
 - `answered_in` (required with `replies`): where the task's answers live,
   as glob patterns of paths under `/work` (as `area` reads them). An
   attempt asks the user only after it opened, through a tool of
   `answered_by`, every file it starts with that they match, and did not
   find the answer there (the check can name its text to `asked_last`); a
-  question counts at once when they match none of its files, the answer being
-  absent (`asked_last`, "The check library", below; maintainer's
-  decision, 2026-10-23).
+  question counts at once when they match none of its files, the answer
+  being absent (`asked_last`, "The check library", below).
 - `tools` (optional): the task's own tools beyond the built-in ones and
-  `ask`, each with its `name`, `description`, `parameters` (the JSON
-  Schema of its arguments), `program` (the absolute path, in the image, of
-  the program that answers it) and, optionally, `names` (other names an
-  attempt may offer it under) and `looks` (`true` for a tool that looks
-  at sources as `read` does, such as a search or a fetch; "The check
-  library", below).
+  `ask`, each with its `name`, `description`, `parameters` (the JSON Schema
+  of its arguments), `program` (the absolute path, in the image, of the
+  program that answers it) and, optionally, `names` (other names an attempt
+  may offer it under) and `looks` (`true` for a tool that looks at sources
+  as `read` does, such as a search or a fetch; "The check library", below).
 - `tool_files` (optional): paths under `files/`, each a file or a folder
   with everything in it, that only the tools' programs read: they go to
   `/tmp/wpt-tools/` instead of `/work`.
-- `absent` (optional): absolute folders of the image, outside `/work`
-  and `/tmp`, their names made of letters, digits, `.`, `_`, `+` and `-`,
-  that the attempts do not see: each is covered by an empty,
-  read-only folder kept in memory (Docker's `--tmpfs`), so a task removes
-  what its image installs there, such as the manual of `ondrik` ("The
-  agent image", below). The check's container shows the image as it is.
+- `absent` (optional): absolute folders of the image, outside `/work` and
+  `/tmp`, their names made of letters, digits, `.`, `_`, `+` and `-`, that
+  the attempts do not see: each is covered by an empty, read-only folder
+  kept in memory (Docker's `--tmpfs`), so a task removes what its image
+  installs there, such as the manual of `ondrik` ("The agent image",
+  below). The check's container shows the image as it is.
 - `pointers` (optional): the texts the task takes from documents of other
   sources ("Pointer tasks", below).
-- `area` (optional): the paths under `/work` an attempt may change, as
-  glob patterns (`*`, `**`, `?`, `[...]`, as a source's license paths
-  read them), `[]` when the task only answers and may change nothing. An
-  attempt that changed, added or removed a path no pattern matches breaks
-  the `within_area` part ("Rewards", below; maintainer's decision,
-  2026-10-23). A task without `area` gets no such part.
+- `area` (optional): the paths under `/work` an attempt may change, as glob
+  patterns (`*`, `**`, `?`, `[...]`, as a source's license paths read
+  them), `[]` when the task only answers and may change nothing. An attempt
+  that changed, added or removed a path no pattern matches breaks the
+  `within_area` part ("Rewards", below). A task without `area` gets no such
+  part.
 - `gates` (optional): the parts that must be 1 for an attempt to score at
   all, by name: the check's own (such as `asked_last`) or `within_area`. A
   gated part below 1, or missing, makes the attempt worth 0 whatever the
-  rest ("Rewards", below; maintainer's decision, 2026-10-23). There is no
-  gate for every task beyond the missing answer.
+  rest ("Rewards", below). There is no gate for every task beyond the
+  missing answer.
 
-A task's shape is 3 since the rewards (maintainer's decisions,
-2026-10-23: shape 2 added `area` and `gates`, shape 3 `answered_in`).
-Task files are a source's bytes, which `wpt-dataset migrate` never
-rewrites: a `task.json` of an earlier shape is read in shape 3 each time
-it is read (`migrate.upgrade`), by the steps, the measures and the task
-editor of `wpt-web`, whose save then writes shape 3. Only a person knows
-where a task's answers live, so a task with replies gets an empty
+A task's shape is 3 (shape 2 added `area` and `gates`, shape 3
+`answered_in`). Task files are a source's bytes, which `wpt-dataset
+migrate` never rewrites: a `task.json` of an earlier shape is read in shape
+3 each time it is read (`migrate.upgrade`), by the steps, the measures and
+the task editor of `wpt-web`, whose save then writes shape 3. Only a person
+knows where a task's answers live, so a task with replies gets an empty
 `answered_in`, which `wpt-dataset check --fetch` then refuses, naming its
 `task.json` to fill in.
 
@@ -347,22 +338,22 @@ against `packages/wpt-dataset/src/wpt_dataset/schemas/task.schema.json`,
 and checks that its `image` is a folder of `data/images/` holding a
 `Dockerfile`. CI does not fetch the sources a change touches: the
 maintainer runs `wpt-dataset check --fetch` on a pull request's sources
-before merging, which catches a task naming an image that is gone
-(maintainer's decision, 2026-10-21). The same check refuses a task whose
-sizes break the rule on `disk` and `memory` above, naming its `task.json`,
-and one whose tools break the rules of "Tools" (below): a declared tool
-taking a built-in name or `ask`, or declared twice; a need naming a tool
-the task does not offer (`ask` without replies included); a tool in two
-needs; a task with replies and no `answered_by` or no `answered_in`, or
-an `answered_by` naming a tool that is not a looking tool; a reply pattern that is not a
-regular expression; a `terse` that holds a line break; a `tool_files`
-entry that names nothing under `files/`; an `absent` entry that is `/work`
-or `/tmp`, lies under them, or holds `.` or `..`; a pointer that names a source that does not exist or takes the
-place of another file, or whose text cannot be filled in ("Pointer tasks",
-below). The step reads the tasks whose `task.json` carries the tag. Every
-file of a task folder is UTF-8 text, as the task format defines: an
-encoding stated inside such a file is not read ([architecture.md](architecture.md),
-"Encodings").
+before merging, which catches a task naming an image that is gone. The same
+check refuses a task whose sizes break the rule on `disk` and `memory`
+above, naming its `task.json`, and one whose tools break the rules of
+"Tools" (below): a declared tool taking a built-in name or `ask`, or
+declared twice; a need naming a tool the task does not offer (`ask` without
+replies included); a tool in two needs; a task with replies and no
+`answered_by` or no `answered_in`, or an `answered_by` naming a tool that
+is not a looking tool; a reply pattern that is not a regular expression; a
+`terse` that holds a line break; a `tool_files` entry that names nothing
+under `files/`; an `absent` entry that is `/work` or `/tmp`, lies under
+them, or holds `.` or `..`; a pointer that names a source that does not
+exist or takes the place of another file, or whose text cannot be filled in
+("Pointer tasks", below). The step reads the tasks whose `task.json`
+carries the tag. Every file of a task folder is UTF-8 text, as the task
+format defines: an encoding stated inside such a file is not read
+([architecture.md](architecture.md), "Encodings").
 
 The task editor of `wpt-web` and `wpt-dataset save-task` write a task
 folder through the service layer:
@@ -385,8 +376,8 @@ but the repository holds pointers to data, never the data
 ([architecture.md](architecture.md)): such a task file holds, for each text
 it needs, the source id, the document and the span, plus what the builder
 changed, such as the sentence it removed. The step and the measures fill in
-the text from the store, checked against its checksum (maintainer's
-decision, 2026-10-18). Each entry of `pointers`:
+the text from the store, checked against its checksum. Each entry of
+`pointers`:
 
 ```json
 {"for": "files", "path": "web/example.org/lamp", "source": "<source id>", "document": "chapter-3.xhtml",
@@ -408,66 +399,62 @@ decision, 2026-10-18). Each entry of `pointers`:
 
 When a task is read, every source its pointers name must be admitted; its
 final tree comes from the store (fetched when it is missing there), the
-document is converted as the build converts it, and the span must hold
-the bytes its `sha256` names and must not cut a character. The text is
-then the span without its removed parts. A task breaks when its source's
-revision changes what the span holds, and is refused, naming the task and
-the pointer, until the builder makes it again (maintainer's decision,
-2026-10-18). `wpt-dataset check --fetch` fills in every pointer of the
-sources it checks, and `check --changed` also checks every task source
-whose pointers point into a source the change touches.
+document is converted as the build converts it, and the span must hold the
+bytes its `sha256` names and must not cut a character. The text is then the
+span without its removed parts. A task breaks when its source's revision
+changes what the span holds, and is refused, naming the task and the
+pointer, until the builder makes it again. `wpt-dataset check --fetch`
+fills in every pointer of the sources it checks, and `check --changed` also
+checks every task source whose pointers point into a source the change
+touches.
 
 A repository pointer names a commit of a git source's history instead, for
-the tasks that commit prepared changes (maintainer's decision, 2026-10-18:
-the task file names the source and the commit):
+the tasks that commit prepared changes (the task file names the source and
+the commit):
 
 ```json
 {"for": "repository", "source": "<git source id>", "document": ".git/history/<commit>",
  "checksum": "sha256:<the source's checksum when the task was built>"}
 ```
 
-The task starts from the real state just before the commit (maintainer's
-decision, 2026-10-22). When it is read, the source must still have the
-checksum the pointer names, which covers every history file and the
-history's order file ([architecture.md](architecture.md), `history`), so
-the same pointer always gives the same repository; a source whose
-checksum changed refuses the task until the builder makes it again. From
-the source's final tree, every commit after the pointer's commit is
-undone, newest first, in the order the order file stores, then the
-commit itself. Undoing the later commits gives the commit's own tree, the
-tree the pushed commit must hold; undoing the commit too gives its
-parent. A merge between the commit and the final tree, or a diff that
-does not undo, makes the task fail to be filled, as does a history file
-whose author and date git cannot make the parent commit from (an empty
-name or email); the builder never draws a commit behind a merge, and
-skips the others. Any other git failure is not the pointer's and stops
+The task starts from the real state just before the commit. When it is
+read, the source must still have the checksum the pointer names, which
+covers every history file and the history's order file
+([architecture.md](architecture.md), `history`), so the same pointer always
+gives the same repository; a source whose checksum changed refuses the task
+until the builder makes it again. From the source's final tree, every
+commit after the pointer's commit is undone, newest first, in the order the
+order file stores, then the commit itself. Undoing the later commits gives
+the commit's own tree, the tree the pushed commit must hold; undoing the
+commit too gives its parent. A merge between the commit and the final tree,
+or a diff that does not undo, makes the task fail to be filled, as does a
+history file whose author and date git cannot make the parent commit from
+(an empty name or email); the builder never draws a commit behind a merge,
+and skips the others. Any other git failure is not the pointer's and stops
 the build.
 
-`/work` is the repository itself (maintainer's decision, 2026-10-22: the
-request "Based on the current diffs, could you commit and push the
-changes in this repository?" means `/work`). Its one commit, on the
-branch `main`, holds the parent tree (the store keeps no older commit, so
-this commit stands for the history: its author and date are the
-commit's, its message names the commit it comes before). Its working tree
-holds the commit's own tree, so the commit's changes are there and not
-committed, and its git settings name the commit's author. A task with a
-repository pointer has no other file in `/work`: no `files/` and no
-pointer to files. Its `origin` is a bare repository holding the same
-commit, outside `/work`, at `/tmp/origin.git` in the container, so `git
-add -A` in `/work` never takes it (maintainer's decision, 2026-10-22). No
-commit message is given: the model writes its own (maintainer's decision,
-2026-10-22). Next to the check, `repository.json` holds what the pushed
-commit must be: the remote (`/tmp/origin.git`), the branch, the commit it
-starts from (`parent`) and the tree the pushed commit must hold (`tree`,
-the commit's own tree). A task has at most one repository pointer. The
-task counts as built from the commit's document, `.git/history/<commit>`,
-for "Measure tasks", below.
+`/work` is the repository itself (the request "Based on the current diffs,
+could you commit and push the changes in this repository?" means `/work`).
+Its one commit, on the branch `main`, holds the parent tree (the store
+keeps no older commit, so this commit stands for the history: its author
+and date are the commit's, its message names the commit it comes before).
+Its working tree holds the commit's own tree, so the commit's changes are
+there and not committed, and its git settings name the commit's author. A
+task with a repository pointer has no other file in `/work`: no `files/`
+and no pointer to files. Its `origin` is a bare repository holding the same
+commit, outside `/work`, at `/tmp/origin.git` in the container, so `git add
+-A` in `/work` never takes it. No commit message is given: the model writes
+its own. Next to the check, `repository.json` holds what the pushed commit
+must be: the remote (`/tmp/origin.git`), the branch, the commit it starts
+from (`parent`) and the tree the pushed commit must hold (`tree`, the
+commit's own tree). A task has at most one repository pointer. The task
+counts as built from the commit's document, `.git/history/<commit>`, for
+"Measure tasks", below.
 
 ### Measure tasks
 
-The measures' tasks are kept out of training by two rules (maintainer's
-decision, 2026-10-18), which the task reader (`wpt_dataset.tasks.read`)
-applies:
+The measures' tasks are kept out of training by two rules, which the task
+reader (`wpt_dataset.tasks.read`) applies:
 
 - people tag the measure tasks they write `eval`, and no training step
   (`grpo`, `token-efficiency`) reads a task so tagged, whatever its other
@@ -476,40 +463,35 @@ applies:
   the task id the same way held-out documents are chosen
   ([data-selection.md](data-selection.md), "Held-out text and
   contamination"): the share is the model recipe's `held_out`, the same
-  rule as documents (maintainer's decision, 2026-10-22). A step reads it
-  from the base model's `provenance.json`, the recipe whose `held_out`
-  kept its documents out.
+  rule as documents. A step reads it from the base model's
+  `provenance.json`, the recipe whose `held_out` kept its documents out.
 
 A pointer task built from a held-out document is measure-only too (a
 document of a source with `held_out_by` is held out by its group, as the
 build holds it out: [data-selection.md](data-selection.md), "Held-out text
-and contamination"; maintainer's decision, 2026-10-23), and so
-is a pointer task whose document's text equals a held-out document's
-(maintainer's decision, 2026-10-22): when the pointers are filled in
-(`tasks.fill`), the sha256 of each named document's whole Markdown is kept,
-and `measure_only` compares it with the sha256 of the Markdown of every
-held-out document of the base model's dataset, the one its
-`provenance.json` names (`held_out_texts`, read once for each pass that
-reads tasks), so the same text under another source or path is caught
-too. Those sha256 come from the dataset's document list, which its build
-keeps ([data-selection.md](data-selection.md), "Held-out text and
-contamination"); no source is converted to find them (maintainer's
-decision, 2026-10-22). A dataset built before builds kept that list has
-none: reading pointer tasks against it is refused
-(`DocumentListMissing`), saying that the base model's dataset predates
-document lists and that such a base is used with the repository at the
-commit that built it; nothing falls back to converting the sources, and
-nothing is rebuilt (maintainer's decision, 2026-10-22). A dataset the
-store does not hold at all is refused the same way, the message saying
-it is not in the store. A held-out document never reaches training
-through a task. A repository pointer names only its commit's document:
-the other files of the repository's tree are not looked at by this rule.
-The measures read exactly the measure-only tasks
-(`read(..., measure=True)`), whatever their tags (`tag=None`): those
-tagged `eval`, the hash share of every task source and the pointer tasks
-on held-out text, all in one run of attempts that every agent measure
-reads (maintainer's decision, 2026-10-23; [evaluation.md](evaluation.md),
-"The shared run of attempts").
+and contamination"), and so is a pointer task whose document's text equals
+a held-out document's: when the pointers are filled in (`tasks.fill`), the
+sha256 of each named document's whole Markdown is kept, and `measure_only`
+compares it with the sha256 of the Markdown of every held-out document of
+the base model's dataset, the one its `provenance.json` names
+(`held_out_texts`, read once for each pass that reads tasks), so the same
+text under another source or path is caught too. Those sha256 come from the
+dataset's document list, which its build keeps
+([data-selection.md](data-selection.md), "Held-out text and
+contamination"); no source is converted to find them. A dataset built
+before builds kept that list has none: reading pointer tasks against it is
+refused (`DocumentListMissing`), saying that the base model's dataset
+predates document lists and that such a base is used with the repository at
+the commit that built it; nothing falls back to converting the sources, and
+nothing is rebuilt. A dataset the store does not hold at all is refused the
+same way, the message saying it is not in the store. A held-out document
+never reaches training through a task. A repository pointer names only its
+commit's document: the other files of the repository's tree are not looked
+at by this rule. The measures read exactly the measure-only tasks
+(`read(..., measure=True)`), whatever their tags (`tag=None`): those tagged
+`eval`, the hash share of every task source and the pointer tasks on
+held-out text, all in one run of attempts that every agent measure reads
+([evaluation.md](evaluation.md), "The shared run of attempts").
 
 ### Tools
 
@@ -522,61 +504,58 @@ Every attempt is offered the tools of its task, chosen for that attempt
 - and the working tools of the image's pool (`tools.json`, "Images",
   below), whose names the task does not take.
 
-**`ask`** (maintainer's decision, 2026-10-18). The model calls it with its
-question, and the harness answers from the task's replies, written in
-advance; the attempt goes on. Each reply's `pattern` is a Python regular
-expression searched for anywhere in the question, and the first reply
-whose pattern is found is given. A question that no pattern matches gets
-"I don't know that", so a precise question pays and a vague one does not.
-No person waits for the model's question: the reply is written ahead and
-the harness gives it, as content a person wrote that the task records
-(Rules, above). `ask` is offered only in a task that declares replies
-(maintainer's decision, 2026-10-22). It serves asking the user last: a
-turn without a tool call still ends the attempt, so a question goes
-through `ask`.
+**`ask`**. The model calls it with its question, and the harness answers
+from the task's replies, written in advance; the attempt goes on. Each
+reply's `pattern` is a Python regular expression searched for anywhere in
+the question, and the first reply whose pattern is found is given. A
+question that no pattern matches gets "I don't know that", so a precise
+question pays and a vague one does not. No person waits for the model's
+question: the reply is written ahead and the harness gives it, as content a
+person wrote that the task records (Rules, above). `ask` is offered only in
+a task that declares replies. It serves asking the user last: a turn
+without a tool call still ends the attempt, so a question goes through
+`ask`.
 
-**Declared tools** (maintainer's decision, 2026-10-18). A task declares
-each tool it offers beyond the built-in ones and `ask`: its name,
-description, parameters, and the program in the agent image that answers
-it. The program runs inside the attempt's container, under its limits and
-`command_seconds`: it reads the call's arguments as JSON on its standard
-input (as ASCII, any other character escaped) and runs from `/work`; its
-standard output is the result, and an exit code other than 0 makes the
-call fail, with its standard error (or, when it printed none there, its
-output) as the result. Like a check, a program must not load code from
-its current folder: the model's files are there. Most of these tools are
-emulations, such as a web search answered from local files; an emulation
-gives the real tool's kind and shape of answer: a search returns ranked
-snippets with their sources, a fetch returns a page's text. So the model
-learns what kind of answer to expect from a kind of tool and adapts to
-whatever harness it is put in. Real MCP servers are not used in training.
+**Declared tools**. A task declares each tool it offers beyond the built-in
+ones and `ask`: its name, description, parameters, and the program in the
+agent image that answers it. The program runs inside the attempt's
+container, under its limits and `command_seconds`: it reads the call's
+arguments as JSON on its standard input (as ASCII, any other character
+escaped) and runs from `/work`; its standard output is the result, and an
+exit code other than 0 makes the call fail, with its standard error (or,
+when it printed none there, its output) as the result. Like a check, a
+program must not load code from its current folder: the model's files are
+there. Most of these tools are emulations, such as a web search answered
+from local files; an emulation gives the real tool's kind and shape of
+answer: a search returns ranked snippets with their sources, a fetch
+returns a page's text. So the model learns what kind of answer to expect
+from a kind of tool and adapts to whatever harness it is put in. Real MCP
+servers are not used in training.
 
-**Hidden files** (maintainer's decision, 2026-10-22). An emulated tool's
-backing files are hidden from the model's own tools (`read`, `bash`): only
-the tools' programs read them. The task names them in `tool_files`; they
-are unpacked into `/tmp/wpt-tools/`, owned by root and readable only by
-group 1001 (folders 750, files 640). A program runs as user 1000, the
-model's, in group 1001, so it reads them and changes `/work` as the
-model's own tools do; the model's commands run in group 1000, so they can
-neither list nor read them, and since the groups differ the kernel lets
-them neither look into the program's process (`ptrace`,
-`/proc/<pid>/fd`, `/proc/<pid>/mem`) nor gain group 1001 (no setgid).
-The files count against what `/tmp` may hold. The check's container does
-not get the task's `tool_files`, but it does get the files an attempt's
-variant hid (a variant's `tool_files`, "Variation", below): they are back
-at their place, in its `/work` or at their folder outside it, as the
-tools' programs left them, in place of whatever the model put there, so
-the check of a commit-and-push task reads the remote the push tool pushed
-to (maintainer's decision, 2026-10-22). A folder a task puts outside
-`/work` (a repository pointer's remote, `/tmp/origin.git`) belongs to user
-1000 in the attempt, and the check's container gets it too, at the same
-place, as the attempt left it.
+**Hidden files**. An emulated tool's backing files are hidden from the
+model's own tools (`read`, `bash`): only the tools' programs read them. The
+task names them in `tool_files`; they are unpacked into `/tmp/wpt-tools/`,
+owned by root and readable only by group 1001 (folders 750, files 640). A
+program runs as user 1000, the model's, in group 1001, so it reads them and
+changes `/work` as the model's own tools do; the model's commands run in
+group 1000, so they can neither list nor read them, and since the groups
+differ the kernel lets them neither look into the program's process
+(`ptrace`, `/proc/<pid>/fd`, `/proc/<pid>/mem`) nor gain group 1001 (no
+setgid). The files count against what `/tmp` may hold. The check's
+container does not get the task's `tool_files`, but it does get the files
+an attempt's variant hid (a variant's `tool_files`, "Variation", below):
+they are back at their place, in its `/work` or at their folder outside it,
+as the tools' programs left them, in place of whatever the model put there,
+so the check of a commit-and-push task reads the remote the push tool
+pushed to. A folder a task puts outside `/work` (a repository pointer's
+remote, `/tmp/origin.git`) belongs to user 1000 in the attempt, and the
+check's container gets it too, at the same place, as the attempt left it.
 
-**Variation** (maintainer's decision, 2026-10-18). Every task lists the
-tools it absolutely needs (`needs`), and a needed tool may have variants.
-For each attempt the step (and the measures) draws, from a generator
-seeded with the step's `seed`, the task, the round, the group and the
-attempt, so runs are reproducible (`wpt_agent.offer`):
+**Variation**. Every task lists the tools it absolutely needs (`needs`),
+and a needed tool may have variants. For each attempt the step (and the
+measures) draws, from a generator seeded with the step's `seed`, the task,
+the round, the group and the attempt, so runs are reproducible
+(`wpt_agent.offer`):
 
 - one variant of each need, under its own name; a variant may be tools
   offered together with paths under `files/` that it hides (its
@@ -592,12 +571,11 @@ attempt, so runs are reproducible (`wpt_agent.offer`):
   `names`);
 - every offered tool in a shuffled order.
 
-The tools of an image's pool pad the offer with tools the task never
-needs; each really works, answered by its own program in the image
-(maintainer's decision, 2026-10-22). The map from each name the model saw
-to the real tool goes into the conversation the check reads ("Scores",
-below). The aim is asking the user last without habits tied to particular
-tools (maintainer's decision, 2026-10-18).
+The tools of an image's pool pad the offer with tools the task never needs;
+each really works, answered by its own program in the image. The map from
+each name the model saw to the real tool goes into the conversation the
+check reads ("Scores", below). The aim is asking the user last without
+habits tied to particular tools.
 
 ### Images
 
@@ -654,43 +632,40 @@ accepts the dated archive's expired Release files.
 
 `uv run wpt-agent build-image NAME` builds the image from its lock on this
 machine (the base by digest, the snapshot, every package as
-`name=version`), and stops when the build installed other packages than
-the lock pins. Like `lock-image`, and through the same code, it first
-checks that apt, after `apt-get update`, reads its package lists only
-from snapshot.debian.org or snapshot.ubuntu.com, and refuses to build
-otherwise. A failed `docker build` (in `lock-image` or `build-image`) and
-a failed `apt-get update` in that check are tried again by the same rule,
-6 times in all, with a growing pause before each new try: 10 s, 30 s,
-1 min, 2 min and 5 min, about 9 minutes of waiting, because
-snapshot.ubuntu.com was once down for over 2 hours (maintainer's decision,
-2026-10-21). The error of a failed build ends with the output of the step
-that failed. The `grpo` step never builds an image: it stops before any
-attempt when a task's image is not built for the folder's current files,
-and names the command that builds it. A changed Dockerfile or lock needs
-a new build.
+`name=version`), and stops when the build installed other packages than the
+lock pins. Like `lock-image`, and through the same code, it first checks
+that apt, after `apt-get update`, reads its package lists only from
+snapshot.debian.org or snapshot.ubuntu.com, and refuses to build otherwise.
+A failed `docker build` (in `lock-image` or `build-image`) and a failed
+`apt-get update` in that check are tried again by the same rule, 6 times in
+all, with a growing pause before each new try: 10 s, 30 s, 1 min, 2 min and
+5 min, about 9 minutes of waiting, because snapshot.ubuntu.com was once
+down for over 2 hours. The error of a failed build ends with the output of
+the step that failed. The `grpo` step never builds an image: it stops
+before any attempt when a task's image is not built for the folder's
+current files, and names the command that builds it. A changed Dockerfile
+or lock needs a new build.
 
 ### The agent image
 
-`data/images/agent/` is the first image of agentic tasks (maintainer's
-decision, 2026-10-18): Debian 13 with `bash`, `git` and Python 3, and
-four parts of its own, which its Dockerfile copies in:
+`data/images/agent/` is the first image of agentic tasks: Debian 13 with
+`bash`, `git` and Python 3, and four parts of its own, which its Dockerfile
+copies in:
 
-- `wpt_check.py`, the shared check library ("The check library", below),
-  in `/usr/lib/python3/dist-packages/`, where every `python3` finds it, `-I`
+- `wpt_check.py`, the shared check library ("The check library", below), in
+  `/usr/lib/python3/dist-packages/`, where every `python3` finds it, `-I`
   and `-P` included;
 - the programs that answer tools, in `/usr/local/lib/wpt-tools/`, written
   in Python and started as `python3 -I`, with the helpers they share,
   `wpt_tools.py`, next to the library;
 - `tools.json`, its pool of working tools;
-- `ondrik`, a small program written for WPT, so no training text
-  describes it, in `/usr/local/bin/`, and its manual,
-  `/usr/share/doc/ondrik/manual.txt` (maintainer's decision, 2026-10-23;
-  `ondrik/` in the image's folder), for the task builder's
-  `read-the-manual` ("The task builder", below). It is compiled
-  (maintainer's decision, 2026-10-23): its source, `ondrik/ondrik.c`, is
-  compiled in a build stage of the Dockerfile, and the image keeps only
-  the binary, owned by root, which the model's user may run but not
-  read, and no compiler.
+- `ondrik`, a small program written for WPT, so no training text describes
+  it, in `/usr/local/bin/`, and its manual,
+  `/usr/share/doc/ondrik/manual.txt` (`ondrik/` in the image's folder), for
+  the task builder's `read-the-manual` ("The task builder", below). It is
+  compiled: its source, `ondrik/ondrik.c`, is compiled in a build stage of
+  the Dockerfile, and the image keeps only the binary, owned by root, which
+  the model's user may run but not read, and no compiler.
 
 A task declares the two emulations it uses as its own tools:
 
@@ -715,17 +690,16 @@ its address and a snippet of its best paragraph, or "No results found".
 there fails with "404 Not Found".
 
 The pool (`tools.json`) pads the offer with tools that really work in
-`/work` (maintainer's decision, 2026-10-22): `list_files` (a folder's
-entries, as `ls -p`), `find_files` (paths matching a glob pattern),
-`search_text` (lines matching a regular expression, as `grep -rn`) and
-`calculator` (an arithmetic expression); the first three are marked
-`looks`. Since a program runs in the group
-that reads the hidden files, these tools open a path only inside `/work`,
-one folder at a time and never through a symbolic link, so neither a path
+`/work`: `list_files` (a folder's entries, as `ls -p`), `find_files` (paths
+matching a glob pattern), `search_text` (lines matching a regular
+expression, as `grep -rn`) and `calculator` (an arithmetic expression); the
+first three are marked `looks`. Since a program runs in the group that
+reads the hidden files, these tools open a path only inside `/work`, one
+folder at a time and never through a symbolic link, so neither a path
 leading out of `/work` nor a link the model made reaches the hidden files.
 
 A task that commits and pushes (the task builder's `commit-and-push`,
-below) declares the emulated `push` (maintainer's decision, 2026-10-18):
+below) declares the emulated `push`:
 
 ```json
 {"name": "push", "description": "Push the commits of the current branch of a git repository to its remote.",
@@ -734,17 +708,16 @@ below) declares the emulated `push` (maintainer's decision, 2026-10-18):
 ```
 
 It runs `git push` in the repository at `path` (by default `/work`) and
-gives what git printed. In the attempt whose variant hides the remote
-(the task builder's `commit-and-push`, below), the remote is among the
-hidden files under its own path: when the remote git would push to is a
-local path outside `/work` (`/tmp/origin.git`) whose hidden copy exists
-under `/tmp/wpt-tools/` (`/tmp/wpt-tools/tmp/origin.git`), the program
-pushes there, so only it reaches the remote and `git push` through `bash`
-does not (maintainer's decision, 2026-10-22). git reads the repository's own
-settings, which the model can change, and the program runs in the group
-that reads the hidden files: it turns hooks and the file system monitor
-off, and a task whose hidden files are more than the remote it pushes to
-must not offer it.
+gives what git printed. In the attempt whose variant hides the remote (the
+task builder's `commit-and-push`, below), the remote is among the hidden
+files under its own path: when the remote git would push to is a local path
+outside `/work` (`/tmp/origin.git`) whose hidden copy exists under
+`/tmp/wpt-tools/` (`/tmp/wpt-tools/tmp/origin.git`), the program pushes
+there, so only it reaches the remote and `git push` through `bash` does
+not. git reads the repository's own settings, which the model can change,
+and the program runs in the group that reads the hidden files: it turns
+hooks and the file system monitor off, and a task whose hidden files are
+more than the remote it pushes to must not offer it.
 
 `ondrik` prints results that only it gives, by rules of its own: `ondrik
 press [--turns N] TEXT` the seal of a text (10 signs, folded `N` times),
@@ -769,9 +742,9 @@ that calls them, and in the built image itself.
 
 ### The check library
 
-Rules many checks share live in one library inside the agent images,
-tested once in the repository, and each check calls it (maintainer's
-decision, 2026-10-18). A check started as `python3 -I` imports it:
+Rules many checks share live in one library inside the agent images, tested
+once in the repository, and each check calls it. A check started as
+`python3 -I` imports it:
 
 ```python
 #!/usr/bin/python3 -I
@@ -787,110 +760,104 @@ step weighs them ("Rewards", below); the library weighs nothing.
 The rules read the attempt's trace by real tool names (`metadata.tools`
 maps each name the model saw to the real one):
 
-- `report(conversation, correct, **rules)`: what a check prints, the
-  JSON object of its parts: `correct`, the task's own judgement through
+- `report(conversation, correct, **rules)`: what a check prints, the JSON
+  object of its parts: `correct`, the task's own judgement through
   `scored`, and each rule given by name, as a number (`True` is 1). A
   task's check may report any part of its own the same way, such as a
   `conventions` part for the conventions its workspace shows (placement,
   naming, framework, existing commands): those are checked only by each
-  task's own check, never by a rule of this library (maintainer's
-  decision, 2026-10-23).
+  task's own check, never by a rule of this library.
 - `scored(conversation, score)`: the missing-answer rule. The attempt's
   score is 0 when it has no answer, whatever its files hold: no final
-  reply, or a reply to the confidence question that is not a number from
-  0 to 100 ([chat-format.md](chat-format.md), "The answer"; maintainer's
-  decisions, 2026-10-18 and 2026-10-23).
+  reply, or a reply to the confidence question that is not a number from 0
+  to 100 ([chat-format.md](chat-format.md), "The answer").
 - `brier(conversation, correct)`: the Brier score of the confidence,
   `(confidence - 1)²` for a right result and `confidence²` for a wrong one;
   1, the worst, without an answer.
 - `read_before_write(conversation, new=())`: every file written or edited
-  was read first, by `read`, by an earlier `bash` command that names it,
-  or written by the attempt itself; `new` lists the files the task expects
-  the model to create.
+  was read first, by `read`, by an earlier `bash` command that names it, or
+  written by the attempt itself; `new` lists the files the task expects the
+  model to create.
 - `sources_first(conversation, changes=("write", "edit", "ask"))`: the
   attempt looked at sources (below) before its first change or question,
   and looked at all when it did neither.
-- `asked_last(conversation, found="")`: every `ask` came after the attempt opened
-  every file where the answer lives: the files of `/work` it started with
-  that the task's `answered_in` matches (`metadata.answered_in`), each
+- `asked_last(conversation, found="")`: every `ask` came after the attempt
+  opened every file where the answer lives: the files of `/work` it started
+  with that the task's `answered_in` matches (`metadata.answered_in`), each
   opened by a call that looks (below) to one of the task's `answered_by`
   (`metadata.answered_by`) and did not fail, whose `path` argument is the
-  file or, for `bash`, whose command names it and runs a program that
-  shows what a file holds (`opened`, `SHOWING`: the reading programs but
-  `wc`, `csplit`, `find`, `ls`, `dir`, `vdir`, `stat`, `du` and `cmp`,
-  which show only its name, size or counts). Given `found`, the answer's
-  text, a question no longer counts once a call that looks showed it, its
-  words in order as `holds` reads them: the answer was found. A question
-  counts at once when no such file exists (the answer is absent), and
-  when the attempt was offered none of those tools (maintainer's
-  decisions, 2026-10-22 and 2026-10-23). A look that does not name the
+  file or, for `bash`, whose command names it and runs a program that shows
+  what a file holds (`opened`, `SHOWING`: the reading programs but `wc`,
+  `csplit`, `find`, `ls`, `dir`, `vdir`, `stat`, `du` and `cmp`, which show
+  only its name, size or counts). Given `found`, the answer's text, a
+  question no longer counts once a call that looks showed it, its words in
+  order as `holds` reads them: the answer was found. A question counts at
+  once when no such file exists (the answer is absent), and when the
+  attempt was offered none of those tools. A look that does not name the
   file, such as `grep -r` over a folder, does not open it.
-- `read_before_ask(conversation, text)`: every `ask` came after a call
-  that looks and whose result showed `text`, its words in order as `holds`
-  reads them; true when the attempt asked nothing (maintainer's decision,
-  2026-10-22).
-- `before(conversation, first, then)`: every call to a tool of `then`
-  after a call to one of `first`; `calls` gives the trace, each call by
-  its real tool's name and whether it looks, `answer` the answer the loop
-  built, `{"answer": ..., "confidence": ...}` or `None`, and `answer_text`
-  its text, the final reply's, `""` without one.
+- `read_before_ask(conversation, text)`: every `ask` came after a call that
+  looks and whose result showed `text`, its words in order as `holds` reads
+  them; true when the attempt asked nothing.
+- `before(conversation, first, then)`: every call to a tool of `then` after
+  a call to one of `first`; `calls` gives the trace, each call by its real
+  tool's name and whether it looks, `answer` the answer the loop built,
+  `{"answer": ..., "confidence": ...}` or `None`, and `answer_text` its
+  text, the final reply's, `""` without one.
 - `holds(text, expected)`: `text` holds the words of `expected` one after
   the other, letter case, punctuation, Markdown marks and spacing aside.
 - `not_enough(conversation, missing="", words=None)`: the answer starts
   with "not enough", the answer of a task whose files do not hold what it
-  asks; given `missing`, the text the files lack, the answer must also
-  name it: hold its first `words` words (all of them by default) in
-  order, as `holds` reads them (maintainer's decision, 2026-10-22).
+  asks; given `missing`, the text the files lack, the answer must also name
+  it: hold its first `words` words (all of them by default) in order, as
+  `holds` reads them.
 - `pushed(expected=None)`: the remote of a repository pointer
   (`repository.json` next to the check, by default) holds on its branch
   exactly one new commit, on the commit it started from, with the expected
   tree and a message that is not empty, spaces aside. The model writes its
-  own message, and the check never compares it (maintainer's decision,
-  2026-10-22). The remote is outside `/work`, at `/tmp/origin.git`. Since
-  the model could have changed the remote's settings, only its objects and
-  references are copied into a fresh repository of the check's own, so git
-  reads none of them.
+  own message, and the check never compares it. The remote is outside
+  `/work`, at `/tmp/origin.git`. Since the model could have changed the
+  remote's settings, only its objects and references are copied into a
+  fresh repository of the check's own, so git reads none of them.
 - `beside(name)` and `file_text(path)`: the text of a file next to the
-  check, and of a regular file the attempt left (`""` for none, a folder,
-  a pipe or a link).
+  check, and of a regular file the attempt left (`""` for none, a folder, a
+  pipe or a link).
 - `programs(command)`: the programs a `bash` command runs, as the looking
   rule finds them (below).
 
 Looking is one rule, which `sources_first`, `asked_last` and
-`read_before_ask` share (maintainer's decision, 2026-10-22): every looking
-tool counts as opening a source. A call looks when it calls `read`, a
-declared tool marked `"looks": true` (the agent image's `search` and
-`fetch`, and its pool's `list_files`, `find_files` and `search_text`), or
-`bash` with a command that runs one of the image's reading programs. Those
-programs are listed once, as `READERS` in `wpt_check.py`: the programs of
-the image that show what files or folders hold, such as `cat`, `head`,
-`grep`, `sed`, `ls` and `find`, and a test checks that the built image
-holds each of them. The command is parsed as bash reads it, never searched
-for a name: each simple command of its pipelines and lists (`|`, `;`,
-`&`, `&&`, `||`, a line break, parentheses, a function's body) runs the
-program named by its first word, after any `VAR=value` and bash's reserved
-words, and after programs that run another program (`env`, `nice`,
-`nohup`, `stdbuf`, `time`, `timeout`, `xargs` and the like) with their
-options and the words they take; a comment does not count. So `cd docs &&
-cat a.md` looks and `echo cat a.md` does not. Which offered tools look is
-decided in one place, `wpt_dataset.tasks.looks` (`read`, `bash`, and a
-declaration marked `looks`): the agent loop writes their real names into
-the conversation's `metadata.looking`, which the library reads, and
-`wpt-dataset check` refuses an `answered_by` naming any other tool.
+`read_before_ask` share: every looking tool counts as opening a source. A
+call looks when it calls `read`, a declared tool marked `"looks": true`
+(the agent image's `search` and `fetch`, and its pool's `list_files`,
+`find_files` and `search_text`), or `bash` with a command that runs one of
+the image's reading programs. Those programs are listed once, as `READERS`
+in `wpt_check.py`: the programs of the image that show what files or
+folders hold, such as `cat`, `head`, `grep`, `sed`, `ls` and `find`, and a
+test checks that the built image holds each of them. The command is parsed
+as bash reads it, never searched for a name: each simple command of its
+pipelines and lists (`|`, `;`, `&`, `&&`, `||`, a line break, parentheses,
+a function's body) runs the program named by its first word, after any
+`VAR=value` and bash's reserved words, and after programs that run another
+program (`env`, `nice`, `nohup`, `stdbuf`, `time`, `timeout`, `xargs` and
+the like) with their options and the words they take; a comment does not
+count. So `cd docs && cat a.md` looks and `echo cat a.md` does not. Which
+offered tools look is decided in one place, `wpt_dataset.tasks.looks`
+(`read`, `bash`, and a declaration marked `looks`): the agent loop writes
+their real names into the conversation's `metadata.looking`, which the
+library reads, and `wpt-dataset check` refuses an `answered_by` naming any
+other tool.
 
 The trace rules of #37 are `read_before_write`, `sources_first` and
-`asked_last`, each reported as a part of that name by the checks that
-apply it ("The task builder", below). Each task states where its answers
-live, its `answered_in`, and the looking tools that can open them, its
-`answered_by`; `asked_last` waits for both (maintainer's decision,
-2026-10-23).
+`asked_last`, each reported as a part of that name by the checks that apply
+it ("The task builder", below). Each task states where its answers live,
+its `answered_in`, and the looking tools that can open them, its
+`answered_by`; `asked_last` waits for both.
 
 ### The task builder
 
 Program-built tasks are generated by a script in the repository,
 `scripts/build_tasks.py`, as committed task sources made of pointer tasks,
-so adding, removing or varying tasks is a rerun of the script (maintainer's
-decision, 2026-10-18). Its code is `wpt_dataset/builder.py`:
+so adding, removing or varying tasks is a rerun of the script. Its code is
+`wpt_dataset/builder.py`:
 
 ```sh
 uv run scripts/build_tasks.py KIND SOURCE --count N [--seed S] [--select EXPRESSION]
@@ -899,20 +866,20 @@ uv run scripts/build_tasks.py KIND SOURCE --count N [--seed S] [--select EXPRESS
 `SOURCE` is an `empty` source a person makes for the tasks, like any text
 written for WPT (`wpt-dataset new-source`, then its license text, tagged
 `grpo`); a maintainer admits it. A run replaces everything under `KIND/` in
-it by `N` tasks, as one new patch checked as `check --fetch` checks it, every
-pointer filled in. The tasks come from the admitted sources already in the
-store, drawn with a generator seeded by `S` (default 1): the same seed,
-sources and store give the same tasks. A source that is not in the store
-gives no task, and the run says how many were left out. Each task's folder
-is `KIND/<16 hex digits of the sha256 of its task.json>`, so an unchanged
-task keeps its id over reruns, and with it its place in or out of the
-measure-only share ("Measure tasks", above). Every task runs in the agent
-image, and its check calls the check library, which reads the attempt's
-answer: the final reply's text and the confidence the model gave when the
-harness asked for it after that reply ([chat-format.md](chat-format.md),
-"The answer"). No kind's instructions say anything about a block or how
-to answer (maintainer's decision, 2026-10-23), and the harness adds
-nothing to the opening (maintainer's decision, 2026-10-22).
+it by `N` tasks, as one new patch checked as `check --fetch` checks it,
+every pointer filled in. The tasks come from the admitted sources already
+in the store, drawn with a generator seeded by `S` (default 1): the same
+seed, sources and store give the same tasks. A source that is not in the
+store gives no task, and the run says how many were left out. Each task's
+folder is `KIND/<16 hex digits of the sha256 of its task.json>`, so an
+unchanged task keeps its id over reruns, and with it its place in or out of
+the measure-only share ("Measure tasks", above). Every task runs in the
+agent image, and its check calls the check library, which reads the
+attempt's answer: the final reply's text and the confidence the model gave
+when the harness asked for it after that reply
+([chat-format.md](chat-format.md), "The answer"). No kind's instructions
+say anything about a block or how to answer, and the harness adds nothing
+to the opening.
 
 The three kinds built on text take the documents of the sources that
 `--select`, a pool expression ([data-selection.md](data-selection.md)),
@@ -934,94 +901,83 @@ source's address and the document).
   starts with "not enough" and names what the question asked for: the
   paragraph, by the words of its quoted start. The removed paragraph is
   next to the check, as `missing.txt`, and the check reads it: the answer
-  must hold the first words of `missing.txt`, as many as `quote.txt`
-  holds, in order, matched by words as `holds` matches them
-  (`not_enough`). The other half can be answered, and "not enough" is
-  wrong there (maintainer's decisions, 2026-10-22).
+  must hold the first words of `missing.txt`, as many as `quote.txt` holds,
+  in order, matched by words as `holds` matches them (`not_enough`). The
+  other half can be answered, and "not enough" is wrong there.
 - `look-or-ask`: the rest of the paragraph goes into a file whose name is
   the one missing detail: in half the tasks `NOTES.md` names it, in the
   other half only the reply of the `ask` tool does (and `ask` is needed);
   both halves declare the same reply. The task's `answered_in` is
   `["NOTES.md"]` in both halves, the file where the answer would live, so
-  the attempt looks before asking even where the notes hold nothing
-  (maintainer's decision, 2026-10-23), and
+  the attempt looks before asking even where the notes hold nothing, and
   its `answered_by` names the looking tools that can read it: `read`,
   `bash` and the pool's `search_text`. The check wants the file's text and
   `asked_last`: no question before `NOTES.md` was opened through one of
-  those (maintainer's decision, 2026-10-23); in the half where the notes
-  do not name the file, the attempt reads them, does not find the name,
-  and then asks. In the half where `NOTES.md` names the file, the answer
-  is found there, so `asked_last` gets the line naming it as `found`: a
-  question after a look showed that line does not count (maintainer's
-  decision, 2026-10-23), and the check also wants `read_before_ask`:
-  the attempt read `NOTES.md`, through any looking tool, before any
-  question (maintainer's decisions, 2026-10-22). Those two are the task's
-  `gates` (maintainer's decision, 2026-10-23): `correct` is the file's
-  text, and a broken gate makes the attempt worth 0.
+  those; in the half where the notes do not name the file, the attempt
+  reads them, does not find the name, and then asks. In the half where
+  `NOTES.md` names the file, the answer is found there, so `asked_last`
+  gets the line naming it as `found`: a question after a look showed that
+  line does not count, and the check also wants `read_before_ask`: the
+  attempt read `NOTES.md`, through any looking tool, before any question.
+  Those two are the task's `gates`: `correct` is the file's text, and a
+  broken gate makes the attempt worth 0.
 - `commit-and-push`: every commit of each admitted git source's stored
-  history that undoing can reach is a candidate, not only the newest
-  (maintainer's decision, 2026-10-22), when the source's working tree
-  stays within 4 MiB and 2,000 files. A source gives one candidate per
-  history file (a merge has none) of a commit newer than its newest
-  merge, read from its stored order file (every commit's, when the
-  history holds no merge); the commits behind that merge, which undoing
-  cannot reach, are dropped before drawing and never logged
-  (maintainer's decision, 2026-10-22). A source whose stored history has
-  no order file (stored before histories kept one) gives none, and the
-  builder says how many such sources it left aside. The builder draws
-  about `--count` of them (2,500 per kind) from all the candidates, in an
-  order seeded by `S`, so the same seed, sources and store give the same
-  tasks. A drawn commit's task starts from the real state just before it:
-  every later commit undone, newest first, in the stored order, then the
-  commit ("Pointer tasks", above). Only a real failure is logged per
-  draw: a drawn commit whose undoing fails, or whose parent commit git
-  refuses to make, is left out, named, and the next drawn takes its place
-  (maintainer's decision, 2026-10-22). Only a drawn commit is made into a
-  repository: the candidates are history files, not trees. Each kept
-  commit is a repository pointer naming the source's checksum ("Pointer
-  tasks", above), and `/work` is the repository, its remote outside it. The
-  model is asked only "Based on the current diffs, could you commit and
-  push the changes in this repository?", with nothing after it
-  (maintainer's decisions, 2026-10-22 and 2026-10-23); it writes its own
-  commit message, then pushes. The check is `pushed`: exactly one new commit
+  history that undoing can reach is a candidate, not only the newest, when
+  the source's working tree stays within 4 MiB and 2,000 files. A source
+  gives one candidate per history file (a merge has none) of a commit newer
+  than its newest merge, read from its stored order file (every commit's,
+  when the history holds no merge); the commits behind that merge, which
+  undoing cannot reach, are dropped before drawing and never logged. A
+  source whose stored history has no order file (stored before histories
+  kept one) gives none, and the builder says how many such sources it left
+  aside. The builder draws about `--count` of them (2,500 per kind) from
+  all the candidates, in an order seeded by `S`, so the same seed, sources
+  and store give the same tasks. A drawn commit's task starts from the real
+  state just before it: every later commit undone, newest first, in the
+  stored order, then the commit ("Pointer tasks", above). Only a real
+  failure is logged per draw: a drawn commit whose undoing fails, or whose
+  parent commit git refuses to make, is left out, named, and the next drawn
+  takes its place. Only a drawn commit is made into a repository: the
+  candidates are history files, not trees. Each kept commit is a repository
+  pointer naming the source's checksum ("Pointer tasks", above), and
+  `/work` is the repository, its remote outside it. The model is asked only
+  "Based on the current diffs, could you commit and push the changes in
+  this repository?", with nothing after it; it writes its own commit
+  message, then pushes. The check is `pushed`: exactly one new commit
   pushed to the remote branch, whose tree is the commit's own tree, its
-  message any that is not empty, never compared (maintainer's decision,
-  2026-10-22). Each attempt pushes one way, the seeded
-  choice between the two variants of the task's one need ("Variation",
-  above; maintainer's decision, 2026-10-22): `bash` alone, so no push tool
-  is offered and `git push` through `bash` reaches the bare `origin` at
-  `/tmp/origin.git`; or `bash` with the declared `push`, a variant that
-  hides the remote (its `tool_files` name `/tmp/origin.git`), so `git
-  push` through `bash` cannot reach it and only the push tool's program
-  does ("The agent image", above). Over a task's
-  attempts both ways come up, so no habit is tied to one way of pushing
-  (maintainer's decision, 2026-10-18). Its commits come from the admitted
-  GitHub repositories (admitted on 2026-10-21).
-- `read-the-manual` (maintainer's decision, 2026-10-23): each task asks
-  for a result only the image's `ondrik` gives ("The agent image",
-  above): the seal of a drawn text (8 hex digits) folded a drawn number
-  of times (2 to 9), or the slack knot of two drawn numbers (100 to
-  99,999). The instructions name the program and the result, never the
-  option that gives it, and are the same whether the manual is there or
-  not. The halves are crossed: every other task names the manual's
-  folder in `absent`, so its attempts run without the manual, and every
-  other pair asks for a seal instead of a knot. The task needs `bash`
-  only (`[["bash"]]`) and has no files. Its check runs the program, by
-  its absolute path, in the check's own container, which the model's
+  message any that is not empty, never compared. Each attempt pushes one
+  way, the seeded choice between the two variants of the task's one need
+  ("Variation", above): `bash` alone, so no push tool is offered and `git
+  push` through `bash` reaches the bare `origin` at `/tmp/origin.git`; or
+  `bash` with the declared `push`, a variant that hides the remote (its
+  `tool_files` name `/tmp/origin.git`), so `git push` through `bash` cannot
+  reach it and only the push tool's program does ("The agent image",
+  above). Over a task's attempts both ways come up, so no habit is tied to
+  one way of pushing. Its commits come from the admitted GitHub
+  repositories.
+- `read-the-manual`: each task asks for a result only the image's `ondrik`
+  gives ("The agent image", above): the seal of a drawn text (8 hex digits)
+  folded a drawn number of times (2 to 9), or the slack knot of two drawn
+  numbers (100 to 99,999). The instructions name the program and the
+  result, never the option that gives it, and are the same whether the
+  manual is there or not. The halves are crossed: every other task names
+  the manual's folder in `absent`, so its attempts run without the manual,
+  and every other pair asks for a seal instead of a knot. The task needs
+  `bash` only (`[["bash"]]`) and has no files. Its check runs the program,
+  by its absolute path, in the check's own container, which the model's
   files cannot change, and wants the program's output in the answer
-  (`holds`). It reads no source and takes no `--select`. It is the
-  agent form of the reading-gain measure ([evaluation.md](evaluation.md),
-  "Reading the manual"). Its tasks are for the measures only
-  (maintainer's decision, 2026-10-23): `builder.write` tags the kind's
-  folder `eval` in the task source's `source.json`, through the service
-  layer, when no entry tags it so, and the task reader gives tasks tagged
-  `eval` to the measures only ("Measure tasks", below). A model trained
-  on them would learn `ondrik` from the attempts themselves, and the
-  measure would no longer tell whether it reads the manual.
+  (`holds`). It reads no source and takes no `--select`. It is the agent
+  form of the reading-gain measure ([evaluation.md](evaluation.md),
+  "Reading the manual"). Its tasks are for the measures only:
+  `builder.write` tags the kind's folder `eval` in the task source's
+  `source.json`, through the service layer, when no entry tags it so, and
+  the task reader gives tasks tagged `eval` to the measures only ("Measure
+  tasks", below). A model trained on them would learn `ondrik` from the
+  attempts themselves, and the measure would no longer tell whether it
+  reads the manual.
 
 Every kind's check prints its parts through `wpt_check.report`, and the
-builder sets each kind's `area` and `gates` (maintainer's decision,
-2026-10-23):
+builder sets each kind's `area` and `gates`:
 
 | kind | parts besides `correct` | `area` | `gates` |
 | --- | --- | --- | --- |
@@ -1033,37 +989,34 @@ builder sets each kind's `area` and `gates` (maintainer's decision,
 The trace rules are reported where the kind gives what they judge: given
 sources for `sources_first`, a file to write for `read_before_write`, an
 `ask` tool for `asked_last`. A `look-or-ask` attempt may change the
-result's file only (maintainer's decision, 2026-10-23): anything else it
-adds, removes or edits breaks `within_area`. A `commit-and-push` attempt
-may change git's own records, everything under `.git/`, and nothing else
-(maintainer's decision, 2026-10-23): committing and pushing the prepared
-changes leaves the project's files as they are, so any project file the
-attempt adds, removes or edits while committing is over-reach and breaks
-`within_area`. Only `look-or-ask` has replies, so only its tasks get an
-`answered_in` (`["NOTES.md"]`, above); the other kinds have no
+result's file only: anything else it adds, removes or edits breaks
+`within_area`. A `commit-and-push` attempt may change git's own records,
+everything under `.git/`, and nothing else: committing and pushing the
+prepared changes leaves the project's files as they are, so any project
+file the attempt adds, removes or edits while committing is over-reach and
+breaks `within_area`. Only `look-or-ask` has replies, so only its tasks get
+an `answered_in` (`["NOTES.md"]`, above); the other kinds have no
 `asked_last` rule and leave it out.
 
-Each kind is marked as acting, checking or both (maintainer's decision,
-2026-10-23; `CLASSES` in `builder.py`): `commit-and-push` acts;
-`find-the-passage`, `evidence-removed` and `look-or-ask` check;
-`read-the-manual` does both, since it runs a program and checks its
-output. After each run, `scripts/build_tasks.py` reports what the task
-source holds: its built tasks of each kind, and the shares of them that
-act only, that check only and that do both, which sum to 100%
-(`builder.shares`), such as:
+Each kind is marked as acting, checking or both (`CLASSES` in
+`builder.py`): `commit-and-push` acts; `find-the-passage`,
+`evidence-removed` and `look-or-ask` check; `read-the-manual` does both,
+since it runs a program and checks its output. After each run,
+`scripts/build_tasks.py` reports what the task source holds: its built
+tasks of each kind, and the shares of them that act only, that check only
+and that do both, which sum to 100% (`builder.shares`), such as:
 
 ```text
 2500 look-or-ask tasks written into <source id>
 <source id> holds 10,000 built tasks (find-the-passage 2,500, evidence-removed 2,500, look-or-ask 2,500, commit-and-push 2,500, read-the-manual 0): acting only 25.0%, checking only 75.0%, both 0.0%
 ```
 
-The first committed task set holds all 4 kinds, about 2,500 tasks of
-each, about 10,000 in all, and reports its shares this way (maintainer's
-decision, 2026-10-22). The 70/30 mix between the two shares is settled
-later, once more kinds of tasks are defined: only the program-built
-kinds are defined so far. Building the set needs every admitted source
-it reads fetched into the store first (`uv run wpt-dataset check
---fetch`), on a machine that holds them, the task sources made and
+The first committed task set holds all 4 kinds, about 2,500 tasks of each,
+about 10,000 in all, and reports its shares this way. The 70/30 mix between
+the two shares is settled later, once more kinds of tasks are defined: only
+the program-built kinds are defined so far. Building the set needs every
+admitted source it reads fetched into the store first (`uv run wpt-dataset
+check --fetch`), on a machine that holds them, the task sources made and
 admitted, and one run per kind with `--count 2500`.
 
 ### Attempts
@@ -1100,37 +1053,34 @@ The conversation follows [chat-format.md](chat-format.md): the tools the
 attempt is offered, then the instructions as the user's message. The model
 writes an assistant turn; each tool call in it runs in the container (a
 relative path starts at `/work`, and a call that cannot run returns its
-error to the model); the
-results come back as a tool turn; and the model writes the next turn. The
-attempt ends when a turn closes without a tool call, when the model writes
-the end of a document, after `max_turns` turns (the last turn's calls still
-run), or when `max_tokens` is reached in the middle of a turn, whose calls
-then do not run (maintainer's decision, 2026-10-17). The turn that closes
-without a tool call is the final reply, the answer; the loop then adds one
-user turn asking for the confidence, a number from 0 to 100 and nothing
-else, and the model replies; that turn counts against `max_tokens` and
-the context, not `max_turns` ([chat-format.md](chat-format.md), "The
-answer"; maintainer's decision, 2026-10-23). The loop builds
-`{"answer": <the final reply's text>, "confidence": <number / 100>}`, or
-`null` when there is no final reply or the reply is not such a number,
-and keeps it in the conversation's `metadata.answer`, next to `metadata.tools`, the map from each name the
-model saw to the real tool, `metadata.looking`, the real names of the
-offered tools that look at sources, `metadata.answered_by`, the
-task's, and `metadata.answered_in`, the files of `/work` the attempt
-starts with that the task's `answered_in` matches ("The check library",
-above). The model's
-`block_size` does not limit an attempt: the cache reads it past
-`block_size`, and the loss pass reads it whole. The attempt also
-ends when the model's own processes or files fill its container, so that
-Docker can start no command there: processes left running reach the
-process limit, or files in `/work` and `/tmp` exhaust the memory. That
-turn's calls get no result, and Docker's own error never
-reaches the model. The attempt is scored like any other, on what `/work`
-holds; when running out of memory also stopped the container, `/work` is
-lost and the check scores an empty folder. A command that runs
-longer than `command_seconds` is stopped, and its result says so (one
-that ignores the signal to stop is killed 5 seconds later); a command that
-only exits with the code `timeout` uses is reported with that exit code. A tool
+error to the model); the results come back as a tool turn; and the model
+writes the next turn. The attempt ends when a turn closes without a tool
+call, when the model writes the end of a document, after `max_turns` turns
+(the last turn's calls still run), or when `max_tokens` is reached in the
+middle of a turn, whose calls then do not run. The turn that closes without
+a tool call is the final reply, the answer; the loop then adds one user
+turn asking for the confidence, a number from 0 to 100 and nothing else,
+and the model replies; that turn counts against `max_tokens` and the
+context, not `max_turns` ([chat-format.md](chat-format.md), "The answer").
+The loop builds `{"answer": <the final reply's text>, "confidence": <number
+/ 100>}`, or `null` when there is no final reply or the reply is not such a
+number, and keeps it in the conversation's `metadata.answer`, next to
+`metadata.tools`, the map from each name the model saw to the real tool,
+`metadata.looking`, the real names of the offered tools that look at
+sources, `metadata.answered_by`, the task's, and `metadata.answered_in`,
+the files of `/work` the attempt starts with that the task's `answered_in`
+matches ("The check library", above). The model's `block_size` does not
+limit an attempt: the cache reads it past `block_size`, and the loss pass
+reads it whole. The attempt also ends when the model's own processes or
+files fill its container, so that Docker can start no command there:
+processes left running reach the process limit, or files in `/work` and
+`/tmp` exhaust the memory. That turn's calls get no result, and Docker's
+own error never reaches the model. The attempt is scored like any other, on
+what `/work` holds; when running out of memory also stopped the container,
+`/work` is lost and the check scores an empty folder. A command that runs
+longer than `command_seconds` is stopped, and its result says so (one that
+ignores the signal to stop is killed 5 seconds later); a command that only
+exits with the code `timeout` uses is reported with that exit code. A tool
 result longer than `result_bytes` (4000) keeps its first and last 2000
 bytes, with a line between them saying how many bytes were cut; the output
 is cut while it is read, so a command that prints without end never fills
@@ -1154,32 +1104,30 @@ as root from `/work` for at most `check_seconds` (300).
 Next to the check, in its folder, is `conversation.json`: the attempt's
 conversation in the chat format, as the attempts file keeps it (Runs,
 below) but with only the attempt's own `metadata`: `tools`, the map from
-each name the model saw to the real tool; `looking`, the real names of
-the offered tools that look at sources ("The check library", below);
-`answered_by`, the task's; `answered_in`, the files of `/work` the
-attempt started with that the task's `answered_in` matches; and
-`answer`, the answer the loop built
-(the final reply's text and the confidence) or `null`. It is written as ASCII JSON, any other character
-escaped. A check finds it as `"$(dirname "$0")/conversation.json"`, and
-scores everything: the files, the trace of tool calls and the confidence
-(maintainer's decision, 2026-10-18). The texts the task's pointers put
-`for` the check are there too, by their `path`.
+each name the model saw to the real tool; `looking`, the real names of the
+offered tools that look at sources ("The check library", below);
+`answered_by`, the task's; `answered_in`, the files of `/work` the attempt
+started with that the task's `answered_in` matches; and `answer`, the
+answer the loop built (the final reply's text and the confidence) or
+`null`. It is written as ASCII JSON, any other character escaped. A check
+finds it as `"$(dirname "$0")/conversation.json"`, and scores everything:
+the files, the trace of tool calls and the confidence. The texts the task's
+pointers put `for` the check are there too, by their `path`.
 
 Since the check runs from `/work`, the files the model left are in its
 current folder. A check must not start an interpreter that loads code from
-the current folder: run Python as `python3 -P` (or `-I`), and call
-programs and scripts by absolute paths. Otherwise a `conftest.py`,
-`unittest.py` or similar file the model planted would run as root inside
-the check and could print any score it likes. Its standard output,
-without the white space around it, must be one JSON object of named
-parts, each a number from 0 to 1, `correct` among them: the task's own
-judgement of the files and the answer, next to the rules it reports,
-such as `{"correct": 0.8, "read_before_write": 1, "sources_first": 0.5}`
-(maintainer's decision, 2026-10-23; `wpt_check.report` prints it). A
-bare number from 0 to 1 reads as `{"correct": n}`, so a check that prints
-one number keeps working. Its exit code and standard error are not read.
-A check that prints anything else (a part outside 0 to 1, a `true`, no
-`correct`), crashes or runs out of time gives no score; the attempt
+the current folder: run Python as `python3 -P` (or `-I`), and call programs
+and scripts by absolute paths. Otherwise a `conftest.py`, `unittest.py` or
+similar file the model planted would run as root inside the check and could
+print any score it likes. Its standard output, without the white space
+around it, must be one JSON object of named parts, each a number from 0 to
+1, `correct` among them: the task's own judgement of the files and the
+answer, next to the rules it reports, such as `{"correct": 0.8,
+"read_before_write": 1, "sources_first": 0.5}` (`wpt_check.report` prints
+it). A bare number from 0 to 1 reads as `{"correct": n}`, so a check that
+prints one number keeps working. Its exit code and standard error are not
+read. A check that prints anything else (a part outside 0 to 1, a `true`,
+no `correct`), crashes or runs out of time gives no score; the attempt
 counts as 0, and the step prints a line naming the task and why. A task
 with an `area` gets one more part, `within_area`, from the harness
 (`wpt_agent.play`): 1 when every path under `/work` the attempt changed,
@@ -1207,11 +1155,9 @@ than 2 attempts.
 
 ### Rewards
 
-An attempt's reward is its parts weighed together, with gates
-(maintainer's decisions, 2026-10-18 and 2026-10-23). The check reports
-its parts; the step combines them, in `wpt_posttrain/agentic.py`
-(`combined`), which `grpo` and `token-efficiency` share, never the
-check:
+An attempt's reward is its parts weighed together, with gates. The check
+reports its parts; the step combines them, in `wpt_posttrain/agentic.py`
+(`combined`), which `grpo` and `token-efficiency` share, never the check:
 
 - The reward is 0, whatever the rest, when the attempt has no answer (no
   final reply, or a reply to the confidence question that is not a number
@@ -1236,28 +1182,26 @@ check:
   before any step has run (`agentic.check`). Both steps take these
   defaults from one place, `agentic.WEIGHTS`.
 
-Terse against full (#39; maintainer's decision, 2026-10-23): a task that
-holds a one-line form (`terse`) is played twice in each round of `grpo`,
-first `group` attempts with its full instructions, then `group` attempts
-with its one-line form, offered the same tools attempt by attempt. Both
-forms' attempts are one group for the advantage (maintainer's decision,
-2026-10-23): with `group` 8, each of the 16 attempts' advantage is its
-reward minus the mean reward of all 16. Only the terse attempts carry the
-closeness part. Terse attempt *i* is
-compared with full attempt *i*, the one of the same index: its reward
-adds, weighed by `weight_closeness`, how alike their changes to `/work`
-are (twice the lines their diffs share, in order, over the lines of both,
-`wpt_agent.changes`; 1 when neither changed anything), next to passing
-the task's check as any attempt does. The model's own full result is the
-reference, which the rule on WPT models in training allows
-([data-selection.md](data-selection.md), "Models in training"). A task
-whose `area` is empty only answers, and gets no closeness part. On any
-other task, a terse attempt whose full attempt Docker dropped has nothing
-to be compared with:
-it is kept in the attempts file with a `null` reward but left out of the
-group, since its reward would lack the part every other terse attempt
-of the group has. As for any group, one left with fewer than 2 attempts
-is skipped, and one whose rewards are all equal teaches nothing.
+Terse against full (#39): a task that holds a one-line form (`terse`) is
+played twice in each round of `grpo`, first `group` attempts with its full
+instructions, then `group` attempts with its one-line form, offered the
+same tools attempt by attempt. Both forms' attempts are one group for the
+advantage: with `group` 8, each of the 16 attempts' advantage is its reward
+minus the mean reward of all 16. Only the terse attempts carry the
+closeness part. Terse attempt *i* is compared with full attempt *i*, the
+one of the same index: its reward adds, weighed by `weight_closeness`, how
+alike their changes to `/work` are (twice the lines their diffs share, in
+order, over the lines of both, `wpt_agent.changes`; 1 when neither changed
+anything), next to passing the task's check as any attempt does. The
+model's own full result is the reference, which the rule on WPT models in
+training allows ([data-selection.md](data-selection.md), "Models in
+training"). A task whose `area` is empty only answers, and gets no
+closeness part. On any other task, a terse attempt whose full attempt
+Docker dropped has nothing to be compared with: it is kept in the attempts
+file with a `null` reward but left out of the group, since its reward would
+lack the part every other terse attempt of the group has. As for any group,
+one left with fewer than 2 attempts is skipped, and one whose rewards are
+all equal teaches nothing.
 
 The group's size matters (#40; paper 13 of the plan): normalizing by the
 group can erase a penalty the weights were designed to give when few
@@ -1299,32 +1243,30 @@ indexers go on learning by their own loss in each loss pass, as in `sft`.
 
 The order of the tasks in each round and every sampled token come from
 generators seeded with `seed`, so a run gives the same attempts again on
-the same machine and setup (the same model, tasks, images and devices);
-the checks themselves may differ, as any program may. The model alone
-writes the attempts, without a drafter (maintainer's decision,
-2026-10-17): the weights change at every update, the drafter is trained
-only at the end of the run ("The drafter", above), and the attempts then
-depend on the seed alone, never on this machine's times. A task's
-attempts are written together in one batch, from one reading of the
-task's opening (model.md, "Generation"). The step prints one line per
+the same machine and setup (the same model, tasks, images and devices); the
+checks themselves may differ, as any program may. The model alone writes
+the attempts, without a drafter: the weights change at every update, the
+drafter is trained only at the end of the run ("The drafter", above), and
+the attempts then depend on the seed alone, never on this machine's times.
+A task's attempts are written together in one batch, from one reading of
+the task's opening (model.md, "Generation"). The step prints one line per
 round (`rounds`, passes over every task): the mean reward, the number of
-attempts and of updates, and the indexers' mean loss over the round's
-loss passes.
+attempts and of updates, and the indexers' mean loss over the round's loss
+passes.
 
 Every attempt is kept in the run's record folder
 ([observability.md](observability.md)), as one line of
-`grpo-attempts.jsonl` (maintainer's decisions, 2026-10-17: "GRPO attempts
-later: chat JSON Lines in the post-training run's folder, linked from
-traces", and "Add metadata to chat"), written through `context.telemetry`
-as soon as the attempt is scored, so a line on a local store is on the
-disk before the next attempt is scored. A group's attempts are written
-together, then scored one by one, in order, each attempt's container
-removed and its line kept before the next attempt is scored
-(maintainer's decision, 2026-10-18: each attempt's line is kept as soon
-as that attempt is scored, even though attempts are written together).
-Each line is a conversation in
-the chat format ([chat-format.md](chat-format.md)) whose `metadata` says
-which attempt it is, so the file passes the same check as any `chat` file:
+`grpo-attempts.jsonl` ("GRPO attempts later: chat JSON Lines in the
+post-training run's folder, linked from traces", and "Add metadata to
+chat"), written through `context.telemetry` as soon as the attempt is
+scored, so a line on a local store is on the disk before the next attempt
+is scored. A group's attempts are written together, then scored one by one,
+in order, each attempt's container removed and its line kept before the
+next attempt is scored (each attempt's line is kept as soon as that attempt
+is scored, even though attempts are written together). Each line is a
+conversation in the chat format ([chat-format.md](chat-format.md)) whose
+`metadata` says which attempt it is, so the file passes the same check as
+any `chat` file:
 
 ```json
 {"schema": 3, "tools": [...], "messages": [...],
@@ -1421,8 +1363,7 @@ Docker failed; the step prints a line for each. When no task is left, the
 step fails, saying how many tasks were left out for each reason, and
 writes nothing.
 
-Then the rounds, as `grpo`'s, with this reward for each attempt
-(maintainer's decision, 2026-10-23):
+Then the rounds, as `grpo`'s, with this reward for each attempt:
 
 - 0 when it fails: its result, the gated `correct` part
   (`agentic.result`), is below the task's best start score;

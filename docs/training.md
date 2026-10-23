@@ -86,13 +86,12 @@ added up).
 
 ### Stages
 
-Maintainer's decisions, 2026-10-17: "Target 1M tokens. Training reaches
-it by stages in the recipe"; the window lengths follow DeepSeek-V4 (section
-4.2.2: 4K, then 16K, 64K and 1M tokens); V4 states no tokens or steps per
-stage, so each recipe sets them. A recipe's `training.stages` lists them
-in order, each with its window length, its length in steps and its batch
-(maintainer's decisions, 2026-10-17: a stage's length is given in steps,
-and each stage sets its own `batch_size`):
+Training targets 1M tokens and reaches it by stages in the recipe; the
+window lengths follow DeepSeek-V4 (section 4.2.2: 4K, then 16K, 64K and 1M
+tokens); V4 states no tokens or steps per stage, so each recipe sets them.
+A recipe's `training.stages` lists them in order, each with its window
+length, its length in steps and its batch (a stage's length is given in
+steps, and each stage sets its own `batch_size`):
 
 ```json
 "stages": [
@@ -106,37 +105,33 @@ and each stage sets its own `batch_size`):
 (an example of the shape, not a recipe's numbers). The steps are counted
 over every stage together: step 1 is the first stage's first, the
 learning-rate schedule and the multi-token prediction weight's switch
-(model.md, "Training") run over them all, and a step's windows depend
-only on the seed and the step, as before. Each stage draws batches of its
-own `batch_size` windows of its own length, so a stage puts
-`batch_size` times `block_size` tokens in each step. A stage's `batch_size` is global,
-over every process together ("The batch is the same on any hardware",
-above), and its evaluations average `eval_batches` batches of its own
-size. The model's context (`config.json`'s `block_size`) is the last
-stage's length.
+(model.md, "Training") run over them all, and a step's windows depend only
+on the seed and the step. Each stage draws batches of its own `batch_size`
+windows of its own length, so a stage puts `batch_size` times `block_size`
+tokens in each step. A stage's `batch_size` is global, over every process
+together ("The batch is the same on any hardware", above), and its
+evaluations average `eval_batches` batches of its own size. The model's
+context (`config.json`'s `block_size`) is the last stage's length.
 
-Each stage is evaluated at its first and last steps and every
-`eval_every` steps, on windows of its length: a longer window predicts
-better, so losses are compared within a stage only. When a stage after
-the first starts, the method hears of it (`Method.stage`) and the best
-evaluation so far is forgotten: `muon` and `adamw` start counting again,
-and the model folder keeps the best weights of the last stage
-(maintainer's decision, 2026-10-17). A method's early stop (`adamw`'s
-patience) ends its stage, and the next stage starts (maintainer's
-decision, 2026-10-17). A held-out part shorter than a stage's window
-measures that stage's validation loss on the training text, which the log
-says (maintainer's decision, 2026-10-17).
+Each stage is evaluated at its first and last steps and every `eval_every`
+steps, on windows of its length: a longer window predicts better, so losses
+are compared within a stage only. When a stage after the first starts, the
+method hears of it (`Method.stage`) and the best evaluation so far is
+forgotten: `muon` and `adamw` start counting again, and the model folder
+keeps the best weights of the last stage. A method's early stop (`adamw`'s
+patience) ends its stage, and the next stage starts. A held-out part
+shorter than a stage's window measures that stage's validation loss on the
+training text, which the log says.
 
-Checkpoints and `--resume` cross stage boundaries: the checkpoint holds
-the step to continue from, and a resumed run starts within its stage.
-Each stage is a span of the run's record (`training.stage`, with its
-number, window length, first and last steps, and the step a resumed run
-started at), each step's event names its window length, and
-`provenance.json` lists the stages with the last step each trained
-(`stages`). Recipes written before stages (shape 3) migrate to one stage
-of their window length, steps and batch (`wpt-dataset migrate`). The
-recipes keep one stage for now (maintainer's decision, 2026-10-17;
-model.md, "Model recipes").
+Checkpoints and `--resume` cross stage boundaries: the checkpoint holds the
+step to continue from, and a resumed run starts within its stage. Each
+stage is a span of the run's record (`training.stage`, with its number,
+window length, first and last steps, and the step a resumed run started
+at), each step's event names its window length, and `provenance.json` lists
+the stages with the last step each trained (`stages`). Recipes written
+before stages (shape 3) migrate to one stage of their window length, steps
+and batch (`wpt-dataset migrate`). The recipes keep one stage for now
+(model.md, "Model recipes").
 
 DeepSeek-V4 trains dense attention first and turns sparse attention on at
 64K tokens; WPT is sparse from the first step, at every stage (model.md,
@@ -144,14 +139,14 @@ DeepSeek-V4 trains dense attention first and turns sparse attention on at
 
 ### Recomputing layers: long windows on a small GPU
 
-`--recompute` (or `WPT_RECOMPUTE=1`) keeps only each layer's input during
-a pass and runs the layer again during the backward pass, instead of
-keeping everything the layer computed. The result is the same; memory
-drops and each step takes about a third longer. Measured on 2026-10-17
-with `watery-tardigrade` (102M parameters, 8 layers, width 512, CSA and
-HCA, an indexer of 8 heads and top 64, Muon as DeepSeek-V4 runs it) on an
-integrated Radeon 860M, where the Triton kernels compute the attention
-(model.md, "Attention"), one window of random tokens with it:
+`--recompute` (or `WPT_RECOMPUTE=1`) keeps only each layer's input during a
+pass and runs the layer again during the backward pass, instead of keeping
+everything the layer computed. The result is the same; memory drops and
+each step takes about a third longer. Measured with `watery-tardigrade`
+(102M parameters, 8 layers, width 512, CSA and HCA, an indexer of 8 heads
+and top 64, Muon as DeepSeek-V4 runs it) on an integrated Radeon 860M,
+where the Triton kernels compute the attention (model.md, "Attention"), one
+window of random tokens with it:
 
 | Tokens | First step's peak | Later steps' peak | Time of a later step |
 | --- | --- | --- | --- |
@@ -160,39 +155,32 @@ integrated Radeon 860M, where the Triton kernels compute the attention
 | 16K | 4.09 GiB | 4.58 GiB | 27.1 s |
 | 32K | 7.74 GiB | 8.24 GiB | 53.2 s |
 
-Later steps add Muon's momentum, about 0.5 GiB. `unimpaired-axolotl`
-(50M parameters) at 32K tokens peaked at 6.28 GiB on its first step and
-6.57 GiB on the next, which took 29.0 s. With the PyTorch form of the
-attention, the same day, the same runs peaked at 1.94, 2.77, 4.62 and
-8.33 GiB (9.2, 16.9, 25.2 and 47.1 s), and `unimpaired-axolotl` at
-6.62 GiB (25.2 s): on this GPU the kernels save under 0.1 GiB and are
-not faster in training, since their backward pass adds each entry's
-gradients by atomic additions, which this GPU runs slowly (about 0.7 s of
-the 1.6 s the backward kernel takes on 32K queries of 8 heads and 192
-entries each). Without gradients, at 8K tokens, a CSA layer's attention
-took 15% less time with them and an HCA layer's half. These times were measured with
-`HIP_LAUNCH_BLOCKING=1`, which makes the CPU wait for each GPU kernel:
-without it, on this GPU (gfx1152, which ROCm supports only through
-`HSA_OVERRIDE_GFX_VERSION`), Muon's 10 Newton-Schulz steps on the
-32-expert recipes crash the process (a segmentation fault in the GPU
-stack) in the first update, while 8 steps do not; the memory is the same
-either way, and the times are an upper bound. With the 4.6M-parameter
-`classics-test` the crash does not occur. Before the indexer was scaled
-and Muon changed, the same model peaked at 1.51, 2.28 and 4.13 GiB on its
-first step at 4K, 8K and 16K tokens (7.4, 14.3 and 34.5 s a step, without
-`HIP_LAUNCH_BLOCKING`); with the gated MLA it had before 2026-10-17, at
-1.73, 2.74 and 5.06 GiB (7.8, 18.9 and 58.2 s); on another GPU it had
-peaked at 5.5 GiB at 4K tokens without `--recompute`. On the Radeon 860M,
-a 4K window without `--recompute` crashes the process (a segmentation
-fault in the GPU stack) with either attention. The `watery-tardigrade` and
-`unimpaired-axolotl` recipes, 32K-token windows on one 16 GB or one 8 GB
-GPU, need it with `--micro-batch 1`.
+Later steps add Muon's momentum, about 0.5 GiB. `unimpaired-axolotl` (50M
+parameters) at 32K tokens peaked at 6.28 GiB on its first step and 6.57 GiB
+on the next, which took 29.0 s. With the PyTorch form of the attention, the
+same runs peaked at 1.94, 2.77, 4.62 and 8.33 GiB (9.2, 16.9, 25.2 and 47.1
+s), and `unimpaired-axolotl` at 6.62 GiB (25.2 s): on this GPU the kernels
+save under 0.1 GiB and are not faster in training, since their backward
+pass adds each entry's gradients by atomic additions, which this GPU runs
+slowly (about 0.7 s of the 1.6 s the backward kernel takes on 32K queries
+of 8 heads and 192 entries each). Without gradients, at 8K tokens, a CSA
+layer's attention took 15% less time with them and an HCA layer's half.
+These times were measured with `HIP_LAUNCH_BLOCKING=1`, which makes the CPU
+wait for each GPU kernel: without it, on this GPU (gfx1152, which ROCm
+supports only through `HSA_OVERRIDE_GFX_VERSION`), Muon's 10 Newton-Schulz
+steps on the 32-expert recipes crash the process (a segmentation fault in
+the GPU stack) in the first update, while 8 steps do not; the memory is the
+same either way, and the times are an upper bound. With the small
+`classics-test` the crash does not occur. On the Radeon 860M, a 4K window
+without `--recompute` crashes the process (a segmentation fault in the GPU
+stack). The `watery-tardigrade` and `unimpaired-axolotl` recipes, 32K-token
+windows on one 16 GB or one 8 GB GPU, need it with `--micro-batch 1`.
 
 ### Long windows: segments and slices
 
 A window too long for one GPU's memory, even with `--recompute`, runs in
 parts, which give exactly the loss and gradients of the whole window at
-once (model.md, "Long windows"; maintainer's decisions, 2026-10-17):
+once (model.md, "Long windows"):
 
 - `--segment N` (or `WPT_SEGMENT`), on one GPU: a window longer than `N`
   tokens runs as consecutive segments of `N` (the last may be shorter). A
@@ -222,29 +210,27 @@ once (model.md, "Long windows"; maintainer's decisions, 2026-10-17):
   process; the result stays exact. Windows whose slices are `N` tokens or
   fewer are split without segments.
 
-These are options of the hardware, not of the recipe: a run may resume
-with another `--segment`, or none. The training loss and the indexer loss
-are the parts' shares of the whole window's (`Method.part_loss`, below);
-the validation loss in parts is each part's validation loss weighted by
-its share of the window's tokens (maintainer's decision, 2026-10-17). The
-tests check, on the CPU, that 448 tokens in segments of 128 (three
-boundaries, the last segment shorter), 512 tokens split over 2 and 4
-processes (gloo), and 768 tokens split over 2 processes in segments of 128
-(three parts) give the whole window's losses, gradients, validation loss
-and expert balancing, each with the layers' activations kept and with
-`--recompute`, for a model with every layer kind (KDA, CSA with its
-indexer choosing, HCA, the windows, Engram, the experts, mHC, the MTP
-block). Split windows are checked in FP32 to `2e-4` of the largest
+These are options of the hardware, not of the recipe: a run may resume with
+another `--segment`, or none. The training loss and the indexer loss are
+the parts' shares of the whole window's (`Method.part_loss`, below); the
+validation loss in parts is each part's validation loss weighted by its
+share of the window's tokens. The tests check, on the CPU, that 448 tokens
+in segments of 128 (three boundaries, the last segment shorter), 512 tokens
+split over 2 and 4 processes (gloo), and 768 tokens split over 2 processes
+in segments of 128 (three parts) give the whole window's losses, gradients,
+validation loss and expert balancing, each with the layers' activations
+kept and with `--recompute`, for a model with every layer kind (KDA, CSA
+with its indexer choosing, HCA, the windows, Engram, the experts, mHC, the
+MTP block). Split windows are checked in FP32 to `2e-4` of the largest
 gradient, against `1e-6` for segments, since KDA's composed transforms
-round differently (model.md, "Long windows"; maintainer's decision,
-2026-10-17: the split tests keep that tolerance in FP32). A run of
-`wpt-train` with `--strategy split --processes 2 --segment 128` trains the
-same model as one process on whole windows.
+round differently (model.md, "Long windows"; the split tests keep that
+tolerance in FP32). A run of `wpt-train` with `--strategy split --processes
+2 --segment 128` trains the same model as one process on whole windows.
 
-Measured on 2026-10-17 on a Radeon 860M (an integrated AMD GPU sharing
-the machine's memory; `HIP_LAUNCH_BLOCKING=1`, which its 32-expert
-recipes need), with watery-tardigrade's model, Muon, `--recompute`, one
-window of random tokens, the second step of each:
+Measured on a Radeon 860M (an integrated AMD GPU sharing the machine's
+memory; `HIP_LAUNCH_BLOCKING=1`, which its 32-expert recipes need), with
+watery-tardigrade's model, Muon, `--recompute`, one window of random
+tokens, the second step of each:
 
 | window | parts | peak memory | time of a step |
 | --- | --- | --- | --- |
@@ -275,68 +261,62 @@ token whose `s_j - alpha` lies on the edge between two of balancing's
 4096 bins (model.md, "Experts") can be counted in the next bin. Every
 token's (k+1)-th expert has an offset of 0, on an edge, by construction.
 
-So a test that compares routing or balancing counts between two such
-passes keeps them exact for every token whose choice is clear, and lets
-only near ties differ (maintainer's decision, 2026-10-18). A token is near
-a tie when the two values that decide a choice are no farther apart than
-the two passes moved them. The bound on those moves is the one the test
-asserts: the scores each pass counted agree within ROUNDING, 2^-14 (about
-6.1e-5, the `routing` fixture in `conftest.py`). That score bound is what
-limits the differences to near ties (maintainer's decision, 2026-10-18).
-The other checks document it and do not enforce it: they test, for the
-scores at hand, that the experts differ only where the k-th and (k+1)-th
-biased scores lie within two such moves of each other (plus 4 units of FP32
-rounding, ARITHMETIC, for the comparison's own arithmetic), that each
-pass's counts are exactly the bins of the scores it counted, and that a
-count moves only where its `s_j - alpha` lies that close to a bin's edge,
-by one bin at most (`assert_routed_alike` in
+So a test that compares routing or balancing counts between two such passes
+keeps them exact for every token whose choice is clear, and lets only near
+ties differ. A token is near a tie when the two values that decide a choice
+are no farther apart than the two passes moved them. The bound on those
+moves is the one the test asserts: the scores each pass counted agree
+within ROUNDING, 2^-14 (about 6.1e-5, the `routing` fixture in
+`conftest.py`). That score bound is what limits the differences to near
+ties. The other checks document it and do not enforce it: they test, for
+the scores at hand, that the experts differ only where the k-th and
+(k+1)-th biased scores lie within two such moves of each other (plus 4
+units of FP32 rounding, ARITHMETIC, for the comparison's own arithmetic),
+that each pass's counts are exactly the bins of the scores it counted, and
+that a count moves only where its `s_j - alpha` lies that close to a bin's
+edge, by one bin at most (`assert_routed_alike` in
 `packages/wpt-training/tests/test_parts.py`; split windows compare each
-process's counts with those of its tokens in the whole window, and the
-sum of the processes' counts with the whole window's: the processes'
-scores, put back in the window's order, are compared with the whole
-window's under the same bounds, so a sum differs from the whole window's
-counts only where a token's bin may differ; maintainer's decision,
-2026-10-18). A test of
-that comparison builds scores one unit of rounding apart, with an exact
-edge and a near tie, so the near-tie path runs the same on any processor.
+process's counts with those of its tokens in the whole window, and the sum
+of the processes' counts with the whole window's: the processes' scores,
+put back in the window's order, are compared with the whole window's under
+the same bounds, so a sum differs from the whole window's counts only where
+a token's bin may differ). A test of that comparison builds scores one unit
+of rounding apart, with an exact edge and a near tie, so the near-tie path
+runs the same on any processor.
 
 A test that reads text through the generation cache and compares the result
 with the whole text (`test_cache.py`, `test_sampling.py`) records the
 cache's routes, reads the text whole recording its own
 (`routing.first_difference`), and accepts a position whose routes differ
 only when the whole pass's k-th and (k+1)-th biased scores lie within two
-ROUNDING plus ARITHMETIC of each other (maintainer's decision, 2026-10-18).
-It then compares scores or tokens exactly, as it did, before the first
-position that differs, and in full when none does. Two passes that run the
-same operations on the same shapes, such as `--recompute`'s
-(`test_model.py`), give the same scores bit for bit, and their counts are
-compared exactly. The exact comparison of balancing counts in segments
-failed on GitHub's runners on 2026-10-18; the same failure shows on an
-x86 machine with `ATEN_CPU_CAPABILITY=avx512 OMP_NUM_THREADS=2` (or
-`avx2`), where one to six tokens' counts in a layer move to the next bin
-and no token goes to other experts.
+ROUNDING plus ARITHMETIC of each other. It then compares scores or tokens
+exactly before the first position that differs, and in full when none does.
+Two passes that run the same operations on the same shapes, such as
+`--recompute`'s (`test_model.py`), give the same scores bit for bit, and
+their counts are compared exactly. An exact comparison of balancing counts
+in segments fails on GitHub's runners; the same failure shows on an x86
+machine with `ATEN_CPU_CAPABILITY=avx512 OMP_NUM_THREADS=2` (or `avx2`),
+where one to six tokens' counts in a layer move to the next bin and no
+token goes to other experts.
 
 A test that trains in segments and compares the gradients with the whole
-window's (`assert_same` in `test_parts.py`) accepts a difference of 2e-5
-of the largest gradient, beyond a relative 1e-3 (maintainer's decision,
-2026-10-21). The difference is the rounding of each math library path:
-on GitHub's runners, up to 8.3e-7 on AMD EPYC processors and 8.2e-6 on
-Intel Xeon ones, which their math libraries compute by other routes; on
-AMD, 4.4e-6 with oneDNN switched off and 4.3e-5 with
-`MKL_CBWR=COMPATIBLE`. The former limit, 1e-6, failed on every Intel
+window's (`assert_same` in `test_parts.py`) accepts a difference of 2e-5 of
+the largest gradient, beyond a relative 1e-3. The difference is the
+rounding of each math library path: on GitHub's runners, up to 8.3e-7 on
+AMD EPYC processors and 8.2e-6 on Intel Xeon ones, which their math
+libraries compute by other routes; on AMD, 4.4e-6 with oneDNN switched off
+and 4.3e-5 with `MKL_CBWR=COMPATIBLE`. A limit of 1e-6 fails on every Intel
 runner.
 
-The drafter test (`test_sampling.py`) checks only that training works:
-the losses of a few steps are finite, every weight they reach changes,
-and the writer verifies the trained drafter's drafts. It does not ask
-that they be kept more often than uniform drafts (maintainer's decision,
-2026-10-21, replacing the 0.01 margin of 2026-10-18): the test's model has
-random weights, so its next-token distribution is nearly uniform
-(entropy 3.75 of at most 3.91), uniform drafts are already kept at about
-0.78 per position, and over 6 seeds a drafter trained for 40 or 200 steps
-was kept no more often than uniform drafts on average (+0.0003), and less
-often after 400. With one seed the margin went from -0.031 on Intel
-runners to +0.075 on AMD ones.
+The drafter test (`test_sampling.py`) checks only that training works: the
+losses of a few steps are finite, every weight they reach changes, and the
+writer verifies the trained drafter's drafts. It does not ask that they be
+kept more often than uniform drafts: the test's model has random weights,
+so its next-token distribution is nearly uniform (entropy 3.75 of at most
+3.91), uniform drafts are already kept at about 0.78 per position, and over
+6 seeds a drafter trained for 40 or 200 steps was kept no more often than
+uniform drafts on average (+0.0003), and less often after 400. With one
+seed the margin went from -0.031 on Intel runners to +0.075 on AMD ones.
 
 ### Strategies: how the hardware is used
 
@@ -445,22 +425,21 @@ weights of the evaluation the method judged best in the last stage.
 
 ### Checkpoints and resuming
 
-Every `--checkpoint-every` steps (default 500, 0 for none during
-training), the main process writes a checkpoint: the step, the weights,
-the method's state and the best weights so far. After the last step it
-always writes one, just before training the drafter (maintainer's
-decision, 2026-10-18; "The drafter", below), unless the last step's own
-checkpoint was just written. It stays until the model folder is written, so any
-failure after training (the drafter, the record, writing the folder)
-leaves it, and the same command with `--resume` takes no step and
-finishes the run; without `--run` it lives in the model folder, so a
-failed run leaves `checkpoint/` in an earlier folder at that place. The same command with `--resume` continues from
-it, on other hardware too: the number of processes, `--micro-batch`,
-`--recompute` and `--segment` may change; the recipe and the other options may not (the
-run stops with `SettingsMismatch`).
-Without `--resume`, a leftover checkpoint stops the run, so a crashed run
-is never overwritten by mistake. The checkpoint is removed once the model
-is saved.
+Every `--checkpoint-every` steps (default 500, 0 for none during training),
+the main process writes a checkpoint: the step, the weights, the method's
+state and the best weights so far. After the last step it always writes
+one, just before training the drafter ("The drafter", below), unless the
+last step's own checkpoint was just written. It stays until the model
+folder is written, so any failure after training (the drafter, the record,
+writing the folder) leaves it, and the same command with `--resume` takes
+no step and finishes the run; without `--run` it lives in the model folder,
+so a failed run leaves `checkpoint/` in an earlier folder at that place.
+The same command with `--resume` continues from it, on other hardware too:
+the number of processes, `--micro-batch`, `--recompute` and `--segment` may
+change; the recipe and the other options may not (the run stops with
+`SettingsMismatch`). Without `--resume`, a leftover checkpoint stops the
+run, so a crashed run is never overwritten by mistake. The checkpoint is
+removed once the model is saved.
 
 Where it lives:
 
@@ -513,42 +492,36 @@ process's machine. torchrun restarts after any failed process, refusals
 included.
 
 After the last step, the main process trains the model's drafter
-(maintainer's decisions, 2026-10-17; [model.md](model.md), "The
-drafter"): a model and its drafter are one unit, so every run trains one,
-against the final weights, the model frozen, with the recipe's `drafter`
-section. Its prompts are the beginnings of the dataset's training
-documents, and the model alone writes the answers. No option skips it. A
-drafter that cannot be trained refuses the run (exit code 2) and writes no
-model folder. So that such a failure can always be resumed, the run
-saves its checkpoint just before training the drafter, whatever
-`--checkpoint-every` says (maintainer's decision, 2026-10-18): the
-checkpoint stays, and `--resume` continues from it, takes no step, loads
-the best weights and trains the drafter again. The drafter reads the
-training shards once at the end of the run, one shard at a time, to draw
-its prompts; from a remote store, each shard's local copy is released
-once read (maintainer's decision, 2026-10-18). The disk then holds at
-most one shard only when the shards were not already local: with
-`--stream`, which released each one once its tokens were in the token
-file, and in `wpt-posttrain`, where nothing before the drafter reads
-them. Without `--stream`, the shards training fetched to build its token
-file are still on disk when the drafter starts, and each one goes as the
-drafter reads it, not every shard: a run resumed with its token file
-already built fetched none (maintainer's decision, 2026-10-18). Drafter settings
-that cannot be (feature layers the model does not have, an unknown
-setting) are refused before training starts (maintainer's decision,
-2026-10-18).
+([model.md](model.md), "The drafter"): a model and its drafter are one
+unit, so every run trains one, against the final weights, the model frozen,
+with the recipe's `drafter` section. Its prompts are the beginnings of the
+dataset's training documents, and the model alone writes the answers. No
+option skips it. A drafter that cannot be trained refuses the run (exit
+code 2) and writes no model folder. So that such a failure can always be
+resumed, the run saves its checkpoint just before training the drafter,
+whatever `--checkpoint-every` says: the checkpoint stays, and `--resume`
+continues from it, takes no step, loads the best weights and trains the
+drafter again. The drafter reads the training shards once at the end of the
+run, one shard at a time, to draw its prompts; from a remote store, each
+shard's local copy is released once read. The disk then holds at most one
+shard only when the shards were not already local: with `--stream`, which
+released each one once its tokens were in the token file, and in
+`wpt-posttrain`, where nothing before the drafter reads them. Without
+`--stream`, the shards training fetched to build its token file are still
+on disk when the drafter starts, and each one goes as the drafter reads it,
+not every shard: a run resumed with its token file already built fetched
+none. Drafter settings that cannot be (feature layers the model does not
+have, an unknown setting) are refused before training starts.
 
 Then the run measures the drafter scheduler's pass times once and writes
 them into its record as `scheduler-costs.json`, with the setup they were
 measured on: the model's config, the drafter's block (the drafts per
 round), the rows (1) and the device (its kind and name; on the CPU, the
-processor's, maintainer's decision, 2026-10-18). `--scheduler-costs
-FOLDER` replays those an earlier run recorded in its record folder
-`FOLDER` instead; times measured on another setup are refused before
-training starts (maintainer's decision, 2026-10-18).
-[model.md](model.md), "The drafter", says exactly what a replay
-guarantees, and [observability.md](observability.md) what the file
-holds.
+processor's). `--scheduler-costs FOLDER` replays those an earlier run
+recorded in its record folder `FOLDER` instead; times measured on another
+setup are refused before training starts. [model.md](model.md), "The
+drafter", says exactly what a replay guarantees, and
+[observability.md](observability.md) what the file holds.
 
 The model folder holds:
 
@@ -587,41 +560,39 @@ removed, and the record is in the store before the folder is renamed. The
 earlier folder is first moved aside, then removed once the new one is in
 place. When the new one cannot take its place, or the run is interrupted
 meanwhile, the earlier folder is moved back; when that fails too, the run
-stops with `RestoreFailed`, which names the earlier folder
-(`.<folder name>-replaced-<random>`) and the new one, both kept: move one
-of them into place by hand. Whenever the rename was tried and the target
-is missing afterward, whatever error stopped the run (a first rename
-refused, or a record that broke meanwhile), the new model is kept and
-named on the error output, with the earlier folder when there is one.
-Without `--run`, the target holds the checkpoint saved just before the
-drafter; when that checkpoint is all it holds and the new folder cannot
-take its place, the checkpoint folder is moved back and the new model is
-kept beside it and named on the error output, as when there was no
-target, since no other model is there to go back to: move it into place
-by hand, or run again with `--resume`, which trains the drafter again
-from the checkpoint, then remove the kept folder by hand, since the
-resumed run writes a new one (maintainer's decision, 2026-10-18). This
-applies only without `--run`: with `--run`, the checkpoint is in the
-store, not in the target (maintainer's decision, 2026-10-18). When the
-earlier folder cannot be removed, or its removal is interrupted, it
-stays beside the new one, as
-`.<folder name>-replaced-<random>`, named in a warning and in the record:
-remove it by hand. The run still succeeds, unless it was interrupted.
+stops with `RestoreFailed`, which names the earlier folder (`.<folder
+name>-replaced-<random>`) and the new one, both kept: move one of them into
+place by hand. Whenever the rename was tried and the target is missing
+afterward, whatever error stopped the run (a first rename refused, or a
+record that broke meanwhile), the new model is kept and named on the error
+output, with the earlier folder when there is one. Without `--run`, the
+target holds the checkpoint saved just before the drafter; when that
+checkpoint is all it holds and the new folder cannot take its place, the
+checkpoint folder is moved back and the new model is kept beside it and
+named on the error output, as when there was no target, since no other
+model is there to go back to: move it into place by hand, or run again with
+`--resume`, which trains the drafter again from the checkpoint, then remove
+the kept folder by hand, since the resumed run writes a new one. This
+applies only without `--run`: with `--run`, the checkpoint is in the store,
+not in the target. When the earlier folder cannot be removed, or its
+removal is interrupted, it stays beside the new one, as `.<folder
+name>-replaced-<random>`, named in a warning and in the record: remove it
+by hand. The run still succeeds, unless it was interrupted.
 
 `NOTICE` and `README.md` are generated from the folder's own records, so they
 cannot disagree with it.
 
 `wpt-chat <model folder>` continues text typed by the user, until the model
 ends the document. Its start line names the licenses and where the notice
-is; `wpt-chat <model folder> --about` prints the folder's `NOTICE`. A pre-trained model only continues text. `wpt-chat <model folder> --chat`
+is; `wpt-chat <model folder> --about` prints the folder's `NOTICE`. A
+pre-trained model only continues text. `wpt-chat <model folder> --chat`
 talks to a model post-trained on conversations: it keeps the history,
 writes it with the chat template ([chat-format.md](chat-format.md)), and
 shows the model's thinking and tool calls with their tags, without running
-the calls. It measures the drafter scheduler's pass times when it loads
-the model; `--scheduler-costs FOLDER` reads instead those a run recorded
-in its record folder `FOLDER` of the store, refused when they were
-measured on another setup (maintainer's decision, 2026-10-18;
-[model.md](model.md), "The drafter").
+the calls. It measures the drafter scheduler's pass times when it loads the
+model; `--scheduler-costs FOLDER` reads instead those a run recorded in its
+record folder `FOLDER` of the store, refused when they were measured on
+another setup ([model.md](model.md), "The drafter").
 
 ## What is exactly repeatable
 

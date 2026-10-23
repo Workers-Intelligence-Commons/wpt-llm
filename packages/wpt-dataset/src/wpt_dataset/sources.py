@@ -289,8 +289,7 @@ def apply_patches(source_id: str, tree: dict[str, Entry], patches: list[Patch], 
     no files are written out, so modes and symlinks behave the same on every
     operating system. The paths git's index refuses (any .git/ path, such
     as a history's files) are set aside and come back exactly as they
-    were; a patch that names one fails, as git refuses it (maintainer's
-    decision, 2026-10-22)."""
+    were; a patch that names one fails, as git refuses it."""
     if not patches:
         return tree
     with tempfile.TemporaryDirectory(prefix="wpt-patch-") as tmp:
@@ -450,8 +449,7 @@ def held_out_group(source: Source, path: str) -> str | None:
     one space, or its whole match when it has none; otherwise None, and the
     id decides. Documents of any source with the same group are held out
     together: eBible's read-aloud sources hold their chapters out this way,
-    by book and chapter in every translation at once (maintainer's
-    decision, 2026-10-23)."""
+    by book and chapter in every translation at once."""
     rule = source.data.get("held_out_by")
     found = re.search(rule["pattern"], path) if rule else None
     if found is None:

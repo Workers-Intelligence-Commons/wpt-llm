@@ -31,8 +31,7 @@ from .sources import source_tree, tags_of
 def content_sha256(content: list) -> str:
     """The sha256 of a message's content, as a model draft records it: its
     JSON with sorted keys, no spaces, UTF-8, a whole number written as an
-    integer (2.0 as 2, as a browser writes it back; maintainer's decision,
-    2026-10-18)."""
+    integer (2.0 as 2, as a browser writes it back)."""
     return hashlib.sha256(json.dumps(_whole(content), sort_keys=True, separators=(",", ":"), ensure_ascii=False)
                           .encode("utf-8")).hexdigest()
 

@@ -113,8 +113,7 @@ def test_the_model_reads_through_its_cache_as_through_the_whole_text_past_block_
     # (hidden state, next token) pairs as they come. On a GPU, BF16's
     # rounding sends some tokens of this random model to other experts, so
     # the whole model is compared on the CPU only. On the CPU, the cache's
-    # routes differ from the whole text's at near ties only (maintainer's
-    # decision, 2026-10-18), and a row's scores are compared before the
+    # routes differ from the whole text's at near ties only, and a row's scores are compared before the
     # first position that went to other experts
     wpt = model()
     ids = torch.randint(50, (2, 301), generator=torch.Generator().manual_seed(0))
@@ -136,7 +135,7 @@ def test_the_model_reads_through_its_cache_as_through_the_whole_text_past_block_
 
 
 def test_segments_and_the_cache_carry_exactly_what_each_module_says_it_passes_on():
-    # maintainer's decision, 2026-10-17: one description per module
+    # one description per module
     # (passes_on, carry.py) of what it passes on to later tokens; a segment
     # of a window and the generation cache carry those values and no other
     wpt = model()

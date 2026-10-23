@@ -22,7 +22,7 @@ it, as the tools' programs left them, in place of whatever the model put
 there.
 Its standard output, without the white space around it, must be one JSON
 object of named parts, each a number from 0 to 1, "correct" among them
-(the task's own judgement; maintainer's decision, 2026-10-23), such as
+(the task's own judgement), such as
 {"correct": 1, "sources_first": 0}; a bare number from 0 to 1 reads as
 {"correct": n}. Its exit code and its standard error are not read.
 """

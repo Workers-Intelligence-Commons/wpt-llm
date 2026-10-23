@@ -167,7 +167,7 @@ def test_calibration_scores_each_half_and_names_how_often_training_saw_each_docu
 def test_calibration_counts_a_reply_without_a_confidence_as_no_answer(tokenizer, tmp_path, root):
     # a model that answers the confidence question with words, not a number
     # from 0 to 100 (a pre-trained one, say), scores what it scores: no
-    # answer, accuracy 0, Brier score 1 (maintainer's decision, 2026-10-23)
+    # answer, accuracy 0, Brier score 1
     training = [("src/t0.md", document("t0x", 3), 2)]
     model = Oracle(tokenizer, lambda prompt: said("the rest, and I am fairly sure"))
     data = measure(context_of(tmp_path, tokenizer, model, training), "calibration").data
@@ -281,7 +281,7 @@ def verses(language):
 
 
 def test_bible_verses_translates_held_out_chapters_only_and_scores_with_chrf(tokenizer, tmp_path, root):
-    # maintainer's decisions, 2026-10-23: given a model that writes the real
+    # given a model that writes the real
     # verse in language B, every verse scores chrF 100; each language comes
     # from the read-aloud twin's tags, named by the tags the other lacks; and
     # every verse asked is in a chapter the twin's held-out rule holds out
@@ -346,8 +346,7 @@ def test_bible_verses_says_it_did_not_run_without_a_verse_source_and_its_twin_in
 
 
 def test_calibration_runs_as_is_on_a_pre_trained_model(trained, tmp_path, root):
-    # every measure runs as is on any model (maintainer's decision,
-    # 2026-10-23): a tiny model trained one step writes through its own
+    # every measure runs as is on any model: a tiny model trained one step writes through its own
     # generation cache and scores what it scores, near 0 with no block
     folder_context = open_context(trained.folder, trained.store, torch.device("cpu"))
     training = [(f"src/t{i}.md", document(f"t{i}x", 3), 2) for i in range(2)]

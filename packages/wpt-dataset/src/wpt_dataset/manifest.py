@@ -274,7 +274,7 @@ def _git_tree(repo, revision, prefix):
 
 
 HISTORY = ".git/history/"
-# the history's commit order, merges included, part of the history (maintainer's decision, 2026-10-22)
+# the history's commit order, merges included, part of the history
 ORDER = HISTORY + "order"
 MERGE = "merge"  # an ORDER line's mark of a merge
 # git's output must not depend on the settings of the machine that fetches
@@ -286,8 +286,7 @@ PLAIN_GIT = {**os.environ, "GIT_CONFIG_NOSYSTEM": "1", "GIT_CONFIG_GLOBAL": os.d
 def license_entries(licenses: list[dict], path: str) -> list[dict]:
     """The license entries covering path, in their order. A history file is
     matched only by patterns that start with `.git/history/`, so an entry
-    written `**` covers every file of the tree and no history file
-    (maintainer's decision, 2026-10-20); such patterns match no other path.
+    written `**` covers every file of the tree and no history file; such patterns match no other path.
     Every place that maps a path to its license entries goes through here."""
     history = path.startswith(HISTORY)
     return [e for e in licenses
@@ -311,7 +310,7 @@ def read_git_history(repo: Path, since: str, revision: str, extractor: Extractor
     One more file, ORDER, lists every commit from `since` to `revision`,
     merges included, newest first in an order where a commit always comes
     before its parents (git's topological order), one per line: the commit,
-    then " merge" for a merge (maintainer's decision, 2026-10-22). It is
+    then " merge" for a merge. It is
     part of the tree, so the source checksum covers the order too."""
     order = _history_order(repo, since, revision)
     extractor.add(ORDER, FILE, "".join(f"{commit} {MERGE}\n" if merge else f"{commit}\n"

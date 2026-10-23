@@ -22,18 +22,16 @@ ended.
 | `wpt-posttrain` | the recipe's steps; each step (its file and sha256, its settings, the sources it read, its outcome or reason), and what the step records itself (`sft`: every update's loss, each epoch; `grpo` and `token-efficiency`: every attempt as a line of `<step>-attempts.jsonl` as soon as it is scored, a conversation in the chat format whose `metadata` identifies the attempt, with a span per group's attempts, a span per attempt inside it and an event per group and per round naming the lines, [post-training.md](post-training.md), "Runs"); the drafter's training, as for `wpt-train`; the scheduler's pass times, measured or replayed, as for `wpt-train`; the new folder's files as for `wpt-train`. Inputs: the recipe, the base weights' sha256, the base model's dataset id, the sources the steps read. Outputs: as for `wpt-train` |
 | `wpt-eval` | each test (its file and sha256, its result's data), each result file and the model card written. Inputs: the weights' sha256 and the dataset id. Outputs: the sha256 of each result file and of the model card |
 
-The drafter scheduler's pass times are measured once per run of
-`wpt-train` and of `wpt-posttrain`, and written into the run's record as
-`scheduler-costs.json` (maintainer's decision, 2026-10-17): its shape
-(`schema`: 2), the `setup` they were measured on (`model`: the model's
-config; `rows`: 1; `draft`: the drafter's block; `device`: its kind and
-name, the processor's on the CPU, maintainer's decisions, 2026-10-18),
-and `seconds`, the seconds of a pass for each width. A later run
-replays them with `--scheduler-costs FOLDER` (`wpt-train`,
-`wpt-posttrain`; `wpt-chat` reads them the same way), naming the earlier
-run's record folder; times recorded on another setup are refused.
-[model.md](model.md), "The drafter", says exactly what a replay
-guarantees.
+The drafter scheduler's pass times are measured once per run of `wpt-train`
+and of `wpt-posttrain`, and written into the run's record as
+`scheduler-costs.json`: its shape (`schema`: 2), the `setup` they were
+measured on (`model`: the model's config; `rows`: 1; `draft`: the drafter's
+block; `device`: its kind and name, the processor's on the CPU), and
+`seconds`, the seconds of a pass for each width. A later run replays them
+with `--scheduler-costs FOLDER` (`wpt-train`, `wpt-posttrain`; `wpt-chat`
+reads them the same way), naming the earlier run's record folder; times
+recorded on another setup are refused. [model.md](model.md), "The drafter",
+says exactly what a replay guarantees.
 
 Each command also records every store ref it sets, before setting it, as
 the event `store.ref_set` (`ref`: such as `datasets/<id>` or
@@ -237,14 +235,14 @@ by that time, then by writer.
     runs Python again: after the wait or the computation it was in.
 
   Where the command handles Ctrl+C itself, its handler runs instead:
-  `wpt-train`'s training loop then finishes its step, saves its
-  checkpoint and exits with code 3, as above; its launcher asks the
-  training processes to stop, as for Ctrl+C, then exits with code 3. A process that ignores Ctrl+C (one a
-  shell that is not interactive started in the background, with `&`) is
-  not interrupted: it stops at its next record call, at most one step or
-  one line later.
+  `wpt-train`'s training loop then finishes its step, saves its checkpoint
+  and exits with code 3, as above; its launcher asks the training processes
+  to stop, as for Ctrl+C, then exits with code 3. A process that ignores
+  Ctrl+C (one a shell that is not interactive started in the background,
+  with `&`) is not interrupted: it stops at its next record call, at most
+  one step or one line later.
 - **No store at all** (`WPT_STORE` unset or wrong): the command stops
-  before it starts, as before.
+  before it starts.
 
 ## The live view
 

@@ -3,23 +3,22 @@
 The verses come from eBible's numbered sources (one verse per line as
 "BOOK C:V text", files tagged VERSE_TAG), read through the repository and
 the store, not the dataset: no mixture selects that tag, so they are
-never training documents (maintainer's decisions, 2026-10-18 and
-2026-10-23). Verses are aligned by their reference. A numbered source's
+never training documents. Verses are aligned by their reference. A numbered source's
 language comes from its read-aloud twin, the read-aloud source whose
 address has the same eBible code (https://eBible.org/Scriptures/<code>_readaloud.zip
-for <code>_vpl.zip; maintainer's decision, 2026-10-23): the tags of the
+for <code>_vpl.zip): the tags of the
 twin's chapter files; translations with the same tags are one language,
 and the prompt names each language by the tags it has and the other
 lacks. Only chapters the held-out rule holds out are used, chosen by book
 and chapter so that the same chapter is held out in every translation at
-once (maintainer's decision, 2026-10-23): a chapter is held out when the
+once: a chapter is held out when the
 twin's own held_out_by pattern gives one of its chapter files that
 chapter as its held-out group, and the group hashes into the model
 recipe's held_out share, the same function the dataset build uses
 (held_out_chapters), so no other translation of a verse asked for was
 trained on.
 
-The measure is translation (maintainer's decision, 2026-10-23): aligned
+The measure is translation: aligned
 verse pairs in languages A and B, then the next verse in A; the model
 writes it in B, and chrF scores its reply. ITEMS times, a pair of
 languages A and B is drawn with SEED, then a translation of each and a

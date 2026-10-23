@@ -1,5 +1,5 @@
 """The rules many tasks' checks share (docs/post-training.md, "The check
-library"; maintainer's decision, 2026-10-18), tested once in the
+library"), tested once in the
 repository (packages/wpt-agent/tests/test_agent_image.py). A check calls
 them on the attempt's conversation, conversation.json next to it, as
 Python started with -P or -I:
@@ -48,7 +48,7 @@ files under /work the attempt started with that the task's answered_in
 matches.
 
 Looking is one rule, which sources_first, asked_last and read_before_ask
-share (maintainer's decision, 2026-10-22): a call looks (Call.looks) when
+share: a call looks (Call.looks) when
 it calls a looking tool other than bash, or bash with a command that runs
 one of the image's reading programs (READERS), found by parsing the
 command (programs): every simple command of its pipelines and lists (|,
@@ -150,14 +150,12 @@ def answer_text(conversation: dict) -> str:
 
 def scored(conversation: dict, score: float) -> float:
     """The attempt's score: score, or 0 without an answer (no final reply,
-    or no confidence from 0 to 100 after it), whatever the files hold
-    (maintainer's decisions, 2026-10-18 and 2026-10-23)."""
+    or no confidence from 0 to 100 after it), whatever the files hold."""
     return score if answer(conversation) is not None else 0.0
 
 
 def report(conversation: dict, correct, **rules) -> str:
-    """What a check prints (docs/post-training.md, "Rewards"; maintainer's
-    decision, 2026-10-23): the JSON object of its named parts, each a
+    """What a check prints (docs/post-training.md, "Rewards"): the JSON object of its named parts, each a
     number from 0 to 1: "correct", the task's own judgement as scored()
     gives it, and each rule given, such as sources_first=True; a task's
     check may report any part of its own, such as its conventions."""
@@ -316,8 +314,7 @@ def opened(call: Call, path: str) -> bool:
 
 def asked_last(conversation: dict, found: str = "") -> bool:
     """Whether every question to the user (ask) came after the attempt had
-    opened every file where the answer lives (maintainer's decisions,
-    2026-10-22 and 2026-10-23): the task's answered_in, as the files of
+    opened every file where the answer lives: the task's answered_in, as the files of
     /work the attempt started with (metadata.answered_in), each opened by
     one of the looking tools that can answer, the task's answered_by
     (metadata.answered_by). A question counts at once when no such file
@@ -388,7 +385,7 @@ def not_enough(conversation: dict, missing: str = "", words: int | None = None) 
     aside: the attempt says the files do not hold what was asked; given
     missing, the text the task's files lack, the answer must also name it:
     hold its first `words` words (all of them by default), in order, as
-    holds reads them (maintainer's decision, 2026-10-22)."""
+    holds reads them."""
     text = answer_text(conversation)
     if not text.strip().casefold().startswith(NOT_ENOUGH):
         return False
@@ -400,7 +397,7 @@ def pushed(expected: dict | None = None) -> bool:
     the check, by default) holds on its branch exactly one new commit, whose
     parent is the commit it started from, whose tree is the expected tree,
     and whose message is not empty, spaces aside: the model writes its own
-    message, never compared (maintainer's decision, 2026-10-22).
+    message, never compared.
 
     The remote is outside /work (wpt_dataset.tasks.REMOTE), where the
     model could also have changed its settings: only its objects and

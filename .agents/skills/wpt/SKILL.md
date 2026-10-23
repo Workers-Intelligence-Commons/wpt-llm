@@ -11,7 +11,9 @@ repository holds pointers to the data, not the data: every source is a
 checksum, and everything fetched or built lives in a store named by the
 `WPT_STORE` setting (environment, or `.env` at the root). The documents in
 `docs/` hold every decision; read the one that covers your change before
-changing it.
+changing it. Every text in the repository, this skill included, describes
+only the current state: no decision dates, no history, and a change may
+break compatibility (CONTRIBUTING.md, "Writing about the project").
 
 ## Before every push
 
@@ -116,7 +118,9 @@ decision), `CONTRIBUTING.md` ("Adding a source"), `docs/data-selection.md`
 and `docs/chat-format.md`. Read them before writing or reviewing a source,
 and follow the `wpt-sources` skill for the order of work. Never apply a
 rule they do not hold: a case they do not settle is a question for the
-maintainer, and the answer goes into the documentation with its date. A
+maintainer, and the answer goes into the documentation as a general rule
+about the current state, with no date and no source named
+(CONTRIBUTING.md, "Writing about the project"). A
 new source starts `under-review`; only a maintainer admits a source, in a
 signed commit (CONTRIBUTING.md, "Decisions are signed").
 
@@ -164,7 +168,7 @@ metadata, never to read or write people's texts (CONTRIBUTING.md, "Models
 and generated text"): never run `read`, `write`, `conversation`,
 `save-conversation`, `task`, `save-task` or `save-rating`, and never call the matching
 `wpt-web` routes. You may run `new-source` without `--file` and
-`--license-text`, never with them (maintainer's decision, 2026-10-18). People write
+`--license-text`, never with them. People write
 their texts in `wpt-web` or with those commands themselves. An `assistant`
 message may start as a WPT model's draft that a person edited or
 confirmed; its `metadata.draft` records it (docs/chat-format.md, "Model

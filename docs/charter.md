@@ -21,7 +21,7 @@ These rules apply to Workers' Intelligence Commons, to each of its models
 2. **Copyleft.** The project is published under copyleft
    (AGPL-3.0-or-later). Every improvement served to the public stays open.
 3. **Clear licenses.** Only content whose license is clear (MIT, public
-   domain, etc.) enters the corpus. When in doubt, we refuse.
+   domain, etc.) enters the corpus. When in doubt, we do not use it.
 4. **Provenance.** Every admitted content is documented: a pointer to the
    source, a checksum, its license and the human decision that admitted it.
    The record is public.

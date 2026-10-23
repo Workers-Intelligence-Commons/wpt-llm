@@ -2,7 +2,7 @@
 about it?
 
 From the shared run of attempts (context.attempts()), every claim naming
-a workspace path (maintainer's decision, 2026-10-23): a file present in
+a workspace path: a file present in
 /work when the attempt starts (the task's files, a repository's .git/
 left out; files the attempt wrote do not count), named in an assistant
 message or in the attempt's answer, by its path relative to /work or

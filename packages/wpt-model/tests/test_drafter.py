@@ -81,7 +81,7 @@ def test_the_model_card_names_the_drafter_and_its_notice_adds_no_source(tmp_path
 
 
 def test_the_markov_head_s_rank_follows_the_model_s_width():
-    # maintainer's decision, 2026-10-17: 256 x width / 4096, DSpark's 256 at
+    # 256 x width / 4096, DSpark's 256 at
     # a width of 4096; 8, 20 and 32 at the widths of 128, 320 and 512
     assert [default_markov_rank(width) for width in (128, 320, 512, 4096)] == [8, 20, 32, 256]
     assert default_markov_rank(8) == 1  # never 0

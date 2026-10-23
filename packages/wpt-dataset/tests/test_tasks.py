@@ -108,7 +108,7 @@ def pointer(source, text, path, start, end, removed=(), to="files"):
 
 def test_a_task_holds_its_request_in_full_and_in_one_line(kit, repo, store, tmp_path):
     # the measure of terse against full requests opens the same task with
-    # either form (maintainer's decision, 2026-10-23); a task without the
+    # either form; a task without the
     # one-line form keeps "" for it
     files = {"tasks/a/task.json": json.dumps({**TASK, "terse": "Say hello."}).encode(), "tasks/a/check": CHECK,
              "tasks/b/task.json": json.dumps(TASK).encode(), "tasks/b/check": CHECK}
@@ -243,7 +243,7 @@ def test_measure_tasks_never_reach_training_and_the_measures_get_them(kit, repo,
 
 
 def test_a_task_on_the_text_of_a_held_out_document_is_measure_only(kit, repo, store, tmp_path):
-    # maintainer's decision, 2026-10-22: a held-out document never reaches
+    # a held-out document never reaches
     # training through a task, also when the task points into another
     # source's copy of its text, whose own id is not held out; the held-out
     # texts are those the base model's dataset lists as held out
@@ -275,7 +275,7 @@ def test_a_task_on_the_text_of_a_held_out_document_is_measure_only(kit, repo, st
 
 def test_a_task_pointing_into_a_document_held_out_by_its_group_is_measure_only(kit, repo, store, tmp_path):
     # a document of a source with held_out_by (as eBible's chapters are held
-    # out by book and chapter: maintainer's decision, 2026-10-23) is held out
+    # out by book and chapter) is held out
     # by its group, not its id; a task pointing into it is measure-only by
     # the same rule, whatever its own id and its id say
     path = "notes.txt"
@@ -300,7 +300,7 @@ def test_a_task_pointing_into_a_document_held_out_by_its_group_is_measure_only(k
 
 
 def test_pointer_tasks_are_refused_when_the_base_dataset_kept_no_document_list(kit, repo, store, tmp_path):
-    # maintainer's decisions, 2026-10-22: a dataset built before builds kept
+    # a dataset built before builds kept
     # their document list cannot say which texts are held out; reading
     # pointer tasks against it stops, saying such a base is used with the
     # repository at the commit that built it, never converting the sources
@@ -339,7 +339,7 @@ def test_pointer_tasks_are_refused_when_the_base_dataset_kept_no_document_list(k
       "tasks/a/check": CHECK}, r"tasks/a/task.json: the reply pattern '\(' is not a regular expression"),
     ({"tasks/a/task.json": json.dumps({**TASK, "replies": [{"pattern": "x", "reply": "y"}]}).encode(),
       "tasks/a/check": CHECK}, "tasks/a/task.json: a task with replies names in answered_by the looking tools"),
-    # each task states where its answers live (maintainer's decision, 2026-10-23); only a person knows where, so
+    # each task states where its answers live; only a person knows where, so
     # a task with replies of shape 2 is read with answered_in empty, which the check names
     ({"tasks/a/task.json": json.dumps({**TASK, "replies": [{"pattern": "x", "reply": "y"}],
                                        "answered_by": ["read"]}).encode(), "tasks/a/check": CHECK},
@@ -347,8 +347,8 @@ def test_pointer_tasks_are_refused_when_the_base_dataset_kept_no_document_list(k
     ({"tasks/a/task.json": json.dumps({**TASK, "schema": 2, "replies": [{"pattern": "x", "reply": "y"}],
                                        "answered_by": ["read"]}).encode(), "tasks/a/check": CHECK},
      "tasks/a/task.json: at answered_in"),
-    # answered_by names only looking tools: read, bash, or a declared tool marked looks (maintainer's decision,
-    # 2026-10-22), so wpt_check.asked_last can see a look through one of them
+    # answered_by names only looking tools: read, bash, or a declared tool marked looks, so
+    # wpt_check.asked_last can see a look through one of them
     *(({"tasks/a/task.json": json.dumps({**TASK, "tools": tools, "replies": [{"pattern": "x", "reply": "y"}],
                                          "answered_by": ["read", name], "answered_in": ["README"]}).encode(),
         "tasks/a/check": CHECK},
@@ -363,7 +363,7 @@ def test_pointer_tasks_are_refused_when_the_base_dataset_kept_no_document_list(k
         {"for": "files", "path": "a.txt", "source": "example-gone-0123abcd", "document": "notes.txt", "span": [0, 1],
          "sha256": "0" * 64}]}).encode(), "tasks/a/check": CHECK},
      "tasks/a/task.json: a pointer names the source 'example-gone-0123abcd', which does not exist"),
-    # the one-line form of the request is one line (maintainer's decision, 2026-10-23)
+    # the one-line form of the request is one line
     ({"tasks/a/task.json": json.dumps({**TASK, "terse": "Write hello.\n"}).encode(), "tasks/a/check": CHECK},
      "tasks/a/task.json: terse is the request in one line, and it holds a line break"),
     ({"tasks/a/task.json": json.dumps({**TASK, "image": "missing"}).encode(), "tasks/a/check": CHECK},

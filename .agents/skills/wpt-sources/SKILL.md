@@ -14,8 +14,7 @@ the only place to take one from.
 Before each batch, read, in full:
 
 - `docs/licenses.md`: "What the corpus accepts" (the closed license list
-  and what to check for each), "Rules" (every rule and every maintainer's
-  decision, with its date), "Who decides";
+  and what to check for each), "Rules" (every rule), "Who decides";
 - `CONTRIBUTING.md`, "Adding a source": the files to write and the
   commands;
 - `docs/data-selection.md` (documents, tags) and `docs/chat-format.md`
@@ -25,8 +24,10 @@ Before each batch, read, in full:
 Write each source from these documents. A case they do not settle is a
 question for the maintainer, never a rule you make up: no exclusion, no
 filter, no default that the documentation does not state. When the
-maintainer answers, write the answer into the document that covers it,
-with the date, in the same change.
+maintainer answers, write the answer into the document that covers it, in
+the same change, as a general rule about the current state only: no
+date, no history, and no source named (CONTRIBUTING.md, "Writing about
+the project").
 
 ## 1. Candidates
 
@@ -42,7 +43,7 @@ says for that license. Cite where each fact comes from. When a fact cannot
 be found, or the evidence disagrees, **do not settle it yourself in either
 direction**: ask the maintainer about that candidate right away, with the
 doubt, the evidence found and what would remove it. Without their answer
-the candidate stays out ("when in doubt, refuse"); `docs/licenses.md` says
+the candidate stays out (a doubt stays under review and is not used); `docs/licenses.md` says
 what happens to a fact still missing after one more research pass, and
 where a question the maintainer cannot settle alone goes.
 

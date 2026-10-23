@@ -64,7 +64,7 @@ def built(repo, store, kind, count, seed=1, measure=False):
     # the base model's dataset, its document list kept, and nothing held out
     write_document_list(store, "d" * 64, [], set(), Telemetry.off())
     found, _ = tasks.read(repo, store, "grpo", 0, measure=measure, dataset="d" * 64)
-    # maintainer's decision, 2026-10-23: the final reply is the answer, as text; no instructions ask for JSON
+    # the final reply is the answer, as text; no instructions ask for JSON
     assert not any("JSON" in task.instructions or "confidence" in task.instructions for task in found)
     return made, sorted(found, key=lambda task: task.id)
 
@@ -98,7 +98,7 @@ def test_find_the_passage_tasks_ask_for_the_rest_of_a_paragraph_that_one_text_ho
         assert len(texts(task)) == (builder.PAGES if pages else builder.GIVEN)
         assert all(len(text) <= builder.WINDOW for text in texts(task).values())
         assert not any(path.startswith("web/") for path in task.files)
-        # maintainer's decision, 2026-10-23: it only answers, so no path of /work may change, and no rule gates it
+        # it only answers, so no path of /work may change, and no rule gates it
         assert task.area == () and task.gates == () and b"sources_first=wpt_check.sources_first(conversation)" in task.check
         assert task.answered_in == ()  # no question to the user, so nothing to look in before one
     assert sorted(bool(task.tool_files) for task in found) == [False, False, True, True]
@@ -106,7 +106,7 @@ def test_find_the_passage_tasks_ask_for_the_rest_of_a_paragraph_that_one_text_ho
 
 
 def test_evidence_removed_tasks_are_half_without_the_paragraph(kit, repo, store, tmp_path):
-    # maintainer's decision, 2026-10-22: half the tasks have the passage
+    # half the tasks have the passage
     # removed, and the right answer is then "not enough"; the other half can
     # be answered, so saying "not enough" is never a safe way out
     books(kit, repo, store, tmp_path)
@@ -138,9 +138,9 @@ def test_look_or_ask_tasks_hide_the_file_name_in_the_notes_or_in_the_user_s_repl
         notes = task.files["NOTES.md"][1].decode()
         # the user is asked after the looking tools that can read the notes (the test image has no pool)
         assert task.answered_by == ("read", "bash") and b"asked_last(conversation" in task.check
-        # maintainer's decision, 2026-10-23: the answer lives in the notes, read before asking in both halves
+        # the answer lives in the notes, read before asking in both halves
         assert task.answered_in == ("NOTES.md",)
-        # maintainer's decision, 2026-10-23: the result's file is all it may change, and the rules the check wants
+        # the result's file is all it may change, and the rules the check wants
         # gate it: a broken one scores the attempt 0
         assert task.area == (name,) and b"read_before_write=wpt_check.read_before_write(conversation" in task.check
         if (tasks.Variant(("ask",)),) in task.needs:
@@ -149,14 +149,14 @@ def test_look_or_ask_tasks_hide_the_file_name_in_the_notes_or_in_the_user_s_repl
             assert b"asked_last(conversation, '')" in task.check
         else:  # the notes, which name the file, must have been read before any question
             assert name in notes and f"read_before_ask(conversation, 'Put results in {name}.')".encode() in task.check
-            # maintainer's decision, 2026-10-23: a question after the notes showed the name no longer counts
+            # a question after the notes showed the name no longer counts
             assert f"asked_last(conversation, 'Put results in {name}.')".encode() in task.check
             assert task.gates == ("asked_last", "read_before_ask")
     assert asked == 2
 
 
 def test_read_the_manual_tasks_ask_for_a_result_of_ondrik_and_half_remove_its_manual(kit, repo, store, tmp_path):
-    # maintainer's decision, 2026-10-23: a result only the image's program
+    # a result only the image's program
     # gives, with and without its manual installed; seals and knots are
     # crossed with the two halves, the instructions never name the option
     # that gives the result, and the check runs the program for it; the
@@ -200,8 +200,7 @@ def test_a_commit_and_push_task_makes_work_the_repository_before_the_commit(kit,
     # /work is the repository itself, checked out at the commit's parent
     # with the commit's changes in its working tree; its remote is outside
     # /work, so `git add -A` there never takes it; what the check expects is
-    # the commit's tree on top of that parent. Maintainer's decisions,
-    # 2026-10-22 and 2026-10-23: the instructions are the decided words
+    # the commit's tree on top of that parent. The instructions are the decided words
     # alone, and the model writes its own message, so none is given or
     # expected
     images(repo)
@@ -245,10 +244,10 @@ def test_a_commit_and_push_task_makes_work_the_repository_before_the_commit(kit,
 
 
 def test_an_older_commit_s_task_starts_from_the_real_state_just_before_it(kit, repo, store, tmp_path):
-    # maintainer's decisions, 2026-10-22: every commit of the stored
+    # every commit of the stored
     # history is a candidate; an older commit's task undoes, in the stored
     # order, every later commit newest first, then that commit, and expects
-    # the commit's own tree. Maintainer's decision, 2026-10-22: the commits
+    # the commit's own tree. The commits
     # behind the newest merge are dropped before drawing, never logged
     images(repo)
     folder = tmp_path / "upstream"
@@ -286,7 +285,7 @@ def test_an_older_commit_s_task_starts_from_the_real_state_just_before_it(kit, r
 
 
 def test_a_commit_whose_undo_fails_is_logged_and_the_next_one_is_drawn(kit, repo, store, tmp_path):
-    # maintainer's decision, 2026-10-22: a failed undo is logged and
+    # a failed undo is logged and
     # skipped, and the next candidate is drawn. A cut changes tides.txt in
     # the final tree, so the older commit that wrote it no longer undoes;
     # the later commit, which left it alone, still does
@@ -310,7 +309,7 @@ def test_a_commit_whose_undo_fails_is_logged_and_the_next_one_is_drawn(kit, repo
 
 
 def test_a_stored_history_without_its_order_gives_no_task(kit, repo, store, tmp_path, monkeypatch):
-    # maintainer's decision, 2026-10-22: the order is part of the stored
+    # the order is part of the stored
     # history; a history stored before it kept one gives no commit-and-push
     # task, and the builder counts such sources in one line
     images(repo)
@@ -361,7 +360,7 @@ def test_a_commit_whose_source_changed_is_refused_until_it_is_built_again(kit, r
 
 
 def test_the_builder_reports_the_act_and_check_shares_of_a_task_source(kit, repo, store, tmp_path):
-    # maintainer's decision, 2026-10-23: each kind acts, checks or does
+    # each kind acts, checks or does
     # both (commit-and-push acts, read-the-manual does both, the others
     # check); a task source's shares count its built tasks by kind and sum
     # to 1

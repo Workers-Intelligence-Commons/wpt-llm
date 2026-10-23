@@ -54,23 +54,20 @@ person then edits or confirms, and its metadata records that
   `assistant` or `tool`) and a `content` list of blocks, in the order they
   happened: thinking, then a call, then more thinking, then text, stays in
   that order. An `assistant` message may have no block: when a model closes
-  its turn without writing anything, the record says exactly that
-  (maintainer's decision, 2026-10-22). A message of any other role holds at
-  least one block. A message may also hold `metadata`, a JSON object never
-  written as tokens; its one named field is `draft`
-  ([Model drafts](#model-drafts)).
+  its turn without writing anything, the record says exactly that. A
+  message of any other role holds at least one block. A message may also
+  hold `metadata`, a JSON object never written as tokens; its one named
+  field is `draft` ([Model drafts](#model-drafts)).
 - `metadata`: optional. What identifies the conversation where it was
-  recorded, as any JSON object: a post-training attempt's step, task,
-  round and score ([post-training.md](post-training.md), "Runs"). It is
-  never written as tokens (maintainer's decision, 2026-10-17: "Add
-  metadata to chat").
+  recorded, as any JSON object: a post-training attempt's step, task, round
+  and score ([post-training.md](post-training.md), "Runs"). It is never
+  written as tokens.
 
-Shape 2 added `metadata`; a shape 1 conversation is the same without it.
-Shape 3 added a message's `metadata`; a shape 2 conversation is the same
-without it. `wpt-dataset migrate` rewrites the repository's own files, and
-a source's `chat` file, whose bytes may be upstream's, is brought to the
-current shape as it is read (`wpt_dataset.migrate.upgrade`), so a shape 1
-or 2 file stays valid.
+A conversation of an earlier shape (1, without any `metadata`, or 2,
+without a message's `metadata`) stays valid. `wpt-dataset migrate`
+rewrites the repository's own files, and a source's `chat` file, whose
+bytes may be upstream's, is brought to the current shape as it is read
+(`wpt_dataset.migrate.upgrade`).
 
 ## Model drafts
 
@@ -94,13 +91,13 @@ conversation. The message's
 
 In `sha256`, a whole number is written as an integer (`2.0` as `2`), as a
 browser writes it back, so a draft the editor sends back unchanged still
-gives its sha256 (maintainer's decision, 2026-10-18).
+gives its sha256.
 
 `metadata.draft` is a claim the client makes, which the server does not
-check (maintainer's decision, 2026-10-18): neither `wpt-web` nor
-`wpt-dataset save-conversation` checks that a WPT model wrote the draft,
-nor its `model`, `weights` or `sha256`. They set only `edited`, from
-whether the message's `content` still gives the `sha256` the client sent.
+check: neither `wpt-web` nor `wpt-dataset save-conversation` checks that a
+WPT model wrote the draft, nor its `model`, `weights` or `sha256`. They set
+only `edited`, from whether the message's `content` still gives the
+`sha256` the client sent.
 
 `wpt-dataset check` refuses a `draft` on any message but an `assistant`
 one, and an `edited` that does not match the content (a chat file made
@@ -111,15 +108,13 @@ the start.
 
 ## Writing a chat file
 
-The conversation editor and `wpt-dataset save-conversation` write only in
-a chat file of an `empty` source, text written for WPT; an upstream
-source's chat file stays upstream's. Each line is the conversation's JSON
-on one line, with U+2028, U+2029 and U+0085 always written as `\u2028`,
-`\u2029` and `\u0085`, even in a value a save keeps unchanged:
-the same JSON, and no line splitter cuts the line in two (maintainer's
-decision, 2026-10-18). A
-replaced line keeps its layout where its meaning did not change, and every
-other line keeps its bytes.
+The conversation editor and `wpt-dataset save-conversation` write only in a
+chat file of an `empty` source, text written for WPT; an upstream source's
+chat file stays upstream's. Each line is the conversation's JSON on one
+line, with U+2028, U+2029 and U+0085 always written as `\u2028`, `\u2029`
+and `\u0085`, even in a value a save keeps unchanged: the same JSON, and no
+line splitter cuts the line in two. A replaced line keeps its layout where
+its meaning did not change, and every other line keeps its bytes.
 
 ## Blocks
 
@@ -140,53 +135,48 @@ meaning, and raising `schema` with a migration covers any change to them.
 The model never writes JSON, except its tool calls, which other harnesses
 parse as JSON: it writes text and special tokens, and the harness builds
 every `json` block and value in the records, in a shape that can later go
-back into sources, as `sft` data for example (maintainer's decision,
-2026-10-23).
+back into sources, as `sft` data for example.
 
-The model's final reply, its last assistant message, one with no tool
-call, is its answer, as text. The agent loop (`wpt_agent.loop`) then adds
-one user turn that asks for its confidence, a number from 0 to 100 and
-nothing else, the same question for every task (`CONFIDENCE` in
-`wpt_agent/loop.py`, the one place it is written). The model's reply to
-it is read, divided by 100, and the loop builds the attempt's
+The model's final reply, its last assistant message, one with no tool call,
+is its answer, as text. The agent loop (`wpt_agent.loop`) then adds one
+user turn that asks for its confidence, a number from 0 to 100 and nothing
+else, the same question for every task (`CONFIDENCE` in
+`wpt_agent/loop.py`, the one place it is written). The model's reply to it
+is read, divided by 100, and the loop builds the attempt's
 `metadata.answer`, which the task's check reads
-([post-training.md](post-training.md), "Scores") (maintainer's decision,
-2026-10-23):
+([post-training.md](post-training.md), "Scores"):
 
 ```json
 {"answer": "calc.py adds instead of subtracting; fixed line 12.", "confidence": 0.8}
 ```
 
 - `answer`: the final reply's text, its text blocks one per line, its
-  thinking left out. In a file-changing task it is the reply's text too
-  (maintainer's decision, 2026-10-23).
+  thinking left out. In a file-changing task it is the reply's text too.
 - `confidence`: the reply to the question, from 0 to 100, divided by 100.
-  In a file-changing task it is how sure the model is that the task's
-  check will pass (maintainer's decision, 2026-10-18).
+  In a file-changing task it is how sure the model is that the task's check
+  will pass.
 
-The reply counts when its text, spaces around it aside, is a number from
-0 to 100 written with digits and at most one decimal point (`80`,
-`72.5`), and nothing else: thinking before it is not part of its text,
-and a tool call, a `%`, a word or a number above 100 make it count as
-none. A final reply closed by the end of a document instead of
-`<|im_end|>` is a final reply too. A reply that is not such a number, or
-that a limit cuts, scores the attempt 0, as a missing block did; so does
-an attempt that ends with no final reply, stopped by a limit or by the
-end of a document written in a turn with a tool call: its `metadata.answer` is `null`, the shared check library
-that every check calls scores its `correct` part 0, and the step that
-learns makes the whole attempt worth 0, whatever its other parts
-(maintainer's decisions, 2026-10-18 and 2026-10-23; post-training.md,
-"Rewards"). The confidence turn counts against `max_tokens` and the
-context, not against `max_turns`. No task's instructions ask for a block
-or say how to answer (maintainer's decision, 2026-10-23). There is no way
-to abstain: "I don't know" is never a way out that costs nothing
-(maintainer's decision, 2026-10-18).
+The reply counts when its text, spaces around it aside, is a number from 0
+to 100 written with digits and at most one decimal point (`80`, `72.5`),
+and nothing else: thinking before it is not part of its text, and a tool
+call, a `%`, a word or a number above 100 make it count as none. A final
+reply closed by the end of a document instead of `<|im_end|>` is a final
+reply too. A reply that is not such a number, or that a limit cuts, scores
+the attempt 0; so does an attempt that ends with no
+final reply, stopped by a limit or by the end of a document written in a
+turn with a tool call: its `metadata.answer` is `null`, the shared check
+library that every check calls scores its `correct` part 0, and the step
+that learns makes the whole attempt worth 0, whatever its other parts
+(post-training.md, "Rewards"). The confidence turn counts against
+`max_tokens` and the context, not against `max_turns`. No task's
+instructions ask for a block or say how to answer. There is no way to
+abstain: "I don't know" is never a way out that costs nothing.
 
-The text measures ask their questions the same way: the prompt never
-asks for JSON, the model's reply is text, and the measure keeps it, with
-its confidence where the measure asks one through the same question, as
-a `json` block in its records (maintainer's decision, 2026-10-23;
-[evaluation.md](evaluation.md), "Text measures").
+The text measures ask their questions the same way: the prompt never asks
+for JSON, the model's reply is text, and the measure keeps it, with its
+confidence where the measure asks one through the same question, as a
+`json` block in its records ([evaluation.md](evaluation.md), "Text
+measures").
 
 ## Files
 
@@ -203,7 +193,7 @@ the files tagged `sft` ([post-training.md](post-training.md)).
 
 ### Message trees
 
-Some datasets, such as OpenAssistant's, store branching conversations: one
+Some datasets store branching conversations: one
 message per record, each naming its parent, so a question can have several
 answers and each answer several follow-ups. A `chat` format entry with
 `tree` reads such a file (JSON Lines or Parquet, as a `records` file):
@@ -224,11 +214,11 @@ answers and each answer several follow-ups. A `chat` format entry with
   this way: an `assistant` message is written by a person.
 
 Every path from a first message to a last one becomes a conversation, so
-the opening turns shared by several branches appear in each of them
-(maintainer's decision, 2026-10-16). Trailing messages that are not the
-assistant's are left off; a path with no assistant message, or one that
-repeats another exactly, gives none. A conversation's id ends with the id
-of its last message. A parent the file does not hold stops the check.
+the opening turns shared by several branches appear in each of them.
+Trailing messages that are not the assistant's are left off; a path with no
+assistant message, or one that repeats another exactly, gives none. A
+conversation's id ends with the id of its last message. A parent the file
+does not hold stops the check.
 
 ## The template
 
@@ -252,8 +242,7 @@ END
   as Qwen does.
 - A `json` block of a system or user message, or of a tool result, is
   written as its JSON text between `<json>` and `</json>`, so the model
-  sees a structured value and tells it apart from text (maintainer's
-  decision, 2026-10-18: the template shows `json` blocks to the model).
+  sees a structured value and tells it apart from text.
 - The model never writes JSON but its tool calls ([The answer](#the-answer)):
   a `json` block in an assistant message, which only a harness builds, is
   never written as tokens, so no conversation teaches the model to write

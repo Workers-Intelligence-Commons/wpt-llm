@@ -1,7 +1,6 @@
 # Publishing models
 
-No model has been published yet. This page says how it will be done
-(maintainer's decisions, 2026-10-16).
+No model has been published yet. This page says how it will be done.
 
 ## Releases
 

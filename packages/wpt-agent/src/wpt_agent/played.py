@@ -89,8 +89,7 @@ def attempt_box(image, task, offer) -> tuple[Sandbox, Arranged]:
 
 def gated(task, parts: dict) -> bool:
     """Whether every rule the task's gates name holds: its part is 1 (a
-    part the check did not print counts as broken; maintainer's decision,
-    2026-10-23)."""
+    part the check did not print counts as broken)."""
     return all(parts.get(name, 0.0) >= 1 for name in task.gates)
 
 

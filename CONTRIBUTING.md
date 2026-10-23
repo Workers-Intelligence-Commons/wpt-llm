@@ -70,8 +70,8 @@ together.
 1. Check the license against [docs/licenses.md](docs/licenses.md). It must be
    on the allowed list, clearly; its "What to check" column says where each
    kind of license hides a trap. CC BY-SA 4.0, the one grey-zone license,
-   is refused until a lawyer confirms it. Public domain must hold under the law
-   of the country where the work was first published.
+   is allowed until legal review says otherwise. Public domain must hold
+   under the law of the country where the work was first published.
 2. Choose the id: `uv run wpt-dataset source-id <origin> [<item>] <address>`.
    For a git repository on GitHub, write the address without `.git`:
    GitHub's robots.txt forbids `/*.git` addresses to AI training
@@ -89,8 +89,7 @@ together.
    text when it is UTF-8, or when it states its own encoding (a
    byte-order mark, an HTML page's `<meta charset>`, an XML declaration,
    Project Gutenberg's `Character set encoding:` line, a Python coding
-   line) and decodes under it; nothing is guessed (maintainer's decision,
-   2026-10-23; [docs/architecture.md](docs/architecture.md),
+   line) and decodes under it; nothing is guessed ([docs/architecture.md](docs/architecture.md),
    "Encodings"). Map every file in `formats` before running it: the format
    says which statement the file can make, and a file no records or chat
    format reads is checked as text.
@@ -172,15 +171,15 @@ an erasure can remove it from future builds, never from that history (see
 good. Your signed-off commit certifies you wrote it, and it holds no other
 person's personal data and no output of another company's model.
 
-There is no automatic filtering or tagging: tags and licenses are written by
-people, and a person reviews every source. Tools such as ScanCode may help
-you find license texts; they never decide.
+No program admits or refuses a source, or writes its tags or licenses:
+people do, and a person reviews every source. Tools such as ScanCode may
+help you find license texts; they never decide.
 
 ## Decisions are signed
 
-A source is in exactly one of three states, its `decision` (maintainer's
-decision, 2026-10-22): `under-review`, a source not yet decided, where every
-new source starts; `admitted`; or `refused`. Each gives who set it (`by`)
+A source is in exactly one of three states, its `decision`:
+`under-review`, a source not yet decided, where every new source starts
+and where a doubt stays; `admitted`; or `refused`. Each gives who set it (`by`)
 and when (`date`). The builds, the post-training readers and
 `check --fetch` without ids read only admitted sources: an `under-review`
 source is left out of them exactly as a refused one is.
@@ -190,9 +189,9 @@ name and the date. An admission needs no reason: the license map and its
 texts already say why the source is allowed. It carries one only for an
 exception, such as an explicit permission for content without a license.
 Refusing a source always gives the reason, so nobody reviews it again from
-scratch; a source under review may give one, and needs none. A refused
-source stays in the repository as a reference: it is never deleted
-(maintainer's decision, 2026-10-22). A commit that changes any `decision`
+scratch; a source under review may give one (a doubt gives the missing
+fact). A refused source stays in the repository as a reference: it is
+never deleted. A commit that changes any `decision`
 must be signed (`git commit -S`) by an SSH key listed in
 `data/allowed-signers` or a GPG key in `data/allowed-gpg-keys.asc`; CI
 checks the signature against the lists as they stood before the commit, so
@@ -212,8 +211,8 @@ decisions.
 - **New upstream revision**: update `revision` and `checksum` in place, and
   redo its cuts and patches in the same commit.
 - **New address**: that is a new source with a new id; refuse the old one
-  (`"decision": "refused"`, its `reason` naming the new source's id;
-  maintainer's decision, 2026-10-22), update the mixtures naming it, and
+  (`"decision": "refused"`, its `reason` naming the new source's id),
+  update the mixtures naming it, and
   move its erasure cuts.
 - **Patches**: `0001-<name>.patch`, `0002-<name>.patch`... in git's format,
   applied in order after the erasure cuts. Removal patches are welcome.
@@ -228,9 +227,8 @@ See [docs/erasure.md](docs/erasure.md).
 
 No output of another company's model is accepted, in data or in
 post-training, and no synthetic data that a WPT model did not make. WPT's
-own models may be used in training, their output included (maintainer's
-decision, 2026-10-18; [docs/data-selection.md](docs/data-selection.md),
-"Models in training"). A contribution that uses a WPT model (to produce
+own models may be used in training, their output included
+([docs/data-selection.md](docs/data-selection.md), "Models in training"). A contribution that uses a WPT model (to produce
 data, or in any post-training role) must say exactly what that model did.
 The uses today are a model's draft of a conversation's reply, below, and
 the `grpo` step's reward on a task's one-line form, which compares an
@@ -247,7 +245,7 @@ whether you changed it, which the service layer computes from the content
 when the conversation is saved; the check refuses an `edited` that does
 not match the content in any other chat file. An unedited confirmed draft
 is allowed. The rest of `metadata.draft` is a claim the client makes,
-which the server does not check (maintainer's decision, 2026-10-18): that
+which the server does not check: that
 a WPT model wrote the draft, and its model, weights and sha256. See
 [docs/chat-format.md](docs/chat-format.md), "Model drafts".
 
@@ -259,17 +257,15 @@ write people's texts, so it never runs the commands and options that do
 `save-task`, `save-rating`, and `new-source`'s `--file` and
 `--license-text`, marked `*`
 in `uv run wpt-dataset --help`). It may start a new source with
-`new-source` without `--file` and `--license-text` (maintainer's
-decision, 2026-10-18): the source is made with its license, attribution,
+`new-source` without `--file` and `--license-text`: the source is made with its license, attribution,
 format entries and tags, and the license text left empty (`--format
 FORMAT=PATTERN` declares a format entry, such as `markdown=**/*.md` or
 `text=notes/*.txt`, without any file; an empty `--license-text` file is an
 error, not a text to write later); you then write the license text
 (`wpt-dataset save source`, or the "Sources" page of `wpt-web`), and the
-check names the source until you do (maintainer's decision, 2026-10-18:
-the text may be empty only while the source is not admitted, that is
-`under-review` or `refused` since the maintainer's decision of 2026-10-22,
-and builds and checks leave such a source out with a note), then add your
+check names the source until you do (the text may be empty only while
+the source is not admitted, that is `under-review` or `refused`, and
+builds and checks leave such a source out with a note), then add your
 files, in any format. People write their texts themselves. When a
 person asks an assistant only to change the form of a text they wrote
 (line endings, spacing, splitting into files), the assistant may move it
@@ -279,9 +275,29 @@ reads or writes the words itself.
 
 ## Post-training records
 
-Demonstrations and environment recordings follow
-[docs/post-training.md](docs/post-training.md): JSON Lines with their
-provenance, recorded only with the authorizations they need.
+Demonstrations and environment recordings are files of a source, like any
+other text ([docs/post-training.md](docs/post-training.md), "Where records
+live"): their license, credit and decision are the source's, in its
+`source.json`, and the signed-off commit that adds them names their
+contributor. Their shape is not settled yet; today the code reads
+conversations in the `chat` format, tasks in the `task` format and
+ratings in the `rating` format.
+
+## Writing about the project
+
+The repository describes only its current state: the documentation, the
+skills (`.agents/skills/`), code comments and docstrings, and recipe
+notes say what is true now and why, never when it was decided or what it
+was before. A change may break compatibility with what came before; the
+text then describes the new state alone, and the old one stays only in
+git's history. No text holds a decision's date, a "(maintainer's
+decision)" tag (only "maintainer's decision alone" stays, for a license
+choice with no outside ruling) or an account of earlier versions. Rules
+are general: they name no source and no example, so they hold for any
+number of sources. Dates that belong to the content stay, such as a
+source's revision or a lawyer's answer in `LEGAL-QUESTIONS.html`. A
+migration step (`wpt-dataset migrate`) says what it changes in a file of
+an older shape, not when that shape changed.
 
 ## Code
 
@@ -297,8 +313,7 @@ a short book fixed at one git commit, so its download never changes), which
 proves the fetch and its checks work, and the checks on your commits, compared with the
 upstream branch. A green run means a green CI. Neither check.py nor CI
 downloads the sources a pull request adds or changes: the maintainer runs
-`uv run wpt-dataset check --fetch` on them before merging (maintainer's
-decision, 2026-10-21). There is no
+`uv run wpt-dataset check --fetch` on them before merging. There is no
 local hook. The tests run in parallel, each process with one PyTorch thread and
 no GPU, as in CI (a plain `uv run pytest` uses the GPU), on as many processes
 as both 75% of the cores and 75% of the available memory (2.5 GB per process)
@@ -308,11 +323,9 @@ code (`packages/wpt-agent/src/wpt_agent/images.py`, the wpt-agent tests
 of wpt-dataset, or `data/images/`); otherwise `uv run pytest` runs it. The GRPO
 tests keep their pinned and built image in `.pytest_cache/` and in Docker, so
 only the first check on a machine, and every CI run, which starts empty, pays
-for locking and building it (maintainer's decision, 2026-10-20;
-`docs/architecture.md`, "Checks").
+for locking and building it (`docs/architecture.md`, "Checks").
 
-A test checks that the code works, not that it works well (maintainer's
-decision, 2026-10-21): it runs without crashing, its computation is valid
+A test checks that the code works, not that it works well: it runs without crashing, its computation is valid
 (finite numbers, values in their range, tokens come out, training changes
 the weights it reaches), and two routes the code says are the same give the
 same result within rounding. Whether a method is efficient or a good idea

@@ -7,7 +7,7 @@
                    a document of a source with held_out_by hashes its held-out
                    group instead, so documents of any source with the same
                    group are held out together (eBible's chapters, by book
-                   and chapter: maintainer's decision, 2026-10-23)
+                   and chapter)
     pools          each training document goes to the first pool, in mixture
                    order, whose expression matches its tags
     shares         a pool fills weight x total_tokens by whole passes over its
@@ -19,11 +19,10 @@
 The dataset id is the fingerprint of every input, so building the same
 recipe on the same data again is a lookup.
 
-Beside its record, every dataset keeps its document list (write_document_list;
-maintainer's decision, 2026-10-22): each document's id, the sha256 of its
+Beside its record, every dataset keeps its document list (write_document_list): each document's id, the sha256 of its
 Markdown and its tag, training or held-out, under a ref named by the
 dataset id, so the base model's provenance finds it. A dataset built
-before builds wrote one never gets one (maintainer's decision, 2026-10-22).
+before builds wrote one never gets one.
 
 A source that fails (its checksum differs, every address fails, a file is
 broken) stops the build, unless the build is asked to skip such sources:

@@ -1,9 +1,10 @@
-"""The closed list of licenses a source may carry. When in doubt, refuse.
+"""The licenses a source may carry today. A license not listed is refused.
 
 docs/licenses.md says why each one is here and what to check before using
 it. A license is on the list only if, were the content code, an
-AGPL-3.0-or-later program could statically link it (the linking test).
-CC-BY-SA-4.0 stays out until a lawyer confirms it; ODbL, GFDL and CC BY
+AGPL-3.0-or-later program could statically link it (the linking test);
+another license that passes the test can be added. CC-BY-SA-4.0 is a grey
+zone, allowed until legal review says otherwise; ODbL, GFDL and CC BY
 before 4.0 are refused; the data and public-sector licenses wait for the
 linking test. A license outside the SPDX list is written LicenseRef-<name>.
 
@@ -30,7 +31,10 @@ ALLOWED = frozenset({
     "GPL-2.0-or-later", "LGPL-2.1-only", "LGPL-2.1-or-later", "MPL-2.0", "EUPL-1.2", "CECILL-2.1",
     # attribution only
     "CC-BY-4.0",
-    # public domain in both the US and the work's country of origin; the
+    # share-alike, a grey zone: BY-SA 4.0 content may move to the GPLv3, which
+    # AGPL section 13 accepts
+    "CC-BY-SA-4.0",
+    # public domain under the law of the country of first publication; the
     # entry's text states why
     "LicenseRef-public-domain",
 })

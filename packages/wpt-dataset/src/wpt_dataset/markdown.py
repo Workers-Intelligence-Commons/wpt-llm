@@ -27,14 +27,13 @@ encoding it states, else UTF-8 (encoding.py), and its Markdown is UTF-8:
   in the source becomes a Markdown note, [^12], with the note's text at
   the end of the document that refers to it; a reference whose note is
   missing is dropped. A label already taken by another note gets a number,
-  [^12-2], then [^12-3] (maintainer's decision, 2026-10-23). Notes
+  [^12-2], then [^12-3]. Notes
   sections themselves (epub:type endnotes or footnotes) are left where they
   were, so a file holding only notes gives no document.
 - `html`: web pages that are not strict XML, such as Project Gutenberg's,
   read by lxml's HTML parser, which never refuses a page, and converted as
-  `xhtml` pages are (maintainer's decision, 2026-10-23). EPUB's epub:type
-  marks exist only in XML; an html page's notes are Project Gutenberg's
-  (maintainer's decision, 2026-10-23): a link of class `fnanchor` (or
+  `xhtml` pages are. EPUB's epub:type
+  marks exist only in XML; an html page's notes are Project Gutenberg's: a link of class `fnanchor` (or
   `noteref`, `noteRef`) to an element of class `footnote` or `fndiv` in
   the same page, or to anything inside one, is a note reference, and that
   element its note (or, when it holds the targets of links in several of
@@ -45,14 +44,12 @@ encoding it states, else UTF-8 (encoding.py), and its Markdown is UTF-8:
   holding it. A note no such link refers to,
   and every other link, stay ordinary text where the page prints them, so
   markdown-check finds no unpaired note. Printed page numbers, such as
-  Gutenberg's {92} (class `pagenum`), stay as the page shows them
-  (maintainer's decision, 2026-10-23).
+  Gutenberg's {92} (class `pagenum`), stay as the page shows them.
 
 In both, an image the page shows (<img>, or an inline <svg>) leaves a
 marker where it was, so a model learns where images were: [image], or
 [image: ALT] when it has alt text (an svg's <title>), ALT being that text
-with its white space collapsed and Markdown's characters escaped
-(maintainer's decision, 2026-10-23). A printed caption (figcaption,
+with its white space collapsed and Markdown's characters escaped. A printed caption (figcaption,
 caption) stays ordinary text; math, audio and video are left out.
 
 - `chat`: conversations for post-training, one per line, or with `tree`
@@ -72,11 +69,11 @@ caption) stays ordinary text; math, audio and video are left out.
 A file whose Markdown is empty gives no document, and neither does a git
 history's order file (`.git/history/order`): it stays in the source's tree
 and its checksum, and the builder reads it, but it is not a training
-document (maintainer's decision, 2026-10-22).
+document.
 
 A change to what this module makes of a file raises the wpt-dataset
 version in the same change, so the stream cache, keyed by it, makes the
-Markdown again (docs/architecture.md; maintainer's decision, 2026-10-23).
+Markdown again (docs/architecture.md).
 """
 
 import posixpath
@@ -155,7 +152,7 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None)
     for path in sorted(files if only is None else files.keys() & only, key=str.encode):
         entry, kind = formats[path], formats[path]["format"]
         if path == ORDER and source.data["type"] == "git":
-            continue  # part of the history, never a document, whatever its format (maintainer's decision, 2026-10-22)
+            continue  # part of the history, never a document, whatever its format
         if kind == "records":
             yield from _records(source, path, entry, store.path(files[path].sha256), skipped)
             continue

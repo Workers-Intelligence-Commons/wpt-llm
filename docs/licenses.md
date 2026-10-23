@@ -23,14 +23,13 @@ under AGPL-3.0-or-later too, by the same logic as code: every source is
 treated as a dependency, and every allowed source permits AGPL use. The
 content of each source inside keeps its own license wherever it is shared,
 with its credit and license text; the AGPL covers what WPT adds to it, the
-format, the structure and everything the pipeline puts around the content
-(maintainer's decision, 2026-10-16).
+format, the structure and everything the pipeline puts around the content.
 
 Still open:
 
 - the legal effect of a license on weights is not settled; a lawyer reviews
-  it before weights are published, and the commitment is written in a
-  manifesto next to the license.
+  it before weights are published, and the commitment is written in the
+  [charter](charter.md).
 
 ## Dependencies
 
@@ -286,8 +285,8 @@ commands in containers built on each machine from the Dockerfiles in
 (`wpt-agent lock-image`) records every package installed in it, with its
 version and its licenses, in `licenses.json` next to the image's
 `lock.json`. No limit applies to which licenses an image may hold: the
-record says what is there, and it is not a list of allowed licenses
-(maintainer's decision, 2026-10-17). The images run the tasks on the
+record says what is there, and it is not a list of allowed licenses. The
+images run the tasks on the
 machine that builds them, and WPT does not distribute them. What a tool
 result shows of an image's files is context the model reads during an
 attempt; the loss covers only the tokens the model wrote.
@@ -296,7 +295,7 @@ A package's licenses come from its `/usr/share/doc/<package>/copyright`
 file. When that file is machine-readable (Debian's copyright format, which
 starts with a `Format:` field), the record lists the licenses its
 `License:` fields name. When it is not, the record holds the file's full
-text instead (maintainer's decision, 2026-10-17). A package with no such
+text instead. A package with no such
 file in the image has a record with its version only.
 
 ### Word lists of recipe names (`scripts/names/`)
@@ -377,57 +376,59 @@ License (its section 1.12).
 
 ## What the corpus accepts
 
-**When in doubt, refuse.** A doubtful content is left out rather than used.
+**When in doubt, it is not used.** A doubtful source stays under review,
+as a reference, and no build reads it.
 
 **The linking test.** A license is allowed only if, were the content code,
 a program under the project's license (AGPL-3.0-or-later) could statically
 link it and be distributed. This holds inside every family below: a license
-that fails it is refused, whatever its family (maintainer's decision,
-2026-10-21).
+that fails it is refused, whatever its family.
 
-The allowed list below is closed: `packages/wpt-dataset/src/wpt_dataset/licenses.py`
-holds it, and these are the licenses we recommend to contributors. Each one
-lets its content end up inside AGPL-3.0-or-later weights: it is permissive,
-its own text lets the content move to the GPLv3 or the AGPL (AGPL section 13
-accepts GPLv3 works, each part keeping its license), or it asks only for
-credit. The "What to check" column says where licenses of that kind hide a
-trap; a person still reads the license of every path.
+The allowed list below is not exhaustive. It holds the licenses the check
+accepts today, the same as `packages/wpt-dataset/src/wpt_dataset/licenses.py`,
+and the licenses we recommend to contributors; another license that passes
+the linking test can be added to both. Each one lets its content end up
+inside AGPL-3.0-or-later weights: it is permissive, its own text lets the
+content move to the GPLv3 or the AGPL (AGPL section 13 accepts GPLv3 works,
+each part keeping its license), or it asks only for credit. The "What to
+check" column names the usual traps of licenses of that kind, not every
+one: a person still reads the license of every path.
 
-The evidence was gathered on 2026-10-15 from the FSF license list
+The evidence comes from the FSF license list
 (<https://www.gnu.org/licenses/license-list.html>), the license texts, the
 Open Definition list (<https://opendefinition.org/licenses/>), the Blue Oak
-Council list (<https://blueoakcouncil.org/list>), Creative Commons' pages on
-compatibility and on AI training, and the publishers named below. A choice
-that rests on the maintainer's decision alone, without an outside ruling,
-says so in its row.
+Council list (<https://blueoakcouncil.org/list>), and Creative Commons'
+pages on compatibility and on AI training. They are the first places to
+look, not the only ones. A choice that rests on the maintainer's decision
+alone, without an outside ruling, says so in its row.
 
 ### Public domain and permissive
 
 | License (SPDX) | Why it is allowed | What to check |
 | --- | --- | --- |
-| `LicenseRef-public-domain` | no rights left | public domain under the law of the country of first publication alone (Rules, "Public domain"), for every person whose words are in the text (author, translator, editor of notes); the entry's `text` gives the proof and its sources |
+| `LicenseRef-public-domain` | no rights left | public domain under the law of the country where the content was first published, for every author and translator (Rules, "Public domain"); the entry's `text` gives the proof and its sources |
 | `CC0-1.0`, `Unlicense` | public-domain dedications; FSF: compatible | a dedication by the right person: a site cannot dedicate what it does not own |
 | `MIT`, `MIT-0`, `0BSD`, `BSD-1-Clause`, `BSD-2-Clause`, `BSD-2-Clause-Patent`, `BSD-3-Clause`, `ISC`, `X11`, `NCSA`, `PostgreSQL`, `UPL-1.0`, `HPND`, `W3C`, `curl` | FSF: GPL-compatible (BSD-2-Clause-Patent: Blue Oak Gold) | the copyright line of the source's own license file goes into `text` with the license |
 | `Apache-2.0` | FSF: compatible with GPLv3 (not v2) | the source's `NOTICE` file, if any: its content follows the license in `text` |
 | `Zlib`, `BSL-1.0`, `WTFPL` | FSF: compatible | Zlib: changed versions must be marked as changed |
 | `Python-2.0`, `PSF-2.0` | FSF: compatible from Python 2.0.1 and 2.1.1 | Python 1.6b1 to 2.1 licenses are not compatible |
 | `Unicode-3.0`, `Unicode-DFS-2016` | FSF: compatible with every GPL version | |
-| `Artistic-2.0` | FSF: compatible through its section 4(c)(ii) | Artistic-1.0 (old Perl) is refused; Perl's "Artistic or GPL" is written as an expression (below) |
+| `Artistic-2.0` | FSF: compatible through its section 4(c)(ii) | Artistic-1.0 is refused; a choice between Artistic and the GPL is written as an expression (below) |
 | `BlueOak-1.0.0` | Blue Oak Council's model permissive license | no FSF ruling; its text sets no condition the AGPL forbids |
 
 ### GPLv3 family
 
 | License (SPDX) | Why it is allowed | What to check |
 | --- | --- | --- |
-| `GPL-3.0-only`, `GPL-3.0-or-later`, `LGPL-3.0-only`, `LGPL-3.0-or-later` | AGPL section 13 lets an AGPL work combine with GPLv3 works | a "-only" part can never move to a later AGPL version; the version comes from the notices in the files: a notice naming version 3 only gives "-only", and "any later version", or no notice at all, gives "-or-later" (section 14: a Program that specifies no version lets any version be chosen; maintainer's decision, 2026-10-16), the same for the AGPL |
+| `GPL-3.0-only`, `GPL-3.0-or-later`, `LGPL-3.0-only`, `LGPL-3.0-or-later` | AGPL section 13 lets an AGPL work combine with GPLv3 works | a "-only" part can never move to a later AGPL version; the version comes from the notices in the files: a notice naming version 3 only gives "-only", and "any later version", or no notice at all, gives "-or-later" (section 14: a Program that specifies no version lets any version be chosen), the same for the AGPL |
 | `AGPL-3.0-only`, `AGPL-3.0-or-later` | the weights' own license | |
 
 ### Copyleft that moves to the GPLv3 or the AGPL
 
 | License (SPDX) | Why it is allowed | What to check |
 | --- | --- | --- |
-| `GPL-2.0-or-later` | "or later" lets the recipient choose the GPLv3 | the notice in each file: a notice naming version 2 only (GPL-2.0-only, the Linux kernel) is refused; "any later version", or no notice at all, gives "-or-later" (section 9: a Program that specifies no version lets any version be chosen; maintainer's decision, 2026-10-16) |
-| `LGPL-2.1-only`, `LGPL-2.1-or-later` | LGPL 2.1 section 3: the ordinary GPL may apply instead, "if a newer version than version 2 ... has appeared, then you can specify that version" | a notice naming version 2.1 only gives "-only"; "any later version", or no notice at all, gives "-or-later" (section 14, as for the GPL; maintainer's decision, 2026-10-16) |
+| `GPL-2.0-or-later` | "or later" lets the recipient choose the GPLv3 | the notice in each file: a notice naming version 2 only (GPL-2.0-only) is refused; "any later version", or no notice at all, gives "-or-later" (section 9: a Program that specifies no version lets any version be chosen) |
+| `LGPL-2.1-only`, `LGPL-2.1-or-later` | LGPL 2.1 section 3: the ordinary GPL may apply instead, "if a newer version than version 2 ... has appeared, then you can specify that version" | a notice naming version 2.1 only gives "-only"; "any later version", or no notice at all, gives "-or-later" (section 14, as for the GPL) |
 | `MPL-2.0` | section 1.12 names "the GNU Affero General Public License, Version 3.0, or any later versions" a Secondary License, and section 3.3 allows distribution under it | files marked "Incompatible With Secondary Licenses" (Exhibit B, SPDX `MPL-2.0-no-copyleft-exception`) are refused |
 | `EUPL-1.2` | its appendix lists the AGPL; the European Commission: "you may distribute under the AGPL a larger derivative work integrating components covered by the EUPL" | EUPL-1.1 is refused (FSF: incompatible) |
 | `CECILL-2.1` | FSF: "explicitly compatible with the GNU GPL" | CeCILL-B and CeCILL-C are refused |
@@ -437,7 +438,24 @@ says so in its row.
 
 | License (SPDX) | Why it is allowed | What to check |
 | --- | --- | --- |
-| `CC-BY-4.0` | FSF: "compatible with all versions of the GNU GPL"; credit may be given "in any reasonable manner", including a link (section 3(a)(2)); Creative Commons: for training, credit "could be a simple link to the source of the dataset" | NC and ND variants are refused; the credit names the creator, the copyright notice, the license, a link and whether the work was changed; a label that names no version (peS2o's "CCBY") is CC BY, written `CC-BY-4.0` with a note in `text` that no version is named (maintainer's decision, 2026-10-16, kept on 2026-10-21 on that decision alone: its first reason, that every version permits the use, fell when the versions before 4.0 failed the linking test) |
+| `CC-BY-4.0` | FSF: "compatible with all versions of the GNU GPL"; credit may be given "in any reasonable manner", including a link (section 3(a)(2)); Creative Commons: for training, credit "could be a simple link to the source of the dataset" | NC and ND variants are refused; the credit names the creator, the copyright notice, the license, a link and whether the work was changed; a label that names no version is CC BY, written `CC-BY-4.0` with a note in `text` that no version is named (maintainer's decision alone) |
+
+### Share-alike, a grey zone: Creative Commons Attribution-ShareAlike 4.0
+
+| License (SPDX) | Why it is allowed | What to check |
+| --- | --- | --- |
+| `CC-BY-SA-4.0` | Creative Commons declared GPLv3 a BY-SA-compatible license for BY-SA 4.0, one way only (<https://creativecommons.org/share-your-work/licensing-considerations/compatible-licenses/>), and AGPL section 13 accepts GPLv3 works (maintainer's decision alone) | a grey zone: allowed until legal review says otherwise ([LEGAL-QUESTIONS.html](../LEGAL-QUESTIONS.html), D1); CC BY-SA before 4.0 is refused; the credit is the same as for CC BY 4.0 |
+
+Facts gathered for the legal review:
+
+- The AGPL is not on Creative Commons' list of BY-SA-compatible licenses.
+- Creative Commons' guidance on training: "If AI models or outputs are based
+  on ShareAlike content and they will be shared publicly, following the
+  ShareAlike condition would require AI developers to use the same CC
+  license as the original works"
+  (<https://creativecommons.org/using-cc-licensed-works-for-ai-training-2/>).
+- Wikipedia text is CC BY-SA 4.0 under the current Wikimedia Terms of Use.
+- Common Pile v0.1 includes CC BY-SA content.
 
 ### Several licenses on one file
 
@@ -451,8 +469,7 @@ after Apache-2.0) and `GCC-exception-3.1` (GCC's runtime libraries, after
 GPL-3.0-or-later). `AND` joins licenses that apply at once, such as
 `MIT AND Apache-2.0` for a repository with both license files and no
 statement that one may choose: the alternative passes when every license
-in it is allowed, and its `text` holds every one of their texts
-(maintainer's decision, 2026-10-16). When the repository states the choice
+in it is allowed, and its `text` holds every one of their texts. When the repository states the choice
 (its README or `Cargo.toml` says "MIT OR Apache-2.0", "MIT/Apache-2.0" or
 "at your option"), the entry is `MIT OR Apache-2.0`. `AND` binds before `OR`, as in SPDX;
 parentheses are not accepted.
@@ -468,26 +485,10 @@ each distinct text once.
 
 ### Still refused
 
-The grey zone is CC-BY-SA-4.0 alone, refused until a lawyer confirms it
-(maintainer's decision, 2026-10-16). Facts gathered for that review:
-
-- Creative Commons declared GPLv3 a BY-SA-compatible license for BY-SA 4.0 on
-  2015-10-08, one way only
-  (<https://creativecommons.org/share-your-work/licensing-considerations/compatible-licenses/>);
-  the AGPL is not on that list.
-- Creative Commons' guidance on training: "If AI models or outputs are based
-  on ShareAlike content and they will be shared publicly, following the
-  ShareAlike condition would require AI developers to use the same CC
-  license as the original works"
-  (<https://creativecommons.org/using-cc-licensed-works-for-ai-training-2/>),
-  which contradicts AGPL weights.
-- Wikipedia text is CC BY-SA 4.0 under the current Wikimedia Terms of Use.
-- Common Pile v0.1 includes CC BY-SA content; WPT's rule is stricter.
-
 Refused: any NC (no commercial use) or ND (no derivatives) clause,
 GPL-2.0-only, CC-BY-SA-3.0, ODbL-1.0 (FSF: "incompatible with the GNU
-GPL"), GFDL (FSF: not GPL-compatible; maintainer's decision, 2026-10-16:
-plainly refused, not a grey zone), the Free Art
+GPL"), GFDL (FSF: not GPL-compatible; plainly refused, not a grey zone),
+the Free Art
 License, CDDL-1.0, EPL-1.0, EPL-2.0 alone, EUPL-1.1,
 MPL-2.0-no-copyleft-exception, CeCILL-B, CeCILL-C, Artistic-1.0,
 BSD-4-Clause, the old OpenSSL license, "responsible AI" and model licenses
@@ -501,207 +502,131 @@ with the major software licenses"
 Refused: `CC-BY-1.0`, `CC-BY-2.0`, `CC-BY-2.5`, `CC-BY-2.5-AU`,
 `CC-BY-3.0`, `CC-BY-3.0-AT`, `CC-BY-3.0-AU`, `CC-BY-3.0-DE`,
 `CC-BY-3.0-IGO`, `CC-BY-3.0-NL`, `CC-BY-3.0-US` and
-`LicenseRef-CC-BY-2.0-FR`; a file under one of them is left out
-(maintainer's decision, 2026-10-21).
+`LicenseRef-CC-BY-2.0-FR`; a file under one of them is left out.
 
 ### Waiting for the linking test
 
-The data and public-sector licenses below were allowed before the linking
-test. None has a ruling on linking with GPL or AGPL code, so each one is a
-doubt and stays refused until it is checked against the test, one by one
-(maintainer's decision, 2026-10-21). The facts gathered for each are kept
-for that check.
+The data and public-sector licenses below have no ruling on linking with
+GPL or AGPL code, so each one is a doubt and stays refused until it is
+checked against the linking test, one by one. What to check for each,
+when it is:
 
-| License (SPDX) | Why it was allowed | What to check |
-| --- | --- | --- |
-| `PDDL-1.0` | public-domain dedication for databases; Open Definition: recommended | |
-| `CDLA-Permissive-2.0` | section 3.1: no restriction on Results, which section 5.4 says include machine learning models | sharing the data itself needs the license text, which WPT never does (it holds pointers) |
-| `CDLA-Sharing-1.0` | section 3.5: no obligation on Results (maintainer's decision) | Results may hold no more than a de minimis part of the data (section 1.11): measure memorization (`wpt-eval FOLDER memorization`) before publishing weights trained on it |
-| `ODC-By-1.0` | Open Definition: recommended | it covers a database, not the documents in it: each document needs its own license |
-| `OGL-UK-3.0` | the licence states it is "compatible with the Creative Commons Attribution License 4.0 and the Open Data Commons Attribution License" | it excludes personal data, third-party rights and logos; default credit: "Contains public sector information licensed under the Open Government Licence v3.0." |
-| `OGL-Canada-2.0` | Open Definition: conformant | |
-| `etalab-2.0` | Licence Ouverte 2.0, built to be compatible with CC BY (2.0 and later), the OGL and ODC-BY | credit: the source (at least the licensor's name) and the date of its last update |
-| `DL-DE-BY-2.0`, `DL-DE-ZERO-2.0` | Open Definition: conformant; allows change, merging and any purpose | BY: the provider's name, "dl-de/by-2-0" with its link, the dataset's link; changes are marked as such |
-| `NLOD-2.0` | its section 9 states compatibility with the OGL | |
-| `LicenseRef-IODL-2.0` | Italian Open Data License 2.0, a variant of the UK OGL | not in SPDX: its text comes from the publisher |
-| `LicenseRef-PDL-1.0` | Japan's Public Data License 1.0; the Japanese government states it is compatible with CC BY 4.0 | each dataset may add limits in an "Important note" section, often only in Japanese: read it |
-| `LicenseRef-OPL-UK-3.0` | the UK Open Parliament Licence v3.0, modelled on `OGL-UK-3.0` with the same terms: free use with attribution (maintainer's decision, 2026-10-16) | it excludes third-party material, personal data and the Parliament's logos; not in SPDX: its text comes from the publisher; credit: "Contains Parliamentary information licensed under the Open Parliament Licence v3.0." |
+| License (SPDX) | What to check |
+| --- | --- |
+| `PDDL-1.0` |  |
+| `CDLA-Permissive-2.0` | sharing the data itself needs the license text, which WPT never does (it holds pointers) |
+| `CDLA-Sharing-1.0` | Results may hold no more than a de minimis part of the data (section 1.11): measure memorization (`wpt-eval FOLDER memorization`) before publishing weights trained on it |
+| `ODC-By-1.0` | it covers a database, not the documents in it: each document needs its own license |
+| `OGL-UK-3.0` | it excludes personal data, third-party rights and logos; default credit: "Contains public sector information licensed under the Open Government Licence v3.0." |
+| `OGL-Canada-2.0` |  |
+| `etalab-2.0` | credit: the source (at least the licensor's name) and the date of its last update |
+| `DL-DE-BY-2.0`, `DL-DE-ZERO-2.0` | BY: the provider's name, "dl-de/by-2-0" with its link, the dataset's link; changes are marked as such |
+| `NLOD-2.0` |  |
+| `LicenseRef-IODL-2.0` | the Italian Open Data License 2.0; not in SPDX: its text comes from the publisher |
+| `LicenseRef-PDL-1.0` | Japan's Public Data License 1.0; each dataset may add limits in an "Important note" section, often only in Japanese: read it |
+| `LicenseRef-OPL-UK-3.0` | it excludes third-party material, personal data and the Parliament's logos; not in SPDX: its text comes from the publisher; credit: "Contains Parliamentary information licensed under the Open Parliament Licence v3.0." |
 
 ## Rules
 
-- A source can hold several licenses, each mapped to its paths; every path
-  matches exactly one. Each entry carries its credit (`attribution`) and its
-  text (`text`).
-- Checking is per file, not per repository: a license can be applied by
-  mistake, and public domain depends on the country.
-- **Per record** in a `records` file (a dataset holding many documents,
-  each with its own license field): the license entries covering the file
-  list in `values` the exact license values they cover, and a record enters
-  only when its value is listed. Any other value (vague ones such as
-  "Various open data", ShareAlike, unknown) leaves the record out, so a
-  value nobody reviewed never enters. Each kept record's credit fields go
+- **Public domain** means public domain under the law of the country
+  where the kept content was first published, and that law alone,
+  whatever another country says. That law applies to every author and
+  translator whose words are in the content: the content is in the public
+  domain when the law's terms have ended for each of them, or when its
+  authors placed it in the public domain themselves. When the country of
+  first publication is unknown, the source is a doubt. A translation is
+  judged in two parts: the original under the law of its own first
+  publication, the translation under the law of the translation's.
+- **A newspaper issue is one collective work**, signed articles included,
+  judged under the law of the country where it was published.
+- **A later edition counts as the text it reproduces.** Its editors are
+  credited in the attribution, and their work does not block the source,
+  unless the edition states otherwise.
+- **Doubts are never guessed.** A fact the decision needs that cannot be
+  found, or facts that disagree, make the source a doubt for the
+  maintainer. A doubt stays `under-review`, with the missing fact as its
+  `reason`, and is not refused.
+- **Public-domain dedications.** A statement that the content is in the
+  public domain, or under CC0, counts when its authors made it, or the
+  project that made the content, and nothing from the same holder
+  contradicts it: a notice reserving rights, a condition on copying or
+  changing the content. A request about a name alone, or a copyright line
+  beside a release of every right, contradicts nothing. A label a
+  distributor writes on content it did not make does not count. The entry
+  is `LicenseRef-public-domain`, with the statement quoted in `text`.
+- **Every path has exactly one license entry.** A source can hold several
+  licenses, each mapped to its paths, and each entry carries its credit
+  (`attribution`) and its text (`text`). Each path is checked on its own:
+  a file can carry another license than the rest of its source.
+- **Every file whose license allows it comes in.** Configuration, build
+  files, license files and edition pages are data like any other. Only
+  the rules on this page leave a file out, and files that are not text
+  the repository can read: UTF-8, or the encoding a file states itself.
+- **A file is covered by the license its publication gives it**, such as
+  a repository's license file for every file of the repository. A file no
+  license covers is all rights reserved, and stays out.
+- **Records.** In a dataset whose records each carry their own license
+  value (a `records` file), each license entry lists in `values` the
+  exact values it covers, and a record enters only when its value is
+  listed: a value nobody reviewed never enters. A value is the license of
+  that record's own content. A license the dataset gives its whole
+  collection covers its records only when it is the license of the content
+  itself: the dataset's makers made that content or state that it is under
+  that license. A license on a collection whose content belongs to others,
+  and is copyrighted, covers none of its records. A value that joins several licenses with
+  commas is their `AND` ("Several licenses on one file", above): its
+  entry is allowed only when every license in it is, and its `text` holds
+  every one of their texts. When a value is known to be wrong for part of
+  a file, the format entry's `keep` rules leave that part out by another
+  field: each names a field and the values it may hold, and a record
+  enters only when every rule holds. Each kept record's credit fields go
   into `CREDITS/<source id>.jsonl` in every model folder trained on it,
-  which `NOTICE` names. The values are the dataset's own labels: its
-  publisher checked each document, not WPT, and a label can be wrong.
-  When a label is known to be wrong for part of the file, the format
-  entry's `keep` rules leave that part out by another field: each names a
-  field and the values it may hold, and a record enters only when every
-  rule holds: UK Hansard keeps the records of the UK Parliament, which its
-  licence covers, and leaves out those of the devolved parliaments and
-  London; regulations keeps the rules and proposed rules agencies issue,
-  and leaves out the notices and supporting material that also hold
-  companies' filings (maintainer's decision, 2026-10-16).
-- **A git history** (`history` in a git source) starts at the commit from
-  which the repository's root license file holds the license the source
-  lists: earlier commits were published without a license or under
-  another one. Its diffs show every file the source keeps, third-party
-  folders included, so its license entry is the AND of every license in
-  the source, with every credit (maintainer's decision, 2026-10-16). Commit
-  authors' names and emails stay as git wrote them: the repository
-  publishes them under its license. A path under `.git/history/` is
-  counted only against license entries whose patterns start with
-  `.git/history/`, so a tree entry written `**` means every file of the
-  tree and does not match the history files (maintainer's
-  decision, 2026-10-20); a pattern starting with `.git/history/` matches
-  no file of the tree. The order file, `.git/history/order` (the commits
-  newest first, merges marked), is part of the history and gets its
-  license entry by the same rule, from the patterns that start with
-  `.git/history/` (maintainer's decision, 2026-10-22).
-- **Every file whose license allows it comes in.** Only binary files (the
-  repository reads text: UTF-8, or the encoding a file states itself,
-  maintainer's decision, 2026-10-23), license refusals and doubts leave a
-  file out; configuration, build files, license files and edition pages are
-  data like any other (maintainer's decision, 2026-10-16).
-- **Third-party code** (a copied library, a dependency folder) inside a
-  source is used when its license is allowed, as its own license entry:
-  its license file, or else the license its package metadata declares
-  (`package.json`, `Cargo.toml`, `composer.json`, `pyproject.toml`), with
+  which `NOTICE` names.
+- **Third-party code** inside a source (a copied library, a dependency
+  folder) gets its own license entry when its license is allowed: its
+  license file, or else the license its package metadata declares, with
   that license's official text in `text`. A folder that declares no
-  license stays out (maintainer's decision, 2026-10-16).
-- **A license notice without the license's text** (a `LICENSE` that only
-  says, for example, "Licensed under the Apache License, Version 2.0" and
-  links to it) counts like a license declared in package metadata: the
-  entry's `text` holds the notice, then that license's official text
-  (maintainer's decision, 2026-10-21).
+  license stays out.
+- **A license notice without the license's text** (a file that only names
+  the license and links to it) counts as a license declared in package
+  metadata: the entry's `text` holds the notice, then that license's
+  official text.
 - **A git submodule** is another repository with its own license. Its
   files enter at the commit the parent pins, with a license entry of
-  their own when that license is on the allowed list (a parent under
-  MIT and a submodule under Apache-2.0 give two entries); a submodule
-  under another license, or one that cannot be fetched, is excluded
-  (maintainer's decision, 2026-10-16).
-- **Public domain** means public domain under the law of the country where
-  the work was first published, and that law alone: a Russian book under
-  Russian law, a French book under French law, whatever another country
-  says (maintainer's decision, 2026-10-22). A text is in the public domain
-  in one of two ways: every person whose words are in it has died and the
-  terms below have ended, or its authors placed it in the public domain
-  themselves (a dedication, below) (maintainer's decision, 2026-10-22).
-  A term runs to the end of the calendar year in which it ends: life + 70
-  years for a person who died in 1955 ends on 31 December 2025. How to
-  decide, for every person whose words are in the text (author,
-  translator, reviser, editor of notes):
-  - **The country of first publication is known**: that country's term
-    and its own rules decide: France (wartime extensions of about 6 to 8
-    years for works published before 1948, more for an author "mort pour
-    la France"), Spain (life + 80 for authors who died before 1987),
-    Colombia (life + 80), Mexico (life + 100), Russia (4 more years for
-    people who worked or fought in the Second World War). A country whose
-    law counts a work's term from its publication rather than from a
-    death counts it so, and a condition that law set, such as a renewal
-    of the copyright it required, counts too: the edition's own statement
-    that the text is in the public domain in that country is proof that
-    it was met (maintainer's decisions, 2026-10-22).
-  - **The country of first publication is unknown**: the work is free only
-    when every country where it could first have appeared has ended its
-    term. Everyone lived until 1925 or earlier: public domain in every
-    country (the longest term, Mexico's life + 100 years, ended by 2026).
-    Everyone lived until 1955 or earlier: public domain in every country
-    whose term is life + 70 years or shorter, which covers the
-    English-speaking countries and most of Europe; a country with a longer
-    term (above) that it could have appeared in still needs its own check.
-    Someone lived until 1956 or later: the country must be found.
-  - **First published in two countries within 30 days**: its country is the
-    one whose term is shorter (Berne Convention, article 5(4)), which must
-    be named.
-  - **A translation is two layers**: the original is settled by its own
-    author (an author who lived until 1925 or earlier, or an anonymous or
-    traditional work written before 1800, frees the original everywhere,
-    whatever its country), and the translation by its translator and
-    editors, with the countries where that translation could first have
-    appeared.
-  - **A dedication by the authors themselves** to the public domain (the
-    Python Enhancement Proposals, whose authors placed them in the public
-    domain) is `LicenseRef-public-domain`, with the dedication quoted in
-    `text` (maintainer's decision, 2026-10-15).
-  - **A translation project's own dedication** counts as its authors':
-    the project states in its own words that the text is in the public
-    domain (or under CC0), and nothing from the same holder contradicts it,
-    such as a notice reserving rights, a conflicting page or a condition on
-    copying or changing the text. The Berean Standard Bible stays refused
-    for a conflicting page of its holder. A request about the name alone
-    does not contradict it (the World English Bible: "if you CHANGE the
-    actual text ... you not call the result the World English Bible"), nor
-    does a copyright line beside a release of every right (the
-    Robinson-Pierpont Greek New Testament: "This compilation is Copyright
-    ... All rights to this text are released to everyone"). A label written
-    by a distributor counts only when the distributor is the project, as
-    eBible.org's owner is the World English Bible's editor (maintainer's
-    decisions, 2026-10-16). Exception: Robert Adam Boyd's three editions
-    on eBible.org (`ebible-engasvbt`, `ebible-englxxup`, `ebible-grctr`)
-    are admitted on eBible.org's label alone, as no statement in Boyd's
-    own words was found (maintainer's decision alone, 2026-10-21).
-  - **A text revised by an unnamed committee or reviser** and published
-    before 1926 is an anonymous work, in the public domain everywhere; the
-    named people (the original translator) are still checked
-    (maintainer's decision, 2026-10-16).
-  - An unknown death year, an unnamed reviser or committee of a text
-    published in 1926 or later, or facts that disagree make the work a
-    doubt for the maintainer, never a guess. A fact that one more research
-    pass cannot find leaves the source refused, with that fact as its
-    `reason` (maintainer's decision, 2026-10-16).
-- **Collections the maintainer chose**: GitHub repositories with 10,000
-  stars or more, forks and archived ones included, whose license is
-  allowed, whether GitHub recognizes the license file or the file itself
-  is identified (maintainer's decisions, 2026-10-15 and 2026-10-16); the
-  build removes exact duplicates with Common Pile's code.
-- **A distributor's own pages** (a copyright page, a note on the file set)
-  enter only when the distributor states their license: eBible.org states
-  none for its own pages, so they stay out, while its signing key, not a
-  written work, enters. A dataset card enters when its license is stated:
-  OpenAssistant's under Apache-2.0, not Common Pile's, which state none
-  (maintainer's decisions, 2026-10-16).
-- **A distributor's date is not proof of the edition**: compare a passage
-  with the edition it names; modern spelling, section headings or
-  introductions mean a later edition, whose editors must be found.
-  Exception: the Arabic Van Dyck Bible (`ebible-arb-vd`), whose vowel
-  marks, absent from the 1867 printing, are by unnamed editors, is
-  admitted because they change no word (maintainer's decision alone,
-  2026-10-21).
+  their own when that license is allowed; a submodule under another
+  license, or one that cannot be fetched, is excluded.
+- **A git history** (`history` in a git source) starts at the commit from
+  which the repository's root license file holds the license the source
+  lists. Its diffs show every file the source keeps, so its license entry
+  is the `AND` of every license in the source, with every credit. Commit
+  authors' names and emails stay as git wrote them: the repository
+  publishes them under its license. Only license patterns that start with
+  `.git/history/` cover the history files, its order file included.
+- **GitHub repositories with 10,000 stars or more** are a collection to
+  draw sources from, forks and archived ones included, when their license
+  is allowed, whether GitHub recognizes the license file or reading the
+  file identifies it.
 - **"No AI training" wishes are honored** even when the license would allow
-  use: a statement by the owner in a README or a machine-readable
-  text-and-data-mining reservation (EU Directive 2019/790, article 4) leaves
-  the content out. Review looks for them on every source.
+  use: a statement by the owner, or a machine-readable
+  text-and-data-mining reservation (EU Directive 2019/790, article 4),
+  leaves the content out, wherever it is hosted. Review looks for them on
+  every source.
 - **robots.txt is enforced in the code**, with no setting to turn it off:
   before any download from an http(s) address, `wpt-dataset` reads the
   site's robots.txt (RFC 9309) and does not download from that address when
   it is forbidden to every crawler (`*`), to `wpt-dataset` itself, or to an
   AI training crawler. Those are the crawlers whose operator documents that
   they gather training data, listed with the link to that statement in
-  `packages/wpt-dataset/src/wpt_dataset/robots.py`. Crawlers that only fetch
-  a page for a person using an AI assistant (Claude-User, ChatGPT-User...)
-  are not on the list: a site that refuses only them has not refused
-  training.
-- **A robots.txt speaks for its own site.** Whoever runs a site writes its
-  robots.txt, and that is not always the owner of the content: a hosting
-  platform can block every AI crawler while the author's own site allows
-  them. So a refused address is skipped and the source's next mirror is
-  tried, read with its own robots.txt; the source fails (`CrawlForbidden`)
-  only when no address works and one of them refused. A statement by the
-  owner (above) still leaves the content out wherever it is hosted.
-- **Only a missing robots.txt means no rules**: an answer 404 (not found)
-  or 410 (gone), since some sites publish no policy. Any other answer
-  (401, 403, 429, a server error, a timeout, an unreachable site) leaves the
-  policy unknown, so that address is not used and the next mirror is tried.
+  `packages/wpt-dataset/src/wpt_dataset/robots.py`. A crawler that only
+  fetches a page at a person's request is not on the list: a site that
+  refuses only such crawlers has not refused training.
+- **A robots.txt speaks for its own site**, which is not always the
+  owner's: a refused address is skipped and the source's next mirror is
+  tried, read with its own robots.txt. The source fails (`CrawlForbidden`)
+  only when no address works and one of them refused. Only an answer 404
+  (not found) or 410 (gone) means no rules; any other answer leaves the
+  policy unknown, so that address is not used and the next mirror is
+  tried.
 - **No personal data**: sources made of personal data are not accepted.
 - A machine can check that a license is written and allowed, not that it is
   true. If the source page lies, only human review catches it.
@@ -711,22 +636,21 @@ for that check.
 A human decides every source; the decision is recorded in `source.json`
 (`decision`, with a reason for a refusal or an exceptional admission) and
 its commit must be signed by an allowed key (see
-[CONTRIBUTING.md](../CONTRIBUTING.md)). A source has exactly three states
-(maintainer's decision, 2026-10-22): `under-review` (not yet decided, where
-every new source starts; a reason is optional), `admitted` and `refused`;
-only an admitted source enters a build. A source replaced because its
-address moved is refused, its reason naming the new source's id. A
-refused source stays in the repository as a reference: it is never
-deleted (maintainer's decision, 2026-10-22). There is no automatic
-filtering or tagging.
+[CONTRIBUTING.md](../CONTRIBUTING.md)). A source has exactly three states:
+`under-review` (not yet decided, where every new source starts, and where
+a doubt stays, its reason naming the missing fact), `admitted` and
+`refused`; only an admitted source enters a build. A source replaced
+because its address moved is refused, its reason naming the new source's
+id. A refused source stays in the repository as a reference: it is never
+deleted. No program admits or refuses a source, or writes its tags:
+people do. The build applies only the rules people wrote.
 
 A license question the maintainer cannot settle alone goes into
 [LEGAL-QUESTIONS.html](../LEGAL-QUESTIONS.html), the page for legal
 review, in English and French: the current choice, the reasons and
 evidence, and the question. Until a lawyer answers, the current choice
 applies. An answer is written under its question with its date and who
-gave it, and the rule it changes is written into this document
-(maintainer's decision, 2026-10-16).
+gave it, and the rule it changes is written into this document.
 
 Tools may help reviewers by flagging, never by deciding:
 
@@ -740,10 +664,14 @@ Tools may help reviewers by flagging, never by deciding:
 
 No output of another company's language model enters the data or the
 training, including "synthetic" datasets whose human origin is not proven.
-This covers text a model produced: generated datasets (smoltalk, Tulu,
-OpenCodeInstruct), machine transcripts (Whisper transcripts of videos),
-OCR corrected by a model, and conversations marked as synthetic. It does
-not cover work that people published under an allowed license, such as a
-repository's code, even when its authors used an AI assistant: the license
-of the person who published it decides, and repositories are not filtered
-for signs of such tools (maintainer's decision, 2026-10-15).
+This covers text such a model produced: generated datasets, transcripts it
+made, OCR it corrected, and conversations marked as synthetic. A
+transcript enters when it carries an allowed license and no other
+company's model generated it. Text read from scans by an OCR program, a
+neural one included, with no rewriting or correction by a language model,
+is not model output and is allowed.
+
+It does not cover work that people published under an allowed license,
+such as a repository's code, even when its authors used an AI assistant:
+the license of the person who published it decides, and repositories are
+not filtered for signs of such tools.

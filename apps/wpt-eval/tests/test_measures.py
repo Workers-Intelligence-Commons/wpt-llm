@@ -65,8 +65,7 @@ def run(context):
 def test_the_measures_of_one_command_share_one_run_of_attempts_kept_in_its_record(trained, tmp_path, monkeypatch):
     # every measure of one wpt-eval reads the same records, played once for
     # each value of plain, at the measure-only tasks (tagged eval here), the
-    # model always taking its likeliest token (maintainer's decision,
-    # 2026-10-23); plain offers the same variants as the varied run, under
+    # model always taking its likeliest token; plain offers the same variants as the varied run, under
     # their real names; the run's record keeps each attempt as a line of
     # attempts.jsonl with its changes to /work, an attempt Docker dropped
     # included, marked dropped, and only the scored ones reach the measures
@@ -224,7 +223,7 @@ def measure(name, varied, plain_records=(), tasks=None):
 
 
 def test_look_before_claim_counts_the_claims_on_files_a_look_opened_before(repository):
-    # maintainer's decision, 2026-10-23: a claim is a file present in /work
+    # a claim is a file present in /work
     # at the start (.git/ left out, files the attempt wrote not counted),
     # named in an assistant message or in the answer, one per path and
     # message; it is looked first when an earlier looking call named that
@@ -302,7 +301,7 @@ def test_tool_robustness_says_whether_there_was_no_task_or_no_task_scored_in_bot
 
 
 def test_code_versus_other_calls_a_task_code_when_a_document_it_points_to_is_tagged_code(repository):
-    # maintainer's decision, 2026-10-23: any pointed document tagged code
+    # any pointed document tagged code
     # makes a code task, by its file's tags (a repository pointer's commit:
     # test_history.py); a task pointing to none is another task
     code = repository.source("code", [{"tags": ["code"], "paths": ["**"]}])

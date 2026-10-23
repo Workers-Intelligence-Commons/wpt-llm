@@ -7,14 +7,13 @@ plain paragraph of a document's Markdown, its quoted start (about its
 first 40%) and the rest, which the model must give. select() chooses the
 documents a measure asks about, the same on every run. A question is
 asked as one user message holding the prompt, which never asks for JSON:
-the model's reply is text, and it is the answer (maintainer's decision,
-2026-10-23; docs/chat-format.md, "The answer"). A measure that wants a
+the model's reply is text, and it is the answer (docs/chat-format.md, "The answer"). A measure that wants a
 confidence then asks the agent loop's question (wpt_agent.loop.CONFIDENCE)
 as one more user message, and the reply, a number from 0 to 100 and
 nothing else, divided by 100, is the confidence
 (wpt_agent.loop.confidence). The model writes each message through
 wpt_inference.next_message, as wpt-chat --chat does, always taking its
-likeliest token (wpt_agent.GREEDY; maintainer's decision, 2026-10-23), so
+likeliest token (wpt_agent.GREEDY), so
 a run gives the same answers again on the same setup.
 
 The measure builds the answer, as the agent loop does: the conversation's
@@ -23,8 +22,7 @@ the measure asks for one, and None when the reply to the confidence
 question is not such a number, which counts as no answer, as in a task.
 A measure keeps it as a json block in its records (block), a shape that
 can go back into sources. Every model runs the same way, a pre-trained
-one included, and scores what it scores (maintainer's decision,
-2026-10-23).
+one included, and scores what it scores.
 
 The answer is right when it holds the rest of the paragraph, the check
 library's holds rule, and its confidence is scored with the library's

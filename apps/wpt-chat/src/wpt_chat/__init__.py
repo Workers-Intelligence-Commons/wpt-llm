@@ -36,7 +36,7 @@ from wpt_store import StoreError, store_from_settings
 from wpt_tokenizer import Tokenizer, chat
 from wpt_utils.device import describe, select_device
 
-# the current shape of a conversation, wpt-chat's own constant (maintainer's decision, 2026-10-18):
+# the current shape of a conversation, wpt-chat's own constant:
 # wpt_dataset.repo.CURRENT_SCHEMA["conversation"], which a test keeps equal
 CONVERSATION_SHAPE = 3
 MAX_NEW_TOKENS = 200

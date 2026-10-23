@@ -25,9 +25,9 @@ def test_check_reports_each_broken_rule(kit, repo, store, git_upstream):
         "type": "git", "address": git_upstream[0], "revision": git_upstream[1]})
     assert repo.check() == []
 
-    grey = kit.add_source(repo, store, "example", "grey", {
+    noncommercial = kit.add_source(repo, store, "example", "noncommercial", {
         "type": "git", "address": git_upstream[0] + "/.", "revision": git_upstream[1],
-        "licenses": [{"license": "CC-BY-SA-4.0", "paths": ["**"], "attribution": kit.ATTRIBUTION, "text": kit.LICENSE_TEXT}]})
+        "licenses": [{"license": "CC-BY-NC-4.0", "paths": ["**"], "attribution": kit.ATTRIBUTION, "text": kit.LICENSE_TEXT}]})
     unexplained = kit.add_source(repo, store, "example", "unexplained", {
         "type": "git", "address": git_upstream[0] + "/./", "revision": git_upstream[1],
         "decision": {"decision": "refused", "by": "Test Reviewer", "date": "2026-10-14"}})  # a refusal must say why
@@ -38,7 +38,7 @@ def test_check_reports_each_broken_rule(kit, repo, store, git_upstream):
     kit.write_recipe(repo, "mixture", "half", {"pools": [{"name": "a", "select": "a", "weight": 0.5}]})
 
     problems = "\n".join(repo.check())
-    assert f"{grey}: license CC-BY-SA-4.0 is not on the allowed list" in problems
+    assert f"{noncommercial}: license CC-BY-NC-4.0 is not on the allowed list" in problems
     assert any(unexplained in line and "'reason' is a required property" in line for line in problems.splitlines())
     assert f"the id must end with {address_hash(git_upstream[0])}" in problems
     assert f"{good}: patches must be numbered 0001" in problems
@@ -100,15 +100,15 @@ def test_a_license_expression_passes_when_one_alternative_is_allowed(kit, repo, 
 
     add("eclipse", "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0", "")
     add("both", "MIT AND Apache-2.0", "//")
-    add("either", "CC-BY-SA-4.0 AND MIT OR CC0-1.0", "///")  # AND binds first: CC0-1.0 alone is allowed
+    add("either", "CC-BY-NC-4.0 AND MIT OR CC0-1.0", "///")  # AND binds first: CC0-1.0 alone is allowed
     assert repo.check() == []
-    neither = add("neither", "EPL-2.0 OR CC-BY-SA-4.0", "/.")
+    neither = add("neither", "EPL-2.0 OR CC-BY-NC-4.0", "/.")
     unknown = add("unknown", "GPL-2.0-or-later WITH Some-exception", "/./")
-    half = add("half", "MIT AND CC-BY-SA-4.0", "/.//")
+    half = add("half", "MIT AND CC-BY-NC-4.0", "/.//")
     problems = repo.check()
-    assert f"{neither}: license expression EPL-2.0 OR CC-BY-SA-4.0 is not on the allowed list" in problems
+    assert f"{neither}: license expression EPL-2.0 OR CC-BY-NC-4.0 is not on the allowed list" in problems
     assert f"{unknown}: license expression GPL-2.0-or-later WITH Some-exception is not on the allowed list" in problems
-    assert f"{half}: license expression MIT AND CC-BY-SA-4.0 is not on the allowed list" in problems
+    assert f"{half}: license expression MIT AND CC-BY-NC-4.0 is not on the allowed list" in problems
     assert len(problems) == 3
 
 
@@ -151,7 +151,7 @@ def test_migrating_to_shape_4_moves_a_licenseref_text_into_source_json(kit, repo
 
 
 def test_migrating_to_shape_6_gives_each_source_one_of_three_states(kit, repo, store, git_upstream):
-    # maintainer's decision, 2026-10-22: under-review, admitted, refused; a
+    # under-review, admitted, refused; a
     # refusal "under review" was a review, a retired source is a refused one
     by = {"by": "Test Reviewer", "date": "2026-10-14"}
     old = {"review": {"decision": "refused", **by, "reason": "under review"},
@@ -285,8 +285,7 @@ def test_migrating_a_shape_3_model_recipe_makes_its_window_and_steps_one_stage(k
 
 def test_migrating_a_shape_4_model_recipe_adds_the_drafter_s_training_values_after_training(kit, repo):
     # docs/model.md, "The drafter": shape 5 adds the recipe's drafter
-    # section, with the training values every recipe states (maintainer's
-    # decision, 2026-10-18), and nothing else changes
+    # section, with the training values every recipe states, and nothing else changes
     path = kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
     new = json.loads(path.read_text())
     path.write_text(dump_json({**{key: value for key, value in new.items() if key != "drafter"}, "schema": 4}))

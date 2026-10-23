@@ -7,12 +7,12 @@ record folder, the attempt's index and whether it was plain), the model's
 weights as the record's ids.json names them, and the person's verdict,
 pass or fail, who rated and when. Ratings are stored as files of an
 `empty` source so the measure is reproducible, and they are a measure
-only, never a training signal (maintainer's decision, 2026-10-18): such a
+only, never a training signal: such a
 file is never a pre-training document (markdown.py gives it no Markdown)
 and no post-training step reads it.
 
 A person rates an attempt once: their newer rating replaces their
-earlier one (maintainer's decision, 2026-10-23). parse() refuses a file
+earlier one. parse() refuses a file
 holding two ratings by one person of one attempt (attempt_of), so every
 way of saving keeps the rule (the check runs it on every patch), and
 Repo.save_rating replaces the earlier line when it adds a newer one.

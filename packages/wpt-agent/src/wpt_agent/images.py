@@ -73,7 +73,7 @@ SNAPSHOT_FILE = "/etc/apt/apt.conf.d/50wpt-snapshot"
 SNAPSHOT_HOSTS = ("https://snapshot.debian.org/", "https://snapshot.ubuntu.com/")
 # `apt-get update` in the snapshot layer, and `docker build`: the archive may refuse requests for a while
 # (snapshot.ubuntu.com was down for over 2 hours once). Seconds before each new try, growing; the
-# number of tries is one more (maintainer's decision, 2026-10-21).
+# number of tries is one more.
 PAUSES = (10, 30, 60, 120, 300)
 STEP_FAILED = re.compile(r"^------\n > ", re.MULTILINE)  # where BuildKit starts the block of the step that failed
 TAIL_LINES = 20  # lines of a failed build's output kept when no step is named

@@ -71,7 +71,7 @@ def test_new_source_without_its_texts_leaves_the_license_text_to_a_person(kit, r
     document = repo.raw("source", sid)
     assert document["licenses"][0]["text"] == "" and document["formats"] == [{"format": "chat",
                                                                                "paths": ["sft/talks.jsonl"]}]
-    # a new source is under review until a maintainer decides (maintainer's decision, 2026-10-22)
+    # a new source is under review until a maintainer decides
     assert document["decision"] == {"decision": "under-review", "by": "A. Person", "date": document["revision"]}
     # the check names it as a note and does not fail; readers leave it out with the same note
     code, out, _ = run(capsys, *root, "check", "--fetch", sid)

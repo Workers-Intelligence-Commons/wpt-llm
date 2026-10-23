@@ -101,7 +101,7 @@ def test_held_out_documents_never_reach_training(kit, repo, store, tmp_path):
     assert record["documents"]["held_out"] == len(held)
     assert record["contamination"]["held_out_documents"] == len(held)
 
-    # maintainer's decision, 2026-10-22: the build keeps, found from the
+    # the build keeps, found from the
     # dataset id, every document's id, Markdown sha256 and tag, so a task
     # reader learns the held-out texts without converting any source
     dataset_id = record["id"]
@@ -115,7 +115,7 @@ def test_held_out_documents_never_reach_training(kit, repo, store, tmp_path):
 
 
 def test_documents_with_the_same_held_out_group_share_their_fate_in_every_source(kit, repo, store, tmp_path):
-    # maintainer's decision, 2026-10-23: eBible's chapters are held out by
+    # eBible's chapters are held out by
     # book and chapter, so the same chapter is held out in every translation
     # at once; a source's held_out_by pattern gives the group its hash reads
     pattern = {"pattern": r"_([A-Z0-9]{3})_0*([1-9][0-9]*)_read\.txt$"}

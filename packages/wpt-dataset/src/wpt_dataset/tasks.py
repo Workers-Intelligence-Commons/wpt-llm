@@ -102,8 +102,8 @@ CONVERSATION = "conversation.json"  # the attempt's conversation, next to the ch
 REPOSITORY = "repository.json"  # next to the check: what a repository pointer's pushed commit must be
 BESIDE_CHECK = (CHECK, CONVERSATION, REPOSITORY)  # names next to the check that a pointer's text may not take
 BRANCH = "main"  # the branch of a repository pointer's repository and of its remote
-# a repository pointer's bare remote, outside /work, so that `git add -A` in /work never takes it (maintainer's
-# decision, 2026-10-22); a variant hides it by naming this path in its tool_files
+# a repository pointer's bare remote, outside /work, so that `git add -A` in /work never takes it; a
+# variant hides it by naming this path in its tool_files
 REMOTE = "/tmp/origin.git"
 OWN = ("/work", "/tmp")  # the attempt's own folders, kept in memory, which `absent` may not name
 PATCHES = 200  # history files undone per `git apply`, so the command line stays short
@@ -258,8 +258,7 @@ def _check_pointers(where, pointers, files, known) -> tuple[list[str], list[str]
     source that does not exist, takes the place of another file or folder,
     or has parts removed outside its span or overlapping, and when a task
     has more than one repository pointer, or one beside any other file in
-    /work (/work is the repository itself: maintainer's decision,
-    2026-10-22)."""
+    /work (/work is the repository itself)."""
     taken = {"files": list(files), "check": list(BESIDE_CHECK)}
     repositories = [pointer for pointer in pointers if pointer["for"] == "repository"]
     if len(repositories) > 1:
@@ -357,8 +356,7 @@ def chain(where, pointer: Pointer, tree, store) -> list[str]:
     """The history files to undo from the source's final tree to reach
     the state just before pointer's commit, in order: every later commit's,
     newest first, in the history's order (ORDER), then the commit's own; a
-    commit that changed no kept path has none (maintainer's decision,
-    2026-10-22). InvalidFile when the tree has no ORDER or no history file
+    commit that changed no kept path has none. InvalidFile when the tree has no ORDER or no history file
     of the commit, the commit is not in ORDER, or a merge sits between the
     commit and the final tree: undoing cannot reach its state."""
     for path in (ORDER, pointer.document):
@@ -380,8 +378,7 @@ def undoable(tree, store) -> list[str]:
     """The history files of a tree that has ORDER whose commits chain()
     can reach: those newer than the newest merge (every commit when there
     is none), in ORDER's order. A commit behind a merge cannot be reached
-    by undoing, so the builder drops it before drawing (maintainer's
-    decision, 2026-10-22)."""
+    by undoing, so the builder drops it before drawing."""
     return [HISTORY + line[0] for line in _reachable(_order(tree, store)) if HISTORY + line[0] in tree]
 
 
@@ -404,12 +401,11 @@ def repository(where, pointer: Pointer, tree, store) -> tuple[dict, dict, dict]:
     final tree with the history files of chain() undone in order is the
     commit's parent (the real state just before it); the final tree with
     only the later commits undone is the commit's own tree, the expected
-    tree (maintainer's decision, 2026-10-22). The parent is committed once
+    tree. The parent is committed once
     on BRANCH, both in /work, the repository itself (its .git and, in its
     working tree, the commit's tree, so the changes are there and not
     committed), and in the bare repository at REMOTE, outside /work, which
-    is its `origin`; the model writes its own commit message
-    (maintainer's decision, 2026-10-22), so none is given or expected. The
+    is its `origin`; the model writes its own commit message, so none is given or expected. The
     parent commit stands for the history the store does not keep: its
     author and date are the commit's, its message names the commit it
     comes before. InvalidFile when chain() refuses, a history file does
@@ -490,8 +486,7 @@ def _quoted(value: str) -> str:
 
 
 def measure_only(task: Task, tags, share: float, held=frozenset()) -> bool:
-    """Whether only the measures read the task (maintainer's decisions,
-    2026-10-18 and 2026-10-22): tagged EVAL; or in the share `share` of
+    """Whether only the measures read the task: tagged EVAL; or in the share `share` of
     every task source that a hash of the task id holds out, the rule that
     holds documents out of training (the model recipe's held_out); or, once
     filled (fill), pointing into a document that rule holds out (by its
@@ -533,11 +528,10 @@ def changed_paths(history: bytes) -> list[str]:
 def held_out_texts(store, dataset: str | None) -> set[str]:
     """The sha256 of the Markdown of every held-out document of the dataset
     `dataset` (the base model's, which its provenance names), read from the
-    dataset's document list (build.document_list; maintainer's decision,
-    2026-10-22): no source is converted. DocumentListMissing when the
+    dataset's document list (build.document_list): no source is converted. DocumentListMissing when the
     dataset has no list, built before builds wrote one, when the store does
     not hold the dataset, or when none is named; nothing falls back and
-    nothing is rebuilt (maintainer's decision, 2026-10-22)."""
+    nothing is rebuilt."""
     from .build import HELD_OUT, document_list
 
     if not dataset:
@@ -556,7 +550,7 @@ def held_out_texts(store, dataset: str | None) -> set[str]:
 
 def looks(tool: dict) -> bool:
     """Whether a tool, by its declaration, looks at sources (wpt_check's
-    looking rule; maintainer's decision, 2026-10-22): read and bash
+    looking rule): read and bash
     (LOOKING), or a declared tool marked `looks`."""
     return tool["name"] in LOOKING or tool.get("looks") is True
 
