@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/spaRV1909_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:82d3448995f78c72d4d31c2b1039bbbe147ed9622f3e46db3de27581bed987a6",
+  "checksum": "sha256:59d6992a65347d9ed16ca7e1bec86c48dfd949b20fc1226900b849cb79b44bf7",
   "extract": {
     "exclude": [
       "copr.htm",
-      "spaRV1909_000_000_000_read.txt"
+      "spaRV1909_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {

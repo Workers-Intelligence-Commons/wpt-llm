@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/engjps_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:b7ec08074a34c69aec4fb83237da371d4b6753d1204b6bbf3e460faf671fa7b2",
+  "checksum": "sha256:906c60803062226ee23473e9601c3ab5938089ba2ac0aa609ecbf0d50143b6e4",
   "extract": {
     "exclude": [
       "copr.htm",
-      "engjps_000_000_000_read.txt"
+      "engjps_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {

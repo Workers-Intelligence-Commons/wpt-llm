@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/grcmt_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:2f31d32cfea6c9080fedd7a7c0c36f3c1067223a187da0aaceea5fd66ec0fd80",
+  "checksum": "sha256:c153afa9e12fb95986b80831e5fc36edef700d806bea01b3679fb4951daed858",
   "extract": {
     "exclude": [
       "copr.htm",
-      "grcmt_000_000_000_read.txt"
+      "grcmt_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {

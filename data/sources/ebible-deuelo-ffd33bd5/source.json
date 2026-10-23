@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/deuelo_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:15769869869b62a98eb69c06aa4a8d7da65f431a3203ac0dd55dada3ea2ba8d6",
+  "checksum": "sha256:9de59583526c4a9512676e8e07ddc26026576d011abb02f901254cc1474d3c8f",
   "extract": {
     "exclude": [
       "copr.htm",
-      "deuelo_000_000_000_read.txt"
+      "deuelo_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {

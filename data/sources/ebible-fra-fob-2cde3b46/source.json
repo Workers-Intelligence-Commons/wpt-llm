@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/fra_fob_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:f3f8c9f6eabf1c89743db3c98b53e95e7c1db665990bd29939bd520b0b4eaf4d",
+  "checksum": "sha256:847241af3cbcac4b27f2ba70e98ba3125fe1818e8a609bfbe156953254750bfa",
   "extract": {
     "exclude": [
       "copr.htm",
-      "fra_fob_000_000_000_read.txt"
+      "fra_fob_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {

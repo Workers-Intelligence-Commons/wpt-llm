@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/engWycliffe_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:e206742ff74751a89957802ec09a285878bb665fc5d0f33a20c5d2ed21687ac7",
+  "checksum": "sha256:86276d5c57c00890adc768cdea4f5c92d469931c7ffd097ee79ec790c15e016e",
   "extract": {
     "exclude": [
       "copr.htm",
-      "engWycliffe_000_000_000_read.txt"
+      "engWycliffe_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {

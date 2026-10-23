@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/engwebster_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:d2b9bb70a5ddba1c8e8ffd330828abe2e76e4a434ce4d5f7bf3611549f43c6c3",
+  "checksum": "sha256:8b999113a6d6c9674bf1af6225b41cdb9f79715255ddd7f054ca52d056425cc6",
   "extract": {
     "exclude": [
       "copr.htm",
-      "engwebster_000_000_000_read.txt"
+      "engwebster_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {

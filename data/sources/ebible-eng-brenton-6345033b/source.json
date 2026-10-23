@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/eng-Brenton_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:325df66ff676cea8d29bded7501cef593e55324d789c8761cd6cb09b20e2e7ad",
+  "checksum": "sha256:a176b99d113daeca8de4b1e33e7f7556a8f4ece3def0be23a2f8598247736436",
   "extract": {
     "exclude": [
       "copr.htm",
-      "eng-Brenton_000_000_000_read.txt"
+      "eng-Brenton_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {

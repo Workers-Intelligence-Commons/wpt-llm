@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/eng-kjv2006_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:9c22f55beef0e13e8c4c90619a2e9e6f9b2f86736ebc9d43028f2551b94c0fd2",
+  "checksum": "sha256:b22a0852f862fb42f074f3efcbcc0dfc5ef68cd7e61a5fdf083bf8d14957c4ae",
   "extract": {
     "exclude": [
       "copr.htm",
-      "eng-kjv2006_000_000_000_read.txt"
+      "eng-kjv2006_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {

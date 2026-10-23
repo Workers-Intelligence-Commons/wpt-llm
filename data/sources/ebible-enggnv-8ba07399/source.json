@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/enggnv_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:33bf65e7a89dbd8be13b42d41ebaa3eea2f1185163bf4184353743d2fc75721b",
+  "checksum": "sha256:88ee2ff17d36f3ab34dcba933a24ebad28d142cb3ec28a9a30fa72b0c0c29f31",
   "extract": {
     "exclude": [
       "copr.htm",
-      "enggnv_000_000_000_read.txt"
+      "enggnv_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {

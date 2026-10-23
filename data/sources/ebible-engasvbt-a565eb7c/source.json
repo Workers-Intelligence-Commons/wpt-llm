@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/engasvbt_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:1e8afe8f64e936e746fd23331ebe65a094a5f3365571b58bbab53fc7a3782230",
+  "checksum": "sha256:84e6937c4ca86a0e78e60d100ce7beceff0a88d643662064f48371abce4a2d22",
   "extract": {
     "exclude": [
       "copr.htm",
-      "engasvbt_000_000_000_read.txt"
+      "engasvbt_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {

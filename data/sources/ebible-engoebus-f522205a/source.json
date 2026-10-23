@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/engoebus_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:21c8f472fb51f2f4bbfc882e64e432fb3b6f7c6d579241fccdeaae00d237665c",
+  "checksum": "sha256:eb3a65198cb730acf5960d09b96faa543a892d03c5d5d7cb1107efb3c86ac480",
   "extract": {
     "exclude": [
       "copr.htm",
-      "engoebus_000_000_000_read.txt"
+      "engoebus_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {

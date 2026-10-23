@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/grcsr_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:a23ec6c9df103587ef63516e48042b6ddfc66d019f6892bb9940174bd7b6ef52",
+  "checksum": "sha256:e2ca0b888f91bc853719f0b4ac894c4877278b5e18dc1f44de10adce624d8d6c",
   "extract": {
     "exclude": [
       "copr.htm",
-      "grcsr_000_000_000_read.txt"
+      "grcsr_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {

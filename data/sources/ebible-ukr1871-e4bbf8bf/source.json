@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/ukr1871_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:8a9d47c3ee76cc13db7f6e0dff5bc9a5fdb3aab94723843a11254b754df4cbe0",
+  "checksum": "sha256:53916462269f5c2b8417f0853926b5322676bbaf201ae43574dc3cff3cf202b1",
   "extract": {
     "exclude": [
       "copr.htm",
-      "ukr1871_000_000_000_read.txt"
+      "ukr1871_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {

@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/deutkw_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:492d5d2f50974b7ab378bf2dd4a4229836d00ba485468298b3a1d3e1e9f2d94a",
+  "checksum": "sha256:5dc3c7a29bee9e97340dbc9a3c9ddccd3e371c69b3945839a5c8f1b1633f9ff5",
   "extract": {
     "exclude": [
       "copr.htm",
-      "deutkw_000_000_000_read.txt"
+      "deutkw_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {

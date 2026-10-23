@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/fraLSG_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:b746be52c7936e4f94dfcbc8fb9cff59756719eb68413887055efb0f8a375586",
+  "checksum": "sha256:0df8f32e7968b71e6d4a0ee6caab2df2d6dd59ea34e52f853c2eff130cbe9ba1",
   "extract": {
     "exclude": [
       "copr.htm",
-      "fraLSG_000_000_000_read.txt"
+      "fraLSG_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {

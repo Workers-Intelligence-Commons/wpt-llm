@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/eng-uk-lxx2012_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:a2e60b33372f6ad9b8ef590d5311aef497cc62a30abb3509dab7ed72e0f73312",
+  "checksum": "sha256:77df3cba8cc756995aeb647495cd2839990d73b8a1b7620c5e723821e74e49eb",
   "extract": {
     "exclude": [
       "copr.htm",
-      "eng-uk-lxx2012_000_000_000_read.txt"
+      "eng-uk-lxx2012_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {

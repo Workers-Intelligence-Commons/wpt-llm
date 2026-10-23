@@ -3,13 +3,15 @@
   "type": "http-archive",
   "address": "https://eBible.org/Scriptures/grcbrent_readaloud.zip",
   "revision": "2026-10-21",
-  "checksum": "sha256:f1d99e3dfe299aa947703a40d332f70d21d34f7fba8e5681c919a1adbd6d3f01",
+  "checksum": "sha256:8498fbac1c48186ae0238a1303ec8983c19879f2dedb3f12d89b0f0ad8101d06",
   "extract": {
     "exclude": [
       "copr.htm",
-      "grcbrent_000_000_000_read.txt"
+      "grcbrent_000_000_000_read.txt",
+      "keys.asc",
+      "signature.txt.asc"
     ],
-    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text)"
+    "note": "left out: the copyright page and the front note on the file set, eBible.org's own texts, for which eBible.org states no license (the rights statement is quoted in the license text); and eBible.org's signing key and the archive's signature (keys.asc, signature.txt.asc), which hold no text of the translation"
   },
   "licenses": [
     {
