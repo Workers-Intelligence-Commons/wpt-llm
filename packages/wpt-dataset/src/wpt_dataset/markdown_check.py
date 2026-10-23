@@ -1,6 +1,6 @@
 """Checks the Markdown that markdown.py makes from a source's files.
 
-markdown.py turns `text` and `xhtml` files into Markdown, so a new kind of
+markdown.py turns `text`, `xhtml` and `html` files into Markdown, so a new kind of
 input can expose a mistake in it. This reads every such document and
 reports each problem:
 
@@ -21,7 +21,7 @@ from .markdown import documents, format_of
 from .repo import Repo, Source
 from .sources import source_tree
 
-CHECKED = {"text", "xhtml"}
+CHECKED = {"text", "xhtml", "html"}
 CODE_SPAN = re.compile(r"(`+)(?!`).*?(?<!`)\1(?!`)", re.S)
 REFERENCE = re.compile(r"(?<!\\)\[\^([^\]\s]+)\](?!:)")
 DEFINITION = re.compile(r"^\[\^([^\]\s]+)\]:", re.M)

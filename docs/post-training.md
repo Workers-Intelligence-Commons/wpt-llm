@@ -359,8 +359,10 @@ regular expression; a `terse` that holds a line break; a `tool_files`
 entry that names nothing under `files/`; an `absent` entry that is `/work`
 or `/tmp`, lies under them, or holds `.` or `..`; a pointer that names a source that does not exist or takes the
 place of another file, or whose text cannot be filled in ("Pointer tasks",
-below). The step reads the tasks whose `task.json` carries the tag. Like
-every file of a source, task files are UTF-8 text.
+below). The step reads the tasks whose `task.json` carries the tag. Every
+file of a task folder is UTF-8 text, as the task format defines: an
+encoding stated inside such a file is not read ([architecture.md](architecture.md),
+"Encodings").
 
 The task editor of `wpt-web` and `wpt-dataset save-task` write a task
 folder through the service layer:

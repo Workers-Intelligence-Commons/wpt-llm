@@ -881,10 +881,10 @@ class Repo:
         fill(list(of_source(source, tree, store, self).values()), self, store)
         return len(tree), converted, skipped
 
-    def fill_checksum(self, sid: str, store) -> tuple[str, list[str]]:
+    def fill_checksum(self, sid: str, store) -> tuple[str, dict[str, str]]:
         """Fill in a draft source's checksum, excluding each file that is not
-        UTF-8 text by its exact path, from one fetch (sources.fill_checksum),
-        and write source.json. Returns (checksum, the paths excluded).
+        text (encoding.py) by its exact path, from one fetch (sources.fill_checksum),
+        and write source.json. Returns (checksum, {path excluded: why}).
         RuleViolation when the checksum is not DRAFT_CHECKSUM."""
         from .sources import fill_checksum
 

@@ -54,7 +54,7 @@ where a step needs them, run through Docker Desktop.
 | --- | --- | --- | --- |
 | id of a new source | `uv run wpt-dataset source-id ORIGIN [ITEM] ADDRESS` | | prints the id |
 | manifest and checksum of a source | `uv run wpt-dataset manifest ID` | the upstream | the store; prints the checksum |
-| fill in new sources' checksums | `uv run wpt-dataset fill-checksum ID [ID ...]` (checksum all zeros; one download each: files that are not UTF-8 text excluded by exact path, then checked as `check --fetch` does; failures listed at the end) | the upstream | `data/sources/ID/source.json`, the store |
+| fill in new sources' checksums | `uv run wpt-dataset fill-checksum ID [ID ...]` (checksum all zeros; one download each: files that are not text (UTF-8, or the encoding they state) excluded by exact path, then checked as `check --fetch` does; failures listed at the end) | the upstream | `data/sources/ID/source.json`, the store |
 | edit a source's files | `uv run wpt-dataset unpack ID FOLDER`, edit, `uv run wpt-dataset patch ID FOLDER NAME` | the source, the folder | the folder; then `data/sources/ID/NNNN-NAME.patch` |
 | check the data rules | `uv run wpt-dataset check [--fetch [ID ...]] [--changed REV]` (every source is fetched, failures listed at the end) | `data/` | the store, with `--fetch` |
 | build a vocabulary | `uv run wpt-dataset build-tokenizer NAME [--stream]` | a tokenizer recipe | the store; `data/recipes/tokenizers/NAME.lock.json` (commit it) |

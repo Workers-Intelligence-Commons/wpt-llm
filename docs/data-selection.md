@@ -4,6 +4,12 @@
 
 Every file of an admitted source's final tree (after cuts and patches) is a
 document, identified as `<source id>/<path>`. Symlinks are not documents.
+A document is the file's Markdown, read in the encoding the file states,
+else UTF-8, and written as UTF-8 ([architecture.md](architecture.md),
+"Encodings"; maintainer's decision, 2026-10-23); an image in a web page
+(`xhtml` or `html`) leaves the marker `[image]` or `[image: ALT]` where it
+was ([architecture.md](architecture.md), "Documents are Markdown";
+maintainer's decision, 2026-10-23).
 
 A file in the `records` format (a dataset holding many documents, such as a
 JSON Lines or Parquet file) is not one document: each of its records whose

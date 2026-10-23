@@ -159,11 +159,11 @@ be mirrors of each other. The checksum is `sha256:` + the sha256 of the
 manifest. `wpt-dataset manifest <id>` prints a source's manifest and
 checksum. `wpt-dataset fill-checksum <id> ...` fills in the checksum of a
 new `source.json` (all zeros until then) from one download: it excludes in
-`extract` each file that is not UTF-8 text by its exact path (`*`, `?` and
-`[` written `[*]`, `[?]` and `[[]`), reads the download again with those
-exclusions (they change the history files too), keeps the upstream tree in
-the store as the check keeps it, and checks that source as `check --fetch`
-does, without downloading it again. A huggingface source's checksum comes
+`extract` each file that is not text ("Encodings", below) by its exact
+path (`*`, `?` and `[` written `[*]`, `[?]` and `[[]`), reads the download
+again with those exclusions (they change the history files too), keeps
+the upstream tree in the store as the check keeps it, and checks that
+source as `check --fetch` does, without downloading it again. A huggingface source's checksum comes
 from the Hub's listing, with nothing excluded; its check downloads it.
 
 The manifest is computed from the downloaded data itself (git's objects,
@@ -172,8 +172,49 @@ so Linux and Windows agree. A path that is not valid UTF-8, uses `\`, `.` or
 `..`, or differs from another only by letter case makes the source fail; an
 `extract` rule or a removal patch must leave it out first.
 
-Files that are not UTF-8 text (images, binaries) make the source fail too:
+Files that are not text (images, binaries) make the source fail too:
 exclude them in `extract`.
+
+### Encodings
+
+A file whose encoding is stated in the file itself is text in that
+encoding: it is decoded to Unicode, and everything the pipeline stores or
+emits from it (Markdown, tokens, wpt-web's views) is UTF-8; every encoding
+stated this way converts without loss (maintainer's decision, 2026-10-23).
+One function decides a file's encoding for every reader
+(`packages/wpt-dataset/src/wpt_dataset/encoding.py`): the check,
+`fill-checksum`, the Markdown of every format, `markdown-check`, the build,
+wpt-web's file views and the evaluations that read a source's files. The
+statements it reads, in this order:
+
+| Where | Statement |
+| --- | --- |
+| any file | a byte-order mark: UTF-8, UTF-16 LE or BE, UTF-32 LE or BE |
+| `html`, `code` in html | the HTML standard's prescan of the first 1024 bytes: `<meta charset="...">` or `<meta http-equiv="Content-Type" content="...; charset=...">`, read as the Encoding Standard reads its label (`iso-8859-1`, `latin1` and `ascii` are windows-1252, a UTF-16 label is UTF-8) |
+| `html` and `code` in html when the prescan finds none (Project Gutenberg's older XHTML pages named `.html`) | the XML declaration's `encoding="..."`, its label read as the prescan reads one, as the HTML standard's prescan reads an XML declaration |
+| `xhtml`, `code` in xml or svg | the XML declaration's `encoding="..."` |
+| `text` | Project Gutenberg's header line `Character set encoding: NAME`, before its `*** START OF` line; `ISO-Latin-1` is Latin-1, and `ASCII` or `US-ASCII` with a byte above 127 does not decode |
+| `code` in python | the PEP 263 coding line, in the first two lines |
+| `code` in css | the `@charset "...";` that starts the file |
+
+Nothing is guessed: a file that states no encoding is UTF-8 text, or no
+text at all, as before. `chat` and `rating` files are JSON, UTF-8 by its
+standard, and every file of a `task` folder is UTF-8 by the task format
+([post-training.md](post-training.md)): no statement is read in them. A stated encoding Python does not know, or bytes
+that do not decode under it, make the file no text: the check names the
+file and why, and `fill-checksum` excludes it as it excludes a binary file.
+A source drafted before this rule may hold such files in its `extract`
+exclusions; to take them in, remove those exclusions, set `checksum` back
+to the zeros and run `fill-checksum` again.
+
+A file keeps its own bytes everywhere else: its checksum, `wpt-dataset
+unpack` and the patches hold them as upstream wrote them, and git's diffs
+carry them as they are, so a removal patch on a Latin-1 page is made and
+applied like any other (edit the unpacked file in its own encoding).
+wpt-web saves an edited file in the encoding the file it replaces states.
+A git history's files (`.git/history/<commit>`) are WPT's own UTF-8 text,
+as before: a diff's bytes that are not UTF-8 are replaced there, whatever
+the changed file states.
 
 ### Patches
 
@@ -238,11 +279,20 @@ tree, as its `formats` entry says
 | `markdown` | the file as it is |
 | `text` | paragraphs as written; each line break inside a paragraph is a Markdown line break; Markdown's own characters are escaped, so the text reads exactly as written |
 | `code` | one fenced code block whose opening line names the language and the path: ```` ```python path="./src/main.py" ```` (the entry's `language`); in a git or Mercurial source the path starts with `./`, the repository's root, and in any other source it is written as it is (```` ```python path="src/main.py" ````), since no repository root exists |
-| `xhtml` | web pages written as strict XML, such as EPUB books, read by lxml (a malformed file stops the build): headings, paragraphs, lists, quotations, emphasis, tables; a dialogue row becomes `**Speaker:** words`; a note reference becomes a Markdown note (`[^12]`) with the note's text at the end of the document that refers to it, or is dropped when the note is not in the source |
+| `xhtml` | web pages written as strict XML, such as EPUB books, read by lxml (a malformed file stops the build): headings, paragraphs, lists, quotations, emphasis, tables; a dialogue row becomes `**Speaker:** words`; a note reference becomes a Markdown note (`[^12]`) with the note's text at the end of the document that refers to it, or is dropped when the note is not in the source; a label already taken by another note gets a number, `[^12-2]`, then `[^12-3]` (maintainer's decision, 2026-10-23); an image becomes a marker, below |
+| `html` | web pages that are not strict XML, such as Project Gutenberg's, read by lxml's HTML parser (which refuses no page) and converted as `xhtml` pages are (maintainer's decision, 2026-10-23); EPUB's note marks exist only in XML, so an html page's notes are Project Gutenberg's: a link of class `fnanchor` (or `noteref`, `noteRef`) to an element of class `footnote` or `fndiv`, or to anything inside one, in the same page, is a note reference, and that element (or, when it holds the targets of links in several of its children, the child holding the target) becomes a Markdown note as an EPUB note does, with one label however many links refer to it; inside such a note, a link back to a reference (or to the empty anchor just before one), and the element of class `label` holding it, are left out; a note no such link refers to, and every other link, stay ordinary text where the page prints them, so `markdown-check` finds no unpaired note (maintainer's decision, 2026-10-23); printed page numbers, such as Gutenberg's `{92}` (class `pagenum`), stay as the page shows them (maintainer's decision, 2026-10-23) |
 | `records` | a dataset file holding many documents (JSON Lines, optionally `.gz` or `.zst`, or Parquet): each record whose license value an entry lists, and that the `keep` rules keep, is one document, `<file>#<record id>`; its text field is read as `text` above, or kept as it is with `"as": "markdown"` |
 | `chat` | conversations for post-training, one JSON object per line ([chat-format.md](chat-format.md)); each line is checked, and the file gives no pre-training document: only the post-training step named by its tags reads it |
 | `task` | the files of task folders for agentic post-training (`task.json`, `files/`, `check`; [post-training.md](post-training.md)); each folder is checked, and its files give no pre-training document: only a post-training step that asks for a tag of its `task.json` reads it: by default each step asks for its own name, and `token-efficiency` asks for `grpo`. A task built by a program holds pointers into the documents of other sources, never their text, which the readers fill in from the store ([post-training.md](post-training.md), "Pointer tasks") |
 | `rating` | people's pass or fail on the attempts of a `wpt-eval` run, one rating per line ([evaluation.md](evaluation.md), "People's ratings"); each line is checked, and the file gives no pre-training document: a measure only, which no training step reads |
+
+In `xhtml` and `html` pages, an image the page shows (`<img>`, or an
+inline `<svg>`) is never dropped silently: in its place the Markdown holds
+the marker `[image]`, or `[image: ALT]` when it has alt text (an svg's
+`<title>`), ALT being that text with its white space collapsed and
+Markdown's characters escaped, so models learn where images were
+(maintainer's decision, 2026-10-23). A printed caption (`figcaption`,
+`caption`) stays ordinary text; math, audio and video are left out.
 
 A file whose Markdown is empty is no document: an EPUB file that holds only
 notes gives none, since its notes moved into the texts that refer to them.
@@ -257,7 +307,7 @@ of its inputs, including WPT's own code version.
 | Result | Fingerprint covers |
 | --- | --- |
 | upstream tree | the source checksum |
-| final source tree | checksum, cuts, each patch's sha256, wpt-dataset version |
+| final source tree (and the check that its files are text) | checksum, cuts, each patch's sha256, the formats (they decide each file's encoding), wpt-dataset version |
 | vocabulary | tokenizer code version, tokenizer recipe (with its `version`), the documents it is trained on (id and sha256 of their Markdown); frozen by the recipe's lock until `version` is raised ([tokenizer.md](tokenizer.md)) |
 | dataset | wpt-dataset version, the model recipe's data part, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, revision, checksum, tree and licenses (with attribution), and the sources skipped with `--skip-failed` |
 
@@ -286,6 +336,11 @@ source that did not change is never fetched again. The documents, the
 dataset id and the shards are the same as without `--stream`. What it no
 longer has is the source's files: a new vocabulary version, a changed
 format or patch, or `wpt-dataset unpack` fetches the source again.
+Because the cache is keyed by the wpt-dataset version, every change to
+what the Markdown converter (`markdown.py`) makes of a file raises that
+version in `packages/wpt-dataset/pyproject.toml` (then `uv lock`), in the
+same change, so no cached source keeps its old Markdown; every dataset id
+changes with it, which is accepted (maintainer's decision, 2026-10-23).
 Without `--stream`, the store keeps everything, as above.
 
 The store is set by one setting, `WPT_STORE`, in the environment or in

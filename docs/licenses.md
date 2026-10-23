@@ -568,8 +568,9 @@ for that check.
   license entry by the same rule, from the patterns that start with
   `.git/history/` (maintainer's decision, 2026-10-22).
 - **Every file whose license allows it comes in.** Only binary files (the
-  repository reads UTF-8 text), license refusals and doubts leave a file
-  out; configuration, build files, license files and edition pages are
+  repository reads text: UTF-8, or the encoding a file states itself,
+  maintainer's decision, 2026-10-23), license refusals and doubts leave a
+  file out; configuration, build files, license files and edition pages are
   data like any other (maintainer's decision, 2026-10-16).
 - **Third-party code** (a copied library, a dependency folder) inside a
   source is used when its license is allowed, as its own license entry:

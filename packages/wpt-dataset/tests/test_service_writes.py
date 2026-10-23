@@ -258,7 +258,7 @@ def test_a_new_source_that_fails_leaves_nothing_and_keeps_its_error(kit, repo, s
     document = empty_source("notes", license="CC0-1.0", attribution="A. Person, notes", text="CC0 1.0 Universal\n",
                             by="A. Person", formats={"notes.txt": "text"})
     with pytest.raises(NotText):  # the error that stopped it, not one from the clean-up
-        repo.create_source("mine", "notes", document, {"notes.txt": b"\xff\xfe"}, "first", store)
+        repo.create_source("mine", "notes", document, {"notes.txt": b"\xff\xff"}, "first", store)
     assert repo.source_ids() == []
 
     rmtree = service.shutil.rmtree
@@ -269,7 +269,7 @@ def test_a_new_source_that_fails_leaves_nothing_and_keeps_its_error(kit, repo, s
         rmtree(path, *args, **kwargs)
     monkeypatch.setattr(service.shutil, "rmtree", broken)
     with pytest.raises(NotText) as raised:  # a clean-up that fails too is a note on the same error
-        repo.create_source("mine", "notes", document, {"notes.txt": b"\xff\xfe"}, "first", store)
+        repo.create_source("mine", "notes", document, {"notes.txt": b"\xff\xff"}, "first", store)
     assert "could not be removed" in raised.value.__notes__[0]
 
 

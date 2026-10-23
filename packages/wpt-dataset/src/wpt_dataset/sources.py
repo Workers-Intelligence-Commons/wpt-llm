@@ -32,7 +32,7 @@ from urllib.parse import unquote, urlparse
 from wpt_telemetry import Telemetry, set_ref
 from wpt_utils.programs import program
 
-from . import huggingface, manifest, retry, robots
+from . import encoding, huggingface, manifest, retry, robots
 from .errors import (ChecksumMismatch, CrawlForbidden, CutFailed, FetchFailed, LicenseMapError, NotText, PatchFailed,
                      UnsupportedEntry)
 from .manifest import FILE, SYMLINK, Entry, Extractor, glob_match_any
@@ -98,12 +98,12 @@ def compute_upstream(data: dict, address: str, store) -> dict[str, Entry]:
     return _fetch(data, address, store, listing_only=True)
 
 
-def fill_checksum(source: Source, store, telemetry=None) -> tuple[dict, list[str]]:
+def fill_checksum(source: Source, store, telemetry=None) -> tuple[dict, dict[str, str]]:
     """For a draft source (checksum all zeros): (its description with the
-    checksum filled in, the paths it now excludes). One fetch of the main
-    address gives the upstream tree; every file of the final tree that is
-    not UTF-8 text, as source_tree finds them, is excluded by its exact
-    path (exact_pattern), and the tree is read again from what that fetch
+    checksum filled in, {path: why} of the files it now excludes). One
+    fetch of the main address gives the upstream tree; every file of the
+    final tree that is not text, as source_tree finds them (encoding.py),
+    is excluded by its exact path (exact_pattern), and the tree is read again from what that fetch
     downloaded, since an exclusion also changes the history files. The tree
     is kept under upstream/<checksum> as upstream_tree keeps it, so checking
     the source fetches nothing more. A huggingface source's checksum comes
@@ -118,7 +118,7 @@ def fill_checksum(source: Source, store, telemetry=None) -> tuple[dict, list[str
             raise FetchFailed(f"{source.id}: {address}: {_reason(error)}") from error
         if data["type"] == "huggingface":
             data["checksum"] = manifest.checksum(tree)
-            return data, []
+            return data, {}
         try:
             final = apply_patches(source.id, apply_cuts(source.id, tree, data.get("cuts", []), store), source.patches,
                                   store)
@@ -126,7 +126,7 @@ def fill_checksum(source: Source, store, telemetry=None) -> tuple[dict, list[str
             final = {}  # the check names that failure, before any text is read
         found = not_text(source, final, store)
         if made := [path for path in found if path not in tree]:
-            raise NotText(f"{source.id}: {made[0]} is not UTF-8 text and comes from a patch, not upstream; "
+            raise NotText(f"{source.id}: {found[made[0]]} and comes from a patch, not upstream; "
                           f"extract cannot leave it out")
         if found:
             data.setdefault("extract", {}).setdefault("exclude", []).extend(map(exact_pattern, found))
@@ -352,12 +352,14 @@ def load_index(git, tree: dict[str, Entry], store):
 # -- the final tree -------------------------------------------------------------
 
 def tree_key(source: Source) -> str:
-    """The fingerprint of a source's final tree: its checksum, cuts and
-    patches, and this wpt-dataset's version."""
+    """The fingerprint of a source's final tree and of the check that its
+    files are text: its checksum, cuts, patches and formats (which decide
+    each file's encoding), and this wpt-dataset's version."""
     return fingerprint({
         "kind": "source-tree",
         "wpt_dataset": VERSION,
         "checksum": source.data["checksum"],
+        "formats": source.data["formats"],
         "cuts": source.data.get("cuts", []),
         "patches": [[p.name, hashlib.sha256(p.data).hexdigest()] for p in source.patches],
     })
@@ -375,24 +377,25 @@ def source_tree(source: Source, store, telemetry=None) -> tuple[dict[str, Entry]
         tree = apply_cuts(source.id, tree, source.data.get("cuts", []), store)
         tree = apply_patches(source.id, tree, source.patches, store)
         if found := not_text(source, tree, store, first=True):
-            raise NotText(f"{source.id}: {found[0]} is not UTF-8 text; exclude it in extract")
+            raise NotText(f"{source.id}: {next(iter(found.values()))}; exclude it in extract")
         known = store.put_bytes(manifest.manifest_bytes(tree))
         set_ref(store, "source-trees", key, known, telemetry or Telemetry.off())
     check_license_map(source, tree)
     return tree, known
 
 
-def not_text(source: Source, tree: dict[str, Entry], store, first=False) -> list[str]:
-    """The files of a final tree that must be UTF-8 text and are not, in
-    the tree's order (symlinks, records files and message trees are read
-    otherwise); with first, only the first one."""
-    found = []
+def not_text(source: Source, tree: dict[str, Entry], store, first=False) -> dict[str, str]:
+    """{path: why} of the files of a final tree that must be text and are
+    not, under the encoding each states (encoding.py), in the tree's order
+    (symlinks, records files and message trees are read otherwise); with
+    first, only the first one."""
+    found = {}
     for path, entry in tree.items():
         if entry.mode != SYMLINK and not is_records(source, path) and not is_message_tree(source, path):
             try:
-                store.get_bytes(entry.sha256).decode("utf-8")
-            except UnicodeDecodeError:
-                found.append(path)
+                encoding.decode(store.get_bytes(entry.sha256), encoding.entry_of(source, path), path)
+            except NotText as error:
+                found[path] = str(error)
                 if first:
                     break
     return found

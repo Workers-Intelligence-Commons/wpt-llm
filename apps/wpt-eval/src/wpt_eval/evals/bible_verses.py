@@ -42,6 +42,7 @@ from collections import Counter, defaultdict
 from dataclasses import dataclass
 
 from wpt_dataset.build import is_held_out
+from wpt_dataset.encoding import source_text
 from wpt_dataset.repo import Repo
 from wpt_dataset.sources import held_out_group, in_store, source_tree, tags_of
 from wpt_eval import Result
@@ -117,7 +118,7 @@ def translations(repo, store, share) -> tuple[dict, int, int]:
         for path, entry in sorted(tree.items()):
             if VERSE_TAG not in tags_of(source, path):
                 continue
-            for line in store.get_bytes(entry.sha256).decode("utf-8", errors="replace").splitlines():
+            for line in source_text(source, path, store.get_bytes(entry.sha256)).splitlines():
                 if match := LINE.fullmatch(line.strip()):
                     verses[(match[1], int(match[2]))] = match[3]
         if verses:

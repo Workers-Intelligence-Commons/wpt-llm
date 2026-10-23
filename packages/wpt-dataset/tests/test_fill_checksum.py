@@ -116,7 +116,7 @@ def test_fill_checksum_fills_every_draft_and_lists_the_failures_at_the_end(kit, 
 
     out, err = capsys.readouterr()
     assert code == 1
-    assert f"{good}: checksum sha256:" in out and "3 files that are not UTF-8 text excluded" in out
+    assert f"{good}: checksum sha256:" in out and "3 files that are not text excluded" in out
     assert re.search(rf"{good}: \d+ entries, checksum, cuts, patches, license and format maps OK", out)
     assert err.split("1 of 2 fetched sources failed:\n")[1].startswith(f"{gone}: FetchFailed: {gone}: ")
     assert repo.source(gone).data["checksum"] == "sha256:" + "0" * 64  # nothing written for it

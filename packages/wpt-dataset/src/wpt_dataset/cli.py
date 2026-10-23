@@ -12,9 +12,10 @@
     wpt-dataset manifest ID               fetch a source without checking its checksum and
                                           print its manifest and checksum (to fill in source.json)
     wpt-dataset fill-checksum ID [ID ...] for draft sources (checksum all zeros): fetch each once,
-                                          exclude every file that is not UTF-8 text by its exact
-                                          path, write the checksum into source.json, and check the
-                                          source as `check --fetch` does, without fetching it again;
+                                          exclude every file that is not text (UTF-8, or the
+                                          encoding it states) by its exact path, write the
+                                          checksum into source.json, and check the source as
+                                          `check --fetch` does, without fetching it again;
                                           every source is filled, and the failures listed at the end.
                                           It checks only the named sources, not the repository-wide
                                           rules `check` runs: run `wpt-dataset check` too
@@ -22,8 +23,8 @@
                                           outside the repository, to edit them
     wpt-dataset patch ID FOLDER NAME      record the folder's differences from the source's
                                           final files as its next patch, NNNN-NAME.patch
-    wpt-dataset markdown-check [ID ...]   check the Markdown made from text and xhtml files (every
-                                          source, or the ids given): notes, unescaped tags
+    wpt-dataset markdown-check [ID ...]   check the Markdown made from text, xhtml and html files
+                                          (every source, or the ids given): notes, unescaped tags
     wpt-dataset build-tokenizer NAME [--stream]
                                           train (or find) the vocabulary of a tokenizer recipe
     wpt-dataset tokenizer-check NAME      encode and decode every admitted document with that
@@ -234,9 +235,9 @@ def cmd_fill_checksum(args, repo):
         except (DatasetError, StoreError, MissingTool) as error:
             _failed(sid, error, failed)
             continue
-        print(f"{sid}: checksum {checksum}; {len(excluded)} files that are not UTF-8 text excluded")
-        for path in excluded:
-            print(f"{sid}: excluded {path}")
+        print(f"{sid}: checksum {checksum}; {len(excluded)} files that are not text excluded")
+        for why in excluded.values():
+            print(f"{sid}: excluded, {why}")
         source = repo.source(sid)
         if source.unwritten:  # as `check` does: no text to check yet
             print(source.note)

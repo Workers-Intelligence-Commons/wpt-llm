@@ -79,8 +79,9 @@ class FormatMapError(DatasetError):
 
 
 class NotText(DatasetError):
-    """A document is not valid UTF-8; exclude it in `extract` (it is likely
-    an image or another binary file)."""
+    """A file is not text: not UTF-8, nor in an encoding it states that
+    Python knows and its bytes decode under (encoding.py); exclude it in
+    `extract` (it is likely an image or another binary file)."""
 
 
 class PoolError(DatasetError):

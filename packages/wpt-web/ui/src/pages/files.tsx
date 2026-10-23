@@ -97,7 +97,7 @@ function FileEditor({ id, path, known }: { id: string; path: string; known: bool
       <p><a href={`#/sources/${part(id)}/files`}>Files of {id}</a></p>
       <h1>{path}</h1>
       <Problems problems={problems} />
-      {binary ? <p>This file is not UTF-8 text; it cannot be edited here.</p> : (
+      {binary ? <p>This file is not text (UTF-8, or the encoding it states); it cannot be edited here.</p> : (
         <form onSubmit={(e) => { e.preventDefault(); save(text); }}>
           <textarea className="page" value={text} rows={24} aria-label={path} onChange={(e) => setText(e.target.value)} />
           <div className="actions">

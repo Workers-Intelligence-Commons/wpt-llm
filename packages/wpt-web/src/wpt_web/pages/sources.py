@@ -8,7 +8,8 @@ commands of the same names do."""
 
 import base64
 
-from wpt_dataset.errors import NotFound, RuleViolation
+from wpt_dataset import encoding
+from wpt_dataset.errors import NotFound, NotText, RuleViolation
 from wpt_dataset.repo import empty_source
 
 from ..server import Route
@@ -72,15 +73,25 @@ def routes(context):
 
     @refusals
     def read_file(values, body):
-        version, data = repo.read_source_file(values["id"], values["path"], context.store)
+        sid, path = values["id"], values["path"]
+        version, data = repo.read_source_file(sid, path, context.store)
         try:
-            return 200, {"version": version, "text": data.decode("utf-8")}
-        except UnicodeDecodeError:
+            return 200, {"version": version, "text": encoding.source_text(repo.source(sid), path, data)}
+        except NotText:
             return 200, {"version": version, "base64": base64.b64encode(data).decode()}
+
+    def encoded(sid, path, text):
+        """text in the encoding the file it replaces states (encoding.encode),
+        so a patch changes only what the person changed; UTF-8 for a new file."""
+        try:
+            _, data = repo.read_source_file(sid, path, context.store)
+        except NotFound:
+            return text.encode("utf-8")
+        return encoding.encode(text, data, encoding.entry_of(repo.source(sid), path), f"{sid}/{path}")
 
     @refusals
     def write_file(values, body):
-        content = None if body["text"] is None else body["text"].encode("utf-8")
+        content = None if body["text"] is None else encoded(values["id"], values["path"], body["text"])
         return 200, {"version": repo.change_source_files(values["id"], {values["path"]: content}, body["patch"],
                                                          body["version"], context.store)}
 
@@ -112,7 +123,8 @@ def routes(context):
               answer={"type": "object", "required": ["version", "files"],
                       "properties": {"version": STRING, "files": {"type": "object", "additionalProperties": FILE}}}),
         Route("GET", "/api/sources/{id}/files/{path}", read_file,
-              "one final file: its text, or base64 when it is not UTF-8 (a person's text)",
+              "one final file: its text (UTF-8, or the encoding it states), or base64 when it is not text "
+              "(a person's text)",
               answer={"type": "object", "required": ["version"],
                       "properties": {"version": STRING, "text": STRING, "base64": STRING}}),
         Route("PUT", "/api/sources/{id}/files/{path}", write_file,

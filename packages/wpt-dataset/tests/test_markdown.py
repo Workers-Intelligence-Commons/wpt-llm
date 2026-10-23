@@ -6,6 +6,8 @@ import pytest
 from wpt_dataset import conversations
 from wpt_dataset.errors import FormatMapError, InvalidFile, NotText
 from wpt_dataset.cli import main
+from wpt_dataset.edit import unpack, write_patch
+from wpt_dataset.encoding import decode
 from wpt_dataset.markdown import documents
 from wpt_dataset.markdown_check import problems
 from wpt_dataset.sources import source_tree
@@ -16,7 +18,9 @@ PAGE = HEAD + """<body><section><h2>The Prison</h2>
 <p>Socrates is <i>calm</i> and *says* 1. things.<a href="notes.xhtml#note-1" epub:type="noteref">1</a></p>
 <table><tbody><tr><td epub:type="z3998:persona">Crito</td>
 <td>Why so early?<a href="notes.xhtml#note-9" epub:type="noteref">9</a></td></tr></tbody></table>
-<p>A line<br/>and another</p></section></body></html>"""
+<p>A line<br/>and another</p>
+<figure><img src="../images/map.png" alt="Athens,  the  prison"/> and
+<svg xmlns="http://www.w3.org/2000/svg"><title>Seal</title></svg> <img src="../images/rule.png" alt=""/><figcaption>The city</figcaption></figure></section></body></html>"""
 NOTES = HEAD + """<body><section epub:type="endnotes"><h2>Endnotes</h2><ol><li id="note-1">
 <p>See <i>Phaedo</i>. <a href="one.xhtml#noteref-1" epub:type="backlink">↩</a></p></li></ol></section></body></html>"""
 FORMATS = [{"format": "xhtml", "paths": ["text/*.xhtml"]}, {"format": "text", "paths": ["plain.txt"]},
@@ -45,6 +49,8 @@ def test_every_format_becomes_markdown_that_reads_as_written(kit, repo, store, t
         "Socrates is *calm* and \\*says\\* 1. things.[^1]\n\n"
         "**Crito:** Why so early?\n\n"  # note 9 is not in the source: its reference is dropped
         "A line\\\nand another\n\n"
+        "[image: Athens, the prison] and [image: Seal] [image]\n\n"  # where each image was, with its alt text
+        "The city\n\n"
         "[^1]: See *Phaedo*.\n")
     assert "text/notes.xhtml" not in found  # its only note now lives in the page that refers to it
     assert found["plain.txt"] == b"\\# not a heading\\\nsecond \\*line\\*\n\nnew paragraph\n"
@@ -68,6 +74,107 @@ def test_a_file_without_format_or_with_broken_markup_stops_the_build(kit, repo, 
         markdown_of(kit, repo, store, tmp_path, {"plain.txt": b"words\n", "extra.dat": b"x\n"})
     with pytest.raises(NotText, match="text/one.xhtml is not well-formed XHTML"):
         markdown_of(kit, repo, store, tmp_path / "second", {"text/one.xhtml": PAGE.replace("</p>", "", 1).encode()})
+
+
+GUTENBERG = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
+<title>Les Misérables</title>
+<style type="text/css">p { text-indent: 2% }</style>
+</head>
+<body>
+<p class="center"><i>par<br>
+Victor Hugo<br></i></p>
+<h2>LIVRE PREMIER</h2>
+<h3>Un juste</h3>
+<p><span class="pagenum"><a id="Page_5">{5}</a></span>En 1815, M. Myriel était évêque de
+<i>Digne</i>.<a name="FNanchor_1" id="FNanchor_1"></a><a href="#Footnote_1" class="fnanchor">[1]</a>
+<p>C'était un vieillard d'environ soixante-quinze ans.<a name="FNanchor_2" id="FNanchor_2"></a><a
+href="#Footnote_2" class="fnanchor">[2]</a>
+<div class="figcenter"><img src="images/myriel.jpg" alt="L'évêque
+  Myriel"><p class="caption">À sa table.</p></div>
+<p><img src="images/deco.png">Fin du chapitre.<a name="FNanchor_3" id="FNanchor_3"></a><a href="#Footnote_3"
+class="fnanchor">[1]</a>
+<div class="footnote"><p><a name="Footnote_1" id="Footnote_1"></a><a href="#FNanchor_1"><span
+class="label">[1]</span></a> Digne est en Provence.</div>
+<div class="footnote"><p><a name="Footnote_2" id="Footnote_2"></a><a href="#FNanchor_2"><span
+class="label">[2]</span></a> Il était né en 1740.
+<p><a name="Footnote_3" id="Footnote_3"></a><a href="#FNanchor_3"><span
+class="label">[1]</span></a> Fin.</div>
+<p class="footnote">[4] Une note que rien n'appelle.</p>
+</body>
+</html>
+"""
+
+
+def test_a_latin_1_gutenberg_page_becomes_utf_8_markdown_and_takes_a_removal_patch(kit, repo, store, tmp_path,
+                                                                                  http_folder):
+    # Project Gutenberg's pages are HTML, not XML, and older ones are Latin-1 as their
+    # <meta> states: the page must read as written, its images leave markers, its
+    # footnotes become Markdown notes, its page numbers stay, and a removal patch
+    # made from the unpacked page must apply to its own bytes
+    folder, base = http_folder
+    (folder / "17489-h.htm").write_bytes(GUTENBERG.encode("latin-1"))
+    sid = kit.add_source(repo, store, "gutenberg", "17489", {
+        "type": "http-file", "address": f"{base}/17489-h.htm", "revision": "2026-10-23",
+        "formats": [{"format": "html", "paths": ["**"]}]})
+
+    def markdown():
+        source = repo.source(sid)
+        return documents(source, source_tree(source, store)[0], store, repo)
+
+    [page] = markdown()
+    assert page.markdown.decode("utf-8") == (
+        "*par\\\nVictor Hugo*\n\n"  # the line break ending the italics stays outside its marks
+        "## LIVRE PREMIER\n\n"
+        "### Un juste\n\n"
+        "{5}En 1815, M. Myriel était évêque de *Digne*.[^1]\n\n"
+        "C'était un vieillard d'environ soixante-quinze ans.[^2]\n\n"
+        "[image: L'évêque Myriel]\n\n"
+        "À sa table.\n\n"
+        "[image]Fin du chapitre.[^1-2]\n\n"  # a label met again gets a number
+        "\\[4\\] Une note que rien n'appelle.\n\n"  # no link refers to it: ordinary text, as printed
+        "[^1]: Digne est en Provence.\n\n"
+        "[^2]: Il était né en 1740.\n\n"  # two notes in one footnote element stay two notes
+        "[^1-2]: Fin.\n")
+    assert problems(page.markdown.decode("utf-8")) == []
+
+    edit = tmp_path / "edit"
+    unpack(repo, repo.source(sid), store, edit)
+    kept = [line for line in (edit / "17489-h.htm").read_bytes().split(b"\n") if b"vieillard" not in line]
+    (edit / "17489-h.htm").write_bytes(b"\n".join(kept))
+    write_patch(repo, repo.source(sid), store, edit, "remove-a-line")
+    assert b"-<p>C'\xe9tait un vieillard" in repo.source(sid).patches[0].data  # the page's own Latin-1 bytes
+    [page] = markdown()
+    assert "vieillard" not in page.markdown.decode("utf-8") and "évêque de *Digne*" in page.markdown.decode("utf-8")
+
+
+@pytest.mark.parametrize("data, entry, read", [
+    (b"\xff\xfe" + "été".encode("utf-16-le"), {"format": "markdown"}, "\ufeffété"),
+    (b"Title: X\r\nCharacter set encoding: ISO-Latin-1\r\n\r\n"
+     b"*** START OF THE PROJECT GUTENBERG EBOOK X ***\r\n\xe9t\xe9\r\n", {"format": "text"}, "été"),
+    (b"Character set encoding: ASCII\n*** START OF THIS PROJECT GUTENBERG EBOOK X ***\n\xe9t\xe9\n", {"format": "text"},
+     "is not text in 'ASCII', the encoding it states (byte 78)"),
+    (b'<?xml version="1.0" encoding="ISO-8859-1"?>\n<p>\xe9t\xe9</p>', {"format": "xhtml"}, "été"),
+    (b'<?xml version="1.0" encoding="iso-8859-1"?>\n<html><p>\x93\xe9t\xe9\x94', {"format": "html"},
+     "“été”"),  # no <meta>: the declaration's label is read as the prescan reads one
+    (b'<!-- <meta charset="koi8-r"> --><meta charset="iso-8859-1"><p>\x93\xe9t\xe9\x94', {"format": "html"},
+     "“été”"),  # the HTML standard reads iso-8859-1 as windows-1252
+    (b'<meta charset="x-unknown"><p>\xe9t\xe9', {"format": "html"},
+     "states the encoding 'x-unknown', which Python does not know"),
+    (b"#!/usr/bin/env python\n# -*- coding: latin-1 -*-\ns = '\xe9t\xe9'\n", {"format": "code", "language": "python"},
+     "s = 'été'"),
+    (b"caf\xe9\nCharacter set encoding: ISO-8859-1\n", {"format": "text"}, "is not UTF-8 text"),  # no Gutenberg header
+])
+def test_a_file_is_text_in_the_encoding_it_states_and_nothing_is_guessed(data, entry, read):
+    # a stated encoding is the file's own word on its text; a file that states none
+    # stays UTF-8 or no text, and a statement Python cannot follow is named
+    try:
+        assert read in decode(data, entry, "f")
+    except NotText as error:
+        assert str(error) == f"f {read}"
 
 
 def test_markdown_check_finds_broken_notes_and_leftover_tags():

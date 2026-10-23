@@ -82,17 +82,26 @@ together.
    `"under-review"`, with your name (`by`) and today's `date` (see
    "Decisions are signed").
 4. `uv run wpt-dataset fill-checksum <id>` downloads it once, excludes in
-   `extract` every file that is not UTF-8 text (binary files), each by its
+   `extract` every file that is not text (binary files), each by its
    exact path, writes the checksum in `source.json`, and checks the source
    as `check --fetch` does (step 5) without downloading it again. It takes
-   several ids, fills each, and lists the failures at the end. Map record
-   and chat files in `formats` before running it: a file no such format
-   reads is checked as text, and excluded when it is not UTF-8.
+   several ids, fills each, and lists the failures at the end. A file is
+   text when it is UTF-8, or when it states its own encoding (a
+   byte-order mark, an HTML page's `<meta charset>`, an XML declaration,
+   Project Gutenberg's `Character set encoding:` line, a Python coding
+   line) and decodes under it; nothing is guessed (maintainer's decision,
+   2026-10-23; [docs/architecture.md](docs/architecture.md),
+   "Encodings"). Map every file in `formats` before running it: the format
+   says which statement the file can make, and a file no records or chat
+   format reads is checked as text.
    `uv run wpt-dataset manifest <id>` only prints a source's manifest and
    checksum. A publisher that rebuilds its archives gives another checksum
    on a later fetch: update `revision`, set `checksum` back to the zeros,
    and fill it again. Map every path to exactly one license in `licenses`,
-   and to exactly one format in `formats` (how it becomes Markdown, below). In
+   and to exactly one format in `formats` (how it becomes Markdown,
+   [docs/architecture.md](docs/architecture.md), "Documents are Markdown":
+   an EPUB page is `xhtml`, a web page that is not strict XML, such as
+   Project Gutenberg's, is `html`). In
    each license entry, write in `attribution` the credit that license asks
    for, as the source gives it: authors, title, copyright line, link, and
    in `text` the license as the source gives it (its license file with its
@@ -103,7 +112,7 @@ together.
    dataset's commit; `fill-checksum` and `manifest` then read the Hub's
    listing and download only its small files. `fill-checksum` excludes
    nothing there, and its check downloads the dataset: exclude each file
-   the check names as not UTF-8 text, then put in the checksum `manifest`
+   the check names as not text, then put in the checksum `manifest`
    prints. A file holding many documents, each with its own
    license (JSON Lines, optionally `.gz` or `.zst`, or Parquet), is in the
    `records` format: it names the record's `text`, `license`, `id` and

@@ -294,6 +294,12 @@ def license_entries(licenses: list[dict], path: str) -> list[dict]:
             if glob_match_any(path, [p for p in e["paths"] if p.startswith(HISTORY)] if history else e["paths"])]
 
 
+def format_entries(formats: list[dict], path: str) -> list[dict]:
+    """The format entries covering path, in their order. Every place that
+    maps a path to its format entry goes through here."""
+    return [e for e in formats if glob_match_any(path, e["paths"])]
+
+
 def read_git_history(repo: Path, since: str, revision: str, extractor: Extractor):
     """One file per commit from `since` to `revision`, merges left out:
     `.git/history/<commit>`, holding what `git format-patch` writes for the
