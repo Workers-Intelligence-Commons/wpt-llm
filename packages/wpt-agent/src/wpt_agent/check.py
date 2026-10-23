@@ -20,12 +20,14 @@ variant hid (tools.Offer.hidden, such as the push tool's remote) are in
 the check's container at their place, in /work or at their folder outside
 it, as the tools' programs left them, in place of whatever the model put
 there.
-Its standard output, without the white space around it, must be one number
-from 0 to 1: the score. Its exit code and its standard error are not read.
+Its standard output, without the white space around it, must be one JSON
+object of named parts, each a number from 0 to 1, "correct" among them
+(the task's own judgement; maintainer's decision, 2026-10-23), such as
+{"correct": 1, "sources_first": 0}; a bare number from 0 to 1 reads as
+{"correct": n}. Its exit code and its standard error are not read.
 """
 
 import json
-import math
 import secrets
 
 from wpt_dataset.manifest import EXECUTABLE, FILE
@@ -34,11 +36,13 @@ from wpt_dataset.tasks import CONVERSATION
 from .sandbox import ROOT, TOOL_FILES, WORK, Sandbox, SandboxFull
 
 OUTPUT = 4096  # bytes of the check's output kept
+CORRECT = "correct"  # the part every check prints: the task's own judgement of the files and the answer
 
 
 def score(attempt: Sandbox, check: bytes, seconds: float, conversation: dict,
-          beside: dict | None = None, hidden=(), outside=()) -> tuple[float | None, str]:
-    """(score, "") or, when the check gave no score, (None, why); the check
+          beside: dict | None = None, hidden=(), outside=()) -> tuple[dict | None, str]:
+    """({part: number from 0 to 1}, "") or, when the check gave no score,
+    (None, why) (parts()); the check
     reads the attempt's conversation next to it, and the files `beside`
     ({path: (manifest mode, content)}, a task's check_files), finds the
     hidden paths (paths under files/, or folders outside /work, the
@@ -78,12 +82,28 @@ def score(attempt: Sandbox, check: bytes, seconds: float, conversation: dict,
     if ran.timed_out:
         return None, f"the check was stopped after {seconds} seconds"
     printed = ran.stdout.decode("utf-8", errors="replace").strip()
+    found = parts(printed)
+    if found is None:
+        detail = ran.stderr.decode("utf-8", errors="replace").strip()[-500:]
+        return None, (f"the check printed {printed[:100]!r}, not a number from 0 to 1 nor an object of such parts "
+                      f"holding {CORRECT!r} (exit code {ran.code})" + (f": {detail}" if detail else ""))
+    return found, ""
+
+
+def parts(printed: str) -> dict | None:
+    """The parts a check printed: a JSON object of numbers from 0 to 1 that
+    holds CORRECT, or a bare number from 0 to 1 (as Python's float reads
+    it) read as {CORRECT: n}; None for anything else (a true or false is
+    not a number)."""
     try:
         value = float(printed)
     except ValueError:
-        value = math.nan
-    if not 0 <= value <= 1:  # also refuses nan
-        detail = ran.stderr.decode("utf-8", errors="replace").strip()[-500:]
-        return None, (f"the check printed {printed[:100]!r}, not a number from 0 to 1 (exit code {ran.code})"
-                      + (f": {detail}" if detail else ""))
-    return value, ""
+        try:
+            value = json.loads(printed)
+        except ValueError:
+            return None
+    found = value if isinstance(value, dict) else {CORRECT: value}
+    if CORRECT not in found or not all(type(part) in (int, float) and 0 <= part <= 1  # also refuses nan
+                                       for part in found.values()):
+        return None
+    return {name: float(part) for name, part in found.items()}

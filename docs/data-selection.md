@@ -157,13 +157,21 @@ parallel text is scarce. It comes from:
 
 ## Models in training
 
-For now, no model takes part in training in any way. If WPT's own bigger
-model ever produces data or plays a role in post-training for smaller
-models, that is stated explicitly and must be open to review: the
-contribution says exactly what the bigger model did, and the generated data
-is a build result fingerprinted by model, prompts and seed. Whether such text
-inherits the licenses of the bigger model's training data is a question for
-a lawyer.
+WPT's own models may be used in training, their output included
+(maintainer's decision, 2026-10-18): as a reference a reward compares
+with, such as a model's own full attempt in the terse-versus-full reward
+of the `grpo` step ([post-training.md](post-training.md), "Rewards"), as
+a draft a person edits or confirms ([chat-format.md](chat-format.md),
+"Model drafts"), or as `sft` data made of its attempts that passed their
+task's check (issue #50, not built yet). Every such use says exactly what the WPT model did, so it is
+open to review.
+
+Other companies' models stay completely forbidden: no output of theirs
+enters the data or the training, and they take no role in it, not as
+data, a simulator or a judge. Synthetic data not made by a WPT model is
+forbidden too; puzzles and tasks a program generates are not that kind of
+synthetic data ([licenses.md](licenses.md), "No distillation from another
+company's model").
 
 ## Model size
 

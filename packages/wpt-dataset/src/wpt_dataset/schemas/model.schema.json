@@ -9,7 +9,7 @@
     "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"}
   },
   "properties": {
-    "schema": {"const": 5},
+    "schema": {"const": 6},
     "data": {
       "description": "what `wpt-dataset build` builds; recipes with the same data share one dataset",
       "type": "object",
@@ -113,9 +113,24 @@
       }
     },
     "posttrain": {
-      "description": "the steps `wpt-posttrain` runs, in order: built-in step names or .py files",
+      "description": "the steps `wpt-posttrain` runs, in order: built-in step names or .py files, each alone or with its settings",
       "type": "array",
-      "items": {"type": "string", "minLength": 1}
+      "items": {
+        "oneOf": [
+          {"type": "string", "minLength": 1, "description": "a step, with its own settings"},
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["step", "settings"],
+            "description": "a step and the settings it changes",
+            "properties": {
+              "step": {"type": "string", "minLength": 1, "description": "a built-in step name or a .py file"},
+              "settings": {"type": "object", "additionalProperties": {"type": ["number", "string", "boolean"]},
+                           "description": "the step's settings (its file's SETTINGS); those left out keep the step's defaults"}
+            }
+          }
+        ]
+      }
     },
     "note": {"type": "string"}
   }

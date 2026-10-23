@@ -12,7 +12,11 @@ is systematic.
 
 - Text written by people: existing sources under allowed licenses, original
   texts written for the project, and contributions under the DCO.
-- No output of another company's language model.
+- No output of another company's language model, and no synthetic data
+  that a WPT model did not make. WPT's own models may be used in
+  training, their output included (maintainer's decision, 2026-10-18;
+  [data-selection.md](data-selection.md), "Models in training"), such as
+  a model's own attempt as the reference of a reward ("Rewards", below).
 - A demonstration's `assistant` message may start as a draft written by a
   WPT model, in the conversation editor of `wpt-web`: the person edits it or
   confirms it as it is, and the message's `metadata.draft` records the model
@@ -70,6 +74,27 @@ uv run wpt-posttrain <model recipe> <base model folder> <new model folder>
 
 The steps are the model recipe's `posttrain` list, run in order; the new
 folder's provenance records the recipe's name.
+
+Each entry of the list is a step, or a step with the settings it changes
+(maintainer's decision, 2026-10-23):
+
+```json
+"posttrain": ["sft", {"step": "grpo", "settings": {"group": 16, "weight_tool_call": -0.02}}]
+```
+
+A step file declares its settings and their defaults as `SETTINGS`, the
+same pattern as a training method's `training.settings`
+([training.md](training.md)): each setting the entry gives takes its
+default's type (an integer where a number is expected is taken, text is
+converted), and the step reads the result as `context.settings`. A
+setting the step does not declare, or one of another type, stops the run
+before any step has run, naming the step's file and its settings; so does
+an unknown step, and so do settings that cannot go together, which a step
+file refuses in an optional `check(settings)` by raising `ValueError`
+with the reason. Every step file is read before the first step runs. The
+new folder's `provenance.json` records each step's settings next to its
+file and sha256. The shared rule is `wpt_utils.settings.typed`, which
+`wpt-train` uses for a method too.
 
 A step is one Python file (or the name of a built-in one, in
 `apps/wpt-posttrain/src/wpt_posttrain/steps/`) that defines `run`:
@@ -221,10 +246,12 @@ folder per task:
 ```
 
 ```json
-{"schema": 1, "instructions": "Fix the failing test in calc.py.", "image": "python",
+{"schema": 3, "instructions": "Fix the failing test in calc.py.", "image": "python",
  "limits": {"max_turns": 20, "max_tokens": 4000, "command_seconds": 30},
  "container": {"memory": 8192}, "needs": [["read", "bash"], ["edit", "write"]],
- "replies": [{"pattern": "(?i)python.*version", "reply": "Python 3.13."}]}
+ "replies": [{"pattern": "(?i)python.*version", "reply": "Python 3.13."}],
+ "answered_by": ["read", "bash"], "answered_in": ["NOTES.md"], "area": ["calc.py", "tests/**"],
+ "gates": ["read_before_write"]}
 ```
 
 - `instructions`: the user message that starts every attempt. No task's
@@ -262,9 +289,17 @@ folder per task:
   offers `ask`.
 - `answered_by` (required with `replies`): the looking tools that can
   answer what the task leaves open, `read`, `bash` or a declared tool
-  marked `looks` (the task's or its image's pool's). An attempt asks the
-  user only after at least one look through one of them (`asked_last`,
-  "The check library", below; maintainer's decision, 2026-10-22).
+  marked `looks` (the task's or its image's pool's), through which an
+  attempt opens the files of `answered_in` (maintainer's decision,
+  2026-10-22).
+- `answered_in` (required with `replies`): where the task's answers live,
+  as glob patterns of paths under `/work` (as `area` reads them). An
+  attempt asks the user only after it opened, through a tool of
+  `answered_by`, every file it starts with that they match, and did not
+  find the answer there (the check can name its text to `asked_last`); a
+  question counts at once when they match none of its files, the answer being
+  absent (`asked_last`, "The check library", below; maintainer's
+  decision, 2026-10-23).
 - `tools` (optional): the task's own tools beyond the built-in ones and
   `ask`, each with its `name`, `description`, `parameters` (the JSON
   Schema of its arguments), `program` (the absolute path, in the image, of
@@ -283,6 +318,27 @@ folder per task:
   agent image", below). The check's container shows the image as it is.
 - `pointers` (optional): the texts the task takes from documents of other
   sources ("Pointer tasks", below).
+- `area` (optional): the paths under `/work` an attempt may change, as
+  glob patterns (`*`, `**`, `?`, `[...]`, as a source's license paths
+  read them), `[]` when the task only answers and may change nothing. An
+  attempt that changed, added or removed a path no pattern matches breaks
+  the `within_area` part ("Rewards", below; maintainer's decision,
+  2026-10-23). A task without `area` gets no such part.
+- `gates` (optional): the parts that must be 1 for an attempt to score at
+  all, by name: the check's own (such as `asked_last`) or `within_area`. A
+  gated part below 1, or missing, makes the attempt worth 0 whatever the
+  rest ("Rewards", below; maintainer's decision, 2026-10-23). There is no
+  gate for every task beyond the missing answer.
+
+A task's shape is 3 since the rewards (maintainer's decisions,
+2026-10-23: shape 2 added `area` and `gates`, shape 3 `answered_in`).
+Task files are a source's bytes, which `wpt-dataset migrate` never
+rewrites: a `task.json` of an earlier shape is read in shape 3 each time
+it is read (`migrate.upgrade`), by the steps, the measures and the task
+editor of `wpt-web`, whose save then writes shape 3. Only a person knows
+where a task's answers live, so a task with replies gets an empty
+`answered_in`, which `wpt-dataset check --fetch` then refuses, naming its
+`task.json` to fill in.
 
 A task folder is a folder holding `task.json` that is not inside another
 task's `files/`; every other file of the format is a task folder's `check`
@@ -297,8 +353,8 @@ sizes break the rule on `disk` and `memory` above, naming its `task.json`,
 and one whose tools break the rules of "Tools" (below): a declared tool
 taking a built-in name or `ask`, or declared twice; a need naming a tool
 the task does not offer (`ask` without replies included); a tool in two
-needs; a task with replies and no `answered_by`, or an `answered_by`
-naming a tool that is not a looking tool; a reply pattern that is not a
+needs; a task with replies and no `answered_by` or no `answered_in`, or
+an `answered_by` naming a tool that is not a looking tool; a reply pattern that is not a
 regular expression; a `terse` that holds a line break; a `tool_files`
 entry that names nothing under `files/`; an `absent` entry that is `/work`
 or `/tmp`, lies under them, or holds `.` or `..`; a pointer that names a source that does not exist or takes the
@@ -517,7 +573,7 @@ place, as the attempt left it.
 **Variation** (maintainer's decision, 2026-10-18). Every task lists the
 tools it absolutely needs (`needs`), and a needed tool may have variants.
 For each attempt the step (and the measures) draws, from a generator
-seeded with the step's `SEED`, the task, the round, the group and the
+seeded with the step's `seed`, the task, the round, the group and the
 attempt, so runs are reproducible (`wpt_agent.offer`):
 
 - one variant of each need, under its own name; a variant may be tools
@@ -720,16 +776,23 @@ decision, 2026-10-18). A check started as `python3 -I` imports it:
 import wpt_check
 conversation = wpt_check.load()  # conversation.json, next to the check
 right = ...  # the task's own judgement of the files and the answer
-print(wpt_check.scored(conversation, float(right)))
+print(wpt_check.report(conversation, right, sources_first=wpt_check.sources_first(conversation)))
 ```
 
-How `brier` weighs in a task's score is the rewards stage's rule (#10, #40:
-correctness plus the Brier score, correctness weighted above 1), added to
-this library; the example weighs nothing yet.
+A check prints the named parts of its score ("Scores", below), and the
+step weighs them ("Rewards", below); the library weighs nothing.
 
 The rules read the attempt's trace by real tool names (`metadata.tools`
 maps each name the model saw to the real one):
 
+- `report(conversation, correct, **rules)`: what a check prints, the
+  JSON object of its parts: `correct`, the task's own judgement through
+  `scored`, and each rule given by name, as a number (`True` is 1). A
+  task's check may report any part of its own the same way, such as a
+  `conventions` part for the conventions its workspace shows (placement,
+  naming, framework, existing commands): those are checked only by each
+  task's own check, never by a rule of this library (maintainer's
+  decision, 2026-10-23).
 - `scored(conversation, score)`: the missing-answer rule. The attempt's
   score is 0 when it has no answer, whatever its files hold: no final
   reply, or a reply to the confidence question that is not a number from
@@ -745,11 +808,21 @@ maps each name the model saw to the real one):
 - `sources_first(conversation, changes=("write", "edit", "ask"))`: the
   attempt looked at sources (below) before its first change or question,
   and looked at all when it did neither.
-- `asked_last(conversation)`: every `ask` came after at least one look
-  that could find the answer: a call that looks (below) to one of the
-  task's `answered_by` (`metadata.answered_by`), not to every one of them
-  it was offered; true when it was offered none of them (maintainer's
-  decision, 2026-10-22).
+- `asked_last(conversation, found="")`: every `ask` came after the attempt opened
+  every file where the answer lives: the files of `/work` it started with
+  that the task's `answered_in` matches (`metadata.answered_in`), each
+  opened by a call that looks (below) to one of the task's `answered_by`
+  (`metadata.answered_by`) and did not fail, whose `path` argument is the
+  file or, for `bash`, whose command names it and runs a program that
+  shows what a file holds (`opened`, `SHOWING`: the reading programs but
+  `wc`, `csplit`, `find`, `ls`, `dir`, `vdir`, `stat`, `du` and `cmp`,
+  which show only its name, size or counts). Given `found`, the answer's
+  text, a question no longer counts once a call that looks showed it, its
+  words in order as `holds` reads them: the answer was found. A question
+  counts at once when no such file exists (the answer is absent), and
+  when the attempt was offered none of those tools (maintainer's
+  decisions, 2026-10-22 and 2026-10-23). A look that does not name the
+  file, such as `grep -r` over a folder, does not open it.
 - `read_before_ask(conversation, text)`: every `ask` came after a call
   that looks and whose result showed `text`, its words in order as `holds`
   reads them; true when the attempt asked nothing (maintainer's decision,
@@ -803,7 +876,12 @@ declaration marked `looks`): the agent loop writes their real names into
 the conversation's `metadata.looking`, which the library reads, and
 `wpt-dataset check` refuses an `answered_by` naming any other tool.
 
-The rewards stage adds its rules here.
+The trace rules of #37 are `read_before_write`, `sources_first` and
+`asked_last`, each reported as a part of that name by the checks that
+apply it ("The task builder", below). Each task states where its answers
+live, its `answered_in`, and the looking tools that can open them, its
+`answered_by`; `asked_last` waits for both (maintainer's decision,
+2026-10-23).
 
 ### The task builder
 
@@ -861,13 +939,23 @@ source's address and the document).
 - `look-or-ask`: the rest of the paragraph goes into a file whose name is
   the one missing detail: in half the tasks `NOTES.md` names it, in the
   other half only the reply of the `ask` tool does (and `ask` is needed);
-  both halves declare the same reply. The task's `answered_by` names the
-  looking tools that can read `NOTES.md`: `read`, `bash` and the pool's
-  `search_text`. The check wants the file's text and `asked_last`: no
-  question before at least one look through one of those. In the
-  half where `NOTES.md` names the file, it also wants `read_before_ask`:
+  both halves declare the same reply. The task's `answered_in` is
+  `["NOTES.md"]` in both halves, the file where the answer would live, so
+  the attempt looks before asking even where the notes hold nothing
+  (maintainer's decision, 2026-10-23), and
+  its `answered_by` names the looking tools that can read it: `read`,
+  `bash` and the pool's `search_text`. The check wants the file's text and
+  `asked_last`: no question before `NOTES.md` was opened through one of
+  those (maintainer's decision, 2026-10-23); in the half where the notes
+  do not name the file, the attempt reads them, does not find the name,
+  and then asks. In the half where `NOTES.md` names the file, the answer
+  is found there, so `asked_last` gets the line naming it as `found`: a
+  question after a look showed that line does not count (maintainer's
+  decision, 2026-10-23), and the check also wants `read_before_ask`:
   the attempt read `NOTES.md`, through any looking tool, before any
-  question (maintainer's decisions, 2026-10-22).
+  question (maintainer's decisions, 2026-10-22). Those two are the task's
+  `gates` (maintainer's decision, 2026-10-23): `correct` is the file's
+  text, and a broken gate makes the attempt worth 0.
 - `commit-and-push`: every commit of each admitted git source's stored
   history that undoing can reach is a candidate, not only the newest
   (maintainer's decision, 2026-10-22), when the source's working tree
@@ -929,6 +1017,30 @@ source's address and the document).
   on them would learn `ondrik` from the attempts themselves, and the
   measure would no longer tell whether it reads the manual.
 
+Every kind's check prints its parts through `wpt_check.report`, and the
+builder sets each kind's `area` and `gates` (maintainer's decision,
+2026-10-23):
+
+| kind | parts besides `correct` | `area` | `gates` |
+| --- | --- | --- | --- |
+| `find-the-passage`, `evidence-removed` | `sources_first` | `[]`: it only answers | none |
+| `look-or-ask` | `sources_first`, `read_before_write` (the result's file is new), `asked_last`, and `read_before_ask` where `NOTES.md` names the file | the result's file | `asked_last`, and `read_before_ask` where it is reported |
+| `commit-and-push` | none | `[".git/**"]`: git's own records | none |
+| `read-the-manual` | none | `[]`: it only answers | none |
+
+The trace rules are reported where the kind gives what they judge: given
+sources for `sources_first`, a file to write for `read_before_write`, an
+`ask` tool for `asked_last`. A `look-or-ask` attempt may change the
+result's file only (maintainer's decision, 2026-10-23): anything else it
+adds, removes or edits breaks `within_area`. A `commit-and-push` attempt
+may change git's own records, everything under `.git/`, and nothing else
+(maintainer's decision, 2026-10-23): committing and pushing the prepared
+changes leaves the project's files as they are, so any project file the
+attempt adds, removes or edits while committing is over-reach and breaks
+`within_area`. Only `look-or-ask` has replies, so only its tasks get an
+`answered_in` (`["NOTES.md"]`, above); the other kinds have no
+`asked_last` rule and leave it out.
+
 Each kind is marked as acting, checking or both (maintainer's decision,
 2026-10-23; `CLASSES` in `builder.py`): `commit-and-push` acts;
 `find-the-passage`, `evidence-removed` and `look-or-ask` check;
@@ -954,7 +1066,7 @@ admitted, and one run per kind with `--count 2500`.
 
 ### Attempts
 
-For each task, the model makes several attempts (`GROUP`), written
+For each task, the model makes several attempts (`group`), written
 together: the model reads the start the attempts' openings share once,
 through its generation cache ([model.md](model.md), "Generation"), copies
 it into one row per attempt, reads in each row the rest of that attempt's
@@ -1001,8 +1113,10 @@ answer"; maintainer's decision, 2026-10-23). The loop builds
 `null` when there is no final reply or the reply is not such a number,
 and keeps it in the conversation's `metadata.answer`, next to `metadata.tools`, the map from each name the
 model saw to the real tool, `metadata.looking`, the real names of the
-offered tools that look at sources, and `metadata.answered_by`, the
-task's ("The check library", above). The model's
+offered tools that look at sources, `metadata.answered_by`, the
+task's, and `metadata.answered_in`, the files of `/work` the attempt
+starts with that the task's `answered_in` matches ("The check library",
+above). The model's
 `block_size` does not limit an attempt: the cache reads it past
 `block_size`, and the loss pass reads it whole. The attempt also
 ends when the model's own processes or files fill its container, so that
@@ -1015,7 +1129,7 @@ lost and the check scores an empty folder. A command that runs
 longer than `command_seconds` is stopped, and its result says so (one
 that ignores the signal to stop is killed 5 seconds later); a command that
 only exits with the code `timeout` uses is reported with that exit code. A tool
-result longer than `RESULT_BYTES` (4000) keeps its first and last 2000
+result longer than `result_bytes` (4000) keeps its first and last 2000
 bytes, with a line between them saying how many bytes were cut; the output
 is cut while it is read, so a command that prints without end never fills
 the machine's memory. `edit` rewrites only a UTF-8 file of at most 1 MiB,
@@ -1033,14 +1147,16 @@ When the attempt has ended, every process in its container is stopped
 container of the same image and sizes, holding only a copy of the
 attempt's `/work`: what the model started, or left anywhere else, cannot
 reach the check. The check is copied in, in a folder of its own, and runs
-as root from `/work` for at most `CHECK_SECONDS`.
+as root from `/work` for at most `check_seconds` (300).
 
 Next to the check, in its folder, is `conversation.json`: the attempt's
 conversation in the chat format, as the attempts file keeps it (Runs,
 below) but with only the attempt's own `metadata`: `tools`, the map from
 each name the model saw to the real tool; `looking`, the real names of
 the offered tools that look at sources ("The check library", below);
-`answered_by`, the task's; and `answer`, the answer the loop built
+`answered_by`, the task's; `answered_in`, the files of `/work` the
+attempt started with that the task's `answered_in` matches; and
+`answer`, the answer the loop built
 (the final reply's text and the confidence) or `null`. It is written as ASCII JSON, any other character
 escaped. A check finds it as `"$(dirname "$0")/conversation.json"`, and
 scores everything: the files, the trace of tool calls and the confidence
@@ -1053,11 +1169,21 @@ the current folder: run Python as `python3 -P` (or `-I`), and call
 programs and scripts by absolute paths. Otherwise a `conftest.py`,
 `unittest.py` or similar file the model planted would run as root inside
 the check and could print any score it likes. Its standard output,
-without the white space around it, must be one number from 0 to 1: the
-attempt's score. Its exit code and standard error are not read. A check
-that prints anything else, crashes or runs out of time gives no score;
-the attempt counts as 0, and the step prints a line naming the task and
-why.
+without the white space around it, must be one JSON object of named
+parts, each a number from 0 to 1, `correct` among them: the task's own
+judgement of the files and the answer, next to the rules it reports,
+such as `{"correct": 0.8, "read_before_write": 1, "sources_first": 0.5}`
+(maintainer's decision, 2026-10-23; `wpt_check.report` prints it). A
+bare number from 0 to 1 reads as `{"correct": n}`, so a check that prints
+one number keeps working. Its exit code and standard error are not read.
+A check that prints anything else (a part outside 0 to 1, a `true`, no
+`correct`), crashes or runs out of time gives no score; the attempt
+counts as 0, and the step prints a line naming the task and why. A task
+with an `area` gets one more part, `within_area`, from the harness
+(`wpt_agent.play`): 1 when every path under `/work` the attempt changed,
+added or removed matches one of the area's patterns, 0 otherwise. The
+attempt's `score`, what its line and the measures keep, is its `correct`
+part, or 0 when a gate of the task is broken (`wpt_agent.gated`).
 
 When Docker or the container fails during an attempt or its check, which
 is not the model's doing, the attempt is dropped from its group and the
@@ -1074,13 +1200,75 @@ and the step fails, naming the round, how many attempts Docker failed and
 its last error, and writes nothing. A round with at least one update goes
 on as usual. A whole run that made no update at all fails too, and
 writes nothing: every group was skipped, and the step says how many
-because their scores were all equal and how many because they kept fewer
+because their rewards were all equal and how many because they kept fewer
 than 2 attempts.
+
+### Rewards
+
+An attempt's reward is its parts weighed together, with gates
+(maintainer's decisions, 2026-10-18 and 2026-10-23). The check reports
+its parts; the step combines them, in `wpt_posttrain/agentic.py`
+(`combined`), which `grpo` and `token-efficiency` share, never the
+check:
+
+- The reward is 0, whatever the rest, when the attempt has no answer (no
+  final reply, or a reply to the confidence question that is not a number
+  from 0 to 100), when its check gave no score, or when a gate of the
+  task is broken: a part its `gates` names is below 1, or missing.
+- Otherwise it is the weighted sum of `correct`; the calibration of the
+  confidence, 1 - (confidence - correct)², one minus its Brier score
+  (#40; paper 12 of the plan); each other part, a rule (the check's, and
+  `within_area`); the number of tool calls, a cost on every call (#37,
+  so the model does not open everything blindly); and, for a terse
+  attempt, its closeness to the full attempt (below).
+- The calibration and the tool calls are computed by the step from the
+  attempt, not by the check: the confidence the harness collected
+  (`metadata.answer`) and the tool calls of its conversation, so every
+  attempt gets them, whatever its check reports.
+- The weights are the step's settings (`weight_correct` 1,
+  `weight_calibration` 0.5, `weight_rule` 0.25 for each rule,
+  `weight_tool_call` -0.01 for each call, `weight_closeness` 0.25),
+  starting values until experiments on the 1B model set them (#53).
+  `weight_correct` must stay above `weight_calibration`, so stating a low
+  confidence never pays more than being right: otherwise the run stops
+  before any step has run (`agentic.check`). Both steps take these
+  defaults from one place, `agentic.WEIGHTS`.
+
+Terse against full (#39; maintainer's decision, 2026-10-23): a task that
+holds a one-line form (`terse`) is played twice in each round of `grpo`,
+first `group` attempts with its full instructions, then `group` attempts
+with its one-line form, offered the same tools attempt by attempt. Both
+forms' attempts are one group for the advantage (maintainer's decision,
+2026-10-23): with `group` 8, each of the 16 attempts' advantage is its
+reward minus the mean reward of all 16. Only the terse attempts carry the
+closeness part. Terse attempt *i* is
+compared with full attempt *i*, the one of the same index: its reward
+adds, weighed by `weight_closeness`, how alike their changes to `/work`
+are (twice the lines their diffs share, in order, over the lines of both,
+`wpt_agent.changes`; 1 when neither changed anything), next to passing
+the task's check as any attempt does. The model's own full result is the
+reference, which the rule on WPT models in training allows
+([data-selection.md](data-selection.md), "Models in training"). A task
+whose `area` is empty only answers, and gets no closeness part. On any
+other task, a terse attempt whose full attempt Docker dropped has nothing
+to be compared with:
+it is kept in the attempts file with a `null` reward but left out of the
+group, since its reward would lack the part every other terse attempt
+of the group has. As for any group, one left with fewer than 2 attempts
+is skipped, and one whose rewards are all equal teaches nothing.
+
+The group's size matters (#40; paper 13 of the plan): normalizing by the
+group can erase a penalty the weights were designed to give when few
+distinct answers appear in a group. The advantage here is the reward
+minus the group's mean, never divided by its standard deviation, and a
+group left with fewer than 2 attempts is skipped (below); the group size
+is set by experiment with the weights.
 
 ### Learning
 
-Each attempt's advantage is its score minus the mean score of its group
-(the attempts at the same task). It is not divided by the group's
+Each attempt's advantage is its reward minus the mean reward of its group
+(the attempts at the same task in the same round, both its forms for
+`grpo`'s terse tasks). It is not divided by the group's
 standard deviation: that would make a group whose scores barely differ
 weigh as much as one whose scores differ widely, and give tasks that are
 almost always passed or failed the largest steps. The loss is minus the
@@ -1091,9 +1279,9 @@ update's attempts; a skipped group (below) adds none. The tokens are the ones th
 were, since writing the conversation as tokens again would not always give
 the same ones. There is no frozen reference model and no KL penalty: each
 update learns from attempts the current model just made. A group whose
-scores are all equal teaches nothing and is skipped. The model samples
-from its own probabilities (`TEMPERATURE` 1, no `TOP_K`), which the loss
-assumes.
+rewards are all equal teaches nothing and is skipped. The model samples
+from its own probabilities (`temperature` 1, `top_k` 0: every token),
+which the loss assumes.
 
 The routed expert layers ([model.md](model.md), "Experts") choose experts
 for each token while the model writes an attempt. The step records those
@@ -1108,7 +1296,7 @@ indexers go on learning by their own loss in each loss pass, as in `sft`.
 ### Runs
 
 The order of the tasks in each round and every sampled token come from
-generators seeded with `SEED`, so a run gives the same attempts again on
+generators seeded with `seed`, so a run gives the same attempts again on
 the same machine and setup (the same model, tasks, images and devices);
 the checks themselves may differ, as any program may. The model alone
 writes the attempts, without a drafter (maintainer's decision,
@@ -1117,7 +1305,7 @@ only at the end of the run ("The drafter", above), and the attempts then
 depend on the seed alone, never on this machine's times. A task's
 attempts are written together in one batch, from one reading of the
 task's opening (model.md, "Generation"). The step prints one line per
-round (`ROUNDS`, passes over every task): the mean score, the number of
+round (`rounds`, passes over every task): the mean reward, the number of
 attempts and of updates, and the indexers' mean loss over the round's
 loss passes.
 
@@ -1139,9 +1327,10 @@ which attempt it is, so the file passes the same check as any `chat` file:
 ```json
 {"schema": 3, "tools": [...], "messages": [...],
  "metadata": {"tools": {"shell": "bash", "...": "..."}, "answer": {"answer": "...", "confidence": 0.5},
-              "step": "grpo", "task": "<task id>", "round": 1, "group": 3, "attempt": 2,
-              "dropped": false, "error": null, "ended": "answered", "score": 0.5, "reward": 0.5,
-              "written": 412}}
+              "step": "grpo", "task": "<task id>", "round": 1, "group": 3, "attempt": 2, "terse": false,
+              "dropped": false, "error": null, "ended": "answered",
+              "parts": {"correct": 1.0, "sources_first": 1.0}, "score": 1.0, "reward": 1.66,
+              "written": 412, "tool_calls": 4}}
 ```
 
 - `tools`, `messages`: the attempt: the tools it was offered, as the
@@ -1152,7 +1341,8 @@ which attempt it is, so the file passes the same check as any `chat` file:
   would have started from.
 - `metadata.tools`: each name the model saw, mapped to the real tool's;
   `metadata.looking`: the real names of the offered tools that look at
-  sources; `metadata.answered_by`: the task's; `metadata.answer`: the
+  sources; `metadata.answered_by`: the task's; `metadata.answered_in`:
+  the starting files the task's `answered_in` matches; `metadata.answer`: the
   answer the loop built, the final reply's text and the confidence, `null`
   without a final reply or a confidence from 0 to 100, and absent for a
   dropped attempt.
@@ -1161,29 +1351,41 @@ which attempt it is, so the file passes the same check as any `chat` file:
   (the `token-efficiency` step's reference, below).
 - `group`: the group within the round, from 1, in the order played (for a
   reference attempt, the task's place in the list of tasks); `attempt`:
-  the attempt within its group, from 1.
+  the attempt within its group, from 1; `terse`: whether it opened with
+  the task's one-line form ("Rewards", above).
 - `dropped`: `true` when Docker failed; then `error` says how, and
-  `ended`, `score`, `reward` and `written` are `null`.
+  `ended`, `parts`, `score`, `reward`, `written` and `tool_calls` are
+  `null`.
 - `ended`: why the attempt ended (`answered`, `ended`, `turns`, `tokens`,
   `context` or `full`; Attempts, above).
-- `score`: the check's score; `reward`: what the attempt is worth to the
-  step (for `grpo`, the score), `null` for an attempt never trained on.
-- `written`: the tokens the model wrote, the tokens the loss learns.
+- `parts`: the check's parts, with `within_area` for a task with an area,
+  `null` when the check gave no score; `score`: its `correct` part, 0
+  with a broken gate ("Scores", above); `reward`: what the attempt is
+  worth to the step (for `grpo`, its parts weighed together, "Rewards",
+  above), `null` for an attempt never trained on.
+- `written`: the tokens the model wrote, the tokens the loss learns;
+  `tool_calls`: the tool calls it made.
 
 The trace names each line: the attempts of a group are written, scored
-and kept in a span `grpo.play` (`task`, `round`, `group`, `attempts`);
-inside it, each attempt's line is kept in a span `grpo.attempt` (`task`, `round`, `group`, `attempt`, then `file` and
+and kept in a span `grpo.play` (`task`, `round`, `group`, `attempts`,
+`terse`);
+inside it, each attempt's line is kept in a span `grpo.attempt` (`task`, `round`, `group`, `attempt`, `terse`, then `file` and
 `line`, its line number from 1, with `dropped`, `ended`, `score`,
 `reward` and `written`); each group is an event `grpo.group` (`task`,
-`round`, `group`, `file`, `lines`, and `outcome`: `learned`, or why it was
+`round`, `group`, `terse`: whether it holds the one-line form's attempts too, `file`, `lines`, and `outcome`: `learned`, or why it was
 skipped); each round is an event `grpo.round` (`file`, `lines`: its first
-and last, `attempts`, `dropped`, `updates`, and the value `mean_score`). A
+and last, `attempts`, `dropped`, `updates`, and the value `mean_reward`). A
 recipe that runs the step twice adds to the same file, and the line
 numbers go on. A line the store refuses stops the command at once with
 exit code 3, as any part of the record does.
-Its settings are the constants at the top of `steps/grpo.py`; to change
-them, copy the file and put its path in the recipe's `posttrain` list. The
-containers' sizes are not among them: they belong to each task.
+Its settings are `SETTINGS` at the top of `steps/grpo.py`, their
+defaults: `rounds` (10), `tasks_per_update` (4), `group` (8),
+`learning_rate` (1e-6), `weight_decay` (0), `temperature` (1), `top_k`
+(0, every token), `check_seconds` (300), `result_bytes` (4000), `seed`
+(0) and the five weights ("Rewards", above); a recipe's entry
+`{"step": "grpo", "settings": {...}}` changes them ("Running
+post-training", above). The containers' sizes are not among them: they
+belong to each task.
 
 ## The `token-efficiency` step
 
@@ -1192,8 +1394,8 @@ list. Its goal is the same result as the model it starts from, with fewer
 tokens. It trains on `grpo`'s own tasks, those tagged `grpo` (it has no tag
 of its own), with the same images, containers, limits and checks, and
 `grpo`'s learning unchanged (Attempts, Scores, Learning and Runs above):
-groups of `GROUP` attempts, the advantage as the reward minus the group's
-mean, the loss over the tokens the model wrote, R3 routes and routers that
+groups of `group` attempts, in each task's full form only (it plays no
+one-line form), the advantage as the reward minus the group's mean, the loss over the tokens the model wrote, R3 routes and routers that
 do not change, dropped attempts and the same failures. Only the reward
 differs. Its code is `steps/token-efficiency.py`; the machinery both steps
 share is `apps/wpt-posttrain/src/wpt_posttrain/agentic.py`, which plays
@@ -1201,8 +1403,11 @@ attempts through `wpt_agent.play`, as the agent measures do. Until a source
 holds tasks tagged `grpo`, it fails with "no tasks" and writes nothing.
 
 First, the reference. Before any update, the incoming model makes
-`REFERENCE` attempts at each task (by default `GROUP`), written together,
-run and scored as `grpo`'s are. A task's best start score is the best score among them. An
+`reference` attempts at each task (8, as `group`), written together,
+run and scored as `grpo`'s are. An attempt's score here is its result:
+its `correct` part, 0 when a gate is broken, its check gave no score or
+it has no answer (`agentic.result`). A task's
+best start score is the best score among them. An
 attempt passes when its score is at least that best score, and the task's
 reference length is the mean length of its passing attempts. A length
 counts only the tokens the model wrote, the same tokens the loss learns,
@@ -1214,25 +1419,31 @@ Docker failed; the step prints a line for each. When no task is left, the
 step fails, saying how many tasks were left out for each reason, and
 writes nothing.
 
-Then the rounds, as `grpo`'s, with this reward for each attempt:
+Then the rounds, as `grpo`'s, with this reward for each attempt
+(maintainer's decision, 2026-10-23):
 
-- 0 when its score is below the task's best start score;
-- otherwise the task's reference length divided by the attempt's length:
-  1 for an attempt as long as the reference, 2 for one half as long, 0.5
-  for one twice as long.
+- 0 when it fails: its result, the gated `correct` part
+  (`agentic.result`), is below the task's best start score;
+- when it passes, its parts weighed together as `grpo` weighs them
+  ("Rewards", above, with this step's own weight settings; the parts are
+  combined in the step that learns, never in the check), times the
+  task's reference length divided by the attempt's length: the weighed
+  parts once for an attempt as long as the reference, twice for one half
+  as long, half for one twice as long.
 
-Every passing attempt is worth more than every failing one, and among
-passing attempts the shorter one is worth more. The step prints one line
+Every passing attempt whose weighed parts are above 0 is worth more than
+every failing one, and of two passing attempts whose parts weigh the same
+the shorter one is worth more. The step prints one line
 per task for the reference (its best start score and reference length) and
 one line per round (the mean reward, the number of attempts and of
-updates). Sampling draws from one generator seeded with `SEED`, for the
+updates). Sampling draws from one generator seeded with `seed`, for the
 reference and then the rounds. Every attempt is kept as `grpo` keeps its
 own (Runs, above), in `token-efficiency-attempts.jsonl`, under the spans
 and events `token-efficiency.attempt`, `.group` and `.round`: the
 reference attempts first, with `round` and `reward` `null` in their
 `metadata`, then the
 rounds' attempts with their reward (the round's value is `mean_reward`).
-Its settings are the constants at the top
-of `steps/token-efficiency.py`, `TAG` (the tag of the tasks it reads) and
-`REFERENCE` among them; to change them, copy the file and put its path in
-the recipe's `posttrain` list.
+Its settings are `SETTINGS` at the top of `steps/token-efficiency.py`:
+`grpo`'s, without `weight_closeness`, with `tag` (`grpo`, the tag of the
+tasks it reads) and `reference`; a recipe's entry `{"step":
+"token-efficiency", "settings": {...}}` changes them.

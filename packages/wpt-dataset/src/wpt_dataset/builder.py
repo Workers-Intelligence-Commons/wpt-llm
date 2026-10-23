@@ -20,8 +20,10 @@ pointers (tasks.Pointer), filled in when a task is read:
   the one missing detail: in half the tasks NOTES.md names it, and the
   attempt must have read it before any question; in the other half only
   the reply of the ask tool does. In both, the user is asked only after
-  at least one look through a looking tool that can answer (ANSWERED_BY;
-  maintainer's decision, 2026-10-22).
+  NOTES.md, where the answer lives (its answered_in), was opened through a
+  looking tool that can answer (ANSWERED_BY), and, where NOTES.md names
+  the file, never after a look showed that line: the answer was found
+  (maintainer's decisions, 2026-10-22 and 2026-10-23).
 - commit-and-push: a repository pointer to a commit of an admitted git
   source's history, drawn from every commit of every such source newer
   than its newest merge (the others are dropped before drawing) whose
@@ -47,6 +49,16 @@ pointers (tasks.Pointer), filled in when a task is read:
   training on them would teach the program, against "no training text
   describes it". write() tags their folder `eval` (tasks.EVAL), so the
   task reader gives them to the measures only (MEASURE_ONLY).
+
+Every kind's check prints its parts (wpt_check.report): `correct`, and
+the trace rules the kind gives something to judge (RULES): sources_first
+for the kinds built on text, and for look-or-ask read_before_write,
+asked_last and, where NOTES.md names the file, read_before_ask, the last
+two its `gates`. Each task's `area` is what its attempts may change:
+nothing ([]) for the kinds that only answer, the result's file for
+look-or-ask, git's own records under .git/ (REPOSITORY_AREA) for
+commit-and-push, whose project files the attempt commits but never changes
+(maintainer's decisions, 2026-10-23).
 
 No kind's instructions state an answer block: the model's final reply is
 its answer, as text, and the harness asks for its confidence after it
@@ -100,6 +112,9 @@ DOCUMENT = 4 << 20  # bytes of a document read at most
 GIVEN, PAGES = 3, 5  # texts of a task: files in docs/, or web pages
 REPOSITORY_BYTES, REPOSITORY_FILES = 4 << 20, 2000  # the largest working tree a commit-and-push task holds
 TRIES = 20  # draws of a paragraph before a document is left aside
+# what a commit-and-push attempt may change: git's own records; a project file it adds, removes or edits
+# while committing is over-reach (maintainer's decision, 2026-10-23)
+REPOSITORY_AREA = ".git/**"
 WORD = re.compile(rb"\w+")
 MARKUP = re.compile(rb"[#>|*+`~<\[!-]|\d+[.)]\s|\\")  # what a plain paragraph does not start with
 SEARCH = {"name": "search", "description": "Search the web; returns the best pages, each with its address.",
@@ -136,6 +151,9 @@ INSTRUCTIONS = {
     "knot": "Use the program ondrik, installed in this container, to find the slack knot of {first} and {second}, "
             "and give the knot as your answer.",
 }
+# where a look-or-ask task's answer lives, its answered_in: in half the tasks it holds the file's name, and in
+# the other half the attempt reads it without finding the name before it asks
+NOTES_FILE = "NOTES.md"
 NOTES = "# Notes\n\nThe documents are in docs/.\n"
 WHERE = "Put results in {name}.\n"
 ASKED = r"(?i)\b(file|name|where|save|put|write|store)"  # a question about where the result goes
@@ -145,10 +163,7 @@ CHECKS = {
     "answerable": "right = wpt_check.holds(wpt_check.answer_text(conversation), wpt_check.beside('rest.txt')) "
                   "and not wpt_check.not_enough(conversation)",
     "removed": "right = wpt_check.not_enough(conversation, wpt_check.beside('missing.txt'), {words})",
-    "file": "right = wpt_check.holds(wpt_check.file_text({name!r}), wpt_check.beside('rest.txt')) "
-            "and wpt_check.asked_last(conversation)",
-    "noted": "right = wpt_check.holds(wpt_check.file_text({name!r}), wpt_check.beside('rest.txt')) "
-             "and wpt_check.asked_last(conversation) and wpt_check.read_before_ask(conversation, {where!r})",
+    "file": "right = wpt_check.holds(wpt_check.file_text({name!r}), wpt_check.beside('rest.txt'))",
     "pushed": "right = wpt_check.pushed()",
     # the program's output, from the check's own container, where the model's files cannot change it
     "program": "import subprocess\n"
@@ -156,12 +171,25 @@ CHECKS = {
                "text=True).stdout.strip()\n"
                "right = expected != '' and wpt_check.holds(wpt_check.answer_text(conversation), expected)",
 }
+# the trace rules of the check library a check reports as parts next to `correct` (maintainer's decisions,
+# 2026-10-18 and 2026-10-23: #37's rules, each a named part)
+RULES = {"sources_first": "wpt_check.sources_first(conversation)",
+         "read_before_write": "wpt_check.read_before_write(conversation, [{name!r}])",
+         "asked_last": "wpt_check.asked_last(conversation, {found!r})",
+         "read_before_ask": "wpt_check.read_before_ask(conversation, {where!r})"}
 CHECK_TEXT = """#!/usr/bin/python3 -I
 import wpt_check
 conversation = wpt_check.load()
 {right}
-print(wpt_check.scored(conversation, float(right)))
+print(wpt_check.report(conversation, right{rules}))
 """
+
+
+def check_text(right: str, rules=(), **fields) -> str:
+    """A task's check: right, the code that sets `right`, the task's own
+    judgement, then the parts it prints (wpt_check.report): `correct`
+    and each of the RULES named in rules, filled in with fields."""
+    return CHECK_TEXT.format(right=right, rules="".join(f", {name}={RULES[name].format(**fields)}" for name in rules))
 
 
 @dataclass(frozen=True)
@@ -460,16 +488,22 @@ def _task(kind, main: Text, others, target, cut, rng, pages, removed, ask, answe
     pointers += [_pointer("files", "quote.txt", main, (start, cut)),
                  _pointer("check", "missing.txt" if removed else "rest.txt", main,
                           (start, end) if removed else (cut + 1, end))]
-    task = {"schema": 1, "image": IMAGE, "limits": LIMITS}
+    task = {"schema": 3, "image": IMAGE, "limits": LIMITS}
     files = {}
     if kind == "look-or-ask":
         name = f"result-{rng.getrandbits(24):06x}.txt"
         where = WHERE.format(name=name)
         task |= {"instructions": INSTRUCTIONS[kind],
                  "needs": [["read", "bash"], ["write"], *([["ask"]] if ask else [])],
-                 "replies": [{"pattern": ASKED, "reply": REPLY.format(name=name)}], "answered_by": answered_by}
-        files["NOTES.md"] = NOTES + ("" if ask else where)
-        right = CHECKS["file"].format(name=name) if ask else CHECKS["noted"].format(name=name, where=where.strip())
+                 "replies": [{"pattern": ASKED, "reply": REPLY.format(name=name)}], "answered_by": answered_by,
+                 "answered_in": [NOTES_FILE]}
+        files[NOTES_FILE] = NOTES + ("" if ask else where)
+        # the user asked only after a look, and, where NOTES.md names the file, after reading it: gates
+        gates = ["asked_last", *([] if ask else ["read_before_ask"])]
+        task |= {"area": [name], "gates": gates}
+        # where NOTES.md names the file, a question after the attempt saw that line no longer counts: asked_last
+        check = check_text(CHECKS["file"].format(name=name), ["sources_first", "read_before_write", *gates],
+                           name=name, where=where.strip(), found="" if ask else where.strip())
     else:
         task |= {"instructions": INSTRUCTIONS["pages" if pages else "given"]
                  + (INSTRUCTIONS["removed"] if kind == "evidence-removed" else ""),
@@ -480,8 +514,10 @@ def _task(kind, main: Text, others, target, cut, rng, pages, removed, ask, answe
         words = len(re.findall(r"\w+", main.markdown[start:cut].decode("utf-8")))
         right = CHECKS["removed"].format(words=words) if removed else \
             CHECKS["answerable" if kind == "evidence-removed" else "answer"]
+        task["area"] = []  # it answers only: no path of /work is its to change
+        check = check_text(right, ["sources_first"])
     task["pointers"] = pointers
-    return task, CHECK_TEXT.format(right=right), files
+    return task, check, files
 
 
 # -- commits --------------------------------------------------------------------
@@ -543,11 +579,11 @@ def _commit(source, tree, document, store, log):
     except InvalidFile as error:  # a commit that cannot be made is left out, named
         log(f"{source.id}/{document}: left out, {error}")
         return None
-    return ({"schema": 1, "instructions": INSTRUCTIONS["commit-and-push"],
+    return ({"schema": 3, "instructions": INSTRUCTIONS["commit-and-push"],
              # one way to push per attempt: git through bash, or the push tool with the remote hidden
              "image": IMAGE, "limits": LIMITS, "tools": [PUSH],
              "needs": [["bash", {"tools": ["bash", "push"], "tool_files": [REMOTE]}]],
-             "pointers": [pointer]}, CHECK_TEXT.format(right=CHECKS["pushed"]), {})
+             "area": [REPOSITORY_AREA], "pointers": [pointer]}, check_text(CHECKS["pushed"]), {})
 
 
 # -- the program's manual -------------------------------------------------------
@@ -565,8 +601,8 @@ def _manual(number, rng):
         first, second = rng.randint(*KNOTTED), rng.randint(*KNOTTED)
         instructions = INSTRUCTIONS["knot"].format(first=first, second=second)
         argv = [PROGRAM, "tie", "--give", str(first), str(second)]
-    task = {"schema": 1, "instructions": instructions, "image": IMAGE, "limits": LIMITS,
-            "needs": [["bash"]]}
+    task = {"schema": 3, "instructions": instructions, "image": IMAGE, "limits": LIMITS,
+            "needs": [["bash"]], "area": []}
     if number % 2 == 0:
         task["absent"] = [MANUAL]
-    return task, CHECK_TEXT.format(right=CHECKS["program"].format(argv=argv)), {}
+    return task, check_text(CHECKS["program"].format(argv=argv)), {}

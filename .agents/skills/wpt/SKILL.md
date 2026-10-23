@@ -65,7 +65,7 @@ where a step needs them, run through Docker Desktop.
 | train | `uv run wpt-train RECIPE DATASET_ID [--out FOLDER] [--stream] [--recompute] [--segment N] [--run NAME] [--scheduler-costs RECORD_FOLDER] [options]`, started detached (skill `wpt-training-run`; ends by training the model's drafter; `--scheduler-costs`: replay the drafter scheduler's pass times an earlier run recorded on the same setup; a checkpoint is always written just before the drafter, so a drafter failure resumes with `--resume`; `--stream`: a few shards on disk at a time; `--recompute`: much less memory, about a third slower; `--segment N`: windows longer than N tokens run as segments of N, the same training in the memory of N tokens plus what the segments hand on, up to twice the time; with `--strategy split`, each process's slice runs in segments of N; `--run`: the checkpoint in the store, so another machine can continue) | the model recipe, the store | a model folder; its run record `records/<folder>/` in the store (one per command, over restarts); `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
 | train on several GPUs | `uv run wpt-train RECIPE DATASET_ID --strategy ddp --processes N [options]`, or `--strategy split` to split each window between the GPUs (windows too long for one; DeepSeek-V4's contextual parallelism) (several machines: `torchrun ... -m wpt_train`, Linux only) | the store | the same |
 | evaluate | `uv run wpt-eval FOLDER [EVAL ...] [--attempts N]` (from inside the repository; the agent measures play N attempts, default 4, at every measure task, so each task's image must be built) | the folder, the store, the measure tasks | `FOLDER/evals/<name>.json`, `README.md`; its run record `records/<folder>/` in the store, with `attempts.jsonl` |
-| post-train | `uv run wpt-posttrain RECIPE BASE NEW [--scheduler-costs RECORD_FOLDER]` (the steps are the recipe's `posttrain` list; ends by training a fresh drafter and measuring, or replaying, the scheduler's pass times) | the model recipe, the base folder, the store | the new folder, only if every step succeeded; its run record `records/<folder>/` in the store, always |
+| post-train | `uv run wpt-posttrain RECIPE BASE NEW [--scheduler-costs RECORD_FOLDER]` (the steps are the recipe's `posttrain` list, each a name or `{"step": NAME, "settings": {...}}`; ends by training a fresh drafter and measuring, or replaying, the scheduler's pass times) | the model recipe, the base folder, the store | the new folder, only if every step succeeded; its run record `records/<folder>/` in the store, always |
 | build program-built tasks | `uv run scripts/build_tasks.py KIND SOURCE --count N [--seed S] [--select EXPRESSION]` (kinds `find-the-passage`, `evidence-removed`, `look-or-ask`, `commit-and-push`, `read-the-manual`; SOURCE an empty source a person made; docs/post-training.md, "The task builder") | admitted sources in the store | everything under `KIND/` in SOURCE, as its next patch |
 | lock an image of agentic tasks | `uv run wpt-agent lock-image NAME [--force]` (needs Docker; `--force` replaces an existing lock) | `data/images/NAME/Dockerfile`, the base image's registry, the dated package archive | `data/images/NAME/lock.json` and `licenses.json` (commit them) |
 | build an image of agentic tasks | `uv run wpt-agent build-image NAME` (needs Docker; before `wpt-posttrain` with `grpo` or `token-efficiency`, and before `wpt-eval`'s agent measures) | `data/images/NAME/`, the base image's registry, the dated package archive | a local Docker image |
@@ -305,8 +305,14 @@ or any path given to `wpt-posttrain`:
 ```python
 from wpt_posttrain import Outcome
 
+SETTINGS = {"rounds": 10}  # changed by a recipe entry {"step": ..., "settings": {...}}, typed from these defaults
+
+def check(settings):  # optional: raise ValueError on settings that cannot go together, before any step runs
+    ...
+
 def run(context):  # context: model (change it in place), tokenizer, device,
-                   # base, provenance, store, telemetry (the run's record:
+                   # base, provenance, store, settings (SETTINGS with the
+                   # recipe's), telemetry (the run's record:
                    # events, spans, files in its store folder);
                    # context.conversations() reads the chat files tagged
                    # with this step's name, and context.tasks() its task
@@ -322,7 +328,10 @@ on the same tasks: the same result with fewer written tokens); `grpo` and
 attempts through `wpt_agent.play` with the model alone (no drafter), as
 the agent measures of `wpt-eval` do, and keeps every attempt as a
 line of `<step>-attempts.jsonl` in the run's record folder: a chat-format
-conversation whose `metadata` identifies the attempt. After the last step,
+conversation whose `metadata` identifies the attempt. A task's check
+prints named parts (`correct` and the rules it reports), and the step
+weighs them into the reward with its weight settings, gated by the task's
+`gates` (docs/post-training.md, "Rewards"). After the last step,
 every run trains a fresh drafter for the new weights; the drafter is not a
 step (docs/post-training.md, "The drafter").
 

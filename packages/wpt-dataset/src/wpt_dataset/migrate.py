@@ -183,6 +183,41 @@ def _model_4_to_5(document, _path):
 MIGRATIONS["model"][4] = _model_4_to_5
 
 
+def _model_5_to_6(document, _path):
+    """Shape 6 lets a `posttrain` entry be a step with its settings,
+    {"step": NAME, "settings": {...}}, as well as a step's name
+    (maintainer's decision, 2026-10-23); a shape 5 recipe names its steps
+    only, so only its number changes."""
+    return {**document, "schema": 6}
+
+
+MIGRATIONS["model"][5] = _model_5_to_6
+
+
+def _task_1_to_2(document, _path):
+    """Shape 2 adds a task's optional `area` and `gates` (maintainer's
+    decision, 2026-10-23); a shape 1 task has neither, so only its number
+    changes. Task files are a source's bytes: upgrade() brings them to
+    shape 2 each time they are read."""
+    return {**document, "schema": 2}
+
+
+MIGRATIONS["task"][1] = _task_1_to_2
+
+
+def _task_2_to_3(document, _path):
+    """Shape 3 adds `answered_in`, the paths where a task's answers live,
+    required with replies (maintainer's decision, 2026-10-23). Only a
+    person knows where they live, so the step leaves it empty in a task
+    with replies, and the check that follows names each file to fill in; a
+    task without replies needs none, so only its number changes. upgrade()
+    brings task files to shape 3 each time they are read."""
+    return {**document, "schema": 3, **({"answered_in": []} if document.get("replies") else {})}
+
+
+MIGRATIONS["task"][2] = _task_2_to_3
+
+
 def _conversation_1_to_2(document, _path):
     """Shape 2 adds the optional `metadata` object; a shape 1 conversation
     has none, so only its number changes."""

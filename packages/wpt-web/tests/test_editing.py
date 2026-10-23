@@ -253,7 +253,7 @@ def test_tasks_recipes_dockerfiles_and_signers_go_through_the_checks_rules(web):
     assert status == 200 and repo.read("dockerfile", "tiny").text == "ARG BASE=debian:trixie-slim\nFROM ${BASE}\n"
 
     sid = new_source(request, {"notes.txt": {"format": "text", "text": TEXT}})
-    task = {"schema": 1, "instructions": "Print hello.", "image": "tiny",
+    task = {"schema": 3, "instructions": "Print hello.", "image": "tiny",
             "limits": {"max_turns": 2, "max_tokens": 100, "command_seconds": 5}, "needs": []}
     status, tasks = request("GET", f"/api/sources/{sid}/tasks")
     status, saved = request("PUT", f"/api/sources/{sid}/tasks/{path('tasks/hello')}", {

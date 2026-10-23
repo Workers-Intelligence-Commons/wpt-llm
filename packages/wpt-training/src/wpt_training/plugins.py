@@ -9,6 +9,7 @@ import torch
 import torch.nn.functional as F
 
 from wpt_utils.files import sha256_file
+from wpt_utils.settings import typed
 
 HERE = Path(__file__).parent
 
@@ -194,22 +195,10 @@ def load_method(name_or_path, overrides: dict) -> tuple[Plugin, dict]:
     overrides, each of its default's type (an int where a float is expected
     is taken; text is converted)."""
     plugin = _load("methods", name_or_path)
-    defaults = getattr(plugin.module, "SETTINGS", {})
-    settings = dict(defaults)
-    for key, value in overrides.items():
-        if key not in defaults:
-            raise PluginError(f"{plugin.file}: no setting {key!r} (settings: {', '.join(defaults) or 'none'})")
-        kind = type(defaults[key])
-        if isinstance(value, str) and kind is not str:
-            try:
-                value = (value.lower() in ("1", "true", "yes")) if kind is bool else kind(value)
-            except ValueError:
-                raise PluginError(f"{plugin.file}: setting {key}={value!r} is not a {kind.__name__}") from None
-        elif kind is float and type(value) is int:
-            value = float(value)
-        if type(value) is not kind:
-            raise PluginError(f"{plugin.file}: setting {key}={value!r} is not a {kind.__name__}")
-        settings[key] = value
+    try:
+        settings = typed(getattr(plugin.module, "SETTINGS", {}), overrides, plugin.file)
+    except ValueError as error:
+        raise PluginError(str(error)) from None
     return plugin, settings
 
 

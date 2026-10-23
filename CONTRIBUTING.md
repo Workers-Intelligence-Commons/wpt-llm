@@ -218,9 +218,15 @@ See [docs/erasure.md](docs/erasure.md).
 ## Models and generated text
 
 No output of another company's model is accepted, in data or in
-post-training. A contribution that uses a WPT model (to produce data, or in
-any post-training role) must say exactly what that model did; the one such
-use today is a model's draft of a conversation's reply, below.
+post-training, and no synthetic data that a WPT model did not make. WPT's
+own models may be used in training, their output included (maintainer's
+decision, 2026-10-18; [docs/data-selection.md](docs/data-selection.md),
+"Models in training"). A contribution that uses a WPT model (to produce
+data, or in any post-training role) must say exactly what that model did.
+The uses today are a model's draft of a conversation's reply, below, and
+the `grpo` step's reward on a task's one-line form, which compares an
+attempt with the model's own attempt at the full form
+([docs/post-training.md](docs/post-training.md), "Rewards").
 
 A conversation's `assistant` message may start as a draft of a WPT model:
 in the conversation editor of

@@ -6,7 +6,7 @@
   "additionalProperties": false,
   "required": ["schema", "instructions", "image", "limits", "needs"],
   "properties": {
-    "schema": {"const": 1, "description": "shape version of the task"},
+    "schema": {"const": 3, "description": "shape version of the task"},
     "instructions": {"type": "string", "minLength": 1, "description": "what the model is asked to do, in full: the user message that starts every attempt, unless it opens with terse"},
     "terse": {"type": "string", "minLength": 1, "description": "the same request in one line (no line break: tasks.py refuses one), for the measure of terse against full requests: an attempt may open with it instead of instructions (docs/post-training.md, \"Tasks\")"},
     "image": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$", "description": "the image the attempt's container runs: a folder name in data/images/"},
@@ -40,8 +40,15 @@
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
-      "description": "the looking tools (read, bash, a declared tool marked looks) that can answer what the task leaves open: an attempt asks the user only after at least one look through one of them (wpt_check.asked_last); required with replies",
+      "description": "the looking tools (read, bash, a declared tool marked looks) that can answer what the task leaves open, through which an attempt opens the files of answered_in before it asks the user (wpt_check.asked_last); required with replies",
       "items": {"$ref": "#/$defs/name"}
+    },
+    "answered_in": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "glob patterns of the paths under /work where the task's answers live: an attempt asks the user only after it opened, through answered_by, every starting file they match; a question counts at once when they match none (the answer is absent; wpt_check.asked_last); required with replies",
+      "items": {"type": "string", "minLength": 1}
     },
     "replies": {
       "type": "array",
@@ -73,6 +80,18 @@
       "uniqueItems": true,
       "description": "absolute folders of the image, outside /work and /tmp, that the attempts' containers show empty: the task removes what the image installs there (docs/post-training.md, \"Tasks\")",
       "items": {"type": "string", "pattern": "^(/[A-Za-z0-9._+-]+)+$"}
+    },
+    "area": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "glob patterns of the paths under /work an attempt may change, [] for none: a changed path outside them breaks the within_area part (docs/post-training.md, \"Rewards\"); a task without an area gets no such part",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "gates": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "the parts (the check's, or within_area) that must be 1: when one is below 1, or missing, the attempt scores 0 whatever the rest (docs/post-training.md, \"Rewards\")",
+      "items": {"$ref": "#/$defs/name"}
     },
     "pointers": {
       "type": "array",

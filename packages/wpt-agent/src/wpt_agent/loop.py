@@ -21,7 +21,9 @@ the task under its own name), and its conversation's metadata keeps
 tool's, `looking`, the real names of the offered tools that look at
 sources (wpt_dataset.tasks.looks; wpt_check's looking rule reads it),
 `answered_by`, the task's looking tools that can answer what it leaves
-open (wpt_check.asked_last reads it), and `answer` (docs/chat-format.md,
+open, `answered_in`, the attempt's starting files under /work that the
+task's answered_in matches (wpt_check.asked_last reads both), and
+`answer` (docs/chat-format.md,
 "The answer"). A turn without a tool call is the model's final reply,
 its answer: a question to the user goes through the ask tool. The loop
 then adds one user turn, CONFIDENCE, and the model's reply to it, a
@@ -45,12 +47,13 @@ import os
 import re
 from dataclasses import dataclass
 
+from wpt_dataset.manifest import glob_match_any
 from wpt_dataset.repo import CURRENT_SCHEMA
 from wpt_dataset.tasks import looks
 from wpt_tokenizer import END, chat
 
 from .sandbox import SandboxError, SandboxFull
-from .tools import call, plain
+from .tools import arranged, call, plain
 
 # why an attempt ended
 ANSWERED = "answered"  # a turn closed without a tool call
@@ -79,7 +82,8 @@ def opening(task, offer=None, terse=False) -> dict:
     default plain(task)), the task's instructions as the user's message
     (with terse, its one-line form; ValueError for a task without one),
     and in its metadata the offered tools' real names, those of them that
-    look, and the task's answered_by."""
+    look, the task's answered_by, and the files of /work the attempt starts
+    with (tools.arranged) that the task's answered_in matches."""
     if terse and not task.terse:
         raise ValueError(f"{task.id}: the task has no one-line form (terse)")
     offer = offer or plain(task)
@@ -88,7 +92,9 @@ def opening(task, offer=None, terse=False) -> dict:
             "messages": [{"role": "user", "content": [{"type": "text", "text": request}]}],
             "metadata": {"tools": dict(offer.names),
                          "looking": [name for name, tool in offer.real.items() if looks(tool)],
-                         "answered_by": list(task.answered_by)}}
+                         "answered_by": list(task.answered_by),
+                         "answered_in": [path for path in sorted(arranged(task, offer).files)
+                                         if glob_match_any(path, task.answered_in)]}}
 
 
 def attempts(task, sandboxes, tokenizer, start, *, result_bytes: int, context: int | None = None,

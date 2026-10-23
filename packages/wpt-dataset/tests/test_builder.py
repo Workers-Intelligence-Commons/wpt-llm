@@ -98,6 +98,9 @@ def test_find_the_passage_tasks_ask_for_the_rest_of_a_paragraph_that_one_text_ho
         assert len(texts(task)) == (builder.PAGES if pages else builder.GIVEN)
         assert all(len(text) <= builder.WINDOW for text in texts(task).values())
         assert not any(path.startswith("web/") for path in task.files)
+        # maintainer's decision, 2026-10-23: it only answers, so no path of /work may change, and no rule gates it
+        assert task.area == () and task.gates == () and b"sources_first=wpt_check.sources_first(conversation)" in task.check
+        assert task.answered_in == ()  # no question to the user, so nothing to look in before one
     assert sorted(bool(task.tool_files) for task in found) == [False, False, True, True]
     assert builder.build(repo, store, "find-the-passage", 4, 1, "en", log=lambda _: None) == made
 
@@ -134,12 +137,21 @@ def test_look_or_ask_tasks_hide_the_file_name_in_the_notes_or_in_the_user_s_repl
         assert name in reply and re.search(pattern, "Which file should I write it to?")
         notes = task.files["NOTES.md"][1].decode()
         # the user is asked after the looking tools that can read the notes (the test image has no pool)
-        assert task.answered_by == ("read", "bash") and b"asked_last(conversation)" in task.check
+        assert task.answered_by == ("read", "bash") and b"asked_last(conversation" in task.check
+        # maintainer's decision, 2026-10-23: the answer lives in the notes, read before asking in both halves
+        assert task.answered_in == ("NOTES.md",)
+        # maintainer's decision, 2026-10-23: the result's file is all it may change, and the rules the check wants
+        # gate it: a broken one scores the attempt 0
+        assert task.area == (name,) and b"read_before_write=wpt_check.read_before_write(conversation" in task.check
         if (tasks.Variant(("ask",)),) in task.needs:
             asked += 1
-            assert name not in notes and b"read_before_ask" not in task.check
+            assert name not in notes and b"read_before_ask" not in task.check and task.gates == ("asked_last",)
+            assert b"asked_last(conversation, '')" in task.check
         else:  # the notes, which name the file, must have been read before any question
             assert name in notes and f"read_before_ask(conversation, 'Put results in {name}.')".encode() in task.check
+            # maintainer's decision, 2026-10-23: a question after the notes showed the name no longer counts
+            assert f"asked_last(conversation, 'Put results in {name}.')".encode() in task.check
+            assert task.gates == ("asked_last", "read_before_ask")
     assert asked == 2
 
 
@@ -229,6 +241,7 @@ def test_a_commit_and_push_task_makes_work_the_repository_before_the_commit(kit,
     assert task.needs == ((tasks.Variant(("bash",)), tasks.Variant(("bash", "push"), (tasks.REMOTE,))),)
     assert [tool["name"] for tool in task.tools] == ["push"]
     assert task.pointers == () and task.documents[0][0] == sid
+    assert task.area == (".git/**",) and task.gates == ()  # git's own records: a project file changed is over-reach
 
 
 def test_an_older_commit_s_task_starts_from_the_real_state_just_before_it(kit, repo, store, tmp_path):
@@ -335,14 +348,14 @@ def test_a_commit_whose_source_changed_is_refused_until_it_is_built_again(kit, r
     head = commit(kit, folder, COMMIT, {"lamps.py": b"LAMPS = 2\n"})
     sid = lamps(kit, repo, store, folder, head, since)
     task = task_source(repo, store)
-    document = {"schema": 1, "instructions": "Commit and push.", "image": "agent", "limits": builder.LIMITS,
+    document = {"schema": 3, "instructions": "Commit and push.", "image": "agent", "limits": builder.LIMITS,
                 "needs": [["bash"]], "pointers": [{"for": "repository", "source": sid, "document": f".git/history/{head}",
                                                    "checksum": "sha256:" + "0" * 64}]}
     with pytest.raises(tasks.InvalidFile, match=rf"the repository pointer: {sid} now has the checksum "
                                                 rf"{repo.source(sid).data['checksum']}, not sha256:0+, which the task "
                                                 rf"was built from; build the task again"):
         builder.write(repo, store, task, "commit-and-push",
-                      {"commit-and-push/a": (document, builder.CHECK_TEXT.format(right="right = 1"), {})},
+                      {"commit-and-push/a": (document, builder.check_text("right = 1"), {})},
                       repo.source_version(task))
     assert repo.source(task).patches == []  # nothing written
 

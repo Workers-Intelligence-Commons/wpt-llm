@@ -5,10 +5,12 @@ share, with no learning and no record of their own.
     attempt_box(image, task, o) one attempt's container, its files arranged for the offer o
     play(task, offers, keep)   one attempt per offer, each in a fresh container, written together
                                by the model alone (no drafter) from one reading of what their
-                               openings share; then, attempt by attempt in order, its score, and
-                               keep(index, outcome) at once: a Played, or the SandboxError that
-                               dropped it (Docker failed, not the model's doing)
+                               openings share; then, attempt by attempt in order, its parts and
+                               score, and keep(index, outcome) at once: a Played, or the
+                               SandboxError that dropped it (Docker failed, not the model's doing)
+    gated(task, parts)         whether every rule the task's gates name holds (its part is 1)
     changes(before, after)     an attempt's changes to /work, as text
+    changed(before, after)     the paths under /work an attempt changed
 
 The caller passes the model, its tokenizer, the built images, how tokens
 are drawn (Sampling: GREEDY always takes the likeliest token) and the
@@ -23,11 +25,11 @@ import hashlib
 from dataclasses import dataclass
 
 from wpt_dataset.errors import DatasetError
-from wpt_dataset.manifest import SYMLINK
+from wpt_dataset.manifest import SYMLINK, glob_match_any
 from wpt_dataset.repo import Repo
 
 from . import images
-from .check import score
+from .check import CORRECT, score
 from .images import ImageError
 from .loop import Attempt, attempts
 from .sandbox import AGENT, Limits, Sandbox, SandboxError
@@ -35,6 +37,7 @@ from .tools import Arranged, arranged
 
 FILE_BYTES = 1 << 16  # a file of /work larger than this is named in the changes, never shown
 CHANGES_BYTES = 1 << 16  # the changes of one attempt, as text, at most; the rest is cut
+WITHIN_AREA = "within_area"  # the part of a task with an area: 1 when every path the attempt changed is inside it
 
 
 class Unready(Exception):
@@ -55,9 +58,10 @@ GREEDY = Sampling(1.0, 1)  # always the likeliest token (two equally likely ones
 class Played:
     """An attempt that was scored."""
     attempt: Attempt
-    score: float  # the check's, 0 when it gave none
+    score: float  # its CORRECT part, 0 when a gate is broken (gated) or the check gave no score
     routes: object = None  # its routed experts (wpt_model.Routes), when the caller asked for them
     changes: str | None = None  # its changes to /work (changes()), when the caller asked for them
+    parts: dict | None = None  # the check's parts, and WITHIN_AREA for a task with an area; None without a score
 
 
 def ready(names) -> tuple[dict, dict]:
@@ -83,17 +87,27 @@ def attempt_box(image, task, offer) -> tuple[Sandbox, Arranged]:
     return box, found
 
 
+def gated(task, parts: dict) -> bool:
+    """Whether every rule the task's gates name holds: its part is 1 (a
+    part the check did not print counts as broken; maintainer's decision,
+    2026-10-23)."""
+    return all(parts.get(name, 0.0) >= 1 for name in task.gates)
+
+
 def play(task, offers, keep, *, model, tokenizer, built, sampling: Sampling, generator, check_seconds: float,
-         result_bytes: int, routes=False, with_changes=False, name="attempts") -> list:
+         result_bytes: int, routes=False, with_changes=False, terse=False, name="attempts") -> list:
     """One attempt at the task for each offer (wpt_agent.Offer), each in a
     fresh container of its image (built: {image name: tag}), written
-    together by the model, its tokens drawn by sampling and generator;
-    then, attempt by attempt in order, its score and its container's
-    removal, and at once keep(index, outcome), index from 1, outcome a
-    Played (with routes, its routes; with with_changes, its changes to
-    /work) or the SandboxError that dropped it. A check that gives no score
-    counts as 0, printed with the reason under name. Returns what keep
-    returned, in order."""
+    together by the model, its tokens drawn by sampling and generator, each
+    opened with the task's instructions, or with terse its one-line form;
+    then, attempt by attempt in order, its parts, its score and its
+    container's removal, and at once keep(index, outcome), index from 1,
+    outcome a Played (with routes, its routes; with with_changes, its
+    changes to /work) or the SandboxError that dropped it. A task with an
+    area gets the part WITHIN_AREA: 1 when every path under /work the
+    attempt changed matches one of its patterns, else 0. A check that
+    gives no score counts as 0, printed with the reason under name.
+    Returns what keep returned, in order."""
     from wpt_inference import Writer  # PyTorch is loaded only by what writes: wpt-agent's own commands need none
 
     outcomes, boxes, placed, writers = {}, {}, {}, []
@@ -113,7 +127,7 @@ def play(task, offers, keep, *, model, tokenizer, built, sampling: Sampling, gen
         rows = {i: row for row, i in enumerate(boxes)}
         if boxes:
             done = attempts(task, list(boxes.values()), tokenizer, start, result_bytes=result_bytes,
-                            offers=[offers[i] for i in boxes])
+                            offers=[offers[i] for i in boxes], terse=terse)
             outcomes.update(zip(boxes, done))
         for i in range(len(offers)):
             outcome, why = outcomes[i], None
@@ -121,8 +135,14 @@ def play(task, offers, keep, *, model, tokenizer, built, sampling: Sampling, gen
                 try:
                     found, why = score(boxes[i], task.check, check_seconds, outcome.conversation, task.check_files,
                                        offers[i].hidden, tuple(placed[i].outside))
-                    changed = _changes(boxes[i], placed[i].files) if with_changes else None
-                    outcome = Played(outcome, found or 0.0, writers[-1].routes[rows[i]] if routes else None, changed)
+                    # what /work holds after the check stopped its processes
+                    left = boxes[i].work_files(FILE_BYTES) if with_changes or task.area is not None else None
+                    if found is not None and task.area is not None:
+                        found[WITHIN_AREA] = float(all(glob_match_any(path, task.area)
+                                                       for path in changed(placed[i].files, left)))
+                    value = found[CORRECT] if found is not None and gated(task, found) else 0.0
+                    outcome = Played(outcome, value, writers[-1].routes[rows[i]] if routes else None,
+                                     changes(placed[i].files, left) if with_changes else None, found)
                 except SandboxError as error:
                     outcome = error
             if i in boxes:
@@ -140,12 +160,6 @@ def play(task, offers, keep, *, model, tokenizer, built, sampling: Sampling, gen
             except SandboxError:
                 pass  # the error that stopped them goes on
     return kept
-
-
-def _changes(box, before) -> str:
-    """The changes to /work of the attempt in box, whose processes score()
-    stopped, from the files it started with."""
-    return changes(before, box.work_files(FILE_BYTES))
 
 
 def changes(before: dict, after: dict, limit: int = CHANGES_BYTES) -> str:
@@ -184,6 +198,15 @@ def changes(before: dict, after: dict, limit: int = CHANGES_BYTES) -> str:
     if len(data) <= limit:
         return data.decode()
     return data[:limit].decode(errors="ignore") + f"\n[cut: {len(data) - limit} more bytes of changes]\n"
+
+
+def changed(before: dict, after: dict) -> list[str]:
+    """The paths under /work, in order, that an attempt added, removed, or
+    whose mode or content it changed, from before and after as changes()
+    takes them."""
+    return sorted(path for path in before.keys() | after.keys()
+                  if path not in before or path not in after or before[path][0] != after[path][0]
+                  or hashlib.sha256(before[path][1]).hexdigest() != after[path][3])
 
 
 def _text(found) -> str | None:

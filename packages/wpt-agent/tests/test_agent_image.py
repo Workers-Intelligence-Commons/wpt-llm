@@ -90,12 +90,13 @@ def call(n, name, arguments):
     return {"type": "tool_call", "id": f"c{n}", "name": name, "arguments": arguments}
 
 
-def conversation(calls, tools=None, answer=None, answered_by=(), results=None):
+def conversation(calls, tools=None, answer=None, answered_by=(), results=None, answered_in=()):
     """An attempt's conversation: each call (name, arguments) in a turn of
     its own with its result (results, one text each, or "ok"), then in
     metadata the offered tools that look (LOOKING), as the agent loop
     writes them, the answer (the final reply's text and the confidence,
-    None without one) and the task's answered_by."""
+    None without one), the task's answered_by and the starting files its
+    answered_in matches."""
     messages = [{"role": "user", "content": [{"type": "text", "text": "Fix calc.py."}]}]
     for n, (name, arguments) in enumerate(calls):
         messages += [{"role": "assistant", "content": [{"type": "tool_call", "id": f"c{n}", "name": name,
@@ -105,7 +106,7 @@ def conversation(calls, tools=None, answer=None, answered_by=(), results=None):
     names = tools or {name: name for name, _ in calls}
     return {"schema": 3, "messages": messages,
             "metadata": {"tools": names, "looking": [name for name in names.values() if name in LOOKING],
-                         "answered_by": list(answered_by), "answer": answer}}
+                         "answered_by": list(answered_by), "answered_in": list(answered_in), "answer": answer}}
 
 
 def test_a_missing_answer_scores_0_and_the_confidence_gets_its_brier_score():
@@ -177,23 +178,41 @@ def test_looking_is_a_looking_tool_or_bash_running_a_reading_program():
     assert not check.sources_first(unlisted)
 
 
-def test_asking_comes_after_a_look_through_a_tool_that_can_answer():
-    # maintainer's decision, 2026-10-22: before a question, at least one call
-    # that looks, to one of the looking tools the task names as able to
-    # answer; not every one of them; a bash call counts when it looks
+def test_asking_comes_after_every_file_where_the_answer_lives_was_opened():
+    # maintainer's decisions, 2026-10-22 and 2026-10-23: a question counts
+    # only after every file of the task's answered_in was opened through one
+    # of the looking tools the task names as able to answer (a bash call
+    # counts when it names the file and runs a program that shows what it
+    # holds), and while no look showed the answer, or at once when no such
+    # file exists: the answer is absent
     check = load("wpt_check")
     names = {"view": "read", "shell": "bash", "find": "find_files", "question": "ask"}  # search_text is not offered
     ask = ("question", {"question": "Where do I put it?"})
-    view, grep, run, find = ("view", {"path": "NOTES.md"}), ("shell", {"command": "grep -rn put ."}), \
-        ("shell", {"command": "python3 x.py"}), ("find", {"pattern": "*.md"})
+    view, cat, grep, run, find = ("view", {"path": "NOTES.md"}), ("shell", {"command": "cat /work/NOTES.md"}), \
+        ("shell", {"command": "grep -n put TODO.md"}), ("shell", {"command": "python3 NOTES.md"}), \
+        ("find", {"path": "NOTES.md"})
+    listing = ("shell", {"command": "ls -l NOTES.md && wc -l NOTES.md"})
+    where = "Put results in result-0a1b2c.txt."
 
-    def last(*calls, answered_by=("read", "bash", "search_text")):
-        return check.asked_last(conversation(calls, names, answered_by=answered_by))
+    def last(*calls, answered_by=("read", "bash", "search_text"), answered_in=("NOTES.md",), results=None,
+             found=""):
+        return check.asked_last(conversation(calls, names, answered_by=answered_by, results=results,
+                                             answered_in=answered_in), found)
 
-    assert last(view, ask) and last(grep, ask) and last(run, view, ask, ask) and last(view, grep)
-    assert not last(ask, view) and not last(run, ask) and not last(view, ask, answered_by=("bash",))
-    assert not last(find, ask)  # a look, but through a tool that cannot answer
-    assert check.asked_last(conversation([ask], names))  # a task that names none
+    assert last(view, ask) and last(cat, ask, ask) and last(view, grep)
+    assert not last(ask, view) and not last(grep, ask) and not last(run, ask)  # no look into NOTES.md
+    assert not last(listing, ask)  # its name and size only: not read
+    # the answer was found in the notes: a question no longer counts
+    assert not last(view, ask, found=where, results=[f"# Notes\n\n{where}\n", "Put it there."])
+    assert last(view, ask, found=where, results=["# Notes\n\nThe documents are in docs/.\n", "Put it there."])
+    assert not last(view, ask, answered_by=("bash",)) and not last(find, ask)  # a tool that cannot answer
+    assert not last(view, ask, answered_in=("NOTES.md", "TODO.md")) and last(view, grep, ask, answered_in=(
+        "NOTES.md", "TODO.md"))  # every file where the answer lives
+    failed = conversation([view, ask], names, answered_by=("read",), answered_in=("NOTES.md",))
+    failed["messages"][2]["content"][0]["error"] = True  # the read failed: nothing was opened
+    assert not check.asked_last(failed)
+    assert last(ask, answered_in=())  # no file holds the answer
+    assert last(ask, answered_by=("search_text",))  # no tool offered could find it
 
 
 def test_a_question_comes_after_a_look_that_showed_the_notes():
@@ -222,19 +241,19 @@ GIT = {**os.environ, "GIT_CONFIG_GLOBAL": os.devnull, "GIT_CONFIG_NOSYSTEM": "1"
 COMMIT = "Count the lamps\n\nThe keeper counts them at dusk, every night.\n"
 
 
-def checked(tmp_path, right, conversation, beside, **fields):
-    """The score a check that the task builder writes prints (its fields
-    filled in), run as in the image (the library on its path) from a folder
-    holding conversation.json and the files a task's pointers put next to
-    it."""
+def checked(tmp_path, right, conversation, beside, rules=(), **fields):
+    """The parts a check that the task builder writes prints (its fields
+    filled in, reporting rules), run as in the image (the library on its
+    path) from a folder holding conversation.json and the files a task's
+    pointers put next to it."""
     folder = Path(tempfile.mkdtemp(dir=tmp_path))
-    (folder / "check").write_text(builder.CHECK_TEXT.format(right=builder.CHECKS[right].format(**fields)))
+    (folder / "check").write_text(builder.check_text(builder.CHECKS[right].format(**fields), rules, **fields))
     (folder / "conversation.json").write_text(json.dumps(conversation))
     for name, text in beside.items():
         (folder / name).write_text(text)
     ran = subprocess.run([sys.executable, "-P", "-B", str(folder / "check")], capture_output=True, text=True,
                          env={**os.environ, "PYTHONPATH": str(FOLDER)}, check=True)
-    return float(ran.stdout)
+    return json.loads(ran.stdout)
 
 
 def test_a_built_check_scores_the_rest_of_the_paragraph_or_not_enough(tmp_path):
@@ -247,23 +266,43 @@ def test_a_built_check_scores_the_rest_of_the_paragraph_or_not_enough(tmp_path):
         return conversation([], answer={"answer": text, "confidence": 0.5})
 
     rest = {"rest.txt": "and wrote the hour, the *wind* and the state of the sea in his log.\n"}
-    assert checked(tmp_path, "answer", said(f"The rest: {REST.upper()}"), rest) == 1.0
-    assert checked(tmp_path, "answer", said("and wrote the hour in his log."), rest) == 0.0
-    assert checked(tmp_path, "answer", conversation([]), rest) == 0.0
-    assert checked(tmp_path, "answerable", said(f"Not enough: {REST}"), rest) == 0.0
+    assert checked(tmp_path, "answer", said(f"The rest: {REST.upper()}"), rest) == {"correct": 1.0}
+    assert checked(tmp_path, "answer", said("and wrote the hour in his log."), rest) == {"correct": 0.0}
+    assert checked(tmp_path, "answer", conversation([]), rest) == {"correct": 0.0}
+    assert checked(tmp_path, "answerable", said(f"Not enough: {REST}"), rest) == {"correct": 0.0}
     missing = {"missing.txt": f"The keeper climbed the stairs at dusk, {REST}\n"}
     quoted = "The keeper climbed the stairs at dusk,"
     assert checked(tmp_path, "removed", said(f"Not enough: no text holds the paragraph that starts "
-                                             f"\"{quoted.lower()}\"."), missing, words=7) == 1.0
+                                             f"\"{quoted.lower()}\"."), missing, words=7) == {"correct": 1.0}
     assert checked(tmp_path, "removed", said("Not enough: the paragraph after the quote is not in docs/."), missing,
-                   words=7) == 0.0
-    assert checked(tmp_path, "removed", said(REST), missing, words=7) == 0.0
+                   words=7) == {"correct": 0.0}
+    assert checked(tmp_path, "removed", said(REST), missing, words=7) == {"correct": 0.0}
     check = load("wpt_check")
     (tmp_path / "out.txt").write_text(REST)
     os.mkfifo(tmp_path / "pipe")
     assert check.file_text(str(tmp_path / "out.txt")) == REST
     assert check.file_text(str(tmp_path / "pipe")) == "" and check.file_text(str(tmp_path / "gone.txt")) == ""
     assert not check.holds("anything", "...")
+
+
+def test_a_built_look_or_ask_check_reports_its_trace_rules_as_parts(tmp_path):
+    # maintainer's decision, 2026-10-23: a check prints its rules as named
+    # parts next to correct (#37's trace rules), which the task's gates and
+    # the step's weights then read; here no file was left, so correct is 0,
+    # and the question came after the notes showed the name: asked_last is 0
+    name, where = "result-1.txt", "Put results in result-1.txt."
+    rules = ["sources_first", "read_before_write", "asked_last", "read_before_ask"]
+    answer = {"answer": "Done.", "confidence": 0.5}
+    looked = conversation([("read", {"path": "NOTES.md"}), ("ask", {"question": "Where?"}),
+                           ("write", {"path": name, "content": REST})], answer=answer, answered_by=("read",),
+                          results=[f"# Notes\n\n{where}\n", "Put it in result-1.txt.", "ok"],
+                          answered_in=["NOTES.md"])
+    blind = conversation([("ask", {"question": "Where?"}), ("write", {"path": "NOTES.md", "content": REST})],
+                         {"read": "read", "ask": "ask", "write": "write"}, answer, ("read",), answered_in=["NOTES.md"])
+    assert checked(tmp_path, "file", looked, {"rest.txt": REST}, rules, name=name, where=where, found=where) == {
+        "correct": 0.0, "sources_first": 1.0, "read_before_write": 1.0, "asked_last": 0.0, "read_before_ask": 1.0}
+    assert checked(tmp_path, "file", blind, {"rest.txt": REST}, rules, name=name, where=where, found=where) == {
+        "correct": 0.0, "sources_first": 0.0, "read_before_write": 0.0, "asked_last": 0.0, "read_before_ask": 0.0}
 
 
 def prepared(tmp_path):
@@ -464,7 +503,7 @@ def test_in_the_agent_image_the_tools_answer_and_the_check_library_scores(agent)
     with Sandbox(image, made.files, user=AGENT, limits=limits, tool_files=made.tool_files) as box:
         done = attempt(made, box, TOKENIZER, Scripted(*turns), result_bytes=4000, offer=chosen)
         assert score(box, made.check, 30, done.conversation, {"expected.txt": (FILE, b"at dusk")}) == \
-               (1.0, "")
+               ({"correct": 1.0}, "")
     searched, fetched, outside, inside, seen = [block["content"][0]["text"] for m in done.conversation["messages"]
                                                 if m["role"] == "tool" for block in m["content"]]
     assert searched == f"1. The lighthouse\n   {WEB}/lighthouse\n   {LAMP.decode().splitlines()[2]}\n"
@@ -485,7 +524,7 @@ def test_in_the_agent_image_each_attempt_pushes_one_way_and_the_check_reads_the_
     # the check, as root, reads the remote the attempt pushed to at its place
     root, image = agent
     files, remote, expected = prepared(Path(tempfile.mkdtemp()))
-    check = builder.CHECK_TEXT.format(right=builder.CHECKS["pushed"]).encode()
+    check = builder.check_text(builder.CHECKS["pushed"]).encode()
     beside = {REPOSITORY: (FILE, json.dumps(expected).encode())}
     made = Task("example/lamps", "Commit and push.", "agent", 8, 10_000, 10, files, check,
                 needs=((Variant(("bash",)), Variant(("bash", "push"), (REMOTE,))),), tools=(builder.PUSH,),
@@ -507,7 +546,7 @@ def test_in_the_agent_image_each_attempt_pushes_one_way_and_the_check_reads_the_
                      outside=found.outside) as box:
             done = attempt(made, box, TOKENIZER, Scripted(*turns), result_bytes=4000, offer=chosen)
             assert score(box, made.check, 30, done.conversation, beside, chosen.hidden, tuple(found.outside)) == \
-                (scored, "")
+                ({"correct": scored}, "")
         status, pushing = (block["content"][0]["text"] for block in done.conversation["messages"][2]["content"])
         assert status.splitlines() == [" M lamps.py", "?? count.md"]
         assert ("does not appear to be a git repository" in pushing) == (not scored)
@@ -562,12 +601,12 @@ def test_in_the_agent_image_a_built_read_the_manual_check_wants_the_program_s_ou
     root, image = agent
     argv = [builder.PROGRAM, "tie", "--give", "12", "40"]
     knot, other = ondrik(image, *argv[1:]).stdout.strip(), ondrik(image, "tie", "12", "40").stdout.strip()
-    check = builder.CHECK_TEXT.format(right=builder.CHECKS["program"].format(argv=argv)).encode()
+    check = builder.check_text(builder.CHECKS["program"].format(argv=argv)).encode()
     limits = Limits(memory=256, disk=16, processes=64, cpus=1.0)
     for answer, expected in ((f"The slack knot is {knot}.", 1.0), (other, 0.0), (None, 0.0)):
         found = None if answer is None else {"answer": answer, "confidence": 0.9}
         with Sandbox(image, {}, user=AGENT, limits=limits) as box:
-            assert score(box, check, 30, conversation([], answer=found), {}) == (expected, "")
+            assert score(box, check, 30, conversation([], answer=found), {}) == ({"correct": expected}, "")
 
 
 @pytest.mark.image_build
@@ -579,7 +618,7 @@ def test_in_the_agent_image_ondrik_runs_and_a_task_can_remove_its_manual(agent):
     # program's output in the answer either way
     _, image = agent
     seal = ondrik(image, "press", "--turns", "3", "a1b2").stdout.strip()
-    check = builder.CHECK_TEXT.format(right=builder.CHECKS["program"].format(
+    check = builder.check_text(builder.CHECKS["program"].format(
         argv=[builder.PROGRAM, "press", "--turns", "3", "a1b2"])).encode()
     limits = Limits(memory=256, disk=16, processes=64, cpus=1.0)
     for absent, listed in (((), "manual.txt\n"), ((builder.MANUAL,), "")):
@@ -592,7 +631,7 @@ def test_in_the_agent_image_ondrik_runs_and_a_task_can_remove_its_manual(agent):
         box, _ = attempt_box(image, made, chosen)  # the task's absent folders come with its arrangement
         with box:
             done = attempt(made, box, TOKENIZER, Scripted(*turns), result_bytes=4000, offer=chosen)
-            assert score(box, made.check, 30, done.conversation, {}) == (1.0, "")
+            assert score(box, made.check, 30, done.conversation, {}) == ({"correct": 1.0}, "")
         [shown] = [block["content"][0]["text"] for m in done.conversation["messages"] if m["role"] == "tool"
                    for block in m["content"]]
         assert shown == f"{listed}{seal}\n"

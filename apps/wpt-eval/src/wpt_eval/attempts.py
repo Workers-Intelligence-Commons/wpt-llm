@@ -72,7 +72,7 @@ class Record:
     index: int  # the attempt's number at its task, from 1
     plain: bool  # offered only the needed tools under their real names, or its seeded variation
     conversation: dict  # as conversation.json holds it for the check: messages, metadata tools, looking,
-    #                     answered_by, answer
+    #                     answered_by, answered_in, answer
     score: float  # the check's, from 0 to 1
     changes: str = ""  # its changes to /work (wpt_agent.changes)
 

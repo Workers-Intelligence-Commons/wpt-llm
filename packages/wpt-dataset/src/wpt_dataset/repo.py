@@ -92,7 +92,7 @@ from .errors import DataAccessRefused, InvalidFile, NotFound, OutdatedSchema, Ru
 from .licenses import check_license
 from .pools import parse
 
-CURRENT_SCHEMA = {"source": 6, "mixture": 1, "model": 5, "tokenizer": 2, "lock": 2, "conversation": 3, "task": 1,
+CURRENT_SCHEMA = {"source": 6, "mixture": 1, "model": 6, "tokenizer": 2, "lock": 2, "conversation": 3, "task": 3,
                   "rating": 1, "image-lock": 1, "image-licenses": 1, "image-tools": 1}
 ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}")
 PATCH = re.compile(r"(\d{4})-[A-Za-z0-9._-]+\.patch")
@@ -1392,7 +1392,10 @@ class Repo:
         refuses a source with another; InvalidFile here too), except a
         symbolic link under files/, which is not given as text: it is listed
         in "kept", and save_task leaves it as it is. The folder "" is a task
-        at the source's root, which save_task refuses to write."""
+        at the source's root, which save_task refuses to write. A task.json
+        of an earlier shape is given in the current one (migrate.upgrade),
+        so a save writes that shape."""
+        from .migrate import upgrade
         from .tasks import CHECK, FILES, TASK
 
         version, folders = self._task_folders(sid, store)
@@ -1408,7 +1411,7 @@ class Repo:
                     raise InvalidFile(f"{sid}/{folder}/{path}: not UTF-8 text") from None
             task = text.get(TASK, "")
             try:
-                task = json.loads(task)
+                task = upgrade(json.loads(task), "task", f"{sid}/{folder}/{TASK}")
             except json.JSONDecodeError:
                 pass
             found[folder] = {"task": task, "check": text.get(CHECK, ""),

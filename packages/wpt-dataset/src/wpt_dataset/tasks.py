@@ -4,7 +4,8 @@ Files in the `task` format form task folders, one folder per task:
 
     <folder>/task.json   instructions (and, optionally, the same request in one line, terse), image,
                          limits, container sizes, the tools it needs and offers, the user's replies to
-                         the ask tool (schemas/task.schema.json)
+                         the ask tool and where its answers live, the paths it may change and the rules
+                         that gate its score (schemas/task.schema.json)
     <folder>/files/...   the starting files, copied into the attempt's container; those task.json's
                          tool_files names go where only the tools' programs read them
     <folder>/check       any program; run after the attempt, it prints a score from 0 to 1
@@ -24,7 +25,8 @@ together with the paths under files/ that it hides (Variant): in an
 attempt offered it, they go where only the tools' programs read them. A
 task with replies names, in `answered_by`, the looking tools that can
 answer what it leaves open: looking tools (looks) it or its image's pool
-offers. Every
+offers; and, in `answered_in`, glob patterns of the paths under /work
+where its answers live (wpt_check.asked_last). Every
 reply's pattern must compile, and every tool_files entry, a variant's
 included, must name a file of files/ (or one a pointer makes) or a
 folder holding some; a variant's may also name REMOTE, a repository
@@ -32,7 +34,13 @@ pointer's remote outside /work. Each `absent` entry is a folder of the
 image, outside /work and /tmp (OWN), that the task's attempts see empty:
 the image installs something there that the task removes, such as the
 manual of the read-the-manual tasks' program. A task's terse form is one
-line: no line break, as str.splitlines() finds them.
+line: no line break, as str.splitlines() finds them. A task's `area`
+lists glob patterns of the paths under /work an attempt may change
+(wpt_agent.play scores it), and its `gates` the parts that must be 1 for
+an attempt to score at all (wpt_agent.gated). A task.json of an earlier
+shape is brought to the current one when it is read (migrate.upgrade):
+task files are a source's bytes, which `wpt-dataset migrate` never
+rewrites.
 
 A task built by a program is a pointer task: task.json's `pointers` name,
 for each text it needs, the source, the document (its path in the
@@ -77,6 +85,7 @@ from typing import NamedTuple
 from . import markdown
 from .errors import DocumentListMissing, InvalidFile, RuleViolation
 from .manifest import FILE, HISTORY, MERGE, ORDER, SYMLINK
+from .migrate import upgrade
 from .repo import Repo, validate
 from .sources import held_out_group, load_index, source_tree, tags_of, temporary_git
 
@@ -141,10 +150,13 @@ class Task:
     check_files: dict = field(default_factory=dict)  # files put next to the check, as `files`
     pointers: tuple = ()  # the Pointers fill() has not filled in yet
     answered_by: tuple = ()  # the looking tools that can answer what the task leaves open (wpt_check.asked_last)
+    answered_in: tuple = ()  # the patterns of the paths under /work where its answers live (wpt_check.asked_last)
     documents: tuple = ()  # (source, document, sha256 of its Markdown or None) of each document its pointers name
     held_out_keys: tuple = ()  # what the held-out hash reads for each of them: its held-out group, or its id
     absent: tuple = ()  # the image's folders the attempts see empty (task.json's `absent`)
     terse: str = ""  # the same request as instructions, in one line; "" when the task has none
+    area: tuple | None = None  # the patterns of the paths under /work an attempt may change; None: no area
+    gates: tuple = ()  # the parts of the check, or the harness's, that must be 1 for the attempt to score
 
 
 def folders(paths) -> dict[str, list[str]]:
@@ -187,6 +199,7 @@ def parse(source_id: str, entries: dict, store, repo: Repo) -> dict[str, Task]:
             document = json.loads(store.get_bytes(entries[prefix + TASK].sha256))
         except json.JSONDecodeError as error:
             raise InvalidFile(f"{where}{TASK}: {error}") from error
+        document = upgrade(document, "task", f"{where}{TASK}")
         validate(document, "task", f"{where}{TASK}")
         try:
             repo.check_image(document["image"])
@@ -209,6 +222,7 @@ def parse(source_id: str, entries: dict, store, repo: Repo) -> dict[str, Task]:
                             Variant(tuple(variant["tools"]), tuple(variant.get("tool_files", [])))
                             for variant in variants) for variants in document["needs"])
         answered_by = tuple(document.get("answered_by", []))
+        answered_in = tuple(document.get("answered_in", []))
         absent = tuple(document.get("absent", []))
         for place in absent:
             if posixpath.normpath(place) != place or any(place == own or place.startswith(own + "/") for own in OWN):
@@ -219,7 +233,7 @@ def parse(source_id: str, entries: dict, store, repo: Repo) -> dict[str, Task]:
             pools[document["image"]] = repo.image_tools(document["image"])
         pool = pools[document["image"]]
         hidden = _check_tools(f"{where}{TASK}", needs, replies, tools, document.get("tool_files", []),
-                              [*files, *pointed], answered_by, pool, [*files, *pointed, *made])
+                              [*files, *pointed], answered_by, answered_in, pool, [*files, *pointed, *made])
         pointers = tuple(Pointer({"check": "check_files", "repository": "repository"}.get(pointer["for"]) or
                                  ("tool_files" if pointer["path"] in hidden else "files"),
                                  pointer.get("path", ""), pointer["source"], pointer["document"],
@@ -232,7 +246,9 @@ def parse(source_id: str, entries: dict, store, repo: Repo) -> dict[str, Task]:
                              {path: entry for path, entry in files.items() if path not in hidden},
                              store.get_bytes(check.sha256), container, needs, replies, tools,
                              {path: files[path] for path in hidden if path in files}, pointers=pointers,
-                             answered_by=answered_by, absent=absent, terse=terse)
+                             answered_by=answered_by, answered_in=answered_in, absent=absent, terse=terse,
+                             area=tuple(document["area"]) if "area" in document else None,
+                             gates=tuple(document.get("gates", [])))
     return tasks
 
 
@@ -554,11 +570,11 @@ def check_declared(where, names) -> None:
                               f"task has ({', '.join(BUILT_IN)}, {ASK})")
 
 
-def _check_tools(where, needs, replies, tools, tool_files, files, answered_by, pool, made) -> set[str]:
+def _check_tools(where, needs, replies, tools, tool_files, files, answered_by, answered_in, pool, made) -> set[str]:
     """The paths of files that tool_files hides; InvalidFile when the
-    task's tools, needs, answered_by, replies or tool_files (a variant's
-    among them, which may also name what a repository pointer makes) break
-    the rules above."""
+    task's tools, needs, answered_by, answered_in, replies or tool_files (a
+    variant's among them, which may also name what a repository pointer
+    makes) break the rules above."""
     declared = [tool["name"] for tool in tools]
     check_declared(where, declared)
     offered = {*BUILT_IN, *declared, *([ASK] if replies else [])}
@@ -575,6 +591,9 @@ def _check_tools(where, needs, replies, tools, tool_files, files, answered_by, p
     if replies and not answered_by:
         raise InvalidFile(f"{where}: a task with replies names in answered_by the looking tools that can answer "
                           f"before the user is asked")
+    if replies and not answered_in:
+        raise InvalidFile(f"{where}: a task with replies names in answered_in the paths under /work where its "
+                          f"answers live")
     for name in answered_by:
         if name not in looking:
             raise InvalidFile(f"{where}: answered_by names {name!r}, which is no looking tool the task or its "

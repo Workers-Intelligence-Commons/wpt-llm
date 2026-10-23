@@ -7,11 +7,18 @@ Usage:
 RECIPE is a file name in data/recipes/models/, without .json, in the
 repository holding the current folder; its `posttrain` list names the
 steps. Each step is the name of a built-in step (the files in
-wpt_posttrain/steps/) or the path of any Python file. A step file defines
+wpt_posttrain/steps/) or the path of any Python file, alone or as
+{"step": NAME, "settings": {...}}. A step file defines
 
+    SETTINGS = {name: default, ...}  # optional: the settings a recipe may change
+    def check(settings)  # optional: raises ValueError, saying why, on settings that cannot go together
     def run(context: wpt_posttrain.Context) -> wpt_posttrain.Outcome
 
-and changes context.model in place. The steps run in order. Each one says
+and changes context.model in place. context.settings holds its SETTINGS
+with the recipe entry's settings, each of its default's type, as a
+training method's (wpt_utils.settings); an unknown setting, one of
+another type, or settings its check refuses stop the run before any step
+runs. The steps run in order. Each one says
 whether it succeeded or why it failed (Outcome.success() or
 Outcome.failure(reason)); the first failure stops the run.
 
@@ -46,7 +53,7 @@ trained: the weights, the tokenizer, the drafter (drafter/, with its own
 provenance.json: the command and recipe that trained it, the dataset, the
 sha256 of the weights it was trained against), and the base model's provenance.json with a "post_training"
 section (the recipe's name, the base weights' sha256, each step's file
-sha256, outcome and the sources it read, those sources' revisions and licenses, the repository
+sha256, settings, outcome and the sources it read, those sources' revisions and licenses, the repository
 commit, the tools), then LICENSE, NOTICE and README.md, which list the
 sources read by the steps with the pre-training sources. It must
 not exist yet. BASE_FOLDER is never changed, and its evaluation results are
@@ -92,6 +99,7 @@ from wpt_tokenizer import RUSTC_VERSION, Tokenizer, chat
 from wpt_utils.device import describe, select_device
 from wpt_utils.files import sha256_file
 from wpt_utils.programs import repository
+from wpt_utils.settings import typed
 
 BUILT_IN = Path(__file__).parent / "steps"
 VERSION = importlib.metadata.version("wpt-posttrain")
@@ -99,7 +107,8 @@ VERSION = importlib.metadata.version("wpt-posttrain")
 
 class StepError(Exception):
     """A step cannot run: the recipe is missing, names no step or has
-    drafter settings no drafter can have, the scheduler's times to replay
+    drafter settings no drafter can have, a step's setting is unknown or of
+    another type or its check refuses its settings, the scheduler's times to replay
     are missing or were measured on another setup, the base folder is not a trained
     model or its drafter is missing or was trained against other weights,
     NEW_FOLDER exists, the step is unknown,
@@ -141,6 +150,7 @@ class Context:
     provenance: dict  # the base folder's provenance.json
     store: Store
     step: str = ""  # the running step's name, set by the runner
+    settings: dict = field(default_factory=dict)  # the running step's settings, set by the runner
     sources: dict = field(default_factory=dict)  # the sources the running step read, recorded by the runner
     # the run's record: a step's own events (telemetry.event, .span, .log) and files (telemetry.write_file)
     telemetry: Telemetry = field(default_factory=Telemetry.off)
@@ -191,17 +201,38 @@ def find(step) -> tuple[str, Path, str]:
     return path.stem, path, path.name
 
 
-def run_step(context, step) -> dict:
-    """Run one step; return its record, or raise StepFailed."""
+def load(entry) -> tuple[str, Path, str, object, dict]:
+    """(step name, file, how the record names the file, the loaded module,
+    its settings) of a recipe's `posttrain` entry: a step, or {"step":
+    step, "settings": {...}}, whose settings change the module's SETTINGS
+    defaults, each of its default's type (wpt_utils.settings.typed), then
+    pass the module's check(settings), when it has one."""
+    step, overrides = (entry, {}) if isinstance(entry, str) else (entry["step"], entry["settings"])
     name, path, file_name = find(step)
     spec = importlib.util.spec_from_file_location(f"wpt_posttrain_step_{name}", path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     if not callable(getattr(module, "run", None)):
         raise StepError(f"{path.name}: defines no run(context)")
-    context.step, context.sources = name, {}
+    try:
+        settings = typed(getattr(module, "SETTINGS", {}), overrides, file_name)
+    except ValueError as error:
+        raise StepError(str(error)) from None
+    try:
+        getattr(module, "check", lambda settings: None)(settings)
+    except ValueError as error:
+        raise StepError(f"{file_name}: {error}") from None
+    return name, path, file_name, module, settings
+
+
+def run_step(context, entry) -> dict:
+    """Run one step of the recipe's `posttrain` list; return its record, or
+    raise StepFailed."""
+    name, path, file_name, module, settings = load(entry)
+    context.step, context.sources, context.settings = name, {}, settings
     file_sha256 = sha256_file(path)
-    with context.telemetry.span("posttrain.step", step=name, file=file_name, file_sha256=file_sha256) as span:
+    with context.telemetry.span("posttrain.step", step=name, file=file_name, file_sha256=file_sha256,
+                                settings=settings) as span:
         outcome = module.run(context)
         if not isinstance(outcome, Outcome):
             raise StepError(f"{path.name}: run(context) returned {type(outcome).__name__}, not wpt_posttrain.Outcome")
@@ -209,7 +240,7 @@ def run_step(context, step) -> dict:
                  sources={sid: source["revision"] for sid, source in sorted(context.sources.items())})
         if not outcome.succeeded:
             raise StepFailed(name, outcome.reason)
-    return {"name": name, "file": file_name, "file_sha256": file_sha256,
+    return {"name": name, "file": file_name, "file_sha256": file_sha256, "settings": settings,
             "outcome": "succeeded", "sources": dict(sorted(context.sources.items()))}
 
 
@@ -230,9 +261,9 @@ def open_context(base, store, device, telemetry=None) -> Context:
     return Context(base, model, tokenizer, device, provenance, store, telemetry=telemetry or Telemetry.off())
 
 
-def recipe_parts(name) -> tuple[list[str], dict]:
-    """(the post-training steps, the drafter section) of the model recipe
-    of that name."""
+def recipe_parts(name) -> tuple[list, dict]:
+    """(the post-training steps, each a name or {"step", "settings"}, the
+    drafter section) of the model recipe of that name."""
     try:
         recipe = Repo.find().recipe("model", name)
     except DatasetError as error:
@@ -253,7 +284,7 @@ def post_train(context, recipe_name, steps, drafter_section, new_folder, base_we
     if new_folder.exists():
         raise StepError(f"{new_folder} exists; give a new folder")
     for step in steps:
-        find(step)  # an unknown step stops the run before any step has run
+        load(step)  # an unknown step, or an unknown, mistyped or refused setting, stops the run before any step has run
     # settings no drafter can have, and times recorded on another setup, stop the run before any step has run
     try:
         drafter_config, drafting = drafter_settings(context.model.config, drafter_section)

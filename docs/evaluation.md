@@ -121,7 +121,9 @@ def run(context):
   first part of the task's folder, such as `look-or-ask`), `index` (the
   attempt's number at its task, from 1), `plain`, `conversation` (the
   conversation the check reads, with its metadata `tools`, `looking`,
-  `answered_by` and `answer`), `score` (the check's, from 0 to 1) and
+  `answered_by`, `answered_in` and `answer`), `score` (the check's `correct` part, from 0
+  to 1, or 0 when a gate of the task is broken; [post-training.md](post-training.md),
+  "Scores") and
   `changes`, its changes to `/work`.
 - Every attempt is a line of `attempts.jsonl` in the run's record folder
   in the store ([observability.md](observability.md)), with the task by
@@ -148,9 +150,12 @@ A measure reads an attempt by the same rules as the checks: the check
 library of the task's image (`wpt_check.py`, [post-training.md](post-training.md),
 "The check library"), loaded through the service layer by
 `wpt_eval.attempts.library`. Each measure gives the mean score, and the
-pass rate of its attempts: an attempt passes when its score is 1, the
-check's full marks. That pass rule is provisional: it holds until the
-rewards stage defines what a pass is.
+pass rate of its attempts: an attempt passes when its score is 1, its
+`correct` part at full marks with every gate of its task holding
+(maintainer's decision, 2026-10-23: a broken gate scores the attempt 0).
+The rest of the rewards (the calibration, the rules' parts, the tool
+calls' cost, the closeness of terse attempts) weighs only in training;
+a measure reads the parts it needs itself.
 
 ## Look before claim
 

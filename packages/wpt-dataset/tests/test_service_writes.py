@@ -23,7 +23,7 @@ from wpt_dataset import repo as service
 from wpt_dataset.errors import InvalidFile, NotText, RuleViolation, StaleFile
 from wpt_dataset.repo import empty_source
 
-TASK = {"schema": 1, "instructions": "Print hello.", "image": "tiny",
+TASK = {"schema": 3, "instructions": "Print hello.", "image": "tiny",
         "limits": {"max_turns": 2, "max_tokens": 100, "command_seconds": 5}, "needs": []}
 
 

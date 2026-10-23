@@ -172,9 +172,11 @@ none. A final reply closed by the end of a document instead of
 `<|im_end|>` is a final reply too. A reply that is not such a number, or
 that a limit cuts, scores the attempt 0, as a missing block did; so does
 an attempt that ends with no final reply, stopped by a limit or by the
-end of a document written in a turn with a tool call: its `metadata.answer` is `null`, and the shared check library
-that every check calls scores it 0 (maintainer's decisions, 2026-10-18
-and 2026-10-23). The confidence turn counts against `max_tokens` and the
+end of a document written in a turn with a tool call: its `metadata.answer` is `null`, the shared check library
+that every check calls scores its `correct` part 0, and the step that
+learns makes the whole attempt worth 0, whatever its other parts
+(maintainer's decisions, 2026-10-18 and 2026-10-23; post-training.md,
+"Rewards"). The confidence turn counts against `max_tokens` and the
 context, not against `max_turns`. No task's instructions ask for a block
 or say how to answer (maintainer's decision, 2026-10-23). There is no way
 to abstain: "I don't know" is never a way out that costs nothing

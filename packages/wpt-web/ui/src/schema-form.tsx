@@ -1,15 +1,23 @@
 // An editor for any JSON document, built from its JSON schema: every field
 // the schema names is shown and editable, so a new field in a shape needs no
-// change here. It only shapes the input; the server's rules decide what is
-// valid (conditions such as "if/then" are left to them).
+// change here. A value that may take one of several shapes (oneOf, anyOf)
+// shows the shape it has and lets a person pick another; an object whose
+// keys are free (additionalProperties, such as a step's settings) lists its
+// keys and takes new ones. It only shapes the input; the server's rules
+// decide what is valid (conditions such as "if/then" are left to them).
+
+import { useState } from "react";
 
 export type Schema = {
-  type?: string;
+  type?: string | string[];
   properties?: Record<string, Schema>;
+  additionalProperties?: Schema | boolean;
   required?: string[];
   items?: Schema;
   enum?: string[];
   const?: unknown;
+  oneOf?: Schema[];
+  anyOf?: Schema[];
   $ref?: string;
   description?: string;
 };
@@ -25,9 +33,40 @@ function resolve(schema: Schema, root: Schema): Schema {
   return found ? resolve(found, root) : schema;
 }
 
+// The JSON kind of a value, as a schema's type names it.
+function kind(value: Json): string {
+  if (Array.isArray(value)) return "array";
+  if (value === null) return "null";
+  if (typeof value === "number") return "number";
+  return typeof value;
+}
+
+function fits(schema: Schema, value: Json): boolean {
+  const types = Array.isArray(schema.type) ? schema.type : schema.type ? [schema.type] : [];
+  const found = kind(value);
+  return types.includes(found) || (found === "number" && types.includes("integer"));
+}
+
+// The alternative of a oneOf or anyOf the value has: of those of its kind,
+// the first whose required fields it holds, else the first of its kind.
+function chosen(choices: Schema[], value: Json, root: Schema): number {
+  const resolved = choices.map((choice) => resolve(choice, root));
+  const ofKind = resolved.map((s, i) => [s, i] as const).filter(([s]) => fits(s, value));
+  const whole = ofKind.find(([s]) => (s.required ?? []).every((key) => value && typeof value === "object" && key in value));
+  return (whole ?? ofKind[0] ?? [null, 0])[1];
+}
+
+// A value typed in a field that may be a number, a boolean or text.
+function scalar(text: string): Json {
+  if (text === "true" || text === "false") return text === "true";
+  return /^-?(\d+\.?\d*|\.\d+)([eE][-+]?\d+)?$/.test(text) ? Number(text) : text;
+}
+
 // A new value of that schema: its required fields, each at its own start.
 export function initial(schema: Schema, root: Schema): Json {
   const s = resolve(schema, root);
+  const choices = s.oneOf ?? s.anyOf;
+  if (choices) return initial(choices[0], root);
   if (s.const !== undefined) return s.const;
   if (s.enum) return s.enum[0];
   if (s.type === "object")
@@ -47,6 +86,25 @@ export function SchemaForm({ value, schema, root, name, onChange }: Props) {
 
   if (s.const !== undefined) return <code>{JSON.stringify(value)}</code>;
 
+  const choices = s.oneOf ?? s.anyOf;
+  if (choices) {
+    const at = chosen(choices, value, root);
+    return (
+      <div className="choice">
+        {choices.length > 1 && (
+          <select value={at} aria-label={`${name} shape`}
+            onChange={(e) => onChange(initial(choices[Number(e.target.value)], root))}>
+            {choices.map((choice, i) => {
+              const r = resolve(choice, root);
+              return <option key={i} value={i}>{r.description ?? String(r.type ?? `shape ${i + 1}`)}</option>;
+            })}
+          </select>
+        )}
+        <SchemaForm value={value} schema={choices[at]} root={root} name={name} onChange={onChange} />
+      </div>
+    );
+  }
+
   if (s.enum)
     return (
       <select value={String(value)} onChange={(e) => onChange(e.target.value)} aria-label={name}>
@@ -55,6 +113,9 @@ export function SchemaForm({ value, schema, root, name, onChange }: Props) {
         ))}
       </select>
     );
+
+  if (s.type === "object" && !s.properties && typeof s.additionalProperties === "object")
+    return <FreeObject value={value} schema={s} root={root} name={name} onChange={onChange} />;
 
   if (s.type === "object") {
     const object = (value && typeof value === "object" ? value : {}) as Record<string, Json>;
@@ -114,6 +175,10 @@ export function SchemaForm({ value, schema, root, name, onChange }: Props) {
     return <input type="number" value={Number(value)} aria-label={name}
       onChange={(e) => onChange(s.type === "integer" ? parseInt(e.target.value || "0", 10) : Number(e.target.value))} />;
 
+  if (Array.isArray(s.type))  // a number, a boolean or text, as typed
+    return <input value={typeof value === "string" ? value : JSON.stringify(value)} aria-label={name}
+      onChange={(e) => onChange(scalar(e.target.value))} />;
+
   const text = typeof value === "string" ? value : JSON.stringify(value);
   const long = LONG.has(name) || text.includes("\n") || text.length > 90;
   return (
@@ -125,6 +190,37 @@ export function SchemaForm({ value, schema, root, name, onChange }: Props) {
         <input value={text} aria-label={name} onChange={(e) => onChange(e.target.value)} />
       )}
       {isLink(value) && <a href={value} target="_blank" rel="noreferrer">open</a>}
+    </div>
+  );
+}
+
+// An object whose keys are free: each key with its value, removable, and a
+// name to add a new key.
+function FreeObject({ value, schema, root, name, onChange }: Props) {
+  const [key, setKey] = useState("");
+  const object = (value && typeof value === "object" && !Array.isArray(value) ? value : {}) as Record<string, Json>;
+  const item = schema.additionalProperties as Schema;
+  return (
+    <div className="object">
+      {schema.description ? <span className="hint">{schema.description}</span> : null}
+      {Object.keys(object).map((k) => (
+        <div className="field" key={k}>
+          <label>
+            {k}
+            <button type="button" className="quiet" onClick={() => {
+              const { [k]: _, ...rest } = object;
+              onChange(rest);
+            }}>remove</button>
+          </label>
+          <SchemaForm value={object[k]} schema={item} root={root} name={k}
+            onChange={(v) => onChange({ ...object, [k]: v })} />
+        </div>
+      ))}
+      <div className="add">
+        <input value={key} placeholder="new name" aria-label={`new ${name} name`} onChange={(e) => setKey(e.target.value)} />
+        <button type="button" disabled={!key || key in object}
+          onClick={() => { onChange({ ...object, [key]: initial(item, root) }); setKey(""); }}>+ add</button>
+      </div>
     </div>
   );
 }

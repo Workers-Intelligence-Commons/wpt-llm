@@ -2,7 +2,6 @@ import hashlib
 import importlib.util
 import json
 import os
-import re
 import subprocess
 from pathlib import Path
 
@@ -116,8 +115,8 @@ def test_post_training_records_the_scheduler_s_times_and_replays_them_only_on_th
     main([trained.recipe("tune", posttrain=[str(check)]), str(trained.folder), str(tmp_path / "again"),
           "--scheduler-costs", run.folder])
     assert trained.store.read_record(trained.records("wpt-posttrain")[-1].folder, COSTS_FILE) == recorded
-    never = tmp_path / "never.py"
-    never.write_text("raise SystemExit('this step must not run')\n")
+    never = tmp_path / "never.py"  # its file is read before any step runs; its run must never start
+    never.write_text("def run(context):\n    raise SystemExit('this step must not run')\n")
     with pytest.raises(SystemExit, match=r"StepError: the recorded costs were measured on another setup: draft 5, "
                                          r"here 4\nnothing was written"):
         main([trained.recipe("tune", drafter={"block": 4}, posttrain=[str(never)]), str(trained.folder),
@@ -155,12 +154,40 @@ def test_a_failed_step_stops_the_run_with_its_reason_and_writes_nothing(trained,
     failing = tmp_path / "needs_records.py"
     failing.write_text("from wpt_posttrain import Outcome\n\n"
                        "def run(context):\n    return Outcome.failure('no demonstration records in the store')\n")
-    never = tmp_path / "never.py"
-    never.write_text("raise SystemExit('this step must not run')\n")
+    never = tmp_path / "never.py"  # its file is read before any step runs; its run must never start
+    never.write_text("def run(context):\n    raise SystemExit('this step must not run')\n")
     with pytest.raises(SystemExit, match="step needs_records failed: no demonstration records in the store"):
         main([trained.recipe("tune", posttrain=[str(step), str(failing), str(never)]), str(trained.folder),
               str(tmp_path / "tuned")])
     assert list(tmp_path.glob("*tuned*")) == []
+
+
+def test_a_recipe_entry_s_settings_reach_its_step_typed_from_the_step_s_defaults(trained, tmp_path):
+    # maintainer's decision, 2026-10-23: a posttrain entry may carry the
+    # settings it changes, typed from the step file's SETTINGS as a training
+    # method's are; the new folder records them, and an unknown or mistyped
+    # setting stops the run before any step has run
+    step = tmp_path / "counted.py"
+    step.write_text("from wpt_posttrain import Outcome\n\nSETTINGS = {'rounds': 10, 'rate': 0.5}\n\n"
+                    "def run(context):\n    assert context.settings == {'rounds': 3, 'rate': 1.0}\n"
+                    "    return Outcome.success()\n")
+    zero = tmp_path / "zero_weights.py"
+    zero.write_text(ZERO_WEIGHTS)
+    entry = {"step": str(step), "settings": {"rounds": 3, "rate": 1}}
+    main([trained.recipe("tune", posttrain=[entry]), str(trained.folder), str(tmp_path / "tuned")])
+    post = json.loads((tmp_path / "tuned" / "provenance.json").read_text())["post_training"]
+    assert post["steps"][0]["settings"] == {"rounds": 3, "rate": 1.0}
+    for settings, why in (({"round": 3}, r"no setting 'round' \(settings: rounds, rate\)"),
+                          ({"rounds": "many"}, r"setting rounds='many' is not a int")):
+        recipe = trained.recipe("tune", posttrain=[str(zero), {"step": str(step), "settings": settings}])
+        with pytest.raises(SystemExit, match=rf"counted.py: {why}\nnothing was written"):
+            main([recipe, str(trained.folder), str(tmp_path / "again")])
+    # stating a low confidence must never pay more than being right: refused before sft or any step runs
+    recipe = trained.recipe("tune", posttrain=[str(zero), {"step": "grpo", "settings": {"weight_calibration": 2}}])
+    with pytest.raises(SystemExit, match=r"grpo.py: weight_correct \(1.0\) must be above weight_calibration \(2.0\)"):
+        main([recipe, str(trained.folder), str(tmp_path / "again")])
+    assert not (tmp_path / "again").exists()
+    assert all(torch.count_nonzero(p) != 0 for p in load_model(trained.folder).parameters())
 
 
 def test_a_step_that_returns_no_outcome_writes_nothing(trained, tmp_path):
@@ -364,15 +391,13 @@ GRPO = Path(wpt_posttrain.__file__).parent / "steps" / "grpo.py"
 TOKEN_EFFICIENCY = Path(wpt_posttrain.__file__).parent / "steps" / "token-efficiency.py"
 
 
-def step_copy(folder, original=GRPO, **settings) -> Path:
-    """The documented way to change a step's settings: a copy of its file,
-    under the same name, with the given constants changed."""
-    text = original.read_text()
-    for name, value in settings.items():
-        text = re.sub(rf"^{name} = .*$", f"{name} = {value}", text, count=1, flags=re.MULTILINE)
-    step = folder / original.name
-    step.write_text(text)
-    return step
+def answered(monkeypatch):
+    """Every attempt ends with an answer, its confidence 0.5, as a model
+    that has learned the chat format gives one: a tiny model never does,
+    and an attempt without an answer is worth 0 whatever its check says."""
+    real = wpt_agent.loop._ended
+    monkeypatch.setattr(wpt_agent.loop, "_ended", lambda conversation, ids, learn, ended, answer=None: real(
+        conversation, ids, learn, ended, answer or {"answer": "", "confidence": 0.5}))
 
 
 def step_module(path):
@@ -392,10 +417,10 @@ def test_grpo_fails_and_writes_nothing_when_no_group_ever_teaches_anything(docke
     if subprocess.run(["docker", "image", "inspect", "ubuntu:24.04"], capture_output=True).returncode:
         subprocess.run(["docker", "pull", "-q", "ubuntu:24.04"], capture_output=True, check=True)
     monkeypatch.setattr(images, "built", lambda root, name: "ubuntu:24.04")  # a plain image is enough here
-    step = step_copy(tmp_path, ROUNDS="2", GROUP="2", TASKS_PER_UPDATE="1")
-    recipe = built.recipe("agent", training=one_stage(1, 1024), posttrain=[str(step)])
+    step = {"step": "grpo", "settings": {"rounds": 2, "group": 2, "tasks_per_update": 1}}
+    recipe = built.recipe("agent", training=one_stage(1, 1024), posttrain=[step])
     with pytest.raises(SystemExit, match=r"step grpo failed: no update in 2 rounds: every group was skipped, 2 "
-                                         r"because its scores were all equal, 0 because it kept fewer than 2 "
+                                         r"because its rewards were all equal, 0 because it kept fewer than 2 "
                                          r"attempts\nnothing was written"):
         main([recipe, str(tmp_path / "model"), str(tmp_path / "tuned")])
     assert not (tmp_path / "tuned").exists()
@@ -414,33 +439,103 @@ class _Logits(torch.nn.Module):
         return (logits, logits.new_zeros(())) if indexer_loss else logits
 
 
-def test_a_group_whose_scores_are_all_equal_never_dilutes_the_update(monkeypatch):
+def fake_task(name, **fields):
+    """A task as agentic reads it, without files or a check."""
+    return type("Task", (), {"id": name, "image": "tiny", "needs": (), "replies": (), "tools": (), "answered_by": (),
+                             "answered_in": (), "files": {}, "tool_files": {}, "outside": {}, "absent": (),
+                             "terse": "", "area": None, "gates": (), **fields})
+
+
+def test_a_group_whose_rewards_are_all_equal_never_dilutes_the_update(monkeypatch):
     # the loss is averaged over the tokens written in the groups that teach
-    # something: a skipped group, whose scores are all equal, adds none
+    # something: a skipped group, whose rewards are all equal, adds none
     scores = {"differ": [1.0, 0.0], "equal": [0.5, 0.5]}
     given = {}
 
-    def play(task, count, keep, offers):
+    def play(task, count, keep, offers, terse=False, with_changes=False):
         ids = [0, 1, 2, 3] if task.id == "differ" else [0, 4, 5, 6, 7, 1, 2]
-        attempt = wpt_agent.Attempt({"metadata": {}}, ids, [False] + [True] * (len(ids) - 1), "answered")
+        attempt = wpt_agent.Attempt({"metadata": {}, "messages": []}, ids, [False] + [True] * (len(ids) - 1),
+                                    "answered")
         return [keep(index, wpt_agent.Played(attempt, next(given[task.id]))) for index in range(1, count + 1)]
 
     losses, update = [], agentic.update
     monkeypatch.setattr(agentic, "update", lambda *args: losses.append(update(*args)) or losses[-1])
     grpo = step_module(GRPO)
-    settings = agentic.Settings(rounds=1, tasks_per_update=grpo.TASKS_PER_UPDATE, group=2,
-                                learning_rate=grpo.LEARNING_RATE, weight_decay=grpo.WEIGHT_DECAY,
-                                temperature=grpo.TEMPERATURE, top_k=grpo.TOP_K, check_seconds=grpo.CHECK_SECONDS,
-                                result_bytes=grpo.RESULT_BYTES, seed=grpo.SEED)
-    task = lambda name: type("Task", (), {"id": name, "image": "tiny", "needs": (), "replies": (), "tools": (),
-                                         "answered_by": ()})
+    settings = {**grpo.SETTINGS, "rounds": 1, "group": 2}
     for names in (["differ", "equal"], ["differ"]):
         given = {name: iter(values) for name, values in scores.items()}
-        tasks = [task(name) for name in names]
+        tasks = [fake_task(name) for name in names]
         learner = agentic.Learner("grpo", _Logits(), None, "cpu", {"tiny": None}, settings)
         learner.play = play
-        assert learner.train(tasks).succeeded
+        assert learner.train(tasks, lambda task, index, played: played.score).succeeded
     assert len(losses) == 2 and losses[0] == pytest.approx(losses[1])
+
+
+def scripted(calls=0, confidence=0.5):
+    """An attempt that made `calls` tool calls and answered with that
+    confidence (None: no answer)."""
+    messages = [{"role": "assistant", "content": [{"type": "tool_call", "id": f"c{n}", "name": "bash",
+                                                    "arguments": {}}]} for n in range(calls)]
+    answer = None if confidence is None else {"answer": "Done.", "confidence": confidence}
+    return wpt_agent.Attempt({"messages": messages, "metadata": {"answer": answer}}, [0, 1], [False, True], "answered")
+
+
+def test_an_attempt_s_parts_add_up_by_their_weights_and_a_broken_gate_or_no_answer_scores_0():
+    # maintainer's decision, 2026-10-23: correct 1, calibration 0.5 (Brier:
+    # 1 - (confidence - correct)²), each rule 0.25, each tool call -0.01; a
+    # gated rule below 1, or no answer, makes the whole attempt worth 0
+    settings = step_module(GRPO).SETTINGS
+    task, gated = fake_task("t"), fake_task("t", gates=("asked_last",))
+    parts = {"correct": 1.0, "sources_first": 1.0, "asked_last": 0.0}
+    assert agentic.combined(task, scripted(3, 0.8), parts, settings) == pytest.approx(
+        1 + 0.5 * (1 - 0.2 ** 2) + 0.25 * 1 - 0.01 * 3)
+    assert agentic.combined(gated, scripted(3, 0.8), parts, settings) == 0.0
+    assert agentic.combined(task, scripted(3, None), parts, settings) == 0.0
+    assert agentic.combined(task, scripted(), None, settings) == 0.0  # the check gave no score
+    # stating a low confidence never pays more than being right
+    right = agentic.combined(task, scripted(0, 0.0), {"correct": 1.0}, settings)
+    assert right > agentic.combined(task, scripted(0, 0.0), {"correct": 0.0}, settings) == 0.5
+
+
+def test_each_terse_attempt_is_rewarded_for_its_closeness_to_the_full_attempt_of_the_same_index(monkeypatch):
+    # maintainer's decision, 2026-10-23: a task with a one-line form is
+    # played in full, then terse, both forms one group, so each advantage is
+    # taken from the mean of all their attempts; terse attempt i adds,
+    # weighed, how alike its changes to /work are to full attempt i's; an
+    # answer-only task (an empty area) gets no closeness; where closeness
+    # counts, a terse attempt whose full attempt Docker dropped is not
+    # trained on
+    full = {1: "+a\n+b\n", 2: "+c\n", 3: None}  # None: dropped
+    terse = {1: "+a\n+b\n", 2: "+x\n", 3: "+c\n"}
+    played_forms = []
+
+    def play(task, count, keep, offers, terse_form=False, with_changes=False):
+        changes = terse if terse_form else full
+        played_forms.append((terse_form, with_changes))
+        return [keep(index, wpt_agent.SandboxError("lost") if changes[index] is None else
+                     wpt_agent.Played(scripted(), 1.0, None, changes[index] if with_changes else None,
+                                      {"correct": 1.0})) for index in range(1, count + 1)]
+
+    settings = {**step_module(GRPO).SETTINGS, "rounds": 1, "group": 3}
+    updated, update = [], agentic.update
+    monkeypatch.setattr(agentic, "update", lambda model, optimizer, groups, device:
+                        updated.append([[value for *_, value in group] for group in groups])
+                        or update(model, optimizer, groups, device))
+    for area, near in ((None, [1.0, 0.0]), ([], None)):
+        kept = []
+        learner = agentic.Learner("grpo", _Logits(), None, "cpu", {"tiny": None}, settings, terse=True)
+        learner.play = play
+        monkeypatch.setattr(learner, "_keep", lambda task, round_, group, index, one, offer, terse_form=False:
+                            kept.append((terse_form, index, one.reward)) or len(kept))
+        learner.train([fake_task("t", terse="Say hi.", area=area)])
+        base = agentic.combined(fake_task("t"), scripted(), {"correct": 1.0}, settings)
+        expected = [base + settings["weight_closeness"] * value for value in near] + [None] if near else [base] * 3
+        assert [reward for terse_form, _, reward in kept if terse_form] == [
+            pytest.approx(value) if value is not None else None for value in expected]
+        assert [reward for terse_form, _, reward in kept if not terse_form] == [base, base, None]
+    # the first task's rewards differ, so it is learned from, as one group of the four kept; the second's are equal
+    assert updated == [[[base, base, *map(pytest.approx, [base + settings["weight_closeness"], base])]], []]
+    assert played_forms == [(False, True), (True, True), (False, False), (True, False)]
 
 
 def test_grpo_fails_and_writes_nothing_when_every_attempt_of_a_round_is_dropped(built, tmp_path, monkeypatch):
@@ -509,7 +604,8 @@ def test_a_refused_attempt_line_stops_the_run_with_the_record_error_code(built, 
 
 
 @pytest.mark.xdist_group("tiny-image")  # one worker: the first of these tests pins and builds the image
-def test_grpo_learns_from_scored_attempts_at_the_tasks_tagged_grpo(docker_runs, built, tmp_path, tiny_image):
+def test_grpo_learns_from_scored_attempts_at_the_tasks_tagged_grpo(docker_runs, built, tmp_path, tiny_image,
+                                                                    monkeypatch):
     # each attempt runs in a container of the task's image and its check
     # scores it; attempts that score apart change the weights, but not the
     # routers', and the new model's NOTICE credits the source of the tasks;
@@ -522,8 +618,9 @@ def test_grpo_learns_from_scored_attempts_at_the_tasks_tagged_grpo(docker_runs, 
     sid = task_source(built, root, tmp_path / "tasks")
     (root / "data" / "images" / "tiny" / "lock.json").write_text(dump_json(NEVER_BUILT))  # no image built yet
 
-    step = step_copy(tmp_path, ROUNDS="1", GROUP="2", TASKS_PER_UPDATE="1", LEARNING_RATE="1e-2")
-    recipe = built.recipe("agent", training=one_stage(1, 64), posttrain=[str(step)])
+    answered(monkeypatch)
+    step = {"step": "grpo", "settings": {"rounds": 1, "group": 2, "tasks_per_update": 1, "learning_rate": 1e-2}}
+    recipe = built.recipe("agent", training=one_stage(1, 64), posttrain=[step])
     with pytest.raises(SystemExit, match="image 'tiny' is not built on this machine.*wpt-agent build-image tiny"):
         main([recipe, str(base), str(tmp_path / "tuned")])
     tiny_image(root)
@@ -535,7 +632,8 @@ def test_grpo_learns_from_scored_attempts_at_the_tasks_tagged_grpo(docker_runs, 
     assert routers and all(torch.equal(before[name], after[name]) for name in routers)
     assert any(not torch.equal(before[name], after[name]) for name in before)
     post = json.loads((tuned / "provenance.json").read_text())["post_training"]
-    assert post["steps"][0]["file"] == "grpo.py" and post["steps"][0]["sources"] == [sid]
+    assert post["steps"][0]["file"] == "wpt_posttrain/steps/grpo.py" and post["steps"][0]["sources"] == [sid]
+    assert post["steps"][0]["settings"] == {**step_module(GRPO).SETTINGS, **step["settings"]}
     notice = (tuned / "NOTICE").read_text()
     assert "Tasks, by Cy Author, 2026" in notice and "dedicates these tasks" in notice
     # every attempt is kept in the run's record, as a conversation in the chat format, and its span names its line
@@ -546,7 +644,11 @@ def test_grpo_learns_from_scored_attempts_at_the_tasks_tagged_grpo(docker_runs, 
     for line in lines:
         metadata = line["metadata"]
         assert not metadata["dropped"] and metadata["error"] is None
-        assert metadata["reward"] == metadata["score"] and 0 <= metadata["score"] <= 1 and metadata["written"] > 0
+        # the check prints one number, its correct part; the reward weighs it with the calibration and tool calls
+        assert metadata["parts"] == {"correct": metadata["score"]} and 0 <= metadata["score"] <= 1
+        assert metadata["reward"] == pytest.approx(metadata["score"] + 0.5 * (1 - (0.5 - metadata["score"]) ** 2)
+                                                   - 0.01 * metadata["tool_calls"])
+        assert metadata["written"] > 0 and metadata["terse"] is False
         assert metadata["ended"] in ("answered", "ended", "turns", "tokens", "context", "full")
         assert line["messages"][0]["content"][0]["text"] == TASK["instructions"]
         assert line["messages"][1]["role"] == "assistant"
@@ -561,19 +663,22 @@ def attempt_of(written, read=3):
     """An attempt whose model wrote `written` tokens between the `read`
     tokens of its instructions and a tool result of `read` tokens."""
     learn = [False] * read + [True] * written + [False] * read + [True]
-    return wpt_agent.Attempt({"metadata": {}}, [0] * len(learn), learn, "answered")
+    return wpt_agent.Attempt({"messages": [], "metadata": {"answer": {"answer": "Hello.", "confidence": 0.5}}},
+                             [0] * len(learn), learn, "answered")
 
 
 def test_token_efficiency_rewards_a_passing_attempt_by_how_few_tokens_it_wrote():
-    # below the best start score an attempt earns nothing; at or above it,
-    # the reference length over the tokens the model wrote, never counting
-    # the instructions, the tool results or the template's tokens
+    # below the best start score an attempt earns nothing, whatever its
+    # weighed parts; at or above it, its weighed parts times the reference
+    # length over the tokens the model wrote, never counting the
+    # instructions, the tool results or the template's tokens
     step = step_module(TOKEN_EFFICIENCY)
     reference = (0.5, 12.0)  # best start score, reference length
-    assert step.reward(reference, attempt_of(2), 0.4) == 0.0  # short, but below the best start score
-    assert step.reward(reference, attempt_of(11, read=50), 0.5) == pytest.approx(1.0)  # 12 tokens written, as long
-    assert step.reward(reference, attempt_of(5), 1.0) == pytest.approx(2.0)  # half as long, scoring higher
-    assert step.reward(reference, attempt_of(23), 0.5) == pytest.approx(0.5)  # twice as long
+    assert step.reward(reference, attempt_of(2), 0.4, 1.5) == 0.0  # short, but below the best start score
+    assert step.reward(reference, attempt_of(11, read=50), 0.5, 1.0) == pytest.approx(1.0)  # 12 tokens, as long
+    assert step.reward(reference, attempt_of(5), 1.0, 1.0) == pytest.approx(2.0)  # half as long, scoring higher
+    assert step.reward(reference, attempt_of(23), 0.5, 1.0) == pytest.approx(0.5)  # twice as long
+    assert step.reward(reference, attempt_of(11), 0.5, 1.5) == pytest.approx(1.5)  # as long, its parts weigh more
 
 
 def test_each_attempt_s_line_is_kept_as_soon_as_it_is_scored(monkeypatch):
@@ -592,7 +697,7 @@ def test_each_attempt_s_line_is_kept_as_soon_as_it_is_scored(monkeypatch):
         def close(self):
             pass
 
-    def attempts(task, boxes, tokenizer, start, result_bytes, offers):
+    def attempts(task, boxes, tokenizer, start, result_bytes, offers, terse):
         start([0], len(boxes), ())
         return [wpt_agent.Attempt({}, [0, 1], [False, True], "answered") for _ in boxes]
 
@@ -601,46 +706,45 @@ def test_each_attempt_s_line_is_kept_as_soon_as_it_is_scored(monkeypatch):
     monkeypatch.setattr(played, "attempts", attempts)
     monkeypatch.setattr(played, "score",
                         lambda box, check, seconds, conversation, beside, hidden, outside: scored.append(list(kept)) or
-                        (1.0, None))
+                        ({"correct": 1.0}, None))
     monkeypatch.setattr(wpt_inference, "Writer",
                         lambda model, ids, rows, **kwargs: type("W", (), {"routes": [None] * rows}))
     grpo = step_module(GRPO)
-    settings = agentic.Settings(rounds=1, tasks_per_update=1, group=3, learning_rate=grpo.LEARNING_RATE,
-                                weight_decay=grpo.WEIGHT_DECAY, temperature=grpo.TEMPERATURE, top_k=grpo.TOP_K,
-                                check_seconds=grpo.CHECK_SECONDS, result_bytes=grpo.RESULT_BYTES, seed=grpo.SEED)
+    settings = {**grpo.SETTINGS, "rounds": 1, "tasks_per_update": 1, "group": 3}
     learner = agentic.Learner("grpo", _Logits(), None, "cpu", {"tiny": None}, settings)
     monkeypatch.setattr(learner, "_keep",
-                        lambda task, round_, group, index, one, offer: kept.append(index) or len(kept))
+                        lambda task, round_, group, index, one, offer, terse: kept.append(index) or len(kept))
     task = type("Task", (), {"id": "t", "image": "tiny", "files": None, "check": None, "needs": (), "replies": (),
-                             "tools": (), "tool_files": {}, "outside": {}, "check_files": {}, "answered_by": (), "absent": (), "container": {"memory": 1, "disk": 1, "processes": 1,
-                                                                         "cpus": 1}})
-    outcomes = learner.attempts(task, 1, 1, 3, lambda task, attempt, score: score)
+                             "tools": (), "tool_files": {}, "outside": {}, "check_files": {}, "answered_by": (),
+                             "answered_in": (), "absent": (), "area": None, "gates": (),
+                             "container": {"memory": 1, "disk": 1, "processes": 1, "cpus": 1}})
+    outcomes = learner.attempts(task, 1, 1, 3, lambda task, index, played: played.score)
     assert scored == [[], [1, 2]]  # attempt 1 scored before any line, attempt 3 after the lines of 1 and 2
     assert kept == [1, 2, 3] and [one.attempt is None for one in outcomes] == [False, True, False]
 
 
 def test_token_efficiency_takes_the_mean_length_of_the_attempts_that_reach_the_best_start_score():
-    # per task: the best score the incoming model reached, and the mean
-    # length of its attempts that reach it; a task the model always scored
-    # 0 on, or whose every attempt Docker dropped, is left out
+    # per task: the best result the incoming model reached (its correct
+    # part, never the weighed parts, which calibration and tool calls move),
+    # and the mean length of its attempts that reach it; a task the model
+    # was always wrong on, or whose every attempt Docker dropped, is left out
     step = step_module(TOKEN_EFFICIENCY)
     plays = {"mixed": [(0.5, 4), (0.75, 10), (0.25, 2), (0.75, 20)], "zero": [(0.0, 3), (0.0, 7)], "lost": []}
 
     class Learner(agentic.Learner):
         def __init__(self):  # no model: play() stands for the attempts, attempts() keeps them as the step does
             self.name, self.file, self.telemetry = "token-efficiency", "token-efficiency-attempts.jsonl", Telemetry.off()
-            self.settings, self.pools = type("Settings", (), {"seed": 0}), {}
+            self.settings = {**step.SETTINGS, "reference": 4}
+            self.pools = {}
 
-        def play(self, task, count, keep, offers):
+        def play(self, task, count, keep, offers, terse=False, with_changes=False):
             outcomes = [(score, length) for score, length in plays[task.id][:count]]
             outcomes += [wpt_agent.SandboxError("docker create: no space left on device")] * (count - len(outcomes))
             return [keep(index, outcome if isinstance(outcome, Exception)
-                         else wpt_agent.Played(attempt_of(outcome[1] - 1), outcome[0]))
+                         else wpt_agent.Played(attempt_of(outcome[1] - 1), outcome[0], parts={"correct": outcome[0]}))
                     for index, outcome in enumerate(outcomes, 1)]
 
-    step.REFERENCE = 4
-    tasks = [type("Task", (), {"id": name, "instructions": "Say hello.", "image": "tiny", "needs": (), "replies": (),
-                               "tools": (), "answered_by": ()}) for name in plays]
+    tasks = [fake_task(name, instructions="Say hello.") for name in plays]
     references, zero, lost = step._references(Learner(), tasks)
     assert references == {"mixed": (0.75, pytest.approx(15.0))}
     assert (zero, lost) == (1, 1)
@@ -655,8 +759,8 @@ def test_token_efficiency_fails_and_writes_nothing_when_no_task_is_left(docker_r
     if subprocess.run(["docker", "image", "inspect", "ubuntu:24.04"], capture_output=True).returncode:
         subprocess.run(["docker", "pull", "-q", "ubuntu:24.04"], capture_output=True, check=True)
     monkeypatch.setattr(images, "built", lambda root, name: "ubuntu:24.04")  # a plain image is enough here
-    step = step_copy(tmp_path, TOKEN_EFFICIENCY, REFERENCE="2")
-    recipe = built.recipe("agent", training=one_stage(1, 1024), posttrain=[str(step)])
+    recipe = built.recipe("agent", training=one_stage(1, 1024),
+                          posttrain=[{"step": "token-efficiency", "settings": {"reference": 2}}])
     with pytest.raises(SystemExit, match=r"step token-efficiency failed: no task left of the 1 tasks tagged grpo: 1 "
                                          r"scored 0 on every reference attempt, Docker failed every reference "
                                          r"attempt of 0\nnothing was written"):
@@ -665,7 +769,7 @@ def test_token_efficiency_fails_and_writes_nothing_when_no_task_is_left(docker_r
 
 
 @pytest.mark.xdist_group("tiny-image")
-def test_token_efficiency_learns_from_the_tasks_tagged_grpo(docker_runs, built, tmp_path, tiny_image):
+def test_token_efficiency_learns_from_the_tasks_tagged_grpo(docker_runs, built, tmp_path, tiny_image, monkeypatch):
     # the incoming model's attempts at grpo's own tasks set the reference,
     # then attempts that pass and fail it change the weights, but not the
     # routers', and the new model credits the source of the tasks
@@ -675,9 +779,10 @@ def test_token_efficiency_learns_from_the_tasks_tagged_grpo(docker_runs, built, 
     sid = task_source(built, root, tmp_path / "tasks", check="#!/bin/bash\necho $((RANDOM % 2))\n")
     tiny_image(root)
     # 16 reference attempts all fail 1 time in 65536; 8 attempts all equal, in each of 2 rounds, 1 time in 16384
-    step = step_copy(tmp_path, TOKEN_EFFICIENCY, ROUNDS="2", GROUP="8", REFERENCE="16", TASKS_PER_UPDATE="1",
-                     LEARNING_RATE="1e-2")
-    recipe = built.recipe("agent", training=one_stage(1, 1024), posttrain=[str(step)])
+    answered(monkeypatch)
+    step = {"step": "token-efficiency", "settings": {"rounds": 2, "group": 8, "reference": 16, "tasks_per_update": 1,
+                                                     "learning_rate": 1e-2}}
+    recipe = built.recipe("agent", training=one_stage(1, 1024), posttrain=[step])
     main([recipe, str(base), str(tmp_path / "tuned")])
 
     tuned = tmp_path / "tuned"
@@ -686,7 +791,7 @@ def test_token_efficiency_learns_from_the_tasks_tagged_grpo(docker_runs, built, 
     assert routers and all(torch.equal(before[name], after[name]) for name in routers)
     assert any(not torch.equal(before[name], after[name]) for name in before)
     post = json.loads((tuned / "provenance.json").read_text())["post_training"]
-    assert post["steps"][0]["file"] == "token-efficiency.py" and post["steps"][0]["sources"] == [sid]
+    assert post["steps"][0]["file"] == "wpt_posttrain/steps/token-efficiency.py" and post["steps"][0]["sources"] == [sid]
     assert "Tasks, by Cy Author, 2026" in (tuned / "NOTICE").read_text()
     # the reference attempts are kept first, with no round and no reward, then the rounds' attempts
     [record] = built.records("wpt-posttrain")

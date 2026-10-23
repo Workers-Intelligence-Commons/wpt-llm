@@ -15,7 +15,7 @@ from wpt_dataset.markdown import documents
 from wpt_dataset.sources import source_tree
 from wpt_telemetry import Telemetry
 
-TASK = {"schema": 1, "instructions": "Write hello into out.txt.", "image": "tiny",
+TASK = {"schema": 3, "instructions": "Write hello into out.txt.", "image": "tiny",
         "limits": {"max_turns": 4, "max_tokens": 200, "command_seconds": 5}, "needs": [["write", "bash"]]}
 SEARCH = {"name": "search", "description": "Search the notes.", "program": "/usr/local/bin/search",
           "parameters": {"type": "object", "properties": {"query": {"type": "string"}}, "required": ["query"]},
@@ -36,10 +36,13 @@ def add(kit, repo, store, folder, files, tags):
 
 def test_tagged_task_folders_reach_their_step_and_never_pretraining(kit, repo, store, tmp_path):
     # a step reads exactly the tasks tagged with its name, each with its
-    # instructions, limits, starting files and check, and no task file may
-    # become a pre-training document: the model would see the checks
-    task = json.dumps(TASK).encode()
-    files = {"tasks/hello/task.json": json.dumps({**TASK, "container": {"memory": 8192, "cpus": 4}}).encode(), "tasks/hello/check": CHECK, "tasks/hello/files/README": b"start\n",
+    # instructions, limits, starting files, area, gates and check, and no
+    # task file may become a pre-training document: the model would see the
+    # checks; a task.json of shape 1, a source's bytes that migrate never
+    # rewrites, is read in the current shape
+    task = json.dumps({**TASK, "schema": 1}).encode()
+    hello = {**TASK, "container": {"memory": 8192, "cpus": 4}, "area": ["out.txt"], "gates": ["sources_first"]}
+    files = {"tasks/hello/task.json": json.dumps(hello).encode(), "tasks/hello/check": CHECK, "tasks/hello/files/README": b"start\n",
              "tasks/hello/files/sub/task.json": b"a starting file, not a task\n",
              "tasks/other/task.json": task, "tasks/other/check": CHECK, "notes.txt": b"words\n"}
     source = add(kit, repo, store, tmp_path / "work", files, [{"tags": ["grpo"], "paths": ["tasks/hello/**"]},
@@ -52,29 +55,32 @@ def test_tagged_task_folders_reach_their_step_and_never_pretraining(kit, repo, s
                                 {"README": (FILE, b"start\n"),
                                  "sub/task.json": (FILE, b"a starting file, not a task\n")}, CHECK,
                                 {"memory": 8192, "disk": 1024, "processes": 256, "cpus": 4},
-                                ((tasks.Variant(("write",)), tasks.Variant(("bash",))),))]
+                                ((tasks.Variant(("write",)), tasks.Variant(("bash",))),), area=("out.txt",),
+                                gates=("sources_first",))]
     assert list(sources) == [source.id] and sources[source.id]["revision"] == source.data["revision"]
     assert tasks.read(repo, store, "sft", 0) == ([], {})
-    assert tasks.of_source(source, tree, store, repo)["tasks/other"].files == {}
+    other = tasks.of_source(source, tree, store, repo)["tasks/other"]
+    assert other.files == {} and (other.area, other.gates) == (None, ())
     assert tree["tasks/hello/check"].mode == EXECUTABLE
 
 
 def test_a_task_s_tools_replies_and_hidden_files_reach_its_step(kit, repo, store, tmp_path):
     # the tools a task declares, its needs (a variant may be tools offered
     # together that hide files), the user's replies and the looking tools
-    # that can answer before the user is asked come as written; the files
+    # that can answer before the user is asked, with where its answers
+    # live, come as written; the files
     # tool_files names leave /work for the tools' programs
     variant = {"tools": ["edit", "bash"], "tool_files": ["corpus.txt"]}
     document = {**TASK, "tools": [SEARCH], "needs": [["search"], ["write", variant]],
                 "replies": [{"pattern": "(?i)colou?r", "reply": "Blue."}], "answered_by": ["read", "search"],
-                "tool_files": ["corpus"]}
+                "answered_in": ["README", "notes/*.txt"], "tool_files": ["corpus"]}
     files = {"tasks/a/task.json": json.dumps(document).encode(), "tasks/a/check": CHECK,
              "tasks/a/files/README": b"start\n", "tasks/a/files/corpus/one.txt": b"one\n",
              "tasks/a/files/corpus.txt": b"seen by the model\n"}
     add(kit, repo, store, tmp_path / "work", files, [{"tags": ["grpo"], "paths": ["**"]}])
     [found], _ = tasks.read(repo, store, "grpo", 0)
-    assert (found.tools, found.replies, found.answered_by) == ((SEARCH,), (("(?i)colou?r", "Blue."),),
-                                                                ("read", "search"))
+    assert (found.tools, found.replies, found.answered_by, found.answered_in) == (
+        (SEARCH,), (("(?i)colou?r", "Blue."),), ("read", "search"), ("README", "notes/*.txt"))
     assert found.needs == ((tasks.Variant(("search",)),),
                            (tasks.Variant(("write",)), tasks.Variant(("edit", "bash"), ("corpus.txt",))))
     assert found.files == {"README": (FILE, b"start\n"), "corpus.txt": (FILE, b"seen by the model\n")}
@@ -329,14 +335,23 @@ def test_pointer_tasks_are_refused_when_the_base_dataset_kept_no_document_list(k
       "tasks/a/check": CHECK},
      "tasks/a/task.json: the tool 'bash' is declared twice, or takes the name of a tool every task has"),
     ({"tasks/a/task.json": json.dumps({**TASK, "replies": [{"pattern": "(", "reply": "x"}],
-                                       "answered_by": ["read"]}).encode(),
+                                       "answered_by": ["read"], "answered_in": ["README"]}).encode(),
       "tasks/a/check": CHECK}, r"tasks/a/task.json: the reply pattern '\(' is not a regular expression"),
     ({"tasks/a/task.json": json.dumps({**TASK, "replies": [{"pattern": "x", "reply": "y"}]}).encode(),
       "tasks/a/check": CHECK}, "tasks/a/task.json: a task with replies names in answered_by the looking tools"),
+    # each task states where its answers live (maintainer's decision, 2026-10-23); only a person knows where, so
+    # a task with replies of shape 2 is read with answered_in empty, which the check names
+    ({"tasks/a/task.json": json.dumps({**TASK, "replies": [{"pattern": "x", "reply": "y"}],
+                                       "answered_by": ["read"]}).encode(), "tasks/a/check": CHECK},
+     "tasks/a/task.json: a task with replies names in answered_in the paths under /work where its answers live"),
+    ({"tasks/a/task.json": json.dumps({**TASK, "schema": 2, "replies": [{"pattern": "x", "reply": "y"}],
+                                       "answered_by": ["read"]}).encode(), "tasks/a/check": CHECK},
+     "tasks/a/task.json: at answered_in"),
     # answered_by names only looking tools: read, bash, or a declared tool marked looks (maintainer's decision,
     # 2026-10-22), so wpt_check.asked_last can see a look through one of them
     *(({"tasks/a/task.json": json.dumps({**TASK, "tools": tools, "replies": [{"pattern": "x", "reply": "y"}],
-                                         "answered_by": ["read", name]}).encode(), "tasks/a/check": CHECK},
+                                         "answered_by": ["read", name], "answered_in": ["README"]}).encode(),
+        "tasks/a/check": CHECK},
        f"tasks/a/task.json: answered_by names '{name}', which is no looking tool the task or its image's pool offers")
       for tools, name in (([], "write"), ([{**SEARCH, "looks": False}], "search"), ([], "search"))),
     ({"tasks/a/task.json": json.dumps({**TASK, "needs": [["write", {"tools": ["bash"], "tool_files": ["gone"]}]]})

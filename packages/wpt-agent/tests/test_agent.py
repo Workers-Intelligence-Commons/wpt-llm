@@ -93,7 +93,7 @@ def test_tool_calls_run_in_the_container_and_the_check_scores_what_they_left(ima
              turn({"type": "text", "text": "Done."})]
     with sandbox(image) as box:
         done = attempt(task(), box, TOKENIZER, scripted(*turns), result_bytes=1000)
-        assert score(box, task().check, 10, done.conversation) == (1.0, "")
+        assert score(box, task().check, 10, done.conversation) == ({"correct": 1.0}, "")
 
     assert done.ended == ANSWERED
     assert results(done) == ["start\n", "edited out.txt", "wrote 1 bytes to deep/er/new.txt", "hello\n"]
@@ -195,7 +195,7 @@ def test_a_model_that_fills_its_process_limit_ends_its_attempt_and_is_scored(ima
              turn(bash("echo still here"))]
     with sandbox(image, {}, limits) as box:
         done = attempt(task(command_seconds=5), box, TOKENIZER, scripted(*turns), result_bytes=1000)
-        assert score(box, task().check, 10, done.conversation) == (1.0, "")
+        assert score(box, task().check, 10, done.conversation) == ({"correct": 1.0}, "")
     assert done.ended == FULL
     assert len(results(done)) == 1 and "OCI" not in results(done)[0]
     assert done.conversation["messages"][-1]["role"] == "assistant"
@@ -212,7 +212,7 @@ def test_a_model_whose_files_fill_the_memory_ends_its_attempt_and_is_scored(imag
         done = attempt(task(command_seconds=5, max_turns=20), box, TOKENIZER, Scripted(lambda count: filling[:count]),
                        result_bytes=1000)
         scored, why = score(box, task().check, 10, done.conversation)
-    assert done.ended == FULL and scored in (0.0, 1.0) and why == ""
+    assert done.ended == FULL and scored in ({"correct": 0.0}, {"correct": 1.0}) and why == ""
     assert not any("OCI" in text for text in results(done))
 
 
@@ -315,7 +315,7 @@ def test_the_check_sees_only_the_attempt_s_work_folder_once_its_processes_are_st
         call(box, "bash", {"command": "echo hello > out.txt; echo planted > /tmp/planted; "
                                       "(sleep 1; echo later > /tmp/later) > /dev/null 2>&1 &"}, 10, 1000,
              plain(task()))
-        assert score(box, check, 10, {}) == (1.0, "")
+        assert score(box, check, 10, {}) == ({"correct": 1.0}, "")
         state = subprocess.run(["docker", "inspect", "-f", "{{.State.Paused}}", box.container],
                                capture_output=True, text=True, check=True).stdout
     assert state == "true\n"
@@ -362,14 +362,21 @@ def test_an_attempt_opens_with_the_full_request_or_with_its_one_line_form():
         opening(task(), terse=True)
 
 
-def test_a_check_that_prints_no_score_gives_none_and_says_why(image):
+def test_a_check_prints_its_named_parts_or_one_number_and_anything_else_gives_no_score(image):
+    # maintainer's decision, 2026-10-23: one JSON object of parts from 0 to
+    # 1, "correct" among them; a bare number is the correct part alone
+    refused = "not a number from 0 to 1 nor an object of such parts holding 'correct'"
     for check, scored in [
-        (b"#!/bin/sh\necho passed\n", (None, "the check printed 'passed', not a number from 0 to 1 (exit code 0)")),
-        (b"#!/bin/sh\necho 1.5; echo oops >&2; exit 3\n",
-         (None, "the check printed '1.5', not a number from 0 to 1 (exit code 3): oops")),
+        (b"#!/bin/sh\necho passed\n", (None, f"the check printed 'passed', {refused} (exit code 0)")),
+        (b"#!/bin/sh\necho 1.5; echo oops >&2; exit 3\n", (None, f"the check printed '1.5', {refused} (exit code 3): oops")),
         (b"#!/bin/sh\nsleep 60\n", (None, "the check was stopped after 1 seconds")),
-        (b"#!/bin/sh\necho '  0.25'\nexit 1\n", (0.25, "")),
-        (b"#!/bin/sh\necho 0.5\nexit 124\n", (0.5, "")),  # timeout's code, but the check was not stopped
+        (b"#!/bin/sh\necho '  0.25'\nexit 1\n", ({"correct": 0.25}, "")),
+        (b"#!/bin/sh\necho 0.5\nexit 124\n", ({"correct": 0.5}, "")),  # timeout's code, but the check was not stopped
+        (b'#!/bin/sh\necho \'{"correct": 1, "sources_first": 0.5}\'\n', ({"correct": 1.0, "sources_first": 0.5}, "")),
+        (b'#!/bin/sh\necho \'{"correct": 1, "sources_first": 2}\'\n',
+         (None, f"the check printed '{{\"correct\": 1, \"sources_first\": 2}}', {refused} (exit code 0)")),
+        (b'#!/bin/sh\necho \'{"sources_first": 1}\'\n',
+         (None, f"the check printed '{{\"sources_first\": 1}}', {refused} (exit code 0)")),
     ]:
         with sandbox(image, {}) as box:
             assert score(box, check, 1 if b"sleep" in check else 10, {}) == scored
@@ -426,7 +433,7 @@ def test_an_attempt_without_a_final_reply_or_a_whole_confidence_has_no_answer():
     done = attempt(task(max_turns=1), None, TOKENIZER, scripted(turn(unknown)), result_bytes=10)
     assert done.ended == TURNS and done.conversation["metadata"] == {
         "tools": {name: name for name in ["read", "write", "edit", "bash"]}, "looking": ["read", "bash"],
-        "answered_by": [], "answer": None}
+        "answered_by": [], "answered_in": [], "answer": None}
     final = turn({"type": "text", "text": "Done."})
     sure = turn({"type": "text", "text": "90"})
     done = attempt(task(max_tokens=len(final) + 1), None, TOKENIZER, scripted(final, sure), result_bytes=10)
@@ -448,6 +455,21 @@ def test_the_opening_lists_the_offered_tools_that_look_by_their_real_names():
         offered = set(chosen.names.values())
         looking = opening(made, chosen)["metadata"]["looking"]
         assert sorted(looking) == sorted(offered & {"read", "bash", "fetch"})
+
+
+def test_the_opening_names_the_starting_files_where_the_answer_lives():
+    # maintainer's decision, 2026-10-23: asked_last waits for the files
+    # under /work that the task's answered_in matches; a file the attempt's
+    # tools hide is not in /work, and a pattern that matches no file names none
+    files = {"NOTES.md": (FILE, b"Put it in a.txt.\n"), "docs/a.md": (FILE, b"a\n"), "docs/b.md": (FILE, b"b\n"),
+             "corpus.txt": (FILE, b"c\n")}
+    hiding = task(files=files, needs=((Variant(("read",)), Variant(("bash",), ("docs/b.md",))),),
+                  answered_in=("NOTES.md", "docs/*.md", "gone.txt"))
+    found = {offer(hiding, [], random.Random(seed)).hidden: offer(hiding, [], random.Random(seed))
+             for seed in range(20)}
+    assert opening(hiding, found[()])["metadata"]["answered_in"] == ["NOTES.md", "docs/a.md", "docs/b.md"]
+    assert opening(hiding, found[("docs/b.md",)])["metadata"]["answered_in"] == ["NOTES.md", "docs/a.md"]
+    assert opening(task(answered_in=("gone.txt",)))["metadata"]["answered_in"] == []
 
 
 def test_a_needed_tool_is_always_offered_and_the_others_vary_with_the_seed():
@@ -617,4 +639,48 @@ def test_the_check_reads_the_attempt_s_conversation_next_to_it(image):
         done = attempt(task(), box, TOKENIZER, scripted(end, turn({"type": "text", "text": "25"})), result_bytes=10,
                        offer=renamed)
         assert done.conversation["metadata"]["tools"] == renamed.names
-        assert score(box, check.encode(), 10, done.conversation) == (0.25, "")
+        assert score(box, check.encode(), 10, done.conversation) == ({"correct": 0.25}, "")
+
+
+def test_a_path_changed_outside_the_task_s_area_breaks_within_area_and_a_gate_on_it_scores_0(monkeypatch):
+    # maintainer's decision, 2026-10-23: an attempt may change only the
+    # paths its task's area matches; within_area is 1 when it kept to them,
+    # 0 otherwise, and a task without an area gets no such part. A gated
+    # part below 1 makes the score 0, whatever correct says
+    import wpt_inference
+    from wpt_agent import GREEDY, Attempt, offer, play, played
+
+    def left(content):
+        return FILE, content, len(content), hashlib.sha256(content).hexdigest()
+
+    ending = []  # what /work holds after each attempt, in order
+
+    class Box:
+        def __init__(self, *args, **kwargs):
+            self.left = ending.pop(0)
+
+        def work_files(self, limit):
+            return self.left
+
+        def close(self):
+            pass
+
+    monkeypatch.setattr(played, "Sandbox", Box)
+    monkeypatch.setattr(played, "attempts", lambda task, boxes, tokenizer, start, **kwargs: [
+        Attempt({"messages": [], "metadata": {}}, [0, 1], [False, True], ANSWERED) for _ in boxes])
+    monkeypatch.setattr(played, "score", lambda *args: ({"correct": 1.0}, ""))
+    monkeypatch.setattr(wpt_inference, "Writer", lambda *args, **kwargs: None)
+    start = {"docs/a.md": (FILE, b"text\n")}
+    kept_to = {"docs/a.md": left(b"text\n"), "out/result.txt": left(b"done\n")}
+    strayed = {**kept_to, "docs/a.md": left(b"changed\n")}
+    for area, gates, parts, scores in (
+            (("out/*",), (), [{"correct": 1.0, "within_area": 1.0}, {"correct": 1.0, "within_area": 0.0}], [1.0, 1.0]),
+            (("out/*",), ("within_area",), [{"correct": 1.0, "within_area": 1.0}, {"correct": 1.0, "within_area": 0.0}],
+             [1.0, 0.0]),
+            (None, (), [{"correct": 1.0}, {"correct": 1.0}], [1.0, 1.0])):
+        task = Task("t", "Write the result into out/.", "tiny", 2, 10, 5, start, b"", area=area, gates=gates)
+        ending = [kept_to, strayed]
+        found = play(task, [offer(task, [], random.Random(i)) for i in range(2)], lambda index, outcome: outcome,
+                     model=None, tokenizer=None, built={"tiny": "tiny"}, sampling=GREEDY, generator=None,
+                     check_seconds=1, result_bytes=100)
+        assert [one.parts for one in found] == parts and [one.score for one in found] == scores

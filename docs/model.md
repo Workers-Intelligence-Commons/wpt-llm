@@ -801,7 +801,9 @@ and the repository:
   schedule points, Muon and AdamW settings, the MTP loss weights;
 - the drafter (`drafter`): its shape and how it is trained ("The
   drafter"; an empty section keeps every default);
-- the post-training steps to run after pre-training.
+- the post-training steps to run after pre-training (`posttrain`), each
+  a step's name or a step with the settings it changes
+  ([post-training.md](post-training.md), "Running post-training").
 
 Settings that change the result come only from the recipe. Command-line
 options remain only for what does not: device strategy (splitting windows
@@ -827,7 +829,10 @@ tokens, 10 epochs, learning rate 6e-4, 10% held out, 512 anchors, 8
 answers per update, seed 0. The three recipes hold exactly these values;
 the settings a section leaves out (the drafter's shape, `weight_decay`,
 `warm_up`, `clip`, `temperature`, `top_k`, `ece_bins`) keep their
-defaults.
+defaults. They are shape 6 since 2026-10-23 (maintainer's decision,
+2026-10-23): a `posttrain` entry may be `{"step": NAME, "settings":
+{...}}` as well as a step's name; `wpt-dataset migrate` changes only the
+number of a shape 5 recipe, whose entries are names.
 
 A new recipe's name is an adjective and an animal drawn by
 `uv run scripts/recipe_name.py`, among about 11.5 million names, so the

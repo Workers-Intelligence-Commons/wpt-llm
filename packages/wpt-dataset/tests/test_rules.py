@@ -7,7 +7,7 @@ from wpt_dataset.cli import main
 from wpt_dataset.errors import InvalidFile, OutdatedSchema
 from wpt_dataset.migrate import NEW_ATTENTION, migrate
 from wpt_dataset.pools import matches, parse
-from wpt_dataset.repo import address_hash, dump_json
+from wpt_dataset.repo import CURRENT_SCHEMA, address_hash, dump_json
 
 
 def test_pool_expressions_follow_usual_precedence():
@@ -260,7 +260,7 @@ def test_migrating_a_shape_2_model_recipe_asks_a_person_for_the_new_attention_nu
     with pytest.raises(InvalidFile, match=re.escape(f"{path}: at model/")):
         migrate(repo, log=lambda _: None)
     document = json.loads(path.read_text())
-    assert document["schema"] == 5
+    assert document["schema"] == CURRENT_SCHEMA["model"]
     assert not any(key.startswith("mla_") for key in document["model"])
     assert {key: document["model"][key] for key in NEW_ATTENTION} == dict.fromkeys(NEW_ATTENTION, 0)
     assert document["model"]["global_attention"] == []

@@ -7,20 +7,26 @@ Python started with -P or -I:
     #!/usr/bin/python3 -I
     import wpt_check
     conversation = wpt_check.load()
-    correct = ...  # the task's own judgement of the files and the answer
-    print(wpt_check.scored(conversation, ...))
+    right = ...  # the task's own judgement of the files and the answer
+    print(wpt_check.report(conversation, right, sources_first=wpt_check.sources_first(conversation)))
 
     load()                       the attempt's conversation, next to the check
     calls(c)                     every tool call, in order, by its real tool's name
     answer(c)                    the answer: {"answer": ..., "confidence": ...}, or None without one
     answer_text(c)               the answer's text, "" without one
     scored(c, score)             score, or 0 without an answer
+    report(c, correct, **rules)  what a check prints: the JSON object of its parts, "correct" (scored) and
+                                 each rule's, as numbers
     brier(c, correct)            (confidence - correct) squared, 1 without an answer
     before(c, first, then)       whether every call to a tool of `then` comes after a call to one of `first`
     read_before_write(c, new)    whether every file written or edited was read first
     sources_first(c)             whether the sources were looked at before anything was changed or asked
-    asked_last(c)                whether every question to the user came after at least one look through a
-                                 looking tool that can answer (the task's answered_by)
+    asked_last(c, found)         whether every question to the user came after every file where the answer
+                                 lives (the task's answered_in) was opened by a looking tool that can answer
+                                 (its answered_by), and before any look showed found; true at once when no
+                                 such file exists
+    opened(call, path)           whether a call showed the file at path: its path argument, or a bash command
+                                 that names it and runs a program that shows content (SHOWING)
     read_before_ask(c, text)     whether every question to the user came after a look whose result showed text
     programs(command)            the programs a bash command runs
     path_of(path)                a tool's path argument as an absolute path (a relative one starts at /work)
@@ -37,7 +43,9 @@ ask, a declared tool's name): an attempt sees them under varied names, and
 the conversation's metadata.tools maps each name it saw to the real one;
 metadata.looking lists the offered tools that look at sources (read, bash,
 and each declared tool marked `looks`; wpt_dataset.tasks.looks), and
-metadata.answered_by is the task's answered_by.
+metadata.answered_by is the task's answered_by, and metadata.answered_in the
+files under /work the attempt started with that the task's answered_in
+matches.
 
 Looking is one rule, which sources_first, asked_last and read_before_ask
 share (maintainer's decision, 2026-10-22): a call looks (Call.looks) when
@@ -70,6 +78,8 @@ READERS = frozenset({"cat", "head", "tail", "more", "tac", "nl", "od", "wc", "cu
                      "zless", "zmore", "zdiff", "sed", "awk", "mawk", "find", "ls", "dir", "vdir", "stat", "du",
                      "diff", "diff3", "sdiff", "cmp"})
 SEPARATING = frozenset("|&;()\n")  # a word made of these alone ends a simple command: |, ||, &&, ;, ( ), a line break
+# the READERS that show what a file holds, not only its name, size or counts: a bash command opens a file with them
+SHOWING = READERS - {"wc", "csplit", "find", "ls", "dir", "vdir", "stat", "du", "cmp"}
 PUNCTUATION = "();<>|&\n"  # what bash splits words at, outside quotes
 # bash's reserved words that may come before a simple command's program
 RESERVED = frozenset({"if", "then", "else", "elif", "do", "while", "until", "!", "{", "}"})
@@ -143,6 +153,16 @@ def scored(conversation: dict, score: float) -> float:
     or no confidence from 0 to 100 after it), whatever the files hold
     (maintainer's decisions, 2026-10-18 and 2026-10-23)."""
     return score if answer(conversation) is not None else 0.0
+
+
+def report(conversation: dict, correct, **rules) -> str:
+    """What a check prints (docs/post-training.md, "Rewards"; maintainer's
+    decision, 2026-10-23): the JSON object of its named parts, each a
+    number from 0 to 1: "correct", the task's own judgement as scored()
+    gives it, and each rule given, such as sources_first=True; a task's
+    check may report any part of its own, such as its conventions."""
+    return json.dumps({"correct": scored(conversation, float(correct)),
+                       **{name: float(value) for name, value in rules.items()}})
 
 
 def brier(conversation: dict, correct: bool) -> float:
@@ -280,20 +300,42 @@ def sources_first(conversation: dict, changes=CHANGES) -> bool:
     return looked
 
 
-def asked_last(conversation: dict) -> bool:
-    """Whether every question to the user (ask) came after at least one
-    look that could find the answer (maintainer's decision, 2026-10-22): a
-    call that looks (Call.looks) to one of the looking tools that can answer
-    it, the task's answered_by (metadata.answered_by); true when the
-    attempt was offered none of them, since no look could find it."""
+def opened(call: Call, path: str) -> bool:
+    """Whether the call showed the file at path (absolute) and did not
+    fail: it looks (Call.looks) and its path argument is that file, or, for
+    bash, its command names it (mentions) and runs a program that shows
+    what a file holds (SHOWING)."""
+    if not call.looks or call.failed:
+        return False
+    if call.tool == "bash":
+        command = call.arguments["command"]
+        return mentions(command, path) and not SHOWING.isdisjoint(programs(command))
+    argument = call.arguments.get("path")
+    return isinstance(argument, str) and path_of(argument) == path
+
+
+def asked_last(conversation: dict, found: str = "") -> bool:
+    """Whether every question to the user (ask) came after the attempt had
+    opened every file where the answer lives (maintainer's decisions,
+    2026-10-22 and 2026-10-23): the task's answered_in, as the files of
+    /work the attempt started with (metadata.answered_in), each opened by
+    one of the looking tools that can answer, the task's answered_by
+    (metadata.answered_by). A question counts at once when no such file
+    exists (the answer is absent), and when the attempt was offered none of
+    those tools, since no look could find it. Given found, the answer's
+    text, a question no longer counts once a call that looks showed it,
+    its words in order as holds reads them: the answer was found."""
     metadata = conversation.get("metadata", {})
     offered = set(metadata.get("tools", {}).values())
     wanted = {name for name in metadata.get("answered_by", []) if name in offered}
-    looked = not wanted
+    unopened = {path_of(path) for path in metadata.get("answered_in", [])} if wanted else set()
+    shown = False
     for call in calls(conversation):
-        if call.tool == "ask" and not looked:
+        if call.tool == "ask" and (unopened or shown):
             return False
-        looked = looked or (call.looks and call.tool in wanted)
+        shown = shown or bool(found and call.looks and holds(call.result, found))
+        if call.tool in wanted:
+            unopened = {path for path in unopened if not opened(call, path)}
     return True
 
 
