@@ -151,6 +151,15 @@ def test_a_latin_1_gutenberg_page_becomes_utf_8_markdown_and_takes_a_removal_pat
     assert "vieillard" not in page.markdown.decode("utf-8") and "évêque de *Digne*" in page.markdown.decode("utf-8")
 
 
+def test_an_html_page_with_tags_xml_refuses_and_odd_list_starts_still_converts(kit, repo, store, tmp_path):
+    # the html format never refuses a page: a tag name with a colon is one more
+    # container, and a list's start is read as HTML reads it, 1 when it holds no number
+    page = (b'<html><body><p>Script<mw:editTemplateData page="x"></mw:editTemplateData> forms.</p>'
+            b'<ol start=""><li>One</li><li>Two</li></ol><ol start=" 7th"><li>Seven</li></ol></body></html>')
+    found = markdown_of(kit, repo, store, tmp_path, {"page.html": page}, [{"format": "html", "paths": ["**"]}])
+    assert found["page.html"].decode() == "Script forms.\n\n1. One\n2. Two\n\n7. Seven\n"
+
+
 @pytest.mark.parametrize("data, entry, read", [
     (b"\xff\xfe" + "été".encode("utf-16-le"), {"format": "markdown"}, "\ufeffété"),
     (b"Title: X\r\nCharacter set encoding: ISO-Latin-1\r\n\r\n"

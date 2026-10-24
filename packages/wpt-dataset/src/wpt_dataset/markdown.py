@@ -303,7 +303,16 @@ def _html(content: bytes):
 
 
 def _name(element) -> str | None:
-    return etree.QName(element).localname if isinstance(element.tag, str) else None
+    """The tag without its namespace; the HTML parser keeps tag names XML
+    refuses, so the name is not validated."""
+    return element.tag.rpartition("}")[2] if isinstance(element.tag, str) else None
+
+
+def _integer(value: str | None, default: int) -> int:
+    """An integer attribute read as HTML reads it: spaces, a sign, then
+    digits, the rest ignored; the default when no digit comes."""
+    found = re.match(r"[\t\n\f\r ]*([-+]?[0-9]+)", value or "")
+    return int(found[1]) if found else default
 
 
 def _kinds(element) -> set[str]:
@@ -419,7 +428,7 @@ class Page:
         return self.blocks(element)  # containers, dl, a stray li or tr
 
     def list(self, element, name) -> list[str]:
-        items, number = [], int(element.get("start", "1")) if name == "ol" else 0
+        items, number = [], _integer(element.get("start"), 1) if name == "ol" else 0
         for child in element:
             if _name(child) != "li":
                 continue
