@@ -160,9 +160,10 @@ def test_an_html_page_with_tags_xml_refuses_and_odd_list_starts_still_converts(k
     assert found["page.html"].decode() == "Script forms.\n\n1. One\n2. Two\n\n7. Seven\n"
 
 
-def test_a_table_inside_a_table_cell_is_read_once_and_a_broken_link_keeps_its_text(kit, repo, store, tmp_path):
-    # a nested table belongs to its cell alone: collecting its rows into the outer table too
-    # repeated every cell twice per level; an address Python cannot parse is no link
+def test_a_table_inside_a_table_cell_follows_that_table_and_a_broken_link_keeps_its_text(kit, repo, store,
+                                                                                         tmp_path):
+    # Markdown tables do not nest: each table inside a cell follows its table as a table of
+    # its own, read once at every level; an address Python cannot parse is no link
     nested = "<table><tbody><tr><td>leaf</td></tr></tbody></table>"
     for level in range(20):
         nested = f"<table><tbody><tr><td>row{level}</td><td>{nested}</td></tr></tbody></table>"
@@ -171,8 +172,10 @@ def test_a_table_inside_a_table_cell_is_read_once_and_a_broken_link_keeps_its_te
     found = markdown_of(kit, repo, store, tmp_path, {"page.html": page}, [{"format": "html", "paths": ["**"]}])
     text = found["page.html"].decode()
     assert text.count("leaf") == 1 and all(text.count(f"row{level} ") == 1 for level in range(20))
-    assert text.split("\n")[2].startswith("| row19 |") and len(text.split("\n\n")[0].split("\n")) == 3
-    assert text.endswith("\n\nSee this and [that](<https://x.org/>).\n")
+    blocks = text.split("\n\n")
+    assert [block.split("\n")[2] for block in blocks[:21]] == [f"| row{level} |  |" for level in range(19, -1, -1)] \
+        + ["| leaf |"]
+    assert blocks[21:] == ["See this and [that](<https://x.org/>).\n"]
 
 
 @pytest.mark.parametrize("data, entry, read", [

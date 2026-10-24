@@ -22,7 +22,8 @@ encoding it states, else UTF-8 (encoding.py), and its Markdown is UTF-8:
   quotations, italics and bold `*` and `**`, a line break a Markdown line
   break, and tables Markdown tables, except dialogue rows (a cell marked as
   the speaker, epub:type z3998:persona), which become "**Speaker:** words".
-  The page's head, scripts and styles are left out; an image becomes a
+  Markdown tables do not nest, so a table inside a table's cell follows
+  that table as a table of its own. The page's head, scripts and styles are left out; an image becomes a
   marker (below). A note reference (epub:type noteref) whose note exists
   in the source becomes a Markdown note, [^12], with the note's text at
   the end of the document that refers to it; a reference whose note is
@@ -318,6 +319,15 @@ def _rows(table):
             yield from (row for row in child if _name(row) == "tr")
 
 
+def _tables_in(cell):
+    """The tables inside a cell that no other table there holds."""
+    for child in cell:
+        if _name(child) == "table":
+            yield child
+        else:
+            yield from _tables_in(child)
+
+
 def _address(href: str):
     """A link's address in parts; None when it is no valid URL, so the link
     keeps only its text, as a browser shows it."""
@@ -382,6 +392,7 @@ class Page:
             self.back |= {name for e in ((ref, before) if empty else (ref,)) for name in (e.get("id"), e.get("name"))
                           if name}
         self.notes = {}  # label -> note element, in the order first referred to
+        self.moved = set()  # tables inside a table's cell: each follows that table instead
         self.labels = {}  # note element -> label
 
     def render(self, root) -> bytes:
@@ -439,7 +450,7 @@ class Page:
         if name in ("ul", "ol"):
             return self.list(element, name)
         if name == "table":
-            return self.table(element)
+            return [] if element in self.moved else self.table(element)
         if name == "hr":
             return ["---"]
         if name == "pre":
@@ -462,6 +473,11 @@ class Page:
     def table(self, element) -> list[str]:
         rows = list(_rows(element))
         cells = [[cell for cell in row if _name(cell) in ("td", "th")] for row in rows]
+        inner = [table for row in cells for cell in row for table in _tables_in(cell)]
+        self.moved.update(inner)  # Markdown tables do not nest
+        return self.own_table(cells) + [block for table in inner for block in self.table(table)]
+
+    def own_table(self, cells) -> list[str]:
         if any("z3998:persona" in _kinds(c) for row in cells for c in row):  # a dialogue
             out = []
             for row in cells:
@@ -491,7 +507,7 @@ class Page:
 
     def inline(self, element) -> str:
         name, kinds = _name(element), _kinds(element)
-        if name is None or name in SKIPPED or "backlink" in kinds:
+        if name is None or name in SKIPPED or "backlink" in kinds or element in self.moved:
             return ""
         if name == "br":
             return "\\\n"
