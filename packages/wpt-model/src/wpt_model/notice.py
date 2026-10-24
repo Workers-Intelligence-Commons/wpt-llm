@@ -100,7 +100,9 @@ def notice(provenance) -> str:
     ]
     texts = {}  # text -> the sources and licenses that give it
     for sid, source in sorted(learned_from(provenance).items()):
-        lines += ["", sid, f"  address:  {source['address']}", f"  revision: {source['revision']}"]
+        addresses = [f"{part['address']} (into {part['folder']}/)" for part in source.get("addresses", [])]
+        lines += ["", sid, *(f"  address:  {address}" for address in addresses or [source["address"]]),
+                  f"  revision: {source['revision']}"]
         if source.get("credits"):
             lines.append(f"  credit of each document: {CREDITS_NAME}/{sid}.jsonl")
         for entry in source["licenses"]:

@@ -3,7 +3,8 @@
     download (address, else each mirror) -> upstream tree, checked against `checksum`
                                             (an "empty" source has no files and downloads nothing;
                                             a "huggingface" source is a dataset pinned to a commit,
-                                            see huggingface.py;
+                                            see huggingface.py; a source with `addresses` downloads
+                                            each into its own folder of the tree;
                                             an address whose robots.txt forbids it, or cannot be
                                             read, is skipped for the next mirror, see robots.py)
     erasure cuts, in the order listed     -> each checked by sha256_after
@@ -20,7 +21,6 @@ import importlib.metadata
 import itertools
 import json
 import os
-import re
 import shutil
 import subprocess
 import tempfile
@@ -32,7 +32,7 @@ from urllib.parse import unquote, urlparse
 from wpt_telemetry import Telemetry, set_ref
 from wpt_utils.programs import program
 
-from . import encoding, huggingface, manifest, retry, robots
+from . import encoding, huggingface, manifest, records, retry, robots
 from .errors import (ChecksumMismatch, CrawlForbidden, CutFailed, FetchFailed, LicenseMapError, NotText, PatchFailed,
                      UnsupportedEntry)
 from .manifest import FILE, SYMLINK, Entry, Extractor, glob_match_any
@@ -64,8 +64,8 @@ def upstream_tree(source: Source, store, telemetry=None) -> dict[str, Entry]:
         except CrawlForbidden as error:  # that site's wish only; another site may allow it
             forbidden.append(str(error))
             continue
-        except UNREACHABLE as error:
-            unreachable.append(f"{address}: {_reason(error)}")
+        except FetchFailed as error:  # names the address that failed (_fetch)
+            unreachable.append(str(error))
             continue
         actual = manifest.checksum(tree)
         if actual == expected:
@@ -93,29 +93,34 @@ def _reason(error) -> str:
 def compute_upstream(data: dict, address: str, store) -> dict[str, Entry]:
     """The upstream tree of a description, without checking its checksum
     (used to fill in `checksum` for a new source). For a huggingface source
-    it comes from the Hub's listing, and large files are not downloaded: the
-    tree is only good for its manifest."""
+    it comes from the Hub's listing, and large files are not downloaded,
+    except the archives the dataset holds, which are downloaded and
+    unpacked since their members are the source's files: the tree is only
+    good for its manifest."""
     return _fetch(data, address, store, listing_only=True)
 
 
 def fill_checksum(source: Source, store, telemetry=None) -> tuple[dict, dict[str, str]]:
     """For a draft source (checksum all zeros): (its description with the
     checksum filled in, {path: why} of the files it now excludes). One
-    fetch of the main address gives the upstream tree; every file of the
+    fetch of the main address (of each of the source's `addresses`) gives
+    the upstream tree; every file of the
     final tree that is not text, as source_tree finds them (encoding.py),
     is excluded by its exact path (exact_pattern), and the tree is read again from what that fetch
     downloaded, since an exclusion also changes the history files. The tree
     is kept under upstream/<checksum> as upstream_tree keeps it, so checking
     the source fetches nothing more. A huggingface source's checksum comes
-    from the Hub's listing (compute_upstream) and nothing is excluded: its
-    check downloads it, as before."""
+    from the Hub's listing (compute_upstream) and nothing is excluded, and
+    no upstream ref is set: its check downloads it, as before. A dataset
+    that holds archives has them downloaded and unpacked here too (their
+    members are its files), and the check downloads them again."""
     data = json.loads(json.dumps(source.data))
     address = data["address"]
     with tempfile.TemporaryDirectory(prefix="wpt-fetch-") as tmp:
         try:
             tree = _fetch(data, address, store, listing_only=True, tmp=Path(tmp))
-        except UNREACHABLE as error:
-            raise FetchFailed(f"{source.id}: {address}: {_reason(error)}") from error
+        except FetchFailed as error:
+            raise FetchFailed(f"{source.id}: {error}") from error
         if data["type"] == "huggingface":
             data["checksum"] = manifest.checksum(tree)
             return data, {}
@@ -148,11 +153,26 @@ def _fetch(data: dict, address: str, store, listing_only=False, tmp: Path | None
     """The upstream tree, downloaded into tmp (default: a temporary folder
     of its own). again: tmp holds what an earlier call downloaded, and it
     is read from there, with no robots.txt or download (a git source still
-    asks for any object it needs and lacks)."""
+    asks for any object it needs and lacks). A source with `addresses`
+    fetches each into its own folder of the one tree, and into its own
+    folder of tmp. A download that
+    fails raises FetchFailed, naming the address it was for."""
     if tmp is None:
         with tempfile.TemporaryDirectory(prefix="wpt-fetch-") as folder:
             return _fetch(data, address, store, listing_only, Path(folder))
     extractor = Extractor(store, data.get("extract", {}))
+    parts = [(p["folder"], p["address"]) for p in data["addresses"]] if "addresses" in data else [("", address)]
+    for folder, part_address in parts:
+        (tmp / folder).mkdir(exist_ok=True)
+        try:
+            _fetch_into(data, part_address, extractor.within(folder), tmp / folder, listing_only, again)
+        except UNREACHABLE as error:  # of several addresses, the one that failed is named here
+            raise FetchFailed(f"{part_address}: {_reason(error)}") from error
+    return extractor.finish()
+
+
+def _fetch_into(data: dict, address: str, extractor: Extractor, tmp: Path, listing_only: bool, again: bool):
+    """Add what one address holds to the extractor's tree (see _fetch)."""
     kind, revision = data["type"], data["revision"]
     if kind != "empty" and not again:
         robots.check(address, kind, USER_AGENT)  # before anything is downloaded
@@ -183,7 +203,6 @@ def _fetch(data: dict, address: str, store, listing_only=False, tmp: Path | None
         pass  # its patches hold every file
     else:
         raise ValueError(f"unknown source type {kind!r}")
-    return extractor.finish()
 
 
 def _download(address: str, target: Path) -> Path:
@@ -401,9 +420,14 @@ def not_text(source: Source, tree: dict[str, Entry], store, first=False) -> dict
 
 
 def is_records(source: Source, path: str) -> bool:
-    """Whether a path is in the records format (see records.py)."""
-    return any(e["format"] == "records" and glob_match_any(path, e["paths"])
-               for e in source.data["formats"])
+    """Whether a path is in the records format (see records.py), a file a
+    records entry joins included."""
+    return records_entry(source, path) is not None
+
+
+def records_entry(source: Source, path: str) -> dict | None:
+    """The records format entry covering a path, or None."""
+    return next((e for e in manifest.format_entries(source.data["formats"], path) if e["format"] == "records"), None)
 
 
 def is_message_tree(source: Source, path: str) -> bool:
@@ -415,17 +439,21 @@ def is_message_tree(source: Source, path: str) -> bool:
 
 def check_license_map(source: Source, tree: dict[str, Entry]):
     """Every path matches exactly one license entry, without `values`; a
-    records file instead matches one or more, each listing the license
-    values of the records it covers, with no value listed twice."""
+    records file whose format names a `license` field instead matches one
+    or more, each listing the license values of the records it covers, with
+    no value listed twice. A records file whose format names none is like
+    any other file: its records take its one entry."""
     for path in tree:
         found = manifest.license_entries(source.data["licenses"], path)
         names = ", ".join(e["license"] for e in found)
-        if not is_records(source, path):
+        entry = records_entry(source, path)
+        if entry is None or "license" not in entry:
             if len(found) != 1:
                 what = "no license entry" if not found else f"{len(found)} license entries ({names})"
                 raise LicenseMapError(f"{source.id}: {path} matches {what}; every path must match exactly 1")
             if "values" in found[0]:
-                raise LicenseMapError(f"{source.id}: {path} is not a records file, but its license entry lists `values`")
+                what = "is not a records file" if entry is None else "is a records file with no `license` field"
+                raise LicenseMapError(f"{source.id}: {path} {what}, but its license entry lists `values`")
             continue
         if not found or any("values" not in e for e in found):
             raise LicenseMapError(f"{source.id}: {path} is a records file: every license entry covering it "
@@ -451,10 +479,7 @@ def held_out_group(source: Source, path: str) -> str | None:
     together: eBible's read-aloud sources hold their chapters out this way,
     by book and chapter in every translation at once."""
     rule = source.data.get("held_out_by")
-    found = re.search(rule["pattern"], path) if rule else None
-    if found is None:
-        return None
-    return " ".join(group or "" for group in found.groups()) if found.groups() else found[0]
+    return records.key_of(rule["pattern"], path) if rule else None
 
 
 def in_store(source: Source, store) -> bool:

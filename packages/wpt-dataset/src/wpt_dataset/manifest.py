@@ -16,6 +16,7 @@ Linux and Windows compute the same manifest.
 
 import concurrent.futures
 import contextlib
+import copy
 import functools
 import glob
 import hashlib
@@ -129,11 +130,23 @@ class Extractor:
     def __init__(self, store, extract: dict):
         self.store = store
         self.strip = extract.get("strip", 0)
+        self.folder: list[str] = []  # the folder of the tree the entries go into (within)
         # compiled here once, not through glob_match_any, which turns the whole list into its cache key on
         # every call (once per entry read) and keeps it compiled after this fetch
         self.excluded = Globs(extract.get("exclude", []))
         self.paths: dict[bytes | str, str | None] = {}  # kept's answers: history commits repeat paths
         self.tree: dict[str, Entry] = {}
+
+    def within(self, folder: str, strip: int | None = None) -> "Extractor":
+        """An extractor adding to the same tree, each entry's path (after
+        `strip`, the source's unless given) placed under folder ("" for the
+        root) before `exclude` is matched: for one of several addresses, or
+        the members of an archive a dataset holds."""
+        inner = copy.copy(self)  # the same store, exclusions and tree
+        inner.folder = [part for part in folder.split("/") if part]
+        inner.strip = self.strip if strip is None else strip
+        inner.paths = {}
+        return inner
 
     def kept(self, raw_path: bytes | str) -> str | None:
         """The path an entry keeps after `strip`, or None when it is stripped
@@ -151,7 +164,7 @@ class Extractor:
         parts = [p for p in raw_path.split("/") if p not in ("", ".")]
         if len(parts) <= self.strip:
             return None  # gone with the stripped folders, like tar --strip-components
-        path = "/".join(parts[self.strip:])
+        path = "/".join(self.folder + parts[self.strip:])
         if self.excluded.match(path):
             return None
         return path
@@ -294,9 +307,10 @@ def license_entries(licenses: list[dict], path: str) -> list[dict]:
 
 
 def format_entries(formats: list[dict], path: str) -> list[dict]:
-    """The format entries covering path, in their order. Every place that
+    """The format entries covering path, in their order: a records entry
+    covers the files its `join` reads too (records.py). Every place that
     maps a path to its format entry goes through here."""
-    return [e for e in formats if glob_match_any(path, e["paths"])]
+    return [e for e in formats if glob_match_any(path, e["paths"] + e.get("join", {}).get("paths", []))]
 
 
 def read_git_history(repo: Path, since: str, revision: str, extractor: Extractor):

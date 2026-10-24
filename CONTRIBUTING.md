@@ -112,12 +112,31 @@ together.
    listing and download only its small files. `fill-checksum` excludes
    nothing there, and its check downloads the dataset: exclude each file
    the check names as not text, then put in the checksum `manifest`
-   prints. A file holding many documents, each with its own
+   prints. An archive the dataset holds (tar, tar.gz, tar.bz2, tar.xz,
+   zip) is unpacked into its folder and its members are the source's
+   files, so `manifest` downloads every archive the source keeps: exclude
+   in `extract` the archives the source must not hold by their own paths,
+   which keeps them from being downloaded. A source published at several
+   addresses (its documents in one archive and their metadata in another)
+   lists them in `addresses`, each with the
+   folder of the tree it fills, and repeats the first one in `address`
+   ([docs/architecture.md](docs/architecture.md), "source.json"). A file
+   holding many documents, each with its own
    license (JSON Lines, optionally `.gz` or `.zst`, or Parquet), is in the
    `records` format: it names the record's `text`, `license`, `id` and
    `credit` fields, and each license entry covering it lists in `values`
    the license values it covers ([docs/licenses.md](docs/licenses.md),
-   "Rules").
+   "Rules"). A text field that holds Markdown says `"as": "markdown"`, and
+   one that holds a web page says `"as": "html"`; a `title` field gives
+   the document its heading, and a dataset holding several revisions of
+   one record names their date field in `newest`. A dataset that states
+   one license for all its records names
+   no `license` field, and its files take their one license entry. A
+   JSON document whose field holds the list of records names that field in
+   `records`; an XML file is one record, its fields XPath expressions with
+   the entry's `namespaces`, and a `join` reads the license and credit from
+   another file of the same record ([docs/architecture.md](docs/architecture.md),
+   "Documents are Markdown").
    A git source may add its history: `"history": {"since": "<commit>"}`
    gives one file `.git/history/<commit>` per commit from `since` to the
    revision (merges left out), in `git format-patch` layout and limited

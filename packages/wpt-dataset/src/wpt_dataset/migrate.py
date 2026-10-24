@@ -98,6 +98,18 @@ def _source_5_to_6(document, _path):
 MIGRATIONS["source"][5] = _source_5_to_6
 
 
+def _source_6_to_7(document, _path):
+    """Shape 7 adds `addresses` (several addresses, each into its own
+    folder) and the records format's `records`, `namespaces` and `join`,
+    and makes its `license` field optional (maintainer's decisions,
+    2026-10-23); a shape 6 file uses none of them, so only its number
+    changes."""
+    return {**document, "schema": 7}
+
+
+MIGRATIONS["source"][6] = _source_6_to_7
+
+
 def _model_1_to_2(document, _path):
     """Shape 2 holds the numbers of the architecture in docs/model.md. The
     window, the layers and the width carry over, and the old heads become

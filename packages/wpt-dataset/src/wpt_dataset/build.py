@@ -122,9 +122,7 @@ def gather(repo: Repo, store, log=print, skipped=None, telemetry=None):
                 _skip(source, error, skipped, log)
                 span.set(skipped=f"{type(error).__name__}: {error}")
                 continue
-            info[source.id] = {"address": source.data["address"], "revision": source.data["revision"],
-                               "checksum": source.data["checksum"], "tree": tree_object,
-                               "licenses": source.data["licenses"]}
+            info[source.id] = source_info(source, tree_object)
             documents += found
             seen |= mine
             duplicates += repeated
@@ -133,6 +131,15 @@ def gather(repo: Repo, store, log=print, skipped=None, telemetry=None):
             span.set(tree=tree_object, documents=len(found), duplicates=repeated, credits=info[source.id].get("credits"))
     log(f"documents: {len(documents):,} from {len(info)} admitted sources ({duplicates:,} exact duplicates removed)")
     return documents, info, duplicates
+
+
+def source_info(source, tree: str) -> dict:
+    """What a dataset's record keeps of one source: where it comes from
+    (each of its `addresses` too, when it has several), its revision,
+    checksum, final tree and licenses."""
+    where = {"addresses": source.data["addresses"]} if "addresses" in source.data else {}
+    return {"address": source.data["address"], **where, "revision": source.data["revision"],
+            "checksum": source.data["checksum"], "tree": tree, "licenses": source.data["licenses"]}
 
 
 def _skip(source, error, skipped, log):
@@ -257,9 +264,7 @@ def gather_streamed(repo: Repo, store, tokenizer, vocabulary: str, log=print, sk
                 _skip(source, error, skipped, log)
                 span.set(skipped=f"{type(error).__name__}: {error}")
                 continue
-            info[source.id] = {"address": source.data["address"], "revision": source.data["revision"],
-                               "checksum": source.data["checksum"], "tree": summary["tree"],
-                               "licenses": source.data["licenses"]}
+            info[source.id] = source_info(source, summary["tree"])
             credits, before = [], duplicates
             for entry in summary["documents"]:
                 if entry["sha256"] in seen:

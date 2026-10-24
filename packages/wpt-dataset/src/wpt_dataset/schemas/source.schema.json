@@ -6,9 +6,24 @@
   "additionalProperties": false,
   "required": ["schema", "type", "address", "revision", "checksum", "licenses", "formats", "decision"],
   "properties": {
-    "schema": {"const": 6, "description": "shape version of this file, for migrations"},
+    "schema": {"const": 7, "description": "shape version of this file, for migrations"},
     "type": {"enum": ["http-file", "http-archive", "git", "mercurial", "huggingface", "empty"], "description": "empty: no upstream; the patches hold every file (text written for WPT); huggingface: a dataset repository on huggingface.co, address https://huggingface.co/datasets/<owner>/<name>"},
-    "address": {"type": "string", "minLength": 1, "description": "where to fetch it; its sha256 gives the id's hash part"},
+    "address": {"type": "string", "minLength": 1, "description": "where to fetch it; its sha256 gives the id's hash part; with `addresses`, the first of them"},
+    "addresses": {
+      "type": "array",
+      "minItems": 2,
+      "description": "http-file and http-archive only: several addresses, each fetched (with the source's type, revision and extract rules) into its own folder of the source's tree; `address` repeats the first one's address, which gives the id",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["folder", "address"],
+        "properties": {
+          "folder": {"type": "string", "pattern": "^[A-Za-z0-9_-][A-Za-z0-9._-]*$", "description": "the folder at the tree's root that this address's files go into"},
+          "address": {"type": "string", "minLength": 1},
+          "note": {"type": "string"}
+        }
+      }
+    },
     "revision": {"type": "string", "minLength": 1, "description": "git/mercurial/huggingface: full commit hash; http: fetch date YYYY-MM-DD; empty: the date the source was started"},
     "checksum": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$", "description": "sha256 of the canonical manifest"},
     "extract": {
@@ -62,12 +77,27 @@
         "additionalProperties": false,
         "required": ["format", "paths"],
         "properties": {
-          "format": {"enum": ["markdown", "text", "xhtml", "html", "code", "chat", "task", "rating", "records"], "description": "markdown: kept as is; text: plain text; xhtml: web pages as strict XML (EPUB books); html: web pages that are not strict XML (such as Project Gutenberg's), converted as xhtml pages are; code: a fenced code block naming the language and the path; chat: conversations for the post-training step named by the file's tags, never a pre-training document; task: the files of task folders (task.json, files/, check) for the post-training step named by the tags of their task.json, never a pre-training document; rating: people's pass or fail ratings of measure attempts, one per line, a measure only, never a pre-training document nor a training signal; records: a JSON Lines (.jsonl, .json, optionally .gz or .zst) or Parquet file holding one document per record, each with its own license"},
+          "format": {"enum": ["markdown", "text", "xhtml", "html", "code", "chat", "task", "rating", "records"], "description": "markdown: kept as is; text: plain text; xhtml: web pages as strict XML (EPUB books); html: web pages that are not strict XML (such as Project Gutenberg's), converted as xhtml pages are; code: a fenced code block naming the language and the path; chat: conversations for the post-training step named by the file's tags, never a pre-training document; task: the files of task folders (task.json, files/, check) for the post-training step named by the tags of their task.json, never a pre-training document; rating: people's pass or fail ratings of measure attempts, one per line, a measure only, never a pre-training document nor a training signal; records: a JSON Lines (.jsonl, .json, optionally .gz or .zst) or Parquet file holding one document per record, each with its own license, or a JSON document holding the list of records (`records`), or an XML file holding one record"},
           "language": {"type": "string", "pattern": "^[A-Za-z0-9_+#.-]+$", "description": "code only: the language named after the opening fence, for example python"},
-          "text": {"$ref": "#/$defs/field", "description": "records only: the field holding the document's text"},
-          "as": {"enum": ["text", "markdown"], "description": "records only: whether the text field is plain text (default) or Markdown"},
-          "license": {"$ref": "#/$defs/field", "description": "records only: the field holding the record's license, matched against the `values` of the license entries"},
+          "text": {"$ref": "#/$defs/field", "description": "records only: the field holding the document's text (in an .xml file, every field is an XPath 1.0 expression)"},
+          "as": {"enum": ["text", "markdown", "html"], "description": "records only: whether the text field is plain text (default), Markdown, or a web page converted as an html file is"},
+          "license": {"$ref": "#/$defs/field", "description": "records only: the field holding the record's license, matched against the `values` of the license entries; without it, every record takes the one license entry of its file, which lists no `values`"},
+          "records": {"$ref": "#/$defs/field", "description": "records only: the file (.json, optionally .gz or .zst) is one JSON document, and this field of it holds the list of records"},
+          "namespaces": {"type": "object", "additionalProperties": {"type": "string", "minLength": 1}, "description": "records only: the prefixes the XPath fields of an .xml records file use, each mapped to its namespace"},
+          "join": {
+            "type": "object", "additionalProperties": false, "required": ["name", "paths", "key", "joined_key"],
+            "description": "records only, for .xml files: each record also reads the one file of `paths` whose path holds the same key, as the XPath variable $<name> (an empty node set when no file holds it); those files give no document",
+            "properties": {
+              "name": {"type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_-]*$", "description": "the XPath variable holding the joined file's document"},
+              "paths": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/glob"}, "description": "the files that can be joined"},
+              "key": {"type": "string", "minLength": 1, "description": "a Python regular expression searched in the record file's path; its groups, joined by one space (its whole match when it has none), are the key"},
+              "joined_key": {"type": "string", "minLength": 1, "description": "the same, searched in each joined file's path"},
+              "note": {"type": "string"}
+            }
+          },
           "id": {"$ref": "#/$defs/field", "description": "records only: the field holding the record's id within its file; without it, the record's position (1 for the first)"},
+          "newest": {"$ref": "#/$defs/field", "description": "records only: the field holding the record's date (ISO 8601); of the records that share an id in all the files this entry covers, only the one with the latest date is read, and when the dates are equal the later one (in path order, then in its file); without it, an id that repeats in a file is an error; it needs `id`"},
+          "title": {"$ref": "#/$defs/field", "description": "records only: the field holding the record's title, which becomes the document's first line as a heading"},
           "credit": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/field"}, "description": "records only: the fields that name the record's authors, title and address, copied into the per-record credit file of every model trained on it"},
           "keep": {"type": "array", "minItems": 1, "description": "records only: a record enters only when each rule's field holds one of its values", "items": {
             "type": "object", "additionalProperties": false, "required": ["field", "in"],
@@ -96,9 +126,11 @@
           {"if": {"properties": {"format": {"const": "code"}}},
            "then": {"required": ["language"]},
            "else": {"not": {"required": ["language"]}}},
+          {"if": {"required": ["newest"]},
+           "then": {"required": ["id"]}},
           {"if": {"properties": {"format": {"const": "records"}}},
-           "then": {"required": ["text", "license"]},
-           "else": {"not": {"anyOf": [{"required": ["text"]}, {"required": ["as"]}, {"required": ["license"]}, {"required": ["id"]}, {"required": ["credit"]}, {"required": ["keep"]}]}}}
+           "then": {"required": ["text"]},
+           "else": {"not": {"anyOf": [{"required": ["text"]}, {"required": ["as"]}, {"required": ["license"]}, {"required": ["id"]}, {"required": ["credit"]}, {"required": ["keep"]}, {"required": ["records"]}, {"required": ["namespaces"]}, {"required": ["join"]}, {"required": ["newest"]}, {"required": ["title"]}]}}}
         ]
       }
     },
@@ -195,6 +227,10 @@
         },
         "not": {"anyOf": [{"required": ["extract"]}, {"required": ["mirrors"]}]}
       }
+    },
+    {
+      "if": {"required": ["addresses"]},
+      "then": {"properties": {"type": {"enum": ["http-file", "http-archive"]}}, "not": {"required": ["mirrors"]}}
     },
     {
       "if": {"properties": {"type": {"not": {"const": "http-file"}}}},

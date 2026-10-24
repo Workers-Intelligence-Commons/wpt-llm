@@ -88,7 +88,7 @@ from .errors import DataAccessRefused, InvalidFile, NotFound, OutdatedSchema, Ru
 from .licenses import check_license
 from .pools import parse
 
-CURRENT_SCHEMA = {"source": 6, "mixture": 1, "model": 6, "tokenizer": 2, "lock": 2, "conversation": 3, "task": 3,
+CURRENT_SCHEMA = {"source": 7, "mixture": 1, "model": 6, "tokenizer": 2, "lock": 2, "conversation": 3, "task": 3,
                   "rating": 1, "image-lock": 1, "image-licenses": 1, "image-tools": 1}
 ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}")
 PATCH = re.compile(r"(\d{4})-[A-Za-z0-9._-]+\.patch")
@@ -899,6 +899,12 @@ class Repo:
         expected = address_hash(document["address"])
         if not sid.endswith("-" + expected):
             raise RuleViolation(f"{sid}: the id must end with {expected}, the hash of its address")
+        if "addresses" in document:
+            if document["address"] != document["addresses"][0]["address"]:
+                raise RuleViolation(f"{sid}: `address` must be the first of `addresses`, which gives the id")
+            folders = [part["folder"] for part in document["addresses"]]
+            if len({folder.casefold() for folder in folders}) != len(folders):
+                raise RuleViolation(f"{sid}: each of `addresses` needs a folder of its own")
         for entry in document["licenses"]:
             check_license(entry["license"], sid)
         numbers = []
@@ -920,6 +926,12 @@ class Repo:
                 re.compile(document["held_out_by"]["pattern"])
             except re.error as error:
                 raise RuleViolation(f"{sid}: held_out_by's pattern is not a regular expression: {error}") from None
+        for entry in document["formats"]:
+            for key in ("key", "joined_key") if "join" in entry else ():
+                try:
+                    re.compile(entry["join"][key])
+                except re.error as error:
+                    raise RuleViolation(f"{sid}: a join's {key} is not a regular expression: {error}") from None
 
     def _check_image(self, name):
         self._image_folder(name)
@@ -1072,9 +1084,11 @@ class Repo:
 
     def source_files(self, sid: str, store) -> tuple[str, dict[str, dict]]:
         """(version, {path: {mode, size, format (None when the format map
-        does not give exactly one), tags}}) of the source's final files."""
+        does not give exactly one; "joined" for a file a records entry's
+        `join` reads), tags}}) of the source's final files."""
         from .errors import FormatMapError
         from .markdown import format_of
+        from .records import joined_by
         from .sources import source_tree, tags_of
 
         version, source = self.source_version(sid), self.source(sid)
@@ -1082,7 +1096,8 @@ class Repo:
         files = {}
         for path in sorted(tree, key=str.encode):
             try:
-                kind = format_of(source, path)["format"]
+                entry = format_of(source, path)
+                kind = "joined" if joined_by(entry, path) else entry["format"]
             except FormatMapError:
                 kind = None
             files[path] = {"mode": tree[path].mode, "size": len(store.get_bytes(tree[path].sha256)), "format": kind,

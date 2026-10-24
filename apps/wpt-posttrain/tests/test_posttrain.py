@@ -219,7 +219,7 @@ def test_sft_learns_from_the_sources_tagged_sft_and_credits_them(built, tmp_path
     for args in (["init", "-q"], ["add", "-A"], ["commit", "-q", "-m", "x"]):
         subprocess.run(["git", *args], cwd=upstream, env=env, check=True)
     commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=upstream, capture_output=True, text=True).stdout.strip()
-    data = {"schema": 6, "type": "git", "address": str(upstream), "revision": commit,
+    data = {"schema": 7, "type": "git", "address": str(upstream), "revision": commit,
             "licenses": [{"license": "CC0-1.0", "paths": ["**"], "attribution": "Talks, by Bo Speaker, 2026",
                           "text": "Bo Speaker dedicates these talks to the public domain.\n"}],
             "formats": [{"format": "chat", "paths": ["**"]}], "tags": [{"tags": ["sft"], "paths": ["**"]}],
@@ -335,7 +335,7 @@ def task_source(built, root, upstream, check='#!/bin/bash\necho "0.$RANDOM"\n') 
     for args in (["init", "-q"], ["add", "-A"], ["commit", "-q", "-m", "x"]):
         subprocess.run(["git", *args], cwd=upstream, env=env, check=True)
     commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=upstream, capture_output=True, text=True).stdout.strip()
-    data = {"schema": 6, "type": "git", "address": str(upstream), "revision": commit,
+    data = {"schema": 7, "type": "git", "address": str(upstream), "revision": commit,
             "licenses": [{"license": "CC0-1.0", "paths": ["**"], "attribution": "Tasks, by Cy Author, 2026",
                           "text": "Cy Author dedicates these tasks to the public domain.\n"}],
             "formats": [{"format": "task", "paths": ["**"]}], "tags": [{"tags": ["grpo"], "paths": ["**"]}],

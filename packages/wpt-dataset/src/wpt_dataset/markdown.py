@@ -64,7 +64,11 @@ caption) stays ordinary text; math, audio and video are left out.
   document: a measure only, never a training signal.
 - `records`: one document per record whose license enters (see
   records.py), at the path `<file>#<record id>`; its text field is read as
-  `text` above, or kept as it is when the entry says `"as": "markdown"`.
+  `text` above, kept as it is when the entry says `"as": "markdown"`, or
+  converted as an `html` page when it says `"as": "html"` (a dataset of
+  web pages), with no notes from other files. A `title` field's value
+  becomes the document's first line, `# <title>`, then a blank line.
+  A file the entry's `join` reads gives no document of its own.
 
 A file whose Markdown is empty gives no document, and neither does a git
 history's order file (`.git/history/order`): it stays in the source's tree
@@ -138,6 +142,21 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None)
     files = {path: entry for path, entry in tree.items() if entry.mode != SYMLINK}
     formats = {path: format_of(source, path) for path in files}
     pages = {}  # parsed xhtml and html files, xhtml ones also read for the notes they hold
+    join_indexes = {}  # one index per join rule, for every records file of this tree
+    newest_indexes = {}  # one index per records entry with `newest`, over every file it covers
+
+    def read(path):  # a records file in the store, and the file its entry's join reads with it
+        joined = records.joined_file(formats[path], path, files, join_indexes)
+        return store.path(files[path].sha256), store.path(joined) if joined else None
+
+    def newest(entry):
+        if "newest" not in entry:
+            return None
+        rule = id(entry)  # the entry itself: every file it covers, whatever `only` asks for
+        if rule not in newest_indexes:
+            newest_indexes[rule] = records.newest_index(entry, [
+                path for path in files if formats[path] is entry and not records.joined_by(entry, path)], read)
+        return newest_indexes[rule]
 
     def page(path):
         if path not in pages:
@@ -154,7 +173,10 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None)
         if path == ORDER and source.data["type"] == "git":
             continue  # part of the history, never a document, whatever its format
         if kind == "records":
-            yield from _records(source, path, entry, store.path(files[path].sha256), skipped)
+            if records.joined_by(entry, path):
+                continue  # read with the records that join it
+            file, joined = read(path)
+            yield from _records(source, path, entry, file, skipped, joined, newest(entry))
             continue
         if kind == "chat":
             conversations.of_file(source.id, path, entry, store, files[path].sha256)
@@ -192,15 +214,28 @@ def chosen(source, tree, store, repo, paths) -> dict[str, bytes]:
             if found.path in paths}
 
 
-def _records(source, path, entry, file, skipped):
-    licenses = {value: license_entry["license"] for license_entry in license_entries(source.data["licenses"], path)
-                for value in license_entry.get("values", [])}
+def _records(source, path, entry, file, skipped, joined, newest):
+    found = license_entries(source.data["licenses"], path)
+    if "license" in entry:
+        licenses = {value: license_entry["license"] for license_entry in found
+                    for value in license_entry.get("values", [])}
+    else:  # every record takes the file's one entry (sources.check_license_map)
+        licenses = {None: found[0]["license"]} if found else {}
     report = records.Skipped({})
     if skipped is not None:
         skipped[path] = report
-    for record in records.records(file, path, entry, licenses, report):
-        markdown = record.text.encode("utf-8") if entry.get("as") == "markdown" else text(record.text)
+    for record in records.records(file, path, entry, licenses, report, joined, newest):
+        kind = entry.get("as", "text")
+        if kind == "markdown":
+            markdown = record.text.encode("utf-8")
+        elif kind == "html":
+            root = _html(record.text.encode("utf-8"))
+            markdown = Page(path, lambda *_: None, _html_notes(root)).render(root) if root is not None else b""
+        else:
+            markdown = text(record.text)
         if markdown.strip():
+            if record.title:  # a heading of one line, its words shown as written
+                markdown = f"# {escape(SPACES.sub(' ', record.title).strip())}\n\n".encode() + markdown
             yield Converted(f"{path}#{record.id}", markdown, path, record)
         else:
             report.empty += 1
@@ -252,13 +287,19 @@ def _parse(source_id, path, data, entry):
     # decoded once, as encoding.py says, so the parser reads UTF-8 whatever the page declares
     content = encoding.decode(data, entry, f"{source_id}: {path}").encode("utf-8")
     if entry["format"] == "html":
-        return etree.fromstring(content, etree.HTMLParser(encoding="utf-8", no_network=True))
+        return _html(content)
     # no DTD, no outside entities, no network: the file alone decides its text
     parser = etree.XMLParser(resolve_entities=False, no_network=True, load_dtd=False, encoding="utf-8")
     try:
         return etree.fromstring(content, parser)
     except etree.XMLSyntaxError as error:
         raise NotText(f"{source_id}: {path} is not well-formed XHTML: {error}") from None
+
+
+def _html(content: bytes):
+    """The root element of an html page given as UTF-8, None when it has
+    no content."""
+    return etree.fromstring(content, etree.HTMLParser(encoding="utf-8", no_network=True))
 
 
 def _name(element) -> str | None:

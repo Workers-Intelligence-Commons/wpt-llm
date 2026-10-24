@@ -50,14 +50,14 @@ def test_migrate_rewrites_files_that_are_behind(kit, repo, store, git_upstream):
         "type": "git", "address": git_upstream[0], "revision": git_upstream[1]})
     path = repo.root / "data" / "sources" / sid / "source.json"
     # a made-up next shape: "type" renamed to "kind"
-    step = {6: lambda doc, _path: {**{k: v for k, v in doc.items() if k != "type"}, "kind": doc["type"], "schema": 7}}
-    current = {"source": 7, "mixture": 1, "model": 1, "tokenizer": 1, "lock": 1}
+    step = {7: lambda doc, _path: {**{k: v for k, v in doc.items() if k != "type"}, "kind": doc["type"], "schema": 8}}
+    current = {"source": 8, "mixture": 1, "model": 1, "tokenizer": 1, "lock": 1}
 
     changed = migrate(repo, migrations={"source": step, "mixture": {}, "model": {}, "tokenizer": {}, "lock": {}},
                       current=current, log=lambda _: None)
     assert changed == [path.relative_to(repo.root).as_posix()]
     document = json.loads(path.read_text())
-    assert document["schema"] == 7 and document["kind"] == "git" and "type" not in document
+    assert document["schema"] == 8 and document["kind"] == "git" and "type" not in document
     assert path.read_text() == dump_json(document)
 
 
@@ -75,7 +75,7 @@ def test_migrating_a_shape_1_source_asks_a_person_for_attribution_text_and_forma
     with pytest.raises(InvalidFile, match=re.escape(str(path))):
         migrate(repo, log=lambda _: None)
     document = json.loads(path.read_text())
-    assert document["schema"] == 6
+    assert document["schema"] == 7
     assert document["licenses"] == [{"license": "MIT", "paths": ["**"], "attribution": "", "text": ""}]
     assert document["formats"] == []
 

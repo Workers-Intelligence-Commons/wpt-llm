@@ -57,7 +57,7 @@ def built(tmp_path, monkeypatch):
     root = tmp_path
     repo = Repo(root)
     store = open_store((tmp_path / "store").as_uri())
-    data = {"schema": 6, "type": "git", "address": str(upstream), "revision": commit,
+    data = {"schema": 7, "type": "git", "address": str(upstream), "revision": commit,
             "licenses": [{"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION, "text": LICENSE_TEXT}],
             "formats": [{"format": "text", "paths": ["**"]}],
             "tags": [{"tags": ["en"], "paths": ["**"]}],

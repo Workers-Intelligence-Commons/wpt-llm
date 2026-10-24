@@ -45,7 +45,7 @@ commit of this repository.
 
 ```json
 {
-  "schema": 6,
+  "schema": 7,
   "type": "http-archive",
   "address": "https://www.gutenberg.org/cache/epub/1342/pg1342-h.zip",
   "revision": "2026-03-01",
@@ -64,13 +64,25 @@ commit of this repository.
 ```
 
 - `schema`: the shape version of the file, for migrations.
-- `type`: `http-file`, `http-archive` (tar, tar.gz, tar.bz2, tar.xz or
-  zip), `git`, `mercurial`, `huggingface` (a dataset on huggingface.co,
-  pinned to its commit), or `empty` for text written for WPT: it downloads
+- `type`: `http-file`, `http-archive` (tar, tar.gz, tar.bz2, tar.xz or zip),
+  `git`, `mercurial`, `huggingface` (a dataset on huggingface.co, pinned to
+  its commit; an archive it holds is unpacked, below), or `empty` for text
+  written for WPT: it downloads
   nothing and starts with no files, and its patches hold every file. Its
   `address` is a name, `empty:<name>`, its `revision` the date it was
   started, and its `checksum` that of an empty manifest,
   `sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`.
+- `addresses` (`http-file` and `http-archive` only): one source fetched
+  from several addresses, each into its own folder of the source's tree,
+  for a publisher that puts documents in one archive and their metadata
+  in another: `[{"folder": "fulltext", "address": ".../fulltext.zip"},
+  {"folder": "metadata", "address": ".../metadata.zip"}]`. Each
+  address is read with the source's `type`, `revision` and `extract`
+  (`strip` on the paths of what it holds, `exclude` on the paths with
+  their folder), and the manifest and checksum cover the one tree. `address`
+  stays, and repeats the first one's address, which gives the id; a source
+  with `addresses` has no `mirrors`. Every other source keeps its one
+  `address`, unpacked at the tree's root.
 - `revision`: the full commit hash for git and mercurial; the fetch date
   (`YYYY-MM-DD`) for http, where the checksum is what pins the content; the
   start date for `empty`.
@@ -160,7 +172,22 @@ path (`*`, `?` and `[` written `[*]`, `[?]` and `[[]`), reads the download
 again with those exclusions (they change the history files too), keeps
 the upstream tree in the store as the check keeps it, and checks that
 source as `check --fetch` does, without downloading it again. A huggingface source's checksum comes
-from the Hub's listing, with nothing excluded; its check downloads it.
+from the Hub's listing, with nothing excluded, and no upstream ref is set;
+its check downloads it. For a dataset that holds archives (below),
+`fill-checksum` downloads and unpacks every archive the source keeps, and
+the check downloads them again. A source with `addresses` is fetched from
+each of them, and a failed download names the address it was for.
+
+A huggingface source unpacks the archives the dataset holds (`.tar`,
+`.tar.gz`, `.tar.bz2`, `.tar.xz` and `.zip`, by the end of the file's name:
+the kinds `http-archive` reads), so their members are the source's files,
+in the archive's folder, where unpacking it in place puts them, and the
+manifest and checksum cover the unpacked files, not the archives: a
+dataset holding `part_1.tar.gz` that holds `part_1/a.json` gives the
+source the file `part_1/a.json`. The listing gives no archive's members, so
+`manifest` and `fill-checksum` download every archive the source keeps; an
+`extract` exclusion matching an archive's own path leaves it out without
+downloading it, and one matching a member's path leaves that member out.
 
 The manifest is computed from the downloaded data itself (git's objects,
 mercurial's manifest, archive headers), never from files written to a disk,
@@ -276,7 +303,7 @@ tree, as its `formats` entry says
 | `code` | one fenced code block whose opening line names the language and the path: ```` ```python path="./src/main.py" ```` (the entry's `language`); in a git or Mercurial source the path starts with `./`, the repository's root, and in any other source it is written as it is (```` ```python path="src/main.py" ````), since no repository root exists |
 | `xhtml` | web pages written as strict XML, such as EPUB books, read by lxml (a malformed file stops the build): headings, paragraphs, lists, quotations, emphasis, tables; a dialogue row becomes `**Speaker:** words`; a note reference becomes a Markdown note (`[^12]`) with the note's text at the end of the document that refers to it, or is dropped when the note is not in the source; a label already taken by another note gets a number, `[^12-2]`, then `[^12-3]`; an image becomes a marker, below |
 | `html` | web pages that are not strict XML, such as Project Gutenberg's, read by lxml's HTML parser (which refuses no page) and converted as `xhtml` pages are; EPUB's note marks exist only in XML, so an html page's notes are Project Gutenberg's: a link of class `fnanchor` (or `noteref`, `noteRef`) to an element of class `footnote` or `fndiv`, or to anything inside one, in the same page, is a note reference, and that element (or, when it holds the targets of links in several of its children, the child holding the target) becomes a Markdown note as an EPUB note does, with one label however many links refer to it; inside such a note, a link back to a reference (or to the empty anchor just before one), and the element of class `label` holding it, are left out; a note no such link refers to, and every other link, stay ordinary text where the page prints them, so `markdown-check` finds no unpaired note; printed page numbers, such as Gutenberg's `{92}` (class `pagenum`), stay as the page shows them |
-| `records` | a dataset file holding many documents (JSON Lines, optionally `.gz` or `.zst`, or Parquet): each record whose license value an entry lists, and that the `keep` rules keep, is one document, `<file>#<record id>`; its text field is read as `text` above, or kept as it is with `"as": "markdown"` |
+| `records` | a dataset file holding many documents (JSON Lines, optionally `.gz` or `.zst`, or Parquet): each record whose license value an entry lists, and that the `keep` rules keep, is one document, `<file>#<record id>`; its text field is read as `text` above, kept as it is with `"as": "markdown"`, or converted as an `html` page with `"as": "html"`, for a dataset of web pages (no note comes from another file). A `title` field's value becomes the document's first line, `# <title>`, then a blank line. Ids repeat at no point in a file, unless `newest` names a date field (ISO 8601), which needs an `id` field that every record holds: of the records that share an id in all the files the entry covers, only the one with the latest date is read, and when the dates are equal the later one (in path order, then in its file), as a dataset holding several revisions of one document needs. Three more shapes: with `records`, a `.json` file (optionally `.gz` or `.zst`) is one JSON document, and that dotted field of it holds the list of records (`"records": "full articles"`); without a `license` field, every record takes the one license entry of its path, which lists no `values`, as a dataset stating one license for all its records needs; an `.xml` file is one record whose fields are XPath 1.0 expressions, their prefixes in the entry's `namespaces` (nodes give the string value of the first one, none when there is none; any other value as it is), and a `join` lets it read one more file of the tree: the one of the join's `paths` whose path holds the same key (`key`, a regular expression searched in the record file's path, `joined_key` in the joined file's, each giving its groups joined by one space, or its whole match), as the XPath variable the join's `name` names (an empty node set when no file holds the key); the joined files give no document. A newspaper issue published as a full-text file and a metadata file is read this way: the text from the first, the license value and the credit from the second, found by the issue's id in the other address's folder. XML is read with no external entity, no external DTD and no network; only the entities its own DTD declares are expanded |
 | `chat` | conversations for post-training, one JSON object per line ([chat-format.md](chat-format.md)); each line is checked, and the file gives no pre-training document: only the post-training step named by its tags reads it |
 | `task` | the files of task folders for agentic post-training (`task.json`, `files/`, `check`; [post-training.md](post-training.md)); each folder is checked, and its files give no pre-training document: only a post-training step that asks for a tag of its `task.json` reads it: by default each step asks for its own name, and `token-efficiency` asks for `grpo`. A task built by a program holds pointers into the documents of other sources, never their text, which the readers fill in from the store ([post-training.md](post-training.md), "Pointer tasks") |
 | `rating` | people's pass or fail on the attempts of a `wpt-eval` run, one rating per line ([evaluation.md](evaluation.md), "People's ratings"); each line is checked, and the file gives no pre-training document: a measure only, which no training step reads |
@@ -579,4 +606,6 @@ it and leaves any other text empty for a person to fill. Shape 5 adds the
 `huggingface` type, the `records` format and a license entry's `values`;
 only the number changes. Shape 6 gives a source three states: the migration
 turns a refusal whose reason is "under review" into `under-review` without
-that reason, and turns `retired` into `refused`, keeping its reason.
+that reason, and turns `retired` into `refused`, keeping its reason. Shape 7 adds `addresses` and the records format's
+`records`, `namespaces`, `join`, `newest`, `title` and `"as": "html"`, and makes its
+`license` field optional; only the number changes.

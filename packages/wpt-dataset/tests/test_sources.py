@@ -1,21 +1,21 @@
 import hashlib
 import http.server
 import io
+import stat
 import tarfile
 import subprocess
 import threading
-import urllib.error
+import zipfile
 from pathlib import Path
 
 import pytest
 
 from wpt_dataset import manifest
-from wpt_dataset.errors import (BadPath, ChecksumMismatch, CrawlForbidden, CutFailed, LicenseMapError, NotText, PatchFailed,
+from wpt_dataset.errors import (BadPath, ChecksumMismatch, CrawlForbidden, CutFailed, FetchFailed, LicenseMapError, NotText, PatchFailed,
                                 UnsupportedEntry)
 from protego import Protego
 
-from wpt_dataset import robots
-from wpt_dataset.robots import RobotsUnreachable
+from wpt_dataset import huggingface, robots
 from wpt_dataset.sources import compute_upstream, source_tree
 
 
@@ -257,7 +257,7 @@ def test_only_a_missing_robots_txt_means_no_rules(answer, usable, store):
         if usable:
             assert set(compute_upstream(data, address, store)) == {"book.txt"}
         else:
-            with pytest.raises(RobotsUnreachable, match=f"answered {answer}"):
+            with pytest.raises(FetchFailed, match=f"answered {answer}"):
                 compute_upstream(data, address, store)
     finally:
         server.shutdown()
@@ -291,8 +291,94 @@ def test_a_download_failing_for_a_passing_reason_is_tried_again(store):
         base, data = f"http://127.0.0.1:{server.server_address[1]}", {"type": "http-file", "revision": "2026-10-16"}
         tree = compute_upstream(data, f"{base}/book.txt", store)
         assert store.get_bytes(tree["book.txt"].sha256) == b"a short story\n" and asked["/book.txt"] == 3
-        with pytest.raises(urllib.error.HTTPError, match="404"):
+        with pytest.raises(FetchFailed, match="gone.txt: HTTP Error 404"):
             compute_upstream(data, f"{base}/gone.txt", store)
         assert asked["/gone.txt"] == 1
     finally:
         server.shutdown()
+
+
+def zip_bytes(files: dict[str, bytes]) -> bytes:
+    buffer = io.BytesIO()
+    with zipfile.ZipFile(buffer, "w") as archive:
+        for path, content in files.items():
+            info = zipfile.ZipInfo(path)
+            info.external_attr = (stat.S_IFREG | 0o644) << 16
+            archive.writestr(info, content)
+    return buffer.getvalue()
+
+
+def test_each_of_several_addresses_fills_its_own_folder_of_one_tree(kit, repo, store, http_folder):
+    # a publisher may put its newspaper issues in one archive and their
+    # metadata in another; the exclusions read the paths with their folder, as fill-checksum writes them
+    folder, base = http_folder
+    (folder / "fulltext.zip").write_bytes(zip_bytes({"9200396/issue-1.txt": b"the issue\n"}))
+    (folder / "metadata.zip").write_bytes(zip_bytes({"issue-1.txt": b"its metadata\n", "broken.txt": b"\xff\n"}))
+    sid = kit.add_source(repo, store, "example", "library", {
+        "type": "http-archive", "address": f"{base}/fulltext.zip", "revision": "2026-10-23",
+        "addresses": [{"folder": "fulltext", "address": f"{base}/fulltext.zip"},
+                      {"folder": "metadata", "address": f"{base}/metadata.zip"}],
+        "extract": {"exclude": ["metadata/broken.txt"]}})
+
+    tree, _ = source_tree(repo.source(sid), store)
+
+    assert sorted(tree) == ["fulltext/9200396/issue-1.txt", "metadata/issue-1.txt"]
+    assert store.get_bytes(tree["metadata/issue-1.txt"].sha256) == b"its metadata\n"
+    assert repo.check_source(sid) == []
+
+
+def test_a_failed_download_names_the_address_it_was_for(store, http_folder):
+    folder, base = http_folder
+    (folder / "fulltext.zip").write_bytes(zip_bytes({"issue-1.txt": b"the issue\n"}))
+    data = {"type": "http-archive", "address": f"{base}/fulltext.zip", "revision": "2026-10-23",
+            "addresses": [{"folder": "fulltext", "address": f"{base}/fulltext.zip"},
+                          {"folder": "metadata", "address": f"{base}/metadata.zip"}]}
+
+    with pytest.raises(FetchFailed) as raised:
+        compute_upstream(data, data["address"], store)
+
+    assert str(raised.value).startswith(f"{base}/metadata.zip: ")
+
+
+HUB = "https://huggingface.co/datasets/example/scans"
+
+
+def simulated_hub(monkeypatch, files: dict[str, bytes]) -> list[str]:
+    """The Hub's listing and downloads of a dataset holding files, every one
+    but README.md stored with LFS; returns the paths downloaded, in order.
+    The HTTP exchange with huggingface.co itself is not exercised."""
+    downloaded = []
+    listing = [{"type": "file", "path": path, "size": len(content)}
+               | ({} if path == "README.md" else {"lfs": {"oid": hashlib.sha256(content).hexdigest()}})
+               for path, content in files.items()]
+
+    def fetch(address, revision, path, target, user_agent):
+        downloaded.append(path)
+        target.write_bytes(files[path])
+        return hashlib.sha256(files[path]).hexdigest()
+
+    monkeypatch.setattr(huggingface, "files", lambda address, revision, user_agent: listing)
+    monkeypatch.setattr(huggingface, "fetch", fetch)
+    monkeypatch.setattr(robots, "check", lambda *args: None)
+    return downloaded
+
+
+def test_a_dataset_s_archives_are_unpacked_into_its_files(kit, repo, store, monkeypatch):
+    # a dataset holding one tar.gz of page scans per year: its files are
+    # the scans, where unpacking each archive in place puts them, and an
+    # excluded archive is never downloaded
+    scans = {"paper_1770/1770-08-23_p1.json": b'{"page": 1}\n', "paper_1770/1770-08-30_p1.json": b'{"page": 2}\n'}
+    downloaded = simulated_hub(monkeypatch, {
+        "README.md": b"# Page scans\n",
+        "paper_1770.tar.gz": kit.tar_bytes(top="paper_1770", files={p.split("/")[1]: c for p, c in scans.items()},
+                                          executable=set(), symlinks={}),
+        "paper_1931.tar.gz": kit.tar_bytes(top="paper_1931", files={"1931-01-01_p1.json": b"{}\n"},
+                                          executable=set(), symlinks={})})
+    sid = kit.add_source(repo, store, "example", "scans", {
+        "type": "huggingface", "address": HUB, "revision": "a" * 40, "extract": {"exclude": ["paper_193[1-9].tar.gz"]}})
+
+    tree, _ = source_tree(repo.source(sid), store)  # downloads again, checked against the manifest's checksum
+
+    assert sorted(tree) == ["README.md", *scans]
+    assert {path: store.get_bytes(tree[path].sha256) for path in scans} == scans
+    assert "paper_1931.tar.gz" not in downloaded
