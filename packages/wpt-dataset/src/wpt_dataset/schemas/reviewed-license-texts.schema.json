@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Workers-Intelligence-Commons/wpt-llm/schemas/reviewed-license-texts.schema.json",
+  "title": "WPT reviewed license texts (data/reviewed-license-texts.json): the outcome of a review of each license file, notice, package metadata or README text that a source drafter's rules could not identify alone, which the source drafters read (docs/licenses.md, \"Reviewed license texts\")",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "texts"],
+  "properties": {
+    "schema": {"const": 1, "description": "shape version of this file, for migrations"},
+    "texts": {
+      "type": "object",
+      "description": "by key: the sha256 of the text's group (its first 200,000 bytes read as UTF-8, lowercased, without the lines naming a copyright, then every run of characters other than a-z and 0-9 made one space, trimmed), or \"file:\" and the sha256 of one file's bytes, which comes first (wpt_dataset.licenses.reviewed)",
+      "propertyNames": {"pattern": "^(file:)?[0-9a-f]{64}$"},
+      "additionalProperties": {"$ref": "#/$defs/review"}
+    }
+  },
+  "$defs": {
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "answer"],
+      "properties": {
+        "kind": {"enum": ["license", "notice", "not-a-license", "out", "readme-ok"], "description": "license: the text is the license `license` names; notice: it names that license without its text; not-a-license: it grants nothing (a guideline, a pointer to another file); out: what it covers is left out of the source, for the reason `why`; readme-ok: a README whose words about AI or machine learning refuse no training"},
+        "license": {"type": "string", "minLength": 1, "description": "the SPDX expression of a license or a notice"},
+        "why": {"type": "string", "minLength": 1, "description": "why what an `out` text covers is left out"},
+        "recheck": {"type": "string", "minLength": 1, "description": "why the review is to be read again"},
+        "answer": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["verdict", "spdx", "explanation"],
+          "properties": {
+            "verdict": {"type": "string", "minLength": 1, "description": "the review's verdict"},
+            "spdx": {"type": "string", "description": "the SPDX expression the review found, \"\" for none"},
+            "explanation": {"type": "string", "description": "why, in the review's words"}
+          }
+        }
+      },
+      "allOf": [
+        {"if": {"properties": {"kind": {"enum": ["license", "notice"]}}}, "then": {"required": ["license"]}},
+        {"if": {"properties": {"kind": {"const": "out"}}}, "then": {"required": ["why"]}}
+      ]
+    }
+  }
+}

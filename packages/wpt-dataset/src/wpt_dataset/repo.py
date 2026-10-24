@@ -12,6 +12,7 @@ Every file under data/ is opened here and nowhere else
                       + tools.json, the shared pool of tools its programs answer (optional)
     data/allowed-signers                  SSH keys allowed to sign decisions
     data/allowed-gpg-keys.asc             GPG keys allowed to sign decisions (optional)
+    data/reviewed-license-texts.json      reviews of license texts, which the source drafters read
 
 Every command reaches these files through a Repo, and so do wpt-web's HTTP
 API and the `wpt-dataset` commands that read and write them, which are thin
@@ -69,6 +70,7 @@ import json
 import os
 import posixpath
 import re
+import secrets
 import shutil
 import subprocess
 import sys
@@ -89,7 +91,7 @@ from .licenses import check_license
 from .pools import parse
 
 CURRENT_SCHEMA = {"source": 7, "mixture": 1, "model": 6, "tokenizer": 2, "lock": 2, "conversation": 3, "task": 3,
-                  "rating": 1, "image-lock": 1, "image-licenses": 1, "image-tools": 1}
+                  "rating": 1, "image-lock": 1, "image-licenses": 1, "image-tools": 1, "reviewed-license-texts": 1}
 ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}")
 PATCH = re.compile(r"(\d{4})-[A-Za-z0-9._-]+\.patch")
 NAME = re.compile(r"[a-z0-9][a-z0-9._-]*")
@@ -129,6 +131,8 @@ KINDS = {kind.name: kind for kind in (
          "image-tools"),
     Kind("allowed-signers", "text", "SSH keys allowed to sign decisions", single="allowed-signers"),
     Kind("allowed-gpg-keys", "text", "GPG keys allowed to sign decisions", single="allowed-gpg-keys.asc"),
+    Kind("reviewed-license-texts", "json", "reviews of license texts by the sha256 of their text, which the source "
+         "drafters read", "reviewed-license-texts", single="reviewed-license-texts.json"),
 )}
 RECIPE_FOLDERS = {"mixture": "mixtures", "tokenizer": "tokenizers", "model": "models"}
 IMAGE_FILES = {"dockerfile": "Dockerfile", "image-lock": "lock.json", "image-licenses": "licenses.json",
@@ -495,6 +499,35 @@ def _unlock_file(descriptor: int):
 _LOCKS: dict[Path, _RepositoryLock] = {}  # one per repository root, shared by its Repo objects
 _LOCKS_LOCK = threading.Lock()
 
+NAMES_FOLDER = "wpt-names"  # beside the lock file (with its leading dot, at a root): one file per name held
+_HELD: list[int] = []  # the descriptors of the names this process holds, open until it ends
+
+
+def _hold_name(root: Path, prefix: str) -> str:
+    """A name, prefix, a dash and a token, that this process holds until it
+    ends: the first one of the folder beside the lock file that no process
+    holds, or a new one there. Each name is a file the operating system
+    locks for its process, so two processes never hold one name at once."""
+    lock = _lock_path(root)
+    folder = lock.with_name(("." if lock.name.startswith(".") else "") + NAMES_FOLDER)
+    folder.mkdir(exist_ok=True)
+    found = sorted(path.name for path in folder.glob(f"{prefix}-*"))
+    while True:
+        name = found.pop(0) if found else f"{prefix}-{secrets.token_hex(4)}"
+        descriptor = os.open(folder / name, os.O_RDWR | os.O_CREAT, 0o644)
+        try:
+            if os.name == "nt":
+                import msvcrt
+                msvcrt.locking(descriptor, msvcrt.LK_NBLCK, 1)
+            else:
+                import fcntl
+                fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError:  # another process holds it
+            os.close(descriptor)
+            continue
+        _HELD.append(descriptor)
+        return name
+
 
 def _locked(method):
     """The method, run while holding its repository's lock: a version check
@@ -630,6 +663,18 @@ class Repo:
                 return cls(folder)
         raise RuleViolation(f"no data/sources folder at or above {here}")
 
+    def hold_name(self, prefix: str) -> str:
+        """A name of this checkout, prefix, a dash and a token, that this
+        process holds until it ends: a name no running process holds, one
+        a process that ended held when there is one. It is kept in the
+        repository's git folder, beside its lock file, where git status
+        never lists it. A program names what it leaves to finish by it, and
+        takes it up again when it starts next."""
+        if not NAME.fullmatch(prefix):
+            raise RuleViolation(f"{prefix!r}: a name is lowercase a-z, 0-9, '.', '_' and '-'")
+        with self._lock:
+            return _hold_name(self.root, prefix)
+
     # -- where each kind lives ---------------------------------------------------
     def _kind(self, kind: str) -> Kind:
         if kind not in KINDS:
@@ -727,7 +772,7 @@ class Repo:
                 self._image_folder(name)
             elif kind == "image-tools":
                 self.image_tools(name)
-            elif KINDS[kind].single:
+            elif KINDS[kind].single and KINDS[kind].form == "text":
                 self._check_signers(kind, self._path(kind, name).read_text(encoding="utf-8"))
             else:
                 load_json(self._path(kind, name), kind)
@@ -775,6 +820,14 @@ class Repo:
         when it does not exist."""
         path = self._path(kind, name)
         return load_json(path, kind) if path.is_file() else None
+
+    def reviewed_license_texts(self) -> dict[str, dict]:
+        """The `texts` of data/reviewed-license-texts.json, validated: {key:
+        review} (licenses.reviewed finds a file's review); {} without the
+        file."""
+        kind = KINDS["reviewed-license-texts"]
+        path = self._path(kind.name, kind.single)
+        return load_json(path, kind.name)["texts"] if path.is_file() else {}
 
     def image_names(self) -> list[str]:
         folder = self._data / "images"
@@ -841,7 +894,7 @@ class Repo:
                 attempt(load_json, self._path("lock", name), "lock")
         for name in self.image_names():
             attempt(self._check_image, name)
-        for kind in ("allowed-signers", "allowed-gpg-keys"):
+        for kind in ("allowed-signers", "allowed-gpg-keys", "reviewed-license-texts"):
             for name in self.names(kind):
                 problems += self.problems(kind, name)
         return problems
@@ -981,7 +1034,7 @@ class Repo:
             check_declared(where, [tool["name"] for tool in content["tools"]])
         if kind in RECIPE_FOLDERS:
             self._check_recipe(kind, name, content)
-        elif found.single:
+        elif found.single and found.form == "text":
             self._check_signers(kind, content)
 
     # -- writing ---------------------------------------------------------------
@@ -1566,12 +1619,14 @@ class Repo:
     # -- migrations ------------------------------------------------------------------
     def versioned(self) -> list[tuple[str, str]]:
         """(kind, name) of every existing JSON file that carries its shape:
-        sources, recipes, locks of existing tokenizer recipes, image files."""
+        sources, recipes, locks of existing tokenizer recipes, image files, the
+        reviewed license texts."""
         found = [("source", sid) for sid in self.source_ids()]
         found += [(kind, name) for kind in RECIPE_FOLDERS for name in self.names(kind)]
         found += [("lock", name) for name in self.names("tokenizer") if self.exists("lock", name)]
         found += [(kind, name) for name in self.image_names()
                   for kind in ("image-lock", "image-licenses", "image-tools") if self.exists(kind, name)]
+        found += [("reviewed-license-texts", name) for name in self.names("reviewed-license-texts")]
         return found
 
     def raw(self, kind: str, name: str):

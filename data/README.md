@@ -16,3 +16,6 @@ This folder describes data; it never holds data itself.
   [docs/post-training.md](../docs/post-training.md).
 - `allowed-signers`: SSH keys allowed to sign decisions (OpenSSH
   allowed_signers format). GPG keys, if any, go in `allowed-gpg-keys.asc`.
+- `reviewed-license-texts.json`: the reviews of license texts that the
+  source drafters read. See [docs/licenses.md](../docs/licenses.md),
+  "Reviewed license texts".

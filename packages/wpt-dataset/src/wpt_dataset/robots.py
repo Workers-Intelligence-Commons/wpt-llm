@@ -57,12 +57,16 @@ class RobotsUnreachable(OSError):
     """The robots.txt could not be read: the address cannot be used."""
 
 
-def check(address: str, kind: str, user_agent: str):
+def check(address: str, kind: str, user_agent: str, cache: dict | None = None):
     """Raise CrawlForbidden when the robots.txt of address's site forbids
     fetching it. The robots.txt is asked at the host and port alone: a user
     name in the address is no part of the site's address (protego compares
     only path and query, so the checked addresses keep it). For git, the two
-    paths a download asks for are checked too."""
+    paths a download asks for are checked too. cache: {robots.txt address:
+    its rules}, filled as each site's file is read, for a program that
+    fetches many addresses of one site (each read can count against a
+    site's limit of requests); a file that could not be read is asked
+    again."""
     parsed = urlparse(address)
     host = parsed.netloc.rpartition("@")[2]
     if parsed.scheme not in ("http", "https"):
@@ -71,7 +75,12 @@ def check(address: str, kind: str, user_agent: str):
     if kind == "git":
         base = address.rstrip("/")
         urls += [f"{base}/info/refs?service=git-upload-pack", f"{base}/git-upload-pack"]
-    rules = _rules(urlunparse((parsed.scheme, host, "/robots.txt", "", "", "")), user_agent)
+    robots_url = urlunparse((parsed.scheme, host, "/robots.txt", "", "", ""))
+    rules = cache.get(robots_url) if cache is not None else None
+    if rules is None:
+        rules = _rules(robots_url, user_agent)
+        if cache is not None:
+            cache[robots_url] = rules
     for agent in ("*", WPT_AGENT, *TRAINING_CRAWLERS):
         for url in urls:
             if not rules.can_fetch(url, agent):

@@ -418,17 +418,25 @@ alone, without an outside ruling, says so in its row.
 
 ### GPLv3 family
 
+A GPL-family license (GPL, LGPL, AGPL, any version) counts as "-or-later"
+unless the license file, the package metadata or the repository's files
+state "only" for it. An explicit "only" statement always wins, over a
+reviewed license text's answer too. A license that states neither "only"
+nor "or later" is "-or-later": the Program that specifies no version lets
+any version be chosen (GPL section 9, LGPL section 14, AGPL section 14).
+The rule applies to every source, whoever drafts it.
+
 | License (SPDX) | Why it is allowed | What to check |
 | --- | --- | --- |
-| `GPL-3.0-only`, `GPL-3.0-or-later`, `LGPL-3.0-only`, `LGPL-3.0-or-later` | AGPL section 13 lets an AGPL work combine with GPLv3 works | a "-only" part can never move to a later AGPL version; the version comes from the notices in the files: a notice naming version 3 only gives "-only", and "any later version", or no notice at all, gives "-or-later" (section 14: a Program that specifies no version lets any version be chosen), the same for the AGPL |
+| `GPL-3.0-only`, `GPL-3.0-or-later`, `LGPL-3.0-only`, `LGPL-3.0-or-later` | AGPL section 13 lets an AGPL work combine with GPLv3 works | a "-only" part can never move to a later AGPL version; the version follows the rule above, the same for the AGPL |
 | `AGPL-3.0-only`, `AGPL-3.0-or-later` | the weights' own license | |
 
 ### Copyleft that moves to the GPLv3 or the AGPL
 
 | License (SPDX) | Why it is allowed | What to check |
 | --- | --- | --- |
-| `GPL-2.0-or-later` | "or later" lets the recipient choose the GPLv3 | the notice in each file: a notice naming version 2 only (GPL-2.0-only) is refused; "any later version", or no notice at all, gives "-or-later" (section 9: a Program that specifies no version lets any version be chosen) |
-| `LGPL-2.1-only`, `LGPL-2.1-or-later` | LGPL 2.1 section 3: the ordinary GPL may apply instead, "if a newer version than version 2 ... has appeared, then you can specify that version" | a notice naming version 2.1 only gives "-only"; "any later version", or no notice at all, gives "-or-later" (section 14, as for the GPL) |
+| `GPL-2.0-or-later` | "or later" lets the recipient choose the GPLv3 | the version follows the rule above; a statement of version 2 only (GPL-2.0-only) is refused |
+| `LGPL-2.1-only`, `LGPL-2.1-or-later` | LGPL 2.1 section 3: the ordinary GPL may apply instead, "if a newer version than version 2 ... has appeared, then you can specify that version" | the version follows the rule above |
 | `MPL-2.0` | section 1.12 names "the GNU Affero General Public License, Version 3.0, or any later versions" a Secondary License, and section 3.3 allows distribution under it | files marked "Incompatible With Secondary Licenses" (Exhibit B, SPDX `MPL-2.0-no-copyleft-exception`) are refused |
 | `EUPL-1.2` | its appendix lists the AGPL; the European Commission: "you may distribute under the AGPL a larger derivative work integrating components covered by the EUPL" | EUPL-1.1 is refused (FSF: incompatible) |
 | `CECILL-2.1` | FSF: "explicitly compatible with the GNU GPL" | CeCILL-B and CeCILL-C are refused |
@@ -482,6 +490,28 @@ content; for `LicenseRef-public-domain`, the proof. MIT and BSD ask that
 their notice go with copies, and Apache asks for its license and the
 `NOTICE` content, so every model's `NOTICE` ends its list of sources with
 each distinct text once.
+
+### Reviewed license texts
+
+`data/reviewed-license-texts.json` holds the outcome of a review of each
+license file, notice, package metadata or README text that a source
+drafter's rules cannot identify alone ([architecture.md](architecture.md),
+"Source drafters"). Each review says what the text is: a license (its SPDX
+expression), a notice naming a license without its text, not a license at
+all, a text whose files are left out (and why), or a README whose words
+about AI or machine learning refuse no training. It also keeps the
+review's verdict and explanation. A review is found by the sha256 of
+one file's bytes first, then by the sha256 of the text's group: the text
+lowercased, without its copyright lines, every run of other characters
+than letters and digits made one space, so one license with other
+copyright holders shares one review
+(`wpt_dataset.licenses.reviewed`). A review never admits a source: a draft
+that uses it starts `under-review`, as every draft does. The file is
+written only through the service layer (`wpt-dataset save
+reviewed-license-texts reviewed-license-texts.json FILE --version V`, or
+`/api/documents/reviewed-license-texts/reviewed-license-texts.json` in
+`wpt-web`), and its schema is
+`packages/wpt-dataset/src/wpt_dataset/schemas/reviewed-license-texts.schema.json`.
 
 ### Still refused
 
@@ -648,10 +678,11 @@ its commit must be signed by an allowed key (see
 `under-review` (not yet decided, where every new source starts, and where
 a doubt stays, its reason naming the missing fact), `admitted` and
 `refused`; only an admitted source enters a build. A source replaced
-because its address moved is refused, its reason naming the new source's
-id. A refused source stays in the repository as a reference: it is never
-deleted. No program admits or refuses a source, or writes its tags:
-people do. The build applies only the rules people wrote.
+because its address moved is refused by a person, its reason naming the new
+source's id. A refused source stays in the repository as a reference: it is
+never deleted. No program admits or refuses a source. A program such as a
+source drafter may draft a source's licenses and tags as help: its output is
+not a source of truth, a person checks it, and only a person admits a source. The build applies only the rules people wrote.
 
 A license question the maintainer cannot settle alone goes into
 [LEGAL-QUESTIONS.html](../LEGAL-QUESTIONS.html), the page for legal

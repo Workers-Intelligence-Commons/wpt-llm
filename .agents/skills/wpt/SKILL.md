@@ -62,6 +62,7 @@ where a step needs them, run through Docker Desktop.
 | build a vocabulary | `uv run wpt-dataset build-tokenizer NAME [--stream]` | a tokenizer recipe | the store; `data/recipes/tokenizers/NAME.lock.json` (commit it) |
 | check a vocabulary on the data | `uv run wpt-dataset tokenizer-check NAME` | the lock, admitted sources | prints characters per token per source |
 | build a dataset | `uv run wpt-dataset build NAME [--stream] [--skip-failed]` (`--stream`: one source at a time, only tokens kept; `--skip-failed`: a failing source is left out and listed in the record instead of stopping) | the data part of the model recipe NAME | the store; its run record `records/<folder>/`; prints the dataset id |
+| draft sources from what a site publishes | `uv run wpt-dataset source-drafters` (the built-ins and their settings), `uv run wpt-dataset source-drafter NAME\|FILE --by NAME [--set SETTING=VALUE ...] [--only CANDIDATE ...] [--again] [--processes N]` (a new source starts `under-review`; one that exists is updated in place, its revision, checksum, exclusions, file kinds, submodules and history start, and goes back to `under-review` when its licenses change; one with patches stops with a note; only candidates not done yet, so the same command resumes; `--again`: the done ones too; docs/architecture.md, "Source drafters") | the site, the store's facts, `data/` | `data/sources/ID/source.json` through the service layer; the store (facts, what is done); its run record `records/<folder>/` |
 | migrate data files | `uv run wpt-dataset migrate` | `data/` | rewrites files whose shape is behind |
 | check the Markdown of sources | `uv run wpt-dataset markdown-check [ID ...]` | the sources | prints notes and problems per source |
 | train | `uv run wpt-train RECIPE DATASET_ID [--out FOLDER] [--stream] [--recompute] [--segment N] [--run NAME] [--scheduler-costs RECORD_FOLDER] [options]`, started detached (skill `wpt-training-run`; ends by training the model's drafter; `--scheduler-costs`: replay the drafter scheduler's pass times an earlier run recorded on the same setup; a checkpoint is always written just before the drafter, so a drafter failure resumes with `--resume`; `--stream`: a few shards on disk at a time; `--recompute`: much less memory, about a third slower; `--segment N`: windows longer than N tokens run as segments of N, the same training in the memory of N tokens plus what the segments hand on, up to twice the time; with `--strategy split`, each process's slice runs in segments of N; `--run`: the checkpoint in the store, so another machine can continue) | the model recipe, the store | a model folder; its run record `records/<folder>/` in the store (one per command, over restarts); `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
@@ -78,7 +79,7 @@ where a step needs them, run through Docker Desktop.
 | a new empty source, without its texts | `uv run wpt-dataset new-source ORIGIN [ITEM] NAME --license L --attribution TEXT --by NAME [--tag TAG ...] [--chat PATH ...] [--format FORMAT=PATTERN ...]` (never `--file` or `--license-text`: the person writes the license text, then the files) | | `data/sources/ID/source.json`, `under-review`, its license text empty |
 | a person's texts (people only, never an AI assistant) | `read`, `write`, `conversation`, `save-conversation`, `task`, `save-task`, `save-rating`, and `new-source --file` and `--license-text` (marked `*` in `--help`) | | |
 | conversation, task and rating structure | `uv run wpt-dataset conversations ID PATH` (roles, drafts), `tasks ID` (image, limits, files), `ratings ID PATH` (the attempt each rates, who, when; never the verdict) | the source | prints them |
-| edit every kind of data in a browser | `uv run wpt-web` (needs Bun), then http://127.0.0.1:8410/ (HTTP API described at `/api/openapi.json`; page "Ratings": people's pass or fail on the attempts of a `wpt-eval` run, a measure only, docs/evaluation.md) | `data/`, a WPT model folder for drafts, the store's `wpt-eval` run records for ratings, `packages/wpt-web/ui` | data files through the service layer; `ui/node_modules`, `ui/dist` |
+| edit every kind of data in a browser | `uv run wpt-web` (needs Bun), then http://127.0.0.1:8410/ (HTTP API described at `/api/openapi.json`; page "Ratings": people's pass or fail on the attempts of a `wpt-eval` run, a measure only, docs/evaluation.md; page "Source drafters": start a run and follow it, stopped with `wpt-web` and started again with it) | `data/`, a WPT model folder for drafts, the store's `wpt-eval` run records for ratings, `packages/wpt-web/ui` | data files through the service layer; `ui/node_modules`, `ui/dist`; the name it holds, in the git folder |
 
 Everything that changes a model comes from its model recipe
 (`data/recipes/models/NAME.json`: data, architecture, method and settings,
@@ -97,8 +98,8 @@ with `--resume` continues from `FOLDER/checkpoint/` (or, with `--run NAME`,
 from the store, on any machine). Exit codes: 2 refused, 3 the run's record
 could not be written, 130 stopped.
 
-Every run of `wpt-dataset build`, `wpt-train`, `wpt-posttrain` and
-`wpt-eval` writes its record into its own store folder, `records/<UTC
+Every run of `wpt-dataset build`, `wpt-dataset source-drafter`,
+`wpt-train`, `wpt-posttrain` and `wpt-eval` writes its record into its own store folder, `records/<UTC
 time>-<command>-<main id>-<random>/` (main id: the recipe name, a short
 dataset id or a short weights hash): `start.json`, `events.jsonl` (spans, events,
 every printed line), `ids.json` (the ids read and written, which chain the
@@ -130,8 +131,9 @@ signed commit (CONTRIBUTING.md, "Decisions are signed").
 (docs/architecture.md, "The service layer"): sources and patches, chat and
 task files, recipes, Dockerfiles, the signer lists, and the generated
 locks and license lists, which only the command that makes them writes.
-Code elsewhere asks it for documents, bytes and versions, never for a path
-under `data/`; `packages/wpt-dataset/tests/test_data_access.py` fails
+The reviewed license texts (`reviewed-license-texts.json`, which the source
+drafters read) are one of its kinds. Code elsewhere asks it for documents,
+bytes and versions, never for a path under `data/`; `packages/wpt-dataset/tests/test_data_access.py` fails
 otherwise, and an audit hook the layer sets refuses such an access at run
 time (`DataAccessRefused`), except from tests. Every write applies the
 rules of `wpt-dataset check`, refuses a stale save (one lock, across
@@ -241,6 +243,34 @@ Weights are AGPL-3.0-or-later; generated text is CC0-1.0 under
 `OUTPUT-NOTICE`. `packages/wpt-model/src/wpt_model/LICENSE` and
 `OUTPUT-NOTICE` are copies of the root files, and a test fails when they
 differ: change both together.
+
+## Writing a source drafter
+
+One Python file, a built-in in
+`packages/wpt-dataset/src/wpt_dataset/source_drafters/` or any path given
+to `wpt-dataset source-drafter`:
+
+```python
+from wpt_dataset.source_drafter import Candidate, Drafted, NeedsPerson, Skipped
+
+SETTINGS = {"run": "20250320"}  # changed by --set NAME=VALUE, typed from these defaults
+
+def candidates(context):  # Candidate(name, source id when known, facts as JSON)
+    ...
+
+def draft(candidate, context):  # context: repo (read only), store, settings, by, today, work (an empty
+                                # folder for this draft), fact(key, compute) (kept in the store),
+                                # fetch(address) (robots.txt and retries, as a source's fetch)
+    return Drafted(origin, item, document)  # source.json without its decision; or Skipped(reason),
+                                            # or NeedsPerson(reason, notes)
+```
+
+Never write under `data/` from it, and never give a decision: the
+framework saves every draft through the service layer, under review, and
+records what is done in the store. A step that spans candidates is the
+program's own. Check a new one by running it on a few real candidates
+(`--only`), then restore `data/`. Details: docs/architecture.md, "Source
+drafters".
 
 ## Writing an evaluation
 

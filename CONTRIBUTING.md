@@ -190,9 +190,11 @@ an erasure can remove it from future builds, never from that history (see
 good. Your signed-off commit certifies you wrote it, and it holds no other
 person's personal data and no output of another company's model.
 
-No program admits or refuses a source, or writes its tags or licenses:
-people do, and a person reviews every source. Tools such as ScanCode may
-help you find license texts; they never decide.
+No program admits or refuses a source. A program such as a source
+drafter may draft a source's licenses and tags as help: its output is not
+a source of truth, a person checks it, and only a person admits a source,
+after reviewing it. Tools such as ScanCode may help you find license
+texts; they never decide.
 
 ## Decisions are signed
 

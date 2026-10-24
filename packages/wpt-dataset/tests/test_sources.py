@@ -234,6 +234,25 @@ def test_robots_txt_is_asked_without_the_user_name_of_the_address(monkeypatch):
         robots.check("https://LeoNatan@github.com/private/repo", "git", "wpt-test")
 
 
+def test_a_cache_reads_each_robots_txt_once_and_its_rules_still_apply(monkeypatch):
+    # a source drafter asks one site thousands of times; a site may count each robots.txt read against its
+    # limit of requests, so a program that keeps a cache reads each site's file once
+    asked = []
+
+    def rules(robots_url, user_agent):
+        asked.append(robots_url)
+        return Protego.parse("User-agent: *\nDisallow: /private\n")
+
+    monkeypatch.setattr(robots, "_rules", rules)
+    cache = {}
+    robots.check("https://api.example.org/repos/a", "http", "wpt-test", cache)
+    robots.check("https://api.example.org/repos/b", "http", "wpt-test", cache)
+    with pytest.raises(CrawlForbidden, match="forbids"):
+        robots.check("https://api.example.org/private/c", "http", "wpt-test", cache)
+    robots.check("https://other.example.org/a", "http", "wpt-test", cache)
+    assert asked == ["https://api.example.org/robots.txt", "https://other.example.org/robots.txt"]
+
+
 @pytest.mark.parametrize("answer, usable",[(410, True), (403, False), (429, False)])
 def test_only_a_missing_robots_txt_means_no_rules(answer, usable, store):
     # 404 and 410 say the site has no policy; any other answer leaves its policy unknown

@@ -173,6 +173,29 @@ def test_the_lock_holds_across_processes_and_a_crashed_holder_leaves_none(repo):
     process.stdin.close()
 
 
+NAME_HOLDER = """
+import sys
+from wpt_dataset.repo import Repo
+print(Repo(sys.argv[1]).hold_name("wpt-web"), flush=True)
+sys.stdin.readline()
+"""
+
+
+def test_a_held_name_is_never_held_twice_and_is_taken_up_once_its_process_ends(repo):
+    # each wpt-web names its runs by a name it holds: two running at once never share one, and one started
+    # after another ended, crash included, takes up its name, so it finds the runs left to finish
+    process = subprocess.Popen([sys.executable, "-c", NAME_HOLDER, str(repo.root)], stdin=subprocess.PIPE,
+                               stdout=subprocess.PIPE, text=True)
+    held = process.stdout.readline().strip()
+    assert held.startswith("wpt-web-")
+    assert repo.hold_name("wpt-web") not in (held, "")
+    process.kill()
+    process.wait(30)
+    process.stdout.close()
+    process.stdin.close()
+    assert repo.hold_name("wpt-web") == held
+
+
 def test_a_save_keeps_the_layout_where_the_meaning_did_not_change(kit, repo):
     path = repo.root / "data" / "recipes" / "mixtures" / "m.json"
     text = ('{"schema": 1,\n "pools": [\n    {"name": "a", "select": "a",   "weight": 0.5},\n'

@@ -33,6 +33,14 @@
                                           build (or find) the data of a model recipe; prints the
                                           dataset id
     wpt-dataset migrate                   rewrite data files to the current shapes
+    wpt-dataset source-drafters           the built-in source drafters: what each drafts, its settings
+    wpt-dataset source-drafter NAME|FILE --by NAME [--set SETTING=VALUE ...] [--only CANDIDATE ...]
+                [--again] [--processes N]
+                                          draft sources from what a site publishes (a built-in source
+                                          drafter, or any Python file defining one) and save each
+                                          draft: a new source under review, an existing one updated in
+                                          place; only what is not done yet, so the same command resumes
+                                          after a stop
 
 Reading and writing the data files, through the service layer (wpt_dataset.repo;
 wpt-web's HTTP API does the same). Every write applies the rules of `check` and
@@ -88,8 +96,8 @@ tokens in the store, not its files: for a corpus larger than the disk.
 A failing source stops a build; --skip-failed (or WPT_SKIP_FAILED=1) leaves
 it out and lists it, with its error, in the dataset record. A build is
 recorded in the store, in its own folder under records/ (wpt_telemetry;
-docs/observability.md); when that record cannot be written, it stops with
-exit code 3. A download that fails for a reason that may pass (timeout, cut
+docs/observability.md), and so is a source drafter's run; when that record
+cannot be written, it stops with exit code 3. A download that fails for a reason that may pass (timeout, cut
 connection, server error) is tried again, up to 5 times (see retry.py); a
 build records each new try.
 """
@@ -104,7 +112,7 @@ from wpt_store import StoreError, store_from_settings
 from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry
 from wpt_utils.programs import MissingTool
 
-from . import manifest, retry
+from . import manifest, retry, source_drafter
 from .build import build_dataset, build_tokenizer
 from .commits import check_commits
 from .edit import unpack, write_patch
@@ -298,6 +306,36 @@ def cmd_build(args, repo):
           retry.reporting(telemetry.log)):  # a download tried again is part of the run's record
         telemetry.log(build_dataset(repo, args.name, store, log=telemetry.log, stream=args.stream,
                                     skip_failed=args.skip_failed, telemetry=telemetry))
+    return 0
+
+
+def cmd_source_drafters(args, repo):
+    for name in source_drafter.built_in_names():
+        found = source_drafter.describe(name)
+        print(f"{name}: {found['summary']}")
+        print(f"  settings: {json.dumps(found['settings'], ensure_ascii=False)}")
+    return 0
+
+
+def cmd_source_drafter(args, repo):
+    overrides = {}
+    for given in args.set:
+        key, equals, value = given.partition("=")
+        if not key or not equals:
+            raise InvalidFile(f"--set {given}: write SETTING=VALUE")
+        overrides[key] = value
+    only = [name for given in args.only
+            for name in (_input(given[1:]).decode("utf-8").split() if given.startswith("@") else [given])]
+    name = source_drafter.find(args.target)[0]
+    store = _store(repo)
+    with (Telemetry.start(store, source_drafter.COMMAND, args.arguments, name,
+                          inputs={"source_drafter": args.target, "started_by": args.started_by},
+                          env_file=repo.root / ".env") as telemetry,
+          retry.reporting(telemetry.log)):
+        counts = source_drafter.run(repo, store, args.target, overrides, args.by, telemetry, only=only,
+                                    again=args.again, processes=args.processes)
+        if counts["failed"]:  # recorded as the run's end: the failures are drafted again by the next run
+            sys.exit(1)
     return 0
 
 
@@ -562,6 +600,21 @@ def main(argv=None):
                             "stopping; a new vocabulary still needs every source (WPT_SKIP_FAILED)")
     build.set_defaults(run=cmd_build)
     commands.add_parser("migrate").set_defaults(run=cmd_migrate)
+    commands.add_parser("source-drafters").set_defaults(run=cmd_source_drafters)
+    drafting = commands.add_parser("source-drafter")
+    drafting.add_argument("target", metavar="NAME|FILE",
+                          help="a built-in source drafter, or a Python file defining one")
+    drafting.add_argument("--by", required=True, help="who drafts: the `by` of each draft's decision (under-review)")
+    drafting.add_argument("--set", action="append", default=[], metavar="SETTING=VALUE",
+                         help="change one of the source drafter's settings (SETTINGS), of its default's type")
+    drafting.add_argument("--only", action="append", default=[], metavar="CANDIDATE",
+                         help="draft only this candidate, by its name or the id of its source (@FILE: those the "
+                              "file lists)")
+    drafting.add_argument("--again", action="store_true", help="draft the chosen candidates even when done before")
+    drafting.add_argument("--processes", type=int, default=1, help="draft in this many processes at once")
+    drafting.add_argument("--started-by", default="", help="who started the run, kept in its record (wpt-web "
+                                                          "starts again the runs it started that did not finish)")
+    drafting.set_defaults(run=cmd_source_drafter)
     _data_commands(commands)
     args = parser.parse_args(argv)
     args.arguments = sys.argv[1:] if argv is None else list(argv)  # as the run's record names them

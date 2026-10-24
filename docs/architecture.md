@@ -34,7 +34,7 @@ natural item (lowercase `a-z 0-9 -`), for example `gutenberg-1342-05bda734`.
 reused.
 
 When a source moves to a new address, it becomes a new source with a new
-id; the old one is refused (`"decision": "refused"`), its reason naming the
+id; a person refuses the old one (`"decision": "refused"`), its reason naming the
 new source's id, mixtures naming it are updated, and its erasure cuts move
 to the new folder. When it publishes a new revision, the folder is updated
 in place: `revision` and `checksum` change, and its cuts and patches are
@@ -376,7 +376,7 @@ For S3, credentials and a non-AWS endpoint come from the usual
 settings. Objects are named by their sha256 and checked on every read.
 
 The store also holds the record of every run of `wpt-dataset build`,
-`wpt-train`, `wpt-posttrain` and `wpt-eval`: one folder per run under
+`wpt-dataset source-drafter`, `wpt-train`, `wpt-posttrain` and `wpt-eval`: one folder per run under
 `records/`, written by name rather than by content
 ([observability.md](observability.md)).
 
@@ -386,10 +386,12 @@ The store also holds the record of every run of `wpt-dataset build`,
 or writes the repository's data: the
 sources and their patches, the chat, task and rating files inside them, the
 model, tokenizer and mixture recipes, the image Dockerfiles and their
-pools of tools (`tools.json`), and the two
-signer lists (`allowed-signers`, `allowed-gpg-keys.asc`). Every command
+pools of tools (`tools.json`), the two
+signer lists (`allowed-signers`, `allowed-gpg-keys.asc`), and the
+reviewed license texts (`reviewed-license-texts.json`,
+[licenses.md](licenses.md), "Reviewed license texts"). Every command
 that uses this data goes through it: `wpt-dataset` (`check`, `migrate`,
-`build`, `check-commits` and the rest), `wpt-train`, `wpt-posttrain`, the
+`build`, `check-commits`, `source-drafter` and the rest), `wpt-train`, `wpt-posttrain`, the
 image commands of `wpt-agent`, and `wpt-web`. It hands out documents, bytes
 and versions, never a path under `data/`.
 
@@ -503,6 +505,7 @@ request body against the same description), and `wpt-dataset` commands.
 | tasks | `tasks ID`, `task ID FOLDER`, `save-task ID FOLDER` | `/api/sources/{id}/tasks[/{folder}]`; page "Tasks" |
 | people's ratings of attempts ([evaluation.md](evaluation.md), "People's ratings") | `ratings ID PATH`, `save-rating ID PATH LINE` (or `new`) | `/api/sources/{id}/ratings/{path}[/{line}]`, and the attempts of `wpt-eval` runs from the store, `/api/runs[/{folder}/attempts]`; page "Ratings" |
 | git's status of `data/` | `status` | `/api/status`, on every page |
+| source drafters and their runs ("Source drafters", below) | `source-drafters`, `source-drafter NAME\|FILE --by NAME ...` | `/api/source-drafters`, `POST /api/source-drafters/{name}/runs`, `/api/source-drafter-runs[/{folder}]`; page "Source drafters" |
 
 The HTTP API answers 404 when the thing does not exist, 409 for a stale
 save, 422 for content the rules refuse (with their messages) and 503 when
@@ -515,17 +518,100 @@ the commands, it asks for no login and no header. What that leaves open
 while it runs: a web page open in the same browser can send it a
 cross-origin `POST` with `Content-Type: text/plain`, which the browser
 sends without asking first, so such a page can start sources
-(`POST /api/sources`) or ask for drafts (`POST /api/drafts`); and a site
+(`POST /api/sources`), ask for drafts (`POST /api/drafts`) or start a run
+of a built-in source drafter (`POST /api/source-drafters/{name}/runs`); and a site
 that makes its own name resolve to 127.0.0.1 (DNS rebinding) can reach
 every route, reading people's texts and changing data files in the working
 tree. Nothing is committed by `wpt-web`, so every change shows in
 `git status` and in the page's list of changed files before a commit.
 
+## Source drafters
+
+A source drafter is a program that writes `source.json` drafts from what a
+site publishes, to add its sources or to move them to a new revision. It
+is one Python file, a built-in in
+`packages/wpt-dataset/src/wpt_dataset/source_drafters/` or any path given
+to `wpt-dataset source-drafter`:
+
+```python
+from wpt_dataset.source_drafter import Candidate, Drafted, NeedsPerson, Skipped
+
+SETTINGS = {"run": "20250320"}  # changed by --set NAME=VALUE, typed from these defaults
+
+def check(settings):  # optional: raise ValueError on settings that cannot go together
+    ...
+
+def candidates(context):  # what the site offers: Candidate(name, source id if known, facts)
+    ...
+
+def draft(candidate, context):  # context: repo (read only), store, settings, by, today,
+                                # work (an empty folder for this draft), fact(key, compute), fetch(address)
+    return Drafted(origin, item, document)  # or Skipped(reason), or NeedsPerson(reason, notes)
+```
+
+The framework (`wpt_dataset/source_drafter.py`) does the rest:
+
+- A drafted document is saved through the service layer, its decision
+  `under-review` by the run's `--by` and dated the day of the run. No
+  program admits or refuses a source.
+- A draft whose source exists (the same id) updates it in place: the
+  draft's `revision`, `checksum`, `extract`, `formats`, `submodules` and
+  `history` replace the file's (a field the draft leaves out is removed),
+  and everything else stays as it is. When the revision and the exclusions
+  stay the same and the draft gives the placeholder checksum, the
+  existing checksum stays, since the same content is pinned already.
+  When the draft's `licenses` are the same as the file's, the decision
+  stays. When they differ, the draft's replace them and the source goes
+  back to `under-review`, so the commit that holds it needs an allowed
+  signature ([CONTRIBUTING.md](../CONTRIBUTING.md), "Decisions are
+  signed").
+- A draft may name sources it supersedes (`Drafted.supersedes`, the ids
+  of sources it replaces, such as the same site's source at an older
+  address). Once the draft is saved, each of those that is `admitted`
+  or `refused` goes back to `under-review` (by the run's `--by`, dated
+  the day of the run) and nothing else in it changes. Refusing a replaced
+  source stays a person's decision. The Wikipedia source drafter names the same wiki's sources
+  from older dump runs.
+- A source that has patches is never written: its outcome is "stopped",
+  with a note, since a person redoes its patches on the new revision.
+- Every outcome (drafted, skipped, needs-a-person, stopped, failed) is
+  recorded in the run's record, `records/<folder>/` in the store
+  ([observability.md](observability.md)), and, unless it failed, in the
+  record of what is done, one ref per candidate in the store. The same
+  command, on any machine sharing the store, drafts only what is left; a
+  failed candidate is drafted again. The record of what is done is kept
+  per source drafter and settings: other settings start again, and
+  `--again` drafts the chosen candidates even when they are done.
+- `context.fact(key, compute)` keeps a site fact (a listing, a dump's
+  statistics, an official license text) in the store, computed once.
+- `--processes N` runs the drafts in N worker processes; the saves and the
+  records stay in the command's own process.
+
+Fetches from a site go through `context.fetch`, which follows the site's
+robots.txt and tries a failure that may pass again, as a source's fetch
+does. A draft's checksum is the placeholder until `wpt-dataset
+fill-checksum` fills it in. The built-ins are listed by `wpt-dataset
+source-drafters`, with their settings.
+
+The page "Source drafters" of `wpt-web` lists the built-ins, starts a run
+as a separate process (`wpt-dataset source-drafter`), and follows its
+progress from its record. A run that ends before it writes its record is
+listed with its exit code and the end of its error output.
+
+A run started there stops when `wpt-web` stops, its worker processes
+with it, and `wpt-web` starts it again, with the same arguments, when it
+starts next. Each running `wpt-web` holds a name of its checkout, kept in
+the repository's git folder, which no other process holds at the same
+time; a `wpt-web` started later takes up the name of one that ended. A
+run's record names the `wpt-web` that started it by that name, so a
+`wpt-web` starts again only its own runs, never one that another
+`wpt-web`, on this machine or another sharing the store, still runs.
+
 ## Packages
 
 | Package | Role |
 | --- | --- |
-| `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; the service layer (`repo.py`), the only code that reads or writes `data/`; the task builder (`builder.py`, run by `scripts/build_tasks.py`); command `wpt-dataset` |
+| `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; the service layer (`repo.py`), the only code that reads or writes `data/`; the task builder (`builder.py`, run by `scripts/build_tasks.py`); the source drafters (`source_drafter.py`, the built-ins in `source_drafters/`); command `wpt-dataset` |
 | `wpt-store` | the content-addressed store (local or S3), its record folders, and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules |
 | `wpt-telemetry` | the record of one command run in the store, sent live to an OpenTelemetry backend when one is set ([observability.md](observability.md)) |
 | `wpt-tokenizer` | the byte-level BPE tokenizer, Rust inside |
