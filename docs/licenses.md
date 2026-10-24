@@ -573,7 +573,15 @@ when it is:
   collection covers its records only when it is the license of the content
   itself: the dataset's makers made that content or state that it is under
   that license. A license on a collection whose content belongs to others,
-  and is copyrighted, covers none of its records. A value that joins several licenses with
+  and is copyrighted, covers none of its records. When the owners of the
+  content state that it is under a later version of a license than the
+  value its records carry, their statement decides: that value is mapped to
+  the later version, and the entry's `text` quotes the statement. A
+  statement by a host or a distributor that does not own the content does
+  not count. Terms of use that contributors accept when they publish are
+  the owners' own statement, and a license whose text allows sharing a
+  changed version under a later version lets that content move to the
+  later version. A value that joins several licenses with
   commas is their `AND` ("Several licenses on one file", above): its
   entry is allowed only when every license in it is, and its `text` holds
   every one of their texts. When a value is known to be wrong for part of
