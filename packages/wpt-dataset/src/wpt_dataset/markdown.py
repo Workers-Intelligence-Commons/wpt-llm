@@ -308,6 +308,25 @@ def _name(element) -> str | None:
     return element.tag.rpartition("}")[2] if isinstance(element.tag, str) else None
 
 
+def _rows(table):
+    """A table's own rows, never those of a table inside one of its cells,
+    which that cell renders."""
+    for child in table:
+        if _name(child) == "tr":
+            yield child
+        elif _name(child) in ("thead", "tbody", "tfoot"):
+            yield from (row for row in child if _name(row) == "tr")
+
+
+def _address(href: str):
+    """A link's address in parts; None when it is no valid URL, so the link
+    keeps only its text, as a browser shows it."""
+    try:
+        return urlparse(href)
+    except ValueError:
+        return None
+
+
 def _integer(value: str | None, default: int) -> int:
     """An integer attribute read as HTML reads it: spaces, a sign, then
     digits, the rest ignored; the default when no digit comes."""
@@ -441,7 +460,7 @@ class Page:
         return [("\n\n" if loose else "\n").join(items)] if items else []
 
     def table(self, element) -> list[str]:
-        rows = [row for row in element.iter() if _name(row) == "tr"]
+        rows = list(_rows(element))
         cells = [[cell for cell in row if _name(cell) in ("td", "th")] for row in rows]
         if any("z3998:persona" in _kinds(c) for row in cells for c in row):  # a dialogue
             out = []
@@ -495,7 +514,8 @@ class Page:
             raw = "".join(element.itertext())
             ticks = "`" * (max((len(r) for r in re.findall("`+", raw)), default=0) + 1)
             return f"{ticks} {raw} {ticks}" if raw.startswith("`") or raw.endswith("`") else f"{ticks}{raw}{ticks}"
-        if name == "a" and urlparse(element.get("href") or "").scheme in ("http", "https") and inner.strip():
+        address = _address(element.get("href") or "") if name == "a" else None
+        if address is not None and address.scheme in ("http", "https") and inner.strip():
             return f"[{inner}](<{element.get('href')}>)"
         if name in HEADINGS or name in PARAGRAPHS or name in CONTAINERS:  # a block inside a line: keep its words
             return " " + inner + " "
@@ -506,7 +526,7 @@ class Page:
         return _name(element) == "a" and href.startswith("#") and unquote(href[1:]) in self.back
 
     def reference(self, element) -> str:
-        href = urlparse(element.get("href") or "")
+        href = _address(element.get("href") or "") or urlparse("")
         found = self.html_notes.get(element)
         if found is None:
             if href.scheme or href.netloc or not href.fragment:
