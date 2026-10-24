@@ -1,0 +1,90 @@
+{
+  "schema": 7,
+  "type": "http-archive",
+  "address": "https://download.europeana.eu/newspapers/fulltext/edm_issue/9200396.zip",
+  "addresses": [
+    {
+      "folder": "fulltext",
+      "address": "https://download.europeana.eu/newspapers/fulltext/edm_issue/9200396.zip",
+      "note": "one RDF/XML file per issue, 9200396/BibliographicResource_<n>.xml, its text in rdf:value"
+    },
+    {
+      "folder": "metadata",
+      "address": "https://download.europeana.eu/newspapers/metadata/9200396.zip",
+      "note": "one EDM file per issue, http%3A%2F%2Fdata.theeuropeanlibrary.org%2FBibliographicResource%2F<n>.edm.xml, with its rights, date, title and library"
+    }
+  ],
+  "revision": "2026-10-23",
+  "checksum": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "values": [
+        "http://creativecommons.org/publicdomain/mark/1.0/"
+      ],
+      "attribution": "Europeana Newspapers, National Library of Luxembourg (data provider), The European Library (provider), https://www.europeana.eu/; each issue's title, date and address are in the credit of each document",
+      "text": "Public domain. Each issue's own metadata (edm:rights) labels it with the Public Domain Mark 1.0, http://creativecommons.org/publicdomain/mark/1.0/; the publication's own label is the proof (docs/licenses.md, maintainer's decision, 2026-10-23). An issue enters only with that label and a date of publication (dcterms:issued) in 1955 or earlier, the European Union's term for a newspaper issue (docs/licenses.md, newspaper rule, maintainer's decision, 2026-10-23).",
+      "note": "the metadata files are read only for each issue's license value and credit, and give no document"
+    }
+  ],
+  "formats": [
+    {
+      "format": "records",
+      "paths": [
+        "fulltext/**"
+      ],
+      "namespaces": {
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "edm": "http://www.europeana.eu/schemas/edm/",
+        "dc": "http://purl.org/dc/elements/1.1/",
+        "dcterms": "http://purl.org/dc/terms/"
+      },
+      "text": "//edm:FullTextResource/rdf:value",
+      "license": "$metadata//edm:rights/@rdf:resource",
+      "credit": [
+        "$metadata//edm:ProvidedCHO/@rdf:about",
+        "$metadata//edm:ProvidedCHO/dc:title",
+        "$metadata//edm:ProvidedCHO/dcterms:issued",
+        "$metadata//edm:dataProvider"
+      ],
+      "keep": [
+        {
+          "field": "number(substring($metadata//edm:ProvidedCHO/dcterms:issued, 1, 4)) <= 1955",
+          "in": [
+            "true"
+          ]
+        }
+      ],
+      "join": {
+        "name": "metadata",
+        "paths": [
+          "metadata/**"
+        ],
+        "key": "BibliographicResource_([0-9]+)\\.xml$",
+        "joined_key": "BibliographicResource%2F([0-9]+)\\.edm\\.xml$",
+        "note": "an issue's metadata file has the issue's number, as the full-text file has it"
+      },
+      "note": "one issue per full-text file; its license value and credit come from the metadata file of the same issue"
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "fr",
+        "news"
+      ],
+      "paths": [
+        "**"
+      ],
+      "note": "fr: the dc:language of every one of the 1,319 metadata files of this library (2026-10-23)"
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-23"
+  }
+}
