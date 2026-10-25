@@ -14,7 +14,7 @@ template can train on an element that an earlier one skipped, without
 recording anything again.
 
 Recording everything does not widen what may be recorded: the rules of
-[post-training.md](post-training.md) still apply to every element. An
+[training.md](training.md) still apply to every element. An
 `assistant` message in a demonstration is written by a person, never by
 another company's model; it may start as a draft of a WPT model that the
 person then edits or confirms, and its metadata records that
@@ -42,7 +42,7 @@ person then edits or confirms, and its metadata records that
      "metadata": {"draft": {"model": "wpt-small", "weights": {"model.safetensors": "<sha256>"},
                             "sha256": "<sha256 of the draft's content>", "edited": true}}}
   ],
-  "metadata": {"step": "grpo", "task": "<task id>", "round": 1}
+  "metadata": {"step": "finish-tasks", "task": "<task id>", "round": 1}
 }
 ```
 
@@ -59,8 +59,8 @@ person then edits or confirms, and its metadata records that
   hold `metadata`, a JSON object never written as tokens; its one named
   field is `draft` ([Model drafts](#model-drafts)).
 - `metadata`: optional. What identifies the conversation where it was
-  recorded, as any JSON object: a post-training attempt's step, task, round
-  and score ([post-training.md](post-training.md), "Runs"). It is never
+  recorded, as any JSON object: a training attempt's step, task, round
+  and score ([training.md](training.md), "Runs"). It is never
   written as tokens.
 
 A conversation of an earlier shape (1, without any `metadata`, or 2,
@@ -135,7 +135,8 @@ meaning, and raising `schema` with a migration covers any change to them.
 The model never writes JSON, except its tool calls, which other harnesses
 parse as JSON: it writes text and special tokens, and the harness builds
 every `json` block and value in the records, in a shape that can later go
-back into sources, as `sft` data for example.
+back into sources, as conversations for the `answer-as-assistant` step
+for example.
 
 The model's final reply, its last assistant message, one with no tool call,
 is its answer, as text. The agent loop (`wpt_agent.loop`) then adds one
@@ -144,7 +145,7 @@ else, the same question for every task (`CONFIDENCE` in
 `wpt_agent/loop.py`, the one place it is written). The model's reply to it
 is read, divided by 100, and the loop builds the attempt's
 `metadata.answer`, which the task's check reads
-([post-training.md](post-training.md), "Scores"):
+([training.md](training.md), "Scores"):
 
 ```json
 {"answer": "calc.py adds instead of subtracting; fixed line 12.", "confidence": 0.8}
@@ -167,7 +168,7 @@ final reply, stopped by a limit or by the end of a document written in a
 turn with a tool call: its `metadata.answer` is `null`, the shared check
 library that every check calls scores its `correct` part 0, and the step
 that learns makes the whole attempt worth 0, whatever its other parts
-(post-training.md, "Rewards"). The confidence turn counts against
+(training.md, "Rewards"). The confidence turn counts against
 `max_tokens` and the context, not against `max_turns`. No task's
 instructions ask for a block or say how to answer. There is no way to
 abstain: "I don't know" is never a way out that costs nothing.
@@ -187,9 +188,11 @@ against `packages/wpt-dataset/src/wpt_dataset/schemas/conversation.schema.json`
 `tool` message holds `tool_result` blocks) and checks that each
 `tool_result` answers a `tool_call` made earlier in the conversation.
 
-A `chat` file is never a pre-training document. A post-training step reads
-the `chat` files whose tags include the step's name: the `sft` step reads
-the files tagged `sft` ([post-training.md](post-training.md)).
+A `chat` file is never a pre-training document. A dataset's build keeps
+every conversation with the tags of its file, and a training step reads
+those whose tags include its `tag` setting: the `answer-as-assistant`
+step reads the conversations tagged `answer-as-assistant`
+([training.md](training.md), "The answer-as-assistant step").
 
 ### Message trees
 

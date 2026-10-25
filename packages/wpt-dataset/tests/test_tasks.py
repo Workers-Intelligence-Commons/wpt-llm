@@ -45,20 +45,20 @@ def test_tagged_task_folders_reach_their_step_and_never_pretraining(kit, repo, s
     files = {"tasks/hello/task.json": json.dumps(hello).encode(), "tasks/hello/check": CHECK, "tasks/hello/files/README": b"start\n",
              "tasks/hello/files/sub/task.json": b"a starting file, not a task\n",
              "tasks/other/task.json": task, "tasks/other/check": CHECK, "notes.txt": b"words\n"}
-    source = add(kit, repo, store, tmp_path / "work", files, [{"tags": ["grpo"], "paths": ["tasks/hello/**"]},
+    source = add(kit, repo, store, tmp_path / "work", files, [{"tags": ["finish-tasks"], "paths": ["tasks/hello/**"]},
                                                               {"tags": ["en"], "paths": ["notes.txt"]}])
     tree, _ = source_tree(source, store)
     assert [c.path for c in documents(source, tree, store, repo)] == ["notes.txt"]
 
-    found, sources = tasks.read(repo, store, "grpo", 0)
+    found, sources = tasks.read(repo, store, "finish-tasks", 0)
     assert found == [tasks.Task(f"{source.id}/tasks/hello", "Write hello into out.txt.", "tiny", 4, 200, 5,
                                 {"README": (FILE, b"start\n"),
                                  "sub/task.json": (FILE, b"a starting file, not a task\n")}, CHECK,
                                 {"memory": 8192, "disk": 1024, "processes": 256, "cpus": 4},
                                 ((tasks.Variant(("write",)), tasks.Variant(("bash",))),), area=("out.txt",),
-                                gates=("sources_first",))]
+                                gates=("sources_first",), tags=frozenset({"finish-tasks"}))]
     assert list(sources) == [source.id] and sources[source.id]["revision"] == source.data["revision"]
-    assert tasks.read(repo, store, "sft", 0) == ([], {})
+    assert tasks.read(repo, store, "answer-as-assistant", 0) == ([], {})
     other = tasks.of_source(source, tree, store, repo)["tasks/other"]
     assert other.files == {} and (other.area, other.gates) == (None, ())
     assert tree["tasks/hello/check"].mode == EXECUTABLE
@@ -77,8 +77,8 @@ def test_a_task_s_tools_replies_and_hidden_files_reach_its_step(kit, repo, store
     files = {"tasks/a/task.json": json.dumps(document).encode(), "tasks/a/check": CHECK,
              "tasks/a/files/README": b"start\n", "tasks/a/files/corpus/one.txt": b"one\n",
              "tasks/a/files/corpus.txt": b"seen by the model\n"}
-    add(kit, repo, store, tmp_path / "work", files, [{"tags": ["grpo"], "paths": ["**"]}])
-    [found], _ = tasks.read(repo, store, "grpo", 0)
+    add(kit, repo, store, tmp_path / "work", files, [{"tags": ["finish-tasks"], "paths": ["**"]}])
+    [found], _ = tasks.read(repo, store, "finish-tasks", 0)
     assert (found.tools, found.replies, found.answered_by, found.answered_in) == (
         (SEARCH,), (("(?i)colou?r", "Blue."),), ("read", "search"), ("README", "notes/*.txt"))
     assert found.needs == ((tasks.Variant(("search",)),),
@@ -112,8 +112,8 @@ def test_a_task_holds_its_request_in_full_and_in_one_line(kit, repo, store, tmp_
     # one-line form keeps "" for it
     files = {"tasks/a/task.json": json.dumps({**TASK, "terse": "Say hello."}).encode(), "tasks/a/check": CHECK,
              "tasks/b/task.json": json.dumps(TASK).encode(), "tasks/b/check": CHECK}
-    add(kit, repo, store, tmp_path / "work", files, [{"tags": ["grpo"], "paths": ["**"]}])
-    found, _ = tasks.read(repo, store, "grpo", 0)
+    add(kit, repo, store, tmp_path / "work", files, [{"tags": ["finish-tasks"], "paths": ["**"]}])
+    found, _ = tasks.read(repo, store, "finish-tasks", 0)
     assert [(task.instructions, task.terse) for task in found] == [("Write hello into out.txt.", "Say hello."),
                                                                    ("Write hello into out.txt.", "")]
 
@@ -133,8 +133,8 @@ def test_a_pointer_task_gets_its_texts_from_the_document_it_points_into(kit, rep
         pointer(book, text, "web/example.org/lamp", 0, second),
         pointer(book, text, "missing.txt", second, third, to="check")]}
     task = add(kit, repo, store, tmp_path / "work", {"tasks/a/task.json": json.dumps(document).encode(),
-                                                     "tasks/a/check": CHECK}, [{"tags": ["grpo"], "paths": ["**"]}])
-    [found], sources = tasks.read(repo, store, "grpo", 0, dataset=listed(store))
+                                                     "tasks/a/check": CHECK}, [{"tags": ["finish-tasks"], "paths": ["**"]}])
+    [found], sources = tasks.read(repo, store, "finish-tasks", 0, dataset=listed(store))
     assert found.files == {"book.txt": (FILE, text[:second] + text[third:])}
     assert found.tool_files == {"web/example.org/lamp": (FILE, b"The lamp was lit at dusk. ")}
     assert found.check_files == {"missing.txt": (FILE, b"The keeper wrote the hour in his log. ")}
@@ -151,7 +151,7 @@ def test_a_pointer_whose_span_changed_or_whose_source_is_not_admitted_stops_the_
     stale = {**pointer(book, text, "book.txt", 0, 10), "sha256": hashlib.sha256(b"other text").hexdigest()}
     task = add(kit, repo, store, tmp_path / "work",
                {"tasks/a/task.json": json.dumps({**TASK, "pointers": [stale]}).encode(), "tasks/a/check": CHECK},
-               [{"tags": ["grpo"], "paths": ["**"]}])
+               [{"tags": ["finish-tasks"], "paths": ["**"]}])
     with pytest.raises(InvalidFile, match=rf"{task.id}/tasks/a/task.json: the pointer to 'book.txt': the span "
                                           rf"\[0, 10\] of {book.id}/notes.txt no longer holds the text it pointed to"):
         repo.check_fetched(task.id, store)
@@ -171,7 +171,7 @@ def test_a_changed_source_checks_the_task_sources_that_point_into_it(kit, repo, 
     [text] = [c.markdown for c in documents(book, tree, store, repo)]
     task = add(kit, repo, store, tmp_path / "work",
                {"tasks/a/task.json": json.dumps({**TASK, "pointers": [pointer(book, text, "a.txt", 0, 8)]}).encode(),
-                "tasks/a/check": CHECK}, [{"tags": ["grpo"], "paths": ["**"]}])
+                "tasks/a/check": CHECK}, [{"tags": ["finish-tasks"], "paths": ["**"]}])
     other = add(kit, repo, store, tmp_path / "other",
                 {"tasks/b/task.json": json.dumps(TASK).encode(), "tasks/b/check": CHECK}, [])
     kit.run("git", "init", "-q", cwd=repo.root)
@@ -193,7 +193,7 @@ def test_a_deleted_source_gets_the_task_sources_that_pointed_into_it_checked(
     [text] = [c.markdown for c in documents(book, tree, store, repo)]
     task = add(kit, repo, store, tmp_path / "work",
                {"tasks/a/task.json": json.dumps({**TASK, "pointers": [pointer(book, text, "a.txt", 0, 8)]}).encode(),
-                "tasks/a/check": CHECK}, [{"tags": ["grpo"], "paths": ["**"]}])
+                "tasks/a/check": CHECK}, [{"tags": ["finish-tasks"], "paths": ["**"]}])
     kit.run("git", "init", "-q", cwd=repo.root)
     kit.run("git", "add", "-A", cwd=repo.root)
     kit.run("git", "commit", "-q", "-m", "sources", cwd=repo.root)
@@ -209,7 +209,7 @@ def test_a_pointer_with_an_empty_span_is_refused_as_such_even_with_removed_parts
     empty = {**pointer(book, BOOK, "a.txt", 5, 5), "removed": [[1, 2]]}
     task = add(kit, repo, store, tmp_path / "work",
                {"tasks/a/task.json": json.dumps({**TASK, "pointers": [empty]}).encode(), "tasks/a/check": CHECK},
-               [{"tags": ["grpo"], "paths": ["**"]}])
+               [{"tags": ["finish-tasks"], "paths": ["**"]}])
     with pytest.raises(InvalidFile, match=r"the pointer to 'a.txt' has the empty span \[5, 5\]"):
         repo.check_fetched(task.id, store)
 
@@ -223,6 +223,26 @@ def test_the_image_tool_pool_declares_its_tools_as_a_task_does():
            {key: task["$defs"][key] for key in ("name", "tool")}
 
 
+def test_a_task_kept_in_a_dataset_reads_back_as_the_same_task():
+    # a dataset keeps its tasks as JSON lines, which the training steps read
+    # back: every field comes back as it was, the bytes of every kind of file
+    # and every need's variants included
+    files = {"notes.txt": ("100644", b"start\n"), "run": ("100755", b"#!/bin/sh\n\xff\n")}
+    task = tasks.Task(
+        "example-tasks/hello", "Write hello into out.txt.", "tiny", 4, 200, 5.0, files, CHECK,
+        container={**tasks.SIZES, "memory": 2048},
+        needs=((tasks.Variant(("write",)), tasks.Variant(("bash",), ("bin",))),),
+        replies=(("which file", "out.txt"),), tools=(SEARCH,), tool_files={"index": ("100644", b"hello\n")},
+        outside={"/tmp/origin.git": {"HEAD": ("100644", b"ref: refs/heads/main\n")}},
+        check_files={"expected": ("100644", b"hello\n")}, answered_by=("search",), answered_in=("notes/**",),
+        documents=(("example-text", "book.md", "a" * 64),), held_out_keys=("example-text/book.md",),
+        absent=("/usr/share/doc",), terse="Write hello.", area=("out.txt",), gates=("correct",),
+        tags=frozenset({"finish-tasks", "finish-tasks-with-less-writing"}))
+    defaults = tasks.Task("", "", "", 0, 0, 0.0, {}, b"")
+    assert [name for name in tasks.JSON_FIELDS if getattr(task, name) == getattr(defaults, name)] == []
+    assert tasks.from_json(json.loads(json.dumps(tasks.to_json(task)))) == task
+
+
 def test_measure_tasks_never_reach_training_and_the_measures_get_them(kit, repo, store, tmp_path):
     # tasks tagged eval, and the share of every task source the recipe's
     # held_out holds out by a hash of the task id (as documents are held
@@ -231,13 +251,13 @@ def test_measure_tasks_never_reach_training_and_the_measures_get_them(kit, repo,
     names = [f"t{i}" for i in range(12)]
     files = {f"tasks/{name}/{part}": content for name in names
              for part, content in (("task.json", json.dumps(TASK).encode()), ("check", CHECK))}
-    source = add(kit, repo, store, tmp_path / "work", files, [{"tags": ["grpo"], "paths": ["**"]},
+    source = add(kit, repo, store, tmp_path / "work", files, [{"tags": ["finish-tasks"], "paths": ["**"]},
                                                               {"tags": ["eval"], "paths": ["tasks/t0/**"]}])
     held = {f"{source.id}/tasks/{name}" for name in names if is_held_out(f"{source.id}/tasks/{name}", 0.5)}
     assert 0 < len(held) < len(names)  # the share leaves some on both sides
     measures = held | {f"{source.id}/tasks/t0"}
-    training, _ = tasks.read(repo, store, "grpo", 0.5)
-    measured, _ = tasks.read(repo, store, "grpo", 0.5, measure=True)
+    training, _ = tasks.read(repo, store, "finish-tasks", 0.5)
+    measured, _ = tasks.read(repo, store, "finish-tasks", 0.5, measure=True)
     assert {task.id for task in measured} == measures
     assert {task.id for task in training} == {f"{source.id}/tasks/{name}" for name in names} - measures
 
@@ -246,7 +266,7 @@ def test_a_task_on_the_text_of_a_held_out_document_is_measure_only(kit, repo, st
     # a held-out document never reaches
     # training through a task, also when the task points into another
     # source's copy of its text, whose own id is not held out; the held-out
-    # texts are those the base model's dataset lists as held out
+    # texts are those the model's dataset lists as held out
     held, kept = [], []
     for number in range(16):  # sources with the same text, until one is held out by its id and one is not
         source = add(kit, repo, store, tmp_path / f"copy{number}", {"notes.txt": BOOK}, [])
@@ -262,13 +282,13 @@ def test_a_task_on_the_text_of_a_held_out_document_is_measure_only(kit, repo, st
     files = {f"tasks/{name}/{part}": content for name in names for part, content in (
         ("task.json", json.dumps({**TASK, "pointers": [pointer(kept[0] if int(name[1:]) % 2 else other, text,
                                                                "a.txt", 0, 10)]}).encode()), ("check", CHECK))}
-    work = add(kit, repo, store, tmp_path / "work", files, [{"tags": ["grpo"], "paths": ["**"]}])
+    work = add(kit, repo, store, tmp_path / "work", files, [{"tags": ["finish-tasks"], "paths": ["**"]}])
     ids = {f"{work.id}/tasks/{name}" for name in names if not is_held_out(f"{work.id}/tasks/{name}", 0.5)}
     copied = {f"{work.id}/tasks/{name}" for name in names if int(name[1:]) % 2}
     assert ids & copied and ids - copied  # some tasks of each kind not held out by their own id
     dataset = listed(store, [(held[0].id, "notes.txt", text)], 0.5)
-    training, _ = tasks.read(repo, store, "grpo", 0.5, dataset=dataset)
-    measured, _ = tasks.read(repo, store, "grpo", 0.5, measure=True, dataset=dataset)
+    training, _ = tasks.read(repo, store, "finish-tasks", 0.5, dataset=dataset)
+    measured, _ = tasks.read(repo, store, "finish-tasks", 0.5, measure=True, dataset=dataset)
     assert {task.id for task in training} == ids - copied
     assert {task.id for task in measured} == {f"{work.id}/tasks/{name}" for name in names} - (ids - copied)
 
@@ -293,9 +313,9 @@ def test_a_task_pointing_into_a_document_held_out_by_its_group_is_measure_only(k
     files = {f"tasks/{name}/{part}": content for name in names for part, content in (
         ("task.json", json.dumps({**TASK, "pointers": [pointer(book, text, "a.txt", 0, 10)]}).encode()),
         ("check", CHECK))}
-    add(kit, repo, store, tmp_path / "work", files, [{"tags": ["grpo"], "paths": ["**"]}])
-    training, _ = tasks.read(repo, store, "grpo", 0.5, dataset=listed(store))
-    measured, _ = tasks.read(repo, store, "grpo", 0.5, measure=True, dataset=listed(store))
+    add(kit, repo, store, tmp_path / "work", files, [{"tags": ["finish-tasks"], "paths": ["**"]}])
+    training, _ = tasks.read(repo, store, "finish-tasks", 0.5, dataset=listed(store))
+    measured, _ = tasks.read(repo, store, "finish-tasks", 0.5, measure=True, dataset=listed(store))
     assert training == [] and len(measured) == len(names)
 
 
@@ -310,14 +330,14 @@ def test_pointer_tasks_are_refused_when_the_base_dataset_kept_no_document_list(k
     [text] = [c.markdown for c in documents(book, tree, store, repo)]
     add(kit, repo, store, tmp_path / "work", {"tasks/a/task.json": json.dumps(
         {**TASK, "pointers": [pointer(book, text, "a.txt", 0, 10)]}).encode(), "tasks/a/check": CHECK},
-        [{"tags": ["grpo"], "paths": ["**"]}])
+        [{"tags": ["finish-tasks"], "paths": ["**"]}])
     # a dataset this store does not hold is named as absent, not as old
-    with pytest.raises(DocumentListMissing, match=f"dataset {'e' * 64}, the base model's, is not in this store"):
-        tasks.read(repo, store, "grpo", 0, dataset="e" * 64)
+    with pytest.raises(DocumentListMissing, match=f"dataset {'e' * 64}, the model's, is not in this store"):
+        tasks.read(repo, store, "finish-tasks", 0, dataset="e" * 64)
     store.set_ref("datasets", "e" * 64, store.put_bytes(b"{}\n"))  # the dataset's record, and no document list
     with pytest.raises(DocumentListMissing, match=f"dataset {'e' * 64} predates document lists.*used with the "
                                                    f"repository at the commit that built it$"):
-        tasks.read(repo, store, "grpo", 0, dataset="e" * 64)
+        tasks.read(repo, store, "finish-tasks", 0, dataset="e" * 64)
 
 
 @pytest.mark.parametrize("files, error", [
@@ -379,8 +399,8 @@ def test_pointer_tasks_are_refused_when_the_base_dataset_kept_no_document_list(k
 ])
 def test_a_broken_task_folder_stops_the_check(kit, repo, store, tmp_path, files, error):
     # a task that cannot run must be caught when the source is checked, not
-    # in the middle of a post-training run
-    source = add(kit, repo, store, tmp_path / "work", files, [{"tags": ["grpo"], "paths": ["**"]}])
+    # in the middle of a training run
+    source = add(kit, repo, store, tmp_path / "work", files, [{"tags": ["finish-tasks"], "paths": ["**"]}])
     with pytest.raises(InvalidFile, match=error):
         list(documents(source, source_tree(source, store)[0], store, repo))
 
@@ -389,7 +409,7 @@ def test_a_changed_image_folder_checks_every_source_with_tasks(kit, repo, store,
     # CI fetches only the changed sources; a task naming an image that a
     # change removed must still be caught before it merges
     add(kit, repo, store, tmp_path / "work", {"tasks/a/task.json": json.dumps(TASK).encode(), "tasks/a/check": CHECK},
-        [{"tags": ["grpo"], "paths": ["**"]}])
+        [{"tags": ["finish-tasks"], "paths": ["**"]}])
     kit.run("git", "init", "-q", cwd=repo.root)
     kit.run("git", "add", "-A", cwd=repo.root)
     kit.run("git", "commit", "-q", "-m", "tasks", cwd=repo.root)

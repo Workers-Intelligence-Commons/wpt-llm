@@ -1,4 +1,4 @@
-/* ondrik: the program of the read-the-manual tasks (docs/post-training.md,
+/* ondrik: the program of the read-the-manual tasks (docs/training.md,
  * "The agent image"). The image compiles it in a build stage and installs
  * only the binary, on the path, executable but not readable by the
  * model's user, with its manual, /usr/share/doc/ondrik/manual.txt, which a

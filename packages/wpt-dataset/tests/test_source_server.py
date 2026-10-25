@@ -21,7 +21,7 @@ def candidates(context):
 
 def draft(candidate, context):
     return Drafted("example", "drafted", {
-        "schema": 7, "type": "http-file", "address": context.settings["address"], "revision": "2026-10-25",
+        "schema": 8, "type": "http-file", "address": context.settings["address"], "revision": "2026-10-25",
         "checksum": "sha256:" + "0" * 64,
         "licenses": [{"license": "MIT", "paths": ["**"], "attribution": context.settings["attribution"],
                       "text": context.settings["text"]}],

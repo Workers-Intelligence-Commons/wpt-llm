@@ -34,9 +34,9 @@ def images(repo):
 
 
 def task_source(repo, store):
-    """An empty source made for the built tasks, its license text written and admitted, tagged grpo."""
+    """An empty source made for the built tasks, its license text written and admitted, tagged finish-tasks."""
     document = empty_source("built", license="CC0-1.0", attribution="A. Person, built tasks",
-                            text="CC0 1.0 Universal\n", by="A. Person", formats={"README": "text"}, tags=["grpo"])
+                            text="CC0 1.0 Universal\n", by="A. Person", formats={"README": "text"}, tags=["finish-tasks"])
     sid = repo.create_source("mine", "built", document, {}, "first", store)
     data = repo.source(sid).data
     repo.save("source", sid, {**data, "decision": {"decision": "admitted", "by": "A. Person", "date": "2026-10-22"}},
@@ -61,9 +61,9 @@ def built(repo, store, kind, count, seed=1, measure=False):
     made = builder.build(repo, store, kind, count, seed, "en", log=lambda _: None)
     sid = task_source(repo, store)
     builder.write(repo, store, sid, kind, made, repo.source_version(sid))
-    # the base model's dataset, its document list kept, and nothing held out
+    # the model's dataset, its document list kept, and nothing held out
     write_document_list(store, "d" * 64, [], set(), Telemetry.off())
-    found, _ = tasks.read(repo, store, "grpo", 0, measure=measure, dataset="d" * 64)
+    found, _ = tasks.read(repo, store, "finish-tasks", 0, measure=measure, dataset="d" * 64)
     # the final reply is the answer, as text; no instructions ask for JSON
     assert not any("JSON" in task.instructions or "confidence" in task.instructions for task in found)
     return made, sorted(found, key=lambda task: task.id)
@@ -166,7 +166,7 @@ def test_read_the_manual_tasks_ask_for_a_result_of_ondrik_and_half_remove_its_ma
     _, found = built(repo, store, "read-the-manual", 8, measure=True)
     [sid] = {task.id.split("/", 1)[0] for task in found}
     assert {"tags": [EVAL], "paths": ["read-the-manual/**"]} in repo.source(sid).data["tags"]
-    assert tasks.read(repo, store, "grpo", 0, dataset="d" * 64)[0] == []
+    assert tasks.read(repo, store, "finish-tasks", 0, dataset="d" * 64)[0] == []
     halves = {}
     for task in found:
         assert task.needs == ((tasks.Variant(("bash",)),),) and task.files == {}

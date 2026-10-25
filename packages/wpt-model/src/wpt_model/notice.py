@@ -94,9 +94,8 @@ def notice(provenance) -> str:
         *_built_from(provenance), "", "",
         "Sources this model learned from", "",
         "Each source with its exact revision, and for each license the paths it",
-        "covers and the credit it asks for, as recorded when the dataset was built",
-        "or when a post-training step read it. Their license texts follow the list,",
-        "each text once.",
+        "covers and the credit it asks for, as recorded when the dataset was built.",
+        "Their license texts follow the list, each text once.",
     ]
     texts = {}  # text -> the sources and licenses that give it
     for sid, source in sorted(learned_from(provenance).items()):
@@ -136,14 +135,11 @@ def card(config, provenance, evals, drafter=None) -> str:
         f"- Context: {config['block_size']} tokens; vocabulary: {config['vocab_size']:,} tokens", "",
         "## Training", "",
         f"- Dataset: `{provenance['dataset']}`",
-        f"- {_steps(provenance)}, {_batch(provenance)}",
-        f"- Method: {provenance['method']['name']} "
-        f"({', '.join(f'{k} {v}' for k, v in sorted(provenance['method']['settings'].items()))})",
-        f"- Best validation loss: {provenance['best_validation_loss']:.4f}",
         *(f"- {line}" for line in _built_from(provenance)),
         f"- Device: {provenance['device']}",
         f"- Every input and tool version: [provenance.json](provenance.json)", "",
-        *_post_training(provenance.get("post_training")),
+        "The steps, in order, each on the weights the one before it left:", "",
+        *(f"{number}. {_step(step)}" for number, step in enumerate(provenance["steps"], start=1)), "",
         *_drafter(drafter),
         "## Sources", "",
         "| Source | Revision | Licenses |", "|---|---|---|",
@@ -162,10 +158,10 @@ def card(config, provenance, evals, drafter=None) -> str:
 
 
 def learned_from(provenance) -> dict:
-    """Every source the model learned from: the pre-training dataset's, then
-    those post-training steps read. The drafter adds none: its prompts are
-    the beginnings of the dataset's training documents."""
-    return {**provenance["sources"], **(provenance.get("post_training") or {}).get("sources", {})}
+    """Every source the model learned from: those of every step. The
+    drafter adds none: its prompts are the beginnings of the dataset's
+    training documents."""
+    return provenance["sources"]
 
 
 def _drafter(drafter):
@@ -193,52 +189,38 @@ def _drafter(drafter):
     return lines + [""]
 
 
-def _post_training(post_training):
-    if not post_training:
-        return []
-    return ["## Post-training", "",
-            "Trained from the base weights "
-            + ", ".join(f"`{name}` (sha256 `{sha[:12]}`)" for name, sha in post_training["base_weights"].items())
-            + ", then changed by these steps, in order; every one succeeded:", "",
-            *(f"{i}. `{step['file']}` (sha256 `{step['file_sha256'][:12]}`)"
-              + (f", trained on {', '.join(step['sources'])}" if step.get("sources") else "")
-              for i, step in enumerate(post_training["steps"], start=1)),
-            "", *(f"- {line}" for line in _built_from(post_training)), ""]
+TEXT = "windows"  # what a step that reads text reads, as provenance.json's steps say (`reads`)
 
 
 def _model_kind(provenance):
-    if provenance.get("post_training"):
+    if all(step["reads"] == TEXT for step in provenance["steps"]):
         return ["A WPT mixture-of-experts model (KDA, CSA and HCA attention, mHC residual",
-                "streams, Engram memory), pre-trained and then changed by the post-training",
-                "steps below.", ""]
+                "streams, Engram memory). It is trained on text only: it continues text and",
+                "follows no instructions.", ""]
     return ["A WPT mixture-of-experts model (KDA, CSA and HCA attention, mHC residual",
-            "streams, Engram memory). It is pre-trained only: it continues text and follows",
-            "no instructions.", ""]
+            "streams, Engram memory), trained by the steps below.", ""]
 
 
-def _steps(provenance):
-    training = provenance["recipe"]["training"]
-    stages = training.get("stages")  # recipes before shape 4 had one window length and its steps
-    limit = sum(stage["steps"] for stage in stages) if stages else training["steps"]
-    if "steps_trained" not in provenance:  # trained before the steps were recorded
-        return f"Steps: at most {limit:,}"
-    text = (f"Steps: {provenance['steps_trained']:,} trained (limit {limit:,}); "
-            f"the weights are those of step {provenance['weights_step']:,}")
-    if stages and len(stages) > 1:
-        text += "; stages: " + ", ".join(f"{stage['block_size']:,}-token windows"
-                                         + (f", {stage['batch_size']:,} a step" if "batch_size" in stage else "")
-                                         + f", for {stage['steps']:,} steps" for stage in stages)
-    return text
-
-
-def _batch(provenance):
-    batch = provenance["batch"]
-    if isinstance(batch, dict):  # trained before each stage had its own batch: one for the run
-        return f"batch {batch['windows']:,} windows"
-    sizes = [stage["windows"] for stage in batch]
-    if len(set(sizes)) == 1:
-        return f"batch {sizes[0]:,} windows"
-    return "batches of " + ", ".join(f"{size:,}" for size in sizes) + " windows, by stage"
+def _step(step):
+    """One line of the card for a step of provenance.json's `steps`."""
+    stages = step["stages"]
+    limit = sum(stage["steps"] for stage in stages)
+    text = (f"`{step['step']['name']}`: method {step['method']['name']}, optimizer {step['optimizer']['name']}, "
+            f"environment {step['environment']['name']}"
+            + (f", locked {', '.join(step['locked'])}" if step["locked"] else "")
+            + f"; {step['updates']:,} updates (limit {limit:,}), the weights of update {step['weights_update']:,}")
+    if any(stage["block_size"] is not None for stage in stages):
+        text += "; " + ", ".join(f"{stage['block_size']:,}-token windows, {stage['batch_size']:,} an update, for "
+                                 f"{stage['steps']:,} updates" for stage in stages)
+    else:
+        text += f"; {stages[0]['batch_size']:,} examples an update"
+        if step["sources"]:
+            text += f"; trained on {', '.join(step['sources'])}"
+    if step["best_validation_loss"] is not None:
+        text += f"; best validation loss {step['best_validation_loss']:.4f}"
+    if step["reused"]:
+        text += f"; the result of an earlier run (`{step['result'][:12]}`)"
+    return text + "."
 
 
 def _built_from(provenance):

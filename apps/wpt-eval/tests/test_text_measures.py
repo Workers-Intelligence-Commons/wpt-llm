@@ -244,7 +244,7 @@ def git_source(tmp_path, root, store, folder_name, files, data, fetched=True):
     for args in (["init", "-q"], ["add", "-A"], ["commit", "-q", "-m", "x"]):
         subprocess.run(["git", *args], cwd=folder, env=GIT_ENV, check=True)
     commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=folder, capture_output=True, text=True).stdout.strip()
-    data = {"schema": 7, "type": "git", "address": str(folder), "revision": commit,
+    data = {"schema": 8, "type": "git", "address": str(folder), "revision": commit,
             "licenses": [{"license": "MIT", "paths": ["**"], "attribution": "T", "text": "Copyright T\n"}],
             "formats": [{"format": "text", "paths": ["**"]}],
             "decision": {"decision": "admitted", "by": "T", "date": "2026-10-23", "reason": "test"}, **data}

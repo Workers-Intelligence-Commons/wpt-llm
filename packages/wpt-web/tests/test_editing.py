@@ -274,7 +274,7 @@ def test_tasks_recipes_dockerfiles_and_signers_go_through_the_checks_rules(web):
     assert status == 422 and "pool weights add up to 0.5, not 1" in refused["problems"][0]
     assert not repo.exists("mixture", "half")
     status, schema = request("GET", "/api/schemas/model")
-    assert status == 200 and "training" in schema["properties"]
+    assert status == 200 and "steps" in schema["properties"]
 
     status, refused = request("PUT", "/api/documents/lock/t", {"document": {}, "version": ""})
     assert status == 422 and "written only by `wpt-dataset build-tokenizer`" in refused["problems"][0]

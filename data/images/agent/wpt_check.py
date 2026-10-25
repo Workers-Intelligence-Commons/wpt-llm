@@ -1,4 +1,4 @@
-"""The rules many tasks' checks share (docs/post-training.md, "The check
+"""The rules many tasks' checks share (docs/training.md, "The check
 library"), tested once in the
 repository (packages/wpt-agent/tests/test_agent_image.py). A check calls
 them on the attempt's conversation, conversation.json next to it, as
@@ -155,7 +155,7 @@ def scored(conversation: dict, score: float) -> float:
 
 
 def report(conversation: dict, correct, **rules) -> str:
-    """What a check prints (docs/post-training.md, "Rewards"): the JSON object of its named parts, each a
+    """What a check prints (docs/training.md, "Rewards"): the JSON object of its named parts, each a
     number from 0 to 1: "correct", the task's own judgement as scored()
     gives it, and each rule given, such as sources_first=True; a task's
     check may report any part of its own, such as its conventions."""

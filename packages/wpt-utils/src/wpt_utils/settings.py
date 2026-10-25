@@ -1,7 +1,7 @@
 """A plug-in's settings: the defaults its file declares (SETTINGS), changed
-by those a recipe gives, each of its default's type. A training method's
-come from the recipe's training.settings, a post-training step's from its
-`posttrain` entry (docs/training.md, docs/post-training.md)."""
+by those a recipe gives, each of its default's type. A training step's
+come from its entry in the recipe's `steps`, and so do its optimizer's
+(docs/training.md, "Steps"); a source drafter's from --set."""
 
 
 def typed(defaults: dict, overrides: dict, where: str) -> dict:

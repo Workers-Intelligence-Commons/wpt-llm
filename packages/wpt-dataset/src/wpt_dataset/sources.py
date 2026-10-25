@@ -38,7 +38,10 @@ from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 from wpt_store import parse_file_list
+from concurrent.futures import ThreadPoolExecutor
+
 from wpt_telemetry import Telemetry, set_ref
+from wpt_utils.parallel import Sizing, in_order
 from wpt_utils.programs import program
 
 from . import archives, encoding, huggingface, manifest, records, retry, robots
@@ -50,6 +53,12 @@ from .repo import Patch, Source
 VERSION = importlib.metadata.version("wpt-dataset")
 USER_AGENT = f"wpt-dataset/{VERSION} (+https://github.com/Workers-Intelligence-Commons/wpt-llm)"
 UPSTREAM, UPSTREAM_FILES = "upstream", "upstream-files"  # the kinds of the refs naming an upstream tree by its checksum
+# bytes one source's conversion takes, measured as the growth of the process's resident memory sampled every 5 ms
+# over one source: 2 to 5 MB for a git source of 5,000 files of 20 KB, a book of 50 files of 100 KB and a records
+# file of 5,000 records; 14 to 64 MB streamed, with its tokens and the thread's cache of encoded chunks (at most
+# about 100 MB, wpt_tokenizer); a file read whole takes about 4 times its size (its bytes, its text, its Markdown):
+# rounded up to cover the cache and a file of 100 MB
+CONVERT_MEMORY = 0.5e9
 
 
 def fingerprint(inputs) -> str:
@@ -321,6 +330,34 @@ def load_index(git, tree: dict[str, Entry], store) -> dict[str, str]:
     git("update-index", "-z", "--index-info",
         input=b"".join(f"{tree[p].mode} {o}\t{p}".encode() + b"\0" for p, o in zip(paths, objects)))
     return dict(zip(paths, objects))
+
+
+def opener(store, copies=None):
+    """copies, or without it a function whose every call gives a context
+    manager of store itself: what each_read gives each item a store from."""
+    return copies or (lambda: contextlib.nullcontext(store))
+
+
+def each_read(work, items, store, copies=None, telemetry=None, what="sources read at once") -> list:
+    """[work(item, its store)] in the items' order, as many items at once as
+    wpt_utils.parallel allows at CONVERT_MEMORY each. An item's store is
+    store, or with copies the store copies() gives that item alone (a
+    context manager, such as a streamed build's temporary folder of local
+    copies), ended as soon as work returns, so the local copies work made
+    are gone before later items need room. An item's error is raised at
+    its turn, and no new item starts after it. With a telemetry, work
+    records under the caller's current span."""
+    telemetry = telemetry or Telemetry.off()
+    parent = telemetry.current()
+    opened = opener(store, copies)
+
+    def run(item):
+        with telemetry.within(parent), opened() as here:
+            return work(item, here)
+
+    sizing = Sizing(CONVERT_MEMORY, what)
+    with ThreadPoolExecutor(sizing.limit) as executor:
+        return list(in_order(run, items, executor, sizing))
 
 
 # -- the final tree -------------------------------------------------------------

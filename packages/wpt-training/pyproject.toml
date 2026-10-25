@@ -1,10 +1,10 @@
 [project]
 name = "wpt-training"
 version = "0.1.0"
-description = "Next-token training: a runner with pluggable hardware strategies and training methods"
+description = "Training: one runner for every step of a model recipe, with pluggable strategies, methods, optimizers and environments"
 license = "AGPL-3.0-or-later"
 requires-python = ">=3.14"
-dependencies = ["wpt-utils", "wpt-telemetry", "numpy>=2"]  # torch comes from the root group that scripts/setup.py picks
+dependencies = ["wpt-utils", "wpt-telemetry", "wpt-model", "wpt-tokenizer", "wpt-store", "wpt-dataset", "wpt-agent", "numpy>=2"]  # torch comes from the root group that scripts/setup.py picks
 
 [build-system]
 requires = ["uv_build>=0.13.0,<0.14.0"]

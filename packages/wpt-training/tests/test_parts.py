@@ -11,7 +11,7 @@ import torch
 
 from wpt_model import WPT, ModelConfig
 from wpt_model.experts import BINS, WINDOW, Experts
-from wpt_training import Method, Strategy, parts
+from wpt_training import Strategy, TextMethod, parts
 from wpt_training.launch import launch
 
 # every layer kind: KDA (layers 1-3, 5-7), CSA (4) with an indexer choosing 8 of its entries, HCA (8), the window of
@@ -69,7 +69,7 @@ def results(model, loss, indexer, kept=None, rows=2):
 def whole_window(T):
     model, x, y = model_and_window(T)
     with counted_scores() as kept:
-        loss, indexer = Method().loss(model, x, y)
+        loss, indexer = TextMethod().loss(model, x, y)
         loss.backward()
     return results(model, loss.detach(), indexer, kept)
 
@@ -189,26 +189,26 @@ def test_a_window_in_segments_trains_as_the_whole_window(recompute, routing):
     model, x, y = model_and_window(448)
     model.recompute = recompute
     with counted_scores() as kept:
-        loss, indexer = parts.learn(Method(), model, model, x, y, 1.0, Strategy(torch.device("cpu")), 128,
+        loss, indexer = parts.learn(TextMethod(), model, model, x, y, 1.0, Strategy(torch.device("cpu")), 128,
                                     lambda last: contextlib.nullcontext())
     assert_same(results(model, loss, indexer, kept), expected, routing)
 
     model.eval()  # and the validation loss in segments is the whole window's
     with torch.no_grad():
-        assert torch.allclose(parts.validation_loss(Method(), model, model, x, y, Strategy(torch.device("cpu")), 128),
-                              Method().validation_loss(model, x, y), rtol=1e-5)
+        assert torch.allclose(parts.validation_loss(TextMethod(), model, model, x, y, Strategy(torch.device("cpu")), 128),
+                              TextMethod().validation_loss(model, x, y), rtol=1e-5)
 
 
 WORKER = '''
 import json, os, sys, torch
 sys.path.insert(0, sys.argv[2])
 from test_parts import counted_scores, model_and_window, results
-from wpt_training import Method, load_strategy, parts
+from wpt_training import TextMethod, load_strategy, parts
 _, strategy = load_strategy("split")
 model, x, y = model_and_window(int(sys.argv[3]))
 segment, model.recompute = int(sys.argv[4]), sys.argv[5] == "1"
 with counted_scores() as kept:
-    loss, indexer = parts.learn(Method(), model, strategy.wrap(model), x, y, 1.0, strategy, segment,
+    loss, indexer = parts.learn(TextMethod(), model, strategy.wrap(model), x, y, 1.0, strategy, segment,
                                 lambda last: strategy.no_sync(model))
 strategy.synchronize(model)
 loss, indexer = strategy.mean(float(loss)) * strategy.world_size, strategy.mean(float(indexer)) * strategy.world_size
@@ -217,7 +217,7 @@ torch.save(found[3], f"{sys.argv[1]}.{strategy.rank}")  # this process's slice: 
 model.after_update(strategy.reduce)  # the balancing counts, added over the processes
 model.eval()
 with torch.no_grad():
-    validation = strategy.mean(float(parts.validation_loss(Method(), model, model, x, y, strategy, segment)))
+    validation = strategy.mean(float(parts.validation_loss(TextMethod(), model, model, x, y, strategy, segment)))
 if strategy.rank == 0:
     torch.save((found[:3], validation * strategy.world_size), sys.argv[1])
 strategy.close()
@@ -271,13 +271,13 @@ def split_runs(tmp_path, monkeypatch, recompute, runs, routing):
     for processes, T, segment in runs:
         model, x, y = model_and_window(T)
         with counted_scores() as kept:
-            loss, indexer = Method().loss(model, x, y)
+            loss, indexer = TextMethod().loss(model, x, y)
             loss.backward()
         loss, indexer, grads, routed = results(model, loss.detach(), indexer, kept)
         model.after_update(lambda tensor, op: tensor)
         model.eval()
         with torch.no_grad():
-            validation = float(Method().validation_loss(model, x, y))
+            validation = float(TextMethod().validation_loss(model, x, y))
         out = tmp_path / f"{processes}-{T}-{segment}.pt"
         assert launch(processes, [str(script), str(out), str(Path(__file__).parent), str(T), str(segment),
                                   "1" if recompute else "0"]) == 0

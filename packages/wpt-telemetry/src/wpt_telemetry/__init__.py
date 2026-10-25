@@ -1,7 +1,7 @@
 """The record of one WPT command run: what it read, what it did and what it
 wrote, so that afterwards one can know exactly what happened.
 
-wpt-dataset build, wpt-train, wpt-posttrain and wpt-eval each open one
+wpt-dataset build, wpt-dataset source-drafter, wpt-train and wpt-eval each open one
 Telemetry per run. Its record is its own folder of the store named by
 WPT_STORE, records/<folder>/ (see wpt_store), named
 <UTC start>-<command>-<main id>-<8 random hex digits>, where the main id is
@@ -17,7 +17,7 @@ hash: the command chooses):
     ids.json       the ids the run read (inputs) and wrote (outputs), such
                    as a dataset id or a weight file's sha256, rewritten as
                    each is learned: the chain from a dataset build to the
-                   models trained, post-trained and evaluated on it
+                   models trained and evaluated on it
     end.json       how it ended: succeeded or failed, the exit code, the
                    error and its traceback
     other files    written by a part of the command (write_file, append_file)
@@ -115,7 +115,7 @@ FLUSH_THREAD = "wpt-telemetry-flush"
 SHORT = 8  # characters of a hash or a dataset id in a record folder's name
 METRIC_INTERVAL_MS = 10_000  # live values are sent every 10 s unless OTEL_METRIC_EXPORT_INTERVAL says otherwise
 PACKAGES = ("wpt-dataset", "wpt-store", "wpt-telemetry", "wpt-utils", "wpt-tokenizer", "wpt-model",
-            "wpt-training", "wpt-train", "wpt-posttrain", "wpt-eval", "torch")
+            "wpt-training", "wpt-train", "wpt-eval", "torch")
 
 
 class RecordError(Exception):

@@ -13,7 +13,7 @@ CONFIG = ModelConfig(vocab_size=50, block_size=16, n_layer=4, global_attention=[
 
 
 def test_a_seeded_generator_draws_the_same_tokens_again():
-    # post-training runs repeat their attempts: the same seed gives the same
+    # training runs repeat their attempts: the same seed gives the same
     # tokens, whatever else drew from torch's global generator in between
     torch.manual_seed(0)
     model = torch.nn.Embedding(50, 50)  # next-token scores from the last token alone

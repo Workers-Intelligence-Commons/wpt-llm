@@ -17,7 +17,7 @@ attempt's conversation.
     check.score(sandbox, ...)   the attempt's processes stopped, the task's check runs on a copy
                                 of its /work in a fresh container, next to the attempt's
                                 conversation, and prints its named parts, each 0 to 1
-    played.play(task, ...)      attempts written by a model and scored, what a post-training
+    played.play(task, ...)      attempts written by a model and scored, what a training
                                 step and the measures share (played.ready: the images built;
                                 played.gated: whether the task's gates hold)
 
@@ -25,7 +25,7 @@ The tools are read, write, edit and bash, ask when the task holds the
 user's replies, and those the task or its image's pool declares, which
 programs in the image answer (tools.py). Tasks come from the
 `task` format of sources (wpt_dataset.tasks); this package holds no
-learning: a post-training step, or a chat or evaluation command, decides
+learning: a training step, or a chat or evaluation command, decides
 what to do with an attempt and its score.
 """
 

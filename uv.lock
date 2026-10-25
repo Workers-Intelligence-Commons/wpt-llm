@@ -26,7 +26,6 @@ members = [
     "wpt-inference",
     "wpt-llm",
     "wpt-model",
-    "wpt-posttrain",
     "wpt-store",
     "wpt-telemetry",
     "wpt-tokenizer",
@@ -110,7 +109,7 @@ name = "cffi"
 version = "2.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pycparser", marker = "implementation_name != 'PyPy' or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-cuda') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-rocm') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-xpu') or (extra == 'group-7-wpt-llm-cuda' and extra == 'group-7-wpt-llm-rocm') or (extra == 'group-7-wpt-llm-cuda' and extra == 'group-7-wpt-llm-xpu') or (extra == 'group-7-wpt-llm-rocm' and extra == 'group-7-wpt-llm-xpu')" },
+    { name = "pycparser", marker = "implementation_name != 'PyPy'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/9e/ef/008a1939e372c06329a3fce4279c02f328488f3526744906eeec3da7ad5f/cffi-2.1.1.tar.gz", hash = "sha256:dd31f52ea1086513bb9df30f8fcee9b8918323ae067a3d5b78bc826a000712be", size = 530807, upload-time = "2026-08-03T21:21:18.939Z" }
 wheels = [
@@ -281,7 +280,7 @@ name = "cryptography"
 version = "50.0.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "cffi", marker = "platform_python_implementation != 'PyPy' or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-cuda') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-rocm') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-xpu') or (extra == 'group-7-wpt-llm-cuda' and extra == 'group-7-wpt-llm-rocm') or (extra == 'group-7-wpt-llm-cuda' and extra == 'group-7-wpt-llm-xpu') or (extra == 'group-7-wpt-llm-rocm' and extra == 'group-7-wpt-llm-xpu')" },
+    { name = "cffi", marker = "platform_python_implementation != 'PyPy'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/9d/af/182eb91b0df3fe75c4d9f26fe70684569566745f6ba7e5c9c73a862c5252/cryptography-50.0.2.tar.gz", hash = "sha256:7b46165bb56eb4704e2eaaf86f3c940d19154535d9b0ca7d6d590b04060e00d5", size = 880623, upload-time = "2026-09-30T15:30:04.884Z" }
 wheels = [
@@ -1453,7 +1452,7 @@ name = "pytest"
 version = "9.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-cuda') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-rocm') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-xpu') or (extra == 'group-7-wpt-llm-cuda' and extra == 'group-7-wpt-llm-rocm') or (extra == 'group-7-wpt-llm-cuda' and extra == 'group-7-wpt-llm-xpu') or (extra == 'group-7-wpt-llm-rocm' and extra == 'group-7-wpt-llm-xpu')" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
     { name = "iniconfig" },
     { name = "packaging" },
     { name = "pluggy" },
@@ -1807,7 +1806,7 @@ resolution-markers = [
 ]
 dependencies = [
     { name = "cuda-bindings", marker = "python_full_version < '3.15' and sys_platform == 'linux'" },
-    { name = "cuda-toolkit", extra = ["cublas", "cudart", "cufft", "cufile", "cupti", "curand", "cusolver", "cusparse", "nvjitlink", "nvrtc", "nvtx"], marker = "(sys_platform == 'linux' and extra == 'group-7-wpt-llm-cuda') or (extra == 'group-7-wpt-llm-cuda' and extra == 'group-7-wpt-llm-rocm') or (extra == 'group-7-wpt-llm-cuda' and extra == 'group-7-wpt-llm-xpu') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-cuda') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-rocm') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-xpu') or (extra == 'group-7-wpt-llm-rocm' and extra == 'group-7-wpt-llm-xpu')" },
+    { name = "cuda-toolkit", extra = ["cublas", "cudart", "cufft", "cufile", "cupti", "curand", "cusolver", "cusparse", "nvjitlink", "nvrtc", "nvtx"], marker = "(sys_platform == 'linux' and extra == 'group-7-wpt-llm-cuda') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-cuda') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-rocm') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-xpu') or (extra == 'group-7-wpt-llm-cuda' and extra == 'group-7-wpt-llm-rocm') or (extra == 'group-7-wpt-llm-cuda' and extra == 'group-7-wpt-llm-xpu') or (extra == 'group-7-wpt-llm-rocm' and extra == 'group-7-wpt-llm-xpu')" },
     { name = "filelock" },
     { name = "fsspec" },
     { name = "jinja2" },
@@ -2145,7 +2144,6 @@ dev = [
     { name = "wpt-chat" },
     { name = "wpt-dataset" },
     { name = "wpt-eval" },
-    { name = "wpt-posttrain" },
     { name = "wpt-train" },
     { name = "wpt-web" },
 ]
@@ -2175,7 +2173,6 @@ dev = [
     { name = "wpt-chat", editable = "apps/wpt-chat" },
     { name = "wpt-dataset", editable = "packages/wpt-dataset" },
     { name = "wpt-eval", editable = "apps/wpt-eval" },
-    { name = "wpt-posttrain", editable = "apps/wpt-posttrain" },
     { name = "wpt-train", editable = "apps/wpt-train" },
     { name = "wpt-web", editable = "packages/wpt-web" },
 ]
@@ -2204,33 +2201,6 @@ requires-dist = [
     { name = "fla-core", specifier = ">=0.5.2" },
     { name = "numpy", specifier = ">=2" },
     { name = "safetensors", specifier = ">=0.4" },
-    { name = "wpt-utils", editable = "packages/wpt-utils" },
-]
-
-[[package]]
-name = "wpt-posttrain"
-version = "0.1.0"
-source = { editable = "apps/wpt-posttrain" }
-dependencies = [
-    { name = "wpt-agent" },
-    { name = "wpt-dataset" },
-    { name = "wpt-inference" },
-    { name = "wpt-model" },
-    { name = "wpt-store" },
-    { name = "wpt-telemetry" },
-    { name = "wpt-tokenizer" },
-    { name = "wpt-utils" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "wpt-agent", editable = "packages/wpt-agent" },
-    { name = "wpt-dataset", editable = "packages/wpt-dataset" },
-    { name = "wpt-inference", editable = "packages/wpt-inference" },
-    { name = "wpt-model", editable = "packages/wpt-model" },
-    { name = "wpt-store", editable = "packages/wpt-store" },
-    { name = "wpt-telemetry", editable = "packages/wpt-telemetry" },
-    { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
     { name = "wpt-utils", editable = "packages/wpt-utils" },
 ]
 
@@ -2311,14 +2281,24 @@ version = "0.1.0"
 source = { editable = "packages/wpt-training" }
 dependencies = [
     { name = "numpy" },
+    { name = "wpt-agent" },
+    { name = "wpt-dataset" },
+    { name = "wpt-model" },
+    { name = "wpt-store" },
     { name = "wpt-telemetry" },
+    { name = "wpt-tokenizer" },
     { name = "wpt-utils" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "numpy", specifier = ">=2" },
+    { name = "wpt-agent", editable = "packages/wpt-agent" },
+    { name = "wpt-dataset", editable = "packages/wpt-dataset" },
+    { name = "wpt-model", editable = "packages/wpt-model" },
+    { name = "wpt-store", editable = "packages/wpt-store" },
     { name = "wpt-telemetry", editable = "packages/wpt-telemetry" },
+    { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
     { name = "wpt-utils", editable = "packages/wpt-utils" },
 ]
 

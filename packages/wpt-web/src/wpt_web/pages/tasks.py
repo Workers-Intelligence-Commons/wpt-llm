@@ -1,6 +1,6 @@
 """The task editor's routes: the task folders of a source (task.json, the
 check, the starting files), one written or removed as the next patch (the
-task rules of docs/post-training.md, "Tasks"); and git's status of the
+task rules of docs/training.md, "Tasks"); and git's status of the
 data files, which every page shows. As `wpt-dataset tasks`, `task`,
 `save-task` and `status`, through the service layer."""
 

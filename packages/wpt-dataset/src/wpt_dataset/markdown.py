@@ -53,13 +53,13 @@ marker where it was, so a model learns where images were: [image], or
 with its white space collapsed and Markdown's characters escaped. A printed caption (figcaption,
 caption) stays ordinary text; math, audio and video are left out.
 
-- `chat`: conversations for post-training, one per line, or with `tree`
+- `chat`: conversations for training, one per line, or with `tree`
   one message per record naming its parent (see conversations.py). Each
   conversation is checked, and the file gives no document: only the
-  post-training step named by its tags reads it.
-- `task`: the files of task folders for post-training (see tasks.py).
+  training step its tags name reads it.
+- `task`: the files of task folders for training (see tasks.py).
   Each folder is checked, and its files give no document: only the
-  post-training step named by the tags of its task.json reads it.
+  training step the tags of its task.json name reads it.
 - `rating`: people's pass or fail ratings of measure attempts, one per
   line (see ratings.py). Each rating is checked, and the file gives no
   document: a measure only, never a training signal.

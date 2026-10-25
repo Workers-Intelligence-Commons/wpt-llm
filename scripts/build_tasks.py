@@ -4,9 +4,9 @@ Usage:
     uv run scripts/build_tasks.py KIND SOURCE --count N [--seed S] [--select EXPRESSION]
 
 KIND is find-the-passage, evidence-removed, look-or-ask, commit-and-push or
-read-the-manual (docs/post-training.md, "The task builder"). SOURCE is the id of an
+read-the-manual (docs/training.md, "The task builder"). SOURCE is the id of an
 `empty` source a person made for the tasks (`wpt-dataset new-source`, its
-license text written, tagged `grpo`); everything under KIND/ in it becomes
+license text written, tagged `finish-tasks`); everything under KIND/ in it becomes
 the N tasks drawn with seed S (default 1) as one new patch, checked as
 `wpt-dataset check --fetch` checks it. The texts come from the admitted
 sources already in the store (WPT_STORE) whose documents the pool

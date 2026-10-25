@@ -52,7 +52,6 @@ the matching area label when the issue is opened:
 - `area: tokenizer`
 - `area: dataset build`
 - `area: training`
-- `area: post-training`
 - `area: evaluation`
 - `area: generation and chat`
 - `area: web interface`
@@ -60,7 +59,7 @@ the matching area label when the issue is opened:
 - `area: documentation`
 
 The three labels of kind (`model behavior`, `source proposal` and
-`erasure request`) must exist too, like the 10 area labels. A maintainer
+`erasure request`) must exist too, like the 9 area labels. A maintainer
 creates every label before its first use. The words of the dropdown and of
 the workflow are the area label names without `area: `: change them
 together.
@@ -164,7 +163,7 @@ patches of an `empty` source (see [docs/architecture.md](docs/architecture.md)).
 The simplest way is the "New source" page of `uv run wpt-web`: write or
 paste your text, and the page makes the source, under review
 (`under-review`), with your text as its first patch; its "Conversations"
-and "Tasks" pages write post-training conversations and tasks the same
+and "Tasks" pages write the conversations and tasks training steps read the same
 way, its "Ratings" page your pass or fail on a model's attempts (a
 measure only, never a training signal:
 [docs/evaluation.md](docs/evaluation.md), "People's ratings"), and every
@@ -199,7 +198,7 @@ texts; they never decide.
 A source is in exactly one of three states, its `decision`:
 `under-review`, a source not yet decided, where every new source starts
 and where a doubt stays; `admitted`; or `refused`. Each gives who set it (`by`)
-and when (`date`). The builds, the post-training readers and
+and when (`date`). The builds and
 `check --fetch` without ids read only admitted sources: an `under-review`
 source is left out of them exactly as a refused one is.
 
@@ -245,14 +244,14 @@ See [docs/erasure.md](docs/erasure.md).
 ## Models and generated text
 
 No output of another company's model is accepted, in data or in
-post-training, and no synthetic data that a WPT model did not make. WPT's
+training, and no synthetic data that a WPT model did not make. WPT's
 own models may be used in training, their output included
 ([docs/data-selection.md](docs/data-selection.md), "Models in training"). A contribution that uses a WPT model (to produce
-data, or in any post-training role) must say exactly what that model did.
+data, or in any training role) must say exactly what that model did.
 The uses today are a model's draft of a conversation's reply, below, and
-the `grpo` step's reward on a task's one-line form, which compares an
+the `finish-tasks` step's reward on a task's one-line form, which compares an
 attempt with the model's own attempt at the full form
-([docs/post-training.md](docs/post-training.md), "Rewards").
+([docs/training.md](docs/training.md), "Rewards").
 
 A conversation's `assistant` message may start as a draft of a WPT model:
 in the conversation editor of
@@ -292,13 +291,13 @@ with scripts that transform whole files mechanically and report only its
 shape, never its words, then pass it to `unpack` and `patch`; it never
 reads or writes the words itself.
 
-## Post-training records
+## Training records
 
 Demonstrations and environment recordings are files of a source, like any
-other text ([docs/post-training.md](docs/post-training.md), "Where records
+other text ([docs/training.md](docs/training.md), "Where records
 live"): their license, credit and decision are the source's, in its
 `source.json`, and the signed-off commit that adds them names their
-contributor. Their shape is not settled yet; today the code reads
+contributor. Their shape is not settled yet; the code reads
 conversations in the `chat` format, tasks in the `task` format and
 ratings in the `rating` format.
 
@@ -339,8 +338,8 @@ as both 75% of the cores and 75% of the available memory (2.5 GB per process)
 allow, at least 1. The image build test runs only when your push changes image
 code (`packages/wpt-agent/src/wpt_agent/images.py`, the wpt-agent tests
 `test_images.py` and `conftest.py`, the image lock and image licenses schemas
-of wpt-dataset, or `data/images/`); otherwise `uv run pytest` runs it. The GRPO
-tests keep their pinned and built image in `.pytest_cache/` and in Docker, so
+of wpt-dataset, or `data/images/`); otherwise `uv run pytest` runs it. The task
+step tests keep their pinned and built image in `.pytest_cache/` and in Docker, so
 only the first check on a machine, and every CI run, which starts empty, pays
 for locking and building it (`docs/architecture.md`, "Checks").
 

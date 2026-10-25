@@ -73,10 +73,9 @@ Bump it whenever a code change could alter training or encoding results.
   sha256, and writes it into the model folder as `tokenizer.json`. Every
   weight file's header names it: `tokenizer` (such as
   `classics version 1`) and `tokenizer_sha256`.
-- `wpt-chat`, `wpt-eval` and `wpt-posttrain` load `tokenizer.json` only when
-  its sha256 is the one in the weights' headers (`TokenizerMismatch`
-  otherwise), so a model never runs with another vocabulary.
-  `wpt-posttrain` keeps the base model's vocabulary and name.
+- `wpt-chat` and `wpt-eval` load `tokenizer.json` only when its sha256
+  is the one in the weights' headers (`TokenizerMismatch` otherwise), so a
+  model never runs with another vocabulary.
 
 ### Checking a vocabulary on the data
 

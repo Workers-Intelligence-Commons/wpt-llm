@@ -56,7 +56,7 @@ def draft(candidate, context):
     if what.get("raise"):
         raise RuntimeError(what["raise"])
     return Drafted("fake", candidate.name, {
-        "schema": 7, "type": "http-archive", "address": f"https://example.org/{candidate.name}.zip",
+        "schema": 8, "type": "http-archive", "address": f"https://example.org/{candidate.name}.zip",
         "revision": context.settings["revision"], "checksum": "sha256:" + "0" * 64,
         "licenses": [{"license": what.get("license", "MIT"), "paths": ["**"], "attribution": "A. Author",
                       "text": "Permission is hereby granted."}],

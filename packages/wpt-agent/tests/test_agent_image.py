@@ -35,7 +35,7 @@ WEB = "https://example.org"
 LAMP = b"# The lighthouse\n\nThe keeper lights the lamp at dusk and writes the hour in his log.\n"
 TIDES = b"# Tides\n\nThe tide turns twice a day.\n\nA spring tide comes after a new moon.\n"
 TOKENIZER = Tokenizer([])  # bytes only: any text encodes
-# the declarations a task copies for the image's search and fetch (docs/post-training.md, "The agent image")
+# the declarations a task copies for the image's search and fetch (docs/training.md, "The agent image")
 SEARCH = {"name": "search", "description": "Search the web; returns the best pages, each with its address.",
           "parameters": {"type": "object", "properties": {"query": {"type": "string"}}, "required": ["query"]},
           "program": "/usr/local/lib/wpt-tools/search", "names": ["web_search"], "looks": True}

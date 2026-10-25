@@ -4,7 +4,7 @@ import time
 
 import pytest
 
-from wpt_dataset import build
+from wpt_dataset import build, conversations, sources
 from wpt_dataset.build import build_dataset, document_list, is_held_out
 from wpt_dataset.cli import main
 from wpt_dataset.errors import ChecksumMismatch, LockedDocumentsMissing, LockMismatch, PoolError, TokenizerVersionNeeded
@@ -428,3 +428,113 @@ def test_a_streamed_build_leaves_no_copy_of_a_source_s_files_on_this_machine(kit
     normal = fresh_store(kit, repo, tmp_path / "normal", sid)
     build_dataset(repo, "small", normal, log=lambda _: None)
     assert list(normal.cache.rglob(record_file))  # without --stream, the copy stays in the store's cache
+
+
+def test_a_streamed_build_keeps_the_conversations_and_leaves_no_copy_of_their_files(kit, repo, store, corpus,
+                                                                                    tmp_path):
+    # the build also keeps the conversations the training steps read, and a
+    # streamed one still leaves none of the files it read on this machine
+    sid = setup_recipes(kit, repo, store, corpus, total_tokens=500)
+    messages = "".join(json.dumps(row) + "\n" for row in [
+        {"id": "q", "parent": None, "role": "prompter", "text": "Why is the sky blue?"},
+        {"id": "a", "parent": "q", "role": "assistant", "text": "Air scatters blue light most."}]).encode()
+    folder, commit = kit.git_project(tmp_path / "talks", files={"messages.jsonl": messages}, executable=set(),
+                                     symlinks={})
+    talks = kit.add_source(repo, store, "example", "talks", {
+        "type": "git", "address": folder, "revision": commit,
+        "formats": [{"format": "chat", "paths": ["*.jsonl"], "tree": {
+            "id": "id", "parent": "parent", "role": "role", "text": "text",
+            "roles": {"prompter": "user", "assistant": "assistant"}}}],
+        "tags": [{"tags": ["answer-as-assistant"], "paths": ["**"]}]})
+    messages_file = hashlib.sha256(messages).hexdigest()
+
+    streamed_id = build_dataset(repo, "small", store, log=lambda _: None, stream=True)
+    assert not list(store.cache.rglob(messages_file))  # read from a copy, now gone
+    normal = fresh_store(kit, repo, tmp_path / "normal", sid)
+    kit.download(repo, normal, talks)
+    assert build_dataset(repo, "small", normal, log=lambda _: None) == streamed_id
+    streamed, built = record_of(store, streamed_id), record_of(normal, streamed_id)
+    assert streamed["conversations"] == built["conversations"]
+    assert streamed["conversations"]["count"] == 1 and streamed["conversations"]["sources"] == [talks]
+    [line] = store.get_bytes(streamed["conversations"]["object"]).decode().splitlines()
+    assert json.loads(line)["id"] == f"{talks}/messages.jsonl:a"
+
+
+def chat_source(kit, repo, store, tmp_path, name, text="Air scatters blue light most.", fetch=True):
+    """A source of one chat file holding one conversation, tagged answer-as-assistant; returns its id."""
+    messages = "".join(json.dumps(row) + "\n" for row in [
+        {"id": "q", "parent": None, "role": "prompter", "text": "Why is the sky blue?"},
+        {"id": "a", "parent": "q", "role": "assistant", "text": text}]).encode()
+    folder, commit = kit.git_project(tmp_path / name, files={"messages.jsonl": messages}, executable=set(),
+                                     symlinks={})
+    return kit.add_source(repo, store, "example", name, {
+        "type": "git", "address": folder, "revision": commit,
+        "formats": [{"format": "chat", "paths": ["*.jsonl"], "tree": {
+            "id": "id", "parent": "parent", "role": "role", "text": "text",
+            "roles": {"prompter": "user", "assistant": "assistant"}}}],
+        "tags": [{"tags": ["answer-as-assistant"], "paths": ["**"]}]}, fetch=fetch)
+
+
+def test_a_source_left_out_gives_the_same_dataset_on_any_machine_and_never_moves_the_text(kit, repo, store, corpus,
+                                                                                          tmp_path):
+    # a chat source not downloaded is left out; its error names the store, yet
+    # two machines missing it build the same dataset, and the text (its rows'
+    # order) is the one of a build that holds the source
+    sid = setup_recipes(kit, repo, store, corpus, total_tokens=2000, held_out=0.2)
+    talks = chat_source(kit, repo, store, tmp_path, "talks", fetch=False)
+    whole = fresh_store(kit, repo, tmp_path / "whole", sid)
+    kit.download(repo, whole, talks)
+    held = record_of(whole, build_dataset(repo, "small", whole, log=lambda _: None))  # locks the vocabulary
+    assert held["conversations"]["sources"] == [talks]
+    other = fresh_store(kit, repo, tmp_path / "other", sid)
+    for missing_it in (store, other):  # a store without the vocabulary trains it again, which needs every source
+        missing_it.put_bytes(whole.get_bytes(held["tokenizer"]["vocabulary"]))
+
+    here = build_dataset(repo, "small", store, log=lambda _: None)
+    assert build_dataset(repo, "small", other, log=lambda _: None) == here
+    missing = record_of(store, here)
+    assert [s["source"] for s in missing["skipped"]] == [talks]
+    assert held["fingerprints"]["text"] == missing["fingerprints"]["text"]
+    assert held["shards"] == missing["shards"]
+
+
+def test_a_dataset_whose_record_has_another_shape_is_built_again(kit, repo, store, corpus):
+    # a dataset whose record a build of another shape wrote is built again, so
+    # wpt-train, which reads the current shape only, can use it
+    setup_recipes(kit, repo, store, corpus, total_tokens=500)
+    dataset_id = build_dataset(repo, "small", store, log=lambda _: None)
+    current = record_of(store, dataset_id)
+    older = {k: v for k, v in current.items() if k != "fingerprints"} | {"schema": build.RECORD_SCHEMA - 1}
+    store.set_ref("datasets", dataset_id, store.put_bytes(json.dumps(older).encode()))
+
+    assert build_dataset(repo, "small", store, log=lambda _: None) == dataset_id
+    assert record_of(store, dataset_id)["schema"] == build.RECORD_SCHEMA
+    assert record_of(store, dataset_id)["fingerprints"] == current["fingerprints"]
+
+
+@pytest.mark.parametrize("stream", [False, True])
+def test_conversations_read_at_once_give_the_dataset_read_one_at_a_time(kit, repo, store, corpus, tmp_path,
+                                                                        monkeypatch, stream):
+    # chat sources are read several at once, finishing in any order; the
+    # conversations and the dataset id must be the ones read one at a time give
+    sid = setup_recipes(kit, repo, store, corpus, total_tokens=500)
+    ids = [chat_source(kit, repo, store, tmp_path, f"talks-{n}", text=f"Answer number {n}.") for n in range(4)]
+    order = {talk: n for n, talk in enumerate(ids)}
+    read = conversations.of_file
+
+    def last_first(source_id, *args):  # the later a source, the sooner it is done
+        time.sleep(0.05 * (len(ids) - order[source_id]))
+        return read(source_id, *args)
+
+    monkeypatch.setattr(conversations, "of_file", last_first)
+    built = {}
+    for cores in (1, 16):  # 1: one at a time; 16: 12 at once
+        monkeypatch.setattr(sources, "Sizing", lambda memory, what, cores=cores: Sizing(memory, what, Machine(cores)))
+        fresh = fresh_store(kit, repo, tmp_path / f"store-{cores}", sid)
+        kit.download(repo, fresh, *ids)
+        dataset_id = build_dataset(repo, "small", fresh, log=lambda _: None, stream=stream)
+        record = record_of(fresh, dataset_id)
+        built[cores] = dataset_id, record["conversations"], fresh.get_bytes(record["conversations"]["object"])
+    assert built[1] == built[16]
+    assert built[1][1]["sources"] == sorted(ids) and built[1][1]["count"] == 4
+

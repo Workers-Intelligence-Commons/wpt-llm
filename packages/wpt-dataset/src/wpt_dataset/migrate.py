@@ -109,6 +109,24 @@ def _source_6_to_7(document, _path):
 
 MIGRATIONS["source"][6] = _source_6_to_7
 
+# the tags of shape 7 that name a training step, and the tags that name the step doing the same
+TAGS_7 = {"sft": "answer-as-assistant", "grpo": "finish-tasks", "token-efficiency": "finish-tasks-with-less-writing"}
+
+
+def _source_7_to_8(document, _path):
+    """Shape 8 names a tag that picks a training step's examples by the
+    step's name: sft becomes answer-as-assistant, grpo finish-tasks and
+    token-efficiency finish-tasks-with-less-writing (TAGS_7), in every tag
+    list; a tag listed twice by the rename stays once."""
+    migrated = {**document, "schema": 8}
+    if "tags" in document:
+        migrated["tags"] = [{**entry, "tags": list(dict.fromkeys(TAGS_7.get(tag, tag) for tag in entry["tags"]))}
+                            for entry in document["tags"]]
+    return migrated
+
+
+MIGRATIONS["source"][7] = _source_7_to_8
+
 
 def _model_1_to_2(document, _path):
     """Shape 2 holds the numbers of the architecture in docs/model.md. The
@@ -180,7 +198,7 @@ DRAFTER_5 = {"prompts": 256, "prompt_tokens": 64, "answer_tokens": 256, "epochs"
 
 def _model_4_to_5(document, _path):
     """Shape 5 adds the `drafter` section (docs/model.md, "The drafter"): the drafter that
-    wpt-train and wpt-posttrain train at the end of every run. It goes in
+    wpt-train trains at the end of every run. It goes in
     after `training`, with the training values every recipe states
     (DRAFTER_5); the settings it leaves out keep their defaults."""
     migrated = {}
@@ -202,6 +220,60 @@ def _model_5_to_6(document, _path):
 
 
 MIGRATIONS["model"][5] = _model_5_to_6
+
+# the settings of shape 6's `muon` that make the loss, which shape 7 gives the read-text step's method
+NEXT_TOKEN_6 = ("mtp_weight", "mtp_late_weight", "mtp_switch")
+# shape 6's post-training steps and the training steps that do the same, and the settings of theirs that
+# shape 7 gives the step's optimizer (adamw), under that optimizer's names
+STEPS_6 = {"sft": "answer-as-assistant", "grpo": "finish-tasks", "token-efficiency": "finish-tasks-with-less-writing"}
+OPTIMIZER_6 = {"learning_rate": "lr", "weight_decay": "weight_decay"}
+
+
+def _model_6_to_7(document, _path):
+    """Shape 7 trains a model in one ordered list of steps (docs/training.md,
+    "Steps"), in place of `training` and `posttrain`: the training becomes
+    the first step, read-text, its method the step's optimizer (with its
+    settings but those of the loss, NEXT_TOKEN_6, which become the step's),
+    its stages, eval_every and eval_batches the step's settings, nothing
+    locked; its seed becomes the recipe's `seed`. Each post-training step
+    follows under its new name (STEPS_6), the settings of its learning rate
+    and weight decay given to its optimizer, adamw, and a `tag` setting
+    that names a step of shape 6 renamed with it; a step given as a
+    Python file keeps its name and settings, and the check that follows
+    says what the file lacks. `steps` and `seed` go where `training` was,
+    `posttrain` goes."""
+    training = document["training"]
+    method_settings = training["settings"]
+    loss = {key: value for key, value in method_settings.items() if key in NEXT_TOKEN_6}
+    first = {"step": "read-text",
+             "optimizer": {"name": training["method"],
+                           "settings": {key: value for key, value in method_settings.items() if key not in loss}},
+             "settings": {"stages": training["stages"], "eval_every": training["eval_every"],
+                          "eval_batches": training["eval_batches"], **loss},
+             "locked": []}
+    steps = [first]
+    for entry in document["posttrain"]:
+        name, settings = (entry, {}) if isinstance(entry, str) else (entry["step"], entry["settings"])
+        if name not in STEPS_6:
+            steps.append({"step": name, "settings": settings})
+            continue
+        optimizer = {OPTIMIZER_6[key]: value for key, value in settings.items() if key in OPTIMIZER_6}
+        # a tag that names a step of shape 6 names the step that does the same
+        step = {"step": STEPS_6[name], "settings": {key: STEPS_6.get(value, value) if key == "tag" else value
+                                                    for key, value in settings.items() if key not in OPTIMIZER_6}}
+        steps.append({**step, **({"optimizer": {"name": "adamw", "settings": optimizer}} if optimizer else {})})
+    migrated = {}
+    for key, value in document.items():
+        if key == "schema":
+            migrated[key] = 7
+        elif key == "training":
+            migrated["seed"], migrated["steps"] = training["seed"], steps
+        elif key != "posttrain":
+            migrated[key] = value
+    return migrated
+
+
+MIGRATIONS["model"][6] = _model_6_to_7
 
 
 def _task_1_to_2(document, _path):

@@ -4,12 +4,13 @@
   "title": "WPT model recipe (data/recipes/models/<name>.json): everything that changes the resulting model",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "data", "model", "training", "drafter", "posttrain"],
+  "required": ["schema", "data", "model", "seed", "steps", "drafter"],
   "$defs": {
-    "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"}
+    "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "settings": {"type": "object", "additionalProperties": {"type": ["number", "string", "boolean", "array"]}}
   },
   "properties": {
-    "schema": {"const": 6},
+    "schema": {"const": 7},
     "data": {
       "description": "what `wpt-dataset build` builds; recipes with the same data share one dataset",
       "type": "object",
@@ -23,7 +24,7 @@
       }
     },
     "model": {
-      "description": "the architecture's numbers (docs/model.md; wpt_model.ModelConfig without vocab_size, which the tokenizer gives, and block_size, the last stage's window)",
+      "description": "the architecture's numbers (docs/model.md; wpt_model.ModelConfig without vocab_size, which the tokenizer gives, and block_size, the last window length of the steps' text windows)",
       "type": "object",
       "additionalProperties": false,
       "required": ["n_layer", "global_attention", "d_model", "kda_heads", "kda_head_dim", "attention_heads",
@@ -59,35 +60,32 @@
                               "description": "each table has a distinct prime size, the smallest at or above this"}
       }
     },
-    "training": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["method", "settings", "stages", "eval_every", "eval_batches", "seed"],
-      "properties": {
-        "method": {"type": "string", "minLength": 1, "description": "a built-in method of wpt_training, or a .py file"},
-        "settings": {"type": "object", "additionalProperties": {"type": ["number", "string", "boolean"]},
-                     "description": "the method's settings; those left out keep the method's defaults"},
-        "stages": {
-          "type": "array", "minItems": 1,
-          "description": "trained in order, each on windows of its length (docs/training.md, \"Stages\"); the model's context is the last one's",
-          "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": ["block_size", "steps", "batch_size"],
+    "seed": {"type": "integer", "minimum": 0, "description": "the initial weights and every step's draws (text windows, the order of conversations and tasks, the tools offered, the sampled tokens) come from it, each step mixing its number in the list into it, and every step's fingerprint names it (docs/training.md, \"Steps\")"},
+    "steps": {
+      "description": "what is done to the model, in order, by one wpt-train run (docs/training.md, \"Steps\"); the model's context is the last window length of the last step that reads text windows",
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["step"],
+        "properties": {
+          "step": {"type": "string", "minLength": 1, "description": "a built-in step of wpt_training (read-text, answer-as-assistant, finish-tasks, finish-tasks-with-less-writing) or a .py file"},
+          "optimizer": {
+            "type": "object", "additionalProperties": false, "required": ["name"],
+            "description": "the optimizer the step's loss moves the weights with; left out, the step's own",
             "properties": {
-              "block_size": {"type": "integer", "minimum": 2, "description": "tokens per training window in this stage"},
-              "steps": {"type": "integer", "minimum": 1, "description": "maximum number of updates in this stage"},
-              "batch_size": {"type": "integer", "minimum": 1, "description": "windows per update in this stage, over every process together"}
+              "name": {"type": "string", "minLength": 1, "description": "a built-in optimizer of wpt_training (muon, adamw) or a .py file"},
+              "settings": {"$ref": "#/$defs/settings", "description": "its settings; those left out keep the step's defaults for its own optimizer, else the optimizer's"}
             }
-          }
-        },
-        "eval_every": {"type": "integer", "minimum": 1},
-        "eval_batches": {"type": "integer", "minimum": 1, "description": "global batches of the stage averaged per evaluation"},
-        "seed": {"type": "integer", "minimum": 0}
+          },
+          "settings": {"$ref": "#/$defs/settings", "description": "the step's settings (those of its method and environment among them); those left out keep the step's defaults"},
+          "locked": {"type": "array", "items": {"type": "string"}, "uniqueItems": true,
+                     "description": "the parts of the model the step leaves unchanged, by the names docs/model.md, \"Parts\", gives (an unknown name is refused); left out, the step's own"}
+        }
       }
     },
     "drafter": {
-      "description": "the drafter wpt-train trains at the end of the run, and wpt-posttrain at the end of every run (docs/model.md, \"The drafter\"; wpt_inference.drafting); a setting left out keeps its default",
+      "description": "the drafter wpt-train trains at the end of every run, after the last step (docs/model.md, \"The drafter\"; wpt_inference.drafting); a setting left out keeps its default",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -110,26 +108,6 @@
         "held_out": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1, "description": "share of the prompts kept apart for calibration and the measure"},
         "ece_bins": {"type": "integer", "minimum": 1},
         "seed": {"type": "integer", "minimum": 0}
-      }
-    },
-    "posttrain": {
-      "description": "the steps `wpt-posttrain` runs, in order: built-in step names or .py files, each alone or with its settings",
-      "type": "array",
-      "items": {
-        "oneOf": [
-          {"type": "string", "minLength": 1, "description": "a step, with its own settings"},
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "required": ["step", "settings"],
-            "description": "a step and the settings it changes",
-            "properties": {
-              "step": {"type": "string", "minLength": 1, "description": "a built-in step name or a .py file"},
-              "settings": {"type": "object", "additionalProperties": {"type": ["number", "string", "boolean"]},
-                           "description": "the step's settings (its file's SETTINGS); those left out keep the step's defaults"}
-            }
-          }
-        ]
       }
     },
     "note": {"type": "string"}

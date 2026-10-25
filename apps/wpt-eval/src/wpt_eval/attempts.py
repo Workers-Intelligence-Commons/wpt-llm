@@ -13,7 +13,7 @@ The tasks are the measure-only ones of every admitted source
 (wpt_dataset.tasks.read(..., measure=True): tagged eval, the hash share of
 every task source, the pointer tasks on held-out text), read with the
 model's own held-out share and dataset. The attempts are played by
-wpt_agent.play, as the grpo step plays its own: each in a fresh container
+wpt_agent.play, as the finish-tasks step plays its own: each in a fresh container
 of the task's image, written together by the model alone, then scored by
 the task's check. The model always writes its likeliest token
 (wpt_agent.GREEDY), so the attempts at
@@ -35,7 +35,7 @@ text diff from its start to its end, a file that is not text or is too
 large named, never shown, the whole cut past a size), which the rating
 page shows; one Docker dropped
 (wpt_agent.SandboxError, not the model's doing), marked dropped, with
-the error and the opening it would have started from, as the grpo step
+the error and the opening it would have started from, as the finish-tasks step
 keeps its own. A dropped attempt has no Record: it is printed and
 recorded as an event too. A line the store refuses raises
 wpt_telemetry.RecordError.
@@ -55,7 +55,7 @@ from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
 
 ATTEMPTS = 4  # attempts per task, unless wpt-eval's --attempts says otherwise
-# how the attempts are checked: the grpo step's values (wpt_posttrain/steps/grpo.py)
+# how the attempts are checked: the finish-tasks step's values (wpt_training/environments/agent-tasks.py)
 CHECK_SECONDS = 300
 RESULT_BYTES = 4000
 SEED = 0  # the tools' variation, and the generator (whose draws matter only between equally likely tokens)

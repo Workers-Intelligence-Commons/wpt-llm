@@ -7,20 +7,26 @@ The smaller the tokens-per-parameter ratio, the more overfitting is
 tolerated: at Chinchilla balance (`chinchilla` tokens per parameter) an
 improvement must be `min_improve`; a data-starved run relaxes toward "never
 stop early, memorizing is the only available mode". An early stop ends the
-stage: the next one starts, with its own count.
+stage: the next one starts, with its own count. A step without evaluations
+never stops early and keeps its last weights.
+
+Only the parameters the step trains are in it: those of the parts it
+locks, and of the parts its method never reaches, are not. weight_decay
+defaults to PyTorch's own.
 """
 
 import torch
 
-from wpt_training import Method, Verdict
+from wpt_training import Optimizer, Verdict
 
-SETTINGS = {"lr": 3e-4, "patience": 10, "min_improve": 0.01, "smoothing": 3, "chinchilla": 20}
+SETTINGS = {"lr": 3e-4, "weight_decay": 0.01, "patience": 10, "min_improve": 0.01, "smoothing": 3, "chinchilla": 20}
 
 
-class AdamW(Method):
+class AdamW(Optimizer):
     def __init__(self, model, settings, run):
         self.settings = settings
-        self.optimizer = torch.optim.AdamW(model.parameters(), lr=settings["lr"])
+        self.optimizer = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], lr=settings["lr"],
+                                           weight_decay=settings["weight_decay"])
         ratio = run.tokens / run.parameters
         self.min_improve = max(0.0005, settings["min_improve"] * min(1.0, ratio / settings["chinchilla"]))
         run.log(f"tokens: {run.tokens:,} | params: {run.parameters:,} | ratio: {ratio:.3f} tok/param "

@@ -1,8 +1,8 @@
-"""Continue text with a trained model, or chat with a post-trained one.
+"""Continue text with a trained model, or chat with one trained on conversations.
 
 You type some text and press Enter; the model continues it until it ends the
 document or reaches the length limit. There are no roles and no history: a
-pre-trained model only continues text. Empty line quits. The model writes
+model trained on text only continues text. Empty line quits. The model writes
 through its generation cache (wpt_inference), so text and conversations
 may grow past its block_size. It writes by speculative decoding with the
 folder's drafter (drafter/), the same text faster: a model and its
@@ -14,7 +14,8 @@ scheduler's pass times are measured once, when the model is loaded;
 names, environment or .env), refused when they were measured on another
 setup (the model's config, the drafter's block, the device).
 
---chat talks to a model post-trained on conversations (docs/chat-format.md):
+--chat talks to a model trained on conversations (the answer-as-assistant
+step, docs/training.md; docs/chat-format.md):
 each line you type is a user message, the conversation so far goes through
 the chat template, and the model writes the assistant's message until
 <|im_end|>. Its thinking and tool calls are shown with their tags; tool
@@ -88,7 +89,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("model", nargs="?", default="runs/default", help="model folder (default: runs/default)")
     parser.add_argument("--max-new-tokens", type=int, default=MAX_NEW_TOKENS, help="length limit of each continuation")
-    parser.add_argument("--chat", action="store_true", help="chat with a post-trained model (roles and history)")
+    parser.add_argument("--chat", action="store_true", help="chat with a model trained on conversations (roles and history)")
     parser.add_argument("--about", action="store_true", help="print the model's licenses and sources, then quit")
     parser.add_argument("--scheduler-costs", metavar="RECORD_FOLDER",
                         help="read the drafter scheduler's pass times that a run recorded on the same setup: the name "

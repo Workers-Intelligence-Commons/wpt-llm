@@ -221,7 +221,7 @@ def add_source(repo, store, origin, item, data, patches=(), compute_checksum=Tru
     """Write data/sources/<id>/source.json, filling in the checksum from the
     real upstream, and download it into the store (fetch, default:
     compute_checksum). Returns the source id."""
-    data = {"schema": 7, "checksum": "sha256:" + "0" * 64,
+    data = {"schema": 8, "checksum": "sha256:" + "0" * 64,
             "licenses": [{"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION, "text": LICENSE_TEXT}],
             "formats": [{"format": "text", "paths": ["**"]}], "decision": DECISION, **data}
     if compute_checksum:
@@ -243,15 +243,16 @@ MODEL = {"n_layer": 2, "global_attention": ["CSA"], "d_model": 16, "kda_heads": 
          "index_heads": 2, "index_head_dim": 128, "index_top_k": 2, "n_experts": 4, "top_k": 2, "expert_width": 8, "latent_width": 8,
          "shared_width": 16, "engram_layers": [1], "engram_order": 3, "engram_heads": 2, "engram_dim": 4,
          "engram_table_size": 31}
-TRAINING = {"method": "adamw", "settings": {}, "stages": [{"block_size": 16, "steps": 1, "batch_size": 4}],
-            "eval_every": 1, "eval_batches": 1, "seed": 1337}
+STEPS = [{"step": "read-text", "optimizer": {"name": "adamw", "settings": {}},
+          "settings": {"stages": [{"block_size": 16, "steps": 1, "batch_size": 4}], "eval_every": 1,
+                       "eval_batches": 1}, "locked": []}]
 
 
 def write_model_recipe(repo, name, data):
-    """A model recipe whose data part is data; its model and training parts
-    are the smallest that train."""
-    return write_recipe(repo, "model", name, {"data": data, "model": MODEL, "training": TRAINING,
-                                              "drafter": {}, "posttrain": []})
+    """A model recipe whose data part is data; its model and steps are the
+    smallest that train."""
+    return write_recipe(repo, "model", name, {"data": data, "model": MODEL, "seed": 1337, "steps": STEPS,
+                                              "drafter": {}})
 
 
 def write_recipe(repo, kind, name, document):

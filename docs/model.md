@@ -1,7 +1,7 @@
 # Model architecture
 
 This page describes the architecture WPT models use and why; the code is
-`packages/wpt-model` and the `muon` method of `packages/wpt-training`.
+`packages/wpt-model` and the `muon` optimizer of `packages/wpt-training`.
 Every component comes from published research (cited at the end) and is
 trained from scratch: no weights or outputs of those models are used.
 
@@ -165,7 +165,7 @@ a scale that Muon's and Adam's normalized steps mostly cancel). Its inputs
 are cut off from the rest of the model, so this loss trains only the
 indexer, and the language-model loss only the rest. The model computes it
 only when its caller asks (`model(x, indexer_loss=True)` returns it after
-the scores): pre-training and the `sft` step ask, and a pass that does not
+the scores): every built-in training step asks, and a pass that does not
 ask leaves the indexers untrained. The training loss adds the gradient of
 this loss but not its value, so the logged training loss stays comparable
 with the validation loss; the log shows the indexer loss beside it at each
@@ -463,7 +463,7 @@ cache instead of from a segment before.
 - **Engram** keeps each attempt's last `N - 1` canonical ids and the last
   inputs of its convolution; its tables stay on the model's device.
 - The experts keep nothing, but a cache can record each attempt's routed
-  experts as its tokens are read, for R3 (post-training.md).
+  experts as its tokens are read, for R3 (training.md).
 
 Only the merged entries grow, a quarter of the tokens in CSA (and as many
 indexer keys) and 1/128 in HCA, so generation goes on past `block_size`
@@ -508,9 +508,9 @@ the same TileLang or Triton kernels as training, where they run.
 
 `wpt_inference.Writer` writes through the cache (`sample_tokens` for one
 text); `wpt-chat`, the sample `wpt-train` prints, the drafter's training
-and the attempts of the `grpo` and `token-efficiency` steps use it.
-`wpt-chat` and `wpt-train`'s sample draft with the model's drafter. The
-attempts of `grpo` and `token-efficiency` are written by the model alone,
+and the attempts of the `finish-tasks` and `finish-tasks-with-less-writing`
+steps use it. `wpt-chat` and `wpt-train`'s sample draft with the model's
+drafter. The attempts of those steps are written by the model alone,
 without a drafter: the weights change at every update, a drafter is trained
 only at the end of a run, and the attempts then depend on the seed alone,
 never on this machine's times.
@@ -529,23 +529,21 @@ folder's `drafter/` (`config.json`, `model.safetensors`,
 **One unit**. The model and its drafter are one unit and a hard dependency,
 with separate weights:
 
-- `wpt-train` trains a drafter at the end of every run, against the final
-  weights, the model frozen (training.md); `wpt-posttrain` trains a fresh
-  one at the end of every run, against the post-trained weights
-  (post-training.md). The drafter is not a post-training step.
+- `wpt-train` trains a drafter at the end of every run, after the
+  recipe's last step, against the final weights, the model frozen
+  (training.md, "The drafter"). The drafter is not a training step.
 - The drafter's `provenance.json` names the sha256 of every weight file it
   was trained against (`target.weights`). `wpt_model.load_model` refuses a
   folder whose drafter is missing, was not saved whole, or names other
   weights (`DrafterMismatch`), and no option skips the check.
 - A drafter that cannot be trained (too few prompts, a loss that is not
   finite, no draft verified) fails the run, which writes nothing.
-- The prompts are the beginnings of the dataset's training documents, after
-  training and after post-training alike (each the document start and its
-  first `prompt_tokens` tokens; the rest of the document is never read),
-  and the model alone writes the answers, each up to the end of a document,
-  and after post-training also up to `<|im_end|>`, the end of a turn a
-  post-trained model writes. A test checks that no text past a prompt
-  reaches the drafter's training.
+- The prompts are the beginnings of the dataset's training documents
+  (each the document start and its first `prompt_tokens` tokens; the rest
+  of the document is never read), and the model alone writes the answers,
+  each up to the end of a document and, when a step trained on
+  conversations or tasks, also up to `<|im_end|>`, the end of a turn. A
+  test checks that no text past a prompt reaches the drafter's training.
 
 **Settings.** The model recipe's `drafter` section (recipe shape 5, "Model
 recipes") gives the drafter's shape (`features`, `layers`, `block`,
@@ -557,8 +555,8 @@ training values explicitly ("Model recipes"), equal to today's defaults, so
 a later change of a default does not change their drafters. `features`
 numbers the model's layers from 1 to its `n_layer`;
 `DrafterConfig.for_model` checks them against the model's layers when a run
-starts, so `wpt-train` refuses a layer the model does not have before it
-trains, and `wpt-posttrain` before any step runs.
+starts, so `wpt-train` refuses a layer the model does not have before
+any step runs.
 
 A round drafts a block after the anchor, the last token the model wrote
 and has not read yet:
@@ -591,8 +589,8 @@ and has not read yet:
   are verified while the expected tokens per second of the model's pass
   grow, from a table of the pass's times, and the first that does not pay
   stops the admission, so a draft's admission never depends on the draft
-  itself. The times are measured once per run of `wpt-train` and of
-  `wpt-posttrain` (`wpt_inference.measure_costs`) and written into the
+  itself. The times are measured once per run of `wpt-train`
+  (`wpt_inference.measure_costs`) and written into the
   run's record as `scheduler-costs.json`, with the setup they were measured
   on: the model's config, the drafter's block (the drafts per round), the
   writer's rows (1) and the device, by its kind and name (such as "cuda
@@ -621,12 +619,11 @@ and has not read yet:
   stops a run: the name is then the architecture. The file's shape stays 2:
   only the device's text changed, so a file recorded on the CPU before,
   whose device is `cpu` alone, is refused like any other setup. `wpt-train
-  --scheduler-costs FOLDER` and `wpt-posttrain --scheduler-costs FOLDER`
-  replay the times an earlier run recorded in its record folder `FOLDER`
+  --scheduler-costs FOLDER` replays the times an earlier run recorded in its record folder `FOLDER`
   instead of measuring them, and `wpt-chat --scheduler-costs FOLDER` reads
   them instead of measuring them when it loads the model; each refuses
   times recorded on another setup, naming each difference, `wpt-train`
-  before training and `wpt-posttrain` before any step. A writer given no
+  before any step runs. A writer given no
   times verifies every draft.
 
   What a replay guarantees, exactly: the scheduler uses the recorded
@@ -703,8 +700,29 @@ V4's MTP-1 for drafting, as DSpark replaced it in V4's production. A cost
 of the scheduler: it follows this machine's measured times, so a seeded
 generator may draw other tokens from one run to the next (never another
 distribution), unless the run replays the times an earlier one recorded.
-Post-training attempts are written without a drafter, so they never
-depend on the times.
+The attempts of the task steps are written without a drafter, so they
+never depend on the times.
+
+## Parts
+
+A training step locks parts of the model by name ([training.md](training.md),
+"Locked parts"). The model gives its parts these names (`wpt_model.PARTS`),
+and every parameter belongs to exactly one of them (`WPT.parts`):
+
+- `embedding`: the token embedding;
+- `attention`: every layer's attention (KDA, CSA or HCA, with its norm),
+  its indexer aside;
+- `indexers`: the CSA indexers;
+- `routers`: the routers of the experts layers;
+- `balancing`: the routers' balancing biases, which no gradient trains:
+  Quantile Balancing sets them after each update, unless a step locks
+  them;
+- `experts`: the experts, shared and routed, with their norm;
+- `engram`: the Engram memories;
+- `streams`: mHC's mappings of the residual streams;
+- `final-norm`: the last norm;
+- `output-head`: the output head;
+- `multi-token-prediction`: the MTP block.
 
 ## Training
 
@@ -737,7 +755,7 @@ AdamW's quality with about 52% of the compute.
   rate and no weight decay for Engram tables (DeepSeek's Engram setting).
 
 **Schedule.** Multi-step ([DeepSeek LLM][llm], also used in the [mHC paper][mhc]): linear
-warm-up to the maximum over 2,000 steps, then 31.6% of it after 80% of the
+warm-up to the maximum over 2,000 updates, then 31.6% of it after 80% of the
 training tokens and 10% after 90%. DeepSeek reports final results matching
 cosine decay, and a run can be extended by continuing from a checkpoint
 taken before the first drop.
@@ -774,14 +792,16 @@ and the repository:
   latent, output groups and their width, indexer heads and dimensions, the
   top `k` entries), expert counts and widths, top `k`, latent width,
   Engram orders, heads, table sizes and layers;
-- training: the stages (each its window length, steps and batch, in
-  order; the model's context is the last one's), seed, learning rate and
-  schedule points, Muon and AdamW settings, the MTP loss weights;
+- the `seed`;
+- the `steps`, in order, each a step with, when they differ from the step
+  file's, its optimizer and that optimizer's settings, its settings and
+  the parts it locks ([training.md](training.md), "Steps"): the
+  `read-text` step's stages (each its window length, updates and batch, in
+  order), evaluations, MTP loss weights and Muon settings among them; the
+  model's context is the last window length of the last step that reads
+  text windows;
 - the drafter (`drafter`): its shape and how it is trained ("The
-  drafter"; an empty section keeps every default);
-- the post-training steps to run after pre-training (`posttrain`), each
-  a step's name or a step with the settings it changes
-  ([post-training.md](post-training.md), "Running post-training").
+  drafter"; an empty section keeps every default).
 
 Settings that change the result come only from the recipe. Command-line
 options remain only for what does not: device strategy (splitting windows
@@ -789,7 +809,7 @@ across processes included), number of processes, streaming, output folder,
 run name, resuming, micro-batch, recomputing, segments, checkpoints, weight
 file size and restarts. Mixtures and tokenizer recipes stay separate files,
 since several models share them. A model has at least 2 layers: the last is
-CSA or HCA, the others start with KDA. Recipes are shape 6, and
+CSA or HCA, the others start with KDA. Recipes are shape 7, and
 `wpt-dataset migrate` brings an older one there. From shape 2, it turns the
 MLA numbers into the CSA and HCA ones at 0 and adds an empty
 `global_attention` (gated MLA's numbers say neither), which a person then
@@ -803,8 +823,19 @@ held out, 512 anchors, 8 answers per update, seed 0. The three recipes hold
 exactly these values; the settings a section leaves out (the drafter's
 shape, `weight_decay`, `warm_up`, `clip`, `temperature`, `top_k`,
 `ece_bins`) keep their defaults. From shape 5, it changes only the number:
-shape 6 lets a `posttrain` entry be `{"step": NAME, "settings": {...}}` as
-well as a step's name.
+shape 6 lets a post-training entry be `{"step": NAME, "settings": {...}}`
+as well as a step's name. From shape 6, it makes `training` and the
+post-training steps one list, `steps`, with `seed` beside it: the
+training becomes the first step, `read-text`, its method the step's
+optimizer (with its settings but the MTP loss weights, which become the
+step's), its stages and evaluations the step's settings, nothing locked;
+each post-training step follows under the name of the step that does the
+same (`sft` as `answer-as-assistant`, `grpo` as `finish-tasks`,
+`token-efficiency` as `finish-tasks-with-less-writing`), its learning
+rate and weight decay given to its optimizer, `adamw`, and a `tag` setting
+naming one of those steps renamed with it. A step given as a Python file
+keeps its name and settings, and the check that follows says what the
+file lacks.
 
 A new recipe's name is an adjective and an animal drawn by `uv run
 scripts/recipe_name.py`, among about 11.5 million names, so the name says

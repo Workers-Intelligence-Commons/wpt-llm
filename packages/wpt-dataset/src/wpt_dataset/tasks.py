@@ -1,4 +1,4 @@
-"""Tasks for agentic post-training (docs/post-training.md).
+"""Tasks for agentic training (docs/training.md).
 
 Files in the `task` format form task folders, one folder per task:
 
@@ -58,19 +58,20 @@ parent, the real state just before the commit (every later commit undone,
 newest first, in the history's order, then the commit), with the
 commit's changes in its working tree, not committed, and a bare
 repository outside /work, at REMOTE, as its `origin`; next to the check,
-REPOSITORY says what the pushed commit must be (docs/post-training.md,
+REPOSITORY says what the pushed commit must be (docs/training.md,
 "Pointer tasks").
 
 Such files are never pre-training
-documents (markdown.py gives them no Markdown); a post-training step reads
-the tasks whose task.json carries a tag named after the step, through
-read(), which fills in the pointers and leaves out the measure-only tasks
-(measure_only: among them every task pointing into a document whose
-Markdown is the text of a held-out document of the base model's dataset,
-held_out_texts); read(..., measure=True) gives the measure-only ones
-instead.
+documents (markdown.py gives them no Markdown); a dataset's build keeps
+every task, with the tags of its task.json, through read(), which fills in
+the pointers and leaves out the measure-only tasks (measure_only: among
+them every task pointing into a document whose Markdown is the text of a
+held-out document of the dataset, held_out_texts), and a training step
+reads those of its tag; read(..., measure=True) gives the measure-only
+ones instead.
 """
 
+import base64
 import hashlib
 import json
 import os
@@ -78,7 +79,7 @@ import posixpath
 import re
 import subprocess
 import tempfile
-from dataclasses import dataclass, field, replace
+from dataclasses import dataclass, field, fields, replace
 from pathlib import Path
 from typing import NamedTuple
 
@@ -87,7 +88,7 @@ from .errors import DocumentListMissing, InvalidFile, RuleViolation
 from .manifest import FILE, HISTORY, MERGE, ORDER, SYMLINK
 from .migrate import upgrade
 from .repo import Repo, validate
-from .sources import held_out_group, load_index, source_tree, tags_of, temporary_git
+from .sources import each_read, held_out_group, load_index, opener, source_tree, tags_of, temporary_git
 
 TASK, CHECK, FILES = "task.json", "check", "files/"
 # the containers' sizes when task.json asks for no more: MiB of memory (the files in /work and /tmp included),
@@ -157,6 +158,7 @@ class Task:
     terse: str = ""  # the same request as instructions, in one line; "" when the task has none
     area: tuple | None = None  # the patterns of the paths under /work an attempt may change; None: no area
     gates: tuple = ()  # the parts of the check, or the harness's, that must be 1 for the attempt to score
+    tags: frozenset = frozenset()  # the tags of its task.json, which say which training step reads it (read)
 
 
 def folders(paths) -> dict[str, list[str]]:
@@ -288,29 +290,40 @@ def _check_pointers(where, pointers, files, known) -> tuple[list[str], list[str]
     return [pointer["path"] for pointer in pointers if pointer["for"] == "files"], [REMOTE] if repositories else []
 
 
-def fill(tasks, repo: Repo, store) -> tuple[list[Task], dict]:
+def fill(tasks, repo: Repo, store, copies=None) -> tuple[list[Task], dict]:
     """(the tasks, each pointer's text put in its place, its pointers gone
     and its documents (source, document, sha256 of the document's whole
     Markdown, for measure_only) kept; {source id: address, revision,
     licenses} of every source they point into}). Each source's final tree
-    comes from the store (fetched
-    when it is not there), and each span must hold the bytes its sha256
+    comes from the store (NotDownloaded when it is not there), and each span must hold the bytes its sha256
     names; a repository pointer's source must still have the checksum it
     names, and the commit must be made as repository() makes it.
     InvalidFile names the task and the pointer that cannot be filled: its
     source not admitted or changed, its document gone, its span changed or
-    cutting a character, its commit not made (repository())."""
+    cutting a character, its commit not made (repository()). The sources
+    pointed into are read several at once, each through its own store from
+    copies, and each repository pointer's commit is made through its own
+    too (each_read)."""
     wanted = {}
     for task in tasks:
         for pointer in task.pointers:  # a repository pointer's history file is a document too
             wanted.setdefault(pointer.source, set()).add(pointer.document)
     texts, trees, sources, checksums, read_sources = {}, {}, {}, {}, {}
-    for sid, paths in sorted(wanted.items()):
-        source = read_sources[sid] = repo.source(sid)
+
+    def pointed(item, here):
+        """(the source, its final tree, {path: Markdown} of the documents pointed into)."""
+        sid, paths = item
+        source = repo.source(sid)
         if not source.admitted:
             raise InvalidFile(f"{sid}: tasks point into it, but it is not admitted")
-        trees[sid], _ = source_tree(source, store)
-        texts |= {(sid, path): text for path, text in markdown.chosen(source, trees[sid], store, repo, paths).items()}
+        tree, _ = source_tree(source, here)
+        return source, tree, markdown.chosen(source, tree, here, repo, paths)
+
+    chosen = sorted(wanted.items())
+    for (sid, _), (source, tree, found) in zip(chosen, each_read(pointed, chosen, store, copies,
+                                                                 what="sources pointed into read at once")):
+        read_sources[sid], trees[sid] = source, tree
+        texts |= {(sid, path): text for path, text in found.items()}
         sources[sid] = {"address": source.data["address"], "revision": source.data["revision"],
                         "licenses": source.data["licenses"]}
         checksums[sid] = source.data["checksum"]
@@ -329,7 +342,8 @@ def fill(tasks, repo: Repo, store) -> tuple[list[Task], dict]:
                 if pointer.checksum != checksums[pointer.source]:
                     raise InvalidFile(f"{where}: {pointer.source} now has the checksum {checksums[pointer.source]}, "
                                       f"not {pointer.checksum}, which the task was built from; build the task again")
-                files, remote, expected = repository(where, pointer, trees[pointer.source], store)
+                with opener(store, copies)() as here:
+                    files, remote, expected = repository(where, pointer, trees[pointer.source], here)
                 parts["files"] |= files
                 parts["outside"][REMOTE] = remote
                 parts["check_files"][REPOSITORY] = (FILE, json.dumps(expected, indent=1).encode() + b"\n")
@@ -527,7 +541,7 @@ def changed_paths(history: bytes) -> list[str]:
 
 def held_out_texts(store, dataset: str | None) -> set[str]:
     """The sha256 of the Markdown of every held-out document of the dataset
-    `dataset` (the base model's, which its provenance names), read from the
+    `dataset` (the model's, which its provenance names), read from the
     dataset's document list (build.document_list): no source is converted. DocumentListMissing when the
     dataset has no list, built before builds wrote one, when the store does
     not hold the dataset, or when none is named; nothing falls back and
@@ -535,15 +549,15 @@ def held_out_texts(store, dataset: str | None) -> set[str]:
     from .build import HELD_OUT, document_list
 
     if not dataset:
-        raise DocumentListMissing("pointer tasks need the base model's dataset, to keep held-out texts out of "
+        raise DocumentListMissing("pointer tasks need the model's dataset, to keep held-out texts out of "
                                   "training, and none is named")
     listed = document_list(store, dataset)
     if listed is None and store.get_ref("datasets", dataset) is None:
-        raise DocumentListMissing(f"dataset {dataset}, the base model's, is not in this store, so its document "
+        raise DocumentListMissing(f"dataset {dataset}, the model's, is not in this store, so its document "
                                   f"list cannot say which texts it held out, and pointer tasks need that")
     if listed is None:
         raise DocumentListMissing(f"dataset {dataset} predates document lists, so it cannot say which texts it held "
-                                  f"out, and pointer tasks need that; this base model is used with the repository "
+                                  f"out, and pointer tasks need that; this model is used with the repository "
                                   f"at the commit that built it")
     return {entry["sha256"] for entry in listed if entry["tag"] == HELD_OUT}
 
@@ -634,29 +648,45 @@ def pointed_sources(source, tree, store, repo: Repo) -> set[str]:
 
 
 def read(repo: Repo, store, tag: str | None, held_out: float, log=print, measure=False,
-         dataset: str | None = None) -> tuple[list[Task], dict]:
+         dataset: str | None = None, held: set | None = None,
+         only: set[str] | None = None, copies=None) -> tuple[list[Task], dict]:
     """([Task], {source id: address, revision, licenses}) for every task of
     an admitted source whose task.json is tagged `tag` (any tag or none,
-    when tag is None: the measures read every measure-only task) and that is not
+    when tag is None: the measures read every measure-only task, and a
+    dataset's build every task a training step may read) and that is not
     measure-only (measure_only, with held_out the model recipe's share and,
     when a task points into documents, the texts of the held-out documents
-    of `dataset`, the base model's, read once for the pass: held_out_texts,
-    which refuses a dataset without its document list), in source and
-    folder order, its pointers filled in; the sources include those the
-    kept tasks' pointers read. With measure, the measure-only ones instead.
-    A source whose license text is empty is left out, and log is called
-    with a note naming it."""
-    found, sources = [], {}
-    for source in repo.sources(log):
-        if not source.admitted or not has_tasks(source):  # no tree read for a source without tasks
-            continue
-        tree, _ = source_tree(source, store)
-        for folder, task in of_source(source, tree, store, repo).items():
+    of `dataset`, the model's, read once for the pass: held_out_texts,
+    which refuses a dataset without its document list; or held, those
+    texts, when the caller has them, as the build that cuts the dataset
+    does), in source and folder order, its pointers filled in and the tags
+    of its task.json kept (Task.tags); the sources include those the kept
+    tasks' pointers read. With measure, the measure-only ones instead. With
+    only, the tasks of the sources of those ids alone are read (a pointer
+    may still name any admitted source). A source whose license text is
+    empty is left out, and log is called with a note naming it. Several
+    sources are read at once, each through its own store from copies
+    (each_read), and so are the sources pointed into (fill)."""
+    chosen = [source for source in repo.sources(log) if source.admitted and has_tasks(source)
+              and (only is None or source.id in only)]  # no tree read for a source without tasks
+
+    def tagged(source, here):
+        """[(task, its tags)] of the source's tasks tagged tag."""
+        tree, _ = source_tree(source, here)
+        found = []
+        for folder, task in of_source(source, tree, here, repo).items():
             tags = tags_of(source, _prefix(folder) + TASK)
             if tag is None or tag in tags:
-                found.append((task, tags, source))
-    filled, pointed = fill([task for task, _, _ in found], repo, store)
-    held = held_out_texts(store, dataset) if any(task.documents for task in filled) else set()
+                found.append((replace(task, tags=frozenset(tags)), tags))
+        return found
+
+    sources = {}
+    found = [(task, tags, source) for source, own in zip(chosen, each_read(tagged, chosen, store, copies,
+                                                                           what="task sources read at once"))
+             for task, tags in own]
+    filled, pointed = fill([task for task, _, _ in found], repo, store, copies)
+    if held is None:
+        held = held_out_texts(store, dataset) if any(task.documents for task in filled) else set()
     kept = []
     for task, (_, tags, source) in zip(filled, found):
         if measure_only(task, tags, held_out, held) == measure:
@@ -665,3 +695,59 @@ def read(repo: Repo, store, tag: str | None, held_out: float, log=print, measure
                                   "licenses": source.data["licenses"]}
             sources |= {sid: pointed[sid] for sid, _, _ in task.documents}
     return kept, sources
+
+
+def _files_out(found):
+    return {path: [mode, base64.b64encode(data).decode("ascii")] for path, (mode, data) in found.items()}
+
+
+def _files_in(written):
+    return {path: (mode, base64.b64decode(data)) for path, (mode, data) in written.items()}
+
+
+def _nested(value):
+    return [list(item) for item in value]
+
+
+# the JSON form of each Task field that JSON does not hold as it is: (to JSON, from JSON); every other field is
+# written as it is
+JSON_FORMS = {
+    "files": (_files_out, _files_in),
+    "tool_files": (_files_out, _files_in),
+    "check_files": (_files_out, _files_in),
+    "outside": (lambda found: {folder: _files_out(files) for folder, files in found.items()},
+                lambda written: {folder: _files_in(files) for folder, files in written.items()}),
+    "check": (lambda data: base64.b64encode(data).decode("ascii"), base64.b64decode),
+    "container": (dict, dict),
+    "needs": (lambda needs: [[[list(variant.tools), list(variant.tool_files)] for variant in variants]
+                             for variants in needs],
+              lambda needs: tuple(tuple(Variant(tuple(tools), tuple(hidden)) for tools, hidden in variants)
+                                  for variants in needs)),
+    "replies": (_nested, lambda found: tuple(map(tuple, found))),
+    "documents": (_nested, lambda found: tuple(map(tuple, found))),
+    "tools": (list, tuple),
+    "answered_by": (list, tuple),
+    "answered_in": (list, tuple),
+    "held_out_keys": (list, tuple),
+    "absent": (list, tuple),
+    "gates": (list, tuple),
+    "area": (lambda area: None if area is None else list(area), lambda area: None if area is None else tuple(area)),
+    "tags": (sorted, frozenset),
+}
+JSON_FIELDS = tuple(one.name for one in fields(Task) if one.name != "pointers")  # a kept task has none left
+
+
+def to_json(task: Task) -> dict:
+    """A filled task (fill: no pointer left) as JSON, each field under its
+    name, each file's bytes in base64, as a dataset keeps it (build.py);
+    from_json reads it back."""
+    if task.pointers:
+        raise ValueError(f"{task.id}: a task is kept as JSON once its pointers are filled in")
+    return {name: JSON_FORMS[name][0](getattr(task, name)) if name in JSON_FORMS else getattr(task, name)
+            for name in JSON_FIELDS}
+
+
+def from_json(found: dict) -> Task:
+    """The Task that to_json wrote."""
+    return Task(**{name: JSON_FORMS[name][1](found[name]) if name in JSON_FORMS else found[name]
+                   for name in JSON_FIELDS})

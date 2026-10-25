@@ -1,6 +1,6 @@
 ---
 name: wpt
-description: How to work in the WPT repository (Workers' Pre-trained Transformer) with its own tools. Use it before adding or changing a source, a recipe, the model, training, an evaluation or a post-training step, before running any wpt-* command, and before every push. It names the command for each job, what each one reads and writes, how to extend evaluation and post-training, and the rules that keep `scripts/check.py` green.
+description: How to work in the WPT repository (Workers' Pre-trained Transformer) with its own tools. Use it before adding or changing a source, a recipe, the model, training, an evaluation or a training step, before running any wpt-* command, and before every push. It names the command for each job, what each one reads and writes, how to extend evaluation and training, and the rules that keep `scripts/check.py` green.
 ---
 
 # WPT tooling
@@ -68,14 +68,13 @@ where a step needs them, run through Docker Desktop.
 | keep a checkout's sources current, without end (a server) | `uv run wpt-dataset source-server --by NAME [--pause SECONDS]` (each round: every built-in source drafter on every candidate, then every source downloaded again in full, the drafts' checksums filled in, each source checked as `check --fetch` does; the failures printed; then a pause, `WPT_SOURCE_SERVER_PAUSE` or `--pause`, one week by default; nothing committed; docs/architecture.md, "The source server") | the sites, the upstream, `data/` | `data/sources/ID/source.json` in this checkout; the store; a run record per source drafter run and per round's download |
 | migrate data files | `uv run wpt-dataset migrate` | `data/` | rewrites files whose shape is behind |
 | check the Markdown of sources | `uv run wpt-dataset markdown-check [ID ...]` | the sources | prints notes and problems per source |
-| train | `uv run wpt-train RECIPE DATASET_ID [--out FOLDER] [--stream] [--recompute] [--segment N] [--run NAME] [--scheduler-costs RECORD_FOLDER] [options]`, started detached (skill `wpt-training-run`; ends by training the model's drafter; `--scheduler-costs`: replay the drafter scheduler's pass times an earlier run recorded on the same setup; a checkpoint is always written just before the drafter, so a drafter failure resumes with `--resume`; `--stream`: a few shards on disk at a time; `--recompute`: much less memory, about a third slower; `--segment N`: windows longer than N tokens run as segments of N, the same training in the memory of N tokens plus what the segments hand on, up to twice the time; with `--strategy split`, each process's slice runs in segments of N; `--run`: the checkpoint in the store, so another machine can continue) | the model recipe, the store | a model folder; its run record `records/<folder>/` in the store (one per command, over restarts); `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
+| train | `uv run wpt-train RECIPE DATASET_ID [--out FOLDER] [--stream] [--recompute] [--segment N] [--run NAME] [--scheduler-costs RECORD_FOLDER] [options]`, started detached (skill `wpt-training-run`; runs the recipe's `steps` in order, starting from the result of the last of its first steps the store already holds, so a run reuses the steps it shares with an earlier one; a dataset that holds nothing for a step refuses the run before any step trains; a step that cannot do its part (`StepFailed`) stops the run with exit code 2, no result of it kept but the checkpoint it wrote, which `--resume` continues, the results of the steps before it kept; ends by training the model's drafter; `--scheduler-costs`: replay the drafter scheduler's pass times an earlier run recorded on the same setup; a checkpoint is always written just before the drafter, so a drafter failure resumes with `--resume`; `--stream`: a few shards on disk at a time; `--recompute`: much less memory, about a third slower; `--segment N`: windows longer than N tokens run as segments of N, the same training in the memory of N tokens plus what the segments hand on, up to twice the time; with `--strategy split`, each process's slice runs in segments of N; `--run`: the checkpoint in the store, so another machine can continue) | the model recipe, the store | a model folder; each step's result, the store's `steps/<fingerprint>`; its run record `records/<folder>/` in the store (one per command, over restarts); `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
 | train on several GPUs | `uv run wpt-train RECIPE DATASET_ID --strategy ddp --processes N [options]`, or `--strategy split` to split each window between the GPUs (windows too long for one; DeepSeek-V4's contextual parallelism) (several machines: `torchrun ... -m wpt_train`, Linux only) | the store | the same |
 | evaluate | `uv run wpt-eval FOLDER [EVAL ...] [--attempts N]` (from inside the repository; the agent measures play N attempts, default 4, at every measure task, so each task's image must be built) | the folder, the store, the measure tasks | `FOLDER/evals/<name>.json`, `README.md`; its run record `records/<folder>/` in the store, with `attempts.jsonl` |
-| post-train | `uv run wpt-posttrain RECIPE BASE NEW [--scheduler-costs RECORD_FOLDER]` (the steps are the recipe's `posttrain` list, each a name or `{"step": NAME, "settings": {...}}`; ends by training a fresh drafter and measuring, or replaying, the scheduler's pass times) | the model recipe, the base folder, the store | the new folder, only if every step succeeded; its run record `records/<folder>/` in the store, always |
-| build program-built tasks | `uv run scripts/build_tasks.py KIND SOURCE --count N [--seed S] [--select EXPRESSION]` (kinds `find-the-passage`, `evidence-removed`, `look-or-ask`, `commit-and-push`, `read-the-manual`; SOURCE an empty source a person made; docs/post-training.md, "The task builder") | admitted sources in the store | everything under `KIND/` in SOURCE, as its next patch |
+| build program-built tasks | `uv run scripts/build_tasks.py KIND SOURCE --count N [--seed S] [--select EXPRESSION]` (kinds `find-the-passage`, `evidence-removed`, `look-or-ask`, `commit-and-push`, `read-the-manual`; SOURCE an empty source a person made; docs/training.md, "The task builder") | admitted sources in the store | everything under `KIND/` in SOURCE, as its next patch |
 | lock an image of agentic tasks | `uv run wpt-agent lock-image NAME [--force]` (needs Docker; `--force` replaces an existing lock) | `data/images/NAME/Dockerfile`, the base image's registry, the dated package archive | `data/images/NAME/lock.json` and `licenses.json` (commit them) |
-| build an image of agentic tasks | `uv run wpt-agent build-image NAME` (needs Docker; before `wpt-posttrain` with `grpo` or `token-efficiency`, and before `wpt-eval`'s agent measures) | `data/images/NAME/`, the base image's registry, the dated package archive | a local Docker image |
-| continue text | `uv run wpt-chat FOLDER` (`--about` prints its NOTICE; `--chat` talks to a post-trained model; `--scheduler-costs RECORD_FOLDER` reads the scheduler's pass times a run recorded on the same setup instead of measuring them) | the folder; with `--scheduler-costs`, the store | |
+| build an image of agentic tasks | `uv run wpt-agent build-image NAME` (needs Docker; before `wpt-train` with `finish-tasks` or `finish-tasks-with-less-writing`, and before `wpt-eval`'s agent measures) | `data/images/NAME/`, the base image's registry, the dated package archive | a local Docker image |
+| continue text | `uv run wpt-chat FOLDER` (`--about` prints its NOTICE; `--chat` talks to a model trained on conversations; `--scheduler-costs RECORD_FOLDER` reads the scheduler's pass times a run recorded on the same setup instead of measuring them) | the folder; with `--scheduler-costs`, the store | |
 | the kinds of data files, their names, one file | `uv run wpt-dataset kinds`, `list KIND`, `show KIND NAME` | `data/`, through the service layer | prints them (version and problems on stderr) |
 | write a data file people write | `uv run wpt-dataset save KIND NAME FILE --version VERSION` (`''`: a new file) | the file | that file, after the rules of `check`; refused when it changed since VERSION |
 | a source's files, tags and git status | `uv run wpt-dataset files ID`, `tags ID PATH [TAG ...] --version V`, `remove ID PATH --patch NAME --version V`, `status` | the source | `source.json`, or the next patch |
@@ -85,24 +84,30 @@ where a step needs them, run through Docker Desktop.
 | edit every kind of data in a browser | `uv run wpt-web` (needs Bun), then http://127.0.0.1:8410/ (HTTP API described at `/api/openapi.json`; page "Ratings": people's pass or fail on the attempts of a `wpt-eval` run, a measure only, docs/evaluation.md; page "Source drafters": start a run and follow it, stopped with `wpt-web` and started again with it) | `data/`, a WPT model folder for drafts, the store's `wpt-eval` run records for ratings, `packages/wpt-web/ui` | data files through the service layer; `ui/node_modules`, `ui/dist`; the name it holds, in the git folder |
 
 Everything that changes a model comes from its model recipe
-(`data/recipes/models/NAME.json`: data, architecture, method and settings,
-stages, seed, the drafter, post-training steps; docs/model.md). `training.stages` lists
-the window lengths in order, each with its steps and its `batch_size`,
-which is global (over every process) (docs/training.md, "Stages"); the
-model's context is the last one's. Segments and split windows give
+(`data/recipes/models/NAME.json`: data, architecture, seed, the training
+`steps` in order, the drafter; docs/model.md). Each step is
+`{"step": NAME}` with, when they differ from the step file's, its
+`optimizer` and that optimizer's settings, its `settings` and the parts it
+keeps `locked`, named as the model names them (docs/model.md, "Parts";
+docs/training.md, "Steps"). The built-in steps are `read-text`,
+`answer-as-assistant`, `finish-tasks` and `finish-tasks-with-less-writing`.
+The `read-text` step's `stages` list the window lengths in order, each
+with its updates (`steps`) and its `batch_size`, which is global (over
+every process) (docs/training.md, "Stages"); the model's context is the
+last window length of the last step that reads text windows. Segments and split windows give
 the whole window's loss and gradients, so they are options, never part of
 the recipe (docs/training.md, "Long windows"). The `wpt-train` options only
 say how the hardware runs it, and each also comes from `WPT_<OPTION>` in the
 environment (`--micro-batch` -> `WPT_MICRO_BATCH`); `--help` on any command
 lists them. A crash restarts the processes on their own, up to
 `--max-restarts` times (default 3), from the last checkpoint; Ctrl+C or
-`kill` finishes the step and saves first; after a stop, the same command
+`kill` finishes the current update and saves first; after a stop, the same command
 with `--resume` continues from `FOLDER/checkpoint/` (or, with `--run NAME`,
 from the store, on any machine). Exit codes: 2 refused, 3 the run's record
 could not be written, 130 stopped.
 
 Every run of `wpt-dataset download`, `check --fetch`, `fill-checksum`,
-`manifest`, `build`, `wpt-dataset source-drafter`, each round of `wpt-dataset source-server`, `wpt-train`, `wpt-posttrain` and `wpt-eval` writes its record into its own store folder, `records/<UTC
+`manifest`, `build`, `wpt-dataset source-drafter`, each round of `wpt-dataset source-server`, `wpt-train` and `wpt-eval` writes its record into its own store folder, `records/<UTC
 time>-<command>-<main id>-<random>/` (main id: the source id or `<count>-sources`, the recipe name, a short
 dataset id or a short weights hash): `start.json`, `events.jsonl` (spans, events,
 every printed line), `ids.json` (the ids read and written, which chain the
@@ -110,8 +115,9 @@ runs together), `end.json`. With `OTEL_EXPORTER_OTLP_ENDPOINT` set
 (environment or `.env`), the same goes live to an OpenTelemetry backend
 (`deploy/otel-lgtm/compose.yaml`). A backend failure is one warning; a
 record the store refuses stops the command with exit code 3 (`wpt-train`
-first finishes its step and saves its checkpoint). A post-training step or
-an evaluation records its own events and files through `context.telemetry`.
+first finishes its update and saves its checkpoint). A training step's
+environment records its own events and files through `data.telemetry`, and
+an evaluation through `context.telemetry`.
 Details: `docs/observability.md`.
 
 ## Adding a source
@@ -157,12 +163,14 @@ license map.
 
 Text a person writes for WPT is an `empty` source: no download, its
 patches hold every file (CONTRIBUTING.md, "Adding your own texts").
-Post-training conversations are `chat` files of such a source, tagged with
-the name of the step that reads them (`sft`), one conversation per line as
-docs/chat-format.md says. Tasks for agentic post-training are `task`
-files of such a source, one folder per task, tagged `grpo`; the
-`token-efficiency` step, after `grpo`, reads the same tasks
-(docs/post-training.md). People's pass or fail on a model's measure
+Conversations for training are `chat` files of such a source, tagged with
+the name of the step that reads them (`answer-as-assistant`), one
+conversation per line as docs/chat-format.md says. Tasks for agentic
+training are `task` files of such a source, one folder per task, tagged
+`finish-tasks`; the `finish-tasks-with-less-writing` step, after
+`finish-tasks`, reads the same tasks (docs/training.md). A dataset's
+build keeps the tagged conversations and tasks of its admitted sources,
+so a step reads them only from a dataset built after they were added. People's pass or fail on a model's measure
 attempts are `rating` files of such a source, one rating per line, a
 measure only that no training step reads (docs/evaluation.md, "People's
 ratings"). Committed text
@@ -234,8 +242,7 @@ target and renames it into place; training into an existing folder replaces
 it as a whole (its `evals/`, checkpoint and any other file go with it).
 Every model folder holds `drafter/` (`config.json`, weights with the same
 header, `provenance.json`): the drafter for speculative decoding, which
-`wpt-train` and `wpt-posttrain` train at the end of every run against the
-final weights. A model and its drafter are one unit: `load_model` and
+`wpt-train` trains at the end of every run against the final weights. A model and its drafter are one unit: `load_model` and
 `load_drafter` refuse a folder whose drafter is missing or names other
 weights' sha256 (`DrafterMismatch`), and nothing skips the check; a
 folder written by hand gets one through `save_drafter`, whose provenance
@@ -296,7 +303,7 @@ def run(context):  # context: model, tokenizer, device, folder, provenance, stor
 Every evaluation returns `Result`: `data` that JSON can hold, and `text`
 that the model card shows. Details: `docs/evaluation.md`.
 
-## Writing a training strategy or method
+## Writing a training strategy or step
 
 A strategy (how the hardware is used) is one Python file, a built-in in
 `packages/wpt-training/src/wpt_training/strategies/` or any path given to
@@ -310,71 +317,60 @@ def start():  # a subclass overrides wrap, no_sync, synchronize, mean, reduce, b
     return Strategy(device, rank=0, world_size=1, local_rank=0)
 ```
 
-A method (how the model learns) is one Python file, a built-in in
-`packages/wpt-training/src/wpt_training/methods/` (`muon`, `adamw`) or any
-path, named by a model recipe's `training.method`:
+A step is made of separate parts, each one Python file, a built-in in its
+folder of `packages/wpt-training/src/wpt_training/` or any path:
 
 ```python
-from wpt_training import Method, Verdict
+# methods/NAME.py: how a loss is made from a batch of examples
+READS = "windows"  # the kind of examples it learns from
+SETTINGS = {...}
+def start(settings): return Mine()  # a wpt_training.Method (TextMethod on text windows): learn, update_loss,
+                                    # optionally begin, unreached (parts its loss never reaches), after_update, state_dict
 
-SETTINGS = {"lr": 3e-4}  # changed by the recipe's training.settings, typed from these defaults
+# environments/NAME.py: where the examples come from
+GIVES = "windows"  # the kind of examples it gives
+SETTINGS = {...}
+def start(settings, data): ...  # a wpt_training.Environment: stage_list, tokens, sources, batch (None: the update
+                                # is skipped), evaluates, evaluate, after_update, finished, state_dict, close;
+                                # data: the step's name, store, dataset record, tokenizer, config, strategy,
+                                # telemetry, log, seed, the step's number, step_seed (both mixed:
+                                # what the step's draws are seeded by); optionally check(settings),
+                                # context(settings) and check_dataset(settings, record, store): ValueError
+                                # when the dataset holds nothing for it, before any step runs
 
-class Mine(Method):  # may override loss (then part_loss too, for windows in parts), validation_loss,
-                     # stage, before_update, after_update, evaluated, state_dict, load_state_dict
-    def __init__(self, model, settings, run):  # run: tokens, parameters, steps, log
-        self.optimizer = ...
+# optimizers/NAME.py: how the weights move, with its schedule
+SETTINGS = {...}
+def start(model, settings, run): ...  # a wpt_training.Optimizer over run's parameters
 
-def start(model, settings, run):
-    return Mine(model, settings, run)
+# steps/NAME.py: puts them together
+METHOD = "next-token"
+ENVIRONMENT = "text-windows"
+OPTIMIZER = {"name": "muon", "settings": {...}}
+LOCKED = ()        # model parts left as they are (wpt_model.PARTS)
+SETTINGS = {...}   # defaults for its method's and environment's settings
 ```
 
-The runner in `wpt_training/runner.py` owns the data, the stages, each
-stage's global batch, windows in parts (`parts.py`), evaluation and checkpoints: a strategy or a method never draws windows or
-seeds randomness itself, so runs stay the same on any hardware. Anything a
-resumed run needs goes in the method's `state_dict`. Details:
-`docs/training.md`.
+A method that reads what its environment does not give, an unknown part or
+setting, an optimizer that refuses the model, and a dataset that holds
+nothing for a step are refused before any step runs. The runner in `wpt_training/runner.py` runs one step: its
+stages, each update's global batch, windows in parts (`parts.py`),
+evaluation and checkpoints; a part never seeds randomness itself, so runs
+stay the same on any hardware. Anything a resumed step needs goes in the
+`state_dict` of its method, environment or optimizer. A part that finds it
+cannot do its job (a loss that is not finite, every attempt dropped)
+raises `wpt_training.StepFailed(reason)`. The step keeps its result in the store
+under a fingerprint of everything that decides it: the dataset part the
+step reads (the record's `fingerprints`: text, conversations or tasks), not
+the whole dataset, and never the hardware options (`--stream` included). After the last step, every run trains a drafter for the final
+weights; the drafter is not a step. Details: `docs/training.md`, "Steps".
 
-## Writing a post-training step
-
-One Python file, a built-in in `apps/wpt-posttrain/src/wpt_posttrain/steps/`
-or any path given to `wpt-posttrain`:
-
-```python
-from wpt_posttrain import Outcome
-
-SETTINGS = {"rounds": 10}  # changed by a recipe entry {"step": ..., "settings": {...}}, typed from these defaults
-
-def check(settings):  # optional: raise ValueError on settings that cannot go together, before any step runs
-    ...
-
-def run(context):  # context: model (change it in place), tokenizer, device,
-                   # base, provenance, store, settings (SETTINGS with the
-                   # recipe's), telemetry (the run's record:
-                   # events, spans, files in its store folder);
-                   # context.conversations() reads the chat files tagged
-                   # with this step's name, and context.tasks() its task
-                   # folders (run them with wpt_agent; context.tasks("grpo")
-                   # reads another step's tag)
-    ...
-    return Outcome.success()  # or Outcome.failure("why it could not do its part")
-```
-
-The built-in steps are `sft`, `grpo` and `token-efficiency` (after `grpo`,
-on the same tasks: the same result with fewer written tokens); `grpo` and
-`token-efficiency` share `wpt_posttrain/agentic.py`, which plays their
-attempts through `wpt_agent.play` with the model alone (no drafter), as
-the agent measures of `wpt-eval` do, and keeps every attempt as a
-line of `<step>-attempts.jsonl` in the run's record folder: a chat-format
-conversation whose `metadata` identifies the attempt. A task's check
-prints named parts (`correct` and the rules it reports), and the step
-weighs them into the reward with its weight settings, gated by the task's
-`gates` (docs/post-training.md, "Rewards"). After the last step,
-every run trains a fresh drafter for the new weights; the drafter is not a
-step (docs/post-training.md, "The drafter").
-
-A step reports only whether it managed to do its part, and why not. The
-first failure stops the run and nothing is written. Details:
-`docs/post-training.md`.
+The `finish-tasks` steps play their attempts through `wpt_agent.play` with
+the model alone (no drafter), as the agent measures of `wpt-eval` do, and
+keep every attempt as a line of `<step>-attempts.jsonl` in the run's
+record folder: a chat-format conversation whose `metadata` identifies the
+attempt. A task's check prints named parts (`correct` and the rules it
+reports), and the step weighs them into the reward with its weight
+settings, gated by the task's `gates` (docs/training.md, "Rewards").
 
 ## Generating text
 
@@ -402,7 +398,7 @@ once (`measure_costs`) and records with the setup they were measured on
 (`costs_setup`, `costs_file`), or replays on the same setup only
 (`replayed_costs`); without them every draft is verified. For agentic
 tasks, `wpt_agent.attempts` runs several attempts in one batch, and
-`wpt_agent.play(...)` (what the post-training steps and the agent measures
+`wpt_agent.play(...)` (what the task steps and the agent measures
 share) scores them one by one and hands each to the caller as soon as it
 is scored. What a layer passes
 on to later tokens is said once, in its `passes_on()` (`carry.py`), which

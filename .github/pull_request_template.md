@@ -5,8 +5,8 @@
 ## Part it touches
 
 <!-- One or more: sources and data rules, tokenizer, dataset build, training,
-post-training, evaluation, generation and chat, web interface, model
-architecture, documentation. -->
+evaluation, generation and chat, web interface, model architecture,
+documentation. -->
 
 ## Checks
 
@@ -30,8 +30,7 @@ a maintainer afterwards (CONTRIBUTING.md, "Decisions are signed").
 
 ## The model
 
-<!-- Only for a pull request that changes the model, its training or its
-post-training. -->
+<!-- Only for a pull request that changes the model or its training. -->
 
 Measurements (the run record's folder, the eval results, before and after):
 

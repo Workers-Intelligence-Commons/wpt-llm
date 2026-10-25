@@ -19,7 +19,7 @@ weights.
 The agent measures (below) also need the repository: `wpt-eval` runs from
 inside it, since the measure tasks are task files of its sources, and each
 task's image must be built on this machine first (`uv run wpt-agent
-build-image NAME`, which needs Docker), as for the `grpo` step. A missing
+build-image NAME`, which needs Docker), as for the `finish-tasks` step. A missing
 image stops the command and names the command that builds it.
 
 ## Writing a test
@@ -84,15 +84,15 @@ The agent measures read one run of attempts at the measure tasks: the
 measure-only tasks of every admitted source, whatever their tags, as
 `wpt_dataset.tasks.read(..., measure=True)` gives them: those tagged
 `eval`, the hash share of every task source, and the pointer tasks on
-held-out text ([post-training.md](post-training.md), "Measure tasks"), read
+held-out text ([training.md](training.md), "Measure tasks"), read
 with the model's own `held_out` share and dataset (its `provenance.json`),
 once per command. The run is `wpt_eval/attempts.py`. Its attempts are
-played by `wpt_agent.play`, the function the `grpo` step plays its own
+played by `wpt_agent.play`, the function the `finish-tasks` step plays its own
 with: each in a fresh container of the task's image, written together by
 the model alone, then scored by the task's check. The model always writes
 its likeliest token (`wpt_agent.GREEDY`), so the attempts at one task
 differ only in the tools they are offered, and a run gives the same
-attempts again on the same setup. Checks use the `grpo` step's values (300
+attempts again on the same setup. Checks use the `finish-tasks` step's values (300
 seconds for a check, 4,000 bytes of a tool result) and seed 0.
 
 ```python
@@ -106,7 +106,7 @@ def run(context):
   offered vary from one attempt to the next).
 - `plain=False`: each attempt is offered its seeded variation of the tools
   (`wpt_agent.offer`, from a generator seeded with the seed, the task and
-  the attempt; [post-training.md](post-training.md), "Variation").
+  the attempt; [training.md](training.md), "Variation").
   `plain=True`: the same attempt, from a generator in the same state, is
   offered only the tools of the same variants of the task's needs, under
   their real names, nothing renamed, shuffled or added from the image's
@@ -120,7 +120,7 @@ def run(context):
   conversation the check reads, with its metadata `tools`, `looking`,
   `answered_by`, `answered_in` and `answer`), `score` (the check's
   `correct` part, from 0 to 1, or 0 when a gate of the task is broken;
-  [post-training.md](post-training.md), "Scores") and `changes`, its
+  [training.md](training.md), "Scores") and `changes`, its
   changes to `/work`.
 - Every attempt is a line of `attempts.jsonl` in the run's record folder in
   the store ([observability.md](observability.md)), with the task by its
@@ -134,7 +134,7 @@ def run(context):
 - An attempt Docker dropped (not the model's doing) has no score and no
   record: it is printed, recorded as an `eval.attempt_dropped` event, and
   kept as a line marked `"dropped": true`, with the error and the opening
-  it would have started from, as the `grpo` step keeps its own.
+  it would have started from, as the `finish-tasks` step keeps its own.
 
 Every measure runs as it is on any model, a pre-trained one included: an
 attempt with no answer (no final reply, or no confidence from 0 to 100
@@ -144,7 +144,7 @@ exists for base models.
 
 A measure reads an attempt by the same rules as the checks: the check
 library of the task's image (`wpt_check.py`,
-[post-training.md](post-training.md), "The check library"), loaded through
+[training.md](training.md), "The check library"), loaded through
 the service layer by `wpt_eval.attempts.library`. Each measure gives the
 mean score, and the pass rate of its attempts: an attempt passes when its
 score is 1, its `correct` part at full marks with every gate of its task
@@ -225,7 +225,7 @@ trained on: `calibration` (#28), `reading_gain` (#34, its text form) and
   the same replies again on the same setup.
 - `calibration` and `reading_gain` ask for the rest of a paragraph. The
   paragraph and its quoted start follow the task builder's rules
-  ([post-training.md](post-training.md), "The task builder"): plain text of
+  ([training.md](training.md), "The task builder"): plain text of
   120 to 800 bytes, its start about its first 40%. The question is
   "Continue this passage: " and the quoted start. Both choose their
   documents with one function, `asking.select`: for each document, one
@@ -313,7 +313,7 @@ Its rules:
 
 The agent form of the reading-gain measure (`read_the_manual`): does the
 model use a program better when its manual is there to read? Its tasks are
-the task builder's `read-the-manual` ([post-training.md](post-training.md),
+the task builder's `read-the-manual` ([training.md](training.md),
 "The task builder"): each asks for a result only `ondrik` gives, a program
 of the agent image written for WPT, so no training text describes it, and
 half of them remove its manual from the image. `ondrik` is compiled, so the
@@ -338,7 +338,7 @@ scores, near 0 for a pre-trained model.
 ## Terse and full requests
 
 A task can hold its request in two forms: its full `instructions`, and a
-one-line form, `terse` ([post-training.md](post-training.md), "Tasks"). The
+one-line form, `terse` ([training.md](training.md), "Tasks"). The
 agent loop opens an attempt with either (`wpt_agent.attempts(...,
 terse=True)` for the one-line form), and the task's check scores both the
 same way, so the pass rates of the two forms can be compared on the same
