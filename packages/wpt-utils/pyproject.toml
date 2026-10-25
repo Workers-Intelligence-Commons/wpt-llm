@@ -1,7 +1,7 @@
 [project]
 name = "wpt-utils"
 version = "0.1.0"
-description = "Helpers several WPT packages share: the PyTorch device to run on, the outside programs WPT starts, the repository commit, the sha256 of a file"
+description = "Helpers several WPT packages share: the PyTorch device to run on, the outside programs WPT starts, the repository commit, the sha256 of a file, a lock on a file between processes, how much parallel work the machine takes"
 license = "AGPL-3.0-or-later"
 requires-python = ">=3.14"
 dependencies = []  # wpt_utils.device needs torch, which comes from the root group that scripts/setup.py picks

@@ -144,7 +144,7 @@ def routes(context, runs_here: Runs):
             raise NotFound(f"no built-in source drafter {name!r}")
         settings = {key: str(value) if not isinstance(value, str) else value for key, value in body["settings"].items()}
         load(name, settings)  # an unknown setting, or one its check refuses, is refused before any run starts
-        given = arguments(name, body["by"], body["settings"], body["only"], body["again"], body["processes"])
+        given = arguments(name, body["by"], body["settings"], body["only"], body["again"])
         return 200, {"started_by": runs_here.start(given)}
 
     def summary(found, running):
@@ -180,16 +180,15 @@ def routes(context, runs_here: Runs):
         Route("POST", "/api/source-drafters/{name}/runs", start,
               "start a run of a built-in source drafter as a separate process (`wpt-dataset source-drafter`): its "
               "settings, who drafts (the decision's `by`), only these candidates (by name or source id; none: "
-              "every one), again (draft those done before too), in how many processes; it stops when wpt-web "
-              "stops and starts again when it starts next",
-              body={"type": "object", "required": ["by", "settings", "only", "again", "processes"],
+              "every one), again (draft those done before too); it stops when wpt-web stops and starts again when it "
+              "starts next",
+              body={"type": "object", "required": ["by", "settings", "only", "again"],
                     "additionalProperties": False,
                     "properties": {"by": {"type": "string", "minLength": 1},
                                    "settings": {"type": "object",
                                                 "additionalProperties": {"type": ["string", "number", "boolean"]}},
                                    "only": {"type": "array", "items": {"type": "string", "minLength": 1}},
-                                   "again": {"type": "boolean"},
-                                   "processes": {"type": "integer", "minimum": 1}}},
+                                   "again": {"type": "boolean"}}},
               answer={"type": "object", "required": ["started_by"], "properties": {"started_by": STRING}}),
         Route("GET", "/api/source-drafter-runs", all_runs,
               "every source drafter run in the store, newest first, from its record: its inputs (source drafter, "

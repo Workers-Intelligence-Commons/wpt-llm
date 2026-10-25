@@ -41,6 +41,11 @@ class CrawlForbidden(DatasetError):
     at least one refused (each address and its reason are listed)."""
 
 
+class NotDownloaded(DatasetError):
+    """The store does not hold the source's upstream files: `wpt-dataset
+    download` fetches them. Nothing is downloaded anywhere else."""
+
+
 class ChecksumMismatch(DatasetError):
     """The downloaded data has another manifest checksum than source.json says."""
 

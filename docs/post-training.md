@@ -1015,8 +1015,8 @@ The first committed task set holds all 4 kinds, about 2,500 tasks of each,
 about 10,000 in all, and reports its shares this way. The 70/30 mix between
 the two shares is settled later, once more kinds of tasks are defined: only
 the program-built kinds are defined so far. Building the set needs every
-admitted source it reads fetched into the store first (`uv run wpt-dataset
-check --fetch`), on a machine that holds them, the task sources made and
+admitted source it reads downloaded into the store first (`uv run wpt-dataset
+download`), on a machine that holds them, the task sources made and
 admitted, and one run per kind with `--count 2500`.
 
 ### Attempts

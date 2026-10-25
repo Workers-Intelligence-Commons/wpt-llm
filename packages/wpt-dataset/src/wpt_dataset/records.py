@@ -181,8 +181,8 @@ def join_index(entry: dict, paths) -> dict[str, str]:
     return index
 
 
-def joined_file(entry: dict, path: str, tree, indexes: dict) -> str | None:
-    """The sha256 of the file the entry's `join` reads with this one (a
+def joined_file(entry: dict, path: str, tree, indexes: dict):
+    """The tree entry of the file the entry's `join` reads with this one (a
     tree's {path: entry}), or None when the entry has no join or no file
     holds the key. indexes keeps each join's index for the next file of the
     same tree, so a tree of many files is read once per join."""
@@ -192,7 +192,7 @@ def joined_file(entry: dict, path: str, tree, indexes: dict) -> str | None:
     if rule not in indexes:
         indexes[rule] = join_index(entry, tree)
     partner = indexes[rule].get(key_of(entry["join"]["key"], path))
-    return tree[partner].sha256 if partner else None
+    return tree[partner] if partner else None
 
 
 def records(file: Path, name: str, entry: dict, licenses: dict, skipped: Skipped,

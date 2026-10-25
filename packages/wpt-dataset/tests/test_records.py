@@ -251,7 +251,7 @@ def test_a_fulltext_file_finds_the_metadata_file_that_joins_it():
             "metadata/BibliographicResource%2F7.edm.xml": Entry(FILE, "b" * 64),
             "metadata/BibliographicResource%2F8.edm.xml": Entry(FILE, "c" * 64)}
 
-    assert joined_file(ISSUE_FIELDS, "fulltext/9200396/BibliographicResource_7.xml", tree, {}) == "b" * 64
+    assert joined_file(ISSUE_FIELDS, "fulltext/9200396/BibliographicResource_7.xml", tree, {}) == tree["metadata/BibliographicResource%2F7.edm.xml"]
     assert joined_file(ISSUE_FIELDS, "fulltext/9200396/BibliographicResource_9.xml", tree, {}) is None
 
 

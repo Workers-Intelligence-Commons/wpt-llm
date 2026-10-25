@@ -5,16 +5,18 @@ import http.server
 import io
 import json
 import os
+import secrets
 import subprocess
 import tarfile
+import tempfile
 import threading
 from pathlib import Path
 
 import pytest
 
-from wpt_dataset import manifest
+from wpt_dataset import download as downloading
+from wpt_dataset import manifest, sources
 from wpt_dataset.repo import CURRENT_SCHEMA, Repo, address_hash, dump_json
-from wpt_dataset.sources import compute_upstream
 from wpt_store import open_store
 
 # The same small project, as git, mercurial and tar would publish it.
@@ -110,6 +112,51 @@ class QuietHandler(http.server.SimpleHTTPRequestHandler):
         pass
 
 
+class RangeHandler(QuietHandler):
+    """Serves a file whole or one range of it (`bytes=START-` or
+    `bytes=START-END`), says it serves ranges, and adds (path, its Range
+    header or None) of every GET to `asked`."""
+
+    asked: list
+
+    def do_GET(self):
+        self.asked.append((self.path, self.headers.get("Range")))
+        path = Path(self.translate_path(self.path))
+        if not path.is_file():
+            self.send_error(404)
+            return
+        data = path.read_bytes()
+        wanted = self.headers.get("Range")
+        if wanted:
+            first, _, last = wanted.removeprefix("bytes=").partition("-")
+            start, end = int(first), int(last) if last else len(data) - 1
+            self.send_response(206)
+            self.send_header("Content-Range", f"bytes {start}-{end}/{len(data)}")
+            data = data[start:end + 1]
+        else:
+            self.send_response(200)
+        self.send_header("Accept-Ranges", "bytes")
+        self.send_header("Content-Length", str(len(data)))
+        self.end_headers()
+        try:
+            self.wfile.write(data)
+        except (BrokenPipeError, ConnectionResetError):  # the reader had what it needed
+            pass
+
+
+@pytest.fixture
+def ranged_folder(tmp_path):
+    """(folder, base URL, asked) of a local HTTP server that serves byte
+    ranges (RangeHandler); put files in folder."""
+    folder, asked = tmp_path / "ranged", []
+    folder.mkdir()
+    handler = functools.partial(type("Handler", (RangeHandler,), {"asked": asked}), directory=str(folder))
+    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    yield folder, f"http://127.0.0.1:{server.server_address[1]}", asked
+    server.shutdown()
+
+
 @pytest.fixture
 def store(tmp_path):
     return open_store((tmp_path / "store").as_uri())
@@ -131,20 +178,63 @@ WITH_HISTORY = [{"license": "MIT", "paths": [".git/history/**"], "attribution": 
                 {"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION, "text": LICENSE_TEXT}]
 
 
-def add_source(repo, store, origin, item, data, patches=(), compute_checksum=True):
+class Objects:
+    """A store as a fetch stores into it (manifest.Extractor): each kept
+    entry an object under its sha256."""
+
+    def __init__(self, store):
+        self.store = store
+
+    def keep(self, data):
+        return self.store.put_bytes(data), None
+
+    def put_file(self, path):
+        return self.store.put_file(path)
+
+
+def upstream(data, address, store):
+    """The upstream tree at address, its checksum not checked, each file's
+    content put into store as an object (sources.fetch); store is a
+    wpt_store store, or a download's Staging."""
+    with tempfile.TemporaryDirectory(prefix="wpt-test-fetch-") as tmp:
+        sink = store if isinstance(store, downloading.Staging) else Objects(store)
+        return sources.fetch(data, address, sink, Path(tmp))
+
+
+def session(store, command="test"):
+    """A new session of store, named like a run record folder."""
+    return store.session(f"20261025T120000Z-{command}-{secrets.token_hex(4)}", command, "abc123", False)
+
+
+def download(repo, store, *ids):
+    """The download step on ids, in a session of its own, as `wpt-dataset
+    download` runs it: each source's error raised, the first first."""
+    with session(store, "download") as running:
+        done = downloading.download(repo, list(ids), store, running, log=lambda *_: None)
+    for result in done:
+        if result.error is not None:
+            raise result.error
+    return done
+
+
+def add_source(repo, store, origin, item, data, patches=(), compute_checksum=True, fetch=None):
     """Write data/sources/<id>/source.json, filling in the checksum from the
-    real upstream. Returns the source id."""
+    real upstream, and download it into the store (fetch, default:
+    compute_checksum). Returns the source id."""
     data = {"schema": 7, "checksum": "sha256:" + "0" * 64,
             "licenses": [{"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION, "text": LICENSE_TEXT}],
             "formats": [{"format": "text", "paths": ["**"]}], "decision": DECISION, **data}
     if compute_checksum:
-        data["checksum"] = manifest.checksum(compute_upstream(data, data["address"], store))
+        with tempfile.TemporaryDirectory(prefix="wpt-test-staging-") as staging:
+            data["checksum"] = manifest.checksum(upstream(data, data["address"], downloading.Staging(staging)))
     sid = "-".join([origin] + ([item] if item else []) + [address_hash(data["address"])])
     folder = repo.root / "data" / "sources" / sid
     folder.mkdir()
     (folder / "source.json").write_text(dump_json(data), encoding="utf-8", newline="\n")
     for i, patch in enumerate(patches, start=1):
         (folder / f"{i:04d}-change.patch").write_text(patch, encoding="utf-8", newline="\n")
+    if compute_checksum if fetch is None else fetch:
+        download(repo, store, sid)
     return sid
 
 

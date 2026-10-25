@@ -39,7 +39,7 @@ def unpack(repo: Repo, source: Source, store, folder) -> int:
     for path, entry in tree.items():
         target = folder.joinpath(*path.split("/"))
         target.parent.mkdir(parents=True, exist_ok=True)
-        content = store.get_bytes(entry.sha256)
+        content = manifest.content(store, entry)
         if entry.mode == SYMLINK:
             os.symlink(content.decode(), target)
         else:

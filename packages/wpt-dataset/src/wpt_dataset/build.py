@@ -24,17 +24,37 @@ Markdown and its tag, training or held-out, under a ref named by the
 dataset id, so the base model's provenance finds it. A dataset built
 before builds wrote one never gets one.
 
-A source that fails (its checksum differs, every address fails, a file is
-broken) stops the build, unless the build is asked to skip such sources:
-the record then lists each one with its error under `skipped`. A missing
-program stops it anyway, since it fails every source that needs it. A
-vocabulary is never trained without a source: it is frozen for good.
+The build never downloads: it reads the upstream files the download step
+put in the store (download.py). A source that is not in the store
+(NotDownloaded) is left out, and the record lists it with its error under
+`skipped`. Any other source that fails (a patch no longer applies, a file
+is broken) stops the build, unless the build is asked to skip such
+sources: the record then lists each one the same way. A missing program
+stops it anyway, since it fails every source that needs it. A vocabulary
+is never trained without a source: it is frozen for good.
 
-With stream=True the build keeps no source's files: each source is fetched
-into a throwaway store, turned into tokens (one store object per source,
-see source_tokens) and the throwaway store removed before the next one.
-The documents, the dataset id and the shards are the same as without it;
-only what the store keeps differs.
+The record also names, for each source, the session (its run record's
+folder) and the time of the download that put the files it used in the
+store, from the store database (`downloads`; None for a source with no
+such download, an empty one or one downloaded before the store kept
+sessions). It is not part of the dataset id: the same files downloaded
+again give the same dataset.
+
+Sources are converted, and documents turned into tokens, several at once,
+as many as wpt_utils.parallel allows (CONVERT_MEMORY for a source,
+ENCODE_MEMORY for a document); the results are put together in the
+sources' and the documents' order, so the dataset id and the shards are
+the ones a build of one at a time gives.
+
+With stream=True the build keeps no document's Markdown in the store and
+no source's files on this machine: each source's documents are turned
+into tokens (one store object per source, see source_tokens), every local
+copy its conversion needs in a temporary folder, removed once the source
+is tokens. Sources are turned into tokens several at once, as above, each
+in its own temporary folder, so the disk holds the local copies of every
+source being converted; how many run at once counts memory and cores, not
+disk. The documents, the dataset id and the shards are the same as without
+it; only what the store and the machine keep differs.
 
 With a telemetry (wpt_telemetry), the build records each source (fetched,
 converted, its documents, or why it was skipped), the vocabulary, each
@@ -42,6 +62,7 @@ pool, each shard written, the contamination check and the dataset record.
 """
 
 import concurrent.futures
+import contextlib
 import hashlib
 import importlib.metadata
 import json
@@ -49,20 +70,24 @@ import math
 import platform
 import subprocess
 import tempfile
+import time
 import tomllib
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
 
-from wpt_store import CorruptObject, MissingObject, open_store
+from wpt_store import CorruptObject, MissingObject
 from wpt_store.shards import write_shard
 from wpt_telemetry import Telemetry, set_ref
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
 from wpt_tokenizer import __version__ as TOKENIZER_VERSION
+from wpt_utils.parallel import Sizing, each, in_order
 
-from . import manifest, markdown, pools
-from .errors import DatasetError, LockedDocumentsMissing, LockMismatch, PoolError, TokenizerVersionNeeded
+from . import manifest, markdown, pools, store_history
+from .errors import (DatasetError, LockedDocumentsMissing, LockMismatch, NotDownloaded, PoolError,
+                     TokenizerVersionNeeded)
 from .repo import Repo
 from .sources import VERSION, check_license_map, fingerprint, held_out_group, source_tree, tags_of, tree_key
 
@@ -70,6 +95,15 @@ DEFAULT_MAX_EPOCHS = 4
 SHARD_TOKENS = 1 << 26  # about 64M tokens (256 MB of uint32) per shard
 NGRAM = 13  # contamination check: runs of 13 words, as in the GPT-3 paper
 STREAM_READERS = 16  # documents read at once from a streamed build's token objects
+# bytes one source's conversion takes, measured as the growth of the process's resident memory sampled every 5 ms
+# over one source: 2 to 5 MB for a git source of 5,000 files of 20 KB, a book of 50 files of 100 KB and a records
+# file of 5,000 records; 14 to 64 MB streamed, with its tokens and the thread's cache of encoded chunks (at most
+# about 100 MB, wpt_tokenizer); a file read whole takes about 4 times its size (its bytes, its text, its Markdown):
+# rounded up to cover the cache and a file of 100 MB
+CONVERT_MEMORY = 0.5e9
+# bytes one document's encoding takes: the thread's cache of encoded chunks (about 100 MB at most, measured), the
+# document's Markdown and its tokens as a list (about 36 bytes per token), rounded up for a document of a few MB
+ENCODE_MEMORY = 0.2e9
 DOCUMENT_LIST = "dataset-documents"  # the kind of the ref, named by the dataset id, of a dataset's document list
 TRAINING, HELD_OUT = "training", "held-out"  # a listed document's tag
 
@@ -88,49 +122,107 @@ class Document:
         return self.group or self.id
 
 
-def gather(repo: Repo, store, log=print, skipped=None, telemetry=None):
+def gather(repo: Repo, store, log=print, skipped=None, telemetry=None, skip_failed=False):
     """(documents, sources info, number of duplicates removed). A source with
     records files gets `credits` in its info: the store object listing, one
     JSON line per document it gives, the document id, its license and the
-    credit fields of its record. With a list as skipped, a failing source is
-    left out and added to it (see _skip); otherwise its error stops. A
-    source whose license text is empty is left out, and log is called with
-    a note naming it."""
+    credit fields of its record. With a list as skipped, a source that is
+    not in the store is left out and added to it, and so is any other
+    failing source with skip_failed (see _skip); otherwise its error stops.
+    A source whose license text is empty is left out, and log is called
+    with a note naming it. Sources are converted several at once
+    (each_source), and their documents put together in the sources' order."""
     telemetry = telemetry or Telemetry.off()
     documents, info, seen, duplicates = [], {}, set(), 0
-    for source in repo.sources(log):
-        if not source.admitted:
-            continue
-        with telemetry.span("source", source=source.id, checksum=source.data["checksum"]) as span:
-            try:
-                tree, tree_object = source_tree(source, store, telemetry)
-                found, mine, credits, repeated = [], set(), [], 0  # kept apart until the source succeeds
-                for converted in markdown.documents(source, tree, store, repo):  # links are not documents; their targets are
-                    sha256 = store.put_bytes(converted.markdown)
-                    if sha256 in seen or sha256 in mine:
+    admitted = [source for source in repo.sources(log) if source.admitted]
+    # closed at once when a source stops the others, so the sources still running end first
+    with contextlib.closing(each_source(lambda source: _converted(source, store, repo, telemetry), admitted,
+                                        telemetry)) as converted:
+        for done, span in converted:
+            source = done.item
+            with telemetry.finish(span):
+                if done.error is not None:
+                    _skip(source, done.error, skipped, skip_failed, log)
+                    span.set(skipped=f"{type(done.error).__name__}: {done.error}")
+                    continue
+                tree_object, found, repeated = done.value
+                credits, kept = [], 0
+                for document, credit in found:
+                    if document.sha256 in seen:
                         repeated += 1
                         continue
-                    mine.add(sha256)
-                    document_id = f"{source.id}/{converted.path}"
-                    found.append(Document(document_id, source.id, sha256, tags_of(source, converted.file),
-                                          held_out_group(source, converted.path)))
-                    if converted.record:
-                        credits.append(json.dumps({"document": document_id, "license": converted.record.license,
-                                                   "credit": converted.record.credit}, ensure_ascii=False,
-                                                  sort_keys=True))
-            except (DatasetError, CorruptObject, MissingObject) as error:
-                _skip(source, error, skipped, log)
-                span.set(skipped=f"{type(error).__name__}: {error}")
-                continue
-            info[source.id] = source_info(source, tree_object)
-            documents += found
-            seen |= mine
-            duplicates += repeated
-            if credits:
-                info[source.id]["credits"] = store.put_bytes("".join(f"{line}\n" for line in credits).encode())
-            span.set(tree=tree_object, documents=len(found), duplicates=repeated, credits=info[source.id].get("credits"))
+                    seen.add(document.sha256)
+                    documents.append(document)
+                    kept += 1
+                    if credit is not None:
+                        credits.append(credit)
+                info[source.id] = source_info(source, tree_object)
+                duplicates += repeated
+                if credits:
+                    info[source.id]["credits"] = store.put_bytes("".join(f"{line}\n" for line in credits).encode())
+                span.set(tree=tree_object, documents=kept, duplicates=repeated, credits=info[source.id].get("credits"))
     log(f"documents: {len(documents):,} from {len(info)} admitted sources ({duplicates:,} exact duplicates removed)")
     return documents, info, duplicates
+
+
+def each_source(work, sources, telemetry):
+    """(wpt_utils.parallel.Done of work(source), the source's "source" span)
+    for each source, in the sources' order, as many at once as
+    wpt_utils.parallel allows at CONVERT_MEMORY each (the event
+    "sources.at_once" says how many and why). A DatasetError, CorruptObject
+    or MissingObject work raises is the source's error; anything else (a
+    missing program, a store that refuses a write) stops every source.
+
+    The span opens under the caller's current span when the source's work
+    starts, on its own thread, so what the work records lands under it, and
+    it says how many seconds the work took (converting_seconds); the caller
+    ends it (telemetry.finish) once it has put the source's result together.
+    The spans of the sources whose turn never came, because something
+    stopped the sources, end with an error saying so."""
+    sizing = Sizing(CONVERT_MEMORY, "sources at once")
+    telemetry.event("sources.at_once", limit=sizing.limit, why=sizing.why)
+    parent, spans = telemetry.current(), {}  # spans: each source begun and not yet given to the caller
+
+    def run(source):
+        with telemetry.within(parent):
+            spans[source.id] = span = telemetry.begin("source", source=source.id, checksum=source.data["checksum"])
+        started = time.monotonic()
+        try:
+            with telemetry.within(span):
+                return work(source)
+        finally:
+            span.set(converting_seconds=round(time.monotonic() - started, 3))
+
+    try:
+        for done in each(run, sources, (DatasetError, CorruptObject, MissingObject), sizing):
+            yield done, spans.pop(done.item.id)
+    finally:
+        stopped = RuntimeError("the sources stopped before this source's turn")
+        for span in spans.values():
+            telemetry.end(span, stopped)
+
+
+def _converted(source, store, repo, telemetry):
+    """(manifest object of its final tree, [(document, its credit line or
+    None)], exact duplicates inside the source) of one source, each
+    document's Markdown put in the store; duplicates of other sources are
+    gather's to remove."""
+    tree, tree_object = source_tree(source, store, telemetry)
+    found, mine, repeated = [], set(), 0
+    for converted in markdown.documents(source, tree, store, repo):  # links are not documents; their targets are
+        sha256 = store.put_bytes(converted.markdown)
+        if sha256 in mine:
+            repeated += 1
+            continue
+        mine.add(sha256)
+        document_id = f"{source.id}/{converted.path}"
+        credit = None
+        if converted.record:
+            credit = json.dumps({"document": document_id, "license": converted.record.license,
+                                 "credit": converted.record.credit}, ensure_ascii=False, sort_keys=True)
+        found.append((Document(document_id, source.id, sha256, tags_of(source, converted.file),
+                               held_out_group(source, converted.path)), credit))
+    return tree_object, found, repeated
 
 
 def source_info(source, tree: str) -> dict:
@@ -142,11 +234,13 @@ def source_info(source, tree: str) -> dict:
             "checksum": source.data["checksum"], "tree": tree, "licenses": source.data["licenses"]}
 
 
-def _skip(source, error, skipped, log):
-    """Record a source that failed, or raise its error when nothing asked to
-    skip. A missing program (wpt_utils.programs.MissingTool), which would fail every
-    source using it, is not caught here and always stops the build."""
-    if skipped is None:
+def _skip(source, error, skipped, skip_failed, log):
+    """Record a source that failed, or raise its error: with a list as
+    skipped, a source that is not in the store (NotDownloaded) is always
+    recorded, any other failure only with skip_failed. A missing program
+    (wpt_utils.programs.MissingTool), which would fail every source using
+    it, is not caught here and always stops the build."""
+    if skipped is None or not (skip_failed or isinstance(error, NotDownloaded)):
         raise error
     skipped.append({"source": source.id, "error": f"{type(error).__name__}: {error}"})
     log(f"skipped {source.id}: {type(error).__name__}: {error}")
@@ -173,28 +267,22 @@ def _pool_of(document, trees) -> str | None:
 
 # -- streaming --------------------------------------------------------------------
 
-def _fetched(source, folder: Path):
-    """(throwaway store, final tree, manifest object) of a source fetched
-    into a new store in folder; removing folder removes every file of it."""
-    scratch = open_store(folder.as_uri())
-    tree, tree_object = source_tree(source, scratch)
-    return scratch, tree, tree_object
-
-
-def streamed_documents(repo: Repo, telemetry=None, log=print):
+def streamed_documents(repo: Repo, store, telemetry=None, log=print):
     """(document, Markdown) of every admitted source, exact duplicates left
-    out as in gather, each source fetched into a throwaway store that is
-    removed before the next one. A source whose license text is empty is
-    left out, and log is called with a note naming it."""
+    out as in gather, one source after the other, no Markdown kept in the
+    store and every local copy a source's conversion needs in a temporary
+    folder, removed before the next source. A source whose license text is
+    empty is left out, and log is called with a note naming it."""
     telemetry = telemetry or Telemetry.off()
     seen = set()
     for source in repo.sources(log):
         if not source.admitted:
             continue
         with tempfile.TemporaryDirectory(prefix="wpt-stream-") as tmp:
-            scratch, tree, tree_object = _fetched(source, Path(tmp) / "store")
+            copies = store.copies_in(tmp)
+            tree, tree_object = source_tree(source, copies)
             count = 0
-            for converted in markdown.documents(source, tree, scratch, repo):
+            for converted in markdown.documents(source, tree, copies, repo):
                 sha256 = hashlib.sha256(converted.markdown).hexdigest()
                 if sha256 in seen:
                     continue
@@ -203,20 +291,22 @@ def streamed_documents(repo: Repo, telemetry=None, log=print):
                 # no held-out group: its only reader, tokenizer training, never splits off a held-out share
                 document = Document(f"{source.id}/{converted.path}", source.id, sha256, tags_of(source, converted.file))
                 yield document, converted.markdown
-            # an event, not a span: the reader of this generator runs between its documents
-            telemetry.event("source.streamed", source=source.id, checksum=source.data["checksum"], tree=tree_object,
-                            documents=count)
+        # an event, not a span: the reader of this generator runs between its documents
+        telemetry.event("source.streamed", source=source.id, checksum=source.data["checksum"], tree=tree_object,
+                        documents=count)
 
 
 def source_tokens(repo, source, store, tokenizer, vocabulary: str, telemetry=None) -> dict:
-    """A source as tokens, its files not kept: {"tree": its final manifest
+    """A source as tokens, its Markdown not kept: {"tree": its final manifest
     object, "tokens": one object holding every document's tokens (each
     ending with END) one after the other, "documents": [{path, file, sha256
     of its Markdown, start (byte offset), tokens, token_sha256, record}]}.
+    Every local copy its conversion needs, and its tokens until they are
+    stored, are in a temporary folder, removed before it returns.
 
     Kept under a ref named after what decides it (the final tree, formats,
     licenses, wpt-dataset version, vocabulary), so a source that did not
-    change is never fetched again. With a telemetry, the ref is recorded
+    change is never converted again. With a telemetry, the ref is recorded
     before it is set (wpt_telemetry.set_ref)."""
     key = fingerprint({"kind": "source-tokens", "tree": tree_key(source), "formats": source.data["formats"],
                        "licenses": [[e["license"], e["paths"], e.get("values")] for e in source.data["licenses"]],
@@ -226,10 +316,11 @@ def source_tokens(repo, source, store, tokenizer, vocabulary: str, telemetry=Non
         return json.loads(store.get_bytes(known))
     with tempfile.TemporaryDirectory(prefix="wpt-stream-") as tmp:
         tmp = Path(tmp)
-        scratch, tree, tree_object = _fetched(source, tmp / "store")
+        copies = store.copies_in(tmp / "copies")
+        tree, tree_object = source_tree(source, copies, telemetry)
         documents, offset = [], 0
         with open(tmp / "tokens.u32", "wb") as out:
-            for converted in markdown.documents(source, tree, scratch, repo):
+            for converted in markdown.documents(source, tree, copies, repo):
                 data = np.asarray(tokenizer.encode(converted.markdown) + [Tokenizer.END], dtype="<u4").tobytes()
                 out.write(data)
                 entry = {"path": converted.path, "file": converted.file,
@@ -239,50 +330,57 @@ def source_tokens(repo, source, store, tokenizer, vocabulary: str, telemetry=Non
                     entry["record"] = {"license": converted.record.license, "credit": converted.record.credit}
                 documents.append(entry)
                 offset += len(data)
-        summary = {"tree": store.put_bytes(scratch.get_bytes(tree_object)), "tokens": store.put_file(tmp / "tokens.u32"),
-                   "documents": documents}
+        summary = {"tree": tree_object, "tokens": copies.put_file(tmp / "tokens.u32"), "documents": documents}
     known = store.put_bytes(json.dumps(summary, ensure_ascii=False, sort_keys=True).encode())
     set_ref(store, "source-tokens", key, known, telemetry or Telemetry.off())
     return summary
 
 
-def gather_streamed(repo: Repo, store, tokenizer, vocabulary: str, log=print, skipped=None, telemetry=None):
+def gather_streamed(repo: Repo, store, tokenizer, vocabulary: str, log=print, skipped=None, telemetry=None,
+                    skip_failed=False):
     """gather's (documents, sources info, duplicates), plus every document's
-    tokens (PackedDocuments), from source_tokens: no source's files stay in
-    the store. skipped: as in gather."""
+    tokens (PackedDocuments), from source_tokens: no document's Markdown
+    stays in the store, and no source's files on this machine. Several
+    sources at once (each_source), put together in the sources' order.
+    skipped, skip_failed: as in gather."""
     telemetry = telemetry or Telemetry.off()
     documents, info, seen, duplicates = [], {}, set(), 0
     tokens = PackedDocuments(store)
-    for source in repo.sources(log):
-        if not source.admitted:
-            continue
-        with telemetry.span("source", source=source.id, checksum=source.data["checksum"]) as span:
-            try:
-                summary = source_tokens(repo, source, store, tokenizer, vocabulary, telemetry)
-                check_license_map(source, manifest.parse_manifest(store.get_bytes(summary["tree"])))
-            except (DatasetError, CorruptObject, MissingObject) as error:
-                _skip(source, error, skipped, log)
-                span.set(skipped=f"{type(error).__name__}: {error}")
-                continue
-            info[source.id] = source_info(source, summary["tree"])
-            credits, before = [], duplicates
-            for entry in summary["documents"]:
-                if entry["sha256"] in seen:
-                    duplicates += 1
+
+    def tokenized(source):
+        summary = source_tokens(repo, source, store, tokenizer, vocabulary, telemetry)
+        check_license_map(source, manifest.parse_manifest(store.get_bytes(summary["tree"])))
+        return summary
+
+    admitted = [source for source in repo.sources(log) if source.admitted]
+    with contextlib.closing(each_source(tokenized, admitted, telemetry)) as converted:  # as in gather
+        for done, span in converted:
+            source = done.item
+            with telemetry.finish(span):
+                if done.error is not None:
+                    _skip(source, done.error, skipped, skip_failed, log)
+                    span.set(skipped=f"{type(done.error).__name__}: {done.error}")
                     continue
-                seen.add(entry["sha256"])
-                document_id = f"{source.id}/{entry['path']}"
-                documents.append(Document(document_id, source.id, entry["sha256"], tags_of(source, entry["file"]),
-                                          held_out_group(source, entry["path"])))
-                tokens.add(document_id, summary["tokens"], entry)
-                if "record" in entry:
-                    credits.append(json.dumps({"document": document_id, **entry["record"]}, ensure_ascii=False,
-                                              sort_keys=True))
-            if credits:
-                info[source.id]["credits"] = store.put_bytes("".join(f"{line}\n" for line in credits).encode())
-            span.set(tree=summary["tree"], tokens_object=summary["tokens"],
-                     documents=len(summary["documents"]) - (duplicates - before), duplicates=duplicates - before,
-                     credits=info[source.id].get("credits"))
+                summary = done.value
+                info[source.id] = source_info(source, summary["tree"])
+                credits, before = [], duplicates
+                for entry in summary["documents"]:
+                    if entry["sha256"] in seen:
+                        duplicates += 1
+                        continue
+                    seen.add(entry["sha256"])
+                    document_id = f"{source.id}/{entry['path']}"
+                    documents.append(Document(document_id, source.id, entry["sha256"], tags_of(source, entry["file"]),
+                                              held_out_group(source, entry["path"])))
+                    tokens.add(document_id, summary["tokens"], entry)
+                    if "record" in entry:
+                        credits.append(json.dumps({"document": document_id, **entry["record"]}, ensure_ascii=False,
+                                                  sort_keys=True))
+                if credits:
+                    info[source.id]["credits"] = store.put_bytes("".join(f"{line}\n" for line in credits).encode())
+                span.set(tree=summary["tree"], tokens_object=summary["tokens"],
+                         documents=len(summary["documents"]) - (duplicates - before), duplicates=duplicates - before,
+                         credits=info[source.id].get("credits"))
     log(f"documents: {len(documents):,} from {len(info)} admitted sources ({duplicates:,} exact duplicates removed)")
     return documents, info, duplicates, tokens
 
@@ -365,8 +463,8 @@ def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, telem
       documents the lock lists (LockedDocumentsMissing when some are not in
       the store, LockMismatch when the result differs).
 
-    With stream, training reads each source from a throwaway store
-    (streamed_documents) instead of keeping the documents in the store; the
+    With stream, training reads each source's documents one source after
+    the other (streamed_documents) instead of keeping them in the store; the
     vocabulary is the same, since training counts words and its result
     does not depend on the order of the documents.
     """
@@ -386,7 +484,7 @@ def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, telem
         trained = []
 
         def selected_texts():
-            for document, text in streamed_documents(repo, telemetry, log):
+            for document, text in streamed_documents(repo, store, telemetry, log):
                 if _pool_of(document, trees) is not None:
                     trained.append([document.id, document.sha256])
                     yield text
@@ -414,7 +512,7 @@ def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, telem
             wanted, found = {tuple(d) for d in trained}, set()
 
             def locked_texts():
-                for document, text in streamed_documents(repo, telemetry, log):
+                for document, text in streamed_documents(repo, store, telemetry, log):
                     if (document.id, document.sha256) in wanted:
                         found.add((document.id, document.sha256))
                         yield text
@@ -471,9 +569,11 @@ def _training_part(recipe) -> dict:
 def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TOKENS, stream=False,
                   skip_failed=False, telemetry=None) -> str:
     """Build (or find) the dataset of a model recipe's data part and return
-    its id; with stream, keeping no source's files; with skip_failed,
-    leaving out the sources that fail (see the module's docstring). Only
-    the data part counts: recipes with the same data share one dataset."""
+    its id; with stream, keeping no document's Markdown and no source's
+    files on this machine; leaving out the sources not in the store, and
+    with skip_failed every source that fails (see the module's docstring).
+    Only the data part counts: recipes with the same data share one
+    dataset."""
     telemetry = telemetry or Telemetry.off()
     recipe = repo.recipe("model", name)["data"]
     mixture = repo.recipe("mixture", recipe["mixture"])
@@ -483,19 +583,20 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
                                                                telemetry=telemetry)
         span.set(vocabulary=vocabulary, fingerprint=tokenizer_key, vocab_size=tokenizer.vocab_size)
     telemetry.input(recipe=name, tokenizer=recipe["tokenizer"], vocabulary=vocabulary)
-    skipped = [] if skip_failed else None
+    skipped = []
     with telemetry.span("documents", stream=stream, skip_failed=skip_failed) as span:
         if stream:
             documents, sources_info, duplicates, packed = gather_streamed(repo, store, tokenizer, vocabulary,
                                                                            log=lambda _: None, skipped=skipped,
-                                                                           telemetry=telemetry)
+                                                                           telemetry=telemetry,
+                                                                           skip_failed=skip_failed)
         else:
             documents, sources_info, duplicates = gather(repo, store, log=lambda _: None, skipped=skipped,
-                                                         telemetry=telemetry)
-        span.set(documents=len(documents), sources=len(sources_info), duplicates=duplicates, skipped=skipped or [])
+                                                         telemetry=telemetry, skip_failed=skip_failed)
+        span.set(documents=len(documents), sources=len(sources_info), duplicates=duplicates, skipped=skipped)
     telemetry.input(sources={sid: info["checksum"] for sid, info in sorted(sources_info.items())},
-                    skipped_sources=[failed["source"] for failed in skipped or []])
-    for failed in skipped or []:
+                    skipped_sources=[failed["source"] for failed in skipped])
+    for failed in skipped:
         log(f"skipped {failed['source']}: {failed['error']}")
     dataset_id = fingerprint({
         "kind": "dataset", "wpt_dataset": VERSION, "recipe": recipe, "mixture": mixture, "vocabulary": vocabulary,
@@ -543,7 +644,8 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
                       "fingerprint": tokenizer_key, "vocabulary": vocabulary,
                       "version": TOKENIZER_VERSION, "vocab_size": tokenizer.vocab_size},
         "sources": sources_info,
-        "skipped": skipped or [],
+        "downloads": store_history.downloads_used(store, {sid: info["checksum"] for sid, info in sources_info.items()}),
+        "skipped": skipped,
         "documents": {"total": len(documents), "duplicates_removed": duplicates,
                       "held_out": len(held_out), "training": len(training)},
         "pools": pool_report,
@@ -611,15 +713,22 @@ def _fill_pools(dataset_id, recipe, mixture, training, tokens, log):
 
 class EncodedDocuments:
     """Every document's tokens (ending with END), encoded once into its own
-    file in folder; only their lengths stay in memory."""
+    file in folder, several documents at once as wpt_utils.parallel allows
+    at ENCODE_MEMORY each; only their lengths stay in memory."""
 
     def __init__(self, folder: Path, tokenizer, documents, store):
         folder.mkdir()
         self.folder, self._lengths = folder, {}
-        for i, document in enumerate(documents):
+
+        def encode(item):
+            i, document = item
             tokens = np.asarray(tokenizer.encode(store.get_bytes(document.sha256)) + [Tokenizer.END], dtype="<u4")
             tokens.tofile(folder / f"{i}.u32")
-            self._lengths[document.id] = (i, len(tokens))
+            return document.id, (i, len(tokens))
+
+        sizing = Sizing(ENCODE_MEMORY, "documents encoded at once")
+        with ThreadPoolExecutor(sizing.limit) as executor:
+            self._lengths.update(in_order(encode, enumerate(documents), executor, sizing))
 
     def length(self, document_id) -> int:
         return self._lengths[document_id][1]

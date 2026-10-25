@@ -399,7 +399,7 @@ def test_a_damaged_shard_stops_training_before_it_starts(built, tmp_path, capsys
     store, dataset_id = built.store, built.dataset_id
     record = json.loads(store.get_bytes(store.get_ref("datasets", dataset_id)))
     shard = record["shards"][0]["object"]
-    path = store.root / "objects" / shard[:2] / shard
+    path = store.path(shard)  # the shard's own bytes, whether the store keeps it compressed or not
     path.write_bytes(path.read_bytes()[:-10] + b"0123456789")
     with pytest.raises(SystemExit) as refused:
         main(["d", dataset_id, "--out", "model"])

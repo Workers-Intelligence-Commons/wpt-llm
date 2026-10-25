@@ -64,7 +64,6 @@ The rules every write follows:
   test_data_access.py's scan.
 """
 
-import errno
 import hashlib
 import json
 import os
@@ -84,6 +83,7 @@ from importlib import resources
 from pathlib import Path
 
 import jsonschema
+from wpt_utils.files import lock_file, unlock_file
 from wpt_utils.programs import program
 
 from .errors import DataAccessRefused, InvalidFile, NotFound, OutdatedSchema, RuleViolation, StaleFile
@@ -425,7 +425,7 @@ class _RepositoryLock:
         self._threads.acquire()
         try:
             if self._depth == 0:
-                self._file = _lock_file(_lock_path(self._root))
+                self._file = lock_file(_lock_path(self._root))
             self._depth += 1
         except BaseException:
             self._threads.release()
@@ -437,7 +437,7 @@ class _RepositoryLock:
             self._depth -= 1
             if self._depth == 0:
                 file, self._file = self._file, None
-                _unlock_file(file)
+                unlock_file(file)
         finally:
             self._threads.release()
 
@@ -457,43 +457,6 @@ def _lock_path(root: Path) -> Path:
             if folder.is_dir():
                 return folder / LOCK_FILE
     return root / f".{LOCK_FILE}"
-
-
-def _lock_file(path: Path) -> int:
-    """An open descriptor of path, locked for this process; waits while
-    another process holds it."""
-    descriptor = os.open(path, os.O_RDWR | os.O_CREAT, 0o644)
-    try:
-        if os.name == "nt":
-            import msvcrt
-            while True:
-                try:
-                    os.lseek(descriptor, 0, os.SEEK_SET)
-                    msvcrt.locking(descriptor, msvcrt.LK_LOCK, 1)  # gives up after 10 seconds: try again
-                    break
-                except OSError as error:
-                    if error.errno != errno.EDEADLOCK:
-                        raise
-        else:
-            import fcntl
-            fcntl.flock(descriptor, fcntl.LOCK_EX)
-    except BaseException:
-        os.close(descriptor)
-        raise
-    return descriptor
-
-
-def _unlock_file(descriptor: int):
-    try:
-        if os.name == "nt":
-            import msvcrt
-            os.lseek(descriptor, 0, os.SEEK_SET)
-            msvcrt.locking(descriptor, msvcrt.LK_UNLCK, 1)
-        else:
-            import fcntl
-            fcntl.flock(descriptor, fcntl.LOCK_UN)
-    finally:
-        os.close(descriptor)  # closing releases the lock too
 
 
 _LOCKS: dict[Path, _RepositoryLock] = {}  # one per repository root, shared by its Repo objects
@@ -930,19 +893,20 @@ class Repo:
         fill(list(of_source(source, tree, store, self).values()), self, store)
         return len(tree), converted, skipped
 
-    def fill_checksum(self, sid: str, store) -> tuple[str, dict[str, str]]:
+    def fill_checksum(self, sid: str, store, session, telemetry=None) -> tuple[str, dict[str, str]]:
         """Fill in a draft source's checksum, excluding each file that is not
-        text (encoding.py) by its exact path, from one fetch (sources.fill_checksum),
-        and write source.json. Returns (checksum, {path excluded: why}).
-        RuleViolation when the checksum is not DRAFT_CHECKSUM."""
-        from .sources import fill_checksum
+        text (encoding.py) by its exact path, from one fetch kept in
+        session (download.fill), and write source.json. Returns (checksum,
+        {path excluded: why}). RuleViolation when the checksum is not
+        DRAFT_CHECKSUM."""
+        from .download import fill
 
         version = self.version("source", sid)
         source = self.source(sid)
         if source.data["checksum"] != DRAFT_CHECKSUM:
             raise RuleViolation(f"{sid}: its checksum is filled in already; `wpt-dataset manifest {sid}` prints the "
                                 f"upstream's, `wpt-dataset check --fetch {sid}` checks it")
-        document, excluded = fill_checksum(source, store)
+        document, excluded = fill(source, store, session, telemetry)
         self.save_source(sid, document, version)
         return document["checksum"], excluded
 
@@ -1139,6 +1103,7 @@ class Repo:
         """(version, {path: {mode, size, format (None when the format map
         does not give exactly one; "joined" for a file a records entry's
         `join` reads), tags}}) of the source's final files."""
+        from . import manifest
         from .errors import FormatMapError
         from .markdown import format_of
         from .records import joined_by
@@ -1153,19 +1118,20 @@ class Repo:
                 kind = "joined" if joined_by(entry, path) else entry["format"]
             except FormatMapError:
                 kind = None
-            files[path] = {"mode": tree[path].mode, "size": len(store.get_bytes(tree[path].sha256)), "format": kind,
+            files[path] = {"mode": tree[path].mode, "size": manifest.size(store, tree[path]), "format": kind,
                            "tags": sorted(tags_of(source, path))}
         return version, files
 
     def read_source_file(self, sid: str, path: str, store) -> tuple[str, bytes]:
         """(version, content) of one final file of the source."""
+        from . import manifest
         from .sources import source_tree
 
         version, source = self.source_version(sid), self.source(sid)
         tree, _ = source_tree(source, store)
         if path not in tree:
             raise NotFound(f"{sid} has no file {path}")
-        return version, store.get_bytes(tree[path].sha256)
+        return version, manifest.content(store, tree[path])
 
     @_locked
     def change_source_files(self, sid: str, changes: dict[str, bytes | None], patch: str, version: str, store,
@@ -1434,6 +1400,7 @@ class Repo:
         """(version, {task folder: {path in the folder: (manifest mode,
         content)}}) of the source's files in the task format; the source is
         read and checked here when not given, and only once."""
+        from . import manifest
         from .sources import source_tree
         from .tasks import folders
 
@@ -1443,7 +1410,7 @@ class Repo:
         found = {}
         for folder, owned in sorted(folders(paths).items()):
             prefix = folder + "/" if folder else ""
-            found[folder] = {p.removeprefix(prefix): (tree[p].mode, store.get_bytes(tree[p].sha256))
+            found[folder] = {p.removeprefix(prefix): (tree[p].mode, manifest.content(store, tree[p]))
                              for p in sorted(owned)}
         return version, found
 

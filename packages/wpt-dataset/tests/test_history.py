@@ -6,7 +6,7 @@ from wpt_dataset import manifest
 from wpt_dataset.build import gather
 from wpt_dataset.edit import unpack, write_patch
 from wpt_dataset.errors import EditError, PatchFailed
-from wpt_dataset.sources import compute_upstream, source_tree
+from wpt_dataset.sources import source_tree
 
 
 def commit(kit, folder, message, files):
@@ -99,7 +99,7 @@ def test_a_patched_git_source_keeps_its_history_and_order_and_no_patch_touches_t
 
     after, _ = source_tree(repo.source(sid), store)
     assert {path: entry for path, entry in after.items() if path.startswith(manifest.HISTORY)} == history
-    assert store.get_bytes(after["main.py"].sha256) == b"print(3)\n" and after["LICENSE"] == before["LICENSE"]
+    assert manifest.content(store, after["main.py"]) == b"print(3)\n" and after["LICENSE"] == before["LICENSE"]
 
     # an edited folder whose history files differ cannot be recorded as a patch, and leaves no patch
     (edited / ".git" / "history" / "order").write_bytes(b"")
@@ -108,7 +108,7 @@ def test_a_patched_git_source_keeps_its_history_and_order_and_no_patch_touches_t
     assert len(repo.source(sid).patches) == 1
 
     # a patch that removes a history file is refused
-    order = store.get_bytes(before[manifest.ORDER].sha256).decode()
+    order = manifest.content(store, before[manifest.ORDER]).decode()
     lines = order.splitlines()
     removal = (f"diff --git a/{manifest.ORDER} b/{manifest.ORDER}\ndeleted file mode 100644\n--- a/{manifest.ORDER}\n"
                f"+++ /dev/null\n@@ -1,{len(lines)} +0,0 @@\n" + "".join(f"-{line}\n" for line in lines))
@@ -137,7 +137,7 @@ def test_a_submodule_replacing_a_folder_keeps_the_folder_s_excluded_file_out_of_
     for each, tip in ((library, library_commit), (folder, head)):
         kit.run("git", "update-ref", "refs/heads/main", tip, cwd=each)
 
-    tree = compute_upstream({"type": "git", "revision": head, "history": {"since": since},
+    tree = kit.upstream({"type": "git", "revision": head, "history": {"since": since},
                              "extract": {"exclude": ["frontend/favicon.ico"]}, "submodules": {"frontend": str(library)}},
                             str(folder), store)
 
@@ -224,13 +224,13 @@ def test_history_files_are_the_bytes_of_one_format_patch_per_commit(kit, store, 
         head = plumbing_commit(kit, folder, f"quote\n\nFrom {first} Mon Sep 17 00:00:00 2001\n",
                                {"src/renamed.py": b"x = 41\n"}, [head])
     extract = {"exclude": ["vendor/**"]}
-    extractor = manifest.Extractor(store, extract)
+    extractor = manifest.Extractor(kit.Objects(store), extract)
 
     manifest.read_git_history(folder, root, head, extractor)
 
     written = {path: store.get_bytes(entry.sha256) for path, entry in extractor.tree.items()}
     order = written.pop(manifest.ORDER).decode().splitlines()
-    expected = history_one_call_per_commit(folder, root, head, manifest.Extractor(store, extract))
+    expected = history_one_call_per_commit(folder, root, head, manifest.Extractor(kit.Objects(store), extract))
     assert written == expected
     # the order file lists every commit since root, the merge and the commits
     # that changed no kept path included, newest first, each before its parents, and marks the merge

@@ -89,7 +89,7 @@ from urllib.parse import unquote, urlparse
 
 from lxml import etree
 
-from . import conversations, encoding, ratings, records, tasks
+from . import conversations, encoding, manifest, ratings, records, tasks
 from .errors import FormatMapError, NotText
 from .manifest import ORDER, SYMLINK, format_entries, license_entries
 
@@ -148,7 +148,7 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None)
 
     def read(path):  # a records file in the store, and the file its entry's join reads with it
         joined = records.joined_file(formats[path], path, files, join_indexes)
-        return store.path(files[path].sha256), store.path(joined) if joined else None
+        return manifest.local_file(store, files[path]), manifest.local_file(store, joined) if joined else None
 
     def newest(entry):
         if "newest" not in entry:
@@ -161,7 +161,7 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None)
 
     def page(path):
         if path not in pages:
-            pages[path] = _parse(source.id, path, store.get_bytes(files[path].sha256), formats[path])
+            pages[path] = _parse(source.id, path, manifest.content(store, files[path]), formats[path])
         return pages[path]
 
     def note(path, element_id):
@@ -180,15 +180,15 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None)
             yield from _records(source, path, entry, file, skipped, joined, newest(entry))
             continue
         if kind == "chat":
-            conversations.of_file(source.id, path, entry, store, files[path].sha256)
+            conversations.of_file(source.id, path, entry, store, files[path])
             continue
         if kind == "task":
             continue  # checked by folder, below
         if kind == "rating":
-            ratings.parse(source.id, path, store.get_bytes(files[path].sha256))
+            ratings.parse(source.id, path, manifest.content(store, files[path]))
             continue
         if kind in ("markdown", "text", "code"):
-            content = encoding.decode(store.get_bytes(files[path].sha256), entry, f"{source.id}: {path}")
+            content = encoding.decode(manifest.content(store, files[path]), entry, f"{source.id}: {path}")
         if kind == "markdown":
             markdown = content.encode("utf-8")
         elif kind == "text":

@@ -29,24 +29,34 @@ Everything a run keeps lives in the store (WPT_STORE):
   settings, so other settings start again;
 - site facts: what context.fact(key, compute) computed once, under
   source-drafter-facts/<name>.<sha256 of key>;
+- fetched pages: each page context.fetch read whose answer gave an ETag,
+  with that ETag, under source-drafter-pages/<sha256 of the request (its
+  address and headers, without Authorization)>, so the next fetch of the
+  same request asks the site whether it changed (If-None-Match) and a 304
+  answer gives the kept page;
 - the run's record, records/<folder>/ (wpt_telemetry), with candidates.json
   (how many candidates, chosen, done before, to draft) and outcomes.jsonl
   (one line per outcome: candidate, outcome, source, change, reason,
   notes).
 
-With processes above 1, the drafts run in that many worker processes; the
-saves and the records stay in the running process, one at a time. A
-worker process's own log lines, and the site facts it keeps, are not in
-the run's record (the facts are in the store all the same).
+How many drafts run at once: the rule of wpt_utils.parallel, at
+DRAFT_MEMORY each. Above one, the drafts run in worker processes; the
+saves and the records stay in the running process, one at a time, in the
+candidates' order, so a run's outcomes do not depend on how many drafted
+at once. A worker process's own log lines, and the site facts and pages
+it keeps, are not in the run's record (they are in the store all the
+same).
 """
 
 import concurrent.futures
+import contextlib
 import hashlib
 import importlib.util
 import json
 import multiprocessing
 import shutil
 import tempfile
+import urllib.error
 import urllib.request
 from dataclasses import dataclass, field
 from datetime import date
@@ -55,6 +65,7 @@ from pathlib import Path
 from wpt_store import as_record_name, store_from_settings
 from wpt_telemetry import Telemetry, set_ref
 from wpt_utils.files import sha256_file
+from wpt_utils.parallel import Sizing, in_order
 from wpt_utils.settings import typed
 
 from . import retry, robots
@@ -64,7 +75,12 @@ from .sources import USER_AGENT
 
 BUILT_IN = Path(__file__).parent / "source_drafters"
 COMMAND = "wpt-dataset-source-drafter"  # the run record's command, part of its folder's name
-DONE, FACTS = "source-drafter-done", "source-drafter-facts"  # the kinds of ref a run keeps in the store
+# the kinds of ref a run keeps in the store
+DONE, FACTS, PAGES = "source-drafter-done", "source-drafter-facts", "source-drafter-pages"
+# bytes one draft takes: a worker process with the built-ins loaded (0.1 GB, measured) and the git fetches of a
+# repository and its history, as one download of a git source takes them (wpt_dataset.download.DOWNLOAD_MEMORY,
+# measured: 0.76 GB for 5,600 files with 125 commits of history); rounded up
+DRAFT_MEMORY = 1e9
 CANDIDATES, OUTCOMES = "candidates.json", "outcomes.jsonl"  # files of the run's record
 # every outcome; "stopped": a source with patches, which is not written; "failed": the draft or its save raised
 KINDS = ("drafted", "skipped", "needs-a-person", "stopped", "failed")
@@ -162,14 +178,36 @@ class Context:
         """The bytes an http(s) address answers, as wpt-dataset fetches a
         source: refused (CrawlForbidden) when the site's robots.txt forbids
         it (robots.py), and tried again after a failure that may pass
-        (retry.py). Each site's robots.txt is read once per Context."""
+        (retry.py). Each site's robots.txt is read once per Context. A page
+        whose answer gave an ETag is kept in the store with it; the same
+        request asks again with If-None-Match, and an answer 304 (not
+        changed) gives the kept page, which GitHub does not count against
+        its limit."""
         robots.check(address, "http", USER_AGENT, self.robots)
-        request = urllib.request.Request(address, headers={"User-Agent": USER_AGENT, **(headers or {})})
+        headers = {"User-Agent": USER_AGENT, **(headers or {})}
+        # the token changes who asks, not the page: it stays out of the key and of the store
+        asked = {name: value for name, value in headers.items() if name.lower() != "authorization"}
+        ref = hashlib.sha256(json.dumps({"address": address, "headers": asked}, sort_keys=True).encode()).hexdigest()
+        found = self.store.get_ref(PAGES, ref)
+        kept = json.loads(self.store.get_bytes(found)) if found is not None else None
+        request = urllib.request.Request(address, headers={**headers, **({"If-None-Match": kept["etag"]} if kept
+                                                                         else {})})
 
         def read():
-            with urllib.request.urlopen(request, timeout=120) as response:
-                return response.read()
-        return retry.call(read, address)
+            try:
+                with urllib.request.urlopen(request, timeout=120) as response:
+                    return response.read(), response.headers.get("ETag")
+            except urllib.error.HTTPError as error:
+                if error.code == 304 and kept is not None:
+                    return None, None
+                raise
+        data, etag = retry.call(read, address)
+        if data is None:
+            return self.store.get_bytes(kept["page"])
+        if etag:
+            page = {"address": address, "headers": asked, "etag": etag, "page": self.store.put_bytes(data)}
+            set_ref(self.store, PAGES, ref, self.store.put_bytes(json_text(page).encode()), self.telemetry)
+        return data
 
 
 def built_in_names() -> list[str]:
@@ -357,19 +395,21 @@ def _draft_in_worker(candidate: Candidate):
     return _draft(_WORKER["module"], candidate, _WORKER["context"])
 
 
-def _drafts(module, path, candidates, context, processes):
-    """(candidate, draft()'s outcome) of each candidate, as each finishes."""
-    if processes <= 1:
+def _drafts(module, path, candidates, context):
+    """(candidate, draft()'s outcome) of each candidate, in the candidates'
+    order, as many drafting at once as wpt_utils.parallel allows: in this
+    process when that is one, otherwise in worker processes."""
+    sizing = Sizing(DRAFT_MEMORY, "drafts at once")
+    context.telemetry.log(sizing.why)
+    if sizing.limit <= 1:
         for candidate in candidates:
             yield candidate, _draft(module, candidate, context)
         return
     pool = concurrent.futures.ProcessPoolExecutor(
-        processes, mp_context=multiprocessing.get_context("spawn"), initializer=_start_worker,
+        sizing.limit, mp_context=multiprocessing.get_context("spawn"), initializer=_start_worker,
         initargs=(str(path), context.name, context.settings, str(context.repo.root), context.by, context.today))
     try:
-        running = {pool.submit(_draft_in_worker, candidate): candidate for candidate in candidates}
-        for future in concurrent.futures.as_completed(running):
-            yield running[future], future.result()
+        yield from zip(candidates, in_order(_draft_in_worker, candidates, pool, sizing))
     except BaseException:  # a stop (Ctrl+C) ends the drafts under way at once; the next run drafts them
         pool.terminate_workers()
         raise
@@ -379,8 +419,20 @@ def _drafts(module, path, candidates, context, processes):
 
 # -- a run ---------------------------------------------------------------------------------
 
+@contextlib.contextmanager
+def recorded(store, target: str, arguments: list[str], started_by: str, env_file):
+    """The telemetry of one run of the source drafter target: its record,
+    records/<UTC>-wpt-dataset-source-drafter-<its name>-<random>/, with
+    who started it (started_by, as wpt-web finds its own runs by it) and
+    every new try of a fetch in it (retry.reporting)."""
+    with (Telemetry.start(store, COMMAND, arguments, find(target)[0],
+                          inputs={"source_drafter": target, "started_by": started_by}, env_file=env_file) as telemetry,
+          retry.reporting(telemetry.log)):
+        yield telemetry
+
+
 def run(repo: Repo, store, target: str, overrides: dict, by: str, telemetry: Telemetry, only=(), again=False,
-        processes=1, today=None) -> dict[str, int]:
+        today=None) -> dict[str, int]:
     """Run a source drafter (a built-in's name or a file's path) with its
     settings changed by overrides: its candidates (those only names, by name
     or source id, when only is given), each one not done yet (every one with
@@ -389,8 +441,6 @@ def run(repo: Repo, store, target: str, overrides: dict, by: str, telemetry: Tel
     "done before". SourceDrafterError before anything is drafted."""
     if not by:
         raise SourceDrafterError("give who drafts (--by), the decision's `by` of every draft")
-    if processes < 1:
-        raise SourceDrafterError(f"processes {processes}: at least 1")
     name, path, file_name, module, settings = load(target, overrides)
     today = today or date.today().isoformat()
     key = done_key(name, settings)
@@ -422,7 +472,7 @@ def run(repo: Repo, store, target: str, overrides: dict, by: str, telemetry: Tel
         if candidate.name in stopped:
             _record(store, telemetry, key, candidate, stopped[candidate.name], counts)
     drafting = [c for c in left if c.name not in stopped]
-    for candidate, outcome in _drafts(module, path, drafting, context, processes):
+    for candidate, outcome in _drafts(module, path, drafting, context):
         _record(store, telemetry, key, candidate, _outcome(repo, candidate, outcome, by, today), counts)
     telemetry.log(f"{name}: " + ", ".join(f"{count} {kind}" for kind, count in counts.items()))
     return counts
@@ -524,9 +574,9 @@ def rerun(given: list[str]) -> list[str]:
     return given[:at] + given[at + 2:]
 
 
-def arguments(target: str, by: str, settings: dict, only=(), again=False, processes=1, started_by="") -> list[str]:
+def arguments(target: str, by: str, settings: dict, only=(), again=False, started_by="") -> list[str]:
     """The arguments of `wpt-dataset source-drafter` for a run."""
-    found = ["source-drafter", target, "--by", by, "--processes", str(processes)]
+    found = ["source-drafter", target, "--by", by]
     for key, value in settings.items():
         found += ["--set", f"{key}={json.dumps(value) if not isinstance(value, str) else value}"]
     for name in only:

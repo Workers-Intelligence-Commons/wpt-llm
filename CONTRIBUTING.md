@@ -81,10 +81,11 @@ together.
    `sha256:` followed by 64 zeros for now, and a `decision` stating
    `"under-review"`, with your name (`by`) and today's `date` (see
    "Decisions are signed").
-4. `uv run wpt-dataset fill-checksum <id>` downloads it once, excludes in
-   `extract` every file that is not text (binary files), each by its
-   exact path, writes the checksum in `source.json`, and checks the source
-   as `check --fetch` does (step 5) without downloading it again. It takes
+4. `uv run wpt-dataset fill-checksum <id>` downloads it once into the
+   store, excludes in `extract` every file that is not text (binary
+   files), each by its exact path, writes the checksum in `source.json`,
+   and checks the source as `check --fetch` does (step 5) without
+   downloading it again. It takes
    several ids, fills each, and lists the failures at the end. A file is
    text when it is UTF-8, or when it states its own encoding (a
    byte-order mark, an HTML page's `<meta charset>`, an XML declaration,
@@ -93,7 +94,8 @@ together.
    "Encodings"). Map every file in `formats` before running it: the format
    says which statement the file can make, and a file no records or chat
    format reads is checked as text.
-   `uv run wpt-dataset manifest <id>` only prints a source's manifest and
+   `uv run wpt-dataset manifest <id>` downloads a source without checking
+   its checksum, keeps it in the store, and prints its manifest and
    checksum. A publisher that rebuilds its archives gives another checksum
    on a later fetch: update `revision`, set `checksum` back to the zeros,
    and fill it again. Map every path to exactly one license in `licenses`,
@@ -108,15 +110,11 @@ together.
    domain, why). Every model trained on the source repeats both in its
    notice.
    A dataset on huggingface.co is `"type": "huggingface"`, pinned to the
-   dataset's commit; `fill-checksum` and `manifest` then read the Hub's
-   listing and download only its small files. `fill-checksum` excludes
-   nothing there, and its check downloads the dataset: exclude each file
-   the check names as not text, then put in the checksum `manifest`
-   prints. An archive the dataset holds (tar, tar.gz, tar.bz2, tar.xz,
-   zip) is unpacked into its folder and its members are the source's
-   files, so `manifest` downloads every archive the source keeps: exclude
-   in `extract` the archives the source must not hold by their own paths,
-   which keeps them from being downloaded. A source published at several
+   dataset's commit; `fill-checksum` downloads every file it keeps, as for
+   any other source. An archive the dataset holds (tar, tar.gz, tar.bz2,
+   tar.xz, zip) is unpacked into its folder and its members are the
+   source's files: exclude in `extract` the archives the source must not
+   hold by their own paths, which keeps them from being downloaded. A source published at several
    addresses (its documents in one archive and their metadata in another)
    lists them in `addresses`, each with the
    folder of the tree it fills, and repeats the first one in `address`

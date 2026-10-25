@@ -6,14 +6,16 @@ under --import-mode=importlib)."""
 import json
 import os
 import subprocess
+import tempfile
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
 
-from wpt_dataset import manifest
+from wpt_dataset import download as downloading
+from wpt_dataset import manifest, sources
 from wpt_dataset.build import build_dataset
 from wpt_dataset.repo import CURRENT_SCHEMA, Repo, address_hash, dump_json
-from wpt_dataset.sources import compute_upstream
 from wpt_store import open_store
 from wpt_train import main as train
 
@@ -35,13 +37,37 @@ TINY_DRAFTER = {"epochs": 1, "prompts": 4, "prompt_tokens": 8, "answer_tokens": 
                 "held_out": 0.25}
 
 
+def checksum_of(data) -> str:
+    """The checksum of what a source's address gives, kept nowhere."""
+    with tempfile.TemporaryDirectory(prefix="wpt-test-staging-") as tmp:
+        (Path(tmp) / "download").mkdir()
+        return manifest.checksum(sources.fetch(data, data["address"], downloading.Staging(Path(tmp) / "files"),
+                                               Path(tmp) / "download"))
+
+
+def download(root, store, sid):
+    """The download step on one source, as `wpt-dataset download` runs it,
+    in a session of its own; its error raised."""
+    with store.session(f"20261025T120000Z-test-download-{sid}", "test", "abc123", False) as session:
+        [done] = downloading.download(Repo(root), [sid], store, session, log=lambda *_: None)
+    if done.error is not None:
+        raise done.error
+
+
+@pytest.fixture
+def fetching():
+    """checksum_of and download, for tests that write sources of their own."""
+    return SimpleNamespace(checksum_of=checksum_of, download=download)
+
+
 @pytest.fixture
 def built(tmp_path, monkeypatch):
     """A dataset of one git project of 16 documents, about half of them held
     out; its 3000 training tokens draw only some of the training documents.
     The working folder tmp_path is the repository, and the store is
     WPT_STORE. Gives store, records(command) (the record folders of that
-    command's runs, oldest first), dataset_id (built from the model recipe "d", a
+    command's runs, oldest first), checksum_of(data) and download(source id)
+    (for a test's own sources), dataset_id (built from the model recipe "d", a
     tiny model trained one step), source_id, attribution, and
     recipe(name, model=..., training=..., drafter=..., posttrain=...), which
     writes a model recipe of the same data part, with those changes to "d",
@@ -62,10 +88,11 @@ def built(tmp_path, monkeypatch):
             "formats": [{"format": "text", "paths": ["**"]}],
             "tags": [{"tags": ["en"], "paths": ["**"]}],
             "decision": {"decision": "admitted", "by": "T", "date": "2026-10-14", "reason": "test"}}
-    data["checksum"] = manifest.checksum(compute_upstream(data, data["address"], store))
+    data["checksum"] = checksum_of(data)
     source_id = f"example-fox-{address_hash(str(upstream))}"
     (root / "data" / "sources" / source_id).mkdir(parents=True)
     (root / "data" / "sources" / source_id / "source.json").write_text(dump_json(data))
+    download(root, store, source_id)
     def write(kind, name, document):
         path = root / "data" / "recipes" / f"{kind}s" / f"{name}.json"
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -98,7 +125,8 @@ def built(tmp_path, monkeypatch):
         return sorted(found, key=lambda run: run.start["started"])
 
     return SimpleNamespace(store=store, dataset_id=dataset_id, source_id=source_id, attribution=ATTRIBUTION,
-                           license_text=LICENSE_TEXT, recipe=recipe, records=records)
+                           license_text=LICENSE_TEXT, recipe=recipe, records=records, checksum_of=checksum_of,
+                           download=lambda sid: download(root, store, sid))
 
 
 @pytest.fixture
@@ -132,7 +160,7 @@ def s3(tmp_path, monkeypatch):
 
         def copy(local):
             for path in sorted((local.root / "objects").glob("*/*")):
-                store.put_file(path)
+                store.put_file(local.path(path.name.removesuffix(".zst")))  # a compressed one as its own bytes
             for path in sorted((local.root / "refs").glob("*/*")):
                 store.set_ref(path.parent.name, path.name, path.read_text().strip())
 

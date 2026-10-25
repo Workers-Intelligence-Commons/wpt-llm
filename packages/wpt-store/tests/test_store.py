@@ -222,8 +222,8 @@ def test_a_refused_replace_of_an_object_already_stored_counts_as_stored(tmp_path
     def refuse(tmp, to):
         raise PermissionError(5, "Access denied")
 
-    monkeypatch.setattr("wpt_store.os.replace", refuse)
-    store._raw_put(sha, source)  # what put_file does when both workers saw no object
+    monkeypatch.setattr("wpt_store.kinds.os.replace", refuse)
+    store._put(sha, source)  # what put_file does when both workers saw no object
     assert target.read_bytes() == b"same bytes\n"
     assert [p.name for p in target.parent.iterdir()] == [sha]
 

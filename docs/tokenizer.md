@@ -12,6 +12,10 @@ hot loops in Rust (PyO3, built by maturin when the workspace is installed).
 - Text is first cut into chunks by ASCII whitespace only (a chunk is a word
   with at most one leading space, or a run of whitespace), so results never
   depend on a Unicode version.
+- Each thread that encodes keeps its own cache of encoded chunks (up to
+  about a million, then it starts again empty), so threads encoding at
+  once never wait for each other, and the tokens never depend on the cache.
+  A thread's cache goes when the thread ends.
 
 ## Vocabularies
 

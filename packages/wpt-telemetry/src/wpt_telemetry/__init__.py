@@ -126,8 +126,9 @@ class RecordError(Exception):
 class Span:
     """An open span: set() adds attributes, recorded when it closes."""
 
-    def __init__(self, id, otel):
-        self.id, self.attributes, self.otel = id, {}, otel
+    def __init__(self, id, otel, name=None):
+        self.id, self.attributes, self.otel, self.name = id, {}, otel, name
+        self.started = time.monotonic()
 
     def set(self, **attributes):
         self.attributes.update(attributes)
@@ -148,10 +149,11 @@ class Telemetry:
         self._started, self._clock = time.time(), time.monotonic()
         self._closed = False
         self._closing = False  # close() has begun: the flush thread no longer interrupts (under _lock)
-        self._stack = []
+        self._root = None  # the run's own span
+        self._threads = threading.local()  # each thread's stack of open spans (_stack)
         if live is not None:
             root = live.start(command, parent, {})
-            self._stack.append(Span(_span_id(root), root))
+            self._root = Span(_span_id(root), root, command)
             self.trace = f"{root.get_span_context().trace_id:032x}"
         self._stop = threading.Event()
         self._flusher = None  # started by start() and join() once their first parts are in the store
@@ -173,7 +175,7 @@ class Telemetry:
                                            "started": _iso(moment), "trace": telemetry.trace,
                                            "inputs": dict(inputs or {}), **_where()}))
             telemetry._write(IDS, _json({"inputs": dict(inputs or {}), "outputs": {}}))
-            telemetry._line({"kind": "span_start", "span": telemetry._stack[0].id, "parent": None, "name": command,
+            telemetry._line({"kind": "span_start", "span": telemetry._root.id, "parent": None, "name": command,
                              "attributes": {}})
         except RecordError:
             telemetry._abandon()
@@ -197,7 +199,7 @@ class Telemetry:
         live = _Live(command, folder, _endpoint(env_file, environ), echo or _print)
         telemetry = cls(store, folder, command, live, echo or _print, owner=False, parent=parent)
         try:
-            telemetry._line({"kind": "span_start", "span": telemetry._stack[0].id, "parent": f"{span_id:016x}",
+            telemetry._line({"kind": "span_start", "span": telemetry._root.id, "parent": f"{span_id:016x}",
                              "name": command, "attributes": {"process": "joined"}})
         except RecordError:
             telemetry._abandon()
@@ -246,32 +248,67 @@ class Telemetry:
             for key, value in (values or {}).items():
                 self._live.gauge(f"wpt.{name}.{key}", value)
 
-    @contextlib.contextmanager
     def span(self, name, /, **attributes):
         """A part of the run, from the with block's start to its end; spans
         and events inside it are recorded under it. An exception leaving it
         is recorded as its error, with its traceback."""
+        return self.finish(self.begin(name, **attributes))
+
+    # Each thread has its own open spans: what a thread records goes under
+    # the span it opened last, or the run's own span in a thread that opened
+    # none. The four methods below let work handed to other threads record
+    # under a span of its own: begin() opens one in one thread, within()
+    # makes it the place a thread records in, end() or finish() ends it,
+    # from any thread.
+
+    def current(self):
+        """The span this thread records under now (None when the record
+        has no span: off())."""
+        return self._stack[-1] if self._stack else None
+
+    def begin(self, name, /, **attributes):
+        """Open a span under this thread's current one, without recording
+        anything under it yet (within, finish); it stays open until end()
+        or finish() ends it."""
         self._check_open()
         if self.store is None and self._live is None:
-            yield Span(None, None)
-            return
+            return Span(None, None, name)
         live = self._live.start(name, self._top(), attributes)
-        span = Span(_span_id(live), live)
+        span = Span(_span_id(live), live, name)
         self._line({"kind": "span_start", "span": span.id, "parent": self._span(), "name": name,
                     "attributes": attributes})
+        return span
+
+    @contextlib.contextmanager
+    def within(self, span):
+        """Record under span (current() of another thread, or begin()'s) in
+        this thread for the with block's length; span stays open."""
         self._stack.append(span)
-        started = time.monotonic()
         try:
             yield span
-        except RecordError:
+        finally:
             self._stack.pop()
+
+    @contextlib.contextmanager
+    def finish(self, span):
+        """within(span), then end span when the with block ends, with the
+        exception leaving it as its error."""
+        try:
+            with self.within(span):
+                yield span
+        except RecordError:
             raise
         except BaseException as error:
-            self._stack.pop()
-            self._end_span(span, name, started, error)
+            self.end(span, error)
             raise
-        self._stack.pop()
-        self._end_span(span, name, started, None)
+        self.end(span)
+
+    def end(self, span, error=None):
+        """End span (begin()'s), with error as its error when given."""
+        self._check_open()
+        if span.id is None and span.otel is None:
+            return
+        self._end_span(span, span.name, span.started, error)
 
     def input(self, **ids):
         """Ids this run read (dataset id, weights' sha256, recipe name...)."""
@@ -329,8 +366,7 @@ class Telemetry:
             try:
                 if self.store is not None and self._broken is None and not isinstance(error, RecordError):
                     status, code, text = _ending(error)
-                    root = self._stack[0]
-                    self._end_span(root, self.command, self._clock, error if status != "succeeded" else None)
+                    self._end_span(self._root, self.command, self._clock, error if status != "succeeded" else None)
                     if self._owner:
                         self._write(END, _json({"schema": SCHEMA, "status": status, "exit_code": code,
                                                 "error": text,
@@ -349,6 +385,14 @@ class Telemetry:
             raise RecordError(self._broken) from error
 
     # -- inside --------------------------------------------------------------------
+
+    @property
+    def _stack(self):
+        """This thread's open spans, the run's own first."""
+        stack = getattr(self._threads, "stack", None)
+        if stack is None:
+            stack = self._threads.stack = [self._root] if self._root is not None else []
+        return stack
 
     def _span(self):
         return self._stack[-1].id if self._stack else None

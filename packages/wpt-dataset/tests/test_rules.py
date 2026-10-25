@@ -30,7 +30,8 @@ def test_check_reports_each_broken_rule(kit, repo, store, git_upstream):
         "licenses": [{"license": "CC-BY-NC-4.0", "paths": ["**"], "attribution": kit.ATTRIBUTION, "text": kit.LICENSE_TEXT}]})
     unexplained = kit.add_source(repo, store, "example", "unexplained", {
         "type": "git", "address": git_upstream[0] + "/./", "revision": git_upstream[1],
-        "decision": {"decision": "refused", "by": "Test Reviewer", "date": "2026-10-14"}})  # a refusal must say why
+        "decision": {"decision": "refused", "by": "Test Reviewer", "date": "2026-10-14"}},  # a refusal must say why
+        fetch=False)  # an invalid source.json: never downloaded
     wrong_id = repo.root / "data" / "sources" / "example-wrong-00000000"
     wrong_id.mkdir()
     (wrong_id / "source.json").write_text((repo.root / "data" / "sources" / good / "source.json").read_text())
@@ -191,8 +192,11 @@ def test_command_line_builds_a_dataset_and_prints_its_id(kit, repo, store, git_u
     assert (repo.root / "data" / "recipes" / "tokenizers" / "t.lock.json").exists()
     # the build's record names the dataset it wrote, which training records as its input,
     # and each source it read
-    [folder] = store.record_folders()
-    assert "-wpt-dataset-build-d-" in folder  # named after the recipe it built
+    # check --fetch's session and the build's record, named after the recipe it built
+    folders = store.record_folders()
+    [downloading] = [name for name in folders if "-wpt-dataset-check-" in name]
+    [folder] = [name for name in folders if "-wpt-dataset-build-d-" in name]
+    assert len(folders) == 2
     ids = json.loads(store.read_record(folder, "ids.json"))
     assert ids["outputs"] == {"dataset": dataset_id, "dataset_record": store.get_ref("datasets", dataset_id),
                               "dataset_documents": store.get_ref("dataset-documents", dataset_id)}

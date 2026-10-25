@@ -14,9 +14,7 @@ import pytest
 import wpt_agent
 from wpt_agent import images
 from wpt_agent.loop import CONFIDENCE
-from wpt_dataset import manifest
 from wpt_dataset.repo import address_hash, dump_json
-from wpt_dataset.sources import compute_upstream
 from wpt_dataset.tasks import Task, Variant
 from wpt_eval import find, main
 from wpt_eval.attempts import Record
@@ -47,10 +45,11 @@ def task_source(built, root, upstream, check="#!/bin/sh\necho 1\n", folders=("he
                           "text": "Cy Author dedicates these tasks to the public domain.\n"}],
             "formats": [{"format": "task", "paths": ["**"]}], "tags": [{"tags": ["eval"], "paths": ["**"]}],
             "decision": {"decision": "admitted", "by": "T", "date": "2026-10-17"}}
-    data["checksum"] = manifest.checksum(compute_upstream(data, data["address"], built.store))
+    data["checksum"] = built.checksum_of(data)
     sid = f"example-tasks-{address_hash(str(upstream))}"
     (root / "data" / "sources" / sid).mkdir()
     (root / "data" / "sources" / sid / "source.json").write_text(dump_json(data))
+    built.download(sid)
     return sid
 
 

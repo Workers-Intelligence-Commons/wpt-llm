@@ -1,14 +1,19 @@
 import hashlib
 import json
+import time
 
 import pytest
 
+from wpt_dataset import build
 from wpt_dataset.build import build_dataset, document_list, is_held_out
 from wpt_dataset.cli import main
 from wpt_dataset.errors import ChecksumMismatch, LockedDocumentsMissing, LockMismatch, PoolError, TokenizerVersionNeeded
-from wpt_store import open_store
+from wpt_dataset.sources import stored_files
+from wpt_store import CorruptObject, open_store
 from wpt_store.shards import read_shard, token_hash
+from wpt_telemetry import Telemetry
 from wpt_tokenizer import Tokenizer
+from wpt_utils.parallel import Sizing
 
 FRENCH = ["le chat dort sur le tapis rouge", "la pluie tombe sur la ville grise", "un enfant lit un livre ancien",
           "le vent souffle dans les arbres", "une femme chante dans la rue"]
@@ -29,7 +34,8 @@ def corpus(kit, tmp_path):
 
 
 def setup_recipes(kit, repo, store, corpus, total_tokens, held_out=0.0):
-    kit.add_source(repo, store, "example", "corpus", {
+    """The corpus as a source, downloaded into store, and recipes to build it; returns its id."""
+    sid = kit.add_source(repo, store, "example", "corpus", {
         "type": "git", "address": corpus[0], "revision": corpus[1],
         "tags": [{"tags": ["fr"], "paths": ["fr/**"]}, {"tags": ["literature"], "paths": ["fr/lit/**"]},
                  {"tags": ["en"], "paths": ["en/**"]}]})
@@ -40,6 +46,14 @@ def setup_recipes(kit, repo, store, corpus, total_tokens, held_out=0.0):
     kit.write_recipe(repo, "tokenizer", "main", {"version": 1, "mixture": "main", "vocab_size": 656})
     kit.write_model_recipe(repo, "small", {"mixture": "main", "tokenizer": "main",
                                                 "total_tokens": total_tokens, "held_out": held_out})
+    return sid
+
+
+def fresh_store(kit, repo, folder, sid):
+    """A new store (another machine) with the source downloaded into it."""
+    fresh = open_store(folder.as_uri())
+    kit.download(repo, fresh, sid)
+    return fresh
 
 
 def record_of(store, dataset_id):
@@ -51,7 +65,7 @@ def rows_of(store, shards):
 
 
 def test_build_fills_pools_and_is_repeatable_on_another_machine(kit, repo, store, corpus, tmp_path):
-    setup_recipes(kit, repo, store, corpus, total_tokens=2000)
+    sid = setup_recipes(kit, repo, store, corpus, total_tokens=2000)
     dataset_id = build_dataset(repo, "small", store, log=lambda _: None)
     record = record_of(store, dataset_id)
 
@@ -75,11 +89,18 @@ def test_build_fills_pools_and_is_repeatable_on_another_machine(kit, repo, store
     # same inputs: a lookup, not a rebuild
     assert build_dataset(repo, "small", store, log=lambda _: None) == dataset_id
     # a fresh store (another machine): the same id, vocabulary and tokens
-    fresh = open_store((tmp_path / "other-store").as_uri())
+    fresh = fresh_store(kit, repo, tmp_path / "other-store", sid)
     assert build_dataset(repo, "small", fresh, log=lambda _: None) == dataset_id
     again = record_of(fresh, dataset_id)
     assert again["tokenizer"]["vocabulary"] == record["tokenizer"]["vocabulary"]
     assert [s["token_sha256"] for s in again["shards"]] == [s["token_sha256"] for s in record["shards"]]
+    # each record names the download its files came from, which the dataset id leaves out
+    for built, record_ in ((store, record), (fresh, again)):
+        with built.database() as found:
+            downloaded = found.execute("SELECT session, time FROM lines WHERE source = ? AND outcome = 'downloaded'",
+                                       (sid,)).fetchall()
+        assert [(record_["downloads"][sid]["session"], record_["downloads"][sid]["time"])] == downloaded
+    assert again["downloads"][sid]["session"] != record["downloads"][sid]["session"]
 
 
 def test_held_out_documents_never_reach_training(kit, repo, store, tmp_path):
@@ -163,7 +184,7 @@ def test_too_many_passes_over_a_pool_is_refused(kit, repo, store, corpus):
 def test_the_locked_vocabulary_stays_until_its_version_is_raised(kit, repo, store, corpus, tmp_path):
     # many datasets and models share one vocabulary, so new sources must not change it;
     # only a person raising the recipe's version trains a new one
-    setup_recipes(kit, repo, store, corpus, total_tokens=1000)
+    sid = setup_recipes(kit, repo, store, corpus, total_tokens=1000)
     first = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))
     lock_path = (repo.root / "data" / "recipes" / "tokenizers" / "main.lock.json")
     lock = json.loads(lock_path.read_text())
@@ -172,14 +193,15 @@ def test_the_locked_vocabulary_stays_until_its_version_is_raised(kit, repo, stor
 
     folder, commit = kit.git_project(tmp_path / "more", files={"en/new.txt": b"zebras graze quietly. " * 30},
                                      executable=set(), symlinks={})
-    kit.add_source(repo, store, "example", "more", {"type": "git", "address": folder, "revision": commit,
-                                                    "tags": [{"tags": ["en"], "paths": ["**"]}]})
+    more = kit.add_source(repo, store, "example", "more", {"type": "git", "address": folder, "revision": commit,
+                                                           "tags": [{"tags": ["en"], "paths": ["**"]}]})
     second = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))
     assert second["documents"]["total"] == 11  # the new source is in the dataset...
     assert second["tokenizer"]["vocabulary"] == first["tokenizer"]["vocabulary"]  # ...but not in the vocabulary
     assert json.loads(lock_path.read_text()) == lock
     # another machine rebuilds the same vocabulary from the documents the lock lists
-    fresh = open_store((tmp_path / "fresh").as_uri())
+    fresh = fresh_store(kit, repo, tmp_path / "fresh", sid)
+    kit.download(repo, fresh, more)
     assert record_of(fresh, build_dataset(repo, "small", fresh, log=lambda _: None))["tokenizer"]["vocabulary"] \
         == lock["vocabulary_sha256"]
 
@@ -199,18 +221,18 @@ def test_the_locked_vocabulary_stays_until_its_version_is_raised(kit, repo, stor
 
 
 def test_a_locked_vocabulary_that_cannot_be_rebuilt_the_same_is_refused(kit, repo, store, corpus, tmp_path):
-    setup_recipes(kit, repo, store, corpus, total_tokens=1000)
+    sid = setup_recipes(kit, repo, store, corpus, total_tokens=1000)
     build_dataset(repo, "small", store, log=lambda _: None)
     lock_path = (repo.root / "data" / "recipes" / "tokenizers" / "main.lock.json")
     lock = json.loads(lock_path.read_text())
     lock_path.write_text(json.dumps({**lock, "vocabulary_sha256": "f" * 64}))  # as if another machine trained another
     with pytest.raises(LockMismatch):
-        build_dataset(repo, "small", open_store((tmp_path / "fresh").as_uri()), log=lambda _: None)
+        build_dataset(repo, "small", fresh_store(kit, repo, tmp_path / "fresh", sid), log=lambda _: None)
 
     # a document the vocabulary was trained on is gone, and the store holds neither
     lock_path.write_text(json.dumps({**lock, "documents": lock["documents"] + [["example-gone/a.txt", "e" * 64]]}))
     with pytest.raises(LockedDocumentsMissing, match="1 of the documents .* such as example-gone/a.txt"):
-        build_dataset(repo, "small", open_store((tmp_path / "fresh-2").as_uri()), log=lambda _: None)
+        build_dataset(repo, "small", fresh_store(kit, repo, tmp_path / "fresh-2", sid), log=lambda _: None)
 
 
 def test_tokenizer_check_round_trips_every_document_and_reports_each_source(kit, repo, store, corpus, tmp_path,
@@ -231,16 +253,15 @@ def test_tokenizer_check_round_trips_every_document_and_reports_each_source(kit,
     assert lines[-1].startswith("every document decodes back exactly: 11 documents, ")
 
 
-def test_a_streamed_build_gives_the_same_dataset_and_keeps_no_source_files(kit, repo, store, corpus, tmp_path):
-    # a corpus larger than the disk is built one source at a time: the store
-    # keeps tokens, never the sources' files, and the dataset is the one a
-    # normal build gives
-    setup_recipes(kit, repo, store, corpus, total_tokens=2000, held_out=0.2)
+def test_a_streamed_build_gives_the_same_dataset_and_keeps_no_markdown(kit, repo, store, corpus, tmp_path):
+    # a streamed build keeps tokens in the store, never the documents'
+    # Markdown, and the dataset is the one a normal build gives
+    sid = setup_recipes(kit, repo, store, corpus, total_tokens=2000, held_out=0.2)
     # one pool of all 10 documents, so the held-out share always leaves it some
     kit.write_recipe(repo, "mixture", "main", {"pools": [{"name": "all", "select": "fr || en", "weight": 1}]})
-    streamed_store = open_store((tmp_path / "streamed").as_uri())
+    streamed_store = fresh_store(kit, repo, tmp_path / "streamed", sid)
     streamed_id = build_dataset(repo, "small", streamed_store, log=lambda _: None, stream=True)  # trains the vocabulary
-    normal_store = open_store((tmp_path / "normal").as_uri())
+    normal_store = fresh_store(kit, repo, tmp_path / "normal", sid)
     normal_id = build_dataset(repo, "small", normal_store, log=lambda _: None)  # rebuilds it from the lock
 
     assert streamed_id == normal_id
@@ -249,34 +270,41 @@ def test_a_streamed_build_gives_the_same_dataset_and_keeps_no_source_files(kit, 
         assert streamed[part] == normal[part]
     assert [s["token_sha256"] for s in streamed["shards"] + streamed["held_out_shards"]] == \
            [s["token_sha256"] for s in normal["shards"] + normal["held_out_shards"]]
-    files = kit.run("git", "ls-tree", "-r", "--name-only", corpus[1], cwd=corpus[0]).decode().split()
-    for path in files:
-        content = kit.run("git", "show", f"{corpus[1]}:{path}", cwd=corpus[0])
-        assert not streamed_store.has(hashlib.sha256(content).hexdigest())
     vocabulary = Tokenizer.from_bytes(streamed_store.get_bytes(streamed["tokenizer"]["vocabulary"]))
     for tokens, *_ in rows_of(streamed_store, streamed["shards"]):
         assert not streamed_store.has(hashlib.sha256(vocabulary.decode(tokens.tolist())).hexdigest())  # its Markdown
 
 
-def test_a_failing_source_stops_the_build_unless_skipping_is_asked(kit, repo, store, corpus, tmp_path, monkeypatch,
-                                                                    capsys):
-    # with thousands of sources, one site rebuilding its file must not block every
-    # build; but leaving a source out is a choice someone makes, and the record says so
+def test_a_source_missing_from_the_store_is_left_out_listed_and_recorded(kit, repo, store, corpus, tmp_path,
+                                                                         monkeypatch, capsys):
+    # the build never downloads: a source the download step could not keep
+    # must not block every build, and the record says it is missing
     setup_recipes(kit, repo, store, corpus, total_tokens=2000)
     first = build_dataset(repo, "small", store, log=lambda _: None)  # also locks the vocabulary
     changed = kit.add_source(repo, store, "example", "changed", {
         "type": "git", "address": corpus[0], "revision": corpus[1], "checksum": "sha256:" + "1" * 64,
         "tags": [{"tags": ["en"], "paths": ["**"]}]}, compute_checksum=False)
+    with pytest.raises(ChecksumMismatch, match=changed):  # upstream no longer gives its checksum: nothing kept
+        kit.download(repo, store, changed)
 
-    with pytest.raises(ChecksumMismatch, match=changed):
-        build_dataset(repo, "small", store, log=lambda _: None)
     for stream in (False, True):
-        skipped = build_dataset(repo, "small", store, log=lambda _: None, stream=stream, skip_failed=True)
-        record = record_of(store, skipped)
+        without = build_dataset(repo, "small", store, log=lambda _: None, stream=stream)  # no --skip-failed needed
+        record = record_of(store, without)
         assert [s["source"] for s in record["skipped"]] == [changed]
-        assert record["skipped"][0]["error"].startswith("ChecksumMismatch: ")
+        assert record["skipped"][0]["error"].startswith("NotDownloaded: ")
         assert changed not in record["sources"] and record["documents"] == record_of(store, first)["documents"]
-        assert skipped != first  # the id says something is missing
+        assert without != first  # the id says something is missing
+
+    # the build's record names the missing source and why
+    monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)
+    assert main(["--root", str(repo.root), "build", "small"]) == 0
+    [folder] = [name for name in store.record_folders() if "-wpt-dataset-build-small-" in name]
+    events = [json.loads(line) for line in store.read_record(folder, "events.jsonl").splitlines()]
+    [missing] = [e["attributes"]["skipped"] for e in events
+                 if e["kind"] == "span_end" and e["name"] == "source" and "skipped" in e["attributes"]]
+    assert missing.startswith(f"NotDownloaded: {changed}: ")
+    assert json.loads(store.read_record(folder, "ids.json"))["inputs"]["skipped_sources"] == [changed]
 
     # the check goes on past a failure, so one run names every source to fix
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
@@ -284,3 +312,119 @@ def test_a_failing_source_stops_the_build_unless_skipping_is_asked(kit, repo, st
     assert main(["--root", str(repo.root), "check", "--fetch", *repo.source_ids()]) == 1
     out, err = capsys.readouterr()
     assert "Markdown documents" in out and f"1 of 2 fetched sources failed:\n{changed}: ChecksumMismatch: " in err
+
+
+def test_a_broken_source_stops_the_build_unless_skipping_is_asked(kit, repo, store, corpus, tmp_path):
+    # a source in the store whose files are broken is a fault to look at:
+    # leaving it out is a choice someone makes, and the record says so
+    setup_recipes(kit, repo, store, corpus, total_tokens=2000)
+    first = build_dataset(repo, "small", store, log=lambda _: None)  # also locks the vocabulary
+    folder, commit = kit.git_project(tmp_path / "other", files={"en/other.txt": b"owls hunt at night. " * 30},
+                                     executable=set(), symlinks={})
+    broken = kit.add_source(repo, store, "example", "broken", {"type": "git", "address": folder, "revision": commit,
+                                                               "tags": [{"tags": ["en"], "paths": ["**"]}]})
+    [placed] = {placed for _, placed in stored_files(repo.source(broken).data["checksum"], store).values()}
+    for bundle in (store.root / "bundles").glob(f"{placed.bundle}*"):
+        bundle.write_bytes(bytes(b ^ 0xFF for b in bundle.read_bytes()))  # every byte changed
+
+    with pytest.raises(CorruptObject):
+        build_dataset(repo, "small", store, log=lambda _: None)
+    for stream in (False, True):
+        skipped = build_dataset(repo, "small", store, log=lambda _: None, stream=stream, skip_failed=True)
+        record = record_of(store, skipped)
+        assert [s["source"] for s in record["skipped"]] == [broken]
+        assert record["skipped"][0]["error"].startswith("CorruptObject: ")
+        assert record["documents"] == record_of(store, first)["documents"]
+
+
+class Machine:
+    """A machine with plenty of everything, as wpt_utils.parallel measures it."""
+
+    def __init__(self, cores):
+        self.cores = cores
+
+    def memory(self):
+        return 1e12, 1e12
+
+    def idle_cores(self):
+        return float(self.cores)
+
+
+@pytest.mark.parametrize("stream", [False, True])
+def test_sources_converted_at_once_give_the_dataset_converted_one_at_a_time(kit, repo, store, tmp_path, monkeypatch,
+                                                                            stream):
+    # sources and documents are worked on several at once, finishing in any
+    # order; the dataset id, the documents and the shards must not change, and
+    # the record still ties each ref a source's conversion sets to that source
+    ids = []
+    for n in range(4):
+        files = {f"en/{n}-{i}.txt": f"source {n} text {i}: the wind blows over hill {i}. ".encode() * 20
+                 for i in range(3)}
+        files["en/shared.txt"] = b"every source holds this same page. " * 20  # the first source keeps it
+        folder, commit = kit.git_project(tmp_path / f"upstream-{n}", files=files, executable=set(), symlinks={})
+        ids.append(kit.add_source(repo, store, "example", f"part-{n}", {
+            "type": "git", "address": folder, "revision": commit, "tags": [{"tags": ["en"], "paths": ["**"]}]}))
+    kit.write_recipe(repo, "mixture", "main", {"pools": [{"name": "en", "select": "en", "weight": 1}]})
+    kit.write_recipe(repo, "tokenizer", "main", {"version": 1, "mixture": "main", "vocab_size": 600})
+    kit.write_model_recipe(repo, "small", {"mixture": "main", "tokenizer": "main", "total_tokens": 3000,
+                                           "held_out": 0.2})
+    build_dataset(repo, "small", store, log=lambda _: None)  # locks the vocabulary
+    order = {sid: n for n, sid in enumerate(ids)}
+    converted, tokenized = build._converted, build.source_tokens
+
+    def last_first(source, *args):  # the later a source, the sooner it is done
+        time.sleep(0.05 * (len(ids) - order[source.id]))
+        return converted(source, *args)
+
+    def tokens_last_first(repo_, source, *args):
+        time.sleep(0.05 * (len(ids) - order[source.id]))
+        return tokenized(repo_, source, *args)
+
+    monkeypatch.setattr(build, "_converted", last_first)
+    monkeypatch.setattr(build, "source_tokens", tokens_last_first)
+    built = {}
+    for cores in (1, 16):  # 1: one at a time; 16: 12 at once
+        monkeypatch.setattr(build, "Sizing", lambda memory, what, cores=cores: Sizing(memory, what, Machine(cores)))
+        fresh = fresh_store(kit, repo, tmp_path / f"store-{cores}", ids[0])
+        kit.download(repo, fresh, *ids[1:])
+        with Telemetry.start(fresh, "wpt-dataset-build", [], "small", env_file=tmp_path / ".env",
+                             environ={}) as telemetry:
+            dataset_id = build_dataset(repo, "small", fresh, log=lambda _: None, stream=stream, telemetry=telemetry)
+        built[cores] = dataset_id, record_of(fresh, dataset_id), document_list(fresh, dataset_id)
+        events = [json.loads(line) for line in fresh.read_record(telemetry.folder, "events.jsonl").splitlines()]
+        spans = {e["span"]: e["attributes"]["source"] for e in events
+                 if e["kind"] == "span_start" and e["name"] == "source"}
+        kind = "source-tokens" if stream else "source-trees"  # what each source's conversion stores once
+        refs = [spans.get(e["span"]) for e in events
+                if e["kind"] == "event" and e["name"] == "store.ref_set" and e["attributes"]["ref"].startswith(kind)]
+        assert sorted(refs) == sorted(ids)
+    (one_id, one, one_list), (many_id, many, many_list) = built[1], built[16]
+    assert many_id == one_id and many_list == one_list
+    assert one["documents"]["duplicates_removed"] == 3 and len(one["sources"]) == 4
+    for part in ("sources", "documents", "pools", "contamination"):
+        assert many[part] == one[part]
+    assert [s["token_sha256"] for s in many["shards"] + many["held_out_shards"]] == \
+           [s["token_sha256"] for s in one["shards"] + one["held_out_shards"]]
+
+
+def test_a_streamed_build_leaves_no_copy_of_a_source_s_files_on_this_machine(kit, repo, store, tmp_path):
+    # --stream is for data larger than the disk: what a source's conversion
+    # copies out of the store goes before the next source
+    records = "".join(json.dumps({"id": str(i), "text": f"record {i} tells of the sea. " * 10}) + "\n"
+                      for i in range(5)).encode()
+    folder, commit = kit.git_project(tmp_path / "records", files={"data/part.jsonl": records}, executable=set(),
+                                     symlinks={})
+    sid = kit.add_source(repo, store, "example", "records", {
+        "type": "git", "address": folder, "revision": commit, "formats": [{"format": "records", "paths": ["**"], "text": "text", "id": "id"}],
+        "tags": [{"tags": ["en"], "paths": ["**"]}]})
+    kit.write_recipe(repo, "mixture", "main", {"pools": [{"name": "en", "select": "en", "weight": 1}]})
+    kit.write_recipe(repo, "tokenizer", "main", {"version": 1, "mixture": "main", "vocab_size": 560})
+    kit.write_model_recipe(repo, "small", {"mixture": "main", "tokenizer": "main", "total_tokens": 300,
+                                           "held_out": 0})
+    record_file = hashlib.sha256(records).hexdigest()
+
+    build_dataset(repo, "small", store, log=lambda _: None, stream=True)
+    assert not list(store.cache.rglob(record_file))  # its records file was read from a copy, now gone
+    normal = fresh_store(kit, repo, tmp_path / "normal", sid)
+    build_dataset(repo, "small", normal, log=lambda _: None)
+    assert list(normal.cache.rglob(record_file))  # without --stream, the copy stays in the store's cache

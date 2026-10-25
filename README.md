@@ -19,9 +19,9 @@ model. No checkpoint has been published yet.
 `data/sources/<id>/source.json`: its exact address, revision and checksum,
 the license of every path with the credit it asks for, how each file
 becomes Markdown, and the signed human decision that admitted or refused
-it. The data itself is fetched on demand into a store you control (a
-folder or an S3 bucket) and checked against its checksum, so anyone can
-rebuild exactly the same dataset. WPT hosts no data.
+it. The data itself is downloaded into a store you control (a folder or
+an S3 bucket) and checked against its checksum, so anyone can rebuild
+exactly the same dataset. WPT hosts no data.
 
 - **Clear licenses only.** A source enters only when its license lets the
   weights be distributed under the AGPL; when in doubt, it is refused
@@ -49,7 +49,8 @@ through Docker Desktop.
 uv run scripts/setup.py                            # the PyTorch build for this machine's GPU
 echo "WPT_STORE=file://$HOME/wpt-store" >> .env    # where fetched and built data lives
 
-uv run wpt-dataset build classics-test --stream    # fetch, convert, tokenize; prints a dataset id
+uv run wpt-dataset download                        # every admitted source, checked, into the store
+uv run wpt-dataset build classics-test --stream    # convert, tokenize; prints a dataset id
 scripts/detach.sh uv run wpt-train classics-test <dataset id> --stream --out runs/first
 uv run wpt-eval runs/first                         # memorization and other tests, into the model card
 uv run wpt-chat runs/first                         # continue text with the model
@@ -62,12 +63,15 @@ data, architecture, training and post-training steps
 ([model.md](docs/model.md)); the command-line options only say how the
 hardware runs it.
 
-**Streaming** keeps disk use small at both ends, for data larger than the
+**Streaming** keeps disk use small at each step, for data larger than the
 disk:
 
-- `wpt-dataset build --stream` fetches one source at a time, turns it into
-  tokens and deletes its files before the next; the store keeps only
-  tokens. The dataset and its id are the same as without it.
+- `wpt-dataset download --stream` keeps no copy on the downloading
+  machine of what an S3 store holds.
+- `wpt-dataset build --stream` takes each source from the store into a
+  temporary folder, turns it into tokens and deletes the folder; the store
+  keeps their tokens, not their Markdown. The dataset and its id are the
+  same as without it.
 - `wpt-train --stream` reads the training shards a few at a time (8 by
   default, about 2 GB, `--stream-shards`) instead of copying them all to
   disk first.
@@ -84,7 +88,7 @@ the same command with `--resume` continues.
 | share data and runs between machines | `WPT_STORE=s3://bucket/prefix` (any S3-compatible service) |
 | move a run to another machine | `--run NAME`: the checkpoint lives in the store; `--run NAME --resume` there |
 | use several GPUs | `--strategy ddp --processes N` (several machines: `torchrun`) |
-| build despite a broken source | `wpt-dataset build --skip-failed`: it is left out and listed |
+| build despite a broken source | `wpt-dataset build --skip-failed`: it is left out and listed (a source not downloaded always is) |
 | teach the model to chat | a recipe whose `posttrain` list holds `sft`: `wpt-posttrain RECIPE runs/first runs/chat`, then `wpt-chat runs/chat --chat` |
 | teach the model to finish tasks as an agent | tasks tagged `grpo` in a source, their images in `data/images/` locked with `wpt-agent lock-image NAME` and built with `wpt-agent build-image NAME`, and a recipe whose `posttrain` list holds `grpo` (needs Docker; [post-training](docs/post-training.md)) |
 | teach the agent to reach the same result with fewer tokens | `token-efficiency` after `grpo` in the recipe's `posttrain` list: it trains on the same tasks ([post-training](docs/post-training.md)) |

@@ -1,7 +1,7 @@
 """The source drafter runs wpt-web starts (wpt_web.pages.source_drafters):
 real `wpt-dataset source-drafter` processes on a repository and a store of
-the test's own. A stop ends the drafts its worker processes have under
-way; a run that ends before its record says why on the page's list."""
+the test's own. A stop ends the drafts under way, in worker processes
+too; a run that ends before its record says why on the page's list."""
 
 import http.client
 import json
@@ -51,17 +51,17 @@ def setup(tmp_path, monkeypatch):
 
 
 @pytest.mark.skipif(os.name == "nt", reason="the stop of a process group is Ctrl+Break there, not Ctrl+C")
-def test_a_stop_ends_the_drafts_under_way_in_worker_processes(setup, tmp_path):
-    # given a run drafting in two worker processes, a stop ends both drafts at once, and the run's record
-    # ends as stopped, so wpt-web starts it again next time
+def test_a_stop_ends_the_drafts_under_way(setup, tmp_path):
+    # given a run drafting (in worker processes when the machine lets several drafts run at once), a stop ends
+    # every draft under way at once, and the run's record ends as stopped, so wpt-web starts it again next time
     repo, store = setup
     program, marks = tmp_path / "slow.py", tmp_path / "marks"
     program.write_text(SLOW)
     marks.mkdir()
     started = Runs(repo)
-    started.start(["source-drafter", str(program), "--by", "T", "--processes", "2", "--set", f"marks={marks}"])
+    started.start(["source-drafter", str(program), "--by", "T", "--set", f"marks={marks}"])
     deadline = time.monotonic() + 60
-    while len(list(marks.glob("*.started"))) < 2:
+    while not list(marks.glob("*.started")):
         assert time.monotonic() < deadline, "the drafts never started"
         time.sleep(0.1)
     started.stop()

@@ -1,6 +1,7 @@
 # Observability: the record of every run
 
-Every run of `wpt-dataset build`, `wpt-dataset source-drafter`,
+Every run of `wpt-dataset download`, `check --fetch`, `fill-checksum`,
+`manifest`, `build` and `source-drafter`, each round of `source-server`,
 `wpt-train`, `wpt-posttrain` and `wpt-eval` keeps a record of what it did, from its first input to its last
 file, so that afterwards one can know exactly what happened. The record is
 written into the store, as OpenTelemetry's three kinds of data (traces,
@@ -17,7 +18,8 @@ ended.
 
 | Command | Records |
 | --- | --- |
-| `wpt-dataset build` | the recipe and mixture; the vocabulary (built, or found from its lock), and each source the tokenizer training read; the lock file written (its path and the vocabulary's sha256); each source fetched and converted (its tree, documents, duplicates, credits) or why it was skipped; the tokens; each pool; each shard written (training and held-out: object, rows, tokens, token sha256, sources); the contamination check; the dataset record. Inputs: the recipe, the tokenizer, the vocabulary, every source's checksum, the skipped sources. Outputs: the dataset id, its record object and its document list |
+| `wpt-dataset download`, `check --fetch`, `fill-checksum`, `manifest`, a round of `source-server` | the session of the download step: how many sources download at once and why; each download tried again; every ref set for a kept source (`upstream-files/<checksum>`, `upstream/<checksum>`). Inputs: the source ids. Each source's outcome (downloaded, reused or failed) is a line of the session in the store database alone, never in the record ([architecture.md](architecture.md), "The download step") |
+| `wpt-dataset build` | the recipe and mixture; the vocabulary (built, or found from its lock), and each source the tokenizer training read; the lock file written (its path and the vocabulary's sha256); how many sources are converted at once and why; each source read and converted (its tree, documents, duplicates, credits, the seconds its conversion took) or why it was skipped (a source not in the store, `NotDownloaded`, included); the tokens; each pool; each shard written (training and held-out: object, rows, tokens, token sha256, sources); the contamination check; the dataset record. Inputs: the recipe, the tokenizer, the vocabulary, every source's checksum, the skipped sources. Outputs: the dataset id, its record object and its document list |
 | `wpt-dataset source-drafter` | the source drafter (its file and sha256, its settings, the name of its record of what is done) and who started it; the candidates listed (a span), and how many were chosen, done before and left to draft (the file `candidates.json`); one line per outcome in `outcomes.jsonl` (candidate, outcome: drafted, skipped, needs-a-person, stopped or failed, the source, its change: new, updated, licenses-changed or unchanged, the reason and the notes for a person), and every line printed. Inputs: the source drafter, its file's sha256, its settings, the record of what is done |
 | `wpt-train` | the recipe, plugins and settings; the dataset read and its token counts; each stage (a span: its number, window length, batch, first and last steps, and the step a resumed run started at); every step (its loss over the whole batch, its window length, its duration, the learning rate of each parameter group); every evaluation (validation loss, best or not, stop or not); every checkpoint written, a resume, a stop; the drafter's training (a span `drafter`: the model's answers, its settings, every update's losses, the calibration and the share of drafts kept); the scheduler's pass times, measured or replayed (a span `scheduler.costs`), written as the file `scheduler-costs.json`, which `--scheduler-costs` replays in a later run; the weights, the drafter, `provenance.json`, the credits, `NOTICE`, `LICENSE` and the model card written, with the sha256 of every file of the model folder; the checkpoint's removal, and with `--run` every checkpoint object deleted from the store (the one each save replaces, and the last one), named by its sha256; the sample. Inputs: the recipe, the dataset id, its record object, the vocabulary. Outputs: the model folder, the sha256 of each weight file, of the drafter's weights and of `provenance.json` |
 | `wpt-posttrain` | the recipe's steps; each step (its file and sha256, its settings, the sources it read, its outcome or reason), and what the step records itself (`sft`: every update's loss, each epoch; `grpo` and `token-efficiency`: every attempt as a line of `<step>-attempts.jsonl` as soon as it is scored, a conversation in the chat format whose `metadata` identifies the attempt, with a span per group's attempts, a span per attempt inside it and an event per group and per round naming the lines, [post-training.md](post-training.md), "Runs"); the drafter's training, as for `wpt-train`; the scheduler's pass times, measured or replayed, as for `wpt-train`; the new folder's files as for `wpt-train`. Inputs: the recipe, the base weights' sha256, the base model's dataset id, the sources the steps read. Outputs: as for `wpt-train` |
@@ -56,6 +58,7 @@ the run is about:
 
 | Command | Main id |
 | --- | --- |
+| `wpt-dataset download`, `check`, `fill-checksum`, `manifest`, a round of `source-server` | the one source id, or `<count>-sources` |
 | `wpt-dataset build` | the model recipe's name |
 | `wpt-dataset source-drafter` | the source drafter's name |
 | `wpt-train` | the first 8 characters of the dataset id |
@@ -363,7 +366,15 @@ refused it: let it propagate, the command then stops.
 `telemetry.irreversible(name, **attributes)` records an event as
 `telemetry.event` does, then sends the lines an S3 store holds and waits
 for its answer: call it just before a step that cannot be undone, which
-then happens only once its record is in the store. Once the run's record is closed,
+then happens only once its record is in the store.
+Each thread records under the span it opened last, or under the run's own
+span when it opened none. Work handed to other threads records under a
+span of its own: `telemetry.begin(name, **attributes)` opens a span under
+the current one without entering it, `telemetry.within(span)` makes a
+thread record under a span for a with block (`telemetry.current()` gives
+a thread's current span to hand over), and `telemetry.end(span)`, or
+`telemetry.finish(span)` around a with block, ends it from any thread.
+Once the run's record is closed,
 every call raises `RuntimeError`: a step or a test must not keep the
 telemetry for later.
 

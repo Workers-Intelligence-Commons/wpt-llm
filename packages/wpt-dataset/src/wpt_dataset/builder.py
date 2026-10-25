@@ -85,7 +85,7 @@ import random
 import re
 from dataclasses import dataclass
 
-from . import markdown, pools
+from . import manifest, markdown, pools
 from .errors import InvalidFile, RuleViolation
 from .manifest import HISTORY, ORDER
 from .repo import Repo
@@ -539,7 +539,7 @@ def _commits(repo, store, count, rng, log) -> list:
             unordered += 1
             continue
         work = [entry for path, entry in tree.items() if not path.startswith(".git/")]
-        if len(work) > REPOSITORY_FILES or sum(store.path(entry.sha256).stat().st_size for entry in work) \
+        if len(work) > REPOSITORY_FILES or sum(manifest.size(store, entry) for entry in work) \
                 > REPOSITORY_BYTES:
             continue
         candidates += [(source, tree, path) for path in undoable(tree, store)]

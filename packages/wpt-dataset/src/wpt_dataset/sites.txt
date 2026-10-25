@@ -1,0 +1,27 @@
+# How many sources wpt-dataset downloads at once from one site, at most.
+#
+# One line per site: its host name, then the number. A line covers the host
+# and every host under it (wikimedia.org covers dumps.wikimedia.org). The
+# line "default" covers every other site. Each number comes from what the
+# site publishes, named in the comment above it; the machine's own limit
+# (wpt_utils.parallel) may allow fewer. Change a line by a commit, like code.
+
+# "Downloads are rate limited and capped at 3 connections per-IP."
+# https://dumps.wikimedia.org/
+wikimedia.org 3
+
+# "No more than 100 concurrent requests are allowed. This limit is shared
+# across the REST API and GraphQL API." GitHub publishes no other limit on
+# requests at once, git fetches included.
+# https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api
+github.com 100
+
+# The Hub publishes a number of requests per 5 minutes, not a number at
+# once: 3,000 file downloads (its "Resolvers") per IP address without an
+# account. The number below is not derived from it; a download the Hub
+# refuses with 429 (too many requests) is tried again later (retry.py).
+# https://huggingface.co/docs/hub/rate-limits
+huggingface.co 4
+
+# Every other site: a few at once.
+default 2

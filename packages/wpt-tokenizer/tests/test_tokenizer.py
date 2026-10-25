@@ -1,3 +1,5 @@
+from concurrent.futures import ThreadPoolExecutor
+
 from wpt_tokenizer import Tokenizer
 
 DOCUMENTS = [
@@ -32,3 +34,13 @@ def test_end_token_marks_documents_and_decodes_to_nothing():
     tokenizer = Tokenizer.train(DOCUMENTS, vocab_size=556)
     ids = tokenizer.encode(b"one") + [Tokenizer.END] + tokenizer.encode(b"two")
     assert tokenizer.decode(ids) == b"onetwo"
+
+
+def test_threads_encoding_at_once_give_what_one_thread_gives():
+    # the build encodes documents on several threads, each with its own cache;
+    # a dataset's tokens must not depend on how many ran at once
+    tokenizer = Tokenizer.train(DOCUMENTS, vocab_size=576)
+    texts = [document * (i + 1) for i, document in enumerate(DOCUMENTS * 20)]
+    alone = [Tokenizer.train(DOCUMENTS, vocab_size=576).encode(text) for text in texts]  # a fresh cache each
+    with ThreadPoolExecutor(8) as pool:
+        assert list(pool.map(tokenizer.encode, texts)) == alone

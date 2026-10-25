@@ -1,18 +1,27 @@
 """From a source description to its final tree of documents.
 
-    download (address, else each mirror) -> upstream tree, checked against `checksum`
-                                            (an "empty" source has no files and downloads nothing;
-                                            a "huggingface" source is a dataset pinned to a commit,
-                                            see huggingface.py; a source with `addresses` downloads
-                                            each into its own folder of the tree;
-                                            an address whose robots.txt forbids it, or cannot be
-                                            read, is skipped for the next mirror, see robots.py)
+    upstream tree (in the store)          -> put there by the download step (download.py), which
+                                             fetches it (fetch: an "empty" source has no files
+                                             and downloads nothing; a "huggingface" source is a
+                                             dataset pinned to a commit, see huggingface.py; a
+                                             source with `addresses` downloads each into its own
+                                             folder of the tree; an address whose robots.txt
+                                             forbids it, or cannot be read, is skipped for the
+                                             next mirror, see robots.py) and checks it against
+                                             `checksum`
     erasure cuts, in the order listed     -> each checked by sha256_after
     patches, in file-name order           -> applied with `git apply`
 
-Every result is stored under the fingerprint of what produced it, so a step
-that already ran is a lookup: nothing is downloaded or applied twice, and
-changing one patch rebuilds only that source.
+Nothing here downloads a source: a source whose upstream tree is not in
+the store is NotDownloaded. Every result is stored under the fingerprint
+of what produced it, so a step that already ran is a lookup: nothing is
+applied twice, and changing one patch rebuilds only that source.
+
+The store names an upstream tree by its checksum: the ref
+upstream/<checksum> points at its manifest, and upstream-files/<checksum>
+at its file list (wpt_store.sessions), which says where each downloaded
+file lies in its session's bundles. A tree downloaded before bundles has
+no file list: its files are store objects.
 """
 
 import contextlib
@@ -25,21 +34,22 @@ import shutil
 import subprocess
 import tempfile
 import urllib.error
-import urllib.request
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
+from wpt_store import parse_file_list
 from wpt_telemetry import Telemetry, set_ref
 from wpt_utils.programs import program
 
-from . import encoding, huggingface, manifest, records, retry, robots
-from .errors import (ChecksumMismatch, CrawlForbidden, CutFailed, FetchFailed, LicenseMapError, NotText, PatchFailed,
+from . import archives, encoding, huggingface, manifest, records, retry, robots
+from .errors import (ChecksumMismatch, CutFailed, FetchFailed, LicenseMapError, NotDownloaded, NotText, PatchFailed,
                      UnsupportedEntry)
 from .manifest import FILE, SYMLINK, Entry, Extractor, glob_match_any
 from .repo import Patch, Source
 
 VERSION = importlib.metadata.version("wpt-dataset")
 USER_AGENT = f"wpt-dataset/{VERSION} (+https://github.com/Workers-Intelligence-Commons/wpt-llm)"
+UPSTREAM, UPSTREAM_FILES = "upstream", "upstream-files"  # the kinds of the refs naming an upstream tree by its checksum
 
 
 def fingerprint(inputs) -> str:
@@ -48,37 +58,35 @@ def fingerprint(inputs) -> str:
 
 # -- upstream -----------------------------------------------------------------
 
-def upstream_tree(source: Source, store, telemetry=None) -> dict[str, Entry]:
-    """The source's upstream tree, fetched once and kept under the ref
-    upstream/<checksum>; with a telemetry, the ref is recorded before it is
-    set (wpt_telemetry.set_ref)."""
-    expected = source.data["checksum"]
-    known = store.get_ref("upstream", expected.removeprefix("sha256:"))
-    if known:
-        return manifest.parse_manifest(store.get_bytes(known))
-    addresses = [source.data["address"]] + [m["address"] for m in source.data.get("mirrors", [])]
-    unreachable, forbidden, mismatched = [], [], []
-    for address in addresses:
-        try:
-            tree = _fetch(source.data, address, store)
-        except CrawlForbidden as error:  # that site's wish only; another site may allow it
-            forbidden.append(str(error))
-            continue
-        except FetchFailed as error:  # names the address that failed (_fetch)
-            unreachable.append(str(error))
-            continue
-        actual = manifest.checksum(tree)
-        if actual == expected:
-            set_ref(store, "upstream", expected.removeprefix("sha256:"), store.put_bytes(manifest.manifest_bytes(tree)),
-                    telemetry or Telemetry.off())
-            return tree
-        mismatched.append(f"{address}: {actual}")
-    others = "".join(f"; refused {f}" for f in forbidden) + "".join(f"; unreachable {u}" for u in unreachable)
-    if mismatched:
-        raise ChecksumMismatch(f"{source.id}: expected {expected}, got " + "; ".join(mismatched) + others)
-    if forbidden:
-        raise CrawlForbidden(f"{source.id}: every address failed{others}")
-    raise FetchFailed(f"{source.id}: " + "; ".join(unreachable))
+def upstream_tree(source: Source, store) -> dict[str, Entry]:
+    """The source's upstream tree as the store holds it, each downloaded
+    file placed in its bundle. An empty source's is empty, and needs no
+    download. NotDownloaded when the store does not hold it."""
+    if source.data["type"] == "empty":
+        if manifest.checksum({}) != source.data["checksum"]:
+            raise ChecksumMismatch(f"{source.id}: expected {source.data['checksum']}, got {manifest.checksum({})}")
+        return {}
+    tree = stored_upstream(source.data["checksum"], store)
+    if tree is None:
+        raise NotDownloaded(f"{source.id}: its upstream files are not in {store}; `wpt-dataset download {source.id}` "
+                            f"fetches them")
+    return tree
+
+
+def stored_upstream(checksum: str, store) -> dict[str, Entry] | None:
+    """The upstream tree the store holds under a checksum, each downloaded
+    file placed in its bundle, or None."""
+    known = store.get_ref(UPSTREAM, checksum.removeprefix("sha256:"))
+    if not known:
+        return None
+    return manifest.placed_tree(manifest.parse_manifest(store.get_bytes(known)), stored_files(checksum, store))
+
+
+def stored_files(checksum: str, store) -> dict:
+    """The file list (wpt_store.parse_file_list) of the upstream tree the
+    store holds under a checksum; {} for one downloaded before bundles."""
+    listed = store.get_ref(UPSTREAM_FILES, checksum.removeprefix("sha256:"))
+    return parse_file_list(store.get_bytes(listed)) if listed else {}
 
 
 UNREACHABLE = (OSError, urllib.error.URLError, subprocess.CalledProcessError)  # what a failed download raises
@@ -90,104 +98,51 @@ def _reason(error) -> str:
     return str(error)
 
 
-def compute_upstream(data: dict, address: str, store) -> dict[str, Entry]:
-    """The upstream tree of a description, without checking its checksum
-    (used to fill in `checksum` for a new source). For a huggingface source
-    it comes from the Hub's listing, and large files are not downloaded,
-    except the archives the dataset holds, which are downloaded and
-    unpacked since their members are the source's files: the tree is only
-    good for its manifest."""
-    return _fetch(data, address, store, listing_only=True)
-
-
-def fill_checksum(source: Source, store, telemetry=None) -> tuple[dict, dict[str, str]]:
-    """For a draft source (checksum all zeros): (its description with the
-    checksum filled in, {path: why} of the files it now excludes). One
-    fetch of the main address (of each of the source's `addresses`) gives
-    the upstream tree; every file of the
-    final tree that is not text, as source_tree finds them (encoding.py),
-    is excluded by its exact path (exact_pattern), and the tree is read again from what that fetch
-    downloaded, since an exclusion also changes the history files. The tree
-    is kept under upstream/<checksum> as upstream_tree keeps it, so checking
-    the source fetches nothing more. A huggingface source's checksum comes
-    from the Hub's listing (compute_upstream) and nothing is excluded, and
-    no upstream ref is set: its check downloads it, as before. A dataset
-    that holds archives has them downloaded and unpacked here too (their
-    members are its files), and the check downloads them again."""
-    data = json.loads(json.dumps(source.data))
-    address = data["address"]
-    with tempfile.TemporaryDirectory(prefix="wpt-fetch-") as tmp:
-        try:
-            tree = _fetch(data, address, store, listing_only=True, tmp=Path(tmp))
-        except FetchFailed as error:
-            raise FetchFailed(f"{source.id}: {error}") from error
-        if data["type"] == "huggingface":
-            data["checksum"] = manifest.checksum(tree)
-            return data, {}
-        try:
-            final = apply_patches(source.id, apply_cuts(source.id, tree, data.get("cuts", []), store), source.patches,
-                                  store)
-        except (CutFailed, PatchFailed):
-            final = {}  # the check names that failure, before any text is read
-        found = not_text(source, final, store)
-        if made := [path for path in found if path not in tree]:
-            raise NotText(f"{source.id}: {found[made[0]]} and comes from a patch, not upstream; "
-                          f"extract cannot leave it out")
-        if found:
-            data.setdefault("extract", {}).setdefault("exclude", []).extend(map(exact_pattern, found))
-            tree = _fetch(data, address, store, tmp=Path(tmp), again=True)
-    data["checksum"] = manifest.checksum(tree)
-    set_ref(store, "upstream", data["checksum"].removeprefix("sha256:"), store.put_bytes(manifest.manifest_bytes(tree)),
-            telemetry or Telemetry.off())
-    return data, found
-
-
 def exact_pattern(path: str) -> str:
     """An extract pattern matching only that path: each `*`, `?` and `[`
     written as a class of that one letter."""
     return manifest.WILDCARD.sub(lambda letter: f"[{letter[0]}]", path)
 
 
-def _fetch(data: dict, address: str, store, listing_only=False, tmp: Path | None = None, again=False) \
-        -> dict[str, Entry]:
-    """The upstream tree, downloaded into tmp (default: a temporary folder
-    of its own). again: tmp holds what an earlier call downloaded, and it
-    is read from there, with no robots.txt or download (a git source still
-    asks for any object it needs and lacks). A source with `addresses`
-    fetches each into its own folder of the one tree, and into its own
-    folder of tmp. A download that
-    fails raises FetchFailed, naming the address it was for."""
-    if tmp is None:
-        with tempfile.TemporaryDirectory(prefix="wpt-fetch-") as folder:
-            return _fetch(data, address, store, listing_only, Path(folder))
+def fetch(data: dict, address: str, store, tmp: Path, again=False) -> dict[str, Entry]:
+    """The upstream tree at one address, without checking its checksum:
+    downloaded into tmp, each kept file's content put into store (what a
+    download stores into: manifest.Extractor). An http-archive source's
+    archive is read while it downloads (archives.py). again: a git source
+    is read from the repositories tmp holds already, with no robots.txt,
+    asking only for any object it needs and lacks. A source with
+    `addresses` fetches each into its own folder of the one tree, and
+    into its own folder of tmp. A download
+    that fails raises FetchFailed, naming the address it was for."""
     extractor = Extractor(store, data.get("extract", {}))
     parts = [(p["folder"], p["address"]) for p in data["addresses"]] if "addresses" in data else [("", address)]
     for folder, part_address in parts:
         (tmp / folder).mkdir(exist_ok=True)
         try:
-            _fetch_into(data, part_address, extractor.within(folder), tmp / folder, listing_only, again)
+            _fetch_into(data, part_address, extractor.within(folder), tmp / folder, again)
         except UNREACHABLE as error:  # of several addresses, the one that failed is named here
             raise FetchFailed(f"{part_address}: {_reason(error)}") from error
     return extractor.finish()
 
 
-def _fetch_into(data: dict, address: str, extractor: Extractor, tmp: Path, listing_only: bool, again: bool):
-    """Add what one address holds to the extractor's tree (see _fetch)."""
+def _fetch_into(data: dict, address: str, extractor: Extractor, tmp: Path, again: bool):
+    """Add what one address holds to the extractor's tree (see fetch)."""
     kind, revision = data["type"], data["revision"]
-    if kind != "empty" and not again:
+    if kind != "empty" and not (again and kind == "git"):
         robots.check(address, kind, USER_AGENT)  # before anything is downloaded
     if kind == "http-file":
         name = data.get("extract", {}).get("name") or unquote(urlparse(address).path.rsplit("/", 1)[-1])
         if not name:
             raise OSError(f"{address}: no file name in the address; set extract.name")
-        download = tmp / "download" if again else _download(address, tmp / "download")
-        extractor.add(name, FILE, download.read_bytes())
+        download = _download(address, tmp / "download")
+        if (path := extractor.kept(name)) is not None:
+            extractor.add_file(path, FILE, download)  # never read into memory: a file may hold gigabytes
     elif kind == "http-archive":
-        manifest.read_archive(tmp / "download" if again else _download(address, tmp / "download"), extractor)
+        archives.read(address, extractor, tmp, USER_AGENT)
     elif kind == "git":
         _read_git_source(data, address, tmp, extractor, again)
     elif kind == "huggingface":
-        huggingface.read(address, revision, extractor, tmp, USER_AGENT, listing_only)
+        huggingface.read(address, revision, extractor, tmp, USER_AGENT)
     elif kind == "mercurial":
         hg = program("hg")
 
@@ -196,8 +151,7 @@ def _fetch_into(data: dict, address: str, extractor: Extractor, tmp: Path, listi
             subprocess.run([hg, "clone", "-q", "-U", "-r", revision, address, str(tmp / "repo")],
                            capture_output=True, check=True)
 
-        if not again:
-            retry.call(clone, address)
+        retry.call(clone, address)
         manifest.read_mercurial(tmp / "repo", revision, extractor)
     elif kind == "empty":
         pass  # its patches hold every file
@@ -206,12 +160,8 @@ def _fetch_into(data: dict, address: str, extractor: Extractor, tmp: Path, listi
 
 
 def _download(address: str, target: Path) -> Path:
-    if urlparse(address).scheme not in ("http", "https"):
-        raise OSError(f"{address}: http sources need an http:// or https:// address")
-    request = urllib.request.Request(address, headers={"User-Agent": USER_AGENT})
-
     def download():
-        with urllib.request.urlopen(request, timeout=120) as response, open(target, "wb") as out:
+        with archives.get(address, USER_AGENT) as response, open(target, "wb") as out:
             while block := response.read(1 << 20):
                 out.write(block)
 
@@ -223,7 +173,7 @@ def _read_git_source(data: dict, address: str, tmp: Path, extractor: Extractor, 
     """The commit, its history when asked, and each kept submodule at the
     commit it pins, from the address `submodules` lists for it, recursively.
     Only the contents of kept files are downloaded. again: each repository
-    is in tmp already (_fetch)."""
+    is in tmp already (fetch)."""
     since = data["history"]["since"] if data.get("history") else None
     listed, found = data.get("submodules", {}), set()
     pending = [("", address, data["revision"], since)]
@@ -293,7 +243,7 @@ def apply_cuts(source_id: str, tree: dict[str, Entry], cuts: list[dict], store) 
         entry = tree.get(path)
         if entry is None or entry.mode == SYMLINK:
             raise CutFailed(f"{source_id}: cut on {path}: no such file")
-        content = store.get_bytes(entry.sha256)
+        content = manifest.content(store, entry)
         if not 0 <= cut["start"] < cut["end"] <= len(content):
             raise CutFailed(f"{source_id}: cut on {path}: range {cut['start']}-{cut['end']} outside {len(content)} bytes")
         after = content[:cut["start"]] + content[cut["end"]:]
@@ -308,12 +258,13 @@ def apply_patches(source_id: str, tree: dict[str, Entry], patches: list[Patch], 
     no files are written out, so modes and symlinks behave the same on every
     operating system. The paths git's index refuses (any .git/ path, such
     as a history's files) are set aside and come back exactly as they
-    were; a patch that names one fails, as git refuses it."""
+    were; a patch that names one fails, as git refuses it. A file the
+    patches leave as it was keeps its entry, and so where it lies."""
     if not patches:
         return tree
     with tempfile.TemporaryDirectory(prefix="wpt-patch-") as tmp:
         git, env = temporary_git(tmp)
-        load_index(git, tree, store)
+        loaded = load_index(git, tree, store)
         held = {path for path, _, _ in _index(git)}
         aside = {path: entry for path, entry in tree.items() if path not in held}
         for patch in patches:
@@ -322,9 +273,12 @@ def apply_patches(source_id: str, tree: dict[str, Entry], patches: list[Patch], 
             except subprocess.CalledProcessError as error:
                 raise PatchFailed(f"{source_id}: {patch.name}: {error.stderr.decode(errors='replace').strip()}") from error
         records = _index(git)
-        with contextlib.closing(manifest._git_blobs(env["GIT_DIR"], [r[2] for r in records])) as contents:
-            patched = {path: Entry(mode, store.put_bytes(content)) for (path, mode, _), content in zip(records, contents)}
-    patched = aside | patched
+        patched = {path: tree[path] for path, mode, object_id in records
+                   if loaded.get(path) == object_id and tree[path].mode == mode}
+        changed = [record for record in records if record[0] not in patched]
+        with contextlib.closing(manifest._git_blobs(env["GIT_DIR"], [r[2] for r in changed])) as contents:
+            patched |= {path: Entry(mode, store.put_bytes(content)) for (path, mode, _), content in zip(changed, contents)}
+    patched = aside | dict(sorted(patched.items()))
     manifest.check_paths(patched)
     return patched
 
@@ -353,18 +307,20 @@ def temporary_git(tmp):
     return git, env
 
 
-def load_index(git, tree: dict[str, Entry], store):
+def load_index(git, tree: dict[str, Entry], store) -> dict[str, str]:
     """Make the temporary index hold this tree minus the paths git refuses:
     git silently drops any .git/ path (such as a history's files), so a
-    caller that needs those must handle them itself."""
+    caller that needs those must handle them itself. Returns {path: git
+    object id} of the tree's files."""
     git("read-tree", "--empty")
     paths = sorted(tree)
     if not paths:
-        return
+        return {}
     objects = git("hash-object", "-w", "--no-filters", "--stdin-paths",
-                  input="".join(f"{store.path(tree[p].sha256)}\n" for p in paths).encode()).decode().split()
+                  input="".join(f"{manifest.local_file(store, tree[p])}\n" for p in paths).encode()).decode().split()
     git("update-index", "-z", "--index-info",
         input=b"".join(f"{tree[p].mode} {o}\t{p}".encode() + b"\0" for p, o in zip(paths, objects)))
+    return dict(zip(paths, objects))
 
 
 # -- the final tree -------------------------------------------------------------
@@ -384,14 +340,18 @@ def tree_key(source: Source) -> str:
 
 
 def source_tree(source: Source, store, telemetry=None) -> tuple[dict[str, Entry], str]:
-    """The source's final tree and the sha256 of its manifest object. With
-    a telemetry, every ref it sets is recorded first (wpt_telemetry.set_ref)."""
+    """The source's final tree and the sha256 of its manifest object, each
+    file its patches left as it was placed where the download put it.
+    NotDownloaded when the store does not hold its upstream files. With a
+    telemetry, every ref it sets is recorded first (wpt_telemetry.set_ref)."""
     key = tree_key(source)
     known = store.get_ref("source-trees", key)
     if known:
         tree = manifest.parse_manifest(store.get_bytes(known))
+        if source.data["type"] != "empty":
+            tree = manifest.placed_tree(tree, stored_files(source.data["checksum"], store))
     else:
-        tree = upstream_tree(source, store, telemetry)
+        tree = upstream_tree(source, store)
         tree = apply_cuts(source.id, tree, source.data.get("cuts", []), store)
         tree = apply_patches(source.id, tree, source.patches, store)
         if found := not_text(source, tree, store, first=True):
@@ -411,7 +371,7 @@ def not_text(source: Source, tree: dict[str, Entry], store, first=False) -> dict
     for path, entry in tree.items():
         if entry.mode != SYMLINK and not is_records(source, path) and not is_message_tree(source, path):
             try:
-                encoding.decode(store.get_bytes(entry.sha256), encoding.entry_of(source, path), path)
+                encoding.decode(manifest.content(store, entry), encoding.entry_of(source, path), path)
             except NotText as error:
                 found[path] = str(error)
                 if first:
@@ -483,6 +443,7 @@ def held_out_group(source: Source, path: str) -> str | None:
 
 
 def in_store(source: Source, store) -> bool:
-    """Whether the store holds the source's upstream files, so reading its
-    tree downloads nothing."""
-    return store.get_ref("upstream", source.data["checksum"].removeprefix("sha256:")) is not None
+    """Whether the store holds the source's upstream files, so its tree
+    can be read."""
+    return source.data["type"] == "empty" or store.get_ref(UPSTREAM, source.data["checksum"].removeprefix("sha256:")) \
+        is not None

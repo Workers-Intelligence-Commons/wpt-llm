@@ -57,13 +57,12 @@ function Start({ sourceDrafter, onStarted }: { sourceDrafter: SourceDrafter; onS
   const [by, setBy] = useState(remembered);
   const [only, setOnly] = useState("");
   const [again, setAgain] = useState(false);
-  const [processes, setProcesses] = useState(1);
   const [problems, setProblems] = useState<string[]>([]);
   const [message, setMessage] = useState("");
   const start = async () => {
     try { localStorage.setItem(NAME_KEY, by); } catch { /* a browser that keeps nothing */ }
     const a = await post<{ started_by: string }>(`/api/source-drafters/${part(sourceDrafter.name)}/runs`, {
-      by, settings, only: only.split(/\s+/).filter(Boolean), again, processes,
+      by, settings, only: only.split(/\s+/).filter(Boolean), again,
     });
     setProblems(a.ok ? [] : a.problems);
     setMessage(a.ok ? `Started (${a.data.started_by}).` : "Not started.");
@@ -80,9 +79,6 @@ function Start({ sourceDrafter, onStarted }: { sourceDrafter: SourceDrafter; onS
           </label>
         ))}
         <label className="inline">Drafted by <input value={by} required onChange={(e) => setBy(e.target.value)} /></label>
-        <label className="inline">Processes{" "}
-          <input type="number" min={1} value={processes} onChange={(e) => setProcesses(Math.max(1, Number(e.target.value)))} />
-        </label>
         <label className="inline"><input type="checkbox" checked={again} onChange={(e) => setAgain(e.target.checked)} /> again, even those done before</label>
       </div>
       <textarea rows={2} value={only} aria-label="only these candidates" placeholder="only these candidates, by name or source id (empty: every one)"

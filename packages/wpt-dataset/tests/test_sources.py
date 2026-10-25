@@ -11,21 +11,21 @@ from pathlib import Path
 import pytest
 
 from wpt_dataset import manifest
-from wpt_dataset.errors import (BadPath, ChecksumMismatch, CrawlForbidden, CutFailed, FetchFailed, LicenseMapError, NotText, PatchFailed,
-                                UnsupportedEntry)
+from wpt_dataset.errors import (BadPath, ChecksumMismatch, CrawlForbidden, CutFailed, FetchFailed, LicenseMapError,
+                                NotDownloaded, NotText, PatchFailed, UnsupportedEntry)
 from protego import Protego
 
 from wpt_dataset import huggingface, robots
-from wpt_dataset.sources import compute_upstream, source_tree
+from wpt_dataset.sources import source_tree
 
 
 def test_git_mercurial_and_tar_of_one_project_give_one_checksum(kit, repo, store, git_upstream, hg_upstream, http_folder):
     # mirrors of different kinds can back each other up only if their manifests agree
     folder, base = http_folder
     (folder / "project-1.0.tar.gz").write_bytes(kit.tar_bytes())
-    git_tree = compute_upstream({"type": "git", "revision": git_upstream[1]}, git_upstream[0], store)
-    hg_tree = compute_upstream({"type": "mercurial", "revision": hg_upstream[1]}, hg_upstream[0], store)
-    tar_tree = compute_upstream({"type": "http-archive", "revision": "2026-10-14", "extract": {"strip": 1}},
+    git_tree = kit.upstream({"type": "git", "revision": git_upstream[1]}, git_upstream[0], store)
+    hg_tree = kit.upstream({"type": "mercurial", "revision": hg_upstream[1]}, hg_upstream[0], store)
+    tar_tree = kit.upstream({"type": "http-archive", "revision": "2026-10-14", "extract": {"strip": 1}},
                                 f"{base}/project-1.0.tar.gz", store)
 
     assert manifest.checksum(git_tree) == manifest.checksum(hg_tree) == manifest.checksum(tar_tree)
@@ -43,24 +43,34 @@ def test_git_mercurial_and_tar_of_one_project_give_one_checksum(kit, repo, store
 def test_a_mirror_is_used_when_the_main_address_is_down(kit, repo, store, http_folder):
     folder, base = http_folder
     (folder / "book.txt").write_bytes(b"a public domain book\n")
-    sid = kit.add_source(repo, store, "example", "book", {
-        "type": "http-file", "address": f"{base}/book.txt", "revision": "2026-10-14"})
-    source = repo.source(sid)
-    source.data["address"] = f"{base}/gone.txt"
-    source.data["mirrors"] = [{"address": f"{base}/book.txt"}]
+    data = {"type": "http-file", "address": f"{base}/gone.txt", "revision": "2026-10-14",
+            "extract": {"name": "book.txt"}, "mirrors": [{"address": f"{base}/book.txt"}]}
+    checksum = manifest.checksum(kit.upstream(data, f"{base}/book.txt", store))
+    sid = kit.add_source(repo, store, "example", "book", {**data, "checksum": checksum}, compute_checksum=False,
+                         fetch=True)
 
-    tree, _ = source_tree(source, store)
+    tree, _ = source_tree(repo.source(sid), store)
     assert list(tree) == ["book.txt"]
+    with store.database() as found:  # the main address failed, then the mirror gave it
+        assert found.execute("SELECT address, outcome FROM lines").fetchall() == [
+            (f"{base}/gone.txt", "failed"), (f"{base}/book.txt", "downloaded")]
 
 
-def test_checksum_mismatch_is_refused(kit, repo, store, http_folder):
+def test_checksum_mismatch_is_refused_and_nothing_of_it_is_kept(kit, repo, store, http_folder):
     folder, base = http_folder
     (folder / "book.txt").write_bytes(b"version one\n")
     sid = kit.add_source(repo, store, "example", "book", {
-        "type": "http-file", "address": f"{base}/book.txt", "revision": "2026-10-14"})
+        "type": "http-file", "address": f"{base}/book.txt", "revision": "2026-10-14"}, fetch=False)
     (folder / "book.txt").write_bytes(b"upstream changed it\n")
     with pytest.raises(ChecksumMismatch):
+        kit.download(repo, store, sid)
+
+    with pytest.raises(NotDownloaded):
         source_tree(repo.source(sid), store)
+    # only the failure is recorded, with the checksum upstream gives now
+    changed = manifest.checksum(kit.upstream(repo.source(sid).data, f"{base}/book.txt", store))
+    with store.database() as found:
+        assert found.execute("SELECT source, outcome, checksum FROM lines").fetchall() == [(sid, "failed", changed)]
 
 
 def offer_partial_fetches(folder):
@@ -78,11 +88,11 @@ def test_a_git_source_never_downloads_the_content_of_an_excluded_file(kit, store
     blob = kit.run("git", "rev-parse", f"{commit}:video.bin", cwd=address).decode().strip()
     (Path(address) / ".git" / "objects" / blob[:2] / blob[2:]).unlink()
 
-    tree = compute_upstream({"type": "git", "revision": commit, "extract": {"exclude": ["video.bin"]}}, address, store)
+    tree = kit.upstream({"type": "git", "revision": commit, "extract": {"exclude": ["video.bin"]}}, address, store)
 
     without, without_commit = kit.git_project(tmp_path / "without")  # the same project without that file
     assert manifest.checksum(tree) == manifest.checksum(
-        compute_upstream({"type": "git", "revision": without_commit}, without, store))
+        kit.upstream({"type": "git", "revision": without_commit}, without, store))
 
 
 def test_a_kept_submodule_gives_its_files_under_its_folder_and_an_excluded_one_is_skipped(kit, store, tmp_path):
@@ -97,12 +107,12 @@ def test_a_kept_submodule_gives_its_files_under_its_folder_and_an_excluded_one_i
     commit = kit.run("git", "rev-parse", "HEAD", cwd=parent).decode().strip()
     data = {"type": "git", "revision": commit, "extract": {"exclude": ["vendor/unknown"]}}
 
-    tree = compute_upstream({**data, "submodules": {"vendor/lib": library}}, parent, store)
+    tree = kit.upstream({**data, "submodules": {"vendor/lib": library}}, parent, store)
 
     assert sorted(tree) == ["main.py", "vendor/lib/lib.py"]
     assert tree["vendor/lib/lib.py"].sha256 == hashlib.sha256(b"x = 1\n").hexdigest()
     with pytest.raises(UnsupportedEntry, match="vendor/lib: a submodule with no address"):
-        compute_upstream(data, parent, store)
+        kit.upstream(data, parent, store)
 
 
 def test_cuts_then_patches_produce_the_final_tree(kit, repo, store, git_upstream):
@@ -132,7 +142,7 @@ def test_cuts_then_patches_produce_the_final_tree(kit, repo, store, git_upstream
     }, patches=[patch])
 
     tree, _ = source_tree(repo.source(sid), store)
-    assert store.get_bytes(tree["README.md"].sha256) == b"the cat sat on the mat.\n"
+    assert manifest.content(store, tree["README.md"]) == b"the cat sat on the mat.\n"
     assert "docs/guide.txt" not in tree
     assert tree["run.sh"].mode == manifest.FILE
     assert tree["latest.txt"].mode == manifest.SYMLINK  # untouched entries keep their mode
@@ -190,7 +200,7 @@ def test_paths_differing_only_by_case_are_refused(kit, store, http_folder):
             archive.addfile(info, io.BytesIO(b"x"))
     (folder / "case.tar").write_bytes(buffer.getvalue())
     with pytest.raises(BadPath):
-        compute_upstream({"type": "http-archive", "revision": "2026-10-14"}, f"{base}/case.tar", store)
+        kit.upstream({"type": "http-archive", "revision": "2026-10-14"}, f"{base}/case.tar", store)
 
 
 def test_a_robots_txt_refusal_skips_that_address_and_the_next_mirror_is_tried(kit, repo, store, http_folder):
@@ -202,21 +212,22 @@ def test_a_robots_txt_refusal_skips_that_address_and_the_next_mirror_is_tried(ki
         (folder / name).write_bytes(b"a short story\n")
     (folder / "robots.txt").write_text("User-agent: GPTBot\nDisallow: /book.txt\n")
     data = {"type": "http-file", "address": f"{base}/book.txt", "revision": "2026-10-14"}
-    checksum = manifest.checksum(compute_upstream(data, f"{base}/copy/book.txt", store))
+    checksum = manifest.checksum(kit.upstream(data, f"{base}/copy/book.txt", store))
     with pytest.raises(CrawlForbidden, match="forbids .*book.txt to GPTBot"):
-        compute_upstream(data, data["address"], store)
+        kit.upstream(data, data["address"], store)
 
     alone = kit.add_source(repo, store, "example", "alone", {**data, "checksum": checksum}, compute_checksum=False)
     with pytest.raises(CrawlForbidden, match="every address failed; refused .*GPTBot"):
-        source_tree(repo.source(alone), store)
+        kit.download(repo, store, alone)
 
     mirrored = kit.add_source(repo, store, "example", "mirrored", {
-        **data, "checksum": checksum, "mirrors": [{"address": f"{base}/copy/book.txt"}]}, compute_checksum=False)
+        **data, "checksum": checksum, "mirrors": [{"address": f"{base}/copy/book.txt"}]}, compute_checksum=False,
+        fetch=True)
     assert set(source_tree(repo.source(mirrored), store)[0]) == {"book.txt"}
 
     # refusing only assistants that fetch for a person is not a refusal of training
     (folder / "robots.txt").write_text("User-agent: Claude-User\nDisallow: /\n")
-    assert set(compute_upstream(data, data["address"], store)) == {"book.txt"}
+    assert set(kit.upstream(data, data["address"], store)) == {"book.txt"}
 
 
 def test_robots_txt_is_asked_without_the_user_name_of_the_address(monkeypatch):
@@ -254,7 +265,7 @@ def test_a_cache_reads_each_robots_txt_once_and_its_rules_still_apply(monkeypatc
 
 
 @pytest.mark.parametrize("answer, usable",[(410, True), (403, False), (429, False)])
-def test_only_a_missing_robots_txt_means_no_rules(answer, usable, store):
+def test_only_a_missing_robots_txt_means_no_rules(kit, answer, usable, store):
     # 404 and 410 say the site has no policy; any other answer leaves its policy unknown
     class Handler(http.server.BaseHTTPRequestHandler):
         def do_GET(self):
@@ -274,15 +285,15 @@ def test_only_a_missing_robots_txt_means_no_rules(answer, usable, store):
         address = f"http://127.0.0.1:{server.server_address[1]}/book.txt"
         data = {"type": "http-file", "revision": "2026-10-14"}
         if usable:
-            assert set(compute_upstream(data, address, store)) == {"book.txt"}
+            assert set(kit.upstream(data, address, store)) == {"book.txt"}
         else:
             with pytest.raises(FetchFailed, match=f"answered {answer}"):
-                compute_upstream(data, address, store)
+                kit.upstream(data, address, store)
     finally:
         server.shutdown()
 
 
-def test_a_download_failing_for_a_passing_reason_is_tried_again(store):
+def test_a_download_failing_for_a_passing_reason_is_tried_again(kit, store):
     # a busy server must not fail a fetch of thousands of sources, while a file
     # that is not there is reported at once: asking again gives the same answer
     asked = {}
@@ -308,10 +319,10 @@ def test_a_download_failing_for_a_passing_reason_is_tried_again(store):
     threading.Thread(target=server.serve_forever, daemon=True).start()
     try:
         base, data = f"http://127.0.0.1:{server.server_address[1]}", {"type": "http-file", "revision": "2026-10-16"}
-        tree = compute_upstream(data, f"{base}/book.txt", store)
+        tree = kit.upstream(data, f"{base}/book.txt", store)
         assert store.get_bytes(tree["book.txt"].sha256) == b"a short story\n" and asked["/book.txt"] == 3
         with pytest.raises(FetchFailed, match="gone.txt: HTTP Error 404"):
-            compute_upstream(data, f"{base}/gone.txt", store)
+            kit.upstream(data, f"{base}/gone.txt", store)
         assert asked["/gone.txt"] == 1
     finally:
         server.shutdown()
@@ -342,11 +353,11 @@ def test_each_of_several_addresses_fills_its_own_folder_of_one_tree(kit, repo, s
     tree, _ = source_tree(repo.source(sid), store)
 
     assert sorted(tree) == ["fulltext/9200396/issue-1.txt", "metadata/issue-1.txt"]
-    assert store.get_bytes(tree["metadata/issue-1.txt"].sha256) == b"its metadata\n"
+    assert manifest.content(store, tree["metadata/issue-1.txt"]) == b"its metadata\n"
     assert repo.check_source(sid) == []
 
 
-def test_a_failed_download_names_the_address_it_was_for(store, http_folder):
+def test_a_failed_download_names_the_address_it_was_for(kit, store, http_folder):
     folder, base = http_folder
     (folder / "fulltext.zip").write_bytes(zip_bytes({"issue-1.txt": b"the issue\n"}))
     data = {"type": "http-archive", "address": f"{base}/fulltext.zip", "revision": "2026-10-23",
@@ -354,7 +365,7 @@ def test_a_failed_download_names_the_address_it_was_for(store, http_folder):
                           {"folder": "metadata", "address": f"{base}/metadata.zip"}]}
 
     with pytest.raises(FetchFailed) as raised:
-        compute_upstream(data, data["address"], store)
+        kit.upstream(data, data["address"], store)
 
     assert str(raised.value).startswith(f"{base}/metadata.zip: ")
 
@@ -396,8 +407,8 @@ def test_a_dataset_s_archives_are_unpacked_into_its_files(kit, repo, store, monk
     sid = kit.add_source(repo, store, "example", "scans", {
         "type": "huggingface", "address": HUB, "revision": "a" * 40, "extract": {"exclude": ["paper_193[1-9].tar.gz"]}})
 
-    tree, _ = source_tree(repo.source(sid), store)  # downloads again, checked against the manifest's checksum
+    tree, _ = source_tree(repo.source(sid), store)  # as the download kept it, checked against its checksum
 
     assert sorted(tree) == ["README.md", *scans]
-    assert {path: store.get_bytes(tree[path].sha256) for path in scans} == scans
+    assert {path: manifest.content(store, tree[path]) for path in scans} == scans
     assert "paper_1931.tar.gz" not in downloaded

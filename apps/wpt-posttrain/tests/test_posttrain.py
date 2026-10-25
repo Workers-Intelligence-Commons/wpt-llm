@@ -13,10 +13,8 @@ import wpt_agent
 import wpt_inference
 import wpt_posttrain
 from wpt_agent import images, played
-from wpt_dataset import manifest
 from wpt_dataset.build import is_held_out
 from wpt_dataset.repo import address_hash, dump_json
-from wpt_dataset.sources import compute_upstream
 from wpt_inference import COSTS_FILE, DRAFT, costs_setup, replayed_costs
 from wpt_model import load_drafter, load_model, weight_hashes
 from wpt_eval import main as evaluate
@@ -224,10 +222,11 @@ def test_sft_learns_from_the_sources_tagged_sft_and_credits_them(built, tmp_path
                           "text": "Bo Speaker dedicates these talks to the public domain.\n"}],
             "formats": [{"format": "chat", "paths": ["**"]}], "tags": [{"tags": ["sft"], "paths": ["**"]}],
             "decision": {"decision": "admitted", "by": "T", "date": "2026-10-15"}}
-    data["checksum"] = manifest.checksum(compute_upstream(data, data["address"], built.store))
+    data["checksum"] = built.checksum_of(data)
     sid = f"example-talks-{address_hash(str(upstream))}"
     (root / "data" / "sources" / sid).mkdir()
     (root / "data" / "sources" / sid / "source.json").write_text(dump_json(data))
+    built.download(sid)
 
     main([recipe, str(base), str(tmp_path / "tuned")])
     tuned = tmp_path / "tuned"
@@ -340,10 +339,11 @@ def task_source(built, root, upstream, check='#!/bin/bash\necho "0.$RANDOM"\n') 
                           "text": "Cy Author dedicates these tasks to the public domain.\n"}],
             "formats": [{"format": "task", "paths": ["**"]}], "tags": [{"tags": ["grpo"], "paths": ["**"]}],
             "decision": {"decision": "admitted", "by": "T", "date": "2026-10-17"}}
-    data["checksum"] = manifest.checksum(compute_upstream(data, data["address"], built.store))
+    data["checksum"] = built.checksum_of(data)
     sid = f"example-tasks-{address_hash(str(upstream))}"
     (root / "data" / "sources" / sid).mkdir()
     (root / "data" / "sources" / sid / "source.json").write_text(dump_json(data))
+    built.download(sid)
     return sid
 
 

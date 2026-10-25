@@ -1,10 +1,10 @@
 [project]
 name = "wpt-store"
 version = "0.1.0"
-description = "Content-addressed storage for WPT data (a local folder or an S3-compatible bucket) and its token shard format"
+description = "Content-addressed storage for WPT data (a local folder or an S3-compatible bucket), compressed, with its sessions, bundles and database, and its token shard format"
 license = "AGPL-3.0-or-later"
 requires-python = ">=3.14"
-dependencies = ["wpt-utils", "boto3>=1.40", "pyarrow>=21", "numpy>=2"]  # wpt-utils: the one sha256 of a file; pyarrow, numpy: the token shard format (shards.py)
+dependencies = ["wpt-utils", "boto3>=1.40", "pyarrow>=21", "numpy>=2"]  # wpt-utils: the one sha256 of a file, the file lock, parallel work; pyarrow, numpy: the token shard format (shards.py)
 
 [build-system]
 requires = ["uv_build>=0.13.0,<0.14.0"]

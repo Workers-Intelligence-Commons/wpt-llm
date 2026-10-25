@@ -5,9 +5,30 @@ WPT hosts no data: each machine points the WPT_STORE setting at its own store,
     WPT_STORE=file:///home/me/wpt-store      a local folder
     WPT_STORE=s3://bucket/prefix             an S3-compatible bucket
 
+The prefix picks the store's kind (wpt_store.kinds: Folder, Bucket), which
+supplies five operations on files; everything here is built on them, alike
+for both kinds.
+
 An object is stored under the sha256 of its bytes and checked against it on
 every read. A ref is a small named pointer to an object (for example a build
 fingerprint to its result), so "already done" is a lookup.
+
+Every file a store writes is compressed while it is written, with zstd in
+frames of about 1 MB that a range read takes one by one (wpt_store.blocks),
+and kept so only when that saves space: objects/<first 2 hex>/<sha256>.zst
+then, objects/<first 2 hex>/<sha256> as it is otherwise (Store.keep_smaller
+for objects, Store.keep_compressed for bundles). Which of the two names a
+file is stored under is found once and kept in memory. Large files are compressed several frames
+at once, and sent to S3 several parts at once, as wpt_utils.parallel allows.
+Refs, too small to shrink, and record folders are written as they are.
+
+A session (wpt_store.sessions) stores the files one downloading command
+fetches in its own bundles, and its lines in the store database
+(wpt_store.database), which Store.database() reads. An S3 store keeps a
+local copy of each bundle its sessions stored, in its cache folder,
+cache/bundles/<session>/<number>[.zst], and reads that copy first, unless
+the session streams (Store.session): the copy is then gone once the
+bucket holds the bundle.
 
 A record folder holds files written by name, not by content: a command's
 own account of one run (see wpt_telemetry), records/<folder>/<name>. A file
@@ -19,17 +40,25 @@ money. Lines added by several processes read back in the order they were
 added.
 
 For S3, credentials and a non-AWS endpoint come from boto3's own settings
-(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_ENDPOINT_URL...). Objects read
-from S3 are cached locally after their check.
+(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_ENDPOINT_URL...). A store
+keeps local copies of objects in its cache folder: an S3 store every object
+read as a file, after its check; a local store the compressed ones read as
+a file, which it cannot give in place. release() removes a copy;
+copies_in(folder) is the same store making its new copies in folder, for
+work that keeps none.
 
 Failures: StoreSettingError (no or bad WPT_STORE), MissingObject (no such
-object, ref target or record file), CorruptObject (stored bytes do not match
-their sha256, or a record part is not in the store's format; the copy is not
+object, ref target, bundle or record file), CorruptObject (stored bytes do
+not match their sha256, a compressed file or the store database is not in
+its format, or a record part is not in the store's format; the copy is not
 used), MixedRecord (a whole write to a file added to line by line, or the
 reverse; nothing is written). Writing raises what the folder or the bucket
 raised (OSError, botocore's errors): nothing is known to be stored.
 """
 
+import collections
+import contextlib
+import copy
 import hashlib
 import os
 import re
@@ -37,35 +66,29 @@ import secrets
 import tempfile
 import threading
 import time
+from compression import zstd
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 from wpt_utils.files import sha256_file
+from wpt_utils.parallel import Sizing, in_order
+
+from . import blocks, database
+from .errors import CorruptObject, MissingObject, MixedRecord, StoreError, StoreSettingError
+from .kinds import Absent, Bucket, Folder, atomic_copy, atomic_write, sync_folder
+from .names import NAME, NAME_CHARACTERS, as_record_name, check_record_name, check_ref
+from .sessions import Placed, Session, file_list_bytes, parse_file_list
 
 SHA256 = re.compile(r"[0-9a-f]{64}")
-NAME_CHARACTERS = "A-Za-z0-9._-"  # what a ref or record name may hold, as a regular expression class
-NAME = re.compile(f"[{NAME_CHARACTERS}]+")
 CHUNK = 1 << 20
-
-
-class StoreError(Exception):
-    pass
-
-
-class StoreSettingError(StoreError):
-    pass
-
-
-class MissingObject(StoreError):
-    pass
-
-
-class CorruptObject(StoreError):
-    pass
-
-
-class MixedRecord(StoreError):
-    """A record file is written whole or added to line by line, never both."""
+PACKED = ".zst"  # the end of a key whose file is compressed
+TAIL = 64 << 10  # bytes read at a compressed file's end for its seek table: the whole table up to 8,000 frames
+DOWNLOAD = 64 << 20  # bytes of one file fetched in one request, when a whole file is copied from the store
+DOWNLOAD_MEMORY = 2.5 * DOWNLOAD  # bytes one such request takes: its bytes, decompressed, and written
+FRAMES_KEPT = 64  # decompressed frames kept in memory for range reads (about 64 MB)
+TABLES_KEPT = 1024  # seek tables kept in memory
+KEYS_KEPT = 1 << 16  # keys files were found under (compressed or not) kept in memory
 
 
 WHOLE, APPENDED = "written whole", "added to line by line"  # the two kinds of record file
@@ -76,121 +99,486 @@ def _check_sha(sha):
         raise ValueError(f"not a sha256: {sha!r}")
 
 
-def _check_ref(kind, name):
-    for part in (kind, name):
-        if not NAME.fullmatch(part):
-            raise ValueError(f"ref parts use letters, digits, '.', '_' and '-' only: {part!r}")
-
-
-def check_record_name(part):
-    """ValueError unless part can name a record folder or file: letters,
-    digits, '.', '_' and '-' only, not starting with '.'."""
-    if not NAME.fullmatch(part) or part.startswith("."):
-        raise ValueError(f"record folders and files use letters, digits, '.', '_' and '-' only, "
-                         f"and do not start with '.': {part!r}")
-
-
-def as_record_name(text) -> str:
-    """text made into a part of a record folder or file name that
-    check_record_name accepts: '-' for each character it does not allow,
-    without the leading '.'s, and '-' for nothing left."""
-    return re.sub(f"[^{NAME_CHARACTERS}]", "-", str(text)).lstrip(".") or "-"
-
-
 def _check_record(folder, name=None):
     for part in (folder, name) if name is not None else (folder,):
         check_record_name(part)
 
 
+def _object_key(sha):
+    return f"objects/{sha[:2]}/{sha}"
+
+
+class _Kept:
+    """The last `size` values by key, for several threads."""
+
+    def __init__(self, size):
+        self.size, self._values, self._lock = size, collections.OrderedDict(), threading.Lock()
+
+    def get(self, key):
+        with self._lock:
+            if key in self._values:
+                self._values.move_to_end(key)
+            return self._values.get(key)
+
+    def put(self, key, value):
+        with self._lock:
+            self._values[key] = value
+            self._values.move_to_end(key)
+            while len(self._values) > self.size:
+                self._values.popitem(last=False)
+
+    def drop(self, test):
+        with self._lock:
+            for key in [key for key in self._values if test(key)]:
+                del self._values[key]
+
+
 class Store:
-    """Operations every store offers. Subclasses provide the _raw_* methods
-    and `scratch`: a local folder for files derived from objects (such as
-    token files for training), which may be deleted at any time."""
+    """Operations every store offers, built on its kind's five (see
+    wpt_store.kinds). Subclasses give the kind, `cache` (a local folder for
+    copies of objects) and `scratch` (a local folder for files derived from
+    objects, such as token files for training, which may be deleted at
+    any time), and the _raw_* methods of record folders."""
 
     scratch: Path
+    local = False  # whether the kind's files are on this machine's disk already, so no copy of them is kept
 
-    def __init__(self):
+    def __init__(self, kind, cache):
+        self.kind, self.cache = kind, Path(cache)
+        self._copies = Folder(self.cache)  # the local copies of bundles, read through the same five operations
         self._record_kinds = {}  # (folder, name) -> WHOLE or APPENDED, as this store learned it
+        self._tables, self._frames, self._keys = _Kept(TABLES_KEPT), _Kept(FRAMES_KEPT), _Kept(KEYS_KEPT)
+        self._compressing, self._compressing_lock = None, threading.Lock()
+
+    # Objects
 
     def put_bytes(self, data: bytes) -> str:
         sha = hashlib.sha256(data).hexdigest()
         if not self.has(sha):
-            with tempfile.TemporaryDirectory() as tmp:
-                path = Path(tmp) / "object"
-                path.write_bytes(data)
-                self._raw_put(sha, path)
+            self._put(sha, data)
         return sha
 
     def put_file(self, path) -> str:
         sha = sha256_file(path)
         if not self.has(sha):
-            self._raw_put(sha, Path(path))
+            self._put(sha, Path(path))
         return sha
 
+    def _put(self, sha, source):
+        try:
+            self.keep_smaller(_object_key(sha), source)
+        except PermissionError:
+            # on Windows, replacing a file another process has open is refused; the
+            # name is the content's hash, so an object stored meanwhile holds the same bytes
+            if not self.has(sha):
+                raise
+
     def has(self, sha: str) -> bool:
+        """Asks the store each time, so an object deleted by another process
+        is not taken as stored."""
         _check_sha(sha)
-        return self._raw_has(sha)
+        return self._stored(_object_key(sha), fresh=True) is not None
+
+    def size(self, sha: str) -> int:
+        """The object's length in bytes, without reading or copying it (and
+        so without checking it against its sha256)."""
+        _check_sha(sha)
+        key = self._found(sha)
+        with self._reading(f"object {sha}", key):
+            if key.endswith(PACKED):
+                return self._table(key).size
+            on_disk = self.kind.on_disk(key)
+            total = on_disk.stat().st_size if on_disk is not None else self.kind.list(key).get(key)
+        if total is None:
+            self._forget(_object_key(sha))
+            raise MissingObject(f"object {sha} is not in the store")
+        return total
 
     def path(self, sha: str) -> Path:
-        """A local file holding the object, checked against its sha256."""
+        """A local file holding the object, checked against its sha256. A
+        copy in the cache folder when the object is not a local file as it
+        is (every object of an S3 store, a local store's compressed ones):
+        the copy stays until release()."""
         _check_sha(sha)
-        if not self._raw_has(sha):
-            raise MissingObject(f"object {sha} is not in the store")
-        path = self._raw_local(sha)
+        key = self._found(sha)
+        local = self.cache / sha[:2] / sha
+        path = None if key.endswith(PACKED) else self.kind.on_disk(key)
+        if path is None:
+            if not local.is_file():
+                with self._reading(f"object {sha}", key):
+                    self._copy(key, local)
+            path = local
         actual = sha256_file(path)
         if actual != sha:
-            self._raw_discard_local(sha)
+            if path == local:
+                local.unlink(missing_ok=True)
             raise CorruptObject(f"object {sha} reads back as {actual}")
         return path
 
     def get_bytes(self, sha: str) -> bytes:
-        return self.path(sha).read_bytes()
+        _check_sha(sha)
+        key = self._found(sha)
+        on_disk = self.kind.on_disk(key)
+        if on_disk is None or (self.cache / sha[:2] / sha).is_file():
+            return self.path(sha).read_bytes()
+        try:
+            data = on_disk.read_bytes()
+        except FileNotFoundError:
+            self._forget(key.removesuffix(PACKED))
+            raise MissingObject(f"object {sha} is not in the store") from None
+        if key.endswith(PACKED):
+            data = self._decompressed(key, data)
+        actual = hashlib.sha256(data).hexdigest()
+        if actual != sha:
+            raise CorruptObject(f"object {sha} reads back as {actual}")
+        return data
 
     def read_range(self, sha: str, start: int, length: int) -> bytes:
         """length bytes of an object from offset start, without fetching the
         rest of it. A part cannot be checked against the object's sha256:
         the caller checks it against a hash of its own."""
         _check_sha(sha)
-        if not self._raw_has(sha):
-            raise MissingObject(f"object {sha} is not in the store")
-        data = self._raw_read_range(sha, start, length)
+        key = self._found(sha)
+        local = self.cache / sha[:2] / sha
+        if local.is_file():
+            with open(local, "rb") as file:
+                file.seek(start)
+                data = file.read(length)
+        else:
+            with self._reading(f"object {sha}", key):
+                data = self._range(key, start, length)
         if len(data) != length:
             raise CorruptObject(f"object {sha}: {length} bytes at {start} read back as {len(data)}")
         return data
 
     def release(self, sha: str):
-        """Remove the local copy of a remote object (it stays in the store);
-        nothing for a local store, whose copy is the object itself."""
+        """Remove the local copy of an object (it stays in the store);
+        nothing when there is none, as for a local store's object that is
+        not compressed, whose copy is the object itself."""
         _check_sha(sha)
-        self._raw_discard_local(sha)
-
-    def set_ref(self, kind: str, name: str, sha: str):
-        _check_ref(kind, name)
-        _check_sha(sha)
-        if not self._raw_has(sha):
-            raise MissingObject(f"ref {kind}/{name} would point at missing object {sha}")
-        self._raw_set_ref(kind, name, sha)
-
-    def get_ref(self, kind: str, name: str) -> str | None:
-        """The object a ref points at, or None when the ref does not exist."""
-        _check_ref(kind, name)
-        sha = self._raw_get_ref(kind, name)
-        if sha is not None and not SHA256.fullmatch(sha):
-            raise CorruptObject(f"ref {kind}/{name} holds {sha!r}, not a sha256")
-        return sha
+        (self.cache / sha[:2] / sha).unlink(missing_ok=True)
 
     def delete(self, sha: str):
         """Remove an object, and its local copy; nothing when it is absent.
         Objects are shared by content: only for one that nothing else can
         point at, such as a training checkpoint that a newer one replaced."""
         _check_sha(sha)
-        self._raw_discard_local(sha)
-        self._raw_delete(sha)
+        self.release(sha)
+        key = _object_key(sha)
+        for stored in (key + PACKED, key):
+            self.kind.delete(stored)
+        self._forget(key)
+
+    def copies_in(self, folder) -> "Store":
+        """The same store, whose new local copies of objects and of a
+        session's files (path(), file_path()) go into folder instead of its
+        cache folder, for work that keeps none: removing folder afterwards
+        removes every copy that work made. Copies already in the cache
+        folder are not read. For objects and refs only, not record
+        folders."""
+        self.compressing()  # made before the copy, so every view shares this store's one
+        view = copy.copy(self)
+        view.cache = Path(folder)
+        return view
+
+    def _found(self, sha):
+        key = self._stored(_object_key(sha))
+        if key is None:
+            raise MissingObject(f"object {sha} is not in the store")
+        return key
+
+    # Refs
+
+    def set_ref(self, kind: str, name: str, sha: str):
+        check_ref(kind, name)
+        _check_sha(sha)
+        if not self.has(sha):
+            raise MissingObject(f"ref {kind}/{name} would point at missing object {sha}")
+        self.kind.write(f"refs/{kind}/{name}", sha.encode())
+
+    def get_ref(self, kind: str, name: str) -> str | None:
+        """The object a ref points at, or None when the ref does not exist."""
+        check_ref(kind, name)
+        try:
+            sha = self.kind.read(f"refs/{kind}/{name}")[0].decode().strip()
+        except Absent:
+            return None
+        if not SHA256.fullmatch(sha):
+            raise CorruptObject(f"ref {kind}/{name} holds {sha!r}, not a sha256")
+        return sha
 
     def delete_ref(self, kind: str, name: str):
         """Remove a ref (not its object); nothing when it is absent."""
-        _check_ref(kind, name)
-        self._raw_delete_ref(kind, name)
+        check_ref(kind, name)
+        self.kind.delete(f"refs/{kind}/{name}")
+
+    # Sessions, bundles and the store database
+
+    def session(self, folder: str, command: str, commit: str, dirty: bool, stream=False) -> Session:
+        """A new session (wpt_store.sessions), named by its run record's
+        folder. stream: no local copy of its bundles stays (see the module's
+        docstring)."""
+        return Session(self, folder, command, commit, dirty, keep_local=not stream)
+
+    def read_file(self, placed: Placed) -> bytes:
+        """One file a session stored, checked against its sha256.
+        MissingObject when its bundle is not in the store (or not sealed)."""
+        key, kind = self._bundle(placed)
+        with self._reading(f"bundle {placed.bundle}", key):
+            data = self._range(key, placed.start, placed.length, kind)
+        if len(data) != placed.length or hashlib.sha256(data).hexdigest() != placed.sha256:
+            raise CorruptObject(f"bundle {placed.bundle}: the {placed.length} bytes at {placed.start} "
+                                f"do not match their sha256 {placed.sha256}")
+        return data
+
+    def file_path(self, placed: Placed) -> Path:
+        """A local file holding one file a session stored, checked against
+        its sha256: a copy in the cache folder, where path() keeps an
+        object's, read part by part and kept until release(placed.sha256)."""
+        local = self.cache / placed.sha256[:2] / placed.sha256
+        if not local.is_file():
+            key, kind = self._bundle(placed)
+            local.parent.mkdir(parents=True, exist_ok=True)
+            fd, tmp = tempfile.mkstemp(dir=local.parent, prefix=".partial-")
+            try:
+                digest = hashlib.sha256()
+                with os.fdopen(fd, "wb") as out, self._reading(f"bundle {placed.bundle}", key):
+                    for at in range(0, placed.length, DOWNLOAD):
+                        data = self._range(key, placed.start + at, min(DOWNLOAD, placed.length - at), kind)
+                        digest.update(data)
+                        out.write(data)
+                if digest.hexdigest() != placed.sha256:
+                    raise CorruptObject(f"bundle {placed.bundle}: the {placed.length} bytes at {placed.start} "
+                                        f"do not match their sha256 {placed.sha256}")
+                _replace_object(tmp, local)
+            except BaseException:
+                Path(tmp).unlink(missing_ok=True)
+                raise
+        return local
+
+    def _bundle(self, placed):
+        """(the key a bundle is stored under, the kind to read it from: its
+        local copy's when there is one)."""
+        key = self._stored(f"bundles/{placed.bundle}")
+        if key is None:
+            raise MissingObject(f"bundle {placed.bundle} is not in the store")
+        return key, self._copies if self._copies.on_disk(key) is not None else self.kind
+
+    def database(self):
+        """The store database (wpt_store.database), as a sqlite3 connection
+        to a copy in memory."""
+        return database.read(self.kind)
+
+    # Compressed files
+
+    def compressing(self):
+        """(executor, sizing) for wpt_store.blocks.Writer, made once per
+        store: as many frames at once as wpt_utils.parallel allows."""
+        with self._compressing_lock:
+            if self._compressing is None:
+                self._compressing = blocks.parallel()
+            return self._compressing
+
+    def keep_smaller(self, key, source):
+        """Store source (bytes, or a local file, left as it is) under
+        key + PACKED, compressed, when that is smaller, else under key as
+        it is."""
+        if isinstance(source, (bytes, bytearray, memoryview)):
+            packed = blocks.compressed(source, *(self.compressing() if len(source) > blocks.FRAME else (None, None)))
+            if len(packed) < len(source):
+                self.kind.write(key + PACKED, packed)
+            else:
+                self.kind.write(key, bytes(source))
+            return
+        self.cache.mkdir(parents=True, exist_ok=True)
+        with tempfile.NamedTemporaryFile(dir=self.cache, prefix=".partial-", delete=False) as out:
+            try:
+                writer = blocks.Writer(out, *self.compressing())
+                with open(source, "rb") as file:
+                    while block := file.read(CHUNK):
+                        writer.write(block)
+                original, stored = writer.close()
+                out.close()
+                if stored < original:
+                    self.kind.write(key + PACKED, Path(out.name), move=True)
+                else:
+                    self.kind.write(key, Path(source))
+            finally:
+                Path(out.name).unlink(missing_ok=True)
+
+    def keep_compressed(self, key, path, original, stored, local=False):
+        """Store a local file wpt_store.blocks.Writer compressed (original
+        and stored: the sizes its close() gave) as keep_smaller would its
+        original bytes. The file is gone afterwards, stored or not. local:
+        a store whose files are not on this machine keeps a copy in its
+        cache folder, under the same key, once the write succeeded."""
+        try:
+            if stored < original:
+                self._write_kept(key + PACKED, path, local)
+                return
+            with tempfile.NamedTemporaryFile(dir=self.cache, prefix=".partial-", delete=False) as out:
+                try:
+                    with zstd.open(path) as packed:
+                        while block := packed.read(CHUNK):
+                            out.write(block)
+                    out.close()
+                    self._write_kept(key, Path(out.name), local)
+                finally:
+                    Path(out.name).unlink(missing_ok=True)
+        finally:
+            Path(path).unlink(missing_ok=True)
+
+    def _write_kept(self, key, path, local):
+        """Move a local file into the store under key; with local (and a
+        store not on this machine), a copy of it into the cache folder too,
+        removed again when the store refused the file."""
+        copy = self.cache.joinpath(*key.split("/")) if local and not self.local else None
+        if copy is not None:
+            atomic_copy(path, copy)
+        try:
+            self.kind.write(key, path, move=True)
+        except BaseException:
+            if copy is not None:
+                copy.unlink(missing_ok=True)
+            raise
+
+    def _stored(self, key, fresh=False):
+        """The key under which a file is stored, compressed or not, or None.
+        A key found is kept in memory and given again, unless fresh."""
+        found = None if fresh else self._keys.get(key)
+        if found is not None:
+            return found
+        for stored in (key + PACKED, key):
+            try:
+                self.kind.read(stored, 0, 0)
+                self._keys.put(key, stored)
+                return stored
+            except Absent:
+                pass
+        return None
+
+    @contextlib.contextmanager
+    def _reading(self, what, key):
+        """A file found earlier and gone since (deleted by another process)
+        is a MissingObject, and forgotten."""
+        try:
+            yield
+        except Absent:
+            self._forget(key.removesuffix(PACKED))
+            raise MissingObject(f"{what} is not in the store") from None
+
+    def _table(self, key, kind=None) -> blocks.SeekTable:
+        kind = kind or self.kind
+        table = self._tables.get(key)
+        if table is None:
+            end = kind.read(key, -TAIL)[0]
+            try:
+                table = blocks.SeekTable.parse(end)
+                if isinstance(table, int):
+                    table = blocks.SeekTable.parse(kind.read(key, -table)[0])
+            except blocks.BadTable as error:
+                raise CorruptObject(f"{key}: {error}") from None
+            if isinstance(table, int):
+                raise CorruptObject(f"{key}: shorter than its seek table")
+            self._tables.put(key, table)
+        return table
+
+    def _range(self, key, start, length, kind=None):
+        """length original bytes of a stored file from start (fewer when it
+        ends first): read in place when it is not compressed, else from
+        the frames that hold them, each decompressed once and kept a while.
+        kind: where to read it (default: the store's own kind)."""
+        kind = kind or self.kind
+        if not key.endswith(PACKED):
+            return kind.read(key, start, length)[0] if length else b""
+        table = self._table(key, kind)
+        frames = table.frames(start, length)
+        if not frames:
+            return b""
+        found = {i: self._frames.get((key, i)) for i in frames}
+        wanted = [i for i in frames if found[i] is None]
+        if wanted:
+            first, last = wanted[0], wanted[-1]
+            data = kind.read(key, table.stored[first], table.stored[last + 1] - table.stored[first])[0]
+            for i in range(first, last + 1):
+                if found.get(i) is None:
+                    at = table.stored[i] - table.stored[first]
+                    found[i] = self._frame(key, table, i, data[at:at + table.sizes[i][0]])
+                    self._frames.put((key, i), found[i])
+        joined = b"".join(found[i] for i in frames)
+        at = start - table.original[frames[0]]
+        return joined[at:at + length]
+
+    def _frame(self, key, table, i, data):
+        try:
+            frame = zstd.decompress(data)
+        except zstd.ZstdError as error:
+            raise CorruptObject(f"{key}: frame {i} is not zstd: {error}") from None
+        if len(frame) != table.sizes[i][1]:
+            raise CorruptObject(f"{key}: frame {i} holds {len(frame)} bytes, not {table.sizes[i][1]}")
+        return frame
+
+    def _decompressed(self, key, data):
+        try:
+            return zstd.decompress(data)
+        except zstd.ZstdError as error:
+            raise CorruptObject(f"{key}: not zstd: {error}") from None
+
+    def _copy(self, key, target: Path):
+        """A whole stored file's original bytes into the local file target,
+        several parts fetched at once as wpt_utils.parallel allows."""
+        if key.endswith(PACKED):
+            table = self._table(key)
+            parts, group, size = [], [], 0
+            for i, (stored, _) in enumerate(table.sizes):  # frames grouped into requests of about DOWNLOAD bytes
+                group.append(i)
+                size += stored
+                if size >= DOWNLOAD:
+                    parts.append(group)
+                    group, size = [], 0
+            if group:
+                parts.append(group)
+
+            def fetch(group):
+                first, last = group[0], group[-1]
+                data = self.kind.read(key, table.stored[first], table.stored[last + 1] - table.stored[first])[0]
+                return b"".join(self._frame(key, table, i, data[table.stored[i] - table.stored[first]:
+                                                                 table.stored[i + 1] - table.stored[first]])
+                                for i in group)
+        else:
+            total = self.kind.list(key).get(key)
+            if total is None:
+                raise MissingObject(f"{key} is not in the store")
+            parts = [(at, min(DOWNLOAD, total - at)) for at in range(0, total, DOWNLOAD)]
+
+            def fetch(part):
+                return self.kind.read(key, *part)[0]
+
+        target.parent.mkdir(parents=True, exist_ok=True)
+        fd, tmp = tempfile.mkstemp(dir=target.parent, prefix=".partial-")
+        try:
+            with os.fdopen(fd, "wb") as out:
+                if len(parts) > 1:
+                    sizing = Sizing(DOWNLOAD_MEMORY, "downloads")
+                    with ThreadPoolExecutor(sizing.limit) as executor:
+                        for data in in_order(fetch, parts, executor, sizing):
+                            out.write(data)
+                else:
+                    for part in parts:
+                        out.write(fetch(part))
+            _replace_object(tmp, target)
+        except BaseException:
+            Path(tmp).unlink(missing_ok=True)
+            raise
+
+    def _forget(self, key):
+        """Drop what is kept in memory about a file that changed or went."""
+        self._keys.drop(lambda kept: kept == key)
+        for stored in (key, key + PACKED):
+            self._tables.drop(lambda kept: kept == stored)
+            self._frames.drop(lambda kept: kept[0] == stored)
+
+    # Record folders
 
     def write_record(self, folder: str, name: str, data: bytes):
         """Write a record file whole, replacing any earlier one; a crash
@@ -247,57 +635,27 @@ class Store:
 
 
 class LocalStore(Store):
-    """objects/<first 2 hex>/<sha256> and refs/<kind>/<name> under one folder."""
+    """A store in one local folder (wpt_store.kinds.Folder):
+    objects/<first 2 hex>/<sha256>[.zst], refs/<kind>/<name>,
+    bundles/<session>/<number>[.zst], store.sqlite.zst, records/<folder>/,
+    and the local folders cache/ and scratch/."""
+
+    local = True
 
     def __init__(self, root):
-        super().__init__()
         self.root = Path(root)
+        super().__init__(Folder(self.root), self.root / "cache")
         self.scratch = self.root / "scratch"
         self._appending = set()  # (folder, name) this store added to: their marker exists and their last line ends
 
     def __repr__(self):
         return f"LocalStore({str(self.root)!r})"
 
-    def _object(self, sha):
-        return self.root / "objects" / sha[:2] / sha
-
-    def _raw_has(self, sha):
-        return self._object(sha).is_file()
-
-    def _raw_put(self, sha, path):
-        _atomic_copy(path, self._object(sha))
-
-    def _raw_local(self, sha):
-        return self._object(sha)
-
-    def _raw_discard_local(self, sha):
-        pass  # the stored copy is the only one; keep it for inspection
-
-    def _raw_read_range(self, sha, start, length):
-        with open(self._object(sha), "rb") as file:
-            file.seek(start)
-            return file.read(length)
-
-    def _raw_set_ref(self, kind, name, sha):
-        _atomic_write(self.root / "refs" / kind / name, sha.encode())
-
-    def _raw_get_ref(self, kind, name):
-        try:
-            return (self.root / "refs" / kind / name).read_text().strip()
-        except FileNotFoundError:
-            return None
-
-    def _raw_delete(self, sha):
-        self._object(sha).unlink(missing_ok=True)
-
-    def _raw_delete_ref(self, kind, name):
-        (self.root / "refs" / kind / name).unlink(missing_ok=True)
-
     def _record(self, folder, name=None):
         return self.root / "records" / folder / name if name else self.root / "records" / folder
 
     def _raw_write_record(self, folder, name, data):
-        _atomic_write(self._record(folder, name), data, durable=True)
+        atomic_write(self._record(folder, name), data, durable=True)
 
     # A file added to line by line has a marker beside it, .appended-<name>,
     # so a later process knows its kind (see Store._claim).
@@ -326,7 +684,7 @@ class LocalStore(Store):
             out.flush()
             os.fsync(out.fileno())  # on the disk before the caller goes on
         if created:
-            _sync_folder(path.parent)
+            sync_folder(path.parent)
         self._appending.add((folder, name))
 
     def _raw_flush_records(self):
@@ -348,16 +706,17 @@ class LocalStore(Store):
 
 
 class S3Store(Store):
-    """The same layout as LocalStore, as keys under s3://bucket/prefix."""
+    """The same layout as LocalStore, as keys under s3://bucket/prefix
+    (wpt_store.kinds.Bucket); its cache and scratch folders are local."""
 
     def __init__(self, bucket, prefix, cache_dir=None, client=None):
         import boto3
 
-        super().__init__()
         self.bucket = bucket
         self.prefix = prefix.strip("/")
         self.client = client or boto3.client("s3")
-        self.cache = Path(cache_dir) if cache_dir else _default_cache() / bucket / (self.prefix or "_")
+        cache = Path(cache_dir) if cache_dir else _default_cache() / bucket / (self.prefix or "_")
+        super().__init__(Bucket(self.client, bucket, self.prefix), cache)
         self.scratch = self.cache / "scratch"
         # lines added and not yet sent: (folder, name) -> [(time, number, data)]; see _raw_append_record
         self._writer, self._pending, self._added, self._last = secrets.token_hex(4), {}, 0, 0
@@ -365,75 +724,6 @@ class S3Store(Store):
 
     def __repr__(self):
         return f"S3Store(s3://{self.bucket}/{self.prefix})"
-
-    def _key(self, *parts):
-        return "/".join(p for p in (self.prefix, *parts) if p)
-
-    def _object_key(self, sha):
-        return self._key("objects", sha[:2], sha)
-
-    def _raw_has(self, sha):
-        from botocore.exceptions import ClientError
-
-        try:
-            self.client.head_object(Bucket=self.bucket, Key=self._object_key(sha))
-            return True
-        except ClientError as error:
-            if error.response["Error"]["Code"] in ("404", "NoSuchKey", "NotFound"):
-                return False
-            raise
-
-    def _raw_put(self, sha, path):
-        self.client.upload_file(str(path), self.bucket, self._object_key(sha))
-
-    def _raw_local(self, sha):
-        local = self.cache / sha[:2] / sha
-        if not local.is_file():
-            local.parent.mkdir(parents=True, exist_ok=True)
-            fd, tmp = tempfile.mkstemp(dir=local.parent)
-            os.close(fd)
-            try:
-                self.client.download_file(self.bucket, self._object_key(sha), tmp)
-                _replace_object(tmp, local)
-            except BaseException:
-                Path(tmp).unlink(missing_ok=True)
-                raise
-        return local
-
-    def _raw_discard_local(self, sha):
-        (self.cache / sha[:2] / sha).unlink(missing_ok=True)
-
-    def _raw_read_range(self, sha, start, length):
-        local = self.cache / sha[:2] / sha
-        if local.is_file():
-            with open(local, "rb") as file:
-                file.seek(start)
-                return file.read(length)
-        if length == 0:
-            return b""
-        answer = self.client.get_object(Bucket=self.bucket, Key=self._object_key(sha),
-                                        Range=f"bytes={start}-{start + length - 1}")
-        return answer["Body"].read()
-
-    def _raw_set_ref(self, kind, name, sha):
-        self.client.put_object(Bucket=self.bucket, Key=self._key("refs", kind, name), Body=sha.encode())
-
-    def _raw_get_ref(self, kind, name):
-        from botocore.exceptions import ClientError
-
-        try:
-            body = self.client.get_object(Bucket=self.bucket, Key=self._key("refs", kind, name))["Body"]
-            return body.read().decode().strip()
-        except ClientError as error:
-            if error.response["Error"]["Code"] in ("404", "NoSuchKey", "NotFound"):
-                return None
-            raise
-
-    def _raw_delete(self, sha):
-        self.client.delete_object(Bucket=self.bucket, Key=self._object_key(sha))  # S3 answers the same when absent
-
-    def _raw_delete_ref(self, kind, name):
-        self.client.delete_object(Bucket=self.bucket, Key=self._key("refs", kind, name))
 
     # An S3 object cannot grow. A file added to line by line is a folder of
     # parts, records/<folder>/<name>/<time>-<writer>-<number>: each part holds
@@ -446,13 +736,12 @@ class S3Store(Store):
     # processes, whenever each was sent.
 
     def _raw_record_kind(self, folder, name):
-        parts, _ = self._list(self._key("records", folder, name) + "/", max_keys=1)
-        if parts:
+        if self.kind.list(f"records/{folder}/{name}/"):
             return APPENDED
         return WHOLE if self._record_object(folder, name) is not None else None
 
     def _raw_write_record(self, folder, name, data):
-        self.client.put_object(Bucket=self.bucket, Key=self._key("records", folder, name), Body=data)
+        self.kind.write(f"records/{folder}/{name}", data)
 
     def _raw_append_record(self, folder, name, data):
         with self._pending_lock:
@@ -471,41 +760,23 @@ class S3Store(Store):
             for (folder, name), additions in list(self._pending.items()):
                 first_time, first_number, _ = additions[0]
                 body = b"".join(b"%d %d %d\n" % (moment, number, len(data)) + data for moment, number, data in additions)
-                key = self._key("records", folder, name, f"{first_time:020d}-{self._writer}-{first_number:010d}")
-                self.client.put_object(Bucket=self.bucket, Key=key, Body=body)
+                self.kind.write(f"records/{folder}/{name}/{first_time:020d}-{self._writer}-{first_number:010d}", body)
                 del self._pending[(folder, name)]
 
-    def _list(self, prefix, delimiter=None, max_keys=None):
-        """(keys, sub-prefixes) under prefix, every page (only the first
-        max_keys keys, when given)."""
-        keys, prefixes = [], []
-        options = {"Bucket": self.bucket, "Prefix": prefix, **({"Delimiter": delimiter} if delimiter else {})}
-        if max_keys:
-            page = self.client.list_objects_v2(**options, MaxKeys=max_keys)
-            return [item["Key"] for item in page.get("Contents", [])], []
-        for page in self.client.get_paginator("list_objects_v2").paginate(**options):
-            keys += [item["Key"] for item in page.get("Contents", [])]
-            prefixes += [item["Prefix"] for item in page.get("CommonPrefixes", [])]
-        return keys, prefixes
-
     def _record_object(self, folder, name):
-        from botocore.exceptions import ClientError
-
         try:
-            return self.client.get_object(Bucket=self.bucket, Key=self._key("records", folder, name))["Body"].read()
-        except ClientError as error:
-            if error.response["Error"]["Code"] in ("404", "NoSuchKey", "NotFound"):
-                return None
-            raise
+            return self.kind.read(f"records/{folder}/{name}")[0]
+        except Absent:
+            return None
 
     def _raw_read_record(self, folder, name):
-        parts, _ = self._list(self._key("records", folder, name) + "/")
+        parts = self.kind.list(f"records/{folder}/{name}/")
         if not parts:
             return self._record_object(folder, name)
         additions = []
         for key in parts:
             writer = key.rsplit("/", 1)[1].split("-")[1]
-            body = self.client.get_object(Bucket=self.bucket, Key=key)["Body"].read()
+            body = self.kind.read(key)[0]
             at = 0
             try:
                 while at < len(body):
@@ -518,14 +789,25 @@ class S3Store(Store):
         return b"".join(data for *_, data in sorted(additions))
 
     def _raw_record_files(self, folder):
-        prefix = self._key("records", folder) + "/"
-        keys, appended = self._list(prefix, "/")
-        return {key[len(prefix):] for key in keys} | {p[len(prefix):-1] for p in appended}
+        files, appended = self._folder(f"records/{folder}/")
+        return set(files) | set(appended)
 
     def _raw_record_folders(self):
-        prefix = self._key("records") + "/"
-        _, folders = self._list(prefix, "/")
-        return [p[len(prefix):-1] for p in folders]
+        _, folders = self._folder("records/")
+        return folders
+
+    def _folder(self, prefix):
+        """(names of the files, names of the folders) right under a store
+        key prefix ending in '/': S3's listing by delimiter, which the
+        kind's list does not offer, so a folder's own files are not all
+        listed to find its sub-folders."""
+        prefix = self.kind.key(prefix)
+        files, folders = [], []
+        for page in self.client.get_paginator("list_objects_v2").paginate(Bucket=self.bucket, Prefix=prefix,
+                                                                           Delimiter="/"):
+            files += [item["Key"][len(prefix):] for item in page.get("Contents", [])]
+            folders += [item["Prefix"][len(prefix):-1] for item in page.get("CommonPrefixes", [])]
+        return files, folders
 
 
 def open_store(url: str) -> Store:
@@ -574,19 +856,6 @@ def _default_cache():
     return Path(base or Path.home() / ".cache") / "wpt-store"
 
 
-def _atomic_copy(source, target: Path):
-    target.parent.mkdir(parents=True, exist_ok=True)
-    fd, tmp = tempfile.mkstemp(dir=target.parent)
-    try:
-        with os.fdopen(fd, "wb") as out, open(source, "rb") as src:
-            while block := src.read(CHUNK):
-                out.write(block)
-        _replace_object(tmp, target)
-    except BaseException:
-        Path(tmp).unlink(missing_ok=True)
-        raise
-
-
 def _replace_object(tmp, target: Path):
     """os.replace for a file named by its hash. On Windows, replacing a file
     another process has open is refused; the name is the content's hash, so a
@@ -597,35 +866,3 @@ def _replace_object(tmp, target: Path):
         if not target.is_file():
             raise
         Path(tmp).unlink(missing_ok=True)
-
-
-def _atomic_write(target: Path, data: bytes, durable=False):
-    """durable: on the disk, name included, when it returns, not only in the
-    system's memory."""
-    target.parent.mkdir(parents=True, exist_ok=True)
-    fd, tmp = tempfile.mkstemp(dir=target.parent, prefix=".partial-")
-    try:
-        with os.fdopen(fd, "wb") as out:
-            out.write(data)
-            if durable:
-                out.flush()
-                os.fsync(out.fileno())
-        os.replace(tmp, target)
-    except BaseException:
-        Path(tmp).unlink(missing_ok=True)
-        raise
-    if durable:
-        _sync_folder(target.parent)
-
-
-def _sync_folder(folder: Path):
-    """Put a folder's list of names on the disk, so a new file's name survives
-    a power cut. Windows cannot open a folder this way: there, only the
-    file itself is synced."""
-    if os.name == "nt":
-        return
-    fd = os.open(folder, os.O_RDONLY)
-    try:
-        os.fsync(fd)
-    finally:
-        os.close(fd)

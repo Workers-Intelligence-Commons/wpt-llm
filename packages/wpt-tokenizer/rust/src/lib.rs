@@ -15,8 +15,10 @@
 //! equally frequent the pair with the smaller (left, right) ids wins.
 
 use std::cmp::Reverse;
+use std::cell::RefCell;
 use std::collections::{BinaryHeap, HashMap, HashSet};
-use std::sync::Mutex;
+use std::sync::{Arc, Mutex, Weak};
+use std::thread::{self, ThreadId};
 
 use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
@@ -166,12 +168,48 @@ fn learn(counts: &HashMap<Vec<u8>, u64>, n_merges: usize) -> Vec<Pair> {
     merges
 }
 
-/// Encodes and decodes with a fixed list of merges.
+/// The tokens of each chunk one thread has encoded.
+type Cache = HashMap<Vec<u8>, Vec<u32>>;
+
+/// Each thread's cache of one Codec, by the thread.
+type Caches = Mutex<HashMap<ThreadId, Arc<Mutex<Cache>>>>;
+
+/// Chunks one thread's cache holds before it starts again empty (about 100 MB): every thread has its own, and
+/// a corpus has far more distinct chunks than that.
+const CACHE_CHUNKS: usize = 1 << 20;
+
+/// The Codecs one thread has a cache in, so that the thread's end removes its caches from them: a Codec kept
+/// for a whole build (pools of threads that start and end) then holds the caches of the threads alive only.
+struct Leaving {
+    thread: ThreadId, // read when the thread starts: thread::current() is not there any more at its end
+    codecs: RefCell<Vec<Weak<Caches>>>,
+}
+
+impl Drop for Leaving {
+    fn drop(&mut self) {
+        for caches in self.codecs.borrow().iter().filter_map(Weak::upgrade) {
+            if let Ok(mut caches) = caches.lock() {
+                caches.remove(&self.thread);
+            }
+        }
+    }
+}
+
+thread_local! {
+    static LEAVING: Leaving = Leaving { thread: thread::current().id(), codecs: RefCell::new(Vec::new()) };
+}
+
+/// Encodes and decodes with a fixed list of merges. Each thread keeps its
+/// own cache of encoded chunks until it ends, so threads encoding at once
+/// never wait for each other; a chunk's tokens are the same whichever cache
+/// holds them, or none.
 #[pyclass(frozen)]
 struct Codec {
     ranks: HashMap<Pair, u32>,
     pieces: Vec<Vec<u8>>, // id -> bytes (END and the special tokens decode to nothing)
-    cache: Mutex<HashMap<Vec<u8>, Vec<u32>>>,
+    // each living thread's cache (a thread's end removes its own, see Leaving); the map is locked only to
+    // find a thread's own, and that cache's lock is never waited for, since only its thread takes it
+    caches: Arc<Caches>,
 }
 
 impl Codec {
@@ -183,6 +221,44 @@ impl Codec {
             word = merge_word(&word, pair, FIRST_MERGE + rank);
         }
         word
+    }
+
+    /// The calling thread's cache, made on its first call and removed when the thread ends. A thread that is
+    /// already ending (encoding from another thread-local's destructor) gets an empty cache it does not keep.
+    fn own_cache(&self) -> Arc<Mutex<Cache>> {
+        let mut caches = self.caches.lock().unwrap();
+        if let Some(own) = caches.get(&thread::current().id()) {
+            return own.clone();
+        }
+        let own = Arc::<Mutex<Cache>>::default();
+        let registered = LEAVING.try_with(|leaving| {
+            let mut codecs = leaving.codecs.borrow_mut();
+            codecs.retain(|codec| codec.strong_count() > 0); // the Codecs dropped since
+            codecs.push(Arc::downgrade(&self.caches));
+        });
+        if registered.is_ok() {
+            caches.insert(thread::current().id(), own.clone());
+        }
+        own
+    }
+
+    fn encode_bytes(&self, data: &[u8]) -> Vec<u32> {
+        let own = self.own_cache();
+        let mut cache = own.lock().unwrap();
+        let mut out = Vec::new();
+        for chunk in chunks(data) {
+            if let Some(ids) = cache.get(chunk) {
+                out.extend_from_slice(ids);
+            } else {
+                let ids = self.encode_chunk(chunk);
+                out.extend_from_slice(&ids);
+                if cache.len() >= CACHE_CHUNKS {
+                    cache.clear();
+                }
+                cache.insert(chunk.to_vec(), ids);
+            }
+        }
+        out
     }
 }
 
@@ -205,24 +281,11 @@ impl Codec {
             piece.extend_from_slice(&pieces[b as usize]);
             pieces.push(piece);
         }
-        Ok(Codec { ranks, pieces, cache: Mutex::new(HashMap::new()) })
+        Ok(Codec { ranks, pieces, caches: Arc::default() })
     }
 
     fn encode(&self, py: Python<'_>, data: &[u8]) -> Vec<u32> {
-        py.detach(|| {
-            let mut cache = self.cache.lock().unwrap();
-            let mut out = Vec::new();
-            for chunk in chunks(data) {
-                if let Some(ids) = cache.get(chunk) {
-                    out.extend_from_slice(ids);
-                } else {
-                    let ids = self.encode_chunk(chunk);
-                    out.extend_from_slice(&ids);
-                    cache.insert(chunk.to_vec(), ids);
-                }
-            }
-            out
-        })
+        py.detach(|| self.encode_bytes(data))
     }
 
     fn decode<'py>(&self, py: Python<'py>, ids: Vec<u32>) -> PyResult<Bound<'py, PyBytes>> {
@@ -262,5 +325,17 @@ mod tests {
         assert_eq!(joined, text);
         assert_eq!(chunks(b"a b"), vec![&b"a"[..], &b" b"[..]]);
         assert_eq!(chunks(b"a  b"), vec![&b"a"[..], &b" "[..], &b" b"[..]]);
+    }
+
+    #[test]
+    fn a_thread_s_cache_leaves_the_codec_when_the_thread_ends() {
+        let codec = Codec::new(vec![(b'a' as u32, b'b' as u32)]).unwrap();
+        let ids = thread::scope(|scope| {
+            let ids = (0..4).map(|_| scope.spawn(|| codec.encode_bytes(b"ab ab abc"))).collect::<Vec<_>>();
+            ids.into_iter().map(|handle| handle.join().unwrap()).collect::<Vec<_>>()
+        });
+        assert!(ids.iter().all(|one| *one == codec.encode_bytes(b"ab ab abc")));
+        // the four threads ended: only this one's cache is left
+        assert_eq!(codec.caches.lock().unwrap().keys().collect::<Vec<_>>(), vec![&thread::current().id()]);
     }
 }

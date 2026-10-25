@@ -5,21 +5,16 @@ revision the repository's full commit hash. The file list comes from the
 Hub's API at that commit; each file's content comes from its `resolve`
 address at that commit.
 
-The Hub stores large files with Git LFS, and its listing gives their sha256,
-which is what a manifest records. So `read` with listing_only builds a
-source's manifest from the listing alone, downloading only the small files
-it holds directly (such as README.md): `wpt-dataset manifest` gives the
-checksum of a dataset of hundreds of gigabytes without fetching it.
-Otherwise `read` fetches every kept file, streamed to disk, and checks each
+The Hub stores large files with Git LFS, and its listing gives their
+sha256. `read` fetches every kept file, streamed to disk, and checks each
 one against the listing.
 
 An archive the dataset holds (ARCHIVES, the kinds an http-archive source
 reads) is unpacked: its members are the source's files, in the archive's
 folder, as unpacking it where it lies would place them, and the manifest
-covers them, not the archive. So an
-archive is always downloaded, even for a manifest; `extract.exclude`
-matching the archive's own path leaves it out undownloaded, and matching a
-member's path leaves that member out.
+covers them, not the archive. `extract.exclude` matching the archive's
+own path leaves it out undownloaded, and matching a member's path leaves
+that member out.
 
 robots.txt is read once for the address's site before anything else
 (sources.py); the API and resolve addresses are on the same site.
@@ -92,19 +87,15 @@ def fetch(address: str, revision: str, path: str, target: Path, user_agent: str)
     return retry.call(download, url)
 
 
-def read(address: str, revision: str, extractor, tmp: Path, user_agent: str, listing_only: bool):
+def read(address: str, revision: str, extractor, tmp: Path, user_agent: str):
     """Add every file the extractor keeps, each archive's members in its
-    place. listing_only: large files that are not archives are recorded by
-    the sha256 the listing gives, without their content."""
+    place."""
     for entry in files(address, revision, user_agent):
         path = extractor.kept(entry["path"])
         if path is None:
             continue
         archive = path.lower().endswith(ARCHIVES)
         expected = entry.get("lfs", {}).get("oid")
-        if listing_only and expected and not archive:
-            extractor.add_known(path, FILE, expected)
-            continue
         target = tmp / "download"
         actual = fetch(address, revision, entry["path"], target, user_agent)
         if expected and actual != expected:

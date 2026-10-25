@@ -18,7 +18,8 @@ from wpt_dataset import manifest
 from wpt_agent.loop import CONFIDENCE
 from wpt_dataset.build import Document, is_held_out
 from wpt_dataset.repo import Repo, address_hash, dump_json
-from wpt_dataset.sources import compute_upstream, held_out_group, source_tree
+from wpt_dataset import download
+from wpt_dataset.sources import fetch, held_out_group
 from wpt_eval import Context, find, open_context
 from wpt_eval.asking import CONTINUE, Question
 from wpt_store import open_store
@@ -247,13 +248,17 @@ def git_source(tmp_path, root, store, folder_name, files, data, fetched=True):
             "licenses": [{"license": "MIT", "paths": ["**"], "attribution": "T", "text": "Copyright T\n"}],
             "formats": [{"format": "text", "paths": ["**"]}],
             "decision": {"decision": "admitted", "by": "T", "date": "2026-10-23", "reason": "test"}, **data}
-    elsewhere = open_store((tmp_path / f"elsewhere-{folder_name}").as_uri())
-    data["checksum"] = manifest.checksum(compute_upstream(data, data["address"], elsewhere))
+    staging = tmp_path / f"elsewhere-{folder_name}"
+    (staging / "download").mkdir(parents=True)
+    data["checksum"] = manifest.checksum(fetch(data, data["address"], download.Staging(staging / "files"),
+                                               staging / "download"))
     sid = f"ebible-{folder_name.replace('_', '-').removesuffix('.zip')}-{address_hash(str(folder))}"
     (root / "data" / "sources" / sid).mkdir()
     (root / "data" / "sources" / sid / "source.json").write_text(dump_json(data), encoding="utf-8", newline="\n")
-    if fetched:
-        source_tree(Repo(root).source(sid), store)
+    if fetched:  # as `wpt-dataset download` would
+        with store.session(f"20261025T120000Z-test-download-{sid}", "test", "abc123", False) as session:
+            [done] = download.download(Repo(root), [sid], store, session, log=lambda *_: None)
+        assert done.error is None, done.error
     return sid
 
 

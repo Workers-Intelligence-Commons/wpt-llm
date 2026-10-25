@@ -21,7 +21,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from . import markdown, records
+from . import manifest, markdown, records
 from .errors import InvalidFile
 from .migrate import upgrade
 from .repo import CURRENT_SCHEMA, Repo, validate
@@ -170,12 +170,13 @@ def _drops(value, rule) -> bool:
     return isinstance(value, (int, float)) and not isinstance(value, bool) and value > rule["above"]
 
 
-def of_file(source_id: str, path: str, entry: dict, store, sha256: str) -> list[tuple[str, dict]]:
+def of_file(source_id: str, path: str, entry: dict, store, file) -> list[tuple[str, dict]]:
     """[(key, conversation)] of one chat file: its line number, or with
-    `tree` its last message's id. InvalidFile names what is wrong."""
+    `tree` its last message's id; file is its tree entry. InvalidFile
+    names what is wrong."""
     if "tree" in entry:
-        return from_tree(source_id, path, store.path(sha256), entry["tree"])
-    return list(enumerate(parse(source_id, path, store.get_bytes(sha256)), start=1))
+        return from_tree(source_id, path, manifest.local_file(store, file), entry["tree"])
+    return list(enumerate(parse(source_id, path, manifest.content(store, file)), start=1))
 
 
 def read(repo: Repo, store, tag: str, telemetry=None, log=print) -> tuple[list[tuple[str, dict]], dict]:
@@ -194,7 +195,7 @@ def read(repo: Repo, store, tag: str, telemetry=None, log=print) -> tuple[list[t
             entry = markdown.format_of(source, path)
             if entry["format"] != "chat" or tag not in tags_of(source, path):
                 continue
-            found = of_file(source.id, path, entry, store, tree[path].sha256)
+            found = of_file(source.id, path, entry, store, tree[path])
             conversations += [(f"{source.id}/{path}:{key}", c) for key, c in found]
             sources[source.id] = {"address": source.data["address"], "revision": source.data["revision"],
                                   "licenses": source.data["licenses"]}

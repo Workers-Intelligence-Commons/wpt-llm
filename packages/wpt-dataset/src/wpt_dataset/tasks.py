@@ -82,7 +82,7 @@ from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import NamedTuple
 
-from . import markdown
+from . import manifest, markdown
 from .errors import DocumentListMissing, InvalidFile, RuleViolation
 from .manifest import FILE, HISTORY, MERGE, ORDER, SYMLINK
 from .migrate import upgrade
@@ -196,7 +196,7 @@ def parse(source_id: str, entries: dict, store, repo: Repo) -> dict[str, Task]:
         if SYMLINK in (check.mode, entries[prefix + TASK].mode):
             raise InvalidFile(f"{where}: {TASK} and {CHECK} must be files, not links")
         try:
-            document = json.loads(store.get_bytes(entries[prefix + TASK].sha256))
+            document = json.loads(manifest.content(store, entries[prefix + TASK]))
         except json.JSONDecodeError as error:
             raise InvalidFile(f"{where}{TASK}: {error}") from error
         document = upgrade(document, "task", f"{where}{TASK}")
@@ -214,7 +214,7 @@ def parse(source_id: str, entries: dict, store, repo: Repo) -> dict[str, Task]:
         if terse and terse.splitlines() != [terse]:
             raise InvalidFile(f"{where}{TASK}: terse is the request in one line, and it holds a line break")
         limits = document["limits"]
-        files = {path.removeprefix(prefix + FILES): (entries[path].mode, store.get_bytes(entries[path].sha256))
+        files = {path.removeprefix(prefix + FILES): (entries[path].mode, manifest.content(store, entries[path]))
                  for path in sorted(paths) if path.startswith(prefix + FILES)}
         replies = tuple((reply["pattern"], reply["reply"]) for reply in document.get("replies", []))
         tools = tuple(document.get("tools", []))
@@ -244,7 +244,7 @@ def parse(source_id: str, entries: dict, store, repo: Repo) -> dict[str, Task]:
         tasks[folder] = Task(f"{source_id}/{folder}" if folder else source_id, document["instructions"],
                              document["image"], limits["max_turns"], limits["max_tokens"], limits["command_seconds"],
                              {path: entry for path, entry in files.items() if path not in hidden},
-                             store.get_bytes(check.sha256), container, needs, replies, tools,
+                             manifest.content(store, check), container, needs, replies, tools,
                              {path: files[path] for path in hidden if path in files}, pointers=pointers,
                              answered_by=answered_by, answered_in=answered_in, absent=absent, terse=terse,
                              area=tuple(document["area"]) if "area" in document else None,
@@ -392,7 +392,7 @@ def _reachable(order: list[list[str]]) -> list[list[str]]:
 
 def _order(tree, store) -> list[list[str]]:
     """ORDER's lines, each split into the commit and its marks."""
-    return [line.split() for line in store.get_bytes(tree[ORDER].sha256).decode().splitlines()]
+    return [line.split() for line in manifest.content(store, tree[ORDER]).decode().splitlines()]
 
 
 def repository(where, pointer: Pointer, tree, store) -> tuple[dict, dict, dict]:
@@ -412,7 +412,7 @@ def repository(where, pointer: Pointer, tree, store) -> tuple[dict, dict, dict]:
     not undo, or its author and date do not make a commit (an empty name or
     email); any other git failure is not the pointer's and goes through."""
     undone = chain(where, pointer, tree, store)
-    patches = [store.get_bytes(tree[path].sha256) for path in undone]
+    patches = [manifest.content(store, tree[path]) for path in undone]
     commit = pointer.document.removeprefix(HISTORY)
     work = {path: found for path, found in tree.items() if not path.startswith(".git/")}
     with tempfile.TemporaryDirectory(prefix="wpt-repository-") as tmp:
@@ -510,7 +510,7 @@ def document_tags(repo: Repo, store, sid: str, document: str) -> frozenset[str]:
     if not document.startswith(HISTORY):
         return tags_of(source, document.split("#", 1)[0])
     tree, _ = source_tree(source, store)
-    return frozenset(tag for path in changed_paths(store.get_bytes(tree[document].sha256))
+    return frozenset(tag for path in changed_paths(manifest.content(store, tree[document]))
                      for tag in tags_of(source, path))
 
 

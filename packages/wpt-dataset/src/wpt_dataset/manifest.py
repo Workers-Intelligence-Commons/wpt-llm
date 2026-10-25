@@ -8,8 +8,11 @@ mode 100644 is a file, 100755 an executable file, 120000 a symlink (its
 sha256 is that of the target text). Empty folders do not appear. The
 source checksum is "sha256:" + the sha256 of the manifest's bytes.
 
-Contents live in the store under their sha256, so a tree is just a mapping
-path -> Entry. Readers build trees from the downloaded data itself (archive
+A tree is a mapping path -> Entry. A downloaded file lies in one of its
+session's bundles (wpt_store.sessions), and its entry says where
+(Entry.placed); any other content (a cut's or a patch's result, a file
+of a tree downloaded before bundles) is a store object under its sha256.
+content() and local_file() read either. Readers build trees from the downloaded data itself (archive
 headers, git or mercurial objects), never from files written to a disk, so
 Linux and Windows compute the same manifest.
 """
@@ -27,7 +30,7 @@ import stat
 import subprocess
 import tarfile
 import zipfile
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
 
 from wpt_utils.programs import program
@@ -43,6 +46,33 @@ SUBMODULE = "160000"  # a git tree's pointer to a commit of another repository
 class Entry:
     mode: str
     sha256: str
+    # where a downloaded file lies (wpt_store.Placed); None for a store object. Not part of what the entry is:
+    # two entries with the same mode and content are equal wherever their bytes lie
+    placed: object = field(default=None, compare=False, repr=False)
+
+
+def content(store, entry: Entry) -> bytes:
+    """An entry's bytes, checked against its sha256."""
+    return store.read_file(entry.placed) if entry.placed is not None else store.get_bytes(entry.sha256)
+
+
+def local_file(store, entry: Entry) -> Path:
+    """A local file holding an entry's bytes, checked against its sha256
+    (a copy in the store's cache folder when they are not local already)."""
+    return store.file_path(entry.placed) if entry.placed is not None else store.path(entry.sha256)
+
+
+def size(store, entry: Entry) -> int:
+    """An entry's length in bytes, without reading it."""
+    return entry.placed.length if entry.placed is not None else store.size(entry.sha256)
+
+
+def placed_tree(tree: dict[str, Entry], files: dict) -> dict[str, Entry]:
+    """The tree with each entry whose content a source's file list
+    (wpt_store.parse_file_list: {path: (mode, Placed)}) holds placed where
+    that list says; the others stay store objects."""
+    where = {placed.sha256: placed for _, placed in files.values()}
+    return {path: Entry(e.mode, e.sha256, where[e.sha256]) if e.sha256 in where else e for path, e in tree.items()}
 
 
 def manifest_bytes(tree: dict[str, Entry]) -> bytes:
@@ -125,7 +155,10 @@ def check_paths(tree: dict[str, Entry]):
 
 class Extractor:
     """Applies a source's `extract` rules while entries are read, storing
-    each kept entry's content in the store."""
+    each kept entry's content in store: what a download stores into
+    (download.Staging, download.Bundled), whose keep(content) gives the
+    content's sha256 and where it lies (a wpt_store.Placed, or None for
+    an object under its sha256), and put_file(path) a local file's sha256."""
 
     def __init__(self, store, extract: dict):
         self.store = store
@@ -169,25 +202,43 @@ class Extractor:
             return None
         return path
 
-    def add(self, raw_path: bytes | str, mode: str, content: bytes):
+    def add(self, raw_path: bytes | str, mode: str, content: bytes) -> Entry | None:
+        """Store an entry's content when its path is kept: its Entry, or None."""
         path = self.kept(raw_path)
         if path is not None:
-            self._record(path, mode, self.store.put_bytes(content))
+            return self._record(path, mode, *self.store.keep(content))
+        return None
+
+    def add_same(self, raw_path: bytes | str, mode: str, like: Entry) -> Entry | None:
+        """An entry holding the content of an entry already stored (a tar's
+        hard link), when its path is kept: its Entry, or None."""
+        path = self.kept(raw_path)
+        if path is not None:
+            return self._record(path, mode, like.sha256, like.placed)
+        return None
 
     def add_file(self, path: str, mode: str, file: Path):
         """A kept path (see kept) whose content is a file on disk, stored
         without reading it into memory."""
         self._record(path, mode, self.store.put_file(file))
 
-    def add_known(self, path: str, mode: str, sha256: str):
-        """A kept path known only by its content's sha256, which is not
-        stored: for a manifest computed from an upstream's own listing."""
-        self._record(path, mode, sha256)
-
-    def _record(self, path: str, mode: str, sha256: str):
+    def _record(self, path: str, mode: str, sha256: str, placed=None) -> Entry:
         if path in self.tree:
             raise BadPath(f"{path!r} appears twice")
-        self.tree[path] = Entry(mode, sha256)
+        self.tree[path] = Entry(mode, sha256, placed)
+        return self.tree[path]
+
+    @contextlib.contextmanager
+    def trying(self):
+        """A block whose entries leave the tree again when it raises: one
+        try at reading what an address holds."""
+        before = set(self.tree)
+        try:
+            yield
+        except BaseException:
+            for path in set(self.tree) - before:
+                del self.tree[path]
+            raise
 
     def finish(self) -> dict[str, Entry]:
         check_paths(self.tree)
@@ -198,32 +249,93 @@ def _file_mode(unix_mode: int) -> str:
     return EXECUTABLE if unix_mode & 0o111 else FILE
 
 
+class LinkBack(Exception):
+    """A tar read as it arrives holds hard links to members that were not
+    kept: their content went by unread, and only reading the archive again,
+    holding them (read_tar_members), gives it. targets: the normalized
+    names of the members whose content those links need."""
+
+    def __init__(self, targets):
+        super().__init__("hard links to members not kept: " + ", ".join(sorted(targets)))
+        self.targets = frozenset(targets)
+
+
 def read_tar(path: Path, extractor: Extractor):
     with tarfile.open(path, "r:*") as archive:
-        for member in archive:
-            if member.isdir():
-                continue
-            if member.issym():
-                extractor.add(member.name, SYMLINK, member.linkname.encode())
-            elif member.isfile() or member.islnk():  # a hard link holds its target's content
-                extractor.add(member.name, _file_mode(member.mode), archive.extractfile(member).read())
-            else:
-                raise UnsupportedEntry(f"{member.name}: tar entry type {member.type!r} is neither a file nor a symlink")
+        read_tar_members(archive, extractor)
+
+
+def read_tar_members(archive: tarfile.TarFile, extractor: Extractor, streamed=False, held=frozenset()):
+    """Every entry of an open tar archive. streamed: it is read once from
+    start to end (mode "r|"), so a hard link takes the content of the
+    member it names, the last of that name before it, as tarfile finds it.
+    A kept hard link to a member that was not kept is left out, and once
+    the whole archive is read, LinkBack names every member whose content
+    such links need; read again with those names as held, a held member's
+    content stays in memory, unstored, for the links that need it. A
+    member's content is read whole."""
+    read = {}  # streamed: each member's normalized name -> its Entry when kept, its content when held, else None
+    links = {}  # streamed: each hard link's normalized name -> the normalized name it links to
+    missing = set()
+    for member in archive:
+        name, found = os.path.normpath(member.name), None
+        if member.isdir():
+            pass
+        elif member.issym():
+            extractor.add(member.name, SYMLINK, member.linkname.encode())
+        elif member.islnk() and streamed:  # a hard link holds its target's content
+            links[name] = target = os.path.normpath(member.linkname)
+            found = read.get(target)  # what a link to this one holds, kept or not
+            if extractor.kept(member.name) is not None:
+                if found is None:
+                    missing.add(target)
+                elif isinstance(found, Entry):
+                    found = extractor.add_same(member.name, _file_mode(member.mode), found)
+                else:
+                    found = extractor.add(member.name, _file_mode(member.mode), found)
+        elif member.isfile() or member.islnk():
+            if not streamed or extractor.kept(member.name) is not None:
+                found = extractor.add(member.name, _file_mode(member.mode), archive.extractfile(member).read())
+            elif name in held:
+                found = archive.extractfile(member).read()
+        else:
+            raise UnsupportedEntry(f"{member.name}: tar entry type {member.type!r} is neither a file nor a symlink")
+        if streamed:
+            read[name] = found
+    if missing:
+        raise LinkBack(_linked(missing, links))
+
+
+def _linked(names, links) -> set[str]:
+    """names, with every member a hard link among them leads to, link after link."""
+    found, pending = set(), list(names)
+    while pending:
+        if (name := pending.pop()) not in found:
+            found.add(name)
+            if name in links:
+                pending.append(links[name])
+    return found
 
 
 def read_zip(path: Path, extractor: Extractor):
     with zipfile.ZipFile(path) as archive:
-        for info in archive.infolist():
-            if info.is_dir():
-                continue
-            unix_mode = info.external_attr >> 16 if info.create_system == 3 else 0
-            content = archive.read(info)
-            if stat.S_ISLNK(unix_mode):
-                extractor.add(info.filename, SYMLINK, content)
-            elif unix_mode == 0 or stat.S_ISREG(unix_mode):
-                extractor.add(info.filename, _file_mode(unix_mode), content)
-            else:
-                raise UnsupportedEntry(f"{info.filename}: zip entry is neither a file nor a symlink")
+        read_zip_members(archive, extractor)
+
+
+def read_zip_members(archive: zipfile.ZipFile, extractor: Extractor):
+    """Every entry of an open zip archive, in the order of its table of
+    contents. A member's content is read whole."""
+    for info in archive.infolist():
+        if info.is_dir():
+            continue
+        unix_mode = info.external_attr >> 16 if info.create_system == 3 else 0
+        content = archive.read(info)
+        if stat.S_ISLNK(unix_mode):
+            extractor.add(info.filename, SYMLINK, content)
+        elif unix_mode == 0 or stat.S_ISREG(unix_mode):
+            extractor.add(info.filename, _file_mode(unix_mode), content)
+        else:
+            raise UnsupportedEntry(f"{info.filename}: zip entry is neither a file nor a symlink")
 
 
 def read_archive(path: Path, extractor: Extractor):

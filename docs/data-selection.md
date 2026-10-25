@@ -86,14 +86,17 @@ part is what a build enforces:
 that name and prints the dataset id: the fingerprint of the data part, the
 mixture, the vocabulary and every document. Recipes with the same data
 part share one dataset, and `wpt-train` refuses a dataset built from
-another data part than its recipe's. With `--stream`, it
-fetches one source at a time and keeps only tokens in the store, for a
-corpus larger than the disk; the dataset is the same
+another data part than its recipe's. It reads the sources `wpt-dataset
+download` put in the store and downloads none; a source that is not
+there is left out and listed in the record. With `--stream`, it keeps
+only the tokens of each source's documents in the store, not their
+Markdown, and no source's files on the machine; the dataset is the same
 ([architecture.md](architecture.md), "Fingerprints and the store"). There is no
 tokens-per-parameter rule: a model may be data-starved or oversized for its
 data. Model size is the recipe's `model` part.
 
-The build record (in the store) lists the sources and their trees, the pools
+The build record (in the store) lists the sources and their trees, the
+download each source's files came from (its session and time), the pools
 with their documents, tokens, shares and passes, the shards, the
 contamination report and the tool versions used.
 

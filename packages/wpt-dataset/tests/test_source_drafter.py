@@ -5,13 +5,17 @@ resumed after a stop, skips, needs-a-person and failures, a source that
 exists updated in place, and the runs a program started that it starts
 again."""
 
+import http.server
 import json
+import shutil
+import threading
 
 import pytest
 
 from wpt_dataset import source_drafter
 from wpt_dataset.cli import main
 from wpt_dataset.repo import DRAFT_CHECKSUM, source_id
+from wpt_utils.parallel import Sizing
 
 # A source drafter driven by a plan file (its `plan` setting): its candidates, what draft() gives each, and a
 # list of the candidates it was asked to draft (`calls`). A candidate's "stop" makes draft() stop the run as
@@ -97,6 +101,19 @@ def sid(name):
     return source_id("fake", name, f"https://example.org/{name}.zip")
 
 
+class Machine:
+    """A machine with plenty of everything, as wpt_utils.parallel measures it."""
+
+    def __init__(self, cores):
+        self.cores = cores
+
+    def memory(self):
+        return 1e12, 1e12
+
+    def idle_cores(self):
+        return float(self.cores)
+
+
 def records(store):
     """(candidates.json, every outcomes.jsonl line) of each run, oldest first."""
     found = sorted((source_drafter.report(store, folder) for folder in source_drafter.runs(store)),
@@ -126,14 +143,17 @@ def test_drafts_are_saved_under_review_and_every_outcome_is_recorded(program, re
 
     # a second run drafts only the failed candidate again: skips and needs-a-person are done
     assert program.run(["one", "skipped", "person", "broken"], {}) == 0
-    assert program.calls() == ["one", "skipped", "person", "broken", "broken"]
+    calls = program.calls()  # the first run's drafts may run at once, in any order
+    assert sorted(calls[:4]) == sorted(["one", "skipped", "person", "broken"]) and calls[4:] == ["broken"]
     assert records(store)[1][0] == {"candidates": 4, "chosen": 4, "done_before": 3, "to_draft": 1}
     assert repo.check() == []
 
 
-def test_a_stopped_run_resumes_with_what_is_left(program, repo, store):
-    # given a run stopped (Ctrl+C) while drafting its second candidate, the same command drafts the second and
-    # third, never the first again, and reads its site facts from the store instead of computing them again
+def test_a_stopped_run_resumes_with_what_is_left(program, repo, store, monkeypatch):
+    # given a run drafting one at a time (a machine of 1 core) stopped (Ctrl+C) while drafting its second
+    # candidate, the same command drafts the second and third, never the first again, and reads its site facts
+    # from the store instead of computing them again
+    monkeypatch.setattr(source_drafter, "Sizing", lambda memory, what: Sizing(memory, what, Machine(1)))
     with pytest.raises(KeyboardInterrupt):
         program.run(["first", "second", "third"], {"second": {"stop": True}})
     assert repo.source_ids() == [sid("first")]
@@ -179,11 +199,24 @@ def test_an_existing_source_is_updated_in_place(program, kit, repo, store):
     assert "patched" not in program.calls()  # its candidate names its source: it stops before its draft
 
 
-def test_drafts_made_in_worker_processes_are_saved(program, repo, store):
-    # --processes 2: the drafts run in two worker processes, the saves in the command's own
-    assert program.run(["a", "b", "c"], {}, "--processes", "2") == 0
-    assert repo.source_ids() == sorted(sid(name) for name in ("a", "b", "c"))
-    assert sorted(o["candidate"] for o in records(store)[0][1]) == ["a", "b", "c"]
+def test_drafts_in_worker_processes_give_what_drafts_one_at_a_time_give(program, repo, store, monkeypatch):
+    # given the same candidates drafted one at a time (a machine of 1 core) and in worker processes (16 cores:
+    # 12 at once) into an empty repository each time, both runs save the same sources and record the same
+    # outcomes, in the candidates' order
+    names = ["c", "a", "skipped", "b", "person"]
+    drafts = {"skipped": {"skip": "nothing published"}, "person": {"person": "a license file to read"}}
+    found = []
+    for cores in (1, 16):
+        for existing in repo.source_ids():
+            shutil.rmtree(repo.root / "data" / "sources" / existing)
+        monkeypatch.setattr(source_drafter, "Sizing", lambda memory, what, cores=cores: Sizing(memory, what,
+                                                                                              Machine(cores)))
+        assert program.run(names, drafts, "--again") == 0
+        outcomes = [(o["candidate"], o["outcome"], o["source"], o["change"], o["reason"]) for o in records(store)[-1][1]]
+        found.append((outcomes, {s: repo.source(s).data for s in repo.source_ids()}))
+    assert found[0] == found[1]
+    assert [line[0] for line in found[0][0]] == names
+    assert sorted(found[0][1]) == sorted(sid(name) for name in ("a", "b", "c"))
 
 
 def test_a_program_starts_again_only_the_unfinished_runs_it_started(program, repo, store, tmp_path):
@@ -256,3 +289,51 @@ def test_a_draft_puts_the_sources_it_supersedes_back_under_review(program, kit, 
     [outcome] = records(store)[0][1]
     assert outcome["superseded"] == [sid("old"), sid("gone")]
     assert repo.check() == []
+
+
+@pytest.fixture
+def site():
+    """(the address of a page, the page's state): the page answers its body with its ETag, or 304 (not
+    changed) to a request whose If-None-Match names that ETag; state["asked"] keeps each request's
+    If-None-Match. The site has no robots.txt."""
+    state = {"body": b"first version", "etag": '"v1"', "asked": []}
+
+    class Handler(http.server.BaseHTTPRequestHandler):
+        def do_GET(self):
+            if self.path != "/page":
+                self.send_error(404)
+                return
+            state["asked"].append(self.headers.get("If-None-Match"))
+            if self.headers.get("If-None-Match") == state["etag"]:
+                self.send_response(304)
+                self.end_headers()
+                return
+            self.send_response(200)
+            self.send_header("ETag", state["etag"])
+            self.send_header("Content-Length", str(len(state["body"])))
+            self.end_headers()
+            self.wfile.write(state["body"])
+
+        def log_message(self, *args):
+            pass
+
+    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    yield f"http://127.0.0.1:{server.server_address[1]}/page", state
+    server.shutdown()
+
+
+def test_a_page_fetched_again_is_asked_for_only_if_it_changed(repo, store, site):
+    # given a page fetched once, a later run (another Context sharing the store) asks the site whether it
+    # changed and, on 304, gets the kept page; once the site changes it, the new page comes, and is kept
+    address, state = site
+
+    def fetch():
+        return source_drafter.Context(repo, store, {}, "fake", "T", "2026-10-25").fetch(address)
+
+    assert fetch() == b"first version"
+    assert fetch() == b"first version"
+    state.update(body=b"second version", etag='"v2"')
+    assert fetch() == b"second version"
+    assert fetch() == b"second version"
+    assert state["asked"] == [None, '"v1"', '"v1"', '"v2"']

@@ -148,6 +148,49 @@ def test_a_failure_is_recorded_with_its_traceback(tmp_path):
         assert "in load_the_recipe" in text and text.rstrip().endswith("ValueError: no recipe named d")
 
 
+
+def test_each_thread_records_under_its_own_spans(tmp_path):
+    # work run on other threads at once must land under its own item's span, never under whatever span another
+    # thread has open; a span begun on a worker can be ended by the thread that puts the results together
+    store = open_store((tmp_path / "store").as_uri())
+    with Telemetry.start(store, "wpt-example", ["d"], "d", env_file=tmp_path / ".env", environ={}) as telemetry:
+        with telemetry.span("documents"):
+            parent, begun, ready = telemetry.current(), {}, threading.Barrier(3)
+
+            def work(item):
+                with telemetry.within(parent):
+                    begun[item] = span = telemetry.begin("source", source=item)
+                with telemetry.within(span):
+                    ready.wait()  # every worker has its span open: an event landing in another's would show
+                    telemetry.event("converted", source=item)
+
+            def unhanded():
+                telemetry.event("outside")
+
+            workers = [threading.Thread(target=work, args=(item,)) for item in ("a", "b", "c")]
+            workers.append(threading.Thread(target=unhanded))
+            for thread in workers:
+                thread.start()
+            for thread in workers:
+                thread.join()
+            for item in ("a", "b", "c"):
+                with telemetry.finish(begun[item]) as span:
+                    span.set(kept=1)
+                    telemetry.event("kept", source=item)
+
+    lines = events(store, telemetry.folder)
+    [documents] = [e["span"] for e in lines if e["kind"] == "span_start" and e["name"] == "documents"]
+    starts = {e["attributes"]["source"]: e for e in lines if e["kind"] == "span_start" and e["name"] == "source"}
+    ends = {e["span"]: e for e in lines if e["kind"] == "span_end" and e["name"] == "source"}
+    for item, start in starts.items():
+        assert start["parent"] == documents
+        assert [(e["name"], e["attributes"]["source"]) for e in lines
+                if e["kind"] == "event" and e["span"] == start["span"]] == [("converted", item), ("kept", item)]
+        assert ends[start["span"]]["attributes"] == {"kept": 1}
+    [outside] = [e for e in lines if e["kind"] == "event" and e["name"] == "outside"]
+    [run] = [e["span"] for e in lines if e["kind"] == "span_start" and e["parent"] is None]
+    assert outside["span"] == run  # a thread given no span records under the run's own
+
 def test_a_launcher_never_writes_back_an_older_copy_of_the_ids(tmp_path):
     # wpt-train's launcher opens the record, its training process joins it and
     # adds the ids it wrote; whatever the launcher adds later keeps them
