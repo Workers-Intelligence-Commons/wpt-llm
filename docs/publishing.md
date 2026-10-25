@@ -25,7 +25,8 @@ it from there.
   every letter. A letter says only the order inside its release: the model
   card gives the real size.
 - `<variation>`: none for the base model; otherwise one short word, such as
-  `chat` for a model post-trained on conversations, which the model card
+  `chat` for a model whose steps include training on conversations, which
+  the model card
   explains.
 
 ## Where

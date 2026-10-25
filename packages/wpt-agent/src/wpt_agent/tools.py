@@ -1,7 +1,7 @@
 """The tools a model calls in its sandbox: the four every task offers
 (read, write, edit and bash), ask when the task holds the user's replies,
 and the tools a task or its image's pool declares, each answered by a
-program in the image (docs/post-training.md, "Tools").
+program in the image (docs/training.md, "Tools").
 
 TOOLS lists the four as a conversation's `tools` (docs/chat-format.md).
 An Offer is what one attempt is offered: offer() chooses it with a seeded

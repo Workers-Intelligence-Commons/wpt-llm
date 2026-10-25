@@ -21,7 +21,7 @@ token, so every process has a gradient for every weight.
 A forward pass can record the experts its routers chose for each position
 of one sequence (Routes), and a later pass can replay them instead of
 choosing again: a learner then scores the tokens through the experts that
-wrote them (R3, docs/post-training.md). Replayed weights still come from
+wrote them (R3, docs/training.md). Replayed weights still come from
 the current router scores. Hash-routed layers need no record.
 """
 

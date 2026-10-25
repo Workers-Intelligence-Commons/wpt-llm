@@ -1,4 +1,4 @@
-# The first image of agentic tasks (docs/post-training.md, "The agent image"): Debian with bash, git
+# The first image of agentic tasks (docs/training.md, "The agent image"): Debian with bash, git
 # and Python, the shared check library (wpt_check.py, which every task's check calls), and the
 # programs that answer the tools tasks declare (search, fetch) and the image's pool (tools.json);
 # and ondrik, the program of the read-the-manual tasks, compiled in a stage of its own so the image

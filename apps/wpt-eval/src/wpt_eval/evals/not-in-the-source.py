@@ -2,7 +2,7 @@
 answer?
 
 From the shared run of attempts (context.attempts()), the evidence-removed
-tasks (docs/post-training.md, "The task builder"), in two halves: those
+tasks (docs/training.md, "The task builder"), in two halves: those
 whose paragraph was removed from its text (the removed paragraph is next
 to the check, as missing.txt, and the right answer starts with "not
 enough" and names it), and those that can be answered (rest.txt next to

@@ -2,7 +2,7 @@
 for what only the user knows?
 
 From the shared run of attempts (context.attempts()), the look-or-ask
-tasks (docs/post-training.md, "The task builder"), in two halves: those
+tasks (docs/training.md, "The task builder"), in two halves: those
 where NOTES.md names the file the result goes into (the task does not
 need ask: asking scores down), and those where only the reply of the ask
 tool has it (the task needs ask). For each half, the pass rate and the

@@ -3,7 +3,7 @@ it answers, without opening everything blindly?
 
 From the shared run of attempts (context.attempts()), the tasks that give
 sources: files under docs/ in /work, or web pages under web/ that the
-search and fetch tools answer from (docs/post-training.md, "The task
+search and fetch tools answer from (docs/training.md, "The task
 builder"). The share of attempts that opened sources before answering,
 by the check library's sources_first (a look before any change or
 question, and a look at all when there was neither), and the mean number

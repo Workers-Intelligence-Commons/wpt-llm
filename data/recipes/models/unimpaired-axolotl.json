@@ -1,5 +1,5 @@
 {
-  "schema": 6,
+  "schema": 7,
   "data": {
     "mixture": "classics",
     "tokenizer": "classics",
@@ -36,22 +36,30 @@
     "engram_dim": 16,
     "engram_table_size": 50021
   },
-  "training": {
-    "method": "muon",
-    "settings": {
-      "warmup": 30
-    },
-    "stages": [
-      {
-        "block_size": 32768,
-        "steps": 300,
-        "batch_size": 8
-      }
-    ],
-    "eval_every": 50,
-    "eval_batches": 4,
-    "seed": 1337
-  },
+  "seed": 1337,
+  "steps": [
+    {
+      "step": "read-text",
+      "optimizer": {
+        "name": "muon",
+        "settings": {
+          "warmup": 30
+        }
+      },
+      "settings": {
+        "stages": [
+          {
+            "block_size": 32768,
+            "steps": 300,
+            "batch_size": 8
+          }
+        ],
+        "eval_every": 50,
+        "eval_batches": 4
+      },
+      "locked": []
+    }
+  ],
   "drafter": {
     "prompts": 256,
     "prompt_tokens": 64,
@@ -63,6 +71,5 @@
     "batch": 8,
     "seed": 0
   },
-  "posttrain": [],
   "note": "Untested in a full run: half of watery-tardigrade, 50M parameters with 32K-token windows, sized for about 8 GB of GPU memory, trained with --recompute --micro-batch 1. Layer 4 is DeepSeek-V4's CSA (4 heads of 128 sharing one key-value head, an indexer of 5 heads of 128 and top 40, V4-Flash's scaled to the width), layer 8 is HCA, and the MTP block's attention is a 128-token window. On an integrated Radeon 860M, one 32K window of random tokens peaked at 6.6 GiB; it is meant for a stronger GPU. Its data is the classics for now (about 4.3M tokens, so the model mostly memorizes); it changes once a larger mixture exists. Its training is one stage: 300 steps of 8 windows of 32K tokens; DeepSeek-V4's stages to 1M tokens are not set yet. A GPU where 32K tokens do not fit trains it the same with --segment 8192 or --strategy split (docs/training.md, \"Long windows\")."
 }

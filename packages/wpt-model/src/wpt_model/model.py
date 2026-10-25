@@ -49,6 +49,32 @@ from .sequence import WHOLE, Carried, Split
 HASH_LAYERS = 3   # the first 3 layers' experts are hash-routed
 RATIOS = {"CSA": CSA_RATIO, "HCA": HCA_RATIO}
 
+# the model's parts, by the names a training step locks them by (docs/model.md, "Parts"): every parameter
+# belongs to exactly one, and BALANCING is the routers' balancing biases, which change after each update
+EMBEDDING, ATTENTION, INDEXERS, ROUTERS, BALANCING = "embedding", "attention", "indexers", "routers", "balancing"
+EXPERTS, ENGRAM, STREAMS_PART, FINAL_NORM = "experts", "engram", "streams", "final-norm"
+OUTPUT_HEAD, MULTI_TOKEN_PREDICTION = "output-head", "multi-token-prediction"
+PARTS = (EMBEDDING, ATTENTION, INDEXERS, ROUTERS, BALANCING, EXPERTS, ENGRAM, STREAMS_PART, FINAL_NORM, OUTPUT_HEAD,
+         MULTI_TOKEN_PREDICTION)
+# the first module names of a parameter's name, in order of precedence, and the part they make it
+_PART_OF = ((("mtp",), MULTI_TOKEN_PREDICTION), (("embedding",), EMBEDDING), (("head",), OUTPUT_HEAD),
+            (("final_norm",), FINAL_NORM), (("attention", "indexer"), INDEXERS),
+            (("attention",), ATTENTION), (("attention_norm",), ATTENTION), (("experts", "router"), ROUTERS),
+            (("experts",), EXPERTS), (("experts_norm",), EXPERTS), (("engram",), ENGRAM),
+            (("attention_streams",), STREAMS_PART), (("experts_streams",), STREAMS_PART))
+
+
+def part_of(name: str) -> str:
+    """The part (PARTS) a parameter belongs to, by its name in the model
+    (WPT.named_parameters): a layer's are read after `layers.<n>.`."""
+    words = name.split(".")
+    if words[0] == "layers":
+        words = words[2:]
+    for prefix, part in _PART_OF:
+        if tuple(words[:len(prefix)]) == prefix:
+            return part
+    raise ValueError(f"{name}: a parameter of no part")
+
 
 def merging_ratio(number, config):
     """The merging ratio of layer number's attention (CSA_RATIO or
@@ -267,11 +293,25 @@ class WPT(nn.Module):
         """undo, for the pairs of the last undoable extend_mtp."""
         cache.mtp.undo(torch.as_tensor(kept, dtype=torch.long, device=cache.lengths.device))
 
-    def after_update(self, reduce):
+    def after_update(self, reduce, balance=True):
         """After each optimizer step: Quantile Balancing sets the routers'
-        biases from the step's scores, summed over processes by reduce."""
+        biases from the step's scores, summed over processes by reduce.
+        Without balance (a step that locks BALANCING), the biases stay as
+        they are and the step's scores are dropped."""
         for layer in self.layers:
-            layer.experts.balance(reduce)
+            if balance:
+                layer.experts.balance(reduce)
+            else:
+                layer.experts.histogram = None
+
+    def parts(self) -> dict[str, list[torch.nn.Parameter]]:
+        """{part: its parameters} for every name of PARTS, in the model's
+        order (BALANCING has none: its biases are not trained by gradient);
+        every parameter is in exactly one."""
+        found = {part: [] for part in PARTS}
+        for name, parameter in self.named_parameters():
+            found[part_of(name)].append(parameter)
+        return found
 
     def optimizer_roles(self):
         """(name, parameter, role, view) for every parameter. Role "matrix"

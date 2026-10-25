@@ -6,7 +6,7 @@
   "additionalProperties": false,
   "required": ["schema", "type", "address", "revision", "checksum", "licenses", "formats", "decision"],
   "properties": {
-    "schema": {"const": 7, "description": "shape version of this file, for migrations"},
+    "schema": {"const": 8, "description": "shape version of this file, for migrations"},
     "type": {"enum": ["http-file", "http-archive", "git", "mercurial", "huggingface", "empty"], "description": "empty: no upstream; the patches hold every file (text written for WPT); huggingface: a dataset repository on huggingface.co, address https://huggingface.co/datasets/<owner>/<name>"},
     "address": {"type": "string", "minLength": 1, "description": "where to fetch it; its sha256 gives the id's hash part; with `addresses`, the first of them"},
     "addresses": {
@@ -77,7 +77,7 @@
         "additionalProperties": false,
         "required": ["format", "paths"],
         "properties": {
-          "format": {"enum": ["markdown", "text", "xhtml", "html", "code", "chat", "task", "rating", "records"], "description": "markdown: kept as is; text: plain text; xhtml: web pages as strict XML (EPUB books); html: web pages that are not strict XML (such as Project Gutenberg's), converted as xhtml pages are; code: a fenced code block naming the language and the path; chat: conversations for the post-training step named by the file's tags, never a pre-training document; task: the files of task folders (task.json, files/, check) for the post-training step named by the tags of their task.json, never a pre-training document; rating: people's pass or fail ratings of measure attempts, one per line, a measure only, never a pre-training document nor a training signal; records: a JSON Lines (.jsonl, .json, optionally .gz or .zst) or Parquet file holding one document per record, each with its own license, or a JSON document holding the list of records (`records`), or an XML file holding one record"},
+          "format": {"enum": ["markdown", "text", "xhtml", "html", "code", "chat", "task", "rating", "records"], "description": "markdown: kept as is; text: plain text; xhtml: web pages as strict XML (EPUB books); html: web pages that are not strict XML (such as Project Gutenberg's), converted as xhtml pages are; code: a fenced code block naming the language and the path; chat: conversations for the training step the file's tags name, never a pre-training document; task: the files of task folders (task.json, files/, check) for the training step the tags of their task.json name, never a pre-training document; rating: people's pass or fail ratings of measure attempts, one per line, a measure only, never a pre-training document nor a training signal; records: a JSON Lines (.jsonl, .json, optionally .gz or .zst) or Parquet file holding one document per record, each with its own license, or a JSON document holding the list of records (`records`), or an XML file holding one record"},
           "language": {"type": "string", "pattern": "^[A-Za-z0-9_+#.-]+$", "description": "code only: the language named after the opening fence, for example python"},
           "text": {"$ref": "#/$defs/field", "description": "records only: the field holding the document's text (in an .xml file, every field is an XPath 1.0 expression)"},
           "as": {"enum": ["text", "markdown", "html"], "description": "records only: whether the text field is plain text (default), Markdown, or a web page converted as an html file is"},

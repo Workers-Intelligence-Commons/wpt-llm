@@ -6,7 +6,7 @@ Every file under data/ is opened here and nowhere else
     data/sources/<id>/source.json         + NNNN-*.patch
     data/recipes/mixtures/<name>.json
     data/recipes/tokenizers/<name>.json   + <name>.lock.json (written by `wpt-dataset build-tokenizer`)
-    data/recipes/models/<name>.json       data, architecture, training and post-training of one model
+    data/recipes/models/<name>.json       data, architecture and training steps of one model
     data/images/<name>/Dockerfile         a container image of agentic tasks (and any file it copies)
                       + lock.json, licenses.json (written by `wpt-agent lock-image`)
                       + tools.json, the shared pool of tools its programs answer (optional)
@@ -90,7 +90,7 @@ from .errors import DataAccessRefused, InvalidFile, NotFound, OutdatedSchema, Ru
 from .licenses import check_license
 from .pools import parse
 
-CURRENT_SCHEMA = {"source": 7, "mixture": 1, "model": 6, "tokenizer": 2, "lock": 2, "conversation": 3, "task": 3,
+CURRENT_SCHEMA = {"source": 8, "mixture": 1, "model": 7, "tokenizer": 2, "lock": 2, "conversation": 3, "task": 3,
                   "rating": 1, "image-lock": 1, "image-licenses": 1, "image-tools": 1, "reviewed-license-texts": 1}
 ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}")
 PATCH = re.compile(r"(\d{4})-[A-Za-z0-9._-]+\.patch")
@@ -121,7 +121,7 @@ KINDS = {kind.name: kind for kind in (
     Kind("source", "json", "a source's description, data/sources/<id>/source.json", "source"),
     Kind("mixture", "json", "a mixture recipe: pools and their weights", "mixture"),
     Kind("tokenizer", "json", "a tokenizer recipe", "tokenizer"),
-    Kind("model", "json", "a model recipe: data, architecture, training and post-training", "model"),
+    Kind("model", "json", "a model recipe: data, architecture and training steps", "model"),
     Kind("lock", "json", "a tokenizer recipe's lock: the vocabulary it froze", "lock", "wpt-dataset build-tokenizer"),
     Kind("dockerfile", "text", "the Dockerfile of a container image of agentic tasks"),
     Kind("image-lock", "json", "an image's lock: its base, archive date and packages", "image-lock",
@@ -1485,7 +1485,7 @@ class Repo:
     @_locked
     def save_task(self, sid: str, folder: str, task: dict | None, check: str, files: dict[str, str], patch: str,
                   version: str, store) -> str:
-        """Write a task folder (docs/post-training.md, "Tasks") of an `empty`
+        """Write a task folder (docs/training.md, "Tasks") of an `empty`
         source as exactly task.json (the task), check and files/<path>
         (files), removing its other files; task None removes the folder.
         Through a patch (change_source_files) that holds only the files

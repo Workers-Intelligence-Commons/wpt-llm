@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/Workers-Intelligence-Commons/wpt-llm/schemas/image-tools.schema.json",
-  "title": "WPT image tools (data/images/<name>/tools.json): the shared pool of working tools an attempt in the image may be offered beyond those its task needs, each answered by a program in the image (docs/post-training.md, \"Tools\")",
+  "title": "WPT image tools (data/images/<name>/tools.json): the shared pool of working tools an attempt in the image may be offered beyond those its task needs, each answered by a program in the image (docs/training.md, \"Tools\")",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema", "tools"],
@@ -21,7 +21,7 @@
         "parameters": {"type": "object", "description": "the JSON Schema of the call's arguments"},
         "program": {"type": "string", "pattern": "^/", "description": "the absolute path, in the image, of the program that answers a call"},
         "names": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/name"}, "description": "other names an attempt may offer the tool under"},
-        "looks": {"type": "boolean", "description": "whether a call of the tool looks at sources, as read does (search, fetch, a file search); answered_by names only looking tools (docs/post-training.md, \"The check library\")"}
+        "looks": {"type": "boolean", "description": "whether a call of the tool looks at sources, as read does (search, fetch, a file search); answered_by names only looking tools (docs/training.md, \"The check library\")"}
       }
     }
   }

@@ -1,7 +1,7 @@
 """Reading gain, agent form: does the model use a program better when its
 manual is there to read (docs/evaluation.md, "Reading the manual")?
 
-The read-the-manual tasks (docs/post-training.md, "The task builder") ask
+The read-the-manual tasks (docs/training.md, "The task builder") ask
 for a result only ondrik gives, a compiled program of the agent image
 written for WPT, so no training text describes it and the image holds no
 readable documentation of it besides the manual. Half of them remove the

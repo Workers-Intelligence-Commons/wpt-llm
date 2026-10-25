@@ -1,4 +1,4 @@
-"""Playing attempts at a task: what a post-training step and the measures
+"""Playing attempts at a task: what a training step and the measures
 share, with no learning and no record of their own.
 
     ready(names)               the built images and their pools of tools, or Unready

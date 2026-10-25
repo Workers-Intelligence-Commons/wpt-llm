@@ -28,7 +28,8 @@ TINY_MODEL = {"n_layer": 4, "global_attention": ["CSA"], "d_model": 16, "kda_hea
               "output_rank": 8, "index_heads": 2, "index_head_dim": 128, "index_top_k": 2, "n_experts": 4, "top_k": 2, "expert_width": 8, "latent_width": 8,
               "shared_width": 16, "engram_layers": [2], "engram_order": 3, "engram_heads": 2, "engram_dim": 4,
               "engram_table_size": 31}
-ONE_STEP = {"method": "muon", "settings": {}, "stages": [{"block_size": 16, "steps": 1, "batch_size": 4}],
+# the read-text step of the recipe "d": the optimizer, its settings, the step's text windows, the recipe's seed
+ONE_STEP = {"optimizer": "muon", "settings": {}, "stages": [{"block_size": 16, "steps": 1, "batch_size": 4}],
             "eval_every": 2, "eval_batches": 20, "seed": 1337}
 # the drafter every run trains at its end, as small and short as still trains and calibrates one
 TINY_DRAFTER = {"epochs": 1, "prompts": 4, "prompt_tokens": 8, "answer_tokens": 8, "batch": 2, "anchors": 4,
@@ -42,10 +43,16 @@ def built(tmp_path, monkeypatch):
     The working folder tmp_path is the repository, and the store is
     WPT_STORE. Gives store, records(command) (the record folders of that
     command's runs, oldest first), dataset_id (built from the model recipe "d", a
-    tiny model trained one step), source_id, attribution, and
-    recipe(name, model=..., training=..., drafter=..., posttrain=...), which
-    writes a model recipe of the same data part, with those changes to "d",
-    and returns its name."""
+    tiny model trained one step), source_id, attribution,
+    recipe(name, model=..., training=..., drafter=..., steps=...), which
+    writes a model recipe of the same data part, with those changes to "d"
+    (training: to ONE_STEP, its read-text step; steps: the entries that
+    follow it), and returns its name, source(upstream, files, formats, tags,
+    attribution, text), which commits files into the new git project
+    upstream and adds it as an admitted CC0-1.0 source of that attribution
+    and license text, returning its id, and build(name), which builds the
+    dataset of recipe name again from the sources there are now, returning
+    its id."""
     upstream = tmp_path / "upstream"
     upstream.mkdir()
     for i in range(16):
@@ -57,26 +64,45 @@ def built(tmp_path, monkeypatch):
     root = tmp_path
     repo = Repo(root)
     store = open_store((tmp_path / "store").as_uri())
-    data = {"schema": 7, "type": "git", "address": str(upstream), "revision": commit,
-            "licenses": [{"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION, "text": LICENSE_TEXT}],
-            "formats": [{"format": "text", "paths": ["**"]}],
-            "tags": [{"tags": ["en"], "paths": ["**"]}],
-            "decision": {"decision": "admitted", "by": "T", "date": "2026-10-14", "reason": "test"}}
-    data["checksum"] = manifest.checksum(compute_upstream(data, data["address"], store))
-    source_id = f"example-fox-{address_hash(str(upstream))}"
-    (root / "data" / "sources" / source_id).mkdir(parents=True)
-    (root / "data" / "sources" / source_id / "source.json").write_text(dump_json(data))
+    def admitted(name, upstream, commit, license, attribution, text, formats, tags):
+        data = {"schema": CURRENT_SCHEMA["source"], "type": "git", "address": str(upstream), "revision": commit,
+                "licenses": [{"license": license, "paths": ["**"], "attribution": attribution, "text": text}],
+                "formats": formats, "tags": tags,
+                "decision": {"decision": "admitted", "by": "T", "date": "2026-10-14", "reason": "test"}}
+        data["checksum"] = manifest.checksum(compute_upstream(data, data["address"], store))
+        sid = f"example-{name}-{address_hash(str(upstream))}"
+        (root / "data" / "sources" / sid).mkdir(parents=True)
+        (root / "data" / "sources" / sid / "source.json").write_text(dump_json(data))
+        return sid
+
+    source_id = admitted("fox", upstream, commit, "MIT", ATTRIBUTION, LICENSE_TEXT,
+                         [{"format": "text", "paths": ["**"]}], [{"tags": ["en"], "paths": ["**"]}])
+
+    def source(upstream, files, formats, tags, attribution, text):
+        for path, content in files.items():
+            (upstream / path).parent.mkdir(parents=True, exist_ok=True)
+            (upstream / path).write_bytes(content)
+            if path.endswith("/check"):
+                (upstream / path).chmod(0o755)
+        for args in (["init", "-q"], ["add", "-A"], ["commit", "-q", "-m", "x"]):
+            subprocess.run(["git", *args], cwd=upstream, env=GIT_ENV, check=True)
+        commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=upstream, capture_output=True,
+                                text=True).stdout.strip()
+        return admitted(upstream.name, upstream, commit, "CC0-1.0", attribution, text, formats, tags)
+
     def write(kind, name, document):
         path = root / "data" / "recipes" / f"{kind}s" / f"{name}.json"
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps({"schema": CURRENT_SCHEMA[kind], **document}))
         return name
 
-    def recipe(name="d", model=None, training=None, drafter=None, posttrain=()):
+    def recipe(name="d", model=None, training=None, drafter=None, steps=()):
+        text = {**ONE_STEP, **(training or {})}
+        read_text = {"step": "read-text", "optimizer": {"name": text["optimizer"], "settings": text["settings"]},
+                     "settings": {key: text[key] for key in ("stages", "eval_every", "eval_batches")}}
         return write("model", name, {"data": {"mixture": "m", "tokenizer": "t", "total_tokens": 3000, "held_out": 0.5},
-                                     "model": {**TINY_MODEL, **(model or {})},
-                                     "training": {**ONE_STEP, **(training or {})},
-                                     "drafter": {**TINY_DRAFTER, **(drafter or {})}, "posttrain": list(posttrain)})
+                                     "model": {**TINY_MODEL, **(model or {})}, "seed": text["seed"],
+                                     "steps": [read_text, *steps], "drafter": {**TINY_DRAFTER, **(drafter or {})}})
 
     write("mixture", "m", {"pools": [{"name": "en", "select": "en", "weight": 1}]})
     write("tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})
@@ -98,7 +124,8 @@ def built(tmp_path, monkeypatch):
         return sorted(found, key=lambda run: run.start["started"])
 
     return SimpleNamespace(store=store, dataset_id=dataset_id, source_id=source_id, attribution=ATTRIBUTION,
-                           license_text=LICENSE_TEXT, recipe=recipe, records=records)
+                           license_text=LICENSE_TEXT, recipe=recipe, records=records, source=source,
+                           build=lambda name="d": build_dataset(repo, name, store, log=lambda _: None))
 
 
 @pytest.fixture

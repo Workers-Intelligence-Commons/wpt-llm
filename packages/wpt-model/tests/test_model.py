@@ -1,7 +1,7 @@
 import pytest
 import torch
 
-from wpt_model import WPT, ModelConfig, Routes
+from wpt_model import BALANCING, MULTI_TOKEN_PREDICTION, PARTS, ROUTERS, WPT, ModelConfig, Routes
 from wpt_model.attention import CSA_RATIO, HCA_RATIO, Attention
 from wpt_model.experts import Experts
 from wpt_model.kda import _fla_chunk_kda, chunked_kda, delta_attention, recurrent_kda
@@ -104,7 +104,7 @@ def test_quantile_balancing_gives_each_expert_its_share():
 
 
 def test_a_replayed_pass_routes_each_token_through_the_experts_recorded_while_writing_it():
-    # R3 (docs/post-training.md): routes recorded by growing prefixes, as
+    # R3 (docs/training.md): routes recorded by growing prefixes, as
     # sampling reads them, route a later pass over the whole sequence the
     # same way, even when the routers would now choose other experts
     torch.manual_seed(0)
@@ -190,3 +190,19 @@ def test_the_same_pass_gives_the_same_gradients_every_time():
 
     first, second = gradients(), gradients()
     assert first.keys() == second.keys() and all(torch.equal(first[k], second[k]) for k in first)
+
+
+def test_every_parameter_belongs_to_exactly_one_named_part():
+    # a training step locks the model's parts by these names (docs/model.md,
+    # "Parts"): a parameter outside them could never be locked, and one in
+    # two would be locked by either name
+    model = WPT(ModelConfig(**TINY))
+    parts = model.parts()
+    assert list(parts) == list(PARTS)
+    found = [id(parameter) for named in parts.values() for parameter in named]
+    assert sorted(found) == sorted(id(parameter) for parameter in model.parameters())  # each once
+    names = {id(parameter): name for name, parameter in model.named_parameters()}
+    assert sorted(names[id(p)] for p in parts[ROUTERS]) == sorted(
+        name for name in names.values() if ".experts.router." in name)
+    assert parts[MULTI_TOKEN_PREDICTION] and all(names[id(p)].startswith("mtp") for p in parts[MULTI_TOKEN_PREDICTION])
+    assert parts[BALANCING] == []  # the balancing biases are set after each update, never by a gradient

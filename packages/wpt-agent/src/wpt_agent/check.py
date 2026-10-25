@@ -8,7 +8,7 @@ repository's remote): nothing the model started or changed elsewhere can
 reach the check. The
 check enters that container in a folder of its own and runs from /work,
 so the model's files are its current folder: a check must not start an
-interpreter that loads code from there (docs/post-training.md, "Scores").
+interpreter that loads code from there (docs/training.md, "Scores").
 Next to the check, in its folder, is CONVERSATION: the attempt's
 conversation in the chat format, whose metadata maps each tool's name as
 the model saw it to the real tool's and holds the answer, the final

@@ -245,7 +245,7 @@ def test_line_and_paragraph_separators_are_escaped_even_in_values_a_save_keeps(k
     path = repo.root / "data" / "sources" / sid / "source.json"
     text = path.read_text(encoding="utf-8").replace("A. Person, notes", "A. Person\u2028notes\x85\u2029")
     path.write_text(text, encoding="utf-8")  # as a file written by hand may hold them raw
-    repo.set_tags(sid, "notes.txt", ["sft"], repo.version("source", sid))  # the attribution does not change
+    repo.set_tags(sid, "notes.txt", ["answer-as-assistant"], repo.version("source", sid))  # the attribution does not change
     saved = path.read_text(encoding="utf-8")
     assert "\u2028" not in saved and "\x85" not in saved and "\u2029" not in saved
     assert '"A. Person\\u2028notes\\u0085\\u2029"' in saved
@@ -271,8 +271,8 @@ def test_an_empty_license_text_is_allowed_only_while_the_source_is_not_admitted(
 
     notes = []  # every reader leaves it out with a note naming it
     assert build.gather(repo, store, notes.append)[:2] == ([], {})
-    assert conversations.read(repo, store, "sft", log=notes.append) == ([], {})
-    assert tasks.read(repo, store, "grpo", 0, log=notes.append) == ([], {})
+    assert conversations.read(repo, store, "answer-as-assistant", log=notes.append) == ([], {})
+    assert tasks.read(repo, store, "finish-tasks", 0, log=notes.append) == ([], {})
     assert [n for n in notes if n == repo.source(sid).note] == [repo.source(sid).note] * 3 and sid in notes[0]
 
 

@@ -15,7 +15,7 @@ and its licenses). It refuses to replace an existing lock without --force.
 Commit both files.
 
 build-image builds the image from its lock on this machine, which the
-post-training steps that run tasks need first. It does nothing when the
+training steps that run tasks need first. It does nothing when the
 image is built already.
 
 Both refuse a base whose apt, after `apt-get update`, reads a package list

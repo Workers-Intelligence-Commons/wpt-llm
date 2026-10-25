@@ -31,7 +31,7 @@ that read a source's files. The statements read, the first that applies:
 A file that states no encoding is UTF-8 text, or no text at all, as before:
 nothing is guessed. Nothing in `chat` and `rating` files is read as a
 statement, since they are JSON, UTF-8 by its standard, nor in a `task`
-folder's files, UTF-8 by the task format (docs/post-training.md). A stated
+folder's files, UTF-8 by the task format (docs/training.md). A stated
 encoding Python does not know, or bytes that do not decode under it, make
 the file no text, and NotText names why. A file written in place of
 another (wpt-web's saves) is encoded the same way (encode).

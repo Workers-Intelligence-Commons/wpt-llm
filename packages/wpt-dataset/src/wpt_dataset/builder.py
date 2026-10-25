@@ -1,5 +1,5 @@
 """The task builder: program-built tasks, written as pointer tasks into a
-task source (docs/post-training.md, "The task builder"). scripts/build_tasks.py runs it.
+task source (docs/training.md, "The task builder"). scripts/build_tasks.py runs it.
 
 Each kind draws its tasks from the documents of admitted sources already
 in the store, with a generator seeded by the run's seed, so the same seed,

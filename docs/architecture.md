@@ -45,7 +45,7 @@ commit of this repository.
 
 ```json
 {
-  "schema": 7,
+  "schema": 8,
   "type": "http-archive",
   "address": "https://www.gutenberg.org/cache/epub/1342/pg1342-h.zip",
   "revision": "2026-03-01",
@@ -135,7 +135,7 @@ commit of this repository.
   `admitted` or `refused`, by whom and when. `reason` (why) is required to
   refuse, optional under review; an admission gives one only for an
   exception, such as an explicit permission for content without a license.
-  The builds, the post-training readers and `check --fetch` without ids
+  The builds and `check --fetch` without ids
   read only admitted sources; an `under-review` source is left out of them
   as a refused one is. A refused source stays in the repository as a
   reference and is never deleted.
@@ -223,7 +223,7 @@ statements it reads, in this order:
 Nothing is guessed: a file that states no encoding is UTF-8 text, or no
 text at all, as before. `chat` and `rating` files are JSON, UTF-8 by its
 standard, and every file of a `task` folder is UTF-8 by the task format
-([post-training.md](post-training.md)): no statement is read in them. A stated encoding Python does not know, or bytes
+([training.md](training.md)): no statement is read in them. A stated encoding Python does not know, or bytes
 that do not decode under it, make the file no text: the check names the
 file and why, and `fill-checksum` excludes it as it excludes a binary file.
 A source drafted before this rule may hold such files in its `extract`
@@ -304,8 +304,8 @@ tree, as its `formats` entry says
 | `xhtml` | web pages written as strict XML, such as EPUB books, read by lxml (a malformed file stops the build): headings, paragraphs, lists, quotations, emphasis, tables; a table inside a table's cell follows that table as a table of its own; a dialogue row becomes `**Speaker:** words`; a note reference becomes a Markdown note (`[^12]`) with the note's text at the end of the document that refers to it, or is dropped when the note is not in the source; a label already taken by another note gets a number, `[^12-2]`, then `[^12-3]`; an image becomes a marker, below |
 | `html` | web pages that are not strict XML, such as Project Gutenberg's, read by lxml's HTML parser (which refuses no page) and converted as `xhtml` pages are; EPUB's note marks exist only in XML, so an html page's notes are Project Gutenberg's: a link of class `fnanchor` (or `noteref`, `noteRef`) to an element of class `footnote` or `fndiv`, or to anything inside one, in the same page, is a note reference, and that element (or, when it holds the targets of links in several of its children, the child holding the target) becomes a Markdown note as an EPUB note does, with one label however many links refer to it; inside such a note, a link back to a reference (or to the empty anchor just before one), and the element of class `label` holding it, are left out; a note no such link refers to, and every other link, stay ordinary text where the page prints them, so `markdown-check` finds no unpaired note; printed page numbers, such as Gutenberg's `{92}` (class `pagenum`), stay as the page shows them |
 | `records` | a dataset file holding many documents (JSON Lines, optionally `.gz` or `.zst`, or Parquet): each record whose license value an entry lists, and that the `keep` rules keep, is one document, `<file>#<record id>`; its text field is read as `text` above, kept as it is with `"as": "markdown"`, or converted as an `html` page with `"as": "html"`, for a dataset of web pages (no note comes from another file). A `title` field's value becomes the document's first line, `# <title>`, then a blank line. Ids repeat at no point in a file, unless `newest` names a date field (ISO 8601), which needs an `id` field that every record holds: of the records that share an id in all the files the entry covers, only the one with the latest date is read, and when the dates are equal the later one (in path order, then in its file), as a dataset holding several revisions of one document needs. Three more shapes: with `records`, a `.json` file (optionally `.gz` or `.zst`) is one JSON document, and that dotted field of it holds the list of records (`"records": "full articles"`); without a `license` field, every record takes the one license entry of its path, which lists no `values`, as a dataset stating one license for all its records needs; an `.xml` file is one record whose fields are XPath 1.0 expressions, their prefixes in the entry's `namespaces` (nodes give the string value of the first one, none when there is none; any other value as it is), and a `join` lets it read one more file of the tree: the one of the join's `paths` whose path holds the same key (`key`, a regular expression searched in the record file's path, `joined_key` in the joined file's, each giving its groups joined by one space, or its whole match), as the XPath variable the join's `name` names (an empty node set when no file holds the key); the joined files give no document. A newspaper issue published as a full-text file and a metadata file is read this way: the text from the first, the license value and the credit from the second, found by the issue's id in the other address's folder. XML is read with no external entity, no external DTD and no network; only the entities its own DTD declares are expanded |
-| `chat` | conversations for post-training, one JSON object per line ([chat-format.md](chat-format.md)); each line is checked, and the file gives no pre-training document: only the post-training step named by its tags reads it |
-| `task` | the files of task folders for agentic post-training (`task.json`, `files/`, `check`; [post-training.md](post-training.md)); each folder is checked, and its files give no pre-training document: only a post-training step that asks for a tag of its `task.json` reads it: by default each step asks for its own name, and `token-efficiency` asks for `grpo`. A task built by a program holds pointers into the documents of other sources, never their text, which the readers fill in from the store ([post-training.md](post-training.md), "Pointer tasks") |
+| `chat` | conversations for training, one JSON object per line ([chat-format.md](chat-format.md)); each line is checked, and the file gives no pre-training document: a dataset's build keeps each conversation with its file's tags, and only a training step whose `tag` setting is one of them reads it |
+| `task` | the files of task folders for agentic training (`task.json`, `files/`, `check`; [training.md](training.md)); each folder is checked, and its files give no pre-training document: a dataset's build keeps each task with the tags of its `task.json`, and only a training step whose `tag` setting is one of them reads it: `finish-tasks` and `finish-tasks-with-less-writing` both ask for `finish-tasks`. A task built by a program holds pointers into the documents of other sources, never their text, which the readers fill in from the store ([training.md](training.md), "Pointer tasks") |
 | `rating` | people's pass or fail on the attempts of a `wpt-eval` run, one rating per line ([evaluation.md](evaluation.md), "People's ratings"); each line is checked, and the file gives no pre-training document: a measure only, which no training step reads |
 
 In `xhtml` and `html` pages, an image the page shows (`<img>`, or an
@@ -330,7 +330,8 @@ of its inputs, including WPT's own code version.
 | upstream tree | the source checksum |
 | final source tree (and the check that its files are text) | checksum, cuts, each patch's sha256, the formats (they decide each file's encoding), wpt-dataset version |
 | vocabulary | tokenizer code version, tokenizer recipe (with its `version`), the documents it is trained on (id and sha256 of their Markdown); frozen by the recipe's lock until `version` is raised ([tokenizer.md](tokenizer.md)) |
-| dataset | wpt-dataset version, the model recipe's data part, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, revision, checksum, tree and licenses (with attribution), and the sources skipped with `--skip-failed` |
+| dataset | wpt-dataset version, the model recipe's data part, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, revision, checksum, tree and licenses (with attribution), the sources skipped with `--skip-failed`, and the objects of its conversations and tasks |
+| training step's result | the fingerprint of the step before it, the step (its files, method, environment, optimizer, settings and locked parts), the fingerprint of the dataset part it reads (`text`, `conversations` or `tasks`, in the record's `fingerprints`), the recipe's seed and the versions of the training code; no hardware option ([training.md](training.md), "Step results and reuse") |
 
 So "already done" is a lookup: nothing is downloaded or applied twice, and
 changing one patch rebuilds only that source.
@@ -376,7 +377,7 @@ For S3, credentials and a non-AWS endpoint come from the usual
 settings. Objects are named by their sha256 and checked on every read.
 
 The store also holds the record of every run of `wpt-dataset build`,
-`wpt-dataset source-drafter`, `wpt-train`, `wpt-posttrain` and `wpt-eval`: one folder per run under
+`wpt-dataset source-drafter`, `wpt-train` and `wpt-eval`: one folder per run under
 `records/`, written by name rather than by content
 ([observability.md](observability.md)).
 
@@ -391,7 +392,7 @@ signer lists (`allowed-signers`, `allowed-gpg-keys.asc`), and the
 reviewed license texts (`reviewed-license-texts.json`,
 [licenses.md](licenses.md), "Reviewed license texts"). Every command
 that uses this data goes through it: `wpt-dataset` (`check`, `migrate`,
-`build`, `check-commits`, `source-drafter` and the rest), `wpt-train`, `wpt-posttrain`, the
+`build`, `check-commits`, `source-drafter` and the rest), `wpt-train`, the
 image commands of `wpt-agent`, and `wpt-web`. It hands out documents, bytes
 and versions, never a path under `data/`.
 
@@ -430,9 +431,8 @@ and versions, never a path under `data/`.
 - A license entry's `text` may be empty only while the source is not
   admitted, that is `under-review` or `refused`: the schema says so, and a
   person writes the text later (`wpt-dataset save source`, or the "Sources"
-  page). Every reader of the sources (`wpt-dataset build`, the
-  post-training readers of chat and task files, `check --fetch`, `check
-  --changed`) leaves such a source out with a note naming it, instead of
+  page). Every reader of the sources (`wpt-dataset build`, with its
+  readers of chat and task files, `check --fetch`, `check --changed`) leaves such a source out with a note naming it, instead of
   failing, and `wpt-dataset check` names it too, as a note that is not a
   failure. A source that is admitted needs its text, and a source with an
   empty text takes no files until it is written.
@@ -447,7 +447,7 @@ and versions, never a path under `data/`.
   its object or array.
 - Conversations, tasks and ratings are written only in an `empty` source,
   text written for WPT ([chat-format.md](chat-format.md), "Writing a chat
-  file"; [post-training.md](post-training.md), "Tasks";
+  file"; [training.md](training.md), "Tasks";
   [evaluation.md](evaluation.md), "People's ratings").
 - A source's text changes only through a patch: the layer unpacks the
   source into a temporary folder, puts the change in, and records the
@@ -617,11 +617,11 @@ run's record names the `wpt-web` that started it by that name, so a
 | `wpt-tokenizer` | the byte-level BPE tokenizer, Rust inside |
 | `wpt-web` | a local web interface over the service layer: one small server on 127.0.0.1, one file per page (Python routes, React page), an editor for every kind of data, a conversation editor that asks a WPT model folder for drafts, and its OpenAPI description; its interface is built with Bun when it starts; command `wpt-web` |
 | `wpt-model` | the WPT network ([model.md](model.md)) and its drafter, its safetensors model folders, and their license documents (`LICENSE`, `NOTICE`, model card) |
-| `wpt-training` | the training loop (global batch, evaluation, checkpoints, resuming), with two plug points: strategies (how the hardware is used) and methods (how the model learns) |
-| `wpt-inference` | sampling through the model's generation cache: several rows from one prompt, the model's next chat message (`next_message`, which `wpt-chat --chat` and the text measures of `wpt-eval` both write with), speculative decoding with a drafter and its scheduler, the scheduler's pass times (measured, recorded, replayed); training a model's drafter (`drafting.py`), which `wpt-train` and `wpt-posttrain` run at the end of every run, so it uses `wpt-model` |
-| `wpt-utils` | helpers several packages share, one submodule each: `wpt_utils.device` picks the best GPU, else the CPU; `wpt_utils.programs` starts the outside programs WPT runs (`program(name)`, with a clear error when one is missing) and reads the repository commit (`repository()`), without importing PyTorch; `wpt_utils.files.sha256_file` is the one way a file is hashed, by the store, the model folders and the run records alike; `wpt_utils.settings.typed` types a training method's and a post-training step's settings from the defaults its file declares |
-| `wpt-agent` | the agent harness of agentic post-training: the tools (the four built-in ones, `ask`, and those a task or its image's pool declares, answered by programs in the image) and each attempt's choice of them, one Docker container per attempt, the images of `data/images/` and their locks, the agent loop and the task's check, and the playing of a task's attempts (`wpt_agent.play`), which the `grpo` and `token-efficiency` steps and the agent measures of `wpt-eval` share, so `wpt-eval` does not depend on `wpt-posttrain`; commands `wpt-agent lock-image` and `wpt-agent build-image` |
-| `wpt-train`, `wpt-eval`, `wpt-posttrain`, `wpt-chat` | the applications |
+| `wpt-training` | the training loop (global batch, evaluation, checkpoints, resuming) that runs one training step, with its plug points: strategies (how the hardware is used), and the parts of a step ([training.md](training.md), "Steps"): methods (how the model learns from an example), environments (where the examples come from), optimizers (how an update changes the weights) and the steps that name one of each, with the model parts they lock |
+| `wpt-inference` | sampling through the model's generation cache: several rows from one prompt, the model's next chat message (`next_message`, which `wpt-chat --chat` and the text measures of `wpt-eval` both write with), speculative decoding with a drafter and its scheduler, the scheduler's pass times (measured, recorded, replayed); training a model's drafter (`drafting.py`), which `wpt-train` runs at the end of every run, so it uses `wpt-model` |
+| `wpt-utils` | helpers several packages share, one submodule each: `wpt_utils.device` picks the best GPU, else the CPU; `wpt_utils.programs` starts the outside programs WPT runs (`program(name)`, with a clear error when one is missing) and reads the repository commit (`repository()`), without importing PyTorch; `wpt_utils.files.sha256_file` is the one way a file is hashed, by the store, the model folders and the run records alike; `wpt_utils.settings.typed` types the settings of a training step and of its method, environment and optimizer from the defaults each file declares |
+| `wpt-agent` | the agent harness of agentic training: the tools (the four built-in ones, `ask`, and those a task or its image's pool declares, answered by programs in the image) and each attempt's choice of them, one Docker container per attempt, the images of `data/images/` and their locks, the agent loop and the task's check, and the playing of a task's attempts (`wpt_agent.play`), which the `agent-tasks` environment of the `finish-tasks` and `finish-tasks-with-less-writing` steps and the agent measures of `wpt-eval` share, so `wpt-eval` does not depend on `wpt-train`; commands `wpt-agent lock-image` and `wpt-agent build-image` |
+| `wpt-train`, `wpt-eval`, `wpt-chat` | the applications |
 
 ## Checks
 
@@ -654,8 +654,8 @@ branch, as a push would:
   `packages/wpt-dataset/src/wpt_dataset/schemas/`, or anything under
   `data/images/`. Otherwise the check leaves it out and says so; a plain
   `uv run pytest` runs it with every other test.
-- The two GRPO tests that run attempts in a real image
-  (`apps/wpt-posttrain/tests/test_posttrain.py`) keep its lock in
+- The two task step tests that run attempts in a real image
+  (`apps/wpt-train/tests/test_steps.py`) keep its lock in
   `.pytest_cache/` and the built image in Docker, for as long as the
   image's files and `wpt_agent/images.py` stay the same. Only the first
   check on a machine, and every CI run (which starts empty), pays for
@@ -694,4 +694,7 @@ only the number changes. Shape 6 gives a source three states: the migration
 turns a refusal whose reason is "under review" into `under-review` without
 that reason, and turns `retired` into `refused`, keeping its reason. Shape 7 adds `addresses` and the records format's
 `records`, `namespaces`, `join`, `newest`, `title` and `"as": "html"`, and makes its
-`license` field optional; only the number changes.
+`license` field optional; only the number changes. Shape 8 names the tags
+of a training step's examples by the step: the migration renames `sft` to
+`answer-as-assistant`, `grpo` to `finish-tasks` and `token-efficiency` to
+`finish-tasks-with-less-writing` in every tag list of `source.json`.

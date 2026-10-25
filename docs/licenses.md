@@ -247,7 +247,7 @@ They run unmodified next to WPT and are not linked into it.
 | git | any | GPL-2.0-only | fetches sources, applies patches, checks commits |
 | mercurial | any | GPL-2.0-or-later | fetches mercurial sources |
 | GnuPG | any | GNU GPL | checks GPG-signed decisions |
-| Docker Engine and its CLI | any | Apache-2.0 | builds the images and runs the containers of agentic post-training |
+| Docker Engine and its CLI | any | Apache-2.0 | builds the images and runs the containers of agentic training |
 | Docker Desktop | any | proprietary (Docker Subscription Service Agreement) | runs Docker Engine on Windows and macOS (the way WPT uses Docker on Windows) |
 | actions/checkout | v4 | MIT | CI |
 | astral-sh/setup-uv | v6 | MIT | CI |
@@ -278,10 +278,11 @@ A new image version needs this table checked again.
 
 ### Container images of agentic tasks (`data/images/`)
 
-The `grpo` and `token-efficiency` post-training steps run the model's
+The `finish-tasks` and `finish-tasks-with-less-writing` training steps
+run the model's
 commands in containers built on each machine from the Dockerfiles in
 `data/images/`
-([post-training.md](post-training.md), "Images"). Locking an image
+([training.md](training.md), "Images"). Locking an image
 (`wpt-agent lock-image`) records every package installed in it, with its
 version and its licenses, in `licenses.json` next to the image's
 `lock.json`. No limit applies to which licenses an image may hold: the

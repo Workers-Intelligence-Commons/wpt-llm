@@ -104,10 +104,10 @@ class LockedDocumentsMissing(DatasetError):
 
 
 class DocumentListMissing(DatasetError):
-    """Reading pointer tasks needs the base model's dataset's document list,
-    and that dataset predates document lists (or no dataset is named): such
-    a base model is used with the repository at the commit that built it,
-    with no fallback."""
+    """Reading pointer tasks for the measures needs the model's dataset's
+    document list, and that dataset predates document lists (or no dataset
+    is named): such a model is used with the repository at the commit that
+    built it, with no fallback."""
 
 
 class RoundTripFailed(DatasetError):

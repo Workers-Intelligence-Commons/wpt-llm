@@ -19,7 +19,7 @@ The agent measures share one run of attempts (wpt_eval.attempts):
 context.attempts(plain) plays N attempts (--attempts, WPT_ATTEMPTS, default
 4) at every measure-only task of the repository holding the current folder
 (read once per command), each in a container of the task's image (built
-first with `wpt-agent build-image NAME`, as for grpo), scored by the task's
+first with `wpt-agent build-image NAME`, as for finish-tasks), scored by the task's
 check, once per command for each value of plain; every test of the run
 reads the same records. Every attempt is also kept in the run's record
 folder, one JSON line each in attempts.jsonl, a dropped one marked so.
@@ -212,8 +212,8 @@ def open_context(folder, store, device, telemetry=None, attempts=shared.ATTEMPTS
         provenance = json.loads((folder / "provenance.json").read_text(encoding="utf-8"))
     except FileNotFoundError:
         raise EvalError(f"{folder}: no provenance.json; give a folder that wpt-train wrote") from None
-    if provenance.get("schema") != 4:
-        raise EvalError(f"{folder}: provenance shape {provenance.get('schema')}, this wpt-eval reads 4; train it again")
+    if provenance.get("schema") != 5:
+        raise EvalError(f"{folder}: provenance shape {provenance.get('schema')}, this wpt-eval reads 5; train it again")
     try:
         tokenizer = Tokenizer.from_bytes(load_tokenizer(folder))
         model = load_model(folder, device)  # refuses a folder whose drafter is missing or of other weights

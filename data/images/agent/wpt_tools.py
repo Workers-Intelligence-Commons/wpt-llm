@@ -1,4 +1,4 @@
-"""What the programs that answer tools share (docs/post-training.md, "The
+"""What the programs that answer tools share (docs/training.md, "The
 agent image"). A program reads the call's arguments as a JSON object on
 its standard input, prints its result, and exits 1 with its message on
 standard error when the call fails.

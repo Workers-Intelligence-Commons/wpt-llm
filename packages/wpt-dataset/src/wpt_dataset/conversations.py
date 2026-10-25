@@ -1,4 +1,4 @@
-"""Conversations for post-training (docs/chat-format.md).
+"""Conversations for training (docs/chat-format.md).
 
 A file in the `chat` format is JSON Lines: one conversation per line, each
 matching schemas/conversation.schema.json, and each tool_result answering a
@@ -7,9 +7,9 @@ tool_call made earlier in the same conversation, and each model draft
 line in an earlier
 shape is brought to the current one in memory (migrate.upgrade), since an
 upstream file cannot be rewritten. Such a file is never a
-pre-training document (markdown.py gives it no Markdown); a post-training
-step reads it through read(), which picks the files tagged with the step's
-name.
+pre-training document (markdown.py gives it no Markdown); a dataset's
+build keeps every conversation with the tags of its file (tagged), and a
+training step reads those of its tag.
 
 A chat format entry with `tree` reads instead a file of messages, one per
 record (JSON Lines or Parquet, as a records file), each naming its parent:
@@ -178,24 +178,36 @@ def of_file(source_id: str, path: str, entry: dict, store, sha256: str) -> list[
     return list(enumerate(parse(source_id, path, store.get_bytes(sha256)), start=1))
 
 
-def read(repo: Repo, store, tag: str, telemetry=None, log=print) -> tuple[list[tuple[str, dict]], dict]:
+def read(repo: Repo, store, tag: str | None, telemetry=None, log=print) -> tuple[list[tuple[str, dict]], dict]:
     """([(conversation id, conversation)], {source id: address, revision,
     licenses}) for every chat file tagged `tag` in an admitted source, in
     source and path order. A conversation id is "<source>/<path>:<line>", or
     with `tree` "<source>/<path>:<id of its last message>". telemetry: as
     for source_tree. A source whose license text is empty is left out, and
     log is called with a note naming it."""
+    found, sources = tagged(repo, store, tag, telemetry, log)
+    return [(conversation_id, conversation) for conversation_id, _, conversation in found], sources
+
+
+def tagged(repo: Repo, store, tag: str | None = None, telemetry=None, log=print,
+           only: set[str] | None = None) -> tuple[list[tuple[str, list[str], dict]], dict]:
+    """read's conversations, each with the sorted tags of its file:
+    [(conversation id, tags, conversation)]; with tag None, those of every
+    chat file, whatever its tags (what a dataset's build keeps). With
+    only, the sources of those ids alone are read."""
     conversations, sources = [], {}
     for source in repo.sources(log):
-        if not source.admitted:
-            continue
+        if not source.admitted or not any(entry["format"] == "chat" for entry in source.data["formats"]) \
+                or (only is not None and source.id not in only):
+            continue  # no tree read for a source without chat files
         tree, _ = source_tree(source, store, telemetry)
         for path in sorted(tree, key=str.encode):
             entry = markdown.format_of(source, path)
-            if entry["format"] != "chat" or tag not in tags_of(source, path):
+            tags = tags_of(source, path)
+            if entry["format"] != "chat" or (tag is not None and tag not in tags):
                 continue
             found = of_file(source.id, path, entry, store, tree[path].sha256)
-            conversations += [(f"{source.id}/{path}:{key}", c) for key, c in found]
+            conversations += [(f"{source.id}/{path}:{key}", sorted(tags), c) for key, c in found]
             sources[source.id] = {"address": source.data["address"], "revision": source.data["revision"],
                                   "licenses": source.data["licenses"]}
     return conversations, sources

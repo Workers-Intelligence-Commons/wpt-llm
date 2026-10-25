@@ -1,7 +1,7 @@
 // The conversation editor: the conversations of a chat file of a source
 // (docs/chat-format.md), one per line. A conversation holds its tools, its
 // messages and their blocks, and its metadata; the file's tags say which
-// post-training step reads it (sft). A WPT model folder on this machine can
+// training step reads it (answer-as-assistant). A WPT model folder on this machine can
 // draft the next assistant message: the draft is edited or confirmed as it
 // is, and its metadata.draft records the model, its weights and whether the
 // person changed it (docs/chat-format.md, "Model drafts"). Each save becomes
@@ -318,7 +318,7 @@ function FileView({ id, path }: { id: string; path: string }) {
       <h1>{path}</h1>
       <Problems problems={problems} />
       <div className="filters">
-        <label className="inline">This file's tags <input value={tags} onChange={(e) => setTags(e.target.value)} placeholder="sft" /></label>
+        <label className="inline">This file's tags <input value={tags} onChange={(e) => setTags(e.target.value)} placeholder="answer-as-assistant" /></label>
         <button type="button" onClick={saveTags}>Save tags</button>
         <span className="hint">{others.length ? `other entries: ${others.map((e) => `${e.tags.join(" ")} (${e.paths.join(", ")})`).join("; ")}` : ""}</span>
         <span role="status">{message}</span>
@@ -347,7 +347,7 @@ function ChatFiles({ id }: { id: string }) {
   const [files, setFiles] = useState<string[]>([]);
   const [entries, setEntries] = useState<string[]>([]);
   const [problems, setProblems] = useState<string[]>([]);
-  const [newPath, setNewPath] = useState("sft/conversations.jsonl");
+  const [newPath, setNewPath] = useState("answer-as-assistant/conversations.jsonl");
   useEffect(() => {
     if (!id) return;
     get<{ files: Record<string, { format: string | null }> }>(`/api/sources/${part(id)}/files`).then((a) =>

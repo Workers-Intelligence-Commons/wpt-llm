@@ -50,15 +50,39 @@ def test_migrate_rewrites_files_that_are_behind(kit, repo, store, git_upstream):
         "type": "git", "address": git_upstream[0], "revision": git_upstream[1]})
     path = repo.root / "data" / "sources" / sid / "source.json"
     # a made-up next shape: "type" renamed to "kind"
-    step = {7: lambda doc, _path: {**{k: v for k, v in doc.items() if k != "type"}, "kind": doc["type"], "schema": 8}}
-    current = {"source": 8, "mixture": 1, "model": 1, "tokenizer": 1, "lock": 1}
+    step = {8: lambda doc, _path: {**{k: v for k, v in doc.items() if k != "type"}, "kind": doc["type"], "schema": 9}}
+    current = {"source": 9, "mixture": 1, "model": 1, "tokenizer": 1, "lock": 1}
 
     changed = migrate(repo, migrations={"source": step, "mixture": {}, "model": {}, "tokenizer": {}, "lock": {}},
                       current=current, log=lambda _: None)
     assert changed == [path.relative_to(repo.root).as_posix()]
     document = json.loads(path.read_text())
-    assert document["schema"] == 8 and document["kind"] == "git" and "type" not in document
+    assert document["schema"] == 9 and document["kind"] == "git" and "type" not in document
     assert path.read_text() == dump_json(document)
+
+
+def test_migrating_a_shape_7_source_renames_the_old_training_step_tags(kit, repo, store, git_upstream):
+    # docs/training.md, "Steps": a tag that picks a step's examples is the
+    # step's name; sft, grpo and token-efficiency become the names of the
+    # steps that do the same, in every tag list, and any other tag stays
+    sid = kit.add_source(repo, store, "example", "ok", {
+        "type": "git", "address": git_upstream[0], "revision": git_upstream[1]})
+    path = repo.root / "data" / "sources" / sid / "source.json"
+    old = json.loads(path.read_text())
+    old["schema"] = 7
+    old["tags"] = [{"tags": ["en", "sft"], "paths": ["a/**"]},
+                   {"tags": ["grpo", "token-efficiency"], "paths": ["b/**"], "note": "tasks"},
+                   {"tags": ["sft", "answer-as-assistant"], "paths": ["c/**"]}]
+    path.write_text(dump_json(old))
+
+    assert migrate(repo, log=lambda _: None) == [path.relative_to(repo.root).as_posix()]
+    document = json.loads(path.read_text())
+    assert document["schema"] == 8
+    assert document["tags"] == [{"tags": ["en", "answer-as-assistant"], "paths": ["a/**"]},
+                                {"tags": ["finish-tasks", "finish-tasks-with-less-writing"], "paths": ["b/**"],
+                                 "note": "tasks"},
+                                {"tags": ["answer-as-assistant"], "paths": ["c/**"]}]
+    assert migrate(repo, log=lambda _: None) == [] and repo.check() == []
 
 
 def test_migrating_a_shape_1_source_asks_a_person_for_attribution_text_and_formats(kit, repo, store, git_upstream):
@@ -75,7 +99,7 @@ def test_migrating_a_shape_1_source_asks_a_person_for_attribution_text_and_forma
     with pytest.raises(InvalidFile, match=re.escape(str(path))):
         migrate(repo, log=lambda _: None)
     document = json.loads(path.read_text())
-    assert document["schema"] == 7
+    assert document["schema"] == 8
     assert document["licenses"] == [{"license": "MIT", "paths": ["**"], "attribution": "", "text": ""}]
     assert document["formats"] == []
 
@@ -246,6 +270,27 @@ def test_migrating_shape_1_tokenizer_files(kit, repo):
     assert migrate(repo, log=lambda _: None) == []
 
 
+# the smallest training part of a shape 6 recipe, which shape 7 makes its read-text step (kit.STEPS)
+TRAINING_6 = {"method": "adamw", "settings": {}, "stages": [{"block_size": 16, "steps": 1, "batch_size": 4}],
+              "eval_every": 1, "eval_batches": 1, "seed": 1337}
+
+
+def shape_6(document, schema=6, training=TRAINING_6, posttrain=()):
+    """A shape 7 recipe written as an older shape: `training` and `posttrain`
+    where `seed` and `steps` are."""
+    old = {}
+    for key, value in document.items():
+        if key == "schema":
+            old[key] = schema
+        elif key == "seed":
+            old["training"] = training
+        elif key == "drafter":
+            old[key], old["posttrain"] = value, list(posttrain)
+        elif key != "steps":
+            old[key] = value
+    return old
+
+
 def test_migrating_a_shape_2_model_recipe_asks_a_person_for_the_new_attention_numbers(kit, repo):
     # gated MLA's numbers go; CSA and HCA's, and which global layer is which,
     # are a person's choice, so the check names the file until they are filled in
@@ -253,9 +298,9 @@ def test_migrating_a_shape_2_model_recipe_asks_a_person_for_the_new_attention_nu
                                 if key not in (*NEW_ATTENTION, "global_attention")}}
     old.update({"mla_heads": 2, "mla_head_dim": 8, "mla_kv_rank": 8})
     path = kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
-    training = {key: value for key, value in kit.TRAINING.items() if key != "stages"}
-    path.write_text(dump_json({**json.loads(path.read_text()), "schema": 2, "model": old,
-                               "training": {**training, "steps": 1, "batch_size": 4}}))
+    training = {key: value for key, value in TRAINING_6.items() if key != "stages"}
+    path.write_text(dump_json({**shape_6(json.loads(path.read_text()), 2, {**training, "steps": 1, "batch_size": 4}),
+                               "model": old}))
 
     with pytest.raises(InvalidFile, match=re.escape(f"{path}: at model/")):
         migrate(repo, log=lambda _: None)
@@ -276,9 +321,9 @@ def test_migrating_a_shape_3_model_recipe_makes_its_window_and_steps_one_stage(k
     # else changes
     path = kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
     new = json.loads(path.read_text())
-    training = {key: value for key, value in kit.TRAINING.items() if key != "stages"}
-    path.write_text(dump_json({**new, "schema": 3, "model": {"block_size": 16, **kit.MODEL},
-                               "training": {**training, "steps": 1, "batch_size": 4}}))
+    training = {key: value for key, value in TRAINING_6.items() if key != "stages"}
+    path.write_text(dump_json({**shape_6(new, 3, {**training, "steps": 1, "batch_size": 4}),
+                               "model": {"block_size": 16, **kit.MODEL}}))
     assert migrate(repo, log=lambda _: None) == [path.relative_to(repo.root).as_posix()]
     assert json.loads(path.read_text()) == new
 
@@ -288,10 +333,37 @@ def test_migrating_a_shape_4_model_recipe_adds_the_drafter_s_training_values_aft
     # section, with the training values every recipe states, and nothing else changes
     path = kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
     new = json.loads(path.read_text())
-    path.write_text(dump_json({**{key: value for key, value in new.items() if key != "drafter"}, "schema": 4}))
+    path.write_text(dump_json({key: value for key, value in shape_6(new, 4).items() if key != "drafter"}))
     assert migrate(repo, log=lambda _: None) == [path.relative_to(repo.root).as_posix()]
     migrated = json.loads(path.read_text())
     assert migrated["drafter"] == {"prompts": 256, "prompt_tokens": 64, "answer_tokens": 256, "epochs": 10,
                                    "learning_rate": 6e-4, "held_out": 0.1, "anchors": 512, "batch": 8, "seed": 0}
     assert migrated == {**new, "drafter": migrated["drafter"]}
-    assert list(migrated) == ["schema", "data", "model", "training", "drafter", "posttrain"]
+    assert list(migrated) == ["schema", "data", "model", "seed", "steps", "drafter"]
+
+
+def test_migrating_a_shape_6_model_recipe_makes_its_training_and_post_training_one_list_of_steps(kit, repo):
+    # docs/training.md, "Steps": the training becomes read-text, its method
+    # the step's optimizer and its loss settings the step's; each
+    # post-training step follows under the name of the step that does the
+    # same, its learning rate and weight decay given to adamw, a tag naming
+    # an old step renamed with it
+    path = kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
+    new = json.loads(path.read_text())
+    training = {**TRAINING_6, "method": "muon", "settings": {"lr": 0.02, "mtp_weight": 0.5}}
+    path.write_text(dump_json(shape_6(new, 6, training, [
+        "sft", {"step": "grpo", "settings": {"learning_rate": 1e-6, "rounds": 2}},
+        {"step": "token-efficiency", "settings": {"tag": "grpo", "weight_decay": 0.1}}])))
+    assert migrate(repo, log=lambda _: None) == [path.relative_to(repo.root).as_posix()]
+    migrated = json.loads(path.read_text())
+    assert list(migrated) == ["schema", "data", "model", "seed", "steps", "drafter"]
+    assert migrated["seed"] == 1337
+    assert migrated["steps"] == [
+        {"step": "read-text", "optimizer": {"name": "muon", "settings": {"lr": 0.02}},
+         "settings": {"stages": TRAINING_6["stages"], "eval_every": 1, "eval_batches": 1, "mtp_weight": 0.5},
+         "locked": []},
+        {"step": "answer-as-assistant", "settings": {}},
+        {"step": "finish-tasks", "settings": {"rounds": 2},
+         "optimizer": {"name": "adamw", "settings": {"lr": 1e-6}}},
+        {"step": "finish-tasks-with-less-writing", "settings": {"tag": "finish-tasks"},
+         "optimizer": {"name": "adamw", "settings": {"weight_decay": 0.1}}}]

@@ -23,7 +23,7 @@ segment of every part, and the parts hand on what they pass on as
 segments do.
 
 The model gives each part its place (model.carried, model.split), and the
-method its loss (Method.part_loss): the part's share of the whole window's
+method its loss (TextMethod.part_loss): the part's share of the whole window's
 loss. Validation losses are the parts' validation losses weighted by their
 share of the window's tokens.
 """
@@ -32,7 +32,7 @@ from functools import partial
 
 import torch
 
-from .plugins import Method, PluginError
+from .plugins import PluginError, TextMethod
 
 
 def check(model, method, stages, segment, strategy):
@@ -43,7 +43,7 @@ def check(model, method, stages, segment, strategy):
         return
     if not hasattr(model, "carried") or not hasattr(model, "split"):
         raise PluginError("the model cannot train a window in parts (it has no carried and split)")
-    if type(method).loss is not Method.loss and type(method).part_loss is Method.part_loss:
+    if type(method).loss is not TextMethod.loss and type(method).part_loss is TextMethod.part_loss:
         raise PluginError("the method defines its own loss but not part_loss, so it cannot train a window in parts")
     part = getattr(model, "PART", 1)
     if segment % part:

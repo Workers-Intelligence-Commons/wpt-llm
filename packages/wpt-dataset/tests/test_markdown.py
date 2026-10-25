@@ -222,7 +222,7 @@ def test_markdown_check_command_passes_on_converted_pages(kit, repo, store, tmp_
 
 
 def test_a_chat_file_is_checked_and_never_becomes_a_pretraining_document(kit, repo, store, tmp_path):
-    # conversations are for the post-training step named by their tags: they
+    # conversations are for the training step their tags name: they
     # must reach no pre-training mixture, and a malformed one must stop the check
     good = (b'{"schema": 1, "messages": [{"role": "user", "content": [{"type": "text", "text": "Hi"}]}, '
             b'{"role": "assistant", "content": [{"type": "text", "text": "Hello"}]}]}\n')
@@ -241,7 +241,7 @@ def test_a_chat_file_is_checked_and_never_becomes_a_pretraining_document(kit, re
 
 def test_a_message_tree_gives_every_human_path_as_a_conversation(kit, repo, store, http_folder):
     # datasets such as OpenAssistant store branching conversations as messages
-    # naming their parent; post-training needs each path from the first message
+    # naming their parent; training needs each path from the first message
     # to a last one, and nothing written by a model or flagged by its reviewers
     rows = [
         {"id": "q", "parent": None, "role": "prompter", "text": "Why is the sky blue?"},
@@ -270,11 +270,11 @@ def test_a_message_tree_gives_every_human_path_as_a_conversation(kit, repo, stor
                                                               executable=set(), symlinks={}))
         return kit.add_source(repo, store, "example", item, {
             "type": "http-archive", "address": f"{base}/{item}.tar.gz", "revision": "2026-10-16",
-            "extract": {"strip": 1}, "formats": formats, "tags": [{"tags": ["sft"], "paths": ["**"]}]})
+            "extract": {"strip": 1}, "formats": formats, "tags": [{"tags": ["answer-as-assistant"], "paths": ["**"]}]})
 
     sid = tree_source("talks", data)
 
-    found, _ = conversations.read(repo, store, "sft")
+    found, _ = conversations.read(repo, store, "answer-as-assistant")
     said = {cid: [m["content"][0]["text"] for m in c["messages"]] for cid, c in found}
     assert said == {
         f"{sid}/messages.jsonl.gz:f1a": ["Why is the sky blue?", "Air scatters blue light most.", "And at sunset?",

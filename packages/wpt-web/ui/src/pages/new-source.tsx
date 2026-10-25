@@ -70,7 +70,7 @@ function NewSource() {
           <label>What it holds</label>
           <select value={format} aria-label="format" onChange={(e) => {
             setFormat(e.target.value);
-            setPath(e.target.value === "chat" ? "sft/conversations.jsonl" : e.target.value === "markdown" ? "text.md" : "text.txt");
+            setPath(e.target.value === "chat" ? "answer-as-assistant/conversations.jsonl" : e.target.value === "markdown" ? "text.md" : "text.txt");
           }}>
             {KINDS.map((k) => <option key={k.value} value={k.value}>{k.label}</option>)}
           </select>

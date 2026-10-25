@@ -1,8 +1,7 @@
 """Training a model's drafter (docs/model.md, "The drafter";
 wpt_model.Drafter). A model and its drafter are one unit: wpt-train trains
-one at the end of every run, against the final weights, and wpt-posttrain
-a fresh one at the end of every run, against the post-trained weights.
-The model is frozen while it does: only the drafter learns.
+one at the end of every run, after the recipe's last step, against the
+final weights. The model is frozen while it does: only the drafter learns.
 
 The prompts are the beginnings of the dataset's training documents: of
 every document read once, `prompts` drawn at random (a seeded reservoir),

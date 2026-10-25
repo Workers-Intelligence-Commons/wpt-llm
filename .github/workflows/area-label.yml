@@ -30,7 +30,7 @@ jobs:
           ')"
           for option in \
             "sources and data rules" "tokenizer" "dataset build" "training" \
-            "post-training" "evaluation" "generation and chat" "web interface" \
+            "evaluation" "generation and chat" "web interface" \
             "model architecture" "documentation"; do
             if [ "$part" = "$option" ]; then
               gh api --method POST "repos/$GH_REPO/issues/$ISSUE_NUMBER/labels" \

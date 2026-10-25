@@ -10,7 +10,7 @@ modified version must share it. The principles are in the
 
 This repository is everything needed to rebuild a WPT model from nothing:
 the description of every source, the tools that fetch and check them, and
-the code that builds the data, trains, evaluates, post-trains and runs the
+the code that builds the data, trains, evaluates and runs the
 model. No checkpoint has been published yet.
 
 ## How it works
@@ -58,7 +58,7 @@ uv run wpt-chat runs/first                         # continue text with the mode
 `classics-test` is a small model recipe over the admitted public-domain
 books, enough to see every step work on one machine. A model recipe
 (`data/recipes/models/`) holds everything that changes the model: its
-data, architecture, training and post-training steps
+data, architecture and training steps
 ([model.md](docs/model.md)); the command-line options only say how the
 hardware runs it.
 
@@ -85,9 +85,9 @@ the same command with `--resume` continues.
 | move a run to another machine | `--run NAME`: the checkpoint lives in the store; `--run NAME --resume` there |
 | use several GPUs | `--strategy ddp --processes N` (several machines: `torchrun`) |
 | build despite a broken source | `wpt-dataset build --skip-failed`: it is left out and listed |
-| teach the model to chat | a recipe whose `posttrain` list holds `sft`: `wpt-posttrain RECIPE runs/first runs/chat`, then `wpt-chat runs/chat --chat` |
-| teach the model to finish tasks as an agent | tasks tagged `grpo` in a source, their images in `data/images/` locked with `wpt-agent lock-image NAME` and built with `wpt-agent build-image NAME`, and a recipe whose `posttrain` list holds `grpo` (needs Docker; [post-training](docs/post-training.md)) |
-| teach the agent to reach the same result with fewer tokens | `token-efficiency` after `grpo` in the recipe's `posttrain` list: it trains on the same tasks ([post-training](docs/post-training.md)) |
+| teach the model to chat | conversations tagged `answer-as-assistant` in a source, the dataset built again, and a recipe whose `steps` add `answer-as-assistant` after `read-text`: `wpt-train RECIPE DATASET_ID --out runs/chat`, then `wpt-chat runs/chat --chat` ([training](docs/training.md)) |
+| teach the model to finish tasks as an agent | tasks tagged `finish-tasks` in a source, the dataset built again, their images in `data/images/` locked with `wpt-agent lock-image NAME` and built with `wpt-agent build-image NAME`, and a recipe whose `steps` hold `finish-tasks` (needs Docker; [training](docs/training.md)) |
+| teach the agent to reach the same result with fewer tokens | `finish-tasks-with-less-writing` after `finish-tasks` in the recipe's `steps`: it trains on the same tasks ([training](docs/training.md)) |
 | train long windows on a small GPU | `--recompute`: layers run again in the backward pass instead of keeping their values |
 | write your own texts, conversations and tasks, and edit recipes, in a browser | `wpt-web` (needs Bun), then http://127.0.0.1:8410/; the same through `wpt-dataset` commands ([architecture](docs/architecture.md), "Two interfaces") |
 
@@ -116,7 +116,6 @@ settle alone are listed for legal review in
 - [Model architecture: the research it comes from and the recipes that size it](docs/model.md)
 - [Training and repeatability](docs/training.md)
 - [Evaluation](docs/evaluation.md)
-- [Post-training](docs/post-training.md)
 - [Observability: the record of every run, and its live view](docs/observability.md)
 - [Chat format: conversations as JSON, turned into tokens by a template](docs/chat-format.md)
 - [Output notice and attribution](docs/output-notice.md)

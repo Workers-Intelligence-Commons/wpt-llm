@@ -21,7 +21,7 @@ recipe on the same data again is a lookup.
 
 Beside its record, every dataset keeps its document list (write_document_list): each document's id, the sha256 of its
 Markdown and its tag, training or held-out, under a ref named by the
-dataset id, so the base model's provenance finds it. A dataset built
+dataset id, so a model's provenance finds it. A dataset built
 before builds wrote one never gets one.
 
 A source that fails (its checksum differs, every address fails, a file is
@@ -61,8 +61,10 @@ from wpt_telemetry import Telemetry, set_ref
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
 from wpt_tokenizer import __version__ as TOKENIZER_VERSION
 
+from . import conversations as chat_files
 from . import manifest, markdown, pools
-from .errors import DatasetError, LockedDocumentsMissing, LockMismatch, PoolError, TokenizerVersionNeeded
+from . import tasks as task_files
+from .errors import DatasetError, LockedDocumentsMissing, LockMismatch, PoolError, RuleViolation, TokenizerVersionNeeded
 from .repo import Repo
 from .sources import VERSION, check_license_map, fingerprint, held_out_group, source_tree, tags_of, tree_key
 
@@ -497,26 +499,35 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
                     skipped_sources=[failed["source"] for failed in skipped or []])
     for failed in skipped or []:
         log(f"skipped {failed['source']}: {failed['error']}")
-    dataset_id = fingerprint({
+    held_ids = {d.id for d in documents if is_held_out(d.held_out_key, recipe["held_out"])}
+    steps_read = conversations_and_tasks(repo, store, set(sources_info), recipe["held_out"],
+                                         {d.sha256 for d in documents if d.id in held_ids}, telemetry)
+    text_inputs = {
         "kind": "dataset", "wpt_dataset": VERSION, "recipe": recipe, "mixture": mixture, "vocabulary": vocabulary,
         # a document's held-out group only when it has one, so earlier ids stay the same
         "documents": [[d.id, d.sha256, sorted(d.tags), *([d.group] if d.group is not None else [])] for d in documents],
-        "sources": sources_info,  # the record copies their licenses and attribution: a change rebuilds it
+        # the record copies their licenses and attribution: a change rebuilds it
+        "sources": sources_info,
         **({"skipped": skipped} if skipped else {}),  # absent when none, so earlier ids stay the same
-    })
+    }
+    # the text's own id orders and picks its rows. It names the sources that hold documents only, and no part, so a
+    # change to the conversations or tasks (their sources included) never changes the text
+    text_id = fingerprint({**text_inputs, "sources": {sid: info for sid, info in sources_info.items()
+                                                      if sid in {d.source for d in documents}}})
+    # each part by its object only when it holds something, so earlier ids stay the same
+    dataset_id = fingerprint({**text_inputs, **{part: found["object"] for part, found in steps_read.items()}})
     if store.get_ref("datasets", dataset_id):
         telemetry.output(dataset=dataset_id, dataset_record=store.get_ref("datasets", dataset_id))
         log(f"dataset {dataset_id} is already built")
         return dataset_id
 
-    held_ids = {d.id for d in documents if is_held_out(d.held_out_key, recipe["held_out"])}
     held_out = [d for d in documents if d.id in held_ids]
     training = [d for d in documents if d.id not in held_ids]
     with tempfile.TemporaryDirectory(prefix="wpt-build-") as tmp:
         with telemetry.span("tokens", documents=len(documents)):
             tokens = packed if stream else EncodedDocuments(Path(tmp) / "tokens", tokenizer, documents, store)
         with telemetry.span("pools"):
-            rows, pool_report = _fill_pools(dataset_id, recipe, mixture, training, tokens, log)
+            rows, pool_report = _fill_pools(text_id, recipe, mixture, training, tokens, log)
             for report in pool_report:
                 telemetry.event("pool", **report)
         with telemetry.span("shards"):
@@ -534,7 +545,7 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
             yield from (tokenizer.decode(part[d.id].tolist()) for d in chosen[i:i + 1024])
 
     record = {
-        "schema": 3,
+        "schema": 4,
         "id": dataset_id,
         "recipe_name": name,
         "recipe": recipe,
@@ -551,6 +562,8 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
         "shards": shards,
         "held_out_shards": held_shards,
         "contamination": _recorded_contamination(training, held_out, texts, telemetry),
+        **steps_read,  # conversations and tasks, each part only when the sources hold some
+        "fingerprints": part_fingerprints(vocabulary, shards, held_shards, steps_read),
         "tools": tool_versions(),
         "tool_differences": tool_differences(repo),
     }
@@ -571,6 +584,53 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
     return dataset_id
 
 
+def part_fingerprints(vocabulary: str, shards: list, held_shards: list, steps_read: dict) -> dict:
+    """{part: sha256} of what each kind of training step reads, so that a
+    step's fingerprint changes only with its own part: "text" (the training
+    and held-out shards, by the hashes of their tokens), and "conversations"
+    and "tasks" (their objects), each only when the dataset holds the part.
+    Each holds the vocabulary too, since every part becomes tokens with it."""
+    parts = {"text": {"shards": [s["token_sha256"] for s in shards],
+                      "held_out_shards": [s["token_sha256"] for s in held_shards]},
+             **{part: {"object": found["object"]} for part, found in steps_read.items()}}
+    return {part: fingerprint({"part": part, "vocabulary": vocabulary, **content}) for part, content in parts.items()}
+
+
+def conversations_and_tasks(repo: Repo, store, kept: set[str], share: float, held: set[str], telemetry) -> dict:
+    """The parts of a dataset that the training steps read besides its
+    shards, each only when the sources hold some: {"conversations": {object,
+    count, sources}, "tasks": {object, count, sources}}, sources the sorted
+    ids of the sources the part holds or points into, each described in the
+    record's own `sources`. Each object holds
+    one JSON line per conversation ({id, tags, conversation}: every chat
+    file, whatever its tags) or per task (tasks.to_json: every task, its
+    pointers filled in, but the measure-only ones, which share and held
+    decide: the recipe's held_out and the sha256 of every held-out
+    document's Markdown). Only the sources in kept, those the build kept,
+    are read; one that breaks a rule here stops the build, and so does a
+    task pointing into a source the build did not keep (RuleViolation)."""
+    parts = {}
+    with telemetry.span("conversations") as span:
+        found, sources = chat_files.tagged(repo, store, None, telemetry, log=lambda _: None, only=kept)
+        if found:
+            lines = (json.dumps({"id": cid, "tags": tags, "conversation": conversation}, ensure_ascii=False,
+                                sort_keys=True) for cid, tags, conversation in found)
+            parts["conversations"] = {"object": store.put_bytes("".join(f"{line}\n" for line in lines).encode()),
+                                      "count": len(found), "sources": sorted(sources)}
+        span.set(**parts.get("conversations", {"count": 0}))
+    with telemetry.span("tasks") as span:
+        found, sources = task_files.read(repo, store, None, share, log=lambda _: None, held=held, only=kept)
+        outside = sorted(set(sources) - kept)
+        if outside:
+            raise RuleViolation(f"tasks point into {outside[0]}, which the build left out")
+        if found:
+            lines = (json.dumps(task_files.to_json(task), ensure_ascii=False, sort_keys=True) for task in found)
+            parts["tasks"] = {"object": store.put_bytes("".join(f"{line}\n" for line in lines).encode()),
+                              "count": len(found), "sources": sorted(sources)}
+        span.set(**parts.get("tasks", {"count": 0}))
+    return parts
+
+
 def _recorded_contamination(training, held_out, texts, telemetry):
     with telemetry.span("contamination") as span:
         found = contamination(training, held_out, texts)
@@ -578,7 +638,7 @@ def _recorded_contamination(training, held_out, texts, telemetry):
     return found
 
 
-def _fill_pools(dataset_id, recipe, mixture, training, tokens, log):
+def _fill_pools(text_id, recipe, mixture, training, tokens, log):
     """(rows, pool report): each pool filled to its share of the recipe's tokens."""
     rows, pool_report = [], []
     assigned = assign(training, mixture)
@@ -597,7 +657,7 @@ def _fill_pools(dataset_id, recipe, mixture, training, tokens, log):
         for pass_ in range(full):
             rows += [(d, pool["name"], pass_) for d in members]
         remainder, taken = share - full * available, 0
-        for d in sorted(members, key=lambda d: _rank(dataset_id, pool["name"], full, d.id)):
+        for d in sorted(members, key=lambda d: _rank(text_id, pool["name"], full, d.id)):
             if taken >= remainder:
                 break
             rows.append((d, pool["name"], full))
@@ -605,7 +665,7 @@ def _fill_pools(dataset_id, recipe, mixture, training, tokens, log):
         pool_report.append({"name": pool["name"], "documents": len(members), "tokens": available,
                             "share": share, "epochs": round(epochs, 6)})
         log(f"pool {pool['name']}: {len(members):,} documents, {available:,} tokens, {epochs:.2f} passes for {share:,}")
-    rows.sort(key=lambda r: _rank(dataset_id, "order", r[2], r[0].id))
+    rows.sort(key=lambda r: _rank(text_id, "order", r[2], r[0].id))
     return rows, pool_report
 
 

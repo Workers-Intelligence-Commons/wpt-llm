@@ -20,7 +20,7 @@ export const get = <T,>(path: string) => call<T>("GET", path);
 export const put = <T,>(path: string, body: unknown) => call<T>("PUT", path, body);
 export const post = <T,>(path: string, body: unknown) => call<T>("POST", path, body);
 
-// One part of a route: a path such as "sft/talks.jsonl" stays one part ("/" becomes %2F).
+// One part of a route: a path such as "answer-as-assistant/talks.jsonl" stays one part ("/" becomes %2F).
 export const part = encodeURIComponent;
 
 // What a save answers in words.

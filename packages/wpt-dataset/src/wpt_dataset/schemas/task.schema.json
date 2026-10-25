@@ -1,14 +1,14 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/Workers-Intelligence-Commons/wpt-llm/schemas/task.schema.json",
-  "title": "WPT task (the task.json of a task folder, in a file of the task format; docs/post-training.md)",
+  "title": "WPT task (the task.json of a task folder, in a file of the task format; docs/training.md)",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema", "instructions", "image", "limits", "needs"],
   "properties": {
     "schema": {"const": 3, "description": "shape version of the task"},
     "instructions": {"type": "string", "minLength": 1, "description": "what the model is asked to do, in full: the user message that starts every attempt, unless it opens with terse"},
-    "terse": {"type": "string", "minLength": 1, "description": "the same request in one line (no line break: tasks.py refuses one), for the measure of terse against full requests: an attempt may open with it instead of instructions (docs/post-training.md, \"Tasks\")"},
+    "terse": {"type": "string", "minLength": 1, "description": "the same request in one line (no line break: tasks.py refuses one), for the measure of terse against full requests: an attempt may open with it instead of instructions (docs/training.md, \"Tasks\")"},
     "image": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$", "description": "the image the attempt's container runs: a folder name in data/images/"},
     "limits": {
       "type": "object",
@@ -33,7 +33,7 @@
     },
     "needs": {
       "type": "array",
-      "description": "the tools the task cannot be done without; each entry lists the variants of one need, and every attempt is offered exactly one of them (docs/post-training.md, \"Tools\")",
+      "description": "the tools the task cannot be done without; each entry lists the variants of one need, and every attempt is offered exactly one of them (docs/training.md, \"Tools\")",
       "items": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/variant"}}
     },
     "answered_by": {
@@ -78,24 +78,24 @@
     "absent": {
       "type": "array",
       "uniqueItems": true,
-      "description": "absolute folders of the image, outside /work and /tmp, that the attempts' containers show empty: the task removes what the image installs there (docs/post-training.md, \"Tasks\")",
+      "description": "absolute folders of the image, outside /work and /tmp, that the attempts' containers show empty: the task removes what the image installs there (docs/training.md, \"Tasks\")",
       "items": {"type": "string", "pattern": "^(/[A-Za-z0-9._+-]+)+$"}
     },
     "area": {
       "type": "array",
       "uniqueItems": true,
-      "description": "glob patterns of the paths under /work an attempt may change, [] for none: a changed path outside them breaks the within_area part (docs/post-training.md, \"Rewards\"); a task without an area gets no such part",
+      "description": "glob patterns of the paths under /work an attempt may change, [] for none: a changed path outside them breaks the within_area part (docs/training.md, \"Rewards\"); a task without an area gets no such part",
       "items": {"type": "string", "minLength": 1}
     },
     "gates": {
       "type": "array",
       "uniqueItems": true,
-      "description": "the parts (the check's, or within_area) that must be 1: when one is below 1, or missing, the attempt scores 0 whatever the rest (docs/post-training.md, \"Rewards\")",
+      "description": "the parts (the check's, or within_area) that must be 1: when one is below 1, or missing, the attempt scores 0 whatever the rest (docs/training.md, \"Rewards\")",
       "items": {"$ref": "#/$defs/name"}
     },
     "pointers": {
       "type": "array",
-      "description": "texts the task takes from documents of sources, filled in from the store when the task is read: the repository holds the pointer, never the text (docs/post-training.md, \"Pointer tasks\")",
+      "description": "texts the task takes from documents of sources, filled in from the store when the task is read: the repository holds the pointer, never the text (docs/training.md, \"Pointer tasks\")",
       "items": {"oneOf": [{"$ref": "#/$defs/text_pointer"}, {"$ref": "#/$defs/repository_pointer"}]}
     },
     "note": {"type": "string"}
@@ -156,7 +156,7 @@
         "parameters": {"type": "object", "description": "the JSON Schema of the call's arguments"},
         "program": {"type": "string", "pattern": "^/", "description": "the absolute path, in the image, of the program that answers a call"},
         "names": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/name"}, "description": "other names an attempt may offer the tool under"},
-        "looks": {"type": "boolean", "description": "whether a call of the tool looks at sources, as read does (search, fetch, a file search); answered_by names only looking tools (docs/post-training.md, \"The check library\")"}
+        "looks": {"type": "boolean", "description": "whether a call of the tool looks at sources, as read does (search, fetch, a file search); answered_by names only looking tools (docs/training.md, \"The check library\")"}
       }
     }
   }

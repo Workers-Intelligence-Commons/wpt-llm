@@ -15,12 +15,13 @@ tables take Adam at table_lr_factor times the rate, with no weight decay.
 No QK-Clip: CSA and HCA normalize their queries and key-value entries, which
 keeps their scores bounded (DeepSeek-V4).
 
-Schedule (DeepSeek LLM): linear warm-up to lr over `warmup` steps, then
-first_factor of it after first_drop of the steps and second_factor after
-second_drop. The multi-token prediction loss weighs mtp_weight, then
-mtp_late_weight after mtp_switch of the steps (DeepSeek-V3: after 10T of
-14.8T tokens); the steps are those of every stage together. The folder
-keeps the weights of the lowest validation loss of the last stage.
+Schedule (DeepSeek LLM): linear warm-up to lr over `warmup` updates, then
+first_factor of it after first_drop of the step's updates and
+second_factor after second_drop; the updates are those of every stage of
+the step together. The step keeps the weights of the lowest validation
+loss of its last stage, or its last weights when it has no evaluation.
+Only the parameters the step trains are in it: those of the parts it
+locks, and of the parts its method never reaches, are not.
 
 lr and weight_decay default to Kimi Linear's smallest model (2.006e-3) and
 Moonlight (0.1); a recipe sets its own.
@@ -30,14 +31,13 @@ import math
 
 import torch
 
-from wpt_training import Method, PluginError, Verdict
+from wpt_training import Optimizer, PluginError, Verdict
 
 SETTINGS = {
     "lr": 0.002, "weight_decay": 0.1, "momentum": 0.95,
     "beta1": 0.9, "beta2": 0.95, "eps": 1e-8,
     "table_lr_factor": 5.0,
     "warmup": 2000, "first_drop": 0.8, "first_factor": 0.316, "second_drop": 0.9, "second_factor": 0.1,
-    "mtp_weight": 0.3, "mtp_late_weight": 0.1, "mtp_switch": 0.676,
 }
 NEWTON_SCHULZ = [(3.4445, -4.7750, 2.0315)] * 8 + [(2.0, -1.5, 0.5)] * 2  # DeepSeek-V4's hybrid steps
 UPDATE_RMS = 0.18  # DeepSeek-V4's gamma
@@ -106,13 +106,15 @@ class MuonAdamW(torch.optim.Optimizer):
             p.addcdiv_(mean.to(p.dtype), root.to(p.dtype), value=-lr)
 
 
-class Muon(Method):
+class Muon(Optimizer):
     def __init__(self, model, settings, run):
         if not hasattr(model, "optimizer_roles"):
             raise PluginError("muon: the model does not name its parameters' roles (optimizer_roles)")
         self.settings, self.steps = settings, run.steps
         roles = {"matrix": ([], []), "vector": ([], []), "table": ([], [])}
         for _, parameter, role, view in model.optimizer_roles():
+            if not parameter.requires_grad:  # a locked part, or one the method never reaches
+                continue
             roles[role][0].append(parameter)
             roles[role][1].append(view)
         groups = [
@@ -123,13 +125,12 @@ class Muon(Method):
         ]
         self.optimizer = MuonAdamW([g for g in groups if g["params"]], settings["momentum"],
                                    (settings["beta1"], settings["beta2"]), settings["eps"])
-        self.best, self.next_step = float("inf"), 1
-        self._weigh_mtp()
+        self.best = float("inf")
         run.log(f"muon: {len(roles['matrix'][0])} matrices, {len(roles['vector'][0])} AdamW tensors, "
                 f"{len(roles['table'][0])} Engram tables")
 
     def factor(self, step):
-        """The share of lr a step uses."""
+        """The share of lr an update uses."""
         s = self.settings
         if step <= s["warmup"]:
             return step / s["warmup"]
@@ -139,20 +140,12 @@ class Muon(Method):
             return s["first_factor"]
         return 1.0
 
-    def before_update(self, model, step):
+    def before_update(self, step):
         for group in self.optimizer.param_groups:
             group["lr"] = self.settings["lr"] * group["lr_factor"] * self.factor(step)
 
-    def after_update(self, model, step, reduce):
-        self.next_step = step + 1
-        self._weigh_mtp()
-
-    def _weigh_mtp(self):
-        s = self.settings
-        self.mtp_weight = s["mtp_weight"] if self.next_step <= s["mtp_switch"] * self.steps else s["mtp_late_weight"]
-
     def stage(self, number, block_size):
-        self.best = float("inf")  # the folder keeps the best weights of the last stage, at its window length
+        self.best = float("inf")  # the step keeps the best weights of its last stage, at its window length
 
     def evaluated(self, step, val_loss):
         note = f" | lr x{self.factor(step):.3f}"
@@ -162,12 +155,11 @@ class Muon(Method):
         return Verdict(best=False, stop=False, note=note)
 
     def state_dict(self):
-        return {**super().state_dict(), "best": self.best, "next_step": self.next_step}
+        return {**super().state_dict(), "best": self.best}
 
     def load_state_dict(self, state):
         super().load_state_dict(state)
-        self.best, self.next_step = state["best"], state["next_step"]
-        self._weigh_mtp()
+        self.best = state["best"]
 
 
 def start(model, settings, run):

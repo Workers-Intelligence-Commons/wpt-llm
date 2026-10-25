@@ -95,7 +95,15 @@ data. Model size is the recipe's `model` part.
 
 The build record (in the store) lists the sources and their trees, the pools
 with their documents, tokens, shares and passes, the shards, the
-contamination report and the tool versions used.
+contamination report and the tool versions used. It also gives a
+fingerprint (a sha256) for each part the training steps read: `text` (the
+shards, training and held-out), and `conversations` and `tasks` when the
+dataset holds some. Each holds the vocabulary too, since every part becomes
+tokens with it. The documents a pool takes and the order of the rows come
+from the dataset's documents and sources that hold documents, never from the
+conversations and tasks, so adding a conversation or a task leaves the
+`text` fingerprint as it was ([training.md](training.md), "Step results and
+reuse").
 
 ## Held-out text and contamination
 
@@ -126,13 +134,14 @@ Every dataset build stores, beside the dataset's record, the list of all
 its documents: each one's id, the sha256 of its Markdown (the same sha256
 the dataset id's fingerprint reads) and its tag, `training` or `held-out`.
 It is found from the dataset id,
-which a model's `provenance.json` names, so post-training learns which
-texts its base model held out from that list alone: a pointer task whose
+which a model's `provenance.json` names and every training run is
+given, so a step and a measure learn which texts the model held out from
+that list alone: a pointer task whose
 document's text is one of them is measure-only, and no source is
-converted to Markdown to find out ([post-training.md](post-training.md),
+converted to Markdown to find out ([training.md](training.md),
 "Measure tasks"). Reading pointer tasks against a dataset that has no
-document list is refused (`DocumentListMissing`): such a base model is
-used with the repository at the commit that built its dataset. Nothing
+document list is refused (`DocumentListMissing`): such a dataset is
+used with the repository at the commit that built it. Nothing
 falls back and nothing is rebuilt. A dataset the store does not hold at
 all is refused the same way, the message saying it is not in the store.
 
@@ -159,9 +168,10 @@ parallel text is scarce. It comes from:
 WPT's own models may be used in training, their output included: as a
 reference a reward compares
 with, such as a model's own full attempt in the terse-versus-full reward
-of the `grpo` step ([post-training.md](post-training.md), "Rewards"), as
+of the `finish-tasks` step ([training.md](training.md), "Rewards"), as
 a draft a person edits or confirms ([chat-format.md](chat-format.md),
-"Model drafts"), or as `sft` data made of its attempts that passed their
+"Model drafts"), or as `answer-as-assistant` conversations made of its
+attempts that passed their
 task's check (issue #50, not built yet). Every such use says exactly what the WPT model did, so it is
 open to review.
 
@@ -176,4 +186,4 @@ company's model").
 
 The repository is recipes, scripts and environment setups usable for any
 model size. Flags and features let a smaller model train on a subset (for
-example a computer-use pre- and post-training subset).
+example a computer-use subset for every training step).

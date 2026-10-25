@@ -9,7 +9,7 @@ pass or fail, who rated and when. Ratings are stored as files of an
 `empty` source so the measure is reproducible, and they are a measure
 only, never a training signal: such a
 file is never a pre-training document (markdown.py gives it no Markdown)
-and no post-training step reads it.
+and no training step reads it.
 
 A person rates an attempt once: their newer rating replaces their
 earlier one. parse() refuses a file

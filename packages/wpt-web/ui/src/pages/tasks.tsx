@@ -1,10 +1,10 @@
-// The task editor: the task folders of an empty source (docs/post-training.md,
+// The task editor: the task folders of an empty source (docs/training.md,
 // "Tasks"): task.json, edited with a form built from its JSON schema, the
 // check that decides whether an attempt solved it, and the starting files.
 // A save writes the folder as exactly these files, as the next patch (only
 // the files that changed, each keeping its mode); a symbolic link is kept as
 // it is, and a task at the source's root is changed with unpack and patch.
-// The folder's tags (grpo) say which steps read it.
+// The folder's tags (finish-tasks) say which steps read it.
 
 import { useEffect, useState } from "react";
 import { get, part, put, saying } from "../api";
@@ -58,7 +58,7 @@ function Editor({ id, folder }: { id: string; folder: string }) {
       {schema ? <SchemaForm value={task.task} schema={schema} root={schema} name="task" onChange={(v) => setTask({ ...task, task: v })} />
         : <p className="hint">loading the task schema</p>}
       <h2>check</h2>
-      <p className="hint">The program that decides whether an attempt solved the task (docs/post-training.md).</p>
+      <p className="hint">The program that decides whether an attempt solved the task (docs/training.md).</p>
       <textarea className="page" value={task.check} rows={10} aria-label="check" onChange={(e) => setTask({ ...task, check: e.target.value })} />
       <h2>Starting files</h2>
       {files.map(([path, text]) => (
@@ -79,7 +79,7 @@ function Editor({ id, folder }: { id: string; folder: string }) {
         <button type="submit" disabled={!newFile}>+ file</button>
       </form>
       <p className="hint">
-        Which steps read this task comes from the tags of its files in source.json (grpo); <a href={`#/sources/${part(id)}`}>edit them there</a>.
+        Which steps read this task comes from the tags of its files in source.json (finish-tasks); <a href={`#/sources/${part(id)}`}>edit them there</a>.
       </p>
       <div className="actions">
         <PatchName value={patch} onChange={setPatch} />
