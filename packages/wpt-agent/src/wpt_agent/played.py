@@ -15,7 +15,9 @@ share, with no learning and no record of their own.
 The caller passes the model, its tokenizer, the built images, how tokens
 are drawn (Sampling: GREEDY always takes the likeliest token) and the
 generator that draws them, so the same generator state gives the same
-attempts again. A step that learns asks for each attempt's routes (R3);
+attempts again; or, instead of the model and the generator, writer: what
+makes a writer like wpt_inference.Writer (the wpt manager's, whose model
+writes on its gpu worker). A step that learns asks for each attempt's routes (R3);
 a measure asks for its changes to /work, which people read when they
 rate it.
 """
@@ -93,8 +95,9 @@ def gated(task, parts: dict) -> bool:
     return all(parts.get(name, 0.0) >= 1 for name in task.gates)
 
 
-def play(task, offers, keep, *, model, tokenizer, built, sampling: Sampling, generator, check_seconds: float,
-         result_bytes: int, routes=False, with_changes=False, terse=False, name="attempts") -> list:
+def play(task, offers, keep, *, tokenizer, built, sampling: Sampling, check_seconds: float, result_bytes: int,
+         model=None, generator=None, writer=None, routes=False, with_changes=False, terse=False,
+         name="attempts") -> list:
     """One attempt at the task for each offer (wpt_agent.Offer), each in a
     fresh container of its image (built: {image name: tag}), written
     together by the model, its tokens drawn by sampling and generator, each
@@ -106,8 +109,14 @@ def play(task, offers, keep, *, model, tokenizer, built, sampling: Sampling, gen
     area gets the part WITHIN_AREA: 1 when every path under /work the
     attempt changed matches one of its patterns, else 0. A check that
     gives no score counts as 0, printed with the reason under name.
-    Returns what keep returned, in order."""
-    from wpt_inference import Writer  # PyTorch is loaded only by what writes: wpt-agent's own commands need none
+    writer(prompt, rows, *, temperature, top_k, stops, routes), when
+    given, makes the writers in place of wpt_inference.Writer on model and
+    generator. Returns what keep returned, in order."""
+    if writer is None:
+        from wpt_inference import Writer  # PyTorch is loaded only by what writes: wpt-agent's own commands need none
+
+        def writer(prompt, rows, **settings):
+            return Writer(model, prompt, rows, generator=generator, **settings)
 
     outcomes, boxes, placed, writers = {}, {}, {}, []
     for i, offer in enumerate(offers):
@@ -117,8 +126,8 @@ def play(task, offers, keep, *, model, tokenizer, built, sampling: Sampling, gen
             outcomes[i] = error
 
     def start(ids, rows, stops):  # the opening read once for every attempt
-        writers.append(Writer(model, ids, rows, temperature=sampling.temperature, top_k=sampling.top_k,
-                              generator=generator, stops=stops, routes=routes))
+        writers.append(writer(ids, rows, temperature=sampling.temperature, top_k=sampling.top_k, stops=stops,
+                              routes=routes))
         return writers[-1]
 
     kept = []

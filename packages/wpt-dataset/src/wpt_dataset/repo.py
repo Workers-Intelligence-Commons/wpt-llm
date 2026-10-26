@@ -552,7 +552,8 @@ _EVENTS = {"open": (0,), "os.listdir": (0,), "os.scandir": (0,), "os.remove": (0
            "os.truncate": (0,), "os.utime": (0,), "shutil.rmtree": (0,), "shutil.copyfile": (0, 1),
            "shutil.copytree": (0, 1), "shutil.move": (0, 1), "glob.glob": (0,), "glob.glob/2": (0, 2)}
 _LIBRARIES = tuple(sorted({os.path.normcase(os.path.abspath(path)) + os.sep for name, path in sysconfig.get_paths().items()
-                           if name in ("stdlib", "platstdlib", "purelib", "platlib")}))
+                           if name in ("stdlib", "platstdlib", "purelib", "platlib", "scripts")}))
+_RMTREE = shutil.rmtree.__code__
 
 
 def _guard(data: Path):
@@ -572,7 +573,8 @@ def _audit(event, args):
     if paths is None:
         return
     for index in paths:
-        if index < len(args) and _in_data(args[index]):
+        if index < len(args) and _in_data(args[index]) and not (
+                event != "shutil.rmtree" and _inside_rmtree(args[index])):
             caller = _project_caller()
             if caller is not None and caller != _HERE and not _is_test(caller):
                 raise DataAccessRefused(f"{caller} reaches {os.fsdecode(args[index])} ({event}): only the service "
@@ -593,6 +595,21 @@ def _in_data(path) -> bool:
         return _under(os.path.normcase(os.path.realpath(written)), guarded)
     except (TypeError, ValueError, OSError):
         return False
+
+
+def _inside_rmtree(path) -> bool:
+    """Whether path is relative and named inside shutil.rmtree, which opens
+    and removes each child by its name relative to its parent folder's
+    descriptor (dir_fd), not to the current folder; rmtree's own event
+    already checked the folder it removes."""
+    if os.path.isabs(os.fsdecode(path)):
+        return False
+    frame = sys._getframe(2)
+    while frame is not None:
+        if frame.f_code is _RMTREE:
+            return True
+        frame = frame.f_back
+    return False
 
 
 def _under(found: str, folders) -> bool:
@@ -651,6 +668,11 @@ class Repo:
         key = self.root.resolve()
         with _LOCKS_LOCK:
             self._lock = _LOCKS.setdefault(key, _RepositoryLock(key))
+
+    def data_folder(self) -> str:
+        """The data folder's path from the repository's root, with /: what a
+        copy of the repository's code leaves out (wpt_worker.manager)."""
+        return self._data.relative_to(self.root).as_posix()
 
     @classmethod
     def find(cls, start=None) -> "Repo":

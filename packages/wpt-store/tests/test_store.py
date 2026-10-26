@@ -264,10 +264,16 @@ def test_an_s3_store_signs_its_requests_with_its_own_keys(tmp_path, monkeypatch)
     with mock_aws():
         boto3.client("s3", region_name="eu-west-1").create_bucket(
             Bucket="wpt-test", CreateBucketConfiguration={"LocationConstraint": "eu-west-1"})
+        # neither an AWS endpoint nor an AWS profile (missing here) reaches the store
+        monkeypatch.setenv("AWS_ENDPOINT_URL", "https://other.example")
+        monkeypatch.setenv("AWS_PROFILE", "missing")
         store = open_store("s3://wpt-test/store")
         credentials = store.kind.client._request_signer._credentials
         assert (credentials.access_key, credentials.secret_key) == ("the-id", "the-secret")
         assert store.kind.client.meta.region_name == "eu-west-1"
+        assert store.kind.client.meta.endpoint_url == "https://s3.eu-west-1.amazonaws.com"
+        store.kind.write("a", b"1")
+        assert store.kind.read("a")[0] == b"1"
 
 
 def test_s3_store_round_trip(tmp_path, monkeypatch):

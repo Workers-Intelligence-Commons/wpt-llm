@@ -17,6 +17,11 @@ runs (check_dataset). Each conversation must fit the model's context
 (block_size + 1 tokens, as text windows); a longer one fails the step,
 since cutting it would drop the answers it holds, and so does one without
 an assistant message.
+
+The wpt manager turns the conversations into tokens (Encoded, the
+environment's part there, which holds the tokenizer); the gpu worker's
+main process gets only the token ids and the marks of what the assistant
+wrote, and shares them with the other processes.
 """
 
 import json
@@ -24,7 +29,6 @@ import math
 
 import torch
 
-from wpt_tokenizer import chat
 from wpt_training import Environment, Stage, StepFailed
 
 GIVES = "conversations"
@@ -50,29 +54,50 @@ def check_dataset(settings, record, store):
         raise ValueError(f"no conversations: the dataset holds no chat file tagged {settings['tag']}")
 
 
-class Conversations(Environment):
-    def __init__(self, settings, data):
-        self.settings, self.data = settings, data
-        found = tagged(data.record, data.store, settings["tag"])
-        limit = data.config.block_size + 1
-        self.examples = []
+class Encoded:
+    """The environment's part on the wpt manager: the conversations as
+    tokens, through the chat template (wpt_tokenizer.chat), each checked."""
+
+    def __init__(self, settings, context):
+        from wpt_tokenizer import chat  # the manager's own: the gpu worker has no tokenizer
+
+        found = tagged(context.record, context.store, settings["tag"])
+        limit = context.config.block_size + 1
+        examples = []
         for one in found:
-            ids, learn = chat.encode(data.tokenizer, one["conversation"])
+            ids, learn = chat.encode(context.tokenizer, one["conversation"])
             if len(ids) > limit:
                 raise StepFailed(f"{one['id']}: {len(ids)} tokens, more than the model's context ({limit} with the "
                                  "first token)")
             if not any(learn[1:]):
                 raise StepFailed(f"{one['id']}: no assistant message to learn from")
-            self.examples.append((ids, learn))
+            examples.append((ids, learn))
         sources = {one["id"].split("/", 1)[0] for one in found}
-        self.sources = {sid: data.record["sources"][sid] for sid in sorted(sources)}
+        self.found = {"examples": examples, "sources": {sid: context.record["sources"][sid] for sid in sorted(sources)}}
+        context.telemetry.event(f"{context.step}.conversations", conversations=len(examples),
+                                tokens=sum(len(ids) for ids, _ in examples))
+
+    def examples(self) -> dict:
+        """{"examples": [(token ids, whether the assistant wrote each)], "sources": {id: its entry}}."""
+        return self.found
+
+
+def manager(settings, context):
+    return Encoded(settings, context)
+
+
+class Conversations(Environment):
+    def __init__(self, settings, data):
+        self.settings, self.data = settings, data
+        found = _asked(data, "examples")
+        self.examples = [(list(ids), list(learn)) for ids, learn in found["examples"]]
+        self.sources = found["sources"]
         self.tokens = sum(len(ids) for ids, _ in self.examples)
         self.per_epoch = math.ceil(len(self.examples) / settings["batch"])
         self.stage_list = (Stage(settings["epochs"] * self.per_epoch, settings["batch"]),)
         order = torch.Generator().manual_seed(data.step_seed)
         self.orders = [torch.randperm(len(self.examples), generator=order).tolist() for _ in range(settings["epochs"])]
         self.losses, self.indexers = [], []
-        data.telemetry.event(f"{data.step}.conversations", conversations=len(self.examples), tokens=self.tokens)
 
     def batch(self, step, model, strategy):
         epoch, index = divmod(step - 1, self.per_epoch)
@@ -105,6 +130,22 @@ class Conversations(Environment):
 
     def load_state_dict(self, state):
         self.losses, self.indexers = list(state["losses"]), list(state["indexers"])
+
+
+def _asked(data, name):
+    """The manager part's answer to name(), asked once by the main process
+    and shared with the others; a StepFailed there fails the step in every
+    process."""
+    found = None
+    if data.strategy.is_main:
+        try:
+            found = ("answer", data.call(name))
+        except StepFailed as error:
+            found = ("failed", error.reason)
+    kind, value = data.strategy.broadcast(found)
+    if kind == "failed":
+        raise StepFailed(value)
+    return value
 
 
 def _batch(examples, device, learn=True):

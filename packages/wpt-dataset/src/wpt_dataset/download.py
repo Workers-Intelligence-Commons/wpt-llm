@@ -51,6 +51,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from wpt_store import StoreError
+from wpt_store.database import DOWNLOADED, FAILED, REUSED  # the store database's outcomes
 from wpt_telemetry import Telemetry, set_ref
 from wpt_utils.files import sha256_file
 from wpt_utils.parallel import Done, Sizing, each as each_item
@@ -62,7 +63,6 @@ from .repo import Source
 from .sources import (UPSTREAM, UPSTREAM_FILES, apply_cuts, apply_patches, exact_pattern, fetch, not_text,
                       stored_files, stored_upstream)
 
-DOWNLOADED, REUSED, FAILED = "downloaded", "reused", "failed"  # the store database's outcomes (wpt_store.database)
 
 
 class Staging:

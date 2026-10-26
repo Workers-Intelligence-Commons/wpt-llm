@@ -32,7 +32,10 @@ results and reuse", below). A source added after the build reaches training
 only once it is downloaded into the store (`wpt-dataset download`) and the
 dataset is built again.
 
-The main process records the run in the store: what it read, every step
+`wpt-train` trains through gpu workers, one per machine
+([machines.md](machines.md)): each worker's job runs the steps on its GPUs, and `wpt-train` answers it from
+the store, the tokenizer and the run's record. The job's main process
+records the run in the store, through that link: what it read, every step
 and every update's loss, duration and learning rates, every evaluation and
 checkpoint, every step result kept or reused, and every file it wrote
 ([observability.md](observability.md)). A record the store refuses stops
@@ -41,11 +44,11 @@ process's record breaks (a record call refused, or on S3 a group of its
 lines refused in the background), it finishes its update unrecorded and
 every process stops after it, as for Ctrl+C: the checkpoint is saved, and
 `--resume` continues from it without losing an update. The broken record
-does not name that checkpoint (nor, with `--run`, its store ref). When the
-launcher's record breaks while the processes train (on S3, a group of its
-lines refused in the background), it stops them as Ctrl+C does: they
-finish their update and save the checkpoint, and the launcher exits with
-code 3.
+does not name that checkpoint (nor, with `--run`, its store ref). When
+`wpt-train`'s own record breaks while the job trains (on S3, a group of
+its lines refused in the background), it stops the job as Ctrl+C does: its
+processes finish their update and save the checkpoint, and `wpt-train`
+exits with code 3.
 
 ## Steps
 
@@ -581,27 +584,19 @@ seed the margin went from -0.031 on Intel runners to +0.075 on AMD ones.
   them ("Long windows", above). Each holds a full copy of the model, and
   their gradients are added up before each update.
 
-On one machine, `--processes` starts them:
+Every strategy runs inside the gpu worker ([machines.md](machines.md)),
+whose job is the training's processes; `--processes` starts them on the
+worker's machine:
 
 ```sh
 uv run wpt-train <recipe> <dataset id> --strategy ddp --processes 2
 ```
 
-(`split` starts the same ways.)
-
-On several machines, `torchrun` (which comes with PyTorch) starts them:
-each machine runs the same command with its `--nnodes`, `--node-rank` and
-`--master-addr` options. torchrun works on one machine too:
-
-```sh
-uv run torchrun --nproc-per-node 2 -m wpt_train <recipe> <dataset id> --strategy ddp
-```
-
-On Windows, torchrun does not start with PyTorch 2.14: the store its
-processes meet through needs a network library (libuv) that PyTorch's
-Windows build lacks. Use `--processes` there. PyTorch's processes on
-Windows talk only through the CPU library (gloo), so several GPUs gain
-less than on Linux.
+(`split` starts the same way.) A run on several gpu workers starts
+`--processes` processes on each machine, and they train as one run
+([machines.md](machines.md), "Several machines"); across places, only
+`ddp` runs. PyTorch's processes on Windows talk only through the CPU
+library (gloo), so several GPUs gain less than on Linux.
 
 `single` refuses to start among several processes, since each would train
 alone and write the same folder. One process per
@@ -619,7 +614,7 @@ written as such a file, without changes to the training loop. None ships.
 ## Checkpoints and resuming
 
 Inside a step, every `--checkpoint-every` updates (default 500, 0 for none
-during a step), the main process writes a checkpoint: the step's
+during a step), the gpu worker's main process writes a checkpoint: the step's
 fingerprint, the update, the weights, the optimizer's, method's and
 environment's state and the best weights so far. After the step's last
 update it always writes one, unless that update's own was just written,
@@ -635,10 +630,20 @@ other inputs (its fingerprint differs), stops the run with
 leftover checkpoint stops the run, so a crashed run is never overwritten
 by mistake.
 
-Where it lives:
+The gpu worker writes every checkpoint on its own disk, where a restart of
+its processes finds it. What comes back to the wpt manager is a setting,
+`WPT_LINK_CHECKPOINTS`: `step-ends` (the default) sends only each step's
+last checkpoint, with the step's end, which becomes its kept state;
+`every` sends each one as it is written, into the place below. With
+`step-ends`, a step that stops or fails leaves no checkpoint there, so
+`--resume` starts it over, and the stop's message says so. The first
+start of a job removes the checkpoint folders that earlier runs' jobs
+left on the worker, which no later run reads.
 
-- without `--run`, in `<model folder>/checkpoint/checkpoint.pt`, on the
-  machine of the main process; a run that fails leaves `checkpoint/` in an
+Where it lives, on the manager's side:
+
+- without `--run`, in `<model folder>/checkpoint/checkpoint.safetensors`, on the
+  wpt manager's machine; a run that fails leaves `checkpoint/` in an
   earlier folder at that place, and a model folder that did not exist
   before the run and holds nothing else goes with the checkpoint;
 - with `--run NAME` (or `WPT_RUN`), in the store, under the ref
@@ -664,30 +669,30 @@ as `kill -9` or a power cut does.
 
 ### Restarting after a crash
 
-When a process crashes, the processes `wpt-train` started are stopped and
-all start again, up to `--max-restarts` times (default 3, `WPT_MAX_RESTARTS`);
-a restarted process continues from the checkpoint without `--resume`. A
-one-process run is started this way too, by a small parent process, unless
-`--max-restarts 0`, which runs the training in the command's own process
-and never restarts. Three exits are never restarted: a refusal (exit code
+When a process crashes, the processes the gpu worker's job started are
+stopped and all start again, up to `--max-restarts` times (default 3,
+`WPT_MAX_RESTARTS`); a restarted process continues from the worker's own
+checkpoint without `--resume`. A one-process run is started this way too,
+by a small parent process in the job, unless `--max-restarts 0`, which runs
+the training in the job's first process and never restarts. Three exits are never restarted: a refusal (exit code
 2: a missing or damaged dataset, a checkpoint written by another step,
 settings or options that do not fit, a step that failed, a drafter that
 could not be trained), which would refuse again, a record that could not be
 written (exit code 3), and a stop asked for (exit code 130). A bug that
-crashes every time stops after the last restart.
+crashes every time stops after the last restart, and `wpt-train` exits
+with the crash's exit code. Restarts stay on one machine: on several gpu
+workers, a crash ends the job on every one, and `wpt-train` exits with
+code 5; `wpt-manager` resumes the run from the checkpoint it holds, as for
+a lost worker ([machines.md](machines.md), "A lost gpu worker").
 
-With torchrun, its own `--max-restarts` restarts the processes, and they
-continue from the checkpoint the same way. On several machines, use
-torchrun's meeting point (`--rdzv-backend c10d --rdzv-endpoint HOST:PORT
---rdzv-id NAME`) instead of `--master-addr`, so a machine that comes back
-can join again; and `--run`, so the checkpoint is where every machine can
-read it. A checkpoint folder without `--run` is only on the main
-process's machine. torchrun restarts after any failed process, refusals
-included.
+A gpu worker lost (it cannot be reached, or its link breaks) stops the run
+with exit code 4; `--resume` continues it from the checkpoint the manager
+holds, and `wpt-manager` does so itself on a replacement for a worker it
+rented ([machines.md](machines.md), "A lost gpu worker").
 
 ## The drafter
 
-After the last step, the main process trains the model's drafter
+After the last step, the gpu worker's main process trains the model's drafter
 ([model.md](model.md), "The drafter"): a model and its drafter are one
 unit, so every run trains one, against the final weights, the model frozen,
 with the recipe's `drafter` section. Its prompts are the beginnings of the
@@ -900,9 +905,11 @@ occurs exactly once in a file) and `bash` (run a command), and the tools a
 task adds ("Tools", below). Its code is the `wpt-agent` package (tools,
 containers, images, the agent loop and the scoring), the `agent-tasks`
 environment and `wpt_training/agentic.py` (the attempts and their
-rewards), and the `grpo` method (the learning). It needs Docker on the
-machine of the main process, which plays every attempt; every process
-then trains on its share of them. It reads the dataset's tasks tagged
+rewards), and the `grpo` method (the learning). The wpt manager plays
+every attempt, the gpu worker's model writing its tokens, so it needs
+Docker where the manager's `docker` command reaches it: its own machine or
+the Docker host `DOCKER_HOST` names ([machines.md](machines.md)); every
+process on the worker then trains on its share of them. It reads the dataset's tasks tagged
 `finish-tasks` (`tag`); a dataset that holds none refuses the run, with
 "no tasks", before any step trains.
 

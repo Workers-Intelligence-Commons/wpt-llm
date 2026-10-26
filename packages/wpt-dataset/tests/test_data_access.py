@@ -173,6 +173,24 @@ def test_the_audit_hook_refuses_data_access_from_code_outside_the_service_layer(
     exec(compile(f"open({str(tmp_path / 'other.txt')!r}, 'w').write('x')", elsewhere, "exec"), {})  # elsewhere: free
 
 
+def test_the_audit_hook_lets_code_remove_a_folder_elsewhere_that_holds_a_data_folder(tmp_path, monkeypatch):
+    # shutil.rmtree names each child relative to its parent folder, so a child named data is not the
+    # checkout's data/ even when the current folder is the checkout; removing data/ itself stays refused
+    root = tmp_path / "wpt"
+    (root / "data").mkdir(parents=True)
+    Repo(root)
+    work = tmp_path / "work"
+    (work / "data").mkdir(parents=True)
+    (work / "data" / "f").write_text("x", encoding="utf-8")
+    monkeypatch.chdir(root)
+    elsewhere = str(tmp_path / "elsewhere" / "reader.py")
+    exec(compile(f"__import__('shutil').rmtree({str(work)!r})", elsewhere, "exec"), {})
+    assert not work.exists()
+    with pytest.raises(DataAccessRefused, match="only the service layer"):
+        exec(compile("__import__('shutil').rmtree('data')", elsewhere, "exec"), {})
+    assert (root / "data").is_dir()
+
+
 def test_the_audit_hook_follows_links_and_counts_only_the_project_s_own_tests(tmp_path, monkeypatch):
     # a link from elsewhere into data/ is refused like the path itself, and a checkout under a folder named
     # tests is not test code for being there: only a tests folder inside the checkout is

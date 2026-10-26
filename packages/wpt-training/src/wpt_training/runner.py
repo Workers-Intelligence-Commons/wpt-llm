@@ -16,8 +16,9 @@ import torch
 from wpt_telemetry import RecordError, Telemetry
 
 from .plugins import PluginError, Run
+from .states import load_state, save_state
 
-CHECKPOINT = "checkpoint.pt"
+CHECKPOINT = "checkpoint.safetensors"
 
 
 class SettingsMismatch(Exception):
@@ -54,12 +55,18 @@ class Checkpoint:
         when its record breaks, once the state is saved all the same."""
         raise NotImplementedError
 
+    def save_file(self, path: Path):
+        """save() of a state already written to the file path (a state
+        file, wpt_training.states), such as one a gpu worker sent; the file
+        stays the caller's."""
+        raise NotImplementedError
+
     def remove(self):
         raise NotImplementedError
 
 
 class FolderCheckpoint(Checkpoint):
-    """checkpoint.pt in a folder of this machine."""
+    """checkpoint.safetensors, a state file (states.py), in a folder of this machine."""
 
     def __init__(self, folder: Path):
         self.folder, self.path = Path(folder), Path(folder) / CHECKPOINT
@@ -71,10 +78,16 @@ class FolderCheckpoint(Checkpoint):
         return self.folder.exists()
 
     def load(self):
-        return torch.load(self.path, map_location="cpu", weights_only=True) if self.path.is_file() else None
+        return load_state(self.path) if self.path.is_file() else None
 
     def save(self, state):
-        _save(self.path, state)
+        save_state(state, self.path)
+
+    def save_file(self, path):
+        self.folder.mkdir(parents=True, exist_ok=True)
+        partial = self.path.with_name(self.path.name + ".partial")
+        shutil.copyfile(path, partial)
+        os.replace(partial, self.path)
 
     def remove(self):
         shutil.rmtree(self.folder, ignore_errors=True)
@@ -415,13 +428,6 @@ class _Unbroken:
                 opened.__exit__(None, None, None)
             except RecordError as error:
                 self.broken = error
-
-
-def _save(path: Path, state):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    partial = path.with_name(path.name + ".partial")
-    torch.save(state, partial)
-    os.replace(partial, path)
 
 
 class _StopSignals:

@@ -445,7 +445,7 @@ patch makes that is not text) gets no line. With
 `download --stream` (or `WPT_STREAM=1`), the downloading machine keeps no
 copy of the bundles once the store holds them; without it, an S3 store
 keeps a copy in its local cache folder and reads it first.
-`wpt-dataset store` lists what the database says, from the database
+`wpt-store list` lists what the database says, from the database
 alone: each source's last outcome, revision and checksum, and its last
 download's time, address, repository commit and size; then every session,
 in the order they started. A build is a session too, with no bundle: one
@@ -483,8 +483,9 @@ For S3, the credentials and a non-AWS endpoint come from the store's own
 settings, in the environment or in `.env`: `WPT_STORE_ACCESS_KEY_ID` and
 `WPT_STORE_SECRET_ACCESS_KEY` (both needed), `WPT_STORE_SESSION_TOKEN`,
 `WPT_STORE_ENDPOINT_URL` and `WPT_STORE_REGION` (default `us-east-1`). The
-store reads no `AWS_*` setting, so the keys a cloud provider's other tools
-use never reach it. Objects are named by their sha256 and checked on every
+store reads no `AWS_*` setting (not even `AWS_ENDPOINT_URL` or `AWS_PROFILE`)
+and no AWS configuration or credentials file, so the keys a cloud provider's
+other tools use never reach it. Objects are named by their sha256 and checked on every
 read.
 
 The setting's prefix picks the store's kind, a class of `wpt-store`
@@ -647,8 +648,11 @@ every way to build a path, so the service layer also sets an audit hook
 made: any opening, listing, removal or renaming of a path under a `Repo`'s
 data folder, as written or with its symbolic links resolved, whose nearest
 caller in the project's own code (not Python's library, not an installed
-package) is neither `repo.py` nor a test fails with `DataAccessRefused`
-before it happens, in every command and in the test suite. A test is a
+package or its command script) is neither `repo.py` nor a test fails with
+`DataAccessRefused` before it happens, in every command and in the test
+suite. Inside `shutil.rmtree`, a relative name is a child of the folder being
+removed, not of the current folder, so only the folder `rmtree` was given is
+checked. A test is a
 `conftest.py` or a file under a `tests` folder, both inside the project's
 checkout: a folder named `tests` above the checkout, or a `conftest.py`
 outside it, does not make its code a test. The tests are left out of both:
@@ -816,7 +820,7 @@ code 3, as it stops any recorded command.
 | Package | Role |
 | --- | --- |
 | `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; the service layer (`repo.py`), the only code that reads or writes `data/`; the task builder (`builder.py`, run by `scripts/build_tasks.py`); the source drafters (`source_drafter.py`, the built-ins in `source_drafters/`); the always-on monitoring (`monitoring.py`); command `wpt-dataset` |
-| `wpt-store` | the content-addressed store (its kinds: a local folder or S3), its compression, its sessions with their bundles, the store database, its record folders, and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules |
+| `wpt-store` | the content-addressed store (its kinds: a local folder or S3), its compression, its sessions with their bundles, the store database, its record folders, the model folders kept under a run's name (`models/<name>`), and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules; command `wpt-store` (`list`: what the store database says; `copy-out`: a kept model folder, checked against its sha256s) |
 | `wpt-telemetry` | the record of one command run in the store, sent live to an OpenTelemetry backend when one is set ([observability.md](observability.md)) |
 | `wpt-tokenizer` | the byte-level BPE tokenizer, Rust inside |
 | `wpt-web` | a local web interface over the service layer: one small server on 127.0.0.1, one file per page (Python routes, React page), an editor for every kind of data, a conversation editor that asks a WPT model folder for drafts, and its OpenAPI description; its interface is built with Bun when it starts; command `wpt-web` |
@@ -825,7 +829,8 @@ code 3, as it stops any recorded command.
 | `wpt-inference` | sampling through the model's generation cache: several rows from one prompt, the model's next chat message (`next_message`, which `wpt-chat --chat` and the text measures of `wpt-eval` both write with), speculative decoding with a drafter and its scheduler, the scheduler's pass times (measured, recorded, replayed); training a model's drafter (`drafting.py`), which `wpt-train` runs at the end of every run, so it uses `wpt-model` |
 | `wpt-utils` | helpers several packages share, one submodule each: `wpt_utils.device` picks the best GPU, else the CPU; `wpt_utils.programs` starts the outside programs WPT runs (`program(name)`, with a clear error when one is missing), identifies the code every fingerprint holds (`code()`: the checkout's commit and a hash of its uncommitted changes, the one place that reads the commit) and gives that commit, and whether there are changes, in the shape the records name them (`repository()`), without importing PyTorch; `wpt_utils.files.sha256_file` is the one way a file is hashed, by the store, the model folders and the run records alike; `wpt_utils.files.lock_file` is the lock the operating system holds on a file for one process, which the service layer and a local store's database share; `wpt_utils.settings.typed` types the settings of a training step and of its method, environment and optimizer from the defaults each file declares; `wpt_utils.parallel` is the one rule that sizes parallel work (at most 75% of the cores; before each new item it measures again and starts it only while a quarter of the memory, of the cores and, where the items write to a disk, of the free disk stays free, one item's memory being what running items are measured taking, never a given figure; it never stops a running item) and runs items that way with their results in the items' order, an error an item may fail with becoming that item's result |
 | `wpt-agent` | the agent harness of agentic training: the tools (the four built-in ones, `ask`, and those a task or its image's pool declares, answered by programs in the image) and each attempt's choice of them, one Docker container per attempt, the images of `data/images/` and their locks, the agent loop and the task's check, and the playing of a task's attempts (`wpt_agent.play`), which the `agent-tasks` environment of the `finish-tasks` and `finish-tasks-with-less-writing` steps and the agent measures of `wpt-eval` share, so `wpt-eval` does not depend on `wpt-train`; commands `wpt-agent lock-image` and `wpt-agent build-image` |
-| `wpt-train`, `wpt-eval`, `wpt-chat` | the applications |
+| `wpt-worker` | the gpu worker, which runs the GPU work of a training on its machine, the link to it from the wpt manager's side, and the gradients exchanged between gpu workers in different places ([machines.md](machines.md)) |
+| `wpt-train`, `wpt-eval`, `wpt-chat`, `wpt-manager` | the applications; `wpt-manager` runs download, build, training and the optional evaluation as one command, and rents its gpu workers through providers when asked ([machines.md](machines.md)) |
 
 ## Checks
 

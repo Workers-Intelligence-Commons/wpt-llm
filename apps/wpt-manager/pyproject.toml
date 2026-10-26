@@ -1,0 +1,14 @@
+[project]
+name = "wpt-manager"
+version = "0.1.0"
+description = "The wpt manager: one command that downloads, builds and trains a WPT model recipe, through a gpu worker"
+license = "AGPL-3.0-or-later"
+requires-python = ">=3.14"
+dependencies = ["wpt-dataset", "wpt-train", "wpt-eval", "wpt-store", "wpt-telemetry", "wpt-utils", "wpt-worker"]
+
+[project.scripts]
+wpt-manager = "wpt_manager:main"
+
+[build-system]
+requires = ["uv_build>=0.13.0,<0.14.0"]
+build-backend = "uv_build"

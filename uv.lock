@@ -25,6 +25,7 @@ members = [
     "wpt-eval",
     "wpt-inference",
     "wpt-llm",
+    "wpt-manager",
     "wpt-model",
     "wpt-store",
     "wpt-telemetry",
@@ -33,6 +34,7 @@ members = [
     "wpt-training",
     "wpt-utils",
     "wpt-web",
+    "wpt-worker",
 ]
 
 [[package]]
@@ -2083,12 +2085,12 @@ dependencies = [
     { name = "numpy" },
     { name = "wpt-agent" },
     { name = "wpt-dataset" },
-    { name = "wpt-inference" },
     { name = "wpt-model" },
     { name = "wpt-store" },
     { name = "wpt-telemetry" },
     { name = "wpt-tokenizer" },
     { name = "wpt-utils" },
+    { name = "wpt-worker" },
 ]
 
 [package.metadata]
@@ -2096,12 +2098,12 @@ requires-dist = [
     { name = "numpy", specifier = ">=2" },
     { name = "wpt-agent", editable = "packages/wpt-agent" },
     { name = "wpt-dataset", editable = "packages/wpt-dataset" },
-    { name = "wpt-inference", editable = "packages/wpt-inference" },
     { name = "wpt-model", editable = "packages/wpt-model" },
     { name = "wpt-store", editable = "packages/wpt-store" },
     { name = "wpt-telemetry", editable = "packages/wpt-telemetry" },
     { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
     { name = "wpt-utils", editable = "packages/wpt-utils" },
+    { name = "wpt-worker", editable = "packages/wpt-worker" },
 ]
 
 [[package]]
@@ -2144,8 +2146,10 @@ dev = [
     { name = "wpt-chat" },
     { name = "wpt-dataset" },
     { name = "wpt-eval" },
+    { name = "wpt-manager" },
     { name = "wpt-train" },
     { name = "wpt-web" },
+    { name = "wpt-worker" },
 ]
 rocm = [
     { name = "torch", version = "2.14.1+rocm7.2", source = { registry = "https://download.pytorch.org/whl/rocm7.2" }, marker = "sys_platform == 'linux'" },
@@ -2173,8 +2177,10 @@ dev = [
     { name = "wpt-chat", editable = "apps/wpt-chat" },
     { name = "wpt-dataset", editable = "packages/wpt-dataset" },
     { name = "wpt-eval", editable = "apps/wpt-eval" },
+    { name = "wpt-manager", editable = "apps/wpt-manager" },
     { name = "wpt-train", editable = "apps/wpt-train" },
     { name = "wpt-web", editable = "packages/wpt-web" },
+    { name = "wpt-worker", editable = "packages/wpt-worker" },
 ]
 rocm = [
     { name = "torch", marker = "sys_platform == 'linux'", specifier = ">=2.14", index = "https://download.pytorch.org/whl/rocm7.2", conflict = { package = "wpt-llm", group = "rocm" } },
@@ -2183,6 +2189,31 @@ rocm = [
 xpu = [
     { name = "torch", specifier = ">=2.14", index = "https://download.pytorch.org/whl/xpu", conflict = { package = "wpt-llm", group = "xpu" } },
     { name = "triton-xpu", index = "https://download.pytorch.org/whl/xpu", conflict = { package = "wpt-llm", group = "xpu" } },
+]
+
+[[package]]
+name = "wpt-manager"
+version = "0.1.0"
+source = { editable = "apps/wpt-manager" }
+dependencies = [
+    { name = "wpt-dataset" },
+    { name = "wpt-eval" },
+    { name = "wpt-store" },
+    { name = "wpt-telemetry" },
+    { name = "wpt-train" },
+    { name = "wpt-utils" },
+    { name = "wpt-worker" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "wpt-dataset", editable = "packages/wpt-dataset" },
+    { name = "wpt-eval", editable = "apps/wpt-eval" },
+    { name = "wpt-store", editable = "packages/wpt-store" },
+    { name = "wpt-telemetry", editable = "packages/wpt-telemetry" },
+    { name = "wpt-train", editable = "apps/wpt-train" },
+    { name = "wpt-utils", editable = "packages/wpt-utils" },
+    { name = "wpt-worker", editable = "packages/wpt-worker" },
 ]
 
 [[package]]
@@ -2260,6 +2291,7 @@ dependencies = [
     { name = "wpt-tokenizer" },
     { name = "wpt-training" },
     { name = "wpt-utils" },
+    { name = "wpt-worker" },
 ]
 
 [package.metadata]
@@ -2273,6 +2305,7 @@ requires-dist = [
     { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
     { name = "wpt-training", editable = "packages/wpt-training" },
     { name = "wpt-utils", editable = "packages/wpt-utils" },
+    { name = "wpt-worker", editable = "packages/wpt-worker" },
 ]
 
 [[package]]
@@ -2331,6 +2364,35 @@ requires-dist = [
     { name = "wpt-store", editable = "packages/wpt-store" },
     { name = "wpt-telemetry", editable = "packages/wpt-telemetry" },
     { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
+    { name = "wpt-utils", editable = "packages/wpt-utils" },
+]
+
+[[package]]
+name = "wpt-worker"
+version = "0.1.0"
+source = { editable = "packages/wpt-worker" }
+dependencies = [
+    { name = "cryptography" },
+    { name = "numpy" },
+    { name = "psutil" },
+    { name = "wpt-inference" },
+    { name = "wpt-model" },
+    { name = "wpt-store" },
+    { name = "wpt-telemetry" },
+    { name = "wpt-training" },
+    { name = "wpt-utils" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "cryptography", specifier = ">=46" },
+    { name = "numpy", specifier = ">=2" },
+    { name = "psutil", specifier = ">=7" },
+    { name = "wpt-inference", editable = "packages/wpt-inference" },
+    { name = "wpt-model", editable = "packages/wpt-model" },
+    { name = "wpt-store", editable = "packages/wpt-store" },
+    { name = "wpt-telemetry", editable = "packages/wpt-telemetry" },
+    { name = "wpt-training", editable = "packages/wpt-training" },
     { name = "wpt-utils", editable = "packages/wpt-utils" },
 ]
 

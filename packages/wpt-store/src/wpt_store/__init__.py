@@ -49,9 +49,9 @@ For S3, the credentials and a non-AWS endpoint come from the store's own
 settings, in the environment or in .env: WPT_STORE_ACCESS_KEY_ID and
 WPT_STORE_SECRET_ACCESS_KEY (both needed), WPT_STORE_SESSION_TOKEN,
 WPT_STORE_ENDPOINT_URL and WPT_STORE_REGION (default us-east-1). The
-store reads no AWS_* setting, so the keys a cloud provider's other
-tools use never reach it. A store
-keeps local copies of objects in its cache folder: an S3 store every object
+store reads no AWS_* setting (no AWS_ENDPOINT_URL, no AWS_PROFILE) and no
+AWS configuration or credentials file, so the keys a cloud provider's
+other tools use never reach it. A store keeps local copies of objects in its cache folder: an S3 store every object
 read as a file, after its check; a local store the compressed ones read as
 a file, which it cannot give in place. release() removes a copy;
 copies_in(folder) is the same store making in folder only the copies its
@@ -927,17 +927,19 @@ class S3Store(Store):
 
     def __init__(self, bucket, prefix, cache_dir=None, client=None, settings=None):
         import boto3
+        from botocore.config import Config
 
         self.bucket = bucket
         self.prefix = prefix.strip("/")
         self.settings = (s3_settings() if settings is None else settings) if client is None else settings
         if client is None:
-            client = boto3.client(
+            client = boto3.Session(botocore_session=_own_session()).client(
                 "s3", aws_access_key_id=self.settings["access_key_id"],
                 aws_secret_access_key=self.settings["secret_access_key"],
                 aws_session_token=self.settings.get("session_token"),
                 endpoint_url=self.settings.get("endpoint_url"),
-                region_name=self.settings.get("region", S3_DEFAULT_REGION))
+                region_name=self.settings.get("region", S3_DEFAULT_REGION),
+                config=Config(ignore_configured_endpoint_urls=True))
         self.client = client
         cache = Path(cache_dir) if cache_dir else _default_cache() / bucket / (self.prefix or "_")
         super().__init__(Bucket(self.client, bucket, self.prefix), cache)
@@ -949,6 +951,20 @@ class S3Store(Store):
 
     def _opening(self):
         return S3Store, (self.bucket, self.prefix, self._own_cache, None, self.settings)  # its client, from the same settings
+
+
+def _own_session():
+    """A new botocore session that reads no AWS_* environment variable and
+    no AWS configuration or credentials file (a client is built from its
+    arguments alone). One per client: boto3 adds its methods to a
+    session's client class once."""
+    import botocore.session
+    from botocore.configprovider import BOTOCORE_DEFAUT_SESSION_VARIABLES
+
+    files = ("config_file", "credentials_file")
+    return botocore.session.Session(session_vars={
+        name: (config, None, os.devnull if name in files else default, convert)
+        for name, (config, _variable, default, convert) in BOTOCORE_DEFAUT_SESSION_VARIABLES.items()})
 
 
 def _cut(path: Path) -> bool:

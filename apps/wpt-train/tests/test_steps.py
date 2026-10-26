@@ -14,7 +14,6 @@ import torch
 from safetensors.torch import load_file
 
 import wpt_agent
-import wpt_inference
 import wpt_train
 from wpt_agent import images, played
 from wpt_dataset import conversations
@@ -24,7 +23,7 @@ from wpt_model import PARTS
 from wpt_store import LocalStore
 from wpt_telemetry import RECORD_FAILED, Telemetry
 from wpt_tokenizer import chat
-from wpt_training import Data, Strategy, load_step
+from wpt_training import Context, Data, Strategy, in_process, load_step, step_seed
 from wpt_training import agentic
 from wpt_train import main as train
 
@@ -71,11 +70,10 @@ def test_answer_as_assistant_learns_from_the_conversations_tagged_for_it_and_cre
     assert record["conversations"]["count"] == 1 and list(record["conversations"]["sources"]) == [sid]
     train([built.recipe("base", training=one_stage(1, 64)), dataset, "--out", "base"])
 
-    stops, real = [], wpt_train.train_drafter
-    monkeypatch.setattr(wpt_train, "train_drafter", lambda *args, **kwargs: stops.append(kwargs["stops"])
-                        or real(*args, **kwargs))
     train([recipe, dataset, "--out", "model"])
-    assert stops == [(wpt_train.Tokenizer.END, chat.IM_END)]
+    [drafter] = [event for event in built.records("wpt-train")[-1].events
+                 if event["kind"] == "span_start" and event["name"] == "drafter"]
+    assert drafter["attributes"]["stops"] == [wpt_train.Tokenizer.END, chat.IM_END]
     assert "step 1 read-text: reused" in capsys.readouterr().out
     base, tuned = load_file(tmp_path / "base" / "model.safetensors"), load_file(tmp_path / "model" / "model.safetensors")
     assert any(not torch.equal(base[name], tuned[name]) for name in base)
@@ -203,8 +201,7 @@ def test_two_text_steps_of_one_recipe_draw_other_windows(built):
     strategy = Strategy(torch.device("cpu"))
 
     def first_windows(number):
-        data = Data(step.name, built.store, record, None, None, strategy, Telemetry.off(), lambda _: None, 1337,
-                    number)
+        data = Data(step.name, built.store, record, None, strategy, Telemetry.off(), lambda _: None, 1337, number)
         environment = step.start_environment(data)
         try:
             [(x, _)] = environment.batch(1, None, strategy)
@@ -229,13 +226,14 @@ def test_two_identical_steps_of_one_recipe_draw_other_conversations_and_tasks(bu
     tokenizer = wpt_train.Tokenizer.from_bytes(built.store.get_bytes(record["tokenizer"]["vocabulary"]))
     strategy = Strategy(torch.device("cpu"))
 
-    def data(number):
-        return Data("x", built.store, record, tokenizer, SimpleNamespace(block_size=64), strategy, Telemetry.off(),
-                    lambda _: None, 1337, number)
-
     def conversation_orders(number):
         step = load_step({"step": "answer-as-assistant"}, PARTS)
-        return step.start_environment(data(number)).orders
+        config = SimpleNamespace(block_size=64)
+        part = step.start_manager(Context("x", built.store, record, tokenizer, config, Telemetry.off(),
+                                          lambda _: None, 1337, number))
+        data = Data("x", built.store, record, config, strategy, Telemetry.off(), lambda _: None, 1337, number,
+                    call=in_process(part))
+        return step.start_environment(data).orders
 
     assert conversation_orders(1) != conversation_orders(2)
     assert conversation_orders(2) == conversation_orders(2)
@@ -243,8 +241,9 @@ def test_two_identical_steps_of_one_recipe_draw_other_conversations_and_tasks(bu
     def task_orders(number):
         found, _ = environment({"rounds": 4, "tasks_per_update": 2}, [fake_task(f"t{i}") for i in range(6)],
                                lambda *_: [])
-        found.data = data(number)
-        found.begin(MODEL, SimpleNamespace(broadcast=lambda value: value))
+        found.data = SimpleNamespace(step="x", log=lambda _: None, telemetry=Telemetry.off(),
+                                     step_seed=step_seed(1337, number))
+        found.begin()
         return found.orders
 
     assert task_orders(1) != task_orders(2)
@@ -291,11 +290,12 @@ def test_a_step_that_fails_after_a_checkpoint_keeps_it_for_resume(built, tmp_pat
     monkeypatch.setenv("WPT_TEST_FAIL", str(tmp_path / "fail"))
     recipe = built.recipe("fails", steps=[{"step": str(tmp_path / "fails-once-step.py"), "settings": one_stage(3)}])
     command = [recipe, built.dataset_id, "--out", "model", "--checkpoint-every", "1"]
+    monkeypatch.setenv("WPT_LINK_CHECKPOINTS", "every")  # the checkpoint the failure leaves comes to this machine
     err = refused(capsys, command)
     assert ("StepFailed: step 2 fails-once-step: the examples went away; its checkpoint stays in "
             f"{Path('model') / 'checkpoint'}: --resume continues the step from it, and deleting it starts the step "
             "over; the results of the 1 steps before it stay in the store") in err
-    assert (tmp_path / "model" / "checkpoint" / "checkpoint.pt").is_file()
+    assert (tmp_path / "model" / "checkpoint" / "checkpoint.safetensors").is_file()
     train([*command, "--resume"])
     out = capsys.readouterr().out
     assert "step 1 read-text: reused" in out and "fails-once-step: resumed from update 1" in out
@@ -654,11 +654,8 @@ def environment(settings, tasks, plays):
     found.data = SimpleNamespace(step="x", log=lambda _: None, telemetry=Telemetry.off(), step_seed=0)
     found.lines = {"folder": None, "count": 0}
     player = FakePlayer(plays)
-    found._player = lambda model: player
+    found._player = lambda: player
     return found, player
-
-
-MODEL = SimpleNamespace(eval=lambda: None, layers=[])  # what playing reads of the model here: nothing
 
 
 def test_a_group_whose_rewards_are_all_equal_never_dilutes_the_update():
@@ -669,8 +666,8 @@ def test_a_group_whose_rewards_are_all_equal_never_dilutes_the_update():
     for names in (["differ", "equal"], ["differ"]):
         found, _ = environment({"rounds": 1, "group": 2, "tasks_per_update": 2, "terse": False},
                                [fake_task(name) for name in names], lambda task, round_, terse: scores[task.id])
-        found.begin(MODEL, SimpleNamespace(broadcast=lambda value: value))
-        payload = found._play(1, MODEL)
+        found.begin()
+        payload = found.play(1)
         counted.append((payload["count"], len(payload["items"])))
         assert found.equal == len(names) - 1
     assert counted == [(6, 2), (6, 2)]
@@ -693,8 +690,8 @@ def test_each_terse_attempt_is_rewarded_for_its_closeness_to_the_full_attempt_of
         found, player = environment({"rounds": 1, "group": 3, "tasks_per_update": 1, "terse": True},
                                     [fake_task("t", terse="Say hi.", area=area)],
                                     lambda task, round_, form: terse if form else full)
-        found.begin(MODEL, SimpleNamespace(broadcast=lambda value: value))
-        payload = found._play(1, MODEL)
+        found.begin()
+        payload = found.play(1)
         assert player.calls == [("t", 1, False, area is None), ("t", 1, True, area is None)]
         learned.append(len(payload["items"]))
         mean = sum(rewards) / len(rewards)
@@ -733,7 +730,7 @@ def test_less_writing_takes_the_mean_length_of_the_attempts_that_reach_the_best_
              "zero": [(0.0, 3, None), (0.0, 7, None)], "lost": [None, None]}
     found, _ = environment({"reward": "shorter", "reference": 4, "terse": False},
                            [fake_task(name) for name in plays], lambda task, round_, terse: plays[task.id])
-    assert found._references(MODEL) == {"mixed": (0.75, pytest.approx(15.0))}
+    assert found._references() == {"mixed": (0.75, pytest.approx(15.0))}
 
 
 def test_each_attempt_s_line_is_kept_as_soon_as_it_is_scored(monkeypatch):
@@ -762,10 +759,8 @@ def test_each_attempt_s_line_is_kept_as_soon_as_it_is_scored(monkeypatch):
     monkeypatch.setattr(played, "score",
                         lambda box, check, seconds, conversation, beside, hidden, outside: scored.append(list(kept)) or
                         ({"correct": 1.0}, None))
-    monkeypatch.setattr(wpt_inference, "Writer",
-                        lambda model, ids, rows, **kwargs: type("W", (), {"routes": [None] * rows}))
-    player = agentic.Player("x", torch.nn.Identity(), None, {"tiny": None}, {}, AGENT_TASKS.SETTINGS,
-                            0, torch.Generator())
+    player = agentic.Player("x", lambda ids, rows, **kwargs: type("W", (), {"routes": [None] * rows}), None,
+                            {"tiny": None}, {}, AGENT_TASKS.SETTINGS, 0)
     monkeypatch.setattr(player, "_keep", lambda task, round_, group, index, one, offer, terse: kept.append(index)
                         or len(kept))
     task = type("Task", (), {"id": "t", "image": "tiny", "files": None, "check": None, "needs": (), "replies": (),

@@ -8,7 +8,6 @@ so a window too long for one GPU trains exactly as it would on one. They
 are started like ddp's:
 
     wpt-train RECIPE DATASET_ID --strategy split --processes 2 ...
-    torchrun --nproc-per-node 2 -m wpt_train RECIPE DATASET_ID --strategy split ...
 
 Each window's length must split into slices of a multiple of 128 tokens.
 GPUs talk through NCCL (RCCL on AMD), the CPU through gloo.
@@ -52,5 +51,5 @@ class Split(DDP):
 
 def start():
     if "LOCAL_RANK" not in os.environ:
-        raise PluginError("split: start several processes, with --processes N or torchrun")
+        raise PluginError("split: start several processes, with --processes N")
     return Split()

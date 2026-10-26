@@ -1,0 +1,13 @@
+[project]
+name = "wpt-worker"
+version = "0.1.0"
+description = "The gpu worker, which does only the GPU work of a WPT training run, and its link to the wpt manager"
+license = "AGPL-3.0-or-later"
+requires-python = ">=3.14"
+# cryptography: the worker's own certificate; psutil: the network interface that has its private address; the rest: what its job runs (wpt_worker.training), which is also
+# the set of libraries a worker's container installs; torch comes from the root group that scripts/setup.py picks
+dependencies = ["cryptography>=46", "wpt-training", "wpt-model", "wpt-inference", "wpt-store", "wpt-telemetry", "wpt-utils", "numpy>=2", "psutil>=7"]
+
+[build-system]
+requires = ["uv_build>=0.13.0,<0.14.0"]
+build-backend = "uv_build"

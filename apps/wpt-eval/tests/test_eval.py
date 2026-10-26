@@ -11,6 +11,7 @@ from wpt_eval import main, open_context, run_eval
 from wpt_store import LocalStore
 from wpt_telemetry import FLUSH_THREAD
 from wpt_tokenizer import Tokenizer
+from wpt_worker.evaluation import Served
 
 class Recall(torch.nn.Module):
     """A stand-in model that knows its training documents by heart: after
@@ -19,6 +20,7 @@ class Recall(torch.nn.Module):
     def __init__(self, documents, vocab_size):
         super().__init__()
         self.config = SimpleNamespace(block_size=1000)
+        self.weight = torch.nn.Parameter(torch.zeros(1))  # a device for the model
         self.vocab_size = vocab_size
         self.next = {tuple([Tokenizer.END, *d.tokens[:i].tolist()]): int(d.tokens[i])
                      for d in documents for i in range(len(d.tokens))}
@@ -34,10 +36,11 @@ def test_memorization_counts_the_training_documents_a_model_reproduces(trained):
     # given a model that recalls every training document and no held-out one,
     # the test must report all training documents and no held-out document
     folder, sid = trained.folder, trained.source_id
-    context = open_context(folder, trained.store, torch.device("cpu"))
+    context = open_context(folder, trained.store)
     training, held_out = list(context.documents("training")), list(context.documents("held_out"))
     assert training and held_out
-    context.model = Recall(training, context.tokenizer.vocab_size)
+    context.model = Served(Recall(training, context.tokenizer.vocab_size))
+    context.device = context.model.device
 
     data = run_eval(context, "memorization")["data"]
     assert data["training"]["exact"] == data["training"]["documents"] == len(training)

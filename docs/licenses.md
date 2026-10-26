@@ -53,10 +53,10 @@ packages must stay compatible with AGPL-3.0-or-later.
 | boto3 | 1.43.113 | Apache-2.0 | |
 | botocore | 1.43.113 | Apache-2.0 | |
 | certifi | 2026.7.22 | MPL-2.0 | through requests |
-| cffi | 2.1.1 | MIT-0 | tests, through moto (cryptography) |
+| cffi | 2.1.1 | MIT-0 | through cryptography |
 | charset-normalizer | 3.5.2 | MIT | through requests |
 | colorama | 0.4.6 | BSD-3-Clause | Windows only, through pytest |
-| cryptography | 50.0.2 | Apache-2.0 OR BSD-3-Clause | tests, through moto; its compiled part includes OpenSSL (Apache-2.0), statically linked |
+| cryptography | 50.0.2 | Apache-2.0 OR BSD-3-Clause | the gpu worker's certificate (wpt-worker), and tests through moto; its compiled part includes OpenSSL (Apache-2.0), statically linked |
 | einops | 0.8.2 | MIT | through fla-core |
 | execnet | 2.1.2 | MIT | tests, through pytest-xdist |
 | fla-core | 0.5.2 | MIT | KDA's GPU kernel (flash-linear-attention), used where Triton runs |
@@ -275,6 +275,24 @@ each project's `LICENSE` file at that tag):
 | Red Hat UBI 9 micro (the base image) | 9.8 | Red Hat's UBI terms (`com.redhat.license_terms`: https://www.redhat.com/en/about/red-hat-end-user-license-agreements#UBI) |
 
 A new image version needs this table checked again.
+
+### The machines' images (`deploy/manager/`, `deploy/gpu-worker/`, not part of WPT)
+
+The wpt manager's image and the gpu worker's container run WPT's code from
+the checkout on public images, unmodified, pinned by their digests
+([machines.md](machines.md)); WPT neither links nor distributes them. The
+manager's image also installs SkyPilot, a separate program its code runs
+as a command, at a pinned version. A new digest or version needs this
+table checked again.
+
+| Part | Version | License | Role |
+| --- | --- | --- | --- |
+| python (Docker's official image, Debian trixie slim) | 3.14 | PSF-2.0 for Python; each Debian package its own license | the manager's base image |
+| docker (Docker's official image, its `docker` command) | 29.9.2 | Apache-2.0 | the manager's `docker` command, for the sandboxes |
+| git, mercurial, GnuPG, rustup, build-essential (Debian packages) | trixie | as in "Tools that build and check WPT"; rustup MIT OR Apache-2.0; build-essential's compilers GPL-3.0-or-later | the manager's downloads, signed commits and tokenizer build |
+| uv | 0.13.5 | MIT OR Apache-2.0 | installs the libraries, on the manager and on the gpu worker |
+| SkyPilot (`skypilot[all]`, with the libraries it installs for every cloud it reaches) | 0.14.1 | Apache-2.0 for SkyPilot; each library its own license | the manager's `sky` command, which rents gpu workers, in an environment of its own on Python 3.13 (which uv installs, PSF-2.0) |
+| pytorch/pytorch | 2.14.1, CUDA 13.0, cuDNN 9 | BSD-3-Clause for PyTorch; NVIDIA's CUDA and cuDNN under NVIDIA's license agreements, as in "CUDA build, Linux only" | the gpu worker's base image |
 
 ### Container images of agentic tasks (`data/images/`)
 

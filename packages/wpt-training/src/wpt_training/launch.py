@@ -1,8 +1,8 @@
-"""Start several training processes on this machine, as torchrun does.
-
-torchrun covers several machines but does not start on Windows with
-PyTorch 2.14 (its process store needs libuv, which the Windows build
-lacks); this covers one machine on every system.
+"""Start several training processes on this machine, telling each its
+place the way PyTorch's own launcher (torchrun) does, on every system:
+torchrun does not start on Windows with PyTorch 2.14 (its process store
+needs libuv, which the Windows build lacks). The gpu worker's training
+job runs it (wpt_worker.training).
 
 When a process fails, the others are stopped and, up to max_restarts
 times, all start again; each is told how many times through
@@ -33,13 +33,18 @@ STOPPED = 130
 GRACE = 30  # seconds a process gets to exit once its peers failed, before it is killed
 
 
-def launch(processes: int, arguments: list[str], max_restarts: int = 0, log=None, environ=None) -> int:
+def launch(processes: int, arguments: list[str], max_restarts: int = 0, log=None, environ=None, first_rank=0,
+           world_size=None, master=None) -> int:
     """Run `python ARGUMENTS` processes times at once, each told its place
     the way torchrun tells it (RANK, LOCAL_RANK, WORLD_SIZE,
     LOCAL_WORLD_SIZE, MASTER_ADDR, MASTER_PORT). Returns 0 when all
     succeed; otherwise the exit code of the first that failed, once no
     restart is left or allowed. environ: more variables every process gets,
-    such as where the run's record is (wpt_telemetry)."""
+    such as where the run's record is (wpt_telemetry). For a run on several
+    machines, this machine's processes are ranks first_rank onward of
+    world_size, and master, (address, port), is where every machine's
+    processes meet; by default this machine alone, on a free port of its
+    own."""
     log = log or (lambda text: print(text, file=sys.stderr, flush=True))
     running, stopping = [], []
 
@@ -57,7 +62,8 @@ def launch(processes: int, arguments: list[str], max_restarts: int = 0, log=None
                 previous[getattr(signal, name)] = signal.signal(getattr(signal, name), forward)
     try:
         for attempt in range(max_restarts + 1):
-            code = _run_once(processes, arguments, attempt, running, stopping, environ or {})
+            code = _run_once(processes, arguments, attempt, running, stopping, environ or {}, first_rank,
+                             world_size or processes, master)
             if code == 0 or stopping or code in (REFUSED, RECORD_FAILED, STOPPED) or attempt == max_restarts:
                 return STOPPED if stopping and code != 0 else code
             log(f"a training process failed (exit code {code}): starting every process again "
@@ -68,16 +74,18 @@ def launch(processes: int, arguments: list[str], max_restarts: int = 0, log=None
             signal.signal(number, handler)
 
 
-def _run_once(processes, arguments, attempt, running, stopping, environ) -> int:
-    with socket.socket() as probe:  # a free port for the processes to meet on
-        probe.bind(("127.0.0.1", 0))
-        port = probe.getsockname()[1]
-    shared = {"WORLD_SIZE": str(processes), "LOCAL_WORLD_SIZE": str(processes),
-              "MASTER_ADDR": "127.0.0.1", "MASTER_PORT": str(port), "TORCHELASTIC_RESTART_COUNT": str(attempt)}
+def _run_once(processes, arguments, attempt, running, stopping, environ, first_rank, world_size, master) -> int:
+    if master is None:
+        with socket.socket() as probe:  # a free port for the processes to meet on
+            probe.bind(("127.0.0.1", 0))
+            master = ("127.0.0.1", probe.getsockname()[1])
+    shared = {"WORLD_SIZE": str(world_size), "LOCAL_WORLD_SIZE": str(processes),
+              "MASTER_ADDR": master[0], "MASTER_PORT": str(master[1]), "TORCHELASTIC_RESTART_COUNT": str(attempt)}
     # in their own process group, so a Ctrl+C reaches them only once, through forward()
     group = ({"creationflags": subprocess.CREATE_NEW_PROCESS_GROUP} if os.name == "nt" else {"process_group": 0})
     running[:] = [subprocess.Popen([sys.executable, *arguments],
-                                   env={**os.environ, **environ, **shared, "RANK": str(rank), "LOCAL_RANK": str(rank)}, **group)
+                                   env={**os.environ, **environ, **shared, "RANK": str(first_rank + rank),
+                                        "LOCAL_RANK": str(rank)}, **group)
                   for rank in range(processes)]
     try:
         while True:

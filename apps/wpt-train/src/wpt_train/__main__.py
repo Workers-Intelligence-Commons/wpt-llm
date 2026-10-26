@@ -1,4 +1,4 @@
-"""`python -m wpt_train`, which is how torchrun starts each process."""
+"""`python -m wpt_train`: the same as the wpt-train command."""
 
 from wpt_train import main
 

@@ -313,7 +313,7 @@ def test_building_a_tokenizer_is_a_session_with_a_reused_line_for_each_source_it
 
     # the vocabulary is locked now: a second command reads no source, so it writes no line
     assert main(["--root", str(repo.root), "build-tokenizer", "t"]) == 0
-    [_, again] = sorted(name for name in store.record_folders() if "-wpt-dataset-build-tokenizer-t-" in name)
+    [again] = [name for name in store.record_folders() if "-wpt-dataset-build-tokenizer-t-" in name and name != folder]
     with store.database() as found:
         assert found.execute("SELECT count(*) FROM lines WHERE session = ?", (again,)).fetchone() == (0,)
 
