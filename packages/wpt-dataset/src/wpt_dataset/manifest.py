@@ -135,7 +135,9 @@ class Globs:
         return path in self.exact or (self.wild is not None and self.wild(path) is not None)
 
 
-@functools.lru_cache(maxsize=4096)
+# No bound: format_entries asks for every entry of a source in turn, so a
+# bound below a source's entry count would compile them all again per path.
+@functools.cache
 def _globs(patterns: tuple[str, ...]) -> Globs:
     return Globs(patterns)
 
