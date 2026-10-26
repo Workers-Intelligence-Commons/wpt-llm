@@ -1,0 +1,34 @@
+# A gpu worker the wpt manager rents through SkyPilot (docs/machines.md,
+# "Rented gpu workers"; apps/wpt-manager/src/wpt_manager/skypilot.py): one
+# machine of the GPUs WPT_RENTAL_GPUS names, on the same public PyTorch
+# image as compose.yaml beside this file, runs start.sh, which starts the
+# worker from the copy of its package below (file_mounts: SkyPilot's own way
+# to put files on a machine it starts). The manager runs `sky launch` from the
+# repository's root, so the local paths here are from there.
+#
+# Several workers at one provider are one cluster: the manager adds
+# `--num-nodes N` and WPT_WORKER_PLACE (the cluster's name) to the same
+# request, and start.sh gives each node its private address (from
+# SKYPILOT_NODE_IPS and SKYPILOT_NODE_RANK) as WPT_WORKER_PRIVATE and prints
+# it as a `wpt-node RANK ADDRESS` line, so the nodes meet through NCCL.
+#
+# The manager gives the worker its token (WPT_WORKER_TOKEN, through sky's
+# environment, never on a command line), and WPT_WORKER_WAIT when its own
+# settings hold it. The worker ends after WPT_WORKER_WAIT seconds with no
+# manager (1 hour by default), and `sky launch --down` then gives the
+# machine back.
+resources:
+  image_id: docker:pytorch/pytorch:2.14.1-cuda13.0-cudnn9-runtime@sha256:3c0b174a1339193a5bcc4b37d737c9f5ca3c4782a2293d3888e4271367eddf44
+  ports: 8470
+
+file_mounts:
+  /start/start.sh: deploy/gpu-worker/start.sh
+  /start/wpt_worker: packages/wpt-worker/src/wpt_worker
+
+envs:
+  WPT_WORKER_FOLDER: /tmp/wpt-worker
+  WPT_WORKER_INSTALL: "1"
+  WPT_WORKER_TORCH: cuda
+  WPT_WORKER_PORT: "8470"
+
+run: sh /start/start.sh

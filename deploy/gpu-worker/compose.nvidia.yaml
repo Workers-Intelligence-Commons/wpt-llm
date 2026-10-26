@@ -1,0 +1,14 @@
+# The gpu worker on NVIDIA GPUs (compose.yaml beside it adds this file): every
+# GPU of the machine, through the NVIDIA Container Toolkit, and the CUDA build
+# of PyTorch.
+services:
+  gpu-worker:
+    environment:
+      WPT_WORKER_TORCH: cuda
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

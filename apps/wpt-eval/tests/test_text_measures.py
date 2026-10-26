@@ -22,9 +22,11 @@ from wpt_dataset import download
 from wpt_dataset.sources import fetch, held_out_group
 from wpt_eval import Context, find, open_context
 from wpt_eval.asking import CONTINUE, Question
+from wpt_model import load_model
 from wpt_store import open_store
 from wpt_store.shards import write_shard
 from wpt_tokenizer import END, Tokenizer, chat
+from wpt_worker.evaluation import Served
 
 ROOT = Path(__file__).resolve().parents[3]  # the repository
 AGENT = ROOT / "data" / "images" / "agent"  # the image holding the check library
@@ -121,7 +123,7 @@ def context_of(tmp_path, tokenizer, model, training=(), held_out=(), held_share=
     provenance = {"shards": shard([(d, t, n) for d, t, passes in training for n in range(passes)], "training"),
                   "held_out_shards": shard([(d, t, 0) for d, t in held_out], "held"),
                   "recipe": {"data": {"held_out": held_share}}}
-    return Context(tmp_path, model, tokenizer, torch.device("cpu"), provenance, store)
+    return Context(tmp_path, Served(model), tokenizer, "cpu", provenance, store)
 
 
 @pytest.fixture
@@ -353,10 +355,11 @@ def test_bible_verses_says_it_did_not_run_without_a_verse_source_and_its_twin_in
 def test_calibration_runs_as_is_on_a_pre_trained_model(trained, tmp_path, root):
     # every measure runs as is on any model: a tiny model trained one step writes through its own
     # generation cache and scores what it scores, near 0 with no block
-    folder_context = open_context(trained.folder, trained.store, torch.device("cpu"))
+    folder_context = open_context(trained.folder, trained.store)
     training = [(f"src/t{i}.md", document(f"t{i}x", 3), 2) for i in range(2)]
     held_out = [(f"src/h{i}.md", document(f"h{i}x", 3)) for i in range(2)]
-    context = context_of(tmp_path / "measure", folder_context.tokenizer, folder_context.model, training, held_out)
+    context = context_of(tmp_path / "measure", folder_context.tokenizer, load_model(trained.folder), training,
+                         held_out)
     data = measure(context, "calibration").data
     assert data["training"]["questions"] == data["held_out"]["questions"] == 2
     for part in ("training", "held_out"):

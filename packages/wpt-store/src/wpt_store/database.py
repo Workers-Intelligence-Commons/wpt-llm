@@ -31,7 +31,8 @@ from .errors import CorruptObject
 from .kinds import Absent, Changed
 
 KEY = "store.sqlite.zst"
-OUTCOMES = ("downloaded", "reused", "failed")
+DOWNLOADED, REUSED, FAILED = "downloaded", "reused", "failed"  # what a line says of its source
+OUTCOMES = (DOWNLOADED, REUSED, FAILED)
 SCHEMA = f"""
 CREATE TABLE IF NOT EXISTS sessions (
     folder TEXT PRIMARY KEY,

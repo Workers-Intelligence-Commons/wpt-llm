@@ -432,7 +432,7 @@ patch makes that is not text) gets no line. With
 `download --stream` (or `WPT_STREAM=1`), the downloading machine keeps no
 copy of the bundles once the store holds them; without it, an S3 store
 keeps a copy in its local cache folder and reads it first.
-`wpt-dataset store` lists what the database says, from the database
+`wpt-store list` lists what the database says, from the database
 alone: each source's last outcome, revision and checksum, and its last
 download's time, address, repository commit and size; then every session,
 in the order they started.
@@ -768,7 +768,7 @@ as it stops any recorded command.
 | Package | Role |
 | --- | --- |
 | `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; the service layer (`repo.py`), the only code that reads or writes `data/`; the task builder (`builder.py`, run by `scripts/build_tasks.py`); the source drafters (`source_drafter.py`, the built-ins in `source_drafters/`); the source server (`source_server.py`); command `wpt-dataset` |
-| `wpt-store` | the content-addressed store (its kinds: a local folder or S3), its compression, its sessions with their bundles, the store database, its record folders, and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules |
+| `wpt-store` | the content-addressed store (its kinds: a local folder or S3), its compression, its sessions with their bundles, the store database, its record folders, the model folders kept under a run's name (`models/<name>`), and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules; command `wpt-store` (`list`: what the store database says; `copy-out`: a kept model folder, checked against its sha256s) |
 | `wpt-telemetry` | the record of one command run in the store, sent live to an OpenTelemetry backend when one is set ([observability.md](observability.md)) |
 | `wpt-tokenizer` | the byte-level BPE tokenizer, Rust inside |
 | `wpt-web` | a local web interface over the service layer: one small server on 127.0.0.1, one file per page (Python routes, React page), an editor for every kind of data, a conversation editor that asks a WPT model folder for drafts, and its OpenAPI description; its interface is built with Bun when it starts; command `wpt-web` |
@@ -777,7 +777,8 @@ as it stops any recorded command.
 | `wpt-inference` | sampling through the model's generation cache: several rows from one prompt, the model's next chat message (`next_message`, which `wpt-chat --chat` and the text measures of `wpt-eval` both write with), speculative decoding with a drafter and its scheduler, the scheduler's pass times (measured, recorded, replayed); training a model's drafter (`drafting.py`), which `wpt-train` runs at the end of every run, so it uses `wpt-model` |
 | `wpt-utils` | helpers several packages share, one submodule each: `wpt_utils.device` picks the best GPU, else the CPU; `wpt_utils.programs` starts the outside programs WPT runs (`program(name)`, with a clear error when one is missing) and reads the repository commit (`repository()`), without importing PyTorch; `wpt_utils.files.sha256_file` is the one way a file is hashed, by the store, the model folders and the run records alike; `wpt_utils.files.lock_file` is the lock the operating system holds on a file for one process, which the service layer and a local store's database share; `wpt_utils.settings.typed` types the settings of a training step and of its method, environment and optimizer from the defaults each file declares; `wpt_utils.parallel` is the one rule that sizes parallel work (at most the fewer of 75% of the cores and 75% of the available memory divided by one item's measured memory, at least 1; before each new item it measures again and starts it only while a quarter of the memory and of the cores stays free, never stopping a running item) and runs items that way with their results in the items' order, an error an item may fail with becoming that item's result |
 | `wpt-agent` | the agent harness of agentic training: the tools (the four built-in ones, `ask`, and those a task or its image's pool declares, answered by programs in the image) and each attempt's choice of them, one Docker container per attempt, the images of `data/images/` and their locks, the agent loop and the task's check, and the playing of a task's attempts (`wpt_agent.play`), which the `agent-tasks` environment of the `finish-tasks` and `finish-tasks-with-less-writing` steps and the agent measures of `wpt-eval` share, so `wpt-eval` does not depend on `wpt-train`; commands `wpt-agent lock-image` and `wpt-agent build-image` |
-| `wpt-train`, `wpt-eval`, `wpt-chat` | the applications |
+| `wpt-worker` | the gpu worker, which runs the GPU work of a training on its machine, the link to it from the wpt manager's side, and the gradients exchanged between gpu workers in different places ([machines.md](machines.md)) |
+| `wpt-train`, `wpt-eval`, `wpt-chat`, `wpt-manager` | the applications; `wpt-manager` runs download, build, training and the optional evaluation as one command, and rents its gpu workers through providers when asked ([machines.md](machines.md)) |
 
 ## Checks
 

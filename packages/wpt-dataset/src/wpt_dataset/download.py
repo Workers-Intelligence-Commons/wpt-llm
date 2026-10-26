@@ -51,6 +51,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from wpt_store import StoreError, file_list_bytes
+from wpt_store.database import DOWNLOADED, FAILED, REUSED  # the store database's outcomes
 from wpt_telemetry import Telemetry, set_ref
 from wpt_utils.files import sha256_file
 from wpt_utils.parallel import Done, Sizing, each as each_item
@@ -68,7 +69,6 @@ from .sources import (UPSTREAM, UPSTREAM_FILES, VERSION, apply_cuts, apply_patch
 # archive holding one file of 1 GB (an archive's file is read whole); rounded up to the largest
 DOWNLOAD_MEMORY = 1e9
 SITES = "sites.txt"  # the per-site limits, in this package
-DOWNLOADED, REUSED, FAILED = "downloaded", "reused", "failed"  # the store database's outcomes (wpt_store.database)
 
 
 class Staging:

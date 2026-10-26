@@ -1,14 +1,12 @@
-"""Several processes, one per GPU (or several on the CPU), on one machine or
-several; each holds a full copy of the model and their gradients are
-averaged (PyTorch's DistributedDataParallel). They are started by
-wpt-train's --processes on one machine, or by torchrun on one or several:
+"""Several processes, one per GPU (or several on the CPU), on the gpu
+worker's machine; each holds a full copy of the model and their gradients
+are averaged (PyTorch's DistributedDataParallel). wpt-train's --processes
+starts them:
 
     wpt-train RECIPE DATASET_ID --strategy ddp --processes 2 ...
-    torchrun --nproc-per-node 2 -m wpt_train RECIPE DATASET_ID --strategy ddp ...
 
 GPUs talk through NCCL (RCCL on AMD), the CPU through gloo. Windows has
-gloo only, and torchrun does not start there with PyTorch 2.14 (use
---processes).
+gloo only.
 """
 
 import os
@@ -61,5 +59,5 @@ class DDP(Strategy):
 
 def start():
     if "LOCAL_RANK" not in os.environ:
-        raise PluginError("ddp: start several processes, with --processes N or torchrun")
+        raise PluginError("ddp: start several processes, with --processes N")
     return DDP()

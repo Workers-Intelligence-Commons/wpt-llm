@@ -1,0 +1,108 @@
+# The wpt manager (docs/machines.md): one container that downloads the
+# sources, builds the dataset and trains the recipe WPT_RECIPE names, through
+# a gpu worker (WPT_GPU_WORKERS; with none, a local one in this container),
+# then keeps the model in the store under the run's name. One command, from
+# the repository's root:
+#
+#     docker compose up
+#
+# which reads the .env at the repository's root: put COMPOSE_FILE=deploy/manager/compose.yaml
+# there (.env.example), or give the file and the settings by hand:
+#
+#     docker compose --env-file .env -f deploy/manager/compose.yaml up
+#
+# Settings, from the environment or the .env file given:
+#
+#     WPT_RECIPE            the model recipe; required
+#     WPT_RUN               the run's name; unset, the manager makes one and writes it, with the
+#                           lines to copy, into wpt-run.txt at the repository's root
+#     WPT_EVALUATE          1: evaluate the model at the end; off by default
+#     WPT_STORE             the store; unset, a folder on the volume wpt-store (file:///store).
+#                           A file:// store must name a folder on a volume or a mounted folder:
+#                           the manager refuses one in this container's own files, which go
+#                           with the container
+#     WPT_STORE_FOLDER      a folder of this machine to mount at that same path in the container
+#                           instead of the volume wpt-store (set WPT_STORE to file:// and the same path)
+#     WPT_GPU_WORKERS       the run's gpu workers, one per machine: their keys
+#                           (deploy/gpu-worker/compose.yaml prints one), or how many to rent;
+#                           unset, a local one in this container
+#     WPT_RENTAL_PROVIDER   who rents them (default skypilot)
+#     WPT_RENTAL_KIND       on-demand (the default) or interruptible
+#     WPT_RENTAL_GPUS       what each rented machine has (SkyPilot: H100:8)
+#     WPT_RENTAL_WAIT       seconds a rented worker has to give its address (default 1800)
+#     WPT_REPLACEMENTS      how many times a run resumes after a lost gpu worker (default 3)
+#     WPT_WORKER_WAIT       seconds a rented worker waits with no manager, then ends and its
+#                           machine is given back (default 3600)
+#     WPT_LINK_CHECKPOINTS  every, or step-ends (the default)
+#     AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_ENDPOINT_URL   for an S3 store
+#     DOCKER_HOST           where the sandboxes run; unset, this machine's Docker, through its
+#                           socket, which is mounted here
+#
+# The settings file is the .env at the repository's root: Compose reads it
+# for the lines above, and the manager reads it again inside the container
+# (/repo/.env) for the rest: wpt-train's options (WPT_STRATEGY, WPT_PROCESSES,
+# WPT_MICRO_BATCH and the others) and a provider's keys. Where a setting names
+# a path of this machine and the container has its own (WPT_STORE, the
+# manager's folders, HOME, DOCKER_HOST), the container's value wins. SkyPilot
+# reads its clouds' keys from the environment or its own files, which are
+# under HOME, on the volume wpt-manager.
+#
+# The manager's container exits when its runs are over, finished or failed
+# (WPT_MANAGER_CONTAINER makes a failed run exit with 0). Docker starts it
+# again only after a crash or when Docker itself starts again (restart:
+# on-failure): it goes on with the run that was cut short, reconnecting to its
+# gpu workers, whose keys and tokens stay on the volume wpt-manager (never in
+# the store). `docker compose up` again continues a run that failed (wpt-run.txt
+# names it), and starts the next run when the last one finished.
+#
+# The live view of the runs (deploy/otel-lgtm/compose.yaml) starts with it,
+# so WPT_GRAFANA_PASSWORD is required too. The checkout is mounted at /repo:
+# the manager runs its code, sends it to its gpu worker, and writes
+# wpt-run.txt there. At the end it prints the line that copies the model
+# out of the store into runs/ of the checkout.
+include:
+  - ../otel-lgtm/compose.yaml
+
+services:
+  manager:
+    build: .
+    # the PyTorch build for this machine's GPU (scripts/setup.py), then the run
+    command: ["sh", "-c", "uv run --frozen scripts/setup.py && exec uv run --frozen --no-sync wpt-manager"]
+    environment:
+      WPT_RECIPE: ${WPT_RECIPE:?set WPT_RECIPE, the model recipe to train (docs/machines.md)}
+      WPT_RUN: ${WPT_RUN:-}
+      WPT_EVALUATE: ${WPT_EVALUATE:-}
+      WPT_STORE: ${WPT_STORE:-file:///store}
+      WPT_MANAGER_FOLDER: /manager/models
+      WPT_MANAGER_STATE: /manager/state
+      WPT_MANAGER_CONTAINER: "1"
+      HOME: /manager/home  # SkyPilot's own files (its clusters, its keys) stay with the manager's
+      WPT_MANAGER_COMMAND: docker compose --env-file .env -f deploy/manager/compose.yaml run --rm manager uv run --no-sync
+      UV_PROJECT_ENVIRONMENT: /manager/venv  # the libraries, on the volume: kept from one start to the next
+      UV_CACHE_DIR: /manager/uv-cache
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-lgtm:4318
+      # passed on only when set
+      WPT_GPU_WORKERS:
+      WPT_RENTAL_PROVIDER:
+      WPT_RENTAL_KIND:
+      WPT_RENTAL_GPUS:
+      WPT_RENTAL_WAIT:
+      WPT_REPLACEMENTS:
+      WPT_WORKER_WAIT:
+      WPT_LINK_CHECKPOINTS:
+      AWS_ACCESS_KEY_ID:
+      AWS_SECRET_ACCESS_KEY:
+      AWS_ENDPOINT_URL:
+      DOCKER_HOST:
+    volumes:
+      - ../..:/repo
+      - ${WPT_STORE_FOLDER:-wpt-store}:${WPT_STORE_FOLDER:-/store}
+      - wpt-manager:/manager
+      - /var/run/docker.sock:/var/run/docker.sock  # the sandboxes, on this machine's Docker
+    depends_on:
+      - otel-lgtm
+    restart: on-failure
+
+volumes:
+  wpt-store:
+  wpt-manager:

@@ -17,8 +17,7 @@ sha256, among documents long enough.
 import hashlib
 import heapq
 from collections import Counter
-
-import torch
+from itertools import takewhile
 
 from wpt_eval import Result
 from wpt_tokenizer import Tokenizer
@@ -27,14 +26,9 @@ PREFIX, CONTINUATION, DOCUMENTS, BATCH = 32, 32, 500, 64
 PARTS = {"training": "training documents", "held_out": "held-out documents"}
 
 
-@torch.no_grad()
-def greedy(model, prompts, steps):
-    """The most likely next token, steps times, for each row of prompts."""
-    ids = prompts
-    for _ in range(steps):
-        logits = model(ids[:, -model.config.block_size:])[:, -1, :]
-        ids = torch.cat([ids, logits.argmax(dim=-1, keepdim=True)], dim=1)
-    return ids[:, prompts.size(1):]
+def matched_tokens(written, truth) -> int:
+    """How many tokens written equal truth's, before the first that differs."""
+    return len(list(takewhile(bool, (a == b for a, b in zip(written, truth)))))
 
 
 def measure(context, part):
@@ -51,10 +45,10 @@ def measure(context, part):
     matched, exact = [], Counter()
     for start in range(0, len(chosen), BATCH):
         batch = chosen[start:start + BATCH]
-        prompts = torch.tensor([[Tokenizer.END, *d.tokens[:PREFIX].tolist()] for d in batch], device=context.device)
-        truth = torch.tensor([d.tokens[PREFIX:PREFIX + CONTINUATION].tolist() for d in batch], device=context.device)
-        same = greedy(context.model, prompts, CONTINUATION) == truth
-        lengths = same.int().cumprod(dim=1).sum(dim=1).tolist()  # tokens equal before the first difference
+        prompts = [[Tokenizer.END, *d.tokens[:PREFIX].tolist()] for d in batch]
+        truth = [d.tokens[PREFIX:PREFIX + CONTINUATION].tolist() for d in batch]
+        lengths = [matched_tokens(written, true) for written, true in zip(context.model.greedy(prompts, CONTINUATION),
+                                                                           truth)]
         matched += lengths
         exact.update(d.source for d, n in zip(batch, lengths) if n == CONTINUATION)
     tested = len(chosen)

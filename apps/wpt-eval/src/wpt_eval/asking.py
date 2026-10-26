@@ -11,10 +11,11 @@ the model's reply is text, and it is the answer (docs/chat-format.md, "The answe
 confidence then asks the agent loop's question (wpt_agent.loop.CONFIDENCE)
 as one more user message, and the reply, a number from 0 to 100 and
 nothing else, divided by 100, is the confidence
-(wpt_agent.loop.confidence). The model writes each message through
-wpt_inference.next_message, as wpt-chat --chat does, always taking its
-likeliest token (wpt_agent.GREEDY), so
-a run gives the same answers again on the same setup.
+(wpt_agent.loop.confidence). The model writes each message through the
+chat template, as wpt-chat --chat does, always taking its likeliest token
+(wpt_agent.GREEDY), so a run gives the same answers again on the same setup.
+It writes on a gpu worker (context.model.writer(), docs/machines.md,
+"Evaluation"), and a measure's generator (generator()) is made there.
 
 The measure builds the answer, as the agent loop does: the conversation's
 metadata.answer is {"answer": the reply's text}, with "confidence" where
@@ -36,13 +37,10 @@ import heapq
 import random
 from dataclasses import dataclass
 
-import torch
-
 import wpt_agent
 from wpt_agent import loop
 from wpt_dataset import builder
-from wpt_inference import next_message
-from wpt_tokenizer import chat
+from wpt_tokenizer import END, chat
 
 from .attempts import library
 
@@ -109,12 +107,13 @@ def select(documents, tokenizer, count, salt, cells, prepare=lambda question: qu
     return {cell: [value for _, _, value in sorted(heap, key=lambda entry: -entry[0])] for cell, heap in heaps.items()}
 
 
-def generator(context, salt="") -> torch.Generator:
-    """The generator a measure's writing draws with, seeded by SEED and
-    salt: with the likeliest token always taken, it decides only between
-    tokens exactly as likely."""
+def generator(context, salt="") -> int:
+    """A new generator on the model's machine for a measure's writing,
+    seeded by SEED and salt (context.model.generator): the writers that
+    name it draw from it, one after the other. With the likeliest token
+    always taken, it decides only between tokens exactly as likely."""
     seed = int.from_bytes(hashlib.sha256(f"{SEED}:{salt}".encode()).digest()[:8])
-    return torch.Generator(device=context.device).manual_seed(seed)
+    return context.model.generator(seed)
 
 
 def ask(context, text, generator, max_tokens=MAX_TOKENS, confident=False) -> dict:
@@ -137,10 +136,15 @@ def ask(context, text, generator, max_tokens=MAX_TOKENS, confident=False) -> dic
 
 
 def _reply(context, messages, generator, max_tokens) -> list[dict]:
-    """The blocks of the model's next message after messages."""
-    written = next_message(context.model, context.tokenizer, {"messages": messages}, max_new_tokens=max_tokens,
-                           temperature=wpt_agent.GREEDY.temperature, top_k=wpt_agent.GREEDY.top_k,
-                           generator=generator)
+    """The blocks of the model's next message after messages: the tokens it
+    writes after the chat template's prompt, up to <|im_end|> or the end of
+    a document, which are left out, or max_tokens."""
+    prompt = chat.prompt(context.tokenizer, {"messages": messages})
+    writer = context.model.writer(prompt, 1, temperature=wpt_agent.GREEDY.temperature, top_k=wpt_agent.GREEDY.top_k,
+                                  stops=(chat.IM_END, END), generator=generator)
+    written = writer.write({}, {0: max_tokens})[0]
+    if written and written[-1] in (chat.IM_END, END):
+        written = written[:-1]
     return chat.reply(context.tokenizer, written)
 
 

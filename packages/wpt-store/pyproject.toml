@@ -6,6 +6,9 @@ license = "AGPL-3.0-or-later"
 requires-python = ">=3.14"
 dependencies = ["wpt-utils", "boto3>=1.40", "pyarrow>=21", "numpy>=2"]  # wpt-utils: the one sha256 of a file, the file lock, parallel work; pyarrow, numpy: the token shard format (shards.py)
 
+[project.scripts]
+wpt-store = "wpt_store.cli:main"
+
 [build-system]
 requires = ["uv_build>=0.13.0,<0.14.0"]
 build-backend = "uv_build"

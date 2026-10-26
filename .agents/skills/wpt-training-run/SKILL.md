@@ -78,7 +78,7 @@ whose window does not fit the GPU, even with `--recompute --micro-batch
 - one GPU: `--segment N`, with N a multiple of 128 that fits (the memory
   of an N-token window, plus about 31 KiB per token of the window for
   watery-tardigrade), up to twice the time;
-- several GPUs: `--strategy split` with `--processes N` or torchrun, each
+- several GPUs: `--strategy split` with `--processes N`, each
   window's length a multiple of 128 times the number of processes;
 - several GPUs whose slices still do not fit: `--strategy split` with
   `--segment N`, each process training its slice in segments of N.
@@ -90,5 +90,9 @@ Any of them may be added or changed when resuming.
 With `--run NAME`, the checkpoint is kept in the store (`WPT_STORE`)
 instead of the model folder: any machine using the same store continues
 the run with the same command plus `--run NAME --resume`. Use it when a run
-may move to another machine, or with torchrun on several machines
-(docs/training.md, "Restarting after a crash").
+may move to another machine.
+
+The GPUs may be on another machine than the store: start a gpu worker
+there (`docker compose -f compose.yaml -f compose.nvidia.yaml up` with the files of `deploy/gpu-worker/` and `wpt_worker/` copied beside them, or `compose.amd.yaml`) and give its
+key to `wpt-train` as `WPT_GPU_WORKERS` (docs/machines.md). The run is
+started, followed, stopped and resumed on the manager's machine, as above.

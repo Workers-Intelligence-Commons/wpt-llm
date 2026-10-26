@@ -15,10 +15,12 @@ Each is a Python file, a built-in by its name or any path:
                        def start(settings) -> Method
     optimizer file:    SETTINGS = {...}; def start(model, settings, run) -> Optimizer
     environment file:  GIVES = "<kind of examples>"; SETTINGS = {...}
-                       def start(settings, data) -> Environment; optional check(settings),
-                       context(settings): the window length it trains at, which a model's
-                       context comes from, and check_dataset(settings, record, store): ValueError
-                       when the dataset holds nothing for it, before any step runs
+                       def start(settings, data) -> Environment, on the gpu worker; optional
+                       check(settings), context(settings): the window length it trains at,
+                       which a model's context comes from, check_dataset(settings, record,
+                       store): ValueError when the dataset holds nothing for it, before any
+                       step runs, and manager(settings, context) -> its part on the wpt
+                       manager (below)
     step file:         METHOD, ENVIRONMENT, OPTIMIZER = {"name": ..., "settings": {...}},
                        LOCKED = (...), SETTINGS = {...} (defaults of its method's and
                        environment's settings); optional check(settings)
@@ -27,11 +29,26 @@ A method reads one kind of examples and an environment gives one; a step
 whose method reads what its environment does not give is refused, and so
 is any optimizer whose start refuses the model. A setting belongs to the
 method or to the environment by its name, never both.
+
+A step trains on a gpu worker (wpt_worker; docs/machines.md), which has no
+tokenizer, no Docker and no store of its own: everything it reads comes
+from the wpt manager. An environment that needs what only the manager
+holds (the tokenizer, the sandboxes) has a part there: manager(settings,
+context), given a Context (the store, the dataset's record, the tokenizer,
+the run's record, and writer(...), which has the model on the gpu worker
+write tokens), returns an object whose methods the environment's part on
+the worker calls through data.call(name, *arguments). Arguments and
+results are what JSON holds (a tuple arrives as a list); a StepFailed the
+manager's part raises arrives as StepFailed. The manager makes the part
+when the step's first call reaches it and drops it when the step ends.
+data.writing(model, generator), on the worker, is where that model writes
+meanwhile, drawing from that generator; it gives back each row's routes.
 """
 
 import contextlib
 import hashlib
 import importlib.util
+import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -52,7 +69,7 @@ class PluginError(Exception):
     returned the wrong type, an unknown or mistyped setting, settings it
     refuses, a method that does not read what the environment gives, an
     unknown part of the model to lock, or a strategy that cannot start
-    here (ddp outside torchrun). Nothing has been trained."""
+    here (ddp in one process). Nothing has been trained."""
 
 
 class StepFailed(Exception):
@@ -283,21 +300,34 @@ class Stage:
     block_size: int | None = None
 
 
+def step_seed(seed: int, number: int) -> int:
+    """The recipe's seed mixed with the step's number: what the step's
+    draws (conversations' order, tasks' order, tools offered, sampled
+    tokens) are seeded by, so two identical steps of one recipe draw
+    differently."""
+    digest = hashlib.sha256(repr((seed, number)).encode()).digest()
+    return int.from_bytes(digest[:8], "little") & (2**63 - 1)
+
+
 @dataclass
 class Data:
-    """What an environment reads its examples from: the step's name, the
-    store, the dataset's record, the model's tokenizer and configuration,
-    the strategy, the run's telemetry (its record), log (a no-op except in
-    the main process), the recipe's seed, the step's number in the recipe
-    (from 1), which the step's draws read with the seed (step_seed) so that two
-    steps of one recipe draw other windows, conversations and tasks, and the options that change how
-    the examples are read (stream_shards: with --stream, the shards in use
-    at once; micro_batch: the examples per pass in one process, 0 for its
-    whole share)."""
+    """What an environment's part on the gpu worker reads its examples
+    from: the step's name, the store (the manager's, as the worker reads
+    it: wpt_worker.job.LinkStore), the dataset's record, the model's
+    configuration, the strategy, the run's telemetry (its record), log (a
+    no-op except in the main process), the recipe's seed, the step's number
+    in the recipe (from 1), which the step's draws read with the seed
+    (step_seed) so that two steps of one recipe draw other windows,
+    conversations and tasks, the options that change how the examples are
+    read (stream_shards: with --stream, the shards in use at once;
+    micro_batch: the examples per pass in one process, 0 for its whole
+    share), call(name, *arguments), which calls a method of the
+    environment's part on the wpt manager and gives its result, and
+    writing(model, generator), a context in which the manager's writers
+    write with that model (module docstring)."""
     step: str
     store: object
     record: dict
-    tokenizer: object
     config: object
     strategy: Strategy
     telemetry: object
@@ -306,15 +336,48 @@ class Data:
     number: int
     stream_shards: int | None = None
     micro_batch: int = 0
+    call: callable = None
+    writing: callable = None
 
     @property
     def step_seed(self) -> int:
-        """The recipe's seed mixed with the step's number: what the step's
-        draws (conversations' order, tasks' order, tools offered, sampled
-        tokens) are seeded by, so two identical steps of one recipe draw
-        differently."""
-        digest = hashlib.sha256(repr((self.seed, self.number)).encode()).digest()
-        return int.from_bytes(digest[:8], "little") & (2**63 - 1)
+        return step_seed(self.seed, self.number)
+
+
+@dataclass
+class Context:
+    """What an environment's part on the wpt manager reads: the step's
+    name, the store, the dataset's record, the model's tokenizer and
+    configuration, the run's telemetry (its record), log, the recipe's seed
+    and the step's number, and writer(prompt, rows, *, temperature, top_k,
+    stops, routes), a writer (wpt_inference.Writer's write and routes) whose
+    tokens the model writes on the gpu worker, drawn from the generator the
+    worker's part gave data.writing; its routes are each row's handle,
+    which the worker's part turns back into the row's routes."""
+    step: str
+    store: object
+    record: dict
+    tokenizer: object
+    config: object
+    telemetry: object
+    log: callable
+    seed: int
+    number: int
+    writer: callable = None
+
+    @property
+    def step_seed(self) -> int:
+        return step_seed(self.seed, self.number)
+
+
+def in_process(part) -> callable:
+    """data.call for an environment whose manager's part runs in this
+    process, as through the link: the arguments and the result go through
+    JSON."""
+    def call(name, *arguments):
+        found = getattr(part, name)(*json.loads(json.dumps(arguments)))
+        return json.loads(json.dumps(found))
+    return call
 
 
 class Environment:
@@ -378,9 +441,15 @@ class Plugin:
     file: str     # a built-in by its package path, another file by its name only
     sha256: str
     module: object
+    given: str = None  # the path a recipe, a step's file or a command gave for it; None for a built-in
 
     def record(self) -> dict:
         return {"name": self.name, "file": self.file, "file_sha256": self.sha256}
+
+
+# {a file a recipe or a command names: where this process reads it from}: the gpu worker's copies of
+# the files outside the repository that the manager sent (wpt_worker); empty elsewhere
+SENT = {}
 
 
 def built_in(kind) -> list[str]:
@@ -392,7 +461,7 @@ def _load(kind, name_or_path, needs=("start",)) -> Plugin:
     if name_or_path in built_in(kind):
         path, file = folder / f"{name_or_path}.py", f"wpt_training/{kind}/{name_or_path}.py"
     else:
-        path = Path(name_or_path)
+        path = Path(SENT.get(name_or_path, name_or_path))
         if path.suffix != ".py" or not path.is_file():
             raise PluginError(f"{name_or_path}: not a built-in {kind[:-1].replace('ie', 'y')} "
                               f"({', '.join(built_in(kind))}) nor a Python file")
@@ -403,7 +472,13 @@ def _load(kind, name_or_path, needs=("start",)) -> Plugin:
     for name in needs:
         if not hasattr(module, name):
             raise PluginError(f"{path.name}: defines no {name}")
-    return Plugin(path.stem, file, sha256_file(path), module)
+    return Plugin(path.stem, file, sha256_file(path), module, None if name_or_path in built_in(kind) else name_or_path)
+
+
+def strategy_plugin(name_or_path) -> Plugin:
+    """The strategy's file, read but not started (what the manager checks
+    before its gpu worker starts it)."""
+    return _load("strategies", name_or_path)
 
 
 def load_strategy(name_or_path) -> tuple[Plugin, Strategy]:
@@ -469,6 +544,19 @@ class Step:
         if not isinstance(method, Method):
             raise PluginError(f"{self.method.file}: start() returned {type(method).__name__}, not wpt_training.Method")
         return method
+
+    def files(self) -> list[Plugin]:
+        """The step's files that are not built-ins (its own, its method's,
+        environment's and optimizer's), which the manager sends its gpu
+        worker."""
+        return [plugin for plugin in (self.plugin, self.method, self.environment, self.optimizer)
+                if plugin.given is not None]
+
+    def start_manager(self, context: Context):
+        """The environment's part on the wpt manager (its file's
+        manager(settings, context)), or None when it has none."""
+        made = getattr(self.environment.module, "manager", None)
+        return None if made is None else made(self.environment_settings, context)
 
     def start_environment(self, data: Data) -> Environment:
         environment = self.environment.module.start(self.environment_settings, data)

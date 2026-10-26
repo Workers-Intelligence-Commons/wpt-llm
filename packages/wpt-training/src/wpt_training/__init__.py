@@ -16,9 +16,12 @@ model it locks (wpt_model.PARTS):
 A strategy knows the hardware: how many processes train together and which
 one this is, its device, how the model is wrapped, how a number is averaged
 over the processes. Built-ins (strategies/): `single`, one device; `ddp`,
-several processes started by `torchrun`, on one machine or several, each
-on its own examples; `split`, several processes that split each text window
-between them (DeepSeek-V4's contextual parallelism).
+several processes on one machine, each on its own examples; `split`,
+several processes that split each text window between them (DeepSeek-V4's
+contextual parallelism). Every one runs inside a gpu worker (wpt_worker;
+docs/machines.md): the training's processes are the worker's job, and an
+environment's part that needs what only the wpt manager holds runs there
+(plugins.py).
 
 Each is a Python file, named by a built-in name or a path (plugins.py says
 what each defines). The runner (train) owns everything else: the updates,
@@ -32,10 +35,13 @@ update only, so the same settings train the same way on any number of
 processes, and a resumed step continues exactly where it stopped.
 """
 
-from .plugins import (Data, Environment, Method, Optimizer, PluginError, Run, Stage, Step, StepFailed, Strategy,
-                      TextMethod, Verdict, WINDOWS, built_in, load_step, load_strategy)
+from .plugins import (SENT, Context, Data, Environment, Method, Optimizer, PluginError, Run, Stage, Step, StepFailed,
+                      Strategy, TextMethod, Verdict, WINDOWS, built_in, in_process, load_step, load_strategy, step_seed,
+                      strategy_plugin)
 from .runner import Checkpoint, FolderCheckpoint, Interrupted, Options, SettingsMismatch, Trained, train, weights
+from .states import load_state, save_state
 
-__all__ = ["Checkpoint", "Data", "Environment", "FolderCheckpoint", "Interrupted", "Method", "Optimizer", "Options",
+__all__ = ["SENT", "Checkpoint", "Context", "Data", "Environment", "FolderCheckpoint", "Interrupted", "Method", "Optimizer", "Options",
            "PluginError", "Run", "SettingsMismatch", "Stage", "Step", "StepFailed", "Strategy", "TextMethod",
-           "Trained", "Verdict", "WINDOWS", "built_in", "load_step", "load_strategy", "train", "weights"]
+           "Trained", "Verdict", "WINDOWS", "built_in", "in_process", "load_state", "load_step", "load_strategy",
+           "save_state", "step_seed", "strategy_plugin", "train", "weights"]

@@ -4,8 +4,8 @@ version = "0.1.0"
 description = "Run tests on a trained model and record their results in its model card"
 license = "AGPL-3.0-or-later"
 requires-python = ">=3.14"
-dependencies = ["wpt-tokenizer", "wpt-store", "wpt-telemetry", "wpt-model", "wpt-utils", "wpt-dataset", "wpt-inference", "wpt-agent",
-                "numpy>=2"]  # wpt-dataset, wpt-agent: the measure tasks and their attempts (attempts.py); wpt-inference: the text measures (asking.py); torch comes from the root group that scripts/setup.py picks
+dependencies = ["wpt-tokenizer", "wpt-store", "wpt-telemetry", "wpt-model", "wpt-utils", "wpt-dataset", "wpt-agent", "wpt-worker",
+                "numpy>=2"]  # wpt-dataset, wpt-agent: the measure tasks and their attempts (attempts.py); wpt-worker: the gpu worker that holds the model (remote.py); torch comes from the root group that scripts/setup.py picks
 
 [project.scripts]
 wpt-eval = "wpt_eval:main"

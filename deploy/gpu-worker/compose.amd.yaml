@@ -1,0 +1,11 @@
+# The gpu worker on AMD GPUs (compose.yaml beside it adds this file): the
+# machine's ROCm devices, and the ROCm build of PyTorch.
+services:
+  gpu-worker:
+    environment:
+      WPT_WORKER_TORCH: rocm
+    devices:
+      - /dev/kfd
+      - /dev/dri
+    group_add:
+      - video

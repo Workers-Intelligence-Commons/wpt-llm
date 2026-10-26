@@ -87,7 +87,10 @@ the same command with `--resume` continues.
 | --- | --- |
 | share data and runs between machines | `WPT_STORE=s3://bucket/prefix` (any S3-compatible service) |
 | move a run to another machine | `--run NAME`: the checkpoint lives in the store; `--run NAME --resume` there |
-| use several GPUs | `--strategy ddp --processes N` (several machines: `torchrun`) |
+| use several GPUs | `--strategy ddp --processes N`, on the gpu worker's machine |
+| train on another machine's GPUs | a gpu worker on each machine (`deploy/gpu-worker/compose.yaml`, with `compose.nvidia.yaml` or `compose.amd.yaml` for GPUs), their keys in `WPT_GPU_WORKERS` ([machines](docs/machines.md)) |
+| rent the GPUs | `WPT_GPU_WORKERS=N` and `WPT_RENTAL_GPUS` for `wpt-manager`, which rents N gpu workers through SkyPilot (as one cluster in one request), replaces a lost one and gives them back at the end ([machines](docs/machines.md)) |
+| download, build and train in one command | `docker compose up`, with `COMPOSE_FILE=deploy/manager/compose.yaml` and `WPT_RECIPE` set in `.env`; then `wpt-store copy-out NAME runs/NAME` ([machines](docs/machines.md)) |
 | build despite a broken source | `wpt-dataset build --skip-failed`: it is left out and listed (a source not downloaded always is) |
 | teach the model to chat | conversations tagged `answer-as-assistant` in a source, downloaded (`wpt-dataset download`) and the dataset built again, and a recipe whose `steps` add `answer-as-assistant` after `read-text`: `wpt-train RECIPE DATASET_ID --out runs/chat`, then `wpt-chat runs/chat --chat` ([training](docs/training.md)) |
 | teach the model to finish tasks as an agent | tasks tagged `finish-tasks` in a source, downloaded and the dataset built again, their images in `data/images/` locked with `wpt-agent lock-image NAME` and built with `wpt-agent build-image NAME`, and a recipe whose `steps` hold `finish-tasks` (needs Docker; [training](docs/training.md)) |
@@ -119,6 +122,7 @@ settle alone are listed for legal review in
 - [Tokenizer](docs/tokenizer.md)
 - [Model architecture: the research it comes from and the recipes that size it](docs/model.md)
 - [Training and repeatability](docs/training.md)
+- [Machines for training: the wpt manager, gpu workers, sandboxes](docs/machines.md)
 - [Evaluation](docs/evaluation.md)
 - [Observability: the record of every run, and its live view](docs/observability.md)
 - [Chat format: conversations as JSON, turned into tokens by a template](docs/chat-format.md)

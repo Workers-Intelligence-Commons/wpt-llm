@@ -617,6 +617,11 @@ class Repo:
         with _LOCKS_LOCK:
             self._lock = _LOCKS.setdefault(key, _RepositoryLock(key))
 
+    def data_folder(self) -> str:
+        """The data folder's path from the repository's root, with /: what a
+        copy of the repository's code leaves out (wpt_worker.manager)."""
+        return self._data.relative_to(self.root).as_posix()
+
     @classmethod
     def find(cls, start=None) -> "Repo":
         """The nearest folder at or above start (default: cwd) holding data/sources."""

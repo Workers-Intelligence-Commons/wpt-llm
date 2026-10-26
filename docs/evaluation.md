@@ -22,6 +22,15 @@ task's image must be built on this machine first (`uv run wpt-agent
 build-image NAME`, which needs Docker), as for the `finish-tasks` step. A missing
 image stops the command and names the command that builds it.
 
+## The model on a gpu worker
+
+The tests run on the machine that runs `wpt-eval`, which holds the
+tokenizer, the store and the sandboxes. The model runs on a gpu worker
+(the first key of `WPT_GPU_WORKERS`, else a local worker), which the
+command sends the checkout and the folder's weight files; what a test asks
+of the model goes through the link, as token ids
+([machines.md](machines.md), "Evaluation").
+
 ## Writing a test
 
 A test is one Python file that defines `run`:
@@ -37,8 +46,12 @@ def run(context):
 
 `context` gives:
 
-- `model`: the model, in evaluation mode, on `device`;
-- `tokenizer`, `device`, `folder`, and `provenance` (the folder's
+- `model`: the model, which runs on a gpu worker (below): `model.config`,
+  `model.generator(seed)`, `model.writer(prompt, rows, temperature=...,
+  top_k=..., stops=...)` and `model.greedy(prompts, steps)`, all in token
+  ids; it holds no tensors on this machine;
+- `device`: where the model runs, in words;
+- `tokenizer`, `folder`, and `provenance` (the folder's
   `provenance.json`);
 - `store`: the store holding the dataset;
 - `telemetry`: the run's record, for the test's own events
@@ -220,8 +233,8 @@ trained on: `calibration` (#28), `reading_gain` (#34, its text form) and
 
 - A question is one user message through the model's chat template
   (`wpt_tokenizer.chat`). The model writes each reply through
-  `wpt_inference.next_message`, the function `wpt-chat --chat` writes with,
-  always taking its likeliest token (`wpt_agent.GREEDY`), so a run gives
+  the chat template, as `wpt-chat --chat` does, on the gpu worker
+  (`context.model.writer`), always taking its likeliest token (`wpt_agent.GREEDY`), so a run gives
   the same replies again on the same setup.
 - `calibration` and `reading_gain` ask for the rest of a paragraph. The
   paragraph and its quoted start follow the task builder's rules

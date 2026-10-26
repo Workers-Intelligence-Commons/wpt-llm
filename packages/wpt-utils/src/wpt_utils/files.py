@@ -20,12 +20,13 @@ def sha256_file(path) -> str:
     return h.hexdigest()
 
 
-def lock_file(path) -> int:
+def lock_file(path, wait=True) -> int | None:
     """An open descriptor of path (created when missing), locked for this
     process (fcntl.flock on Linux and macOS, msvcrt.locking on Windows);
-    waits while another process holds it. The system releases the lock
-    when the process ends, crash included, so none is left behind. Locks
-    between processes only: threads of one process need their own lock."""
+    waits while another process holds it, or with wait False, gives None
+    at once. The system releases the lock when the process ends, crash
+    included, so none is left behind. Locks between processes only:
+    threads of one process need their own lock."""
     descriptor = os.open(path, os.O_RDWR | os.O_CREAT, 0o644)
     try:
         if os.name == "nt":
@@ -33,14 +34,22 @@ def lock_file(path) -> int:
             while True:
                 try:
                     os.lseek(descriptor, 0, os.SEEK_SET)
-                    msvcrt.locking(descriptor, msvcrt.LK_LOCK, 1)  # gives up after 10 seconds: try again
+                    # LK_LOCK gives up after 10 seconds: try again
+                    msvcrt.locking(descriptor, msvcrt.LK_LOCK if wait else msvcrt.LK_NBLCK, 1)
                     break
                 except OSError as error:
+                    if not wait and error.errno in (errno.EDEADLOCK, errno.EACCES):  # another process holds it
+                        os.close(descriptor)
+                        return None
                     if error.errno != errno.EDEADLOCK:
                         raise
         else:
             import fcntl
-            fcntl.flock(descriptor, fcntl.LOCK_EX)
+            try:
+                fcntl.flock(descriptor, fcntl.LOCK_EX | (0 if wait else fcntl.LOCK_NB))
+            except BlockingIOError:
+                os.close(descriptor)
+                return None
     except BaseException:
         os.close(descriptor)
         raise

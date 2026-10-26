@@ -5,8 +5,6 @@
                                           given), each checked against its checksum, several at
                                           once; a source already there is not fetched again;
                                           every source is tried, and the failures listed at the end
-    wpt-dataset store                     what the store database says: each source's last outcome,
-                                          revision, checksum and last download; every session
     wpt-dataset check                     every rule that needs no download
     wpt-dataset check --fetch [ID ...]    also download sources (all admitted, or the ids given),
                                           then check them: checksum, cuts, patches, license map,
@@ -144,7 +142,7 @@ from wpt_store import StoreError, store_from_settings
 from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry
 from wpt_utils.programs import MissingTool
 
-from . import download, manifest, source_drafter, source_server, store_history
+from . import download, manifest, source_drafter, source_server
 from .build import build_dataset, build_tokenizer
 from .commits import check_commits
 from .edit import unpack, write_patch
@@ -190,20 +188,6 @@ def cmd_download(args, repo):
     with _session(repo, store, "download", args, ids, stream=args.stream) as (telemetry, session):
         _download(repo, store, ids, telemetry, session, failed)
     return _failures(failed, len(ids))
-
-
-def cmd_store(args, repo):
-    sources, sessions = store_history.listing(_store(repo))
-    print(f"{len(sessions)} sessions:")
-    for row in sessions:
-        print(f"  {row.started} to {row.ended or '(not ended)'} {row.command} at {row.commit or '?'}"
-              f"{' (changed)' if row.dirty else ''}: records/{row.folder}/")
-    print(f"{len(sources)} sources:")
-    for state in sources:
-        last = (f"downloaded {state.downloaded} from {state.address} at {state.commit or '?'}, {state.size:,} bytes"
-                if state.downloaded else "never downloaded")
-        print(f"  {state.source}: {state.outcome}; revision {state.revision}, checksum {state.checksum}; {last}")
-    return 0
 
 
 def cmd_check(args, repo):
@@ -672,7 +656,6 @@ def main(argv=None):
     fetching.add_argument("--stream", action="store_true", default=stream,
                           help="keep no copy on this machine of what the store holds (WPT_STREAM)")
     fetching.set_defaults(run=cmd_download)
-    commands.add_parser("store").set_defaults(run=cmd_store)
     vocab = commands.add_parser("build-tokenizer")
     vocab.add_argument("name")
     vocab.add_argument("--stream", action="store_true", default=stream, help=stream_help)

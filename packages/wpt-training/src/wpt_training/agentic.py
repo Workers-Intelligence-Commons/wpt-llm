@@ -15,8 +15,6 @@ step").
                                    fresh container, offered its tools, written together by the
                                    model alone, each one's routes (R3) recorded), each kept as a
                                    line of the step's attempts file as soon as it is scored
-    routes_out(model, routes)      an attempt's routes as {layer index: tensor}, which pickle
-    routes_in(model, found)        the wpt_model.Routes routes_out gave, on another process's model
 
 Every attempt, a dropped one included, becomes one line of
 `<step>-attempts.jsonl` in the run's record folder (docs/observability.md):
@@ -30,6 +28,10 @@ so it is learned and counted in `written`, as every token the model
 writes. The attempt's span, its group's event and its round's event name
 the file and the line numbers. A line the store refuses raises
 wpt_telemetry.RecordError, which stops the command (exit code 3).
+
+This runs on the wpt manager, where the sandboxes and the tokenizer are;
+the gpu worker imports the module for WEIGHTS and check only, so it loads
+wpt_agent only where an attempt is played or scored.
 """
 
 import difflib
@@ -37,8 +39,6 @@ import json
 import random
 from dataclasses import dataclass
 
-import wpt_agent
-from wpt_model import Routes
 from wpt_telemetry import Telemetry
 
 CORRECT = "correct"  # the check's part for the task's own judgement (wpt_agent.check)
@@ -83,6 +83,8 @@ def combined(task, attempt, parts, settings, closeness=None) -> float:
     for a terse attempt, its closeness to the full attempt, weighed by
     settings' weight_correct, weight_calibration, weight_rule,
     weight_tool_call and weight_closeness."""
+    import wpt_agent
+
     answer = attempt.conversation.get("metadata", {}).get("answer")
     if parts is None or answer is None or not wpt_agent.gated(task, parts):
         return 0.0
@@ -108,20 +110,6 @@ def closeness(full: str, terse: str) -> float:
     return difflib.SequenceMatcher(None, full.splitlines(), terse.splitlines(), autojunk=False).ratio()
 
 
-def routes_out(model, routes: Routes) -> dict:
-    """{index of the layer: its recorded choices, on the CPU}: the routes of
-    an attempt, without the model's modules, to send to another process."""
-    return {index: routes.chosen[layer.experts].cpu() for index, layer in enumerate(model.layers)
-            if layer.experts in routes.chosen}
-
-
-def routes_in(model, found: dict, device) -> Routes:
-    """The Routes routes_out gave, on this process's model."""
-    routes = Routes()
-    routes.chosen = {model.layers[index].experts: chosen.to(device) for index, chosen in found.items()}
-    return routes
-
-
 @dataclass
 class Kept:
     """An attempt Player.attempts played and kept: its line number in the
@@ -129,8 +117,8 @@ class Kept:
     error that dropped it (the others None), and its parts and changes to
     /work (wpt_agent.Played)."""
     line: int
-    attempt: wpt_agent.Attempt | None
-    routes: Routes | None
+    attempt: object | None  # wpt_agent.Attempt
+    routes: object | None  # what the writer gave for the attempt's row (Player)
     score: float | None
     reward: float | None
     error: Exception | None
@@ -139,9 +127,10 @@ class Kept:
 
 
 class Player:
-    """One step's attempts, played by one model in the main process.
-    Sampling draws from `sampling`, a generator the caller seeded, so every
-    attempt comes from one sequence. The model alone writes the attempts,
+    """One step's attempts, written by writer (wpt_agent.play's: the wpt
+    manager's, whose model writes on the gpu worker, drawing from a
+    generator the worker seeded, so every attempt comes from one sequence;
+    each row's routes are the handle it gives). The model alone writes the attempts,
     never a drafter: the tokens drawn then depend on the seed alone, never
     on how fast this machine's passes are. Each attempt is kept in
     telemetry's record, as a line of `<name>-attempts.jsonl`, numbered from
@@ -149,9 +138,9 @@ class Player:
     drawn from. built: {image name: built image}; pools: {image name: its
     pool of tools}."""
 
-    def __init__(self, name, model, tokenizer, built, pools, settings, seed, sampling, telemetry=None, lines=0):
-        self.name, self.model, self.tokenizer, self.built, self.pools = name, model, tokenizer, built, pools
-        self.settings, self.seed, self.sampling, self.lines = settings, seed, sampling, lines
+    def __init__(self, name, writer, tokenizer, built, pools, settings, seed, telemetry=None, lines=0):
+        self.name, self.writer, self.tokenizer, self.built, self.pools = name, writer, tokenizer, built, pools
+        self.settings, self.seed, self.lines = settings, seed, lines
         self.telemetry = telemetry or Telemetry.off()
         self.file = f"{name}-attempts.jsonl"
 
@@ -164,6 +153,8 @@ class Player:
         both forms; reward(task, index, played) is what an attempt is worth,
         None for one never trained on. A dropped attempt (Docker failed) is
         kept too. RecordError when the store refuses a line."""
+        import wpt_agent
+
         settings = self.settings
         offers = [wpt_agent.offer(task, self.pools.get(task.image, []),
                                   random.Random(f"{self.seed}/{task.id}/{round_}/{group}/{index}"))
@@ -189,8 +180,8 @@ class Player:
         sampling = wpt_agent.Sampling(settings["temperature"], settings["top_k"] or None)  # top_k 0: every token
         with self.telemetry.span(f"{self.name}.play", task=task.id, round=round_, group=group, attempts=count,
                                  terse=terse):
-            return wpt_agent.play(task, offers, keep, model=self.model, tokenizer=self.tokenizer,
-                                  built=self.built, sampling=sampling, generator=self.sampling,
+            return wpt_agent.play(task, offers, keep, writer=self.writer, tokenizer=self.tokenizer,
+                                  built=self.built, sampling=sampling,
                                   check_seconds=settings["check_seconds"], result_bytes=settings["result_bytes"],
                                   routes=True, with_changes=with_changes, terse=terse, name=self.name)
 
@@ -198,6 +189,8 @@ class Player:
         """Add the attempt's line to self.file, its conversation (a dropped
         attempt's opening, with the tools it was offered) with the attempt's
         metadata added to its own; its line number, from 1."""
+        import wpt_agent
+
         attempt = kept.attempt
         metadata = {"step": self.name, "task": task.id, "round": round_, "group": group, "attempt": index,
                     "terse": terse, "dropped": attempt is None,

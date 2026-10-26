@@ -9,11 +9,15 @@ defines
 
     def run(context: wpt_eval.Context) -> wpt_eval.Result
 
-The context gives the model, its tokenizer, the device, the folder's
-provenance and the documents of the dataset it was trained on, read from the
-store named by WPT_STORE (environment or .env) and checked against their
-recorded hashes. The result carries data for programs and the same findings
-as text for people.
+The context gives the model, its tokenizer, the folder's provenance and the
+documents of the dataset it was trained on, read from the store named by
+WPT_STORE (environment or .env) and checked against their recorded hashes.
+The result carries data for programs and the same findings as text for
+people. The model is on a gpu worker (wpt_eval.remote, docs/machines.md,
+"Evaluation"): the first of WPT_GPU_WORKERS, or a local one; a test reaches
+it through the context only: context.model.config, .device (where it runs,
+in words), .generator(seed), .writer(prompt, rows, ...) and
+.greedy(prompts, steps).
 
 The agent measures share one run of attempts (wpt_eval.attempts):
 context.attempts(plain) plays N attempts (--attempts, WPT_ATTEMPTS, default
@@ -50,20 +54,20 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 import numpy as np
-import torch
 
 from wpt_agent import Unready
-from wpt_model import WPT, TokenizerMismatch, load_model, load_tokenizer, weight_hashes
+from wpt_model import DrafterMismatch, TokenizerMismatch, check_drafter, load_tokenizer, weight_hashes
 from wpt_model.notice import CARD_NAME, EVALS_NAME, documents
-from wpt_store import Store, StoreError, store_from_settings
+from wpt_store import Store, StoreError, read_env_file, store_from_settings
 from wpt_store.shards import documents as documents_of
 from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry, short
 from wpt_tokenizer import Tokenizer
-from wpt_utils.device import describe, select_device
 from wpt_utils.files import sha256_file
+from wpt_worker.link import LinkError
 
 from . import attempts as shared
 from .attempts import Record
+from .remote import Remote, WorkerError
 
 BUILT_IN = Path(__file__).parent / "evals"
 VERSION = importlib.metadata.version("wpt-eval")
@@ -91,9 +95,9 @@ class Document:
 @dataclass
 class Context:
     folder: Path
-    model: WPT  # in eval mode, on device
+    model: object  # on a gpu worker (wpt_eval.remote.Remote), or wpt_worker.evaluation.Served in this process
     tokenizer: Tokenizer
-    device: torch.device
+    device: str  # where the model runs, in words
     provenance: dict
     store: Store
     telemetry: Telemetry = field(default_factory=Telemetry.off)  # the run's record, for a test's own events
@@ -170,7 +174,7 @@ def run_eval(context, eval_) -> dict:
         if not isinstance(result, Result):
             raise EvalError(f"{path.name}: run(context) returned {type(result).__name__}, not wpt_eval.Result")
         record = {"schema": 1, "name": name, "file": file_name, "file_sha256": file_sha256,
-                  "wpt_eval": VERSION, "device": describe(context.device), "data": result.data, "text": result.text}
+                  "wpt_eval": VERSION, "device": context.device, "data": result.data, "text": result.text}
         telemetry.event("eval.result", name=name, data=result.data)
         folder = context.folder / EVALS_NAME
         text = json.dumps(record, indent=2) + "\n"
@@ -206,7 +210,11 @@ def _write_documents(folder, telemetry):
         raise
 
 
-def open_context(folder, store, device, telemetry=None, attempts=shared.ATTEMPTS) -> Context:
+def open_context(folder, store, telemetry=None, attempts=shared.ATTEMPTS) -> Context:
+    """The context of the model folder, with no model yet (main puts the
+    gpu worker's there). EvalError when the folder is not one wpt-train
+    wrote, its drafter was trained against other weights, or its tokenizer
+    is not the weights'."""
     folder = Path(folder)
     try:
         provenance = json.loads((folder / "provenance.json").read_text(encoding="utf-8"))
@@ -216,12 +224,11 @@ def open_context(folder, store, device, telemetry=None, attempts=shared.ATTEMPTS
         raise EvalError(f"{folder}: provenance shape {provenance.get('schema')}, this wpt-eval reads 5; train it again")
     try:
         tokenizer = Tokenizer.from_bytes(load_tokenizer(folder))
-        model = load_model(folder, device)  # refuses a folder whose drafter is missing or of other weights
-    # ValueError: a vocabulary of another tokenizer version, or a DrafterMismatch
-    except (TokenizerMismatch, ValueError) as error:
+        check_drafter(folder)  # refuses a folder whose drafter is missing or of other weights
+    # ValueError: a vocabulary of another tokenizer version; DrafterMismatch is one too
+    except (TokenizerMismatch, DrafterMismatch, ValueError) as error:
         raise EvalError(str(error)) from None
-    model.eval()
-    return Context(folder, model, tokenizer, device, provenance, store, telemetry or Telemetry.off(), attempts)
+    return Context(folder, None, tokenizer, "", provenance, store, telemetry or Telemetry.off(), attempts)
 
 
 def _count(text) -> int:
@@ -248,6 +255,7 @@ def main(argv=None):
                         help=f"attempts at each measure task in the agent measures' shared run (WPT_ATTEMPTS; "
                              f"default {shared.ATTEMPTS})")
     args = parser.parse_args(argv)
+    environ = {**read_env_file(Path.cwd() / ".env"), **{key: value for key, value in os.environ.items() if value}}
     try:
         store = store_from_settings(Path.cwd() / ".env")
     except StoreError as error:  # no store, no record: nothing has started
@@ -266,14 +274,14 @@ def main(argv=None):
                 with telemetry.span("inputs"):
                     for eval_ in evals:
                         find(eval_)  # an unknown test stops the run before any other has run
-                    device = select_device()
-                    telemetry.log(f"device: {describe(device)}")
-                    context = open_context(args.model, store, device, telemetry, args.attempts)
+                    context = open_context(args.model, store, telemetry, args.attempts)
                     telemetry.input(weights=weights, dataset=context.provenance.get("dataset"))
-                for eval_ in evals:
-                    record = run_eval(context, eval_)
-                    telemetry.log(f"\n{record['name']}\n{record['text'].rstrip()}")
-            except (StoreError, EvalError, Unready) as error:
+                with telemetry.span("gpu_worker.model"), Remote(args.model, environ, telemetry.log) as model:
+                    context.model, context.device = model, model.device
+                    for eval_ in evals:
+                        record = run_eval(context, eval_)
+                        telemetry.log(f"\n{record['name']}\n{record['text'].rstrip()}")
+            except (StoreError, EvalError, Unready, LinkError, WorkerError) as error:
                 sys.exit(f"{type(error).__name__}: {error}")  # end.json records it
             telemetry.log(f"\nresults in {Path(args.model) / EVALS_NAME}, model card {Path(args.model) / 'README.md'}")
     except RecordError as error:

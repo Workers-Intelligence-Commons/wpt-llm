@@ -1,6 +1,6 @@
 """`wpt-dataset download`: sources fetched into the store's bundles, each
 checked against its checksum, in a session recorded in the store, several
-at once; and `wpt-dataset store`, which lists what the store database says."""
+at once; and `wpt-store list`, which lists what the store database says."""
 
 import shutil
 
@@ -9,6 +9,7 @@ import pytest
 from wpt_dataset import download, manifest
 from wpt_dataset.cli import main
 from wpt_dataset.sources import source_tree
+from wpt_store.cli import main as store_command
 
 
 def two_sources(kit, repo, store, tmp_path, http_folder):
@@ -54,7 +55,7 @@ def test_download_keeps_each_source_in_bundles_records_its_session_and_reuses_it
     assert main(["--root", str(repo.root), "download", git, book]) == 0
     capsys.readouterr()
 
-    assert main(["--root", str(repo.root), "store"]) == 0
+    assert store_command(["list"]) == 0
     out = capsys.readouterr().out.splitlines()
     assert out[0] == "2 sessions:" and len([line for line in out if "wpt-dataset-download" in line]) == 2
     for sid in (git, book):

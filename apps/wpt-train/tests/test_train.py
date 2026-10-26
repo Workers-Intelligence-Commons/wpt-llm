@@ -22,6 +22,7 @@ from wpt_telemetry import FLUSH_THREAD
 from wpt_tokenizer import Tokenizer
 from wpt_utils.device import select_device
 from wpt_train import main
+from wpt_training import load_state
 
 ROOT = Path(__file__).resolve().parents[3]
 
@@ -177,6 +178,7 @@ def test_a_record_the_store_refuses_stops_the_run_once_its_checkpoint_is_saved(b
         real(self, folder, name, data)
 
     monkeypatch.setattr(LocalStore, "_raw_append_record", disk_full_at_step_3)
+    monkeypatch.setenv("WPT_LINK_CHECKPOINTS", "every")  # the checkpoint it saves comes to this machine
     with pytest.raises(SystemExit) as stopped:
         main([built.recipe("five", training=one_stage(5)), built.dataset_id, "--out", "model"])
 
@@ -184,7 +186,7 @@ def test_a_record_the_store_refuses_stops_the_run_once_its_checkpoint_is_saved(b
     [run] = built.records("wpt-train")
     assert [e["attributes"]["step"] for e in run.events if e.get("name") == "training.step"] == [1, 2]
     assert run.end is None and [path.name for path in (tmp_path / "model").iterdir()] == ["checkpoint"]
-    assert torch.load(tmp_path / "model" / "checkpoint" / "checkpoint.pt", weights_only=True)["step"] == 3
+    assert load_state(tmp_path / "model" / "checkpoint" / "checkpoint.safetensors")["step"] == 3
 
 
 def test_a_send_refused_in_the_background_keeps_the_step_in_the_store_checkpoint(built, tmp_path, monkeypatch, capsys):
@@ -193,27 +195,29 @@ def test_a_send_refused_in_the_background_keeps_the_step_in_the_store_checkpoint
     # done: the step ends, the store's checkpoint holds it, unrecorded, and
     # --resume gives the model of an unbroken run. The checkpoint it replaced
     # is not deleted, since its deletion could not be recorded first
-    real = LocalStore._raw_flush_records
+    real, now = LocalStore._raw_flush_records, tmp_path / "refuse-now"  # the gpu worker's job makes now at update 3
 
     def refused_in_the_background(self):
-        if threading.current_thread().name == FLUSH_THREAD and os.environ.get("REFUSE") == "now":
+        if threading.current_thread().name == FLUSH_THREAD and now.exists():
             raise OSError(28, "No space left on device")
         real(self)
 
     monkeypatch.setattr(wpt_telemetry, "FLUSH_SECONDS", 0.02)
     monkeypatch.setattr(LocalStore, "_raw_flush_records", refused_in_the_background)
-    options = [*interrupting(built, tmp_path, "if os.environ.get('REFUSE'): os.environ['REFUSE'] = 'now'; "
+    monkeypatch.setenv("WPT_LINK_CHECKPOINTS", "every")
+    options = [*interrupting(built, tmp_path, "if os.environ.get('REFUSE'): open(os.environ['REFUSE'], 'w').close(); "
                                               "__import__('time').sleep(2)"), "--checkpoint-every", "1"]
     main([*options, "--out", "whole"])
     forget_steps(built.store)
 
-    monkeypatch.setenv("REFUSE", "1")
+    monkeypatch.setenv("REFUSE", str(now))
     with pytest.raises(SystemExit) as stopped:
         main([*options, "--out", "here", "--run", "fox-1"])
     monkeypatch.delenv("REFUSE")
+    now.unlink()
     assert stopped.value.code == 3 and "No space left on device" in capsys.readouterr().err
     saved = built.store.get_ref("checkpoints", "fox-1")
-    assert torch.load(built.store.path(saved), weights_only=True)["step"] == 3
+    assert load_state(built.store.path(saved))["step"] == 3
     run = built.records("wpt-train")[-1]
     named = [e["attributes"]["object"] for e in run.events
              if e.get("name") == "store.ref_set" and e["attributes"]["ref"] == "checkpoints/fox-1"]
@@ -293,6 +297,7 @@ def test_every_checkpoint_deleted_from_the_store_is_named_in_the_record_first(bu
         real(self, sha)
 
     monkeypatch.setattr(LocalStore, "delete", delete)
+    monkeypatch.setenv("WPT_LINK_CHECKPOINTS", "every")  # each checkpoint comes to the store
     main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model", "--checkpoint-every", "1",
           "--run", "fox-1"])
     assert len({sha for sha, _ in deleted}) == 2 and all(named for _, named in deleted)
@@ -310,6 +315,7 @@ def test_on_s3_a_checkpoint_is_deleted_only_once_its_deletion_is_in_the_bucket(b
     s3.copy(built.store)
     deleted = []
     monkeypatch.setattr(S3Store, "delete", lambda self, sha: deleted.append(sha))
+    monkeypatch.setenv("WPT_LINK_CHECKPOINTS", "every")
     s3.refuse(b'"training.checkpoint_deleted"')
     with pytest.raises(SystemExit) as stopped:
         main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model",
@@ -434,25 +440,18 @@ def test_a_dataset_built_from_another_recipe_data_is_refused(built, tmp_path, ca
 
 
 ON_CPU = {"CUDA_VISIBLE_DEVICES": "", "HIP_VISIBLE_DEVICES": ""}  # gloo on every system, no GPU needed
-STARTERS = {
-    "processes": ["-m", "wpt_train", "--processes", "2"],
-    "torchrun": pytest.param(["-m", "torch.distributed.run", "--nproc-per-node", "2", "-m", "wpt_train"],
-                             marks=pytest.mark.skipif(os.name == "nt", reason="torchrun does not start on Windows "
-                                                                              "with PyTorch 2.14 (docs/training.md)")),
-}
 
 
 def weights(folder):
     return load_file(folder / "model.safetensors")
 
 
-@pytest.mark.parametrize("starter", STARTERS.values(), ids=STARTERS.keys())
-def test_two_processes_train_the_same_model_as_one(built, tmp_path, starter):
+def test_two_processes_train_the_same_model_as_one(built, tmp_path):
     # the batch is global: 2 processes of 2 windows each, or 1 process adding up
     # 2 passes of 2 windows, must take the same steps, dropout included
     env = {**os.environ, **ON_CPU}
     recipe = built.recipe("four", training=one_stage(4))
-    for out, command in [("one", ["-m", "wpt_train", "--micro-batch", "2"]), ("two", [*starter, "--strategy", "ddp"])]:
+    for out, command in [("one", ["-m", "wpt_train", "--micro-batch", "2"]), ("two", ["-m", "wpt_train", "--processes", "2", "--strategy", "ddp"])]:
         forget_steps(built.store)  # the hardware is no part of a step's fingerprint: each run trains
         subprocess.run([sys.executable, *command, recipe, built.dataset_id, "--out", out],
                        cwd=tmp_path, env=env, check=True)
@@ -483,6 +482,15 @@ def test_split_windows_in_segments_train_the_same_model_as_one_process(built, tm
     assert all(torch.allclose(one[k], two[k], atol=1e-4) for k in one)
     provenance = json.loads((tmp_path / "two" / "provenance.json").read_text())
     assert provenance["strategy"]["processes"] == 2
+
+
+def crash(capsys, argv):
+    """Run argv, whose gpu worker's job crashes with RuntimeError('power
+    cut'): the command ends with exit code 1 and the job's traceback on its
+    error output."""
+    with pytest.raises(SystemExit) as stopped:
+        main(argv)
+    assert stopped.value.code == 1 and "RuntimeError: power cut" in capsys.readouterr().err
 
 
 def interrupting(built, tmp_path, at_step_3, at_step=3, best=None):
@@ -516,13 +524,13 @@ def test_a_crashed_run_resumes_where_its_checkpoint_left_it(built, tmp_path, mon
     # after a crash, --resume must give the same model as a run never interrupted
     options = [*interrupting(built, tmp_path, "if os.environ.get('CRASH'): raise RuntimeError('power cut')"),
                "--checkpoint-every", "2"]
+    monkeypatch.setenv("WPT_LINK_CHECKPOINTS", "every")  # the checkpoint the crash leaves is on this machine
     main([*options, "--out", "whole"])
     forget_steps(built.store)
 
     monkeypatch.setenv("CRASH", "1")
-    with pytest.raises(RuntimeError, match="power cut"):
-        main([*options, "--out", "resumed"])
-    assert (tmp_path / "resumed" / "checkpoint" / "checkpoint.pt").is_file()
+    crash(capsys, [*options, "--out", "resumed"])
+    assert (tmp_path / "resumed" / "checkpoint" / "checkpoint.safetensors").is_file()
     with pytest.raises(SystemExit) as refused:
         main([*options, "--out", "resumed"])
     assert refused.value.code == 2 and "--resume" in capsys.readouterr().err
@@ -557,17 +565,17 @@ def step_windows(run):
             if event.get("name") == "training.step"]
 
 
-def test_stages_train_in_order_and_a_run_resumes_across_their_boundary(built, tmp_path, monkeypatch):
+def test_stages_train_in_order_and_a_run_resumes_across_their_boundary(built, tmp_path, monkeypatch, capsys):
     # a crash at the first step of the second stage resumes from the
     # checkpoint the first stage's end wrote, and gives the model of a run
     # never interrupted (the long windows in segments of 128 tokens, as a
     # 16 GB GPU would run them); each stage draws its own batch
     options = staged(built, tmp_path, 3)
+    monkeypatch.setenv("WPT_LINK_CHECKPOINTS", "every")
     main([*options, "--out", "whole", "--segment", "128"])
     forget_steps(built.store)
     monkeypatch.setenv("CRASH", "1")
-    with pytest.raises(RuntimeError, match="power cut"):
-        main([*options, "--out", "resumed"])
+    crash(capsys, [*options, "--out", "resumed"])
     monkeypatch.delenv("CRASH")
     main([*options, "--out", "resumed", "--segment", "128", "--resume"])
 
@@ -587,17 +595,17 @@ def test_stages_train_in_order_and_a_run_resumes_across_their_boundary(built, tm
     assert step_windows(again) == [(3, 256), (4, 256), (5, 256), (6, 256)]
 
 
-def test_a_run_resumed_in_the_middle_of_a_later_stage_keeps_its_best_weights(built, tmp_path, monkeypatch):
+def test_a_run_resumed_in_the_middle_of_a_later_stage_keeps_its_best_weights(built, tmp_path, monkeypatch, capsys):
     # the method judges only step 4's evaluation the best: a crash at step 5
     # resumes from step 4's checkpoint, inside the second stage, with that
     # best kept, so the folder holds the same weights from the same step as
     # a run never interrupted, and the resumed run trains steps 5 and 6 only
     options = staged(built, tmp_path, 5, best=4)
+    monkeypatch.setenv("WPT_LINK_CHECKPOINTS", "every")
     main([*options, "--out", "whole"])
     forget_steps(built.store)
     monkeypatch.setenv("CRASH", "1")
-    with pytest.raises(RuntimeError, match="power cut"):
-        main([*options, "--out", "resumed"])
+    crash(capsys, [*options, "--out", "resumed"])
     monkeypatch.delenv("CRASH")
     main([*options, "--out", "resumed", "--resume"])
 
@@ -637,14 +645,15 @@ def test_the_model_card_names_the_updates_trained_and_the_update_of_its_weights(
            "the weights of update 2" in card
 
 
-def test_streamed_training_never_copies_the_whole_dataset_to_disk(built, tmp_path):
-    # --stream trains from a few shards at a time, so a machine needs disk
-    # only for those, and the model folder names its sources as usual
+def test_streamed_training_never_copies_the_whole_dataset_to_disk(built, tmp_path, monkeypatch):
+    # --stream trains from a few shards at a time, so the gpu worker needs
+    # disk only for those, and the model folder names its sources as usual
     store, dataset_id = built.store, built.dataset_id
+    monkeypatch.setenv("WPT_WORKER_FOLDER", str(tmp_path / "worker"))  # the local worker's, kept
     main([built.recipe("two", training=one_stage(2)), dataset_id, "--out", "model", "--stream", "--stream-shards", "1"])
 
     record = json.loads(store.get_bytes(store.get_ref("datasets", dataset_id)))
-    held_out_only = [p.name for p in (store.scratch / "tokens").glob("*.u32")]
+    held_out_only = [p.name for p in (tmp_path / "worker" / "job" / "scratch" / "tokens").glob("*.u32")]
     assert len(held_out_only) == 1  # the held-out tokens; no file of every training shard
     provenance = json.loads((tmp_path / "model" / "provenance.json").read_text())
     assert set(provenance["sources"]) == {built.source_id}
@@ -660,6 +669,7 @@ def test_a_stopped_run_saves_its_step_and_continues_on_another_machine(built, tm
     # ignored, and an ignored signal stays ignored
     options = [*interrupting(built, tmp_path, "if os.environ.get('STOP'): signal.raise_signal(signal.SIGTERM)"),
                "--checkpoint-every", "100"]
+    monkeypatch.setenv("WPT_LINK_CHECKPOINTS", "every")  # the checkpoint the stop saves comes to the store
     main([*options, "--out", "whole"])
     forget_steps(built.store)
 
@@ -669,7 +679,7 @@ def test_a_stopped_run_saves_its_step_and_continues_on_another_machine(built, tm
     monkeypatch.delenv("STOP")
     assert stopped.value.code == 130 and not (tmp_path / "here" / "checkpoint").exists()
     saved = built.store.get_ref("checkpoints", "fox-1")
-    assert torch.load(built.store.path(saved), weights_only=True)["step"] == 3  # not a multiple of 100: the signal
+    assert load_state(built.store.path(saved))["step"] == 3  # not a multiple of 100: the signal
     main([*options, "--out", "there", "--run", "fox-1", "--resume"])
 
     whole, there = weights(tmp_path / "whole"), weights(tmp_path / "there")
@@ -737,6 +747,7 @@ def test_a_new_model_that_cannot_take_the_place_of_its_own_checkpoint_folder_is_
         real(source, target)
 
     monkeypatch.setattr(os, "replace", refuse_the_new_one)
+    monkeypatch.setenv("WPT_LINK_CHECKPOINTS", "every")  # the step's last checkpoint comes into the model folder
     with pytest.raises(PermissionError):
         main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model"])
     assert list((tmp_path / "model").iterdir()) == []
@@ -781,3 +792,30 @@ def test_a_restore_failure_inside_a_broken_record_still_keeps_both_models(built,
     assert json.loads((new / "provenance.json").read_text())["recipe_name"] == "three"
     err = capsys.readouterr().err
     assert str(new) in err and str(aside) in err
+
+
+def test_only_each_step_s_end_comes_back_from_the_gpu_worker_unless_every_checkpoint_is_asked(built, tmp_path,
+                                                                                              monkeypatch, capsys):
+    # by default (an empty value too, as a copied .env.example gives) the
+    # store gets no checkpoint during a step, only the step's result at its
+    # end; WPT_LINK_CHECKPOINTS=every sends each checkpoint; another value is
+    # refused before the gpu worker starts
+    def checkpoints_set(out, mode):
+        monkeypatch.setenv("WPT_LINK_CHECKPOINTS", mode)
+        forget_steps(built.store)
+        main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", out, "--checkpoint-every",
+              "1", "--run", "fox-1"])
+        run = built.records("wpt-train")[-1]
+        assert [e["attributes"]["step"] for e in run.events
+                if e["kind"] == "span_start" and e["name"] == "training.step_kept"] == ["read-text"]
+        return len([e for e in run.events
+                    if e.get("name") == "store.ref_set" and e["attributes"]["ref"] == "checkpoints/fox-1"])
+
+    assert checkpoints_set("ends", "") == 0
+    assert checkpoints_set("every", "every") == 3
+
+    monkeypatch.setenv("WPT_LINK_CHECKPOINTS", "sometimes")
+    with pytest.raises(SystemExit) as refused:
+        main(["d", built.dataset_id, "--out", "model"])
+    assert refused.value.code == 2 and "WPT_LINK_CHECKPOINTS='sometimes': one of every, step-ends" in \
+        capsys.readouterr().err

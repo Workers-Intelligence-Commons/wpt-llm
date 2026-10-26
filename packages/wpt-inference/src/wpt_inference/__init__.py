@@ -62,7 +62,6 @@ from dataclasses import asdict
 import torch
 import torch.nn.functional as F
 
-from wpt_tokenizer import END, chat
 from wpt_utils.device import processor_name
 
 DRAFT = 5  # draft tokens per row and step: the most DSpark's production drafter proposes (docs/model.md)
@@ -353,6 +352,8 @@ def next_message(model, tokenizer, conversation, *, max_new_tokens, temperature=
     (wpt_tokenizer.chat.prompt): up to <|im_end|> or the end of a document,
     which are left out, or max_new_tokens; the sampling as sample_tokens.
     chat.reply(tokenizer, tokens) gives its blocks."""
+    from wpt_tokenizer import END, chat  # here only: a gpu worker, which has no tokenizer, imports this module
+
     written = []
     for token in sample_tokens(model, chat.prompt(tokenizer, conversation), max_new_tokens=max_new_tokens,
                                temperature=temperature, top_k=top_k, generator=generator, drafter=drafter,

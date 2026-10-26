@@ -46,8 +46,6 @@ import random
 import types
 from dataclasses import dataclass
 
-import torch
-
 import wpt_agent
 from wpt_agent import Unready
 from wpt_dataset import tasks as task_files
@@ -108,7 +106,7 @@ def run(context, plain: bool, count: int = ATTEMPTS) -> list[Record]:
         return []
     built, pools = wpt_agent.ready(sorted({task.image for task in tasks}))
     telemetry = context.telemetry
-    generator = torch.Generator(device=context.device).manual_seed(SEED)
+    generator = context.model.generator(SEED)  # a new one for every run: its draws start from the same place
     records = []
     for task in tasks:
         draws = [random.Random(f"{SEED}/{task.id}/{index}") for index in range(1, count + 1)]
@@ -129,9 +127,10 @@ def run(context, plain: bool, count: int = ATTEMPTS) -> list[Record]:
             telemetry.append_file(RECORD_FILE, (json.dumps(line, ensure_ascii=False) + "\n").encode("utf-8"))
 
         with telemetry.span("eval.attempts", task=task.id, plain=plain, attempts=count):
-            wpt_agent.play(task, offers, keep, model=context.model, tokenizer=context.tokenizer, built=built,
-                           sampling=wpt_agent.GREEDY, generator=generator, check_seconds=CHECK_SECONDS,
-                           result_bytes=RESULT_BYTES, with_changes=True, name="eval")
+            wpt_agent.play(task, offers, keep, tokenizer=context.tokenizer, built=built, sampling=wpt_agent.GREEDY,
+                           writer=lambda prompt, rows, **settings: context.model.writer(
+                               prompt, rows, generator=generator, **settings),
+                           check_seconds=CHECK_SECONDS, result_bytes=RESULT_BYTES, with_changes=True, name="eval")
     return records
 
 

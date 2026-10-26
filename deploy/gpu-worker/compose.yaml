@@ -1,0 +1,69 @@
+# A gpu worker a person starts (docs/machines.md, "Starting a gpu worker by
+# hand"): on any machine with Docker, the public PyTorch image, with uv
+# installed when it starts, runs `python -m wpt_worker` from the server files
+# below; the libraries its jobs need come from the wpt manager's checkout,
+# installed by uv when a job starts (WPT_WORKER_INSTALL). It prints its key;
+# give it to the manager in WPT_GPU_WORKERS, with this machine's address
+# (one worker per machine).
+#
+# The server files are two things beside this file, which the person copies
+# from the repository to the machine (the wpt manager sends them to a worker
+# it rents itself, through the provider's own start mechanism, skypilot.yaml):
+#
+#     compose.yaml  and the file of the GPU kind (below)   from deploy/gpu-worker/
+#     start.sh                                             from deploy/gpu-worker/
+#     wpt_worker/                                          from packages/wpt-worker/src/
+#
+# This file asks for no GPU: it starts anywhere, with the CPU build of
+# PyTorch. A GPU kind adds a small file of its own, by the command or by a
+# setting:
+#
+#     docker compose -f compose.yaml -f compose.nvidia.yaml up      NVIDIA GPUs (CUDA)
+#     docker compose -f compose.yaml -f compose.amd.yaml up         AMD GPUs (ROCm)
+#
+#     COMPOSE_FILE=compose.yaml:compose.nvidia.yaml                 the same, in the environment
+#                                                                   or in a .env file beside this one
+#
+# Settings, from the environment:
+#
+#     WPT_WORKER_TOKEN    the secret token; unset, the worker makes one at each start
+#                         (a token set here is printed as its first 4 characters only)
+#     WPT_WORKER_PORT     the port (default 8470)
+#     WPT_WORKER_ADDRESS  the address the port listens on (default 0.0.0.0, every address)
+#     WPT_WORKER_WAIT     seconds it waits with no manager, then ends (default 3600: 1 hour)
+#
+# The container uses the machine's own network: the gpu workers of one
+# place (a home network) meet through NCCL, whose ports are chosen as it
+# goes, at their private addresses. A worker that ends after its wait
+# stays down (restart: on-failure); a crash starts it again.
+#
+# The worker's folder (its certificate, so its pin stays the same, the
+# manager's checkout and the libraries) is the volume wpt-worker. It never
+# holds the store's settings: everything it reads comes from the manager.
+# The image is pinned by digest (docs/licenses.md). Its own Python and
+# PyTorch are not what the jobs run: their environment is the repository's
+# Python 3.14 with the PyTorch build the checkout's uv.lock pins, which uv
+# downloads into the volume the first time (the image gives the system
+# under it).
+services:
+  gpu-worker:
+    image: pytorch/pytorch:2.14.1-cuda13.0-cudnn9-runtime@sha256:3c0b174a1339193a5bcc4b37d737c9f5ca3c4782a2293d3888e4271367eddf44
+    command: ["sh", "/start/start.sh"]
+    environment:
+      WPT_WORKER_FOLDER: /worker
+      WPT_WORKER_INSTALL: "1"
+      WPT_WORKER_TORCH: cpu  # the file of a GPU kind sets its own build
+      WPT_WORKER_TOKEN:
+      WPT_WORKER_PORT: ${WPT_WORKER_PORT:-8470}
+      WPT_WORKER_ADDRESS: ${WPT_WORKER_ADDRESS:-0.0.0.0}
+      WPT_WORKER_WAIT:
+    network_mode: host
+    volumes:
+      - ./start.sh:/start/start.sh:ro
+      - ./wpt_worker:/start/wpt_worker:ro
+      - wpt-worker:/worker
+    shm_size: 8gb  # the processes of a job share tensors through /dev/shm
+    restart: on-failure
+
+volumes:
+  wpt-worker:
