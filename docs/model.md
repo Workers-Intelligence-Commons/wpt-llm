@@ -545,7 +545,7 @@ with separate weights:
   conversations or tasks, also up to `<|im_end|>`, the end of a turn. A
   test checks that no text past a prompt reaches the drafter's training.
 
-**Settings.** The model recipe's `drafter` section (recipe shape 5, "Model
+**Settings.** The model recipe's `drafter` section ("Model
 recipes") gives the drafter's shape (`features`, `layers`, `block`,
 `markov_rank`) and its training (`epochs`, `learning_rate`, `weight_decay`,
 `warm_up`, `clip`, `anchors`, `batch`, `prompts`, `prompt_tokens`,
@@ -616,9 +616,9 @@ and has not read yet:
   by its code, such as "implementer 0x61 part 0x22". Only when those codes
   are missing too is it the machine's architecture, such as `aarch64`, the
   last resort. On macOS, a `sysctl` that is not on the search path never
-  stops a run: the name is then the architecture. The file's shape stays 2:
-  only the device's text changed, so a file recorded on the CPU before,
-  whose device is `cpu` alone, is refused like any other setup. `wpt-train
+  stops a run: the name is then the architecture. A file recorded on
+  the CPU before, whose device is `cpu` alone, is refused like any other
+  setup. `wpt-train
   --scheduler-costs FOLDER` replays the times an earlier run recorded in its record folder `FOLDER`
   instead of measuring them, and `wpt-chat --scheduler-costs FOLDER` reads
   them instead of measuring them when it loads the model; each refuses
@@ -809,23 +809,20 @@ across processes included), number of processes, streaming, output folder,
 run name, resuming, micro-batch, recomputing, segments, checkpoints, weight
 file size and restarts. Mixtures and tokenizer recipes stay separate files,
 since several models share them. A model has at least 2 layers: the last is
-CSA or HCA, the others start with KDA. Recipes are shape 7, and
-`wpt-dataset migrate` brings an older one there. From shape 2, it turns the
-MLA numbers into the CSA and HCA ones at 0 and adds an empty
-`global_attention` (gated MLA's numbers say neither), which a person then
-fills in; `wpt-dataset check` names each file until then. From shape 3, it
-turns the model's `block_size` and the training's `steps` and `batch_size`
-into one stage of the training's `stages` (training.md, "Stages"). From
-shape 4, it adds the `drafter` section, after `training`, with the
-drafter's training values every recipe states: 256 prompts of at most 64
-tokens, answers of at most 256 tokens, 10 epochs, learning rate 6e-4, 10%
-held out, 512 anchors, 8 answers per update, seed 0. The three recipes hold
-exactly these values; the settings a section leaves out (the drafter's
-shape, `weight_decay`, `warm_up`, `clip`, `temperature`, `top_k`,
-`ece_bins`) keep their defaults. From shape 5, it changes only the number:
-shape 6 lets a post-training entry be `{"step": NAME, "settings": {...}}`
-as well as a step's name. From shape 6, it makes `training` and the
-post-training steps one list, `steps`, with `seed` beside it: the
+CSA or HCA, the others start with KDA. `wpt-dataset migrate` brings a recipe of an earlier
+shape to the current one, step by step. A recipe with the MLA numbers gets
+the CSA and HCA ones at 0 and an empty `global_attention` (gated MLA's
+numbers say neither), which a person then fills in; `wpt-dataset check`
+names each file until then. A recipe with the model's `block_size` and the
+training's `steps` and `batch_size` gets one stage of the training's
+`stages` (training.md, "Stages"). A recipe without the `drafter` section
+gets it, after `training`, with the drafter's training values every recipe
+states: 256 prompts of at most 64 tokens, answers of at most 256 tokens, 10
+epochs, learning rate 6e-4, 10% held out, 512 anchors, 8 answers per update,
+seed 0. The three recipes hold exactly these values; the settings a section
+leaves out (the drafter's shape, `weight_decay`, `warm_up`, `clip`,
+`temperature`, `top_k`, `ece_bins`) keep their defaults. A recipe with
+`training` and `posttrain` gets one list, `steps`, with `seed` beside it: the
 training becomes the first step, `read-text`, its method the step's
 optimizer (with its settings but the MTP loss weights, which become the
 step's), its stages and evaluations the step's settings, nothing locked;

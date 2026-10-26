@@ -3,10 +3,11 @@ checked against its checksum, in a session recorded in the store, several
 at once; and `wpt-dataset store`, which lists what the store database says."""
 
 import shutil
+import threading
 
 import pytest
 
-from wpt_dataset import download, manifest
+from wpt_dataset import archives, download, manifest, robots, sites
 from wpt_dataset.cli import main
 from wpt_dataset.sources import source_tree
 
@@ -75,7 +76,7 @@ def test_downloads_running_at_once_give_what_one_at_a_time_gives(kit, repo, stor
     results = {}
     for way, limits in (("at once", ({}, 6)), ("one at a time", ({}, 1))):
         target = kit.open_store((tmp_path / way).as_uri())
-        monkeypatch.setattr(download, "site_limits", lambda limits=limits: limits)
+        monkeypatch.setattr(sites, "limits", lambda limits=limits: (*limits, {}))
         with kit.session(target) as session:
             done = download.download(repo, ids, target, session, log=lambda *_: None)
         results[way] = (done, [manifest.manifest_bytes(source_tree(repo.source(sid), target)[0]) for sid in ids])
@@ -84,12 +85,63 @@ def test_downloads_running_at_once_give_what_one_at_a_time_gives(kit, repo, stor
 
 
 def test_a_site_s_limit_covers_the_hosts_under_it_and_every_other_site_takes_the_default():
-    limits, default = download.site_limits()  # the file this package ships
-    assert default >= 1 and {"github.com", "wikimedia.org", "huggingface.co"} <= set(limits)
-    assert download.site_of("https://dumps.wikimedia.org/enwiki/latest/x.xml.bz2", limits) == "wikimedia.org"
-    assert download.site_of("https://github.com/owner/project", limits) == "github.com"
-    assert download.site_of("https://notgithub.com/owner/project", limits) is None
-    assert download.site_limits("# a comment\n\nexample.org 5\ndefault 1\n") == ({"example.org": 5}, 1)
+    at_once, default, per_time = sites.limits()  # the file this package ships
+    assert (at_once, default) == ({"wikimedia.org": 3, "github.com": 100, "huggingface.co": 16}, 2)
+    assert per_time == {"huggingface.co": (3000, 300.0)}  # what the Hub publishes: 3,000 requests per 5 minutes
+    assert sites.site_of("https://dumps.wikimedia.org/enwiki/latest/x.xml.bz2", at_once) == "wikimedia.org"
+    assert sites.site_of("https://github.com/owner/project", at_once) == "github.com"
+    assert sites.site_of("https://notgithub.com/owner/project", at_once) is None
+    assert sites.site_of("https://huggingface.co/api/datasets/a/b", per_time) == "huggingface.co"
+    assert sites.site_of("https://huggingface.co/datasets/a/b", at_once) == "huggingface.co"  # 16 at once as well
+    # both kinds of limit for one site, side by side
+    assert sites.limits("# a comment\n\nexample.org 5\nexample.org 10 per 60 seconds\ndefault 1\n") == (
+        {"example.org": 5}, 1, {"example.org": (10, 60.0)})
+    for wrong in ("example.org five\ndefault 1\n", "example.org 5 per minute\ndefault 1\n", "example.org 5\n",
+                  "example.org 5\nexample.org 6\ndefault 1\n"):
+        with pytest.raises(ValueError):
+            sites.limits(wrong)
+
+
+def test_a_limit_per_time_holds_back_the_requests_that_would_pass_it():
+    # 3 requests per 10 seconds: the fourth waits until the first is 10 seconds old, and requests from
+    # several threads share one count
+    moments, slept = [0.0], []
+
+    def sleep(seconds):
+        slept.append(seconds)
+        moments[0] += seconds
+
+    pace = sites.Pace(3, 10, clock=lambda: moments[0], sleep=sleep)
+    for at in (0.0, 1.0, 2.0):
+        moments[0] = at
+        pace.wait()
+    assert slept == []
+    moments[0] = 4.0
+    pace.wait()
+    assert slept == [6.0] and moments[0] == 10.0
+    shared = sites.Pace(2, 60, sleep=lambda seconds: (_ for _ in ()).throw(TimeoutError(seconds)))
+    done = []
+    workers = [threading.Thread(target=lambda: done.append(shared.wait())) for _ in range(2)]
+    for worker in workers:
+        worker.start()
+    for worker in workers:
+        worker.join(5)
+    assert len(done) == 2
+    with pytest.raises(TimeoutError):  # a third within the minute would wait
+        shared.wait()
+
+
+def test_every_request_to_a_site_with_a_limit_per_time_waits_its_turn(monkeypatch, http_folder):
+    # the Hub's limit holds for each request wpt-dataset sends itself (archives, its API, robots.txt): each
+    # one asks the site's pace first
+    folder, base = http_folder
+    (folder / "file.txt").write_bytes(b"one file\n")
+    asked = []
+    monkeypatch.setattr(sites, "_paces", {"127.0.0.1": type("Counted", (), {"wait": lambda self: asked.append(1)})()})
+    with archives.get(f"{base}/file.txt", "test") as answer:
+        assert answer.read() == b"one file\n"
+    robots.check(f"{base}/file.txt", "http", "test", {})
+    assert len(asked) == 2
 
 
 def test_only_an_address_that_failed_gets_a_failed_line(kit, repo, store, http_folder, monkeypatch):

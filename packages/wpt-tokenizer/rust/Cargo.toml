@@ -1,7 +1,8 @@
 [package]
 name = "wpt-tokenizer"
-# The tokenizer's version. It is part of every vocabulary's fingerprint, so
-# bump it whenever a change could alter training or encoding results.
+# The tokenizer's version. Every vocabulary file names it (`tokenizer_version`),
+# and a build of another version refuses the file: bump it when a change makes
+# the ids mean other tokens.
 version = "0.3.0"
 edition = "2024"
 license = "AGPL-3.0-or-later"

@@ -21,8 +21,9 @@ Repo.save_rating replaces the earlier line when it adds a newer one.
 import json
 from datetime import date
 
-from .errors import InvalidFile
-from .repo import validate
+from .errors import InvalidFile, RuleViolation
+from .migrate import upgrade
+from .repo import check_person, validate
 
 
 def attempt_of(rating: dict) -> tuple:
@@ -42,7 +43,12 @@ def parse(source_id: str, path: str, data: bytes) -> list[dict]:
             rating = json.loads(line)
         except json.JSONDecodeError as error:
             raise InvalidFile(f"{where}: {error}") from error
+        rating = upgrade(rating, "rating", where)
         validate(rating, "rating", where)
+        try:
+            check_person(rating["by"], where)
+        except RuleViolation as error:
+            raise InvalidFile(str(error)) from None
         try:
             date.fromisoformat(rating["date"])
         except ValueError:

@@ -15,7 +15,7 @@ from wpt_dataset.markdown import documents
 from wpt_dataset.sources import source_tree
 from wpt_telemetry import Telemetry
 
-TASK = {"schema": 3, "instructions": "Write hello into out.txt.", "image": "tiny",
+TASK = {"instructions": "Write hello into out.txt.", "image": "tiny",
         "limits": {"max_turns": 4, "max_tokens": 200, "command_seconds": 5}, "needs": [["write", "bash"]]}
 SEARCH = {"name": "search", "description": "Search the notes.", "program": "/usr/local/bin/search",
           "parameters": {"type": "object", "properties": {"query": {"type": "string"}}, "required": ["query"]},
@@ -40,7 +40,7 @@ def test_tagged_task_folders_reach_their_step_and_never_pretraining(kit, repo, s
     # task file may become a pre-training document: the model would see the
     # checks; a task.json of shape 1, a source's bytes that migrate never
     # rewrites, is read in the current shape
-    task = json.dumps({**TASK, "schema": 1}).encode()
+    task = json.dumps({**TASK}).encode()
     hello = {**TASK, "container": {"memory": 8192, "cpus": 4}, "area": ["out.txt"], "gates": ["sources_first"]}
     files = {"tasks/hello/task.json": json.dumps(hello).encode(), "tasks/hello/check": CHECK, "tasks/hello/files/README": b"start\n",
              "tasks/hello/files/sub/task.json": b"a starting file, not a task\n",
@@ -357,14 +357,12 @@ def test_pointer_tasks_are_refused_when_the_base_dataset_kept_no_document_list(k
     ({"tasks/a/task.json": json.dumps({**TASK, "replies": [{"pattern": "(", "reply": "x"}],
                                        "answered_by": ["read"], "answered_in": ["README"]}).encode(),
       "tasks/a/check": CHECK}, r"tasks/a/task.json: the reply pattern '\(' is not a regular expression"),
-    ({"tasks/a/task.json": json.dumps({**TASK, "replies": [{"pattern": "x", "reply": "y"}]}).encode(),
+    ({"tasks/a/task.json": json.dumps({**TASK, "replies": [{"pattern": "x", "reply": "y"}],
+                                       "answered_in": ["README"]}).encode(),
       "tasks/a/check": CHECK}, "tasks/a/task.json: a task with replies names in answered_by the looking tools"),
     # each task states where its answers live; only a person knows where, so
-    # a task with replies of shape 2 is read with answered_in empty, which the check names
+    # a task with replies and no answered_in is read with answered_in empty, which the check names
     ({"tasks/a/task.json": json.dumps({**TASK, "replies": [{"pattern": "x", "reply": "y"}],
-                                       "answered_by": ["read"]}).encode(), "tasks/a/check": CHECK},
-     "tasks/a/task.json: a task with replies names in answered_in the paths under /work where its answers live"),
-    ({"tasks/a/task.json": json.dumps({**TASK, "schema": 2, "replies": [{"pattern": "x", "reply": "y"}],
                                        "answered_by": ["read"]}).encode(), "tasks/a/check": CHECK},
      "tasks/a/task.json: at answered_in"),
     # answered_by names only looking tools: read, bash, or a declared tool marked looks, so

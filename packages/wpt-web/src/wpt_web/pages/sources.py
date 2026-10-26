@@ -36,7 +36,7 @@ def routes(context):
         document = document if isinstance(document, dict) else {}
         decision = document.get("decision") if isinstance(document.get("decision"), dict) else {}
         licenses = document.get("licenses") if isinstance(document.get("licenses"), list) else []
-        return {"id": sid, "address": document.get("address"), "schema": document.get("schema"),
+        return {"id": sid, "address": document.get("address"),
                 "type": document.get("type"), "decision": decision.get("decision"), "reason": decision.get("reason"),
                 "licenses": [e.get("license") for e in licenses if isinstance(e, dict)],
                 "problems": problems}

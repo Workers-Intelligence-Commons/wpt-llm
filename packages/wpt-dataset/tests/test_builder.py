@@ -347,7 +347,7 @@ def test_a_commit_whose_source_changed_is_refused_until_it_is_built_again(kit, r
     head = commit(kit, folder, COMMIT, {"lamps.py": b"LAMPS = 2\n"})
     sid = lamps(kit, repo, store, folder, head, since)
     task = task_source(repo, store)
-    document = {"schema": 3, "instructions": "Commit and push.", "image": "agent", "limits": builder.LIMITS,
+    document = {"instructions": "Commit and push.", "image": "agent", "limits": builder.LIMITS,
                 "needs": [["bash"]], "pointers": [{"for": "repository", "source": sid, "document": f".git/history/{head}",
                                                    "checksum": "sha256:" + "0" * 64}]}
     with pytest.raises(tasks.InvalidFile, match=rf"the repository pointer: {sid} now has the checksum "

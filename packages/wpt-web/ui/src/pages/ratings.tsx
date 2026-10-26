@@ -23,11 +23,10 @@ type Attempt = {
 };
 type Run = { weights: Record<string, string>; attempts: Attempt[] };
 type Rating = {
-  schema: number; task: string; weights: Record<string, string>; record: string; attempt: number; plain: boolean;
+  task: string; weights: Record<string, string>; record: string; attempt: number; plain: boolean;
   verdict: "pass" | "fail"; by: string; date: string;
 };
 
-const SCHEMA = 1;
 const NAME_KEY = "wpt-web rater";
 const FILE = "ratings/ratings.jsonl"; // the rating file a new rating goes to unless the person names another
 
@@ -139,7 +138,7 @@ function Rater({ id, path, folder }: { id: string; path: string; folder: string 
   // Always a new rating: the service layer replaces the person's earlier rating of the same attempt.
   const rate = async (a: Attempt, verdict: "pass" | "fail") => {
     if (version === null || run === null || !by.trim()) return;
-    const rating: Rating = { schema: SCHEMA, task: a.task, weights: run.weights, record: folder, attempt: a.index,
+    const rating: Rating = { task: a.task, weights: run.weights, record: folder, attempt: a.index,
       plain: a.plain, verdict, by: by.trim(), date: today() };
     const answer = await put<{ version: string }>(
       `/api/sources/${part(id)}/ratings/${part(path)}/new`, { rating, patch, version });

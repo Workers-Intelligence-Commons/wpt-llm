@@ -1,10 +1,18 @@
-# How many sources wpt-dataset downloads at once from one site, at most.
+# How politely wpt-dataset downloads from each site (sites.py).
 #
-# One line per site: its host name, then the number. A line covers the host
-# and every host under it (wikimedia.org covers dumps.wikimedia.org). The
-# line "default" covers every other site. Each number comes from what the
-# site publishes, named in the comment above it; the machine's own limit
-# (wpt_utils.parallel) may allow fewer. Change a line by a commit, like code.
+# Two kinds of line, each for a host and every host under it (wikimedia.org
+# covers dumps.wikimedia.org):
+#
+#   <host> <number>                        how many sources download at once
+#                                          from the site, at most
+#   <host> <number> per <number> seconds   how many requests reach the site
+#                                          in any span of that many seconds,
+#                                          at most
+#
+# The line "default" gives how many at once for every site with no line of
+# the first kind. Each number comes from what the site publishes, named in
+# the comment above it; the machine's own limit (wpt_utils.parallel) may
+# allow fewer at once. Change a line by a commit, like code.
 
 # "Downloads are rate limited and capped at 3 connections per-IP."
 # https://dumps.wikimedia.org/
@@ -18,10 +26,12 @@ github.com 100
 
 # The Hub publishes a number of requests per 5 minutes, not a number at
 # once: 3,000 file downloads (its "Resolvers") per IP address without an
-# account. The number below is not derived from it; a download the Hub
-# refuses with 429 (too many requests) is tried again later (retry.py).
+# account, which is the limit that holds. Every request to the Hub counts
+# against it, its API's too. Sources download from it 16 at once as well,
+# so that many connections never wait on one another's rate.
 # https://huggingface.co/docs/hub/rate-limits
-huggingface.co 4
+huggingface.co 16
+huggingface.co 3000 per 300 seconds
 
 # Every other site: a few at once.
 default 2

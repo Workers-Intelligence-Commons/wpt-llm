@@ -4,9 +4,8 @@
   "title": "WPT task (the task.json of a task folder, in a file of the task format; docs/training.md)",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "instructions", "image", "limits", "needs"],
+  "required": ["instructions", "image", "limits", "needs"],
   "properties": {
-    "schema": {"const": 3, "description": "shape version of the task"},
     "instructions": {"type": "string", "minLength": 1, "description": "what the model is asked to do, in full: the user message that starts every attempt, unless it opens with terse"},
     "terse": {"type": "string", "minLength": 1, "description": "the same request in one line (no line break: tasks.py refuses one), for the measure of terse against full requests: an attempt may open with it instead of instructions (docs/training.md, \"Tasks\")"},
     "image": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$", "description": "the image the attempt's container runs: a folder name in data/images/"},

@@ -48,7 +48,6 @@ import re
 from dataclasses import dataclass
 
 from wpt_dataset.manifest import glob_match_any
-from wpt_dataset.repo import CURRENT_SCHEMA
 from wpt_dataset.tasks import looks
 from wpt_tokenizer import END, chat
 
@@ -88,7 +87,7 @@ def opening(task, offer=None, terse=False) -> dict:
         raise ValueError(f"{task.id}: the task has no one-line form (terse)")
     offer = offer or plain(task)
     request = task.terse if terse else task.instructions
-    return {"schema": CURRENT_SCHEMA["conversation"], "tools": offer.tools,
+    return {"tools": offer.tools,
             "messages": [{"role": "user", "content": [{"type": "text", "text": request}]}],
             "metadata": {"tools": dict(offer.names),
                          "looking": [name for name, tool in offer.real.items() if looks(tool)],

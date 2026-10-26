@@ -307,7 +307,7 @@ def costs_setup(model_config, rows, draft, device) -> dict:
 def costs_file(costs, setup) -> bytes:
     """The text of COSTS_FILE for a table measure_costs gave on setup
     (costs_setup)."""
-    return (json.dumps({"schema": 2, "setup": setup, "seconds": costs}, indent=2) + "\n").encode()
+    return (json.dumps({"setup": setup, "seconds": costs}, indent=2) + "\n").encode()
 
 
 def replayed_costs(data, setup) -> list:
@@ -315,9 +315,8 @@ def replayed_costs(data, setup) -> list:
     writer on setup (costs_setup); ValueError when it was measured on
     another setup, naming each difference."""
     table = json.loads(data)
-    if table.get("schema") != 2:
-        raise ValueError(f"the recorded costs are of shape {table.get('schema')}, which names no setup; a replay "
-                         "needs shape 2")
+    if "setup" not in table:
+        raise ValueError("the recorded costs name no setup; a replay needs the setup they were measured on")
     recorded = table["setup"]
     differences = []
     for key in setup:

@@ -4,9 +4,8 @@
   "title": "WPT image tools (data/images/<name>/tools.json): the shared pool of working tools an attempt in the image may be offered beyond those its task needs, each answered by a program in the image (docs/training.md, \"Tools\")",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "tools"],
+  "required": ["tools"],
   "properties": {
-    "schema": {"const": 1, "description": "shape version of this file, for migrations"},
     "tools": {"type": "array", "items": {"$ref": "#/$defs/tool"}, "description": "declared as a task declares its own tools (task.schema.json)"}
   },
   "$defs": {

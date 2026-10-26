@@ -24,7 +24,6 @@ person then edits or confirms, and its metadata records that
 
 ```json
 {
-  "schema": 3,
   "tools": [
     {"name": "read_file", "description": "Read a file of the project.",
      "parameters": {"type": "object", "properties": {"path": {"type": "string"}}, "required": ["path"]}}
@@ -46,7 +45,6 @@ person then edits or confirms, and its metadata records that
 }
 ```
 
-- `schema`: the shape version of the object, as in every data file.
 - `tools`: the tools offered in the conversation, each with its `name`, its
   `description` and the JSON Schema of its `parameters`. Empty or absent
   when none is offered.
@@ -63,11 +61,10 @@ person then edits or confirms, and its metadata records that
   and score ([training.md](training.md), "Runs"). It is never
   written as tokens.
 
-A conversation of an earlier shape (1, without any `metadata`, or 2,
-without a message's `metadata`) stays valid. `wpt-dataset migrate`
-rewrites the repository's own files, and a source's `chat` file, whose
-bytes may be upstream's, is brought to the current shape as it is read
-(`wpt_dataset.migrate.upgrade`).
+A conversation without any `metadata`, or whose messages hold none, stays
+valid. `wpt-dataset migrate` rewrites the repository's own files, and a
+source's `chat` file, whose bytes may be upstream's, is brought to the
+current shape as it is read (`wpt_dataset.migrate.upgrade`).
 
 ## Model drafts
 
@@ -128,7 +125,7 @@ its meaning did not change, and every other line keeps its bytes.
 | `file` | `sha256`, `media_type` | a media file such as a screenshot, stored next to the record and named by its sha256 |
 
 A new kind of element gets a new block type; existing blocks keep their
-meaning, and raising `schema` with a migration covers any change to them.
+meaning, and a migration step covers any change to them (docs/architecture.md, "Migrations").
 
 ## The answer
 

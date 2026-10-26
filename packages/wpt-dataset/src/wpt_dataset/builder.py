@@ -482,7 +482,7 @@ def _task(kind, main: Text, others, target, cut, rng, pages, removed, ask, answe
     pointers += [_pointer("files", "quote.txt", main, (start, cut)),
                  _pointer("check", "missing.txt" if removed else "rest.txt", main,
                           (start, end) if removed else (cut + 1, end))]
-    task = {"schema": 3, "image": IMAGE, "limits": LIMITS}
+    task = {"image": IMAGE, "limits": LIMITS}
     files = {}
     if kind == "look-or-ask":
         name = f"result-{rng.getrandbits(24):06x}.txt"
@@ -572,7 +572,7 @@ def _commit(source, tree, document, store, log):
     except InvalidFile as error:  # a commit that cannot be made is left out, named
         log(f"{source.id}/{document}: left out, {error}")
         return None
-    return ({"schema": 3, "instructions": INSTRUCTIONS["commit-and-push"],
+    return ({"instructions": INSTRUCTIONS["commit-and-push"],
              # one way to push per attempt: git through bash, or the push tool with the remote hidden
              "image": IMAGE, "limits": LIMITS, "tools": [PUSH],
              "needs": [["bash", {"tools": ["bash", "push"], "tool_files": [REMOTE]}]],
@@ -594,7 +594,7 @@ def _manual(number, rng):
         first, second = rng.randint(*KNOTTED), rng.randint(*KNOTTED)
         instructions = INSTRUCTIONS["knot"].format(first=first, second=second)
         argv = [PROGRAM, "tie", "--give", str(first), str(second)]
-    task = {"schema": 3, "instructions": instructions, "image": IMAGE, "limits": LIMITS,
+    task = {"instructions": instructions, "image": IMAGE, "limits": LIMITS,
             "needs": [["bash"]], "area": []}
     if number % 2 == 0:
         task["absent"] = [MANUAL]

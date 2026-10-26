@@ -4,9 +4,8 @@
   "title": "WPT source description (data/sources/<id>/source.json)",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "type", "address", "revision", "checksum", "licenses", "formats", "decision"],
+  "required": ["type", "address", "revision", "checksum", "licenses", "formats", "decision"],
   "properties": {
-    "schema": {"const": 8, "description": "shape version of this file, for migrations"},
     "type": {"enum": ["http-file", "http-archive", "git", "mercurial", "huggingface", "empty"], "description": "empty: no upstream; the patches hold every file (text written for WPT); huggingface: a dataset repository on huggingface.co, address https://huggingface.co/datasets/<owner>/<name>"},
     "address": {"type": "string", "minLength": 1, "description": "where to fetch it; its sha256 gives the id's hash part; with `addresses`, the first of them"},
     "addresses": {

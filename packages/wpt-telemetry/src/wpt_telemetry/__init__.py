@@ -9,7 +9,8 @@ what the run is about (a recipe name, a short dataset id, a short weights
 hash: the command chooses):
 
     start.json     the command, its arguments, when it started, the tools,
-                   the repository commit, and the trace id the live backend
+                   the code (its commit and a hash of its uncommitted
+                   changes), the repository commit, and the trace id the live backend
                    shows it under
     events.jsonl   one JSON object per line, in the order they happened:
                    spans opened and closed, events with their values, and
@@ -22,10 +23,9 @@ hash: the command chooses):
                    error and its traceback
     other files    written by a part of the command (write_file, append_file)
 
-Each part of the record is in the store before the call that makes it
-returns, so a run that crashes keeps every line until the crash; a run with
-no end.json did not reach its end. The exception is a store that holds
-lines back (S3, see wpt_store): its lines are sent every FLUSH_SECONDS, at
+Each file written whole is in the store before the call that makes it
+returns; a run with no end.json did not reach its end. The store holds
+added lines back (see wpt_store): they are sent every FLUSH_SECONDS, at
 the end of every span, before every step that cannot be undone
 (irreversible) and at the end of the run, so a crash loses at most the
 lines of the last few seconds. When the store does not take a part,
@@ -102,20 +102,18 @@ from opentelemetry.trace import NonRecordingSpan, SpanContext, Status, StatusCod
 
 from wpt_store import MissingObject, MixedRecord, as_record_name, check_record_name, read_env_file
 from wpt_utils.files import sha256_file
-from wpt_utils.programs import repository
+from wpt_utils.programs import code, repository
 
-SCHEMA = 1
 RECORD_FAILED = 3  # the exit code of a command whose record could not be written; never restarted
 ENDPOINT = "OTEL_EXPORTER_OTLP_ENDPOINT"
 JOIN_FOLDER = "WPT_RECORD_FOLDER"  # set by a launcher for the processes that join its record
 JOIN_PARENT = "WPT_RECORD_PARENT"  # <trace id>-<span id> of the launcher's span they belong under
 START, EVENTS, IDS, END = "start.json", "events.jsonl", "ids.json", "end.json"
-FLUSH_SECONDS = 5  # a store that holds lines back (S3) is sent them at least this often
+FLUSH_SECONDS = 5  # the store is sent the lines it holds back at least this often
 FLUSH_THREAD = "wpt-telemetry-flush"
 SHORT = 8  # characters of a hash or a dataset id in a record folder's name
 METRIC_INTERVAL_MS = 10_000  # live values are sent every 10 s unless OTEL_METRIC_EXPORT_INTERVAL says otherwise
-PACKAGES = ("wpt-dataset", "wpt-store", "wpt-telemetry", "wpt-utils", "wpt-tokenizer", "wpt-model",
-            "wpt-training", "wpt-train", "wpt-eval", "torch")
+PACKAGES = ("torch",)  # the outside packages whose version start.json names; the code itself is code()
 
 
 class RecordError(Exception):
@@ -171,7 +169,7 @@ class Telemetry:
         live = _Live(command, folder, _endpoint(env_file, environ), echo or _print)
         telemetry = cls(store, folder, command, live, echo or _print, owner=True)
         try:
-            telemetry._write(START, _json({"schema": SCHEMA, "command": command, "arguments": list(arguments),
+            telemetry._write(START, _json({"command": command, "arguments": list(arguments),
                                            "started": _iso(moment), "trace": telemetry.trace,
                                            "inputs": dict(inputs or {}), **_where()}))
             telemetry._write(IDS, _json({"inputs": dict(inputs or {}), "outputs": {}}))
@@ -215,13 +213,17 @@ class Telemetry:
         return cls(None, None, "", None, echo or _print, owner=False)
 
     def child_environment(self) -> dict:
-        """What a process started for this run needs to join its record. The
-        lines held back are sent first, so the record is whole up to here."""
+        """What a process started for this run needs to join its record,
+        under this thread's current span, and to send to the same live
+        backend. The lines held back are sent first, so the record is whole
+        up to here."""
         self._check_open()
         if self.store is None:
             return {}
         self._flush()
-        return {JOIN_FOLDER: self.folder, JOIN_PARENT: f"{self.trace}-{self._stack[-1].id}"}
+        endpoint = self._live.failure.endpoint if self._live and self._live.failure else None
+        return {JOIN_FOLDER: self.folder, JOIN_PARENT: f"{self.trace}-{self._stack[-1].id}",
+                **({ENDPOINT: endpoint} if endpoint else {})}
 
     # -- recording -----------------------------------------------------------------
 
@@ -337,7 +339,7 @@ class Telemetry:
 
     def irreversible(self, name, /, values=None, **attributes):
         """Record, as event() does, a step that cannot be undone, just before
-        taking it, and send it with every line the store holds back (S3): the
+        taking it, and send it with every line the store holds back: the
         step happens only once its record is in the store. RecordError when
         the store refuses it, and the caller must not take the step."""
         self.event(name, values, **attributes)
@@ -368,11 +370,12 @@ class Telemetry:
                     status, code, text = _ending(error)
                     self._end_span(self._root, self.command, self._clock, error if status != "succeeded" else None)
                     if self._owner:
-                        self._write(END, _json({"schema": SCHEMA, "status": status, "exit_code": code,
+                        self._write(END, _json({"status": status, "exit_code": code,
                                                 "error": text,
                                                 "traceback": _traceback(error) if status != "succeeded" else None,
                                                 "ended": _iso(datetime.now(UTC)),
                                                 "seconds": round(time.time() - self._started, 3)}))
+                        self._end_records()
             finally:
                 if self._live:
                     self._live.close()
@@ -444,6 +447,12 @@ class Telemetry:
 
     def _write(self, name, data):
         self._store_call(name, lambda: self.store.write_record(self.folder, name, data))
+
+    def _end_records(self):
+        """The record ended: a local store compresses the file it added the
+        events to into one part."""
+        if self.store is not None:
+            self._store_call(EVENTS, lambda: self.store.end_records(self.folder))
 
     def _flush(self):
         if self.store is not None:
@@ -769,14 +778,15 @@ def _ending(error) -> tuple[str, int, str | None]:
 
 
 def _where() -> dict:
-    """The tools and the repository commit; no machine name."""
+    """The tools, the code (wpt_utils.programs.code) and the repository
+    commit; no machine name."""
     versions = {"python": platform.python_version(), "platform": platform.platform()}
     for package in PACKAGES:
         try:
             versions[package] = importlib.metadata.version(package)
         except importlib.metadata.PackageNotFoundError:
             pass
-    return {"tools": versions, **repository()}
+    return {"tools": versions, "code": code(), **repository()}
 
 
 def file_hashes(folder) -> dict:

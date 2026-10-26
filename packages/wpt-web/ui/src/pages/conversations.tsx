@@ -16,10 +16,9 @@ type Block = Record<string, unknown> & { type: string };
 type Draft = { model: string; weights: Record<string, string>; sha256: string; edited: boolean };
 type Message = { role: string; content: Block[]; metadata?: Record<string, unknown> & { draft?: Draft } };
 type Tool = { name: string; description: string; parameters: Record<string, unknown> };
-type Conversation = { schema: number; tools?: Tool[]; messages: Message[]; metadata?: Record<string, unknown> };
+type Conversation = { tools?: Tool[]; messages: Message[]; metadata?: Record<string, unknown> };
 type Listing = { version: string; conversations: Conversation[] };
 
-const SCHEMA = 3;
 const ROLES = ["system", "user", "assistant", "tool"];
 const TYPES: Record<string, string[]> = {
   system: ["text", "json", "file"], user: ["text", "json", "file"], tool: ["tool_result"],
@@ -161,7 +160,7 @@ function MessageEditor({ message, onChange, onRemove, onMove }: {
 function Editor({ id, path, line }: { id: string; path: string; line: string }) {
   const [version, setVersion] = useState<string | null>(null);
   const [saved, setSaved] = useState<Conversation | null>(null);
-  const [conversation, setConversation] = useState<Conversation>({ schema: SCHEMA, messages: [] });
+  const [conversation, setConversation] = useState<Conversation>({ messages: [] });
   const [patch, setPatch] = useState("conversations");
   const [problems, setProblems] = useState<string[]>([]);
   const [message, setMessage] = useState("");
@@ -177,7 +176,7 @@ function Editor({ id, path, line }: { id: string; path: string; line: string }) 
       setVersion(a.data.version);
       const found = line === "new" ? null : a.data.conversations[Number(line) - 1] ?? null;
       setSaved(found);
-      setConversation(found ?? { schema: SCHEMA, messages: [] });
+      setConversation(found ?? { messages: [] });
     });
   useEffect(() => { load(); }, [id, path, line]);
 

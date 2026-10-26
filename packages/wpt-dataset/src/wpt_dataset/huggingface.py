@@ -17,7 +17,8 @@ own path leaves it out undownloaded, and matching a member's path leaves
 that member out.
 
 robots.txt is read once for the address's site before anything else
-(sources.py); the API and resolve addresses are on the same site.
+(sources.py); the API and resolve addresses are on the same site, and
+every request waits for the Hub's limit per time (sites.py).
 """
 
 import hashlib
@@ -28,7 +29,7 @@ import urllib.request
 from pathlib import Path
 from urllib.parse import quote, urlparse
 
-from . import retry
+from . import retry, sites
 from .errors import UnsupportedEntry
 from .manifest import FILE, read_archive
 
@@ -63,6 +64,7 @@ def files(address: str, revision: str, user_agent: str) -> list[dict]:
 
 def _page(url, user_agent):
     request = urllib.request.Request(url, headers={"User-Agent": user_agent})
+    sites.paced(url)
     with urllib.request.urlopen(request, timeout=120) as response:
         return json.load(response), NEXT.search(response.headers.get("Link") or "")
 
@@ -78,6 +80,7 @@ def fetch(address: str, revision: str, path: str, target: Path, user_agent: str)
 
     def download():
         digest = hashlib.sha256()
+        sites.paced(url)
         with urllib.request.urlopen(request, timeout=120) as response, open(target, "wb") as out:
             while block := response.read(BLOCK):
                 digest.update(block)

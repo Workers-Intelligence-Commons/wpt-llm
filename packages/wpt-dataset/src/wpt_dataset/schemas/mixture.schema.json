@@ -4,9 +4,8 @@
   "title": "WPT mixture (data/recipes/mixtures/<name>.json)",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "pools"],
+  "required": ["pools"],
   "properties": {
-    "schema": {"const": 1},
     "pools": {
       "type": "array",
       "minItems": 1,

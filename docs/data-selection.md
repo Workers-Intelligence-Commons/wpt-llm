@@ -56,7 +56,6 @@ therefore changes the dataset (and its id).
 
 ```json
 {
-  "schema": 1,
   "pools": [
     { "name": "fr", "select": "fr && !(literature)", "weight": 0.5, "max_epochs": 4, "note": "" },
     { "name": "literature", "select": "literature", "weight": 0.5, "note": "" }
@@ -88,7 +87,9 @@ mixture, the vocabulary and every document. Recipes with the same data
 part share one dataset, and `wpt-train` refuses a dataset built from
 another data part than its recipe's. It reads the sources `wpt-dataset
 download` put in the store and downloads none; a source that is not
-there is left out and listed in the record. With `--stream`, it keeps
+there is left out and listed in the record. A task pointing into a
+source the build left out, one not downloaded among them, stops the build,
+naming the task and the source. With `--stream`, it keeps
 only the tokens of each source's documents in the store, not their
 Markdown, and no source's files on the machine; the dataset is the same
 ([architecture.md](architecture.md), "Fingerprints and the store"). There is no

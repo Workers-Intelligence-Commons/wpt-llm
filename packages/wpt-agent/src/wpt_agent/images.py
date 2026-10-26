@@ -137,8 +137,8 @@ def lock(root, name, *, force=False, log=print) -> str:
         licenses = _licenses(image, installed)
     finally:
         _docker("rmi", image)
-    repo.write_generated("image-lock", name, {"schema": 1, "base": base, "snapshot": snapshot, "packages": installed})
-    repo.write_generated("image-licenses", name, {"schema": 1, "packages": licenses})
+    repo.write_generated("image-lock", name, {"base": base, "snapshot": snapshot, "packages": installed})
+    repo.write_generated("image-licenses", name, {"packages": licenses})
     log(f"{len(installed)} packages locked in {locked}, their licenses in {licensed}; "
         f"build the image with `wpt-agent build-image {name}`")
     return locked

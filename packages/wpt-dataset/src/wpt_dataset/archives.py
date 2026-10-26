@@ -4,8 +4,12 @@ it.
 
     a GET of the address, its first bytes
     a zip's start (PK\\3\\4, or PK\\5\\6 for an empty zip)
-        the server serves byte ranges   -> the GET is closed; the table of contents, at the zip's end, then
-        (Accept-Ranges: bytes)             every member, read through range requests (Ranged)
+        its size known                  -> the GET is closed; its last bytes asked for (a range request),
+        (Content-Length)                   whether the server says it serves ranges (Accept-Ranges: bytes)
+                                           or not:
+            the range in answer         -> the table of contents, at the zip's end, then every member,
+                                           read through range requests (Ranged)
+            the whole file in answer    -> that answer saved to a file in tmp, read from there
         otherwise                       -> the answer saved to a file in tmp, read from there
     anything else                       -> read as a tar (compressed or not) while it arrives
         no tar header at its start      -> what came so far and the rest of the answer saved to a file in
@@ -37,7 +41,7 @@ import zipfile
 from pathlib import Path
 from urllib.parse import urlparse
 
-from . import manifest, retry
+from . import manifest, retry, sites
 from .errors import UnsupportedEntry
 
 ZIP_STARTS = (b"PK\x03\x04", b"PK\x05\x06")
@@ -59,10 +63,12 @@ def read(address: str, extractor: manifest.Extractor, tmp: Path, user_agent: str
 
 def get(address: str, user_agent: str, headers=None):
     """The answer to a GET of an http or https address (OSError for any
-    other), urllib's, still to be read."""
+    other), urllib's, still to be read; sent once the site's limit per time
+    allows (sites.paced)."""
     if urlparse(address).scheme not in ("http", "https"):
         raise OSError(f"{address}: http sources need an http:// or https:// address")
     request = urllib.request.Request(address, headers={"User-Agent": user_agent, **(headers or {})})
+    sites.paced(address)
     return urllib.request.urlopen(request, timeout=TIMEOUT)
 
 
@@ -72,7 +78,7 @@ def _read(address, extractor, target, user_agent):
         if start not in ZIP_STARTS:
             return _read_tar(address, start, answer, extractor, target, user_agent)
         size = answer.headers.get("Content-Length", "")
-        if "bytes" not in answer.headers.get("Accept-Ranges", "").lower() or not size.isdigit():
+        if not size.isdigit():  # a range request needs the size: Ranged checks each answer against it
             return manifest.read_archive(_save(start, answer, target, address), extractor)
         address, validator = answer.geturl(), _validator(answer.headers)
     with Ranged(address, int(size), user_agent, validator) as ranged:

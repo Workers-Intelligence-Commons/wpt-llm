@@ -83,12 +83,13 @@ from dataclasses import dataclass, field, fields, replace
 from pathlib import Path
 from typing import NamedTuple
 
-from . import manifest, markdown
+from . import manifest, markdown, workers
 from .errors import DocumentListMissing, InvalidFile, RuleViolation
 from .manifest import FILE, HISTORY, MERGE, ORDER, SYMLINK
 from .migrate import upgrade
 from .repo import Repo, validate
-from .sources import each_read, held_out_group, load_index, opener, source_tree, tags_of, temporary_git
+from .sources import (copied_by_pointers, copied_for_repository, copy_size, each_read, held_out_group, load_index,
+                      source_tree, tags_of, temporary_git)
 
 TASK, CHECK, FILES = "task.json", "check", "files/"
 # the containers' sizes when task.json asks for no more: MiB of memory (the files in /work and /tmp included),
@@ -290,7 +291,7 @@ def _check_pointers(where, pointers, files, known) -> tuple[list[str], list[str]
     return [pointer["path"] for pointer in pointers if pointer["for"] == "files"], [REMOTE] if repositories else []
 
 
-def fill(tasks, repo: Repo, store, copies=None) -> tuple[list[Task], dict]:
+def fill(tasks, repo: Repo, store, copies=None, pointable: set[str] | None = None) -> tuple[list[Task], dict]:
     """(the tasks, each pointer's text put in its place, its pointers gone
     and its documents (source, document, sha256 of the document's whole
     Markdown, for measure_only) kept; {source id: address, revision,
@@ -300,33 +301,47 @@ def fill(tasks, repo: Repo, store, copies=None) -> tuple[list[Task], dict]:
     names, and the commit must be made as repository() makes it.
     InvalidFile names the task and the pointer that cannot be filled: its
     source not admitted or changed, its document gone, its span changed or
-    cutting a character, its commit not made (repository()). The sources
-    pointed into are read several at once, each through its own store from
+    cutting a character, its commit not made (repository()). With
+    pointable, a task pointing into a source not in it (one a build left
+    out, such as a source not downloaded) is a RuleViolation naming the
+    task and the source, before any source is read. The sources pointed
+    into are read several at once, each through its own store from
     copies, and each repository pointer's commit is made through its own
     too (each_read)."""
     wanted = {}
     for task in tasks:
         for pointer in task.pointers:  # a repository pointer's history file is a document too
             wanted.setdefault(pointer.source, set()).add(pointer.document)
-    texts, trees, sources, checksums, read_sources = {}, {}, {}, {}, {}
-
-    def pointed(item, here):
-        """(the source, its final tree, {path: Markdown} of the documents pointed into)."""
-        sid, paths = item
-        source = repo.source(sid)
-        if not source.admitted:
+    for sid in sorted(wanted):
+        if not repo.source(sid).admitted:
             raise InvalidFile(f"{sid}: tasks point into it, but it is not admitted")
-        tree, _ = source_tree(source, here)
-        return source, tree, markdown.chosen(source, tree, here, repo, paths)
-
+    if pointable is not None:
+        for task in tasks:
+            outside = sorted({pointer.source for pointer in task.pointers} - pointable)
+            if outside:
+                raise RuleViolation(f"{task.id}: it points into {outside[0]}, which the build left out")
+    texts, trees, sources, checksums, read_sources = {}, {}, {}, {}, {}
     chosen = sorted(wanted.items())
-    for (sid, _), (source, tree, found) in zip(chosen, each_read(pointed, chosen, store, copies,
-                                                                 what="sources pointed into read at once")):
+    pointed = each_read(_pointed, chosen, repo, store, copies, what="sources pointed into read at once",
+                        disk=lambda item: copy_size(repo.source(item[0]), store,
+                                                    copied_by_pointers(repo.source(item[0]), item[1])))
+    for (sid, _), (source, tree, found) in zip(chosen, pointed):
         read_sources[sid], trees[sid] = source, tree
         texts |= {(sid, path): text for path, text in found.items()}
         sources[sid] = {"address": source.data["address"], "revision": source.data["revision"],
                         "licenses": source.data["licenses"]}
         checksums[sid] = source.data["checksum"]
+    # what repository() makes of each repository pointer, in the order of the tasks and of their pointers
+    pointers = [(task.id, pointer, trees[pointer.source]) for task in tasks for pointer in task.pointers
+                if pointer.to == "repository"]
+    for task_id, pointer, _ in pointers:
+        if pointer.checksum != checksums[pointer.source]:
+            raise InvalidFile(f"{task_id}/{TASK}: the repository pointer: {pointer.source} now has the checksum "
+                              f"{checksums[pointer.source]}, not {pointer.checksum}, which the task was built from; "
+                              f"build the task again")
+    made = iter(each_read(_repository, pointers, repo, store, copies, what="task repositories made at once",
+                          disk=lambda item: copy_size(read_sources[item[1].source], store,
+                                                      copied_for_repository(read_sources[item[1].source]))))
     filled = []
     for task in tasks:
         parts = {"files": dict(task.files), "tool_files": dict(task.tool_files), "check_files": dict(task.check_files),
@@ -338,12 +353,7 @@ def fill(tasks, repo: Repo, store, copies=None) -> tuple[list[Task], dict]:
         for pointer in task.pointers:
             where = f"{task.id}/{TASK}: the pointer to {pointer.path!r}"
             if pointer.to == "repository":
-                where = f"{task.id}/{TASK}: the repository pointer"
-                if pointer.checksum != checksums[pointer.source]:
-                    raise InvalidFile(f"{where}: {pointer.source} now has the checksum {checksums[pointer.source]}, "
-                                      f"not {pointer.checksum}, which the task was built from; build the task again")
-                with opener(store, copies)() as here:
-                    files, remote, expected = repository(where, pointer, trees[pointer.source], here)
+                files, remote, expected = next(made)
                 parts["files"] |= files
                 parts["outside"][REMOTE] = remote
                 parts["check_files"][REPOSITORY] = (FILE, json.dumps(expected, indent=1).encode() + b"\n")
@@ -364,6 +374,23 @@ def fill(tasks, repo: Repo, store, copies=None) -> tuple[list[Task], dict]:
         filled.append(replace(task, **parts, pointers=(), documents=task.documents + documents,
                               held_out_keys=task.held_out_keys + keys))
     return filled, sources
+
+
+def _pointed(item, store, telemetry):
+    """(the source, its final tree, {path: Markdown} of the documents
+    pointed into) of fill's item (source id, paths), in a worker process."""
+    sid, paths = item
+    found = workers.repo()
+    source = found.source(sid)
+    tree, _ = source_tree(source, store, telemetry)
+    return source, tree, markdown.chosen(source, tree, store, found, paths)
+
+
+def _repository(item, store, telemetry):
+    """repository() of fill's repository pointer (task id, pointer, its
+    source's final tree), in a worker process."""
+    task_id, pointer, tree = item
+    return repository(f"{task_id}/{TASK}: the repository pointer", pointer, tree, store)
 
 
 def chain(where, pointer: Pointer, tree, store) -> list[str]:
@@ -599,9 +626,6 @@ def _check_tools(where, needs, replies, tools, tool_files, files, answered_by, a
     if replies and not answered_by:
         raise InvalidFile(f"{where}: a task with replies names in answered_by the looking tools that can answer "
                           f"before the user is asked")
-    if replies and not answered_in:
-        raise InvalidFile(f"{where}: a task with replies names in answered_in the paths under /work where its "
-                          f"answers live")
     for name in answered_by:
         if name not in looking:
             raise InvalidFile(f"{where}: answered_by names {name!r}, which is no looking tool the task or its "
@@ -649,7 +673,7 @@ def pointed_sources(source, tree, store, repo: Repo) -> set[str]:
 
 def read(repo: Repo, store, tag: str | None, held_out: float, log=print, measure=False,
          dataset: str | None = None, held: set | None = None,
-         only: set[str] | None = None, copies=None) -> tuple[list[Task], dict]:
+         only: set[str] | None = None, copies=None, pointable: set[str] | None = None) -> tuple[list[Task], dict]:
     """([Task], {source id: address, revision, licenses}) for every task of
     an admitted source whose task.json is tagged `tag` (any tag or none,
     when tag is None: the measures read every measure-only task, and a
@@ -666,25 +690,14 @@ def read(repo: Repo, store, tag: str | None, held_out: float, log=print, measure
     may still name any admitted source). A source whose license text is
     empty is left out, and log is called with a note naming it. Several
     sources are read at once, each through its own store from copies
-    (each_read), and so are the sources pointed into (fill)."""
+    (each_read), and so are the sources pointed into (fill, with
+    pointable)."""
     chosen = [source for source in repo.sources(log) if source.admitted and has_tasks(source)
               and (only is None or source.id in only)]  # no tree read for a source without tasks
-
-    def tagged(source, here):
-        """[(task, its tags)] of the source's tasks tagged tag."""
-        tree, _ = source_tree(source, here)
-        found = []
-        for folder, task in of_source(source, tree, here, repo).items():
-            tags = tags_of(source, _prefix(folder) + TASK)
-            if tag is None or tag in tags:
-                found.append((replace(task, tags=frozenset(tags)), tags))
-        return found
-
     sources = {}
-    found = [(task, tags, source) for source, own in zip(chosen, each_read(tagged, chosen, store, copies,
-                                                                           what="task sources read at once"))
-             for task, tags in own]
-    filled, pointed = fill([task for task, _, _ in found], repo, store, copies)
+    read_tasks = each_read(_tagged, chosen, repo, store, copies, what="task sources read at once", args=(tag,))
+    found = [(task, tags, source) for source, own in zip(chosen, read_tasks) for task, tags in own]
+    filled, pointed = fill([task for task, _, _ in found], repo, store, copies, pointable)
     if held is None:
         held = held_out_texts(store, dataset) if any(task.documents for task in filled) else set()
     kept = []
@@ -695,6 +708,18 @@ def read(repo: Repo, store, tag: str | None, held_out: float, log=print, measure
                                   "licenses": source.data["licenses"]}
             sources |= {sid: pointed[sid] for sid, _, _ in task.documents}
     return kept, sources
+
+
+def _tagged(source, store, tag, telemetry):
+    """[(task, its tags)] of the source's tasks tagged tag (any, with tag
+    None), in a worker process."""
+    tree, _ = source_tree(source, store, telemetry)
+    found = []
+    for folder, task in of_source(source, tree, store, workers.repo()).items():
+        tags = tags_of(source, _prefix(folder) + TASK)
+        if tag is None or tag in tags:
+            found.append((replace(task, tags=frozenset(tags)), tags))
+    return found
 
 
 def _files_out(found):

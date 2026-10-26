@@ -76,9 +76,9 @@ history's order file (`.git/history/order`): it stays in the source's tree
 and its checksum, and the builder reads it, but it is not a training
 document.
 
-A change to what this module makes of a file raises the wpt-dataset
-version in the same change, so the stream cache, keyed by it, makes the
-Markdown again (docs/architecture.md).
+The stream cache is keyed by the code (wpt_utils.programs.code), so a
+change to what this module makes of a file makes the Markdown again
+(docs/architecture.md).
 """
 
 import posixpath

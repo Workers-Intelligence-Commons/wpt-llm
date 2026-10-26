@@ -29,7 +29,7 @@ def test_a_drafter_saved_with_its_model_folder_loads_back_identical(tmp_path):
     drafter = Drafter(config, DrafterConfig.for_model(config))
     drafter.temperatures.copy_(torch.tensor([0.5, 0.8, 1.0, 1.3, 2.0]))
     drafter.layers[1].experts.bias.fill_(0.25)
-    provenance = {"schema": 2, "acceptance": {"verified": 3}, "target": {"weights": weight_hashes(tmp_path)}}
+    provenance = {"acceptance": {"verified": 3}, "target": {"weights": weight_hashes(tmp_path)}}
     save_drafter(drafter, tmp_path, "test version 1", hashlib.sha256(VOCABULARY).hexdigest(), metadata=WEIGHT_METADATA,
                  provenance=provenance)
 
@@ -66,7 +66,7 @@ def test_the_model_card_names_the_drafter_and_its_notice_adds_no_source(tmp_path
             "locked": [], "updates": 1,
             "weights_update": 1, "stages": [{"block_size": None, "steps": 1, "batch_size": 8}],
             "best_validation_loss": None, "reused": False, "sources": ["example-talks"]}
-    provenance = {"schema": 5, "dataset": "d" * 64, "parameters": 1, "steps": [step], "device": "cpu",
+    provenance = {"dataset": "d" * 64, "parameters": 1, "steps": [step], "device": "cpu",
                   "sources": {}}
     (tmp_path / "provenance.json").write_text(json.dumps(provenance))
     provenance["sources"] = {"example-talks": source}

@@ -22,7 +22,7 @@ from wpt_dataset import repo as service
 from wpt_dataset.errors import InvalidFile, NotText, RuleViolation, StaleFile
 from wpt_dataset.repo import empty_source
 
-TASK = {"schema": 3, "instructions": "Print hello.", "image": "tiny",
+TASK = {"instructions": "Print hello.", "image": "tiny",
         "limits": {"max_turns": 2, "max_tokens": 100, "command_seconds": 5}, "needs": []}
 
 
@@ -80,7 +80,7 @@ def test_a_change_through_a_link_of_a_source_lands_on_its_target_inside_the_sour
 
 
 def test_a_write_through_a_link_lands_on_its_target_inside_the_repository_only(kit, repo, tmp_path):
-    mixture = {"schema": 1, "pools": [{"name": "a", "select": "a", "weight": 1}]}
+    mixture = {"pools": [{"name": "a", "select": "a", "weight": 1}]}
     mixtures = repo.root / "data" / "recipes" / "mixtures"
     outside = tmp_path / "outside" / "m.json"
     outside.parent.mkdir()
@@ -105,7 +105,7 @@ def test_a_write_through_a_link_lands_on_its_target_inside_the_repository_only(k
 
 def test_two_saves_of_one_version_cannot_both_pass(kit, repo, monkeypatch):
     # the version check and the write happen under one lock: the slower save finds the file changed
-    mixture = {"schema": 1, "pools": [{"name": "a", "select": "a", "weight": 1}]}
+    mixture = {"pools": [{"name": "a", "select": "a", "weight": 1}]}
     version = repo.save("mixture", "m", mixture, "")
     rules = repo._rules
 
@@ -198,7 +198,7 @@ def test_a_held_name_is_never_held_twice_and_is_taken_up_once_its_process_ends(r
 
 def test_a_save_keeps_the_layout_where_the_meaning_did_not_change(kit, repo):
     path = repo.root / "data" / "recipes" / "mixtures" / "m.json"
-    text = ('{"schema": 1,\n "pools": [\n    {"name": "a", "select": "a",   "weight": 0.5},\n'
+    text = ('{"pools": [\n    {"name": "a", "select": "a",   "weight": 0.5},\n'
             '    {"name": "b", "select": "b", "weight": 0.5}\n ]\n}\n')
     path.write_text(text, encoding="utf-8")
     document = json.loads(text)
@@ -206,14 +206,14 @@ def test_a_save_keeps_the_layout_where_the_meaning_did_not_change(kit, repo):
     assert repo.save("mixture", "m", document, version) == version and path.read_text() == text  # nothing changed
 
     document["pools"][1]["select"] = "fr"
-    repo.save("mixture", "m", {"pools": document["pools"], "schema": 1}, version)  # key order is no change either
+    repo.save("mixture", "m", {"pools": document["pools"]}, version)  # key order is no change either
     assert path.read_text() == text.replace('"select": "b"', '"select": "fr"')
 
 
 def test_conversations_hold_line_and_paragraph_separators(kit, repo, store):
     sid = own_source(repo, store, {"notes.txt": "text"})
     said = "one two three\x85four"
-    conversation = {"schema": 3, "messages": [{"role": "user", "content": [{"type": "text", "text": said}]},
+    conversation = {"messages": [{"role": "user", "content": [{"type": "text", "text": said}]},
                                               {"role": "assistant", "content": [{"type": "text", "text": "ok"}]}]}
     version = repo.save_conversation(sid, "sft/talks.jsonl", None, conversation, "talk", repo.source_version(sid),
                                      store)
@@ -231,7 +231,7 @@ def test_an_assistant_message_may_hold_no_block_but_no_other_message_may(kit):
 
     def line(role):
         messages = [{"role": "user", "content": [{"type": "text", "text": "hi"}]}, {"role": role, "content": []}]
-        return (json.dumps({"schema": 3, "messages": messages}) + "\n").encode()
+        return (json.dumps({"messages": messages}) + "\n").encode()
 
     parsed = conversations.parse("record", "attempts.jsonl", line("assistant"))
     assert parsed[0]["messages"][1] == {"role": "assistant", "content": []}
@@ -299,7 +299,7 @@ def test_conversations_and_tasks_are_written_only_in_an_empty_source(kit, repo, 
     upstream = kit.git_project(tmp_path / "upstream", symlinks={})
     sid = kit.add_source(repo, store, "example", "project", {"type": "git", "address": upstream[0],
                                                             "revision": upstream[1]})
-    conversation = {"schema": 3, "messages": [{"role": "user", "content": [{"type": "text", "text": "hi"}]}]}
+    conversation = {"messages": [{"role": "user", "content": [{"type": "text", "text": "hi"}]}]}
     with pytest.raises(RuleViolation, match="is a git source"):
         repo.save_conversation(sid, "talks.jsonl", None, conversation, "talk", repo.source_version(sid), store)
     with pytest.raises(RuleViolation, match="is a git source"):
@@ -368,15 +368,15 @@ def test_an_image_s_pool_of_tools_is_written_and_read_after_the_check(repo):
              "parameters": {"type": "object", "properties": {"url": {"type": "string"}}, "required": ["url"]},
              "names": ["get_page"]}
     assert repo.image_tools("tiny") == []
-    repo.save("image-tools", "tiny", {"schema": 1, "tools": [fetch]}, "")
+    repo.save("image-tools", "tiny", {"tools": [fetch]}, "")
     assert repo.image_tools("tiny") == [fetch] and repo.problems("image-tools", "tiny") == []
     version = repo.version("image-tools", "tiny")
     with pytest.raises(InvalidFile, match="the tool 'bash' is declared twice, or takes the name of a tool every task"):
-        repo.save("image-tools", "tiny", {"schema": 1, "tools": [{**fetch, "name": "bash"}]}, version)
+        repo.save("image-tools", "tiny", {"tools": [{**fetch, "name": "bash"}]}, version)
     assert repo.image_tools("tiny") == [fetch]
 
 
-RATING = {"schema": 1, "task": "mine-tasks-0123abcd/tasks/hello", "weights": {"model.safetensors": "a" * 64},
+RATING = {"task": "mine-tasks-0123abcd/tasks/hello", "weights": {"model.safetensors": "a" * 64},
           "record": "20261023T090000Z-wpt-eval-aaaaaaaa-0123abcd", "attempt": 0, "plain": False, "verdict": "pass",
           "by": "A. Person", "date": "2026-10-23"}
 
@@ -401,7 +401,8 @@ def test_ratings_are_lines_of_a_rating_file_of_an_empty_source_and_never_a_docum
 
     for wrong, error in (({**RATING, "verdict": "maybe"}, "at verdict"),
                          ({**RATING, "date": "2026-02-30"}, "is not a day of the calendar"),
-                         ({k: v for k, v in RATING.items() if k != "plain"}, "'plain' is a required property")):
+                         ({k: v for k, v in RATING.items() if k != "plain"}, "'plain' is a required property"),
+                         ({**RATING, "by": "machine:a-host"}, "a person's name holds no ':'")):
         with pytest.raises(InvalidFile, match=error):
             repo.save_rating(sid, "ratings/terse.jsonl", None, wrong, "wrong", version, store)
     with pytest.raises(RuleViolation, match="in the text format, not rating"):

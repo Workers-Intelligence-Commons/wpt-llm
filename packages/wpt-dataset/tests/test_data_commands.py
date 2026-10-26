@@ -36,7 +36,7 @@ def test_the_commands_write_a_new_source_its_files_and_a_conversation(kit, repo,
     code, out, version = run(capsys, *root, "read", sid, "poem.txt")
     assert out == "the night falls on the quiet town\n"
 
-    conversation = {"schema": 3, "messages": [{"role": "user", "content": [{"type": "text", "text": "Hello"}]},
+    conversation = {"messages": [{"role": "user", "content": [{"type": "text", "text": "Hello"}]},
                                               {"role": "assistant", "content": [{"type": "text", "text": "Hi"}]}]}
     (tmp_path / "talk.json").write_text(json.dumps(conversation))
     assert run(capsys, *root, "save-conversation", sid, "sft/talks.jsonl", "new", str(tmp_path / "talk.json"),
@@ -46,7 +46,7 @@ def test_the_commands_write_a_new_source_its_files_and_a_conversation(kit, repo,
                    "metadata: none\n")
     assert [p.name for p in repo.source(sid).patches] == ["0001-texts.patch", "0002-quiet.patch", "0003-talk.patch"]
 
-    (tmp_path / "half.json").write_text(json.dumps({"schema": 1, "pools": [{"name": "a", "select": "a",
+    (tmp_path / "half.json").write_text(json.dumps({"pools": [{"name": "a", "select": "a",
                                                                             "weight": 0.5}]}))
     assert run(capsys, *root, "save", "mixture", "half", str(tmp_path / "half.json"), "--version", "")[0] == 1
     assert run(capsys, *root, "list", "mixture") == (0, "", None)

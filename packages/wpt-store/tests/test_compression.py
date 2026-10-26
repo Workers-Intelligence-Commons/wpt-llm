@@ -18,7 +18,7 @@ def store(request, tmp_path, monkeypatch):
     if request.param == "local":
         yield open_store((tmp_path / "store").as_uri())
         return
-    for name, value in {"AWS_ACCESS_KEY_ID": "test", "AWS_SECRET_ACCESS_KEY": "test", "AWS_DEFAULT_REGION": "us-east-1",
+    for name, value in {"WPT_STORE_ACCESS_KEY_ID": "test", "WPT_STORE_SECRET_ACCESS_KEY": "test", "AWS_DEFAULT_REGION": "us-east-1",
                         "XDG_CACHE_HOME": str(tmp_path / "cache"), "LOCALAPPDATA": str(tmp_path / "cache")}.items():
         monkeypatch.setenv(name, value)
     monkeypatch.delenv("AWS_ENDPOINT_URL", raising=False)

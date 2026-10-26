@@ -4,13 +4,12 @@
   "title": "WPT model recipe (data/recipes/models/<name>.json): everything that changes the resulting model",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "data", "model", "seed", "steps", "drafter"],
+  "required": ["data", "model", "seed", "steps", "drafter"],
   "$defs": {
     "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
     "settings": {"type": "object", "additionalProperties": {"type": ["number", "string", "boolean", "array"]}}
   },
   "properties": {
-    "schema": {"const": 7},
     "data": {
       "description": "what `wpt-dataset build` builds; recipes with the same data share one dataset",
       "type": "object",

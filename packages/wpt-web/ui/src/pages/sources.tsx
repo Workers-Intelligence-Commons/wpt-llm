@@ -8,7 +8,6 @@ import type { Page } from "./index";
 type Summary = {
   id: string;
   address: string | null;
-  schema: number | null;
   type: string | null;
   decision: string | null;
   reason: string | null;

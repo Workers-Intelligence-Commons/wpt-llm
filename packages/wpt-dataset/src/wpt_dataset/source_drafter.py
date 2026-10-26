@@ -39,8 +39,8 @@ Everything a run keeps lives in the store (WPT_STORE):
   (one line per outcome: candidate, outcome, source, change, reason,
   notes).
 
-How many drafts run at once: the rule of wpt_utils.parallel, at
-DRAFT_MEMORY each. Above one, the drafts run in worker processes; the
+How many drafts run at once: the rule of wpt_utils.parallel, each
+draft's memory measured as it runs. Above one, the drafts run in worker processes; the
 saves and the records stay in the running process, one at a time, in the
 candidates' order, so a run's outcomes do not depend on how many drafted
 at once. A worker process's own log lines, and the site facts and pages
@@ -48,12 +48,10 @@ it keeps, are not in the run's record (they are in the store all the
 same).
 """
 
-import concurrent.futures
 import contextlib
 import hashlib
 import importlib.util
 import json
-import multiprocessing
 import shutil
 import tempfile
 import urllib.error
@@ -65,10 +63,10 @@ from pathlib import Path
 from wpt_store import as_record_name, store_from_settings
 from wpt_telemetry import Telemetry, set_ref
 from wpt_utils.files import sha256_file
-from wpt_utils.parallel import Sizing, in_order
+from wpt_utils.parallel import Sizing, in_order, process_pool
 from wpt_utils.settings import typed
 
-from . import retry, robots
+from . import retry, robots, sites
 from .errors import DatasetError, RuleViolation
 from .repo import DRAFT_CHECKSUM, Repo, json_text, source_id
 from .sources import USER_AGENT
@@ -77,10 +75,6 @@ BUILT_IN = Path(__file__).parent / "source_drafters"
 COMMAND = "wpt-dataset-source-drafter"  # the run record's command, part of its folder's name
 # the kinds of ref a run keeps in the store
 DONE, FACTS, PAGES = "source-drafter-done", "source-drafter-facts", "source-drafter-pages"
-# bytes one draft takes: a worker process with the built-ins loaded (0.1 GB, measured) and the git fetches of a
-# repository and its history, as one download of a git source takes them (wpt_dataset.download.DOWNLOAD_MEMORY,
-# measured: 0.76 GB for 5,600 files with 125 commits of history); rounded up
-DRAFT_MEMORY = 1e9
 CANDIDATES, OUTCOMES = "candidates.json", "outcomes.jsonl"  # files of the run's record
 # every outcome; "stopped": a source with patches, which is not written; "failed": the draft or its save raised
 KINDS = ("drafted", "skipped", "needs-a-person", "stopped", "failed")
@@ -194,6 +188,7 @@ class Context:
                                                                          else {})})
 
         def read():
+            sites.paced(address)
             try:
                 with urllib.request.urlopen(request, timeout=120) as response:
                     return response.read(), response.headers.get("ETag")
@@ -399,15 +394,14 @@ def _drafts(module, path, candidates, context):
     """(candidate, draft()'s outcome) of each candidate, in the candidates'
     order, as many drafting at once as wpt_utils.parallel allows: in this
     process when that is one, otherwise in worker processes."""
-    sizing = Sizing(DRAFT_MEMORY, "drafts at once")
+    sizing = Sizing("drafts at once")
     context.telemetry.log(sizing.why)
     if sizing.limit <= 1:
         for candidate in candidates:
             yield candidate, _draft(module, candidate, context)
         return
-    pool = concurrent.futures.ProcessPoolExecutor(
-        sizing.limit, mp_context=multiprocessing.get_context("spawn"), initializer=_start_worker,
-        initargs=(str(path), context.name, context.settings, str(context.repo.root), context.by, context.today))
+    pool = process_pool(sizing, sizing.limit, _start_worker,
+                        (str(path), context.name, context.settings, str(context.repo.root), context.by, context.today))
     try:
         yield from zip(candidates, in_order(_draft_in_worker, candidates, pool, sizing))
     except BaseException:  # a stop (Ctrl+C) ends the drafts under way at once; the next run drafts them
@@ -549,12 +543,16 @@ def to_resume(store, holder: str) -> list[dict]:
     """The reports of the runs holder started (their started_by: holder, a
     dash and a token) that did not finish (no end.json, or stopped: exit
     code 130), each the latest of those holder started with its arguments:
-    what holder starts again."""
+    what holder starts again. A record that cannot be read (cut short
+    before its start, or not readable) is left out, never hiding the
+    others."""
+    from wpt_store import CorruptObject, MissingObject
+
     found = []
     for folder in runs(store):
         try:
             found.append(report(store, folder))
-        except (OSError, ValueError, KeyError):  # a record cut short before its start: nothing to resume
+        except (OSError, ValueError, KeyError, MissingObject, CorruptObject):  # nothing to resume there
             continue
     latest = {}
     for run in sorted(found, key=lambda run: run["started"]):  # to the microsecond; folders, to the second

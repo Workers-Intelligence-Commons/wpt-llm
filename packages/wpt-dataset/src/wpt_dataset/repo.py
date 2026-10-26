@@ -71,6 +71,7 @@ import posixpath
 import re
 import secrets
 import shutil
+import socket
 import subprocess
 import sys
 import sysconfig
@@ -90,13 +91,14 @@ from .errors import DataAccessRefused, InvalidFile, NotFound, OutdatedSchema, Ru
 from .licenses import check_license
 from .pools import parse
 
-CURRENT_SCHEMA = {"source": 8, "mixture": 1, "model": 7, "tokenizer": 2, "lock": 2, "conversation": 3, "task": 3,
-                  "rating": 1, "image-lock": 1, "image-licenses": 1, "image-tools": 1, "reviewed-license-texts": 1}
 ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}")
 PATCH = re.compile(r"(\d{4})-[A-Za-z0-9._-]+\.patch")
 NAME = re.compile(r"[a-z0-9][a-z0-9._-]*")
 EMPTY_CHECKSUM = "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"  # an empty manifest
 DRAFT_CHECKSUM = "sha256:" + "0" * 64  # a new source's, until fill-checksum (CONTRIBUTING.md, "Adding a source")
+# the start of a decision's `by` that names a machine, not a person: a machine drafts (always-on monitoring), and
+# never admits or refuses; a person's name holds no ':'
+MACHINE = "machine:"
 SOURCE_FILE = "source.json"
 # a key type of an allowed-signers line (ssh-keygen ALLOWED SIGNERS), followed by the key in base64
 SIGNER_KEY = re.compile(r"(?:^|\s)(?:ssh-[a-z0-9-]+|ecdsa-sha2-[a-z0-9-]+|sk-[a-z0-9@.-]+)\s+[A-Za-z0-9+/]+=*(?:\s|$)")
@@ -178,10 +180,14 @@ def load_json(path: Path, kind: str) -> dict:
 
 def validate(document, kind: str, path):
     """Raise OutdatedSchema or InvalidFile unless the document is a valid
-    file of the given kind in its current shape; path names it in messages."""
-    version = document.get("schema") if isinstance(document, dict) else None
-    if isinstance(version, int) and version < CURRENT_SCHEMA[kind]:
-        raise OutdatedSchema(f"{path}: shape {version}, current is {CURRENT_SCHEMA[kind]}; run `wpt-dataset migrate`")
+    file of the given kind in its current shape; path names it in messages.
+    OutdatedSchema when a migration step recognizes an earlier shape by the
+    document's fields."""
+    from .migrate import outdated
+
+    earlier = outdated(document, kind)
+    if earlier:
+        raise OutdatedSchema(f"{path}: an earlier shape ({'; '.join(earlier)}); run `wpt-dataset migrate`")
     try:
         error = jsonschema.exceptions.best_match(_validator(kind).iter_errors(document))
         if error is not None:
@@ -388,6 +394,35 @@ class Document:
     problems: list[str]
 
 
+def machine_name() -> str:
+    """This machine's host name marked as a machine's (MACHINE): the `by`
+    of the drafts always-on monitoring saves when no person is named."""
+    return MACHINE + socket.gethostname()
+
+
+def check_person(name: str, where: str):
+    """RuleViolation for a person's name holding ':', which MACHINE keeps
+    for a machine's name."""
+    if ":" in name:
+        raise RuleViolation(f"{where}: {name!r}: a person's name holds no ':' (`{MACHINE}<host>` names a machine)")
+
+
+def check_decision(decision: dict, where: str):
+    """RuleViolation unless a decision's `by` is a person's name (check_person)
+    or, for a source under review only, a machine's (MACHINE<host>): a
+    machine never admits or refuses."""
+    by = decision["by"]
+    if not by.startswith(MACHINE):
+        check_person(by, where)
+        return
+    if decision["decision"] != "under-review":
+        raise RuleViolation(f"{where}: {decision['decision']} by {by!r}: a machine never admits or refuses; a person "
+                            f"decides, under their own name")
+    host = by.removeprefix(MACHINE)
+    if not host or ":" in host:
+        raise RuleViolation(f"{where}: {by!r}: a machine's name is `{MACHINE}<host>`, its host name holding no ':'")
+
+
 def empty_source(name: str, *, license: str, attribution: str, text: str, by: str, formats: dict[str, str],
                  tags=(), started: str | None = None) -> dict:
     """The source.json of a new `empty` source (CONTRIBUTING.md, "Adding your
@@ -395,7 +430,7 @@ def empty_source(name: str, *, license: str, attribution: str, text: str, by: st
     each file's format by its path, under review ("under-review") until a
     maintainer decides."""
     today = started or date.today().isoformat()
-    document = {"schema": CURRENT_SCHEMA["source"], "type": "empty", "address": f"empty:{name}", "revision": today,
+    document = {"type": "empty", "address": f"empty:{name}", "revision": today,
                 "checksum": EMPTY_CHECKSUM,
                 "licenses": [{"license": license, "paths": ["**"], "attribution": attribution, "text": text}],
                 "formats": [{"format": kind, "paths": [path]} for path, kind in formats.items()],
@@ -913,6 +948,7 @@ class Repo:
     def _check_source_document(self, sid, document):
         if not ID.fullmatch(sid):
             raise RuleViolation(f"{sid}: a source id is <origin>-<item>-<hash> or <origin>-<hash>, lowercase a-z 0-9 '-'")
+        check_decision(document["decision"], sid)
         expected = address_hash(document["address"])
         if not sid.endswith("-" + expected):
             raise RuleViolation(f"{sid}: the id must end with {expected}, the hash of its address")

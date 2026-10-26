@@ -104,7 +104,7 @@ def conversation(calls, tools=None, answer=None, answered_by=(), results=None, a
                      {"role": "tool", "content": [{"type": "tool_result", "call": f"c{n}", "content": [
                          {"type": "text", "text": results[n] if results else "ok"}]}]}]
     names = tools or {name: name for name, _ in calls}
-    return {"schema": 3, "messages": messages,
+    return {"messages": messages,
             "metadata": {"tools": names, "looking": [name for name in names.values() if name in LOOKING],
                          "answered_by": list(answered_by), "answered_in": list(answered_in), "answer": answer}}
 

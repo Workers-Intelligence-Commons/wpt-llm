@@ -20,6 +20,7 @@ Linux and Windows compute the same manifest.
 import concurrent.futures
 import contextlib
 import copy
+import dataclasses
 import functools
 import glob
 import hashlib
@@ -49,6 +50,10 @@ class Entry:
     # where a downloaded file lies (wpt_store.Placed); None for a store object. Not part of what the entry is:
     # two entries with the same mode and content are equal wherever their bytes lie
     placed: object = field(default=None, compare=False, repr=False)
+    # the git object id of the blob a git source's entry holds as it was fetched (None otherwise): what the store
+    # database's map from git object id to sha256 learns. Not part of what the entry is either, and never in a
+    # manifest; an entry a cut or a patch changes is a new entry, without it
+    git: str | None = field(default=None, compare=False, repr=False)
 
 
 def content(store, entry: Entry) -> bytes:
@@ -72,7 +77,8 @@ def placed_tree(tree: dict[str, Entry], files: dict) -> dict[str, Entry]:
     (wpt_store.parse_file_list: {path: (mode, Placed)}) holds placed where
     that list says; the others stay store objects."""
     where = {placed.sha256: placed for _, placed in files.values()}
-    return {path: Entry(e.mode, e.sha256, where[e.sha256]) if e.sha256 in where else e for path, e in tree.items()}
+    return {path: dataclasses.replace(e, placed=where[e.sha256]) if e.sha256 in where else e
+            for path, e in tree.items()}
 
 
 def manifest_bytes(tree: dict[str, Entry]) -> bytes:
@@ -202,11 +208,12 @@ class Extractor:
             return None
         return path
 
-    def add(self, raw_path: bytes | str, mode: str, content: bytes) -> Entry | None:
-        """Store an entry's content when its path is kept: its Entry, or None."""
+    def add(self, raw_path: bytes | str, mode: str, content: bytes, git: str | None = None) -> Entry | None:
+        """Store an entry's content when its path is kept: its Entry, or
+        None. git: the id of the git blob it holds (Entry.git)."""
         path = self.kept(raw_path)
         if path is not None:
-            return self._record(path, mode, *self.store.keep(content))
+            return self._record(path, mode, *self.store.keep(content), git=git)
         return None
 
     def add_same(self, raw_path: bytes | str, mode: str, like: Entry) -> Entry | None:
@@ -217,15 +224,34 @@ class Extractor:
             return self._record(path, mode, like.sha256, like.placed)
         return None
 
+    def add_placed(self, raw_path: bytes | str, mode: str, placed, git: str | None = None) -> Entry | None:
+        """An entry whose content the store holds already where placed (a
+        wpt_store.Placed) says, when its path is kept: its Entry, or None.
+        Its content is neither read nor stored again. git: as add's."""
+        path = self.kept(raw_path)
+        if path is not None:
+            return self._record(path, mode, placed.sha256, placed, git)
+        return None
+
+    def keep_blobs(self, repo: Path, object_ids: list[str]):
+        """Store git blobs no entry holds, the ones the history's patches
+        need (a store that has no use for them, one that does not give
+        keep_mapped, ignores them): what a download keeps, so the store
+        database's map of git objects learns them (download.Staging)."""
+        if object_ids and hasattr(self.store, "keep_mapped"):
+            with contextlib.closing(_git_blobs(repo, object_ids)) as contents:
+                for object_id, content in zip(object_ids, contents):
+                    self.store.keep_mapped(object_id, content)
+
     def add_file(self, path: str, mode: str, file: Path):
         """A kept path (see kept) whose content is a file on disk, stored
         without reading it into memory."""
         self._record(path, mode, self.store.put_file(file))
 
-    def _record(self, path: str, mode: str, sha256: str, placed=None) -> Entry:
+    def _record(self, path: str, mode: str, sha256: str, placed=None, git=None) -> Entry:
         if path in self.tree:
             raise BadPath(f"{path!r} appears twice")
-        self.tree[path] = Entry(mode, sha256, placed)
+        self.tree[path] = Entry(mode, sha256, placed, git)
         return self.tree[path]
 
     @contextlib.contextmanager
@@ -348,11 +374,16 @@ def read_archive(path: Path, extractor: Extractor):
             raise UnsupportedEntry(f"{path.name}: neither a zip nor a tar archive") from error
 
 
-def read_git(repo: Path, revision: str, extractor: Extractor, prefix: str = "") -> dict[str, str]:
+def read_git(repo: Path, revision: str, extractor: Extractor, prefix: str = "", known=None) -> dict[str, str]:
     """Entries of a commit, from git's own objects, each path after `prefix`
     (a submodule's folder, ending in "/"). An excluded file is never read, so
-    a partial fetch need not hold it. Returns the kept submodules, each path
-    with the commit it pins; an excluded submodule is skipped."""
+    a partial fetch need not hold it; nor is a blob whose content the store
+    holds already (known: {git object id: wpt_store.Placed}), whose entry
+    is placed where the store holds it, its sha256 taken from there. Each
+    kept entry holds its blob's id (Entry.git). Returns the
+    kept submodules, each path with the commit it pins; an excluded
+    submodule is skipped."""
+    known = known or {}
     entries, submodules = [], {}
     for path, mode, kind, object_id in _git_tree(repo, revision, prefix):
         if extractor.kept(path) is None:
@@ -361,11 +392,13 @@ def read_git(repo: Path, revision: str, extractor: Extractor, prefix: str = "") 
             submodules[path.decode()] = object_id
         elif kind != "blob" or mode not in MODES:
             raise UnsupportedEntry(f"{path.decode(errors='replace')}: git {kind} with mode {mode}")
+        elif object_id in known:
+            extractor.add_placed(path, mode, known[object_id], object_id)
         else:
             entries.append((path, mode, object_id))
     with contextlib.closing(_git_blobs(repo, [e[2] for e in entries])) as contents:
-        for (path, mode, _), content in zip(entries, contents):
-            extractor.add(path, mode, content)
+        for (path, mode, object_id), content in zip(entries, contents):
+            extractor.add(path, mode, content, object_id)
     return submodules
 
 
@@ -373,13 +406,31 @@ def git_blobs_needed(repo: Path, revision: str, extractor: Extractor, since: str
                      prefix: str = "") -> list[str]:
     """The blobs read_git and read_git_history read: the kept files of the
     commit and, with `since`, both sides of every kept file a commit since
-    then changes. A partial fetch downloads only these."""
+    then changes (git_history_blobs). A partial fetch downloads only these."""
     needed = [object_id for path, _, kind, object_id in _git_tree(repo, revision, prefix)
               if kind == "blob" and extractor.kept(path) is not None]
-    if since:
-        for changes in _changed_paths(repo, _history_commits(repo, since, revision)).values():
-            needed += [object_id for path, blobs in changes if extractor.kept(path) is not None for object_id in blobs]
+    return list(dict.fromkeys(needed + git_history_blobs(repo, revision, extractor, since)))
+
+
+def git_history_blobs(repo: Path, revision: str, extractor: Extractor, since: str | None) -> list[str]:
+    """The blobs read_git_history reads to write its patches (none without
+    `since`): both sides of every kept file a commit since then changes."""
+    if not since:
+        return []
+    needed = []
+    for changes in _changed_paths(repo, _history_commits(repo, since, revision)).values():
+        needed += [object_id for path, blobs in changes if extractor.kept(path) is not None for object_id in blobs]
     return list(dict.fromkeys(needed))
+
+
+def put_blobs(repo: Path, files: list[Path]) -> list[str]:
+    """Write local files into a repository as git blobs, in one git call:
+    contents the store holds already, so git can diff them without
+    downloading them. Their object ids, in order."""
+    if not files:
+        return []
+    return _git(repo, "hash-object", "-w", "--no-filters", "--stdin-paths",
+                input="".join(f"{file}\n" for file in files).encode()).decode().split()
 
 
 def missing_objects(repo: Path, object_ids: list[str]) -> list[str]:

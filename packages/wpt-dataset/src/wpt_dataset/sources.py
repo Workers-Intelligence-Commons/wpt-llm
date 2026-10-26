@@ -26,7 +26,6 @@ no file list: its files are store objects.
 
 import contextlib
 import hashlib
-import importlib.metadata
 import itertools
 import json
 import os
@@ -41,24 +40,17 @@ from wpt_store import parse_file_list
 from concurrent.futures import ThreadPoolExecutor
 
 from wpt_telemetry import Telemetry, set_ref
-from wpt_utils.parallel import Sizing, in_order
-from wpt_utils.programs import program
+from wpt_utils.parallel import in_order
+from wpt_utils.programs import code, program
 
-from . import archives, encoding, huggingface, manifest, records, retry, robots
+from . import archives, encoding, huggingface, manifest, records, retry, robots, workers
 from .errors import (ChecksumMismatch, CutFailed, FetchFailed, LicenseMapError, NotDownloaded, NotText, PatchFailed,
                      UnsupportedEntry)
 from .manifest import FILE, SYMLINK, Entry, Extractor, glob_match_any
 from .repo import Patch, Source
 
-VERSION = importlib.metadata.version("wpt-dataset")
-USER_AGENT = f"wpt-dataset/{VERSION} (+https://github.com/Workers-Intelligence-Commons/wpt-llm)"
+USER_AGENT = "wpt-dataset (+https://github.com/Workers-Intelligence-Commons/wpt-llm)"
 UPSTREAM, UPSTREAM_FILES = "upstream", "upstream-files"  # the kinds of the refs naming an upstream tree by its checksum
-# bytes one source's conversion takes, measured as the growth of the process's resident memory sampled every 5 ms
-# over one source: 2 to 5 MB for a git source of 5,000 files of 20 KB, a book of 50 files of 100 KB and a records
-# file of 5,000 records; 14 to 64 MB streamed, with its tokens and the thread's cache of encoded chunks (at most
-# about 100 MB, wpt_tokenizer); a file read whole takes about 4 times its size (its bytes, its text, its Markdown):
-# rounded up to cover the cache and a file of 100 MB
-CONVERT_MEMORY = 0.5e9
 
 
 def fingerprint(inputs) -> str:
@@ -121,7 +113,8 @@ def fetch(data: dict, address: str, store, tmp: Path, again=False) -> dict[str, 
     is read from the repositories tmp holds already, with no robots.txt,
     asking only for any object it needs and lacks. A source with
     `addresses` fetches each into its own folder of the one tree, and
-    into its own folder of tmp. A download
+    into its own folder of tmp. A git source's entries hold their git
+    object ids (Entry.git). A download
     that fails raises FetchFailed, naming the address it was for."""
     extractor = Extractor(store, data.get("extract", {}))
     parts = [(p["folder"], p["address"]) for p in data["addresses"]] if "addresses" in data else [("", address)]
@@ -181,8 +174,14 @@ def _download(address: str, target: Path) -> Path:
 def _read_git_source(data: dict, address: str, tmp: Path, extractor: Extractor, again=False):
     """The commit, its history when asked, and each kept submodule at the
     commit it pins, from the address `submodules` lists for it, recursively.
-    Only the contents of kept files are downloaded. again: each repository
-    is in tmp already (fetch)."""
+    Only the contents of kept files are downloaded, and of those only the
+    ones the store does not hold already: the git objects the store
+    database's map knows (what the extractor stores into gives them,
+    known_objects) are taken from the store, their sha256 with them, and
+    the ones the history's patches need are written into the repository
+    from there (manifest.put_blobs); the history's own blobs that the tree
+    does not hold are kept for the map too (Extractor.keep_blobs). again:
+    each repository is in tmp already (fetch)."""
     since = data["history"]["since"] if data.get("history") else None
     listed, found = data.get("submodules", {}), set()
     pending = [("", address, data["revision"], since)]
@@ -193,8 +192,20 @@ def _read_git_source(data: dict, address: str, tmp: Path, extractor: Extractor, 
         repo = tmp / f"repo-{number}"
         if not again:
             _git_fetch(address, revision, repo, full=since is not None)
-        _git_fetch_blobs(address, repo, manifest.git_blobs_needed(repo, revision, extractor, since, prefix))
-        submodules = manifest.read_git(repo, revision, extractor, prefix)
+        history = manifest.git_history_blobs(repo, revision, extractor, since)
+        in_tree = manifest.git_blobs_needed(repo, revision, extractor, None, prefix)
+        needed = list(dict.fromkeys(in_tree + history))
+        known = extractor.store.known_objects(needed) if hasattr(extractor.store, "known_objects") else {}
+        _git_fetch_blobs(address, repo, [object_id for object_id in needed if object_id not in known])
+        # the blobs only the history's patches read are kept too, so a moved revision asks for none of them again
+        held = set(in_tree) | set(known)
+        extractor.keep_blobs(repo, [object_id for object_id in history if object_id not in held])
+        if history:  # the patches diff both sides of each change: git must hold them
+            lacking = manifest.missing_objects(repo, [object_id for object_id in history if object_id in known])
+            written = manifest.put_blobs(repo, [extractor.store.file_path(known[object_id]) for object_id in lacking])
+            if written != lacking:
+                raise FetchFailed(f"{address}: the store's copies of git objects do not give their ids back")
+        submodules = manifest.read_git(repo, revision, extractor, prefix, known)
         if since:
             manifest.read_git_history(repo, since, revision, extractor)
         for path, commit in submodules.items():
@@ -267,13 +278,17 @@ def apply_patches(source_id: str, tree: dict[str, Entry], patches: list[Patch], 
     no files are written out, so modes and symlinks behave the same on every
     operating system. The paths git's index refuses (any .git/ path, such
     as a history's files) are set aside and come back exactly as they
-    were; a patch that names one fails, as git refuses it. A file the
-    patches leave as it was keeps its entry, and so where it lies."""
+    were; a patch that names one fails, as git refuses it. Only the files
+    the patches name go into the index (git apply reads no other); every
+    other file is set aside the same way, never read. A file the patches
+    leave as it was keeps its entry, and so where it lies."""
     if not patches:
         return tree
     with tempfile.TemporaryDirectory(prefix="wpt-patch-") as tmp:
         git, env = temporary_git(tmp)
-        loaded = load_index(git, tree, store)
+        touched = _touched(git, patches)
+        loaded = load_index(git, {path: entry for path, entry in tree.items() if path in touched}, store,
+                            in_memory=True)
         held = {path for path, _, _ in _index(git)}
         aside = {path: entry for path, entry in tree.items() if path not in held}
         for patch in patches:
@@ -287,9 +302,28 @@ def apply_patches(source_id: str, tree: dict[str, Entry], patches: list[Patch], 
         changed = [record for record in records if record[0] not in patched]
         with contextlib.closing(manifest._git_blobs(env["GIT_DIR"], [r[2] for r in changed])) as contents:
             patched |= {path: Entry(mode, store.put_bytes(content)) for (path, mode, _), content in zip(changed, contents)}
-    patched = aside | dict(sorted(patched.items()))
+    patched = dict(sorted((aside | patched).items()))  # the order a tree read back from its manifest has
     manifest.check_paths(patched)
     return patched
+
+
+def _touched(git, patches: list[Patch]) -> set[str]:
+    """Every path the patches name (git apply --numstat), each side of a
+    rename: the only files git reads while it applies them."""
+    found = set()
+    for patch in patches:
+        try:
+            listed = git("apply", "--numstat", "-z", "-", input=patch.data)
+        except subprocess.CalledProcessError:
+            continue  # git apply --cached names what is wrong with it
+        fields = listed.split(b"\0")
+        while fields and fields[0]:
+            *_, path = fields.pop(0).split(b"\t", 2)
+            if path:
+                found.add(path.decode())
+            else:  # a rename: its old path, then its new one
+                found |= {fields.pop(0).decode(), fields.pop(0).decode()}
+    return found
 
 
 def _index(git) -> list[tuple[str, str, str]]:
@@ -316,17 +350,22 @@ def temporary_git(tmp):
     return git, env
 
 
-def load_index(git, tree: dict[str, Entry], store) -> dict[str, str]:
+def load_index(git, tree: dict[str, Entry], store, in_memory=False) -> dict[str, str]:
     """Make the temporary index hold this tree minus the paths git refuses:
     git silently drops any .git/ path (such as a history's files), so a
     caller that needs those must handle them itself. Returns {path: git
-    object id} of the tree's files."""
+    object id} of the tree's files. With in_memory (for a few files), each
+    file's bytes go to git from memory, with no local copy of it."""
     git("read-tree", "--empty")
     paths = sorted(tree)
     if not paths:
         return {}
-    objects = git("hash-object", "-w", "--no-filters", "--stdin-paths",
-                  input="".join(f"{manifest.local_file(store, tree[p])}\n" for p in paths).encode()).decode().split()
+    if in_memory:
+        objects = [git("hash-object", "-w", "--no-filters", "--stdin", input=manifest.content(store, tree[p]))
+                   .decode().strip() for p in paths]
+    else:
+        objects = git("hash-object", "-w", "--no-filters", "--stdin-paths",
+                      input="".join(f"{manifest.local_file(store, tree[p])}\n" for p in paths).encode()).decode().split()
     git("update-index", "-z", "--index-info",
         input=b"".join(f"{tree[p].mode} {o}\t{p}".encode() + b"\0" for p, o in zip(paths, objects)))
     return dict(zip(paths, objects))
@@ -338,26 +377,72 @@ def opener(store, copies=None):
     return copies or (lambda: contextlib.nullcontext(store))
 
 
-def each_read(work, items, store, copies=None, telemetry=None, what="sources read at once") -> list:
-    """[work(item, its store)] in the items' order, as many items at once as
-    wpt_utils.parallel allows at CONVERT_MEMORY each. An item's store is
-    store, or with copies the store copies() gives that item alone (a
-    context manager, such as a streamed build's temporary folder of local
-    copies), ended as soon as work returns, so the local copies work made
-    are gone before later items need room. An item's error is raised at
-    its turn, and no new item starts after it. With a telemetry, work
-    records under the caller's current span."""
+def each_read(function, items, repo, store, copies=None, telemetry=None, what="sources read at once", args=(),
+              disk=None) -> list:
+    """[function(item, its store, *args, telemetry=...)] in the items'
+    order, each item in a worker process (workers.py), as many at once as
+    wpt_utils.parallel allows, disk(item) (when given) the bytes it may
+    copy to the disk, which the conversion states beforehand (copy_size). An
+    item's store is store, or with copies the store copies() gives that
+    item alone (a context manager, such as a streamed build's temporary
+    folder of local copies), ended as soon as the item is read, so the
+    local copies it made are gone before later items need room. An item's
+    error is raised at its turn, and no new item starts after it. With a
+    telemetry, the item records under the caller's current span."""
+    items = list(items)
+    if not items:
+        return []
     telemetry = telemetry or Telemetry.off()
     parent = telemetry.current()
     opened = opener(store, copies)
+    with workers.Pool(repo, what, disk=disk, folder=tempfile.gettempdir() if copies else store.cache) as pool:
+        def run(item):
+            with telemetry.within(parent), opened() as here:
+                return pool.call(function, item, here, *args, telemetry=telemetry)
 
-    def run(item):
-        with telemetry.within(parent), opened() as here:
-            return work(item, here)
+        with ThreadPoolExecutor(pool.sizing.limit) as executor:
+            return list(in_order(run, items, executor, pool.sizing))
 
-    sizing = Sizing(CONVERT_MEMORY, what)
-    with ThreadPoolExecutor(sizing.limit) as executor:
-        return list(in_order(run, items, executor, sizing))
+
+def copy_size(source: Source, store, wanted) -> int:
+    """The bytes a conversion will copy to the disk, stated beforehand: the
+    size, from the source's file list, of its upstream files whose path
+    wanted accepts, each content once. The conversion says which files it
+    copies (copied_as_records, copied_as_trees, copied_for_repository),
+    and each_read reserves that on the disk its copies go to. 0 for an
+    empty source and for one whose file list the store does not hold."""
+    if source.data["type"] == "empty":
+        return 0
+    return sum({placed.sha256: placed.length for path, (_, placed) in
+                stored_files(source.data["checksum"], store).items() if wanted(path)}.values())
+
+
+def copied_as_records(source: Source):
+    """Which paths the conversion of documents copies: the files read as
+    records (markdown.documents opens them and the file their join reads
+    as files)."""
+    return lambda path: is_records(source, path)
+
+
+def copied_by_pointers(source: Source, paths):
+    """Which paths the reading of the documents tasks point into copies
+    (markdown.chosen reads only the files the pointed paths, a file's or
+    <file>#<record id>, name): those of them read as records."""
+    pointed = list(paths)
+    return lambda path: is_records(source, path) and any(p == path or p.startswith(f"{path}#") for p in pointed)
+
+
+def copied_as_trees(source: Source):
+    """Which paths the reading of conversations copies: the chat files read
+    as message trees (conversations.of_file opens them as files)."""
+    return lambda path: is_message_tree(source, path)
+
+
+def copied_for_repository(source: Source):
+    """Which paths a task's repository copies (tasks.repository loads the
+    source's files into a git index from copies): every file but the
+    history's (`.git/`)."""
+    return lambda path: not path.startswith(".git/")
 
 
 # -- the final tree -------------------------------------------------------------
@@ -365,10 +450,10 @@ def each_read(work, items, store, copies=None, telemetry=None, what="sources rea
 def tree_key(source: Source) -> str:
     """The fingerprint of a source's final tree and of the check that its
     files are text: its checksum, cuts, patches and formats (which decide
-    each file's encoding), and this wpt-dataset's version."""
+    each file's encoding), and the code (wpt_utils.programs.code)."""
     return fingerprint({
         "kind": "source-tree",
-        "wpt_dataset": VERSION,
+        "code": code(),
         "checksum": source.data["checksum"],
         "formats": source.data["formats"],
         "cuts": source.data.get("cuts", []),

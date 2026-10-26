@@ -1,13 +1,15 @@
 import hashlib
+import importlib
 import json
-import time
+from pathlib import Path
 
 import pytest
 
-from wpt_dataset import build, conversations, sources
+from wpt_dataset import build, conversations, markdown, sources, tasks, workers
 from wpt_dataset.build import build_dataset, document_list, is_held_out
 from wpt_dataset.cli import main
-from wpt_dataset.errors import ChecksumMismatch, LockedDocumentsMissing, LockMismatch, PoolError, TokenizerVersionNeeded
+from wpt_dataset.errors import (ChecksumMismatch, LockedDocumentsMissing, LockMismatch, PoolError, RuleViolation,
+                                 TokenizerVersionNeeded)
 from wpt_dataset.sources import stored_files
 from wpt_store import CorruptObject, open_store
 from wpt_store.shards import read_shard, token_hash
@@ -37,6 +39,9 @@ def setup_recipes(kit, repo, store, corpus, total_tokens, held_out=0.0):
     """The corpus as a source, downloaded into store, and recipes to build it; returns its id."""
     sid = kit.add_source(repo, store, "example", "corpus", {
         "type": "git", "address": corpus[0], "revision": corpus[1],
+        # the held-out hash reads the document's path, not its id: the id holds a hash of the address, which
+        # holds the temporary folder's name, so the same test would hold other documents out in every run
+        "held_out_by": {"pattern": r"(fr|en)/(?:lit/)?(text\d)"},
         "tags": [{"tags": ["fr"], "paths": ["fr/**"]}, {"tags": ["literature"], "paths": ["fr/lit/**"]},
                  {"tags": ["en"], "paths": ["en/**"]}]})
     kit.write_recipe(repo, "mixture", "main", {"pools": [
@@ -220,6 +225,23 @@ def test_the_locked_vocabulary_stays_until_its_version_is_raised(kit, repo, stor
     assert new_lock["vocabulary_sha256"] != lock["vocabulary_sha256"] and len(new_lock["documents"]) == 11
 
 
+def test_a_change_of_the_tokenizer_code_asks_for_no_version_and_leaves_the_lock_as_it_is(kit, repo, store, corpus,
+                                                                                         monkeypatch):
+    # the lock holds no version of the tokenizer code; the code's hash is in the fingerprints, so changed code
+    # builds the locked vocabulary again, and only a change of the recipe asks a person for a version
+    setup_recipes(kit, repo, store, corpus, total_tokens=1000)
+    first = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))
+    lock_path = repo.root / "data" / "recipes" / "tokenizers" / "main.lock.json"
+    locked = lock_path.read_bytes()
+    assert set(json.loads(locked)) == {"recipe", "documents", "vocabulary_sha256"}
+    assert "version" not in first["tokenizer"] and "recipe_version" in first["tokenizer"]
+
+    monkeypatch.setattr(build, "code", lambda: "another tokenizer code")
+    second = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))
+    assert second["tokenizer"]["vocabulary"] == first["tokenizer"]["vocabulary"] and lock_path.read_bytes() == locked
+    assert second["fingerprints"] != first["fingerprints"]  # the code is part of what made the tokens
+
+
 def test_a_locked_vocabulary_that_cannot_be_rebuilt_the_same_is_refused(kit, repo, store, corpus, tmp_path):
     sid = setup_recipes(kit, repo, store, corpus, total_tokens=1000)
     build_dataset(repo, "small", store, log=lambda _: None)
@@ -349,13 +371,42 @@ class Machine:
     def idle_cores(self):
         return float(self.cores)
 
+    def free_disk(self, folder):
+        return 1e15
+
+
+def first_ends_last(monkeypatch, module, name, first, log):
+    """Make the worker function module.name end last for the item first
+    (first_ends_last.py), each item's end logged into log; returns the
+    module's ended_out_of_order."""
+    monkeypatch.syspath_prepend(str(Path(__file__).parent))  # where the workers import the stand-in from
+    helper = importlib.import_module("first_ends_last")
+    monkeypatch.setattr(module, name, helper.FirstEndsLast(module.__name__, name, first, log))
+    return helper.ended_out_of_order
+
+
+def on_cores(monkeypatch, cores):
+    """Make the build's worker processes as many as a machine of cores, with plenty of memory and disk, allows."""
+    monkeypatch.setattr(workers, "Sizing", lambda what, cores=cores, **more: Sizing(what, Machine(cores), **more))
+
+
+def source_of(events, span):
+    """The source of the "source" span an event's span lies in (through the parts a worker records under it)."""
+    starts = {e["span"]: e for e in events if e["kind"] == "span_start"}
+    while span in starts:
+        if starts[span]["name"] == "source":
+            return starts[span]["attributes"]["source"]
+        span = starts[span]["parent"]
+    return None
+
 
 @pytest.mark.parametrize("stream", [False, True])
 def test_sources_converted_at_once_give_the_dataset_converted_one_at_a_time(kit, repo, store, tmp_path, monkeypatch,
                                                                             stream):
-    # sources and documents are worked on several at once, finishing in any
-    # order; the dataset id, the documents and the shards must not change, and
-    # the record still ties each ref a source's conversion sets to that source
+    # sources are converted in worker processes, several at once, and
+    # documents encoded several at once, finishing in any order; the dataset
+    # id, the documents and the shards must not change, and the record still
+    # ties each ref a source's conversion sets to that source
     ids = []
     for n in range(4):
         files = {f"en/{n}-{i}.txt": f"source {n} text {i}: the wind blows over hill {i}. ".encode() * 20
@@ -369,22 +420,12 @@ def test_sources_converted_at_once_give_the_dataset_converted_one_at_a_time(kit,
     kit.write_model_recipe(repo, "small", {"mixture": "main", "tokenizer": "main", "total_tokens": 3000,
                                            "held_out": 0.2})
     build_dataset(repo, "small", store, log=lambda _: None)  # locks the vocabulary
-    order = {sid: n for n, sid in enumerate(ids)}
-    converted, tokenized = build._converted, build.source_tokens
-
-    def last_first(source, *args):  # the later a source, the sooner it is done
-        time.sleep(0.05 * (len(ids) - order[source.id]))
-        return converted(source, *args)
-
-    def tokens_last_first(repo_, source, *args):
-        time.sleep(0.05 * (len(ids) - order[source.id]))
-        return tokenized(repo_, source, *args)
-
-    monkeypatch.setattr(build, "_converted", last_first)
-    monkeypatch.setattr(build, "source_tokens", tokens_last_first)
-    built = {}
-    for cores in (1, 16):  # 1: one at a time; 16: 12 at once
-        monkeypatch.setattr(build, "Sizing", lambda memory, what, cores=cores: Sizing(memory, what, Machine(cores)))
+    built, log = {}, tmp_path / "ends.txt"
+    for cores in (1, 16):  # 1: one worker process at a time; 16: 12 at once, the first source ending last
+        on_cores(monkeypatch, cores)
+        if cores == 16:
+            ended_out_of_order = first_ends_last(monkeypatch, build, "_tokenized" if stream else "_converted",
+                                                 sorted(ids)[0], log)
         fresh = fresh_store(kit, repo, tmp_path / f"store-{cores}", ids[0])
         kit.download(repo, fresh, *ids[1:])
         with Telemetry.start(fresh, "wpt-dataset-build", [], "small", env_file=tmp_path / ".env",
@@ -392,12 +433,13 @@ def test_sources_converted_at_once_give_the_dataset_converted_one_at_a_time(kit,
             dataset_id = build_dataset(repo, "small", fresh, log=lambda _: None, stream=stream, telemetry=telemetry)
         built[cores] = dataset_id, record_of(fresh, dataset_id), document_list(fresh, dataset_id)
         events = [json.loads(line) for line in fresh.read_record(telemetry.folder, "events.jsonl").splitlines()]
-        spans = {e["span"]: e["attributes"]["source"] for e in events
-                 if e["kind"] == "span_start" and e["name"] == "source"}
+        at_once = [e["attributes"]["limit"] for e in events if e["kind"] == "event" and e["name"] == "sources.at_once"]
+        assert at_once and set(at_once) == {max(1, int(cores * 0.75))}  # the vocabulary's rebuild, then the dataset
         kind = "source-tokens" if stream else "source-trees"  # what each source's conversion stores once
-        refs = [spans.get(e["span"]) for e in events
+        refs = [source_of(events, e["span"]) for e in events
                 if e["kind"] == "event" and e["name"] == "store.ref_set" and e["attributes"]["ref"].startswith(kind)]
-        assert sorted(refs) == sorted(ids)
+        assert sorted(refs) == sorted(ids)  # recorded by the worker, under its source's span
+    assert ended_out_of_order(log, sorted(ids)[0])
     (one_id, one, one_list), (many_id, many, many_list) = built[1], built[16]
     assert many_id == one_id and many_list == one_list
     assert one["documents"]["duplicates_removed"] == 3 and len(one["sources"]) == 4
@@ -486,9 +528,7 @@ def test_a_source_left_out_gives_the_same_dataset_on_any_machine_and_never_moves
     kit.download(repo, whole, talks)
     held = record_of(whole, build_dataset(repo, "small", whole, log=lambda _: None))  # locks the vocabulary
     assert held["conversations"]["sources"] == [talks]
-    other = fresh_store(kit, repo, tmp_path / "other", sid)
-    for missing_it in (store, other):  # a store without the vocabulary trains it again, which needs every source
-        missing_it.put_bytes(whole.get_bytes(held["tokenizer"]["vocabulary"]))
+    other = fresh_store(kit, repo, tmp_path / "other", sid)  # without the vocabulary: it is rebuilt from the lock
 
     here = build_dataset(repo, "small", store, log=lambda _: None)
     assert build_dataset(repo, "small", other, log=lambda _: None) == here
@@ -498,43 +538,186 @@ def test_a_source_left_out_gives_the_same_dataset_on_any_machine_and_never_moves
     assert held["shards"] == missing["shards"]
 
 
-def test_a_dataset_whose_record_has_another_shape_is_built_again(kit, repo, store, corpus):
+def test_a_dataset_whose_record_lacks_a_field_is_built_again(kit, repo, store, corpus):
     # a dataset whose record a build of another shape wrote is built again, so
     # wpt-train, which reads the current shape only, can use it
     setup_recipes(kit, repo, store, corpus, total_tokens=500)
     dataset_id = build_dataset(repo, "small", store, log=lambda _: None)
     current = record_of(store, dataset_id)
-    older = {k: v for k, v in current.items() if k != "fingerprints"} | {"schema": build.RECORD_SCHEMA - 1}
+    older = {k: v for k, v in current.items() if k != "fingerprints"}
+    assert not build.current_record(older) and build.current_record(current)
     store.set_ref("datasets", dataset_id, store.put_bytes(json.dumps(older).encode()))
 
     assert build_dataset(repo, "small", store, log=lambda _: None) == dataset_id
-    assert record_of(store, dataset_id)["schema"] == build.RECORD_SCHEMA
+    assert build.current_record(record_of(store, dataset_id))
     assert record_of(store, dataset_id)["fingerprints"] == current["fingerprints"]
 
 
 @pytest.mark.parametrize("stream", [False, True])
 def test_conversations_read_at_once_give_the_dataset_read_one_at_a_time(kit, repo, store, corpus, tmp_path,
                                                                         monkeypatch, stream):
-    # chat sources are read several at once, finishing in any order; the
-    # conversations and the dataset id must be the ones read one at a time give
+    # chat sources are read in worker processes, several at once, finishing
+    # in any order; the conversations and the dataset id must be the ones read
+    # one at a time give
     sid = setup_recipes(kit, repo, store, corpus, total_tokens=500)
     ids = [chat_source(kit, repo, store, tmp_path, f"talks-{n}", text=f"Answer number {n}.") for n in range(4)]
-    order = {talk: n for n, talk in enumerate(ids)}
-    read = conversations.of_file
-
-    def last_first(source_id, *args):  # the later a source, the sooner it is done
-        time.sleep(0.05 * (len(ids) - order[source_id]))
-        return read(source_id, *args)
-
-    monkeypatch.setattr(conversations, "of_file", last_first)
-    built = {}
-    for cores in (1, 16):  # 1: one at a time; 16: 12 at once
-        monkeypatch.setattr(sources, "Sizing", lambda memory, what, cores=cores: Sizing(memory, what, Machine(cores)))
+    built, log = {}, tmp_path / "ends.txt"
+    for cores in (1, 16):  # 1: one worker process at a time; 16: 12 at once, the first source ending last
+        on_cores(monkeypatch, cores)
+        if cores == 16:
+            ended_out_of_order = first_ends_last(monkeypatch, conversations, "_of_source", sorted(ids)[0], log)
         fresh = fresh_store(kit, repo, tmp_path / f"store-{cores}", sid)
         kit.download(repo, fresh, *ids)
         dataset_id = build_dataset(repo, "small", fresh, log=lambda _: None, stream=stream)
         record = record_of(fresh, dataset_id)
         built[cores] = dataset_id, record["conversations"], fresh.get_bytes(record["conversations"]["object"])
+    assert ended_out_of_order(log, sorted(ids)[0])
     assert built[1] == built[16]
     assert built[1][1]["sources"] == sorted(ids) and built[1][1]["count"] == 4
 
+
+
+TASK = {"instructions": "Write hello into out.txt.", "image": "tiny",
+        "limits": {"max_turns": 4, "max_tokens": 200, "command_seconds": 5}, "needs": [["write", "bash"]]}
+CHECK = b"#!/bin/sh\ntest -f out.txt && echo 1 || echo 0\n"
+BOOK = b"The lamp was lit at dusk. The keeper wrote the hour in his log. Then he slept.\n"
+
+
+def book_source(kit, repo, store, tmp_path, fetch=True):
+    """A source of one text, notes.txt, that tasks point into; returns (its id, its Markdown)."""
+    folder, commit = kit.git_project(tmp_path / "book", files={"notes.txt": BOOK}, executable=set(), symlinks={})
+    sid = kit.add_source(repo, store, "example", "book", {"type": "git", "address": folder, "revision": commit},
+                         fetch=fetch)
+    return sid, BOOK.strip() + b"\n"  # the text's Markdown: its paragraph, ending with one newline
+
+
+def task_source(kit, repo, store, tmp_path, name, book, text):
+    """A source of two tasks tagged finish-tasks: one on its own files, one taking its file from book's
+    notes.txt (a pointer); returns its id."""
+    (repo.root / "data" / "images" / "tiny").mkdir(parents=True, exist_ok=True)
+    (repo.root / "data" / "images" / "tiny" / "Dockerfile").write_text("ARG BASE=debian:trixie-slim\nFROM ${BASE}\n")
+    end = text.index(b" The keeper")
+    pointed = {**TASK, "instructions": f"Read the lamp's line, task {name}.", "pointers": [
+        {"for": "files", "path": "lamp.txt", "source": book, "document": "notes.txt", "span": [0, end],
+         "sha256": hashlib.sha256(text[:end]).hexdigest(), "removed": []}]}
+    files = {"tasks/own/task.json": json.dumps({**TASK, "instructions": f"Task {name}."}).encode(),
+             "tasks/own/check": CHECK, "tasks/own/files/README": f"start {name}\n".encode(),
+             "tasks/pointed/task.json": json.dumps(pointed).encode(), "tasks/pointed/check": CHECK}
+    folder, commit = kit.git_project(tmp_path / name, files=files,
+                                     executable={path for path in files if path.endswith("/check")}, symlinks={})
+    return kit.add_source(repo, store, "example", name, {
+        "type": "git", "address": folder, "revision": commit, "formats": [{"format": "task", "paths": ["tasks/**"]}],
+        "tags": [{"tags": ["finish-tasks"], "paths": ["**"]}]})
+
+
+def test_task_sources_read_at_once_give_the_dataset_read_one_at_a_time(kit, repo, store, corpus, tmp_path,
+                                                                       monkeypatch):
+    # task sources, and the source their pointers read, are read in worker
+    # processes, several at once; the tasks kept and the dataset id must be the
+    # ones a machine reading one at a time gives
+    sid = setup_recipes(kit, repo, store, corpus, total_tokens=500)
+    book, text = book_source(kit, repo, store, tmp_path)
+    ids = [task_source(kit, repo, store, tmp_path, f"tasks-{n}", book, text) for n in range(4)]
+    built, log = {}, tmp_path / "ends.txt"
+    for cores in (1, 16):  # 1: one worker process at a time; 16: 12 at once, the first source ending last
+        on_cores(monkeypatch, cores)
+        if cores == 16:
+            ended_out_of_order = first_ends_last(monkeypatch, tasks, "_tagged", sorted(ids)[0], log)
+        fresh = fresh_store(kit, repo, tmp_path / f"store-{cores}", sid)
+        kit.download(repo, fresh, book, *ids)
+        dataset_id = build_dataset(repo, "small", fresh, log=lambda _: None)
+        record = record_of(fresh, dataset_id)
+        built[cores] = dataset_id, record["tasks"], fresh.get_bytes(record["tasks"]["object"])
+    assert ended_out_of_order(log, sorted(ids)[0])
+    assert built[1] == built[16]
+    assert built[1][1]["count"] == 8 and built[1][1]["sources"] == sorted([book, *ids])
+    found = [json.loads(line) for line in built[1][2].decode().splitlines()]
+    assert [task["id"] for task in found] == [f"{sid}/tasks/{folder}" for sid in sorted(ids)
+                                              for folder in ("own", "pointed")]
+    lamp = tasks.from_json(found[1]).files["lamp.txt"][1]
+    assert lamp == b"The lamp was lit at dusk." and all(task["files"] == found[1]["files"] for task in found[1::2])
+
+
+def test_a_task_pointing_into_a_source_not_downloaded_stops_the_build_naming_the_task(kit, repo, store, corpus,
+                                                                                     tmp_path):
+    # the book a task reads is not in this store: the build leaves the book out,
+    # and the task, which would give the model a text that is not there, stops it
+    setup_recipes(kit, repo, store, corpus, total_tokens=500)
+    build_dataset(repo, "small", store, log=lambda _: None)  # locks the vocabulary
+    book, text = book_source(kit, repo, store, tmp_path, fetch=False)
+    tasks_id = task_source(kit, repo, store, tmp_path, "tasks", book, text)
+    with pytest.raises(RuleViolation, match=f"^{tasks_id}/tasks/pointed: it points into {book}, which the build "
+                                            f"left out$"):
+        build_dataset(repo, "small", store, log=lambda _: None)
+
+
+@pytest.mark.parametrize("stream", [False, True])
+def test_a_locked_vocabulary_rebuilt_where_a_source_is_missing_reports_it_and_goes_on(kit, repo, store, corpus,
+                                                                                      tmp_path, stream):
+    # a store without the vocabulary rebuilds it from the documents its lock
+    # lists; a source added since, not downloaded there, is reported, never a stop
+    sid = setup_recipes(kit, repo, store, corpus, total_tokens=1000)
+    first = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))  # locks the vocabulary
+    folder, commit = kit.git_project(tmp_path / "late", files={"en/late.txt": b"herons wait by the river. " * 30},
+                                     executable=set(), symlinks={})
+    late = kit.add_source(repo, store, "example", "late", {"type": "git", "address": folder, "revision": commit,
+                                                           "tags": [{"tags": ["en"], "paths": ["**"]}]}, fetch=False)
+    fresh = fresh_store(kit, repo, tmp_path / "fresh", sid)
+    logged = []
+    record = record_of(fresh, build_dataset(repo, "small", fresh, log=logged.append, stream=stream))
+    assert record["tokenizer"]["vocabulary"] == first["tokenizer"]["vocabulary"]
+    assert any(line.startswith(f"skipped {late}: NotDownloaded: ") for line in logged)
+    assert [failed["source"] for failed in record["skipped"]] == [late]
+
+
+def test_a_streamed_conversion_copies_only_the_files_it_needs_as_files(kit, repo, store, tmp_path):
+    # a records file is read as a file, so it is copied; the text beside it is
+    # read from the store by range and never copied, nor is any file of the
+    # store itself opened in place: the patched records file, a store object,
+    # is copied too
+    records = "".join(json.dumps({"id": str(i), "text": f"record {i} tells of the sea. " * 10}) + "\n"
+                      for i in range(3)).encode()
+    folder, commit = kit.git_project(tmp_path / "mixed", files={"data/part.jsonl": records,
+                                                                "notes.txt": b"plain words on a page.\n" * 50},
+                                     executable=set(), symlinks={})
+    changed = records.replace(b"record 0 tells", b"record 0 says")
+    lines = records.decode().splitlines()
+    patch = ("diff --git a/data/part.jsonl b/data/part.jsonl\n--- a/data/part.jsonl\n+++ b/data/part.jsonl\n"
+             f"@@ -1,3 +1,3 @@\n-{lines[0]}\n+{changed.decode().splitlines()[0]}\n {lines[1]}\n {lines[2]}\n")
+    sid = kit.add_source(repo, store, "example", "mixed", {
+        "type": "git", "address": folder, "revision": commit,
+        "formats": [{"format": "records", "paths": ["data/**"], "text": "text", "id": "id"},
+                    {"format": "text", "paths": ["notes.txt"]}]}, patches=[patch])
+    source = repo.source(sid)
+    copies = tmp_path / "copies"
+    view = store.copies_in(copies)
+    tree, _ = sources.source_tree(source, view)
+    found = [converted.path for converted in markdown.documents(source, tree, view, repo)]
+    assert found == ["data/part.jsonl#0", "data/part.jsonl#1", "data/part.jsonl#2", "notes.txt"]
+    assert sorted(path.name for path in copies.rglob("*") if path.is_file()) == [hashlib.sha256(changed).hexdigest()]
+
+
+def test_the_disk_a_conversion_reserves_is_the_size_of_the_files_it_will_copy_stated_beforehand(kit, repo, store, tmp_path):
+    # records files are copied as files; text, and the history of a git source, are read from the store by
+    # range; a task's repository copies every file but the history's; pointers copy the files they point into
+    records = "".join(json.dumps({"id": str(i), "text": f"record {i} tells of the sea. " * 10}) + "\n"
+                      for i in range(3)).encode()
+    other = records.replace(b"sea", b"sky")
+    notes = b"plain words on a page.\n" * 50
+    folder, commit = kit.git_project(tmp_path / "mixed", files={"data/a.jsonl": records, "data/b.jsonl": other,
+                                                               "data/copy.jsonl": records, "notes.txt": notes},
+                                     executable=set(), symlinks={})
+    sid = kit.add_source(repo, store, "example", "mixed", {
+        "type": "git", "address": folder, "revision": commit,
+        "formats": [{"format": "records", "paths": ["data/**"], "text": "text", "id": "id"},
+                    {"format": "text", "paths": ["notes.txt"]}]})
+    source = repo.source(sid)
+
+    # a content that several paths hold is copied once
+    assert sources.copy_size(source, store, sources.copied_as_records(source)) == len(records) + len(other)
+    assert sources.copy_size(source, store, sources.copied_by_pointers(source, ["data/b.jsonl#1"])) == len(other)
+    assert sources.copy_size(source, store, sources.copied_by_pointers(source, ["notes.txt"])) == 0
+    assert sources.copy_size(source, store, sources.copied_for_repository(source)) \
+        == len(records) + len(other) + len(notes)
+    assert sources.copy_size(source, store, sources.copied_as_trees(source)) == 0  # it holds no chat file
+    assert sources.copy_size(source, store, lambda path: False) == 0

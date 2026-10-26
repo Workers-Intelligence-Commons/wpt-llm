@@ -4,9 +4,8 @@
   "title": "WPT image lock (data/images/<name>/lock.json), written by `wpt-agent lock-image`: the inputs an image is built from",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "base", "snapshot", "packages"],
+  "required": ["base", "snapshot", "packages"],
   "properties": {
-    "schema": {"const": 1, "description": "shape version of this file, for migrations"},
     "base": {"type": "string", "pattern": "^[^@\\s]+@sha256:[0-9a-f]{64}$", "description": "the Dockerfile's base image, pinned by registry digest"},
     "snapshot": {"type": "string", "pattern": "^[0-9]{8}T[0-9]{6}Z$", "description": "the moment, in UTC, of the dated package archive (snapshot.debian.org, snapshot.ubuntu.com) apt reads"},
     "packages": {

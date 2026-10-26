@@ -16,7 +16,7 @@ import pytest
 
 from wpt_dataset import download as downloading
 from wpt_dataset import manifest, sources
-from wpt_dataset.repo import CURRENT_SCHEMA, Repo, address_hash, dump_json
+from wpt_dataset.repo import Repo, address_hash, dump_json
 from wpt_store import open_store
 
 # The same small project, as git, mercurial and tar would publish it.
@@ -114,10 +114,11 @@ class QuietHandler(http.server.SimpleHTTPRequestHandler):
 
 class RangeHandler(QuietHandler):
     """Serves a file whole or one range of it (`bytes=START-` or
-    `bytes=START-END`), says it serves ranges, and adds (path, its Range
-    header or None) of every GET to `asked`."""
+    `bytes=START-END`), says it serves ranges unless `announce` is false,
+    and adds (path, its Range header or None) of every GET to `asked`."""
 
     asked: list
+    announce = True
 
     def do_GET(self):
         self.asked.append((self.path, self.headers.get("Range")))
@@ -135,7 +136,8 @@ class RangeHandler(QuietHandler):
             data = data[start:end + 1]
         else:
             self.send_response(200)
-        self.send_header("Accept-Ranges", "bytes")
+        if self.announce:
+            self.send_header("Accept-Ranges", "bytes")
         self.send_header("Content-Length", str(len(data)))
         self.end_headers()
         try:
@@ -144,16 +146,32 @@ class RangeHandler(QuietHandler):
             pass
 
 
+def _ranged(folder, announce):
+    """(folder, base URL, asked, the server) of a local HTTP server serving byte ranges (RangeHandler)."""
+    asked = []
+    folder.mkdir()
+    handler = functools.partial(type("Handler", (RangeHandler,), {"asked": asked, "announce": announce}),
+                                directory=str(folder))
+    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    return folder, f"http://127.0.0.1:{server.server_address[1]}", asked, server
+
+
 @pytest.fixture
 def ranged_folder(tmp_path):
     """(folder, base URL, asked) of a local HTTP server that serves byte
     ranges (RangeHandler); put files in folder."""
-    folder, asked = tmp_path / "ranged", []
-    folder.mkdir()
-    handler = functools.partial(type("Handler", (RangeHandler,), {"asked": asked}), directory=str(folder))
-    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
-    threading.Thread(target=server.serve_forever, daemon=True).start()
-    yield folder, f"http://127.0.0.1:{server.server_address[1]}", asked
+    *found, server = _ranged(tmp_path / "ranged", True)
+    yield tuple(found)
+    server.shutdown()
+
+
+@pytest.fixture
+def unannounced_ranged_folder(tmp_path):
+    """ranged_folder's, from a server that serves byte ranges without
+    saying so (no Accept-Ranges header)."""
+    *found, server = _ranged(tmp_path / "unannounced", False)
+    yield tuple(found)
     server.shutdown()
 
 
@@ -221,7 +239,7 @@ def add_source(repo, store, origin, item, data, patches=(), compute_checksum=Tru
     """Write data/sources/<id>/source.json, filling in the checksum from the
     real upstream, and download it into the store (fetch, default:
     compute_checksum). Returns the source id."""
-    data = {"schema": 8, "checksum": "sha256:" + "0" * 64,
+    data = {"checksum": "sha256:" + "0" * 64,
             "licenses": [{"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION, "text": LICENSE_TEXT}],
             "formats": [{"format": "text", "paths": ["**"]}], "decision": DECISION, **data}
     if compute_checksum:
@@ -257,7 +275,7 @@ def write_model_recipe(repo, name, data):
 
 def write_recipe(repo, kind, name, document):
     path = repo.root / "data" / "recipes" / f"{kind}s" / f"{name}.json"
-    path.write_text(json.dumps({"schema": CURRENT_SCHEMA[kind], **document}, indent=2) + "\n", encoding="utf-8", newline="\n")
+    path.write_text(json.dumps(document, indent=2) + "\n", encoding="utf-8", newline="\n")
     return path
 
 

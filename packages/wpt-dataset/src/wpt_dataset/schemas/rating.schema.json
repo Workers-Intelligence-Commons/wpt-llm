@@ -4,9 +4,8 @@
   "title": "WPT rating (one line of a file in the rating format: a person's pass or fail on one attempt of a wpt-eval run; docs/evaluation.md)",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "task", "weights", "record", "attempt", "plain", "verdict", "by", "date"],
+  "required": ["task", "weights", "record", "attempt", "plain", "verdict", "by", "date"],
   "properties": {
-    "schema": {"const": 1, "description": "shape version of the rating"},
     "task": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}(/[^/]+)+$", "description": "the id of the task the attempt was made on: <source id>/<task folder>, as attempts.jsonl names it"},
     "weights": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "description": "the sha256 of each weight file of the model that made the attempt, as the run record's ids.json names them (inputs.weights)"},
     "record": {"type": "string", "pattern": "^[A-Za-z0-9_-][A-Za-z0-9._-]*$", "description": "the wpt-eval run record folder whose attempts.jsonl holds the attempt (records/<folder>/ in the store)"},

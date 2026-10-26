@@ -145,7 +145,9 @@ reuses the first), the step as `provenance.json` records it, the
 fingerprint of the dataset part it reads (the record's `fingerprints`: `text`
 for `read-text`, `conversations` for `answer-as-assistant`, `tasks` for
 `finish-tasks` and `finish-tasks-with-less-writing`), the seed and the
-versions of the packages the training code is made of. A change to the
+code (the commit it runs from and a hash of its uncommitted changes;
+[architecture.md](architecture.md), "Fingerprints and the store"), so any
+commit makes every kept result unknown. A change to the
 conversations, or to a source that holds only conversations, leaves the
 fingerprint of `read-text` as it was, and so its kept result stands. The
 options, which only say how the hardware runs it, stay out, `--stream` and
@@ -919,7 +921,7 @@ folder per task:
 ```
 
 ```json
-{"schema": 3, "instructions": "Fix the failing test in calc.py.", "image": "python",
+{"instructions": "Fix the failing test in calc.py.", "image": "python",
  "limits": {"max_turns": 20, "max_tokens": 4000, "command_seconds": 30},
  "container": {"memory": 8192}, "needs": [["read", "bash"], ["edit", "write"]],
  "replies": [{"pattern": "(?i)python.*version", "reply": "Python 3.13."}],
@@ -998,11 +1000,11 @@ folder per task:
   rest ("Rewards", below). There is no gate for every task beyond the
   missing answer.
 
-A task's shape is 3 (shape 2 added `area` and `gates`, shape 3
-`answered_in`). Task files are a source's bytes, which `wpt-dataset
-migrate` never rewrites: a `task.json` of an earlier shape is read in shape
-3 each time it is read (`migrate.upgrade`), by the build, the measures and
-the task editor of `wpt-web`, whose save then writes shape 3. Only a person
+Task files are a source's bytes, which `wpt-dataset migrate` never
+rewrites: a `task.json` of an earlier shape (a task with `replies` and no
+`answered_in`) is read in the current shape each time it is read
+(`migrate.upgrade`), by the build, the measures and the task editor of
+`wpt-web`, whose save then writes the current shape. Only a person
 knows where a task's answers live, so a task with replies gets an empty
 `answered_in`, which `wpt-dataset check --fetch` then refuses, naming its
 `task.json` to fill in.
@@ -1280,7 +1282,7 @@ download anything, and nothing checks them. A person reviews them like
 any other change.
 
 An image's pool of tools is `data/images/<name>/tools.json` (optional),
-written by people like the Dockerfile: `{"schema": 1, "tools": [...]}`,
+written by people like the Dockerfile: `{"tools": [...]}`,
 each tool declared as a task declares its own, its program a file the
 Dockerfile puts in the image. `wpt-dataset check` checks it against
 `image-tools.schema.json` and refuses a tool declared twice or taking the
@@ -1950,7 +1952,7 @@ conversation in the chat format ([chat-format.md](chat-format.md)) whose
 any `chat` file:
 
 ```json
-{"schema": 3, "tools": [...], "messages": [...],
+{"tools": [...], "messages": [...],
  "metadata": {"tools": {"shell": "bash", "...": "..."}, "answer": {"answer": "...", "confidence": 0.5},
               "step": "finish-tasks", "task": "<task id>", "round": 1, "group": 3, "attempt": 2, "terse": false,
               "dropped": false, "error": null, "ended": "answered",

@@ -25,16 +25,15 @@ tokenizer recipe, shared by every dataset and model that uses it.
 `data/recipes/tokenizers/<name>.json`:
 
 ```json
-{ "schema": 2, "version": 1, "mixture": "<mixture name>", "vocab_size": 32000, "note": "" }
+{ "version": 1, "mixture": "<mixture name>", "vocab_size": 32000, "note": "" }
 ```
 
 ### The lock freezes it
 
 The first build of a recipe version trains the vocabulary on the documents
 its mixture selects (each once), and writes
-`data/recipes/tokenizers/<name>.lock.json`: the recipe, the tokenizer code's
-version, every document it was trained on (`[id, sha256 of its Markdown]`)
-and the vocabulary's sha256. Commit it. From then on, every build of that
+`data/recipes/tokenizers/<name>.lock.json`: the recipe, every document it
+was trained on (`[id, sha256 of its Markdown]`) and the vocabulary's sha256. Commit it. From then on, every build of that
 version uses that vocabulary:
 
 - **Adding or changing sources never retrains it.** Many datasets and
@@ -46,9 +45,11 @@ version uses that vocabulary:
   data, another size) or a change of the tokenizing algorithm, raise
   `version` in the recipe: the next build trains a new vocabulary and
   replaces the lock (git history keeps the old one). Editing the recipe
-  (other than its `note`), or a new tokenizer code version, without
-  raising `version` stops the build (`TokenizerVersionNeeded`), so one name
-  and version always mean one vocabulary.
+  (other than its `note`) without raising `version` stops the build
+  (`TokenizerVersionNeeded`), so one name and version always mean one
+  vocabulary. A change of the tokenizer's code asks for no version: the
+  lock keeps the vocabulary, and the code's hash is in the fingerprint of
+  what the code makes, so a build never reuses a result an older code made.
 - **Every machine gets the same vocabulary.** A store that lacks it trains
   it again from the documents the lock lists, and the result must have the
   locked sha256 (`LockMismatch` otherwise). Training is deterministic: it
@@ -56,13 +57,16 @@ version uses that vocabulary:
   the smaller ids wins. When a listed document is no longer available (its
   source changed or was cut), that store cannot rebuild it
   (`LockedDocumentsMissing`): copy the vocabulary from a store that holds
-  it, or raise `version`.
+  it, or raise `version`. While a store rebuilds it, an admitted source
+  that fails, or is not in that store, is reported and left out, never a
+  stop: only the documents the lock lists decide.
 - **Erasure does not reach a locked vocabulary** until `version` is raised:
   merges learned from text that was erased later stay in it (see
   [erasure.md](erasure.md)).
 
-The tokenizer code's version is in `packages/wpt-tokenizer/rust/Cargo.toml`.
-Bump it whenever a code change could alter training or encoding results.
+The tokenizer's version is in `packages/wpt-tokenizer/rust/Cargo.toml`; a
+vocabulary file names it (see below). Bump it when a change makes the ids
+mean other tokens.
 
 ### Where the vocabulary is checked
 

@@ -1,5 +1,5 @@
-"""The always-on source server: rounds that keep this checkout's sources
-current, one after another, forever, with a pause between two (serve).
+"""Always-on monitoring: rounds that keep this checkout's sources current,
+one after another, forever, with a pause between two (serve).
 
 A round (one_round), in the checkout it runs in:
 
@@ -9,18 +9,23 @@ A round (one_round), in the checkout it runs in:
    the source drafter rules: only a license change sends a source back to
    under-review. A source drafter that cannot run is logged in the round's
    output and the round goes on.
-2. Every source is downloaded again in full and checked, in one session of
-   the round's command: a draft (checksum all zeros) is filled in as
-   `wpt-dataset fill-checksum` fills it; any other is downloaded even when
-   its tree is in the store (download.one, again), so a source whose
-   upstream no longer gives its checksum fails, and only the failure is
-   recorded. Each source that came is then checked as `check --fetch`
-   checks it.
+2. Every admitted source is downloaded again and checked, in one session
+   of the round's command: one whose checksum a source drafter set back
+   to a draft (all zeros, a new revision) is filled in as `wpt-dataset
+   fill-checksum` fills it; any other is downloaded even when its tree is
+   in the store (download.one, again), so a source whose upstream no
+   longer gives its checksum fails, and only the failure is recorded. A
+   git source asks only for the files the store does not hold (the store
+   database's map of git objects). Each source that came is then checked
+   as `check --fetch` checks it. Sources under review or refused are not
+   downloaded.
 
-Nothing is committed: the drafts and the filled checksums stay in the
-checkout. A round returns its failures, one line each, and serve logs
-them; the next round comes all the same. A record the store refuses (RecordError) stops the
-server, as it stops any recorded command.
+The drafts' `by` is the one given, or this machine's name marked as a
+machine's (repo.machine_name): a machine drafts, and never admits or
+refuses. Nothing is committed: the drafts and the filled checksums stay in
+the checkout. A round returns its failures, one line each, and serve logs
+them; the next round comes all the same. A record the store refuses
+(RecordError) stops the loop, as it stops any recorded command.
 """
 
 import time
@@ -51,9 +56,9 @@ def serve(repo, store, by, command, arguments, pause=PAUSE, drafters=None, log=p
 def one_round(repo, store, by, command, arguments, drafters=None, log=print) -> list[str]:
     """One round (see the module's docstring): the source drafters
     (built-in names or files; None: every built-in) with by as the drafts'
-    `by`, then every source downloaded again and checked, the session's
-    record named after command (wpt-dataset-<command>) with arguments.
-    Returns the failures."""
+    `by`, then every admitted source downloaded again and checked, the
+    session's record named after command (wpt-dataset-<command>) with
+    arguments. Returns the failures."""
     failed = []
     for target in source_drafter.built_in_names() if drafters is None else drafters:
         failed += _drafted(repo, store, target, by, log)
@@ -76,9 +81,9 @@ def _drafted(repo, store, target, by, log) -> list[str]:
 
 
 def _downloaded(repo, store, command, arguments) -> list[str]:
-    """Download every source again in one session, filling in the drafts,
-    then check each one that came; the failures."""
-    sources = [source for source in repo.sources() if not source.unwritten]  # as `check` does: no text yet
+    """Download every admitted source again in one session, filling in the
+    drafts, then check each one that came; the failures."""
+    sources = [source for source in repo.sources() if source.admitted]
     drafts = {source.id for source in sources if source.data["checksum"] == DRAFT_CHECKSUM}
     ids = [source.id for source in sources]
     failed = []
@@ -98,6 +103,6 @@ def _downloaded(repo, store, command, arguments) -> list[str]:
             if result.error is not None:
                 failed.append(f"{result.item}: {type(result.error).__name__}: {result.error}")
                 telemetry.log(failed[-1], error=True)
-        telemetry.log(f"{len(ids)} sources downloaded again and checked, {len(drafts)} drafts filled in, "
+        telemetry.log(f"{len(ids)} admitted sources downloaded again and checked, {len(drafts)} drafts filled in, "
                       f"{len(failed)} failed")
     return failed

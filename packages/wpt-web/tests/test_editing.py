@@ -93,7 +93,7 @@ def test_a_persons_text_starts_an_empty_source_and_every_change_is_a_patch(web):
 
 
 def conversation(*messages):
-    return {"schema": 3, "messages": list(messages)}
+    return {"messages": list(messages)}
 
 
 def text(role, words, **metadata):
@@ -253,7 +253,7 @@ def test_tasks_recipes_dockerfiles_and_signers_go_through_the_checks_rules(web):
     assert status == 200 and repo.read("dockerfile", "tiny").text == "ARG BASE=debian:trixie-slim\nFROM ${BASE}\n"
 
     sid = new_source(request, {"notes.txt": {"format": "text", "text": TEXT}})
-    task = {"schema": 3, "instructions": "Print hello.", "image": "tiny",
+    task = {"instructions": "Print hello.", "image": "tiny",
             "limits": {"max_turns": 2, "max_tokens": 100, "command_seconds": 5}, "needs": []}
     status, tasks = request("GET", f"/api/sources/{sid}/tasks")
     status, saved = request("PUT", f"/api/sources/{sid}/tasks/{path('tasks/hello')}", {
@@ -267,7 +267,7 @@ def test_tasks_recipes_dockerfiles_and_signers_go_through_the_checks_rules(web):
         "task": {**task, "image": "missing"}, "check": "", "patch": "other", "version": tasks["version"]})
     assert status == 422 and "no image 'missing'" in refused["problems"][0]
 
-    mixture = {"schema": 1, "pools": [{"name": "en", "select": "en", "weight": 1}]}
+    mixture = {"pools": [{"name": "en", "select": "en", "weight": 1}]}
     assert request("PUT", "/api/documents/mixture/m", {"document": mixture, "version": ""})[0] == 200
     status, refused = request("PUT", "/api/documents/mixture/half", {
         "document": {**mixture, "pools": [{**mixture["pools"][0], "weight": 0.5}]}, "version": ""})
@@ -307,6 +307,7 @@ def test_the_rating_page_lists_a_runs_attempts_and_records_a_persons_verdict(web
     store.write_record(folder, "ids.json", json.dumps({"inputs": {"weights": weights}, "outputs": {}}).encode())
     store.append_record(folder, "attempts.jsonl", (json.dumps(tried) + "\n" + json.dumps(dropped) + "\n").encode())
     store.append_record(folder, "attempts.jsonl", json.dumps(tried).encode()[:40])
+    store.flush_records()  # added lines reach the store together
     store.write_record("20261023T080000Z-wpt-train-tiny-0123abcd", "ids.json", b"{}")
     assert request("GET", "/api/runs") == (200, [folder])
     assert request("GET", f"/api/runs/{folder}/attempts") == (200, {"weights": weights, "attempts": [tried, dropped]})
@@ -315,7 +316,7 @@ def test_the_rating_page_lists_a_runs_attempts_and_records_a_persons_verdict(web
     sid = new_source(request, {"notes.txt": {"format": "text", "text": TEXT}})
     status, listing = request("GET", f"/api/sources/{sid}/ratings/{path('ratings/terse.jsonl')}")
     assert status == 200 and listing["ratings"] == []
-    rating = {"schema": 1, "task": tried["task"], "weights": weights, "record": folder, "attempt": 1, "plain": False,
+    rating = {"task": tried["task"], "weights": weights, "record": folder, "attempt": 1, "plain": False,
               "verdict": "pass", "by": "A. Person", "date": "2026-10-23"}
     status, saved = request("PUT", f"/api/sources/{sid}/ratings/{path('ratings/terse.jsonl')}/new",
                             {"rating": rating, "patch": "rated", "version": listing["version"]})

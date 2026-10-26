@@ -29,7 +29,7 @@ from urllib.parse import urlparse, urlunparse
 
 from protego import Protego
 
-from . import retry
+from . import retry, sites
 from .errors import CrawlForbidden
 
 WPT_AGENT = "wpt-dataset"
@@ -102,5 +102,6 @@ def _rules(robots_url: str, user_agent: str) -> Protego:
 
 
 def _read(request) -> str:
+    sites.paced(request.full_url)
     with urllib.request.urlopen(request, timeout=60) as response:  # follows redirects
         return response.read(MAX_BYTES).decode("utf-8", errors="replace")

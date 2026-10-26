@@ -16,7 +16,7 @@ Its revision is the revision setting, or the run's date when it is empty.
 import copy
 import re
 
-from wpt_dataset.repo import CURRENT_SCHEMA, DRAFT_CHECKSUM, source_id
+from wpt_dataset.repo import DRAFT_CHECKSUM, source_id
 from wpt_dataset.source_drafter import Candidate, Drafted, Skipped
 
 SETTINGS = {"revision": ""}  # the fetch date the drafts give (YYYY-MM-DD); "": the run's date
@@ -63,7 +63,7 @@ def draft(candidate, context):
         else:  # the text describes no archive: the numbered one's description goes at its end
             entry["text"] = entry["text"].rstrip("\n") + "\n\n" + VPL
     return Drafted("ebible", item, {
-        "schema": CURRENT_SCHEMA["source"], "type": "http-archive", "address": address,
+        "type": "http-archive", "address": address,
         "revision": context.settings["revision"] or context.today,
         "checksum": DRAFT_CHECKSUM,
         "extract": {"exclude": [f"{code}_about.htm", f"{code}_vpl.sql", f"{code}_vpl.xml", "haiola.css",

@@ -4,9 +4,8 @@
   "title": "WPT conversation (one line of a file in the chat format; docs/chat-format.md)",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "messages"],
+  "required": ["messages"],
   "properties": {
-    "schema": {"const": 3, "description": "shape version of the conversation"},
     "metadata": {"type": "object", "description": "what identifies the conversation where it was recorded, such as a training attempt's step, task and round; never read as tokens"},
     "tools": {
       "type": "array",

@@ -15,7 +15,7 @@ import pytest
 from wpt_dataset import download as downloading
 from wpt_dataset import manifest, sources
 from wpt_dataset.build import build_dataset
-from wpt_dataset.repo import CURRENT_SCHEMA, Repo, address_hash, dump_json
+from wpt_dataset.repo import Repo, address_hash, dump_json
 from wpt_store import open_store
 from wpt_train import main as train
 
@@ -90,10 +90,10 @@ def built(tmp_path, monkeypatch):
     root = tmp_path
     repo = Repo(root)
     store = open_store((tmp_path / "store").as_uri())
-    def admitted(name, upstream, commit, license, attribution, text, formats, tags):
-        data = {"schema": CURRENT_SCHEMA["source"], "type": "git", "address": str(upstream), "revision": commit,
+    def admitted(name, upstream, commit, license, attribution, text, formats, tags, held_out_by=None):
+        data = {"type": "git", "address": str(upstream), "revision": commit,
                 "licenses": [{"license": license, "paths": ["**"], "attribution": attribution, "text": text}],
-                "formats": formats, "tags": tags,
+                "formats": formats, "tags": tags, **({"held_out_by": held_out_by} if held_out_by else {}),
                 "decision": {"decision": "admitted", "by": "T", "date": "2026-10-14", "reason": "test"}}
         data["checksum"] = checksum_of(data)
         sid = f"example-{name}-{address_hash(str(upstream))}"
@@ -103,7 +103,11 @@ def built(tmp_path, monkeypatch):
         return sid
 
     source_id = admitted("fox", upstream, commit, "MIT", ATTRIBUTION, LICENSE_TEXT,
-                         [{"format": "text", "paths": ["**"]}], [{"tags": ["en"], "paths": ["**"]}])
+                         [{"format": "text", "paths": ["**"]}], [{"tags": ["en"], "paths": ["**"]}],
+                         # the held-out hash reads the document's path, not its id: the id holds a hash of the
+                         # address, which holds the temporary folder's name, so a test would hold other documents
+                         # out in every run
+                         held_out_by={"pattern": r"(t\d+)\.txt"})
 
     def source(upstream, files, formats, tags, attribution, text):
         for path, content in files.items():
@@ -120,7 +124,7 @@ def built(tmp_path, monkeypatch):
     def write(kind, name, document):
         path = root / "data" / "recipes" / f"{kind}s" / f"{name}.json"
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps({"schema": CURRENT_SCHEMA[kind], **document}))
+        path.write_text(json.dumps(document))
         return name
 
     def recipe(name="d", model=None, training=None, drafter=None, steps=()):
@@ -175,7 +179,7 @@ def s3(tmp_path, monkeypatch):
 
     from wpt_store import S3Store
 
-    for name, value in {"AWS_ACCESS_KEY_ID": "test", "AWS_SECRET_ACCESS_KEY": "test", "AWS_DEFAULT_REGION": "us-east-1",
+    for name, value in {"WPT_STORE_ACCESS_KEY_ID": "test", "WPT_STORE_SECRET_ACCESS_KEY": "test", "AWS_DEFAULT_REGION": "us-east-1",
                         "XDG_CACHE_HOME": str(tmp_path / "cache"), "LOCALAPPDATA": str(tmp_path / "cache")}.items():
         monkeypatch.setenv(name, value)
     monkeypatch.delenv("AWS_ENDPOINT_URL", raising=False)

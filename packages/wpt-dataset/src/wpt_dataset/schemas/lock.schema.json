@@ -4,11 +4,9 @@
   "title": "WPT tokenizer lock (data/recipes/tokenizers/<name>.lock.json), written by the build: the frozen vocabulary of one recipe version",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "recipe", "wpt_tokenizer", "documents", "vocabulary_sha256"],
+  "required": ["recipe", "documents", "vocabulary_sha256"],
   "properties": {
-    "schema": {"const": 2},
     "recipe": {"type": "object", "description": "the tokenizer recipe as it was when the vocabulary was trained, version included"},
-    "wpt_tokenizer": {"type": "string", "minLength": 1, "description": "the tokenizer code version that trained it"},
     "documents": {
       "type": "array",
       "minItems": 1,

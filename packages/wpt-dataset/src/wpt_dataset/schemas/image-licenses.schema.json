@@ -4,9 +4,8 @@
   "title": "WPT image licenses (data/images/<name>/licenses.json), written by `wpt-agent lock-image`: every package installed in an image and its licenses (docs/licenses.md)",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "packages"],
+  "required": ["packages"],
   "properties": {
-    "schema": {"const": 1, "description": "shape version of this file, for migrations"},
     "packages": {
       "type": "object",
       "description": "every package installed in the image, as in lock.json",

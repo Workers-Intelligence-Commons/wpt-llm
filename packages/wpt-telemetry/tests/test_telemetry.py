@@ -33,6 +33,20 @@ def a_short_run(store, tmp_path, environ):
     return telemetry.folder
 
 
+def test_a_local_record_holds_its_events_as_one_compressed_part_once_the_run_ended(tmp_path):
+    store = open_store((tmp_path / "store").as_uri())
+    with Telemetry.start(store, "wpt-example", [], "d", env_file=tmp_path / ".env", environ={}) as telemetry:
+        telemetry.event("one")
+        # while the run goes, its events are in the plain file, whole after a crash
+        assert any(key.endswith("events.jsonl.open") for key in store.kind.list(f"records/{telemetry.folder}/"))
+        assert [e["name"] for e in events(store, telemetry.folder) if e.get("kind") == "event"] == ["one"]
+    stored = store.kind.list(f"records/{telemetry.folder}/")
+    assert not any(key.endswith(".open") for key in stored)
+    assert len([key for key in stored if f"/events.jsonl/" in key]) == 1
+    assert record(store, telemetry.folder, "end.json")["status"] == "succeeded"
+    assert [e["name"] for e in events(store, telemetry.folder) if e.get("kind") == "event"] == ["one"]
+
+
 def test_a_backend_that_cannot_be_reached_gets_one_warning_and_the_run_goes_on(tmp_path, capsys, monkeypatch):
     # the live view is a convenience: an unreachable backend must neither stop
     # the run nor take anything from its record in the store
@@ -215,7 +229,7 @@ def test_on_s3_each_span_is_sent_when_it_ends_and_a_refused_send_stops_the_run(t
     import boto3
     from moto import mock_aws
 
-    for name, value in {"AWS_ACCESS_KEY_ID": "test", "AWS_SECRET_ACCESS_KEY": "test", "AWS_DEFAULT_REGION": "us-east-1",
+    for name, value in {"WPT_STORE_ACCESS_KEY_ID": "test", "WPT_STORE_SECRET_ACCESS_KEY": "test", "AWS_DEFAULT_REGION": "us-east-1",
                         "XDG_CACHE_HOME": str(tmp_path / "cache"), "LOCALAPPDATA": str(tmp_path / "cache")}.items():
         monkeypatch.setenv(name, value)
     monkeypatch.delenv("AWS_ENDPOINT_URL", raising=False)
@@ -402,7 +416,7 @@ def test_after_the_run_ends_every_recording_call_is_refused(tmp_path, monkeypatc
             import boto3
             from moto import mock_aws
 
-            for name, value in {"AWS_ACCESS_KEY_ID": "test", "AWS_SECRET_ACCESS_KEY": "test",
+            for name, value in {"WPT_STORE_ACCESS_KEY_ID": "test", "WPT_STORE_SECRET_ACCESS_KEY": "test",
                                 "AWS_DEFAULT_REGION": "us-east-1", "XDG_CACHE_HOME": str(tmp_path / "cache"),
                                 "LOCALAPPDATA": str(tmp_path / "cache")}.items():
                 monkeypatch.setenv(name, value)

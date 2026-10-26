@@ -25,8 +25,6 @@ from wpt_utils.parallel import Sizing, in_order
 
 FRAME = 1 << 20  # original bytes per frame: the unit a range read decompresses
 LEVEL = 3  # zstd's own default
-# bytes one frame's compression takes: its block, its output and zstd's tables at LEVEL, rounded up
-COMPRESS_MEMORY = 4e6
 SKIPPABLE = 0x184D2A5E  # the magic number of the skippable frame holding the seek table
 SEEKABLE = 0x8F92EAB1  # the seekable format's magic number, last in the file
 FOOTER = 9  # number of frames (4 bytes), descriptor (1), magic (4)
@@ -116,8 +114,8 @@ def read(file, table: "SeekTable", start: int, length: int) -> bytes:
 
 def parallel():
     """An executor and a sizing for Writer: as many frames at once as
-    wpt_utils.parallel allows for COMPRESS_MEMORY each."""
-    sizing = Sizing(COMPRESS_MEMORY, "compressions")
+    wpt_utils.parallel allows."""
+    sizing = Sizing("compressions")
     return ThreadPoolExecutor(sizing.limit), sizing
 
 

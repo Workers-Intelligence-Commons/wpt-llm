@@ -114,7 +114,7 @@ def test_a_base_whose_apt_ignores_the_snapshot_is_neither_locked_nor_built(root)
     base = subprocess.run(["docker", "image", "inspect", "--format", "{{index .RepoDigests 0}}",
                            "debian:bookworm-slim"], capture_output=True, text=True, check=True).stdout.strip()
     (dockerfile.parent / "lock.json").write_text(json.dumps(
-        {"schema": 1, "base": base, "snapshot": "20260101T000000Z", "packages": {"hello": "2.10-3"}}))
+        {"base": base, "snapshot": "20260101T000000Z", "packages": {"hello": "2.10-3"}}))
     tags.append(images.tag(root, "tiny"))
     with pytest.raises(ImageError, match=IGNORES_SNAPSHOT):
         images.build(root, "tiny", log=lambda _: None)

@@ -55,7 +55,7 @@ from wpt_store import read_env_file
 from wpt_dataset import licenses, retry, robots
 from wpt_dataset.errors import CrawlForbidden, RuleViolation
 from wpt_dataset.licenses import ALLOWED, check_license
-from wpt_dataset.repo import CURRENT_SCHEMA, DRAFT_CHECKSUM, source_id
+from wpt_dataset.repo import DRAFT_CHECKSUM, source_id
 from wpt_dataset.source_drafter import Candidate, Drafted, NeedsPerson, Skipped
 from wpt_dataset.sources import USER_AGENT
 
@@ -898,7 +898,7 @@ def draft_document(facts, work, matcher, reviews, context):
     entries.insert(0, {"format": "code", "language": "patch", "paths": [".git/history/**"]})
 
     document = {
-        "schema": CURRENT_SCHEMA["source"], "type": "git", "address": address, "revision": commit,
+        "type": "git", "address": address, "revision": commit,
         "checksum": DRAFT_CHECKSUM,
         "extract": {"exclude": exclude} if exclude else {},
         "history": {"since": since},

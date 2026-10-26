@@ -24,8 +24,8 @@ from pathlib import Path
 from . import manifest, markdown, records
 from .errors import InvalidFile
 from .migrate import upgrade
-from .repo import CURRENT_SCHEMA, Repo, validate
-from .sources import each_read, source_tree, tags_of
+from .repo import Repo, validate
+from .sources import copied_as_trees, copy_size, each_read, source_tree, tags_of
 
 
 def content_sha256(content: list) -> str:
@@ -158,7 +158,7 @@ def from_tree(source_id: str, path: str, file: Path, spec: dict) -> list[tuple[s
             continue
         seen.add(key)
         turns = [{"role": role, "content": [{"type": "text", "text": text}]} for role, text in key]
-        conversation = {"schema": CURRENT_SCHEMA["conversation"], "messages": turns}
+        conversation = {"messages": turns}
         validate(conversation, "conversation", f"{where} message {kept[-1][0]}")
         found.append((kept[-1][0], conversation))
     return found
@@ -200,26 +200,29 @@ def tagged(repo: Repo, store, tag: str | None = None, telemetry=None, log=print,
     chosen = [source for source in repo.sources(log)
               if source.admitted and any(entry["format"] == "chat" for entry in source.data["formats"])
               and (only is None or source.id in only)]  # no tree read for a source without chat files
-
-    def of_source(source, here):
-        """(whether a chat file of the source is tagged tag, its conversations)."""
-        tree, _ = source_tree(source, here, telemetry)
-        matched, found = False, []
-        for path in sorted(tree, key=str.encode):
-            entry = markdown.format_of(source, path)
-            tags = tags_of(source, path)
-            if entry["format"] != "chat" or (tag is not None and tag not in tags):
-                continue
-            matched = True
-            found += [(f"{source.id}/{path}:{key}", sorted(tags), c)
-                      for key, c in of_file(source.id, path, entry, here, tree[path])]
-        return matched, found
-
     conversations, sources = [], {}
-    for source, (matched, found) in zip(chosen, each_read(of_source, chosen, store, copies, telemetry,
-                                                          "chat sources read at once")):
+    read = each_read(_of_source, chosen, repo, store, copies, telemetry, "chat sources read at once", (tag,),
+                     disk=lambda source: copy_size(source, store, copied_as_trees(source)))
+    for source, (matched, found) in zip(chosen, read):
         conversations += found
         if matched:
             sources[source.id] = {"address": source.data["address"], "revision": source.data["revision"],
                                   "licenses": source.data["licenses"]}
     return conversations, sources
+
+
+def _of_source(source, store, tag, telemetry):
+    """(whether a chat file of the source is tagged tag, [(conversation id,
+    tags, conversation)] of its chat files tagged tag, or of all with tag
+    None): one source's part of tagged, in a worker process."""
+    tree, _ = source_tree(source, store, telemetry)
+    matched, found = False, []
+    for path in sorted(tree, key=str.encode):
+        entry = markdown.format_of(source, path)
+        tags = tags_of(source, path)
+        if entry["format"] != "chat" or (tag is not None and tag not in tags):
+            continue
+        matched = True
+        found += [(f"{source.id}/{path}:{key}", sorted(tags), c) for key, c in of_file(source.id, path, entry, store,
+                                                                                         tree[path])]
+    return matched, found

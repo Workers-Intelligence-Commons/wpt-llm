@@ -42,7 +42,7 @@ def refused(capsys, argv) -> str:
     return capsys.readouterr().err
 
 
-TALK = {"schema": 3, "messages": [{"role": "user", "content": [{"type": "text", "text": "Hi"}]},
+TALK = {"messages": [{"role": "user", "content": [{"type": "text", "text": "Hi"}]},
                                   {"role": "assistant", "content": [{"type": "text", "text": "Hello"}]}]}
 
 
@@ -311,7 +311,7 @@ def test_finish_tasks_says_so_when_the_dataset_holds_no_tasks(built, tmp_path, c
     assert not (tmp_path / "model").exists() and not (built.store.root / "refs" / "steps").exists()
 
 
-TASK = {"schema": 3, "instructions": "Write hello into out.txt.", "image": "tiny",
+TASK = {"instructions": "Write hello into out.txt.", "image": "tiny",
         "limits": {"max_turns": 2, "max_tokens": 6, "command_seconds": 5}, "needs": []}
 
 
@@ -429,7 +429,7 @@ def test_finish_tasks_with_less_writing_fails_when_no_task_is_left(docker_runs, 
 
 
 # a lock of data/images/tiny/ whose image no machine builds: its tag is absent
-NEVER_BUILT = {"schema": 1, "base": f"ubuntu@sha256:{'0' * 64}", "snapshot": "20000101T000000Z",
+NEVER_BUILT = {"base": f"ubuntu@sha256:{'0' * 64}", "snapshot": "20000101T000000Z",
                "packages": {"hello": "0"}}
 TINY_IMAGE = "wpt-train/tiny-image"  # in pytest's cache (.pytest_cache/): the pinned and built image of tiny
 

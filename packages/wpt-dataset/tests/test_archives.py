@@ -14,6 +14,7 @@ import tarfile
 import threading
 import urllib.request
 import zipfile
+from compression import zstd
 from pathlib import Path
 
 import pytest
@@ -91,8 +92,8 @@ def case(name, kit):
                    ("kept-copy.txt", tarfile.LNKTYPE, "excluded/original.txt", 0o644)]
         return ("project.tar", tar_bytes(members), True, {"extract": {"exclude": ["excluded/**"]}},
                 {"README.md": (FILE, README), "kept-copy.txt": (FILE, GUIDE)})
-    if name in ("zip, ranges served", "zip, no ranges"):
-        return "project.zip", project_zip(), name == "zip, ranges served", {"extract": {"strip": 1}}, PROJECT
+    if name in ("zip, ranges served", "zip, ranges served unannounced", "zip, no ranges"):
+        return "project.zip", project_zip(), name != "zip, no ranges", {"extract": {"strip": 1}}, PROJECT
     assert name == "records, newest rule"
     archive = tar_bytes([("pages/pages_0.ndjson", tarfile.REGTYPE, PAGES_FILE, 0o644)], "gz")
     return ("pages.tar.gz", archive, True, {
@@ -128,10 +129,15 @@ def checksum_of(tree):
                               for path, (mode, content) in tree.items()})
 
 
-@pytest.mark.parametrize("name", ["tar.gz", "tar", "zip, ranges served", "zip, no ranges", "records, newest rule"])
+@pytest.mark.parametrize("name", ["tar.gz", "tar", "zip, ranges served", "zip, ranges served unannounced",
+                                  "zip, no ranges", "records, newest rule"])
 def test_an_archive_read_while_it_downloads_gives_what_a_copy_on_the_disk_gives(
-        name, kit, repo, tmp_path, http_folder, ranged_folder, monkeypatch, capsys):
+        name, kit, repo, tmp_path, http_folder, ranged_folder, unannounced_ranged_folder, monkeypatch, capsys):
+    # a zip's end is asked for through a range request even from a server that does not say it serves
+    # ranges: a range in answer means it is read in pieces, the whole file in answer means it is saved
     file, data, ranges, fields, expected = case(name, kit)
+    if name == "zip, ranges served unannounced":
+        ranged_folder = unannounced_ranged_folder
     folder, base = ranged_folder[:2] if ranges else http_folder
     (folder / file).write_bytes(data)
     sid = kit.add_source(repo, None, "example", "archive", {
@@ -169,7 +175,7 @@ def test_an_archive_read_while_it_downloads_gives_what_a_copy_on_the_disk_gives(
                                                for path, (mode, content) in expected.items()})
     if name == "records, newest rule":
         assert [(i.rsplit("#", 1)[1], text) for i, text in documents] == [("7", b"7 newer\n"), ("8", b"8 only\n")]
-    if name == "zip, ranges served":  # one GET for its first bytes, then its end through a range
+    if name.startswith("zip, ranges served"):  # one GET for its first bytes, then its end through a range
         assert archive_gets[0] is None and any(wanted and wanted != "bytes=0-" for wanted in archive_gets[1:])
     if name == "tar.gz":
         assert archive_gets == [None]  # downloaded once, read as it came
@@ -201,6 +207,14 @@ def test_fill_checksum_excludes_an_archive_s_binary_member_from_its_one_download
     assert sum(1 for path, wanted in asked if path == "/project.zip" and wanted is None) == 1
     tree, _ = source_tree(source, store)
     assert manifest.content(store, tree["README.md"]) == README
+    # the excluded member went into the bundle as it was read; the session's end rewrote the bundle without it
+    assert stored_bytes(store) == README
+
+
+def stored_bytes(store) -> bytes:
+    """Every bundle's original bytes, one after the other."""
+    return b"".join(zstd.decompress(data) if key.endswith(".zst") else data
+                    for key in sorted(store.kind.list("bundles/")) for data in [store.kind.read(key)[0]])
 
 
 def test_an_archive_that_changed_upstream_fails_and_no_file_list_names_it(kit, repo, store, ranged_folder):
@@ -218,6 +232,7 @@ def test_an_archive_that_changed_upstream_fails_and_no_file_list_names_it(kit, r
 
     with pytest.raises(NotDownloaded):
         source_tree(repo.source(sid), store)
+    assert stored_bytes(store) == b""  # its members went into the bundles as they came; the end removed them
     with store.database() as found:
         assert found.execute("SELECT source, outcome, checksum FROM lines").fetchall() == [
             (sid, "failed", checksum_of(changed))]

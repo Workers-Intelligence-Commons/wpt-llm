@@ -47,6 +47,29 @@ def lock_file(path) -> int:
     return descriptor
 
 
+def try_lock_file(path) -> int | None:
+    """lock_file's lock without waiting: its descriptor, or None while
+    another process holds it."""
+    descriptor = os.open(path, os.O_RDWR | os.O_CREAT, 0o644)
+    try:
+        if os.name == "nt":
+            import msvcrt
+            os.lseek(descriptor, 0, os.SEEK_SET)
+            msvcrt.locking(descriptor, msvcrt.LK_NBLCK, 1)
+        else:
+            import fcntl
+            fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError as error:
+        os.close(descriptor)
+        if error.errno in (errno.EACCES, errno.EAGAIN, errno.EDEADLOCK):
+            return None
+        raise
+    except BaseException:
+        os.close(descriptor)
+        raise
+    return descriptor
+
+
 def unlock_file(descriptor: int):
     """Release a lock_file lock and close its descriptor."""
     try:

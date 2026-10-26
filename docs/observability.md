@@ -1,7 +1,7 @@
 # Observability: the record of every run
 
 Every run of `wpt-dataset download`, `check --fetch`, `fill-checksum`,
-`manifest`, `build` and `source-drafter`, each round of `source-server`,
+`manifest`, `build`, `build-tokenizer` and `source-drafter`, each round of `always-on-monitoring`,
 `wpt-train` and `wpt-eval` keeps a record of what it did, from its first input to its last
 file, so that afterwards one can know exactly what happened. The record is
 written into the store, as OpenTelemetry's three kinds of data (traces,
@@ -18,15 +18,16 @@ ended.
 
 | Command | Records |
 | --- | --- |
-| `wpt-dataset download`, `check --fetch`, `fill-checksum`, `manifest`, a round of `source-server` | the session of the download step: how many sources download at once and why; each download tried again; every ref set for a kept source (`upstream-files/<checksum>`, `upstream/<checksum>`). Inputs: the source ids. Each source's outcome (downloaded, reused or failed) is a line of the session in the store database alone, never in the record ([architecture.md](architecture.md), "The download step") |
-| `wpt-dataset build` | the recipe and mixture; the vocabulary (built, or found from its lock), and each source the tokenizer training read; the lock file written (its path and the vocabulary's sha256); how many sources are converted at once and why; each source read and converted (its tree, documents, duplicates, credits, the seconds its conversion took) or why it was skipped (a source not in the store, `NotDownloaded`, included); the conversations and tasks kept for the training steps (spans `conversations` and `tasks`: how many, their object, their sources); the tokens; each pool; each shard written (training and held-out: object, rows, tokens, token sha256, sources); the contamination check; the dataset record. Inputs: the recipe, the tokenizer, the vocabulary, every source's checksum, the skipped sources. Outputs: the dataset id, its record object and its document list |
+| `wpt-dataset download`, `check --fetch`, `fill-checksum`, `manifest`, a round of `always-on-monitoring` | the session of the download step: how many sources download at once and why; each download tried again; every ref set for a kept source (`upstream-files/<checksum>`, `upstream/<checksum>`). Inputs: the source ids. Each source's outcome (downloaded, reused or failed) is a line of the session in the store database alone, never in the record ([architecture.md](architecture.md), "The download step") |
+| `wpt-dataset build` | the recipe and mixture; the vocabulary (built, or found from its lock), and each source the tokenizer training read; the lock file written (its path and the vocabulary's sha256); how many sources are converted at once and why; each source read and converted (its tree, documents, duplicates, credits, the seconds its conversion took) or why it was skipped (a source not in the store, `NotDownloaded`, included), each worker process's part recorded under its source's span; the conversations and tasks kept for the training steps (spans `conversations` and `tasks`: how many, their object, their sources); the tokens; each pool; each shard written (training and held-out: object, rows, tokens, token sha256, sources); the contamination check; the dataset record. Inputs: the recipe, the tokenizer, the vocabulary, every source's checksum, the skipped sources. Outputs: the dataset id, its record object and its document list |
+| `wpt-dataset build-tokenizer` | the tokenizer recipe; the vocabulary (trained, or found from its lock), and each source the training read; the lock file written (its path and the vocabulary's sha256). It is a session like a build: a `reused` line for each source whose upstream tree the training read, none when the vocabulary was found in the store. Inputs: the recipe, the mixture, the vocabulary. Outputs: the vocabulary's sha256 |
 | `wpt-dataset source-drafter` | the source drafter (its file and sha256, its settings, the name of its record of what is done) and who started it; the candidates listed (a span), and how many were chosen, done before and left to draft (the file `candidates.json`); one line per outcome in `outcomes.jsonl` (candidate, outcome: drafted, skipped, needs-a-person, stopped or failed, the source, its change: new, updated, licenses-changed or unchanged, the reason and the notes for a person), and every line printed. Inputs: the source drafter, its file's sha256, its settings, the record of what is done |
 | `wpt-train` | the recipe and its steps (a span `inputs.steps`); the dataset read, its token counts and the conversations and tasks it holds (a span `inputs.dataset`); the settings; each step reused from an earlier run (the event `training.step_reused`: its number, fingerprint and result); each step trained (a span `step`: its name, number and fingerprint, and what it reached), and inside it each of its stages (a span `training.stage`: its number, window length, batch, first and last updates, and the update a resumed run started at), every update (the event `training.step`: its loss over the whole batch, its window length, its duration, the learning rate of each parameter group), every update skipped, every evaluation (validation loss, best or not, stop or not), every checkpoint written, a resume, a stop, and what the step's environment records itself (`answer-as-assistant`: the conversations read and their tokens; `finish-tasks` and `finish-tasks-with-less-writing`: every attempt as a line of `<step>-attempts.jsonl` as soon as it is scored, a conversation in the chat format whose `metadata` identifies the attempt, with a span per group's attempts, a span per attempt inside it and an event per group and per round naming the lines, [training.md](training.md), "Runs"); each step's result kept in the store (a span `training.step_kept`: its fingerprint and the result's sha256); the drafter's training (a span `drafter`: the model's answers, its settings, every update's losses, the calibration and the share of drafts kept); the scheduler's pass times, measured or replayed (a span `scheduler.costs`), written as the file `scheduler-costs.json`, which `--scheduler-costs` replays in a later run; the weights, the drafter, `provenance.json`, the credits, `NOTICE`, `LICENSE` and the model card written, with the sha256 of every file of the model folder; the checkpoint's removal, and with `--run` every checkpoint object deleted from the store (the one each save replaces; a step's last one stays as its kept state), named by its sha256; the sample. Inputs: the recipe, the dataset id, its record object, the vocabulary, the results of the steps reused. Outputs: the result of each step trained, the model folder, the sha256 of each weight file, of the drafter's weights and of `provenance.json` |
 | `wpt-eval` | each test (its file and sha256, its result's data), each result file and the model card written. Inputs: the weights' sha256 and the dataset id. Outputs: the sha256 of each result file and of the model card |
 
 The drafter scheduler's pass times are measured once per run of `wpt-train`,
 and written into the run's record as
-`scheduler-costs.json`: its shape (`schema`: 2), the `setup` they were
+`scheduler-costs.json`: the `setup` they were
 measured on (`model`: the model's config; `rows`: 1; `draft`: the drafter's
 block; `device`: its kind and name, the processor's on the CPU), and
 `seconds`, the seconds of a pass for each width. A later run replays them
@@ -49,7 +50,7 @@ all of them. The others record nothing.
 
 Each run writes its own folder, `records/<folder>/` in the store named by
 `WPT_STORE`, through the store's own interface (`wpt_store`: `write_record`,
-`append_record`, `flush_records`, `read_record`, `record_files`,
+`append_record`, `flush_records`, `end_records`, `read_record`, `record_files`,
 `record_folders`). The folder is named
 `<UTC start time>-<command>-<main id>-<8 random hex digits>`, such as
 `20261017T120501Z-wpt-train-5d41402a-3fa2b1c9`, where the main id is what
@@ -57,8 +58,9 @@ the run is about:
 
 | Command | Main id |
 | --- | --- |
-| `wpt-dataset download`, `check`, `fill-checksum`, `manifest`, a round of `source-server` | the one source id, or `<count>-sources` |
+| `wpt-dataset download`, `check`, `fill-checksum`, `manifest`, a round of `always-on-monitoring` | the one source id, or `<count>-sources` |
 | `wpt-dataset build` | the model recipe's name |
+| `wpt-dataset build-tokenizer` | the tokenizer recipe's name |
 | `wpt-dataset source-drafter` | the source drafter's name |
 | `wpt-train` | the first 8 characters of the dataset id |
 | `wpt-eval` | the first 8 characters of the measured weights' sha256 (its first weight file's) |
@@ -70,7 +72,7 @@ cards stay where they were; the record only names them and their sha256.
 
 | File | Holds |
 | --- | --- |
-| `start.json` | the command, its arguments, when it started (UTC), the ids known at the start, the tool versions (Python, platform, WPT's packages, torch), the repository commit and whether the working tree had changes, and `trace`: the trace id the live backend shows the run under |
+| `start.json` | the command, its arguments, when it started (UTC), the ids known at the start, the tool versions (Python, platform, torch), the code (`code`: the commit it runs from and a hash of its uncommitted changes), the repository commit and whether the working tree had changes, and `trace`: the trace id the live backend shows the run under |
 | `events.jsonl` | one JSON object per line, in the order things happened (below) |
 | `ids.json` | `{"inputs": {...}, "outputs": {...}}`: every id the run read and wrote, rewritten as each is learned (each process adds to the copy in the store, so a launcher never writes back an older one) |
 | `end.json` | `status` (`succeeded` or `failed`), `exit_code`, `error`, `traceback` (where the failure came from, as Python prints it, with the error it was raised while handling; `null` when it succeeded), when it ended, and how many seconds it took |
@@ -134,27 +136,36 @@ A record file is written whole (`start.json`, `ids.json`, `end.json`) or
 added to line by line (`events.jsonl`), never both: the store refuses the
 other kind of write to a file, whichever process made it.
 
-- A local store (`file://`) appends each line to `events.jsonl` and asks
-  the system to put it on the disk (`fsync`) before the call returns; a
-  new file's name is put on the disk the same way. Whole files are
-  written beside their name and renamed over it. A power cut can lose at
-  most the line being written. A file added to line by line has a hidden
-  marker beside it, `.appended-<name>`, which tells a later process its
-  kind.
-- An S3 object cannot grow, and each request costs time and money, so an
-  S3 store holds the lines back and sends them in groups: every 5 seconds,
+- Every record file is compressed with zstd, but the plain file a local store adds lines to while the record runs (below). A file written whole is one
+  file of the store, `records/<folder>/<name>.zst`, replaced at once by
+  the store's own write. On a local store (`file://`) each write is put
+  on the disk (`fsync`), with its name, before the call returns; S3 has
+  stored an object when it answers the upload.
+- On a local store (`file://`), a file added to line by line is one plain
+  file while the record runs, `records/<folder>/events.jsonl.open`: each
+  line is appended to it at once, so a crash loses none that the call
+  returned for, and the lines reach the disk (`fsync`) every 5 seconds,
   at the end of every span, before the launcher first starts the training
-  processes,
-  and at the end of the run. Each group is one object,
-  `records/<folder>/events.jsonl/<time>-<writer>-<number>`, holding its
-  lines with the time each was added. A crash or a power cut loses the
+  processes and at the end of the run, and before a step that cannot be
+  undone (below). When the record ends, the store compresses that file
+  into one part, `records/<folder>/events.jsonl/<time>-<writer>-<number>.zst`,
+  and removes the plain file; a file that grew while it was compressed
+  stays as it is. A run that crashed leaves its plain file, read as it is.
+  Lines added to the file again later (a resumed run) go to a new plain
+  file, read after the parts.
+- On S3, a file added to line by line is a folder of parts. An S3 object
+  cannot grow, and each request costs time and money, so the store holds
+  the lines back and sends them in groups: every 5 seconds, at the end of
+  every span, before the launcher first starts the training processes,
+  and at the end of the run. Each group is one part,
+  `records/<folder>/events.jsonl/<time>-<writer>-<number>.zst`, holding
+  its lines with the time each was added. A crash or a power cut loses the
   lines added since the last group was sent: at most the last 5 seconds,
-  and less when a span ended meanwhile. Whole files are sent at once, one
-  object each; S3 has stored an object when it answers the upload. A
-  group that S3 refuses stops the command as any record failure does
-  (below), also when it was sent in the background. A group whose send
-  was cut short (Ctrl+C) is sent again later under the same name, which
-  replaces the object: no line is stored twice. Before a step that
+  and less when a span ended meanwhile. A group that the store refuses
+  stops the command as any record failure does (below), also when it was
+  sent in the background. A group whose send was cut short (Ctrl+C) is
+  sent again later under the same name, which replaces the part: no line
+  is stored twice. Before a step that
   cannot be undone (a model folder renamed into place, an evaluation's
   result file or model card written, a checkpoint deleted from the
   store, a tokenizer's lock file written, and every store ref set: a
@@ -162,7 +173,7 @@ other kind of write to a file, whichever process made it.
   checkpoint, a dataset's id pointed at its record), the command
   records it as an event (a ref as `store.ref_set`, naming the ref and
   the object it will point at), sends the lines it holds and waits for
-  S3's answer: a refused group stops it before that step. The one
+  the store's answer: a refused group stops it before that step. The one
   exception is a checkpoint saved once the record broke (below).
 - Reading a file added to line by line on S3 lists its objects (one
   request per 1,000 objects) and reads each one (one request each). A
@@ -172,9 +183,18 @@ other kind of write to a file, whichever process made it.
 
 The lines read back in the order they were added, on either store, even
 when several processes added to one file (`wpt-train`'s launcher, then its
-training process, then the launcher again after a crash): on S3 each line
-carries the time it was added, and reading sorts every line of every group
-by that time, then by writer.
+training process, then the launcher again after a crash): in a local
+plain file, the order the lines were appended in; in S3's groups, each
+line carries the time it was added, and reading sorts every line of every
+group by that time, then by writer. A line one process left cut (it ended
+without its newline) is ended before another process's lines.
+
+A record file stored uncompressed, under its name without `.zst`, and a
+part without `.zst` are read as they are. A local store may hold a file
+added to line by line as one such file, next to a marker
+`.appended-<name>`: it reads as a file written whole, and adding lines to
+it is refused. Listing the record folders, or the files of one folder,
+reads one level of names: it does not list every part of every file.
 
 ## When something fails
 
@@ -359,11 +379,11 @@ file is added to with `append_file` or written with `write_file`, never
 both. Breaking either rule is a mistake in the step or the test: the call
 raises `ValueError` (a name) or `MixedRecord` (from `wpt_store`, a file
 used both ways), writes nothing, and the record goes on.
-Every call is in the store when it returns (on S3, an added line within
-the next few seconds, as above), and raises `RecordError` when the store
+Every call is in the store when it returns (an added line within the next
+few seconds, as above), and raises `RecordError` when the store
 refused it: let it propagate, the command then stops.
 `telemetry.irreversible(name, **attributes)` records an event as
-`telemetry.event` does, then sends the lines an S3 store holds and waits
+`telemetry.event` does, then sends the lines the store holds and waits
 for its answer: call it just before a step that cannot be undone, which
 then happens only once its record is in the store.
 Each thread records under the span it opened last, or under the run's own

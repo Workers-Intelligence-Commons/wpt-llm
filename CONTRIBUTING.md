@@ -202,6 +202,11 @@ and when (`date`). The builds and
 `check --fetch` without ids read only admitted sources: an `under-review`
 source is left out of them exactly as a refused one is.
 
+A person's name holds no colon. The `by` of a draft that always-on
+monitoring saves without a person's name is `machine:<host>`, the name of
+the machine it ran on: a machine drafts, and `check` refuses an
+`admitted` or `refused` decision whose `by` is a machine's.
+
 A maintainer admits a source by setting `decision` to `admitted`, with their
 name and the date. An admission needs no reason: the license map and its
 texts already say why the source is allowed. It carries one only for an
@@ -334,8 +339,8 @@ downloads the sources a pull request adds or changes: the maintainer runs
 `uv run wpt-dataset check --fetch` on them before merging. There is no
 local hook. The tests run in parallel, each process with one PyTorch thread and
 no GPU, as in CI (a plain `uv run pytest` uses the GPU), on as many processes
-as both 75% of the cores and 75% of the available memory (2.5 GB per process)
-allow, at least 1. The image build test runs only when your push changes image
+as both 75% of the cores and 75% of the available memory (divided by the memory
+a sample of the tests held when it ran alone first) allow, at least 1. The image build test runs only when your push changes image
 code (`packages/wpt-agent/src/wpt_agent/images.py`, the wpt-agent tests
 `test_images.py` and `conftest.py`, the image lock and image licenses schemas
 of wpt-dataset, or `data/images/`); otherwise `uv run pytest` runs it. The task

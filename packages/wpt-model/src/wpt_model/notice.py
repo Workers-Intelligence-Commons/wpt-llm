@@ -30,6 +30,8 @@ import shutil
 from importlib.resources import files
 from pathlib import Path
 
+from wpt_utils.programs import code_name
+
 LICENSE = "AGPL-3.0-or-later"
 OUTPUT_LICENSE = "CC0-1.0"
 REPOSITORY = "https://github.com/Workers-Intelligence-Commons/wpt-llm"
@@ -152,9 +154,16 @@ def card(config, provenance, evals, drafter=None) -> str:
         lines += ["None yet: run `wpt-eval <model folder>`.", ""]
     for result in evals:
         lines += [f"### {result['name']}", "", result["text"].rstrip(), "",
-                  f"`{result['file']}` (sha256 `{result['file_sha256'][:12]}`), wpt-eval {result['wpt_eval']}, "
+                  f"`{result['file']}` (sha256 `{result['file_sha256'][:12]}`), {_eval_code(result)}, "
                   f"on {result['device']}. Data: [evals/{result['name']}.json](evals/{result['name']}.json)", ""]
     return "\n".join(lines)
+
+
+def _eval_code(result) -> str:
+    """The code a result was measured with: code() of wpt_utils.programs
+    in a result that names its code, wpt-eval's package version in an
+    older one that names it."""
+    return f"code {code_name(result['code'])}" if "code" in result else f"wpt-eval {result['wpt_eval']}"
 
 
 def learned_from(provenance) -> dict:

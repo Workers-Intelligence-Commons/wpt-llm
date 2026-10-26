@@ -156,5 +156,5 @@ def test_the_scheduler_s_pass_times_are_replayed_only_on_the_setup_they_were_mea
     assert str(refused.value).endswith(f"here {here!r}")
     with pytest.raises(ValueError, match=r"another setup: device 'cpu \(.+\)', here 'cuda \(GPU\)'$"):
         replayed_costs(recorded, {**setup, "device": "cuda (GPU)"})
-    with pytest.raises(ValueError, match="shape 1, which names no setup"):
-        replayed_costs(json.dumps({"schema": 1, "rows": 1, "draft": DRAFT, "seconds": costs}).encode(), setup)
+    with pytest.raises(ValueError, match="name no setup"):
+        replayed_costs(json.dumps({"rows": 1, "draft": DRAFT, "seconds": costs}).encode(), setup)

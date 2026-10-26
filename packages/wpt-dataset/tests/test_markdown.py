@@ -224,7 +224,7 @@ def test_markdown_check_command_passes_on_converted_pages(kit, repo, store, tmp_
 def test_a_chat_file_is_checked_and_never_becomes_a_pretraining_document(kit, repo, store, tmp_path):
     # conversations are for the training step their tags name: they
     # must reach no pre-training mixture, and a malformed one must stop the check
-    good = (b'{"schema": 1, "messages": [{"role": "user", "content": [{"type": "text", "text": "Hi"}]}, '
+    good = (b'{"messages": [{"role": "user", "content": [{"type": "text", "text": "Hi"}]}, '
             b'{"role": "assistant", "content": [{"type": "text", "text": "Hello"}]}]}\n')
     formats = [{"format": "chat", "paths": ["*.jsonl"]}, {"format": "text", "paths": ["plain.txt"]}]
     found = markdown_of(kit, repo, store, tmp_path / "good", {"talks.jsonl": good, "plain.txt": b"words\n"}, formats)

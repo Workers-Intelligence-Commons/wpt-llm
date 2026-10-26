@@ -83,6 +83,22 @@ def test_any_python_file_can_be_a_test(trained, tmp_path):
     assert f"{result['data']['held_out_tokens']} held-out tokens" in (folder / "README.md").read_text()
 
 
+def test_a_folder_holding_a_result_of_another_wpt_eval_version_is_evaluated_again(trained, tmp_path):
+    # a result written by another version of wpt-eval stays in the model card beside the new ones
+    folder = trained.folder
+    (folder / "evals").mkdir()
+    (folder / "evals" / "earlier.json").write_text(json.dumps({
+        "name": "earlier", "file": "earlier.py", "file_sha256": "0" * 64, "wpt_eval": "0.1.0",
+        "device": "cpu", "data": {}, "text": "an earlier result"}))
+    test = tmp_path / "count_tokens.py"
+    test.write_text("from wpt_eval import Result\n\ndef run(context):\n    return Result({}, 'a new result')\n")
+    main([str(folder), str(test)])
+
+    card = (folder / "README.md").read_text()
+    assert "an earlier result" in card and "wpt-eval 0.1.0" in card and "a new result" in card
+    assert "schema" not in json.loads((folder / "evals" / "count_tokens.json").read_text())
+
+
 def test_a_test_that_returns_no_result_writes_nothing(trained, tmp_path):
     folder = trained.folder
     test = tmp_path / "broken.py"

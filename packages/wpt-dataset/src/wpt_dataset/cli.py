@@ -51,13 +51,15 @@
                                           place; only what is not done yet, so the same command resumes
                                           after a stop; several drafts at once, as wpt_utils.parallel
                                           allows
-    wpt-dataset source-server --by NAME [--pause SECONDS]
+    wpt-dataset always-on-monitoring [--by NAME] [--pause SECONDS]
                                           keep this checkout's sources current, forever: each round
                                           runs every built-in source drafter on every candidate, then
-                                          downloads every source again in full, fills in the drafts'
-                                          checksums and checks each source as `check --fetch` does;
-                                          then it waits --pause seconds (WPT_SOURCE_SERVER_PAUSE;
-                                          default one week). Nothing is committed
+                                          downloads every admitted source again (a git source only the
+                                          files the store lacks), fills in the checksums the drafters
+                                          set back to a draft and checks each source as `check --fetch`
+                                          does; then it waits --pause seconds (WPT_MONITORING_PAUSE;
+                                          default one week). The drafts' `by` is NAME, or without it
+                                          machine:<this machine's host name>. Nothing is committed
 
 Reading and writing the data files, through the service layer (wpt_dataset.repo;
 wpt-web's HTTP API does the same). Every write applies the rules of `check` and
@@ -108,14 +110,18 @@ new-source without --file and --license-text (CONTRIBUTING.md, "Models and
 generated text").
 
 The store comes from WPT_STORE (environment or .env at the repository root).
-Only download, check --fetch, fill-checksum, manifest and source-server
+Only download, check --fetch, fill-checksum, manifest and always-on-monitoring
 download sources; every other command reads them from the store, and a
-source not there is NotDownloaded. Each run of the first four, and each
-round of source-server, is a session: its record in the
+source not there is NotDownloaded. Each run of the first four, each round
+of always-on-monitoring, and each build and build-tokenizer is a session:
+its record in the
 store, in its own folder under records/, and its lines (one per source
-downloaded, found in the store, or failed) in the store database. Several
-sources download at once, as wpt_utils.parallel allows and at most as many
-from one site as sites.txt (in this package) says. download --stream (or
+downloaded, found in the store, or failed; a build's or a build-tokenizer's,
+one per source it read, found in the store) in the store database; the other commands that
+read sources write none. Several sources download at once, as
+wpt_utils.parallel allows and at most as many from one site as sites.txt
+(in this package) says, which also paces the requests to a site with a
+limit per time. download --stream (or
 WPT_STREAM=1) leaves no copy of what it stored on this machine (an S3
 store's bundles are otherwise kept in its cache folder too). A build with
 --stream (or WPT_STREAM=1) keeps only the tokens of each source's
@@ -144,13 +150,13 @@ from wpt_store import StoreError, store_from_settings
 from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry
 from wpt_utils.programs import MissingTool
 
-from . import download, manifest, source_drafter, source_server, store_history
+from . import download, manifest, monitoring, source_drafter, store_history
 from .build import build_dataset, build_tokenizer
 from .commits import check_commits
 from .edit import unpack, write_patch
 from .errors import DatasetError, InvalidFile
 from .migrate import migrate
-from .repo import KINDS, Repo, empty_source, source_id
+from .repo import KINDS, Repo, check_decision, empty_source, machine_name, source_id
 from .markdown_check import check_markdown
 from .sources import source_tree
 from .tasks import has_tasks, pointed_sources
@@ -365,8 +371,13 @@ def cmd_markdown_check(args, repo):
 
 
 def cmd_build_tokenizer(args, repo):
-    _, vocabulary, key = build_tokenizer(repo, args.name, _store(repo), stream=args.stream)
-    print(f"vocabulary {vocabulary} (fingerprint {key})")
+    store = _store(repo)
+    with Telemetry.start(store, "wpt-dataset-build-tokenizer", args.arguments, args.name,
+                         inputs={"tokenizer": args.name}, env_file=repo.root / ".env") as telemetry:
+        with download.session(store, telemetry) as session:  # its lines: each source read, `reused`
+            _, vocabulary, key = build_tokenizer(repo, args.name, store, log=telemetry.log, stream=args.stream,
+                                                 telemetry=telemetry, session=session)
+        telemetry.log(f"vocabulary {vocabulary} (fingerprint {key})")
     return 0
 
 
@@ -386,8 +397,10 @@ def cmd_build(args, repo):
     store = _store(repo)
     with Telemetry.start(store, "wpt-dataset-build", args.arguments, args.name, inputs={"recipe": args.name},
                          env_file=repo.root / ".env") as telemetry:
-        telemetry.log(build_dataset(repo, args.name, store, log=telemetry.log, stream=args.stream,
-                                    skip_failed=args.skip_failed, telemetry=telemetry))
+        with download.session(store, telemetry) as session:  # its lines: each source used, `reused`
+            dataset_id = build_dataset(repo, args.name, store, log=telemetry.log, stream=args.stream,
+                                       skip_failed=args.skip_failed, telemetry=telemetry, session=session)
+        telemetry.log(dataset_id)
     return 0
 
 
@@ -400,6 +413,7 @@ def cmd_source_drafters(args, repo):
 
 
 def cmd_source_drafter(args, repo):
+    check_decision({"decision": "under-review", "by": args.by}, "--by")
     overrides = {}
     for given in args.set:
         key, equals, value = given.partition("=")
@@ -417,8 +431,10 @@ def cmd_source_drafter(args, repo):
     return 0
 
 
-def cmd_source_server(args, repo):
-    source_server.serve(repo, _store(repo), args.by, "source-server", args.arguments, pause=args.pause)
+def cmd_always_on_monitoring(args, repo):
+    by = args.by or machine_name()
+    check_decision({"decision": "under-review", "by": by}, "--by")
+    monitoring.serve(repo, _store(repo), by, "always-on-monitoring", args.arguments, pause=args.pause)
 
 
 def cmd_migrate(args, repo):
@@ -704,13 +720,14 @@ def main(argv=None):
     drafting.add_argument("--started-by", default="", help="who started the run, kept in its record (wpt-web "
                                                           "starts again the runs it started that did not finish)")
     drafting.set_defaults(run=cmd_source_drafter)
-    serving = commands.add_parser("source-server")
-    serving.add_argument("--by", required=True, help="who drafts: the `by` of each draft's decision (under-review)")
-    serving.add_argument("--pause", type=int, metavar="SECONDS",
-                         default=os.environ.get("WPT_SOURCE_SERVER_PAUSE") or source_server.PAUSE,
-                         help="seconds between the end of a round and the start of the next (WPT_SOURCE_SERVER_PAUSE; "
-                              "default one week)")
-    serving.set_defaults(run=cmd_source_server)
+    monitoring_ = commands.add_parser("always-on-monitoring")
+    monitoring_.add_argument("--by", help="who drafts: the `by` of each draft's decision (under-review); default "
+                                          "machine:<this machine's host name>")
+    monitoring_.add_argument("--pause", type=int, metavar="SECONDS",
+                             default=os.environ.get("WPT_MONITORING_PAUSE") or monitoring.PAUSE,
+                             help="seconds between the end of a round and the start of the next "
+                                  "(WPT_MONITORING_PAUSE; default one week)")
+    monitoring_.set_defaults(run=cmd_always_on_monitoring)
     _data_commands(commands)
     args = parser.parse_args(argv)
     args.arguments = sys.argv[1:] if argv is None else list(argv)  # as the run's record names them

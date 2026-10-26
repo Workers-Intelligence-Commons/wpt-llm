@@ -194,7 +194,6 @@ def _train(model, prompts, held, config, settings, stops, device, telemetry):
     telemetry.log(f"drafter: {measure['accepted']} of {measure['verified']} drafts kept on {len(held_out)} held-out "
                   f"prompts, {measure['tokens_per_round']:.2f} tokens per round of the model")
     drafter.provenance = {
-        "schema": 2,
         "drafter": shape,
         "settings": asdict(settings),
         "prompts": {"count": len(prompts), "training": len(training), "held_out": len(held_out),

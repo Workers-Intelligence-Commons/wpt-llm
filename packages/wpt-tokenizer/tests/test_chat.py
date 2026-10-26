@@ -4,7 +4,6 @@ TOKENIZER = Tokenizer.train([b"the tool reads the file and answers"] * 4, vocab_
 ASSISTANT = [{"type": "thinking", "text": "Read it first."}, {"type": "text", "text": "Reading."},
              {"type": "tool_call", "id": "c1", "name": "read_file", "arguments": {"path": "a.txt"}}]
 CONVERSATION = {
-    "schema": 1,
     "tools": [{"name": "read_file", "description": "Read a file.", "parameters": {"type": "object"}}],
     "messages": [
         {"role": "system", "content": [{"type": "text", "text": "Be brief."}]},
@@ -39,7 +38,7 @@ def test_a_conversation_becomes_chatml_with_qwen_tags_and_learns_only_the_assist
 def test_a_generated_reply_reads_back_into_the_blocks_it_was_written_from():
     # wpt-chat keeps the model's answers as blocks, so the history it sends
     # back through the template is the conversation that happened
-    ids = chat.encode(TOKENIZER, {"schema": 1, "messages": [{"role": "assistant", "content": ASSISTANT}]})[0]
+    ids = chat.encode(TOKENIZER, {"messages": [{"role": "assistant", "content": ASSISTANT}]})[0]
     body = ids[ids.index(SPECIAL["<|im_start|>"]) + 1 + len(TOKENIZER.encode(b"assistant\n")):
                ids.index(SPECIAL["<|im_end|>"])]
     assert chat.reply(TOKENIZER, body) == [*ASSISTANT[:2], {**ASSISTANT[2], "id": "call-1"}]
@@ -54,7 +53,7 @@ def test_the_model_never_writes_a_json_block_and_reads_one_only_from_others():
     # writes stay text; a tool result's json block is written between its tags
     kept = {"type": "json", "value": {"answer": "Fixed calc.py.", "confidence": 0.75}}
     said = {"type": "text", "text": "Fixed calc.py."}
-    ids = chat.encode(TOKENIZER, {"schema": 3, "messages": [{"role": "assistant", "content": [said, kept]}]})[0]
+    ids = chat.encode(TOKENIZER, {"messages": [{"role": "assistant", "content": [said, kept]}]})[0]
     assert chat.show(TOKENIZER, ids) == "<|im_start|>assistant\nFixed calc.py.<|im_end|>\n"
     assert SPECIAL["<json>"] not in ids
     for written in (b"[1]", b"not json"):

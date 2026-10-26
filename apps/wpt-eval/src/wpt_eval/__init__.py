@@ -39,7 +39,6 @@ in the background was refused; docs/observability.md) and exits with code
 
 import argparse
 import hashlib
-import importlib.metadata
 import importlib.util
 import json
 import os
@@ -61,12 +60,12 @@ from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry, short
 from wpt_tokenizer import Tokenizer
 from wpt_utils.device import describe, select_device
 from wpt_utils.files import sha256_file
+from wpt_utils.programs import code
 
 from . import attempts as shared
 from .attempts import Record
 
 BUILT_IN = Path(__file__).parent / "evals"
-VERSION = importlib.metadata.version("wpt-eval")
 
 
 class EvalError(Exception):
@@ -169,8 +168,8 @@ def run_eval(context, eval_) -> dict:
         result = module.run(context)
         if not isinstance(result, Result):
             raise EvalError(f"{path.name}: run(context) returned {type(result).__name__}, not wpt_eval.Result")
-        record = {"schema": 1, "name": name, "file": file_name, "file_sha256": file_sha256,
-                  "wpt_eval": VERSION, "device": describe(context.device), "data": result.data, "text": result.text}
+        record = {"name": name, "file": file_name, "file_sha256": file_sha256,
+                  "code": code(), "device": describe(context.device), "data": result.data, "text": result.text}
         telemetry.event("eval.result", name=name, data=result.data)
         folder = context.folder / EVALS_NAME
         text = json.dumps(record, indent=2) + "\n"
@@ -212,8 +211,9 @@ def open_context(folder, store, device, telemetry=None, attempts=shared.ATTEMPTS
         provenance = json.loads((folder / "provenance.json").read_text(encoding="utf-8"))
     except FileNotFoundError:
         raise EvalError(f"{folder}: no provenance.json; give a folder that wpt-train wrote") from None
-    if provenance.get("schema") != 5:
-        raise EvalError(f"{folder}: provenance shape {provenance.get('schema')}, this wpt-eval reads 5; train it again")
+    if "steps" not in provenance:
+        raise EvalError(f"{folder}: provenance.json lists no steps, so it is of another shape than this wpt-eval "
+                        "reads; train it again")
     try:
         tokenizer = Tokenizer.from_bytes(load_tokenizer(folder))
         model = load_model(folder, device)  # refuses a folder whose drafter is missing or of other weights

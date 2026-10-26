@@ -56,7 +56,7 @@ def draft(candidate, context):
     if what.get("raise"):
         raise RuntimeError(what["raise"])
     return Drafted("fake", candidate.name, {
-        "schema": 8, "type": "http-archive", "address": f"https://example.org/{candidate.name}.zip",
+        "type": "http-archive", "address": f"https://example.org/{candidate.name}.zip",
         "revision": context.settings["revision"], "checksum": "sha256:" + "0" * 64,
         "licenses": [{"license": what.get("license", "MIT"), "paths": ["**"], "attribution": "A. Author",
                       "text": "Permission is hereby granted."}],
@@ -153,7 +153,7 @@ def test_a_stopped_run_resumes_with_what_is_left(program, repo, store, monkeypat
     # given a run drafting one at a time (a machine of 1 core) stopped (Ctrl+C) while drafting its second
     # candidate, the same command drafts the second and third, never the first again, and reads its site facts
     # from the store instead of computing them again
-    monkeypatch.setattr(source_drafter, "Sizing", lambda memory, what: Sizing(memory, what, Machine(1)))
+    monkeypatch.setattr(source_drafter, "Sizing", lambda what: Sizing(what, Machine(1)))
     with pytest.raises(KeyboardInterrupt):
         program.run(["first", "second", "third"], {"second": {"stop": True}})
     assert repo.source_ids() == [sid("first")]
@@ -209,8 +209,7 @@ def test_drafts_in_worker_processes_give_what_drafts_one_at_a_time_give(program,
     for cores in (1, 16):
         for existing in repo.source_ids():
             shutil.rmtree(repo.root / "data" / "sources" / existing)
-        monkeypatch.setattr(source_drafter, "Sizing", lambda memory, what, cores=cores: Sizing(memory, what,
-                                                                                              Machine(cores)))
+        monkeypatch.setattr(source_drafter, "Sizing", lambda what, cores=cores: Sizing(what, Machine(cores)))
         assert program.run(names, drafts, "--again") == 0
         outcomes = [(o["candidate"], o["outcome"], o["source"], o["change"], o["reason"]) for o in records(store)[-1][1]]
         found.append((outcomes, {s: repo.source(s).data for s in repo.source_ids()}))
@@ -235,6 +234,8 @@ def test_a_program_starts_again_only_the_unfinished_runs_it_started(program, rep
     stopped("second", f"{here}-00000002")
     assert program.run(candidates, {}, "--only", "third", "--started-by", f"{here}-00000003") == 0
     stopped("fourth", f"{elsewhere}-00000004")
+    # a run's record the store cannot read (here its start is not zstd) is left out, never hiding the others
+    store.kind.write(f"records/20261024T000000Z-{source_drafter.COMMAND}-broken/start.json.zst", b"not zstd")
 
     def left():
         return sorted(run["inputs"]["started_by"] for run in source_drafter.to_resume(store, here))

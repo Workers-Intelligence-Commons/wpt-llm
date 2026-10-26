@@ -4,9 +4,8 @@
   "title": "WPT reviewed license texts (data/reviewed-license-texts.json): the outcome of a review of each license file, notice, package metadata or README text that a source drafter's rules could not identify alone, which the source drafters read (docs/licenses.md, \"Reviewed license texts\")",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "texts"],
+  "required": ["texts"],
   "properties": {
-    "schema": {"const": 1, "description": "shape version of this file, for migrations"},
     "texts": {
       "type": "object",
       "description": "by key: the sha256 of the text's group (its first 200,000 bytes read as UTF-8, lowercased, without the lines naming a copyright, then every run of characters other than a-z and 0-9 made one space, trimmed), or \"file:\" and the sha256 of one file's bytes, which comes first (wpt_dataset.licenses.reviewed)",

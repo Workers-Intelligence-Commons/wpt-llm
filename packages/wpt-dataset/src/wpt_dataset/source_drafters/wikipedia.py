@@ -29,7 +29,7 @@ import re
 import zlib
 from datetime import date
 
-from wpt_dataset.repo import CURRENT_SCHEMA, DRAFT_CHECKSUM, source_id
+from wpt_dataset.repo import DRAFT_CHECKSUM, source_id
 from wpt_dataset.source_drafter import Candidate, Drafted
 
 SETTINGS = {"run": "20250320"}  # the dump run, YYYYMMDD
@@ -129,7 +129,6 @@ def draft(candidate, context):
     url = site(db, sample)
     day = _run_date(run)
     return Drafted("wikimedia", _item(db), {
-        "schema": CURRENT_SCHEMA["source"],
         "type": "http-archive",
         "address": address,
         "revision": day.isoformat(),

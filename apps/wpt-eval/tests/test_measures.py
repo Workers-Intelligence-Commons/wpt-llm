@@ -20,7 +20,7 @@ from wpt_eval import find, main
 from wpt_eval.attempts import Record
 
 ROOT = Path(__file__).resolve().parents[3]  # the repository: its agent image holds the check library
-TASK = {"schema": 1, "instructions": "Write hello into out.txt.", "image": "tiny",
+TASK = {"instructions": "Write hello into out.txt.", "image": "tiny",
         "limits": {"max_turns": 2, "max_tokens": 6, "command_seconds": 5}, "needs": [["write", "bash"]]}
 GIT_ENV = {**os.environ, "GIT_AUTHOR_NAME": "T", "GIT_AUTHOR_EMAIL": "t@example.org", "GIT_COMMITTER_NAME": "T",
            "GIT_COMMITTER_EMAIL": "t@example.org", "GIT_CONFIG_GLOBAL": os.devnull}
@@ -40,7 +40,7 @@ def task_source(built, root, upstream, check="#!/bin/sh\necho 1\n", folders=("he
     for args in (["init", "-q"], ["add", "-A"], ["commit", "-q", "-m", "x"]):
         subprocess.run(["git", *args], cwd=upstream, env=GIT_ENV, check=True)
     commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=upstream, capture_output=True, text=True).stdout.strip()
-    data = {"schema": 8, "type": "git", "address": str(upstream), "revision": commit,
+    data = {"type": "git", "address": str(upstream), "revision": commit,
             "licenses": [{"license": "CC0-1.0", "paths": ["**"], "attribution": "Tasks, by Cy Author, 2026",
                           "text": "Cy Author dedicates these tasks to the public domain.\n"}],
             "formats": [{"format": "task", "paths": ["**"]}], "tags": [{"tags": ["eval"], "paths": ["**"]}],
@@ -154,7 +154,7 @@ def repository(tmp_path, monkeypatch):
 
     def source(name, tags):
         address = f"https://example.org/{name}"
-        data = {"schema": 8, "type": "git", "address": address, "revision": "0" * 40,
+        data = {"type": "git", "address": address, "revision": "0" * 40,
                 "licenses": [{"license": "CC0-1.0", "paths": ["**"], "attribution": "A", "text": "Public domain.\n"}],
                 "formats": [{"format": "text", "paths": ["**"]}], "tags": tags, "checksum": "sha256:" + "0" * 64,
                 "decision": {"decision": "admitted", "by": "T", "date": "2026-10-17"}}

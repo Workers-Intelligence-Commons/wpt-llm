@@ -273,3 +273,45 @@ def test_a_repository_pointer_takes_the_tags_of_the_files_its_commit_changes(kit
     assert document_tags(repo, store, sid, f".git/history/{notes}") == {"en"}
     assert document_tags(repo, store, sid, "docs/notes.txt") == {"en"}
     assert document_tags(repo, store, sid, "src/main.py#3") == {"code"}
+
+
+def test_a_moved_revision_with_a_history_asks_only_for_new_files_and_keeps_the_full_fetch_s_checksum(
+        kit, repo, store, tmp_path, monkeypatch):
+    # given a git source with a history in the store, moved to a newer commit: the download asks upstream only
+    # for the contents the store lacks (the new file, and an older version only the history's patches read,
+    # which no tree holds); git diffs the patches against the contents it takes from the store, so the tree
+    # and its checksum are the ones a fetch without the store gives
+    import tempfile
+
+    from wpt_dataset import download, sources
+
+    folder = tmp_path / "upstream"
+    folder.mkdir()
+    kit.run("git", "init", "-q", cwd=folder)
+    for setting in ("uploadpack.allowFilter", "uploadpack.allowAnySHA1InWant"):  # partial fetches, as on GitHub
+        kit.run("git", "config", setting, "true", cwd=folder)
+    since = commit(kit, folder, "add the license", {"LICENSE": kit.LICENSE_TEXT.encode(), "main.py": b"print(1)\n"})
+    first = commit(kit, folder, "print two", {"main.py": b"print(2)\n", "notes.txt": b"some notes\n"})
+    sid = kit.add_source(repo, store, "example", "history", {
+        "type": "git", "address": str(folder), "revision": first, "history": {"since": since},
+        "licenses": kit.WITH_HISTORY,
+        "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
+                    {"format": "text", "paths": ["LICENSE", "main.py", "notes.txt"]}]})
+    later = commit(kit, folder, "print three", {"main.py": b"print(3)\n"})
+    data = repo.source(sid).data | {"revision": later}
+    with tempfile.TemporaryDirectory() as staging:
+        data["checksum"] = manifest.checksum(kit.upstream(data, str(folder), download.Staging(staging)))
+    repo.save_source(sid, data, repo.version("source", sid))
+    asked, real = [], sources._git_fetch_blobs
+    monkeypatch.setattr(sources, "_git_fetch_blobs",
+                        lambda address, folder, ids: asked.append(sorted(ids)) or real(address, folder, ids))
+
+    kit.download(repo, store, sid)  # the checksum matches: the tree is the full fetch's
+
+    # the files the history's patches need that no tree holds were kept with the first download (the git
+    # map names them), so only the new revision's file is asked for
+    assert asked == [[kit.run("git", "rev-parse", f"{later}:main.py", cwd=folder).decode().strip()]]
+    tree, _ = source_tree(repo.source(sid), store)
+    patch = manifest.content(store, tree[f".git/history/{later}"]).decode()
+    assert "-print(2)\n+print(3)" in patch
+    assert manifest.content(store, tree["main.py"]) == b"print(3)\n"

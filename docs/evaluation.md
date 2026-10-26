@@ -359,7 +359,7 @@ the `rating` format holds one rating per line, each a JSON object matching
 `packages/wpt-dataset/src/wpt_dataset/schemas/rating.schema.json`:
 
 ```json
-{"schema": 1, "task": "<source id>/<task folder>", "weights": {"model.safetensors": "<sha256>"},
+{"task": "<source id>/<task folder>", "weights": {"model.safetensors": "<sha256>"},
  "record": "<wpt-eval run record folder>", "attempt": 1, "plain": false, "verdict": "pass",
  "by": "A. Person", "date": "2026-10-23"}
 ```
@@ -373,8 +373,8 @@ the `rating` format holds one rating per line, each a JSON object matching
 - `weights`: the sha256 of each weight file of the model that made it,
   as `{file: sha256}`, as the record's `ids.json` names them
   (`inputs.weights`);
-- `verdict`: `pass` or `fail`; `by`: who rated; `date`: the day, as
-  `YYYY-MM-DD`.
+- `verdict`: `pass` or `fail`; `by`: who rated, a person's name, which
+  holds no colon; `date`: the day, as `YYYY-MM-DD`.
 
 A person rates an attempt once: their newer rating replaces their earlier
 one. The data rules hold it for every way of saving: a rating file with two

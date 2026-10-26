@@ -55,17 +55,17 @@ where a step needs them, run through Docker Desktop.
 | Job | Command | Reads | Writes |
 | --- | --- | --- | --- |
 | id of a new source | `uv run wpt-dataset source-id ORIGIN [ITEM] ADDRESS` | | prints the id |
-| download sources into the store | `uv run wpt-dataset download [ID ...] [--stream]` (no ID: every admitted source; several at once, at most as many from one site as `packages/wpt-dataset/src/wpt_dataset/sites.txt` says; a source already in the store is not downloaded again; `--stream`: no copy kept on this machine) | the upstream | the store: its bundles, its database, its run record `records/<folder>/` |
+| download sources into the store | `uv run wpt-dataset download [ID ...] [--stream]` (no ID: every admitted source; several at once, at most as many from one site, and at most as many requests to a site in a span of time, as `packages/wpt-dataset/src/wpt_dataset/sites.txt` says; a source already in the store is not downloaded again; `--stream`: no copy kept on this machine) | the upstream | the store: its bundles, its database, its run record `records/<folder>/` |
 | what the store holds and when it was downloaded | `uv run wpt-dataset store` | the store database | prints every session and each source's last outcome and last download |
 | manifest and checksum of a source | `uv run wpt-dataset manifest ID` (a download, kept under the checksum found) | the upstream | the store; prints the checksum |
 | fill in new sources' checksums | `uv run wpt-dataset fill-checksum ID [ID ...]` (checksum all zeros; one download each: files that are not text (UTF-8, or the encoding they state) excluded by exact path, then checked as `check --fetch` does; what it downloads is kept in the store; failures listed at the end) | the upstream | `data/sources/ID/source.json`, the store |
 | edit a source's files | `uv run wpt-dataset unpack ID FOLDER`, edit, `uv run wpt-dataset patch ID FOLDER NAME` | the source, the folder | the folder; then `data/sources/ID/NNNN-NAME.patch` |
 | check the data rules | `uv run wpt-dataset check [--fetch [ID ...]] [--changed REV]` (`--fetch`: the sources are downloaded as `download` does, then checked; failures listed at the end) | `data/` | the store, with `--fetch` |
-| build a vocabulary | `uv run wpt-dataset build-tokenizer NAME [--stream]` | a tokenizer recipe | the store; `data/recipes/tokenizers/NAME.lock.json` (commit it) |
+| build a vocabulary | `uv run wpt-dataset build-tokenizer NAME [--stream]` | a tokenizer recipe | the store; its run record `records/<folder>/`; `data/recipes/tokenizers/NAME.lock.json` (commit it) |
 | check a vocabulary on the data | `uv run wpt-dataset tokenizer-check NAME` | the lock, admitted sources | prints characters per token per source |
-| build a dataset | `uv run wpt-dataset build NAME [--stream] [--skip-failed]` (reads only downloaded sources: one not in the store is left out and listed in the record; several sources at once, the same dataset as one at a time; `--stream`: only tokens kept, no Markdown, each source in a temporary folder deleted once it is tokens; `--skip-failed`: any other failing source is left out and listed in the record instead of stopping) | the data part of the model recipe NAME | the store; its run record `records/<folder>/`; prints the dataset id |
+| build a dataset | `uv run wpt-dataset build NAME [--stream] [--skip-failed]` (reads only downloaded sources: one not in the store is left out and listed in the record; sources converted in worker processes, several at once, the same dataset as one at a time; a task pointing into a source left out stops it, naming both; `--stream`: only tokens kept, no Markdown, only the files a conversion needs as files copied into a temporary folder deleted once the source is tokens; `--skip-failed`: any other failing source is left out and listed in the record instead of stopping) | the data part of the model recipe NAME | the store; its run record `records/<folder>/`; a session in the store database with a `reused` line per source it read; prints the dataset id |
 | draft sources from what a site publishes | `uv run wpt-dataset source-drafters` (the built-ins and their settings), `uv run wpt-dataset source-drafter NAME\|FILE --by NAME [--set SETTING=VALUE ...] [--only CANDIDATE ...] [--again]` (a new source starts `under-review`; one that exists is updated in place, its revision, checksum, exclusions, file kinds, submodules and history start, and goes back to `under-review` when its licenses change; one with patches stops with a note; only candidates not done yet, so the same command resumes; `--again`: the done ones too; several drafts at once, as `wpt_utils.parallel` allows; a page fetched with an ETag is kept and asked for again only if it changed; docs/architecture.md, "Source drafters") | the site, the store's facts and pages, `data/` | `data/sources/ID/source.json` through the service layer; the store (facts, pages, what is done); its run record `records/<folder>/` |
-| keep a checkout's sources current, without end (a server) | `uv run wpt-dataset source-server --by NAME [--pause SECONDS]` (each round: every built-in source drafter on every candidate, then every source downloaded again in full, the drafts' checksums filled in, each source checked as `check --fetch` does; the failures printed; then a pause, `WPT_SOURCE_SERVER_PAUSE` or `--pause`, one week by default; nothing committed; docs/architecture.md, "The source server") | the sites, the upstream, `data/` | `data/sources/ID/source.json` in this checkout; the store; a run record per source drafter run and per round's download |
+| keep a checkout's sources current, without end (a machine that stays on) | `uv run wpt-dataset always-on-monitoring [--by NAME] [--pause SECONDS]` (each round: every built-in source drafter on every candidate, then every admitted source downloaded again, the admitted drafts' checksums filled in, each source checked as `check --fetch` does; the failures printed; then a pause, `--pause` or `WPT_MONITORING_PAUSE`, one week by default; without `--by`, the drafts' `by` is `machine:<host>`; nothing committed; docs/architecture.md, "Always-on monitoring") | the sites, the upstream, `data/` | `data/sources/ID/source.json` in this checkout; the store; a run record per source drafter run and per round's download |
 | migrate data files | `uv run wpt-dataset migrate` | `data/` | rewrites files whose shape is behind |
 | check the Markdown of sources | `uv run wpt-dataset markdown-check [ID ...]` | the sources | prints notes and problems per source |
 | train | `uv run wpt-train RECIPE DATASET_ID [--out FOLDER] [--stream] [--recompute] [--segment N] [--run NAME] [--scheduler-costs RECORD_FOLDER] [options]`, started detached (skill `wpt-training-run`; runs the recipe's `steps` in order, starting from the result of the last of its first steps the store already holds, so a run reuses the steps it shares with an earlier one; a dataset that holds nothing for a step refuses the run before any step trains; a step that cannot do its part (`StepFailed`) stops the run with exit code 2, no result of it kept but the checkpoint it wrote, which `--resume` continues, the results of the steps before it kept; ends by training the model's drafter; `--scheduler-costs`: replay the drafter scheduler's pass times an earlier run recorded on the same setup; a checkpoint is always written just before the drafter, so a drafter failure resumes with `--resume`; `--stream`: a few shards on disk at a time; `--recompute`: much less memory, about a third slower; `--segment N`: windows longer than N tokens run as segments of N, the same training in the memory of N tokens plus what the segments hand on, up to twice the time; with `--strategy split`, each process's slice runs in segments of N; `--run`: the checkpoint in the store, so another machine can continue) | the model recipe, the store | a model folder; each step's result, the store's `steps/<fingerprint>`; its run record `records/<folder>/` in the store (one per command, over restarts); `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
@@ -107,7 +107,7 @@ from the store, on any machine). Exit codes: 2 refused, 3 the run's record
 could not be written, 130 stopped.
 
 Every run of `wpt-dataset download`, `check --fetch`, `fill-checksum`,
-`manifest`, `build`, `wpt-dataset source-drafter`, each round of `wpt-dataset source-server`, `wpt-train` and `wpt-eval` writes its record into its own store folder, `records/<UTC
+`manifest`, `build`, `build-tokenizer`, `wpt-dataset source-drafter`, each round of `wpt-dataset always-on-monitoring`, `wpt-train` and `wpt-eval` writes its record into its own store folder, `records/<UTC
 time>-<command>-<main id>-<random>/` (main id: the source id or `<count>-sources`, the recipe name, a short
 dataset id or a short weights hash): `start.json`, `events.jsonl` (spans, events,
 every printed line), `ids.json` (the ids read and written, which chain the
@@ -212,16 +212,18 @@ A tokenizer recipe's lock freezes its vocabulary: adding sources never
 retrains it (docs/tokenizer.md). Raising the recipe's `version` trains a new
 one and replaces the lock; it is a person's decision (it makes later models
 incompatible with earlier ones), so never raise it unasked. A build that
-stops with `TokenizerVersionNeeded` means the recipe or the tokenizer code
-changed: ask whether to raise the version or undo the change. Commit the
+stops with `TokenizerVersionNeeded` means the recipe changed: ask whether to
+raise the version or undo the change. A change of the tokenizer's code asks
+for no version. Commit the
 lock file a build writes.
 
 ## Changing a file's shape
 
-Every data file carries its shape version (`schema`). To change a shape:
-bump `CURRENT_SCHEMA` in `wpt_dataset/repo.py`, update the schema file,
-register the step in `wpt_dataset/migrate.py`, and run `wpt-dataset
-migrate`. A file `migrate` cannot rewrite, such as a source's `chat`
+No data file carries a shape number: a step recognizes an old shape by its
+fields. To change a shape: update the schema file, add a `Step` (what it
+finds, how it rewrites) to the list of its kind in `wpt_dataset/migrate.py`,
+with an old shape that leaves a field difference to find, and run
+`wpt-dataset migrate`. A file `migrate` cannot rewrite, such as a source's `chat`
 file (upstream's bytes), goes through `migrate.upgrade` where it is read.
 Never edit data files by hand for a shape change. A field only a
 person can fill is left empty by the migration, and the check then names
@@ -413,6 +415,13 @@ what the whole text gives (docs/model.md, "What a layer passes on").
   produce the same bytes as Linux.
 - Start external programs through `wpt_utils.programs.program(name)`,
   which reports a missing tool clearly.
+- A fingerprint holds `wpt_utils.programs.code()` (the commit and a hash of
+  the uncommitted changes), never a version number of WPT's own code.
+- Parallel work sizes itself with `wpt_utils.parallel.Sizing`, which
+  measures each item's memory as it runs: never give a memory figure per
+  item. A source's conversion or reading goes through
+  `wpt_dataset.workers` (or `sources.each_read`), with a module-level
+  function, since it runs in a worker process.
 - Test isolation: a test never writes into the real store, cache or user
   settings; set `WPT_STORE`, `XDG_CACHE_HOME` and `LOCALAPPDATA` to the
   test's own folder when it touches them.
@@ -423,4 +432,7 @@ what the whole text gives (docs/model.md, "What a layer passes on").
   `docs/licenses.md` (version and license, read from its metadata), and a
   changed version gets its row checked again.
 - The repository is public: never commit personal paths, machine names,
-  credentials, or data that is not a pointer to a licensed source.
+  credentials, or data that is not a pointer to a licensed source. The one
+  machine name committed is the `by` of a draft that always-on monitoring
+  saved without `--by`, `machine:<host>`; a person's name holds no colon,
+  and `check` refuses an `admitted` or `refused` decision by a machine.

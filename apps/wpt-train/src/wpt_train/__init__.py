@@ -49,7 +49,9 @@ After each step, the store keeps its result (ref steps/<fingerprint>): the
 weights and the optimizer's state, under a fingerprint of the step before
 it, the step itself (method, optimizer, environment, settings, locked
 parts), the fingerprint of the part of the dataset it reads, the seed and
-the code versions; no option is part of it. A run whose first steps
+the code (wpt_utils.programs.code: its commit and a hash of its
+uncommitted changes, so any commit makes every kept result unknown); no
+option is part of it. A run whose first steps
 have a kept result starts from the result of the last of them and runs the
 steps after it: a recipe that shares its first steps with an earlier run
 reuses them, and a run that failed after some steps continues from the
@@ -130,7 +132,7 @@ from pathlib import Path
 
 import torch
 
-from wpt_dataset.build import RECORD_SCHEMA
+from wpt_dataset.build import current_record
 from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
 from wpt_dataset.sources import fingerprint
@@ -149,12 +151,12 @@ from wpt_training import (WINDOWS, Checkpoint, Data, FolderCheckpoint, Interrupt
                           SettingsMismatch, StepFailed, load_step, load_strategy, train, weights)
 from wpt_training.launch import REFUSED, STOPPED, launch
 from wpt_utils.device import describe
-from wpt_utils.programs import repository
+from wpt_utils.programs import code, repository
 
 SIZE_UNITS = {"": 1, "KB": 10**3, "MB": 10**6, "GB": 10**9}
 CHECKPOINT_FOLDER = "checkpoint"
-# the code whose version a step's result depends on, beside the files of the step's own parts
-CODE = ("torch", "numpy", "wpt-model", "wpt-training", "wpt-tokenizer", "wpt-store", "wpt-dataset", "wpt-agent")
+# the outside packages whose versions provenance.json names; the code itself is code()
+TOOLS = ("torch", "numpy", "pyarrow")
 
 
 class Refused(Exception):
@@ -252,9 +254,9 @@ def load_dataset(store, dataset_id, recipe):
     record = json.loads(store.get_bytes(record_object))
     if record.get("id") != dataset_id:
         raise InputError(f"dataset record {record_object} describes {record.get('id')}, not {dataset_id}")
-    if record.get("schema") != RECORD_SCHEMA:
-        raise InputError(f"dataset {dataset_id} has record shape {record.get('schema')}, this wpt-train reads "
-                         f"{RECORD_SCHEMA}; build the recipe again with the current wpt-dataset")
+    if not current_record(record):
+        raise InputError(f"dataset {dataset_id} has a record of another shape than this wpt-train reads; build the "
+                         "recipe again with the current wpt-dataset")
     if record.get("recipe") != recipe["data"]:
         raise InputError(f"dataset {dataset_id} was built from {record.get('recipe_name')!r} with another data part "
                          "than this recipe's; build this recipe with `wpt-dataset build` and use the id it prints")
@@ -289,17 +291,6 @@ def check_dataset(steps, record, store):
             raise InputError(f"step {number} {step.name}: {error}") from None
 
 
-def code_versions() -> dict:
-    """{package: its version} of the code a step's result depends on."""
-    versions = {}
-    for package in CODE:
-        try:
-            versions[package] = importlib.metadata.version(package)
-        except importlib.metadata.PackageNotFoundError:
-            versions[package] = None
-    return versions
-
-
 # the part of the dataset record's `fingerprints` that a step reads, by the kind of examples it learns from
 PART_READ = {WINDOWS: "text", "conversations": "conversations", "attempts": "tasks"}
 
@@ -311,7 +302,7 @@ def fingerprints(steps, model_config, record, seed, code) -> list[str]:
     the step (wpt_training.Step.record: its files, method, environment,
     optimizer, settings and locked parts), the fingerprint of the part of
     the dataset it reads (the record's `fingerprints`), the recipe's seed
-    and the code versions. The step's position in the list, which its draws
+    and the code (code, wpt_utils.programs.code()). The step's position in the list, which its draws
     mix into the seed, is the length of the chain before it. No option is
     part of it."""
     shape = {key: value for key, value in asdict(model_config).items() if key != "block_size"}
@@ -363,13 +354,12 @@ class StepResults:
 def provenance(args, recipe, record, record_object, model_config, n_params, strategy, strategy_plugin, done):
     sources = {sid: source for step in done for sid, source in step["sources"].items()}
     versions = {}
-    for package in (*CODE, "pyarrow", "wpt-train"):
+    for package in TOOLS:
         try:
             versions[package] = importlib.metadata.version(package)
         except importlib.metadata.PackageNotFoundError:
             versions[package] = None
     return {
-        "schema": 5,
         "recipe_name": args.recipe,
         "recipe": recipe,  # everything that changes the model: data, architecture, seed, steps, drafter
         "dataset": record["id"],
@@ -389,8 +379,8 @@ def provenance(args, recipe, record, record_object, model_config, n_params, stra
         "parameters": n_params,
         **repository(),  # repository_commit, repository_dirty
         "device": describe(strategy.device) + (f", {strategy.world_size} processes" if strategy.world_size > 1 else ""),
-        "tools": {"python": platform.python_version(), "platform": platform.platform(), "rustc": RUSTC_VERSION,
-                  **versions},
+        "tools": {"code": code(), "python": platform.python_version(), "platform": platform.platform(),
+                  "rustc": RUSTC_VERSION, **versions},
     }
 
 
@@ -643,7 +633,7 @@ def _train(args, recipe, strategy, strategy_plugin, steps, context, store, telem
     n_params = sum(p.numel() for p in model.parameters())
     log(f"parameters: {n_params:,}")
     stream_shards = args.stream_shards if args.stream else None
-    marks = fingerprints(steps, model_config, record, seed, code_versions())
+    marks = fingerprints(steps, model_config, record, seed, code())
     results = StepResults(store, telemetry)
     telemetry.event("training.settings", recipe=recipe, model=asdict(model_config), parameters=n_params,
                     device=describe(strategy.device), processes=strategy.world_size,
