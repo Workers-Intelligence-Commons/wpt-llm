@@ -1,0 +1,57 @@
+{
+  "type": "huggingface",
+  "address": "https://huggingface.co/datasets/common-pile/python_enhancement_proposals_filtered",
+  "revision": "582170907dd303c207770fceacd38e6abf133edc",
+  "checksum": "sha256:9d20c1fa4424cadec3c5eee9e6374f8b673d6c601dc269a6eb18f766a8e61a94",
+  "extract": {
+    "exclude": [
+      ".gitattributes",
+      "README.md"
+    ]
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "*.json.gz"
+      ],
+      "values": [
+        "Public Domain"
+      ],
+      "attribution": "Python Enhancement Proposals (PEPs), each by the authors named in its own header and in the record's metadata.authors; https://peps.python.org/. Collected as the Common Pile v0.1 dataset \"Python Enhancement Proposals\" (filtered), https://huggingface.co/datasets/common-pile/python_enhancement_proposals_filtered, by Kandpal et al. 2025.",
+      "text": "Each PEP's own Copyright section places it in the public domain (\"This document has been placed in the public domain.\"), and newer PEPs add \"or under the CC0-1.0-Universal license, whichever is more permissive\". The dataset card states: \"The majority of PEPs are published in the Public Domain, but 5 were published under the 'Open Publication License' and omitted from this dataset.\" Records enter only when their metadata.license is \"Public Domain\". The public domain here comes from each author's own dedication, not from an expired copyright."
+    }
+  ],
+  "formats": [
+    {
+      "format": "records",
+      "paths": [
+        "*.json.gz"
+      ],
+      "text": "text",
+      "id": "id",
+      "license": "metadata.license",
+      "credit": [
+        "metadata.authors",
+        "metadata.url"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "en",
+        "code",
+        "technical"
+      ],
+      "paths": [
+        "*.json.gz"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15"
+  }
+}

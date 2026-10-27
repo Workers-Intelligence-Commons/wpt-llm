@@ -1,0 +1,56 @@
+{
+  "type": "huggingface",
+  "address": "https://huggingface.co/datasets/common-pile/caselaw_access_project_filtered",
+  "revision": "50e1961a5ed8fdddcee64c9e66e1338de8953b63",
+  "checksum": "sha256:b1e4844ea7866606d0aedbeb8f809d6b832e1ed59054b6e5b8f0d43c1a5d21dd",
+  "extract": {
+    "exclude": [
+      ".gitattributes",
+      "README.md"
+    ]
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "*.json.gz"
+      ],
+      "values": [
+        "Public Domain"
+      ],
+      "attribution": "Caselaw Access Project and Court Listener court decisions and judges' opinions, as collected in the Common Pile v0.1 dataset \"Caselaw Access Project\" (filtered), https://huggingface.co/datasets/common-pile/caselaw_access_project_filtered, by Kandpal et al. 2025. The Caselaw Access Project is a source of U.S. federal and state court decisions; the card gives no author list for the dataset itself.",
+      "text": "Dataset card (quoted): \"From these sources, we only included documents that were in the public domain.\" The Caselaw Access Project is described as \"nearly 40 million pages of U.S. federal and state court decisions and judges' opinions\". Court decisions of US courts are a US government work with US origin, so the work is public domain in the US and in its origin country. Doubt: the card does not say that all Court Listener cases (described as \"scraped from 479 courts\") are US courts, so this entry rests on the card's public-domain statement for the whole dataset."
+    }
+  ],
+  "formats": [
+    {
+      "format": "records",
+      "paths": [
+        "*.json.gz"
+      ],
+      "text": "text",
+      "id": "id",
+      "license": "metadata.license",
+      "credit": [
+        "metadata.author",
+        "metadata.url"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "en",
+        "law"
+      ],
+      "paths": [
+        "*.json.gz"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-15"
+  }
+}
