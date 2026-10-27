@@ -591,6 +591,16 @@ when it is:
 - **A later edition counts as the text it reproduces.** Its editors are
   credited in the attribution, and their work does not block the source,
   unless the edition states otherwise.
+- **A digitized book's proof** names every person whose words are in it,
+  each with a death year, and the printed edition it reproduces. The
+  people are those the library's catalog lists for the book and those the
+  printed edition's opening pages credit. Each death year is Wikidata's;
+  several death years for one person count when every one gives the same
+  verdict. The edition is a scan whose text holds passages of the
+  digitized text. When every person died in 1925 or earlier, the term has
+  ended under every country's law, and the country of first publication
+  is not needed. A person without a death year, an edition without a
+  scan, or a credit the scan does not show makes the book a doubt.
 - **Doubts are never guessed.** A fact the decision needs that cannot be
   found, or facts that disagree, make the source a doubt for the
   maintainer. A doubt stays `under-review`, with the missing fact as its
