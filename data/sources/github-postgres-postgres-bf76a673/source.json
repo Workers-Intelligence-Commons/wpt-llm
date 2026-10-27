@@ -2,7 +2,7 @@
   "type": "git",
   "address": "https://github.com/postgres/postgres",
   "revision": "febd05600d789ea89f3b3e5fd50391990b652a68",
-  "checksum": "sha256:02db00485592c4093a56de4be68b4d9b107feb15526b692930416848fb6e5857",
+  "checksum": "sha256:519468d61cb51649458daea0eb6a5c3a617552803fd83a2b8056752f4b83800d",
   "extract": {
     "exclude": [
       "contrib/**",
@@ -45,8 +45,7 @@
       "src/test/regress/expected/collate.windows.win1252.out",
       "src/test/regress/sql/collate.windows.win1252.sql",
       "src/test/ssl/ssl/client-der.key",
-      "src/test/ssl/ssl/client-encrypted-der.key",
-      "src/tools/**"
+      "src/test/ssl/ssl/client-encrypted-der.key"
     ]
   },
   "history": {
@@ -948,6 +947,7 @@
         "src/test/ssl/t/**",
         "src/test/subscription/**",
         "src/timezone/**",
+        "src/tools/**",
         "src/tutorial/**"
       ],
       "text": "PostgreSQL Database Management System\n(also known as Postgres, formerly known as Postgres95)\n\nPortions Copyright (c) 1996-2026, PostgreSQL Global Development Group\n\nPortions Copyright (c) 1994, The Regents of the University of California\n\nPermission to use, copy, modify, and distribute this software and its\ndocumentation for any purpose, without fee, and without a written agreement\nis hereby granted, provided that the above copyright notice and this\nparagraph and the following two paragraphs appear in all copies.\n\nIN NO EVENT SHALL THE UNIVERSITY OF CALIFORNIA BE LIABLE TO ANY PARTY FOR\nDIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING\nLOST PROFITS, ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS\nDOCUMENTATION, EVEN IF THE UNIVERSITY OF CALIFORNIA HAS BEEN ADVISED OF THE\nPOSSIBILITY OF SUCH DAMAGE.\n\nTHE UNIVERSITY OF CALIFORNIA SPECIFICALLY DISCLAIMS ANY WARRANTIES,\nINCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY\nAND FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS\nON AN \"AS IS\" BASIS, AND THE UNIVERSITY OF CALIFORNIA HAS NO OBLIGATIONS TO\nPROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.\n",
@@ -1075,6 +1075,13 @@
     },
     {
       "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
       "language": "python",
       "paths": [
         "**/*.py"
@@ -1092,6 +1099,18 @@
       "language": "svg",
       "paths": [
         "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
       ]
     },
     {
@@ -1277,7 +1296,19 @@
     {
       "format": "text",
       "paths": [
+        "**/*.list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
         "**/*.m4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.man"
       ]
     },
     {
@@ -1349,6 +1380,12 @@
     {
       "format": "text",
       "paths": [
+        "**/*.pro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
         "**/*.r0"
       ]
     },
@@ -1368,6 +1405,12 @@
       "format": "text",
       "paths": [
         "**/*.sample"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.samples"
       ]
     },
     {
@@ -1428,6 +1471,12 @@
       "format": "text",
       "paths": [
         "**/*.sub"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.supp"
       ]
     },
     {
@@ -1607,6 +1656,12 @@
     {
       "format": "text",
       "paths": [
+        "**/RELEASE_CHANGES"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
         "**/TESTING"
       ]
     },
@@ -1620,6 +1675,12 @@
       "format": "text",
       "paths": [
         "**/aix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ccsym"
       ]
     },
     {
@@ -1649,6 +1710,12 @@
     {
       "format": "text",
       "paths": [
+        "**/darwin_sysroot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
         "**/duplicate_oids"
       ]
     },
@@ -1661,13 +1728,73 @@
     {
       "format": "text",
       "paths": [
+        "**/exclude_file_patterns"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/find_badmacros"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/find_meson"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/find_perl_files"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/find_static"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/find_typedef"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
         "**/freebsd"
       ]
     },
     {
       "format": "text",
       "paths": [
+        "**/git-external-diff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git_changelog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/headerscheck"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
         "**/install-sh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install_files"
       ]
     },
     {
@@ -1680,6 +1807,24 @@
       "format": "text",
       "paths": [
         "**/linux"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/make_ctags"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/make_etags"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/make_mkid"
       ]
     },
     {
@@ -1709,7 +1854,61 @@
     {
       "format": "text",
       "paths": [
+        "**/perlcriticrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/perltidyrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pgflex"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pgindent"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pgperlcritic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pgperlsyncheck"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pgperltidy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pgtest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
         "**/prep_buildtree"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rcgen"
       ]
     },
     {
@@ -1728,6 +1927,12 @@
       "format": "text",
       "paths": [
         "**/solaris"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/testwrap"
       ]
     },
     {
@@ -1787,8 +1992,8 @@
     }
   ],
   "decision": {
-    "decision": "admitted",
+    "decision": "under-review",
     "by": "Inaya Yousfi",
-    "date": "2026-10-21"
+    "date": "2026-10-16"
   }
 }

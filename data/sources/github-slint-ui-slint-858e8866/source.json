@@ -1,0 +1,2090 @@
+{
+  "type": "git",
+  "address": "https://github.com/slint-ui/slint",
+  "revision": "436f57933407c700be22725024fab2b21d95980f",
+  "checksum": "sha256:7b864c1eefa8e9c40dc8cd2df3445c1f6285471f72f50228de191f1832551578",
+  "extract": {
+    "exclude": [
+      "api/cpp/esp-idf/**",
+      "api/cpp/tests/redpixel.png",
+      "api/node/**",
+      "api/slint-sc/**",
+      "demos/food-processor/ui/images/bubble.jpg",
+      "demos/food-processor/ui/images/detail/**",
+      "demos/food-processor/ui/images/duration.jpg",
+      "demos/food-processor/ui/images/grid/**",
+      "demos/food-processor/ui/images/ingredients/bacon.png",
+      "demos/food-processor/ui/images/ingredients/carrots.png",
+      "demos/food-processor/ui/images/ingredients/oil.png",
+      "demos/food-processor/ui/images/ingredients/onion.png",
+      "demos/food-processor/ui/images/ingredients/soy.png",
+      "demos/food-processor/ui/images/portions.jpg",
+      "demos/food-processor/ui/images/prep.jpg",
+      "demos/food-processor/ui/images/star.jpg",
+      "demos/home-automation/ui/images/album.png",
+      "demos/home-automation/ui/images/back-yard.jpg",
+      "demos/home-automation/ui/images/control-frame.png",
+      "demos/home-automation/ui/images/default-button.png",
+      "demos/home-automation/ui/images/dial-frame.png",
+      "demos/home-automation/ui/images/dishwasher.jpg",
+      "demos/home-automation/ui/images/front-porch.jpg",
+      "demos/home-automation/ui/images/info-frame.png",
+      "demos/home-automation/ui/images/lamp/**",
+      "demos/home-automation/ui/images/led-dark.png",
+      "demos/home-automation/ui/images/led.png",
+      "demos/home-automation/ui/images/lines.png",
+      "demos/home-automation/ui/images/logo-fragment.png",
+      "demos/home-automation/ui/images/microwave.jpg",
+      "demos/home-automation/ui/images/notch.png",
+      "demos/home-automation/ui/images/overhead-frame.png",
+      "demos/home-automation/ui/images/pressed-button.png",
+      "demos/home-automation/ui/images/thumb.png",
+      "demos/home-automation/ui/images/title-frame.png",
+      "demos/home-automation/ui/images/weather/**",
+      "demos/printerdemo/lang/fr/LC_MESSAGES/printerdemo.mo",
+      "demos/printerdemo/ui/fonts/Inter-24pt-Medium.ttf",
+      "demos/printerdemo/ui/fonts/Inter-24pt-Regular.ttf",
+      "demos/printerdemo/ui/images/action-button-frame.png",
+      "demos/printerdemo/ui/images/cat.jpg",
+      "demos/printerdemo/ui/images/dog.jpg",
+      "demos/printerdemo/ui/images/elephant.jpg",
+      "demos/printerdemo/ui/images/mcu/combo-active-background.png",
+      "demos/printerdemo/ui/images/mcu/copy-button.jpg",
+      "demos/printerdemo/ui/images/mcu/place-document.jpg",
+      "demos/printerdemo/ui/images/mcu/popup.jpg",
+      "demos/printerdemo/ui/images/mcu/scan-button.jpg",
+      "demos/printerdemo/ui/images/mcu/sub-action-button.jpg",
+      "demos/printerdemo/ui/images/mcu/switch-active.png",
+      "demos/printerdemo/ui/images/snake.jpg",
+      "demos/printerdemo_mcu/ui/slint-logo-square-dark-80x80.png",
+      "demos/printerdemo_mcu/ui/slint-logo-square-light-80x80.png",
+      "demos/usecases/lang/de/LC_MESSAGES/usecases.mo",
+      "demos/weather-demo/android-res/**",
+      "demos/weather-demo/docs/**",
+      "demos/weather-demo/ui/assets/weathericons-font.ttf",
+      "docs/astro/src/assets/android/**",
+      "docs/astro/src/assets/banner.webp",
+      "docs/astro/src/assets/getting-started/**",
+      "docs/astro/src/assets/guide/**",
+      "docs/astro/src/assets/ios-simulator.webp",
+      "docs/astro/src/assets/slint-logo-simple-dark.webp",
+      "docs/astro/src/assets/slint-logo-simple-light.webp",
+      "docs/astro/src/assets/slint-logo-square-dark.webp",
+      "docs/astro/src/assets/slint-logo-square-light.webp",
+      "docs/astro/src/content/docs/reference/elements/**",
+      "docs/astro/src/content/docs/reference/language/images/**",
+      "editors/vscode/**",
+      "editors/zed/**",
+      "examples/carousel/ui/fonts/Roboto-Bold.ttf",
+      "examples/carousel/ui/fonts/Roboto-Regular.ttf",
+      "examples/dial/images/**",
+      "examples/fancy-switches/images/clouds-background.png",
+      "examples/fancy-switches/images/clouds-front.png",
+      "examples/fancy-switches/images/line.png",
+      "examples/fancy-switches/images/shadow-frame.png",
+      "examples/fancy-switches/images/stars.png",
+      "examples/fancy-switches/images/switch.png",
+      "examples/gallery/lang/de/LC_MESSAGES/gallery.mo",
+      "examples/gallery/lang/fr/LC_MESSAGES/gallery.mo",
+      "examples/gallery/lang/ja/LC_MESSAGES/gallery.mo",
+      "examples/gallery/thumbsup.png",
+      "examples/imagefilter/assets/cat.jpg",
+      "examples/iot-dashboard/images/ac.png",
+      "examples/iot-dashboard/images/dashboard.png",
+      "examples/iot-dashboard/images/devices.png",
+      "examples/iot-dashboard/images/down.png",
+      "examples/iot-dashboard/images/humidity.png",
+      "examples/iot-dashboard/images/indoor-temperature.png",
+      "examples/iot-dashboard/images/lamps.png",
+      "examples/iot-dashboard/images/logout.png",
+      "examples/iot-dashboard/images/main-icon.png",
+      "examples/iot-dashboard/images/members.png",
+      "examples/iot-dashboard/images/music-system.png",
+      "examples/iot-dashboard/images/rooms.png",
+      "examples/iot-dashboard/images/router.png",
+      "examples/iot-dashboard/images/statistics.png",
+      "examples/iot-dashboard/images/storage.png",
+      "examples/iot-dashboard/images/up.png",
+      "examples/memory/icons/at.png",
+      "examples/memory/icons/balance-scale.png",
+      "examples/memory/icons/bicycle.png",
+      "examples/memory/icons/bus.png",
+      "examples/memory/icons/cloud.png",
+      "examples/memory/icons/cogs.png",
+      "examples/memory/icons/motorcycle.png",
+      "examples/memory/icons/tile_logo.png",
+      "examples/memory/icons/video.png",
+      "examples/orbit-animation/images/**",
+      "examples/safe-ui/app/assets/**",
+      "examples/slide_puzzle/berlin.jpg",
+      "examples/slide_puzzle/plaster-font/Plaster-Regular.ttf",
+      "examples/speedometer/01 Digitall.ttf",
+      "examples/speedometer/needle.png",
+      "examples/sprite-sheet/images/**",
+      "examples/uefi-demo/resource/**",
+      "internal/common/sharedfontique/Inter-VariableFont.ttf",
+      "internal/compiler/fuzz/**",
+      "internal/compiler/tests/syntax/slint-sc/image_2x2.png",
+      "internal/core/graphics/image/testdata/**",
+      "logo/MadeWithSlint-logo-dark-large.png",
+      "logo/MadeWithSlint-logo-dark.png",
+      "logo/MadeWithSlint-logo-light-large.png",
+      "logo/MadeWithSlint-logo-light.png",
+      "logo/MadeWithSlint-logo-whitebg.png",
+      "logo/documentation-site-favicons/apple-touch-icon.png",
+      "logo/documentation-site-favicons/favicon-16x16.png",
+      "logo/documentation-site-favicons/favicon-32x32.png",
+      "logo/documentation-site-favicons/favicon.ico",
+      "logo/for_Print/**",
+      "logo/slint-logo-full-dark-large.png",
+      "logo/slint-logo-full-dark.png",
+      "logo/slint-logo-full-light-large.png",
+      "logo/slint-logo-full-light.png",
+      "logo/slint-logo-full-whitebg.png",
+      "logo/slint-logo-simple-dark-large.png",
+      "logo/slint-logo-simple-dark.png",
+      "logo/slint-logo-simple-light-large.png",
+      "logo/slint-logo-simple-light.png",
+      "logo/slint-logo-simple-whitebg.png",
+      "logo/slint-logo-small-dark-large.png",
+      "logo/slint-logo-small-dark.png",
+      "logo/slint-logo-small-light-large.png",
+      "logo/slint-logo-small-light.png",
+      "logo/slint-logo-small-whitebg.png",
+      "logo/slint-logo-square-dark-128x128.png",
+      "logo/slint-logo-square-dark-large.png",
+      "logo/slint-logo-square-dark.png",
+      "logo/slint-logo-square-light-128x128.png",
+      "logo/slint-logo-square-light-large.png",
+      "logo/slint-logo-square-light.png",
+      "logo/slint-logo-square-whitebg.png",
+      "logo/slint-logo.icns",
+      "tests/issues/**",
+      "tests/screenshots/cases/image/border-image-rect.png",
+      "tests/screenshots/cases/image/border-image.png",
+      "tests/screenshots/cases/image/image-add.png",
+      "tests/screenshots/cases/image/image-repeat.png",
+      "tests/screenshots/cases/image/tiny-1x1.png",
+      "tests/screenshots/fonts/NotoSans-Italic.ttf",
+      "tests/screenshots/fonts/NotoSans-Regular.ttf",
+      "tests/screenshots/fonts/NotoSansSymbols2-Regular.ttf",
+      "tests/screenshots/references/skia/**",
+      "tests/screenshots/references/software/**",
+      "tests/screenshots/references/software_embed_assets/**",
+      "tests/screenshots/references/vello_cpu/**",
+      "tools/editor/packaging/linux/slint-visual-editor.gpg",
+      "tools/editor/ui/assets/cursors/corner-radius.png",
+      "tools/editor/ui/assets/cursors/default-32.png",
+      "tools/editor/ui/assets/cursors/default-64.png",
+      "tools/figma-inspector/fixtures/authored/asymmetric.png",
+      "tools/figma-inspector/fixtures/authored/odd-size.png",
+      "tools/figma-inspector/fixtures/authored/raster/asymmetric-1.25x.png",
+      "tools/figma-inspector/fixtures/authored/raster/asymmetric-1x.png",
+      "tools/figma-inspector/fixtures/authored/raster/asymmetric-2x.png",
+      "tools/figma-inspector/fixtures/authored/raster/mask-shadow-1.25x.png",
+      "tools/figma-inspector/fixtures/authored/raster/mask-shadow-1x.png",
+      "tools/figma-inspector/fixtures/authored/raster/mask-shadow-2x.png",
+      "tools/figma-inspector/fixtures/authored/raster/stroke-1.25x.png",
+      "tools/figma-inspector/fixtures/authored/raster/stroke-1x.png",
+      "tools/figma-inspector/fixtures/authored/raster/stroke-2x.png",
+      "tools/figma-inspector/fixtures/authored/square.png",
+      "tools/figma_import/**",
+      "tools/lsp/ui/assets/SourceCodePro-Medium.ttf",
+      "tools/lsp/ui/assets/black-square.png",
+      "tools/viewer/android/fastlane/metadata/android/en-US/images/**",
+      "ui-libraries/material/docs/src/assets/fonts/inter-latin-wght-normal.woff2",
+      "ui-libraries/material/docs/src/assets/images/material-tablet.webp",
+      "ui-libraries/material/examples/gallery/frame-tablet.webp",
+      "ui-libraries/material/examples/gallery/ui/fonts/Roboto-VariableFont.ttf",
+      "xtask/src/**"
+    ]
+  },
+  "history": {
+    "since": "cb463cb58cfbb66f92eda89502c0bf02902b18a4"
+  },
+  "licenses": [
+    {
+      "license": "GPL-3.0-only AND Unlicense AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n# Slint License\n\nThis repository contains several parts under different licenses:\n\n- The **Slint framework** (the runtime libraries and the language tooling) is triple-licensed.\n  See below.\n- The **documentation and examples** are under the [MIT License](LICENSES/MIT.txt),\n  so you can reuse them in any project, including proprietary ones.\n- Some **third-party assets and code** keep their own licenses.\n\nThe exact license of each file is documented in its header or, where that's not possible, via [REUSE](https://reuse.software/) metadata in `REUSE.toml`.\nThe full text of every license used is in the `LICENSES` folder.\n\n## Licenses of the Slint Framework\n\nYou can use the Slint framework under ***any*** of the following licenses, at your choice:\n\n1. [Royalty-free License](LICENSES/LicenseRef-Slint-Royalty-free-2.0.md) - Permits use in **proprietary** desktop, mobile, and web applications **at no cost**. Use in embedded systems is excluded.\n2. [GNU GPLv3](LICENSES/GPL-3.0-only.txt) - Permits use in **open source software** under GPL-compatible terms, **at no cost**, for desktop, mobile, and web applications, as well as for embedded systems.\n3. [Commercial license](LICENSES/LicenseRef-Slint-Software-3.0.md) - Permits use in **proprietary** applications, including desktop, mobile, web, and embedded systems.\n   See the [pricing page](https://slint.dev/pricing) for the available plans.\n\n### What This Means in Practice\n\n- **Do you want to build an open-source application?**\n  Use Slint for free under the GPLv3 on any platform; your own files can stay MIT or Apache-2.0.\n  You're not tied to the GPL, though — the Royalty-free or Commercial license works too.\n- **Do you want to keep your application proprietary?**\n  Both the Royalty-free and Commercial licenses cover proprietary desktop, mobile, and web applications.\n  The Royalty-free License is free, as long as you disclose that you use Slint (for example with the `AboutSlint` widget or the Slint badge); without that disclosure, use the Commercial license.\n  A Commercial license is required for embedded systems, regardless of disclosure.\n\nThe Royalty-free License is meant for applications that run on a user's own general-purpose computer or phone, installed as one application among many.\nIt does not cover embedded systems — computer systems that perform a specific task within a larger mechanical or electrical system — which need the Commercial license.\n\nSee the [Licensing FAQ](FAQ.md#licensing) for the details and common scenarios.\n\n## Definitions\n\nA ***Desktop Application*** is a computer program that is designed to run on a general-purpose computer (PC or notebook), typically installed and executed locally on the computer's operating system.\n\nA ***Mobile Application*** is a computer program that is designed to run on a general-purpose mobile computer (mobile phone or tablet), typically installed and executed locally on the computer's operating system.\n\nA ***Web Application*** is a computer program that is designed to run in the sandbox environment provided by a web browser.\n\nAn ***Embedded System*** is a computer system designed to perform a specific task within a larger mechanical or electrical system.\n\n## Contributions\n\nContributions to this repository are licensed under the [MIT No Attribution license (MIT-0)](https://opensource.org/license/mit-0).\nThis does not assign copyright or transfer ownership; contributors keep full rights to their own code.\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for details.\n\n## Additional Info\n\nSee the [Slint licensing options on the website](https://slint.dev/pricing) and the [Licensing FAQ](FAQ.md#licensing).\nContact us at [info@slint.dev](mailto:info@slint.dev) if you have any questions regarding licensing.\n\n\nThis is free and unencumbered software released into the public domain.\n\nAnyone is free to copy, modify, publish, use, compile, sell, or distribute this software, either in source code form or as a compiled binary, for any purpose, commercial or non-commercial, and by any means.\n\nIn jurisdictions that recognize copyright laws, the author or authors of this software dedicate any and all copyright interest in the software to the public domain. We make this dedication for the benefit of the public at large and to the detriment of our heirs and\nsuccessors. We intend this dedication to be an overt act of relinquishment in perpetuity of all present and future rights to this software under copyright law.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\nFor more information, please refer to <http://unlicense.org/>\n\n\nCargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nCargo.toml declares the license \"MIT OR Apache-2.0\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nApache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n\"License\" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.\n\n\"Licensor\" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.\n\n\"Legal Entity\" shall mean the union of the acting entity and all other entities that control, are controlled by, or are under common control with that entity. For the purposes of this definition, \"control\" means (i) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) beneficial ownership of such entity.\n\n\"You\" (or \"Your\") shall mean an individual or Legal Entity exercising permissions granted by this License.\n\n\"Source\" form shall mean the preferred form for making modifications, including but not limited to software source code, documentation source, and configuration files.\n\n\"Object\" form shall mean any form resulting from mechanical transformation or translation of a Source form, including but not limited to compiled object code, generated documentation, and conversions to other media types.\n\n\"Work\" shall mean the work of authorship, whether in Source or Object form, made available under the License, as indicated by a copyright notice that is included in or attached to the work (an example is provided in the Appendix below).\n\n\"Derivative Works\" shall mean any work, whether in Source or Object form, that is based on (or derived from) the Work and for which the editorial revisions, annotations, elaborations, or other modifications represent, as a whole, an original work of authorship. For the purposes of this License, Derivative Works shall not include works that remain separable from, or merely link (or bind by name) to the interfaces of, the Work and Derivative Works thereof.\n\n\"Contribution\" shall mean any work of authorship, including the original version of the Work and any modifications or additions to that Work or Derivative Works thereof, that is intentionally submitted to Licensor for inclusion in the Work by the copyright owner or by an individual or Legal Entity authorized to submit on behalf of the copyright owner. For the purposes of this definition, \"submitted\" means any form of electronic, verbal, or written communication sent to the Licensor or its representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, the Licensor for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by the copyright owner as \"Not a Contribution.\"\n\n\"Contributor\" shall mean Licensor and any individual or Legal Entity on behalf of whom a Contribution has been received by Licensor and subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the Work or Derivative Works thereof in any medium, with or without modifications, and in Source or Object form, provided that You meet the following conditions:\n\n     (a) You must give any other recipients of the Work or Derivative Works a copy of this License; and\n\n     (b) You must cause any modified files to carry prominent notices stating that You changed the files; and\n\n     (c) You must retain, in the Source form of any Derivative Works that You distribute, all copyright, patent, trademark, and attribution notices from the Source form of the Work, excluding those notices that do not pertain to any part of the Derivative Works; and\n\n     (d) If the Work includes a \"NOTICE\" text file as part of its distribution, then any Derivative Works that You distribute must include a readable copy of the attribution notices contained within such NOTICE file, excluding those notices that do not pertain to any part of the Derivative Works, in at least one of the following places: within a NOTICE text file distributed as part of the Derivative Works; within the Source form or documentation, if provided along with the Derivative Works; or, within a display generated by the Derivative Works, if and wherever such third-party notices normally appear. The contents of the NOTICE file are for informational purposes only and do not modify the License. You may add Your own attribution notices within Derivative Works that You distribute, alongside or as an addendum to the NOTICE text from the Work, provided that such additional attribution notices cannot be construed as modifying the License.\n\n     You may add Your own copyright statement to Your modifications and may provide additional or different license terms and conditions for use, reproduction, or distribution of Your modifications, or for any such Derivative Works as a whole, provided Your use, reproduction, and distribution of the Work otherwise complies with the conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise, any Contribution intentionally submitted for inclusion in the Work by You to the Licensor shall be under the terms and conditions of this License, without any additional terms or conditions. Notwithstanding the above, nothing herein shall supersede or modify the terms of any separate license agreement you may have executed with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or agreed to in writing, Licensor provides the Work (and each Contributor provides its Contributions) on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall any Contributor be liable to You for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result of this License or out of the use or inability to use the Work (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if such Contributor has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\nTo apply the Apache License to your work, attach the following boilerplate notice, with the fields enclosed by brackets \"[]\" replaced with your own identifying information. (Don't include the brackets!)  The text should be enclosed in the appropriate comment syntax for the file format. We also recommend that a file or class name and description of purpose be included on the same \"printed page\" as the copyright notice for easier identification within third-party archives.\n\nCopyright [yyyy] [name of copyright owner]\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n\n\n\nMIT License\n\nCopyright (c) 2026 SixtyFPS GmbH\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/slint-ui/slint: the authors of slint-ui/slint (the license file names no copyright line), GPL-3.0-only license (LICENSE.md), https://github.com/slint-ui/slint; the authors of slint-ui/slint (LICENSES) (the license file names no copyright line), Unlicense license (Unlicense.txt), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/LICENSES; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/analogclock/rust; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/energy-monitor; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/food-processor/rust; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/home-automation/rust; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/launcher; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/printerdemo/rust; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/printerdemo_mcu; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/usecases/rust; FELGO GmbH <contact@felgo.com>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/weather-demo; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/docs/astro/src/content/code; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/7guis; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/async-io; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/bevy/bevy-hosts-slint; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/bevy/bevy-hosts-slint-gpu; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/bevy/slint-hosts-bevy; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/carousel/rust; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/dnd-kanban; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/ffmpeg; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/gallery; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/gstreamer-player; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/imagefilter/rust; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/maps; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/mcu-board-support; David Haig <david@ninjametal.com>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/mcu-embassy; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/memory; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/native-gestures; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/opengl_texture; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/opengl_underlay; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/plotter; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/runtime_key_bindings/rust; the authors of slint-safeui-app, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/safe-ui/app; the authors of slint-safeui-desktop, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/safe-ui/desktop; the authors of slint-safeui-esp32-s3-box, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/safe-ui/esp32-s3-box; the authors of slint-safeui-ffi, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/safe-ui/ffi; the authors of slint-safeui-ffi-simulator, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/safe-ui/ffi-simulator; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/servo; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/slide_puzzle; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/speedometer/rust; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/system-tray; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/todo-mvc/rust; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/todo/rust; the authors of uefi-demo, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/uefi-demo; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/virtual_keyboard/rust; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/wgpu_texture; Slint Developers <info@slint.dev>, MIT OR Apache-2.0 license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/helper_crates/const-field-offset; Slint Developers <info@slint.dev>, MIT OR Apache-2.0 license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/helper_crates/vtable; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/tests/manual/module-builds/app; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/tests/manual/module-builds/blogica; Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/tests/manual/module-builds/blogicb; Copyright (c) 2026 SixtyFPS GmbH, MIT license (LICENSE.md), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/ui-libraries/material/src."
+    },
+    {
+      "license": "GPL-3.0-only",
+      "paths": [
+        ".cargo/**",
+        ".clang-format",
+        ".clippy.toml",
+        ".cspell/**",
+        ".dockerignore",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".mailmap",
+        ".mise/**",
+        ".taplo.toml",
+        ".vscode/**",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CLAUDE.md",
+        "CMakeLists.txt",
+        "CMakePresets.json",
+        "CONTRIBUTING.md",
+        "Cargo.lock",
+        "Cargo.toml",
+        "Cross.toml",
+        "FAQ.md",
+        "LICENSE.md",
+        "README.md",
+        "REUSE.toml",
+        "SECURITY.md",
+        "ai-plugins/**",
+        "api/cpp/CMakeLists.txt",
+        "api/cpp/Cargo.toml",
+        "api/cpp/README.md",
+        "api/cpp/build.rs",
+        "api/cpp/cbindgen.rs",
+        "api/cpp/cmake/**",
+        "api/cpp/emscripten.rs",
+        "api/cpp/include/**",
+        "api/cpp/lib.rs",
+        "api/cpp/platform.rs",
+        "api/cpp/slint_emscripten.js",
+        "api/cpp/tests/CMakeLists.txt",
+        "api/cpp/tests/check_linuxkms_features.sh",
+        "api/cpp/tests/datastructures.cpp",
+        "api/cpp/tests/eventloop.cpp",
+        "api/cpp/tests/interpreter.cpp",
+        "api/cpp/tests/libraries/**",
+        "api/cpp/tests/models.cpp",
+        "api/cpp/tests/multiple-includes/**",
+        "api/cpp/tests/platform_eventloop.cpp",
+        "api/cpp/tests/project-file/**",
+        "api/cpp/tests/project-file-entry/**",
+        "api/cpp/tests/project-file-interpreter/**",
+        "api/cpp/tests/properties.cpp",
+        "api/cpp/tests/test.slint",
+        "api/cpp/tests/testing.cpp",
+        "api/cpp/tests/translator.cpp",
+        "api/cpp/tests/window.cpp",
+        "api/python/**",
+        "api/rs/**",
+        "api/wasm-interpreter/**",
+        "biome.json",
+        "cmake/**",
+        "cspell.json",
+        "demos/CMakeLists.txt",
+        "demos/Cargo.lock",
+        "demos/Cargo.toml",
+        "demos/README.md",
+        "demos/analogclock/README.md",
+        "demos/analogclock/ui/**",
+        "demos/food-processor/README.md",
+        "demos/food-processor/ui/components/**",
+        "demos/food-processor/ui/demo.slint",
+        "demos/food-processor/ui/images/back.svg",
+        "demos/food-processor/ui/images/close.svg",
+        "demos/food-processor/ui/images/ingredients/generation.json",
+        "demos/food-processor/ui/images/play.svg",
+        "demos/food-processor/ui/images/time.svg",
+        "demos/food-processor/ui/recipe-adapter.slint",
+        "demos/food-processor/ui/styles.slint",
+        "demos/home-automation/README.md",
+        "demos/home-automation/esp-idf/**",
+        "demos/home-automation/node/**",
+        "demos/home-automation/ui/api.slint",
+        "demos/home-automation/ui/appState.slint",
+        "demos/home-automation/ui/common.slint",
+        "demos/home-automation/ui/components/**",
+        "demos/home-automation/ui/demo-debug.slint",
+        "demos/home-automation/ui/demo-sw-renderer.slint",
+        "demos/home-automation/ui/demo.slint",
+        "demos/home-automation/ui/fonts/**",
+        "demos/home-automation/ui/images/back.svg",
+        "demos/home-automation/ui/images/brightness.svg",
+        "demos/home-automation/ui/images/cold.svg",
+        "demos/home-automation/ui/images/enlarge.svg",
+        "demos/home-automation/ui/images/fwd.svg",
+        "demos/home-automation/ui/images/lock.svg",
+        "demos/home-automation/ui/images/open-lock.svg",
+        "demos/home-automation/ui/images/pause.svg",
+        "demos/home-automation/ui/images/play.svg",
+        "demos/home-automation/ui/images/reduce.svg",
+        "demos/home-automation/ui/images/slint-logo-simple-dark.svg",
+        "demos/home-automation/ui/images/slint-logo.svg",
+        "demos/home-automation/zephyr/**",
+        "demos/printerdemo/README.md",
+        "demos/printerdemo/cpp/**",
+        "demos/printerdemo/cpp_interpreted/**",
+        "demos/printerdemo/lang/fr/LC_MESSAGES/printerdemo.po",
+        "demos/printerdemo/node/**",
+        "demos/printerdemo/printerdemo.pot",
+        "demos/printerdemo/python/**",
+        "demos/printerdemo/ui/common.slint",
+        "demos/printerdemo/ui/components/**",
+        "demos/printerdemo/ui/fonts/Inter-24pt-Medium.ttf.license",
+        "demos/printerdemo/ui/fonts/Inter-24pt-Regular.ttf.license",
+        "demos/printerdemo/ui/fonts/convert.sh",
+        "demos/printerdemo/ui/images/back.svg",
+        "demos/printerdemo/ui/images/cat.jpg.license",
+        "demos/printerdemo/ui/images/check.svg",
+        "demos/printerdemo/ui/images/copy.svg",
+        "demos/printerdemo/ui/images/delete.svg",
+        "demos/printerdemo/ui/images/dog.jpg.license",
+        "demos/printerdemo/ui/images/down.svg",
+        "demos/printerdemo/ui/images/elephant.jpg.license",
+        "demos/printerdemo/ui/images/laptop.svg",
+        "demos/printerdemo/ui/images/list.svg",
+        "demos/printerdemo/ui/images/mcu/combo-arrow.svg",
+        "demos/printerdemo/ui/images/mcu/home.svg",
+        "demos/printerdemo/ui/images/mcu/ink.svg",
+        "demos/printerdemo/ui/images/mcu/settings.svg",
+        "demos/printerdemo/ui/images/mcu/tick-combo.svg",
+        "demos/printerdemo/ui/images/mcu/tick.svg",
+        "demos/printerdemo/ui/images/minus.svg",
+        "demos/printerdemo/ui/images/moon.svg",
+        "demos/printerdemo/ui/images/moon_full.svg",
+        "demos/printerdemo/ui/images/night_mode.svg",
+        "demos/printerdemo/ui/images/pause.svg",
+        "demos/printerdemo/ui/images/plus.svg",
+        "demos/printerdemo/ui/images/power.svg",
+        "demos/printerdemo/ui/images/print.svg",
+        "demos/printerdemo/ui/images/printer.svg",
+        "demos/printerdemo/ui/images/replicate.svg",
+        "demos/printerdemo/ui/images/scan.svg",
+        "demos/printerdemo/ui/images/sidebar/**",
+        "demos/printerdemo/ui/images/snake.jpg.license",
+        "demos/printerdemo/ui/images/usb.svg",
+        "demos/printerdemo/ui/pages/**",
+        "demos/printerdemo/ui/printerdemo.slint",
+        "demos/printerdemo/zephyr/**",
+        "demos/usecases/cpp/**",
+        "demos/usecases/esp-idf/**",
+        "demos/usecases/lang/de/LC_MESSAGES/usecases.po",
+        "demos/usecases/ui/**",
+        "demos/usecases/update_translations.sh",
+        "demos/zephyr-common/**",
+        "docker/**",
+        "docs/astro/.gitignore",
+        "docs/astro/README.md",
+        "docs/astro/astro.config.mjs",
+        "docs/astro/biome.json",
+        "docs/astro/ec.config.mjs",
+        "docs/astro/package.json",
+        "docs/astro/playwright.config.ts",
+        "docs/astro/public/**",
+        "docs/astro/scripts/**",
+        "docs/astro/src/assets/mattermost-logo-dark.svg",
+        "docs/astro/src/assets/mattermost-logo-light.svg",
+        "docs/astro/src/assets/slint-logo-small-dark.svg",
+        "docs/astro/src/assets/slint-logo-small-light.svg",
+        "docs/astro/src/components/**",
+        "docs/astro/src/content/collections/**",
+        "docs/astro/src/content/docs/guide/**",
+        "docs/astro/src/content/docs/index.mdx",
+        "docs/astro/src/content/docs/language-integrations/**",
+        "docs/astro/src/content/docs/reference/common.mdx",
+        "docs/astro/src/content/docs/reference/global-functions/**",
+        "docs/astro/src/content/docs/reference/global-namespaces/**",
+        "docs/astro/src/content/docs/reference/keyboard-input/**",
+        "docs/astro/src/content/docs/reference/language/animations.mdx",
+        "docs/astro/src/content/docs/reference/language/bindings.mdx",
+        "docs/astro/src/content/docs/reference/language/callbacks.mdx",
+        "docs/astro/src/content/docs/reference/language/container-components.mdx",
+        "docs/astro/src/content/docs/reference/language/deprecation.mdx",
+        "docs/astro/src/content/docs/reference/language/evaluation-and-purity.mdx",
+        "docs/astro/src/content/docs/reference/language/exports.mdx",
+        "docs/astro/src/content/docs/reference/language/expressions.mdx",
+        "docs/astro/src/content/docs/reference/language/file-structure.mdx",
+        "docs/astro/src/content/docs/reference/language/functions.mdx",
+        "docs/astro/src/content/docs/reference/language/geometry.mdx",
+        "docs/astro/src/content/docs/reference/language/globals.mdx",
+        "docs/astro/src/content/docs/reference/language/imports.mdx",
+        "docs/astro/src/content/docs/reference/language/index.mdx",
+        "docs/astro/src/content/docs/reference/language/lexical-structure.mdx",
+        "docs/astro/src/content/docs/reference/language/name-resolution.mdx",
+        "docs/astro/src/content/docs/reference/language/operators.mdx",
+        "docs/astro/src/content/docs/reference/language/properties.mdx",
+        "docs/astro/src/content/docs/reference/language/repetition-and-conditional-elements.mdx",
+        "docs/astro/src/content/docs/reference/language/source-files.mdx",
+        "docs/astro/src/content/docs/reference/language/statements.mdx",
+        "docs/astro/src/content/docs/reference/language/states-and-transitions.mdx",
+        "docs/astro/src/content/docs/reference/language/structs-and-enums.mdx",
+        "docs/astro/src/content/docs/reference/language/two-way-bindings.mdx",
+        "docs/astro/src/content/docs/reference/language/type-conversions.mdx",
+        "docs/astro/src/content/docs/reference/layouts/**",
+        "docs/astro/src/content/docs/reference/overview.mdx",
+        "docs/astro/src/content/docs/reference/property-types/**",
+        "docs/astro/src/content/docs/reference/std-widgets/**",
+        "docs/astro/src/content/docs/tutorial/**",
+        "docs/astro/src/content.config.ts",
+        "docs/astro/src/pages/**",
+        "docs/astro/src/utils/**",
+        "docs/astro/tests/**",
+        "docs/astro/tsconfig.json",
+        "docs/building.md",
+        "docs/common/**",
+        "docs/cpp/**",
+        "docs/development/**",
+        "docs/development.md",
+        "docs/embedded-tutorials.md",
+        "docs/install_qt.md",
+        "docs/internal/**",
+        "docs/ios.md",
+        "docs/nightly-release-notes.md",
+        "docs/nodejs/**",
+        "docs/python/**",
+        "docs/readme.md",
+        "docs/release-artifacts.md",
+        "docs/release-notes.md",
+        "docs/safety/**",
+        "docs/site/**",
+        "docs/slint-doc-generator/**",
+        "docs/testing.md",
+        "docs/torizon.md",
+        "editors/README.md",
+        "editors/kate/**",
+        "editors/sublime/**",
+        "editors/tree-sitter-slint/**",
+        "examples/CMakeLists.txt",
+        "examples/Cargo.lock",
+        "examples/Cargo.toml",
+        "examples/README.md",
+        "examples/bash/**",
+        "examples/bevy/.gitignore",
+        "examples/carousel/README.md",
+        "examples/carousel/cpp/**",
+        "examples/carousel/esp-idf/**",
+        "examples/carousel/node/**",
+        "examples/carousel/ui/card.slint",
+        "examples/carousel/ui/carousel.slint",
+        "examples/carousel/ui/carousel_demo.slint",
+        "examples/carousel/ui/fonts/Roboto-Bold.ttf.license",
+        "examples/carousel/ui/fonts/Roboto-Regular.ttf.license",
+        "examples/carousel/ui/label.slint",
+        "examples/carousel/ui/svg/**",
+        "examples/carousel/ui/theme.slint",
+        "examples/carousel/ui/title_label.slint",
+        "examples/cpp/**",
+        "examples/custom-titlebar/**",
+        "examples/dial/README.md",
+        "examples/dial/dial.slint",
+        "examples/fancy-switches/DarkModeSwitch.slint",
+        "examples/fancy-switches/README.md",
+        "examples/fancy-switches/SunMoonSwitch.slint",
+        "examples/fancy-switches/demo.slint",
+        "examples/fancy-switches/images/moon.svg",
+        "examples/fancy_demo/**",
+        "examples/imagefilter/README.md",
+        "examples/imagefilter/assets/cat.jpg.license",
+        "examples/imagefilter/node/**",
+        "examples/imagefilter/ui/**",
+        "examples/iot-dashboard/.gitignore",
+        "examples/iot-dashboard/CMakeLists.txt",
+        "examples/iot-dashboard/README.md",
+        "examples/iot-dashboard/dashboard.cpp",
+        "examples/iot-dashboard/dashboard.h",
+        "examples/iot-dashboard/images/ac.svg",
+        "examples/iot-dashboard/images/dashboard.svg",
+        "examples/iot-dashboard/images/devices.svg",
+        "examples/iot-dashboard/images/down.svg",
+        "examples/iot-dashboard/images/humidity.svg",
+        "examples/iot-dashboard/images/indoor-temperature.svg",
+        "examples/iot-dashboard/images/lamps.svg",
+        "examples/iot-dashboard/images/logout.svg",
+        "examples/iot-dashboard/images/main-icon.svg",
+        "examples/iot-dashboard/images/members.svg",
+        "examples/iot-dashboard/images/music-system.svg",
+        "examples/iot-dashboard/images/rooms.svg",
+        "examples/iot-dashboard/images/router.svg",
+        "examples/iot-dashboard/images/statistics.svg",
+        "examples/iot-dashboard/images/storage.svg",
+        "examples/iot-dashboard/images/up.svg",
+        "examples/iot-dashboard/iot-dashboard.slint",
+        "examples/iot-dashboard/main.cpp",
+        "examples/iot-dashboard/main.slint",
+        "examples/layouts/**",
+        "examples/orbit-animation/README.md",
+        "examples/orbit-animation/demo.slint",
+        "examples/orbit-animation/orbiter.slint",
+        "examples/repeater/**",
+        "examples/runtime_key_bindings/.gitignore",
+        "examples/runtime_key_bindings/README.md",
+        "examples/runtime_key_bindings/ui/**",
+        "examples/safe-ui/.gitignore",
+        "examples/safe-ui/CMakeLists.txt",
+        "examples/safe-ui/Cargo.toml",
+        "examples/safe-ui/README.md",
+        "examples/speedometer/01 Digitall.ttf.license",
+        "examples/speedometer/README.md",
+        "examples/speedometer/demo.slint",
+        "examples/sprite-sheet/README.md",
+        "examples/sprite-sheet/SpriteSheet.slint",
+        "examples/sprite-sheet/demo.slint",
+        "examples/todo/README.md",
+        "examples/todo/cpp/**",
+        "examples/todo/node/**",
+        "examples/todo/node-typescript/**",
+        "examples/todo/ui/**",
+        "examples/todo-mvc/README.md",
+        "examples/todo-mvc/assets/**",
+        "examples/todo-mvc/ui/**",
+        "examples/virtual_keyboard/README.md",
+        "examples/virtual_keyboard/cpp/**",
+        "examples/virtual_keyboard/node/**",
+        "examples/virtual_keyboard/ui/**",
+        "flake.lock",
+        "flake.nix",
+        "internal/backends/**",
+        "internal/common/Cargo.toml",
+        "internal/common/LICENSES/**",
+        "internal/common/README.md",
+        "internal/common/builtin_functions.rs",
+        "internal/common/builtin_structs.rs",
+        "internal/common/color_parsing.rs",
+        "internal/common/enums.rs",
+        "internal/common/key_codes.rs",
+        "internal/common/lib.rs",
+        "internal/common/sharedfontique/Inter-VariableFont.ttf.license",
+        "internal/common/sharedfontique/svg.rs",
+        "internal/common/sharedfontique.rs",
+        "internal/common/styled_text.rs",
+        "internal/common/unicode_utils.rs",
+        "internal/compiler/Cargo.toml",
+        "internal/compiler/LICENSES/**",
+        "internal/compiler/README.md",
+        "internal/compiler/benches/**",
+        "internal/compiler/build.rs",
+        "internal/compiler/builtin_elements.rs",
+        "internal/compiler/builtin_functions.rs",
+        "internal/compiler/builtin_macros.rs",
+        "internal/compiler/data_uri.rs",
+        "internal/compiler/diagnostics.rs",
+        "internal/compiler/element_type.rs",
+        "internal/compiler/embedded_resources.rs",
+        "internal/compiler/expression_tree.rs",
+        "internal/compiler/expression_types.rs",
+        "internal/compiler/fileaccess.rs",
+        "internal/compiler/generator/**",
+        "internal/compiler/generator.rs",
+        "internal/compiler/langtype.rs",
+        "internal/compiler/layout.rs",
+        "internal/compiler/lexer.rs",
+        "internal/compiler/lib.rs",
+        "internal/compiler/literals.rs",
+        "internal/compiler/llr/**",
+        "internal/compiler/llr.rs",
+        "internal/compiler/lookup.rs",
+        "internal/compiler/namedreference.rs",
+        "internal/compiler/names.rs",
+        "internal/compiler/native_class.rs",
+        "internal/compiler/object_tree/**",
+        "internal/compiler/object_tree.rs",
+        "internal/compiler/parser/**",
+        "internal/compiler/parser-test-macro/**",
+        "internal/compiler/parser.rs",
+        "internal/compiler/passes/**",
+        "internal/compiler/passes.rs",
+        "internal/compiler/project_file.rs",
+        "internal/compiler/source_path.rs",
+        "internal/compiler/symbol_counters.rs",
+        "internal/compiler/tests/array_function_stability.rs",
+        "internal/compiler/tests/binding_loop_blame.rs",
+        "internal/compiler/tests/consistent_styles.rs",
+        "internal/compiler/tests/deep_nesting.rs",
+        "internal/compiler/tests/default_window_title.rs",
+        "internal/compiler/tests/flickable_repeated_model.rs",
+        "internal/compiler/tests/layout_cell_properties.rs",
+        "internal/compiler/tests/llr_lowering.rs",
+        "internal/compiler/tests/lower_backdrop_blur.rs",
+        "internal/compiler/tests/lower_shadows.rs",
+        "internal/compiler/tests/native_class_selection.rs",
+        "internal/compiler/tests/platform_uses_mock_data.rs",
+        "internal/compiler/tests/repeated_child_of_non_layout.rs",
+        "internal/compiler/tests/single_cell_box_layout.rs",
+        "internal/compiler/tests/syntax/accessibility/**",
+        "internal/compiler/tests/syntax/analysis/**",
+        "internal/compiler/tests/syntax/basic/**",
+        "internal/compiler/tests/syntax/callbacks/**",
+        "internal/compiler/tests/syntax/component_slots/**",
+        "internal/compiler/tests/syntax/elements/**",
+        "internal/compiler/tests/syntax/exports/**",
+        "internal/compiler/tests/syntax/expressions/**",
+        "internal/compiler/tests/syntax/focus/**",
+        "internal/compiler/tests/syntax/functions/**",
+        "internal/compiler/tests/syntax/fuzzing/**",
+        "internal/compiler/tests/syntax/imports/**",
+        "internal/compiler/tests/syntax/interfaces/**",
+        "internal/compiler/tests/syntax/layout/**",
+        "internal/compiler/tests/syntax/lookup/**",
+        "internal/compiler/tests/syntax/match_element/**",
+        "internal/compiler/tests/syntax/new_syntax/**",
+        "internal/compiler/tests/syntax/parse_error/**",
+        "internal/compiler/tests/syntax/renderer-software/**",
+        "internal/compiler/tests/syntax/slint-sc/animations.slint",
+        "internal/compiler/tests/syntax/slint-sc/arithmetic.slint",
+        "internal/compiler/tests/syntax/slint-sc/binding_loop.slint",
+        "internal/compiler/tests/syntax/slint-sc/binding_types.slint",
+        "internal/compiler/tests/syntax/slint-sc/bindings.slint",
+        "internal/compiler/tests/syntax/slint-sc/bom-encoding.slint",
+        "internal/compiler/tests/syntax/slint-sc/callback_loop.slint",
+        "internal/compiler/tests/syntax/slint-sc/callbacks.slint",
+        "internal/compiler/tests/syntax/slint-sc/change_callbacks.slint",
+        "internal/compiler/tests/syntax/slint-sc/children_placeholder.slint",
+        "internal/compiler/tests/syntax/slint-sc/color_literals.slint",
+        "internal/compiler/tests/syntax/slint-sc/comments.slint",
+        "internal/compiler/tests/syntax/slint-sc/component_braces_close.slint",
+        "internal/compiler/tests/syntax/slint-sc/component_braces_open.slint",
+        "internal/compiler/tests/syntax/slint-sc/component_declaration.slint",
+        "internal/compiler/tests/syntax/slint-sc/component_shadowing.slint",
+        "internal/compiler/tests/syntax/slint-sc/contextual_keywords.slint",
+        "internal/compiler/tests/syntax/slint-sc/crlf-line-terminators.slint",
+        "internal/compiler/tests/syntax/slint-sc/dialog.slint",
+        "internal/compiler/tests/syntax/slint-sc/element_id.slint",
+        "internal/compiler/tests/syntax/slint-sc/element_nesting.slint",
+        "internal/compiler/tests/syntax/slint-sc/element_unknown_type.slint",
+        "internal/compiler/tests/syntax/slint-sc/elements.slint",
+        "internal/compiler/tests/syntax/slint-sc/empty_file.slint",
+        "internal/compiler/tests/syntax/slint-sc/enums.slint",
+        "internal/compiler/tests/syntax/slint-sc/export_duplicate.slint",
+        "internal/compiler/tests/syntax/slint-sc/export_specifiers.slint",
+        "internal/compiler/tests/syntax/slint-sc/expression_references.slint",
+        "internal/compiler/tests/syntax/slint-sc/expressions.slint",
+        "internal/compiler/tests/syntax/slint-sc/expressions_extra.slint",
+        "internal/compiler/tests/syntax/slint-sc/for_and_if.slint",
+        "internal/compiler/tests/syntax/slint-sc/functions.slint",
+        "internal/compiler/tests/syntax/slint-sc/geometry_root.slint",
+        "internal/compiler/tests/syntax/slint-sc/globals.slint",
+        "internal/compiler/tests/syntax/slint-sc/identifier_leading_hyphen.slint",
+        "internal/compiler/tests/syntax/slint-sc/identifier_leading_hyphen_element_id.slint",
+        "internal/compiler/tests/syntax/slint-sc/identifier_leading_hyphen_inherits.slint",
+        "internal/compiler/tests/syntax/slint-sc/identifier_leading_hyphen_property.slint",
+        "internal/compiler/tests/syntax/slint-sc/identifier_normalization_collision.slint",
+        "internal/compiler/tests/syntax/slint-sc/identifier_normalization_distinct.slint",
+        "internal/compiler/tests/syntax/slint-sc/identifiers.slint",
+        "internal/compiler/tests/syntax/slint-sc/image.slint",
+        "internal/compiler/tests/syntax/slint-sc/image.svg",
+        "internal/compiler/tests/syntax/slint-sc/import_names.slint",
+        "internal/compiler/tests/syntax/slint-sc/import_paths.slint",
+        "internal/compiler/tests/syntax/slint-sc/import_subset.slint",
+        "internal/compiler/tests/syntax/slint-sc/imported/**",
+        "internal/compiler/tests/syntax/slint-sc/imports.slint",
+        "internal/compiler/tests/syntax/slint-sc/inheritance.slint",
+        "internal/compiler/tests/syntax/slint-sc/inherits_not_yet_defined.slint",
+        "internal/compiler/tests/syntax/slint-sc/inherits_unknown.slint",
+        "internal/compiler/tests/syntax/slint-sc/init_callback.slint",
+        "internal/compiler/tests/syntax/slint-sc/int_literal.slint",
+        "internal/compiler/tests/syntax/slint-sc/layout.slint",
+        "internal/compiler/tests/syntax/slint-sc/length_literal_space.slint",
+        "internal/compiler/tests/syntax/slint-sc/logical.slint",
+        "internal/compiler/tests/syntax/slint-sc/path.slint",
+        "internal/compiler/tests/syntax/slint-sc/popup.slint",
+        "internal/compiler/tests/syntax/slint-sc/properties.slint",
+        "internal/compiler/tests/syntax/slint-sc/property_protected.slint",
+        "internal/compiler/tests/syntax/slint-sc/source_file.slint",
+        "internal/compiler/tests/syntax/slint-sc/states.slint",
+        "internal/compiler/tests/syntax/slint-sc/struct_literal.slint",
+        "internal/compiler/tests/syntax/slint-sc/structs.slint",
+        "internal/compiler/tests/syntax/slint-sc/timer.slint",
+        "internal/compiler/tests/syntax/slint-sc/two_way_bindings.slint",
+        "internal/compiler/tests/syntax/slint-sc/types.slint",
+        "internal/compiler/tests/syntax/slint-sc/units.slint",
+        "internal/compiler/tests/syntax/slint-sc/whitespace.slint",
+        "internal/compiler/tests/syntax/slint-sc/window_background.slint",
+        "internal/compiler/tests/syntax/slint-sc/window_instantiation.slint",
+        "internal/compiler/tests/syntax/slint-sc/window_root.slint",
+        "internal/compiler/tests/syntax_tests.rs",
+        "internal/compiler/tests/typeloader/**",
+        "internal/compiler/translations.rs",
+        "internal/compiler/typeloader.rs",
+        "internal/compiler/typeregister.rs",
+        "internal/compiler/widgets/**",
+        "internal/core/Cargo.toml",
+        "internal/core/LICENSES/**",
+        "internal/core/README.md",
+        "internal/core/accessibility.rs",
+        "internal/core/animations/**",
+        "internal/core/animations.rs",
+        "internal/core/api.rs",
+        "internal/core/benches/**",
+        "internal/core/builtin_functions.rs",
+        "internal/core/callbacks.rs",
+        "internal/core/component_factory.rs",
+        "internal/core/context.rs",
+        "internal/core/cursor.rs",
+        "internal/core/data_transfer/**",
+        "internal/core/data_transfer.rs",
+        "internal/core/date_time.rs",
+        "internal/core/debug_log.rs",
+        "internal/core/font_collection.rs",
+        "internal/core/future.rs",
+        "internal/core/gdb_pretty_printers.py",
+        "internal/core/graphics/bitmapfont.rs",
+        "internal/core/graphics/border_radius.rs",
+        "internal/core/graphics/boxshadowcache.rs",
+        "internal/core/graphics/brush.rs",
+        "internal/core/graphics/color.rs",
+        "internal/core/graphics/image/animated.rs",
+        "internal/core/graphics/image/cache.rs",
+        "internal/core/graphics/image/htmlimage.rs",
+        "internal/core/graphics/image/svg.rs",
+        "internal/core/graphics/image.rs",
+        "internal/core/graphics/path.rs",
+        "internal/core/graphics/rendering_metrics_collector.rs",
+        "internal/core/graphics/wgpu_29.rs",
+        "internal/core/graphics/wgpu_30.rs",
+        "internal/core/graphics.rs",
+        "internal/core/input.rs",
+        "internal/core/item_focus.rs",
+        "internal/core/item_rendering.rs",
+        "internal/core/item_tree.rs",
+        "internal/core/items/**",
+        "internal/core/items.rs",
+        "internal/core/layout.rs",
+        "internal/core/lengths.rs",
+        "internal/core/lib.rs",
+        "internal/core/menus.rs",
+        "internal/core/model/**",
+        "internal/core/model.rs",
+        "internal/core/once_box.rs",
+        "internal/core/partial_renderer.rs",
+        "internal/core/platform.rs",
+        "internal/core/properties/**",
+        "internal/core/properties.rs",
+        "internal/core/renderer.rs",
+        "internal/core/rtti.rs",
+        "internal/core/sharedvector.rs",
+        "internal/core/slice.rs",
+        "internal/core/string.rs",
+        "internal/core/styled_text.rs",
+        "internal/core/testing.rs",
+        "internal/core/tests/**",
+        "internal/core/textlayout/**",
+        "internal/core/textlayout.rs",
+        "internal/core/timers.rs",
+        "internal/core/translations.rs",
+        "internal/core/unsafe_single_threaded.rs",
+        "internal/core/window/**",
+        "internal/core/window.rs",
+        "internal/core-macros/**",
+        "internal/editor-preview/**",
+        "internal/interpreter/**",
+        "internal/live-preview/**",
+        "internal/renderers/**",
+        "knip.json",
+        "logo/MadeWithSlint-logo-dark.svg",
+        "logo/MadeWithSlint-logo-light-whitebg.svg",
+        "logo/MadeWithSlint-logo-light.svg",
+        "logo/README.md",
+        "logo/documentation-site-favicons/favicon.svg",
+        "logo/slint-logo-full-dark.svg",
+        "logo/slint-logo-full-light-whitebg.svg",
+        "logo/slint-logo-full-light.svg",
+        "logo/slint-logo-simple-dark.svg",
+        "logo/slint-logo-simple-light-whitebg.svg",
+        "logo/slint-logo-simple-light.svg",
+        "logo/slint-logo-small-dark.svg",
+        "logo/slint-logo-small-light-whitebg.svg",
+        "logo/slint-logo-small-light.svg",
+        "logo/slint-logo-square-dark.svg",
+        "logo/slint-logo-square-light-whitebg.svg",
+        "logo/slint-logo-square-light.svg",
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "rustfmt.toml",
+        "scripts/**",
+        "tests/Cargo.lock",
+        "tests/Cargo.toml",
+        "tests/backends/**",
+        "tests/cases/**",
+        "tests/doctests/**",
+        "tests/driver/**",
+        "tests/helper_components/**",
+        "tests/manual/font-metrics.slint",
+        "tests/manual/opacity_inheritance.slint",
+        "tests/manual/partial-rendering-circus.slint",
+        "tests/manual/path-stroke-cap.slint",
+        "tests/manual/variable-font-weight.slint",
+        "tests/manual/windowattributes/**",
+        "tests/run_tests.sh",
+        "tests/screenshots/Cargo.toml",
+        "tests/screenshots/anyrender.rs",
+        "tests/screenshots/build.rs",
+        "tests/screenshots/cases/basic/**",
+        "tests/screenshots/cases/image/border-image-downscaled.slint",
+        "tests/screenshots/cases/image/border-image-repeat.slint",
+        "tests/screenshots/cases/image/border-image.slint",
+        "tests/screenshots/cases/image/border-image2.slint",
+        "tests/screenshots/cases/image/image-repeat.slint",
+        "tests/screenshots/cases/image/image-uri.slint",
+        "tests/screenshots/cases/image/images-alignment.slint",
+        "tests/screenshots/cases/image/images-scale_factor.slint",
+        "tests/screenshots/cases/image/images.slint",
+        "tests/screenshots/cases/image/svg-text.slint",
+        "tests/screenshots/cases/image/tiny-image-scale.slint",
+        "tests/screenshots/cases/layer/**",
+        "tests/screenshots/cases/path/**",
+        "tests/screenshots/cases/text/**",
+        "tests/screenshots/fonts/.gitignore",
+        "tests/screenshots/fonts/NotoSans-Italic.ttf.license",
+        "tests/screenshots/fonts/NotoSans-Regular.ttf.license",
+        "tests/screenshots/fonts/NotoSansSymbols2-Regular.ttf.license",
+        "tests/screenshots/fonts/convert.sh",
+        "tests/screenshots/main.rs",
+        "tests/screenshots/references/anyrender/**",
+        "tests/screenshots/replay-anyrender.rs",
+        "tests/screenshots/skia.rs",
+        "tests/screenshots/software.rs",
+        "tests/screenshots/testing.rs",
+        "tools/compiler/**",
+        "tools/editor/AGENTS.md",
+        "tools/editor/Cargo.toml",
+        "tools/editor/TESTING.md",
+        "tools/editor/build.rs",
+        "tools/editor/component_support/**",
+        "tools/editor/controls/**",
+        "tools/editor/dev.slint.VisualEditor.yml",
+        "tools/editor/file_dialog.rs",
+        "tools/editor/flatpak.rs",
+        "tools/editor/gallery/**",
+        "tools/editor/lib.rs",
+        "tools/editor/macos-project.yml",
+        "tools/editor/main.rs",
+        "tools/editor/packaging/linux/dev.slint.VisualEditor.desktop",
+        "tools/editor/packaging/linux/dev.slint.VisualEditor.metainfo.xml.in",
+        "tools/editor/packaging/linux/dev.slint.VisualEditor.svg",
+        "tools/editor/packaging/macos/**",
+        "tools/editor/packaging/tile-backdrop-wide.svg",
+        "tools/editor/packaging/tile-backdrop.svg",
+        "tools/editor/packaging/windows-appx/**",
+        "tools/editor/preview/**",
+        "tools/editor/preview.rs",
+        "tools/editor/slint-project.json",
+        "tools/editor/sparkle.rs",
+        "tools/editor/startup.rs",
+        "tools/editor/tests/**",
+        "tools/editor/ui/AGENTS.md",
+        "tools/editor/ui/api.slint",
+        "tools/editor/ui/assets/Inter-VariableFont.ttf",
+        "tools/editor/ui/assets/Inter-VariableFont.ttf.license",
+        "tools/editor/ui/assets/bg-frame-light.svg",
+        "tools/editor/ui/assets/bg-frame-lines-light.svg",
+        "tools/editor/ui/assets/bg-frame-lines.svg",
+        "tools/editor/ui/assets/bg-frame-mark-light.svg",
+        "tools/editor/ui/assets/bg-frame-mark.svg",
+        "tools/editor/ui/assets/bg-frame.svg",
+        "tools/editor/ui/assets/cursors/corner-radius.svg",
+        "tools/editor/ui/assets/cursors/resize.svg",
+        "tools/editor/ui/assets/cursors/rotate.svg",
+        "tools/editor/ui/assets/cursors/scrub-horizontal.svg",
+        "tools/editor/ui/assets/diagnostic-alert.svg",
+        "tools/editor/ui/assets/lucide/**",
+        "tools/editor/ui/assets/octicons/**",
+        "tools/editor/ui/assets/primer-file-code.svg",
+        "tools/editor/ui/assets/primer-folder-open.svg",
+        "tools/editor/ui/assets/primer-plus-circle.svg",
+        "tools/editor/ui/assets/slint-logo-small-light.png",
+        "tools/editor/ui/assets/slint-mark.svg",
+        "tools/editor/ui/components/**",
+        "tools/editor/ui/diagnostics.slint",
+        "tools/editor/ui/main.slint",
+        "tools/editor/ui/preview.slint",
+        "tools/editor/ui/project.slint",
+        "tools/editor/ui/startup-wizard.slint",
+        "tools/editor/ui/style.slint",
+        "tools/editor/ui-tests/**",
+        "tools/editor/windows.rs",
+        "tools/figma-inspector/.gitignore",
+        "tools/figma-inspector/AGENTS.md",
+        "tools/figma-inspector/PUBLISH.md",
+        "tools/figma-inspector/README.md",
+        "tools/figma-inspector/biome.json",
+        "tools/figma-inspector/fixtures/README.md",
+        "tools/figma-inspector/fixtures/authored/raster/asymmetric-1.25x.json",
+        "tools/figma-inspector/fixtures/authored/raster/asymmetric-1x.json",
+        "tools/figma-inspector/fixtures/authored/raster/asymmetric-2x.json",
+        "tools/figma-inspector/fixtures/authored/raster/mask-shadow-1.25x.json",
+        "tools/figma-inspector/fixtures/authored/raster/mask-shadow-1x.json",
+        "tools/figma-inspector/fixtures/authored/raster/mask-shadow-2x.json",
+        "tools/figma-inspector/fixtures/authored/raster/stroke-1.25x.json",
+        "tools/figma-inspector/fixtures/authored/raster/stroke-1x.json",
+        "tools/figma-inspector/fixtures/authored/raster/stroke-2x.json",
+        "tools/figma-inspector/fixtures/auto-layout.slint",
+        "tools/figma-inspector/fixtures/auto-layout.snapshot.json",
+        "tools/figma-inspector/fixtures/button.slint",
+        "tools/figma-inspector/fixtures/button.snapshot.json",
+        "tools/figma-inspector/fixtures/component-text.slint",
+        "tools/figma-inspector/fixtures/component-text.snapshot.json",
+        "tools/figma-inspector/fixtures/default-heavy.slint",
+        "tools/figma-inspector/fixtures/default-heavy.snapshot.json",
+        "tools/figma-inspector/fixtures/errors/**",
+        "tools/figma-inspector/fixtures/frame.slint",
+        "tools/figma-inspector/fixtures/frame.snapshot.json",
+        "tools/figma-inspector/fixtures/hug-button.slint",
+        "tools/figma-inspector/fixtures/hug-button.snapshot.json",
+        "tools/figma-inspector/fixtures/image-fill.slint",
+        "tools/figma-inspector/fixtures/image-fill.snapshot.json",
+        "tools/figma-inspector/fixtures/instance-button.slint",
+        "tools/figma-inspector/fixtures/instance-button.snapshot.json",
+        "tools/figma-inspector/fixtures/instance-override.slint",
+        "tools/figma-inspector/fixtures/instance-override.snapshot.json",
+        "tools/figma-inspector/fixtures/milestone7-resilience.slint",
+        "tools/figma-inspector/fixtures/milestone7-resilience.snapshot.json",
+        "tools/figma-inspector/fixtures/nested-fill.slint",
+        "tools/figma-inspector/fixtures/nested-fill.snapshot.json",
+        "tools/figma-inspector/fixtures/nested-instance.slint",
+        "tools/figma-inspector/fixtures/nested-instance.snapshot.json",
+        "tools/figma-inspector/fixtures/regressions/**",
+        "tools/figma-inspector/fixtures/source/**",
+        "tools/figma-inspector/fixtures/svg-mask-gradient.slint",
+        "tools/figma-inspector/fixtures/svg-mask-gradient.snapshot.json",
+        "tools/figma-inspector/fixtures/svg-multi-path.slint",
+        "tools/figma-inspector/fixtures/svg-multi-path.snapshot.json",
+        "tools/figma-inspector/fixtures/svg-unicode.slint",
+        "tools/figma-inspector/fixtures/svg-unicode.snapshot.json",
+        "tools/figma-inspector/manifest.json",
+        "tools/figma-inspector/package.json",
+        "tools/figma-inspector/scripts/**",
+        "tools/figma-inspector/src/**",
+        "tools/figma-inspector/tests/**",
+        "tools/figma-inspector/tsconfig.json",
+        "tools/figma-inspector/ui.html",
+        "tools/figma-inspector/vite.config.code.ts",
+        "tools/figma-inspector/vite.config.ts",
+        "tools/figma-inspector/vitest.config.ts",
+        "tools/lsp/Cargo.toml",
+        "tools/lsp/LICENSES/**",
+        "tools/lsp/README.md",
+        "tools/lsp/build.rs",
+        "tools/lsp/connector/**",
+        "tools/lsp/connector.rs",
+        "tools/lsp/fmt/**",
+        "tools/lsp/fmt.rs",
+        "tools/lsp/host_language_search/**",
+        "tools/lsp/host_language_search.rs",
+        "tools/lsp/language/**",
+        "tools/lsp/language.rs",
+        "tools/lsp/lsp_to_editor.rs",
+        "tools/lsp/main.rs",
+        "tools/lsp/preview/**",
+        "tools/lsp/preview.rs",
+        "tools/lsp/server_notifier.rs",
+        "tools/lsp/slint-project.json",
+        "tools/lsp/ui/api.slint",
+        "tools/lsp/ui/assets/Inter-VariableFont.ttf",
+        "tools/lsp/ui/assets/Inter-VariableFont.ttf.license",
+        "tools/lsp/ui/assets/SourceCodePro-Medium.ttf.license",
+        "tools/lsp/ui/assets/background-mini.svg",
+        "tools/lsp/ui/assets/background-tiny.svg",
+        "tools/lsp/ui/assets/background.svg",
+        "tools/lsp/ui/assets/beaker.svg",
+        "tools/lsp/ui/assets/bg-frame-light.svg",
+        "tools/lsp/ui/assets/bg-frame-lines-light.svg",
+        "tools/lsp/ui/assets/bg-frame-lines.svg",
+        "tools/lsp/ui/assets/bg-frame-mark-light.svg",
+        "tools/lsp/ui/assets/bg-frame-mark.svg",
+        "tools/lsp/ui/assets/bg-frame.svg",
+        "tools/lsp/ui/assets/binding.svg",
+        "tools/lsp/ui/assets/cconstant.svg",
+        "tools/lsp/ui/assets/chevron-down.svg",
+        "tools/lsp/ui/assets/clear.svg",
+        "tools/lsp/ui/assets/close.svg",
+        "tools/lsp/ui/assets/code.svg",
+        "tools/lsp/ui/assets/constant.svg",
+        "tools/lsp/ui/assets/dial.svg",
+        "tools/lsp/ui/assets/dial.svg.license",
+        "tools/lsp/ui/assets/filter.svg",
+        "tools/lsp/ui/assets/info.svg",
+        "tools/lsp/ui/assets/inspect.svg",
+        "tools/lsp/ui/assets/layout-sidebar-left-off.svg",
+        "tools/lsp/ui/assets/layout-sidebar-left.svg",
+        "tools/lsp/ui/assets/layout-sidebar-right-off.svg",
+        "tools/lsp/ui/assets/layout-sidebar-right.svg",
+        "tools/lsp/ui/assets/library.svg",
+        "tools/lsp/ui/assets/list-tree.svg",
+        "tools/lsp/ui/assets/plus.svg",
+        "tools/lsp/ui/assets/revert.svg",
+        "tools/lsp/ui/assets/search.svg",
+        "tools/lsp/ui/assets/settings.svg",
+        "tools/lsp/ui/assets/slint-logo-small-light.png",
+        "tools/lsp/ui/assets/sync.svg",
+        "tools/lsp/ui/components/**",
+        "tools/lsp/ui/editor.slint",
+        "tools/lsp/ui/main.slint",
+        "tools/lsp/ui/views/**",
+        "tools/lsp/ui/windowglobal.slint",
+        "tools/lsp/wasm_main.rs",
+        "tools/slint-sc-coverage/**",
+        "tools/slintpad/**",
+        "tools/tr-extractor/**",
+        "tools/viewer/.gitignore",
+        "tools/viewer/Cargo.toml",
+        "tools/viewer/LICENSES/**",
+        "tools/viewer/README.md",
+        "tools/viewer/TestFlight/**",
+        "tools/viewer/android/.gitignore",
+        "tools/viewer/android/app/**",
+        "tools/viewer/android/build-aab.sh",
+        "tools/viewer/android/build-native.sh",
+        "tools/viewer/android/build.gradle.kts",
+        "tools/viewer/android/fastlane/metadata/android/en-US/full_description.txt",
+        "tools/viewer/android/fastlane/metadata/android/en-US/short_description.txt",
+        "tools/viewer/android/fastlane/metadata/android/en-US/title.txt",
+        "tools/viewer/android/fdroid/**",
+        "tools/viewer/android/gradle/**",
+        "tools/viewer/android/gradle.properties",
+        "tools/viewer/android/install-aab.sh",
+        "tools/viewer/android/rust-toolchain.toml",
+        "tools/viewer/android/settings.gradle.kts",
+        "tools/viewer/build.rs",
+        "tools/viewer/ci_scripts/**",
+        "tools/viewer/debug.rs",
+        "tools/viewer/ios-project.yml",
+        "tools/viewer/lib.rs",
+        "tools/viewer/main.rs",
+        "tools/viewer/remote/**",
+        "tools/viewer/remote.rs",
+        "tools/viewer/screenshot.rs",
+        "tools/viewer/tests/**",
+        "ui-libraries/material/.gitignore",
+        "ui-libraries/material/Cargo.toml",
+        "ui-libraries/material/README.md",
+        "ui-libraries/material/docs/README.md",
+        "ui-libraries/material/docs/astro.config.ts",
+        "ui-libraries/material/docs/biome.json",
+        "ui-libraries/material/docs/ec.config.mjs",
+        "ui-libraries/material/docs/package.json",
+        "ui-libraries/material/docs/playwright.config.ts",
+        "ui-libraries/material/docs/public/**",
+        "ui-libraries/material/docs/src/assets/fonts/inter-latin-wght-normal.woff2.license",
+        "ui-libraries/material/docs/src/assets/images/icons/**",
+        "ui-libraries/material/docs/src/assets/slint-logo-small-light.svg",
+        "ui-libraries/material/docs/src/assets/styles/**",
+        "ui-libraries/material/docs/src/content/**",
+        "ui-libraries/material/docs/src/content.config.ts",
+        "ui-libraries/material/docs/src/env.d.ts",
+        "ui-libraries/material/docs/src/pages/**",
+        "ui-libraries/material/docs/tests/**",
+        "ui-libraries/material/docs/tsconfig.json",
+        "ui-libraries/material/docs/wrangler.toml",
+        "ui-libraries/material/examples/gallery/Cargo.toml",
+        "ui-libraries/material/examples/gallery/build.rs",
+        "ui-libraries/material/examples/gallery/index.html",
+        "ui-libraries/material/examples/gallery/src/**",
+        "ui-libraries/material/examples/gallery/ui/components/**",
+        "ui-libraries/material/examples/gallery/ui/fonts/Roboto-VariableFont.ttf.license",
+        "ui-libraries/material/examples/gallery/ui/icons/**",
+        "ui-libraries/material/examples/gallery/ui/icons.slint",
+        "ui-libraries/material/examples/gallery/ui/main.slint",
+        "ui-libraries/material/examples/gallery/ui/main_window_adapter.slint",
+        "ui-libraries/material/examples/gallery/ui/themes/**",
+        "ui-libraries/material/examples/gallery/ui/views/**",
+        "ui-libraries/material/release/**",
+        "ui-libraries/material/scripts/**",
+        "xtask/Cargo.toml"
+      ],
+      "text": "\n# Slint License\n\nThis repository contains several parts under different licenses:\n\n- The **Slint framework** (the runtime libraries and the language tooling) is triple-licensed.\n  See below.\n- The **documentation and examples** are under the [MIT License](LICENSES/MIT.txt),\n  so you can reuse them in any project, including proprietary ones.\n- Some **third-party assets and code** keep their own licenses.\n\nThe exact license of each file is documented in its header or, where that's not possible, via [REUSE](https://reuse.software/) metadata in `REUSE.toml`.\nThe full text of every license used is in the `LICENSES` folder.\n\n## Licenses of the Slint Framework\n\nYou can use the Slint framework under ***any*** of the following licenses, at your choice:\n\n1. [Royalty-free License](LICENSES/LicenseRef-Slint-Royalty-free-2.0.md) - Permits use in **proprietary** desktop, mobile, and web applications **at no cost**. Use in embedded systems is excluded.\n2. [GNU GPLv3](LICENSES/GPL-3.0-only.txt) - Permits use in **open source software** under GPL-compatible terms, **at no cost**, for desktop, mobile, and web applications, as well as for embedded systems.\n3. [Commercial license](LICENSES/LicenseRef-Slint-Software-3.0.md) - Permits use in **proprietary** applications, including desktop, mobile, web, and embedded systems.\n   See the [pricing page](https://slint.dev/pricing) for the available plans.\n\n### What This Means in Practice\n\n- **Do you want to build an open-source application?**\n  Use Slint for free under the GPLv3 on any platform; your own files can stay MIT or Apache-2.0.\n  You're not tied to the GPL, though — the Royalty-free or Commercial license works too.\n- **Do you want to keep your application proprietary?**\n  Both the Royalty-free and Commercial licenses cover proprietary desktop, mobile, and web applications.\n  The Royalty-free License is free, as long as you disclose that you use Slint (for example with the `AboutSlint` widget or the Slint badge); without that disclosure, use the Commercial license.\n  A Commercial license is required for embedded systems, regardless of disclosure.\n\nThe Royalty-free License is meant for applications that run on a user's own general-purpose computer or phone, installed as one application among many.\nIt does not cover embedded systems — computer systems that perform a specific task within a larger mechanical or electrical system — which need the Commercial license.\n\nSee the [Licensing FAQ](FAQ.md#licensing) for the details and common scenarios.\n\n## Definitions\n\nA ***Desktop Application*** is a computer program that is designed to run on a general-purpose computer (PC or notebook), typically installed and executed locally on the computer's operating system.\n\nA ***Mobile Application*** is a computer program that is designed to run on a general-purpose mobile computer (mobile phone or tablet), typically installed and executed locally on the computer's operating system.\n\nA ***Web Application*** is a computer program that is designed to run in the sandbox environment provided by a web browser.\n\nAn ***Embedded System*** is a computer system designed to perform a specific task within a larger mechanical or electrical system.\n\n## Contributions\n\nContributions to this repository are licensed under the [MIT No Attribution license (MIT-0)](https://opensource.org/license/mit-0).\nThis does not assign copyright or transfer ownership; contributors keep full rights to their own code.\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for details.\n\n## Additional Info\n\nSee the [Slint licensing options on the website](https://slint.dev/pricing) and the [Licensing FAQ](FAQ.md#licensing).\nContact us at [info@slint.dev](mailto:info@slint.dev) if you have any questions regarding licensing.\n",
+      "attribution": "the authors of slint-ui/slint (the license file names no copyright line), GPL-3.0-only license (LICENSE.md), https://github.com/slint-ui/slint."
+    },
+    {
+      "license": "Unlicense",
+      "paths": [
+        "LICENSES/**"
+      ],
+      "text": "This is free and unencumbered software released into the public domain.\n\nAnyone is free to copy, modify, publish, use, compile, sell, or distribute this software, either in source code form or as a compiled binary, for any purpose, commercial or non-commercial, and by any means.\n\nIn jurisdictions that recognize copyright laws, the author or authors of this software dedicate any and all copyright interest in the software to the public domain. We make this dedication for the benefit of the public at large and to the detriment of our heirs and\nsuccessors. We intend this dedication to be an overt act of relinquishment in perpetuity of all present and future rights to this software under copyright law.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\nFor more information, please refer to <http://unlicense.org/>\n",
+      "attribution": "the authors of slint-ui/slint (LICENSES) (the license file names no copyright line), Unlicense license (Unlicense.txt), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/LICENSES."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "demos/analogclock/rust/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/analogclock/rust."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "demos/energy-monitor/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/energy-monitor."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "demos/food-processor/rust/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/food-processor/rust."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "demos/home-automation/rust/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/home-automation/rust."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "demos/launcher/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/launcher."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "demos/printerdemo/rust/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/printerdemo/rust."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "demos/printerdemo_mcu/Cargo.toml",
+        "demos/printerdemo_mcu/README.md",
+        "demos/printerdemo_mcu/bench.rs",
+        "demos/printerdemo_mcu/build.rs",
+        "demos/printerdemo_mcu/esp-idf/**",
+        "demos/printerdemo_mcu/main.rs",
+        "demos/printerdemo_mcu/ui/common.slint",
+        "demos/printerdemo_mcu/ui/components/**",
+        "demos/printerdemo_mcu/ui/fonts",
+        "demos/printerdemo_mcu/ui/images",
+        "demos/printerdemo_mcu/ui/pages/**",
+        "demos/printerdemo_mcu/ui/printerdemo.slint"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/printerdemo_mcu."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "demos/usecases/rust/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/usecases/rust."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "demos/weather-demo/Cargo.toml",
+        "demos/weather-demo/README.md",
+        "demos/weather-demo/build.rs",
+        "demos/weather-demo/index.html",
+        "demos/weather-demo/main.js",
+        "demos/weather-demo/package.json",
+        "demos/weather-demo/src/**",
+        "demos/weather-demo/ui/about-box.slint",
+        "demos/weather-demo/ui/assets/felgo-logo.svg",
+        "demos/weather-demo/ui/assets/icons/**",
+        "demos/weather-demo/ui/city_weather.slint",
+        "demos/weather-demo/ui/city_weather_tile.slint",
+        "demos/weather-demo/ui/controls/**",
+        "demos/weather-demo/ui/expanded_city_weather_tile.slint",
+        "demos/weather-demo/ui/forecast_with_graph.slint",
+        "demos/weather-demo/ui/location_datatypes.slint",
+        "demos/weather-demo/ui/location_search.slint",
+        "demos/weather-demo/ui/main.slint",
+        "demos/weather-demo/ui/page-base.slint",
+        "demos/weather-demo/ui/style/**",
+        "demos/weather-demo/ui/ui_utils.slint",
+        "demos/weather-demo/ui/weather_datatypes.slint"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "FELGO GmbH <contact@felgo.com>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/demos/weather-demo."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "docs/astro/src/content/code/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/docs/astro/src/content/code."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/7guis/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/7guis."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/async-io/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/async-io."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/bevy/bevy-hosts-slint/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/bevy/bevy-hosts-slint."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/bevy/bevy-hosts-slint-gpu/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/bevy/bevy-hosts-slint-gpu."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/bevy/slint-hosts-bevy/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/bevy/slint-hosts-bevy."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/carousel/rust/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/carousel/rust."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/dnd-kanban/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/dnd-kanban."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/ffmpeg/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/ffmpeg."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/gallery/CMakeLists.txt",
+        "examples/gallery/Cargo.toml",
+        "examples/gallery/README.md",
+        "examples/gallery/build.rs",
+        "examples/gallery/gallery.pot",
+        "examples/gallery/gallery.slint",
+        "examples/gallery/index.html",
+        "examples/gallery/lang/de/LC_MESSAGES/gallery.po",
+        "examples/gallery/lang/fr/LC_MESSAGES/gallery.po",
+        "examples/gallery/lang/ja/LC_MESSAGES/gallery.po",
+        "examples/gallery/main.cpp",
+        "examples/gallery/main.rs",
+        "examples/gallery/thumbsup.png.license",
+        "examples/gallery/ui/**",
+        "examples/gallery/update_translations.sh"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/gallery."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/gstreamer-player/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/gstreamer-player."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/imagefilter/rust/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/imagefilter/rust."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/maps/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/maps."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/mcu-board-support/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/mcu-board-support."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/mcu-embassy/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "David Haig <david@ninjametal.com>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/mcu-embassy."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/memory/CMakeLists.txt",
+        "examples/memory/Cargo.toml",
+        "examples/memory/README.md",
+        "examples/memory/icons/README.md",
+        "examples/memory/icons/at-solid.svg",
+        "examples/memory/icons/balance-scale-solid.svg",
+        "examples/memory/icons/bicycle-solid.svg",
+        "examples/memory/icons/bus-solid.svg",
+        "examples/memory/icons/cloud-solid.svg",
+        "examples/memory/icons/cogs-solid.svg",
+        "examples/memory/icons/motorcycle-solid.svg",
+        "examples/memory/icons/video-solid.svg",
+        "examples/memory/index.html",
+        "examples/memory/main.js",
+        "examples/memory/main.py",
+        "examples/memory/main.rs",
+        "examples/memory/memory.cpp",
+        "examples/memory/memory.slint",
+        "examples/memory/package.json",
+        "examples/memory/pyproject.toml"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/memory."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/native-gestures/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/native-gestures."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/opengl_texture/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/opengl_texture."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/opengl_underlay/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/opengl_underlay."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/plotter/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/plotter."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/runtime_key_bindings/rust/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/runtime_key_bindings/rust."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/safe-ui/app/Cargo.toml",
+        "examples/safe-ui/app/build.rs",
+        "examples/safe-ui/app/components.slint",
+        "examples/safe-ui/app/main.slint",
+        "examples/safe-ui/app/progress-text.slint",
+        "examples/safe-ui/app/progress.slint",
+        "examples/safe-ui/app/src/**",
+        "examples/safe-ui/app/tests/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of slint-safeui-app, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/safe-ui/app."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/safe-ui/desktop/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of slint-safeui-desktop, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/safe-ui/desktop."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/safe-ui/esp32-s3-box/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of slint-safeui-esp32-s3-box, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/safe-ui/esp32-s3-box."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/safe-ui/ffi/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of slint-safeui-ffi, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/safe-ui/ffi."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/safe-ui/ffi-simulator/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of slint-safeui-ffi-simulator, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/safe-ui/ffi-simulator."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/servo/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/servo."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/slide_puzzle/Cargo.toml",
+        "examples/slide_puzzle/README.md",
+        "examples/slide_puzzle/berlin.jpg.license",
+        "examples/slide_puzzle/build.rs",
+        "examples/slide_puzzle/index.html",
+        "examples/slide_puzzle/main.js",
+        "examples/slide_puzzle/main.rs",
+        "examples/slide_puzzle/package.json",
+        "examples/slide_puzzle/plaster-font/Plaster-Regular.ttf.license",
+        "examples/slide_puzzle/slide_puzzle.slint"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/slide_puzzle."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/speedometer/rust/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/speedometer/rust."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/system-tray/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/system-tray."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/todo-mvc/rust/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/todo-mvc/rust."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/todo/rust/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/todo/rust."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/uefi-demo/.gitignore",
+        "examples/uefi-demo/Cargo.toml",
+        "examples/uefi-demo/README.md",
+        "examples/uefi-demo/build.rs",
+        "examples/uefi-demo/demo.slint",
+        "examples/uefi-demo/main.rs"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of uefi-demo, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/uefi-demo."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/virtual_keyboard/rust/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/virtual_keyboard/rust."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/wgpu_texture/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/examples/wgpu_texture."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "helper_crates/const-field-offset/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT OR Apache-2.0\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nApache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n\"License\" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.\n\n\"Licensor\" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.\n\n\"Legal Entity\" shall mean the union of the acting entity and all other entities that control, are controlled by, or are under common control with that entity. For the purposes of this definition, \"control\" means (i) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) beneficial ownership of such entity.\n\n\"You\" (or \"Your\") shall mean an individual or Legal Entity exercising permissions granted by this License.\n\n\"Source\" form shall mean the preferred form for making modifications, including but not limited to software source code, documentation source, and configuration files.\n\n\"Object\" form shall mean any form resulting from mechanical transformation or translation of a Source form, including but not limited to compiled object code, generated documentation, and conversions to other media types.\n\n\"Work\" shall mean the work of authorship, whether in Source or Object form, made available under the License, as indicated by a copyright notice that is included in or attached to the work (an example is provided in the Appendix below).\n\n\"Derivative Works\" shall mean any work, whether in Source or Object form, that is based on (or derived from) the Work and for which the editorial revisions, annotations, elaborations, or other modifications represent, as a whole, an original work of authorship. For the purposes of this License, Derivative Works shall not include works that remain separable from, or merely link (or bind by name) to the interfaces of, the Work and Derivative Works thereof.\n\n\"Contribution\" shall mean any work of authorship, including the original version of the Work and any modifications or additions to that Work or Derivative Works thereof, that is intentionally submitted to Licensor for inclusion in the Work by the copyright owner or by an individual or Legal Entity authorized to submit on behalf of the copyright owner. For the purposes of this definition, \"submitted\" means any form of electronic, verbal, or written communication sent to the Licensor or its representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, the Licensor for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by the copyright owner as \"Not a Contribution.\"\n\n\"Contributor\" shall mean Licensor and any individual or Legal Entity on behalf of whom a Contribution has been received by Licensor and subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the Work or Derivative Works thereof in any medium, with or without modifications, and in Source or Object form, provided that You meet the following conditions:\n\n     (a) You must give any other recipients of the Work or Derivative Works a copy of this License; and\n\n     (b) You must cause any modified files to carry prominent notices stating that You changed the files; and\n\n     (c) You must retain, in the Source form of any Derivative Works that You distribute, all copyright, patent, trademark, and attribution notices from the Source form of the Work, excluding those notices that do not pertain to any part of the Derivative Works; and\n\n     (d) If the Work includes a \"NOTICE\" text file as part of its distribution, then any Derivative Works that You distribute must include a readable copy of the attribution notices contained within such NOTICE file, excluding those notices that do not pertain to any part of the Derivative Works, in at least one of the following places: within a NOTICE text file distributed as part of the Derivative Works; within the Source form or documentation, if provided along with the Derivative Works; or, within a display generated by the Derivative Works, if and wherever such third-party notices normally appear. The contents of the NOTICE file are for informational purposes only and do not modify the License. You may add Your own attribution notices within Derivative Works that You distribute, alongside or as an addendum to the NOTICE text from the Work, provided that such additional attribution notices cannot be construed as modifying the License.\n\n     You may add Your own copyright statement to Your modifications and may provide additional or different license terms and conditions for use, reproduction, or distribution of Your modifications, or for any such Derivative Works as a whole, provided Your use, reproduction, and distribution of the Work otherwise complies with the conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise, any Contribution intentionally submitted for inclusion in the Work by You to the Licensor shall be under the terms and conditions of this License, without any additional terms or conditions. Notwithstanding the above, nothing herein shall supersede or modify the terms of any separate license agreement you may have executed with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or agreed to in writing, Licensor provides the Work (and each Contributor provides its Contributions) on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall any Contributor be liable to You for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result of this License or out of the use or inability to use the Work (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if such Contributor has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\nTo apply the Apache License to your work, attach the following boilerplate notice, with the fields enclosed by brackets \"[]\" replaced with your own identifying information. (Don't include the brackets!)  The text should be enclosed in the appropriate comment syntax for the file format. We also recommend that a file or class name and description of purpose be included on the same \"printed page\" as the copyright notice for easier identification within third-party archives.\n\nCopyright [yyyy] [name of copyright owner]\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT OR Apache-2.0 license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/helper_crates/const-field-offset."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "helper_crates/vtable/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT OR Apache-2.0\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nApache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n\"License\" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.\n\n\"Licensor\" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.\n\n\"Legal Entity\" shall mean the union of the acting entity and all other entities that control, are controlled by, or are under common control with that entity. For the purposes of this definition, \"control\" means (i) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) beneficial ownership of such entity.\n\n\"You\" (or \"Your\") shall mean an individual or Legal Entity exercising permissions granted by this License.\n\n\"Source\" form shall mean the preferred form for making modifications, including but not limited to software source code, documentation source, and configuration files.\n\n\"Object\" form shall mean any form resulting from mechanical transformation or translation of a Source form, including but not limited to compiled object code, generated documentation, and conversions to other media types.\n\n\"Work\" shall mean the work of authorship, whether in Source or Object form, made available under the License, as indicated by a copyright notice that is included in or attached to the work (an example is provided in the Appendix below).\n\n\"Derivative Works\" shall mean any work, whether in Source or Object form, that is based on (or derived from) the Work and for which the editorial revisions, annotations, elaborations, or other modifications represent, as a whole, an original work of authorship. For the purposes of this License, Derivative Works shall not include works that remain separable from, or merely link (or bind by name) to the interfaces of, the Work and Derivative Works thereof.\n\n\"Contribution\" shall mean any work of authorship, including the original version of the Work and any modifications or additions to that Work or Derivative Works thereof, that is intentionally submitted to Licensor for inclusion in the Work by the copyright owner or by an individual or Legal Entity authorized to submit on behalf of the copyright owner. For the purposes of this definition, \"submitted\" means any form of electronic, verbal, or written communication sent to the Licensor or its representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, the Licensor for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by the copyright owner as \"Not a Contribution.\"\n\n\"Contributor\" shall mean Licensor and any individual or Legal Entity on behalf of whom a Contribution has been received by Licensor and subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the Work or Derivative Works thereof in any medium, with or without modifications, and in Source or Object form, provided that You meet the following conditions:\n\n     (a) You must give any other recipients of the Work or Derivative Works a copy of this License; and\n\n     (b) You must cause any modified files to carry prominent notices stating that You changed the files; and\n\n     (c) You must retain, in the Source form of any Derivative Works that You distribute, all copyright, patent, trademark, and attribution notices from the Source form of the Work, excluding those notices that do not pertain to any part of the Derivative Works; and\n\n     (d) If the Work includes a \"NOTICE\" text file as part of its distribution, then any Derivative Works that You distribute must include a readable copy of the attribution notices contained within such NOTICE file, excluding those notices that do not pertain to any part of the Derivative Works, in at least one of the following places: within a NOTICE text file distributed as part of the Derivative Works; within the Source form or documentation, if provided along with the Derivative Works; or, within a display generated by the Derivative Works, if and wherever such third-party notices normally appear. The contents of the NOTICE file are for informational purposes only and do not modify the License. You may add Your own attribution notices within Derivative Works that You distribute, alongside or as an addendum to the NOTICE text from the Work, provided that such additional attribution notices cannot be construed as modifying the License.\n\n     You may add Your own copyright statement to Your modifications and may provide additional or different license terms and conditions for use, reproduction, or distribution of Your modifications, or for any such Derivative Works as a whole, provided Your use, reproduction, and distribution of the Work otherwise complies with the conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise, any Contribution intentionally submitted for inclusion in the Work by You to the Licensor shall be under the terms and conditions of this License, without any additional terms or conditions. Notwithstanding the above, nothing herein shall supersede or modify the terms of any separate license agreement you may have executed with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or agreed to in writing, Licensor provides the Work (and each Contributor provides its Contributions) on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall any Contributor be liable to You for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result of this License or out of the use or inability to use the Work (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if such Contributor has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\nTo apply the Apache License to your work, attach the following boilerplate notice, with the fields enclosed by brackets \"[]\" replaced with your own identifying information. (Don't include the brackets!)  The text should be enclosed in the appropriate comment syntax for the file format. We also recommend that a file or class name and description of purpose be included on the same \"printed page\" as the copyright notice for easier identification within third-party archives.\n\nCopyright [yyyy] [name of copyright owner]\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT OR Apache-2.0 license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/helper_crates/vtable."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "tests/manual/module-builds/app/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/tests/manual/module-builds/app."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "tests/manual/module-builds/blogica/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/tests/manual/module-builds/blogica."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "tests/manual/module-builds/blogicb/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Slint Developers <info@slint.dev>, MIT license (declared in Cargo.toml), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/tests/manual/module-builds/blogicb."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "ui-libraries/material/src/**"
+      ],
+      "text": "\nMIT License\n\nCopyright (c) 2026 SixtyFPS GmbH\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2026 SixtyFPS GmbH, MIT license (LICENSE.md), https://github.com/slint-ui/slint/tree/436f57933407c700be22725024fab2b21d95980f/ui-libraries/material/src."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "astro",
+      "paths": [
+        "**/*.astro"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.aarch64-unknown-linux-gnu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.aarch64-unknown-linux-musl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.armv7-unknown-linux-gnueabihf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cpp-image"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.defaults"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.desktop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gltf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.license"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "api/python/briefcase/uv.lock",
+        "api/python/slint/uv.lock",
+        "docs/python/uv.lock",
+        "flake.lock",
+        "tools/editor/ui-tests/uv.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.overlay"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.po"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.riscv64gc-unknown-linux-gnu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.slint"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sublime-settings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sublime-syntax"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmPreferences"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.torizon-demos"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        ".cspell/slint-project-words.txt",
+        "LICENSES/Apache-2.0.txt",
+        "LICENSES/BSD-3-Clause.txt",
+        "LICENSES/CC-BY-2.0.txt",
+        "LICENSES/CC-BY-4.0.txt",
+        "LICENSES/CC-BY-ND-4.0.txt",
+        "LICENSES/CC-BY-SA-3.0.txt",
+        "LICENSES/CC-BY-SA-4.0.txt",
+        "LICENSES/CC-PDDC.txt",
+        "LICENSES/GPL-3.0-only.txt",
+        "LICENSES/LicenseRef-Unsplash.txt",
+        "LICENSES/LicenseRef-qskinny.txt",
+        "LICENSES/MIT.txt",
+        "LICENSES/OFL-1.1-RFN.txt",
+        "LICENSES/OFL-1.1.txt",
+        "LICENSES/Unlicense.txt",
+        "editors/tree-sitter-slint/test/corpus/empty.txt",
+        "editors/tree-sitter-slint/test/corpus/events.txt",
+        "editors/tree-sitter-slint/test/corpus/match.txt",
+        "editors/tree-sitter-slint/test/corpus/rust_attr.txt",
+        "editors/tree-sitter-slint/test/corpus/string_escape.txt",
+        "editors/tree-sitter-slint/test/corpus/struct_field_defaults.txt",
+        "scripts/commit-template.txt",
+        "tools/viewer/TestFlight/WhatToTest.en-US.txt",
+        "tools/viewer/android/fastlane/metadata/android/en-US/full_description.txt",
+        "tools/viewer/android/fastlane/metadata/android/en-US/short_description.txt",
+        "tools/viewer/android/fastlane/metadata/android/en-US/title.txt",
+        "ui-libraries/material/docs/public/fonts/Inter-LICENSE.txt",
+        "ui-libraries/material/release/released-versions.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ui"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.x"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.x86_64-unknown-linux-gnu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.x86_64-unknown-linux-musl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mailmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Doxyfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/reuse"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/trailing_spaces"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "wgsl",
+      "paths": [
+        "**/*.wgsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16"
+  }
+}

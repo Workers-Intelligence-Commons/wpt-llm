@@ -1,0 +1,1746 @@
+{
+  "type": "git",
+  "address": "https://github.com/kaldi-asr/kaldi",
+  "revision": "e02e35f0254bb033fab73d1df99fc34123e31d56",
+  "checksum": "sha256:48abf8041ca2592a5a82c1b5c35b48b1aae72f79914573c4b3cf9965a0205888",
+  "extract": {
+    "exclude": [
+      "cmake/third_party/**",
+      "egs/ami/s5/local/english.glm",
+      "egs/gp/s5/local/gp_norm_trans_CZ.pl",
+      "egs/icsi/s5/local/english.glm",
+      "egs/nsc/README.txt",
+      "misc/logo/**",
+      "misc/papers/asru11_toolkit/figs/**",
+      "misc/papers/asru11_toolkit/kaldi_asru.pdf",
+      "misc/papers/asru11_toolkit_poster/figures/**",
+      "misc/papers/asru11_toolkit_poster/kaldi-poster.pdf",
+      "src/doc/Kaldi.pptx",
+      "src/doc/KaldiMatrix.pptx",
+      "src/doc/KaldiModels.pptx",
+      "src/doc/KaldiScripts.pptx",
+      "src/feat/test_data/test.wav",
+      "src/feat/test_data/test.wav.fbank_htk.1",
+      "src/feat/test_data/test.wav.fbank_htk.2",
+      "src/feat/test_data/test.wav.fbank_htk.3",
+      "src/feat/test_data/test.wav.fbank_htk.4",
+      "src/feat/test_data/test.wav.fea_htk.1",
+      "src/feat/test_data/test.wav.fea_htk.2",
+      "src/feat/test_data/test.wav.fea_htk.3",
+      "src/feat/test_data/test.wav.fea_htk.4",
+      "src/feat/test_data/test.wav.fea_htk.5",
+      "src/feat/test_data/test.wav.fea_htk.6",
+      "src/feat/test_data/test.wav.plp_htk.1",
+      "src/matrix/test_data/double_matrix.npy",
+      "src/matrix/test_data/double_matrix_big_endian.npy",
+      "src/matrix/test_data/double_vector.npy",
+      "src/matrix/test_data/double_vector_big_endian.npy",
+      "src/matrix/test_data/float_matrix.npy",
+      "src/matrix/test_data/float_matrix_big_endian.npy",
+      "src/matrix/test_data/float_vector.npy",
+      "src/matrix/test_data/float_vector_big_endian.npy",
+      "windows/NewGuidCmd.exe"
+    ]
+  },
+  "history": {
+    "since": "bad94ae0bc1967151f6f6c748c5c30e2f43031a5"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n Update to legal notice, made Feb 2012, modified Sep 2013.  We would like to\n clarify that we are using a convention where multiple names in the Apache\n copyright headers, for example\n\n  // Copyright 2009-2012  Yanmin Qian  Arnab Ghoshal\n  //                2013  Vassil Panayotov\n\n does not signify joint ownership of copyright of that file, except in cases\n where all those names were present in the original release made in March 2011--\n you can use the version history to work this out, if this matters to you.\n Instead, we intend that those contributors who later modified the file, agree\n to release their changes under the Apache license.  The conventional way of\n signifying this is to duplicate the Apache headers at the top of each file each\n time a change is made by a different author, but this would quickly become\n impractical.\n\n Where the copyright header says something like:\n\n // Copyright    2013   Johns Hopkins University (author: Daniel Povey)\n\n it is because the individual who wrote the code was at that institution as an\n employee, so the copyright is owned by the university (and we will have checked\n that the contributions were in accordance with the open-source policies of the\n institutions concerned, including getting them vetted individually where\n necessary).  From a legal point of view the copyright ownership is that of the\n institution concerned, and the (author: xxx) in parentheses is just\n informational, to identify the actual person who wrote the code, and is not\n intended to have any legal implications.  In some cases, however, particularly\n early on, we just wrote the name of the university or company concerned,\n without the actual author's name in parentheses.  If you see something like\n\n //  Copyright  2009-2012   Arnab Ghoshal  Microsoft Corporation\n\n it does not imply that Arnab was working for Microsoft, it is because someone\n else contributed to the file while working at Microsoft (this would be Daniel\n Povey, in fact, who was working at Microsoft Research at the outset of the\n project).\n\n The list of authors of each file is in an essentially arbitrary order, but is\n often chronological if they contributed in different years.\n\n The original legal notice is below.  Note: we are continuing to modify it by\n adding the names of new contributors, but at any given time, the list may\n be out of date.\n\n---\n                          Legal Notices\n\nEach of the files comprising Kaldi v1.0 have been separately licensed by\ntheir respective author(s) under the terms of the Apache License v 2.0 (set\nforth below).  The source code headers for each file specifies the individual\nauthors and source material for that file as well the corresponding copyright\nnotice.  For reference purposes only: A cumulative list of all individual\ncontributors and original source material as well as the full text of the Apache\nLicense v 2.0 are set forth below.\n\nIndividual Contributors (in alphabetical order)\n\n      Albert Vernon\n      Alexander Solovets\n      Allen Guo\n      Ariya Rastrow\n      Arnab Ghoshal\n      Cisco Corporation\n      Daniel Galvez\n      Daniel Povey\n      Danijel Korzinek\n      David Snyder\n      Dogan Can\n      Eduardo Silva\n      Ewald Enzinger\n      Gaofeng Cheng\n      Gaurav Kumar\n      Georg Stemmer\n      Gilles Boulianne\n      Go Vivace Inc.\n      Guoguo Chen\n      Haihua Xu\n      Hainan Xu\n      Hendy Irawan\n      Hossein Hadian\n      Ilya Edrenkin\n      Jan \"Yenda\" Trmal\n      Jan Silovsky\n      Joachim Fainberg\n      Johns Hopkins University\n      Karel Vesely\n      Ke Li\n      Kirill Katsnelson\n      Lucas Ondel\n      Lukas Burget\n      Lv Hang\n      Matthew Maciejewski\n      Microsoft Corporation\n      Minhua Wu\n      Mirko Hannemann\n      Mohit Agarwal\n      Navdeep Jaitly\n      Nickolay V. Shmyrev\n      Omid Sadjadi\n      Ondrej Glembek\n      Ondrej Platek\n      Pavel Denisov\n      Pawel Swietojanski\n      Pegah Ghahremani\n      Peter Smit\n      Petr Motlicek\n      Petr Schwarz\n      Phonexia s.r.o.\n      Saarland University\n      Shinji Watanabe\n      Shiyin Kang\n      Tanel Alumae\n      Tom Ko\n      Vassil Panayotov\n      Vijayaditya Peddinti\n      Vimal Manohar\n      Vincent Nguyen\n      Xiaohui Zhang\n      Xingyu Na\n      Yajie Miao\n      Yanmin Qian\n      Yiming Wang\n      Yiwen Shao\n\nOther Source Material\n\n    This project includes a port and modification of materials from JAMA: A Java\n  Matrix Package under the following notice: \"This software is a cooperative\n  product of The MathWorks and the National Institute of Standards and Technology\n  (NIST) which has been released to the public domain.\" This notice and the\n  original code is available at http://math.nist.gov/javanumerics/jama/\n\n   This project includes a modified version of code published in Malvar, H.,\n  \"Signal processing with lapped transforms,\" Artech House, Inc., 1992.  The\n  current copyright holder, Henrique S. Malvar, has given his permission for the\n  release of this modified version under the Apache License 2.0.\n\n  This project includes material from the OpenFST Library v1.2.7 available at\n  http://www.openfst.org and released under the Apache License v. 2.0.\n\n  [OpenFst COPYING file begins here]\n\n    Licensed under the Apache License, Version 2.0 (the \"License\");\n    you may not use these files except in compliance with the License.\n    You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n    Unless required by applicable law or agreed to in writing, software\n    distributed under the License is distributed on an \"AS IS\" BASIS,\n    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n    See the License for the specific language governing permissions and\n    limitations under the License.\n\n    Copyright 2005-2010 Google, Inc.\n\n  [OpenFst COPYING file ends here]\n\n\n -------------------------------------------------------------------------\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Commit history of https://github.com/kaldi-asr/kaldi: Copyright 2005-2010 Google, Inc., Apache-2.0 license (COPYING), https://github.com/kaldi-asr/kaldi."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".gitpod.Dockerfile",
+        ".gitpod.yml",
+        ".shellcheck.yaml",
+        ".travis.yml",
+        "CMakeLists.txt",
+        "COPYING",
+        "INSTALL",
+        "README.md",
+        "cmake/FindCUB.cmake",
+        "cmake/FindICU.cmake",
+        "cmake/FindNvToolExt.cmake",
+        "cmake/INSTALL.md",
+        "cmake/Utils.cmake",
+        "cmake/VersionHelper.cmake",
+        "cmake/gen_cmake_skeleton.py",
+        "cmake/kaldi-config.cmake.in",
+        "docker/**",
+        "egs/README.txt",
+        "egs/aidatatang_200zh/**",
+        "egs/aishell/**",
+        "egs/aishell2/**",
+        "egs/ami/README.txt",
+        "egs/ami/s5/README",
+        "egs/ami/s5/RESULTS_ihm",
+        "egs/ami/s5/RESULTS_mdm",
+        "egs/ami/s5/RESULTS_sdm",
+        "egs/ami/s5/cmd.sh",
+        "egs/ami/s5/conf/**",
+        "egs/ami/s5/local/ami_beamform.sh",
+        "egs/ami/s5/local/ami_download.sh",
+        "egs/ami/s5/local/ami_format_data.sh",
+        "egs/ami/s5/local/ami_ihm_data_prep.sh",
+        "egs/ami/s5/local/ami_ihm_scoring_data_prep.sh",
+        "egs/ami/s5/local/ami_mdm_data_prep.sh",
+        "egs/ami/s5/local/ami_mdm_scoring_data_prep.sh",
+        "egs/ami/s5/local/ami_prepare_dict.sh",
+        "egs/ami/s5/local/ami_sdm_data_prep.sh",
+        "egs/ami/s5/local/ami_sdm_scoring_data_prep.sh",
+        "egs/ami/s5/local/ami_split_segments.pl",
+        "egs/ami/s5/local/ami_text_prep.sh",
+        "egs/ami/s5/local/ami_train_lms.sh",
+        "egs/ami/s5/local/ami_xml2text.sh",
+        "egs/ami/s5/local/beamformit.sh",
+        "egs/ami/s5/local/chain/**",
+        "egs/ami/s5/local/confidence_calibration.sh",
+        "egs/ami/s5/local/convert2stm.pl",
+        "egs/ami/s5/local/fisher_map_words.pl",
+        "egs/ami/s5/local/nnet/**",
+        "egs/ami/s5/local/nnet3/**",
+        "egs/ami/s5/local/online/**",
+        "egs/ami/s5/local/score.sh",
+        "egs/ami/s5/local/score_asclite.sh",
+        "egs/ami/s5/local/sort_bad_utts.py",
+        "egs/ami/s5/local/split_REAMDE.txt",
+        "egs/ami/s5/local/split_dev.orig",
+        "egs/ami/s5/local/split_eval.orig",
+        "egs/ami/s5/local/split_train.orig",
+        "egs/ami/s5/local/tfrnnlm/**",
+        "egs/ami/s5/path.sh",
+        "egs/ami/s5/run_ihm.sh",
+        "egs/ami/s5/run_mdm.sh",
+        "egs/ami/s5/run_prepare_shared.sh",
+        "egs/ami/s5/run_sdm.sh",
+        "egs/ami/s5/steps",
+        "egs/ami/s5/utils",
+        "egs/ami/s5b/**",
+        "egs/ami/s5c/**",
+        "egs/an4/**",
+        "egs/apiai_decode/**",
+        "egs/aspire/**",
+        "egs/aurora4/**",
+        "egs/babel/**",
+        "egs/babel_multilang/**",
+        "egs/bentham/**",
+        "egs/bn_music_speech/**",
+        "egs/callhome_diarization/**",
+        "egs/callhome_egyptian/**",
+        "egs/casia_hwdb/**",
+        "egs/chime1/**",
+        "egs/chime2/**",
+        "egs/chime3/**",
+        "egs/chime4/**",
+        "egs/chime5/**",
+        "egs/chime6/**",
+        "egs/cifar/**",
+        "egs/cl_english/**",
+        "egs/cmu_cslu_kids/**",
+        "egs/cnceleb/**",
+        "egs/commonvoice/**",
+        "egs/csj/**",
+        "egs/dihard_2018/**",
+        "egs/fame/**",
+        "egs/farsdat/**",
+        "egs/fisher_callhome_spanish/**",
+        "egs/fisher_english/**",
+        "egs/fisher_swbd/**",
+        "egs/formosa/**",
+        "egs/gale_arabic/**",
+        "egs/gale_mandarin/**",
+        "egs/gigaspeech/**",
+        "egs/gop_speechocean762/**",
+        "egs/gp/README.txt",
+        "egs/gp/s1/**",
+        "egs/gp/s5/RESULTS",
+        "egs/gp/s5/cmd.sh",
+        "egs/gp/s5/conf/**",
+        "egs/gp/s5/local/gp_check_tools.sh",
+        "egs/gp/s5/local/gp_convert_audio.sh",
+        "egs/gp/s5/local/gp_data_prep.sh",
+        "egs/gp/s5/local/gp_dict_prep.sh",
+        "egs/gp/s5/local/gp_extract_transcripts.pl",
+        "egs/gp/s5/local/gp_format_lm.sh",
+        "egs/gp/s5/local/gp_install.sh",
+        "egs/gp/s5/local/gp_make_questions.pl",
+        "egs/gp/s5/local/gp_norm_dict_CZ.pl",
+        "egs/gp/s5/local/gp_norm_dict_FR.pl",
+        "egs/gp/s5/local/gp_norm_dict_GE.pl",
+        "egs/gp/s5/local/gp_norm_dict_PL.pl",
+        "egs/gp/s5/local/gp_norm_dict_PO.pl",
+        "egs/gp/s5/local/gp_norm_dict_RU.pl",
+        "egs/gp/s5/local/gp_norm_dict_SP.pl",
+        "egs/gp/s5/local/gp_norm_trans_FR.pl",
+        "egs/gp/s5/local/gp_norm_trans_GE.pl",
+        "egs/gp/s5/local/gp_norm_trans_PL.pl",
+        "egs/gp/s5/local/gp_norm_trans_PO.pl",
+        "egs/gp/s5/local/gp_norm_trans_RU.pl",
+        "egs/gp/s5/local/gp_norm_trans_SP.pl",
+        "egs/gp/s5/local/gp_prep_flists.sh",
+        "egs/gp/s5/local/gp_rmn2utf_FR.pl",
+        "egs/gp/s5/local/gp_rmn2utf_GE.pl",
+        "egs/gp/s5/local/gp_rmn2utf_PL.pl",
+        "egs/gp/s5/local/gp_rmn2utf_PO.pl",
+        "egs/gp/s5/local/gp_rmn2utf_RU.pl",
+        "egs/gp/s5/local/gp_rmn2utf_SP.pl",
+        "egs/gp/s5/local/score.sh",
+        "egs/gp/s5/path.sh",
+        "egs/gp/s5/run.sh",
+        "egs/gp/s5/steps",
+        "egs/gp/s5/utils",
+        "egs/heroico/**",
+        "egs/hi_mia/**",
+        "egs/hkust/**",
+        "egs/hub4_english/**",
+        "egs/hub4_spanish/**",
+        "egs/iam/**",
+        "egs/iban/**",
+        "egs/icsi/README.txt",
+        "egs/icsi/s5/RESULTS_ihm",
+        "egs/icsi/s5/RESULTS_mdm",
+        "egs/icsi/s5/RESULTS_sdm",
+        "egs/icsi/s5/cmd.sh",
+        "egs/icsi/s5/conf/**",
+        "egs/icsi/s5/local/beamformit.sh",
+        "egs/icsi/s5/local/chain/**",
+        "egs/icsi/s5/local/convert2stm.pl",
+        "egs/icsi/s5/local/fisher_map_words.pl",
+        "egs/icsi/s5/local/format_data.sh",
+        "egs/icsi/s5/local/icsi_agree_words.sh",
+        "egs/icsi/s5/local/icsi_agree_words_replace.pl",
+        "egs/icsi/s5/local/icsi_agree_words_split.pl",
+        "egs/icsi/s5/local/icsi_beamform.sh",
+        "egs/icsi/s5/local/icsi_ihm_data_prep.sh",
+        "egs/icsi/s5/local/icsi_ihm_scoring_data_prep.sh",
+        "egs/icsi/s5/local/icsi_mdm_data_prep.sh",
+        "egs/icsi/s5/local/icsi_mdm_scoring_data_prep.sh",
+        "egs/icsi/s5/local/icsi_normalise_segments.pl",
+        "egs/icsi/s5/local/icsi_parse_transcripts.pl",
+        "egs/icsi/s5/local/icsi_prepare_dict.sh",
+        "egs/icsi/s5/local/icsi_sdm_data_prep.sh",
+        "egs/icsi/s5/local/icsi_sdm_scoring_data_prep.sh",
+        "egs/icsi/s5/local/icsi_text_prep.sh",
+        "egs/icsi/s5/local/icsi_train_lms.sh",
+        "egs/icsi/s5/local/nnet3/**",
+        "egs/icsi/s5/local/prepare_parallel_train_data.sh",
+        "egs/icsi/s5/local/score.sh",
+        "egs/icsi/s5/local/score_asclite.sh",
+        "egs/icsi/s5/local/split_REAMDE.txt",
+        "egs/icsi/s5/local/split_dev.orig",
+        "egs/icsi/s5/local/split_eval.orig",
+        "egs/icsi/s5/local/split_train.orig",
+        "egs/icsi/s5/path.sh",
+        "egs/icsi/s5/run.sh",
+        "egs/icsi/s5/run_prepare_shared.sh",
+        "egs/icsi/s5/steps",
+        "egs/icsi/s5/utils",
+        "egs/ifnenit/**",
+        "egs/libri_css/**",
+        "egs/librispeech/**",
+        "egs/lre/**",
+        "egs/lre07/**",
+        "egs/madcat_ar/**",
+        "egs/madcat_zh/**",
+        "egs/malach/**",
+        "egs/mandarin_bn_bc/**",
+        "egs/material/**",
+        "egs/mgb2_arabic/**",
+        "egs/mgb5/**",
+        "egs/mini_librispeech/**",
+        "egs/mobvoi/**",
+        "egs/mobvoihotwords/**",
+        "egs/multi_cn/**",
+        "egs/multi_en/**",
+        "egs/nsc/s5/**",
+        "egs/opensat20/**",
+        "egs/ptb/**",
+        "egs/reverb/**",
+        "egs/rimes/**",
+        "egs/rm/**",
+        "egs/sad_rats/**",
+        "egs/sitw/**",
+        "egs/snips/**",
+        "egs/spanish_dimex100/**",
+        "egs/spgispeech/**",
+        "egs/sprakbanken/**",
+        "egs/sprakbanken_swe/**",
+        "egs/sre08/**",
+        "egs/sre10/**",
+        "egs/sre16/**",
+        "egs/svhn/**",
+        "egs/swahili/**",
+        "egs/swbd/**",
+        "egs/tedlium/**",
+        "egs/thchs30/**",
+        "egs/tidigits/**",
+        "egs/timit/**",
+        "egs/tunisian_msa/**",
+        "egs/uw3/**",
+        "egs/voxceleb/**",
+        "egs/voxforge/**",
+        "egs/vystadial_cz/**",
+        "egs/vystadial_en/**",
+        "egs/wenetspeech/**",
+        "egs/wsj/**",
+        "egs/xbmu_amdo31/**",
+        "egs/yesno/**",
+        "egs/yomdle_fa/**",
+        "egs/yomdle_korean/**",
+        "egs/yomdle_russian/**",
+        "egs/yomdle_tamil/**",
+        "egs/yomdle_zh/**",
+        "egs/zeroth_korean/**",
+        "misc/README.txt",
+        "misc/htk_conversion/**",
+        "misc/htk_decode_example/**",
+        "misc/htk_graph_creation_example/**",
+        "misc/maintenance/**",
+        "misc/papers/asru11_toolkit/IEEEtran.bst",
+        "misc/papers/asru11_toolkit/IEEEtran.cls",
+        "misc/papers/asru11_toolkit/Makefile",
+        "misc/papers/asru11_toolkit/kaldi_asru.tex",
+        "misc/papers/asru11_toolkit/refs.bib",
+        "misc/papers/asru11_toolkit_poster/Makefile",
+        "misc/papers/asru11_toolkit_poster/README",
+        "misc/papers/asru11_toolkit_poster/beamerposter.sty",
+        "misc/papers/asru11_toolkit_poster/beamerthemekaldi1.sty",
+        "misc/papers/asru11_toolkit_poster/code-samples.tex",
+        "misc/papers/asru11_toolkit_poster/kaldi-poster.tex",
+        "misc/papers/asru11_toolkit_poster/script-lowlevel.tex",
+        "misc/papers/asru11_toolkit_poster/script-toplevel.tex",
+        "misc/papers/icassp12_lat/**",
+        "misc/papers/icassp12_tied/**",
+        "scripts/**",
+        "src/.version",
+        "src/Doxyfile",
+        "src/INSTALL",
+        "src/Makefile",
+        "src/NOTES",
+        "src/TODO",
+        "src/base/**",
+        "src/bin/**",
+        "src/chain/**",
+        "src/chainbin/**",
+        "src/configure",
+        "src/cudadecoder/**",
+        "src/cudadecoderbin/**",
+        "src/cudafeat/**",
+        "src/cudafeatbin/**",
+        "src/cudamatrix/**",
+        "src/decoder/**",
+        "src/doc/README",
+        "src/doc/about.dox",
+        "src/doc/build_setup.dox",
+        "src/doc/chain.dox",
+        "src/doc/clustering.dox",
+        "src/doc/cudamatrix.dox",
+        "src/doc/data_prep.dox",
+        "src/doc/decoders.dox",
+        "src/doc/dependencies.dox",
+        "src/doc/dnn.dox",
+        "src/doc/dnn1.dox",
+        "src/doc/dnn2.dox",
+        "src/doc/dnn3.dox",
+        "src/doc/dnn3_code_compilation.dox",
+        "src/doc/dnn3_code_data_types.dox",
+        "src/doc/dnn3_code_optimization.dox",
+        "src/doc/dnn3_scripts_context.dox",
+        "src/doc/error.dox",
+        "src/doc/examples.dox",
+        "src/doc/faq.dox",
+        "src/doc/feat.dox",
+        "src/doc/fst_algo.dox",
+        "src/doc/get_version_info.sh",
+        "src/doc/glossary.dox",
+        "src/doc/grammar.dox",
+        "src/doc/graph.dox",
+        "src/doc/graph_recipe_test.dox",
+        "src/doc/graph_recipe_train.dox",
+        "src/doc/header.html",
+        "src/doc/history.dox",
+        "src/doc/hmm.dox",
+        "src/doc/install.dox",
+        "src/doc/io.dox",
+        "src/doc/io_tut.dox",
+        "src/doc/kaldi_for_dummies.dox",
+        "src/doc/kws.dox",
+        "src/doc/lattices.dox",
+        "src/doc/legal.dox",
+        "src/doc/mainpage.dox",
+        "src/doc/make_tools.sh",
+        "src/doc/matrix.dox",
+        "src/doc/matrixwrap.dox",
+        "src/doc/model.dox",
+        "src/doc/online_decoding.dox",
+        "src/doc/online_programs.dox",
+        "src/doc/other.dox",
+        "src/doc/parse_options.dox",
+        "src/doc/queue.dox",
+        "src/doc/style.dox",
+        "src/doc/table_examples.dox",
+        "src/doc/tools.dox.input",
+        "src/doc/transform.dox",
+        "src/doc/tree_externals.dox",
+        "src/doc/tree_internals.dox",
+        "src/doc/tutorial.dox",
+        "src/doc/tutorial_code.dox",
+        "src/doc/tutorial_git.dox",
+        "src/doc/tutorial_looking.dox",
+        "src/doc/tutorial_prereqs.dox",
+        "src/doc/tutorial_running.dox",
+        "src/doc/tutorial_setup.dox",
+        "src/doc/util.dox",
+        "src/doc/versions.dox",
+        "src/feat/Makefile",
+        "src/feat/feature-common-inl.h",
+        "src/feat/feature-common.h",
+        "src/feat/feature-fbank-test.cc",
+        "src/feat/feature-fbank.cc",
+        "src/feat/feature-fbank.h",
+        "src/feat/feature-functions-test.cc",
+        "src/feat/feature-functions.cc",
+        "src/feat/feature-functions.h",
+        "src/feat/feature-mfcc-test.cc",
+        "src/feat/feature-mfcc.cc",
+        "src/feat/feature-mfcc.h",
+        "src/feat/feature-plp-test.cc",
+        "src/feat/feature-plp.cc",
+        "src/feat/feature-plp.h",
+        "src/feat/feature-sdc-test.cc",
+        "src/feat/feature-spectrogram.cc",
+        "src/feat/feature-spectrogram.h",
+        "src/feat/feature-window.cc",
+        "src/feat/feature-window.h",
+        "src/feat/mel-computations.cc",
+        "src/feat/mel-computations.h",
+        "src/feat/online-feature-test.cc",
+        "src/feat/online-feature.cc",
+        "src/feat/online-feature.h",
+        "src/feat/pitch-functions-test.cc",
+        "src/feat/pitch-functions.cc",
+        "src/feat/pitch-functions.h",
+        "src/feat/resample-test.cc",
+        "src/feat/resample.cc",
+        "src/feat/resample.h",
+        "src/feat/signal-test.cc",
+        "src/feat/signal.cc",
+        "src/feat/signal.h",
+        "src/feat/test_data/README",
+        "src/feat/test_data/fbank1.conf",
+        "src/feat/test_data/fbank2.conf",
+        "src/feat/test_data/fbank3.conf",
+        "src/feat/test_data/fbank4.conf",
+        "src/feat/test_data/hcopy1.conf",
+        "src/feat/test_data/hcopy2.conf",
+        "src/feat/test_data/hcopy3.conf",
+        "src/feat/test_data/hcopy4.conf",
+        "src/feat/test_data/hcopy5.conf",
+        "src/feat/test_data/hcopy6.conf",
+        "src/feat/test_data/plp1.conf",
+        "src/feat/test_data/prepare_wav_in_ascii.m",
+        "src/feat/test_data/test_matlab.ascii",
+        "src/feat/wave-reader-test.cc",
+        "src/feat/wave-reader.cc",
+        "src/feat/wave-reader.h",
+        "src/featbin/**",
+        "src/fgmmbin/**",
+        "src/fstbin/**",
+        "src/fstext/**",
+        "src/gmm/**",
+        "src/gmmbin/**",
+        "src/gst-plugin/**",
+        "src/hip/**",
+        "src/hmm/**",
+        "src/itf/**",
+        "src/ivector/**",
+        "src/ivectorbin/**",
+        "src/kws/**",
+        "src/kwsbin/**",
+        "src/lat/**",
+        "src/latbin/**",
+        "src/lm/**",
+        "src/lmbin/**",
+        "src/makefiles/**",
+        "src/matrix/Makefile",
+        "src/matrix/Matrix.vcxproj",
+        "src/matrix/cblas-wrappers.h",
+        "src/matrix/compressed-matrix.cc",
+        "src/matrix/compressed-matrix.h",
+        "src/matrix/jama-eig.h",
+        "src/matrix/jama-svd.h",
+        "src/matrix/kaldi-blas.h",
+        "src/matrix/kaldi-matrix-inl.h",
+        "src/matrix/kaldi-matrix.cc",
+        "src/matrix/kaldi-matrix.h",
+        "src/matrix/kaldi-vector-inl.h",
+        "src/matrix/kaldi-vector.cc",
+        "src/matrix/kaldi-vector.h",
+        "src/matrix/matrix-common.h",
+        "src/matrix/matrix-functions-inl.h",
+        "src/matrix/matrix-functions.cc",
+        "src/matrix/matrix-functions.h",
+        "src/matrix/matrix-lib-speed-test.cc",
+        "src/matrix/matrix-lib-test.cc",
+        "src/matrix/matrix-lib.h",
+        "src/matrix/numpy-array-test.cc",
+        "src/matrix/numpy-array.cc",
+        "src/matrix/numpy-array.h",
+        "src/matrix/optimization.cc",
+        "src/matrix/optimization.h",
+        "src/matrix/packed-matrix.cc",
+        "src/matrix/packed-matrix.h",
+        "src/matrix/qr.cc",
+        "src/matrix/sp-matrix-inl.h",
+        "src/matrix/sp-matrix.cc",
+        "src/matrix/sp-matrix.h",
+        "src/matrix/sparse-matrix-test.cc",
+        "src/matrix/sparse-matrix.cc",
+        "src/matrix/sparse-matrix.h",
+        "src/matrix/srfft.cc",
+        "src/matrix/srfft.h",
+        "src/matrix/test_data/README",
+        "src/matrix/test_data/generate_numpy_array_test_data.py",
+        "src/matrix/tp-matrix.cc",
+        "src/matrix/tp-matrix.h",
+        "src/nnet/**",
+        "src/nnet2/**",
+        "src/nnet2bin/**",
+        "src/nnet3/**",
+        "src/nnet3bin/**",
+        "src/nnetbin/**",
+        "src/online/**",
+        "src/online2/**",
+        "src/online2bin/**",
+        "src/onlinebin/**",
+        "src/probe/**",
+        "src/rnnlm/**",
+        "src/rnnlmbin/**",
+        "src/sgmm2/**",
+        "src/sgmm2bin/**",
+        "src/tfrnnlm/**",
+        "src/tfrnnlmbin/**",
+        "src/transform/**",
+        "src/tree/**",
+        "src/util/**",
+        "tools/**",
+        "windows/.gitignore",
+        "windows/INSTALL.atlas",
+        "windows/INSTALL.md",
+        "windows/INSTALL.mkl",
+        "windows/NewGuidCmd.exe.config",
+        "windows/cuda_7.0.props",
+        "windows/generate_solution.pl",
+        "windows/get_version.pl",
+        "windows/kaldiwin_atlas.props",
+        "windows/kaldiwin_mkl.props",
+        "windows/kaldiwin_openblas.props",
+        "windows/kaldiwin_win32.props",
+        "windows/openfstwin_debug.props",
+        "windows/openfstwin_debug_win32.props",
+        "windows/openfstwin_release.props",
+        "windows/openfstwin_release_win32.props",
+        "windows/portaudio.props",
+        "windows/portaudio_debug.props",
+        "windows/portaudio_release.props",
+        "windows/variables.props.dev"
+      ],
+      "text": "\n Update to legal notice, made Feb 2012, modified Sep 2013.  We would like to\n clarify that we are using a convention where multiple names in the Apache\n copyright headers, for example\n\n  // Copyright 2009-2012  Yanmin Qian  Arnab Ghoshal\n  //                2013  Vassil Panayotov\n\n does not signify joint ownership of copyright of that file, except in cases\n where all those names were present in the original release made in March 2011--\n you can use the version history to work this out, if this matters to you.\n Instead, we intend that those contributors who later modified the file, agree\n to release their changes under the Apache license.  The conventional way of\n signifying this is to duplicate the Apache headers at the top of each file each\n time a change is made by a different author, but this would quickly become\n impractical.\n\n Where the copyright header says something like:\n\n // Copyright    2013   Johns Hopkins University (author: Daniel Povey)\n\n it is because the individual who wrote the code was at that institution as an\n employee, so the copyright is owned by the university (and we will have checked\n that the contributions were in accordance with the open-source policies of the\n institutions concerned, including getting them vetted individually where\n necessary).  From a legal point of view the copyright ownership is that of the\n institution concerned, and the (author: xxx) in parentheses is just\n informational, to identify the actual person who wrote the code, and is not\n intended to have any legal implications.  In some cases, however, particularly\n early on, we just wrote the name of the university or company concerned,\n without the actual author's name in parentheses.  If you see something like\n\n //  Copyright  2009-2012   Arnab Ghoshal  Microsoft Corporation\n\n it does not imply that Arnab was working for Microsoft, it is because someone\n else contributed to the file while working at Microsoft (this would be Daniel\n Povey, in fact, who was working at Microsoft Research at the outset of the\n project).\n\n The list of authors of each file is in an essentially arbitrary order, but is\n often chronological if they contributed in different years.\n\n The original legal notice is below.  Note: we are continuing to modify it by\n adding the names of new contributors, but at any given time, the list may\n be out of date.\n\n---\n                          Legal Notices\n\nEach of the files comprising Kaldi v1.0 have been separately licensed by\ntheir respective author(s) under the terms of the Apache License v 2.0 (set\nforth below).  The source code headers for each file specifies the individual\nauthors and source material for that file as well the corresponding copyright\nnotice.  For reference purposes only: A cumulative list of all individual\ncontributors and original source material as well as the full text of the Apache\nLicense v 2.0 are set forth below.\n\nIndividual Contributors (in alphabetical order)\n\n      Albert Vernon\n      Alexander Solovets\n      Allen Guo\n      Ariya Rastrow\n      Arnab Ghoshal\n      Cisco Corporation\n      Daniel Galvez\n      Daniel Povey\n      Danijel Korzinek\n      David Snyder\n      Dogan Can\n      Eduardo Silva\n      Ewald Enzinger\n      Gaofeng Cheng\n      Gaurav Kumar\n      Georg Stemmer\n      Gilles Boulianne\n      Go Vivace Inc.\n      Guoguo Chen\n      Haihua Xu\n      Hainan Xu\n      Hendy Irawan\n      Hossein Hadian\n      Ilya Edrenkin\n      Jan \"Yenda\" Trmal\n      Jan Silovsky\n      Joachim Fainberg\n      Johns Hopkins University\n      Karel Vesely\n      Ke Li\n      Kirill Katsnelson\n      Lucas Ondel\n      Lukas Burget\n      Lv Hang\n      Matthew Maciejewski\n      Microsoft Corporation\n      Minhua Wu\n      Mirko Hannemann\n      Mohit Agarwal\n      Navdeep Jaitly\n      Nickolay V. Shmyrev\n      Omid Sadjadi\n      Ondrej Glembek\n      Ondrej Platek\n      Pavel Denisov\n      Pawel Swietojanski\n      Pegah Ghahremani\n      Peter Smit\n      Petr Motlicek\n      Petr Schwarz\n      Phonexia s.r.o.\n      Saarland University\n      Shinji Watanabe\n      Shiyin Kang\n      Tanel Alumae\n      Tom Ko\n      Vassil Panayotov\n      Vijayaditya Peddinti\n      Vimal Manohar\n      Vincent Nguyen\n      Xiaohui Zhang\n      Xingyu Na\n      Yajie Miao\n      Yanmin Qian\n      Yiming Wang\n      Yiwen Shao\n\nOther Source Material\n\n    This project includes a port and modification of materials from JAMA: A Java\n  Matrix Package under the following notice: \"This software is a cooperative\n  product of The MathWorks and the National Institute of Standards and Technology\n  (NIST) which has been released to the public domain.\" This notice and the\n  original code is available at http://math.nist.gov/javanumerics/jama/\n\n   This project includes a modified version of code published in Malvar, H.,\n  \"Signal processing with lapped transforms,\" Artech House, Inc., 1992.  The\n  current copyright holder, Henrique S. Malvar, has given his permission for the\n  release of this modified version under the Apache License 2.0.\n\n  This project includes material from the OpenFST Library v1.2.7 available at\n  http://www.openfst.org and released under the Apache License v. 2.0.\n\n  [OpenFst COPYING file begins here]\n\n    Licensed under the Apache License, Version 2.0 (the \"License\");\n    you may not use these files except in compliance with the License.\n    You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n    Unless required by applicable law or agreed to in writing, software\n    distributed under the License is distributed on an \"AS IS\" BASIS,\n    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n    See the License for the specific language governing permissions and\n    limitations under the License.\n\n    Copyright 2005-2010 Google, Inc.\n\n  [OpenFst COPYING file ends here]\n\n\n -------------------------------------------------------------------------\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright 2005-2010 Google, Inc., Apache-2.0 license (COPYING), https://github.com/kaldi-asr/kaldi."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "awk",
+      "paths": [
+        "**/*.awk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bibtex",
+      "paths": [
+        "**/*.bib"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.sty"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.tex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2015-05-05"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2015-11-27T165017-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2015-11-27T165153-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2015-11-27T175308-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2015-11-27T175401-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2015-11-28T144317-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2015-11-28T144847-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2015-12-01T164923-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2015-12-01T165041-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2015-12-01T195542-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-02-18T114609-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-02-18T121522-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-02-21T102413-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-02-21T102525-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-02-21T102547-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-02-25T094616-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-02-25T104554-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-02-25T154546-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-02-25T232709-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-02-26T064039-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-02-26T161755-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-03-05T105645-0500"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-03-31T113424-0400"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-03-31T120403-0400"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-03-31T121245-0400"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-03-31T122134-0400"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-03-31T122502-0400"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-03-31T122739-0400"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2016-03-31T122955-0400"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.LDC2013S04"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.LDC2013S08"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.LDC2014S09"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.LDC2015S06"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.LDC2015S13"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.LDC2016S03"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.LDC2017S25"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.MF"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.SLT2014"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.arpa"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.arpabo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ascii"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.atlas"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dev"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dox"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.eps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ext"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.flp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fullLP"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.graphemic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.input"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.limitedLP"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mkl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.orig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pyx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.segment"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.slow_expf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tbl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "egs/README.txt",
+        "egs/aishell/README.txt",
+        "egs/aishell/v1/README.txt",
+        "egs/ami/README.txt",
+        "egs/ami/s5/local/split_REAMDE.txt",
+        "egs/ami/s5b/README.txt",
+        "egs/ami/s5b/local/split_REAMDE.txt",
+        "egs/aspire/README.txt",
+        "egs/aurora4/README.txt",
+        "egs/babel/s5/README.txt",
+        "egs/babel/s5/RESULTS.txt",
+        "egs/babel/s5b/README.txt",
+        "egs/babel/s5b/RESULTS.txt",
+        "egs/babel/s5c/README.txt",
+        "egs/babel/s5c/RESULTS.txt",
+        "egs/babel/s5d/README.txt",
+        "egs/babel/s5d/RESULTS.txt",
+        "egs/babel_multilang/s5/README.txt",
+        "egs/bentham/README.txt",
+        "egs/bn_music_speech/v1/conf/merge_vad_map.txt",
+        "egs/callhome_diarization/README.txt",
+        "egs/callhome_diarization/v1/README.txt",
+        "egs/callhome_egyptian/README.txt",
+        "egs/callhome_egyptian/s5/local/ldc_arabic_phones.txt",
+        "egs/chime1/README.txt",
+        "egs/chime1/s5/input/lexicon.txt",
+        "egs/chime2/README.txt",
+        "egs/chime3/README.txt",
+        "egs/chime4/README.txt",
+        "egs/chime5/README.txt",
+        "egs/chime6/README.txt",
+        "egs/cifar/README.txt",
+        "egs/cifar/v1/image/README.txt",
+        "egs/cnceleb/README.txt",
+        "egs/cnceleb/v1/README.txt",
+        "egs/cnceleb/v2/README.txt",
+        "egs/commonvoice/s5/README.txt",
+        "egs/csj/README.txt",
+        "egs/dihard_2018/README.txt",
+        "egs/dihard_2018/v1/README.txt",
+        "egs/dihard_2018/v2/README.txt",
+        "egs/fame/README.txt",
+        "egs/farsdat/README.txt",
+        "egs/fisher_callhome_spanish/README.txt",
+        "egs/fisher_english/README.txt",
+        "egs/fisher_swbd/s5/conf/MSU_single_letter.txt",
+        "egs/formosa/README.txt",
+        "egs/gale_arabic/README.txt",
+        "egs/gale_mandarin/README.txt",
+        "egs/gigaspeech/README.txt",
+        "egs/gp/README.txt",
+        "egs/gp/s1/conf/lang_codes.txt",
+        "egs/gp/s5/conf/lang_codes.txt",
+        "egs/gp/s5/conf/xsampa_map/v1_to_v12.txt",
+        "egs/hi_mia/README.txt",
+        "egs/hkust/README.txt",
+        "egs/hub4_spanish/README.txt",
+        "egs/iam/README.txt",
+        "egs/icsi/README.txt",
+        "egs/icsi/s5/local/split_REAMDE.txt",
+        "egs/ifnenit/README.txt",
+        "egs/ifnenit/v1/RESULTS.txt",
+        "egs/ifnenit/v1/config/extra_questions.txt",
+        "egs/librispeech/README.txt",
+        "egs/librispeech/s5/fairseq_ltlm/ltlm/requirements.txt",
+        "egs/lre/README.txt",
+        "egs/lre/v1/lid/README.txt",
+        "egs/lre/v1/local/callfriend_lang.txt",
+        "egs/lre/v1/local/lang_map.txt",
+        "egs/lre07/README.txt",
+        "egs/lre07/v1/lid/README.txt",
+        "egs/lre07/v1/local/general_lr_closed_set_langs.txt",
+        "egs/lre07/v1/local/lang_map.txt",
+        "egs/lre07/v2/local/general_lr_closed_set_langs.txt",
+        "egs/lre07/v2/local/lang_map.txt",
+        "egs/madcat_ar/README.txt",
+        "egs/madcat_zh/README.txt",
+        "egs/malach/s5/README.txt",
+        "egs/mini_librispeech/s5/local/kws/example/keywords.txt",
+        "egs/mobvoi/README.txt",
+        "egs/mobvoihotwords/README.txt",
+        "egs/multi_en/s5/conf/MSU_single_letter.txt",
+        "egs/opensat20/s5/local/safet_hesitations.txt",
+        "egs/ptb/README.txt",
+        "egs/reverb/README.txt",
+        "egs/reverb/s5/README.txt",
+        "egs/rimes/README.txt",
+        "egs/rm/README.txt",
+        "egs/sad_rats/s5/README.txt",
+        "egs/sad_rats/s5/RESULTS.txt",
+        "egs/sitw/README.txt",
+        "egs/sitw/v1/README.txt",
+        "egs/sitw/v2/README.txt",
+        "egs/snips/README.txt",
+        "egs/spanish_dimex100/README.txt",
+        "egs/spgispeech/s5/README.txt",
+        "egs/sprakbanken/README.txt",
+        "egs/sprakbanken/s5/complexphones.txt",
+        "egs/sprakbanken/s5/local/dictsrc/complexphones.txt",
+        "egs/sprakbanken/s5/local/dictsrc/extra_questions.txt",
+        "egs/sprakbanken/s5/local/dictsrc/silence_phones.txt",
+        "egs/sprakbanken_swe/README.txt",
+        "egs/sprakbanken_swe/s5/local/dictsrc/extra_questions.txt",
+        "egs/sprakbanken_swe/s5/local/dictsrc/nonsilence_phones.txt",
+        "egs/sprakbanken_swe/s5/local/dictsrc/optional_silence.txt",
+        "egs/sprakbanken_swe/s5/local/dictsrc/silence_phones.txt",
+        "egs/sre08/README.txt",
+        "egs/sre08/v1/README.txt",
+        "egs/sre10/README.txt",
+        "egs/sre10/v1/README.txt",
+        "egs/sre10/v2/README.txt",
+        "egs/sre16/README.txt",
+        "egs/sre16/v1/README.txt",
+        "egs/sre16/v2/README.txt",
+        "egs/svhn/README.txt",
+        "egs/swahili/README.txt",
+        "egs/swbd/README.txt",
+        "egs/swbd/s5c/local/MSU_single_letter.txt",
+        "egs/swbd/s5c/local/chain/README.txt",
+        "egs/thchs30/README.txt",
+        "egs/tidigits/README.txt",
+        "egs/timit/README.txt",
+        "egs/uw3/README.txt",
+        "egs/voxceleb/README.txt",
+        "egs/voxceleb/v2/README.txt",
+        "egs/voxforge/online_demo/README.txt",
+        "egs/vystadial_cz/README.txt",
+        "egs/vystadial_cz/online_demo/README.txt",
+        "egs/vystadial_en/README.txt",
+        "egs/wsj/README.txt",
+        "egs/wsj/s5/local/e2e/README.txt",
+        "egs/wsj/s5/steps/nnet3/chain/e2e/README.txt",
+        "egs/xbmu_amdo31/README.txt",
+        "egs/yesno/README.txt",
+        "egs/yesno/s5/input/lexicon.txt",
+        "egs/yesno/s5/input/lexicon_nosil.txt",
+        "egs/yesno/s5/input/phones.txt",
+        "egs/yomdle_fa/README.txt",
+        "egs/yomdle_korean/README.txt",
+        "egs/yomdle_russian/README.txt",
+        "egs/yomdle_tamil/README.txt",
+        "egs/yomdle_zh/README.txt",
+        "egs/zeroth_korean/s5/README.txt",
+        "misc/README.txt",
+        "misc/maintenance/README.txt",
+        "src/lm/examples/CREATURE.txt",
+        "src/lm/examples/DAYOFMONTH.txt",
+        "src/lm/examples/MONTH.txt",
+        "src/lm/examples/YEAR.txt",
+        "src/lm/examples/YEARDATE.txt",
+        "src/lm/examples/input3.txt",
+        "src/lm/examples/input4.txt",
+        "tools/ATLAS_headers/include/README.txt",
+        "tools/CLAPACK/README.txt",
+        "tools/extras/README.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vietnamese"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.with_gale2014"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gdbinit_faster"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/195k_chinese_word2char_map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COPYING"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Czech"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Doxyfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/French"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/German"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/INSTALL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NOTES"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Polish"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Portuguese"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/RESULT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/RESULTS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/RESULTS_ihm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/RESULTS_mdm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/RESULTS_sdm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Spanish"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TODO"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bad_segments"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bad_utts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/callhome_create_splits"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/callhome_make_spk2gender"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/character_tokenizer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmu2pinyin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/config_opt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/configure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/create_splits"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ctm_filter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dev"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dev2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dev_all"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dev_bc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dev_bn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/distant_audio_list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gale_bad_utts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/glm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/h5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hists"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/kana2phone"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ligatures"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/low2upsepnum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lowtxtnum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/magicdata_badlist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mt_eval_all"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mt_eval_bc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mt_eval_bn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pinyin2cmu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pinyin_initial"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stm_filter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/t2tnum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tdt_mandarin_bad_utts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test_list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test_p2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/train"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uem_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/upseptxtnum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uptxtnum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wer_hyp_filter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wer_output_filter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wer_ref_filter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/worn_audio_list"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.props"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.vcxproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16"
+  }
+}

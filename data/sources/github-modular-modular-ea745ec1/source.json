@@ -1,0 +1,1271 @@
+{
+  "type": "git",
+  "address": "https://github.com/modular/modular",
+  "revision": "efb7c3736639ae3548a7e069f6613eaa2e09d591",
+  "checksum": "sha256:8989cb913cbde139b8aed6e081867526e0b70e9e7a8b959049f757130026b230",
+  "extract": {
+    "exclude": [
+      "Licenses/**",
+      "Mojo/docs/compiler/manual/mdnb-data/manual-common-types-tools/**",
+      "Mojo/docs/compiler/manual/mdnb-data/manual-parser-debugging/**",
+      "Mojo/docs/contributing/stdlib/images/**",
+      "Mojo/docs/site/images/**",
+      "Mojo/docs/site/manual/images/**",
+      "Mojo/docs/site/reference/cheat-sheets/assets/**",
+      "Mojo/docs/site/tools/images/**",
+      "Mojo/tools/mblack/src/mblib2to3/**",
+      "Mojo/utils/jupyter-mojo/extension/**",
+      "Mojo/utils/jupyter-mojo/kernel/logo-64x64.png",
+      "Mojo/utils/jupyter-mojo/kernel/nightly-logo-64x64.png",
+      "max/docs/design-docs/img/**",
+      "max/docs/images/**",
+      "max/docs/site/develop/images/custom-kernels-pytorch/**",
+      "max/docs/site/develop/images/custom-ops-matmul/**",
+      "max/docs/site/develop/images/max-pipeline-bring-your-own-model/**",
+      "max/docs/site/images/**",
+      "max/docs/site/serve/images/**",
+      "max/docs/site/static/**",
+      "max/examples/custom_ops/dogs.jpg",
+      "max/kernels/benchmarks/autotune/data/base_vs_branch_0.pdf",
+      "max/kernels/benchmarks/autotune/data/base_vs_branch_0.png",
+      "max/kernels/benchmarks/autotune/data/base_vs_branch_label_0.pdf",
+      "max/kernels/benchmarks/autotune/data/base_vs_branch_label_0.png",
+      "max/kernels/benchmarks/autotune/data/base_vs_branch_label_compare_0.png",
+      "max/kernels/benchmarks/autotune/data/base_vs_branch_vs_cublas_0.pdf",
+      "max/kernels/benchmarks/autotune/data/base_vs_branch_vs_cublas_0.png",
+      "max/kernels/benchmarks/autotune/data/kbench_toolkit.png",
+      "max/kernels/src/comm/vendor/**",
+      "max/kernels/src/linalg/matmul/vendor/**",
+      "max/kernels/test/gpu/device_context/data/vec_add.sm100.cubin",
+      "max/kernels/test/gpu/device_context/data/vec_add.sm80.cubin",
+      "max/kernels/test/gpu/device_context/data/vec_add.sm90.cubin",
+      "max/tests/integration/architectures/llama3/testdata/tiny_llama.gguf",
+      "max/tests/integration/architectures/llama3/testdata/tiny_llama_bf16.gguf",
+      "max/tests/integration/architectures/mimo_v2/testdata/**",
+      "max/tests/integration/test_common/test_llama/model.safetensors",
+      "max/tests/tests/graph/testdata/example_data.gguf",
+      "max/tests/tests/graph/testdata/example_data_1.safetensors",
+      "max/tests/tests/graph/testdata/example_data_2.safetensors",
+      "rust_kv/max-profiler/**"
+    ]
+  },
+  "history": {
+    "since": "eaa387a7ba6ab981b2681c312d181da52ddb07a1"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 WITH LLVM-exception AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "==============================================================================================\nThe Modular repository is licensed under the Apache License v2.0 with LLVM Exceptions:\n==============================================================================================\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n    TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n    1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n    2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n    3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n    4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n    5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n    6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n    7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n    8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n    9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n    END OF TERMS AND CONDITIONS\n\n    APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n    Copyright [yyyy] [name of copyright owner]\n\n    Licensed under the Apache License, Version 2.0 (the \"License\");\n    you may not use this file except in compliance with the License.\n    You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n    Unless required by applicable law or agreed to in writing, software\n    distributed under the License is distributed on an \"AS IS\" BASIS,\n    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n    See the License for the specific language governing permissions and\n    limitations under the License.\n\n---- LLVM Exceptions to the Apache 2.0 License ----\n\nAs an exception, if, as a result of your compiling your source code, portions\nof this Software are embedded into an Object form of such source code, you\nmay redistribute such embedded portions in such Object form without complying\nwith the conditions of Sections 4(a), 4(b) and 4(d) of the License.\n\nIn addition, if you combine or link compiled forms of this Software with\nsoftware that is licensed under the GPLv2 (\"Combined Software\") and if a\ncourt of competent jurisdiction determines that the patent provision (Section\n3), the indemnity provision (Section 9) or other Section of the License\nconflicts with the conditions of the GPLv2, you may retroactively and\nprospectively choose to deem waived or otherwise exclude such Section(s) of\nthe License, but only in their entirety and only with respect to the Combined\nSoftware.\n\n==============================================================================\nSoftware from third parties included in the LLVM Project:\n==============================================================================\n\nThe LLVM Project contains third party software which is under different license\nterms. All such code will be identified clearly using at least one of two\nmechanisms:\n\n1) It will be in a separate directory tree with its own `LICENSE.txt` or\n   `LICENSE` file at the top containing the specific license and restrictions\n   which apply to that software, or\n2) It will contain specific license and restriction terms at the top of every\n   file.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2018 Łukasz Langa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/modular/modular: the authors of modular/modular (the license file names no copyright line), Apache-2.0 WITH LLVM-exception license (LICENSE), https://github.com/modular/modular; Copyright (c) 2018 Łukasz Langa, MIT license (LICENSE), https://github.com/modular/modular/tree/efb7c3736639ae3548a7e069f6613eaa2e09d591/Mojo/tools/mblack."
+    },
+    {
+      "license": "Apache-2.0 WITH LLVM-exception",
+      "paths": [
+        ".bazelrc",
+        ".bazelversion",
+        ".buildifier.json",
+        ".clang-format",
+        ".clang-tidy",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        ".shellcheckrc",
+        "AGENTS.md",
+        "AI_TOOL_POLICY.md",
+        "AsyncRT/**",
+        "BUILD.bazel",
+        "CLAUDE.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Cache/**",
+        "Config/**",
+        "Init/**",
+        "LICENSE",
+        "MODULE.bazel",
+        "Mojo/AGENTS.md",
+        "Mojo/BUILD.bazel",
+        "Mojo/CLAUDE.md",
+        "Mojo/CONTRIBUTING.md",
+        "Mojo/README.md",
+        "Mojo/docs/compiler/DesignOverview.md",
+        "Mojo/docs/compiler/MojoCompilerWalkthrough.md",
+        "Mojo/docs/compiler/MojoLLDB.md",
+        "Mojo/docs/compiler/README.md",
+        "Mojo/docs/compiler/WorkingInOSRepo.md",
+        "Mojo/docs/compiler/arcana/**",
+        "Mojo/docs/compiler/img/**",
+        "Mojo/docs/compiler/manual/CommonTypesAndTools.md",
+        "Mojo/docs/compiler/manual/CompileTimeProfiling.md",
+        "Mojo/docs/compiler/manual/MojoIRCPPCorrespondence.md",
+        "Mojo/docs/compiler/manual/MojoNotes.md",
+        "Mojo/docs/compiler/manual/ParameterSugar.md",
+        "Mojo/docs/compiler/manual/ParserDebugging.md",
+        "Mojo/docs/compiler/manual/PassesAndIR.md",
+        "Mojo/docs/compiler/manual/PostParserDebugging.md",
+        "Mojo/docs/compiler/manual/README.md",
+        "Mojo/docs/compiler/manual/Rationale.md",
+        "Mojo/docs/compiler/manual/Terminology.md",
+        "Mojo/docs/compiler/manual/mdnb-data/manual-readme/**",
+        "Mojo/docs/compiler/overviews/**",
+        "Mojo/docs/compiler/testing.md",
+        "Mojo/docs/contributing/BUILD.bazel",
+        "Mojo/docs/contributing/README.md",
+        "Mojo/docs/contributing/compiler/**",
+        "Mojo/docs/contributing/contribution-areas.md",
+        "Mojo/docs/contributing/contribution-process.md",
+        "Mojo/docs/contributing/faq.md",
+        "Mojo/docs/contributing/issue-pr-etiquette.md",
+        "Mojo/docs/contributing/sidebars.json",
+        "Mojo/docs/contributing/stdlib/adding-gpu-targets.md",
+        "Mojo/docs/contributing/stdlib/docstring-style-guide.md",
+        "Mojo/docs/contributing/stdlib/proposal-process.md",
+        "Mojo/docs/contributing/stdlib/stdlib-code-style.md",
+        "Mojo/docs/contributing/stdlib/stdlib-development.md",
+        "Mojo/docs/site/BUILD.bazel",
+        "Mojo/docs/site/README.md",
+        "Mojo/docs/site/api-docs/**",
+        "Mojo/docs/site/code/**",
+        "Mojo/docs/site/docs_root/**",
+        "Mojo/docs/site/faq.md",
+        "Mojo/docs/site/index.mdx",
+        "Mojo/docs/site/manual/basics.mdx",
+        "Mojo/docs/site/manual/c-ffi.mdx",
+        "Mojo/docs/site/manual/control-flow.mdx",
+        "Mojo/docs/site/manual/errors.mdx",
+        "Mojo/docs/site/manual/functions/**",
+        "Mojo/docs/site/manual/functions.mdx",
+        "Mojo/docs/site/manual/generics.mdx",
+        "Mojo/docs/site/manual/get-started.mdx",
+        "Mojo/docs/site/manual/index.mdx",
+        "Mojo/docs/site/manual/lifecycle/**",
+        "Mojo/docs/site/manual/metaprogramming/**",
+        "Mojo/docs/site/manual/operators.mdx",
+        "Mojo/docs/site/manual/packages.md",
+        "Mojo/docs/site/manual/parameters/**",
+        "Mojo/docs/site/manual/pointers/**",
+        "Mojo/docs/site/manual/python/**",
+        "Mojo/docs/site/manual/python-to-mojo.mdx",
+        "Mojo/docs/site/manual/quickstart.mdx",
+        "Mojo/docs/site/manual/structs/**",
+        "Mojo/docs/site/manual/traits.mdx",
+        "Mojo/docs/site/manual/types.mdx",
+        "Mojo/docs/site/manual/values/**",
+        "Mojo/docs/site/manual/variables.mdx",
+        "Mojo/docs/site/nightly-changelog.md",
+        "Mojo/docs/site/pixi.mdx",
+        "Mojo/docs/site/post-process-mojodocs.py",
+        "Mojo/docs/site/reference/cheat-sheets/basics.mdx",
+        "Mojo/docs/site/reference/cheat-sheets/compile-time.mdx",
+        "Mojo/docs/site/reference/cheat-sheets/conversions.mdx",
+        "Mojo/docs/site/reference/cheat-sheets/index.mdx",
+        "Mojo/docs/site/reference/cheat-sheets/ownership.mdx",
+        "Mojo/docs/site/reference/cheat-sheets/traits.mdx",
+        "Mojo/docs/site/reference/cheat-sheets/types-and-literals.mdx",
+        "Mojo/docs/site/reference/closure-declarations.mdx",
+        "Mojo/docs/site/reference/compound-statements.mdx",
+        "Mojo/docs/site/reference/decorators/**",
+        "Mojo/docs/site/reference/docstrings.mdx",
+        "Mojo/docs/site/reference/expressions.mdx",
+        "Mojo/docs/site/reference/function-declarations.mdx",
+        "Mojo/docs/site/reference/index.mdx",
+        "Mojo/docs/site/reference/inline-mlir.mdx",
+        "Mojo/docs/site/reference/keywords.mdx",
+        "Mojo/docs/site/reference/lambda-expressions.mdx",
+        "Mojo/docs/site/reference/lexical-structure.mdx",
+        "Mojo/docs/site/reference/literals.mdx",
+        "Mojo/docs/site/reference/numeric-types.mdx",
+        "Mojo/docs/site/reference/operators.mdx",
+        "Mojo/docs/site/reference/simple-statements.mdx",
+        "Mojo/docs/site/reference/struct-declarations.mdx",
+        "Mojo/docs/site/reference/trait-declarations.mdx",
+        "Mojo/docs/site/reference/types.mdx",
+        "Mojo/docs/site/releases/**",
+        "Mojo/docs/site/requirements.mdx",
+        "Mojo/docs/site/roadmap.mdx",
+        "Mojo/docs/site/scripts/**",
+        "Mojo/docs/site/tools/compilation.mdx",
+        "Mojo/docs/site/tools/debugging.mdx",
+        "Mojo/docs/site/tools/feature-toggles.mdx",
+        "Mojo/docs/site/tools/notebooks.mdx",
+        "Mojo/docs/site/tools/packaging.mdx",
+        "Mojo/docs/site/tools/skills.mdx",
+        "Mojo/docs/site/tools/testing.mdx",
+        "Mojo/docs/site/vision.mdx",
+        "Mojo/docs/site/write-nightly-release.py",
+        "Mojo/docs/stdlib/**",
+        "Mojo/examples/**",
+        "Mojo/include/**",
+        "Mojo/integration-test/**",
+        "Mojo/lib/**",
+        "Mojo/pixi.lock",
+        "Mojo/pixi.toml",
+        "Mojo/proposals/**",
+        "Mojo/python/**",
+        "Mojo/stdlib/**",
+        "Mojo/test/**",
+        "Mojo/tools/common/**",
+        "Mojo/tools/compilation-server/**",
+        "Mojo/tools/hash-mlir/**",
+        "Mojo/tools/kgen/**",
+        "Mojo/tools/kgen-doc/**",
+        "Mojo/tools/kgen-llvm-opt/**",
+        "Mojo/tools/kgen-opt/**",
+        "Mojo/tools/kgen-reduce/**",
+        "Mojo/tools/kgen-translate/**",
+        "Mojo/tools/llvm-module-split/**",
+        "Mojo/tools/mojo/**",
+        "Mojo/tools/mojo-jupyter-executor/**",
+        "Mojo/tools/mojo-lsp-replayer/**",
+        "Mojo/tools/mojo-lsp-server/**",
+        "Mojo/tools/mojo-lsp-simple-client/**",
+        "Mojo/tools/mojo-lsp-test-client/**",
+        "Mojo/tools/mojo-repl-entry-point/**",
+        "Mojo/unittests/**",
+        "Mojo/utils/jupyter-mojo/BUILD.bazel",
+        "Mojo/utils/jupyter-mojo/install_extension.py",
+        "Mojo/utils/jupyter-mojo/kernel/logo.svg",
+        "Mojo/utils/jupyter-mojo/kernel/mojokernel.py",
+        "Mojo/utils/jupyter-mojo/kernel/nightly-logo.svg",
+        "Mojo/utils/jupyter-mojo/manage_kernel.py",
+        "README.md",
+        "REPO.bazel",
+        "Support/**",
+        "bazel/**",
+        "bazelw",
+        "context7.json",
+        "docs/**",
+        "max/AGENTS.md",
+        "max/BUILD.bazel",
+        "max/CLAUDE.md",
+        "max/CONTRIBUTING.md",
+        "max/README.md",
+        "max/docs/README.md",
+        "max/docs/accuracy-debugging.md",
+        "max/docs/contributing/**",
+        "max/docs/contributing-models.md",
+        "max/docs/design-docs/README.md",
+        "max/docs/design-docs/amd-printf-lessons-learned.md",
+        "max/docs/design-docs/elementwise-ops.md",
+        "max/docs/design-docs/fp8-support-in-mojo.md",
+        "max/docs/design-docs/genai-paged-attention.md",
+        "max/docs/design-docs/matmul-on-blackwell-part-1.md",
+        "max/docs/design-docs/matmul-on-blackwell-part-2.md",
+        "max/docs/design-docs/matmul-on-blackwell-part-3.md",
+        "max/docs/design-docs/matmul-to-flash-attention.md",
+        "max/docs/design-docs/multi-head-flash-attention.md",
+        "max/docs/design-docs/multi-head-latent-attention.md",
+        "max/docs/design-docs/token-sampling.md",
+        "max/docs/design-docs/uwgmma-flash-decoding.md",
+        "max/docs/design-docs/wgmma-programming.md",
+        "max/docs/development.md",
+        "max/docs/kernel-benchmarking.md",
+        "max/docs/kernel-profiling.md",
+        "max/docs/max-benchmarking.md",
+        "max/docs/op-logging.md",
+        "max/docs/pytorch-to-max-mapping-guide.md",
+        "max/docs/site/BUILD.bazel",
+        "max/docs/site/README.md",
+        "max/docs/site/_includes/**",
+        "max/docs/site/_redirects.json",
+        "max/docs/site/code/**",
+        "max/docs/site/coding-assistants.mdx",
+        "max/docs/site/container.mdx",
+        "max/docs/site/develop/basic-ops.mdx",
+        "max/docs/site/develop/broadcasting.mdx",
+        "max/docs/site/develop/build-custom-ops.mdx",
+        "max/docs/site/develop/custom-kernels-pytorch.mdx",
+        "max/docs/site/develop/custom-ops-matmul.mdx",
+        "max/docs/site/develop/custom-ops.mdx",
+        "max/docs/site/develop/debugging-accuracy.mdx",
+        "max/docs/site/develop/debugging-errors.mdx",
+        "max/docs/site/develop/debugging-gpu.mdx",
+        "max/docs/site/develop/debugging-tracing.mdx",
+        "max/docs/site/develop/debugging.mdx",
+        "max/docs/site/develop/dtypes.mdx",
+        "max/docs/site/develop/eager-execution.mdx",
+        "max/docs/site/develop/graph.mdx",
+        "max/docs/site/develop/images/graph-paradigm/**",
+        "max/docs/site/develop/index.mdx",
+        "max/docs/site/develop/indexing.mdx",
+        "max/docs/site/develop/layer-comparison.mdx",
+        "max/docs/site/develop/layers.mdx",
+        "max/docs/site/develop/logit-comparison.mdx",
+        "max/docs/site/develop/max-pipeline-bring-your-own-model.mdx",
+        "max/docs/site/develop/model-bringup-skills.mdx",
+        "max/docs/site/develop/model-bringup-workflow.mdx",
+        "max/docs/site/develop/modules.mdx",
+        "max/docs/site/develop/pipelines.mdx",
+        "max/docs/site/develop/quantize.mdx",
+        "max/docs/site/develop/read-model-config.mdx",
+        "max/docs/site/develop/serve-custom-model-architectures.mdx",
+        "max/docs/site/develop/tensor-realization.mdx",
+        "max/docs/site/develop/tensors.mdx",
+        "max/docs/site/develop/weight-adapters.mdx",
+        "max/docs/site/environment-variables.mdx",
+        "max/docs/site/generate-arch-docs.py",
+        "max/docs/site/generate-metrics-table.py",
+        "max/docs/site/generate-models-table.py",
+        "max/docs/site/get-started.mdx",
+        "max/docs/site/gpu/**",
+        "max/docs/site/gpu-system-profiling.mdx",
+        "max/docs/site/layout/**",
+        "max/docs/site/models.mdx",
+        "max/docs/site/nightly-changelog.md",
+        "max/docs/site/packages.mdx",
+        "max/docs/site/post-process-docs.py",
+        "max/docs/site/releases/**",
+        "max/docs/site/requirements.js",
+        "max/docs/site/rest-api/**",
+        "max/docs/site/serve/audio-generation.mdx",
+        "max/docs/site/serve/benchmark.mdx",
+        "max/docs/site/serve/chat-templates.mdx",
+        "max/docs/site/serve/decisions.mdx",
+        "max/docs/site/serve/embeddings.mdx",
+        "max/docs/site/serve/function-calling.mdx",
+        "max/docs/site/serve/image-generation.mdx",
+        "max/docs/site/serve/image-to-text.mdx",
+        "max/docs/site/serve/local-to-cloud.mdx",
+        "max/docs/site/serve/lora-adapters.mdx",
+        "max/docs/site/serve/metrics.mdx",
+        "max/docs/site/serve/parallelism.mdx",
+        "max/docs/site/serve/prefill-decode-disaggregation.mdx",
+        "max/docs/site/serve/prefix-caching.mdx",
+        "max/docs/site/serve/reasoning.mdx",
+        "max/docs/site/serve/recipes.mdx",
+        "max/docs/site/serve/speculative-decoding.mdx",
+        "max/docs/site/serve/structured-output.mdx",
+        "max/docs/site/serve/text-to-text.mdx",
+        "max/docs/site/serve/video-generation.mdx",
+        "max/docs/site/sidebars.json",
+        "max/docs/site/tile-tensor/**",
+        "max/docs/site/update-github-links.py",
+        "max/docs/site/write-nightly-release.py",
+        "max/docs/why-bazel.md",
+        "max/examples/BUILD.bazel",
+        "max/examples/README.md",
+        "max/examples/capi/**",
+        "max/examples/cloud-configs/**",
+        "max/examples/console.py",
+        "max/examples/custom-models/**",
+        "max/examples/custom_ops/.gitignore",
+        "max/examples/custom_ops/BUILD.bazel",
+        "max/examples/custom_ops/README.md",
+        "max/examples/custom_ops/addition.py",
+        "max/examples/custom_ops/benchmarks.mojo",
+        "max/examples/custom_ops/custom_op_example.bzl",
+        "max/examples/custom_ops/eager_vector_addition.py",
+        "max/examples/custom_ops/elementwise_addition.py",
+        "max/examples/custom_ops/fused_attention.py",
+        "max/examples/custom_ops/histogram.py",
+        "max/examples/custom_ops/image_pipeline.py",
+        "max/examples/custom_ops/kernels/**",
+        "max/examples/custom_ops/mandelbrot.py",
+        "max/examples/custom_ops/matrix_multiplication.py",
+        "max/examples/custom_ops/parametric_addition.py",
+        "max/examples/custom_ops/pixi.lock",
+        "max/examples/custom_ops/pixi.toml",
+        "max/examples/custom_ops/top_k.py",
+        "max/examples/custom_ops/vector_addition.py",
+        "max/examples/diffusion/**",
+        "max/examples/embedding-knowledge-base/**",
+        "max/examples/gpu-block-and-warp/**",
+        "max/examples/gpu-functions/**",
+        "max/examples/gpu-intro/**",
+        "max/examples/layout_tensor/**",
+        "max/examples/layouts/**",
+        "max/examples/modules/**",
+        "max/examples/music_generation/**",
+        "max/examples/pytorch_custom_ops/**",
+        "max/include/**",
+        "max/kernels/AGENTS.md",
+        "max/kernels/CLAUDE.md",
+        "max/kernels/CONTRIBUTING.md",
+        "max/kernels/README.md",
+        "max/kernels/benchmarks/BUILD.bazel",
+        "max/kernels/benchmarks/README.md",
+        "max/kernels/benchmarks/algorithm/**",
+        "max/kernels/benchmarks/autotune/BUILD.bazel",
+        "max/kernels/benchmarks/autotune/README.md",
+        "max/kernels/benchmarks/autotune/README_kplot.md",
+        "max/kernels/benchmarks/autotune/README_kprofile.md",
+        "max/kernels/benchmarks/autotune/__init__.py",
+        "max/kernels/benchmarks/autotune/bencher_utils.py",
+        "max/kernels/benchmarks/autotune/data/output_base.csv",
+        "max/kernels/benchmarks/autotune/data/output_branch.csv",
+        "max/kernels/benchmarks/autotune/data/output_cublas.csv",
+        "max/kernels/benchmarks/autotune/data/run.sh",
+        "max/kernels/benchmarks/autotune/demo/**",
+        "max/kernels/benchmarks/autotune/kbench.py",
+        "max/kernels/benchmarks/autotune/kbench_main.py",
+        "max/kernels/benchmarks/autotune/kbench_model.py",
+        "max/kernels/benchmarks/autotune/kdiff.py",
+        "max/kernels/benchmarks/autotune/kplot.py",
+        "max/kernels/benchmarks/autotune/kprofile.py",
+        "max/kernels/benchmarks/autotune/pyproject.toml",
+        "max/kernels/benchmarks/autotune/sample.mojo",
+        "max/kernels/benchmarks/autotune/sample.py",
+        "max/kernels/benchmarks/autotune/snippet.mojo",
+        "max/kernels/benchmarks/autotune/snippet.txt",
+        "max/kernels/benchmarks/autotune/terminal_viz.py",
+        "max/kernels/benchmarks/autotune/test.yaml",
+        "max/kernels/benchmarks/autotune/test_python.yaml",
+        "max/kernels/benchmarks/autotune/tests/**",
+        "max/kernels/benchmarks/autotune/tuning_codegen.py",
+        "max/kernels/benchmarks/autotune/tuning_codegen_main.py",
+        "max/kernels/benchmarks/autotune/utils.py",
+        "max/kernels/benchmarks/demos/**",
+        "max/kernels/benchmarks/gpu/**",
+        "max/kernels/benchmarks/linalg/**",
+        "max/kernels/benchmarks/math/**",
+        "max/kernels/benchmarks/misc/**",
+        "max/kernels/benchmarks/nn/**",
+        "max/kernels/examples/**",
+        "max/kernels/src/BUILD.bazel",
+        "max/kernels/src/_cublas/**",
+        "max/kernels/src/_cudnn/**",
+        "max/kernels/src/_cufft/**",
+        "max/kernels/src/_miopen/**",
+        "max/kernels/src/_rocblas/**",
+        "max/kernels/src/algorithm/**",
+        "max/kernels/src/comm/BUILD.bazel",
+        "max/kernels/src/comm/__init__.mojo",
+        "max/kernels/src/comm/allgather.mojo",
+        "max/kernels/src/comm/allgather_rmsnorm.mojo",
+        "max/kernels/src/comm/allreduce.mojo",
+        "max/kernels/src/comm/allreduce_lamport_rmsnorm.mojo",
+        "max/kernels/src/comm/allreduce_residual_rmsnorm.mojo",
+        "max/kernels/src/comm/broadcast.mojo",
+        "max/kernels/src/comm/device_collective.mojo",
+        "max/kernels/src/comm/device_query.mojo",
+        "max/kernels/src/comm/lamport.mojo",
+        "max/kernels/src/comm/reducescatter.mojo",
+        "max/kernels/src/comm/reducescatter_rmsnorm.mojo",
+        "max/kernels/src/comm/relay.mojo",
+        "max/kernels/src/comm/rms_norm_fp8.mojo",
+        "max/kernels/src/comm/scatter.mojo",
+        "max/kernels/src/comm/sync.mojo",
+        "max/kernels/src/deprecations.bzl",
+        "max/kernels/src/graph_compiler/**",
+        "max/kernels/src/index.md",
+        "max/kernels/src/internal_utils/**",
+        "max/kernels/src/kv_cache/**",
+        "max/kernels/src/layout/**",
+        "max/kernels/src/linalg/BUILD.bazel",
+        "max/kernels/src/linalg/__init__.mojo",
+        "max/kernels/src/linalg/accumulate.mojo",
+        "max/kernels/src/linalg/arch/**",
+        "max/kernels/src/linalg/block_scaled_quantization.mojo",
+        "max/kernels/src/linalg/block_scaled_utils.mojo",
+        "max/kernels/src/linalg/bmm.mojo",
+        "max/kernels/src/linalg/fp4_utils.mojo",
+        "max/kernels/src/linalg/fp6_quantization.mojo",
+        "max/kernels/src/linalg/fp6_utils.mojo",
+        "max/kernels/src/linalg/fp8_quantization.mojo",
+        "max/kernels/src/linalg/gemv.mojo",
+        "max/kernels/src/linalg/grouped_matmul.mojo",
+        "max/kernels/src/linalg/grouped_matmul_block_scaled_dispatch.mojo",
+        "max/kernels/src/linalg/grouped_matmul_sm100.mojo",
+        "max/kernels/src/linalg/grouped_matmul_sm100_blockwise_fp8.mojo",
+        "max/kernels/src/linalg/grouped_matmul_tile_scheduler.mojo",
+        "max/kernels/src/linalg/lora.mojo",
+        "max/kernels/src/linalg/matmul/__init__.mojo",
+        "max/kernels/src/linalg/matmul/cpu/**",
+        "max/kernels/src/linalg/matmul/gpu/**",
+        "max/kernels/src/linalg/matrix_band_part.mojo",
+        "max/kernels/src/linalg/mx_format.mojo",
+        "max/kernels/src/linalg/mxfp4_dequant.mojo",
+        "max/kernels/src/linalg/mxfp4_matmul_sm90.mojo",
+        "max/kernels/src/linalg/mxfp6_dequant.mojo",
+        "max/kernels/src/linalg/packing.mojo",
+        "max/kernels/src/linalg/structuring.mojo",
+        "max/kernels/src/linalg/swiglu_activation.mojo",
+        "max/kernels/src/linalg/transpose.mojo",
+        "max/kernels/src/linalg/utils.mojo",
+        "max/kernels/src/linalg/utils_gpu.mojo",
+        "max/kernels/src/nn/**",
+        "max/kernels/src/pipeline/**",
+        "max/kernels/src/profiling_range/**",
+        "max/kernels/src/quantization/**",
+        "max/kernels/src/shmem/**",
+        "max/kernels/src/state_space/**",
+        "max/kernels/src/structured_kernels/**",
+        "max/kernels/src/weights_registry/**",
+        "max/kernels/test/algorithm/**",
+        "max/kernels/test/buffer/**",
+        "max/kernels/test/comm/**",
+        "max/kernels/test/gpu/algorithm/**",
+        "max/kernels/test/gpu/basics/**",
+        "max/kernels/test/gpu/cluster/**",
+        "max/kernels/test/gpu/comm/**",
+        "max/kernels/test/gpu/compile/**",
+        "max/kernels/test/gpu/compute_sanitizer/**",
+        "max/kernels/test/gpu/device_context/BUILD.bazel",
+        "max/kernels/test/gpu/device_context/data/vec_add.cu",
+        "max/kernels/test/gpu/device_context/test_device_context.mojo",
+        "max/kernels/test/gpu/device_context/test_device_context_cpu.mojo",
+        "max/kernels/test/gpu/device_context/test_device_context_sub_buffer.mojo",
+        "max/kernels/test/gpu/device_context/test_device_event.mojo",
+        "max/kernels/test/gpu/device_context/test_device_external_function.mojo",
+        "max/kernels/test/gpu/device_context/test_device_graph_builder.mojo",
+        "max/kernels/test/gpu/device_context/test_device_stream.mojo",
+        "max/kernels/test/gpu/device_context/test_dump_sass.mojo",
+        "max/kernels/test/gpu/device_context/test_dynamic_shared_mem_attribute.mojo",
+        "max/kernels/test/gpu/device_context/test_enqueue_fill.mojo",
+        "max/kernels/test/gpu/device_context/test_enqueue_function_closure_argument.mojo",
+        "max/kernels/test/gpu/device_context/test_enqueue_function_closure_encode.mojo",
+        "max/kernels/test/gpu/device_context/test_external_shared_mem.mojo",
+        "max/kernels/test/gpu/device_context/test_external_stream.mojo",
+        "max/kernels/test/gpu/device_context/test_function_attributes.mojo",
+        "max/kernels/test/gpu/device_context/test_function_error.mojo",
+        "max/kernels/test/gpu/device_context/test_function_error_sync_mode.mojo",
+        "max/kernels/test/gpu/device_context/test_multi_device_peer.mojo",
+        "max/kernels/test/gpu/device_context/test_occupancy_max_active_blocks.mojo",
+        "max/kernels/test/gpu/examples/**",
+        "max/kernels/test/gpu/fuzz/**",
+        "max/kernels/test/gpu/graph_compiler/**",
+        "max/kernels/test/gpu/kv_cache/**",
+        "max/kernels/test/gpu/layout/**",
+        "max/kernels/test/gpu/linalg/**",
+        "max/kernels/test/gpu/memory/**",
+        "max/kernels/test/gpu/nn/**",
+        "max/kernels/test/gpu/numerics/**",
+        "max/kernels/test/gpu/quantization/**",
+        "max/kernels/test/gpu/shmem/**",
+        "max/kernels/test/gpu/state_space/**",
+        "max/kernels/test/gpu/structured_kernels/**",
+        "max/kernels/test/graph_compiler/**",
+        "max/kernels/test/internal_utils/**",
+        "max/kernels/test/kv_cache/**",
+        "max/kernels/test/layout/**",
+        "max/kernels/test/linalg/**",
+        "max/kernels/test/nn/**",
+        "max/kernels/test/profiling/**",
+        "max/kernels/test/quantization/**",
+        "max/kernels/test/state_space/**",
+        "max/kernels/test/testdata/**",
+        "max/mojo/**",
+        "max/python/**",
+        "max/tests/BUILD.bazel",
+        "max/tests/docstring_examples/**",
+        "max/tests/integration/Inputs/**",
+        "max/tests/integration/accuracy/**",
+        "max/tests/integration/architectures/clip/**",
+        "max/tests/integration/architectures/deepseekV2/**",
+        "max/tests/integration/architectures/deepseekV3/**",
+        "max/tests/integration/architectures/deepseekV3_2/**",
+        "max/tests/integration/architectures/deepseekV4/**",
+        "max/tests/integration/architectures/dflash2_qwen3_5/**",
+        "max/tests/integration/architectures/dflash_mimo_v2/**",
+        "max/tests/integration/architectures/flux2/**",
+        "max/tests/integration/architectures/flux_modulev3/**",
+        "max/tests/integration/architectures/gemma3/**",
+        "max/tests/integration/architectures/gemma4/**",
+        "max/tests/integration/architectures/gemma4_modulev3/**",
+        "max/tests/integration/architectures/glm/**",
+        "max/tests/integration/architectures/glm5_1/**",
+        "max/tests/integration/architectures/glm5_next/**",
+        "max/tests/integration/architectures/gpt-oss/**",
+        "max/tests/integration/architectures/idefics3/**",
+        "max/tests/integration/architectures/idefics3_network_tests/**",
+        "max/tests/integration/architectures/inkling/**",
+        "max/tests/integration/architectures/internvl/**",
+        "max/tests/integration/architectures/internvl_network_tests/**",
+        "max/tests/integration/architectures/kimik2_5/**",
+        "max/tests/integration/architectures/kimik2_5_modulev3/**",
+        "max/tests/integration/architectures/laguna/**",
+        "max/tests/integration/architectures/lfm2/**",
+        "max/tests/integration/architectures/llama3/BUILD.bazel",
+        "max/tests/integration/architectures/llama3/conftest.py",
+        "max/tests/integration/architectures/llama3/test_llama3_attention_fp4_gpu.py",
+        "max/tests/integration/architectures/llama3/test_llama3_linear_fp4_gpu.py",
+        "max/tests/integration/architectures/llama3/test_rms_norm_gpu.py",
+        "max/tests/integration/architectures/llama3/testdata/BUILD.bazel",
+        "max/tests/integration/architectures/llama3/testdata/README.md",
+        "max/tests/integration/architectures/llama3/testdata/config.json",
+        "max/tests/integration/architectures/llama3/testdata/config_nvfp4.json",
+        "max/tests/integration/architectures/llama3/testdata/special_tokens_map.json",
+        "max/tests/integration/architectures/llama3/testdata/tokenizer.json",
+        "max/tests/integration/architectures/llama3/testdata/tokenizer_config.json",
+        "max/tests/integration/architectures/mimo_v2/BUILD.bazel",
+        "max/tests/integration/architectures/mimo_v2/check_reference_fixtures.py",
+        "max/tests/integration/architectures/mimo_v2/make_random_fixture.py",
+        "max/tests/integration/architectures/mimo_v2/mimo_runner.py",
+        "max/tests/integration/architectures/mimo_v2/test_capture_safe_graph_gpu.py",
+        "max/tests/integration/architectures/mimo_v2/test_model.py",
+        "max/tests/integration/architectures/mimo_v2/test_model_config.py",
+        "max/tests/integration/architectures/mimo_v2/test_moe.py",
+        "max/tests/integration/architectures/mimo_v2/test_serving_numerics_gpu.py",
+        "max/tests/integration/architectures/mimo_v2/test_weight_adapters.py",
+        "max/tests/integration/architectures/mimo_v2/tiny_fixture.py",
+        "max/tests/integration/architectures/minimax_m2/**",
+        "max/tests/integration/architectures/minimax_music3/**",
+        "max/tests/integration/architectures/mistral3/**",
+        "max/tests/integration/architectures/modulev3/**",
+        "max/tests/integration/architectures/muse_glimmer/**",
+        "max/tests/integration/architectures/nemotron_h/**",
+        "max/tests/integration/architectures/nemotron_h_modulev3/**",
+        "max/tests/integration/architectures/olmo2/**",
+        "max/tests/integration/architectures/qwen2_5vl/**",
+        "max/tests/integration/architectures/qwen3/**",
+        "max/tests/integration/architectures/qwen3_5/**",
+        "max/tests/integration/architectures/qwen3_5_tap_crosscheck/**",
+        "max/tests/integration/architectures/qwen3vl/**",
+        "max/tests/integration/architectures/qwen_image/**",
+        "max/tests/integration/architectures/unified_dflash2_qwen3_5/**",
+        "max/tests/integration/architectures/unified_dflash_gemma4_31b/**",
+        "max/tests/integration/architectures/unified_dflash_kimi_k25/**",
+        "max/tests/integration/architectures/unified_dflash_llama3/**",
+        "max/tests/integration/architectures/unified_dflash_mimo_v2/**",
+        "max/tests/integration/architectures/unified_dspark_gemma4_12b/**",
+        "max/tests/integration/architectures/unified_dspark_gemma4_31b/**",
+        "max/tests/integration/architectures/unified_dspark_nemotron_h/**",
+        "max/tests/integration/architectures/unified_eagle_llama/**",
+        "max/tests/integration/architectures/unified_mtp_deepseekV3/**",
+        "max/tests/integration/architectures/unified_mtp_gemma4/**",
+        "max/tests/integration/architectures/unified_mtp_gemma4_modulev3/**",
+        "max/tests/integration/architectures/unified_mtp_inkling/**",
+        "max/tests/integration/architectures/unified_mtp_qwen3_5/**",
+        "max/tests/integration/architectures/wan/**",
+        "max/tests/integration/architectures/whisper/**",
+        "max/tests/integration/c/**",
+        "max/tests/integration/cli/**",
+        "max/tests/integration/dataprocessing/**",
+        "max/tests/integration/graph/**",
+        "max/tests/integration/interfaces/**",
+        "max/tests/integration/kv_cache/**",
+        "max/tests/integration/nn/**",
+        "max/tests/integration/pipelines/**",
+        "max/tests/integration/serve/**",
+        "max/tests/integration/tensor/**",
+        "max/tests/integration/test_common/BUILD.bazel",
+        "max/tests/integration/test_common/context_utils.py",
+        "max/tests/integration/test_common/custom_args.py",
+        "max/tests/integration/test_common/distance_metrics.py",
+        "max/tests/integration/test_common/evaluate.py",
+        "max/tests/integration/test_common/evaluate_embeddings.py",
+        "max/tests/integration/test_common/fake_weights.py",
+        "max/tests/integration/test_common/github_utils.py",
+        "max/tests/integration/test_common/graph_error_messages_scenario.py",
+        "max/tests/integration/test_common/graph_utils.py",
+        "max/tests/integration/test_common/hyper_connection_reference.py",
+        "max/tests/integration/test_common/load_model_helpers.py",
+        "max/tests/integration/test_common/lora_utils.py",
+        "max/tests/integration/test_common/mef_precompile.bzl",
+        "max/tests/integration/test_common/mef_precompile.py",
+        "max/tests/integration/test_common/mocks/**",
+        "max/tests/integration/test_common/model_output.py",
+        "max/tests/integration/test_common/modular_graph_test.py",
+        "max/tests/integration/test_common/ndarray_from_tensor_type.py",
+        "max/tests/integration/test_common/numerics.py",
+        "max/tests/integration/test_common/numpy_encoder.py",
+        "max/tests/integration/test_common/pipeline_mef_precompile.bzl",
+        "max/tests/integration/test_common/pipeline_model_dummy.py",
+        "max/tests/integration/test_common/process_isolation.py",
+        "max/tests/integration/test_common/reduction_graphs.py",
+        "max/tests/integration/test_common/registry.py",
+        "max/tests/integration/test_common/simple_kv_cache.py",
+        "max/tests/integration/test_common/storage.py",
+        "max/tests/integration/test_common/table.py",
+        "max/tests/integration/test_common/test_data.py",
+        "max/tests/integration/test_common/test_llama/BUILD.bazel",
+        "max/tests/integration/test_common/test_llama/config.json",
+        "max/tests/integration/test_common/text_encoder_evaluate.py",
+        "max/tests/integration/test_common/torch_print_hook.py",
+        "max/tests/integration/test_common/torch_utils.py",
+        "max/tests/integration/test_common/verify_utils.py",
+        "max/tests/integration/test_common/vllm_utils.py",
+        "max/tests/integration/tools/**",
+        "max/tests/integration/unorganized/**",
+        "max/tests/integration/xarch_warm/**",
+        "max/tests/tests/BUILD.bazel",
+        "max/tests/tests/_entrypoints/**",
+        "max/tests/tests/benchmark/**",
+        "max/tests/tests/cascade/**",
+        "max/tests/tests/compile_pool_parent_exit_subprocess.py",
+        "max/tests/tests/config/**",
+        "max/tests/tests/conftest.py",
+        "max/tests/tests/driver/**",
+        "max/tests/tests/engine/**",
+        "max/tests/tests/graph/BUILD.bazel",
+        "max/tests/tests/graph/conftest.py",
+        "max/tests/tests/graph/ops/**",
+        "max/tests/tests/graph/test_compile_init.py",
+        "max/tests/tests/graph/test_debug.py",
+        "max/tests/tests/graph/test_device_ref.py",
+        "max/tests/tests/graph/test_dialects.py",
+        "max/tests/tests/graph/test_dim.py",
+        "max/tests/tests/graph/test_dtype_promotion.py",
+        "max/tests/tests/graph/test_graph.py",
+        "max/tests/tests/graph/test_graph_value.py",
+        "max/tests/tests/graph/test_has_shape_function.py",
+        "max/tests/tests/graph/test_mlir_context_threading.py",
+        "max/tests/tests/graph/test_non_contiguous_tensors.py",
+        "max/tests/tests/graph/test_shapes.py",
+        "max/tests/tests/graph/test_sharding_strategy.py",
+        "max/tests/tests/graph/test_squeeze.py",
+        "max/tests/tests/graph/test_tensor_value.py",
+        "max/tests/tests/graph/test_type.py",
+        "max/tests/tests/graph/test_uninit_check_e2e.py",
+        "max/tests/tests/graph/test_weight.py",
+        "max/tests/tests/graph/testdata/BUILD.bazel",
+        "max/tests/tests/graph/testdata/gen_external_checkpoints.py",
+        "max/tests/tests/graph/uninit_check/**",
+        "max/tests/tests/graph/utils/**",
+        "max/tests/tests/kv_cache/**",
+        "max/tests/tests/mojo-importer/**",
+        "max/tests/tests/mojo_runtime_background_thread_subprocess_asyncio.py",
+        "max/tests/tests/mojo_runtime_background_thread_subprocess_thread.py",
+        "max/tests/tests/mojo_runtime_foreign_thread_subprocess.py",
+        "max/tests/tests/nixl/**",
+        "max/tests/tests/nn/**",
+        "max/tests/tests/pipelines/**",
+        "max/tests/tests/profiler/**",
+        "max/tests/tests/serve/**",
+        "max/tests/tests/support/**",
+        "max/tests/tests/test_compilation.py",
+        "max/tests/tests/test_compile_pool.py",
+        "max/tests/tests/test_compile_pool_gpu.py",
+        "max/tests/tests/test_compile_serialization.py",
+        "max/tests/tests/test_dim_substitute.py",
+        "max/tests/tests/test_eager_cold_start_policy.py",
+        "max/tests/tests/test_eager_usage_validator.py",
+        "max/tests/tests/test_eos_tracking.py",
+        "max/tests/tests/test_executor.py",
+        "max/tests/tests/test_flashinfer_cubin.py",
+        "max/tests/tests/test_functional_signatures.py",
+        "max/tests/tests/test_functional_threading.py",
+        "max/tests/tests/test_generated_dialects.py",
+        "max/tests/tests/test_interpreter.py",
+        "max/tests/tests/test_interpreter_ops.py",
+        "max/tests/tests/test_interpreter_ops_gpu.py",
+        "max/tests/tests/test_mojo_runtime_background_thread_import.py",
+        "max/tests/tests/test_mojo_runtime_foreign_thread.py",
+        "max/tests/tests/test_passes.py",
+        "max/tests/tests/test_realization_context.py",
+        "max/tests/tests/test_session_read.py",
+        "max/tests/tests/test_support.py",
+        "max/tests/tests/test_tensor.py",
+        "max/tests/tests/test_tree.py",
+        "max/tests/tests/torch/**",
+        "pyproject.toml",
+        "rust_kv/.gitignore",
+        "rust_kv/BUILD.bazel",
+        "rust_kv/Cargo.lock",
+        "rust_kv/Cargo.toml",
+        "rust_kv/README.md",
+        "rust_kv/kv-core/**",
+        "rust_kv/kv-core-pyo3/**",
+        "rust_kv/kv-tier-connector/**",
+        "rust_kv/kv-tier-connector-pyo3/**",
+        "rust_kv/rust-toolchain.toml",
+        "rust_kv/test_compat.bzl",
+        "tools/**",
+        "utils/**"
+      ],
+      "text": "==============================================================================================\nThe Modular repository is licensed under the Apache License v2.0 with LLVM Exceptions:\n==============================================================================================\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n    TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n    1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n    2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n    3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n    4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n    5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n    6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n    7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n    8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n    9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n    END OF TERMS AND CONDITIONS\n\n    APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n    Copyright [yyyy] [name of copyright owner]\n\n    Licensed under the Apache License, Version 2.0 (the \"License\");\n    you may not use this file except in compliance with the License.\n    You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n    Unless required by applicable law or agreed to in writing, software\n    distributed under the License is distributed on an \"AS IS\" BASIS,\n    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n    See the License for the specific language governing permissions and\n    limitations under the License.\n\n---- LLVM Exceptions to the Apache 2.0 License ----\n\nAs an exception, if, as a result of your compiling your source code, portions\nof this Software are embedded into an Object form of such source code, you\nmay redistribute such embedded portions in such Object form without complying\nwith the conditions of Sections 4(a), 4(b) and 4(d) of the License.\n\nIn addition, if you combine or link compiled forms of this Software with\nsoftware that is licensed under the GPLv2 (\"Combined Software\") and if a\ncourt of competent jurisdiction determines that the patent provision (Section\n3), the indemnity provision (Section 9) or other Section of the License\nconflicts with the conditions of the GPLv2, you may retroactively and\nprospectively choose to deem waived or otherwise exclude such Section(s) of\nthe License, but only in their entirety and only with respect to the Combined\nSoftware.\n\n==============================================================================\nSoftware from third parties included in the LLVM Project:\n==============================================================================\n\nThe LLVM Project contains third party software which is under different license\nterms. All such code will be identified clearly using at least one of two\nmechanisms:\n\n1) It will be in a separate directory tree with its own `LICENSE.txt` or\n   `LICENSE` file at the top containing the specific license and restrictions\n   which apply to that software, or\n2) It will contain specific license and restriction terms at the top of every\n   file.\n",
+      "attribution": "the authors of modular/modular (the license file names no copyright line), Apache-2.0 WITH LLVM-exception license (LICENSE), https://github.com/modular/modular."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Mojo/tools/mblack/BUILD.bazel",
+        "Mojo/tools/mblack/LICENSE",
+        "Mojo/tools/mblack/README.md",
+        "Mojo/tools/mblack/action/**",
+        "Mojo/tools/mblack/autoload/**",
+        "Mojo/tools/mblack/plugin/**",
+        "Mojo/tools/mblack/scripts/**",
+        "Mojo/tools/mblack/src/_mblack_version.py",
+        "Mojo/tools/mblack/src/mblack/**",
+        "Mojo/tools/mblack/tests/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2018 Łukasz Langa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2018 Łukasz Langa, MIT license (LICENSE), https://github.com/modular/modular/tree/efb7c3736639ae3548a7e069f6613eaa2e09d591/Mojo/tools/mblack."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.diff"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.jinja"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/*.bzl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/MODULE.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.BUILD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "REPO.bazel",
+        "bazel/common.MODULE.bazel",
+        "bazel/mojo.MODULE.bazel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "bazel/internal/common.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.def"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.foo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lldb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "Mojo/examples/life/pixi.lock",
+        "Mojo/examples/operators/pixi.lock",
+        "Mojo/examples/python-interop/pixi.lock",
+        "Mojo/examples/testing/pixi.lock",
+        "Mojo/pixi.lock",
+        "bazel/pip/requirements/uv.lock",
+        "max/docs/site/code/tile-tensor/layouts/pixi.lock",
+        "max/docs/site/code/tile-tensor/tensors/pixi.lock",
+        "max/examples/capi/pixi.lock",
+        "max/examples/custom-models/pixi.lock",
+        "max/examples/custom_ops/pixi.lock",
+        "max/examples/gpu-block-and-warp/pixi.lock",
+        "max/examples/gpu-functions/pixi.lock",
+        "max/examples/gpu-intro/pixi.lock",
+        "max/examples/layout_tensor/pixi.lock",
+        "max/examples/layouts/pixi.lock",
+        "max/examples/modules/pixi.lock",
+        "max/examples/music_generation/pixi.lock",
+        "max/examples/pytorch_custom_ops/pixi.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mdc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mlir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mojo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.out"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pie"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pyclear"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snippet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sse"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.td"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelversion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-tidy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.shellcheckrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bazel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bazelw"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "vim",
+      "paths": [
+        "**/*.vim"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16"
+  }
+}

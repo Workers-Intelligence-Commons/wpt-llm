@@ -1,0 +1,750 @@
+{
+  "type": "git",
+  "address": "https://github.com/tporadowski/redis",
+  "revision": "c59c9365be41e8936fef00af5b1b149ab91b70ba",
+  "checksum": "sha256:20c1b17780b31554115ab0aca752d6de813d3110f6528af4b0e4fe9eb549dc44",
+  "extract": {
+    "exclude": [
+      "deps/Makefile",
+      "deps/README.md",
+      "deps/geohash-int/**",
+      "deps/linenoise/**",
+      "deps/lua/doc/cover.png",
+      "deps/lua/doc/logo.gif",
+      "deps/lua/etc/lua.ico",
+      "deps/lua/test/life.lua",
+      "deps/update-jemalloc.sh",
+      "msvs/RedisForWindows.aps",
+      "msvs/msi/RedisMsi/**",
+      "src/Win32_Interop/resources/EventLog.res",
+      "src/Win32_Interop/resources/EventLog_MSG00409.bin",
+      "tests/assets/encodings.rdb",
+      "tests/assets/hash-zipmap.rdb"
+    ]
+  },
+  "history": {
+    "since": "649cd886c33d67edac6bc02ab0c438e1cd9bf212"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause AND BSD-2-Clause AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "COPYING:\n\nCopyright (c) 2006-2015, Salvatore Sanfilippo\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\n    * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n    * Neither the name of Redis nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nlicense.txt:\n\nCopyright (c) 2006-2020, Salvatore Sanfilippo\nModifications copyright (c) Microsoft Open Technologies, Inc. \nModifications copyright (c) Tomasz Poradowski\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: \n\n* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. \n* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. \n* Neither the name of Redis nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission. \n \nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY\nAND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,\nOR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED\nAND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,\nEVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nCopyright (c) 2009-2011, Salvatore Sanfilippo <antirez at gmail dot com>\nCopyright (c) 2010-2011, Pieter Noordhuis <pcnoordhuis at gmail dot com>\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice,\n  this list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\n* Neither the name of Redis nor the names of its contributors may be used\n  to endorse or promote products derived from this software without specific\n  prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nUnless otherwise specified, files in the jemalloc source distribution are\nsubject to the following license:\n--------------------------------------------------------------------------------\nCopyright (C) 2002-present Jason Evans <jasone@canonware.com>.\nAll rights reserved.\nCopyright (C) 2007-2012 Mozilla Foundation.  All rights reserved.\nCopyright (C) 2009-present Facebook, Inc.  All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n1. Redistributions of source code must retain the above copyright notice(s),\n   this list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright notice(s),\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER(S) ``AS IS'' AND ANY EXPRESS\nOR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO\nEVENT SHALL THE COPYRIGHT HOLDER(S) BE LIABLE FOR ANY DIRECT, INDIRECT,\nINCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR\nPROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF\nLIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE\nOR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF\nADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n--------------------------------------------------------------------------------\n\n\nLua License\n-----------\n\nLua is licensed under the terms of the MIT license reproduced below.\nThis means that Lua is free software and can be used for both academic\nand commercial purposes at absolutely no cost.\n\nFor details and rationale, see http://www.lua.org/license.html .\n\n===============================================================================\n\nCopyright (C) 1994-2012 Lua.org, PUC-Rio.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n===============================================================================\n\n(end of COPYRIGHT)\n",
+      "attribution": "Commit history of https://github.com/tporadowski/redis: Copyright (c) 2006-2015, Salvatore Sanfilippo; Copyright (c) 2006-2020, Salvatore Sanfilippo, BSD-3-Clause license (COPYING and license.txt), https://github.com/tporadowski/redis; Copyright (c) 2009-2011, Salvatore Sanfilippo <antirez at gmail dot com>; Copyright (c) 2010-2011, Pieter Noordhuis <pcnoordhuis at gmail dot com>, BSD-3-Clause license (COPYING), https://github.com/tporadowski/redis/tree/c59c9365be41e8936fef00af5b1b149ab91b70ba/deps/hiredis; Copyright (C) 2002-present Jason Evans <jasone@canonware.com>.; Copyright (C) 2007-2012 Mozilla Foundation.  All rights reserved.; Copyright (C) 2009-present Facebook, Inc.  All rights reserved., BSD-2-Clause license (COPYING), https://github.com/tporadowski/redis/tree/c59c9365be41e8936fef00af5b1b149ab91b70ba/deps/jemalloc-5.2.1; Copyright (C) 1994-2012 Lua.org, PUC-Rio., MIT license (COPYRIGHT), https://github.com/tporadowski/redis/tree/c59c9365be41e8936fef00af5b1b149ab91b70ba/deps/lua."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        "00-RELEASENOTES",
+        "BUGS",
+        "CONTRIBUTING",
+        "COPYING",
+        "INSTALL",
+        "MANIFESTO",
+        "Makefile",
+        "README.md",
+        "RELEASENOTES.txt",
+        "Redis on Windows Release Notes.md",
+        "Redis on Windows.md",
+        "Windows Service Documentation.md",
+        "appveyor.yml",
+        "license.txt",
+        "msvs/Build.bat",
+        "msvs/RedisBenchmark/**",
+        "msvs/RedisCli/**",
+        "msvs/RedisForWindows.rc",
+        "msvs/RedisServer.sln",
+        "msvs/RedisServer.vcxproj",
+        "msvs/ReleasePackagingTool/**",
+        "msvs/Samples/**",
+        "msvs/geohash/**",
+        "msvs/hiredis/**",
+        "msvs/lua/**",
+        "msvs/msi/RedisMsi.CustomActions/**",
+        "msvs/msi/RedisMsi.sln",
+        "msvs/resource.h",
+        "msvs/setups/**",
+        "msvs/tools/**",
+        "redis.conf",
+        "runtest",
+        "runtest-cluster",
+        "runtest-sentinel",
+        "sentinel.conf",
+        "src/.gitignore",
+        "src/Makefile",
+        "src/Makefile.dep",
+        "src/Win32_Interop/EventLog.h",
+        "src/Win32_Interop/EventLog.mc",
+        "src/Win32_Interop/WS2tcpip.h",
+        "src/Win32_Interop/Win32_ANSI.c",
+        "src/Win32_Interop/Win32_ANSI.h",
+        "src/Win32_Interop/Win32_APIs.c",
+        "src/Win32_Interop/Win32_APIs.h",
+        "src/Win32_Interop/Win32_Assert.h",
+        "src/Win32_Interop/Win32_CommandLine.cpp",
+        "src/Win32_Interop/Win32_CommandLine.h",
+        "src/Win32_Interop/Win32_Common.cpp",
+        "src/Win32_Interop/Win32_Common.h",
+        "src/Win32_Interop/Win32_Error.c",
+        "src/Win32_Interop/Win32_Error.h",
+        "src/Win32_Interop/Win32_EventLog.cpp",
+        "src/Win32_Interop/Win32_EventLog.h",
+        "src/Win32_Interop/Win32_FDAPI.cpp",
+        "src/Win32_Interop/Win32_FDAPI.h",
+        "src/Win32_Interop/Win32_Interop.vcxproj",
+        "src/Win32_Interop/Win32_PThread.c",
+        "src/Win32_Interop/Win32_PThread.h",
+        "src/Win32_Interop/Win32_Portability.h",
+        "src/Win32_Interop/Win32_QFork.cpp",
+        "src/Win32_Interop/Win32_QFork.h",
+        "src/Win32_Interop/Win32_QFork_impl.c",
+        "src/Win32_Interop/Win32_QFork_impl.h",
+        "src/Win32_Interop/Win32_RedisLog.c",
+        "src/Win32_Interop/Win32_RedisLog.h",
+        "src/Win32_Interop/Win32_Service.h",
+        "src/Win32_Interop/Win32_Signal_Process.c",
+        "src/Win32_Interop/Win32_Signal_Process.h",
+        "src/Win32_Interop/Win32_SmartHandle.h",
+        "src/Win32_Interop/Win32_StackTrace.cpp",
+        "src/Win32_Interop/Win32_StackTrace.h",
+        "src/Win32_Interop/Win32_ThreadControl.c",
+        "src/Win32_Interop/Win32_ThreadControl.h",
+        "src/Win32_Interop/Win32_Time.c",
+        "src/Win32_Interop/Win32_Time.h",
+        "src/Win32_Interop/Win32_fdapi_crt.cpp",
+        "src/Win32_Interop/Win32_fdapi_crt.h",
+        "src/Win32_Interop/Win32_service.cpp",
+        "src/Win32_Interop/Win32_variadicFunctor.cpp",
+        "src/Win32_Interop/Win32_variadicFunctor.h",
+        "src/Win32_Interop/dlfcn.c",
+        "src/Win32_Interop/dlfcn.h",
+        "src/Win32_Interop/resources/EventLog.rc",
+        "src/Win32_Interop/win32_rfdmap.cpp",
+        "src/Win32_Interop/win32_rfdmap.h",
+        "src/Win32_Interop/win32_types.h",
+        "src/Win32_Interop/win32_types_hiredis.h",
+        "src/Win32_Interop/win32_winapifamily.h",
+        "src/Win32_Interop/win32_wsiocp.c",
+        "src/Win32_Interop/win32_wsiocp.h",
+        "src/Win32_Interop/win32_wsiocp2.h",
+        "src/Win32_Interop/win32fixes.c",
+        "src/Win32_Interop/win32fixes.h",
+        "src/adlist.c",
+        "src/adlist.h",
+        "src/ae.c",
+        "src/ae.h",
+        "src/ae_epoll.c",
+        "src/ae_evport.c",
+        "src/ae_kqueue.c",
+        "src/ae_select.c",
+        "src/ae_wsiocp.c",
+        "src/anet.c",
+        "src/anet.h",
+        "src/aof.c",
+        "src/asciilogo.h",
+        "src/atomicvar.h",
+        "src/bio.c",
+        "src/bio.h",
+        "src/bitops.c",
+        "src/blocked.c",
+        "src/childinfo.c",
+        "src/cluster.c",
+        "src/cluster.h",
+        "src/config.c",
+        "src/config.h",
+        "src/crc16.c",
+        "src/crc64.c",
+        "src/crc64.h",
+        "src/create_windows_links.bat",
+        "src/db.c",
+        "src/debug.c",
+        "src/debugmacro.h",
+        "src/defrag.c",
+        "src/dict.c",
+        "src/dict.h",
+        "src/endianconv.c",
+        "src/endianconv.h",
+        "src/evict.c",
+        "src/expire.c",
+        "src/fmacros.h",
+        "src/geo.c",
+        "src/geo.h",
+        "src/geohash.c",
+        "src/geohash.h",
+        "src/geohash_helper.c",
+        "src/geohash_helper.h",
+        "src/help.h",
+        "src/hyperloglog.c",
+        "src/intset.c",
+        "src/intset.h",
+        "src/latency.c",
+        "src/latency.h",
+        "src/lazyfree.c",
+        "src/listpack.c",
+        "src/listpack.h",
+        "src/listpack_malloc.h",
+        "src/localtime.c",
+        "src/lolwut.c",
+        "src/lolwut5.c",
+        "src/lzf.h",
+        "src/lzfP.h",
+        "src/lzf_c.c",
+        "src/lzf_d.c",
+        "src/memtest.c",
+        "src/mkreleasehdr.sh",
+        "src/module.c",
+        "src/modules/**",
+        "src/multi.c",
+        "src/networking.c",
+        "src/notify.c",
+        "src/object.c",
+        "src/pqsort.c",
+        "src/pqsort.h",
+        "src/pubsub.c",
+        "src/quicklist.c",
+        "src/quicklist.h",
+        "src/rand.c",
+        "src/rand.h",
+        "src/rax.c",
+        "src/rax.h",
+        "src/rax_malloc.h",
+        "src/rdb.c",
+        "src/rdb.h",
+        "src/redis-benchmark.c",
+        "src/redis-check-aof.c",
+        "src/redis-check-rdb.c",
+        "src/redis-cli.c",
+        "src/redis-trib.rb",
+        "src/redisassert.h",
+        "src/redismodule.h",
+        "src/release.c",
+        "src/replication.c",
+        "src/rio.c",
+        "src/rio.h",
+        "src/scripting.c",
+        "src/sds.c",
+        "src/sds.h",
+        "src/sdsalloc.h",
+        "src/sentinel.c",
+        "src/server.c",
+        "src/server.h",
+        "src/server_options.txt",
+        "src/setproctitle.c",
+        "src/sha1.c",
+        "src/sha1.h",
+        "src/siphash.c",
+        "src/slowlog.c",
+        "src/slowlog.h",
+        "src/solarisfixes.h",
+        "src/sort.c",
+        "src/sparkline.c",
+        "src/sparkline.h",
+        "src/stream.h",
+        "src/syncio.c",
+        "src/t_hash.c",
+        "src/t_list.c",
+        "src/t_set.c",
+        "src/t_stream.c",
+        "src/t_string.c",
+        "src/t_zset.c",
+        "src/testhelp.h",
+        "src/util.c",
+        "src/util.h",
+        "src/valgrind.sup",
+        "src/version.h",
+        "src/ziplist.c",
+        "src/ziplist.h",
+        "src/zipmap.c",
+        "src/zipmap.h",
+        "src/zmalloc.c",
+        "src/zmalloc.h",
+        "tests/assets/default.conf",
+        "tests/cluster/**",
+        "tests/helpers/**",
+        "tests/instances.tcl",
+        "tests/integration/**",
+        "tests/modules/**",
+        "tests/sentinel/**",
+        "tests/support/**",
+        "tests/test_bgsave.tcl",
+        "tests/test_bgsaveperf.tcl",
+        "tests/test_helper.tcl",
+        "tests/unit/**",
+        "tests/windows/**",
+        "utils/**"
+      ],
+      "text": "COPYING:\n\nCopyright (c) 2006-2015, Salvatore Sanfilippo\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\n    * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n    * Neither the name of Redis nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nlicense.txt:\n\nCopyright (c) 2006-2020, Salvatore Sanfilippo\nModifications copyright (c) Microsoft Open Technologies, Inc. \nModifications copyright (c) Tomasz Poradowski\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: \n\n* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. \n* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. \n* Neither the name of Redis nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission. \n \nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY\nAND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,\nOR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED\nAND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,\nEVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2006-2015, Salvatore Sanfilippo; Copyright (c) 2006-2020, Salvatore Sanfilippo, BSD-3-Clause license (COPYING and license.txt), https://github.com/tporadowski/redis."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "deps/hiredis/**"
+      ],
+      "text": "Copyright (c) 2009-2011, Salvatore Sanfilippo <antirez at gmail dot com>\nCopyright (c) 2010-2011, Pieter Noordhuis <pcnoordhuis at gmail dot com>\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice,\n  this list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\n* Neither the name of Redis nor the names of its contributors may be used\n  to endorse or promote products derived from this software without specific\n  prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2009-2011, Salvatore Sanfilippo <antirez at gmail dot com>; Copyright (c) 2010-2011, Pieter Noordhuis <pcnoordhuis at gmail dot com>, BSD-3-Clause license (COPYING), https://github.com/tporadowski/redis/tree/c59c9365be41e8936fef00af5b1b149ab91b70ba/deps/hiredis."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "deps/jemalloc-5.2.1/**"
+      ],
+      "text": "Unless otherwise specified, files in the jemalloc source distribution are\nsubject to the following license:\n--------------------------------------------------------------------------------\nCopyright (C) 2002-present Jason Evans <jasone@canonware.com>.\nAll rights reserved.\nCopyright (C) 2007-2012 Mozilla Foundation.  All rights reserved.\nCopyright (C) 2009-present Facebook, Inc.  All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n1. Redistributions of source code must retain the above copyright notice(s),\n   this list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright notice(s),\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER(S) ``AS IS'' AND ANY EXPRESS\nOR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO\nEVENT SHALL THE COPYRIGHT HOLDER(S) BE LIABLE FOR ANY DIRECT, INDIRECT,\nINCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR\nPROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF\nLIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE\nOR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF\nADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n--------------------------------------------------------------------------------\n",
+      "attribution": "Copyright (C) 2002-present Jason Evans <jasone@canonware.com>.; Copyright (C) 2007-2012 Mozilla Foundation.  All rights reserved.; Copyright (C) 2009-present Facebook, Inc.  All rights reserved., BSD-2-Clause license (COPYING), https://github.com/tporadowski/redis/tree/c59c9365be41e8936fef00af5b1b149ab91b70ba/deps/jemalloc-5.2.1."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "deps/lua/COPYRIGHT",
+        "deps/lua/HISTORY",
+        "deps/lua/INSTALL",
+        "deps/lua/Makefile",
+        "deps/lua/README",
+        "deps/lua/doc/contents.html",
+        "deps/lua/doc/lua.1",
+        "deps/lua/doc/lua.css",
+        "deps/lua/doc/lua.html",
+        "deps/lua/doc/luac.1",
+        "deps/lua/doc/luac.html",
+        "deps/lua/doc/manual.css",
+        "deps/lua/doc/manual.html",
+        "deps/lua/doc/readme.html",
+        "deps/lua/etc/Makefile",
+        "deps/lua/etc/README",
+        "deps/lua/etc/all.c",
+        "deps/lua/etc/lua.hpp",
+        "deps/lua/etc/lua.pc",
+        "deps/lua/etc/luavs.bat",
+        "deps/lua/etc/min.c",
+        "deps/lua/etc/noparser.c",
+        "deps/lua/etc/strict.lua",
+        "deps/lua/src/**",
+        "deps/lua/test/README",
+        "deps/lua/test/bisect.lua",
+        "deps/lua/test/cf.lua",
+        "deps/lua/test/echo.lua",
+        "deps/lua/test/env.lua",
+        "deps/lua/test/factorial.lua",
+        "deps/lua/test/fib.lua",
+        "deps/lua/test/fibfor.lua",
+        "deps/lua/test/globals.lua",
+        "deps/lua/test/hello.lua",
+        "deps/lua/test/luac.lua",
+        "deps/lua/test/printf.lua",
+        "deps/lua/test/readonly.lua",
+        "deps/lua/test/sieve.lua",
+        "deps/lua/test/sort.lua",
+        "deps/lua/test/table.lua",
+        "deps/lua/test/trace-calls.lua",
+        "deps/lua/test/trace-globals.lua",
+        "deps/lua/test/xd.lua"
+      ],
+      "text": "Lua License\n-----------\n\nLua is licensed under the terms of the MIT license reproduced below.\nThis means that Lua is free software and can be used for both academic\nand commercial purposes at absolutely no cost.\n\nFor details and rationale, see http://www.lua.org/license.html .\n\n===============================================================================\n\nCopyright (C) 1994-2012 Lua.org, PUC-Rio.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n===============================================================================\n\n(end of COPYRIGHT)\n",
+      "attribution": "Copyright (C) 1994-2012 Lua.org, PUC-Rio., MIT license (COPYRIGHT), https://github.com/tporadowski/redis/tree/c59c9365be41e8936fef00af5b1b149ab91b70ba/deps/lua."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "awk",
+      "paths": [
+        "**/*.awk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tcl",
+      "paths": [
+        "**/*.tcl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ac"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.filters"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.guess"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.m4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nuspec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sln"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sub"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/00-RELEASENOTES"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/BUGS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CONTRIBUTING"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COPYING"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COPYRIGHT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ChangeLog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/HISTORY"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/INSTALL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/MANIFESTO"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/create-cluster"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install-sh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/redis_init_script"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/runtest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/runtest-cluster"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/runtest-sentinel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.csproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.vcxproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16"
+  }
+}

@@ -2,7 +2,7 @@
   "type": "git",
   "address": "https://github.com/microsoft/react-native-windows",
   "revision": "811b44334ddbb179e715a7e241ca3c67eb14970f",
-  "checksum": "sha256:f8475c9ebcaf19f895f29e0a6d94ee6492949398e47a6460afe1a8a834b4cb7e",
+  "checksum": "sha256:0f605a464451dc6e9327e3f11af8a2ac9cd2e205470a68f533dbef6540b244af",
   "extract": {
     "exclude": [
       ".ado/config/PoliCheckRules.mdb",
@@ -79,7 +79,10 @@
       "vnext/ReactCopies/IntegrationTests/blue_square.png",
       "vnext/ReactCopies/IntegrationTests/red_square.png",
       "vnext/TestWebSite/wwwroot/static/react.png",
-      "vnext/external/**",
+      "vnext/external/.clang-format",
+      "vnext/external/External.vcxitems",
+      "vnext/external/fmt/**",
+      "vnext/external/folly/folly/docs/Fbvector--graphical_solutions.png",
       "vnext/templates/cpp-app/windows/MyApp/MyApp.ico",
       "vnext/templates/cpp-app/windows/MyApp/MyApp.rc",
       "vnext/templates/cpp-app/windows/MyApp/small.ico",
@@ -92,12 +95,12 @@
   },
   "licenses": [
     {
-      "license": "MIT",
+      "license": "MIT AND Apache-2.0 AND BSL-1.0 AND MIT AND Apache-2.0 AND MIT",
       "paths": [
         ".git/history/**"
       ],
-      "text": "The MIT License (MIT)\n\nCopyright (c) Microsoft Corporation and contributors. All rights reserved.\n\nPortions derived from React Native:\n\nCopyright (c) 2015-present, Facebook, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2020-2022 Alexander Sklar\nCopyright (c) Microsoft Corporation.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
-      "attribution": "Commit history of https://github.com/microsoft/react-native-windows: Copyright (c) Microsoft Corporation and contributors. All rights reserved.; Copyright (c) 2015-present, Facebook, Inc., MIT license (LICENSE), https://github.com/microsoft/react-native-windows; Copyright (c) 2020-2022 Alexander Sklar; Copyright (c) Microsoft Corporation., MIT license (LICENSE), https://github.com/microsoft/react-native-windows/tree/811b44334ddbb179e715a7e241ca3c67eb14970f/packages/@rnw-scripts/unbroken; Copyright (c) Microsoft Corporation and contributors. All rights reserved.; Copyright (c) 2015-present, Facebook, Inc., MIT license (LICENSE), https://github.com/microsoft/react-native-windows/tree/811b44334ddbb179e715a7e241ca3c67eb14970f/vnext."
+      "text": "The MIT License (MIT)\n\nCopyright (c) Microsoft Corporation and contributors. All rights reserved.\n\nPortions derived from React Native:\n\nCopyright (c) 2015-present, Facebook, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2020-2022 Alexander Sklar\nCopyright (c) Microsoft Corporation.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nvnext/external/fast-float/LICENSE-APACHE:\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   Copyright 2021 The fast_float authors\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nvnext/external/fast-float/LICENSE-BOOST:\n\nBoost Software License - Version 1.0 - August 17th, 2003\n\nPermission is hereby granted, free of charge, to any person or organization\nobtaining a copy of the software and accompanying documentation covered by\nthis license (the \"Software\") to use, reproduce, display, distribute,\nexecute, and transmit the Software, and to prepare derivative works of the\nSoftware, and to permit third-parties to whom the Software is furnished to\ndo so, all subject to the following:\n\nThe copyright notices in the Software and this entire statement, including\nthe above license grant, this restriction and the following disclaimer,\nmust be included in all copies of the Software, in whole or in part, and\nall derivative works of the Software, unless such copies or derivative\nworks are solely in the form of machine-executable object code generated by\na source language processor.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT\nSHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE\nFOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,\nARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n\nvnext/external/fast-float/LICENSE-MIT:\n\nMIT License\n\nCopyright (c) 2021 The fast_float authors\n\nPermission is hereby granted, free of charge, to any\nperson obtaining a copy of this software and associated\ndocumentation files (the \"Software\"), to deal in the\nSoftware without restriction, including without\nlimitation the rights to use, copy, modify, merge,\npublish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software\nis furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice\nshall be included in all copies or substantial portions\nof the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF\nANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED\nTO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A\nPARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT\nSHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR\nIN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n\n\nVersion: No file states a choice between the licenses, so all apply.\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n\nFiles in folly/external/farmhash licensed as follows\n\n    Copyright (c) 2014 Google, Inc.\n\n    Permission is hereby granted, free of charge, to any person obtaining a copy\n    of this software and associated documentation files (the \"Software\"), to deal\n    in the Software without restriction, including without limitation the rights\n    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n    copies of the Software, and to permit persons to whom the Software is\n    furnished to do so, subject to the following conditions:\n\n    The above copyright notice and this permission notice shall be included in\n    all copies or substantial portions of the Software.\n\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\n    THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/microsoft/react-native-windows: Copyright (c) Microsoft Corporation and contributors. All rights reserved.; Copyright (c) 2015-present, Facebook, Inc., MIT license (LICENSE), https://github.com/microsoft/react-native-windows; Copyright (c) 2020-2022 Alexander Sklar; Copyright (c) Microsoft Corporation., MIT license (LICENSE), https://github.com/microsoft/react-native-windows/tree/811b44334ddbb179e715a7e241ca3c67eb14970f/packages/@rnw-scripts/unbroken; Copyright (c) Microsoft Corporation and contributors. All rights reserved.; Copyright (c) 2015-present, Facebook, Inc., MIT license (LICENSE), https://github.com/microsoft/react-native-windows/tree/811b44334ddbb179e715a7e241ca3c67eb14970f/vnext; Copyright 2021 The fast_float authors; Copyright (c) 2021 The fast_float authors, Apache-2.0 AND BSL-1.0 AND MIT license (LICENSE-APACHE and LICENSE-BOOST and LICENSE-MIT), https://github.com/microsoft/react-native-windows/tree/811b44334ddbb179e715a7e241ca3c67eb14970f/vnext/external/fast-float; Copyright (c) 2014 Google, Inc., Apache-2.0 AND MIT license (LICENSE), https://github.com/microsoft/react-native-windows/tree/811b44334ddbb179e715a7e241ca3c67eb14970f/vnext/external/folly."
     },
     {
       "license": "MIT",
@@ -817,6 +820,232 @@
       ],
       "text": "The MIT License (MIT)\n\nCopyright (c) Microsoft Corporation and contributors. All rights reserved.\n\nPortions derived from React Native:\n\nCopyright (c) 2015-present, Facebook, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
       "attribution": "Copyright (c) Microsoft Corporation and contributors. All rights reserved.; Copyright (c) 2015-present, Facebook, Inc., MIT license (LICENSE), https://github.com/microsoft/react-native-windows/tree/811b44334ddbb179e715a7e241ca3c67eb14970f/vnext."
+    },
+    {
+      "license": "Apache-2.0 AND BSL-1.0 AND MIT",
+      "paths": [
+        "vnext/external/fast-float/**"
+      ],
+      "text": "vnext/external/fast-float/LICENSE-APACHE:\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   Copyright 2021 The fast_float authors\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nvnext/external/fast-float/LICENSE-BOOST:\n\nBoost Software License - Version 1.0 - August 17th, 2003\n\nPermission is hereby granted, free of charge, to any person or organization\nobtaining a copy of the software and accompanying documentation covered by\nthis license (the \"Software\") to use, reproduce, display, distribute,\nexecute, and transmit the Software, and to prepare derivative works of the\nSoftware, and to permit third-parties to whom the Software is furnished to\ndo so, all subject to the following:\n\nThe copyright notices in the Software and this entire statement, including\nthe above license grant, this restriction and the following disclaimer,\nmust be included in all copies of the Software, in whole or in part, and\nall derivative works of the Software, unless such copies or derivative\nworks are solely in the form of machine-executable object code generated by\na source language processor.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT\nSHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE\nFOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,\nARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n\nvnext/external/fast-float/LICENSE-MIT:\n\nMIT License\n\nCopyright (c) 2021 The fast_float authors\n\nPermission is hereby granted, free of charge, to any\nperson obtaining a copy of this software and associated\ndocumentation files (the \"Software\"), to deal in the\nSoftware without restriction, including without\nlimitation the rights to use, copy, modify, merge,\npublish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software\nis furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice\nshall be included in all copies or substantial portions\nof the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF\nANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED\nTO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A\nPARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT\nSHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR\nIN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n\n\nVersion: No file states a choice between the licenses, so all apply.",
+      "attribution": "Copyright 2021 The fast_float authors; Copyright (c) 2021 The fast_float authors, Apache-2.0 AND BSL-1.0 AND MIT license (LICENSE-APACHE and LICENSE-BOOST and LICENSE-MIT), https://github.com/microsoft/react-native-windows/tree/811b44334ddbb179e715a7e241ca3c67eb14970f/vnext/external/fast-float."
+    },
+    {
+      "license": "Apache-2.0 AND MIT",
+      "paths": [
+        "vnext/external/folly/.syncignore",
+        "vnext/external/folly/Folly.natvis",
+        "vnext/external/folly/LICENSE",
+        "vnext/external/folly/README.md",
+        "vnext/external/folly/cgmanifest.json",
+        "vnext/external/folly/folly/.clang-format",
+        "vnext/external/folly/folly/AtomicHashArray-inl.h",
+        "vnext/external/folly/folly/AtomicHashArray.h",
+        "vnext/external/folly/folly/AtomicHashMap-inl.h",
+        "vnext/external/folly/folly/AtomicHashMap.h",
+        "vnext/external/folly/folly/AtomicIntrusiveLinkedList.h",
+        "vnext/external/folly/folly/AtomicLinkedList.h",
+        "vnext/external/folly/folly/AtomicUnorderedMap.h",
+        "vnext/external/folly/folly/BUCK",
+        "vnext/external/folly/folly/BUILD_MODE.bzl",
+        "vnext/external/folly/folly/Benchmark.cpp",
+        "vnext/external/folly/folly/Benchmark.h",
+        "vnext/external/folly/folly/BenchmarkUtil.h",
+        "vnext/external/folly/folly/Bits.h",
+        "vnext/external/folly/folly/CMakeLists.txt",
+        "vnext/external/folly/folly/CPortability.h",
+        "vnext/external/folly/folly/CancellationToken-inl.h",
+        "vnext/external/folly/folly/CancellationToken.cpp",
+        "vnext/external/folly/folly/CancellationToken.h",
+        "vnext/external/folly/folly/Chrono.h",
+        "vnext/external/folly/folly/ClockGettimeWrappers.cpp",
+        "vnext/external/folly/folly/ClockGettimeWrappers.h",
+        "vnext/external/folly/folly/ConcurrentBitSet.h",
+        "vnext/external/folly/folly/ConcurrentLazy.h",
+        "vnext/external/folly/folly/ConcurrentSkipList-inl.h",
+        "vnext/external/folly/folly/ConcurrentSkipList.h",
+        "vnext/external/folly/folly/ConstexprMath.h",
+        "vnext/external/folly/folly/ConstructorCallbackList.h",
+        "vnext/external/folly/folly/Conv.cpp",
+        "vnext/external/folly/folly/Conv.h",
+        "vnext/external/folly/folly/CppAttributes.h",
+        "vnext/external/folly/folly/CpuId.h",
+        "vnext/external/folly/folly/DefaultKeepAliveExecutor.h",
+        "vnext/external/folly/folly/Demangle.cpp",
+        "vnext/external/folly/folly/Demangle.h",
+        "vnext/external/folly/folly/DiscriminatedPtr.h",
+        "vnext/external/folly/folly/DynamicConverter.h",
+        "vnext/external/folly/folly/Exception.h",
+        "vnext/external/folly/folly/ExceptionString.cpp",
+        "vnext/external/folly/folly/ExceptionString.h",
+        "vnext/external/folly/folly/ExceptionWrapper-inl.h",
+        "vnext/external/folly/folly/ExceptionWrapper.cpp",
+        "vnext/external/folly/folly/ExceptionWrapper.h",
+        "vnext/external/folly/folly/Executor.cpp",
+        "vnext/external/folly/folly/Executor.h",
+        "vnext/external/folly/folly/Expected.h",
+        "vnext/external/folly/folly/FBString.h",
+        "vnext/external/folly/folly/FBVector.h",
+        "vnext/external/folly/folly/File.cpp",
+        "vnext/external/folly/folly/File.h",
+        "vnext/external/folly/folly/FileUtil.cpp",
+        "vnext/external/folly/folly/FileUtil.h",
+        "vnext/external/folly/folly/Fingerprint.cpp",
+        "vnext/external/folly/folly/Fingerprint.h",
+        "vnext/external/folly/folly/FixedString.h",
+        "vnext/external/folly/folly/FollyMemcpy.cpp",
+        "vnext/external/folly/folly/FollyMemcpy.h",
+        "vnext/external/folly/folly/FollyMemset.cpp",
+        "vnext/external/folly/folly/FollyMemset.h",
+        "vnext/external/folly/folly/Format-inl.h",
+        "vnext/external/folly/folly/Format.cpp",
+        "vnext/external/folly/folly/Format.h",
+        "vnext/external/folly/folly/FormatArg.h",
+        "vnext/external/folly/folly/FormatTraits.h",
+        "vnext/external/folly/folly/Function.h",
+        "vnext/external/folly/folly/GLog.h",
+        "vnext/external/folly/folly/GroupVarint.cpp",
+        "vnext/external/folly/folly/GroupVarint.h",
+        "vnext/external/folly/folly/Hash.h",
+        "vnext/external/folly/folly/IPAddress.cpp",
+        "vnext/external/folly/folly/IPAddress.h",
+        "vnext/external/folly/folly/IPAddressException.h",
+        "vnext/external/folly/folly/IPAddressV4.cpp",
+        "vnext/external/folly/folly/IPAddressV4.h",
+        "vnext/external/folly/folly/IPAddressV6.cpp",
+        "vnext/external/folly/folly/IPAddressV6.h",
+        "vnext/external/folly/folly/Indestructible.h",
+        "vnext/external/folly/folly/IndexedMemPool.h",
+        "vnext/external/folly/folly/IntrusiveList.h",
+        "vnext/external/folly/folly/Lazy.h",
+        "vnext/external/folly/folly/Likely.h",
+        "vnext/external/folly/folly/MPMCPipeline.h",
+        "vnext/external/folly/folly/MPMCQueue.h",
+        "vnext/external/folly/folly/MacAddress.cpp",
+        "vnext/external/folly/folly/MacAddress.h",
+        "vnext/external/folly/folly/MapUtil.h",
+        "vnext/external/folly/folly/Math.h",
+        "vnext/external/folly/folly/MaybeManagedPtr.h",
+        "vnext/external/folly/folly/Memory.h",
+        "vnext/external/folly/folly/MicroLock.cpp",
+        "vnext/external/folly/folly/MicroLock.h",
+        "vnext/external/folly/folly/MicroSpinLock.h",
+        "vnext/external/folly/folly/MoveWrapper.h",
+        "vnext/external/folly/folly/ObserverContainer.h",
+        "vnext/external/folly/folly/Optional.h",
+        "vnext/external/folly/folly/Overload.h",
+        "vnext/external/folly/folly/PackedSyncPtr.h",
+        "vnext/external/folly/folly/Padded.h",
+        "vnext/external/folly/folly/Poly-inl.h",
+        "vnext/external/folly/folly/Poly.h",
+        "vnext/external/folly/folly/PolyException.h",
+        "vnext/external/folly/folly/Portability.h",
+        "vnext/external/folly/folly/Preprocessor.h",
+        "vnext/external/folly/folly/ProducerConsumerQueue.h",
+        "vnext/external/folly/folly/RWSpinLock.h",
+        "vnext/external/folly/folly/Random-inl.h",
+        "vnext/external/folly/folly/Random.cpp",
+        "vnext/external/folly/folly/Random.h",
+        "vnext/external/folly/folly/Range.h",
+        "vnext/external/folly/folly/Replaceable.h",
+        "vnext/external/folly/folly/ScopeGuard.cpp",
+        "vnext/external/folly/folly/ScopeGuard.h",
+        "vnext/external/folly/folly/SharedMutex.cpp",
+        "vnext/external/folly/folly/SharedMutex.h",
+        "vnext/external/folly/folly/Singleton-inl.h",
+        "vnext/external/folly/folly/Singleton.cpp",
+        "vnext/external/folly/folly/Singleton.h",
+        "vnext/external/folly/folly/SingletonThreadLocal.cpp",
+        "vnext/external/folly/folly/SingletonThreadLocal.h",
+        "vnext/external/folly/folly/SocketAddress.cpp",
+        "vnext/external/folly/folly/SocketAddress.h",
+        "vnext/external/folly/folly/SpinLock.h",
+        "vnext/external/folly/folly/String-inl.h",
+        "vnext/external/folly/folly/String.cpp",
+        "vnext/external/folly/folly/String.h",
+        "vnext/external/folly/folly/Subprocess.cpp",
+        "vnext/external/folly/folly/Subprocess.h",
+        "vnext/external/folly/folly/Synchronized.h",
+        "vnext/external/folly/folly/SynchronizedPtr.h",
+        "vnext/external/folly/folly/ThreadCachedInt.h",
+        "vnext/external/folly/folly/ThreadLocal.h",
+        "vnext/external/folly/folly/TimeoutQueue.cpp",
+        "vnext/external/folly/folly/TimeoutQueue.h",
+        "vnext/external/folly/folly/TokenBucket.h",
+        "vnext/external/folly/folly/Traits.h",
+        "vnext/external/folly/folly/Try-inl.h",
+        "vnext/external/folly/folly/Try.cpp",
+        "vnext/external/folly/folly/Try.h",
+        "vnext/external/folly/folly/UTF8String.h",
+        "vnext/external/folly/folly/Unicode.cpp",
+        "vnext/external/folly/folly/Unicode.h",
+        "vnext/external/folly/folly/Unit.h",
+        "vnext/external/folly/folly/Uri-inl.h",
+        "vnext/external/folly/folly/Uri.cpp",
+        "vnext/external/folly/folly/Uri.h",
+        "vnext/external/folly/folly/Utility.h",
+        "vnext/external/folly/folly/VERSION",
+        "vnext/external/folly/folly/Varint.h",
+        "vnext/external/folly/folly/VirtualExecutor.h",
+        "vnext/external/folly/folly/algorithm/**",
+        "vnext/external/folly/folly/base64.h",
+        "vnext/external/folly/folly/chrono/**",
+        "vnext/external/folly/folly/concurrency/**",
+        "vnext/external/folly/folly/container/**",
+        "vnext/external/folly/folly/defs.bzl",
+        "vnext/external/folly/folly/detail/**",
+        "vnext/external/folly/folly/docs/AtomicHashMap.md",
+        "vnext/external/folly/folly/docs/Benchmark.md",
+        "vnext/external/folly/folly/docs/Conv.md",
+        "vnext/external/folly/folly/docs/Dynamic.md",
+        "vnext/external/folly/folly/docs/DynamicConverter.md",
+        "vnext/external/folly/folly/docs/Executors.md",
+        "vnext/external/folly/folly/docs/FBString.md",
+        "vnext/external/folly/folly/docs/FBVector.md",
+        "vnext/external/folly/folly/docs/Format.md",
+        "vnext/external/folly/folly/docs/Function.md",
+        "vnext/external/folly/folly/docs/Futures.md",
+        "vnext/external/folly/folly/docs/GroupVarint.md",
+        "vnext/external/folly/folly/docs/Histogram.md",
+        "vnext/external/folly/folly/docs/MapUtils.md",
+        "vnext/external/folly/folly/docs/Overview.md",
+        "vnext/external/folly/folly/docs/PackedSyncPtr.md",
+        "vnext/external/folly/folly/docs/Poly.md",
+        "vnext/external/folly/folly/docs/ProducerConsumerQueue.md",
+        "vnext/external/folly/folly/docs/Rcu.md",
+        "vnext/external/folly/folly/docs/SmallLocks.md",
+        "vnext/external/folly/folly/docs/Synchronized.md",
+        "vnext/external/folly/folly/docs/ThreadCachedInt.md",
+        "vnext/external/folly/folly/docs/ThreadLocal.md",
+        "vnext/external/folly/folly/docs/Traits.md",
+        "vnext/external/folly/folly/docs/small_vector.md",
+        "vnext/external/folly/folly/docs/style.css",
+        "vnext/external/folly/folly/dynamic-inl.h",
+        "vnext/external/folly/folly/dynamic.h",
+        "vnext/external/folly/folly/folly_extended_library.bzl",
+        "vnext/external/folly/folly/functional/**",
+        "vnext/external/folly/folly/hash/**",
+        "vnext/external/folly/folly/json/**",
+        "vnext/external/folly/folly/json.h",
+        "vnext/external/folly/folly/json_patch.h",
+        "vnext/external/folly/folly/json_pointer.h",
+        "vnext/external/folly/folly/lang/**",
+        "vnext/external/folly/folly/memcpy.S",
+        "vnext/external/folly/folly/memcpy_select_aarch64.cpp",
+        "vnext/external/folly/folly/memory/**",
+        "vnext/external/folly/folly/memset.S",
+        "vnext/external/folly/folly/memset_select_aarch64.cpp",
+        "vnext/external/folly/folly/portability/**",
+        "vnext/external/folly/folly/small_vector.h",
+        "vnext/external/folly/folly/somerge_defs.bzl",
+        "vnext/external/folly/folly/sorted_vector_types.h",
+        "vnext/external/folly/folly/stop_watch.h",
+        "vnext/external/folly/folly/synchronization/**",
+        "vnext/external/folly/folly/system/**",
+        "vnext/external/folly/folly.vcxitems",
+        "vnext/external/folly/sync-config.json"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n\nFiles in folly/external/farmhash licensed as follows\n\n    Copyright (c) 2014 Google, Inc.\n\n    Permission is hereby granted, free of charge, to any person obtaining a copy\n    of this software and associated documentation files (the \"Software\"), to deal\n    in the Software without restriction, including without limitation the rights\n    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n    copies of the Software, and to permit persons to whom the Software is\n    furnished to do so, subject to the following conditions:\n\n    The above copyright notice and this permission notice shall be included in\n    all copies or substantial portions of the Software.\n\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\n    THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 Google, Inc., Apache-2.0 AND MIT license (LICENSE), https://github.com/microsoft/react-native-windows/tree/811b44334ddbb179e715a7e241ca3c67eb14970f/vnext/external/folly."
     }
   ],
   "formats": [
@@ -831,6 +1060,13 @@
       "format": "markdown",
       "paths": [
         "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.S"
       ]
     },
     {
@@ -851,7 +1087,21 @@
       "format": "code",
       "language": "c",
       "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
         "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
       ]
     },
     {
@@ -866,6 +1116,13 @@
       "language": "csharp",
       "paths": [
         "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
       ]
     },
     {
@@ -922,6 +1179,13 @@
       "language": "powershell",
       "paths": [
         "**/*.psm1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/*.bzl"
       ]
     },
     {
@@ -1030,6 +1294,12 @@
     {
       "format": "text",
       "paths": [
+        "**/*.natvis"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
         "**/*.nuspec"
       ]
     },
@@ -1084,7 +1354,9 @@
     {
       "format": "text",
       "paths": [
-        "**/*.txt"
+        "vnext/Microsoft.ReactNative.Cxx.UnitTests/readme.txt",
+        "vnext/Microsoft.ReactNative/readme.txt",
+        "vnext/TestWebSite/wwwroot/static/sample.txt"
       ]
     },
     {
@@ -1109,6 +1381,12 @@
       "format": "text",
       "paths": [
         "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-tidy"
       ]
     },
     {
@@ -1192,6 +1470,12 @@
     {
       "format": "text",
       "paths": [
+        "**/.syncignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
         "**/.unbroken_exclusions"
       ]
     },
@@ -1210,7 +1494,31 @@
     {
       "format": "text",
       "paths": [
+        "**/LICENSE-APACHE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE-BOOST"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE-MIT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
         "**/NuGet_Config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION"
       ]
     },
     {
@@ -1307,8 +1615,8 @@
     }
   ],
   "decision": {
-    "decision": "admitted",
+    "decision": "under-review",
     "by": "Inaya Yousfi",
-    "date": "2026-10-21"
+    "date": "2026-10-16"
   }
 }

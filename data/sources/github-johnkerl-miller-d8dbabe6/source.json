@@ -1,0 +1,2183 @@
+{
+  "type": "git",
+  "address": "https://github.com/johnkerl/miller",
+  "revision": "8f8b60e435651f483b92f77d1d70d85343ec553c",
+  "checksum": "sha256:280573ff2f6648dea7f152d4e0e934a8ef9521fafe193e0be73679fa4f2ea422",
+  "extract": {
+    "exclude": [
+      "docs/src/_static/mlr.jpg",
+      "docs/src/_static/top.png",
+      "docs/src/coverart/**",
+      "docs/src/data/linreg-example.jpg",
+      "docs/src/gz-example.csv.gz",
+      "docs/src/images/**",
+      "docs/src/perf/**",
+      "docs/src/pix/**",
+      "docs/src/profiling/**",
+      "docs/src/purple.csv.gz",
+      "docs/src/red.csv.gz",
+      "docs/src/yellow.csv.gz",
+      "test/cases/dsl-bytes-conversions/non-windows/0002/expout",
+      "test/cases/dsl-latin1/0001/expout",
+      "test/cases/verb-utf8-to-latin1/0001/expout",
+      "test/input/auxents-hex-unhex/0001.bin",
+      "test/input/auxents-hex-unhex/0002.bin",
+      "test/input/auxents-hex-unhex/0003.bin",
+      "test/input/auxents-hex-unhex/0004.bin",
+      "test/input/auxents-hex-unhex/0005.bin",
+      "test/input/auxents-hex-unhex/0006.bin",
+      "test/input/auxents-hex-unhex/0007.bin",
+      "test/input/auxents-hex-unhex/0008.bin",
+      "test/input/latin1.xtab",
+      "test/input/medium.bz2",
+      "test/input/medium.gz",
+      "test/input/medium.z",
+      "test/input/medium.zst"
+    ]
+  },
+  "history": {
+    "since": "892e69978ac877949cb2c6c5461c61a72f0ec348"
+  },
+  "licenses": [
+    {
+      "license": "BSD-2-Clause AND BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "BSD 2-Clause License\n\nSPDX-License-Identifier: BSD-2-Clause\n\nCopyright (c) 2015- John Kerl\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nThis software is provided by the copyright holders and contributors \"as is\" and\nany express or implied warranties, including, but not limited to, the implied\nwarranties of merchantability and fitness for a particular purpose are\ndisclaimed. In no event shall the copyright holder or contributors be liable\nfor any direct, indirect, incidental, special, exemplary, or consequential\ndamages (including, but not limited to, procurement of substitute goods or\nservices; loss of use, data, or profits; or business interruption) however\ncaused and on any theory of liability, whether in contract, strict liability,\nor tort (including negligence or otherwise) arising in any way out of the use\nof this software, even if advised of the possibility of such damage.\n\nI am providing code in this repository to you under an open-source license.\nBecause this is my personal repository, the license you receive to my code is\nfrom me and not from my employer.\n\n\nCopyright (c) 2009 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/johnkerl/miller: Copyright (c) 2015- John Kerl, BSD-2-Clause license (LICENSE.txt), https://github.com/johnkerl/miller; Copyright (c) 2009 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/johnkerl/miller/tree/8f8b60e435651f483b92f77d1d70d85343ec553c/pkg/go-csv."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".all-contributorsrc",
+        ".codespellignore",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".golangci.yml",
+        ".goreleaser.yml",
+        ".readthedocs.yaml",
+        ".vimrc",
+        "CLAUDE.md",
+        "CONTRIBUTING.md",
+        "LICENSE.txt",
+        "Makefile",
+        "README-RPM.md",
+        "README-dev.md",
+        "README-docs.md",
+        "README-go-port.md",
+        "README-profiling.md",
+        "README-versions.md",
+        "README.md",
+        "cmd/**",
+        "configure",
+        "create-release-tarball",
+        "data/**",
+        "delve.txt",
+        "docs/Makefile",
+        "docs/README.md",
+        "docs/_config.yml",
+        "docs/build-epub.sh",
+        "docs/mkdocs.yml",
+        "docs/overrides/**",
+        "docs/regen.sh",
+        "docs/requirements.txt",
+        "docs/retitle",
+        "docs/src/.vimrc",
+        "docs/src/10min.md",
+        "docs/src/10min.md.in",
+        "docs/src/Makefile",
+        "docs/src/_static/basic.css",
+        "docs/src/_static/classic.css",
+        "docs/src/_static/pygments.css",
+        "docs/src/_static/scrolls.css",
+        "docs/src/absent-example.json",
+        "docs/src/agent-skill.md",
+        "docs/src/agent-skill.md.in",
+        "docs/src/ai-support.md",
+        "docs/src/ai-support.md.in",
+        "docs/src/ai.md",
+        "docs/src/ai.md.in",
+        "docs/src/build-one",
+        "docs/src/build.md",
+        "docs/src/build.md.in",
+        "docs/src/circle.csv",
+        "docs/src/commas.csv",
+        "docs/src/community.md",
+        "docs/src/community.md.in",
+        "docs/src/context-example.mlr",
+        "docs/src/contributing.md",
+        "docs/src/contributing.md.in",
+        "docs/src/cpu.md",
+        "docs/src/cpu.md.in",
+        "docs/src/csv-with-and-without-headers.md",
+        "docs/src/csv-with-and-without-headers.md.in",
+        "docs/src/custom-record-formatting.mlr",
+        "docs/src/customization.md",
+        "docs/src/customization.md.in",
+        "docs/src/data/a.csv",
+        "docs/src/data/a.dkvp",
+        "docs/src/data/array-example.json",
+        "docs/src/data/array-values-nested.json",
+        "docs/src/data/array-values-spread-colon.csv",
+        "docs/src/data/array-values-spread.csv",
+        "docs/src/data/array-values.json",
+        "docs/src/data/b.csv",
+        "docs/src/data/b.dkvp",
+        "docs/src/data/begin-end-example-7b.sh",
+        "docs/src/data/budget.csv",
+        "docs/src/data/bulk-rename-for-loop.mlr",
+        "docs/src/data/cases.csv",
+        "docs/src/data/clean-whitespace.csv",
+        "docs/src/data/color-codes.csv",
+        "docs/src/data/color-names.csv",
+        "docs/src/data/colored-shapes-2.csv",
+        "docs/src/data/colored-shapes.csv",
+        "docs/src/data/colored-shapes.dkvp",
+        "docs/src/data/colours.csv",
+        "docs/src/data/consecutive.csv",
+        "docs/src/data/current_counters.csv",
+        "docs/src/data/currtemp.csv",
+        "docs/src/data/dollar-sign.txt",
+        "docs/src/data/english-words.txt",
+        "docs/src/data/extra-spaces.txt",
+        "docs/src/data/fe-example-3.mlr",
+        "docs/src/data/fe-example-4.mlr",
+        "docs/src/data/feature-count.mlr",
+        "docs/src/data/features.json",
+        "docs/src/data/fibo-cached.sh",
+        "docs/src/data/fibo-uncached.sh",
+        "docs/src/data/filenames.txt",
+        "docs/src/data/fillable.csv",
+        "docs/src/data/filter-multiline-example.txt",
+        "docs/src/data/flatten-dots.csv",
+        "docs/src/data/flins.csv",
+        "docs/src/data/flins.json",
+        "docs/src/data/for-oosvar-example-0a.txt",
+        "docs/src/data/for-srec-example.tbl",
+        "docs/src/data/fraction-example.csv",
+        "docs/src/data/header-lf.csv",
+        "docs/src/data/headerless.csv",
+        "docs/src/data/het/**",
+        "docs/src/data/het-bool.csv",
+        "docs/src/data/het.csv",
+        "docs/src/data/het.dkvp",
+        "docs/src/data/het.json",
+        "docs/src/data/hostnames.csv",
+        "docs/src/data/hostnames.xtab",
+        "docs/src/data/hosts.csv",
+        "docs/src/data/inout.csv",
+        "docs/src/data/join-ignore-empty-left.csv",
+        "docs/src/data/join-ignore-empty-right.csv",
+        "docs/src/data/join-left-example.csv",
+        "docs/src/data/join-nest-left.csv",
+        "docs/src/data/join-nest-right.csv",
+        "docs/src/data/join-right-example.csv",
+        "docs/src/data/join-u-left.csv",
+        "docs/src/data/join-u-right.csv",
+        "docs/src/data/join-x.csv",
+        "docs/src/data/join-y.csv",
+        "docs/src/data/json-example-1.json",
+        "docs/src/data/json-example-2.json",
+        "docs/src/data/json-example-3.json",
+        "docs/src/data/json-in-csv.csv",
+        "docs/src/data/key-change.json",
+        "docs/src/data/label-example.txt",
+        "docs/src/data/lazy-quotes.csv",
+        "docs/src/data/linreg-example.txt",
+        "docs/src/data/map-values-nested.json",
+        "docs/src/data/map-values-spread-colon.csv",
+        "docs/src/data/map-values-spread.csv",
+        "docs/src/data/map-values.json",
+        "docs/src/data/maxrows.mlr",
+        "docs/src/data/maxrows.tsv",
+        "docs/src/data/medium",
+        "docs/src/data/medium-squares",
+        "docs/src/data/miss-date.csv",
+        "docs/src/data/mkdat2",
+        "docs/src/data/modsep.dkvp",
+        "docs/src/data/multicountdown.dat",
+        "docs/src/data/multicountdown.rb",
+        "docs/src/data/mydata.txt",
+        "docs/src/data/nas.csv",
+        "docs/src/data/natsort.csv",
+        "docs/src/data/nested.tsv",
+        "docs/src/data/newline-example.txt",
+        "docs/src/data/non-consecutive.csv",
+        "docs/src/data/ping-delta-example.txt",
+        "docs/src/data/previous_counters.csv",
+        "docs/src/data/prevtemp.csv",
+        "docs/src/data/put-gating-example-1.dkvp",
+        "docs/src/data/put-gating-example-2.dkvp",
+        "docs/src/data/question.dat",
+        "docs/src/data/quoted-numeric.csv",
+        "docs/src/data/ragged.csv",
+        "docs/src/data/rank-example.csv",
+        "docs/src/data/rect-inner.txt",
+        "docs/src/data/rect-middle.txt",
+        "docs/src/data/rect-outer.txt",
+        "docs/src/data/rect.txt",
+        "docs/src/data/regex-in-data.dat",
+        "docs/src/data/remove-empty-columns.csv",
+        "docs/src/data/repeat-example.dat",
+        "docs/src/data/repeats.dkvp",
+        "docs/src/data/sample-example.txt",
+        "docs/src/data/sample.dcf",
+        "docs/src/data/sample.rec",
+        "docs/src/data/sample2.rec",
+        "docs/src/data/sar.csv",
+        "docs/src/data/sar.mlr",
+        "docs/src/data/scan-example-1.tbl",
+        "docs/src/data/scan-example-2.tbl",
+        "docs/src/data/scope-example.dat",
+        "docs/src/data/scope-example.mlr",
+        "docs/src/data/sec2dhms.csv",
+        "docs/src/data/self-join.csv",
+        "docs/src/data/semicolon-example.txt",
+        "docs/src/data/sensor-humidity.csv",
+        "docs/src/data/sensor-pressure.csv",
+        "docs/src/data/sensor-temp.csv",
+        "docs/src/data/server-log.json",
+        "docs/src/data/short.csv",
+        "docs/src/data/single-quote-example.mlr",
+        "docs/src/data/small",
+        "docs/src/data/small.csv",
+        "docs/src/data/small2",
+        "docs/src/data/sort-het.dkvp",
+        "docs/src/data/sort-missing.dkvp",
+        "docs/src/data/sort-null.dat",
+        "docs/src/data/sort-within-records.json",
+        "docs/src/data/sorta-example-text.csv",
+        "docs/src/data/sorta-example.csv",
+        "docs/src/data/sortaf-example.csv",
+        "docs/src/data/spaces.csv",
+        "docs/src/data/sparse.json",
+        "docs/src/data/split1.csv",
+        "docs/src/data/split2.csv",
+        "docs/src/data/stan-example.json",
+        "docs/src/data/subcommand-example.txt",
+        "docs/src/data/then-chaining-performance.txt",
+        "docs/src/data/then-example.csv",
+        "docs/src/data/timing-example.txt",
+        "docs/src/data/trivial-records.csv",
+        "docs/src/data/type-decl-example.mlr",
+        "docs/src/data/type-infer.csv",
+        "docs/src/data/under-over.json",
+        "docs/src/data/unsparsify.mlr",
+        "docs/src/data/update-db.csv",
+        "docs/src/data/update-download.csv",
+        "docs/src/data-cleaning-examples.md",
+        "docs/src/data-cleaning-examples.md.in",
+        "docs/src/data-diving-examples.md",
+        "docs/src/data-diving-examples.md.in",
+        "docs/src/data-error.csv",
+        "docs/src/date-time-examples.md",
+        "docs/src/date-time-examples.md.in",
+        "docs/src/dates.csv",
+        "docs/src/dkvp-examples.md",
+        "docs/src/dkvp-examples.md.in",
+        "docs/src/doc-reorg.txt",
+        "docs/src/dsl-example.mlr",
+        "docs/src/etymology.md",
+        "docs/src/etymology.md.in",
+        "docs/src/example-mlr-s-script",
+        "docs/src/example-mlr-s-script-no-shebang",
+        "docs/src/example-shell-script",
+        "docs/src/example.csv",
+        "docs/src/example.json",
+        "docs/src/expo-sample.sh",
+        "docs/src/extra.css",
+        "docs/src/factorial-example.mlr",
+        "docs/src/features.md",
+        "docs/src/features.md.in",
+        "docs/src/file-formats.md",
+        "docs/src/file-formats.md.in",
+        "docs/src/flags.txt",
+        "docs/src/flatten-unflatten.md",
+        "docs/src/flatten-unflatten.md.in",
+        "docs/src/for-example.mlr",
+        "docs/src/genmd-filter",
+        "docs/src/genmds",
+        "docs/src/glossary.md",
+        "docs/src/glossary.md.in",
+        "docs/src/h1foo",
+        "docs/src/h2foo",
+        "docs/src/h3foo",
+        "docs/src/how-to-release.md",
+        "docs/src/how-to-release.md.in",
+        "docs/src/if-example.mlr",
+        "docs/src/index.md",
+        "docs/src/index.md.in",
+        "docs/src/installing-miller.md",
+        "docs/src/installing-miller.md.in",
+        "docs/src/internationalization.md",
+        "docs/src/internationalization.md.in",
+        "docs/src/javascripts/**",
+        "docs/src/keystroke-savers.md",
+        "docs/src/keystroke-savers.md.in",
+        "docs/src/kubectl-and-helm.md",
+        "docs/src/kubectl-and-helm.md.in",
+        "docs/src/link.txt",
+        "docs/src/log-processing-examples.md",
+        "docs/src/log-processing-examples.md.in",
+        "docs/src/log.txt",
+        "docs/src/manpage.md",
+        "docs/src/manpage.md.in",
+        "docs/src/manpage.txt",
+        "docs/src/mcp-server.md",
+        "docs/src/mcp-server.md.in",
+        "docs/src/miller-as-library/**",
+        "docs/src/miller-as-library.md",
+        "docs/src/miller-as-library.md.in",
+        "docs/src/miller-on-windows.md",
+        "docs/src/miller-on-windows.md.in",
+        "docs/src/miller-programming-language.md",
+        "docs/src/miller-programming-language.md.in",
+        "docs/src/misc-examples.md",
+        "docs/src/misc-examples.md.in",
+        "docs/src/missings.csv",
+        "docs/src/missings.json",
+        "docs/src/mk-flag-info.rb",
+        "docs/src/mk-func-h2s.sh",
+        "docs/src/mk-func-info.rb",
+        "docs/src/morph",
+        "docs/src/morphs",
+        "docs/src/multi-join/**",
+        "docs/src/new-in-miller-6.md",
+        "docs/src/new-in-miller-6.md.in",
+        "docs/src/ngrams/**",
+        "docs/src/online-help.md",
+        "docs/src/online-help.md.in",
+        "docs/src/operating-on-all-fields.md",
+        "docs/src/operating-on-all-fields.md.in",
+        "docs/src/operating-on-all-records.md",
+        "docs/src/operating-on-all-records.md.in",
+        "docs/src/originality.md",
+        "docs/src/originality.md.in",
+        "docs/src/output-colorization.md",
+        "docs/src/output-colorization.md.in",
+        "docs/src/parsing-and-formatting-fields.md",
+        "docs/src/parsing-and-formatting-fields.md.in",
+        "docs/src/performance.md",
+        "docs/src/performance.md.in",
+        "docs/src/polyglot-dkvp-io/**",
+        "docs/src/programming-examples.md",
+        "docs/src/programming-examples.md.in",
+        "docs/src/programs/**",
+        "docs/src/questions-about-joins.md",
+        "docs/src/questions-about-joins.md.in",
+        "docs/src/questions-about-then-chaining.md",
+        "docs/src/questions-about-then-chaining.md.in",
+        "docs/src/randomizing-examples.md",
+        "docs/src/randomizing-examples.md.in",
+        "docs/src/record-heterogeneity.md",
+        "docs/src/record-heterogeneity.md.in",
+        "docs/src/record-templating-example.mlr",
+        "docs/src/reference-dsl-builtin-functions.md",
+        "docs/src/reference-dsl-builtin-functions.md.in",
+        "docs/src/reference-dsl-complexity.md",
+        "docs/src/reference-dsl-complexity.md.in",
+        "docs/src/reference-dsl-control-structures.md",
+        "docs/src/reference-dsl-control-structures.md.in",
+        "docs/src/reference-dsl-differences.md",
+        "docs/src/reference-dsl-differences.md.in",
+        "docs/src/reference-dsl-errors.md",
+        "docs/src/reference-dsl-errors.md.in",
+        "docs/src/reference-dsl-filter-statements.md",
+        "docs/src/reference-dsl-filter-statements.md.in",
+        "docs/src/reference-dsl-higher-order-functions.md",
+        "docs/src/reference-dsl-higher-order-functions.md.in",
+        "docs/src/reference-dsl-operators.md",
+        "docs/src/reference-dsl-operators.md.in",
+        "docs/src/reference-dsl-output-statements.md",
+        "docs/src/reference-dsl-output-statements.md.in",
+        "docs/src/reference-dsl-syntax.md",
+        "docs/src/reference-dsl-syntax.md.in",
+        "docs/src/reference-dsl-time.md",
+        "docs/src/reference-dsl-time.md.in",
+        "docs/src/reference-dsl-unset-statements.md",
+        "docs/src/reference-dsl-unset-statements.md.in",
+        "docs/src/reference-dsl-user-defined-functions.md",
+        "docs/src/reference-dsl-user-defined-functions.md.in",
+        "docs/src/reference-dsl-variables.md",
+        "docs/src/reference-dsl-variables.md.in",
+        "docs/src/reference-dsl.md",
+        "docs/src/reference-dsl.md.in",
+        "docs/src/reference-main-arithmetic.md",
+        "docs/src/reference-main-arithmetic.md.in",
+        "docs/src/reference-main-arrays.md",
+        "docs/src/reference-main-arrays.md.in",
+        "docs/src/reference-main-auxiliary-commands.md",
+        "docs/src/reference-main-auxiliary-commands.md.in",
+        "docs/src/reference-main-compressed-data.md",
+        "docs/src/reference-main-compressed-data.md.in",
+        "docs/src/reference-main-data-types.md",
+        "docs/src/reference-main-data-types.md.in",
+        "docs/src/reference-main-env-vars.md",
+        "docs/src/reference-main-env-vars.md.in",
+        "docs/src/reference-main-flag-list.md",
+        "docs/src/reference-main-flag-list.md.in",
+        "docs/src/reference-main-in-place-processing.md",
+        "docs/src/reference-main-in-place-processing.md.in",
+        "docs/src/reference-main-maps.md",
+        "docs/src/reference-main-maps.md.in",
+        "docs/src/reference-main-null-data.md",
+        "docs/src/reference-main-null-data.md.in",
+        "docs/src/reference-main-number-formatting.md",
+        "docs/src/reference-main-number-formatting.md.in",
+        "docs/src/reference-main-overview.md",
+        "docs/src/reference-main-overview.md.in",
+        "docs/src/reference-main-regular-expressions.md",
+        "docs/src/reference-main-regular-expressions.md.in",
+        "docs/src/reference-main-separators.md",
+        "docs/src/reference-main-separators.md.in",
+        "docs/src/reference-main-strings.md",
+        "docs/src/reference-main-strings.md.in",
+        "docs/src/reference-main-then-chaining.md",
+        "docs/src/reference-main-then-chaining.md.in",
+        "docs/src/reference-verbs.md",
+        "docs/src/reference-verbs.md.in",
+        "docs/src/release-docs.md",
+        "docs/src/release-docs.md.in",
+        "docs/src/repl.md",
+        "docs/src/repl.md.in",
+        "docs/src/sample_mlrrc",
+        "docs/src/scripting.md",
+        "docs/src/scripting.md.in",
+        "docs/src/shapes-of-data.md",
+        "docs/src/shapes-of-data.md.in",
+        "docs/src/shell-commands.md",
+        "docs/src/shell-commands.md.in",
+        "docs/src/shell-completion.md",
+        "docs/src/shell-completion.md.in",
+        "docs/src/sorting.md",
+        "docs/src/sorting.md.in",
+        "docs/src/spaces.csv",
+        "docs/src/special-symbols-and-formatting.md",
+        "docs/src/special-symbols-and-formatting.md.in",
+        "docs/src/split_circle.csv",
+        "docs/src/split_square.csv",
+        "docs/src/split_triangle.csv",
+        "docs/src/sql-examples.md",
+        "docs/src/sql-examples.md.in",
+        "docs/src/square.csv",
+        "docs/src/statistics-examples.md",
+        "docs/src/statistics-examples.md.in",
+        "docs/src/streaming-and-memory.md",
+        "docs/src/streaming-and-memory.md.in",
+        "docs/src/structure-of-these-documents.md",
+        "docs/src/structure-of-these-documents.md.in",
+        "docs/src/swipes.sh",
+        "docs/src/tools/**",
+        "docs/src/triangle.csv",
+        "docs/src/troubleshooting-csv-and-json-input.md",
+        "docs/src/troubleshooting-csv-and-json-input.md.in",
+        "docs/src/two-pass-algorithms.md",
+        "docs/src/two-pass-algorithms.md.in",
+        "docs/src/unix-toolkit-context.md",
+        "docs/src/unix-toolkit-context.md.in",
+        "docs/src/variance.mlr",
+        "docs/src/vimrc.md",
+        "docs/src/vimrc.md.in",
+        "docs/src/why.md",
+        "docs/src/why.md.in",
+        "docs/src/παράδειγμα.csv",
+        "docs/src/пример.csv",
+        "go.mod",
+        "go.sum",
+        "man/**",
+        "miller.spec",
+        "pkg/README.md",
+        "pkg/auxents/**",
+        "pkg/bifs/**",
+        "pkg/cli/**",
+        "pkg/climain/**",
+        "pkg/colorizer/**",
+        "pkg/dkvpx/**",
+        "pkg/dsl/**",
+        "pkg/entrypoint/**",
+        "pkg/input/**",
+        "pkg/lib/**",
+        "pkg/mlrval/**",
+        "pkg/output/**",
+        "pkg/parsing/**",
+        "pkg/pbnjay-strptime/**",
+        "pkg/platform/**",
+        "pkg/runtime/**",
+        "pkg/scan/**",
+        "pkg/stream/**",
+        "pkg/terminals/**",
+        "pkg/transformers/**",
+        "pkg/types/**",
+        "pkg/version/**",
+        "plans/**",
+        "python/**",
+        "regression_test.go",
+        "scripts/**",
+        "snap/**",
+        "test/README.md",
+        "test/cases/auxents/**",
+        "test/cases/chaining/**",
+        "test/cases/cli-csv-rs-environment-defaults/**",
+        "test/cases/cli-default-verb-cat/**",
+        "test/cases/cli-fixed-width/**",
+        "test/cases/cli-getoptish/**",
+        "test/cases/cli-help/**",
+        "test/cases/cli-mfrom/**",
+        "test/cases/cli-mlrrc-profiles/**",
+        "test/cases/cli-norc/**",
+        "test/cases/cli-ofmt/**",
+        "test/cases/dsl-absent-empty/**",
+        "test/cases/dsl-argpass-typedecl/**",
+        "test/cases/dsl-array-map-indexing/**",
+        "test/cases/dsl-arrayify/**",
+        "test/cases/dsl-asserting/**",
+        "test/cases/dsl-basic/**",
+        "test/cases/dsl-begin-end/**",
+        "test/cases/dsl-block-exit/**",
+        "test/cases/dsl-break-continue/**",
+        "test/cases/dsl-bytes-conversions/0001/**",
+        "test/cases/dsl-bytes-conversions/non-windows/0002/cmd",
+        "test/cases/dsl-bytes-conversions/non-windows/0002/experr",
+        "test/cases/dsl-bytes-conversions/non-windows/0002/input",
+        "test/cases/dsl-bytes-literals/**",
+        "test/cases/dsl-bytes-ops/**",
+        "test/cases/dsl-clean-whitespace/**",
+        "test/cases/dsl-collection-equality/**",
+        "test/cases/dsl-comments/**",
+        "test/cases/dsl-concat/**",
+        "test/cases/dsl-contains/**",
+        "test/cases/dsl-context-specific-validation/**",
+        "test/cases/dsl-context-validation/**",
+        "test/cases/dsl-depth/**",
+        "test/cases/dsl-do-while/**",
+        "test/cases/dsl-do-while-loops/**",
+        "test/cases/dsl-dump-print/**",
+        "test/cases/dsl-emit/**",
+        "test/cases/dsl-emit-basic-indexing/**",
+        "test/cases/dsl-emit-het/**",
+        "test/cases/dsl-emit1/**",
+        "test/cases/dsl-empty/**",
+        "test/cases/dsl-empty-statements/**",
+        "test/cases/dsl-env/**",
+        "test/cases/dsl-explain/**",
+        "test/cases/dsl-extended-typeof/**",
+        "test/cases/dsl-filter/**",
+        "test/cases/dsl-filter-pattern-action/**",
+        "test/cases/dsl-first-class-functions/**",
+        "test/cases/dsl-flatten-unflatten/**",
+        "test/cases/dsl-for-bind-loops-for-valgrind/**",
+        "test/cases/dsl-for-map-depth/**",
+        "test/cases/dsl-for-multi/**",
+        "test/cases/dsl-for-one/**",
+        "test/cases/dsl-for-oosvar-loops/**",
+        "test/cases/dsl-for-srec-loops/**",
+        "test/cases/dsl-for-two/**",
+        "test/cases/dsl-for-variants/**",
+        "test/cases/dsl-forbind-typedecl/**",
+        "test/cases/dsl-format/**",
+        "test/cases/dsl-from-file/**",
+        "test/cases/dsl-func-decl-hoist/**",
+        "test/cases/dsl-functional-tests/**",
+        "test/cases/dsl-gmt-date-time-functions/**",
+        "test/cases/dsl-hashing/**",
+        "test/cases/dsl-haskey/**",
+        "test/cases/dsl-if-chain/**",
+        "test/cases/dsl-if-chaining/**",
+        "test/cases/dsl-index/**",
+        "test/cases/dsl-indexing/**",
+        "test/cases/dsl-indirect-oosvar-assignments/**",
+        "test/cases/dsl-indirect-srec-assignments/**",
+        "test/cases/dsl-int-function/**",
+        "test/cases/dsl-is-predicates/**",
+        "test/cases/dsl-json-collection-output/**",
+        "test/cases/dsl-json-parse-json-stringify/**",
+        "test/cases/dsl-lashed-emitp-singles/**",
+        "test/cases/dsl-latin1/0001/cmd",
+        "test/cases/dsl-latin1/0001/experr",
+        "test/cases/dsl-latin1/0001/input",
+        "test/cases/dsl-latin1/0001/mlr",
+        "test/cases/dsl-latin1/0002/**",
+        "test/cases/dsl-leafcount/**",
+        "test/cases/dsl-leftpad-rightpad/**",
+        "test/cases/dsl-length/**",
+        "test/cases/dsl-length-depth-leafcount/**",
+        "test/cases/dsl-lhs-indexing/**",
+        "test/cases/dsl-line-number-column-number/**",
+        "test/cases/dsl-load/**",
+        "test/cases/dsl-local-date-time-functions/**",
+        "test/cases/dsl-local-map-variable-typedecl/**",
+        "test/cases/dsl-local-map-variable-write-read/**",
+        "test/cases/dsl-localvar-scope-and-extent/**",
+        "test/cases/dsl-localvar-typedecl/**",
+        "test/cases/dsl-localvar-unsets/**",
+        "test/cases/dsl-map-dot/**",
+        "test/cases/dsl-map-funcs/**",
+        "test/cases/dsl-map-variant-dumps/**",
+        "test/cases/dsl-mapsum-mapdiff-mapexcept/**",
+        "test/cases/dsl-mapvar-assignments/**",
+        "test/cases/dsl-mapvar-emit/**",
+        "test/cases/dsl-mapvar-for-loops/**",
+        "test/cases/dsl-mapvars-in-scalar-function-call-contexts/**",
+        "test/cases/dsl-mapvars-udfs-subroutines/**",
+        "test/cases/dsl-match/**",
+        "test/cases/dsl-mathy/**",
+        "test/cases/dsl-max-variadic/**",
+        "test/cases/dsl-min-max-types/**",
+        "test/cases/dsl-modular-arithmetic/**",
+        "test/cases/dsl-more-type-predicates/**",
+        "test/cases/dsl-multi-index/**",
+        "test/cases/dsl-multipart-scripts/**",
+        "test/cases/dsl-nested-double-quotes/**",
+        "test/cases/dsl-no-filter-in-filter/**",
+        "test/cases/dsl-null-empty-handling/**",
+        "test/cases/dsl-number-formatting/**",
+        "test/cases/dsl-oosvar-assignments/**",
+        "test/cases/dsl-oosvars/**",
+        "test/cases/dsl-operator-associativity/**",
+        "test/cases/dsl-operator-precedence/**",
+        "test/cases/dsl-operator-rewrites/**",
+        "test/cases/dsl-output-redirects/**",
+        "test/cases/dsl-parameterized-emit/**",
+        "test/cases/dsl-parse/**",
+        "test/cases/dsl-prefixed-unprefixed-emit/**",
+        "test/cases/dsl-print/**",
+        "test/cases/dsl-programming-examples/**",
+        "test/cases/dsl-put-dash-s/**",
+        "test/cases/dsl-put-multiple-dash-e/**",
+        "test/cases/dsl-pythonic-division/**",
+        "test/cases/dsl-redirects/**",
+        "test/cases/dsl-regex/**",
+        "test/cases/dsl-regex-captures/**",
+        "test/cases/dsl-regex-matching/**",
+        "test/cases/dsl-scientific-notation/**",
+        "test/cases/dsl-scope/**",
+        "test/cases/dsl-sec2gmt/**",
+        "test/cases/dsl-semicolons/**",
+        "test/cases/dsl-short-circuit/**",
+        "test/cases/dsl-slice/**",
+        "test/cases/dsl-sorts/**",
+        "test/cases/dsl-split-join/**",
+        "test/cases/dsl-split-join-more/**",
+        "test/cases/dsl-stack-allocation/**",
+        "test/cases/dsl-stat/**",
+        "test/cases/dsl-stats/**",
+        "test/cases/dsl-string-array-indexing-slicing/**",
+        "test/cases/dsl-strlen/**",
+        "test/cases/dsl-subr/**",
+        "test/cases/dsl-subs/**",
+        "test/cases/dsl-substr/**",
+        "test/cases/dsl-toupper-tolower/**",
+        "test/cases/dsl-trailing-commas/**",
+        "test/cases/dsl-triple-for-loops/**",
+        "test/cases/dsl-truncate/**",
+        "test/cases/dsl-type-inference/**",
+        "test/cases/dsl-type-predicates/**",
+        "test/cases/dsl-type-reflect/**",
+        "test/cases/dsl-typed-overlay/**",
+        "test/cases/dsl-typedecl/**",
+        "test/cases/dsl-unformat/**",
+        "test/cases/dsl-unset/**",
+        "test/cases/dsl-user-defined-functions/**",
+        "test/cases/dsl-user-defined-functions-and-subroutines/**",
+        "test/cases/dsl-utf8-field-names/**",
+        "test/cases/dsl-utf8-strlen/**",
+        "test/cases/dsl-utf8-uppercase-lowercase/**",
+        "test/cases/dsl-warnings/**",
+        "test/cases/dsl-whitespace/**",
+        "test/cases/globbing/**",
+        "test/cases/help/**",
+        "test/cases/int64-io/**",
+        "test/cases/io-barred-pprint/**",
+        "test/cases/io-box/**",
+        "test/cases/io-compressed-input/**",
+        "test/cases/io-csv-auto-unsparsify/**",
+        "test/cases/io-csv-ors-crlf/**",
+        "test/cases/io-dcf/**",
+        "test/cases/io-dedupe-field-names/**",
+        "test/cases/io-dkvpx/**",
+        "test/cases/io-format-conversion-keystroke-savers/**",
+        "test/cases/io-gen/**",
+        "test/cases/io-het-csv-input/**",
+        "test/cases/io-het-pprint-input/**",
+        "test/cases/io-implicit-header-csv-input/**",
+        "test/cases/io-in-place-processing/**",
+        "test/cases/io-infer-flags/**",
+        "test/cases/io-ixs-regex/**",
+        "test/cases/io-json-io/**",
+        "test/cases/io-jsonl-io/**",
+        "test/cases/io-lf-crlf-and-autodetect/**",
+        "test/cases/io-markdown/**",
+        "test/cases/io-missing-final-lf/**",
+        "test/cases/io-multi/**",
+        "test/cases/io-multi-character-ixs/**",
+        "test/cases/io-nr-progress-mod/**",
+        "test/cases/io-pprint/**",
+        "test/cases/io-pprint-right-align-numeric/**",
+        "test/cases/io-ragged-implicit-header-csvlite/**",
+        "test/cases/io-ragged-implicit-header-tsv/**",
+        "test/cases/io-ragged-non-rfc-csv/**",
+        "test/cases/io-recutils/**",
+        "test/cases/io-rfc-csv/**",
+        "test/cases/io-separator-aliases/**",
+        "test/cases/io-skip-pass-comments/**",
+        "test/cases/io-space-padding/**",
+        "test/cases/io-spec-tsv/**",
+        "test/cases/io-tsv-auto-unsparsify/**",
+        "test/cases/io-uri-schemes/**",
+        "test/cases/io-utf8-alignment/**",
+        "test/cases/io-utf8-bom/**",
+        "test/cases/io-yaml-io/**",
+        "test/cases/mcp/**",
+        "test/cases/mix-null-field-input/**",
+        "test/cases/mix-number-formatting/**",
+        "test/cases/no-shell/**",
+        "test/cases/non-windows/**",
+        "test/cases/output-colorization/**",
+        "test/cases/repl/**",
+        "test/cases/repl-help/**",
+        "test/cases/script/**",
+        "test/cases/verb-altkv/**",
+        "test/cases/verb-bar/**",
+        "test/cases/verb-bootstrap/**",
+        "test/cases/verb-bootstrap-ci/**",
+        "test/cases/verb-case/**",
+        "test/cases/verb-cat/**",
+        "test/cases/verb-check/**",
+        "test/cases/verb-count/**",
+        "test/cases/verb-count-distinct/**",
+        "test/cases/verb-count-similar/**",
+        "test/cases/verb-cut/**",
+        "test/cases/verb-cut-regexed/**",
+        "test/cases/verb-decimate/**",
+        "test/cases/verb-describe/**",
+        "test/cases/verb-fill-down/**",
+        "test/cases/verb-fill-empty/**",
+        "test/cases/verb-flatten-unflatten/**",
+        "test/cases/verb-format-values/**",
+        "test/cases/verb-fraction/**",
+        "test/cases/verb-gap/**",
+        "test/cases/verb-grep/**",
+        "test/cases/verb-group-by/**",
+        "test/cases/verb-group-like/**",
+        "test/cases/verb-having-fields/**",
+        "test/cases/verb-head/**",
+        "test/cases/verb-head-early-out/**",
+        "test/cases/verb-histogram/**",
+        "test/cases/verb-int-float-stats1-step1/**",
+        "test/cases/verb-join/**",
+        "test/cases/verb-join-mixed-format/**",
+        "test/cases/verb-json-parse-json-stringify/**",
+        "test/cases/verb-label/**",
+        "test/cases/verb-latin1-to-utf8/**",
+        "test/cases/verb-merge-fields/**",
+        "test/cases/verb-most-least-frequent/**",
+        "test/cases/verb-nest/**",
+        "test/cases/verb-nothing/**",
+        "test/cases/verb-rank/**",
+        "test/cases/verb-regularize/**",
+        "test/cases/verb-remove-empty-columns/**",
+        "test/cases/verb-rename/**",
+        "test/cases/verb-rename-no-regex/**",
+        "test/cases/verb-rename-regex/**",
+        "test/cases/verb-reorder/**",
+        "test/cases/verb-repeat/**",
+        "test/cases/verb-reshape/**",
+        "test/cases/verb-sample/**",
+        "test/cases/verb-sec2gmt/**",
+        "test/cases/verb-seqgen/**",
+        "test/cases/verb-shuffle/**",
+        "test/cases/verb-skip-trivial-records/**",
+        "test/cases/verb-sort/**",
+        "test/cases/verb-sort-within-records/**",
+        "test/cases/verb-sparkline/**",
+        "test/cases/verb-sparsify/**",
+        "test/cases/verb-split/**",
+        "test/cases/verb-stats1/**",
+        "test/cases/verb-stats1-percentile-interpolation/**",
+        "test/cases/verb-stats1-regexed-field-names/**",
+        "test/cases/verb-stats2/**",
+        "test/cases/verb-step/**",
+        "test/cases/verb-sub-gsub-ssub/**",
+        "test/cases/verb-summary/**",
+        "test/cases/verb-surv/**",
+        "test/cases/verb-tac/**",
+        "test/cases/verb-tail/**",
+        "test/cases/verb-tee/**",
+        "test/cases/verb-template/**",
+        "test/cases/verb-top/**",
+        "test/cases/verb-truncate/**",
+        "test/cases/verb-uniq/**",
+        "test/cases/verb-unspace/**",
+        "test/cases/verb-unsparsify/**",
+        "test/cases/verb-utf8-to-latin1/0001/cmd",
+        "test/cases/verb-utf8-to-latin1/0001/experr",
+        "test/cases-not-suitable-for-ci/**",
+        "test/expected/**",
+        "test/input/1.dkvp",
+        "test/input/2.dkvp",
+        "test/input/256-ragged.txt",
+        "test/input/256.txt",
+        "test/input/a.csv",
+        "test/input/a.pprint",
+        "test/input/abixy",
+        "test/input/abixy-het",
+        "test/input/abixy-upper",
+        "test/input/abixy-wide",
+        "test/input/abixy-wide-short",
+        "test/input/abixy.box",
+        "test/input/abixy.csv",
+        "test/input/abixy.dkvp",
+        "test/input/abixy.json",
+        "test/input/abixy.md",
+        "test/input/abixy.nidx",
+        "test/input/abixy.pprint",
+        "test/input/abixy.tbl",
+        "test/input/abixy.tsv",
+        "test/input/abixy.xtab",
+        "test/input/aborruso-reshape.tsv",
+        "test/input/absent.dkvp",
+        "test/input/arrays.json",
+        "test/input/auxents-hex-unhex/line-ending-temp-1.bin",
+        "test/input/auxents-hex-unhex/line-ending-temp-2.bin",
+        "test/input/auxents-hex-unhex/line-ending-temp-3.bin",
+        "test/input/auxents-hex-unhex/line-ending-temp-4.bin",
+        "test/input/auxents-hex-unhex/line-ending-temp-5.bin",
+        "test/input/auxents-hex-unhex/line-ending-temp-6.bin",
+        "test/input/b.csv",
+        "test/input/b.pprint",
+        "test/input/backslashes.json",
+        "test/input/binary.json",
+        "test/input/bom-dquote-header.csv",
+        "test/input/bom.csv",
+        "test/input/books.rec",
+        "test/input/braced.csv",
+        "test/input/c.csv",
+        "test/input/c.pprint",
+        "test/input/capture-lengths.dkvp",
+        "test/input/capture.dkvp",
+        "test/input/case-verb-flatten-unflatten-0001.xtab",
+        "test/input/cases.csv",
+        "test/input/clean-whitespace.csv",
+        "test/input/comma-at-eof.csv",
+        "test/input/comments/**",
+        "test/input/d.csv",
+        "test/input/d.pprint",
+        "test/input/date1.csv",
+        "test/input/date2.csv",
+        "test/input/datos-plurilingües.csv",
+        "test/input/dev-null.txt",
+        "test/input/dot-match.csv",
+        "test/input/dots.pprint-crlf",
+        "test/input/dots.xtab",
+        "test/input/double-ps.dkvp",
+        "test/input/e.csv",
+        "test/input/e.pprint",
+        "test/input/embedded-ips.xtab",
+        "test/input/emit2.dkvp",
+        "test/input/env-assign.sh",
+        "test/input/env-var.dkvp",
+        "test/input/escapes.json",
+        "test/input/example-with-changed-keys.dkvp",
+        "test/input/example-with-extra-keys.dkvp",
+        "test/input/example-with-missing-keys.dkvp",
+        "test/input/example.asv",
+        "test/input/example.csv",
+        "test/input/example.dkvp",
+        "test/input/example.usv",
+        "test/input/f.csv",
+        "test/input/f.mlr",
+        "test/input/f.pprint",
+        "test/input/ff.mlr",
+        "test/input/fg.mlr",
+        "test/input/fibo.mlr",
+        "test/input/fill-down.csv",
+        "test/input/filter-example.dsl",
+        "test/input/filter-script-piece-1",
+        "test/input/filter-script-piece-2",
+        "test/input/flatten-input-1.json",
+        "test/input/flatten-input-2.json",
+        "test/input/for-multi.json",
+        "test/input/freq.dkvp",
+        "test/input/from-first.csv",
+        "test/input/fsec2xhms",
+        "test/input/g.csv",
+        "test/input/g.pprint",
+        "test/input/gmt2localtime-tz.mlr",
+        "test/input/gmt2nsec",
+        "test/input/gmt2sec",
+        "test/input/gmt2sec-tz.mlr",
+        "test/input/gsub.dat",
+        "test/input/has-a-blank-line.csv",
+        "test/input/having-fields-regex.dkvp",
+        "test/input/het-a1.csv",
+        "test/input/het-a2.csv",
+        "test/input/het-b1.csv",
+        "test/input/het-b2.csv",
+        "test/input/het-c1.csv",
+        "test/input/het-d1.csv",
+        "test/input/het-join-left",
+        "test/input/het-join-right-r0",
+        "test/input/het-join-right-r1",
+        "test/input/het-join-right-r11",
+        "test/input/het-join-right-r12",
+        "test/input/het-join-right-r13",
+        "test/input/het-join-right-r14",
+        "test/input/het-join-right-r15",
+        "test/input/het-join-right-r16",
+        "test/input/het-join-right-r2",
+        "test/input/het-join-right-r22",
+        "test/input/het-join-right-r23",
+        "test/input/het-join-right-r24",
+        "test/input/het-join-right-r25",
+        "test/input/het-join-right-r26",
+        "test/input/het-join-right-r3",
+        "test/input/het-join-right-r33",
+        "test/input/het-join-right-r34",
+        "test/input/het-join-right-r35",
+        "test/input/het-join-right-r36",
+        "test/input/het-join-right-r4",
+        "test/input/het-join-right-r44",
+        "test/input/het-join-right-r45",
+        "test/input/het-join-right-r46",
+        "test/input/het-join-right-r5",
+        "test/input/het-join-right-r55",
+        "test/input/het-join-right-r56",
+        "test/input/het-join-right-r6",
+        "test/input/het-join-right-r66",
+        "test/input/het.csv",
+        "test/input/het.dkvp",
+        "test/input/histo2.csv",
+        "test/input/implicit.csv",
+        "test/input/infer.csv",
+        "test/input/int-float.dkvp",
+        "test/input/int64arith.dkvp",
+        "test/input/int64io.dkvp",
+        "test/input/ints.dkvp",
+        "test/input/issue-1645.csv",
+        "test/input/issue-1983.csv",
+        "test/input/join-1194-left-sorted.csv",
+        "test/input/join-1194-left.csv",
+        "test/input/join-1194-right-sorted.csv",
+        "test/input/join-1194-right.csv",
+        "test/input/join-1821-new.csv",
+        "test/input/join-1821-old.csv",
+        "test/input/join-het.dkvp",
+        "test/input/join-left-keep",
+        "test/input/join-left-ragged.csv",
+        "test/input/join-right-keep",
+        "test/input/joina.dkvp",
+        "test/input/joinb.dkvp",
+        "test/input/json-collection-0001.json",
+        "test/input/json-collection-0002.json",
+        "test/input/json-collection-0003.json",
+        "test/input/json-collection-0004.json",
+        "test/input/json-collection-0005.json",
+        "test/input/json-collection-0006.json",
+        "test/input/json-collection-0007.json",
+        "test/input/json-collection-0008.json",
+        "test/input/json-collection-0009.json",
+        "test/input/json-collection-0010.json",
+        "test/input/json-collection-0011.json",
+        "test/input/json-collection-0012.json",
+        "test/input/json-collection-0013.json",
+        "test/input/json-collection-0014.json",
+        "test/input/json-collection-00xx.json",
+        "test/input/json-output-options.dkvp",
+        "test/input/json-parse-json-stringify-0001.xtab",
+        "test/input/json-parse-json-stringify-0002.xtab",
+        "test/input/json-parse-with-error.csv",
+        "test/input/json-stringify-0001.json",
+        "test/input/json-stringify-0002.json",
+        "test/input/json-stringify-0003.json",
+        "test/input/json-stringify-0004.json",
+        "test/input/json-stringify-0005.json",
+        "test/input/json-stringify-0006.json",
+        "test/input/json-stringify-0007.json",
+        "test/input/json-stringify-0008.json",
+        "test/input/json-stringify-0009.json",
+        "test/input/json-stringify-0010.json",
+        "test/input/lex-error.mlr",
+        "test/input/line-ending-cr.bin",
+        "test/input/line-ending-crlf.bin",
+        "test/input/line-ending-lf.bin",
+        "test/input/line-term-crlf-wrap.json",
+        "test/input/line-term-crlf.csv",
+        "test/input/line-term-crlf.dkvp",
+        "test/input/line-term-crlf.json",
+        "test/input/line-term-crlf.pprint",
+        "test/input/line-term-crlf.xtab",
+        "test/input/line-term-lf-wrap.json",
+        "test/input/line-term-lf.csv",
+        "test/input/line-term-lf.dkvp",
+        "test/input/line-term-lf.json",
+        "test/input/line-term-lf.pprint",
+        "test/input/line-term-lf.xtab",
+        "test/input/localtime2sec-tz.mlr",
+        "test/input/logi.dkvp",
+        "test/input/mand.mlr",
+        "test/input/medium.dkvp",
+        "test/input/merge-fields-abxy.dkvp",
+        "test/input/merge-fields-in-out-mixed.csv",
+        "test/input/merge-fields-in-out.csv",
+        "test/input/minmax.dkvp",
+        "test/input/missings.dkvp",
+        "test/input/mixed-types.xtab",
+        "test/input/mlrrc-with-profile-flag",
+        "test/input/mlrrc-with-profiles",
+        "test/input/mod.csv",
+        "test/input/modarith.dat",
+        "test/input/multi-format-join-a.csv",
+        "test/input/multi-format-join-a.dkvp",
+        "test/input/multi-format-join-a.json",
+        "test/input/multi-format-join-b.csv",
+        "test/input/multi-format-join-b.dkvp",
+        "test/input/multi-format-join-b.json",
+        "test/input/multi-ips.dkvp",
+        "test/input/multi-sep.csv-crlf",
+        "test/input/multi-sep.dkvp-crlf",
+        "test/input/natural-sort.csv",
+        "test/input/natural-within-records.dkvp",
+        "test/input/near-ovf.dkvp",
+        "test/input/needs-regularize.json",
+        "test/input/needs-sorting.json",
+        "test/input/needs-unsparsify.dkvp",
+        "test/input/nest-explode-regex.dkvp",
+        "test/input/nest-explode-vary-fs-ps.dkvp",
+        "test/input/nest-explode.dkvp",
+        "test/input/nested.json",
+        "test/input/null-count-pipe.csv",
+        "test/input/null-fields.csv",
+        "test/input/null-fields.nidx",
+        "test/input/null-vs-empty.dkvp",
+        "test/input/nulls.json",
+        "test/input/nullvals.dkvp",
+        "test/input/nullvals.json",
+        "test/input/ofmt.dat",
+        "test/input/page-aligned-final-ifs.dkvp",
+        "test/input/page-aligned-final-irs.dkvp",
+        "test/input/page-aligned-final-no-ifs.dkvp",
+        "test/input/page-aligned-no-final-eol.xtab",
+        "test/input/page-aligned-no-final-irs.csvl",
+        "test/input/page-aligned-no-final-irs.dkvp",
+        "test/input/page-aligned-no-final-irs.nidx",
+        "test/input/parse-error.mlr",
+        "test/input/pr-1346.csv",
+        "test/input/pr-1787.csv",
+        "test/input/put-example.dsl",
+        "test/input/put-script-piece-1",
+        "test/input/put-script-piece-2",
+        "test/input/put-script-piece-3",
+        "test/input/quote-all.csv",
+        "test/input/quote-original.csv",
+        "test/input/quoted-keys.json",
+        "test/input/ragged-implicit-header.csvlite",
+        "test/input/ragged-implicit-header.tsv",
+        "test/input/ragged-long.csv",
+        "test/input/ragged-short.csv",
+        "test/input/ragged.csv",
+        "test/input/rank-data-grouped.csv",
+        "test/input/rank-data-unsorted.csv",
+        "test/input/rank-data.csv",
+        "test/input/regex-metacharacters.dkvp",
+        "test/input/regex.dkvp",
+        "test/input/regularize.dkvp",
+        "test/input/remove-empty-columns.csv",
+        "test/input/reorder-prefix.csv",
+        "test/input/reorder-regex.nidx",
+        "test/input/reorder.dkvp",
+        "test/input/repeat-input.dat",
+        "test/input/repeats.dkvp",
+        "test/input/reshape-long-ragged.dkvp",
+        "test/input/reshape-long-sortkeys.dkvp",
+        "test/input/reshape-long.tbl",
+        "test/input/reshape-wide-ragged.dkvp",
+        "test/input/reshape-wide.tbl",
+        "test/input/rfc-csv/**",
+        "test/input/s.csv",
+        "test/input/s.dkvp",
+        "test/input/s.json",
+        "test/input/s.nidx",
+        "test/input/s.tsv",
+        "test/input/scinot.dkvp",
+        "test/input/scinot1.dkvp",
+        "test/input/sec2gmt",
+        "test/input/sec2gmt-tz.mlr",
+        "test/input/sec2gmtdate-tz.mlr",
+        "test/input/sec2localdate-tz.mlr",
+        "test/input/sec2localtime-tz.mlr",
+        "test/input/sec2xhms",
+        "test/input/short",
+        "test/input/short-circuit.dkvp",
+        "test/input/sieve.mlr",
+        "test/input/simple.tsv",
+        "test/input/skip-trivial-records.dkvp",
+        "test/input/small",
+        "test/input/small-nested.json",
+        "test/input/small-non-nested-wrapped.json",
+        "test/input/small-non-nested.json",
+        "test/input/sort-het.dkvp",
+        "test/input/sort-within-records.dkvp",
+        "test/input/space-pad.dkvp",
+        "test/input/space-pad.nidx",
+        "test/input/space-pad.pprint",
+        "test/input/spaces.csv",
+        "test/input/sparsify-input.csv",
+        "test/input/strfntime-tz.mlr",
+        "test/input/strfntime_local-tz.mlr",
+        "test/input/strftime-tz.mlr",
+        "test/input/strftime_local-tz.mlr",
+        "test/input/string-numeric-ordering.dkvp",
+        "test/input/strpntime-tz.mlr",
+        "test/input/strpntime_local-tz.mlr",
+        "test/input/strptime-tz.mlr",
+        "test/input/strptime_local-tz.mlr",
+        "test/input/sub.dat",
+        "test/input/subtab.dkvp",
+        "test/input/subtab1.mlr",
+        "test/input/subtab2.mlr",
+        "test/input/subtab3.mlr",
+        "test/input/subtab4.mlr",
+        "test/input/surv.csv",
+        "test/input/t.csv",
+        "test/input/t.dkvp",
+        "test/input/t.json",
+        "test/input/t.nidx",
+        "test/input/template-1.csv",
+        "test/input/template-2.csv",
+        "test/input/ten.dkvp",
+        "test/input/test-1.xtab",
+        "test/input/test-2.xtab",
+        "test/input/test-3.xtab",
+        "test/input/test-dsl-stack-allocation.mlr",
+        "test/input/test-moments.mlr",
+        "test/input/test-percentiles.mlr",
+        "test/input/test.dcf",
+        "test/input/test.rec",
+        "test/input/trivial-records.csv",
+        "test/input/truncated.csv",
+        "test/input/truncated.dkvp",
+        "test/input/truncated.nidx",
+        "test/input/truncated.pprint",
+        "test/input/truncated.xtab-crlf",
+        "test/input/typecast.json",
+        "test/input/typeof.dkvp",
+        "test/input/unflatten-input-2.xtab",
+        "test/input/unflatten-input.xtab",
+        "test/input/unset1.dkvp",
+        "test/input/unset4.dkvp",
+        "test/input/utf8-1.csv",
+        "test/input/utf8-2.csv",
+        "test/input/utf8-align.dkvp",
+        "test/input/utf8-align.nidx",
+        "test/input/utf8.xtab",
+        "test/input/valgrind.txt",
+        "test/input/whitespace 1.csv",
+        "test/input/whitespace 2.csv",
+        "test/input/window.mlr",
+        "test/input/window2.mlr",
+        "test/input/x0to10.dat",
+        "test/input/xy40.dkvp",
+        "test/input/xyz2",
+        "test/input/xyz345",
+        "test/stdlib/**",
+        "todo.txt",
+        "tools/**",
+        "vim/**"
+      ],
+      "text": "BSD 2-Clause License\n\nSPDX-License-Identifier: BSD-2-Clause\n\nCopyright (c) 2015- John Kerl\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nThis software is provided by the copyright holders and contributors \"as is\" and\nany express or implied warranties, including, but not limited to, the implied\nwarranties of merchantability and fitness for a particular purpose are\ndisclaimed. In no event shall the copyright holder or contributors be liable\nfor any direct, indirect, incidental, special, exemplary, or consequential\ndamages (including, but not limited to, procurement of substitute goods or\nservices; loss of use, data, or profits; or business interruption) however\ncaused and on any theory of liability, whether in contract, strict liability,\nor tort (including negligence or otherwise) arising in any way out of the use\nof this software, even if advised of the possibility of such damage.\n\nI am providing code in this repository to you under an open-source license.\nBecause this is my personal repository, the license you receive to my code is\nfrom me and not from my employer.\n",
+      "attribution": "Copyright (c) 2015- John Kerl, BSD-2-Clause license (LICENSE.txt), https://github.com/johnkerl/miller."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "pkg/go-csv/**"
+      ],
+      "text": "Copyright (c) 2009 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2009 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/johnkerl/miller/tree/8f8b60e435651f483b92f77d1d70d85343ec553c/pkg/go-csv."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "d",
+      "paths": [
+        "**/*.d"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nim",
+      "paths": [
+        "**/*.nim"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.asv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.box"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.csv-crlf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.csvl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.csvlite"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dcf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dkvp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dkvp-crlf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dsl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.err"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.expect"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mlr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nidx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.no-autoconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pprint"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pprint-crlf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tbl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.usv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xtab"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xtab-crlf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.all-contributorsrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.codespellignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.vimrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/abixy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/abixy-het"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/abixy-upper"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/abixy-wide"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/abixy-wide-short"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/build-dsl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/build-one"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compiler-versions-build"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compiler-versions-install"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compiler-versions-time"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/configure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/create-release-tarball"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/escbak"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/example-mlr-s-script"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/example-mlr-s-script-no-shebang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/example-shell-script"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/experr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expout"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/filter-script-piece-1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/filter-script-piece-2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/format-go-in-bnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fsec2xhms"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/genmd-filter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/genmds"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gmt2nsec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gmt2sec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/h1foo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/h2foo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/h3foo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-left"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r11"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r12"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r13"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r14"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r15"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r16"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r22"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r23"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r25"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r26"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r33"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r34"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r35"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r36"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r44"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r45"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r46"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r55"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r56"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/het-join-right-r66"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/info"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/input"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/join-left-keep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/join-right-keep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/make-data-stream"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mcountlines"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/medium"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/medium-squares"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mkdat2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mktags"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mlr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mlrrc-with-profile-flag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mlrrc-with-profiles"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/morph"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/morphs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/out"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/postcmp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/precopy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/put-script-piece-1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/put-script-piece-2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/put-script-piece-3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/recolor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/retitle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mlrrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sec2gmt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sec2xhms"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/short"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/should-fail"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/small"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/small2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/smallwide"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/split-cmd-to-cmd-and-mlr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stuv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/trim-final-newline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xyz2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xyz345"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsv",
+      "paths": [
+        "**/*.tsv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "vim",
+      "paths": [
+        "**/*.vim"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zig",
+      "paths": [
+        "**/*.zig"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16"
+  }
+}

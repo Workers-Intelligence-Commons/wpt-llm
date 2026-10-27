@@ -1,0 +1,253 @@
+{
+  "type": "git",
+  "address": "https://github.com/mlfoundations/open_clip",
+  "revision": "7067b350050dc409bfdfdbb3f0cc6c9a1651c000",
+  "checksum": "sha256:a543d120063f5fdc6f52cbd64c1c84b9a9ffb2c6a22f16269df5551720bd61c7",
+  "extract": {
+    "exclude": [
+      "docs/CLIP.png",
+      "docs/clip_loss.png",
+      "docs/clip_recall.png",
+      "docs/clip_val_loss.png",
+      "docs/clip_zeroshot.png",
+      "docs/clipa_acc_compute.png",
+      "docs/clipa_reduce_image_token.png",
+      "docs/clipa_reduce_text_token.png",
+      "docs/effective_robustness.png",
+      "docs/inverse_scaling_law.png",
+      "docs/laion2b_clip_zeroshot_b32.png",
+      "docs/laion_clip_zeroshot.png",
+      "docs/laion_clip_zeroshot_b16.png",
+      "docs/laion_clip_zeroshot_b16_plus_240.png",
+      "docs/laion_clip_zeroshot_l14.png",
+      "docs/laion_openai_compare_b32.jpg",
+      "docs/scaling.png",
+      "src/open_clip/audio/mel_filters.npz",
+      "src/open_clip/bpe_simple_vocab_16e6.txt.gz"
+    ]
+  },
+  "history": {
+    "since": "0caa0dc09b3e32017a274dd11846390c6ea62399"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2012-2021 Gabriel Ilharco, Mitchell Wortsman, \nNicholas Carlini, Rohan Taori, Achal Dave, Vaishaal Shankar, \nJohn Miller, Hongseok Namkoong, Hannaneh Hajishirzi, Ali Farhadi, \nLudwig Schmidt\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/mlfoundations/open_clip: Copyright (c) 2012-2021 Gabriel Ilharco, Mitchell Wortsman,, MIT license (LICENSE), https://github.com/mlfoundations/open_clip."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        "CITATION.cff",
+        "HISTORY.md",
+        "LICENSE",
+        "MANIFEST.in",
+        "Makefile",
+        "README.md",
+        "docs/Interacting_with_open_clip.ipynb",
+        "docs/Interacting_with_open_coca.ipynb",
+        "docs/LOW_ACC.md",
+        "docs/PRETRAINED.md",
+        "docs/clip_conceptual_captions.md",
+        "docs/clipa.md",
+        "docs/datacomp_models.md",
+        "docs/linear_probe.md",
+        "docs/model_profile.csv",
+        "docs/multilabel_zeroshot.md",
+        "docs/openclip_classification_results.csv",
+        "docs/openclip_multilingual_retrieval_results.csv",
+        "docs/openclip_results.csv",
+        "docs/openclip_retrieval_results.csv",
+        "docs/script_examples/**",
+        "pyproject.toml",
+        "pytest.ini",
+        "requirements-test.txt",
+        "requirements-training.txt",
+        "requirements.txt",
+        "scripts/**",
+        "src/open_clip/__init__.py",
+        "src/open_clip/audio/__init__.py",
+        "src/open_clip/audio/config.py",
+        "src/open_clip/audio/convert.py",
+        "src/open_clip/audio/fusion.py",
+        "src/open_clip/audio/htsat.py",
+        "src/open_clip/audio/naflex_audio.py",
+        "src/open_clip/audio/naflex_tower.py",
+        "src/open_clip/audio/tower.py",
+        "src/open_clip/audio/transform.py",
+        "src/open_clip/audio/whisper.py",
+        "src/open_clip/clap_model.py",
+        "src/open_clip/coca_model.py",
+        "src/open_clip/constants.py",
+        "src/open_clip/convert.py",
+        "src/open_clip/factory.py",
+        "src/open_clip/generation.py",
+        "src/open_clip/hf_configs.py",
+        "src/open_clip/hf_model.py",
+        "src/open_clip/layers.py",
+        "src/open_clip/loss.py",
+        "src/open_clip/mammut_model.py",
+        "src/open_clip/model.py",
+        "src/open_clip/model_configs/**",
+        "src/open_clip/model_traits.py",
+        "src/open_clip/modified_resnet.py",
+        "src/open_clip/naflex_config.py",
+        "src/open_clip/naflex_convert.py",
+        "src/open_clip/naflex_genlap_model.py",
+        "src/open_clip/naflex_genlip_model.py",
+        "src/open_clip/pos_embed.py",
+        "src/open_clip/pretrained.py",
+        "src/open_clip/push_to_hf_hub.py",
+        "src/open_clip/task/**",
+        "src/open_clip/timm_model.py",
+        "src/open_clip/tokenizer.py",
+        "src/open_clip/transform.py",
+        "src/open_clip/transformer.py",
+        "src/open_clip/utils.py",
+        "src/open_clip/version.py",
+        "src/open_clip/zero_shot_classifier.py",
+        "src/open_clip/zero_shot_metadata.py",
+        "src/open_clip_train/**",
+        "tests/**",
+        "tutorials/**"
+      ],
+      "text": "Copyright (c) 2012-2021 Gabriel Ilharco, Mitchell Wortsman, \nNicholas Carlini, Rohan Taori, Achal Dave, Vaishaal Shankar, \nJohn Miller, Hongseok Namkoong, Hannaneh Hajishirzi, Ali Farhadi, \nLudwig Schmidt\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2012-2021 Gabriel Ilharco, Mitchell Wortsman,, MIT license (LICENSE), https://github.com/mlfoundations/open_clip."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16"
+  }
+}

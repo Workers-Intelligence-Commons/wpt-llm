@@ -1,0 +1,584 @@
+{
+  "type": "git",
+  "address": "https://github.com/teambit/bit",
+  "revision": "0d90db624d4c018cf77005dd77bd98cde56e4eae",
+  "checksum": "sha256:1ba9c75a0441316fc9b0fec32be92f1145db3c8b79d437481e0e5e14bc72bd8d",
+  "extract": {
+    "exclude": [
+      "components/legacy/e2e-helper/excluded-fixtures/png/**",
+      "components/legacy/e2e-helper/excluded-fixtures/scopes/global-remote.tgz",
+      "components/legacy/e2e-helper/excluded-fixtures/scopes/legacy-remote.tgz",
+      "components/legacy/utils/checksum/fixtures/1px.gif",
+      "components/ui/deps-diff-table/deps-diff-table.tsx",
+      "contrib/**",
+      "e2e/fixtures/components/add-many/add_many_test_files/**",
+      "e2e/fixtures/png_fixture.png",
+      "scopes/component/sources/**"
+    ]
+  },
+  "history": {
+    "since": "3c2f42b30d3205e0660a292688f469b7d02d2d6b"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Bit - A development toolchain for composable software\n\nCopyright (C) 2017 Cocycles Ltd.\n\nCan be contacted at: team@bit.dev \n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.  \n\n\nLICENSE names the license \"Apache-2.0\" without its text, so this is the license's official text (SPDX license list):\n\nApache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n\"License\" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.\n\n\"Licensor\" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.\n\n\"Legal Entity\" shall mean the union of the acting entity and all other entities that control, are controlled by, or are under common control with that entity. For the purposes of this definition, \"control\" means (i) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) beneficial ownership of such entity.\n\n\"You\" (or \"Your\") shall mean an individual or Legal Entity exercising permissions granted by this License.\n\n\"Source\" form shall mean the preferred form for making modifications, including but not limited to software source code, documentation source, and configuration files.\n\n\"Object\" form shall mean any form resulting from mechanical transformation or translation of a Source form, including but not limited to compiled object code, generated documentation, and conversions to other media types.\n\n\"Work\" shall mean the work of authorship, whether in Source or Object form, made available under the License, as indicated by a copyright notice that is included in or attached to the work (an example is provided in the Appendix below).\n\n\"Derivative Works\" shall mean any work, whether in Source or Object form, that is based on (or derived from) the Work and for which the editorial revisions, annotations, elaborations, or other modifications represent, as a whole, an original work of authorship. For the purposes of this License, Derivative Works shall not include works that remain separable from, or merely link (or bind by name) to the interfaces of, the Work and Derivative Works thereof.\n\n\"Contribution\" shall mean any work of authorship, including the original version of the Work and any modifications or additions to that Work or Derivative Works thereof, that is intentionally submitted to Licensor for inclusion in the Work by the copyright owner or by an individual or Legal Entity authorized to submit on behalf of the copyright owner. For the purposes of this definition, \"submitted\" means any form of electronic, verbal, or written communication sent to the Licensor or its representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, the Licensor for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by the copyright owner as \"Not a Contribution.\"\n\n\"Contributor\" shall mean Licensor and any individual or Legal Entity on behalf of whom a Contribution has been received by Licensor and subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the Work or Derivative Works thereof in any medium, with or without modifications, and in Source or Object form, provided that You meet the following conditions:\n\n     (a) You must give any other recipients of the Work or Derivative Works a copy of this License; and\n\n     (b) You must cause any modified files to carry prominent notices stating that You changed the files; and\n\n     (c) You must retain, in the Source form of any Derivative Works that You distribute, all copyright, patent, trademark, and attribution notices from the Source form of the Work, excluding those notices that do not pertain to any part of the Derivative Works; and\n\n     (d) If the Work includes a \"NOTICE\" text file as part of its distribution, then any Derivative Works that You distribute must include a readable copy of the attribution notices contained within such NOTICE file, excluding those notices that do not pertain to any part of the Derivative Works, in at least one of the following places: within a NOTICE text file distributed as part of the Derivative Works; within the Source form or documentation, if provided along with the Derivative Works; or, within a display generated by the Derivative Works, if and wherever such third-party notices normally appear. The contents of the NOTICE file are for informational purposes only and do not modify the License. You may add Your own attribution notices within Derivative Works that You distribute, alongside or as an addendum to the NOTICE text from the Work, provided that such additional attribution notices cannot be construed as modifying the License.\n\n     You may add Your own copyright statement to Your modifications and may provide additional or different license terms and conditions for use, reproduction, or distribution of Your modifications, or for any such Derivative Works as a whole, provided Your use, reproduction, and distribution of the Work otherwise complies with the conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise, any Contribution intentionally submitted for inclusion in the Work by You to the Licensor shall be under the terms and conditions of this License, without any additional terms or conditions. Notwithstanding the above, nothing herein shall supersede or modify the terms of any separate license agreement you may have executed with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or agreed to in writing, Licensor provides the Work (and each Contributor provides its Contributions) on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall any Contributor be liable to You for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result of this License or out of the use or inability to use the Work (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if such Contributor has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\nTo apply the Apache License to your work, attach the following boilerplate notice, with the fields enclosed by brackets \"[]\" replaced with your own identifying information. (Don't include the brackets!)  The text should be enclosed in the appropriate comment syntax for the file format. We also recommend that a file or class name and description of purpose be included on the same \"printed page\" as the copyright notice for easier identification within third-party archives.\n\nCopyright [yyyy] [name of copyright owner]\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+      "attribution": "Commit history of https://github.com/teambit/bit: Copyright (C) 2017 Cocycles Ltd., Apache-2.0 license (LICENSE), https://github.com/teambit/bit."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".bitmap",
+        ".circle-sha",
+        ".circleci/**",
+        ".claude/**",
+        ".editorconfig",
+        ".git-blame-ignore-revs",
+        ".github/**",
+        ".gitignore",
+        ".husky/**",
+        ".mcp.json",
+        ".npmrc",
+        ".oxlintrc.json",
+        ".pr_agent.toml",
+        ".prettierignore",
+        ".prettierrc",
+        "CHANGELOG.md",
+        "CLAUDE.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "babel-register.js",
+        "babel.e2e.config.js",
+        "bin/**",
+        "components/bit/**",
+        "components/component-issues/**",
+        "components/config-store/**",
+        "components/crypto/**",
+        "components/entities/**",
+        "components/hooks/**",
+        "components/legacy/analytics/**",
+        "components/legacy/bit-map/**",
+        "components/legacy/cli/**",
+        "components/legacy/component-diff/**",
+        "components/legacy/component-list/**",
+        "components/legacy/constants/**",
+        "components/legacy/consumer/**",
+        "components/legacy/consumer-component/**",
+        "components/legacy/consumer-config/**",
+        "components/legacy/dependency-graph/**",
+        "components/legacy/e2e-helper/e2e-bitmap-helper.ts",
+        "components/legacy/e2e-helper/e2e-capsules-helper.ts",
+        "components/legacy/e2e-helper/e2e-command-helper.ts",
+        "components/legacy/e2e-helper/e2e-component-json-helper.ts",
+        "components/legacy/e2e-helper/e2e-config-helper.ts",
+        "components/legacy/e2e-helper/e2e-env-helper.ts",
+        "components/legacy/e2e-helper/e2e-extensions-helper.ts",
+        "components/legacy/e2e-helper/e2e-fixtures-helper.ts",
+        "components/legacy/e2e-helper/e2e-fs-helper.ts",
+        "components/legacy/e2e-helper/e2e-general-helper.ts",
+        "components/legacy/e2e-helper/e2e-git-helper.ts",
+        "components/legacy/e2e-helper/e2e-helper.ts",
+        "components/legacy/e2e-helper/e2e-npm-helper.ts",
+        "components/legacy/e2e-helper/e2e-package-json-helper.ts",
+        "components/legacy/e2e-helper/e2e-scope-helper.ts",
+        "components/legacy/e2e-helper/e2e-scope-json-helper.ts",
+        "components/legacy/e2e-helper/e2e-scopes.ts",
+        "components/legacy/e2e-helper/e2e-setup-template.ts",
+        "components/legacy/e2e-helper/e2e-snapping-helper.ts",
+        "components/legacy/e2e-helper/e2e-workspace-jsonc-helper.ts",
+        "components/legacy/e2e-helper/excluded-fixtures/components/**",
+        "components/legacy/e2e-helper/excluded-fixtures/extensions/**",
+        "components/legacy/e2e-helper/excluded-fixtures/scopes/repository-hooks-fixture.js",
+        "components/legacy/e2e-helper/excluded-fixtures/workspace-with-tsconfig-issue/**",
+        "components/legacy/e2e-helper/fixtures.ts",
+        "components/legacy/e2e-helper/index.ts",
+        "components/legacy/e2e-helper/npm-ci-registry.ts",
+        "components/legacy/e2e-helper/remove-update-dependents-runner.ts",
+        "components/legacy/e2e-helper/snap-from-scope-runner.ts",
+        "components/legacy/extension-data/**",
+        "components/legacy/loader/**",
+        "components/legacy/logger/**",
+        "components/legacy/scope/**",
+        "components/legacy/scope-api/**",
+        "components/legacy/utils/bit/**",
+        "components/legacy/utils/checksum/checksum.spec.ts",
+        "components/legacy/utils/checksum/checksum.ts",
+        "components/legacy/utils/checksum/fixtures/dshaw.txt",
+        "components/legacy/utils/checksum/index.ts",
+        "components/legacy/utils/checksum/readme.md",
+        "components/legacy/utils/fs-write-file.ts",
+        "components/legacy/utils/immutable-unshift.ts",
+        "components/legacy/utils/index.ts",
+        "components/legacy/utils/is-bit-url.ts",
+        "components/legacy/utils/is-dir-empty-sync.ts",
+        "components/legacy/utils/is-dir.ts",
+        "components/legacy/utils/is-relative-import.ts",
+        "components/legacy/utils/is-valid-path.spec.ts",
+        "components/legacy/utils/is-valid-path.ts",
+        "components/legacy/utils/number/**",
+        "components/legacy/utils/object-clean.ts",
+        "components/legacy/utils/object-to-stringified-tuple-array.ts",
+        "components/legacy/utils/os-resolve-home-path.ts",
+        "components/legacy/utils/packages/**",
+        "components/legacy/utils/prepend-bang.ts",
+        "components/legacy/utils/resolveLatestVersion.spec.ts",
+        "components/legacy/utils/resolveLatestVersion.ts",
+        "components/legacy/utils/string/**",
+        "components/legacy/utils/zlib-deflate.ts",
+        "components/legacy/utils/zlib-inflate.ts",
+        "components/legacy-component-log/**",
+        "components/mcp/**",
+        "components/modules/**",
+        "components/plugins/**",
+        "components/scope/**",
+        "components/semantics/**",
+        "components/tagged-exports/**",
+        "components/ui/api-diff-view/**",
+        "components/ui/artifacts/**",
+        "components/ui/avatar/**",
+        "components/ui/buttons/**",
+        "components/ui/code-compare/**",
+        "components/ui/code-editor/**",
+        "components/ui/code-tab-page/**",
+        "components/ui/code-view/**",
+        "components/ui/compare/**",
+        "components/ui/component-compare/**",
+        "components/ui/component-drawer/**",
+        "components/ui/component-filters/**",
+        "components/ui/component-meta/**",
+        "components/ui/components-overview/**",
+        "components/ui/composition-compare/**",
+        "components/ui/composition-compare-section/**",
+        "components/ui/deps-diff-table/deps-diff-table.module.scss",
+        "components/ui/deps-diff-table/index.ts",
+        "components/ui/diff-viewer/**",
+        "components/ui/hooks/**",
+        "components/ui/inline-code-compare/**",
+        "components/ui/inline-config-compare/**",
+        "components/ui/inline-deps-compare/**",
+        "components/ui/inline-diff-viewer/**",
+        "components/ui/inline-preview-compare/**",
+        "components/ui/inline-tests-compare/**",
+        "components/ui/inputs/**",
+        "components/ui/lane-overview/**",
+        "components/ui/models/**",
+        "components/ui/pages/**",
+        "components/ui/preserve-workspace-mode/**",
+        "components/ui/preview-compare/**",
+        "components/ui/queries/**",
+        "components/ui/react-router/**",
+        "components/ui/rendering/**",
+        "components/ui/side-bar/**",
+        "components/ui/test-compare/**",
+        "components/ui/test-page/**",
+        "components/ui/time-ago/**",
+        "components/ui/tooltip/**",
+        "components/ui/use-workspace-mode/**",
+        "components/ui/version-block/**",
+        "components/ui/version-dropdown/**",
+        "components/ui/version-dropdown_1/**",
+        "components/ui/workspace-component-card/**",
+        "docs/**",
+        "e2e/commands/**",
+        "e2e/doctor/**",
+        "e2e/fixtures/big-text-file-fixture.txt",
+        "e2e/fixtures/compilers/**",
+        "e2e/fixtures/components/add-many/g.js",
+        "e2e/fixtures/components/add-many/h.js",
+        "e2e/fixtures/components/add-many/h.spec.js",
+        "e2e/fixtures/components/add-many/i.js",
+        "e2e/fixtures/components/add-many/i.spec.js",
+        "e2e/fixtures/components/app/**",
+        "e2e/fixtures/components/dependency-status/**",
+        "e2e/fixtures/components/help/**",
+        "e2e/fixtures/components/hero/**",
+        "e2e/fixtures/components/hero-button/**",
+        "e2e/fixtures/components/hero-withrelativepaths/**",
+        "e2e/fixtures/components/import-relative-path/**",
+        "e2e/fixtures/components/is-string/**",
+        "e2e/fixtures/components/logo/**",
+        "e2e/fixtures/components/pad-left/**",
+        "e2e/fixtures/components/styles/**",
+        "e2e/flows/**",
+        "e2e/functionalities/**",
+        "e2e/harmony/**",
+        "e2e/http-helper.ts",
+        "e2e/modules-manifest.ts",
+        "e2e/performance/**",
+        "e2e/typescript/**",
+        "e2e/watch-runner.ts",
+        "e2e-skipped/**",
+        "fixtures/**",
+        "mocha-multi-reporters-config.json",
+        "openspec/**",
+        "package.json",
+        "pnpm-lock.yaml",
+        "publish-legacy.md",
+        "releases-docs/**",
+        "scopes/api-reference/**",
+        "scopes/cloud/**",
+        "scopes/community/**",
+        "scopes/compilation/**",
+        "scopes/component/aspect-docs/**",
+        "scopes/component/changelog/**",
+        "scopes/component/checkout/**",
+        "scopes/component/code/**",
+        "scopes/component/component/**",
+        "scopes/component/component-compare/**",
+        "scopes/component/component-descriptor/**",
+        "scopes/component/component-log/**",
+        "scopes/component/component-package-version/**",
+        "scopes/component/component-sizer/**",
+        "scopes/component/component-tree/**",
+        "scopes/component/component-url/**",
+        "scopes/component/component-writer/**",
+        "scopes/component/deprecation/**",
+        "scopes/component/dev-files/**",
+        "scopes/component/forking/**",
+        "scopes/component/graph/**",
+        "scopes/component/internalize/**",
+        "scopes/component/isolator/**",
+        "scopes/component/issues/**",
+        "scopes/component/lister/**",
+        "scopes/component/merging/**",
+        "scopes/component/modules/**",
+        "scopes/component/mover/**",
+        "scopes/component/new-component-helper/**",
+        "scopes/component/refactoring/**",
+        "scopes/component/remove/**",
+        "scopes/component/renaming/**",
+        "scopes/component/snap-distance/**",
+        "scopes/component/snapping/**",
+        "scopes/component/stash/**",
+        "scopes/component/status/**",
+        "scopes/component/testing/**",
+        "scopes/component/tracker/**",
+        "scopes/compositions/**",
+        "scopes/defender/**",
+        "scopes/dependencies/**",
+        "scopes/docs/**",
+        "scopes/envs/**",
+        "scopes/explorer/**",
+        "scopes/generator/**",
+        "scopes/git/**",
+        "scopes/harmony/**",
+        "scopes/html/**",
+        "scopes/lanes/**",
+        "scopes/mcp/**",
+        "scopes/mdx/**",
+        "scopes/pipelines/**",
+        "scopes/pkg/**",
+        "scopes/preview/**",
+        "scopes/react/**",
+        "scopes/scope/**",
+        "scopes/semantics/**",
+        "scopes/toolbox/**",
+        "scopes/typescript/**",
+        "scopes/ui-foundation/**",
+        "scopes/vue/**",
+        "scopes/webpack/**",
+        "scopes/workspace/**",
+        "scripts/**",
+        "tsconfig.json",
+        "typings/**",
+        "workspace-jsonc-schema.json",
+        "workspace.jsonc"
+      ],
+      "text": "Bit - A development toolchain for composable software\n\nCopyright (C) 2017 Cocycles Ltd.\n\nCan be contacted at: team@bit.dev \n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.  \n\n\nLICENSE names the license \"Apache-2.0\" without its text, so this is the license's official text (SPDX license list):\n\nApache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n\"License\" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.\n\n\"Licensor\" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.\n\n\"Legal Entity\" shall mean the union of the acting entity and all other entities that control, are controlled by, or are under common control with that entity. For the purposes of this definition, \"control\" means (i) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) beneficial ownership of such entity.\n\n\"You\" (or \"Your\") shall mean an individual or Legal Entity exercising permissions granted by this License.\n\n\"Source\" form shall mean the preferred form for making modifications, including but not limited to software source code, documentation source, and configuration files.\n\n\"Object\" form shall mean any form resulting from mechanical transformation or translation of a Source form, including but not limited to compiled object code, generated documentation, and conversions to other media types.\n\n\"Work\" shall mean the work of authorship, whether in Source or Object form, made available under the License, as indicated by a copyright notice that is included in or attached to the work (an example is provided in the Appendix below).\n\n\"Derivative Works\" shall mean any work, whether in Source or Object form, that is based on (or derived from) the Work and for which the editorial revisions, annotations, elaborations, or other modifications represent, as a whole, an original work of authorship. For the purposes of this License, Derivative Works shall not include works that remain separable from, or merely link (or bind by name) to the interfaces of, the Work and Derivative Works thereof.\n\n\"Contribution\" shall mean any work of authorship, including the original version of the Work and any modifications or additions to that Work or Derivative Works thereof, that is intentionally submitted to Licensor for inclusion in the Work by the copyright owner or by an individual or Legal Entity authorized to submit on behalf of the copyright owner. For the purposes of this definition, \"submitted\" means any form of electronic, verbal, or written communication sent to the Licensor or its representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, the Licensor for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by the copyright owner as \"Not a Contribution.\"\n\n\"Contributor\" shall mean Licensor and any individual or Legal Entity on behalf of whom a Contribution has been received by Licensor and subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the Work or Derivative Works thereof in any medium, with or without modifications, and in Source or Object form, provided that You meet the following conditions:\n\n     (a) You must give any other recipients of the Work or Derivative Works a copy of this License; and\n\n     (b) You must cause any modified files to carry prominent notices stating that You changed the files; and\n\n     (c) You must retain, in the Source form of any Derivative Works that You distribute, all copyright, patent, trademark, and attribution notices from the Source form of the Work, excluding those notices that do not pertain to any part of the Derivative Works; and\n\n     (d) If the Work includes a \"NOTICE\" text file as part of its distribution, then any Derivative Works that You distribute must include a readable copy of the attribution notices contained within such NOTICE file, excluding those notices that do not pertain to any part of the Derivative Works, in at least one of the following places: within a NOTICE text file distributed as part of the Derivative Works; within the Source form or documentation, if provided along with the Derivative Works; or, within a display generated by the Derivative Works, if and wherever such third-party notices normally appear. The contents of the NOTICE file are for informational purposes only and do not modify the License. You may add Your own attribution notices within Derivative Works that You distribute, alongside or as an addendum to the NOTICE text from the Work, provided that such additional attribution notices cannot be construed as modifying the License.\n\n     You may add Your own copyright statement to Your modifications and may provide additional or different license terms and conditions for use, reproduction, or distribution of Your modifications, or for any such Derivative Works as a whole, provided Your use, reproduction, and distribution of the Work otherwise complies with the conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise, any Contribution intentionally submitted for inclusion in the Work by You to the Licensor shall be under the terms and conditions of this License, without any additional terms or conditions. Notwithstanding the above, nothing herein shall supersede or modify the terms of any separate license agreement you may have executed with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or agreed to in writing, Licensor provides the Work (and each Contributor provides its Contributions) on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall any Contributor be liable to You for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result of this License or out of the use or inability to use the Work (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if such Contributor has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\nTo apply the Apache License to your work, attach the following boilerplate notice, with the fields enclosed by brackets \"[]\" replaced with your own identifying information. (Don't include the brackets!)  The text should be enclosed in the appropriate comment syntax for the file format. We also recommend that a file or class name and description of purpose be included on the same \"printed page\" as the copyright notice for easier identification within third-party archives.\n\nCopyright [yyyy] [name of copyright owner]\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+      "attribution": "Copyright (C) 2017 Cocycles Ltd., Apache-2.0 license (LICENSE), https://github.com/teambit/bit."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.jsonc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "less",
+      "paths": [
+        "**/*.less"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sass",
+      "paths": [
+        "**/*.sass"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "stylus",
+      "paths": [
+        "**/*.styl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.foo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pdf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tsxx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.babelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bitmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.circle-sha"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile-bit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile-bit-alpine"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile-bit-non-root"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile-bit-server"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-push"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/runner"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16"
+  }
+}

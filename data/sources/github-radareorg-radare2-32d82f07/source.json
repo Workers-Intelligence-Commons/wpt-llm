@@ -1,0 +1,6160 @@
+{
+  "type": "git",
+  "address": "https://github.com/radareorg/radare2",
+  "revision": "8750ef8573a5f05a78493d973315c87b258e6c5e",
+  "checksum": "sha256:6902b2b5f6302225aa0b032d1167aedf5e78c40be26cadc4e55f5ff5cbda397a",
+  "extract": {
+    "exclude": [
+      "dist/jslinux/web/favicon.ico",
+      "dist/macos/pkg/Resources/**",
+      "dist/windows/radare2.ico",
+      "doc/images/fremoji2.png",
+      "doc/images/icon.png",
+      "doc/images/r2big.png",
+      "doc/images/r2bigger.png",
+      "doc/images/r2emoji.png",
+      "doc/images/r2emoji2.png",
+      "doc/images/r2pow.png",
+      "doc/images/r2sticker.png",
+      "doc/images/r2und.png",
+      "doc/images/r2white.png",
+      "doc/images/rlogo-big.png",
+      "doc/images/rlogo256.png",
+      "doc/images/shot.png",
+      "doc/pdb/**",
+      "libr/magic/d/default/riff",
+      "libr/util/regex/**",
+      "shlr/www/favicon.ico",
+      "shlr/www/icon.png",
+      "shlr/www/m/images/**",
+      "shlr/www/old/rlogo2.png",
+      "shlr/www/p/rlogo-inv.png",
+      "shlr/www/rlogo.png",
+      "shlr/www/t/rlogo.png",
+      "test/db/cmd/cmd_fs",
+      "test/db/formats/pe/**"
+    ]
+  },
+  "history": {
+    "since": "43111b7f50b8b49e6daa070b92fd0c1d081dc2ed"
+  },
+  "licenses": [
+    {
+      "license": "LGPL-3.0-only AND LGPL-3.0-or-later AND MIT AND Zlib",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "# Radare2 License\n\nMost of radare2 is licensed under the LGPLv3, but as its dependencies and plugins are distributed with different licenses.\n\nProbably the only concern for distributing static builds of radare2 is the **GPL** license, and you can skip the related code with the `--without-gpl` configure flag.\n\nSee `doc/licenses/` and `doc/licenses.md`.\n\nTo get a fully detailed SBOM report from a runtime build use the `licenses.r2.js` script that will return a JSON object with `-Vj` containing all the license and copyright detailed information of all the elements shipped in the build. Here's a sample output:\n\nIf you want to confirm the licenses you are shipping you can run the `scripts/licenses.r2.js` script to find out all the plugins and their copying statements.\n\n```console\n$ r2 -qi scripts/licenses.r2.js --\n```\n\n\n                   GNU LESSER GENERAL PUBLIC LICENSE\n                       Version 3, 29 June 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n\n  This version of the GNU Lesser General Public License incorporates\nthe terms and conditions of version 3 of the GNU General Public\nLicense, supplemented by the additional permissions listed below.\n\n  0. Additional Definitions.\n\n  As used herein, \"this License\" refers to version 3 of the GNU Lesser\nGeneral Public License, and the \"GNU GPL\" refers to version 3 of the GNU\nGeneral Public License.\n\n  \"The Library\" refers to a covered work governed by this License,\nother than an Application or a Combined Work as defined below.\n\n  An \"Application\" is any work that makes use of an interface provided\nby the Library, but which is not otherwise based on the Library.\nDefining a subclass of a class defined by the Library is deemed a mode\nof using an interface provided by the Library.\n\n  A \"Combined Work\" is a work produced by combining or linking an\nApplication with the Library.  The particular version of the Library\nwith which the Combined Work was made is also called the \"Linked\nVersion\".\n\n  The \"Minimal Corresponding Source\" for a Combined Work means the\nCorresponding Source for the Combined Work, excluding any source code\nfor portions of the Combined Work that, considered in isolation, are\nbased on the Application, and not on the Linked Version.\n\n  The \"Corresponding Application Code\" for a Combined Work means the\nobject code and/or source code for the Application, including any data\nand utility programs needed for reproducing the Combined Work from the\nApplication, but excluding the System Libraries of the Combined Work.\n\n  1. Exception to Section 3 of the GNU GPL.\n\n  You may convey a covered work under sections 3 and 4 of this License\nwithout being bound by section 3 of the GNU GPL.\n\n  2. Conveying Modified Versions.\n\n  If you modify a copy of the Library, and, in your modifications, a\nfacility refers to a function or data to be supplied by an Application\nthat uses the facility (other than as an argument passed when the\nfacility is invoked), then you may convey a copy of the modified\nversion:\n\n   a) under this License, provided that you make a good faith effort to\n   ensure that, in the event an Application does not supply the\n   function or data, the facility still operates, and performs\n   whatever part of its purpose remains meaningful, or\n\n   b) under the GNU GPL, with none of the additional permissions of\n   this License applicable to that copy.\n\n  3. Object Code Incorporating Material from Library Header Files.\n\n  The object code form of an Application may incorporate material from\na header file that is part of the Library.  You may convey such object\ncode under terms of your choice, provided that, if the incorporated\nmaterial is not limited to numerical parameters, data structure\nlayouts and accessors, or small macros, inline functions and templates\n(ten or fewer lines in length), you do both of the following:\n\n   a) Give prominent notice with each copy of the object code that the\n   Library is used in it and that the Library and its use are\n   covered by this License.\n\n   b) Accompany the object code with a copy of the GNU GPL and this license\n   document.\n\n  4. Combined Works.\n\n  You may convey a Combined Work under terms of your choice that,\ntaken together, effectively do not restrict modification of the\nportions of the Library contained in the Combined Work and reverse\nengineering for debugging such modifications, if you also do each of\nthe following:\n\n   a) Give prominent notice with each copy of the Combined Work that\n   the Library is used in it and that the Library and its use are\n   covered by this License.\n\n   b) Accompany the Combined Work with a copy of the GNU GPL and this license\n   document.\n\n   c) For a Combined Work that displays copyright notices during\n   execution, include the copyright notice for the Library among\n   these notices, as well as a reference directing the user to the\n   copies of the GNU GPL and this license document.\n\n   d) Do one of the following:\n\n       0) Convey the Minimal Corresponding Source under the terms of this\n       License, and the Corresponding Application Code in a form\n       suitable for, and under terms that permit, the user to\n       recombine or relink the Application with a modified version of\n       the Linked Version to produce a modified Combined Work, in the\n       manner specified by section 6 of the GNU GPL for conveying\n       Corresponding Source.\n\n       1) Use a suitable shared library mechanism for linking with the\n       Library.  A suitable mechanism is one that (a) uses at run time\n       a copy of the Library already present on the user's computer\n       system, and (b) will operate properly with a modified version\n       of the Library that is interface-compatible with the Linked\n       Version.\n\n   e) Provide Installation Information, but only if you would otherwise\n   be required to provide such information under section 6 of the\n   GNU GPL, and only to the extent that such information is\n   necessary to install and execute a modified version of the\n   Combined Work produced by recombining or relinking the\n   Application with a modified version of the Linked Version. (If\n   you use option 4d0, the Installation Information must accompany\n   the Minimal Corresponding Source and Corresponding Application\n   Code. If you use option 4d1, you must provide the Installation\n   Information in the manner specified by section 6 of the GNU GPL\n   for conveying Corresponding Source.)\n\n  5. Combined Libraries.\n\n  You may place library facilities that are a work based on the\nLibrary side by side in a single library together with other library\nfacilities that are not Applications and are not covered by this\nLicense, and convey such a combined library under terms of your\nchoice, if you do both of the following:\n\n   a) Accompany the combined library with a copy of the same work based\n   on the Library, uncombined with any other library facilities,\n   conveyed under the terms of this License.\n\n   b) Give prominent notice with the combined library that part of it\n   is a work based on the Library, and explaining where to find the\n   accompanying uncombined form of the same work.\n\n  6. Revised Versions of the GNU Lesser General Public License.\n\n  The Free Software Foundation may publish revised and/or new versions\nof the GNU Lesser General Public License from time to time. Such new\nversions will be similar in spirit to the present version, but may\ndiffer in detail to address new problems or concerns.\n\n  Each version is given a distinguishing version number. If the\nLibrary as you received it specifies that a certain numbered version\nof the GNU Lesser General Public License \"or any later version\"\napplies to it, you have the option of following the terms and\nconditions either of that published version or of any later version\npublished by the Free Software Foundation. If the Library as you\nreceived it does not specify a version number of the GNU Lesser\nGeneral Public License, you may choose any version of the GNU Lesser\nGeneral Public License ever published by the Free Software Foundation.\n\n  If the Library as you received it specifies that a proxy can decide\nwhether future versions of the GNU Lesser General Public License shall\napply, that proxy's public statement of acceptance of any version is\npermanent authorization for you to choose that version for the\nLibrary.\n\n\n\nMIT License\n\nCopyright (c) 2026 pancake <pancake@nopcode.org> and the radare2 contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright (c) 2015 Orson Peters <orsonpeters@gmail.com>\n\nThis software is provided 'as-is', without any express or implied warranty. In no event will the\nauthors be held liable for any damages arising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose, including commercial\napplications, and to alter it and redistribute it freely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not claim that you wrote the\n   original software. If you use this software in a product, an acknowledgment in the product\n   documentation would be appreciated but is not required.\n\n2. Altered source versions must be plainly marked as such, and must not be misrepresented as\n   being the original software.\n\n3. This notice may not be removed or altered from any source distribution.\n\n\nThe MIT License (MIT)\nCopyright (c) 2009-2016 pancake <pancake@nopcode.org>\n\nPermission is  hereby granted,  free of charge,  to any person obtaining a\ncopy of this software and associated documentation files (the \"Software\"),\nto deal in the Software without restriction,  including without limitation\nthe rights to use, copy,  modify, merge, publish,  distribute, sublicense,\nand/or sell  copies  of the Software,  and to  permit persons  to whom the\nSoftware is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED,  INCLUDING BUT NOT LIMITED TO THE  WARRANTIES OF MERCHANTABILITY,\nFITNESS  FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT  SHALL\nTHE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY,  WHETHER IN AN ACTION OF CONTRACT,  TORT OR OTHERWISE,  ARISING\nFROM,  OUT OF OR IN  CONNECTION  WITH  THE SOFTWARE  OR THE  USE OR  OTHER\nDEALINGS IN THE SOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2013-2024 Zyantific\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/radareorg/radare2: the authors of radareorg/radare2 (the license file names no copyright line), LGPL-3.0-only license (COPYING.md), https://github.com/radareorg/radare2; the authors of radareorg/radare2 (dist/windows) (the license file names no copyright line), LGPL-3.0-or-later license (LICENSE), https://github.com/radareorg/radare2/tree/8750ef8573a5f05a78493d973315c87b258e6c5e/dist/windows; Copyright (c) 2026 pancake <pancake@nopcode.org> and the radare2 contributors, MIT license (LICENSE), https://github.com/radareorg/radare2/tree/8750ef8573a5f05a78493d973315c87b258e6c5e/libr/bin/mangling/cxx2; Copyright (c) 2015 Orson Peters <orsonpeters@gmail.com>, Zlib license (license.txt), https://github.com/radareorg/radare2/tree/8750ef8573a5f05a78493d973315c87b258e6c5e/libr/muta/signature/ed25519; Copyright (c) 2009-2016 pancake <pancake@nopcode.org>, MIT license (LICENSE), https://github.com/radareorg/radare2/tree/8750ef8573a5f05a78493d973315c87b258e6c5e/shlr/spp; Copyright (c) 2013-2024 Zyantific, MIT license (LICENSE.MIT), https://github.com/radareorg/radare2/tree/8750ef8573a5f05a78493d973315c87b258e6c5e/subprojects/packagefiles/zydis."
+    },
+    {
+      "license": "LGPL-3.0-only",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        "AGENTS.md",
+        "COMMUNITY.md",
+        "CONTRIBUTING.md",
+        "COPYING.md",
+        "DEVELOPERS.md",
+        "INSTALL.md",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "USAGE.md",
+        "autogen.sh",
+        "binr/**",
+        "config-user.mk.acr",
+        "configure",
+        "configure-plugins",
+        "configure.acr",
+        "configure.bat",
+        "configure.hook",
+        "dist/alpine/**",
+        "dist/brew/**",
+        "dist/cydia/**",
+        "dist/debian/**",
+        "dist/docker/**",
+        "dist/github-actions/**",
+        "dist/iso/**",
+        "dist/jslinux/.dockerignore",
+        "dist/jslinux/.gitignore",
+        "dist/jslinux/Dockerfile",
+        "dist/jslinux/Makefile",
+        "dist/jslinux/README.md",
+        "dist/jslinux/guest/**",
+        "dist/jslinux/setuprootfs.sh",
+        "dist/jslinux/web/index.html",
+        "dist/jslinux/web/manifest.webmanifest",
+        "dist/jslinux/web/root-riscv64.cfg",
+        "dist/jslinux/web/serve.py",
+        "dist/jslinux/web/service-worker.js",
+        "dist/jslinux/web/term-colors.patch",
+        "dist/jslinux/web/term-wheel.patch",
+        "dist/macos/Makefile",
+        "dist/macos/build.sh",
+        "dist/macos/osx-pkg-uninstall.sh",
+        "dist/macos/osx-pkg-uninstall.tool",
+        "dist/macos/pkg/Distribution",
+        "dist/macos/pkg/radare2.unpkg/**",
+        "dist/maemo/**",
+        "dist/netbsd/**",
+        "dist/nix/**",
+        "dist/npm/**",
+        "dist/pip/**",
+        "dist/plugins-cfg/**",
+        "dist/reactos/**",
+        "dist/rpm/**",
+        "dist/sdk/**",
+        "dist/tarball/**",
+        "dist/uefi/**",
+        "dist/vagrant/**",
+        "dist/wapm/**",
+        "dist/winget/**",
+        "doc/3D/**",
+        "doc/abi.md",
+        "doc/all68k.r2",
+        "doc/android.md",
+        "doc/arm-endian.md",
+        "doc/avr.md",
+        "doc/bash_autocompletion.sh",
+        "doc/brainfuck.md",
+        "doc/calling-conventions.md",
+        "doc/capstone.md",
+        "doc/cross-compile.md",
+        "doc/debug-internals.md",
+        "doc/debug.md",
+        "doc/devdebug.md",
+        "doc/dexdump.sh",
+        "doc/dospart",
+        "doc/dwarf-line.rsc",
+        "doc/dyncc.md",
+        "doc/emscripten.md",
+        "doc/esil.md",
+        "doc/flirt.md",
+        "doc/fortunes/**",
+        "doc/freebsd.md",
+        "doc/gdb.md",
+        "doc/gprobe.md",
+        "doc/haiku.md",
+        "doc/hud",
+        "doc/ida.md",
+        "doc/images/keepr2.svg",
+        "doc/images/logo.sixel",
+        "doc/images/morelogos.svg",
+        "doc/images/r2.svg",
+        "doc/images/r2cloud.svg",
+        "doc/images/r2con/**",
+        "doc/images/r2cs.svg",
+        "doc/images/r2pow.svg",
+        "doc/images/r2w.svg",
+        "doc/indent-example.c",
+        "doc/intro.md",
+        "doc/io-fixing.md",
+        "doc/io.md",
+        "doc/iocache",
+        "doc/ios.md",
+        "doc/iphone.md",
+        "doc/kvast.md",
+        "doc/lang-plugins",
+        "doc/licenses/**",
+        "doc/licenses.md",
+        "doc/macos.md",
+        "doc/macros.md",
+        "doc/maemo.md",
+        "doc/objc.pl",
+        "doc/openbsd.md",
+        "doc/portscan.r2",
+        "doc/qnx.md",
+        "doc/r2ascii.txt",
+        "doc/r2pipe.html",
+        "doc/r2pipe2.md",
+        "doc/rap.md",
+        "doc/rapatch.md",
+        "doc/releases.md",
+        "doc/repo",
+        "doc/rgraph.md",
+        "doc/sandbox/**",
+        "doc/sdb_ordinal.md",
+        "doc/siol.md",
+        "doc/slides/**",
+        "doc/slides.r2.md",
+        "doc/snap.md",
+        "doc/solaris.md",
+        "doc/static.md",
+        "doc/strings.md",
+        "doc/termux.md",
+        "doc/uncrustify.cfg",
+        "doc/vim",
+        "doc/vim2r2.js",
+        "doc/vlang-example.v",
+        "doc/wasm.md",
+        "doc/windbg.md",
+        "doc/windows.md",
+        "doc/yara.md",
+        "doc/zsh/**",
+        "env.sh",
+        "flake.nix",
+        "global.mk",
+        "libr/Makefile",
+        "libr/anal/**",
+        "libr/arch/**",
+        "libr/asm/**",
+        "libr/bin/Makefile",
+        "libr/bin/addrline.c",
+        "libr/bin/bfile.c",
+        "libr/bin/bfilter.c",
+        "libr/bin/bin.c",
+        "libr/bin/bin_ldr.c",
+        "libr/bin/bin_write.c",
+        "libr/bin/blang.c",
+        "libr/bin/bobj.c",
+        "libr/bin/d/**",
+        "libr/bin/demangle.c",
+        "libr/bin/demangle_stubs.c",
+        "libr/bin/format/**",
+        "libr/bin/i/**",
+        "libr/bin/mangling/cxx/**",
+        "libr/bin/mangling/cxx.c",
+        "libr/bin/mangling/demangler.c",
+        "libr/bin/mangling/dlang.c",
+        "libr/bin/mangling/ibmxl.c",
+        "libr/bin/mangling/java.c",
+        "libr/bin/mangling/microsoft.c",
+        "libr/bin/mangling/microsoft.h",
+        "libr/bin/mangling/msvc.c",
+        "libr/bin/mangling/objc.c",
+        "libr/bin/mangling/pascal.c",
+        "libr/bin/mangling/rust.c",
+        "libr/bin/mangling/swift-sd.c",
+        "libr/bin/mangling/swift.c",
+        "libr/bin/meson.build",
+        "libr/bin/p/**",
+        "libr/bin/trycatch.c",
+        "libr/bp/**",
+        "libr/config/**",
+        "libr/config.h.head",
+        "libr/config.h.in",
+        "libr/config.h.tail",
+        "libr/config.mk.head",
+        "libr/config.mk.tail",
+        "libr/cons/**",
+        "libr/core/**",
+        "libr/count.sh",
+        "libr/debug/**",
+        "libr/depgraph.pl",
+        "libr/egg/**",
+        "libr/esil/**",
+        "libr/flag/**",
+        "libr/fs/**",
+        "libr/include/**",
+        "libr/io/**",
+        "libr/lang/**",
+        "libr/ld.script",
+        "libr/libr.pc.acr",
+        "libr/libs.custom.mk.example",
+        "libr/libs.mk",
+        "libr/magic/Makefile",
+        "libr/magic/README",
+        "libr/magic/apprentice.c",
+        "libr/magic/ascmagic.c",
+        "libr/magic/d/Makefile",
+        "libr/magic/d/default/apple",
+        "libr/magic/d/default/archive",
+        "libr/magic/d/default/cafebabe",
+        "libr/magic/d/default/code",
+        "libr/magic/d/default/compressed",
+        "libr/magic/d/default/crc",
+        "libr/magic/d/default/database",
+        "libr/magic/d/default/dis",
+        "libr/magic/d/default/elf",
+        "libr/magic/d/default/encoding",
+        "libr/magic/d/default/filesystems",
+        "libr/magic/d/default/firmware",
+        "libr/magic/d/default/flash",
+        "libr/magic/d/default/flutter",
+        "libr/magic/d/default/freebsd",
+        "libr/magic/d/default/gimp",
+        "libr/magic/d/default/gpg",
+        "libr/magic/d/default/hermes",
+        "libr/magic/d/default/html",
+        "libr/magic/d/default/images",
+        "libr/magic/d/default/java",
+        "libr/magic/d/default/jpeg",
+        "libr/magic/d/default/linux",
+        "libr/magic/d/default/mach",
+        "libr/magic/d/default/microsoft",
+        "libr/magic/d/default/mime",
+        "libr/magic/d/default/netbsd",
+        "libr/magic/d/default/network",
+        "libr/magic/d/default/openbsd",
+        "libr/magic/d/default/pdf",
+        "libr/magic/d/default/perl",
+        "libr/magic/d/default/python",
+        "libr/magic/d/default/sniffer",
+        "libr/magic/d/default/sql",
+        "libr/magic/d/default/ssh",
+        "libr/magic/d/default/uuencode",
+        "libr/magic/d/default/video",
+        "libr/magic/d/default/vim",
+        "libr/magic/d/default/vorbis",
+        "libr/magic/d/default/zfs",
+        "libr/magic/d/meson.build",
+        "libr/magic/deps.mk",
+        "libr/magic/file.h",
+        "libr/magic/file_opts.h",
+        "libr/magic/funcs.c",
+        "libr/magic/is_tar.c",
+        "libr/magic/magic.c",
+        "libr/magic/mconfig.h",
+        "libr/magic/mdump.c",
+        "libr/magic/meson.build",
+        "libr/magic/names.h",
+        "libr/magic/patchlevel.h",
+        "libr/magic/softmagic.c",
+        "libr/magic/tar.h",
+        "libr/main/**",
+        "libr/meson.build",
+        "libr/muta/Makefile",
+        "libr/muta/charset.c",
+        "libr/muta/hash/**",
+        "libr/muta/meson.build",
+        "libr/muta/muta.c",
+        "libr/muta/muta_bind.c",
+        "libr/muta/muta_process.c",
+        "libr/muta/muta_session.c",
+        "libr/muta/p/**",
+        "libr/reg/**",
+        "libr/rules.mk",
+        "libr/search/**",
+        "libr/socket/**",
+        "libr/stripsyms.sh",
+        "libr/symgraph.pl",
+        "libr/syscall/**",
+        "libr/util/Makefile",
+        "libr/util/alloc.c",
+        "libr/util/arena.c",
+        "libr/util/asn1.c",
+        "libr/util/asn1_oids.h",
+        "libr/util/asn1_str.c",
+        "libr/util/assert.c",
+        "libr/util/atree.c",
+        "libr/util/axml.c",
+        "libr/util/axml_resources.h",
+        "libr/util/base32.c",
+        "libr/util/base36.c",
+        "libr/util/base85.c",
+        "libr/util/base91.c",
+        "libr/util/bdiff.c",
+        "libr/util/big.c",
+        "libr/util/big_gmp.c",
+        "libr/util/big_ssl.c",
+        "libr/util/bitmap.c",
+        "libr/util/bitset.c",
+        "libr/util/bloom.c",
+        "libr/util/bplist.c",
+        "libr/util/bscanf.c",
+        "libr/util/buf.c",
+        "libr/util/buf_bytes.inc.c",
+        "libr/util/buf_cache.inc.c",
+        "libr/util/buf_file.inc.c",
+        "libr/util/buf_io.inc.c",
+        "libr/util/buf_mmap.inc.c",
+        "libr/util/buf_ref.inc.c",
+        "libr/util/buf_sparse.inc.c",
+        "libr/util/cfloat.c",
+        "libr/util/chartable.c",
+        "libr/util/chmod.c",
+        "libr/util/debruijn.c",
+        "libr/util/deps.mk",
+        "libr/util/donut.c",
+        "libr/util/emoji.c",
+        "libr/util/event.c",
+        "libr/util/file.c",
+        "libr/util/fonts.c",
+        "libr/util/format.c",
+        "libr/util/getopt.c",
+        "libr/util/graph.c",
+        "libr/util/graph_drawable.c",
+        "libr/util/hex.c",
+        "libr/util/idpool.c",
+        "libr/util/intervaltree.c",
+        "libr/util/json_indent.c",
+        "libr/util/json_parser.c",
+        "libr/util/jwt.c",
+        "libr/util/lib.c",
+        "libr/util/libstore.c",
+        "libr/util/list.c",
+        "libr/util/log.c",
+        "libr/util/markdown.c",
+        "libr/util/math.c",
+        "libr/util/mem.c",
+        "libr/util/meson.build",
+        "libr/util/mmap.c",
+        "libr/util/name.c",
+        "libr/util/new_rbtree.c",
+        "libr/util/pie.c",
+        "libr/util/pj.c",
+        "libr/util/pkcs7.c",
+        "libr/util/print.c",
+        "libr/util/print_code.c",
+        "libr/util/print_regcolor.c",
+        "libr/util/prof.c",
+        "libr/util/protobuf.c",
+        "libr/util/punycode.c",
+        "libr/util/qrcode.c",
+        "libr/util/queue.c",
+        "libr/util/randomart.c",
+        "libr/util/range.c",
+        "libr/util/rbtree.c",
+        "libr/util/rlz4.c",
+        "libr/util/rprintf.c",
+        "libr/util/rstr.c",
+        "libr/util/rvc.c",
+        "libr/util/rvc_git.c",
+        "libr/util/rvc_rvc.c",
+        "libr/util/rxml.c",
+        "libr/util/rxmldom.c",
+        "libr/util/sandbox.c",
+        "libr/util/sdb.mk",
+        "libr/util/signal.c",
+        "libr/util/skiplist.c",
+        "libr/util/spaces.c",
+        "libr/util/spp.mk",
+        "libr/util/sstext.c",
+        "libr/util/stack.c",
+        "libr/util/str.c",
+        "libr/util/str_constpool.c",
+        "libr/util/str_pseudo.c",
+        "libr/util/str_strip.c",
+        "libr/util/str_trim.c",
+        "libr/util/strbuf.c",
+        "libr/util/strpool.c",
+        "libr/util/strs.c",
+        "libr/util/strs_attic.c",
+        "libr/util/strs_store.c",
+        "libr/util/sys.c",
+        "libr/util/sys_sh.c",
+        "libr/util/sys_w32.c",
+        "libr/util/syscmd.c",
+        "libr/util/table.c",
+        "libr/util/thread.c",
+        "libr/util/thread_chan.c",
+        "libr/util/thread_cond.c",
+        "libr/util/thread_lock.c",
+        "libr/util/thread_pipe.c",
+        "libr/util/thread_sem.c",
+        "libr/util/time.c",
+        "libr/util/token.c",
+        "libr/util/tree.c",
+        "libr/util/treemap.c",
+        "libr/util/trie.c",
+        "libr/util/ubase64.c",
+        "libr/util/udiff.c",
+        "libr/util/uleb128.c",
+        "libr/util/unum.c",
+        "libr/util/utf16.c",
+        "libr/util/utf32.c",
+        "libr/util/utf8.c",
+        "libr/util/utype.c",
+        "libr/util/w32.c",
+        "libr/util/w32dw.c",
+        "libr/util/x509.c",
+        "libr/util/x509.h",
+        "libr/util/xdg.c",
+        "libr/util/zip.c",
+        "libr/xps/**",
+        "make.bat",
+        "man/**",
+        "meson.build",
+        "meson_options.txt",
+        "mk/**",
+        "pkgcfg/**",
+        "preconfigure",
+        "preconfigure.bat",
+        "scripts/**",
+        "shlr/Makefile",
+        "shlr/bochs/**",
+        "shlr/gdb/**",
+        "shlr/java/**",
+        "shlr/meson.build",
+        "shlr/panels/**",
+        "shlr/qjs/**",
+        "shlr/qnx/**",
+        "shlr/sdb.mk",
+        "shlr/winkd/**",
+        "shlr/www/bolt/**",
+        "shlr/www/console.html",
+        "shlr/www/d3/**",
+        "shlr/www/f/**",
+        "shlr/www/index.css",
+        "shlr/www/index.html",
+        "shlr/www/index.old.html",
+        "shlr/www/log.html",
+        "shlr/www/m/disasmNavProvider.js",
+        "shlr/www/m/disasmProvider.js",
+        "shlr/www/m/hexchunkProvider.js",
+        "shlr/www/m/index.html",
+        "shlr/www/m/legacy.js",
+        "shlr/www/m/main.min.js",
+        "shlr/www/m/r2.js",
+        "shlr/www/m/stylesheet.css",
+        "shlr/www/m/tools.legacy.js",
+        "shlr/www/m/vendors/**",
+        "shlr/www/old/index.html",
+        "shlr/www/old/script.js",
+        "shlr/www/old/style.css",
+        "shlr/www/p/dependencies.css",
+        "shlr/www/p/dependencies.js",
+        "shlr/www/p/index.html",
+        "shlr/www/p/main.js",
+        "shlr/www/p/panels.js",
+        "shlr/www/p/r2core.css",
+        "shlr/www/p/r2core.js",
+        "shlr/www/p/vendors/**",
+        "shlr/www/r2.svg",
+        "shlr/www/t/app.js",
+        "shlr/www/t/index.html",
+        "shlr/www/t/stylesheet.css",
+        "shlr/www/upload.html",
+        "shlr/zip/**",
+        "subprojects/.gitignore",
+        "subprojects/Makefile",
+        "subprojects/autogen.sh",
+        "subprojects/binaryninja.mk",
+        "subprojects/binaryninja.wrap",
+        "subprojects/capstone-next.mk",
+        "subprojects/capstone-next.wrap",
+        "subprojects/capstone-v4.mk",
+        "subprojects/capstone-v4.wrap",
+        "subprojects/capstone-v5.mk",
+        "subprojects/capstone-v5.wrap",
+        "subprojects/otezip.mk",
+        "subprojects/otezip.wrap",
+        "subprojects/packagefiles/binaryninja/**",
+        "subprojects/packagefiles/capstone-next/**",
+        "subprojects/packagefiles/capstone-v4/**",
+        "subprojects/packagefiles/capstone-v5/**",
+        "subprojects/packagefiles/otezip/**",
+        "subprojects/packagefiles/qjs/**",
+        "subprojects/packagefiles/sdb/**",
+        "subprojects/qjs.mk",
+        "subprojects/qjs.wrap",
+        "subprojects/sdb.mk",
+        "subprojects/sdb.wrap",
+        "subprojects/zydis.mk",
+        "subprojects/zydis.wrap",
+        "sys/**",
+        "test/.gitignore",
+        "test/Makefile",
+        "test/README.md",
+        "test/agent/**",
+        "test/bench/**",
+        "test/db/anal/**",
+        "test/db/archos/**",
+        "test/db/asm/**",
+        "test/db/cmd/0000",
+        "test/db/cmd/archs",
+        "test/db/cmd/asm_color_regs",
+        "test/db/cmd/asm_colors",
+        "test/db/cmd/backtickgrep",
+        "test/db/cmd/basic",
+        "test/db/cmd/bitmask",
+        "test/db/cmd/bug_3788",
+        "test/db/cmd/bug_arch",
+        "test/db/cmd/bug_backtick",
+        "test/db/cmd/charset",
+        "test/db/cmd/classes",
+        "test/db/cmd/clippy",
+        "test/db/cmd/cmd_0",
+        "test/db/cmd/cmd_CL",
+        "test/db/cmd/cmd_Ch",
+        "test/db/cmd/cmd_aae",
+        "test/db/cmd/cmd_aafs",
+        "test/db/cmd/cmd_ab",
+        "test/db/cmd/cmd_ac",
+        "test/db/cmd/cmd_aea",
+        "test/db/cmd/cmd_aeg",
+        "test/db/cmd/cmd_aes",
+        "test/db/cmd/cmd_aesb",
+        "test/db/cmd/cmd_aex",
+        "test/db/cmd/cmd_af",
+        "test/db/cmd/cmd_afb",
+        "test/db/cmd/cmd_afcl",
+        "test/db/cmd/cmd_afl",
+        "test/db/cmd/cmd_aflp",
+        "test/db/cmd/cmd_aflxj",
+        "test/db/cmd/cmd_aflxv",
+        "test/db/cmd/cmd_afn",
+        "test/db/cmd/cmd_afts",
+        "test/db/cmd/cmd_afv",
+        "test/db/cmd/cmd_afvd",
+        "test/db/cmd/cmd_ag",
+        "test/db/cmd/cmd_agc",
+        "test/db/cmd/cmd_agf",
+        "test/db/cmd/cmd_ah",
+        "test/db/cmd/cmd_ahi",
+        "test/db/cmd/cmd_aii",
+        "test/db/cmd/cmd_alias",
+        "test/db/cmd/cmd_an",
+        "test/db/cmd/cmd_anal_dex_dyncc",
+        "test/db/cmd/cmd_anal_dyncc",
+        "test/db/cmd/cmd_anal_plugins",
+        "test/db/cmd/cmd_ao",
+        "test/db/cmd/cmd_ara",
+        "test/db/cmd/cmd_arm64_kernelcache",
+        "test/db/cmd/cmd_arp",
+        "test/db/cmd/cmd_arv",
+        "test/db/cmd/cmd_att",
+        "test/db/cmd/cmd_av",
+        "test/db/cmd/cmd_avr",
+        "test/db/cmd/cmd_ax",
+        "test/db/cmd/cmd_ax_delete",
+        "test/db/cmd/cmd_b",
+        "test/db/cmd/cmd_c",
+        "test/db/cmd/cmd_cmp",
+        "test/db/cmd/cmd_cond",
+        "test/db/cmd/cmd_cw",
+        "test/db/cmd/cmd_db",
+        "test/db/cmd/cmd_dh",
+        "test/db/cmd/cmd_disassembly",
+        "test/db/cmd/cmd_dmh",
+        "test/db/cmd/cmd_dr",
+        "test/db/cmd/cmd_dr_equal",
+        "test/db/cmd/cmd_ds",
+        "test/db/cmd/cmd_ec",
+        "test/db/cmd/cmd_env",
+        "test/db/cmd/cmd_eval",
+        "test/db/cmd/cmd_extend",
+        "test/db/cmd/cmd_flags",
+        "test/db/cmd/cmd_flags_graph",
+        "test/db/cmd/cmd_flags_hierarchy",
+        "test/db/cmd/cmd_flags_stress",
+        "test/db/cmd/cmd_flirt",
+        "test/db/cmd/cmd_fnj",
+        "test/db/cmd/cmd_foreach",
+        "test/db/cmd/cmd_fs_apfs",
+        "test/db/cmd/cmd_fuzzed",
+        "test/db/cmd/cmd_fv",
+        "test/db/cmd/cmd_graph",
+        "test/db/cmd/cmd_hash",
+        "test/db/cmd/cmd_help",
+        "test/db/cmd/cmd_i",
+        "test/db/cmd/cmd_ic",
+        "test/db/cmd/cmd_idp",
+        "test/db/cmd/cmd_ie",
+        "test/db/cmd/cmd_ih",
+        "test/db/cmd/cmd_interactive_modes",
+        "test/db/cmd/cmd_interpret",
+        "test/db/cmd/cmd_io",
+        "test/db/cmd/cmd_is",
+        "test/db/cmd/cmd_iw",
+        "test/db/cmd/cmd_iz",
+        "test/db/cmd/cmd_izzzzz",
+        "test/db/cmd/cmd_js",
+        "test/db/cmd/cmd_json",
+        "test/db/cmd/cmd_k",
+        "test/db/cmd/cmd_list",
+        "test/db/cmd/cmd_log",
+        "test/db/cmd/cmd_long_string",
+        "test/db/cmd/cmd_macros",
+        "test/db/cmd/cmd_meta",
+        "test/db/cmd/cmd_mn",
+        "test/db/cmd/cmd_mount",
+        "test/db/cmd/cmd_newapi",
+        "test/db/cmd/cmd_open",
+        "test/db/cmd/cmd_or",
+        "test/db/cmd/cmd_p-",
+        "test/db/cmd/cmd_pFa",
+        "test/db/cmd/cmd_pFb",
+        "test/db/cmd/cmd_pFp",
+        "test/db/cmd/cmd_pFx",
+        "test/db/cmd/cmd_pa",
+        "test/db/cmd/cmd_pad",
+        "test/db/cmd/cmd_pae",
+        "test/db/cmd/cmd_panels_scroll",
+        "test/db/cmd/cmd_panels_sync",
+        "test/db/cmd/cmd_pbits",
+        "test/db/cmd/cmd_pc",
+        "test/db/cmd/cmd_pd",
+        "test/db/cmd/cmd_pd2",
+        "test/db/cmd/cmd_pd3",
+        "test/db/cmd/cmd_pd_bugs",
+        "test/db/cmd/cmd_pd_bytes",
+        "test/db/cmd/cmd_pd_str",
+        "test/db/cmd/cmd_pd_trunk",
+        "test/db/cmd/cmd_pdc",
+        "test/db/cmd/cmd_pdc_ast",
+        "test/db/cmd/cmd_pde",
+        "test/db/cmd/cmd_pdj",
+        "test/db/cmd/cmd_pdr",
+        "test/db/cmd/cmd_pdu",
+        "test/db/cmd/cmd_pdx",
+        "test/db/cmd/cmd_pf",
+        "test/db/cmd/cmd_pf2",
+        "test/db/cmd/cmd_pf_elf",
+        "test/db/cmd/cmd_pf_write",
+        "test/db/cmd/cmd_pfd",
+        "test/db/cmd/cmd_ph",
+        "test/db/cmd/cmd_pi",
+        "test/db/cmd/cmd_pif",
+        "test/db/cmd/cmd_pipe",
+        "test/db/cmd/cmd_pix",
+        "test/db/cmd/cmd_pp",
+        "test/db/cmd/cmd_print",
+        "test/db/cmd/cmd_print_bars",
+        "test/db/cmd/cmd_print_bitformat",
+        "test/db/cmd/cmd_print_misc",
+        "test/db/cmd/cmd_print_msg",
+        "test/db/cmd/cmd_print_strings",
+        "test/db/cmd/cmd_ps",
+        "test/db/cmd/cmd_pseudo_arm32",
+        "test/db/cmd/cmd_pseudo_arm64",
+        "test/db/cmd/cmd_pseudo_h8300",
+        "test/db/cmd/cmd_pseudo_mips",
+        "test/db/cmd/cmd_pseudo_ppc",
+        "test/db/cmd/cmd_psj",
+        "test/db/cmd/cmd_psp",
+        "test/db/cmd/cmd_px",
+        "test/db/cmd/cmd_pxd",
+        "test/db/cmd/cmd_pxw",
+        "test/db/cmd/cmd_question",
+        "test/db/cmd/cmd_r",
+        "test/db/cmd/cmd_regs",
+        "test/db/cmd/cmd_repeats",
+        "test/db/cmd/cmd_rop",
+        "test/db/cmd/cmd_search",
+        "test/db/cmd/cmd_search_ad",
+        "test/db/cmd/cmd_search_asm",
+        "test/db/cmd/cmd_search_crypto",
+        "test/db/cmd/cmd_search_esil",
+        "test/db/cmd/cmd_search_hit",
+        "test/db/cmd/cmd_search_in",
+        "test/db/cmd/cmd_search_magic",
+        "test/db/cmd/cmd_search_str",
+        "test/db/cmd/cmd_seek",
+        "test/db/cmd/cmd_seek_fun",
+        "test/db/cmd/cmd_shift",
+        "test/db/cmd/cmd_system",
+        "test/db/cmd/cmd_table",
+        "test/db/cmd/cmd_tc",
+        "test/db/cmd/cmd_tcc",
+        "test/db/cmd/cmd_tcc_multiret",
+        "test/db/cmd/cmd_tmpbuf",
+        "test/db/cmd/cmd_to",
+        "test/db/cmd/cmd_traces",
+        "test/db/cmd/cmd_visual",
+        "test/db/cmd/cmd_w",
+        "test/db/cmd/cmd_wfs",
+        "test/db/cmd/cmd_wop",
+        "test/db/cmd/cmd_wox",
+        "test/db/cmd/cmd_writedwarf",
+        "test/db/cmd/cmd_yank",
+        "test/db/cmd/cmd_zignature",
+        "test/db/cmd/cmds",
+        "test/db/cmd/comments",
+        "test/db/cmd/cons_grep",
+        "test/db/cmd/cons_html",
+        "test/db/cmd/data",
+        "test/db/cmd/describe",
+        "test/db/cmd/display_flag",
+        "test/db/cmd/dwarf",
+        "test/db/cmd/dwarf2",
+        "test/db/cmd/echo",
+        "test/db/cmd/egg",
+        "test/db/cmd/elf",
+        "test/db/cmd/err",
+        "test/db/cmd/feat_arithmetic",
+        "test/db/cmd/feat_arroba",
+        "test/db/cmd/feat_astabs",
+        "test/db/cmd/feat_base64",
+        "test/db/cmd/feat_foreach",
+        "test/db/cmd/feat_graphdiff",
+        "test/db/cmd/feat_input",
+        "test/db/cmd/feat_quote",
+        "test/db/cmd/feat_redirect",
+        "test/db/cmd/feat_segoff",
+        "test/db/cmd/feat_variables",
+        "test/db/cmd/feat_yank",
+        "test/db/cmd/file_malloc",
+        "test/db/cmd/flags",
+        "test/db/cmd/hash",
+        "test/db/cmd/hex",
+        "test/db/cmd/http",
+        "test/db/cmd/lea_intel",
+        "test/db/cmd/m68k",
+        "test/db/cmd/malloc",
+        "test/db/cmd/manyundo",
+        "test/db/cmd/maps",
+        "test/db/cmd/metadata",
+        "test/db/cmd/midbb",
+        "test/db/cmd/midflags",
+        "test/db/cmd/mm_search_issue",
+        "test/db/cmd/newprj",
+        "test/db/cmd/noreturn",
+        "test/db/cmd/numvars",
+        "test/db/cmd/posixshell",
+        "test/db/cmd/print",
+        "test/db/cmd/print_bug",
+        "test/db/cmd/projects",
+        "test/db/cmd/r2pipe2",
+        "test/db/cmd/regexp",
+        "test/db/cmd/relocs",
+        "test/db/cmd/retries",
+        "test/db/cmd/sandbox",
+        "test/db/cmd/section-mapping",
+        "test/db/cmd/seekbug",
+        "test/db/cmd/shell",
+        "test/db/cmd/sidbug",
+        "test/db/cmd/simple-elf",
+        "test/db/cmd/singleline",
+        "test/db/cmd/slow",
+        "test/db/cmd/spaces",
+        "test/db/cmd/structures",
+        "test/db/cmd/sugar",
+        "test/db/cmd/tables",
+        "test/db/cmd/task",
+        "test/db/cmd/types",
+        "test/db/cmd/types2",
+        "test/db/cmd/types_darwin",
+        "test/db/cmd/types_errors",
+        "test/db/cmd/types_fnptr",
+        "test/db/cmd/types_fortified",
+        "test/db/cmd/types_prototypes",
+        "test/db/cmd/undoredo",
+        "test/db/cmd/unified",
+        "test/db/cmd/utf32",
+        "test/db/cmd/va",
+        "test/db/cmd/write",
+        "test/db/cmd/write-float",
+        "test/db/cmd/write-fun",
+        "test/db/esil/**",
+        "test/db/extras/**",
+        "test/db/formats/ar",
+        "test/db/formats/axml",
+        "test/db/formats/bflt",
+        "test/db/formats/cgc",
+        "test/db/formats/coff",
+        "test/db/formats/dex",
+        "test/db/formats/dmp/**",
+        "test/db/formats/dol",
+        "test/db/formats/dotnet/**",
+        "test/db/formats/dwarf",
+        "test/db/formats/dwarf-arm64-locations",
+        "test/db/formats/dwarf5-loclists",
+        "test/db/formats/elf/**",
+        "test/db/formats/firmware",
+        "test/db/formats/gba",
+        "test/db/formats/gbc",
+        "test/db/formats/gnome",
+        "test/db/formats/hunk/**",
+        "test/db/formats/java",
+        "test/db/formats/jni",
+        "test/db/formats/le",
+        "test/db/formats/mach0/**",
+        "test/db/formats/mangling/**",
+        "test/db/formats/mdmp",
+        "test/db/formats/mdt",
+        "test/db/formats/menuet",
+        "test/db/formats/msil",
+        "test/db/formats/msx",
+        "test/db/formats/mz/**",
+        "test/db/formats/ne",
+        "test/db/formats/nes",
+        "test/db/formats/ninds",
+        "test/db/formats/nro",
+        "test/db/formats/nso",
+        "test/db/formats/omf",
+        "test/db/formats/pcap",
+        "test/db/formats/pdb",
+        "test/db/formats/pebble",
+        "test/db/formats/pef",
+        "test/db/formats/plan9",
+        "test/db/formats/prg",
+        "test/db/formats/prj",
+        "test/db/formats/psx",
+        "test/db/formats/ptx/**",
+        "test/db/formats/pyc",
+        "test/db/formats/qnx",
+        "test/db/formats/rel",
+        "test/db/formats/sbpf/**",
+        "test/db/formats/sep/**",
+        "test/db/formats/smd",
+        "test/db/formats/sms",
+        "test/db/formats/som/**",
+        "test/db/formats/spc700",
+        "test/db/formats/symbols",
+        "test/db/formats/tic",
+        "test/db/formats/vsf/**",
+        "test/db/formats/web_assembly",
+        "test/db/formats/xbe",
+        "test/db/formats/xcoff",
+        "test/db/formats/xcoff64",
+        "test/db/formats/xtac",
+        "test/db/formats/z64",
+        "test/db/formats/zimg",
+        "test/db/formats/zip",
+        "test/db/io/**",
+        "test/db/json/**",
+        "test/db/leak/**",
+        "test/db/perf/**",
+        "test/db/tools/**",
+        "test/fuzz/**",
+        "test/indent/**",
+        "test/notworking_db/**",
+        "test/perf/**",
+        "test/run_unit.sh",
+        "test/scripts/**",
+        "test/unit/**",
+        "vsfix.bat"
+      ],
+      "text": "# Radare2 License\n\nMost of radare2 is licensed under the LGPLv3, but as its dependencies and plugins are distributed with different licenses.\n\nProbably the only concern for distributing static builds of radare2 is the **GPL** license, and you can skip the related code with the `--without-gpl` configure flag.\n\nSee `doc/licenses/` and `doc/licenses.md`.\n\nTo get a fully detailed SBOM report from a runtime build use the `licenses.r2.js` script that will return a JSON object with `-Vj` containing all the license and copyright detailed information of all the elements shipped in the build. Here's a sample output:\n\nIf you want to confirm the licenses you are shipping you can run the `scripts/licenses.r2.js` script to find out all the plugins and their copying statements.\n\n```console\n$ r2 -qi scripts/licenses.r2.js --\n```\n",
+      "attribution": "the authors of radareorg/radare2 (the license file names no copyright line), LGPL-3.0-only license (COPYING.md), https://github.com/radareorg/radare2."
+    },
+    {
+      "license": "LGPL-3.0-or-later",
+      "paths": [
+        "dist/windows/LICENSE",
+        "dist/windows/README.md",
+        "dist/windows/buildins.bat",
+        "dist/windows/radare2.iss"
+      ],
+      "text": "                   GNU LESSER GENERAL PUBLIC LICENSE\n                       Version 3, 29 June 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n\n  This version of the GNU Lesser General Public License incorporates\nthe terms and conditions of version 3 of the GNU General Public\nLicense, supplemented by the additional permissions listed below.\n\n  0. Additional Definitions.\n\n  As used herein, \"this License\" refers to version 3 of the GNU Lesser\nGeneral Public License, and the \"GNU GPL\" refers to version 3 of the GNU\nGeneral Public License.\n\n  \"The Library\" refers to a covered work governed by this License,\nother than an Application or a Combined Work as defined below.\n\n  An \"Application\" is any work that makes use of an interface provided\nby the Library, but which is not otherwise based on the Library.\nDefining a subclass of a class defined by the Library is deemed a mode\nof using an interface provided by the Library.\n\n  A \"Combined Work\" is a work produced by combining or linking an\nApplication with the Library.  The particular version of the Library\nwith which the Combined Work was made is also called the \"Linked\nVersion\".\n\n  The \"Minimal Corresponding Source\" for a Combined Work means the\nCorresponding Source for the Combined Work, excluding any source code\nfor portions of the Combined Work that, considered in isolation, are\nbased on the Application, and not on the Linked Version.\n\n  The \"Corresponding Application Code\" for a Combined Work means the\nobject code and/or source code for the Application, including any data\nand utility programs needed for reproducing the Combined Work from the\nApplication, but excluding the System Libraries of the Combined Work.\n\n  1. Exception to Section 3 of the GNU GPL.\n\n  You may convey a covered work under sections 3 and 4 of this License\nwithout being bound by section 3 of the GNU GPL.\n\n  2. Conveying Modified Versions.\n\n  If you modify a copy of the Library, and, in your modifications, a\nfacility refers to a function or data to be supplied by an Application\nthat uses the facility (other than as an argument passed when the\nfacility is invoked), then you may convey a copy of the modified\nversion:\n\n   a) under this License, provided that you make a good faith effort to\n   ensure that, in the event an Application does not supply the\n   function or data, the facility still operates, and performs\n   whatever part of its purpose remains meaningful, or\n\n   b) under the GNU GPL, with none of the additional permissions of\n   this License applicable to that copy.\n\n  3. Object Code Incorporating Material from Library Header Files.\n\n  The object code form of an Application may incorporate material from\na header file that is part of the Library.  You may convey such object\ncode under terms of your choice, provided that, if the incorporated\nmaterial is not limited to numerical parameters, data structure\nlayouts and accessors, or small macros, inline functions and templates\n(ten or fewer lines in length), you do both of the following:\n\n   a) Give prominent notice with each copy of the object code that the\n   Library is used in it and that the Library and its use are\n   covered by this License.\n\n   b) Accompany the object code with a copy of the GNU GPL and this license\n   document.\n\n  4. Combined Works.\n\n  You may convey a Combined Work under terms of your choice that,\ntaken together, effectively do not restrict modification of the\nportions of the Library contained in the Combined Work and reverse\nengineering for debugging such modifications, if you also do each of\nthe following:\n\n   a) Give prominent notice with each copy of the Combined Work that\n   the Library is used in it and that the Library and its use are\n   covered by this License.\n\n   b) Accompany the Combined Work with a copy of the GNU GPL and this license\n   document.\n\n   c) For a Combined Work that displays copyright notices during\n   execution, include the copyright notice for the Library among\n   these notices, as well as a reference directing the user to the\n   copies of the GNU GPL and this license document.\n\n   d) Do one of the following:\n\n       0) Convey the Minimal Corresponding Source under the terms of this\n       License, and the Corresponding Application Code in a form\n       suitable for, and under terms that permit, the user to\n       recombine or relink the Application with a modified version of\n       the Linked Version to produce a modified Combined Work, in the\n       manner specified by section 6 of the GNU GPL for conveying\n       Corresponding Source.\n\n       1) Use a suitable shared library mechanism for linking with the\n       Library.  A suitable mechanism is one that (a) uses at run time\n       a copy of the Library already present on the user's computer\n       system, and (b) will operate properly with a modified version\n       of the Library that is interface-compatible with the Linked\n       Version.\n\n   e) Provide Installation Information, but only if you would otherwise\n   be required to provide such information under section 6 of the\n   GNU GPL, and only to the extent that such information is\n   necessary to install and execute a modified version of the\n   Combined Work produced by recombining or relinking the\n   Application with a modified version of the Linked Version. (If\n   you use option 4d0, the Installation Information must accompany\n   the Minimal Corresponding Source and Corresponding Application\n   Code. If you use option 4d1, you must provide the Installation\n   Information in the manner specified by section 6 of the GNU GPL\n   for conveying Corresponding Source.)\n\n  5. Combined Libraries.\n\n  You may place library facilities that are a work based on the\nLibrary side by side in a single library together with other library\nfacilities that are not Applications and are not covered by this\nLicense, and convey such a combined library under terms of your\nchoice, if you do both of the following:\n\n   a) Accompany the combined library with a copy of the same work based\n   on the Library, uncombined with any other library facilities,\n   conveyed under the terms of this License.\n\n   b) Give prominent notice with the combined library that part of it\n   is a work based on the Library, and explaining where to find the\n   accompanying uncombined form of the same work.\n\n  6. Revised Versions of the GNU Lesser General Public License.\n\n  The Free Software Foundation may publish revised and/or new versions\nof the GNU Lesser General Public License from time to time. Such new\nversions will be similar in spirit to the present version, but may\ndiffer in detail to address new problems or concerns.\n\n  Each version is given a distinguishing version number. If the\nLibrary as you received it specifies that a certain numbered version\nof the GNU Lesser General Public License \"or any later version\"\napplies to it, you have the option of following the terms and\nconditions either of that published version or of any later version\npublished by the Free Software Foundation. If the Library as you\nreceived it does not specify a version number of the GNU Lesser\nGeneral Public License, you may choose any version of the GNU Lesser\nGeneral Public License ever published by the Free Software Foundation.\n\n  If the Library as you received it specifies that a proxy can decide\nwhether future versions of the GNU Lesser General Public License shall\napply, that proxy's public statement of acceptance of any version is\npermanent authorization for you to choose that version for the\nLibrary.\n\n",
+      "attribution": "the authors of radareorg/radare2 (dist/windows) (the license file names no copyright line), LGPL-3.0-or-later license (LICENSE), https://github.com/radareorg/radare2/tree/8750ef8573a5f05a78493d973315c87b258e6c5e/dist/windows."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "libr/bin/mangling/cxx2/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2026 pancake <pancake@nopcode.org> and the radare2 contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2026 pancake <pancake@nopcode.org> and the radare2 contributors, MIT license (LICENSE), https://github.com/radareorg/radare2/tree/8750ef8573a5f05a78493d973315c87b258e6c5e/libr/bin/mangling/cxx2."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        "libr/muta/signature/**"
+      ],
+      "text": "Copyright (c) 2015 Orson Peters <orsonpeters@gmail.com>\n\nThis software is provided 'as-is', without any express or implied warranty. In no event will the\nauthors be held liable for any damages arising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose, including commercial\napplications, and to alter it and redistribute it freely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not claim that you wrote the\n   original software. If you use this software in a product, an acknowledgment in the product\n   documentation would be appreciated but is not required.\n\n2. Altered source versions must be plainly marked as such, and must not be misrepresented as\n   being the original software.\n\n3. This notice may not be removed or altered from any source distribution.\n",
+      "attribution": "Copyright (c) 2015 Orson Peters <orsonpeters@gmail.com>, Zlib license (license.txt), https://github.com/radareorg/radare2/tree/8750ef8573a5f05a78493d973315c87b258e6c5e/libr/muta/signature/ed25519."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "shlr/spp/**"
+      ],
+      "text": "The MIT License (MIT)\nCopyright (c) 2009-2016 pancake <pancake@nopcode.org>\n\nPermission is  hereby granted,  free of charge,  to any person obtaining a\ncopy of this software and associated documentation files (the \"Software\"),\nto deal in the Software without restriction,  including without limitation\nthe rights to use, copy,  modify, merge, publish,  distribute, sublicense,\nand/or sell  copies  of the Software,  and to  permit persons  to whom the\nSoftware is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED,  INCLUDING BUT NOT LIMITED TO THE  WARRANTIES OF MERCHANTABILITY,\nFITNESS  FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT  SHALL\nTHE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY,  WHETHER IN AN ACTION OF CONTRACT,  TORT OR OTHERWISE,  ARISING\nFROM,  OUT OF OR IN  CONNECTION  WITH  THE SOFTWARE  OR THE  USE OR  OTHER\nDEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2009-2016 pancake <pancake@nopcode.org>, MIT license (LICENSE), https://github.com/radareorg/radare2/tree/8750ef8573a5f05a78493d973315c87b258e6c5e/shlr/spp."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "subprojects/packagefiles/zydis/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2013-2024 Zyantific\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2013-2024 Zyantific, MIT license (LICENSE.MIT), https://github.com/radareorg/radare2/tree/8750ef8573a5f05a78493d973315c87b258e6c5e/subprojects/packagefiles/zydis."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.asm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dart",
+      "paths": [
+        "**/*.dart"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "meson",
+      "paths": [
+        "**/meson.build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "r",
+      "paths": [
+        "**/*.r"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Vagrantfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.7"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.MIT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.acr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.c64x_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cparse"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.def"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.err"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gnu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gnu_16"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gnu_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gnu_64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gnu_cortex_16"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gnu_wd_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gtkon"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.head"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hook"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.iss"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ks_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ks_64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mak"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mr_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.new"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.olly"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.opc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.preerr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.qjs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.r2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.radare2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rasm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.regs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rsc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.script"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sixel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.src"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tab"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tail"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tool"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.udis_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.udis_64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.v35_64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vala"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.webmanifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wrap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wren"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dbg_fork"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dbg_fork2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/0000"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/1byte"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/6502"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/8051"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/APKBUILD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/BUGS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CONFIG"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DESCR"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Distribution"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/HelloWorld-dll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/HelloWorld-exe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/HelloWorld-msil"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PackageInfo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TODO"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_r2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_rabin2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_radiff2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_rafind2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ragg2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_rahash2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_rasm2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_rax2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/aarch64_endian"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/aavr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/alloc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/alpha"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/amd29k_29000_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/android"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/apple"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arc_16"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arc_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/archive"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/archs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arlib"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arm-esil"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arm64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arm64-crypto"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arm64-indirect"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arm64-search"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arm_16"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arm_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arm_64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arm_cortex_16"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/asm_color_regs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/asm_colors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/autoname"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/avr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/axml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ayu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/backtickgrep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/baddr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/banks"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/basic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/behelit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bfbug"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bflt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bitmask"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blocks"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bluy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bobcrawl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bold"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bomb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bpf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bpf_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bpf_64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bright"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bug_3788"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bug_6678"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bug_arch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bug_backtick"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cafebabe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/calls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/catppuccin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cblp0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cccl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cdogs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cga"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cgc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/charset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/chip8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/chkdsk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/chrome"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/clang-format-radare2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/classes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/clippy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_CL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_Ch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_aae"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_aafs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_ab"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_ac"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_aea"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_aeg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_aes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_aesb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_aex"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_af"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_afb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_afcl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_afl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_aflp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_aflxj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_aflxv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_afn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_afts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_afv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_afvd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_ag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_agc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_agf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_ah"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_ahi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_aii"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_alias"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_an"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_anal_dex_dyncc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_anal_dyncc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_anal_plugins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_ao"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_ara"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_arm64_kernelcache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_arp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_arv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_att"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_av"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_avr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_ax"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_ax_delete"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_b"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_c"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_cmp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_cond"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_cw"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_db"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_dd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_dh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_di_onsignals"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_disassembly"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_dmh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_dr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_dr_equal"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_ds"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_dx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_ec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_eval"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_extend"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_flags"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_flags_graph"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_flags_hierarchy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_flags_stress"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_flirt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_fnj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_foreach"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_fs_apfs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_fuzzed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_fv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_graph"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_hash"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_help"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_i"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_ic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_idp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_ie"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_ih"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_interactive_modes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_interpret"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_interpreter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_io"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_is"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_iw"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_iz"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_izzzzz"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_js"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_json"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_k"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_long_string"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_macros"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_meta"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_mn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_mount"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_newapi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_open"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_or"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_p-"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pFa"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pFb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pFp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pFx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pa"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pad"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pae"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_panels_scroll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_panels_sync"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pbits"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pd2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pd3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pd_bugs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pd_bytes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pd_str"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pd_trunk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pdc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pdc_ast"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pde"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pdj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pdr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pdu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pdx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pf2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pf_elf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pf_write"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pfd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_ph"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pif"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pipe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_print"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_print_bars"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_print_bitformat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_print_misc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_print_msg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_print_strings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_ps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pseudo_arm32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pseudo_arm64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pseudo_h8300"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pseudo_mips"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pseudo_ppc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_psj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_psp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_px"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pxd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_pxw"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_question"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_r"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_regs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_repeats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_rop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_search"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_search_ad"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_search_asm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_search_crypto"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_search_esil"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_search_hit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_search_in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_search_magic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_search_str"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_seek"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_seek_fun"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_shift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_system"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_table"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_tc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_tcc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_tcc_multiret"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_tmpbuf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_to"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_traces"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_visual"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_w"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_wfs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_wop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_wox"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_writedwarf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_yank"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmd_zignature"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmdfilter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmdfilter-encoded"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmds"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/code"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/coff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/comments"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compiler"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compressed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cond"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/configure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/configure-plugins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cons"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cons_grep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cons_html"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/consonance"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/core"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/core-notes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/coresymbolication"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cosmac"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cr16"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crackme3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crackme7"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crash"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/create"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crelocs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crypto"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cxx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dalvik"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dark"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/darkda"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/data"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/database"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_aaa_dcu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_aslr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_bps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_bps2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_cmdbps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_cont"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_cont_back"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_dL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_dcu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_dcut"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_di"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_dmh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_dmht"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_dmi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_dpt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_drcov"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_drt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_drv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_dts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_dts_replay"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_fasttime"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_fds"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_io"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_maps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_oo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_px0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_rebase"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_seginfo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_step"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_step_back"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_syscall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_trace1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_trace2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_trace3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbg_wps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ddriving"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/debuglink"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/describe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dex"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dis"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/disasm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/display_flag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dlang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dmp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dol"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dospart"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dsc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dsym-base"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dupfd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dwarf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dwarf-arm64-locations"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dwarf2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dwarf5-loclists"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dylib"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dynimports"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ebc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/echo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/egg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/elf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/elf-emachine6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/elf-mosquitoes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/elf-nx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/elf-phdrlinuxtrick"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/elf-relarm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/elf-relarm64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/elf-relro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/elf-xnorelro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/emu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/encoding"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/entitlements"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/err"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/esil"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/evm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/exceptions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fat-offsets"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fatio"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fatmach0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fcn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/feat_arithmetic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/feat_arroba"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/feat_astabs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/feat_base64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/feat_foreach"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/feat_graphdiff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/feat_input"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/feat_quote"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/feat_redirect"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/feat_segoff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/feat_variables"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/feat_yank"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file_malloc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/filesystems"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/firmware"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/flag_tests"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/flagbounds"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/flags"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/flash"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/flutter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/focus"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/freebsd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/funmask"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gba"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gbc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gentoo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gimp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/globals"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gnome"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gnu-debugdata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gpg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/greepy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/grey-final"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gruvbox"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/h8300"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/h8300_sym_suffix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hash"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/headers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hello"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hellocd-dll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/helloworld-gcc-elf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/helloworld-phdr-elf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hermes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hex"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hexagon"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hints"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/html"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/http"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hud"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/i4004_8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/i8080"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/iaito"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ihex"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/images"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/info"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/init"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/intreg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/iocache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ios-sdk-clang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ios-sdk-ld"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ioswizbug"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/java"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/jmptbl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/jni"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/jpeg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/json1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/json2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/json3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/json4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lang-plugins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/le"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lea_intel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/leb128"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lh5801"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lima"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/linux"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/locdiff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lochist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/loongarch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/loongarch_64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ls-alxchk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/m680x"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/m680x_6805_8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/m68k"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mach"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mach0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mach0_swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/macho"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/macos-sdk-clang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/macos-sdk-ld"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/main"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/malloc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mangling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/many"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/manyundo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/maporder"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/maps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mask"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/math"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/matrix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mc0201"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mc6809"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mdmp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mdt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/me"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/menuet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/metadata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/microsoft"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/midbb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/midflags"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mime"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mips"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mips-abi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mips_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mips_64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mips_micro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mips_v2_64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mm_search_issue"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/monokai"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/motd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/msil"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/msp430"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/msvc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/msx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nds32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ne"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/neg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/netbsd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/network"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/newprj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ninds"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/noreturn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nso"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/numvars"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/obj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ogray"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/om"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/omf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/onedark"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/open"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/openbsd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/or1k"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/path"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pcap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pdb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pdf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pdp11"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pebble"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pef"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/perl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pic_pic18_8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pickle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pie"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pink"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/plan9"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/plt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/plt-local"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/plugins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/posixshell"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ppc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ppc32-apuinfo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ppc32-reloc-apply"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ppc64-abi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ppc64v1-etrel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ppc64v1-opd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ppc64v1-plt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ppc64v1-relocs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ppc64v1-toc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ppc_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ppc_64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/preconfigure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/prg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/print"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/print_bug"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/prj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/process"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/profile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/projects"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/psx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ptx_sm_86_64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pyc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pyramid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/qnx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/qnx-nx-note"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/r2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/r2agent"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/r2k"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/r2pipe2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/r2pm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/r2r"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/r2r_asm_test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/r2r_cmd_test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/r2vm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rabin2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rabin2_addlib"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/radare2rc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/radiff2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rafind2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rafs2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ragg2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rahash2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rambo2-norom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rambo2-rom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/random"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rapi-list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rarun2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rasign2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rasm2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rasta"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ravc2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rax2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/redacted"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/regexp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/reloc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/reloc-arm64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/relocations"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/relocs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/relro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/repo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/resize"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/resources"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/retries"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rhps-norom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rhps-rom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/riscv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/riscv_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/riscv_64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rundiff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rust"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/s1c88"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/s390"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/s390-reloc-apply"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/s390-reloc-listing"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sandbox"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/script"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sdb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/search"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/section-mapping"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sections"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/seekbug"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sep64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sepia"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/serial"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/shell"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/shell_uname"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sidbug"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/simple"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/simple-elf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/singleline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/slow"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/small_register_vars"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/smd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sms"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/smyck"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/snes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/snes_16"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sniffer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/solarized"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/spaces"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sparc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/spc700"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sql"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/srec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ssh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stdout"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stm8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/string"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/strings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/strip"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/structures"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sugar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/swf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/symbols"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/syscalls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tables"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tailcall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tango"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/task"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/threads"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/thumb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/time"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tiny"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tms320_c55x+_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tms320_c55x_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/token"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tricore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/trycatch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/twilight"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/types"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/types2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/types_darwin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/types_errors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/types_fnptr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/types_fortified"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/types_prototypes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/udis86"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/undoredo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/unified"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/unopen"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/unsea"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/unzip"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/utf32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/util"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uuencode"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/v810_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/v850"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/v850_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/va"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vars"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vars_signatures"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vax"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vc4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/versioninfo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/video"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vim"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vorbis"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wasm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/web_assembly"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/white"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/white2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/windows"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/write"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/write-float"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/write-fun"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ws"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/x86-midbb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/x86_16"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/x86_16_vars"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/x86_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/x86_32_mask"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/x86_64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/x86_deadcode"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/x86_fpu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/x86_overlapping"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/x86_zydis"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xbe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xcoff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xcoff64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xrefs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xtac"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xtensa"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xtensa_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/z64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/z80"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zenburn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zfs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zimg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zip"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "v",
+      "paths": [
+        "**/*.v"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "under-review",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16"
+  }
+}
