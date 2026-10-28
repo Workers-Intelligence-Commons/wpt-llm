@@ -656,8 +656,10 @@ when it is:
   verdict. The edition is a scan whose text holds passages of the
   digitized text. When every person died in 1925 or earlier, the term has
   ended under every country's law, and the country of first publication
-  is not needed. A person without a death year, an edition without a
-  scan, or a credit the scan does not show makes the book a doubt.
+  is not needed. A person without a death year, or an edition without a
+  scan, makes the book a doubt. A person the catalog lists counts with
+  the catalog's credit even when the scan does not show it: the passages
+  show the scan holds the text.
 - **Doubts are never guessed.** A fact the decision needs that cannot be
   found, or facts that disagree, make the source a doubt for the
   maintainer. A doubt stays `under-review`, with the missing fact as its
@@ -728,6 +730,11 @@ when it is:
   authors' names and emails stay as git wrote them: the repository
   publishes them under its license. Only license patterns that start with
   `.git/history/` cover the history files, its order file included.
+- **An entry under several licenses** (an `AND` expression: a git
+  history, or a folder whose files mix licenses) has as its place the
+  repository's root license file when that file holds an admitted text of
+  one of its licenses. A place is one file, so it cannot show every
+  license of the expression.
 - **GitHub repositories with 10,000 stars or more** are a collection to
   draw sources from, forks and archived ones included, when their license
   is allowed, whether GitHub recognizes the license file or reading the
