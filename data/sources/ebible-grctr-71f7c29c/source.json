@@ -1,8 +1,6 @@
 {
-  "type": "http-archive",
+  "type": "http",
   "address": "https://eBible.org/Scriptures/grctr_readaloud.zip",
-  "revision": "2026-10-21",
-  "checksum": "sha256:91cedc70eea6c81bee73e695c8b850ac692ca49d83f7e10c90810deaa2d55c41",
   "extract": {
     "exclude": [
       "copr.htm",
@@ -16,10 +14,19 @@
     {
       "license": "LicenseRef-public-domain",
       "paths": [
-        "**"
+        "*.txt"
       ],
       "attribution": "Η Καινή Διαθήκη, eBible.org, https://ebible.org/grctr/",
-      "text": "Η Καινή Διαθήκη, eBible.org, https://ebible.org/grctr/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/grctr/copyright.htm):\n> The Greek Textus Receptus New Testament with manuscript annotations by Adam Boyd\n> Public Domain\n> Language: Ελληνικά (Greek, Ancient)\n> Manuscript comparison footnotes dedicated to the Public Domain by Adam Boyd. The Greek Textus Receptus New Testament is firmly in the Public Domain due to its age.\n> 2026-10-13\n\nWhat was found:\nText: a Textus Receptus compiled by Robert Adam Boyd (living, 2022) from the editions of Stephanus (1550), the Elzevirs (1624) and Scrivener (1881), with his footnotes.\n\nWhy it is admitted: Admitted as an exception on the maintainer's decision alone (2026-10-21): the only public-domain statement for Robert Adam Boyd's changes is eBible.org's label, and eBible.org is not Boyd's project; the same exception covers his three editions on eBible.org (engasvbt, englxxup, grctr).\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=grctr), the edition's copyright page (https://ebible.org/grctr/copyright.htm), https://ebible.org/details.php?id=grctr.\n"
+      "place": {
+        "entry": true
+      },
+      "text": "Η Καινή Διαθήκη, eBible.org, https://ebible.org/grctr/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/grctr/copyright.htm):\n> The Greek Textus Receptus New Testament with manuscript annotations by Adam Boyd\n> Public Domain\n> Language: Ελληνικά (Greek, Ancient)\n> Manuscript comparison footnotes dedicated to the Public Domain by Adam Boyd. The Greek Textus Receptus New Testament is firmly in the Public Domain due to its age.\n> 2026-10-13\n\nWhat was found:\nText: a Textus Receptus compiled by Robert Adam Boyd (living, 2022) from the editions of Stephanus (1550), the Elzevirs (1624) and Scrivener (1881), with his footnotes.\n\nWhy it is admitted: Admitted as an exception on the maintainer's decision alone (2026-10-21): the only public-domain statement for Robert Adam Boyd's changes is eBible.org's label, and eBible.org is not Boyd's project; the same exception covers his three editions on eBible.org (engasvbt, englxxup, grctr).\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=grctr), the edition's copyright page (https://ebible.org/grctr/copyright.htm), https://ebible.org/details.php?id=grctr.\n",
+      "decision": {
+        "decision": "admitted",
+        "by": "Inaya Yousfi",
+        "date": "2026-10-21",
+        "reason": "exception on the maintainer's decision alone: Robert Adam Boyd's changes rest on eBible.org's label, not on his own words"
+      }
     }
   ],
   "formats": [

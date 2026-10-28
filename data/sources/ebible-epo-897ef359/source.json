@@ -1,8 +1,6 @@
 {
-  "type": "http-archive",
+  "type": "http",
   "address": "https://eBible.org/Scriptures/epo_readaloud.zip",
-  "revision": "2026-10-21",
-  "checksum": "sha256:bb6dc9592a30228494876700b98603bd593b90f7d08e171ec9a2e0788004634c",
   "extract": {
     "exclude": [
       "copr.htm",
@@ -14,10 +12,20 @@
     {
       "license": "LicenseRef-public-domain",
       "paths": [
-        "**"
+        "*.asc",
+        "*.txt"
       ],
       "attribution": "Londona Biblio, eBible.org, https://ebible.org/epo/",
-      "text": "Londona Biblio, eBible.org, https://ebible.org/epo/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/epo/copyright.htm):\n> The Holy Bible in Esperanto (1910)\n> Public Domain\n> Language: Esperanto\n> 2020-02-13\n\nWhat was found:\nText: \"La Sankta Biblio\" (the London Bible), 1926, British and Foreign Bible Society and National Bible Society of Scotland; Old Testament by L. L. Zamenhof (died 1917), revised by a named British committee.\n\nWhy it stays out: missing fact: the death years of the named members of the 1919-1926 Bible Translation Committee that revised the 1926 London Bible (C. G. Wilkinson, H. O. Allbrook, M. J. Elliott, C. Gaydou, T. S. Lindsay, J. E. McFadyen, A. Poynder, E. J. Price, W. Bailey, J. M. Warden, William Harvey); Rust (died 1927), Beveridge (died 1943), Page (died 1940) and Wackrill (died 1924) are found.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=epo), the edition's copyright page (https://ebible.org/epo/copyright.htm), https://en.wikipedia.org/wiki/Bible_translations_into_Esperanto; https://eo.wikipedia.org/wiki/Londona_Biblio.\n"
+      "place": {
+        "entry": true
+      },
+      "text": "Londona Biblio, eBible.org, https://ebible.org/epo/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/epo/copyright.htm):\n> The Holy Bible in Esperanto (1910)\n> Public Domain\n> Language: Esperanto\n> 2020-02-13\n\nWhat was found:\nText: \"La Sankta Biblio\" (the London Bible), 1926, British and Foreign Bible Society and National Bible Society of Scotland; Old Testament by L. L. Zamenhof (died 1917), revised by a named British committee.\n\nWhy it stays out: missing fact: the death years of the named members of the 1919-1926 Bible Translation Committee that revised the 1926 London Bible (C. G. Wilkinson, H. O. Allbrook, M. J. Elliott, C. Gaydou, T. S. Lindsay, J. E. McFadyen, A. Poynder, E. J. Price, W. Bailey, J. M. Warden, William Harvey); Rust (died 1927), Beveridge (died 1943), Page (died 1940) and Wackrill (died 1924) are found.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=epo), the edition's copyright page (https://ebible.org/epo/copyright.htm), https://en.wikipedia.org/wiki/Bible_translations_into_Esperanto; https://eo.wikipedia.org/wiki/Londona_Biblio.\n",
+      "decision": {
+        "decision": "under-review",
+        "by": "machine:wpt-dataset",
+        "date": "2026-10-28",
+        "reason": "the source is not admitted"
+      }
     }
   ],
   "formats": [

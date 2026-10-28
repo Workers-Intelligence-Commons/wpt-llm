@@ -1,8 +1,6 @@
 {
-  "type": "http-archive",
+  "type": "http",
   "address": "https://eBible.org/Scriptures/grc-tisch_readaloud.zip",
-  "revision": "2026-10-21",
-  "checksum": "sha256:be33768e63137c0310ba01976c166d504fc030b4a6dd6f64fb81af815f4a8340",
   "extract": {
     "exclude": [
       "copr.htm",
@@ -14,10 +12,20 @@
     {
       "license": "LicenseRef-public-domain",
       "paths": [
-        "**"
+        "*.asc",
+        "*.txt"
       ],
       "attribution": "Η Καινή Διαθήκη, eBible.org, https://ebible.org/grc-tisch/",
-      "text": "Η Καινή Διαθήκη, eBible.org, https://ebible.org/grc-tisch/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/grc-tisch/copyright.htm):\n> The New Testament in Koine Greek, based on Tischendorf's 8th edition\n> Public Domain\n> Language: Ελληνικά (Greek, Ancient)\n> Dialect: Koine\n> Translation by: Tischendorf, etc.\n> Tischendorf's 8th edition Greek New Testament\n> with morphological tags\n> Version 2.7\n> Based on G. Clint Yale's Tischendorf text\n> and on Dr. Maurice A. Robinson's\n> Public Domain Westcott-Hort text\n> Edited by Ulrik Sandborg-Petersen\n> This text and its analysis are\n> in the Public Domain. Copy freely.\n> 2014-01-11\n\nWhat was found:\nText: Tischendorf's 8th edition (Leipzig 1869-72; Tischendorf died 1874), version 2.7, base text supplied by G. Clint Yale, analysis by Maurice Robinson, edited by Ulrik Sandborg-Petersen.\n\nWhy it stays out: missing fact: G. Clint Yale's own public-domain statement for the accented base text (the editor only reports Yale's permission).\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=grc-tisch), the edition's copyright page (https://ebible.org/grc-tisch/copyright.htm), https://en.wikipedia.org/wiki/Constantin_von_Tischendorf; https://ebible.org/details.php?id=grc-tisch.\n"
+      "place": {
+        "entry": true
+      },
+      "text": "Η Καινή Διαθήκη, eBible.org, https://ebible.org/grc-tisch/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/grc-tisch/copyright.htm):\n> The New Testament in Koine Greek, based on Tischendorf's 8th edition\n> Public Domain\n> Language: Ελληνικά (Greek, Ancient)\n> Dialect: Koine\n> Translation by: Tischendorf, etc.\n> Tischendorf's 8th edition Greek New Testament\n> with morphological tags\n> Version 2.7\n> Based on G. Clint Yale's Tischendorf text\n> and on Dr. Maurice A. Robinson's\n> Public Domain Westcott-Hort text\n> Edited by Ulrik Sandborg-Petersen\n> This text and its analysis are\n> in the Public Domain. Copy freely.\n> 2014-01-11\n\nWhat was found:\nText: Tischendorf's 8th edition (Leipzig 1869-72; Tischendorf died 1874), version 2.7, base text supplied by G. Clint Yale, analysis by Maurice Robinson, edited by Ulrik Sandborg-Petersen.\n\nWhy it stays out: missing fact: G. Clint Yale's own public-domain statement for the accented base text (the editor only reports Yale's permission).\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=grc-tisch), the edition's copyright page (https://ebible.org/grc-tisch/copyright.htm), https://en.wikipedia.org/wiki/Constantin_von_Tischendorf; https://ebible.org/details.php?id=grc-tisch.\n",
+      "decision": {
+        "decision": "under-review",
+        "by": "machine:wpt-dataset",
+        "date": "2026-10-28",
+        "reason": "the source is not admitted"
+      }
     }
   ],
   "formats": [

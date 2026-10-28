@@ -1,8 +1,6 @@
 {
-  "type": "huggingface",
+  "type": "git",
   "address": "https://huggingface.co/datasets/common-pile/usgpo_filtered",
-  "revision": "b150cc22211de4d57f1b7f570097a00e65042424",
-  "checksum": "sha256:5cb804f24d0690b7d7d0d71b00cb01519ae9aa9f92b487ffe15a0f2c5455b9a2",
   "extract": {
     "exclude": [
       ".gitattributes",
@@ -15,11 +13,19 @@
       "paths": [
         "*.json.gz"
       ],
-      "values": [
+      "attribution": "U.S. Government Publishing Office (USGPO) documents available through the GovInfo.gov developer API, as collected in the Common Pile v0.1 dataset \"USGPO\" (filtered), https://huggingface.co/datasets/common-pile/usgpo_filtered, by Kandpal et al. 2025. The card describes the USGPO as \"a federal agency responsible for disseminating official documents authored by the U.S. government\".",
+      "place": {
+        "field": "metadata.license"
+      },
+      "expected": [
         "Public Domain"
       ],
-      "attribution": "U.S. Government Publishing Office (USGPO) documents available through the GovInfo.gov developer API, as collected in the Common Pile v0.1 dataset \"USGPO\" (filtered), https://huggingface.co/datasets/common-pile/usgpo_filtered, by Kandpal et al. 2025. The card describes the USGPO as \"a federal agency responsible for disseminating official documents authored by the U.S. government\".",
-      "text": "Dataset card (quoted): \"The United States Government Publishing Office (USGPO) is a federal agency responsible for disseminating official documents authored by the U.S. government. This dataset includes all plain-text documents made available through the USGPO's GovInfo.gov developer API.\" The documents are federal publications such as the Federal Register and congressional bills and hearings. US government documents are public domain in the US (no US copyright in federal works) and have US origin, so the work is public domain in the US and in its origin country. The card does not state the phrase \"public domain\" for this dataset; the mapping rests on the record's own metadata.license value \"Public Domain\" and the card's statement of federal authorship."
+      "text": "Dataset card (quoted): \"The United States Government Publishing Office (USGPO) is a federal agency responsible for disseminating official documents authored by the U.S. government. This dataset includes all plain-text documents made available through the USGPO's GovInfo.gov developer API.\" The documents are federal publications such as the Federal Register and congressional bills and hearings. US government documents are public domain in the US (no US copyright in federal works) and have US origin, so the work is public domain in the US and in its origin country. The card does not state the phrase \"public domain\" for this dataset; the mapping rests on the record's own metadata.license value \"Public Domain\" and the card's statement of federal authorship.",
+      "decision": {
+        "decision": "admitted",
+        "by": "Inaya Yousfi",
+        "date": "2026-10-27"
+      }
     }
   ],
   "formats": [
@@ -30,7 +36,6 @@
       ],
       "text": "text",
       "id": "id",
-      "license": "metadata.license",
       "credit": [
         "author",
         "title",

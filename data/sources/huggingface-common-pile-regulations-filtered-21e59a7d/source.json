@@ -1,8 +1,6 @@
 {
-  "type": "huggingface",
+  "type": "git",
   "address": "https://huggingface.co/datasets/common-pile/regulations_filtered",
-  "revision": "3327364490dfc7929009226ad667eceb2441d93a",
-  "checksum": "sha256:df56ab97687c5a1260e556e79addd1732ab81230b83026c7b8810af7419cf65a",
   "extract": {
     "exclude": [
       ".gitattributes",
@@ -15,11 +13,19 @@
       "paths": [
         "*.json.gz"
       ],
-      "values": [
+      "attribution": "Regulations.gov documents published by U.S. federal agencies, as collected in the Common Pile v0.1 dataset \"Regulations.Gov\" (filtered), https://huggingface.co/datasets/common-pile/regulations_filtered, by Kandpal et al. 2025. Regulations.gov is \"an online platform operated by the U.S. General Services Administration\"; the publishing agency is named in each record.",
+      "place": {
+        "field": "metadata.license"
+      },
+      "expected": [
         "Public Domain"
       ],
-      "attribution": "Regulations.gov documents published by U.S. federal agencies, as collected in the Common Pile v0.1 dataset \"Regulations.Gov\" (filtered), https://huggingface.co/datasets/common-pile/regulations_filtered, by Kandpal et al. 2025. Regulations.gov is \"an online platform operated by the U.S. General Services Administration\"; the publishing agency is named in each record.",
-      "text": "Dataset card (quoted): \"This dataset includes all plain-text regulatory documents published by a variety of U.S. federal agencies on this platform\". The agencies are federal agencies such as \"Department of Transportation (DOT)\". Documents published by US federal agencies are a US government work with US origin, so the work is public domain in the US and in its origin country. The card does not state the phrase \"public domain\" for this dataset; the mapping rests on the record's own metadata.license value \"Public Domain\" and the card's statement of federal authorship.\n\nOnly records whose document_type is \"Rule\" or \"Proposed Rule\" enter (the format entry's keep rule): these are Federal Register texts issued by the agencies. Records typed \"Notice\" or \"Supporting & Related Material\" also hold filings written by companies (for example \"Delta Air Lines, Inc and Air Jamaica Limited - Joint Notice of Termination\", typed Notice), which are not government works, so they are left out (maintainer's decision, 2026-10-16)."
+      "text": "Dataset card (quoted): \"This dataset includes all plain-text regulatory documents published by a variety of U.S. federal agencies on this platform\". The agencies are federal agencies such as \"Department of Transportation (DOT)\". Documents published by US federal agencies are a US government work with US origin, so the work is public domain in the US and in its origin country. The card does not state the phrase \"public domain\" for this dataset; the mapping rests on the record's own metadata.license value \"Public Domain\" and the card's statement of federal authorship.\n\nOnly records whose document_type is \"Rule\" or \"Proposed Rule\" enter (the format entry's keep rule): these are Federal Register texts issued by the agencies. Records typed \"Notice\" or \"Supporting & Related Material\" also hold filings written by companies (for example \"Delta Air Lines, Inc and Air Jamaica Limited - Joint Notice of Termination\", typed Notice), which are not government works, so they are left out (maintainer's decision, 2026-10-16).",
+      "decision": {
+        "decision": "admitted",
+        "by": "Inaya Yousfi",
+        "date": "2026-10-27"
+      }
     }
   ],
   "formats": [
@@ -30,7 +36,6 @@
       ],
       "text": "text",
       "id": "id",
-      "license": "metadata.license",
       "credit": [
         "agency",
         "title",

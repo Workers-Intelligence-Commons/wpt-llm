@@ -1,8 +1,6 @@
 {
-  "type": "http-archive",
+  "type": "http",
   "address": "https://eBible.org/Scriptures/frasbl_readaloud.zip",
-  "revision": "2026-10-21",
-  "checksum": "sha256:66a30b3e4af0a8b1f9c27dc2c6f69fda493c667520eadf4ff99e32f9d480674e",
   "extract": {
     "exclude": [
       "copr.htm",
@@ -14,10 +12,20 @@
     {
       "license": "LicenseRef-public-domain",
       "paths": [
-        "**"
+        "*.asc",
+        "*.txt"
       ],
       "attribution": "Sainte Bible libre pour le monde, eBible.org, https://ebible.org/frasbl/",
-      "text": "Sainte Bible libre pour le monde, eBible.org, https://ebible.org/frasbl/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/frasbl/copyright.htm):\n> The Holy Bible in French, Sainte Bible Libre pour le monde translation\n> Public Domain\n> Language: français (French)\n> Translation by: David Williams\n> Contributor: Michael Paul Johnson\n> Domaine Public\n> Il s'agit d'un brouillon de traduction. Il est en cours de relecture et d'édition. Si vous trouvez des erreurs, veuillez nous en informer à https://eBible.org/cgi-bin/contact.cgi.\n> This is a draft translation. It is being proofread and edited. If you find errors, please let us know at https://eBible.org/cgi-bin/contact.cgi.\n> 2026-10-13\n\nWhat was found:\nText: a draft French translation by David Williams with Michael Paul Johnson, dated 2026-10-13.\n\nWhy it stays out: missing fact: a public-domain dedication in the translator David Williams's own words (the source text is the World English Bible: the French Mark 16:9 footnote translates the World English Bible's and names it).\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=frasbl), the edition's copyright page (https://ebible.org/frasbl/copyright.htm), https://ebible.org/details.php?id=frasbl.\n"
+      "place": {
+        "entry": true
+      },
+      "text": "Sainte Bible libre pour le monde, eBible.org, https://ebible.org/frasbl/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/frasbl/copyright.htm):\n> The Holy Bible in French, Sainte Bible Libre pour le monde translation\n> Public Domain\n> Language: français (French)\n> Translation by: David Williams\n> Contributor: Michael Paul Johnson\n> Domaine Public\n> Il s'agit d'un brouillon de traduction. Il est en cours de relecture et d'édition. Si vous trouvez des erreurs, veuillez nous en informer à https://eBible.org/cgi-bin/contact.cgi.\n> This is a draft translation. It is being proofread and edited. If you find errors, please let us know at https://eBible.org/cgi-bin/contact.cgi.\n> 2026-10-13\n\nWhat was found:\nText: a draft French translation by David Williams with Michael Paul Johnson, dated 2026-10-13.\n\nWhy it stays out: missing fact: a public-domain dedication in the translator David Williams's own words (the source text is the World English Bible: the French Mark 16:9 footnote translates the World English Bible's and names it).\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=frasbl), the edition's copyright page (https://ebible.org/frasbl/copyright.htm), https://ebible.org/details.php?id=frasbl.\n",
+      "decision": {
+        "decision": "under-review",
+        "by": "machine:wpt-dataset",
+        "date": "2026-10-28",
+        "reason": "the source is not admitted"
+      }
     }
   ],
   "formats": [

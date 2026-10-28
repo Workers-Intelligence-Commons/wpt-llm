@@ -1,5 +1,5 @@
 {
-  "type": "http-archive",
+  "type": "http",
   "address": "https://download.europeana.eu/newspapers/fulltext/edm_issue/9200396.zip",
   "addresses": [
     {
@@ -13,19 +13,27 @@
       "note": "one EDM file per issue, http%3A%2F%2Fdata.theeuropeanlibrary.org%2FBibliographicResource%2F<n>.edm.xml, with its rights, date, title and library"
     }
   ],
-  "revision": "2026-10-23",
-  "checksum": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
   "licenses": [
     {
       "license": "LicenseRef-public-domain",
       "paths": [
-        "**"
-      ],
-      "values": [
-        "http://creativecommons.org/publicdomain/mark/1.0/"
+        "fulltext/**",
+        "metadata/**"
       ],
       "attribution": "Europeana Newspapers, National Library of Luxembourg (data provider), The European Library (provider), https://www.europeana.eu/; each issue's title, date and address are in the credit of each document",
+      "place": {
+        "field": "$metadata//edm:rights/@rdf:resource"
+      },
+      "expected": [
+        "http://creativecommons.org/publicdomain/mark/1.0/"
+      ],
       "text": "Public domain. Each issue's own metadata (edm:rights) labels it with the Public Domain Mark 1.0, http://creativecommons.org/publicdomain/mark/1.0/; the publication's own label is the proof (docs/licenses.md, maintainer's decision, 2026-10-23). An issue enters only with that label and a date of publication (dcterms:issued) in 1955 or earlier, the European Union's term for a newspaper issue (docs/licenses.md, newspaper rule, maintainer's decision, 2026-10-23).",
+      "decision": {
+        "decision": "under-review",
+        "by": "machine:wpt-dataset",
+        "date": "2026-10-28",
+        "reason": "the source is not admitted"
+      },
       "note": "the metadata files are read only for each issue's license value and credit, and give no document"
     }
   ],
@@ -42,7 +50,6 @@
         "dcterms": "http://purl.org/dc/terms/"
       },
       "text": "//edm:FullTextResource/rdf:value",
-      "license": "$metadata//edm:rights/@rdf:resource",
       "credit": [
         "$metadata//edm:ProvidedCHO/@rdf:about",
         "$metadata//edm:ProvidedCHO/dc:title",
@@ -76,7 +83,8 @@
         "news"
       ],
       "paths": [
-        "**"
+        "fulltext/**",
+        "metadata/**"
       ],
       "note": "fr: the dc:language of every one of the 1,319 metadata files of this library (2026-10-23)"
     }

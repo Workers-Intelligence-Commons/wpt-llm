@@ -1,8 +1,6 @@
 {
-  "type": "http-archive",
+  "type": "http",
   "address": "https://eBible.org/Scriptures/russyn_readaloud.zip",
-  "revision": "2026-10-21",
-  "checksum": "sha256:63cf3152a2aaf58a2eb71d8de1e8f4c5f8c24286220d305ffae35cede3fb4356",
   "extract": {
     "exclude": [
       "copr.htm",
@@ -14,10 +12,20 @@
     {
       "license": "LicenseRef-public-domain",
       "paths": [
-        "**"
+        "*.asc",
+        "*.txt"
       ],
       "attribution": "Синодальный перевод, eBible.org, https://ebible.org/russyn/",
-      "text": "Синодальный перевод, eBible.org, https://ebible.org/russyn/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/russyn/copyright.htm):\n> Synodal Translation of the Holy Bible in Russian\n> Public Domain\n> Language: русский (Russian)\n> 2022-11-25\n\nWhat was found:\nText: the Russian Synodal Bible (first complete edition 1876); eBible's text uses spelling from after 1917.\n\nWhy it stays out: missing fact: which edition eBible's modern-spelling text reproduces (the 1876 Synodal text, or the 1956 or later editions edited by A. A. Osipov), and the death years of the named translators.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=russyn), the edition's copyright page (https://ebible.org/russyn/copyright.htm), https://en.wikipedia.org/wiki/Russian_Synodal_Bible; https://ru.wikipedia.org/wiki/Синодальный_перевод.\n"
+      "place": {
+        "entry": true
+      },
+      "text": "Синодальный перевод, eBible.org, https://ebible.org/russyn/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/russyn/copyright.htm):\n> Synodal Translation of the Holy Bible in Russian\n> Public Domain\n> Language: русский (Russian)\n> 2022-11-25\n\nWhat was found:\nText: the Russian Synodal Bible (first complete edition 1876); eBible's text uses spelling from after 1917.\n\nWhy it stays out: missing fact: which edition eBible's modern-spelling text reproduces (the 1876 Synodal text, or the 1956 or later editions edited by A. A. Osipov), and the death years of the named translators.\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=russyn), the edition's copyright page (https://ebible.org/russyn/copyright.htm), https://en.wikipedia.org/wiki/Russian_Synodal_Bible; https://ru.wikipedia.org/wiki/Синодальный_перевод.\n",
+      "decision": {
+        "decision": "under-review",
+        "by": "machine:wpt-dataset",
+        "date": "2026-10-28",
+        "reason": "the source is not admitted"
+      }
     }
   ],
   "formats": [

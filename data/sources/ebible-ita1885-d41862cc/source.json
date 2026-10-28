@@ -1,8 +1,6 @@
 {
-  "type": "http-archive",
+  "type": "http",
   "address": "https://eBible.org/Scriptures/ita1885_readaloud.zip",
-  "revision": "2026-10-21",
-  "checksum": "sha256:12d8240b039f9840d5ae3cac81f9e65298be784770c556a8eb27b76780039b30",
   "extract": {
     "exclude": [
       "copr.htm",
@@ -14,10 +12,20 @@
     {
       "license": "LicenseRef-public-domain",
       "paths": [
-        "**"
+        "*.asc",
+        "*.txt"
       ],
       "attribution": "Diodati Bibbia 1885, eBible.org, https://ebible.org/ita1885/",
-      "text": "Diodati Bibbia 1885, eBible.org, https://ebible.org/ita1885/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/ita1885/copyright.htm):\n> The Holy Bible in Italian, translated by Giovanni Diodati in 1641 and revised in 1821\n> Public Domain\n> Language: Italiano (Italian)\n> Contributor: United Bible Societies\n> Diodati Bibbia 1885\n> 2025-05-03\n\nWhat was found:\nText: Giovanni Diodati's Bible (Diodati died 1649), revised 1821, in an 1885 edition with section headings and cross-references.\n\nWhy it stays out: missing fact: who revised eBible.org's New Testament text, and when (it differs from the 1885 Rome edition it names, for example John 3:2, 3:4, 3:17, 3:20-21); also the life dates of the 1819/1821 reviser (named G.B. Rolandi by secondary sources).\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=ita1885), the edition's copyright page (https://ebible.org/ita1885/copyright.htm), https://it.wikipedia.org/wiki/Bibbia_Diodati.\n"
+      "place": {
+        "entry": true
+      },
+      "text": "Diodati Bibbia 1885, eBible.org, https://ebible.org/ita1885/\n\nThe edition's own statement of rights (from eBible.org's page for this translation, https://ebible.org/ita1885/copyright.htm):\n> The Holy Bible in Italian, translated by Giovanni Diodati in 1641 and revised in 1821\n> Public Domain\n> Language: Italiano (Italian)\n> Contributor: United Bible Societies\n> Diodati Bibbia 1885\n> 2025-05-03\n\nWhat was found:\nText: Giovanni Diodati's Bible (Diodati died 1649), revised 1821, in an 1885 edition with section headings and cross-references.\n\nWhy it stays out: missing fact: who revised eBible.org's New Testament text, and when (it differs from the 1885 Rome edition it names, for example John 3:2, 3:4, 3:17, 3:20-21); also the life dates of the 1819/1821 reviser (named G.B. Rolandi by secondary sources).\n\nThe read-aloud archive holds the Bible text chapter by chapter as plain text, a front file, the copyright page (copr.htm, left out of the source), and eBible.org's signing key (keys.asc, left out).\n\nSources of these facts: eBible.org's details page (https://ebible.org/details.php?id=ita1885), the edition's copyright page (https://ebible.org/ita1885/copyright.htm), https://it.wikipedia.org/wiki/Bibbia_Diodati.\n",
+      "decision": {
+        "decision": "under-review",
+        "by": "machine:wpt-dataset",
+        "date": "2026-10-28",
+        "reason": "the source is not admitted"
+      }
     }
   ],
   "formats": [
