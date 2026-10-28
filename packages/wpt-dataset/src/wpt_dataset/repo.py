@@ -117,9 +117,6 @@ SOURCE_FILE = "source.json"
 # a license text's id, the sha256 of its normalized text (license_check.text_id), and the files of its folder
 TEXT_ID = re.compile(r"[0-9a-f]{64}")
 TEXT_FILE, TEXT_ITSELF = "license-text.json", "license-text.txt"
-# the earlier shape of the license texts: one file of reviews by key, which `wpt-dataset migrate` turns into
-# license-text items
-EARLIER_REVIEWS = "reviewed-license-texts.json"
 # a key type of an allowed-signers line (ssh-keygen ALLOWED SIGNERS), followed by the key in base64
 SIGNER_KEY = re.compile(r"(?:^|\s)(?:ssh-[a-z0-9-]+|ecdsa-sha2-[a-z0-9-]+|sk-[a-z0-9@.-]+)\s+[A-Za-z0-9+/]+=*(?:\s|$)")
 GPG_BLOCK = re.compile(r"-----BEGIN PGP PUBLIC KEY BLOCK-----.+?-----END PGP PUBLIC KEY BLOCK-----", re.DOTALL)
@@ -871,21 +868,6 @@ class Repo:
         path = self._path("license-text", text).parent / TEXT_ITSELF
         return path.read_bytes() if path.is_file() else None
 
-    def earlier_reviews(self) -> dict | None:
-        """The `texts` of data/reviewed-license-texts.json, the earlier shape
-        of the license texts, as it is ({key: review}), for `wpt-dataset
-        migrate`; None without the file. InvalidFile when it does not parse."""
-        path = self._data / EARLIER_REVIEWS
-        if not path.is_file():
-            return None
-        try:
-            texts = json.loads(path.read_text(encoding="utf-8")).get("texts")
-        except (UnicodeDecodeError, json.JSONDecodeError, AttributeError) as error:
-            raise InvalidFile(f"data/{EARLIER_REVIEWS}: {error}") from error
-        if not isinstance(texts, dict):
-            raise InvalidFile(f"data/{EARLIER_REVIEWS}: no `texts` object")
-        return texts
-
     def image_names(self) -> list[str]:
         folder = self._data / "images"
         return sorted(p.name for p in folder.iterdir() if p.is_dir()) if folder.is_dir() else []
@@ -946,9 +928,6 @@ class Repo:
             problems += self.check_source(sid, text_ids)
         for text in sorted(text_ids):
             problems += self.problems("license-text", text)
-        if (self._data / EARLIER_REVIEWS).is_file():
-            problems.append(f"data/{EARLIER_REVIEWS}: an earlier shape (the reviews of license texts in one file); "
-                            f"run `wpt-dataset migrate`, which makes each a license text of data/license-texts/")
         for kind in RECIPE_FOLDERS:
             for name in self.names(kind):
                 attempt(self._check_recipe, kind, name)
@@ -1849,17 +1828,6 @@ class Repo:
         path = self._path(kind, name)
         self._write_data(path, self._json_text(path, document).encode("utf-8"))
         return self.relative(kind, name)
-
-    @_locked
-    def rewrite_earlier_reviews(self, texts: dict | None):
-        """Write data/reviewed-license-texts.json holding only these reviews,
-        or remove it (None): `wpt-dataset migrate` alone calls this, once it
-        made the others license texts."""
-        path = self._data / EARLIER_REVIEWS
-        if texts is None:
-            self._target(path).unlink(missing_ok=True)
-        else:
-            self._write_data(path, self._json_text(path, {"texts": texts}).encode("utf-8"))
 
     def validate_file(self, kind: str, name: str):
         load_json(self._path(kind, name), kind)

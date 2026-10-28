@@ -248,7 +248,7 @@ def test_migrating_moves_a_licenseref_text_into_source_json(kit, repo, store, gi
     sid = kit.add_source(repo, store, "example", "book", {
         "type": "git", "address": git_upstream[0], "licenses": [
             {"license": "LicenseRef-public-domain", "paths": kit.PROJECT, "attribution": "A. Author, Book",
-             "decision": kit.DECISION}]}, fetch=False)
+             "place": {"entry": True}, "decision": kit.DECISION}]}, fetch=False)
     folder = repo.root / "data" / "sources" / sid
     path = folder / "source.json"
     proof = "Public domain: the author died in 1850.\n"

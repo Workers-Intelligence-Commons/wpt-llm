@@ -961,16 +961,7 @@ leaves empty and the check then names each file to fill in. The steps today:
   review" becomes `under-review` without that reason, and `retired` becomes
   `refused`, keeping its reason; the tags `sft`, `grpo` and `token-efficiency`
   become `answer-as-assistant`, `finish-tasks` and
-  `finish-tasks-with-less-writing` in every tag list; the types
-  `http-file` and `http-archive` become `http` and `huggingface` becomes
-  `git` (an `http` source whose file's name says otherwise than its old
-  type stays as it is, for a person to give `extract.name`); a source with
-  `checksum` and `revision`, and license entries without their place,
-  expected texts and decision, gets them (below).
-- the license texts: before any step, the reviews of
-  `data/reviewed-license-texts.json` become license text items; a review
-  held for one exact file that no item can hold stays in that file, for a
-  person.
+  `finish-tasks-with-less-writing` in every tag list.
 - model recipes: the architecture of an earlier model (`n_embd`, gated MLA)
   becomes the current one, its numbers a person fills in; the window length
   in the architecture and the `training` steps and batch size become one
@@ -985,29 +976,3 @@ leaves empty and the check then names each file to fill in. The steps today:
 
 A file `migrate` cannot rewrite, such as a source's `chat` file (upstream's
 bytes), goes through `migrate.upgrade` where it is read.
-
-The source step that gives license entries their place reads, for each
-source that needs it, its file list and license files from the store, or
-else from its upstream, never as a full download
-(`wpt_dataset/upstream_files.py`); a source of several `addresses`, or
-one it cannot list otherwise, stays in its earlier shape and is named.
-`checksum` and `revision` go. A `**` pattern is narrowed into the allowed
-shapes, covering the same files. Each entry gets its place:
-
-- an entry that selected records by `values`: the record field the
-  records format named, its values the ones it expects;
-- a `LicenseRef-public-domain` entry, and an entry of an `empty` source:
-  the entry itself;
-- any other: the license file whose text it matches among the license
-  texts, that text its expected one. A license file no item holds is
-  compared with the standard texts of one SPDX release (`spdx.py`, fetched
-  once); a match becomes an admitted item, any other a new item under
-  review, with its text.
-
-These entries keep the source's signed admission, carried by the signed
-migration commit of the person `migrate --by NAME` names: an entry that
-selects records, a public-domain one, and one whose license file is an
-admitted text of its own license. Every other entry goes under review. A
-source with no license-named file, or holding a file whose review stays
-in `data/reviewed-license-texts.json`, stays in its earlier shape and is
-named.

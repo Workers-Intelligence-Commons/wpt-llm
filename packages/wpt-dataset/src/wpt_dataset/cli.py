@@ -40,15 +40,7 @@
     wpt-dataset build NAME [--stream] [--skip-failed]
                                           build (or find) the data of a model recipe; prints the
                                           dataset id
-    wpt-dataset migrate [--by NAME]       rewrite data files to the current shapes; a source of the
-                                          shape that pinned a revision and a checksum reads its file
-                                          list and license files, when it needs them, from the store,
-                                          or else from its upstream (never a full download:
-                                          upstream_files.py), and compares a license file no license
-                                          text holds with the standard texts of one SPDX release
-                                          (spdx.py, fetched once); NAME: the person whose signed
-                                          migration commit carries the license text decisions it
-                                          writes (the earlier reviews, the standard texts)
+    wpt-dataset migrate                   rewrite data files to the current shapes
 
 Reading and writing the data files, through the service layer (wpt_dataset.repo;
 wpt-web's HTTP API does the same). Every write applies the rules of `check` and
@@ -104,13 +96,12 @@ generated text").
 
 Each command is a controller: it reads its arguments, calls the service
 that does the work (the service layer, wpt_dataset.repo, and the services
-over it: download.run, checking.to_fetch, build.run, edit, migrate.run,
+over it: download.run, checking.to_fetch, build.run, edit, migrate.migrate,
 ...) and prints its result or its named failure. It holds no rule of its
 own, so a command and wpt-web's route for the same work cannot disagree.
 
 The store comes from WPT_STORE (environment or .env at the repository root).
-Only download, check --fetch and manifest download sources (and migrate
-reads a few files of a source of the pinned shape); every other command
+Only download, check --fetch and manifest download sources; every other command
 reads them from the store, and a source not there is NotDownloaded. Each
 run of these three, and each build and build-tokenizer is a session:
 its record in the
@@ -333,7 +324,7 @@ def cmd_build(args, repo):
 
 
 def cmd_migrate(args, repo):
-    changed = migrate.run(repo, _store(repo), by=args.by)
+    changed = migrate.migrate(repo)
     print(f"{len(changed)} files rewritten")
     return 0
 
@@ -612,11 +603,7 @@ def main(argv=None):
                             "stopping (a source not in the store, or whose cut or patch does not apply, is always "
                             "left out and listed); a new vocabulary still needs every source (WPT_SKIP_FAILED)")
     build.set_defaults(run=cmd_build)
-    migrating = commands.add_parser("migrate")
-    migrating.add_argument("--by", metavar="NAME",
-                           help="the person whose signed migration commit carries the license text decisions it "
-                                "writes")
-    migrating.set_defaults(run=cmd_migrate)
+    commands.add_parser("migrate").set_defaults(run=cmd_migrate)
     _data_commands(commands)
     args = parser.parse_args(argv)
     args.arguments = sys.argv[1:] if argv is None else list(argv)  # as the run's record names them
