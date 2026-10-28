@@ -60,6 +60,20 @@ IMAGES_CHANGED = "import sys; from wpt_dataset.repo import Repo; print(Repo('.')
 # the fetch and its checks work; the sources a pull request adds or changes are fetched by
 # the maintainer
 SMALL_SOURCE = "standardebooks-joseph-conrad-ford-madox-ford-the-nature-of-a-crime-5366b0f3"
+# the folder of the project's Python library (on Windows, its DLL is in the base folder)
+PYTHON_LIBRARY = "import sys, sysconfig; print(sysconfig.get_config_var('LIBDIR') or sys.base_prefix)"
+# the variable each system reads for the folders where a program's shared libraries are found
+LIBRARY_PATH = {"darwin": "DYLD_LIBRARY_PATH", "win32": "PATH"}
+
+
+def with_python_library():
+    """ENVIRON with the project's Python library folder searched first: the
+    Rust test program links the Python library and loads it when it starts,
+    and the Python uv installs is in a folder no system searches."""
+    found = subprocess.run([UV, "run", "python", "-c", PYTHON_LIBRARY], cwd=ROOT, env=ENVIRON, capture_output=True,
+                           text=True, check=True)
+    name = LIBRARY_PATH.get(sys.platform, "LD_LIBRARY_PATH")
+    return {**ENVIRON, name: os.pathsep.join(f for f in (found.stdout.strip(), ENVIRON.get(name)) if f)}
 
 
 def upstream_base():
@@ -118,8 +132,8 @@ def test_processes(deselect):
 
 def checks(base, range_):
     """(name, what to run) of every check: what to run is a function that
-    gives (commands, folder, the line printed before them or None), called
-    when the check starts."""
+    gives (commands, folder, the line printed before them or None, the
+    environment they run in), called when the check starts."""
     # inside the folder, so rustup applies rust-toolchain.toml; through uv, so the
     # Rust build finds the project's Python even where none is on the search path
     rust = ROOT / "packages" / "wpt-tokenizer" / "rust"
@@ -128,23 +142,24 @@ def checks(base, range_):
         deselect, why = image_tests(base)
         count, sizing = test_processes(deselect)
         return ([[UV, "run", "pytest", "-rs", "-n", str(count), "--dist", "loadgroup", *deselect]], ROOT,
-                f"{sizing}\n{why}")
+                f"{sizing}\n{why}", ENVIRON)
 
     return [
-        ("lock", lambda: ([[UV, "lock", "--check"]], ROOT, None)),
+        ("lock", lambda: ([[UV, "lock", "--check"]], ROOT, None, ENVIRON)),
         ("tests", tests),
-        ("rust", lambda: ([[UV, "run", "rustc", "--version"], [UV, "run", "cargo", "test"]], rust, None)),
-        ("data", lambda: ([[UV, "run", "wpt-dataset", "check"]], ROOT, None)),
-        ("sources", lambda: ([[UV, "run", "wpt-dataset", "check", "--fetch", SMALL_SOURCE]], ROOT, None)),
-        ("commits", lambda: ([[UV, "run", "wpt-dataset", "check-commits", range_]], ROOT, None)),
+        ("rust", lambda: ([[UV, "run", "rustc", "--version"], [UV, "run", "cargo", "test"]], rust, None,
+                          with_python_library())),
+        ("data", lambda: ([[UV, "run", "wpt-dataset", "check"]], ROOT, None, ENVIRON)),
+        ("sources", lambda: ([[UV, "run", "wpt-dataset", "check", "--fetch", SMALL_SOURCE]], ROOT, None, ENVIRON)),
+        ("commits", lambda: ([[UV, "run", "wpt-dataset", "check-commits", range_]], ROOT, None, ENVIRON)),
     ]
 
 
-def run(commands, folder):
+def run(commands, folder, env):
     for command in commands:
         print(f"$ {' '.join(command)}", flush=True)
         try:
-            if subprocess.run(command, cwd=folder, env=ENVIRON).returncode != 0:
+            if subprocess.run(command, cwd=folder, env=env).returncode != 0:
                 return False
         except FileNotFoundError:
             print(f"{command[0]}: not found on this machine", flush=True)
@@ -163,10 +178,10 @@ def main():
     results = []
     for name, prepare in checks(base, range_):
         print(f"\n== {name}", flush=True)
-        commands, folder, why = prepare()
+        commands, folder, why, env = prepare()
         if why:
             print(why, flush=True)
-        results.append((name, run(commands, folder)))
+        results.append((name, run(commands, folder, env)))
     print("\n" + "\n".join(f"{'passed' if ok else 'FAILED'}  {name}" for name, ok in results))
     sys.exit(0 if all(ok for _, ok in results) else 1)
 
