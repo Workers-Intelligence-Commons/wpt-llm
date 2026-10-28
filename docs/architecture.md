@@ -685,10 +685,25 @@ the sha256 of its content, its bundle and its place there). A session puts its r
 end. A full bundle is sealed while the next one fills, so a crash loses
 only the bundles not yet sealed and the lines since the last one. A
 bundle that cannot be stored stops its session: nothing more is added or
-recorded, and the lines that went with that bundle are not kept. The file is replaced whole, only if unchanged since it was
-read: a conditional upload on S3, a lock in a local folder. When another
-session replaced it meanwhile, it is read again, the rows are put in
-again, and the replace is tried again.
+recorded, and the lines that went with that bundle are not kept.
+
+Every read or change of the store database goes through a copy on the
+disk of the machine that runs it, in the store's cache folder, never
+through one in memory, so only the disk bounds its size. A change is made
+in that copy, and the compressed copy replaces the stored file whole, only
+if it is unchanged since it was read: a conditional upload on S3, a lock
+in a local folder. When another session replaced it meanwhile, it is read
+again, the change is made again, and the replace is tried again.
+
+A session's rows go first into its own SQLite file in that cache folder,
+then from it into the store database. Rows are keyed by the session and
+the line's number, so putting them in twice changes nothing. Rows that
+reached the session's file but not the store database (the session
+crashed, or the store refused the replace) stay in the file, and the next
+session that starts on the same machine puts them in. A file is removed
+only once the store database holds its rows. Each of these local files
+lies beside a lock file its process holds; one whose lock can be taken
+belongs to no live process.
 
 The store also keeps the cut key that erasure cuts are matched under
 ([erasure.md](erasure.md)) and the locked vocabularies

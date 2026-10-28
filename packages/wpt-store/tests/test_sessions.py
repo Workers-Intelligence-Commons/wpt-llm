@@ -444,7 +444,8 @@ def test_git_objects_of_a_session_still_running_are_not_given_out_since_its_end_
 def test_a_new_session_removes_the_unfinished_bundles_no_live_session_owns(reopen):
     # a crash leaves the bundle being filled on this machine's disk; the next session removes it, and leaves
     # one another live session is filling
-    from wpt_store.sessions import LOCK, PARTIAL
+    from wpt_store.local_files import LOCK
+    from wpt_store.sessions import PARTIAL
     from wpt_utils.files import lock_file, unlock_file
 
     store = reopen()
@@ -488,3 +489,128 @@ def test_a_local_bundle_is_on_the_disk_before_the_database_names_it(tmp_path, mo
     if os.name != "nt":
         synced = [path for kind, path in order[:put] if kind == "synced"]
         assert str(tmp_path / "store" / "bundles" / "durable") in synced  # the bundle's folder: its new name
+
+
+CRASH = """
+import os, sys
+from wpt_store import Session, database, open_store
+
+real = database.put
+calls = []
+
+
+def put(*args):
+    calls.append(args)
+    if len(calls) == 2:  # the rows of the first sealed bundle are on this machine's disk, not yet in the store
+        os._exit(0)
+    return real(*args)
+
+
+database.put = put
+session = Session(open_store(sys.argv[1]), "crashed", "download", "abc123", False, bundle=1024)
+session.line("first", "downloaded", "abc123")
+session.add(b"x" * 1024)  # fills the bundle: sealed at once
+"""
+
+
+def test_a_session_that_crashed_before_its_rows_went_in_has_them_put_in_by_the_next_session(tmp_path):
+    # a process dies between writing a sealed bundle's rows into its local file and putting them into the store
+    # database: the next session on the machine puts them in, then removes the file
+    import subprocess
+    import sys
+
+    from wpt_store.database import ROWS
+
+    url = (tmp_path / "store").as_uri()
+    subprocess.run([sys.executable, "-c", CRASH, url], check=True)
+    store = open_store(url)
+    with store.database() as found:
+        assert found.execute("SELECT count(*) FROM lines").fetchone() == (0,)
+    assert [path.name for path in store.cache.glob(ROWS + "crashed*") if path.name.endswith(".sqlite")]
+    with Session(store, "next", "download", "abc123", False):
+        pass
+    with store.database() as found:
+        assert found.execute("SELECT session, source, outcome FROM lines").fetchall() \
+            == [("crashed", "first", "downloaded")]
+        assert found.execute("SELECT folder, ended IS NULL FROM sessions ORDER BY folder").fetchall() \
+            == [("crashed", 1), ("next", 0)]
+    assert list(store.cache.glob(ROWS + "*")) == []
+
+
+def test_rows_the_store_refused_at_the_end_are_put_in_by_the_next_session(reopen):
+    # the store database's replace fails at a session's end: its last lines stay in its local file, and the
+    # next session on the machine puts them in
+    store = reopen()
+    real = store.kind.replace
+    failing = []
+
+    def refuses_once(*args):
+        if failing:
+            failing.clear()
+            raise OSError("the upload failed")
+        return real(*args)
+
+    store.kind.replace = refuses_once
+    with pytest.raises(OSError, match="the upload failed"):
+        with Session(store, "refused", "download", "abc123", False) as session:
+            session.line("one", "downloaded", "abc123")
+            failing.append(True)
+    with store.database() as found:
+        assert found.execute("SELECT count(*) FROM lines").fetchone() == (0,)
+    with Session(store, "next", "download", "abc123", False):
+        pass
+    with reopen().database() as found:
+        assert found.execute("SELECT session, source FROM lines").fetchall() == [("refused", "one")]
+        assert found.execute("SELECT folder, ended IS NOT NULL FROM sessions ORDER BY folder").fetchall() \
+            == [("next", 1), ("refused", 1)]  # it ended: its end is among the rows put in
+
+
+def test_the_store_database_is_read_through_a_copy_on_this_machine_s_disk_removed_once_closed(reopen):
+    # the database can outgrow what memory holds: each read opens a copy in the cache folder, which goes when
+    # the connection closes; a copy a crashed process left is removed by the next read, one a live one holds
+    # stays; a session leaves none behind
+    from pathlib import Path
+
+    from wpt_store.database import COPY
+    from wpt_store.local_files import LOCK
+    from wpt_utils.files import lock_file, unlock_file
+
+    store = reopen()
+    with Session(store, "first", "download", "abc123", False) as session:
+        session.line("one", "downloaded", "abc123")
+    store.cache.mkdir(parents=True, exist_ok=True)
+    (store.cache / f"{COPY}crashed").write_bytes(b"a crashed process's copy")
+    (store.cache / f"{COPY}crashed{LOCK}").write_bytes(b"")
+    (store.cache / f"{COPY}live").write_bytes(b"a live process's copy")
+    held = lock_file(store.cache / f"{COPY}live{LOCK}")
+    try:
+        with store.database() as found:
+            _, _, path = found.execute("PRAGMA database_list").fetchone()
+            assert Path(path).parent == store.cache and Path(path).stat().st_size > 0
+            assert found.execute("SELECT session, source FROM lines").fetchall() == [("first", "one")]
+        assert not Path(path).exists()
+        assert sorted(item.name for item in store.cache.glob(COPY + "*")) == [f"{COPY}live", f"{COPY}live{LOCK}"]
+    finally:
+        unlock_file(held)
+    with Session(store, "second", "download", "abc123", False) as session:
+        assert not session.marked("one")
+    assert sorted(item.name for item in store.cache.glob(".*") if not item.name.startswith(".partial-")) == []
+
+
+def test_rows_files_a_crash_left_half_made_or_half_removed_do_not_stop_later_sessions(reopen):
+    # a crash inside the removal of a session's rows file leaves its lock file alone; one while the file is made
+    # leaves it without its tables: neither holds rows, and the next sessions start and leave neither behind
+    from wpt_store.database import ROWS, ROWS_END
+    from wpt_store.local_files import LOCK
+
+    store = reopen()
+    store.cache.mkdir(parents=True, exist_ok=True)
+    (store.cache / f"{ROWS}gone{ROWS_END}{LOCK}").write_bytes(b"")
+    (store.cache / f"{ROWS}empty{ROWS_END}").write_bytes(b"")
+    (store.cache / f"{ROWS}empty{ROWS_END}{LOCK}").write_bytes(b"")
+    for folder in ("next", "after"):
+        with Session(store, folder, "download", "abc123", False) as session:
+            session.line("one", "downloaded", "abc123")
+    with store.database() as found:
+        assert found.execute("SELECT folder FROM sessions ORDER BY folder").fetchall() == [("after",), ("next",)]
+    assert list(store.cache.glob(ROWS + "*")) == []

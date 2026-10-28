@@ -23,10 +23,9 @@ stay: in a bundle of a session that has ended (its bundles are sealed for
 good, see the end below) or of this session.
 
 A bundle fills on this machine's disk first, in the store's cache folder,
-as PARTIAL<random>, beside a lock file (<that name>.lock) the session holds
-while it fills; the system releases the lock when the session's process
-ends, crash included. Every new session removes the unfinished bundles
-whose lock it can take: those no live session owns.
+as PARTIAL<random>, owned by the session through a lock file beside it
+(wpt_store.local_files) while it fills. Every new session removes the
+unfinished bundles no live session owns.
 
 A source's file list (file_list_bytes, parse_file_list) says where each of
 its files went, one line per file, sorted by the UTF-8 bytes of the path:
@@ -41,18 +40,23 @@ The session's lines (one per download, use of a source already in the
 store, failure) go into the store database
 (wpt_store.database) with the session's own row each time a bundle is
 sealed, and at the end, and so do the git objects of the file lists
-named meanwhile (their git_objects table). An action handed to then() or
-name() (such as setting the refs that name a downloaded source's files)
-runs at the same moment, just before those rows go in: once every file
-added before it is stored. A bundle is on the disk (local store) or held
-by S3 before the database names it. A full bundle is sealed while the
-next one fills; should it fill too before the first is sealed, adding
-waits. A crash loses only the bundles not yet sealed (the one being
-sealed and the one being filled) and the rows added since the last one
-was sealed.
+named meanwhile (their git_objects table). They go first into the
+session's own file on this machine's disk (database.Rows, in the store's
+cache folder), then from it into the store database (database.put). An
+action handed to then() or name() (such as setting the refs that name a
+downloaded source's files) runs at the same moment, just before those
+rows go in: once every file added before it is stored. A bundle is on the
+disk (local store) or held by S3 before the database names it. A full
+bundle is sealed while the next one fills; should it fill too before the
+first is sealed, adding waits. A crash loses only the bundles not yet
+sealed (the one being sealed and the one being filled) and the rows added
+since the last one was sealed. Rows that reached the session's file but
+not the database stay in that file, and the next session that starts on
+this machine puts them in, then removes the file.
 
 The session's row goes into the database when it starts, so that a session
-that ends later sees it running. The end (end()) seals the bundles for good: a bundle holding bytes that
+that ends later sees it running. A session that cannot put it in removes
+its file and raises. The end (end()) seals the bundles for good: a bundle holding bytes that
 no named file list names (a try that failed, a download that failed and
 named nothing) is rewritten without them. The one
 being filled is rewritten before it is stored; one sealed earlier becomes
@@ -70,8 +74,9 @@ blobs a git source's history needs, are kept by the rewrite and move with
 it, and their rows follow them.
 
 Failures: what the store raised while sealing a bundle or putting the
-rows in the database. The bundles not yet sealed and the rows not yet
-put are then lost, and the session cannot go on: every later add, line
+rows in the database. The bundles not yet sealed and the rows that had
+not reached the session's file are then lost (those in it go in with the
+next session), and the session cannot go on: every later add, line
 and end raises that same failure and writes nothing; the actions handed
 to then() or name() with them never run. A failing action stops the
 session the same way. ValueError for an outcome the database does not
@@ -87,16 +92,14 @@ from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
 
-from wpt_utils.files import lock_file, try_lock_file, unlock_file
-
 from . import blocks, database
 from .errors import CorruptObject
+from .local_files import LocalFile, unowned
 from .names import check_record_name
 
 BUNDLE = 4 << 30  # bytes: a bundle is sealed once it holds this many or more
 CHUNK = 1 << 20  # bytes of a local file read at once
 PARTIAL = ".partial-bundle-"  # the start of the name of a bundle being filled on this machine's disk
-LOCK = ".lock"  # the end of the name of its lock file
 PART = 64 << 20  # bytes of one file copied at once when a bundle is rewritten
 QUERY = 500  # git object ids asked for in one query of the store database
 
@@ -141,33 +144,13 @@ def now() -> str:
 
 def remove_unowned_partials(cache: Path) -> list[str]:
     """Remove every unfinished bundle in cache (PARTIAL...) that no live
-    session owns: one whose lock this process can take. Their names."""
+    session owns (local_files.unowned). Their names."""
     removed = []
-    for path in sorted(Path(cache).glob(PARTIAL + "*")) if Path(cache).is_dir() else ():
-        if path.name.endswith(LOCK):
-            if not path.with_name(path.name.removesuffix(LOCK)).exists():
-                _remove_unlocked(path, None)  # a lock left without its bundle
-            continue
-        if _remove_unlocked(path.with_name(path.name + LOCK), path):
-            removed.append(path.name)
+    for left in unowned(cache, PARTIAL):
+        if left.path().exists():
+            removed.append(left.path().name)
+        left.remove()
     return removed
-
-
-def _remove_unlocked(lock, path) -> bool:
-    """Remove path and its lock when the lock can be taken; whether it was."""
-    try:
-        descriptor = try_lock_file(lock)
-    except FileNotFoundError:  # removed meanwhile
-        return False
-    if descriptor is None:
-        return False  # a live session fills it
-    try:
-        if path is not None:
-            path.unlink(missing_ok=True)
-    finally:
-        unlock_file(descriptor)
-        Path(lock).unlink(missing_ok=True)
-    return True
 
 
 class _Partial:
@@ -176,12 +159,13 @@ class _Partial:
     lock that says a live session owns it."""
 
     def __init__(self, store, number):
-        store.cache.mkdir(parents=True, exist_ok=True)
-        name = PARTIAL + secrets.token_hex(8)
-        self.lock_path = store.cache / (name + LOCK)
-        self.lock = lock_file(self.lock_path)  # a new name: taken at once
-        self.path = store.cache / name
-        self.out = open(self.path, "xb")
+        self.local = LocalFile(store.cache / (PARTIAL + secrets.token_hex(8)))  # a new name: taken at once
+        self.path = self.local.path()
+        try:
+            self.out = open(self.path, "xb")
+        except BaseException:
+            self.local.remove()
+            raise
         self.writer = blocks.Writer(self.out, *store.compressing())
         self.size, self.number = 0, number
 
@@ -205,11 +189,7 @@ class _Partial:
     def remove(self):
         """The file gone, if still there, and the lock released."""
         self.out.close()
-        self.path.unlink(missing_ok=True)
-        if self.lock is not None:
-            unlock_file(self.lock)
-            self.lock = None
-            self.lock_path.unlink(missing_ok=True)
+        self.local.remove()
 
 
 @dataclass(eq=False)
@@ -239,9 +219,20 @@ class Session:
                     "dirty": int(bool(dirty))}
         remove_unowned_partials(store.cache)
         # the session's row goes in at once, so that a later session's end sees it running (what decides when it
-        # removes the old copy of a rewritten bundle); the bundles marked that no session still running could
-        # read go now
-        self._remove(database.put(store.kind, dict(self.row), []))
+        # removes the old copy of a rewritten bundle), with the rows sessions that crashed on this machine left;
+        # the bundles marked that no session still running could read go now
+        self._row_file, left = database.Rows.begin(store.cache, folder), []
+        try:
+            left = database.unowned_rows(store.cache)
+            self._row_file.add(dict(self.row))
+            removable = database.put(store.kind, store.cache, [self._row_file, *left])
+        except BaseException:
+            self._row_file.discard()  # a session that could not start ran nothing: its row alone is not kept
+            raise
+        finally:
+            for rows in left:
+                rows.close()  # removed once put in, kept otherwise
+        self._remove(removable)
         # _lock guards everything below but _failure and the git objects' lookup. _sealing is held while one
         # bundle is sealed; it is taken under _lock, so bundles are sealed one at a time in the order they
         # were handed over
@@ -479,33 +470,40 @@ class Session:
         docstring), and put the session's end and its last rows in the
         database. Nothing more once ended."""
         with self._lock:
-            self._check()
             if self._ended:
+                self._check()
                 return
             self._ended = True
-        with self._sealing:  # a bundle another thread handed over is sealed first
-            pass
-        marks, rows = [], []
         try:
+            with self._sealing:  # a bundle another thread handed over is sealed first
+                pass
             with self._lock:
                 self._check()
-                earlier = [number for number in sorted(self._open) if number in self._sizes]
-            for number in earlier:
-                rows += self._rewrite_sealed(number)
-                marks.append(self._name(number))
-            with self._lock:
-                self._check()
-                self._rewrite_filling()
-                self.row["ended"] = now()
-                last = self._hand_over(rows, [{"bundle": bundle, "marked": now()} for bundle in marks])
-        except BaseException as error:
-            if self._failure is None:
-                self._failure = error
-            raise
-        removable = self._seal(last)
+            marks, rows = [], []
+            try:
+                with self._lock:
+                    self._check()
+                    earlier = [number for number in sorted(self._open) if number in self._sizes]
+                for number in earlier:
+                    rows += self._rewrite_sealed(number)
+                    marks.append(self._name(number))
+                with self._lock:
+                    self._check()
+                    self._rewrite_filling()
+                    self.row["ended"] = now()
+                    last = self._hand_over(rows, [{"bundle": bundle, "marked": now()} for bundle in marks])
+            except BaseException as error:
+                if self._failure is None:
+                    self._failure = error
+                raise
+            removable = self._seal(last)
+        finally:
+            # the rows file goes once the database holds all of it, and stays for a later session otherwise
+            self._row_file.close()
+            with self._known_lock:
+                if self._known is not None:
+                    self._known.close()
         self._remove(removable)
-        if self._known is not None:
-            self._known.close()
 
     def _remove(self, removable):
         """Remove the bundles the database marks that no session which
@@ -513,7 +511,7 @@ class Session:
         and their marks."""
         for bundle in removable:
             self.store.drop_bundle(bundle)
-        database.forget(self.store.kind, removable)
+        database.forget(self.store.kind, self.store.cache, removable)
 
     def _rewrite_sealed(self, number) -> list[dict]:
         """A bundle sealed earlier rewritten as a new bundle of the session
@@ -644,7 +642,8 @@ class Session:
                                            self.keep_local)
             for action in actions:
                 rows += action() or []
-            return database.put(self.store.kind, row, lines, rows, marks)
+            self._row_file.add(row, lines, rows, marks)
+            return database.put(self.store.kind, self.store.cache, [self._row_file])
         except BaseException as error:
             if self._failure is None:
                 self._failure = error

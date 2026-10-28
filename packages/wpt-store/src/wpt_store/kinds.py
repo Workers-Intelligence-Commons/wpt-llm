@@ -16,8 +16,9 @@ are built above them, alike for every kind:
                                       (start < 0: that many from the end; length
                                       None: up to the end; fewer when the file
                                       ends first) and the file's version
-    replace(key, data, version)       the new version: data written whole only
-                                      if the file is still at version (None:
+    replace(key, source, version)     the new version: source (a local file,
+                                      left as it is) written whole only if
+                                      the file is still at version (None:
                                       only if there is no file); Changed
                                       otherwise, and nothing is written
     list(prefix, deep=True)           {key: size} of every file whose key starts
@@ -112,7 +113,7 @@ class Folder:
             file.seek(max(0, stat.st_size + start) if start < 0 else start)
             return (file.read() if length is None else file.read(length)), _version(stat)
 
-    def replace(self, key, data, version):
+    def replace(self, key, source, version):
         target = self._path(key)
         target.parent.mkdir(parents=True, exist_ok=True)
         lock = lock_file(target.with_name(f".{target.name}.lock"))
@@ -123,7 +124,7 @@ class Folder:
                 current = None
             if current != version:
                 raise Changed(key)
-            atomic_write(target, data, durable=True)
+            atomic_copy(source, target, durable=True)
             return _version(target.stat())
         finally:
             unlock_file(lock)
@@ -243,12 +244,13 @@ class Bucket:
                 return b"", None
             raise
 
-    def replace(self, key, data, version):
+    def replace(self, key, source, version):
         from botocore.exceptions import ClientError
 
         guard = {"IfNoneMatch": "*"} if version is None else {"IfMatch": version}
         try:
-            return self.client.put_object(Bucket=self.bucket, Key=self.key(key), Body=data, **guard)["ETag"]
+            with open(source, "rb") as body:  # sent as it is read from the disk
+                return self.client.put_object(Bucket=self.bucket, Key=self.key(key), Body=body, **guard)["ETag"]
         except ClientError as error:
             # 409: another conditional write to the key was under way; it may have changed it
             if error.response["Error"]["Code"] in ("PreconditionFailed", "412", "ConditionalRequestConflict", "409"):

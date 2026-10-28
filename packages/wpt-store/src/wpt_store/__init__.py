@@ -417,14 +417,17 @@ class Store:
 
     def database(self, threads=False):
         """The store database (wpt_store.database), as a sqlite3 connection
-        to a copy in memory; threads: usable from any thread, one at a time."""
-        return database.read(self.kind, threads)
+        to a copy in the cache folder, removed when the connection closes
+        (close(), or the end of a `with` block over it: there it closes,
+        where a plain sqlite3 connection's `with` only ends a transaction);
+        threads: usable from any thread, one at a time."""
+        return database.read(self.kind, self.cache, threads)
 
     def mark(self, sources=None):
         """Mark sources (ids; None: every source) for a new download in the
         store database (wpt_store.database.mark): the next session that
         meets one downloads it in full, even though the store holds it."""
-        database.mark(self.kind, [database.ALL] if sources is None else list(sources), sessions.now())
+        database.mark(self.kind, self.cache, [database.ALL] if sources is None else list(sources), sessions.now())
 
     def has_bundle(self, bundle: str) -> bool:
         """Whether the store holds a sealed bundle (<session folder>/<number>)."""
