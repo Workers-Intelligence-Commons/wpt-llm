@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Workers-Intelligence-Commons/wpt-llm/schemas/license-text.schema.json",
+  "title": "WPT license text (data/license-texts/<id>/license-text.json): one license text (a license file, a notice, a README) and its decision (docs/licenses.md). <id> is the sha256 of its normalized text: its first 200,000 bytes read as UTF-8, lowercased, without the lines naming a copyright, then every run of characters other than a-z and 0-9 made one space, trimmed (wpt_dataset.license_check.text_id). license-text.txt beside it, when there, holds the text itself",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "kind", "files", "explanation"],
+  "properties": {
+    "decision": {"$ref": "#/$defs/decision", "description": "whether the text is an accepted license statement, signed by a person: a file trains only when its source, its license entry and the text found at its entry's place are all admitted"},
+    "kind": {"enum": ["license", "notice", "not-a-license", "readme"], "description": "license: the text of a license (`license` names it when it is a known one); notice: it names a license without its text; not-a-license: it grants nothing (a guideline, a pointer to another file); readme: a README, read for what it says about training"},
+    "license": {"type": "string", "minLength": 1, "description": "the SPDX expression of the license it is or names; an OR of the ids a text is equally the text of (GPL-3.0-only OR GPL-3.0-or-later)"},
+    "found": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "path"],
+      "description": "where it was first found, when known",
+      "properties": {
+        "source": {"type": "string", "minLength": 1, "description": "a source's id"},
+        "path": {"type": "string", "minLength": 1, "description": "the file's path in that source, or the address of the license page it was found at"}
+      }
+    },
+    "files": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+      "description": "the sha256 of each exact file it was seen as: a file is found by its own sha256 first, then by its normalized text"
+    },
+    "explanation": {"type": "string", "description": "why the decision, in the reviewer's words"}
+  },
+  "allOf": [
+    {"if": {"properties": {"kind": {"const": "notice"}}}, "then": {"required": ["license"]}}
+  ],
+  "$defs": {
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "by", "date"],
+      "properties": {
+        "decision": {"enum": ["under-review", "admitted", "refused"]},
+        "by": {"type": "string", "minLength": 1, "description": "a person's name; under review only, a machine's (machine:<host>)"},
+        "date": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+        "reason": {"type": "string", "minLength": 1, "description": "required to refuse; optional under review"},
+        "note": {"type": "string"}
+      },
+      "if": {"properties": {"decision": {"const": "refused"}}},
+      "then": {"required": ["reason"]}
+    }
+  }
+}

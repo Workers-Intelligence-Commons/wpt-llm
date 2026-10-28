@@ -6,15 +6,19 @@ the full history of its sessions (wpt_store.sessions) and of their lines.
               session ended), wpt_commit (the repository commit it ran at),
               dirty (1 when that working tree had changes)
     lines     session (its folder), number (its place in the session),
-              source (id), revision, checksum (the one found, for a
-              failure), address (the one actually used), time (UTC), outcome
-              (downloaded, reused or failed), size (bytes), code (the code
-              that did it: wpt_utils.programs.code_name)
+              source (id), got (what the download got, as a JSON object,
+              such as the commit: for the record only; NULL when it got
+              nothing to record), address (the one actually used), time
+              (UTC), outcome (downloaded, reused or failed), size (bytes),
+              code (the code that did it: wpt_utils.programs.code_name)
+    marks     source (id, or ALL: every source), marked (UTC): a person's
+              ask for a new download of that source, which holds until a
+              line of it says downloaded at a later time (marked)
     git_objects
               object_id (a git blob's id), sha256 (its content's), bundle,
               start and length (where the store holds that content, as a
               wpt_store.Placed says): shared by every source, so a git
-              source whose revision moved downloads only the files it does
+              source whose commit moved downloads only the files it does
               not hold, and takes the sha256 of the others from here
 
     removals  bundle (<session folder>/<number>), marked (UTC): a bundle a
@@ -23,6 +27,10 @@ the full history of its sessions (wpt_store.sessions) and of their lines.
               `marked` still runs; a later session then removes it (put
               gives each one such; forget drops its row once it is
               removed)
+
+A database whose lines still have the columns revision and checksum (an
+earlier shape) is read with them moved into got, as {"revision": ...,
+"checksum": ...} of those not NULL.
 
 Each fact is written once: the run record keeps a session's start and end,
 not its lines. The file lies at KEY, compressed (wpt_store.blocks), and is
@@ -35,6 +43,7 @@ nothing. SQLite's own journal is no help here: it does not work across
 machines.
 """
 
+import json
 import random
 import sqlite3
 import time
@@ -60,8 +69,7 @@ CREATE TABLE IF NOT EXISTS lines (
     session TEXT NOT NULL REFERENCES sessions (folder),
     number INTEGER NOT NULL,
     source TEXT NOT NULL,
-    revision TEXT,
-    checksum TEXT,
+    got TEXT,
     address TEXT,
     time TEXT NOT NULL,
     outcome TEXT NOT NULL CHECK (outcome IN ({", ".join(f"'{outcome}'" for outcome in OUTCOMES)})),
@@ -80,11 +88,20 @@ CREATE TABLE IF NOT EXISTS removals (
     bundle TEXT PRIMARY KEY,
     marked TEXT NOT NULL
 );
+CREATE TABLE IF NOT EXISTS marks (
+    source TEXT PRIMARY KEY,
+    marked TEXT NOT NULL
+);
 """
+ALL = "*"  # the source a mark of every source names (no source id holds it)
 SESSION = ("folder", "command", "started", "ended", "wpt_commit", "dirty")
-LINE = ("session", "number", "source", "revision", "checksum", "address", "time", "outcome", "size", "code")
+LINE = ("session", "number", "source", "got", "address", "time", "outcome", "size", "code")
 GIT_OBJECT = ("object_id", "sha256", "bundle", "start", "length")
 REMOVAL = ("bundle", "marked")
+MARK = ("source", "marked")
+# whether a source is marked: a mark of it, or of every source, later than its last download
+MARKED = ("SELECT 1 FROM marks WHERE source IN (?, ?) AND marked > COALESCE((SELECT MAX(time) FROM lines"
+          f" WHERE source = ? AND outcome = '{DOWNLOADED}'), '') LIMIT 1")
 # the marked bundles no running session can read any more: every session that started before the mark has ended
 REMOVABLE = ("SELECT bundle FROM removals AS removal WHERE NOT EXISTS "
              "(SELECT 1 FROM sessions WHERE ended IS NULL AND started < removal.marked) ORDER BY bundle")
@@ -112,14 +129,11 @@ def put(kind, session: dict, lines: list[dict], git_objects=(), removals=()) -> 
         data, version = _fetch(kind)
         connection = _connect(data)
         with connection:
-            connection.execute(f"INSERT OR REPLACE INTO sessions VALUES ({', '.join('?' * len(SESSION))})",
-                               [session[name] for name in SESSION])
-            connection.executemany(f"INSERT OR REPLACE INTO lines VALUES ({', '.join('?' * len(LINE))})",
-                                   [[line[name] for name in LINE] for line in lines])
-            connection.executemany(f"INSERT OR REPLACE INTO git_objects VALUES ({', '.join('?' * len(GIT_OBJECT))})",
+            connection.execute(_insert("sessions", SESSION), [session[name] for name in SESSION])
+            connection.executemany(_insert("lines", LINE), [[line[name] for name in LINE] for line in lines])
+            connection.executemany(_insert("git_objects", GIT_OBJECT),
                                    [[row[name] for name in GIT_OBJECT] for row in git_objects])
-            connection.executemany(f"INSERT OR REPLACE INTO removals VALUES ({', '.join('?' * len(REMOVAL))})",
-                                   [[row[name] for name in REMOVAL] for row in removals])
+            connection.executemany(_insert("removals", REMOVAL), [[row[name] for name in REMOVAL] for row in removals])
             removable = [bundle for bundle, in connection.execute(REMOVABLE)]
         updated = compressed(connection.serialize())
         connection.close()
@@ -128,6 +142,36 @@ def put(kind, session: dict, lines: list[dict], git_objects=(), removals=()) -> 
             return removable
         except Changed:
             time.sleep(random.uniform(0, PAUSE))
+
+
+def mark(kind, sources, at: str):
+    """Mark sources (ids, or [ALL] for every source) for a new download,
+    at the time at (UTC, as lines write times): a later mark of a source
+    replaces its earlier one. CorruptObject as put's."""
+    while True:
+        data, version = _fetch(kind)
+        connection = _connect(data)
+        with connection:
+            connection.executemany(_insert("marks", MARK), [[source, at] for source in sources])
+        updated = compressed(connection.serialize())
+        connection.close()
+        try:
+            kind.replace(KEY, updated, version)
+            return
+        except Changed:
+            time.sleep(random.uniform(0, PAUSE))
+
+
+def marked(connection, source: str) -> bool:
+    """Whether a connection's database marks source for a new download
+    (MARKED)."""
+    return connection.execute(MARKED, (source, ALL, source)).fetchone() is not None
+
+
+def _insert(table: str, fields) -> str:
+    """The statement putting one row of fields into table, each column named
+    (a table an earlier shape left may hold them in another order)."""
+    return f"INSERT OR REPLACE INTO {table} ({', '.join(fields)}) VALUES ({', '.join('?' * len(fields))})"
 
 
 def forget(kind, bundles):
@@ -164,8 +208,26 @@ def _connect(data, threads=False):
     try:
         if data:
             connection.deserialize(data)
+        _move_pinned_columns(connection)
         connection.executescript(SCHEMA)
     except sqlite3.DatabaseError as error:
         connection.close()
         raise CorruptObject(f"the store database {KEY} is not a SQLite database: {error}") from None
     return connection
+
+
+def _move_pinned_columns(connection):
+    """Lines of an earlier shape, with the columns revision and checksum:
+    those not NULL moved into got (see the module's docstring), the columns
+    gone."""
+    columns = [row[1] for row in connection.execute("PRAGMA table_info(lines)")]
+    if "revision" not in columns:
+        return
+    connection.create_function("pinned", 2, lambda revision, checksum: json.dumps(
+        {key: value for key, value in (("revision", revision), ("checksum", checksum)) if value is not None},
+        sort_keys=True) if revision is not None or checksum is not None else None, deterministic=True)
+    with connection:
+        connection.execute("ALTER TABLE lines ADD COLUMN got TEXT")
+        connection.execute("UPDATE lines SET got = pinned(revision, checksum)")
+        connection.execute("ALTER TABLE lines DROP COLUMN revision")
+        connection.execute("ALTER TABLE lines DROP COLUMN checksum")

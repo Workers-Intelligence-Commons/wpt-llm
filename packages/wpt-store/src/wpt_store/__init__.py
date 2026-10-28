@@ -85,7 +85,7 @@ from urllib.parse import unquote, urlparse
 from wpt_utils.files import lock_file, sha256_file, unlock_file
 from wpt_utils.parallel import Sizing, in_order
 
-from . import blocks, database
+from . import blocks, database, sessions
 from .errors import CorruptObject, MissingObject, MixedRecord, StoreError, StoreSettingError
 from .kinds import Absent, Bucket, Folder, atomic_copy, sync_file, sync_folder
 from .names import NAME, NAME_CHARACTERS, as_record_name, check_record_name, check_ref
@@ -419,6 +419,12 @@ class Store:
         """The store database (wpt_store.database), as a sqlite3 connection
         to a copy in memory; threads: usable from any thread, one at a time."""
         return database.read(self.kind, threads)
+
+    def mark(self, sources=None):
+        """Mark sources (ids; None: every source) for a new download in the
+        store database (wpt_store.database.mark): the next session that
+        meets one downloads it in full, even though the store holds it."""
+        database.mark(self.kind, [database.ALL] if sources is None else list(sources), sessions.now())
 
     def has_bundle(self, bundle: str) -> bool:
         """Whether the store holds a sealed bundle (<session folder>/<number>)."""

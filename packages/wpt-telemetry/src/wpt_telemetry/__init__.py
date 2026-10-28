@@ -1,7 +1,7 @@
 """The record of one WPT command run: what it read, what it did and what it
 wrote, so that afterwards one can know exactly what happened.
 
-wpt-dataset build, wpt-dataset source-drafter, wpt-train and wpt-eval each open one
+wpt-dataset build, wpt-train and wpt-eval each open one
 Telemetry per run. Its record is its own folder of the store named by
 WPT_STORE, records/<folder>/ (see wpt_store), named
 <UTC start>-<command>-<main id>-<8 random hex digits>, where the main id is

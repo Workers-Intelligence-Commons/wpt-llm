@@ -31,23 +31,66 @@ class OutdatedSchema(DatasetError):
 
 
 class FetchFailed(DatasetError):
-    """No address (main or mirror) gave data with the expected checksum."""
+    """An address could not be turned into files (protocols/): raised for
+    one address, and for a source when none of its addresses (main or
+    mirror) gave its files (each address and its failure are listed). The
+    common base of the protocol failures below, which name what happened;
+    raised itself only for a failure none of them is (protocols/base.py
+    lists those). A source whose addresses failed in different ways fails
+    with the kind its main address failed with. Nothing of that download
+    is kept."""
 
 
-class CrawlForbidden(DatasetError):
+class SourceGone(FetchFailed):
+    """Upstream says it does not hold what the address names: an HTTP
+    answer 404 or 410, a git repository that is not there, an LFS object
+    its host does not hold."""
+
+
+class TooManyRequests(FetchFailed):
+    """Upstream refused the requests as too many (HTTP 429), through every
+    try."""
+
+
+class Incomplete(FetchFailed):
+    """What upstream sent stopped before its end (an answer shorter than
+    its stated length, a cut git transfer), or did not arrive intact (an
+    LFS object whose size or sha256 is not its pointer's)."""
+
+
+class AccessRefused(FetchFailed):
+    """Upstream refused access to what the address names: an HTTP answer
+    401, 403 or 451, or git or Mercurial asking for a password (git and
+    Mercurial run so they never wait for one)."""
+
+
+class HostUnreachable(FetchFailed):
+    """The address's host could not be reached, through every try: its
+    name did not resolve, or no connection to it could be made."""
+
+
+class ServerError(FetchFailed):
+    """The address's server answered with an error of its own (HTTP 5xx),
+    through every try when the error may pass."""
+
+
+class RobotsUnreadable(FetchFailed):
+    """The robots.txt of an address's site could not be read: its server
+    answered something other than the file or "no such file" (404, 410),
+    so the site's rules are unknown and the address is not used. Nothing
+    was downloaded from it."""
+
+
+class CrawlForbidden(FetchFailed):
     """The robots.txt of an address's site forbids it to every crawler, to
     wpt-dataset, or to an AI training crawler. Nothing was downloaded from
-    it. Raised for one address, and for a source when no address worked and
-    at least one refused (each address and its reason are listed)."""
+    it. Raised for one address, and for a source whose main address was
+    refused this way."""
 
 
 class NotDownloaded(DatasetError):
     """The store does not hold the source's upstream files: `wpt-dataset
     download` fetches them. Nothing is downloaded anywhere else."""
-
-
-class ChecksumMismatch(DatasetError):
-    """The downloaded data has another manifest checksum than source.json says."""
 
 
 class BadPath(DatasetError):
@@ -60,8 +103,15 @@ class UnsupportedEntry(DatasetError):
 
 
 class CutFailed(DatasetError):
-    """An erasure cut does not apply: missing path, bad range, or wrong
-    sha256 after the cut."""
+    """An erasure cut does not apply: its file is not in the tree, or the
+    passage it names is not in the file (erasure.py). The whole source is
+    out until a person makes the cut again."""
+
+
+class CutKeyMissing(CutFailed):
+    """The store keeps no cut key (erasure.py), so no cut can be matched:
+    every source with a cut is out until the key is restored or the cuts
+    are made again."""
 
 
 class PatchFailed(DatasetError):
@@ -76,7 +126,9 @@ class EditError(DatasetError):
 
 
 class LicenseMapError(DatasetError):
-    """A path matches no license entry, or more than one."""
+    """A path matches no license entry, or more than one, or the entries
+    covering a records file do not select its records by one field
+    (license_check.py)."""
 
 
 class FormatMapError(DatasetError):
@@ -93,19 +145,15 @@ class PoolError(DatasetError):
     """A pool is empty, or filling its share needs more passes than allowed."""
 
 
-class LockMismatch(DatasetError):
-    """A rebuilt vocabulary differs from the sha256 its lock file records."""
-
-
 class TokenizerVersionNeeded(DatasetError):
     """A tokenizer recipe, or the tokenizer code, changed since its version
     was locked; raise the recipe's `version` to train a new vocabulary."""
 
 
-class LockedDocumentsMissing(DatasetError):
-    """The locked vocabulary is not in the store, and some documents it was
-    trained on are gone, so it cannot be rebuilt here; get it from a store
-    that holds it, or raise the recipe's `version`."""
+class VocabularyMissing(DatasetError):
+    """The locked vocabulary is not in the store: a locked vocabulary is
+    shared through the store that holds it, never trained again; use that
+    store, or raise the recipe's `version` to train a new one."""
 
 
 class DocumentListMissing(DatasetError):

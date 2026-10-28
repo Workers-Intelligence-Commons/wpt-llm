@@ -6,18 +6,15 @@ from wpt_dataset.edit import unpack, write_patch
 from wpt_dataset.errors import EditError, LicenseMapError
 from wpt_dataset.sources import source_tree
 
-EMPTY = "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-
-
 def contents(store, tree):
     return {path: store.get_bytes(entry.sha256) for path, entry in tree.items()}
 
 
 def own_texts(kit, repo, store):
     return kit.add_source(repo, store, "author", "texts", {
-        "type": "empty", "address": "empty:author-texts", "revision": "2026-10-14", "checksum": EMPTY,
-        "licenses": [{"license": "CC0-1.0", "paths": ["**"], "attribution": "Test Author", "text": "CC0 1.0 Universal\n"}],
-        "tags": [{"tags": ["fr"], "paths": ["**"]}]}, compute_checksum=False)
+        "type": "empty", "address": "empty:author-texts",
+        "licenses": [kit.entry(["**/*.txt"], "CC0-1.0", **kit.ITSELF, attribution="Test Author", text="CC0 1.0 Universal\n")],
+        "tags": [{"tags": ["fr"], "paths": ["**"]}]})
 
 
 def test_own_texts_grow_by_patches_made_from_plain_files(kit, repo, store, tmp_path, monkeypatch):
@@ -57,8 +54,7 @@ def test_own_texts_grow_by_patches_made_from_plain_files(kit, repo, store, tmp_p
 
 def test_a_removal_patch_on_an_upstream_source(kit, repo, store, tmp_path):
     upstream = kit.git_project(tmp_path / "upstream", symlinks={})
-    sid = kit.add_source(repo, store, "example", "project", {"type": "git", "address": upstream[0],
-                                                            "revision": upstream[1]})
+    sid = kit.add_source(repo, store, "example", "project", {"type": "git", "address": upstream[0]})
     folder = tmp_path / "edit"
     unpack(repo, repo.source(sid), store, folder)
     (folder / "docs" / "guide.txt").unlink()

@@ -1,12 +1,13 @@
-"""Manifests: the exact list of what a source contains, and its checksum.
+"""Manifests: the sha256 of the exact list of what a source contains.
 
-One line per entry, sorted by the UTF-8 bytes of the path:
+The list holds one line per entry, sorted by the UTF-8 bytes of the path:
 
     <mode> <sha256> <path>
 
 mode 100644 is a file, 100755 an executable file, 120000 a symlink (its
-sha256 is that of the target text). Empty folders do not appear. The
-source checksum is "sha256:" + the sha256 of the manifest's bytes.
+sha256 is that of the target text). Empty folders do not appear. A tree
+is named by the sha256 of that list's bytes (manifest_bytes), its
+`manifest`, as a plain hex digest wherever it appears (digest).
 
 A tree is a mapping path -> Entry. A downloaded file lies in one of its
 session's bundles (wpt_store.sessions), and its entry says where
@@ -24,6 +25,7 @@ import dataclasses
 import functools
 import glob
 import hashlib
+import io
 import itertools
 import os
 import re
@@ -34,9 +36,10 @@ import zipfile
 from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
 
+from wpt_store import CorruptObject
 from wpt_utils.programs import program
 
-from .errors import BadPath, FetchFailed, UnsupportedEntry
+from .errors import BadPath, Incomplete, UnsupportedEntry
 
 FILE, EXECUTABLE, SYMLINK = "100644", "100755", "120000"
 MODES = (FILE, EXECUTABLE, SYMLINK)
@@ -67,6 +70,76 @@ def local_file(store, entry: Entry) -> Path:
     return store.file_path(entry.placed) if entry.placed is not None else store.path(entry.sha256)
 
 
+class Stored:
+    """One file of a tree as a reader of many records needs it: open()
+    reads its bytes from the store as a stream, part by part (a downloaded
+    file through wpt_store's file_parts, a store object, such as a patched
+    file, through its read_range), never whole in memory and never copied
+    to the disk, checked against its sha256 at its end; local() is a local
+    file holding them, for a reader that must seek (Parquet)."""
+
+    def __init__(self, store, entry: Entry, name: str):
+        self.store, self.entry, self.name = store, entry, name
+
+    def __str__(self):
+        return self.name
+
+    def open(self, mode="rb"):
+        if mode != "rb":
+            raise ValueError("a stored file is read as bytes")
+        parts = (self.store.file_parts(self.entry.placed) if self.entry.placed is not None
+                 else _object_parts(self.store, self.entry.sha256))
+        return io.BufferedReader(_Parts(parts), BLOCK)
+
+    def read_bytes(self) -> bytes:
+        return content(self.store, self.entry)
+
+    def local(self) -> Path:
+        return local_file(self.store, self.entry)
+
+
+BLOCK = 1 << 20  # bytes a stored file's stream reads at once
+
+
+def _object_parts(store, sha256: str):
+    """A store object's bytes in parts of at most BLOCK bytes; CorruptObject
+    after the last part when they do not match its sha256."""
+    digest, length = hashlib.sha256(), store.size(sha256)
+    for start in range(0, length, BLOCK):
+        part = store.read_range(sha256, start, min(BLOCK, length - start))
+        digest.update(part)
+        yield part
+    if digest.hexdigest() != sha256:
+        raise CorruptObject(f"object {sha256} reads back as {digest.hexdigest()}")
+
+
+class _Parts(io.RawIOBase):
+    """A readable stream over an iterator of byte strings."""
+
+    def __init__(self, parts):
+        self._parts, self._held, self._at = parts, memoryview(b""), 0
+
+    def readable(self):
+        return True
+
+    def readinto(self, buffer) -> int:
+        while self._at == len(self._held):
+            part = next(self._parts, None)
+            if part is None:
+                return 0
+            self._held, self._at = memoryview(part), 0
+        count = min(len(buffer), len(self._held) - self._at)
+        buffer[:count] = self._held[self._at:self._at + count]
+        self._at += count
+        return count
+
+    def close(self):
+        close = getattr(self._parts, "close", None)
+        if close is not None:
+            close()
+        super().close()
+
+
 def size(store, entry: Entry) -> int:
     """An entry's length in bytes, without reading it."""
     return entry.placed.length if entry.placed is not None else store.size(entry.sha256)
@@ -86,8 +159,9 @@ def manifest_bytes(tree: dict[str, Entry]) -> bytes:
     return "".join(lines).encode()
 
 
-def checksum(tree: dict[str, Entry]) -> str:
-    return "sha256:" + hashlib.sha256(manifest_bytes(tree)).hexdigest()
+def digest(tree: dict[str, Entry]) -> str:
+    """The tree's manifest: the sha256 of its file list's bytes, plain hex."""
+    return hashlib.sha256(manifest_bytes(tree)).hexdigest()
 
 
 def parse_manifest(data: bytes) -> dict[str, Entry]:
@@ -135,8 +209,7 @@ class Globs:
         return path in self.exact or (self.wild is not None and self.wild(path) is not None)
 
 
-# No bound: format_entries asks for every entry of a source in turn, so a
-# bound below a source's entry count would compile them all again per path.
+# No bound: callers match many lists (a records entry's join, a task's area), each compiled on its first use.
 @functools.cache
 def _globs(patterns: tuple[str, ...]) -> Globs:
     return Globs(patterns)
@@ -146,6 +219,58 @@ def glob_match_any(path: str, patterns) -> bool:
     """Whether path matches any of patterns (see glob_match); each list of
     patterns is compiled once, on its first use."""
     return _globs(tuple(patterns)).match(path)
+
+
+class PatternIndex:
+    """Several lists of patterns compiled once into one matcher: matching(path)
+    gives the numbers of the lists that match path (as glob_match_any would
+    for each), in order, without trying each list in turn. An exact path is a
+    lookup. A pattern with wildcards is filed under its literal folder (the
+    segments before its first wildcard) and, when its last segment names a
+    kind of file (`*.js`) or a file (`CMakeLists.txt`), under that ending or
+    name too: a path meets only the patterns of its own folders whose ending
+    or name its own file name has, and those that name neither, each then
+    confirmed by its own compiled expression (Globs)."""
+
+    def __init__(self, lists):
+        self.exact, wild = {}, {}
+        for number, patterns in enumerate(lists):
+            for pattern in map(_normal, patterns):
+                if not WILDCARD.search(pattern):
+                    self.exact.setdefault(pattern, []).append(number)
+                    continue
+                wild.setdefault(_filed(pattern), {}).setdefault(number, []).append(pattern)
+        self.wild = {key: [(number, Globs(found)) for number, found in by_list.items()]
+                     for key, by_list in wild.items()}
+
+    def matching(self, path: str) -> list[int]:
+        path = _normal(path)
+        found = set(self.exact.get(path, ()))
+        parts = path.split("/")
+        name = parts[-1]
+        keys = [("name", name), ("any", "")] + [("ending", name[i + 1:]) for i, letter in enumerate(name)
+                                                 if letter == "."]
+        for depth in range(len(parts)):
+            folder = "/".join(parts[:depth])
+            for kind, key in keys:
+                for number, globs in self.wild.get((folder, kind, key), ()):
+                    if number not in found and globs.match(path):
+                        found.add(number)
+        return sorted(found)
+
+
+def _filed(pattern: str) -> tuple[str, str, str]:
+    """Where PatternIndex files a pattern with wildcards: (its literal
+    folder, "ending" and the ending its last segment `*.<ending>` names,
+    "name" and the file its literal last segment names, or "any" and "")."""
+    parts = pattern.split("/")
+    literal = next(i for i, part in enumerate(parts) if WILDCARD.search(part))
+    folder, last = "/".join(parts[:literal]), parts[-1]
+    if literal < len(parts) - 1 and not WILDCARD.search(last):
+        return folder, "name", last
+    if last.startswith("*.") and not WILDCARD.search(last[2:]):
+        return folder, "ending", last[2:]
+    return folder, "any", ""
 
 
 def check_paths(tree: dict[str, Entry]):
@@ -245,10 +370,10 @@ class Extractor:
                 for object_id, content in zip(object_ids, contents):
                     self.store.keep_mapped(object_id, content)
 
-    def add_file(self, path: str, mode: str, file: Path):
+    def add_file(self, path: str, mode: str, file: Path, git: str | None = None):
         """A kept path (see kept) whose content is a file on disk, stored
-        without reading it into memory."""
-        self._record(path, mode, self.store.put_file(file))
+        without reading it into memory. git: as add's."""
+        self._record(path, mode, self.store.put_file(file), git=git)
 
     def _record(self, path: str, mode: str, sha256: str, placed=None, git=None) -> Entry:
         if path in self.tree:
@@ -376,15 +501,18 @@ def read_archive(path: Path, extractor: Extractor):
             raise UnsupportedEntry(f"{path.name}: neither a zip nor a tar archive") from error
 
 
-def read_git(repo: Path, revision: str, extractor: Extractor, prefix: str = "", known=None) -> dict[str, str]:
+def read_git(repo: Path, revision: str, extractor: Extractor, prefix: str = "", known=None,
+             large=None) -> dict[str, str]:
     """Entries of a commit, from git's own objects, each path after `prefix`
     (a submodule's folder, ending in "/"). An excluded file is never read, so
     a partial fetch need not hold it; nor is a blob whose content the store
     holds already (known: {git object id: wpt_store.Placed}), whose entry
     is placed where the store holds it, its sha256 taken from there. Each
-    kept entry holds its blob's id (Entry.git). Returns the
-    kept submodules, each path with the commit it pins; an excluded
-    submodule is skipped."""
+    kept entry holds its blob's id (Entry.git). large(blob), when given,
+    is a local file holding the file a blob stands for when the blob is not
+    the file itself (an LFS pointer), None otherwise: that file's bytes are
+    the entry's. Returns the kept submodules, each path with the commit it
+    pins; an excluded submodule is skipped."""
     known = known or {}
     entries, submodules = [], {}
     for path, mode, kind, object_id in _git_tree(repo, revision, prefix):
@@ -400,7 +528,11 @@ def read_git(repo: Path, revision: str, extractor: Extractor, prefix: str = "", 
             entries.append((path, mode, object_id))
     with contextlib.closing(_git_blobs(repo, [e[2] for e in entries])) as contents:
         for (path, mode, object_id), content in zip(entries, contents):
-            extractor.add(path, mode, content, object_id)
+            file = large(content) if large is not None and mode != SYMLINK else None
+            if file is None:
+                extractor.add(path, mode, content, object_id)
+            elif (kept := extractor.kept(path)) is not None:
+                extractor.add_file(kept, mode, file, object_id)
     return submodules
 
 
@@ -461,21 +593,46 @@ PLAIN_GIT = {**os.environ, "GIT_CONFIG_NOSYSTEM": "1", "GIT_CONFIG_GLOBAL": os.d
              "GIT_NO_LAZY_FETCH": "1"}
 
 
-def license_entries(licenses: list[dict], path: str) -> list[dict]:
-    """The license entries covering path, in their order. A history file is
-    matched only by patterns that start with `.git/history/`, so an entry
-    written `**` covers every file of the tree and no history file; such patterns match no other path.
-    Every place that maps a path to its license entries goes through here."""
-    history = path.startswith(HISTORY)
-    return [e for e in licenses
-            if glob_match_any(path, [p for p in e["paths"] if p.startswith(HISTORY)] if history else e["paths"])]
+def format_entries(source, path: str) -> list[dict]:
+    """The format entries of a source covering path, in their order: a
+    records entry covers the files its `join` reads too (records.py). Every
+    place that maps a path to its format entry goes through here, and so
+    through the source's one matcher (source_paths)."""
+    return source_paths(source).format_entries(path)
 
 
-def format_entries(formats: list[dict], path: str) -> list[dict]:
-    """The format entries covering path, in their order: a records entry
-    covers the files its `join` reads too (records.py). Every place that
-    maps a path to its format entry goes through here."""
-    return [e for e in formats if glob_match_any(path, e["paths"] + e.get("join", {}).get("paths", []))]
+class SourcePaths:
+    """A source's format entries and tag entries, each list compiled once
+    into one matcher over all its patterns (PatternIndex): a path meets only
+    the patterns of its own folders, never every entry in turn, so a source
+    of 200,000 files and 10,000 entries is matched in seconds."""
+
+    def __init__(self, data: dict):
+        self.formats, self.tag_entries = data["formats"], data.get("tags", [])
+        self._formats = PatternIndex([e["paths"] + e.get("join", {}).get("paths", []) for e in self.formats])
+        self._tags = PatternIndex([e["paths"] for e in self.tag_entries])
+
+    def format_entries(self, path: str) -> list[dict]:
+        return [self.formats[number] for number in self._formats.matching(path)]
+
+    def tags(self, path: str) -> frozenset[str]:
+        return frozenset(tag for number in self._tags.matching(path) for tag in self.tag_entries[number]["tags"])
+
+
+COMPILED = 64  # the sources whose matchers stay compiled, the last asked about
+_compiled: dict[int, tuple[dict, SourcePaths]] = {}
+
+
+def source_paths(source) -> SourcePaths:
+    """The source's matcher (SourcePaths), compiled on its first use and
+    kept while the same description (source.data, the very object) is asked
+    about again."""
+    found = _compiled.get(id(source.data))
+    if found is None or found[0] is not source.data:
+        if len(_compiled) >= COMPILED:
+            _compiled.pop(next(iter(_compiled)), None)
+        found = _compiled[id(source.data)] = (source.data, SourcePaths(source.data))
+    return found[1]
 
 
 def read_git_history(repo: Path, since: str, revision: str, extractor: Extractor):
@@ -490,7 +647,7 @@ def read_git_history(repo: Path, since: str, revision: str, extractor: Extractor
     merges included, newest first in an order where a commit always comes
     before its parents (git's topological order), one per line: the commit,
     then " merge" for a merge. It is
-    part of the tree, so the source checksum covers the order too."""
+    part of the tree, so the tree's manifest covers the order too."""
     order = _history_order(repo, since, revision)
     extractor.add(ORDER, FILE, "".join(f"{commit} {MERGE}\n" if merge else f"{commit}\n"
                                        for commit, merge in order).encode())
@@ -634,7 +791,7 @@ def _git_blobs(repo, object_ids):
             process.stdin.flush()
             header = process.stdout.readline().split()
             if header[1:] == [b"missing"]:
-                raise FetchFailed(f"git object {object_id} was not fetched")
+                raise Incomplete(f"git object {object_id} was not fetched")
             size = int(header[2])
             content = process.stdout.read(size)
             process.stdout.read(1)  # the newline after each object

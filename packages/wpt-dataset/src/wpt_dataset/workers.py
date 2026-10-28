@@ -29,9 +29,11 @@ from wpt_telemetry import Telemetry
 from wpt_utils.parallel import Sizing, process_pool
 from wpt_utils.programs import code, set_code
 
+from .license_check import LicenseTexts
 from .repo import Repo
 
 _REPO = None  # in a worker process: the asking process's repository, set once by _start
+_TEXTS = None  # in a worker process: its repository's license texts, read on their first use
 
 
 def repo() -> Repo:
@@ -40,6 +42,16 @@ def repo() -> Repo:
     if _REPO is None:
         raise RuntimeError("wpt_dataset.workers.repo() is for a worker process")
     return _REPO
+
+
+def license_texts() -> LicenseTexts:
+    """The license texts of repo() (license_check.LicenseTexts), read once
+    per worker process: a worker lives for one piece of work, in which the
+    repository does not change."""
+    global _TEXTS
+    if _TEXTS is None:
+        _TEXTS = LicenseTexts(repo().license_texts())
+    return _TEXTS
 
 
 def _start(root: str, found: dict):

@@ -52,7 +52,9 @@ republish.
 3. Transparency
 
 This model was trained only on the sources listed in its build record, each
-with its license and an exact pointer to the original. The full list, the
-patches applied to it, and the build scripts are at
+with its license and a pointer to the original. The full list, the patches
+applied to it, and the build scripts are at
 https://github.com/Workers-Intelligence-Commons/wpt-llm. Anyone can check what the model was
-trained on, and re-fetch each source by its checksum.
+trained on: its build record names every document by the sha256 of its text.
+Fetching a source again gives what its publisher serves today, which may
+differ from what the model was trained on.

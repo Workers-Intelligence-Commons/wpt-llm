@@ -1,17 +1,17 @@
 """Files that hold many documents, one per record, each with its own license.
 
 A `records` format entry names the fields of a record: `text` (the
-document), optionally `license`, `id`, `title`, `newest` and `credit`. A field with dots goes
+document), optionally `id`, `title`, `newest` and `credit`. A field with dots goes
 into nested objects (`metadata.license`); a value on the way that is a
 string holding a JSON object is read as that object, as some datasets store
 their metadata.
 
-A record enters only when its license value is one of the `values` of a
-license entry covering its file (see sources.check_license_map); any other
-record is left out and counted. An entry with no `license` field is for a
-dataset that states one license for all its records: its file has one
-license entry, without `values`, as any other file, and every record takes
-it. An optional `keep` list narrows
+A record enters only when a license entry covers it (license_check.py):
+when the entries covering its file have a field place, the entry that
+expects the value of that field of the record; any other record is left
+out and counted. A file whose one license entry has no field place is a
+dataset that states one license for all its records, and every record
+takes it. An optional `keep` list narrows
 this further: each rule names a field and the values it may hold (`in`),
 and a record enters only when every rule holds, for example to keep the
 records of the one publisher a license covers. A record whose text is
@@ -67,7 +67,7 @@ import pyarrow.parquet as pq
 from lxml import etree
 
 from .errors import InvalidFile
-from .manifest import glob_match_any
+from .manifest import Stored, glob_match_any
 
 JSON_LINES = (".jsonl", ".json", ".ndjson")
 XML = ".xml"
@@ -91,14 +91,19 @@ class Skipped:
     empty: int = 0
     outside: dict = dataclass_field(default_factory=dict)  # (field, value) a `keep` rule refused -> count
     older: int = 0  # records replaced by a newer record of the same id (`newest`)
+    untrained: dict = dataclass_field(default_factory=dict)  # license value of an entry that does not train -> count
 
 
-def rows(file: Path, name: str, within: str | None = None) -> Iterator[dict]:
+def rows(file, name: str, within: str | None = None) -> Iterator[dict]:
     """Every record of a records file, in order; within: the dotted field
-    of the file's one JSON document that holds them (`records`)."""
+    of the file's one JSON document that holds them (`records`). file is a
+    local Path or a file of the store (manifest.Stored), read as a stream
+    from the store, never copied to the disk, but for Parquet, which is
+    read from a local file (Stored.local)."""
     lower = name.lower()
     if lower.endswith(".parquet") and within is None:
-        for batch in pq.ParquetFile(file).iter_batches(batch_size=PARQUET_BATCH):
+        local = file.local() if isinstance(file, Stored) else file
+        for batch in pq.ParquetFile(local).iter_batches(batch_size=PARQUET_BATCH):
             yield from batch.to_pylist()
         return
     opener = next((open_ for suffix, open_ in COMPRESSED.items() if lower.endswith(suffix)), None)
@@ -107,7 +112,7 @@ def rows(file: Path, name: str, within: str | None = None) -> Iterator[dict]:
         if not base.endswith(".json"):
             raise InvalidFile(f"{name}: a records file with `records` is one JSON document, .json "
                               f"(optionally .gz or .zst)")
-        with opener(file, "rb") if opener else open(file, "rb") as raw:
+        with file.open("rb") as stored, (opener(stored, "rb") if opener else stored) as raw:
             try:
                 document = json.load(raw)
             except (json.JSONDecodeError, UnicodeDecodeError) as error:
@@ -120,7 +125,7 @@ def rows(file: Path, name: str, within: str | None = None) -> Iterator[dict]:
     if not base.endswith(JSON_LINES):
         raise InvalidFile(f"{name}: a records file is .jsonl, .json, .ndjson (optionally .gz or .zst), .parquet "
                           f"or .xml")
-    with (opener(file, "rb") if opener else open(file, "rb")) as raw:
+    with file.open("rb") as stored, (opener(stored, "rb") if opener else stored) as raw:
         for number, line in enumerate(io.TextIOWrapper(raw, encoding="utf-8"), start=1):
             if not line.strip():
                 continue
@@ -195,12 +200,15 @@ def joined_file(entry: dict, path: str, tree, indexes: dict):
     return tree[partner] if partner else None
 
 
-def records(file: Path, name: str, entry: dict, licenses: dict, skipped: Skipped,
-            joined: Path | None = None, newest: dict | None = None) -> Iterator[Record]:
-    """The records of one file that enter: licenses maps each listed license
-    value to its entry's SPDX expression (an entry with no `license` field:
-    None to the expression of the file's one license entry); joined is the
-    file the entry's `join` reads with this one, if any. Ids repeat at no
+def records(file: "Path | Stored", name: str, entry: dict, license_field: str | None, licenses: dict, skipped: Skipped,
+            joined: "Path | Stored | None" = None, newest: dict | None = None) -> Iterator[Record]:
+    """The records of one file that enter: license_field is the field the
+    license entries covering the file read (their field place), and
+    licenses maps each value they expect to its entry's SPDX expression
+    (with no field: None to the expression of the file's one entry), or to
+    None when that entry does not train (its records are left out and
+    counted as untrained); joined is the file the entry's `join` reads with
+    this one, if any. Ids repeat at no
     point in a file, except under `newest`, where only the newest record of
     each id is read: newest is newest_index over every file of the source
     the entry covers."""
@@ -216,9 +224,12 @@ def records(file: Path, name: str, entry: dict, licenses: dict, skipped: Skipped
         if refused:
             skipped.outside[refused] = skipped.outside.get(refused, 0) + 1
             continue
-        value = _text(value_of(entry["license"])) if "license" in entry else None
+        value = _text(value_of(license_field)) if license_field is not None else None
         if value not in licenses:
             skipped.unlisted[value] = skipped.unlisted.get(value, 0) + 1
+            continue
+        if licenses[value] is None:  # its entry does not train (kept.py)
+            skipped.untrained[value] = skipped.untrained.get(value, 0) + 1
             continue
         text = value_of(entry["text"])
         if not isinstance(text, str) or not text.strip():
@@ -272,7 +283,7 @@ def _date(value, name: str, record_id: str, field_name: str) -> datetime:
     return found if found.tzinfo else found.replace(tzinfo=timezone.utc)
 
 
-def _records_of(file: Path, name: str, entry: dict, joined: Path | None) -> Iterator[Callable]:
+def _records_of(file: "Path | Stored", name: str, entry: dict, joined: "Path | Stored | None") -> Iterator[Callable]:
     """For each record of a file, in order, a function giving the value of
     one of its fields."""
     if not name.lower().endswith(XML):
@@ -300,11 +311,12 @@ def _records_of(file: Path, name: str, entry: dict, joined: Path | None) -> Iter
     yield value_of
 
 
-def _xml(file: Path, name: str):
-    """The root element of an XML file, read without loading anything from
-    outside it: only the entities its own DTD declares are expanded."""
+def _xml(file, name: str):
+    """The root element of an XML file (a local Path or a manifest.Stored),
+    read without loading anything from outside it: only the entities its
+    own DTD declares are expanded."""
     parser = etree.XMLParser(resolve_entities="internal", load_dtd=False, no_network=True)
     try:
-        return etree.fromstring(Path(file).read_bytes(), parser)
+        return etree.fromstring(file.read_bytes(), parser)
     except etree.XMLSyntaxError as error:
         raise InvalidFile(f"{name}: {error}") from error

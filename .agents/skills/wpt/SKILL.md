@@ -7,9 +7,13 @@ description: How to work in the WPT repository (Workers' Pre-trained Transformer
 
 WPT trains a language model only on content whose license is clear. The
 repository holds pointers to the data, not the data: every source is a
-`data/sources/<id>/source.json` with an exact address, revision and
-checksum, and everything fetched or built lives in a store named by the
-`WPT_STORE` setting (environment, or `.env` at the root). The documents in
+`data/sources/<id>/source.json` with its address, its license entries
+(each with the place of its statement, the license texts expected there
+and its own decision) and its decision; the license texts are items of
+`data/license-texts/<id>/`; everything fetched or built lives in a store
+named by the `WPT_STORE` setting (environment, or `.env` at the root).
+The content is not pinned: a download takes what upstream serves when
+asked. The documents in
 `docs/` hold every decision; read the one that covers your change before
 changing it. Every text in the repository, this skill included, describes
 only the current state: no decision dates, no history, and a change may
@@ -25,11 +29,11 @@ It runs what CI runs, the same way (CI calls this script): `uv.lock`
 matches the project files, the Python tests, the Rust tests, the data
 rules on every source (read, not downloaded), one small source fetched
 and checked (`standardebooks-joseph-conrad-ford-madox-ford-the-nature-of-a-crime-5366b0f3`,
-a short book fixed at one git commit: it proves the fetch works; the sources
+a short book: it proves the fetch works; the sources
 a pull request adds or changes are fetched by the maintainer with
 `check --fetch`) and the commits (sign-off
 on every commit, an allowed signature on every commit that changes a
-`decision`), compared with what a push would send. A green run means a
+`decision`, of a source, a license entry or a license text), compared with what a push would send. A green run means a
 green CI. It needs a git clone with an upstream branch; elsewhere pass
 `--base` and `--range`.
 
@@ -54,22 +58,21 @@ where a step needs them, run through Docker Desktop.
 
 | Job | Command | Reads | Writes |
 | --- | --- | --- | --- |
-| id of a new source | `uv run wpt-dataset source-id ORIGIN [ITEM] ADDRESS` | | prints the id |
-| download sources into the store | `uv run wpt-dataset download [ID ...] [--stream]` (no ID: every admitted source; several at once, at most as many from one site, and at most as many requests to a site in a span of time, as `packages/wpt-dataset/src/wpt_dataset/sites.txt` says; a source already in the store is not downloaded again; `--stream`: no copy kept on this machine) | the upstream | the store: its bundles, its database, its run record `records/<folder>/` |
-| what the store holds and when it was downloaded | `uv run wpt-store list` | the store database | prints every session and each source's last outcome and last download |
+| id of a new source | `uv run wpt-dataset source-id ORIGIN [ITEM] ADDRESS` (given once, when the source is created; an address that changes later keeps the id) | | prints the id |
+| download sources into the store | `uv run wpt-dataset download [ID ...] [--stream]` (no ID: every admitted source; several at once, at most as many from one site, and at most as many requests to a site in a span of time, as `packages/wpt-dataset/src/wpt_dataset/sites.txt` says; each as its address serves it when asked; a source is downloaded only when the store does not hold it (a new source, an address or fetch options that changed) or when it is marked; a failed download stores nothing and the store keeps what it held; `--stream`: no copy kept on this machine) | the upstream | the store: its bundles, its database, its run record `records/<folder>/` |
+| ask for fresh content | `uv run wpt-store mark ID [ID ...]` or `--all` (the next download of each fetches it in full, though the store holds it) | | the store database |
+| what the store holds and when it was downloaded | `uv run wpt-store list` | the store database | prints every session and each source's last outcome, whether it is marked, and last download |
 | copy a kept model out of the store | `uv run wpt-store copy-out NAME FOLDER` (NAME: the run's name; FOLDER must not exist; every file checked against its sha256) | the store's `models/NAME` | FOLDER |
 | download, build and train in one command | `docker compose up` with `COMPOSE_FILE=deploy/manager/compose.yaml` in `.env` (or `uv run wpt-manager`), `WPT_RECIPE` required, `WPT_RUN` the run's name (unset: a new one, written into the git-ignored `wpt-run.txt` with its copy-out line), `WPT_EVALUATE=1` to evaluate at the end; `WPT_GPU_WORKERS`: the gpu workers' keys, or how many to rent (`WPT_RENTAL_GPUS`, `WPT_RENTAL_KIND`, `WPT_RENTAL_PROVIDER`; a lost rented worker, or a crash on several workers, resumes the run up to `WPT_REPLACEMENTS` times; the container exits when the runs are over, and `docker compose up` again continues a failed run); goes on first with its own runs a crash cut short; builds the images of the dataset's tasks where `DOCKER_HOST` reaches Docker; settings from the environment, else from `.env` (docs/machines.md) | the recipe, the upstreams, the store | the store: its sources, dataset, checkpoint and the model under `models/NAME` (the manager's own copy of the folder removed); the tasks' images on the Docker host; its run record `records/<folder>/`; its runs' gpu workers, tokens included, in `WPT_MANAGER_STATE` (never the store); rentals at the provider, stopped once the evaluation or training ends, and tried again until stopped |
 | a gpu worker on a machine with GPUs | `docker compose -f compose.yaml -f compose.nvidia.yaml up` (or `compose.amd.yaml`; the files of `deploy/gpu-worker/` plus `wpt_worker/` copied beside them; prints its key `wpt-worker://TOKEN@HOST:PORT#PIN`; give it, one per machine, to `wpt-train` in `WPT_GPU_WORKERS`; docs/machines.md) | what the wpt manager sends it | its own folder (certificate, checkout, libraries, checkpoints); never the store |
-| manifest and checksum of a source | `uv run wpt-dataset manifest ID` (a download, kept under the checksum found) | the upstream | the store; prints the checksum |
-| fill in new sources' checksums | `uv run wpt-dataset fill-checksum ID [ID ...]` (checksum all zeros; one download each: files that are not text (UTF-8, or the encoding they state) excluded by exact path, then checked as `check --fetch` does; what it downloads is kept in the store; failures listed at the end) | the upstream | `data/sources/ID/source.json`, the store |
+| manifest of a source's stored tree | `uv run wpt-dataset manifest ID` (downloads it as `download` does, or finds it in the store) | the upstream, the store | the store; prints the list of the tree's files and the tree's manifest (the sha256 of that list) |
+| erase a passage | `uv run wpt-dataset cut ID PATH START END --version V` (bytes of the file as the cuts before left it; the cut names the passage by its length and two hashes keyed by the store's cut key, never its text; docs/erasure.md) | the store | `data/sources/ID/source.json`; the store's cut key on the first cut (keep a backup) |
 | edit a source's files | `uv run wpt-dataset unpack ID FOLDER`, edit, `uv run wpt-dataset patch ID FOLDER NAME` | the source, the folder | the folder; then `data/sources/ID/NNNN-NAME.patch` |
-| check the data rules | `uv run wpt-dataset check [--fetch [ID ...]] [--changed REV]` (`--fetch`: the sources are downloaded as `download` does, then checked; failures listed at the end) | `data/` | the store, with `--fetch` |
+| check the data rules | `uv run wpt-dataset check [--fetch [ID ...]] [--changed REV]` (`--fetch`: the sources are downloaded as `download` does, then checked strictly: cuts, patches, license and format maps, every file text, pointer tasks; it names each file that is not text, to list in `extract`, and each license entry whose statement would keep its files out (not there, a text no item holds, with that text's id, one it does not expect, or one not admitted), without failing; failures listed at the end) | `data/` | the store, with `--fetch` |
 | build a vocabulary | `uv run wpt-dataset build-tokenizer NAME [--stream]` | a tokenizer recipe | the store; its run record `records/<folder>/`; `data/recipes/tokenizers/NAME.lock.json` (commit it) |
 | check a vocabulary on the data | `uv run wpt-dataset tokenizer-check NAME` | the lock, admitted sources | prints characters per token per source |
-| build a dataset | `uv run wpt-dataset build NAME [--stream] [--skip-failed]` (reads only downloaded sources: one not in the store is left out and listed in the record; sources converted in worker processes, several at once, the same dataset as one at a time; a task pointing into a source left out stops it, naming both; `--stream`: only tokens kept, no Markdown, only the files a conversion needs as files copied into a temporary folder deleted once the source is tokens; `--skip-failed`: any other failing source is left out and listed in the record instead of stopping) | the data part of the model recipe NAME | the store; its run record `records/<folder>/`; a session in the store database with a `reused` line per source it read; prints the dataset id |
-| draft sources from what a site publishes | `uv run wpt-dataset source-drafters` (the built-ins and their settings), `uv run wpt-dataset source-drafter NAME\|FILE --by NAME [--set SETTING=VALUE ...] [--only CANDIDATE ...] [--again]` (a new source starts `under-review`; one that exists is updated in place, its revision, checksum, exclusions, file kinds, submodules and history start, and goes back to `under-review` when its licenses change; one with patches stops with a note; only candidates not done yet, so the same command resumes; `--again`: the done ones too; several drafts at once, as `wpt_utils.parallel` allows; a page fetched with an ETag is kept and asked for again only if it changed; docs/architecture.md, "Source drafters") | the site, the store's facts and pages, `data/` | `data/sources/ID/source.json` through the service layer; the store (facts, pages, what is done); its run record `records/<folder>/` |
-| keep a checkout's sources current, without end (a machine that stays on) | `uv run wpt-dataset always-on-monitoring [--by NAME] [--pause SECONDS]` (each round: every built-in source drafter on every candidate, then every admitted source downloaded again, the admitted drafts' checksums filled in, each source checked as `check --fetch` does; the failures printed; then a pause, `--pause` or `WPT_MONITORING_PAUSE`, one week by default; without `--by`, the drafts' `by` is `machine:<host>`; nothing committed; docs/architecture.md, "Always-on monitoring") | the sites, the upstream, `data/` | `data/sources/ID/source.json` in this checkout; the store; a run record per source drafter run and per round's download |
-| migrate data files | `uv run wpt-dataset migrate` | `data/` | rewrites files whose shape is behind |
+| build a dataset | `uv run wpt-dataset build NAME [--stream] [--skip-failed]` (never contacts upstream; reads only downloaded sources: one not in the store, or whose cut or patch does not apply, is left out and listed in the record; each item that fails alone is left out and reported in the record: a file no license entry covers, a file that is not text, the files and records of an entry that does not train (not admitted, or its statement in the stored bytes matches no admitted text it expects), a task whose pointer no longer holds its passage or points into a source left out; every commit recomputes every source from the stored bytes; sources converted in worker processes, several at once, the same dataset as one at a time; `--stream`: only tokens kept, no Markdown, only the files a conversion needs as files copied into a temporary folder deleted once the source is tokens; `--skip-failed`: any other failing source is left out and listed in the record instead of stopping) | the data part of the model recipe NAME | the store; its run record `records/<folder>/`; a session in the store database with a `reused` line per source it read; prints the dataset id |
+| migrate data files | `uv run wpt-dataset migrate [--by NAME]` (a source of the shape that pinned a revision and a checksum reads its file list and license files from the store, or else from its upstream, never a full download; NAME: the person whose signed migration commit carries the license text decisions it writes) | `data/`, the store, the upstream | rewrites files whose shape is behind |
 | check the Markdown of sources | `uv run wpt-dataset markdown-check [ID ...]` | the sources | prints notes and problems per source |
 | train | `uv run wpt-train RECIPE DATASET_ID [--out FOLDER] [--stream] [--recompute] [--segment N] [--run NAME] [--scheduler-costs RECORD_FOLDER] [options]`, started detached (skill `wpt-training-run`; trains through gpu workers, the keys of `WPT_GPU_WORKERS` (one per machine), or else a local one it starts; exit code 4 when a gpu worker is lost; `WPT_LINK_CHECKPOINTS`: `step-ends`, the default, or `every`, the checkpoints that come back from the worker; docs/machines.md; runs the recipe's `steps` in order, starting from the result of the last of its first steps the store already holds, so a run reuses the steps it shares with an earlier one; a dataset that holds nothing for a step refuses the run before any step trains; a step that cannot do its part (`StepFailed`) stops the run with exit code 2, no result of it kept but the checkpoint it wrote, which `--resume` continues (with `WPT_LINK_CHECKPOINTS=every`; with `step-ends` it stays on the worker and `--resume` starts the step over), the results of the steps before it kept; ends by training the model's drafter; `--scheduler-costs`: replay the drafter scheduler's pass times an earlier run recorded on the same setup; a checkpoint is always written just before the drafter, so a drafter failure resumes with `--resume`; `--stream`: a few shards on disk at a time; `--recompute`: much less memory, about a third slower; `--segment N`: windows longer than N tokens run as segments of N, the same training in the memory of N tokens plus what the segments hand on, up to twice the time; with `--strategy split`, each process's slice runs in segments of N; `--run`: the checkpoint in the store, so another machine can continue) | the model recipe, the store | a model folder; each step's result, the store's `steps/<fingerprint>`; its run record `records/<folder>/` in the store (one per command, over restarts); `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
 | train on several GPUs | `uv run wpt-train RECIPE DATASET_ID --strategy ddp --processes N [options]`, or `--strategy split` to split each window between the GPUs (windows too long for one; DeepSeek-V4's contextual parallelism) (on the gpu worker's machine) | the store | the same |
@@ -79,12 +82,13 @@ where a step needs them, run through Docker Desktop.
 | build an image of agentic tasks | `uv run wpt-agent build-image NAME` (needs Docker; before `wpt-train` with `finish-tasks` or `finish-tasks-with-less-writing`, and before `wpt-eval`'s agent measures) | `data/images/NAME/`, the base image's registry, the dated package archive | a local Docker image |
 | continue text | `uv run wpt-chat FOLDER` (`--about` prints its NOTICE; `--chat` talks to a model trained on conversations; `--scheduler-costs RECORD_FOLDER` reads the scheduler's pass times a run recorded on the same setup instead of measuring them) | the folder; with `--scheduler-costs`, the store | |
 | the kinds of data files, their names, one file | `uv run wpt-dataset kinds`, `list KIND`, `show KIND NAME` | `data/`, through the service layer | prints them (version and problems on stderr) |
-| write a data file people write | `uv run wpt-dataset save KIND NAME FILE --version VERSION` (`''`: a new file) | the file | that file, after the rules of `check`; refused when it changed since VERSION |
+| write a data file people write | `uv run wpt-dataset save KIND NAME FILE --version VERSION` (`''`: a new file; a save of a source that changes an entry's license, place or expected texts without deciding it anew sends that entry back to `under-review`) | the file | that file, after the rules of `check`; refused when it changed since VERSION |
 | a source's files, tags and git status | `uv run wpt-dataset files ID`, `tags ID PATH [TAG ...] --version V`, `remove ID PATH --patch NAME --version V`, `status` | the source | `source.json`, or the next patch |
 | a new empty source, without its texts | `uv run wpt-dataset new-source ORIGIN [ITEM] NAME --license L --attribution TEXT --by NAME [--tag TAG ...] [--chat PATH ...] [--format FORMAT=PATTERN ...]` (never `--file` or `--license-text`: the person writes the license text, then the files) | | `data/sources/ID/source.json`, `under-review`, its license text empty |
+| add a license text a source holds | `uv run wpt-dataset add-license-text ID --file PATH` or `--page ADDRESS` (the bytes at that file of its final tree, or that license page downloaded with it; nothing written when a license text holds them already) | the source in the store | `data/license-texts/<text id>/` (`license-text.json` under review, `license-text.txt`); prints the text id |
 | a person's texts (people only, never an AI assistant) | `read`, `write`, `conversation`, `save-conversation`, `task`, `save-task`, `save-rating`, and `new-source --file` and `--license-text` (marked `*` in `--help`) | | |
 | conversation, task and rating structure | `uv run wpt-dataset conversations ID PATH` (roles, drafts), `tasks ID` (image, limits, files), `ratings ID PATH` (the attempt each rates, who, when; never the verdict) | the source | prints them |
-| edit every kind of data in a browser | `uv run wpt-web` (needs Bun), then http://127.0.0.1:8410/ (HTTP API described at `/api/openapi.json`; page "Ratings": people's pass or fail on the attempts of a `wpt-eval` run, a measure only, docs/evaluation.md; page "Source drafters": start a run and follow it, stopped with `wpt-web` and started again with it) | `data/`, a WPT model folder for drafts, the store's `wpt-eval` run records for ratings, `packages/wpt-web/ui` | data files through the service layer; `ui/node_modules`, `ui/dist`; the name it holds, in the git folder |
+| edit every kind of data in a browser | `uv run wpt-web` (needs Bun), then http://127.0.0.1:8410/ (HTTP API described at `/api/openapi.json`; page "Ratings": people's pass or fail on the attempts of a `wpt-eval` run, a measure only, docs/evaluation.md; page "Sources": a source's description, its address and license entries included) | `data/`, a WPT model folder for drafts, the store's `wpt-eval` run records for ratings, `packages/wpt-web/ui` | data files through the service layer; `ui/node_modules`, `ui/dist` |
 
 Everything that changes a model comes from its model recipe
 (`data/recipes/models/NAME.json`: data, architecture, seed, the training
@@ -109,8 +113,8 @@ with `--resume` continues from `FOLDER/checkpoint/` (or, with `--run NAME`,
 from the store, on any machine). Exit codes: 2 refused, 3 the run's record
 could not be written, 130 stopped.
 
-Every run of `wpt-dataset download`, `check --fetch`, `fill-checksum`,
-`manifest`, `build`, `build-tokenizer`, `wpt-dataset source-drafter`, each round of `wpt-dataset always-on-monitoring`, `wpt-train`, `wpt-eval` and `wpt-manager` writes its record into its own store folder, `records/<UTC
+Every run of `wpt-dataset download`, `check --fetch`, `manifest`, `build`,
+`build-tokenizer`, `wpt-train`, `wpt-eval` and `wpt-manager` writes its record into its own store folder, `records/<UTC
 time>-<command>-<main id>-<random>/` (main id: the source id or `<count>-sources`, the recipe name, a short
 dataset id or a short weights hash): `start.json`, `events.jsonl` (spans, events,
 every printed line), `ids.json` (the ids read and written, which chain the
@@ -135,7 +139,10 @@ maintainer, and the answer goes into the documentation as a general rule
 about the current state, with no date and no source named
 (CONTRIBUTING.md, "Writing about the project"). A
 new source starts `under-review`; only a maintainer admits a source, in a
-signed commit (CONTRIBUTING.md, "Decisions are signed").
+signed commit (CONTRIBUTING.md, "Decisions are signed"). The same holds
+for each license entry and each license text: a file trains only when its
+source, its entry and the text found at its entry's place are all
+admitted, and no program admits or refuses at any level.
 
 ## The service layer
 
@@ -143,8 +150,7 @@ signed commit (CONTRIBUTING.md, "Decisions are signed").
 (docs/architecture.md, "The service layer"): sources and patches, chat and
 task files, recipes, Dockerfiles, the signer lists, and the generated
 locks and license lists, which only the command that makes them writes.
-The reviewed license texts (`reviewed-license-texts.json`, which the source
-drafters read) are one of its kinds. Code elsewhere asks it for documents,
+The license texts (`data/license-texts/<id>/`) are one of its kinds. Code elsewhere asks it for documents,
 bytes and versions, never for a path under `data/`; `packages/wpt-dataset/tests/test_data_access.py` fails
 otherwise, and an audit hook the layer sets refuses such an access at run
 time (`DataAccessRefused`), except from tests. Every write applies the
@@ -258,34 +264,6 @@ Weights are AGPL-3.0-or-later; generated text is CC0-1.0 under
 `OUTPUT-NOTICE`. `packages/wpt-model/src/wpt_model/LICENSE` and
 `OUTPUT-NOTICE` are copies of the root files, and a test fails when they
 differ: change both together.
-
-## Writing a source drafter
-
-One Python file, a built-in in
-`packages/wpt-dataset/src/wpt_dataset/source_drafters/` or any path given
-to `wpt-dataset source-drafter`:
-
-```python
-from wpt_dataset.source_drafter import Candidate, Drafted, NeedsPerson, Skipped
-
-SETTINGS = {"run": "20250320"}  # changed by --set NAME=VALUE, typed from these defaults
-
-def candidates(context):  # Candidate(name, source id when known, facts as JSON)
-    ...
-
-def draft(candidate, context):  # context: repo (read only), store, settings, by, today, work (an empty
-                                # folder for this draft), fact(key, compute) (kept in the store),
-                                # fetch(address) (robots.txt and retries, as a source's fetch)
-    return Drafted(origin, item, document)  # source.json without its decision; or Skipped(reason),
-                                            # or NeedsPerson(reason, notes)
-```
-
-Never write under `data/` from it, and never give a decision: the
-framework saves every draft through the service layer, under review, and
-records what is done in the store. A step that spans candidates is the
-program's own. Check a new one by running it on a few real candidates
-(`--only`), then restore `data/`. Details: docs/architecture.md, "Source
-drafters".
 
 ## Writing an evaluation
 
@@ -436,7 +414,8 @@ what the whole text gives (docs/model.md, "What a layer passes on").
   `docs/licenses.md` (version and license, read from its metadata), and a
   changed version gets its row checked again.
 - The repository is public: never commit personal paths, machine names,
-  credentials, or data that is not a pointer to a licensed source. The one
-  machine name committed is the `by` of a draft that always-on monitoring
-  saved without `--by`, `machine:<host>`; a person's name holds no colon,
-  and `check` refuses an `admitted` or `refused` decision by a machine.
+  credentials, or data that is not a pointer to a licensed source. A person's
+  name holds no colon; the one machine name committed is
+  `machine:wpt-dataset`, the `by` of a license entry the service layer
+  sent back to `under-review`, and `check` refuses an `admitted` or
+  `refused` decision by a machine.

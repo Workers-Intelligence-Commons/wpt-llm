@@ -737,8 +737,8 @@ The model folder holds:
   [tokenizer.md](tokenizer.md));
 - `provenance.json`, what produced the model: each step, its fingerprint,
   result and what it reached, and every source the steps learned from
-  (address, revision, licenses and attribution, copied from the dataset
-  record);
+  (address, the manifest of the upstream tree it was built from, licenses
+  and attribution, copied from the dataset record);
 - `LICENSE`, the AGPL text; `NOTICE`, the licenses of the weights and of
   generated text, every source with the credit it asks for, and the output
   notice; `README.md`, the model card, with the licenses at the top and
@@ -1061,7 +1061,7 @@ but the repository holds pointers to data, never the data
 ([architecture.md](architecture.md)): such a task file holds, for each text
 it needs, the source id, the document and the span, plus what the builder
 changed, such as the sentence it removed. The build and the measures fill in
-the text from the store, checked against its checksum. Each entry of
+the text from the store, each span checked against its sha256. Each entry of
 `pointers`:
 
 ```json
@@ -1084,15 +1084,20 @@ the text from the store, checked against its checksum. Each entry of
 
 When a task is read, every source its pointers name must be admitted; its
 final tree comes from the store, where `wpt-dataset download` put it
-(nothing downloads it here: a source missing there fails), the
+(nothing downloads it here), read as the build keeps it, the
 document is converted as the build converts it, and the span must hold the
-bytes its `sha256` names and must not cut a character. The text is then the
-span without its removed parts. A task breaks when its source's revision
-changes what the span holds, and is refused, naming the task and the
-pointer, until the builder makes it again. `wpt-dataset check --fetch`
-fills in every pointer of the sources it checks, and `check --changed` also
-checks every task source whose pointers point into a source the change
-touches.
+bytes its `sha256` names and must not cut a character (the pointer-task
+check, [architecture.md](architecture.md), "Shared checks"). The text is
+then the span without its removed parts. A task breaks when a new download
+of its source changes what the span holds, or when the build leaves out
+the document it points into, until the builder makes it again. The build
+leaves a task out alone, and names it with why in the dataset record
+(`left_out_tasks`), when it breaks, when a source it points into is not
+admitted, and when the build left that source out (not in the store, or a
+cut or patch that does not apply). `wpt-dataset check --fetch` fills in
+every pointer of the sources it checks and refuses a task that breaks,
+naming the task and the pointer, and `check --changed` also checks every
+task source whose pointers point into a source the change touches.
 
 A repository pointer names a commit of a git source's history instead, for
 the tasks that commit prepared changes (the task file names the source and
@@ -1100,17 +1105,20 @@ the commit):
 
 ```json
 {"for": "repository", "source": "<git source id>", "document": ".git/history/<commit>",
- "checksum": "sha256:<the source's checksum when the task was built>"}
+ "manifest": "<the manifest of the source's upstream tree the task was built from>"}
 ```
 
 The task starts from the real state just before the commit. When it is
-read, the source must still have the checksum the pointer names, which
-covers every history file and the history's order file
+read, the source's upstream tree in the store must still have the manifest
+the pointer names (the sha256 of its file list,
+[architecture.md](architecture.md), "The manifest"), which covers every
+history file and the history's order file
 ([architecture.md](architecture.md), `history`), so the same pointer always
-gives the same repository; a source whose checksum changed refuses the task
-until the builder makes it again. From the source's final tree, every
-commit after the pointer's commit is undone, newest first, in the order the
-order file stores, then the commit itself. Undoing the later commits gives
+gives the same repository; once a new download gives the tree another
+manifest, the task breaks as above until the builder makes it again. From
+the source's final tree, every commit after the pointer's commit is
+undone, newest first, in the order the order file stores, then the commit
+itself. Undoing the later commits gives
 the commit's own tree, the tree the pushed commit must hold; undoing the
 commit too gives its parent. A merge between the commit and the final tree,
 or a diff that does not undo, makes the task fail to be filled, as does a
@@ -1626,7 +1634,7 @@ source's address and the document).
   parent commit git refuses to make, is left out, named, and the next drawn
   takes its place. Only a drawn commit is made into a repository: the
   candidates are history files, not trees. Each kept commit is a repository
-  pointer naming the source's checksum ("Pointer tasks", above), and
+  pointer naming the manifest of the source's upstream tree ("Pointer tasks", above), and
   `/work` is the repository, its remote outside it. The model is asked only
   "Based on the current diffs, could you commit and push the changes in
   this repository?", with nothing after it; it writes its own commit
@@ -2080,8 +2088,11 @@ round's value is `mean_reward`). Its settings are those of `finish-tasks`
 
 ## What is exactly repeatable
 
-**The data is exactly repeatable**, for audits: sources, cuts, patches,
-vocabulary and tokens. Shards are compared by their token hash, which covers
+**The data is exactly repeatable from the same store**, for audits: the
+same stored bytes, cuts, patches, vocabulary and code give the same tokens.
+A rebuild from upstream is not: a new download takes what upstream serves
+when asked, and the dataset's document list (each document's id and the
+sha256 of its Markdown) records what a model trained on. Shards are compared by their token hash, which covers
 only their rows, not the bytes of the Parquet file (a newer pyarrow may write
 different bytes for the same tokens).
 

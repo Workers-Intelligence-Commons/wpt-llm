@@ -2,13 +2,15 @@
 source.json (the same rules as `wpt-dataset check`, without downloading:
 `wpt-dataset check --fetch ID` still checks the license and format maps);
 start a new empty source for a person's own text; list, read and change
-its files, always as a new patch; give a path its own tags. Every route
+its files, always as a new patch; give a path its own tags; add the
+license text found at a place of the source, under review. Every route
 goes through the service layer (wpt_dataset.repo), as the `wpt-dataset`
 commands of the same names do."""
 
 import base64
 
 from wpt_dataset import encoding
+from wpt_dataset.edit import write_text
 from wpt_dataset.errors import NotFound, NotText, RuleViolation
 from wpt_dataset.repo import empty_source
 
@@ -80,24 +82,19 @@ def routes(context):
         except NotText:
             return 200, {"version": version, "base64": base64.b64encode(data).decode()}
 
-    def encoded(sid, path, text):
-        """text in the encoding the file it replaces states (encoding.encode),
-        so a patch changes only what the person changed; UTF-8 for a new file."""
-        try:
-            _, data = repo.read_source_file(sid, path, context.store)
-        except NotFound:
-            return text.encode("utf-8")
-        return encoding.encode(text, data, encoding.entry_of(repo.source(sid), path), f"{sid}/{path}")
-
     @refusals
     def write_file(values, body):
-        content = None if body["text"] is None else encoded(values["id"], values["path"], body["text"])
-        return 200, {"version": repo.change_source_files(values["id"], {values["path"]: content}, body["patch"],
-                                                         body["version"], context.store)}
+        return 200, {"version": write_text(repo, values["id"], values["path"], body["text"], body["patch"],
+                                           body["version"], context.store)}
 
     @refusals
     def set_tags(values, body):
         return 200, {"version": repo.set_tags(values["id"], values["path"], body["tags"], body["version"])}
+
+    @refusals
+    def add_license_text(values, body):
+        text, written = repo.add_found_license_text(values["id"], body["place"], context.store)
+        return 200, {"text": text, "added": written is not None}
 
     new_file = {"type": "object", "required": ["format", "text"],
                 "properties": {"format": {"enum": FORMATS}, "text": STRING}}
@@ -133,6 +130,15 @@ def routes(context):
               body={"type": "object", "required": ["text", "patch", "version"],
                     "properties": {"text": {"type": ["string", "null"]}, "patch": PATCH, "version": VERSION}},
               answer=SAVED),
+        Route("POST", "/api/sources/{id}/license-texts", add_license_text,
+              "add the license text found at a file of the source, or a license page downloaded with it, as a new "
+              "license text under review, when no license text holds it; its id, and whether it was added",
+              body={"type": "object", "required": ["place"],
+                    "properties": {"place": {"type": "object", "minProperties": 1, "maxProperties": 1,
+                                             "properties": {"file": STRING, "page": STRING},
+                                             "additionalProperties": False}}},
+              answer={"type": "object", "required": ["text", "added"],
+                      "properties": {"text": STRING, "added": {"type": "boolean"}}}),
         Route("PUT", "/api/sources/{id}/tags/{path}", set_tags,
               "give exactly that path its own tags entry in source.json (no tags: remove it)",
               body={"type": "object", "required": ["tags", "version"],

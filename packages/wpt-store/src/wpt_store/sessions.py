@@ -37,8 +37,8 @@ mode is the caller's, kept as it is (wpt_dataset's manifest modes). A file
 list is handed to name(), which stores it once its files are, and tells
 the caller where it lies.
 
-The session's lines (one per download, check against upstream, use of a
-source already in the store, failure) go into the store database
+The session's lines (one per download, use of a source already in the
+store, failure) go into the store database
 (wpt_store.database) with the session's own row each time a bundle is
 sealed, and at the end, and so do the git objects of the file lists
 named meanwhile (their git_objects table). An action handed to then() or
@@ -53,8 +53,8 @@ was sealed.
 
 The session's row goes into the database when it starts, so that a session
 that ends later sees it running. The end (end()) seals the bundles for good: a bundle holding bytes that
-no named file list names (a try that failed, a checksum that did not
-match, a file fill-checksum excluded) is rewritten without them. The one
+no named file list names (a try that failed, a download that failed and
+named nothing) is rewritten without them. The one
 being filled is rewritten before it is stored; one sealed earlier becomes
 a new bundle of the session, every file list naming it is stored again
 with its files' new places and its action runs again, and the old bundle
@@ -79,6 +79,7 @@ know, or a file added after the end.
 """
 
 import hashlib
+import json
 import os
 import secrets
 import threading
@@ -339,17 +340,19 @@ class Session:
                                 f"do not match their sha256 {placed.sha256}")
         return data
 
-    def line(self, source, outcome, code, *, revision=None, checksum=None, address=None, size=None,
-             time=None):
+    def line(self, source, outcome, code, *, got=None, address=None, size=None, time=None):
         """Record what happened to one source: outcome is downloaded, reused
-        or failed (wpt_store.database.OUTCOMES); time is now unless given."""
+        or failed (wpt_store.database.OUTCOMES); got, what a download got
+        (a dict JSON can hold, such as the commit), for the record only;
+        time is now unless given."""
         if outcome not in database.OUTCOMES:
             raise ValueError(f"outcome must be one of {', '.join(database.OUTCOMES)}: {outcome!r}")
         with self._lock:
             self._check()
             self._counted += 1
             self._lines.append({"session": self.folder, "number": self._counted, "source": source,
-                                "revision": revision, "checksum": checksum, "address": address,
+                                "got": json.dumps(got, sort_keys=True) if got is not None else None,
+                                "address": address,
                                 "time": time or now(), "outcome": outcome, "size": size,
                                 "code": code})
 
@@ -415,6 +418,13 @@ class Session:
             self._rows += [{"object_id": object_id, "sha256": placed.sha256, "bundle": placed.bundle,
                             "start": placed.start, "length": placed.length}
                            for object_id, placed in sorted(lasting.items())]
+
+    def marked(self, source: str) -> bool:
+        """Whether the store database, as read once per session, marks
+        source for a new download (database.marked)."""
+        with self._known_lock:
+            self._read_known()
+            return database.marked(self._known, source)
 
     def known_objects(self, object_ids) -> dict[str, Placed]:
         """{git object id: where the store holds its content} for each of

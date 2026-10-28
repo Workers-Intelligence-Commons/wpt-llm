@@ -2,17 +2,15 @@
 TypeScript file in ui/src/pages/ (listed in ui/src/pages/index.ts)."""
 
 from ..drafts import Drafter
-from . import conversations, documents, ratings, source_drafters, sources, tasks
+from . import conversations, documents, ratings, sources, tasks
 from .common import Context
 
 
-def routes(repo, store=None, drafter=None, source_drafter_runs=None):
+def routes(repo, store=None, drafter=None):
     """The routes over repo; store: the store a source's files are read
     from (default: WPT_STORE, opened when first needed); drafter: what
-    writes model drafts (default: a Drafter); source_drafter_runs: the
-    source drafter runs started here (default: a source_drafters.Runs)."""
+    writes model drafts (default: a Drafter)."""
     context = Context(repo, store)
     return [*sources.routes(context), *documents.routes(context),
             *conversations.routes(context, drafter or Drafter()), *tasks.routes(context),
-            *ratings.routes(context),
-            *source_drafters.routes(context, source_drafter_runs or source_drafters.Runs(repo))]
+            *ratings.routes(context)]

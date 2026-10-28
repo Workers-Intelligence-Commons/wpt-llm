@@ -1,13 +1,16 @@
+import hashlib
 import json
 import re
 
 import pytest
 
 from wpt_dataset.cli import main
-from wpt_dataset.errors import InvalidFile, OutdatedSchema
-from wpt_dataset.migrate import NEW_ATTENTION, Step, migrate, outdated, upgrade
+from wpt_dataset.errors import InvalidFile, OutdatedSchema, RuleViolation
+from wpt_dataset.license_check import text_id
+from wpt_dataset.migrate import NEW_ATTENTION, MigrationIncomplete, Step, migrate, outdated, upgrade
 from wpt_dataset.pools import matches, parse
-from wpt_dataset.repo import address_hash, dump_json, validate
+from wpt_dataset.repo import dump_json, validate
+from wpt_dataset.sources import upstream_manifest
 
 
 def test_pool_expressions_follow_usual_precedence():
@@ -22,38 +25,39 @@ def test_pool_expressions_follow_usual_precedence():
 
 def test_check_reports_each_broken_rule(kit, repo, store, git_upstream):
     good = kit.add_source(repo, store, "example", "ok", {
-        "type": "git", "address": git_upstream[0], "revision": git_upstream[1]})
+        "type": "git", "address": git_upstream[0]})
     assert repo.check() == []
 
     noncommercial = kit.add_source(repo, store, "example", "noncommercial", {
-        "type": "git", "address": git_upstream[0] + "/.", "revision": git_upstream[1],
-        "licenses": [{"license": "CC-BY-NC-4.0", "paths": ["**"], "attribution": kit.ATTRIBUTION, "text": kit.LICENSE_TEXT}]})
+        "type": "git", "address": git_upstream[0] + "/.", "licenses": [kit.entry(kit.PROJECT, license="CC-BY-NC-4.0")]})
     unexplained = kit.add_source(repo, store, "example", "unexplained", {
-        "type": "git", "address": git_upstream[0] + "/./", "revision": git_upstream[1],
-        "decision": {"decision": "refused", "by": "Test Reviewer", "date": "2026-10-14"}},  # a refusal must say why
+        "type": "git", "address": git_upstream[0] + "/./", "decision": {"decision": "refused", "by": "Test Reviewer", "date": "2026-10-14"}},  # a refusal must say why
         fetch=False)  # an invalid source.json: never downloaded
-    wrong_id = repo.root / "data" / "sources" / "example-wrong-00000000"
-    wrong_id.mkdir()
-    (wrong_id / "source.json").write_text((repo.root / "data" / "sources" / good / "source.json").read_text())
+    # the id is given once, when a source is created: an address that moved keeps its source
+    moved = repo.root / "data" / "sources" / "example-moved-00000000"
+    moved.mkdir()
+    (moved / "source.json").write_text((repo.root / "data" / "sources" / good / "source.json").read_text())
+    everything = kit.add_source(repo, store, "example", "everything", {
+        "type": "git", "address": git_upstream[0] + "/.//", "licenses": [kit.entry(["**"])]}, fetch=False)
     (repo.root / "data" / "sources" / good / "0002-skipped.patch").write_text("")
     kit.write_recipe(repo, "mixture", "half", {"pools": [{"name": "a", "select": "a", "weight": 0.5}]})
 
     problems = "\n".join(repo.check())
     assert f"{noncommercial}: license CC-BY-NC-4.0 is not on the allowed list" in problems
     assert any(unexplained in line and "'reason' is a required property" in line for line in problems.splitlines())
-    assert f"the id must end with {address_hash(git_upstream[0])}" in problems
+    assert "example-moved-00000000" not in problems
+    assert f"{everything}: license entry 1: coverage pattern '**' names no folder and no kind of file" in problems
     assert f"{good}: patches must be numbered 0001" in problems
     assert "pool weights add up to 0.5, not 1" in problems
 
 
 def test_a_machine_drafts_but_never_admits_or_refuses_and_a_person_s_name_holds_no_colon(kit, repo, store,
                                                                                        git_upstream):
-    # always-on monitoring saves drafts under `machine:<host>`; the check refuses that name on an admission or
-    # a refusal, and a colon in a person's name, so a machine's name is never taken for a person's
+    # a machine saves drafts under `machine:<host>`; the check refuses that name on an admission or a refusal,
+    # and a colon in a person's name, so a machine's name is never taken for a person's
     def decided(item, decision, by, **more):
         return kit.add_source(repo, store, "example", item, {
-            "type": "git", "address": git_upstream[0] + "/" * len(item), "revision": git_upstream[1],
-            "decision": {"decision": decision, "by": by, "date": "2026-10-25", **more}}, fetch=False)
+            "type": "git", "address": git_upstream[0] + "/" * len(item), "decision": {"decision": decision, "by": by, "date": "2026-10-25", **more}}, fetch=False)
 
     drafted = decided("a", "under-review", "machine:monitor-1")
     assert repo.check() == []
@@ -61,17 +65,40 @@ def test_a_machine_drafts_but_never_admits_or_refuses_and_a_person_s_name_holds_
     refused = decided("ccc", "refused", "machine:monitor-1", reason="not public")
     colon = decided("dddd", "admitted", "A: Person")
     empty = decided("eeeee", "under-review", "machine:")
+    # a license entry's decision follows the same rules: a machine only sends an entry back to under-review
+    entry = kit.add_source(repo, store, "example", "ffffff", {
+        "type": "git", "address": git_upstream[0] + "/" * 6, "licenses": [
+            kit.entry(kit.PROJECT, decision={"decision": "admitted", "by": "machine:monitor-1", "date": "2026-10-25"})]},
+        fetch=False)
     problems = repo.check()
-    assert len(problems) == 4 and not any(drafted in line for line in problems)
+    assert len(problems) == 5 and not any(drafted in line for line in problems)
+    assert any(line.startswith(f"{entry}: license entry 1: ") and "a machine never admits or refuses" in line
+               for line in problems)
     for sid in (admitted, refused):
         assert any(line.startswith(f"{sid}: ") and "a machine never admits or refuses" in line for line in problems)
     assert any(line.startswith(f"{colon}: ") and "a person's name holds no ':'" in line for line in problems)
     assert any(line.startswith(f"{empty}: ") and "a machine's name is `machine:<host>`" in line for line in problems)
 
 
+def test_a_license_text_is_decided_by_a_person_and_its_text_has_its_id(kit, repo):
+    # a license text's decision follows a source's rules: a person saves it, a machine never admits or
+    # refuses it; the text beside it, when there, is the text its id names, with its sha256 listed
+    text = b"Some license, granted to all.\n"
+    item = {"decision": {"decision": "admitted", "by": "Test Reviewer", "date": "2026-10-27"}, "kind": "license",
+            "files": [hashlib.sha256(text).hexdigest()], "explanation": "test"}
+    repo.save("license-text", text_id(text), item, "")
+    assert repo.license_texts()[text_id(text)] == item and repo.check() == []
+    with pytest.raises(RuleViolation, match="a machine never admits or refuses"):
+        repo.save("license-text", text_id(text), {**item, "decision": {**item["decision"], "by": "machine:x"}},
+                  repo.version("license-text", text_id(text)))
+    (repo.root / "data" / "license-texts" / text_id(text) / "license-text.txt").write_bytes(b"Another text.\n")
+    [problem] = repo.check()
+    assert "license-text.txt's normalized text has the id" in problem
+
+
 def test_migrate_rewrites_the_files_a_step_recognizes_by_their_fields(kit, repo, store, git_upstream):
     sid = kit.add_source(repo, store, "example", "ok", {
-        "type": "git", "address": git_upstream[0], "revision": git_upstream[1]})
+        "type": "git", "address": git_upstream[0]})
     path = repo.root / "data" / "sources" / sid / "source.json"
     # a made-up next shape: "type" renamed to "kind"
     rename = Step("a source with `type`", lambda doc: "type" in doc,
@@ -96,9 +123,24 @@ def test_upgrade_brings_a_document_to_the_current_shape_in_memory(kit):
     assert outdated([1], "conversation") == [] and upgrade("text", "conversation", "x") == "text"
 
 
+def test_a_task_whose_repository_pointer_names_a_checksum_reads_with_its_manifest():
+    # a task built before the tree's name was its manifest keeps pointing at the same tree
+    passage = {"for": "files", "path": "book.txt", "source": "example-book-0123abcd", "document": "book.txt",
+               "span": [0, 4], "sha256": "b" * 64}
+    old = {"instructions": "Commit and push.", "image": "agent",
+           "limits": {"max_turns": 4, "max_tokens": 200, "command_seconds": 5}, "needs": [["bash"]],
+           "pointers": [{"for": "repository", "source": "example-lamps-0123abcd", "document": f".git/history/{'c' * 40}",
+                         "checksum": "sha256:" + "a" * 64}, passage]}
+    assert outdated(old, "task") == ["a repository pointer that names its tree by a checksum"]
+    new = upgrade(old, "task", "x")
+    assert new["pointers"] == [{"for": "repository", "source": "example-lamps-0123abcd",
+                                "document": f".git/history/{'c' * 40}", "manifest": "a" * 64}, passage]
+    validate(new, "task", "x")
+
+
 def test_migrate_drops_the_shape_number_of_every_kind_of_file(kit, repo, store, git_upstream):
     sid = kit.add_source(repo, store, "example", "ok", {
-        "type": "git", "address": git_upstream[0], "revision": git_upstream[1]})
+        "type": "git", "address": git_upstream[0]})
     source = repo.root / "data" / "sources" / sid / "source.json"
     mixture = kit.write_recipe(repo, "mixture", "m", {"pools": [{"name": "a", "select": "a", "weight": 1}]})
     paths = (source, mixture)
@@ -116,7 +158,7 @@ def test_migrating_a_source_renames_the_old_training_step_tags(kit, repo, store,
     # step's name; sft, grpo and token-efficiency become the names of the
     # steps that do the same, in every tag list, and any other tag stays
     sid = kit.add_source(repo, store, "example", "ok", {
-        "type": "git", "address": git_upstream[0], "revision": git_upstream[1]})
+        "type": "git", "address": git_upstream[0]})
     path = repo.root / "data" / "sources" / sid / "source.json"
     old = json.loads(path.read_text())
     old["tags"] = [{"tags": ["en", "sft"], "paths": ["a/**"]},
@@ -135,7 +177,7 @@ def test_migrating_a_source_renames_the_old_training_step_tags(kit, repo, store,
 
 def test_migrating_a_source_without_credit_text_or_formats_asks_a_person_for_attribution_text_and_formats(kit, repo, store, git_upstream):
     sid = kit.add_source(repo, store, "example", "ok", {
-        "type": "git", "address": git_upstream[0], "revision": git_upstream[1]})
+        "type": "git", "address": git_upstream[0]})
     path = repo.root / "data" / "sources" / sid / "source.json"
     old = json.loads(path.read_text())
     del old["licenses"][0]["attribution"]
@@ -146,7 +188,7 @@ def test_migrating_a_source_without_credit_text_or_formats_asks_a_person_for_att
     with pytest.raises(InvalidFile, match=re.escape(str(path))):
         migrate(repo, log=lambda _: None)
     document = json.loads(path.read_text())
-    assert document["licenses"] == [{"license": "MIT", "paths": ["**"], "attribution": "", "text": ""}]
+    assert document["licenses"] == [{**old["licenses"][0], "attribution": "", "text": ""}]
     assert document["formats"] == []
 
     document["licenses"][0]["attribution"] = kit.ATTRIBUTION  # what the person writes
@@ -165,8 +207,7 @@ def test_a_license_expression_passes_when_one_alternative_is_allowed(kit, repo, 
     # must be on its own closed list
     def add(item, expression, suffix):
         return kit.add_source(repo, store, "example", item, {
-            "type": "git", "address": git_upstream[0] + suffix, "revision": git_upstream[1],
-            "licenses": [{"license": expression, "paths": ["**"], "attribution": kit.ATTRIBUTION, "text": kit.LICENSE_TEXT}]})
+            "type": "git", "address": git_upstream[0] + suffix, "licenses": [kit.entry(kit.PROJECT, license=expression)]})
 
     add("eclipse", "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0", "")
     add("both", "MIT AND Apache-2.0", "//")
@@ -205,9 +246,9 @@ def test_the_check_reads_the_lock_and_licenses_of_each_image(repo):
 
 def test_migrating_moves_a_licenseref_text_into_source_json(kit, repo, store, git_upstream):
     sid = kit.add_source(repo, store, "example", "book", {
-        "type": "git", "address": git_upstream[0], "revision": git_upstream[1],
-        "licenses": [{"license": "LicenseRef-public-domain", "paths": ["**"], "attribution": "A. Author, Book"}]},
-        compute_checksum=False)
+        "type": "git", "address": git_upstream[0], "licenses": [
+            {"license": "LicenseRef-public-domain", "paths": kit.PROJECT, "attribution": "A. Author, Book",
+             "decision": kit.DECISION}]}, fetch=False)
     folder = repo.root / "data" / "sources" / sid
     path = folder / "source.json"
     proof = "Public domain: the author died in 1850.\n"
@@ -230,7 +271,7 @@ def test_migrating_gives_each_source_one_of_three_states(kit, repo, store, git_u
     paths = {}
     for suffix, (item, decision) in zip(("", "/.", "/./", "//"), old.items()):
         sid = kit.add_source(repo, store, "example", item, {
-            "type": "git", "address": git_upstream[0] + suffix, "revision": git_upstream[1]})
+            "type": "git", "address": git_upstream[0] + suffix})
         paths[item] = repo.root / "data" / "sources" / sid / "source.json"
         paths[item].write_text(dump_json({**json.loads(paths[item].read_text()), "decision": decision}))
 
@@ -246,8 +287,7 @@ def test_migrating_gives_each_source_one_of_three_states(kit, repo, store, git_u
 
 def test_command_line_builds_a_dataset_and_prints_its_id(kit, repo, store, git_upstream, monkeypatch, capsys):
     kit.add_source(repo, store, "example", "ok", {
-        "type": "git", "address": git_upstream[0], "revision": git_upstream[1],
-        "tags": [{"tags": ["text"], "paths": ["**"]}]})
+        "type": "git", "address": git_upstream[0], "tags": [{"tags": ["text"], "paths": ["**"]}]})
     kit.write_recipe(repo, "mixture", "m", {"pools": [{"name": "text", "select": "text", "weight": 1}]})
     kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})
     kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
@@ -286,16 +326,16 @@ def test_command_line_builds_a_dataset_and_prints_its_id(kit, repo, store, git_u
         sessions = found.execute("SELECT folder, command, ended IS NOT NULL FROM sessions").fetchall()
         assert {(downloading, "wpt-dataset-check", 1), (folder, "wpt-dataset-build", 1)} <= set(sessions)
         assert len(sessions) == 3  # and the test's own download, which put the source in the store
-        assert found.execute("SELECT source, outcome, checksum, size > 0 FROM lines WHERE session = ?",
-                             (folder,)).fetchall() == [(sid, "reused", repo.source(sid).data["checksum"], 1)]
+        assert found.execute("SELECT source, outcome, json_extract(got, '$.manifest'), size > 0 FROM lines"
+                             " WHERE session = ?", (folder,)).fetchall() == [
+            (sid, "reused", upstream_manifest(repo.source(sid), store), 1)]
 
 
 @pytest.mark.parametrize("stream", [False, True])
 def test_building_a_tokenizer_is_a_session_with_a_reused_line_for_each_source_it_read(
         kit, repo, store, git_upstream, monkeypatch, stream):
     [sid] = [kit.add_source(repo, store, "example", "ok", {
-        "type": "git", "address": git_upstream[0], "revision": git_upstream[1],
-        "tags": [{"tags": ["text"], "paths": ["**"]}]})]
+        "type": "git", "address": git_upstream[0], "tags": [{"tags": ["text"], "paths": ["**"]}]})]
     kit.write_recipe(repo, "mixture", "m", {"pools": [{"name": "text", "select": "text", "weight": 1}]})
     kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
@@ -306,8 +346,8 @@ def test_building_a_tokenizer_is_a_session_with_a_reused_line_for_each_source_it
     with store.database() as found:
         assert found.execute("SELECT command, ended IS NOT NULL FROM sessions WHERE folder = ?",
                              (folder,)).fetchall() == [("wpt-dataset-build-tokenizer", 1)]
-        assert found.execute("SELECT source, outcome, checksum FROM lines WHERE session = ?", (folder,)).fetchall() \
-            == [(sid, "reused", repo.source(sid).data["checksum"])]
+        assert found.execute("SELECT source, outcome, json_extract(got, '$.manifest') FROM lines WHERE session = ?",
+                             (folder,)).fetchall() == [(sid, "reused", upstream_manifest(repo.source(sid), store))]
     lock = repo.root / "data" / "recipes" / "tokenizers" / "t.lock.json"
     assert lock.exists()
 
@@ -324,8 +364,7 @@ def test_a_build_whose_record_breaks_writes_no_lock_file(kit, repo, store, git_u
     from wpt_store import LocalStore
 
     kit.add_source(repo, store, "example", "ok", {
-        "type": "git", "address": git_upstream[0], "revision": git_upstream[1],
-        "tags": [{"tags": ["text"], "paths": ["**"]}]})
+        "type": "git", "address": git_upstream[0], "tags": [{"tags": ["text"], "paths": ["**"]}]})
     kit.write_recipe(repo, "mixture", "m", {"pools": [{"name": "text", "select": "text", "weight": 1}]})
     kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})
     kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
@@ -349,7 +388,8 @@ def test_migrating_tokenizer_files(kit, repo):
     recipe = kit.write_recipe(repo, "tokenizer", "t", {"mixture": "m", "vocab_size": 556})
     lock = (repo.root / "data" / "recipes" / "tokenizers" / "t.lock.json")
     lock.write_text(json.dumps({"fingerprint": "0" * 64, "vocabulary_sha256": "1" * 64}))
-    with pytest.raises(OutdatedSchema, match=re.escape(f"{lock}: the lock does not list the documents")):
+    with pytest.raises(MigrationIncomplete, match=re.escape(f"OutdatedSchema: {lock}: the lock does not list the "
+                                                            f"documents")):
         migrate(repo, log=lambda _: None)
     assert json.loads(recipe.read_text()) == {"mixture": "m", "vocab_size": 556, "version": 1}
     lock.unlink()  # what the message asks; the next build writes a current lock

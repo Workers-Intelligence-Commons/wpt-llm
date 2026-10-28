@@ -57,13 +57,19 @@ binary file, a license that is not allowed, a doubt, a maintainer's
 decision), and say which in `extract.note`. Draft licenses, credits,
 formats and tags from the source's own files with a script, never from
 memory, and show the maintainer one full `source.json` as the pattern for
-the batch before writing the rest. A new source starts `under-review`, as
-`CONTRIBUTING.md` says.
+the batch before writing the rest. Each license entry names the place of
+its statement and the license texts expected there, with coverage
+patterns of the allowed shapes (`docs/licenses.md`, "License entries"); a
+license text not yet in `data/license-texts/` becomes a new item, under
+review, with `wpt-dataset add-license-text ID --file PATH` (or `--page
+ADDRESS`) once the source is downloaded. A new
+source, each of its entries and each new license text start
+`under-review`, as `CONTRIBUTING.md` says.
 
 ## 4. Check every source
 
 ```sh
-uv run wpt-dataset check --fetch ID [ID ...]   # checksum, cuts, patches, license and format maps
+uv run wpt-dataset check --fetch ID [ID ...]   # cuts, patches, license and format maps, text, statements
 uv run wpt-dataset markdown-check ID [ID ...]  # notes complete, no leftover tags
 ```
 
@@ -79,10 +85,12 @@ rules apply: `scripts/check.py`, sign-off, no personal paths).
 
 ## 6. Admission needs the maintainer's explicit yes
 
-Never set `"decision": "admitted"` without it. Ask once for the batch: the
-question lists every source with its one-line license reason, and the
-sources the maintainer already discussed in step 2 with what was decided.
-An answer that approves only some admits only those.
+Never set `"decision": "admitted"` without it, at any level: a source, a
+license entry or a license text (`docs/licenses.md`, "Who decides"). Ask
+once for the batch: the question lists every source with its one-line
+license reason, its entries and the new license texts they expect, and
+the sources the maintainer already discussed in step 2 with what was
+decided. An answer that approves only some admits only those.
 
 Then set the approved decisions to `admitted`, by the maintainer, with
 today's date, and no `reason` unless the admission is an exception (such

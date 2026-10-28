@@ -6,6 +6,7 @@ from wpt_dataset import manifest
 from wpt_dataset.build import gather
 from wpt_dataset.edit import unpack, write_patch
 from wpt_dataset.errors import EditError, PatchFailed
+from wpt_dataset.license_check import Coverage
 from wpt_dataset.sources import source_tree
 
 
@@ -32,9 +33,8 @@ def test_a_git_history_gives_one_patch_per_commit_since_the_license_limited_to_k
     change = commit(kit, folder, "print two", {"main.py": b"print(2)\n", "vendor/lib.py": b"x = 1\n"})
     vendored = commit(kit, folder, "update the vendored library", {"vendor/lib.py": b"x = 2\n"})
     sid = kit.add_source(repo, store, "example", "history", {
-        "type": "git", "address": str(folder), "revision": vendored, "history": {"since": since},
-        "extract": {"exclude": ["vendor/**"]}, "licenses": kit.WITH_HISTORY,
-        "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
+        "type": "git", "address": str(folder), "history": {"since": since},
+        "extract": {"exclude": ["vendor/**"]}, "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
                     {"format": "code", "language": "python", "paths": ["**/*.py"]},
                     {"format": "text", "paths": ["LICENSE"]}]})
 
@@ -51,17 +51,17 @@ def test_a_git_history_gives_one_patch_per_commit_since_the_license_limited_to_k
     assert "-print(1)\n+print(2)" in patch and "vendor/lib.py" not in patch
 
 
-def test_a_tree_entry_written_everywhere_leaves_the_history_files_to_their_own_entry(kit, repo, store, tmp_path):
+def test_a_tree_entry_over_the_git_folder_leaves_the_history_files_to_their_own_entry(kit, repo, store, tmp_path):
     # a history file counts only against entries whose patterns start with
-    # .git/history/, so `**` means every file of the tree; each file then maps to exactly one entry
+    # .git/history/, so `.git/**` means the tree's files there; each file then maps to exactly one entry
     folder = tmp_path / "upstream"
     folder.mkdir()
     kit.run("git", "init", "-q", cwd=folder)
     since = commit(kit, folder, "add the license", {"LICENSE": kit.LICENSE_TEXT.encode(), "main.py": b"print(1)\n"})
     head = commit(kit, folder, "print two", {"main.py": b"print(2)\n"})
+    licenses = [kit.entry([".git/history/**"]), kit.entry([".git/**", "LICENSE", "main.py"])]
     sid = kit.add_source(repo, store, "example", "history", {
-        "type": "git", "address": str(folder), "revision": head, "history": {"since": since},
-        "licenses": kit.WITH_HISTORY,
+        "type": "git", "address": str(folder), "history": {"since": since}, "licenses": licenses,
         "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
                     {"format": "text", "paths": ["LICENSE", "main.py"]}]})
 
@@ -69,11 +69,10 @@ def test_a_tree_entry_written_everywhere_leaves_the_history_files_to_their_own_e
 
     # the order file is part of the history, under the same entry
     history = [f".git/history/{c}" for c in (head, since)] + [manifest.ORDER]
-    entry_for_history, entry_for_tree = kit.WITH_HISTORY
     assert sorted(tree) == sorted([*history, "LICENSE", "main.py"])
+    coverage = Coverage(licenses)
     for path in tree:
-        expected = entry_for_history if path in history else entry_for_tree
-        assert manifest.license_entries(kit.WITH_HISTORY, path) == [expected]
+        assert coverage.covered(path, False).entry == (0 if path in history else 1)
 
 
 def test_a_patched_git_source_keeps_its_history_and_order_and_no_patch_touches_them(kit, repo, store, tmp_path):
@@ -84,8 +83,8 @@ def test_a_patched_git_source_keeps_its_history_and_order_and_no_patch_touches_t
     kit.run("git", "init", "-q", cwd=folder)
     since = commit(kit, folder, "add the license", {"LICENSE": kit.LICENSE_TEXT.encode(), "main.py": b"print(1)\n"})
     head = commit(kit, folder, "print two", {"main.py": b"print(2)\n"})
-    data = {"type": "git", "address": str(folder), "revision": head, "history": {"since": since},
-            "licenses": kit.WITH_HISTORY, "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
+    data = {"type": "git", "address": str(folder), "history": {"since": since},
+            "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
                                                       {"format": "text", "paths": ["LICENSE", "main.py"]}]}
     sid = kit.add_source(repo, store, "example", "history", data)
     before, _ = source_tree(repo.source(sid), store)
@@ -136,8 +135,9 @@ def test_a_submodule_replacing_a_folder_keeps_the_folder_s_excluded_file_out_of_
                            [since], gitlinks={"frontend": library_commit})
     for each, tip in ((library, library_commit), (folder, head)):
         kit.run("git", "update-ref", "refs/heads/main", tip, cwd=each)
+        kit.run("git", "symbolic-ref", "HEAD", "refs/heads/main", cwd=each)  # what a download fetches
 
-    tree = kit.upstream({"type": "git", "revision": head, "history": {"since": since},
+    tree = kit.upstream({"type": "git", "history": {"since": since},
                              "extract": {"exclude": ["frontend/favicon.ico"]}, "submodules": {"frontend": str(library)}},
                             str(folder), store)
 
@@ -262,8 +262,7 @@ def test_a_repository_pointer_takes_the_tags_of_the_files_its_commit_changes(kit
     code = commit(kit, folder, "print two", {"src/main.py": b"print(2)\n"})
     notes = commit(kit, folder, "write the notes", {"docs/notes.txt": b"Two.\n"})
     sid = kit.add_source(repo, store, "example", "history", {
-        "type": "git", "address": str(folder), "revision": notes, "history": {"since": since},
-        "licenses": kit.WITH_HISTORY,
+        "type": "git", "address": str(folder), "history": {"since": since},
         "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
                     {"format": "code", "language": "python", "paths": ["**/*.py"]},
                     {"format": "text", "paths": ["LICENSE", "docs/**"]}],
@@ -275,15 +274,16 @@ def test_a_repository_pointer_takes_the_tags_of_the_files_its_commit_changes(kit
     assert document_tags(repo, store, sid, "src/main.py#3") == {"code"}
 
 
-def test_a_moved_revision_with_a_history_asks_only_for_new_files_and_keeps_the_full_fetch_s_checksum(
+def test_a_new_download_of_a_moved_upstream_with_a_history_asks_only_for_new_files_and_gives_the_full_fetch(
         kit, repo, store, tmp_path, monkeypatch):
-    # given a git source with a history in the store, moved to a newer commit: the download asks upstream only
-    # for the contents the store lacks (the new file, and an older version only the history's patches read,
-    # which no tree holds); git diffs the patches against the contents it takes from the store, so the tree
-    # and its checksum are the ones a fetch without the store gives
+    # given a git source with a history in the store whose upstream moved to a newer commit, downloaded
+    # again: the download asks upstream only for the contents the store lacks (the new file, and an older
+    # version only the history's patches read, which no tree holds); git diffs the patches against the
+    # contents it takes from the store, so the tree is the one a fetch without the store gives
     import tempfile
 
     from wpt_dataset import download, sources
+    from wpt_dataset.protocols import git
 
     folder = tmp_path / "upstream"
     folder.mkdir()
@@ -293,20 +293,19 @@ def test_a_moved_revision_with_a_history_asks_only_for_new_files_and_keeps_the_f
     since = commit(kit, folder, "add the license", {"LICENSE": kit.LICENSE_TEXT.encode(), "main.py": b"print(1)\n"})
     first = commit(kit, folder, "print two", {"main.py": b"print(2)\n", "notes.txt": b"some notes\n"})
     sid = kit.add_source(repo, store, "example", "history", {
-        "type": "git", "address": str(folder), "revision": first, "history": {"since": since},
-        "licenses": kit.WITH_HISTORY,
+        "type": "git", "address": str(folder), "history": {"since": since},
         "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
                     {"format": "text", "paths": ["LICENSE", "main.py", "notes.txt"]}]})
     later = commit(kit, folder, "print three", {"main.py": b"print(3)\n"})
-    data = repo.source(sid).data | {"revision": later}
     with tempfile.TemporaryDirectory() as staging:
-        data["checksum"] = manifest.checksum(kit.upstream(data, str(folder), download.Staging(staging)))
-    repo.save_source(sid, data, repo.version("source", sid))
-    asked, real = [], sources._git_fetch_blobs
-    monkeypatch.setattr(sources, "_git_fetch_blobs",
+        full = manifest.digest(kit.upstream(repo.source(sid).data, str(folder), download.Staging(staging)))
+    store.mark([sid])  # marked for a new download
+    asked, real = [], git.fetch_blobs
+    monkeypatch.setattr(git, "fetch_blobs",
                         lambda address, folder, ids: asked.append(sorted(ids)) or real(address, folder, ids))
 
-    kit.download(repo, store, sid)  # the checksum matches: the tree is the full fetch's
+    kit.download(repo, store, sid)
+    assert sources.held_manifest(repo.source(sid), store) == full  # the tree is the full fetch's
 
     # the files the history's patches need that no tree holds were kept with the first download (the git
     # map names them), so only the new revision's file is asked for

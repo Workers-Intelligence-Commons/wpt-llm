@@ -7,6 +7,7 @@ import http.client
 import json
 import subprocess
 import threading
+from datetime import date
 from urllib.parse import quote
 
 import pytest
@@ -14,7 +15,7 @@ import pytest
 from wpt_dataset.repo import Repo
 from wpt_store import open_store
 from wpt_web import pages
-from wpt_web.drafts import Drafter
+from wpt_web.drafts import DraftFailed, Drafter, MachineFault, Unloadable, UnknownFault
 from wpt_web.server import make_server
 
 LICENSE_TEXT = "I give this text to the public domain, CC0 1.0 Universal.\n"
@@ -67,7 +68,7 @@ def test_a_persons_text_starts_an_empty_source_and_every_change_is_a_patch(web):
     sid = new_source(request, {"notes/one.md": {"format": "markdown", "text": TEXT}})
     assert [p.name for p in repo.source(sid).patches] == ["0001-first-texts.patch"]
     assert repo.source(sid).data["decision"] == {"decision": "under-review", "by": "A. Person",
-                                                 "date": repo.source(sid).data["revision"]}
+                                                 "date": date.today().isoformat()}
     status, listing = request("GET", f"/api/sources/{sid}/files")
     assert status == 200 and listing["files"] == {"notes/one.md": {"mode": "100644", "size": len(TEXT),
                                                                   "format": "markdown", "tags": ["en"]}}
@@ -146,7 +147,7 @@ def test_the_server_sets_whether_a_model_draft_was_changed(web):
     status, refused = request("PUT", f"{chat}/new", {"conversation": user_draft, "patch": "x",
                                                      "version": third["version"]})
     assert status == 422  # only an assistant message is drafted by a model
-    assert len(repo.source(sid).patches) == 3 and repo.check_fetched(sid, store) == (1, 0, {})
+    assert len(repo.source(sid).patches) == 3 and repo.check_fetched(sid, store) == (1, 0, {}, [])
 
 
 def test_a_model_folder_drafts_the_next_assistant_message(web, tmp_path):
@@ -210,7 +211,7 @@ def test_a_model_folder_drafts_the_next_assistant_message(web, tmp_path):
 
 
 def test_a_machine_fault_while_loading_a_model_is_not_reported_as_a_broken_folder(tmp_path, monkeypatch):
-    # out of memory and driver errors are RuntimeErrors too: only a fault of the folder's files gives 422
+    # out of memory and driver errors are RuntimeErrors too: only a fault of the folder's files is Unloadable
     import torch
     import wpt_model
     from wpt_tokenizer import Tokenizer
@@ -226,24 +227,23 @@ def test_a_machine_fault_while_loading_a_model_is_not_reported_as_a_broken_folde
         def load(*_):
             raise error
         monkeypatch.setattr(wpt_model, "load_model", load)
-        return Drafter().draft(str(folder), asked)
+        with pytest.raises(DraftFailed) as failed:
+            Drafter().draft(str(folder), asked)
+        return failed.value
 
     for machine in (torch.cuda.OutOfMemoryError("CUDA out of memory"), MemoryError(),
                     RuntimeError("CUDA error: an illegal memory access was encountered"),
                     RuntimeError("HIP error: out of memory")):
-        status, refused = fails_with(machine)
-        assert status == 500 and "the machine failed" in refused["problems"][0], (machine, refused)
-        assert "not the model folder" in refused["problems"][0]
+        refused = fails_with(machine)
+        assert type(refused) is MachineFault and "not the model folder" in str(refused), (machine, refused)
     for broken in (FileNotFoundError("model.safetensors"), ValueError("config.json: not JSON"),
                    KeyError("n_layer"), RuntimeError("Error(s) in loading state_dict for WPT: size mismatch")):
-        status, refused = fails_with(broken)
-        assert status == 422, (broken, refused)
-    # any other exception is neither the machine's nor the folder's: 500, saying the fault is unknown
-    status, refused = fails_with(ZeroDivisionError("division by zero"))
-    assert status == 500 and refused["problems"][0].startswith("unknown fault while loading the model"), refused
-    assert "ZeroDivisionError: division by zero" in refused["problems"][0]
-    assert "the machine failed" not in refused["problems"][0]
-    assert "not the model folder" not in refused["problems"][0]
+        refused = fails_with(broken)
+        assert type(refused) is Unloadable, (broken, refused)
+    # any other exception is neither the machine's nor the folder's: unknown, with its type and text
+    refused = fails_with(ZeroDivisionError("division by zero"))
+    assert type(refused) is UnknownFault and "ZeroDivisionError: division by zero" in str(refused), refused
+    assert "the machine failed" not in str(refused) and "not the model folder" not in str(refused)
 
 
 def test_tasks_recipes_dockerfiles_and_signers_go_through_the_checks_rules(web):

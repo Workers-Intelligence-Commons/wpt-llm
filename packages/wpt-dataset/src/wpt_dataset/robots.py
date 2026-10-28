@@ -15,14 +15,15 @@ them has not refused training.
 
 Only an answer saying the file does not exist (404 Not Found, 410 Gone)
 means no rules: some sites publish no policy. Any other answer that is not
-the file (another 4xx such as 401, 403 or 429, a 5xx, a timeout, an
-unreachable site) makes that address unusable (RobotsUnreachable, an
-OSError), since its policy cannot be known. A refusal or an unusable
-address speaks only for that site: the source's next mirror is tried, with
-its own robots.txt. Addresses that are not http(s) (local folders, ssh)
-have no robots.txt.
+the file (another 4xx such as 401, 403 or 429, a 5xx, an answer cut short
+or too slow) makes that address unusable (RobotsUnreadable), since its
+policy cannot be known; a site that cannot be reached at all is
+HostUnreachable. A refusal or an unusable address speaks only for that
+site: the source's next mirror is tried, with its own robots.txt.
+Addresses that are not http(s) (local folders, ssh) have no robots.txt.
 """
 
+import http.client
 import urllib.error
 import urllib.request
 from urllib.parse import urlparse, urlunparse
@@ -30,7 +31,7 @@ from urllib.parse import urlparse, urlunparse
 from protego import Protego
 
 from . import retry, sites
-from .errors import CrawlForbidden
+from .errors import CrawlForbidden, HostUnreachable, RobotsUnreadable
 
 WPT_AGENT = "wpt-dataset"
 MAX_BYTES = 500 * 1024  # the standard asks crawlers to read at least 500 KiB
@@ -53,16 +54,14 @@ TRAINING_CRAWLERS: dict[str, str] = {
 }
 
 
-class RobotsUnreachable(OSError):
-    """The robots.txt could not be read: the address cannot be used."""
-
-
 def check(address: str, kind: str, user_agent: str, cache: dict | None = None):
     """Raise CrawlForbidden when the robots.txt of address's site forbids
-    fetching it. The robots.txt is asked at the host and port alone: a user
-    name in the address is no part of the site's address (protego compares
-    only path and query, so the checked addresses keep it). For git, the two
-    paths a download asks for are checked too. cache: {robots.txt address:
+    fetching it, RobotsUnreadable or HostUnreachable when it cannot be
+    read (see the module's docstring), each message starting with address.
+    The robots.txt is asked at the host and port alone: a user name in the
+    address is no part of the site's address (protego compares only path
+    and query, so the checked addresses keep it). For git, the two paths a
+    download asks for are checked too. cache: {robots.txt address:
     its rules}, filled as each site's file is read, for a program that
     fetches many addresses of one site (each read can count against a
     site's limit of requests); a file that could not be read is asked
@@ -78,7 +77,7 @@ def check(address: str, kind: str, user_agent: str, cache: dict | None = None):
     robots_url = urlunparse((parsed.scheme, host, "/robots.txt", "", "", ""))
     rules = cache.get(robots_url) if cache is not None else None
     if rules is None:
-        rules = _rules(robots_url, user_agent)
+        rules = _rules(address, robots_url, user_agent)
         if cache is not None:
             cache[robots_url] = rules
     for agent in ("*", WPT_AGENT, *TRAINING_CRAWLERS):
@@ -88,16 +87,20 @@ def check(address: str, kind: str, user_agent: str, cache: dict | None = None):
                 raise CrawlForbidden(f"{address}: the site's robots.txt forbids {url} to {who}")
 
 
-def _rules(robots_url: str, user_agent: str) -> Protego:
+def _rules(address: str, robots_url: str, user_agent: str) -> Protego:
     request = urllib.request.Request(robots_url, headers={"User-Agent": user_agent})
     try:
         text = retry.call(lambda: _read(request), robots_url)
     except urllib.error.HTTPError as error:
         if error.code in NO_FILE:
             return Protego.parse("")  # no robots.txt: no rules
-        raise RobotsUnreachable(f"{robots_url}: answered {error.code}, so the address cannot be used") from None
-    except (urllib.error.URLError, OSError) as error:
-        raise RobotsUnreachable(f"{robots_url}: unreachable ({error}), so the address cannot be used") from None
+        raise RobotsUnreadable(f"{address}: {robots_url} answered {error.code}, "
+                               "so the address cannot be used") from None
+    except urllib.error.URLError as error:  # no connection was made
+        raise HostUnreachable(f"{address}: {robots_url} is unreachable ({error.reason})") from None
+    except (OSError, http.client.HTTPException) as error:  # an answer cut short, or too slow
+        raise RobotsUnreadable(f"{address}: {robots_url} could not be read ({error!r}), "
+                               "so the address cannot be used") from None
     return Protego.parse(text)
 
 

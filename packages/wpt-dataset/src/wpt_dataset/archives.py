@@ -1,6 +1,6 @@
-"""An http-archive source's archive read while it downloads, member by
-member, so no copy of the archive lies on the disk when its server allows
-it.
+"""An archive the HTTP protocol unpacks (protocols/http.py) read while
+it downloads, member by member, so no copy of the archive lies on the disk
+when its server allows it.
 
     a GET of the address, its first bytes
     a zip's start (PK\\3\\4, or PK\\5\\6 for an empty zip)
@@ -18,16 +18,17 @@ it.
         (manifest.LinkBack)                need held in memory: a tar read as it arrives cannot go back
 
 Each member goes to the extractor as it is read, whole in memory, as from
-a file (manifest.read_tar_members, manifest.read_zip_members), so the tree, its
-manifest and its checksum are the ones a copy on the disk gives. Whatever
+a file (manifest.read_tar_members, manifest.read_zip_members), so the tree and
+its manifest are the ones a copy on the disk gives. Whatever
 the store the extractor stores into (download.Bundled: the session's
 bundles) is given a member keeps it; a try that fails leaves no entry in
 the tree (Extractor.trying), and is tried again as retry.call says.
 
 Failures: what urllib raises (a URLError for an answer that is not 2xx,
 an OSError for a cut connection or a server whose ranges disagree with
-the file it serves), a ConnectionError for an answer that ends before
-its Content-Length (urllib gives the shorter answer without raising),
+the file it serves), EndedEarly (a ConnectionError) for an answer that
+ends before its Content-Length (urllib gives the shorter answer without
+raising),
 an OSError for a tar that is not the same in its second read,
 UnsupportedEntry for an answer that is neither a zip nor a tar, and
 whatever the extractor raises for an entry.
@@ -132,20 +133,25 @@ def _first(answer, count) -> bytes:
 
 def _save(start: bytes, answer, target: Path, address: str) -> Path:
     """start (the answer's bytes read already), then the rest of the
-    answer, written to target; ConnectionError when it ends early."""
+    answer, written to target; EndedEarly when it ends early."""
     with open(target, "wb") as out:
         out.write(start)
         shutil.copyfileobj(answer, out, BLOCK)
-        _whole(answer, out.tell(), address)
+        whole(answer, out.tell(), address)
     return target
 
 
-def _whole(answer, count: int, address: str):
-    """ConnectionError when count, the bytes an answer gave in all, falls
-    short of its Content-Length."""
+class EndedEarly(ConnectionError):
+    """An answer ended before the length it stated: a ConnectionError, so
+    retry.call tries it again."""
+
+
+def whole(answer, count: int, address: str):
+    """EndedEarly when count, the bytes an answer gave in all, falls short
+    of its Content-Length."""
     size = answer.headers.get("Content-Length", "")
     if size.isdigit() and count < int(size):
-        raise ConnectionError(f"{address}: the answer ended at byte {count} of {size}")
+        raise EndedEarly(f"{address}: the answer ended at byte {count} of {size}")
 
 
 def _validator(headers) -> str | None:
@@ -160,7 +166,7 @@ def _validator(headers) -> str | None:
 class Recorded(io.RawIOBase):
     """An answer's bytes after start (the bytes read from it already),
     each byte read kept in `recorded` until it is set to None;
-    ConnectionError when the answer ends before its Content-Length."""
+    EndedEarly when the answer ends before its Content-Length."""
 
     def __init__(self, start: bytes, answer, address: str):
         self.start, self.answer, self.recorded = start, answer, bytearray(start)
@@ -177,7 +183,7 @@ class Recorded(io.RawIOBase):
         count = self.answer.readinto(buffer)
         self.count += count
         if count == 0 and len(buffer):
-            _whole(self.answer, self.count, self.address)
+            whole(self.answer, self.count, self.address)
         if self.recorded is not None:
             self.recorded += buffer[:count]
         return count
@@ -228,7 +234,7 @@ class Ranged(io.RawIOBase):
             self._ask()
         count = self.answer.readinto(memoryview(buffer)[:self.size - self.position])
         if count == 0:
-            raise ConnectionError(f"{self.address}: the answer ended at byte {self.position} of {self.size}")
+            raise EndedEarly(f"{self.address}: the answer ended at byte {self.position} of {self.size}")
         self.position += count
         self.at = self.position
         return count

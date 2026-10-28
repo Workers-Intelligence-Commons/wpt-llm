@@ -19,13 +19,13 @@ from_tree).
 
 import hashlib
 import json
-from pathlib import Path
 
-from . import manifest, markdown, records
+from . import manifest, markdown, records, workers
 from .errors import InvalidFile
+from .kept import kept
 from .migrate import upgrade
 from .repo import Repo, validate
-from .sources import copied_as_trees, copy_size, each_read, source_tree, tags_of
+from .sources import copied_as_trees, copy_size, each_read, held_manifest, tags_of
 
 
 def content_sha256(content: list) -> str:
@@ -103,7 +103,7 @@ def parse(source_id: str, path: str, data: bytes) -> list[dict]:
     return conversations
 
 
-def from_tree(source_id: str, path: str, file: Path, spec: dict) -> list[tuple[str, dict]]:
+def from_tree(source_id: str, path: str, file, spec: dict) -> list[tuple[str, dict]]:
     """[(id of its last message, conversation)] from a file of messages that
     name their parent. spec (a format entry's `tree`) names the fields `id`,
     `parent`, `role` and `text`, maps the file's roles to WPT's (`roles`),
@@ -175,16 +175,16 @@ def of_file(source_id: str, path: str, entry: dict, store, file) -> list[tuple[s
     `tree` its last message's id; file is its tree entry. InvalidFile
     names what is wrong."""
     if "tree" in entry:
-        return from_tree(source_id, path, manifest.local_file(store, file), entry["tree"])
+        return from_tree(source_id, path, manifest.Stored(store, file, path), entry["tree"])
     return list(enumerate(parse(source_id, path, manifest.content(store, file)), start=1))
 
 
 def read(repo: Repo, store, tag: str | None, telemetry=None, log=print) -> tuple[list[tuple[str, dict]], dict]:
-    """([(conversation id, conversation)], {source id: address, revision,
+    """([(conversation id, conversation)], {source id: address, manifest,
     licenses}) for every chat file tagged `tag` in an admitted source, in
     source and path order. A conversation id is "<source>/<path>:<line>", or
     with `tree` "<source>/<path>:<id of its last message>". telemetry: as
-    for source_tree. A source whose license text is empty is left out, and
+    for kept.kept. A source whose license text is empty is left out, and
     log is called with a note naming it."""
     found, sources = tagged(repo, store, tag, telemetry, log)
     return [(conversation_id, conversation) for conversation_id, _, conversation in found], sources
@@ -206,7 +206,7 @@ def tagged(repo: Repo, store, tag: str | None = None, telemetry=None, log=print,
     for source, (matched, found) in zip(chosen, read):
         conversations += found
         if matched:
-            sources[source.id] = {"address": source.data["address"], "revision": source.data["revision"],
+            sources[source.id] = {"address": source.data["address"], "manifest": held_manifest(source, store),
                                   "licenses": source.data["licenses"]}
     return conversations, sources
 
@@ -215,7 +215,7 @@ def _of_source(source, store, tag, telemetry):
     """(whether a chat file of the source is tagged tag, [(conversation id,
     tags, conversation)] of its chat files tagged tag, or of all with tag
     None): one source's part of tagged, in a worker process."""
-    tree, _ = source_tree(source, store, telemetry)
+    tree = kept(source, store, workers.license_texts(), telemetry).tree
     matched, found = False, []
     for path in sorted(tree, key=str.encode):
         entry = markdown.format_of(source, path)

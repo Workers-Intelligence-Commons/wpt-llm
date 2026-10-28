@@ -4,15 +4,10 @@ license lists, which are only read here), and the JSON schema of each JSON
 kind, which the recipe editors are built from. As `wpt-dataset kinds`,
 `list`, `show` and `save`, through the service layer."""
 
-from wpt_dataset.errors import NotFound
-from wpt_dataset.repo import KINDS, schema
+from wpt_dataset.repo import KINDS, schema_of
 
 from ..server import Route
 from .common import SAVED, STRING, VERSION, refusals
-
-# shapes of files inside a source: a chat file's lines, a task.json, a rating file's lines
-INSIDE_SOURCES = ("conversation", "task", "rating")
-
 
 def routes(context):
     repo = context.repo
@@ -43,12 +38,9 @@ def routes(context):
             content = body["text"]
         return 200, {"version": repo.save(kind, values["name"], content, body["version"])}
 
+    @refusals
     def kind_schema(values, body):
-        kind = KINDS.get(values["kind"])
-        name = kind.schema if kind is not None else values["kind"] if values["kind"] in INSIDE_SOURCES else None
-        if name is None:
-            return 404, {"problems": [str(NotFound(f"no JSON schema for {values['kind']!r}"))]}
-        return 200, schema(name)
+        return 200, schema_of(values["kind"])
 
     return [
         Route("GET", "/api/kinds", kinds, "every kind of data file, who writes it, and the names that exist",

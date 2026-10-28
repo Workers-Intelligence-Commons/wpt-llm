@@ -3,8 +3,10 @@ service layer as wpt-web's HTTP API is: a new empty source, its files as
 patches, a conversation, a recipe, with the check's rules and versions."""
 
 import json
+from datetime import date
 
 from wpt_dataset.cli import main
+from wpt_dataset.license_check import text_id
 
 
 def run(capsys, *args):
@@ -72,7 +74,9 @@ def test_new_source_without_its_texts_leaves_the_license_text_to_a_person(kit, r
     assert document["licenses"][0]["text"] == "" and document["formats"] == [{"format": "chat",
                                                                                "paths": ["sft/talks.jsonl"]}]
     # a new source is under review until a maintainer decides
-    assert document["decision"] == {"decision": "under-review", "by": "A. Person", "date": document["revision"]}
+    today = date.today().isoformat()
+    assert document["decision"] == {"decision": "under-review", "by": "A. Person", "date": today}
+    assert document["licenses"][0]["decision"] == document["decision"]
     # the check names it as a note and does not fail; readers leave it out with the same note
     code, out, _ = run(capsys, *root, "check", "--fetch", sid)
     assert code == 0 and out.splitlines()[0] == repo.source(sid).note and "entries" not in out
@@ -109,3 +113,31 @@ def test_new_source_refuses_an_empty_license_text_file_and_declares_formats_with
     repo.change_source_files(sid, {"docs/a.md": b"# A\n", "notes/b.txt": b"b\n"}, "files", repo.source_version(sid),
                              store)
     assert sorted(repo.source_files(sid, store)[1]) == ["docs/a.md", "notes/b.txt"]
+
+
+def test_check_fetch_names_a_license_text_no_item_holds_and_add_license_text_adds_it(kit, repo, store, tmp_path,
+                                                                                    monkeypatch, capsys):
+    # a new source whose license file no license text holds: `check --fetch` names the entry that would be left
+    # out and the id of the text found; `add-license-text` adds that text under review and prints its id; the
+    # next `check --fetch` names it under review, until a person admits it
+    monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    root = ["--root", str(repo.root)]
+    words = b"Copyright 2026 Someone\n\nYou may copy this work, for any purpose, with this notice.\n"
+    folder, _ = kit.git_project(tmp_path / "upstream", files={"COPYING": words, "a.txt": b"some words. " * 20},
+                                executable=set(), symlinks={})
+    sid = kit.add_source(repo, store, "example", "own", {
+        "type": "git", "address": folder,
+        "licenses": [kit.entry(["COPYING", "a.txt"], place={"file": "COPYING"}, expected=[kit.REVIEWED])]})
+    text = text_id(words)
+
+    code, out, _ = run(capsys, *root, "check", "--fetch", sid)
+    assert code == 0 and (f"  left out: the files of license entry 0 (no license text holds the text there (its id "
+                          f"would be {text}; `wpt-dataset add-license-text` adds it, under review))") in out
+
+    code, out, _ = run(capsys, *root, "add-license-text", sid, "--file", "COPYING")
+    assert code == 0 and out.splitlines()[-1] == text
+    assert repo.license_texts()[text]["decision"]["decision"] == "under-review"
+
+    code, out, _ = run(capsys, *root, "check", "--fetch", sid)
+    assert code == 0 and (f"  left out: the files of license entry 0 (the license text there ({text}) is not one "
+                          f"it expects)") in out

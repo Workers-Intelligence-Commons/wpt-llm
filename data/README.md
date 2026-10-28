@@ -16,6 +16,10 @@ This folder describes data; it never holds data itself.
   [docs/training.md](../docs/training.md).
 - `allowed-signers`: SSH keys allowed to sign decisions (OpenSSH
   allowed_signers format). GPG keys, if any, go in `allowed-gpg-keys.asc`.
-- `reviewed-license-texts.json`: the reviews of license texts that the
-  source drafters read. See [docs/licenses.md](../docs/licenses.md),
-  "Reviewed license texts".
+- `license-texts/<id>/`: one folder per license text (`license-text.json`,
+  its decision, kind and license, and optionally `license-text.txt`, the
+  text itself), `<id>` the sha256 of its normalized text. See
+  [docs/licenses.md](../docs/licenses.md), "License texts".
+- `reviewed-license-texts.json`: reviews of license texts in an earlier
+  shape, which `wpt-dataset migrate` turns into items of `license-texts/`;
+  a review held for one exact file stays here for a person to decide.

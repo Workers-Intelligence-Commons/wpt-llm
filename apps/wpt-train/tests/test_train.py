@@ -3,6 +3,7 @@ import hashlib
 import json
 import math
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -405,13 +406,17 @@ def test_a_trained_model_folder_names_its_licenses_and_sources(built, tmp_path):
 
     notice = (folder / "NOTICE").read_text()
     assert "Weights: AGPL-3.0-or-later" in notice and "Generated text: CC0-1.0" in notice
-    assert f"{sid}\n" in notice and f"  MIT for **:\n    {built.attribution}\n" in notice
+    [entry] = json.loads((tmp_path / "data" / "sources" / sid / "source.json").read_text())["licenses"]
+    assert f"{sid}\n" in notice and f"  MIT for {', '.join(entry['paths'])}:\n    {built.attribution}\n" in notice
     assert f"License texts\n\n--- {sid} (MIT)\n\n{built.license_text}" in notice  # what MIT asks to travel
     assert notice.endswith((ROOT / "OUTPUT-NOTICE").read_text())
     assert (folder / "LICENSE").read_text() == (ROOT / "LICENSE").read_text()
     card = (folder / "README.md").read_text()
     assert card.startswith("---\nlicense: agpl-3.0\n---\n") and "Weights: AGPL-3.0-or-later" in card
     assert f"| {sid} |" in card and "None yet: run `wpt-eval" in card
+    manifest = json.loads((folder / "provenance.json").read_text())["sources"][sid]["manifest"]
+    assert re.fullmatch("[0-9a-f]{64}", manifest)  # the plain sha256 of the list of files, as the store names the tree
+    assert f"  manifest: {manifest}\n" in notice and f"| {sid} | `{manifest}` |" in card
     with safe_open(folder / "model.safetensors", "pt") as weights:
         assert weights.metadata()["license"] == "AGPL-3.0-or-later"
         assert weights.metadata()["output_license"] == "CC0-1.0"

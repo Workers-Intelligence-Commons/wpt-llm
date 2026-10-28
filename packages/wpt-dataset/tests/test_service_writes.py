@@ -7,6 +7,7 @@ change, conversations and tasks only in an empty source, a task's links
 kept as they are, and a new source that leaves nothing behind when it
 fails."""
 
+import hashlib
 import json
 import os
 import subprocess
@@ -18,6 +19,7 @@ from pathlib import Path
 import pytest
 
 from wpt_dataset.edit import unpack, write_patch
+from wpt_dataset import license_check
 from wpt_dataset import repo as service
 from wpt_dataset.errors import InvalidFile, NotText, RuleViolation, StaleFile
 from wpt_dataset.repo import empty_source
@@ -44,7 +46,7 @@ def test_a_change_through_a_link_of_a_source_lands_on_its_target_inside_the_sour
     outside = tmp_path / "outside"
     outside.mkdir()
     (outside / "kept.txt").write_bytes(b"not the source's\n")
-    sid = own_source(repo, store, {"**": "text"})
+    sid = own_source(repo, store, {"**/*.txt": "text", "*-link": "text"})
 
     def links(folder):
         (folder / "notes.txt").write_bytes(b"my notes\n")
@@ -173,29 +175,6 @@ def test_the_lock_holds_across_processes_and_a_crashed_holder_leaves_none(repo):
     process.stdin.close()
 
 
-NAME_HOLDER = """
-import sys
-from wpt_dataset.repo import Repo
-print(Repo(sys.argv[1]).hold_name("wpt-web"), flush=True)
-sys.stdin.readline()
-"""
-
-
-def test_a_held_name_is_never_held_twice_and_is_taken_up_once_its_process_ends(repo):
-    # each wpt-web names its runs by a name it holds: two running at once never share one, and one started
-    # after another ended, crash included, takes up its name, so it finds the runs left to finish
-    process = subprocess.Popen([sys.executable, "-c", NAME_HOLDER, str(repo.root)], stdin=subprocess.PIPE,
-                               stdout=subprocess.PIPE, text=True)
-    held = process.stdout.readline().strip()
-    assert held.startswith("wpt-web-")
-    assert repo.hold_name("wpt-web") not in (held, "")
-    process.kill()
-    process.wait(30)
-    process.stdout.close()
-    process.stdin.close()
-    assert repo.hold_name("wpt-web") == held
-
-
 def test_a_save_keeps_the_layout_where_the_meaning_did_not_change(kit, repo):
     path = repo.root / "data" / "recipes" / "mixtures" / "m.json"
     text = ('{"pools": [\n    {"name": "a", "select": "a",   "weight": 0.5},\n'
@@ -221,6 +200,24 @@ def test_conversations_hold_line_and_paragraph_separators(kit, repo, store):
     _, data = repo.read_source_file(sid, "sft/talks.jsonl", store)
     assert data.count(b"\n") == 2 and b"\\u2028" in data
     assert repo.conversations(sid, "sft/talks.jsonl", store)[1] == [conversation, conversation]
+
+
+def test_a_file_written_into_an_empty_source_joins_its_entry_by_its_top_folder_or_its_kind(kit, repo, store):
+    # every file is covered by exactly one license entry, in a pattern the person signing reads at a glance:
+    # a new file of an empty source adds its top folder, or at the top its kind of file, to the source's one
+    # entry, whose place stays the entry itself; a later file the pattern covers adds nothing, and since
+    # coverage is not what the entry's decision is about, the entry keeps its decision
+    sid = own_source(repo, store, {"notes.txt": "text"})
+    conversation = {"messages": [{"role": "user", "content": [{"type": "text", "text": "hi"}]},
+                                 {"role": "assistant", "content": [{"type": "text", "text": "ok"}]}]}
+    version = repo.save_conversation(sid, "sft/talks.jsonl", None, conversation, "talk", repo.source_version(sid),
+                                     store)
+    version = repo.save_conversation(sid, "sft/more.jsonl", None, conversation, "more", version, store)
+    repo.save_conversation(sid, "talks.jsonl", None, conversation, "top", version, store)
+
+    [entry] = repo.source(sid).data["licenses"]
+    assert entry["paths"] == ["notes.txt", "sft/**", "*.jsonl"] and entry["place"] == {"entry": True}
+    assert entry["decision"] == {"decision": "under-review", "by": "A. Person", "date": entry["decision"]["date"]}
 
 
 def test_an_assistant_message_may_hold_no_block_but_no_other_message_may(kit):
@@ -297,8 +294,7 @@ def test_a_new_source_that_fails_leaves_nothing_and_keeps_its_error(kit, repo, s
 
 def test_conversations_and_tasks_are_written_only_in_an_empty_source(kit, repo, store, tmp_path):
     upstream = kit.git_project(tmp_path / "upstream", symlinks={})
-    sid = kit.add_source(repo, store, "example", "project", {"type": "git", "address": upstream[0],
-                                                            "revision": upstream[1]})
+    sid = kit.add_source(repo, store, "example", "project", {"type": "git", "address": upstream[0]})
     conversation = {"messages": [{"role": "user", "content": [{"type": "text", "text": "hi"}]}]}
     with pytest.raises(RuleViolation, match="is a git source"):
         repo.save_conversation(sid, "talks.jsonl", None, conversation, "talk", repo.source_version(sid), store)
@@ -410,8 +406,7 @@ def test_ratings_are_lines_of_a_rating_file_of_an_empty_source_and_never_a_docum
     assert len(repo.source(sid).patches) == 3  # the three ratings saved, nothing refused
 
     upstream = kit.git_project(tmp_path / "upstream", symlinks={})
-    other_sid = kit.add_source(repo, store, "example", "project", {"type": "git", "address": upstream[0],
-                                                                  "revision": upstream[1]})
+    other_sid = kit.add_source(repo, store, "example", "project", {"type": "git", "address": upstream[0]})
     with pytest.raises(RuleViolation, match="is a git source"):
         repo.save_rating(other_sid, "ratings.jsonl", None, RATING, "rated", repo.source_version(other_sid), store)
 
@@ -431,3 +426,88 @@ def test_a_person_s_newer_rating_of_an_attempt_replaces_their_earlier_one(repo, 
     with pytest.raises(InvalidFile, match="line 2: B. Person rated this attempt on line 1 already"):
         repo.save_rating(sid, "ratings/terse.jsonl", 1, other, "twice", version, store)
     assert repo.ratings(sid, "ratings/terse.jsonl", store) == (version, [newer, other])
+
+
+def test_a_save_that_changes_an_entry_s_license_sends_that_entry_alone_back_to_under_review(kit, repo, store,
+                                                                                            git_upstream):
+    # a license entry's decision is about its license, place and expected texts: a save that changes one of
+    # them and leaves the decision as it was sends that entry back to under-review; the source's decision and
+    # the other entries stay; a save that decides the entry anew keeps the decision it gives
+    sid = kit.add_source(repo, store, "example", "two", {
+        "type": "git", "address": git_upstream[0],
+        "licenses": [kit.entry(["README.md", "run.sh"]), kit.entry(["docs/**", "latest.txt"], "CC0-1.0")]})
+    document = repo.raw("source", sid)
+    changed = {**document, "licenses": [{**document["licenses"][0], "license": "Apache-2.0"}, document["licenses"][1]]}
+    repo.save("source", sid, changed, repo.version("source", sid))
+
+    saved = repo.raw("source", sid)
+    assert saved["licenses"][0]["license"] == "Apache-2.0"
+    assert saved["licenses"][0]["decision"] == {"decision": "under-review", "by": "machine:wpt-dataset",
+                                                "date": saved["licenses"][0]["decision"]["date"],
+                                                "reason": "its license, place or expected texts changed"}
+    assert saved["licenses"][1] == document["licenses"][1] and saved["decision"] == document["decision"]
+
+    decided = {**saved, "licenses": [{**saved["licenses"][0], "license": "MIT", "decision": kit.DECISION},
+                                     saved["licenses"][1]]}
+    repo.save("source", sid, decided, repo.version("source", sid))
+    assert repo.raw("source", sid) == decided
+
+    # a save that changes only an entry's expected texts sends it back the same way
+    other = "d" * 64
+    kit.write_texts(repo.root, {other: kit.TEXTS[kit.REVIEWED]})
+    expecting = {**decided, "licenses": [decided["licenses"][0], {**decided["licenses"][1], "expected": [other]}]}
+    repo.save("source", sid, expecting, repo.version("source", sid))
+    assert repo.raw("source", sid)["licenses"][1]["decision"]["reason"] == "its license, place or expected texts changed"
+
+
+def test_a_save_that_swaps_two_entries_content_sends_back_the_one_given_an_admission(kit, repo, store,
+                                                                                    git_upstream):
+    # each entry is compared with the entry old held with the same content and decision: a save that swaps the
+    # content of an admitted entry and an under-review one, each position keeping its decision, admits nothing;
+    # the entry that took the admission goes back to under-review
+    sid = kit.add_source(repo, store, "example", "swap", {
+        "type": "git", "address": git_upstream[0],
+        "licenses": [kit.entry(["README.md", "run.sh"]), kit.entry(["docs/**", "latest.txt"], "CC0-1.0")]})
+    document = repo.raw("source", sid)
+    first = document["licenses"][0]
+    second = {**document["licenses"][1], "decision": {"decision": "under-review", "by": "Test Reviewer",
+                                                      "date": "2026-10-14"}}
+    held = {**document, "licenses": [first, second]}
+    repo.save("source", sid, held, repo.version("source", sid))
+
+    keys = ("license", "paths", "place", "expected")
+    swapped = {**held, "licenses": [{**first, **{key: second[key] for key in keys}},
+                                    {**second, **{key: first[key] for key in keys}}]}
+    repo.save("source", sid, swapped, repo.version("source", sid))
+    saved = repo.raw("source", sid)
+    assert saved["licenses"][0]["license"] == "CC0-1.0"
+    assert saved["licenses"][0]["decision"]["decision"] == "under-review"
+    assert saved["licenses"][0]["decision"]["by"] == "machine:wpt-dataset"
+    assert saved["licenses"][1] == swapped["licenses"][1]
+
+
+def test_a_license_text_first_met_in_a_source_is_added_under_review_and_then_found_there(kit, repo, store,
+                                                                                       tmp_path):
+    # a license file no license text holds yet becomes a new license text, under review, its id the text's,
+    # with its bytes and where it was found; the license check then finds it at the entry's place, and it lets
+    # nothing train until a person admits it; asking again adds nothing
+    words = b"Copyright 2026 Someone\n\nYou may copy this work, for any purpose, with this notice.\n"
+    folder, _ = kit.git_project(tmp_path / "upstream", files={"COPYING": words, "a.txt": b"some words. " * 20},
+                                executable=set(), symlinks={})
+    sid = kit.add_source(repo, store, "example", "own", {
+        "type": "git", "address": folder,
+        "licenses": [kit.entry(["COPYING", "a.txt"], place={"file": "COPYING"}, expected=[kit.REVIEWED])]})
+
+    text, written = repo.add_found_license_text(sid, {"file": "COPYING"}, store)
+    assert text == license_check.text_id(words)
+    assert written == f"data/license-texts/{text}/license-text.json"
+    item = repo.license_texts()[text]
+    assert item["decision"]["decision"] == "under-review" and item["decision"]["by"] == "machine:wpt-dataset"
+    assert item["found"] == {"source": sid, "path": "COPYING"}
+    assert item["files"] == [hashlib.sha256(words).hexdigest()]
+    assert repo.license_text_itself(text) == words
+
+    found = license_check.statement(0, repo.raw("source", sid)["licenses"][0], lambda place: words,
+                                    license_check.LicenseTexts(repo.license_texts()))
+    assert (found.found, found.decision, found.admitted) == (text, "under-review", False)
+    assert repo.add_found_license_text(sid, {"file": "COPYING"}, store) == (text, None)

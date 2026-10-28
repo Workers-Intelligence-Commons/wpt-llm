@@ -3,7 +3,7 @@
 A file whose encoding is stated in the file itself is text in that
 encoding, decoded to Unicode, and whatever the pipeline stores or emits
 from it is UTF-8. Every reader of a
-source's files as text decodes them here: the check and fill-checksum
+source's files as text decodes them here: the check
 (sources.not_text), the Markdown of every format (markdown.py, so the
 build and markdown-check too), wpt-web's file views and the evaluations
 that read a source's files. The statements read, the first that applies:
@@ -36,7 +36,7 @@ encoding Python does not know, or bytes that do not decode under it, make
 the file no text, and NotText names why. A file written in place of
 another (wpt-web's saves) is encoded the same way (encode).
 
-Nothing rewrites a file's bytes: its checksum, `unpack` and the patches
+Nothing rewrites a file's bytes: the store, `unpack` and the patches
 keep them as upstream wrote them, and git's diffs carry them as they are.
 """
 
@@ -168,7 +168,7 @@ def encode(text: str, data: bytes, entry: dict | None, name: str) -> bytes:
 
 def entry_of(source, path: str) -> dict | None:
     """The format entry of a source's path, None unless exactly one covers it."""
-    found = format_entries(source.data["formats"], path)
+    found = format_entries(source, path)
     return found[0] if len(found) == 1 else None
 
 

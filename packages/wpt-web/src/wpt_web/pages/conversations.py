@@ -6,8 +6,15 @@ person edits or confirms before it is saved. As `wpt-dataset
 conversations`, `conversation` and `save-conversation`, through the
 service layer."""
 
+from wpt_dataset.repo import line_number
+
+from .. import drafts
 from ..server import Route
 from .common import PATCH, SAVED, STRING, VERSION, refusals
+
+# the HTTP status of each kind of failed draft (drafts.DraftFailed)
+DRAFT_REFUSALS = {drafts.NoPyTorch: 503, drafts.NotAModelFolder: 404, drafts.Unloadable: 422,
+                  drafts.MachineFault: 500, drafts.UnknownFault: 500, drafts.NotTokens: 400, drafts.EmptyDraft: 422}
 
 
 def routes(context, drafter):
@@ -20,14 +27,15 @@ def routes(context, drafter):
 
     @refusals
     def save(values, body):
-        if not (values["line"] == "new" or values["line"].isdigit() and int(values["line"]) >= 1):
-            return 404, {"problems": [f"no line {values['line']!r}: a number from 1, or new"]}
-        line = None if values["line"] == "new" else int(values["line"])
-        return 200, {"version": repo.save_conversation(values["id"], values["path"], line, body["conversation"],
-                                                       body["patch"], body["version"], context.store)}
+        return 200, {"version": repo.save_conversation(values["id"], values["path"], line_number(values["line"]),
+                                                       body["conversation"], body["patch"], body["version"],
+                                                       context.store)}
 
     def draft(values, body):
-        return drafter.draft(body["model"], body["conversation"], body.get("max_new_tokens"))
+        try:
+            return 200, {"message": drafter.draft(body["model"], body["conversation"], body.get("max_new_tokens"))}
+        except drafts.DraftFailed as error:
+            return DRAFT_REFUSALS[type(error)], {"problems": [str(error)]}
 
     return [
         Route("GET", "/api/sources/{id}/conversations/{path}", conversations,

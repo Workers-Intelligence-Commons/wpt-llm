@@ -16,9 +16,6 @@ apply at once with AND ("MIT AND Apache-2.0"): it is allowed when every
 one of them is. AND binds before OR, as in SPDX; parentheses are not read.
 """
 
-import hashlib
-import re
-
 from .errors import RuleViolation
 
 ALLOWED = frozenset({
@@ -55,21 +52,3 @@ def check_license(expression: str, source_id: str):
     if not any(all(_allowed(term) for term in alternative.split(" AND ")) for alternative in expression.split(" OR ")):
         what = "license" if all(word not in expression for word in (" OR ", " AND ", " WITH ")) else "license expression"
         raise RuleViolation(f"{source_id}: {what} {expression} is not on the allowed list")
-
-
-COPYRIGHT_LINE = re.compile(r"copyright|\(c\)|©|all rights reserved")
-
-
-def reviewed(texts: dict, content: bytes) -> dict | None:
-    """The review of a file's bytes in the reviewed license texts (texts:
-    their `texts`, Repo.reviewed_license_texts), or None: the review of that
-    exact file first, then the review of its group. A group's key is the
-    sha256 of the text without its copyright lines, case and punctuation,
-    so the same license with other copyright holders shares one review; a
-    removed line may hold a term, so such a file has a review of its own."""
-    exact = texts.get("file:" + hashlib.sha256(content).hexdigest())
-    if exact is not None:
-        return exact
-    text = content[:200000].decode("utf-8", "replace").lower()
-    text = "\n".join(line for line in text.splitlines() if not COPYRIGHT_LINE.search(line))
-    return texts.get(hashlib.sha256(re.sub(r"[^a-z0-9]+", " ", text).strip().encode()).hexdigest())

@@ -2,30 +2,31 @@
 
     wpt-dataset download [ID ...] [--stream]
                                           fetch sources into the store (all admitted, or the ids
-                                          given), each checked against its checksum, several at
-                                          once; a source already there is not fetched again;
+                                          given), each as its address serves it when asked, several
+                                          at once; a source already there is not fetched again
+                                          unless it is marked for a new download (`wpt-store mark`);
                                           every source is tried, and the failures listed at the end
     wpt-dataset check                     every rule that needs no download
     wpt-dataset check --fetch [ID ...]    also download sources (all admitted, or the ids given),
-                                          then check them: checksum, cuts, patches, license map,
+                                          then check them: cuts, patches, license map,
                                           text; every source is checked, and the failures listed
-                                          at the end
+                                          at the end; each license entry whose statement would
+                                          keep its files out of a build is named, not a failure
     wpt-dataset check --changed REV       fetch only sources changed since git revision REV, and
                                           every source with task files when data/images/ changed
     wpt-dataset check-commits RANGE       DCO sign-off and signed decisions (e.g. origin/main..HEAD)
     wpt-dataset source-id ORIGIN [ITEM] ADDRESS
-                                          the id a new source must use
-    wpt-dataset manifest ID               download a source without checking its checksum, keep it
-                                          under the checksum found, and print its manifest and
-                                          checksum (to fill in source.json)
-    wpt-dataset fill-checksum ID [ID ...] for draft sources (checksum all zeros): download each once,
-                                          exclude every file that is not text (UTF-8, or the
-                                          encoding it states) by its exact path, write the
-                                          checksum into source.json, and check the source as
-                                          `check --fetch` does, without downloading it again;
-                                          every source is filled, and the failures listed at the end.
-                                          It checks only the named sources, not the repository-wide
-                                          rules `check` runs: run `wpt-dataset check` too
+                                          the id a new source gets, given once, when it is created
+    wpt-dataset manifest ID               download a source as `download` does (or find it in the
+                                          store), and print the list of the files of its
+                                          upstream tree and that list's sha256, the tree's manifest
+    wpt-dataset cut ID PATH START END [--note TEXT] --version VERSION
+                                          erase bytes [START, END) of an upstream file (as the cuts
+                                          before left it) from every build: the source's next cut,
+                                          naming the passage by its length and two hashes keyed by
+                                          the store's cut key (made on the first cut: keep a backup),
+                                          never by its text; every place the passage is found in the
+                                          file is removed (docs/erasure.md)
     wpt-dataset unpack ID FOLDER          write a source's final files into a new folder
                                           outside the repository, to edit them
     wpt-dataset patch ID FOLDER NAME      record the folder's differences from the source's
@@ -39,25 +40,15 @@
     wpt-dataset build NAME [--stream] [--skip-failed]
                                           build (or find) the data of a model recipe; prints the
                                           dataset id
-    wpt-dataset migrate                   rewrite data files to the current shapes
-    wpt-dataset source-drafters           the built-in source drafters: what each drafts, its settings
-    wpt-dataset source-drafter NAME|FILE --by NAME [--set SETTING=VALUE ...] [--only CANDIDATE ...]
-                [--again]
-                                          draft sources from what a site publishes (a built-in source
-                                          drafter, or any Python file defining one) and save each
-                                          draft: a new source under review, an existing one updated in
-                                          place; only what is not done yet, so the same command resumes
-                                          after a stop; several drafts at once, as wpt_utils.parallel
-                                          allows
-    wpt-dataset always-on-monitoring [--by NAME] [--pause SECONDS]
-                                          keep this checkout's sources current, forever: each round
-                                          runs every built-in source drafter on every candidate, then
-                                          downloads every admitted source again (a git source only the
-                                          files the store lacks), fills in the checksums the drafters
-                                          set back to a draft and checks each source as `check --fetch`
-                                          does; then it waits --pause seconds (WPT_MONITORING_PAUSE;
-                                          default one week). The drafts' `by` is NAME, or without it
-                                          machine:<this machine's host name>. Nothing is committed
+    wpt-dataset migrate [--by NAME]       rewrite data files to the current shapes; a source of the
+                                          shape that pinned a revision and a checksum reads its file
+                                          list and license files, when it needs them, from the store,
+                                          or else from its upstream (never a full download:
+                                          upstream_files.py), and compares a license file no license
+                                          text holds with the standard texts of one SPDX release
+                                          (spdx.py, fetched once); NAME: the person whose signed
+                                          migration commit carries the license text decisions it
+                                          writes (the earlier reviews, the standard texts)
 
 Reading and writing the data files, through the service layer (wpt_dataset.repo;
 wpt-web's HTTP API does the same). Every write applies the rules of `check` and
@@ -90,6 +81,10 @@ A source's files change only through patches (as unpack, an edit and patch):
     wpt-dataset remove ID PATH --patch NAME --version VERSION
     wpt-dataset tags ID PATH [TAG ...] --version VERSION
                                           give exactly that path its own tags (none: remove them)
+    wpt-dataset add-license-text ID (--file PATH | --page ADDRESS)
+                                          add the license text found at a file of the source (or a
+                                          license page downloaded with it) as a new license text,
+                                          under review, when no license text holds it; prints its id
     wpt-dataset conversations ID PATH     the conversations of a chat file: messages, roles, drafts
     wpt-dataset conversation ID PATH LINE print one conversation as JSON *
     wpt-dataset save-conversation ID PATH LINE|new [FILE] [--remove] --patch NAME --version VERSION
@@ -107,11 +102,17 @@ commands and options, for structure and metadata, never these: it may run
 new-source without --file and --license-text (CONTRIBUTING.md, "Models and
 generated text").
 
+Each command is a controller: it reads its arguments, calls the service
+that does the work (the service layer, wpt_dataset.repo, and the services
+over it: download.run, checking.to_fetch, build.run, edit, migrate.run,
+...) and prints its result or its named failure. It holds no rule of its
+own, so a command and wpt-web's route for the same work cannot disagree.
+
 The store comes from WPT_STORE (environment or .env at the repository root).
-Only download, check --fetch, fill-checksum, manifest and always-on-monitoring
-download sources; every other command reads them from the store, and a
-source not there is NotDownloaded. Each run of the first four, each round
-of always-on-monitoring, and each build and build-tokenizer is a session:
+Only download, check --fetch and manifest download sources (and migrate
+reads a few files of a source of the pinned shape); every other command
+reads them from the store, and a source not there is NotDownloaded. Each
+run of these three, and each build and build-tokenizer is a session:
 its record in the
 store, in its own folder under records/, and its lines (one per source
 downloaded, found in the store, or failed; a build's or a build-tokenizer's,
@@ -125,39 +126,38 @@ store's bundles are otherwise kept in its cache folder too). A build with
 --stream (or WPT_STREAM=1) keeps only the tokens of each source's
 documents in the store, not their Markdown, and takes each source from the
 store into a temporary folder, deleted once it is tokens; several sources
-are tokens at once, each in its own folder. A build leaves
-out a source that is not in the store and lists it, with its error, in
-the dataset record; any other failing source stops it, unless
---skip-failed (or WPT_SKIP_FAILED=1) leaves it out and lists it the same
-way. A build is
+are tokens at once, each in its own folder. A build never contacts
+upstream, and leaves out each item that fails a check alone (a file no
+license entry covers, a file that is not text, the files and records of a
+license entry that does not let them train, a task whose pointer no
+longer holds its passage), saying which and why in the dataset record. It
+leaves out a whole source that is not in the store, or whose cut or patch
+does not apply, and lists it, with its error, in the dataset record; any
+other failing source stops it, unless --skip-failed (or
+WPT_SKIP_FAILED=1) leaves it out and lists it the same way. A build is
 recorded in the store, in its own folder under records/ (wpt_telemetry;
-docs/observability.md), and so is a source drafter's run; when that record
+docs/observability.md); when that record
 cannot be written, it stops with exit code 3. A download that fails for a reason that may pass (timeout, cut
 connection, server error) is tried again, up to 5 times (see retry.py); a
 session records each new try.
 """
 
 import argparse
-import contextlib
 import json
 import os
 import sys
 from pathlib import Path
 
 from wpt_store import StoreError, store_from_settings
-from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry
+from wpt_telemetry import RECORD_FAILED, RecordError
 from wpt_utils.programs import MissingTool
 
-from . import download, manifest, monitoring, source_drafter
-from .build import build_dataset, build_tokenizer
+from . import build, checking, download, edit, manifest, migrate
 from .commits import check_commits
-from .edit import unpack, write_patch
 from .errors import DatasetError, InvalidFile
-from .migrate import migrate
-from .repo import KINDS, Repo, check_decision, empty_source, machine_name, source_id
+from .repo import KINDS, Repo, empty_source, line_number, source_id
 from .markdown_check import check_markdown
-from .sources import source_tree
-from .tasks import has_tasks, pointed_sources
+from .sources import upstream_tree
 from .tokenizer_check import check_tokenizer
 
 
@@ -165,22 +165,12 @@ def _store(repo):
     return store_from_settings(repo.root / ".env")
 
 
-@contextlib.contextmanager
-def _session(repo, store, command, args, ids, stream=False):
-    """(telemetry, session) of one downloading command's run: its record
-    (download.recorded) and the session named by it, ended (its last
-    bundle sealed) before the record ends."""
-    with download.recorded(store, command, args.arguments, ids, repo.root / ".env") as telemetry:
-        with download.session(store, telemetry, stream) as session:
-            yield telemetry, session
-
-
-def _download(repo, store, ids, telemetry, session, failed: list[str]) -> list[str]:
-    """Download the sources ids names; add each failure to failed, and
-    return the ids that are in the store. Each source's outcome is the
-    session's line in the store database, not part of the run's record."""
+def _downloaded(results, failed: list[str]) -> list[str]:
+    """The ids of download results that are in the store; each failure
+    printed and added to failed. Each source's outcome is the session's line
+    in the store database, not part of the run's record."""
     done = []
-    for result in download.download(repo, ids, store, session, telemetry, log=telemetry.log):
+    for result in results:
         if result.error is not None:
             _failed(result.item, result.error, failed)
             continue
@@ -189,10 +179,8 @@ def _download(repo, store, ids, telemetry, session, failed: list[str]) -> list[s
 
 
 def cmd_download(args, repo):
-    ids = args.ids or [s.id for s in repo.sources() if s.admitted]
-    store, failed = _store(repo), []
-    with _session(repo, store, "download", args, ids, stream=args.stream) as (telemetry, session):
-        _download(repo, store, ids, telemetry, session, failed)
+    ids, store, failed = download.wanted(repo, args.ids), _store(repo), []
+    _downloaded(download.run(repo, ids, store, "download", args.arguments, stream=args.stream), failed)
     return _failures(failed, len(ids))
 
 
@@ -201,53 +189,31 @@ def cmd_check(args, repo):
     if problems:
         print("\n".join(problems), file=sys.stderr)
         return 1
-    unwritten = {s.id: s.note for s in repo.sources() if s.unwritten}
-    for note in unwritten.values():  # the check names them; they are not a failure
+    selection = checking.to_fetch(repo, lambda: _store(repo), changed=args.changed, fetch=args.fetch)
+    for note in selection.unwritten.values():  # the check names them; they are not a failure
         print(note)
-    ids = []
-    if args.changed:
-        ids, images_changed, removed = repo.changed_since(args.changed)
-        if images_changed:  # a task may name an image that changed or went
-            ids = sorted(set(ids) | {s.id for s in repo.sources() if has_tasks(s)})
-        elif ids or removed:  # a pointer task breaks when the source it points into changed or went
-            store = _store(repo)
-            changed = set(ids) | set(removed)  # a task source that cannot be read is checked too: the check names why
-            ids = sorted(set(ids) | {s.id for s in repo.sources() if has_tasks(s) and not s.unwritten
-                                    and ((pointed := _points_into(repo, s, store)) is None or pointed & changed)})
-    elif args.fetch is not None:
-        ids = args.fetch or [s.id for s in repo.sources() if s.admitted]
-    ids = [sid for sid in ids if sid not in unwritten]  # no text to fetch or check yet: named above
     failed = []
-    if ids:
+    if selection.ids:
         store = _store(repo)
-        with _session(repo, store, "check", args, ids) as (telemetry, session):
-            fetched = _download(repo, store, ids, telemetry, session, failed)
+        fetched = _downloaded(download.run(repo, selection.ids, store, "check", args.arguments), failed)
         for sid in fetched:  # every source is checked, so one run names every failure
             _check_fetched(repo, sid, store, failed)
     print(f"checked {len(repo.source_ids())} sources and their recipes")
-    return _failures(failed, len(ids))
-
-
-def _points_into(repo, source, store) -> set[str] | None:
-    """The sources the pointer tasks of a task source point into; None for
-    a task source that cannot be read (also one whose pointers name a
-    source that was deleted)."""
-    try:
-        return pointed_sources(source, source_tree(source, store)[0], store, repo)
-    except (DatasetError, StoreError, MissingTool):
-        return None
+    return _failures(failed, len(selection.ids))
 
 
 def _check_fetched(repo, sid, store, failed: list[str]):
     """Check one fetched source as `check --fetch` does; a failure is
     printed and added to failed."""
     try:
-        entries, converted, skipped = repo.check_fetched(sid, store)
+        entries, converted, skipped, unmatched = repo.check_fetched(sid, store)
     except (DatasetError, StoreError, MissingTool) as error:
         _failed(sid, error, failed)
         return
-    print(f"{sid}: {entries} entries, checksum, cuts, patches, license and format maps OK; "
+    print(f"{sid}: {entries} entries, cuts, patches, license and format maps OK; "
           f"{converted} Markdown documents")
+    for statement in unmatched:
+        print(f"  left out: the files of license entry {statement.entry} ({statement.problem})")
     _print_skipped(skipped)
 
 
@@ -267,18 +233,23 @@ def _failures(failed: list[str], count: int) -> int:
 
 def _print_skipped(skipped):
     """The records each records file left out, by license value."""
-    unlisted, empty, outside, older = {}, 0, {}, 0
+    unlisted, untrained, empty, outside, older = {}, {}, 0, {}, 0
     for report in skipped.values():
         empty += report.empty
         older += report.older
         for value, count in report.unlisted.items():
             unlisted[value] = unlisted.get(value, 0) + count
+        for value, count in report.untrained.items():
+            untrained[value] = untrained.get(value, 0) + count
         for key, count in report.outside.items():
             outside[key] = outside.get(key, 0) + count
     for (name, value), count in sorted(outside.items(), key=lambda item: -item[1]):
         print(f"  left out: {count} records whose {name} is {value!r} (not kept by `keep`)")
     for value, count in sorted(unlisted.items(), key=lambda item: -item[1]):
-        print(f"  left out: {count} records with license value {value!r} (listed by no license entry)")
+        print(f"  left out: {count} records with license value {value!r} (listed by no license entry: a person "
+              f"adds an entry for that value, under review)")
+    for value, count in sorted(untrained.items(), key=lambda item: -item[1]):
+        print(f"  left out: {count} records with license value {value!r} (its license entry does not train)")
     if older:
         print(f"  left out: {older} records replaced by a newer record of the same id (`newest`)")
     if empty:
@@ -300,44 +271,29 @@ def cmd_source_id(args, repo):
 
 
 def cmd_manifest(args, repo):
-    source, store = repo.source(args.id), _store(repo)
-    with _session(repo, store, "manifest", args, [args.id]) as (telemetry, session):
-        tree = download.unchecked(source, store, session, telemetry)
+    source, store, failed = repo.source(args.id), _store(repo), []
+    if not _downloaded(download.run(repo, [args.id], store, "manifest", args.arguments), failed):
+        return _failures(failed, 1)
+    tree = upstream_tree(source, store)
     sys.stdout.write(manifest.manifest_bytes(tree).decode())
-    print(f"checksum: {manifest.checksum(tree)}", file=sys.stderr)
+    print(f"manifest: {manifest.digest(tree)}", file=sys.stderr)
     return 0
 
 
-def cmd_fill_checksum(args, repo):
-    store, failed = _store(repo), []
-    with _session(repo, store, "fill-checksum", args, args.ids) as (telemetry, session):
-        filled = download.each(lambda sid: repo.fill_checksum(sid, store, session, telemetry), args.ids,
-                               download.address_in(repo), log=telemetry.log)
-    for result in filled:  # every source is filled and checked, so one run names every failure
-        sid = result.item
-        if result.error is not None:
-            _failed(sid, result.error, failed)
-            continue
-        checksum, excluded = result.value
-        print(f"{sid}: checksum {checksum}; {len(excluded)} files that are not text excluded")
-        for why in excluded.values():
-            print(f"{sid}: excluded, {why}")
-        source = repo.source(sid)
-        if source.unwritten:  # as `check` does: no text to check yet
-            print(source.note)
-            continue
-        _check_fetched(repo, sid, store, failed)
-    return _failures(failed, len(args.ids))
+def cmd_cut(args, repo):
+    cut, version = edit.add_cut(repo, args.id, _store(repo), args.path, args.start, args.end, args.note, args.version)
+    print(f"{args.id}: cut {cut['length']:,} bytes of {args.path}, wherever they occur in it; version {version}")
+    return 0
 
 
 def cmd_unpack(args, repo):
-    count = unpack(repo, repo.source(args.id), _store(repo), args.folder)
+    count = edit.unpack(repo, repo.source(args.id), _store(repo), args.folder)
     print(f"{args.folder}: {count} files of {args.id}; edit them, then `wpt-dataset patch {args.id} {args.folder} <name>`")
     return 0
 
 
 def cmd_patch(args, repo):
-    written = write_patch(repo, repo.source(args.id), _store(repo), args.folder, args.name)
+    written = edit.write_patch(repo, repo.source(args.id), _store(repo), args.folder, args.name)
     print(f"wrote {written}; it applies and gives exactly the folder's files")
     return 0
 
@@ -355,13 +311,7 @@ def cmd_markdown_check(args, repo):
 
 
 def cmd_build_tokenizer(args, repo):
-    store = _store(repo)
-    with Telemetry.start(store, "wpt-dataset-build-tokenizer", args.arguments, args.name,
-                         inputs={"tokenizer": args.name}, env_file=repo.root / ".env") as telemetry:
-        with download.session(store, telemetry) as session:  # its lines: each source read, `reused`
-            _, vocabulary, key = build_tokenizer(repo, args.name, store, log=telemetry.log, stream=args.stream,
-                                                 telemetry=telemetry, session=session)
-        telemetry.log(f"vocabulary {vocabulary} (fingerprint {key})")
+    build.run_tokenizer(repo, args.name, _store(repo), args.arguments, stream=args.stream)
     return 0
 
 
@@ -378,51 +328,12 @@ def cmd_tokenizer_check(args, repo):
 
 
 def cmd_build(args, repo):
-    store = _store(repo)
-    with Telemetry.start(store, "wpt-dataset-build", args.arguments, args.name, inputs={"recipe": args.name},
-                         env_file=repo.root / ".env") as telemetry:
-        with download.session(store, telemetry) as session:  # its lines: each source used, `reused`
-            dataset_id = build_dataset(repo, args.name, store, log=telemetry.log, stream=args.stream,
-                                       skip_failed=args.skip_failed, telemetry=telemetry, session=session)
-        telemetry.log(dataset_id)
+    build.run(repo, args.name, _store(repo), args.arguments, stream=args.stream, skip_failed=args.skip_failed)
     return 0
-
-
-def cmd_source_drafters(args, repo):
-    for name in source_drafter.built_in_names():
-        found = source_drafter.describe(name)
-        print(f"{name}: {found['summary']}")
-        print(f"  settings: {json.dumps(found['settings'], ensure_ascii=False)}")
-    return 0
-
-
-def cmd_source_drafter(args, repo):
-    check_decision({"decision": "under-review", "by": args.by}, "--by")
-    overrides = {}
-    for given in args.set:
-        key, equals, value = given.partition("=")
-        if not key or not equals:
-            raise InvalidFile(f"--set {given}: write SETTING=VALUE")
-        overrides[key] = value
-    only = [name for given in args.only
-            for name in (_input(given[1:]).decode("utf-8").split() if given.startswith("@") else [given])]
-    store = _store(repo)
-    with source_drafter.recorded(store, args.target, args.arguments, args.started_by, repo.root / ".env") as telemetry:
-        counts = source_drafter.run(repo, store, args.target, overrides, args.by, telemetry, only=only,
-                                    again=args.again)
-        if counts["failed"]:  # recorded as the run's end: the failures are drafted again by the next run
-            sys.exit(1)
-    return 0
-
-
-def cmd_always_on_monitoring(args, repo):
-    by = args.by or machine_name()
-    check_decision({"decision": "under-review", "by": by}, "--by")
-    monitoring.serve(repo, _store(repo), by, "always-on-monitoring", args.arguments, pause=args.pause)
 
 
 def cmd_migrate(args, repo):
-    changed = migrate(repo)
+    changed = migrate.run(repo, _store(repo), by=args.by)
     print(f"{len(changed)} files rewritten")
     return 0
 
@@ -547,6 +458,14 @@ def cmd_tags(args, repo):
     return 0
 
 
+def cmd_add_license_text(args, repo):
+    place = {"file": args.file} if args.file is not None else {"page": args.page}
+    text, written = repo.add_found_license_text(args.id, place, _store(repo))
+    print(f"added {written}, under review" if written else f"a license text holds it already: {text}")
+    print(text)
+    return 0
+
+
 def cmd_conversations(args, repo):
     version, found = repo.conversations(args.id, args.path, _store(repo))
     for line, conversation in enumerate(found, start=1):
@@ -570,7 +489,7 @@ def cmd_conversation(args, repo):
 
 
 def cmd_save_conversation(args, repo):
-    line = None if args.line == "new" else int(args.line)
+    line = line_number(args.line)
     if args.remove == bool(args.file):
         raise InvalidFile("give FILE, or --remove")
     conversation = None if args.remove else _json(_input(args.file), args.file)
@@ -621,7 +540,7 @@ def cmd_ratings(args, repo):
 
 
 def cmd_save_rating(args, repo):
-    line = None if args.line == "new" else int(args.line)
+    line = line_number(args.line)
     if args.remove == bool(args.file):
         raise InvalidFile("give FILE, or --remove")
     rating = None if args.remove else _json(_input(args.file), args.file)
@@ -649,9 +568,14 @@ def main(argv=None):
     show = commands.add_parser("manifest")
     show.add_argument("id")
     show.set_defaults(run=cmd_manifest)
-    fill = commands.add_parser("fill-checksum")
-    fill.add_argument("ids", nargs="+", metavar="ID")
-    fill.set_defaults(run=cmd_fill_checksum)
+    cutting = commands.add_parser("cut")
+    cutting.add_argument("id")
+    cutting.add_argument("path")
+    cutting.add_argument("start", type=int)
+    cutting.add_argument("end", type=int)
+    cutting.add_argument("--note")
+    cutting.add_argument("--version", required=True, help="the source's version read (`wpt-dataset show source ID`)")
+    cutting.set_defaults(run=cmd_cut)
     unpack_ = commands.add_parser("unpack")
     unpack_.add_argument("id")
     unpack_.add_argument("folder")
@@ -685,32 +609,14 @@ def main(argv=None):
     build.add_argument("--skip-failed", action="store_true",
                        default=os.environ.get("WPT_SKIP_FAILED", "") in ("1", "true", "yes"),
                        help="leave out admitted sources that fail and list them in the dataset record, instead of "
-                            "stopping (a source not in the store is always left out and listed); a new vocabulary "
-                            "still needs every source (WPT_SKIP_FAILED)")
+                            "stopping (a source not in the store, or whose cut or patch does not apply, is always "
+                            "left out and listed); a new vocabulary still needs every source (WPT_SKIP_FAILED)")
     build.set_defaults(run=cmd_build)
-    commands.add_parser("migrate").set_defaults(run=cmd_migrate)
-    commands.add_parser("source-drafters").set_defaults(run=cmd_source_drafters)
-    drafting = commands.add_parser("source-drafter")
-    drafting.add_argument("target", metavar="NAME|FILE",
-                          help="a built-in source drafter, or a Python file defining one")
-    drafting.add_argument("--by", required=True, help="who drafts: the `by` of each draft's decision (under-review)")
-    drafting.add_argument("--set", action="append", default=[], metavar="SETTING=VALUE",
-                         help="change one of the source drafter's settings (SETTINGS), of its default's type")
-    drafting.add_argument("--only", action="append", default=[], metavar="CANDIDATE",
-                         help="draft only this candidate, by its name or the id of its source (@FILE: those the "
-                              "file lists)")
-    drafting.add_argument("--again", action="store_true", help="draft the chosen candidates even when done before")
-    drafting.add_argument("--started-by", default="", help="who started the run, kept in its record (wpt-web "
-                                                          "starts again the runs it started that did not finish)")
-    drafting.set_defaults(run=cmd_source_drafter)
-    monitoring_ = commands.add_parser("always-on-monitoring")
-    monitoring_.add_argument("--by", help="who drafts: the `by` of each draft's decision (under-review); default "
-                                          "machine:<this machine's host name>")
-    monitoring_.add_argument("--pause", type=int, metavar="SECONDS",
-                             default=os.environ.get("WPT_MONITORING_PAUSE") or monitoring.PAUSE,
-                             help="seconds between the end of a round and the start of the next "
-                                  "(WPT_MONITORING_PAUSE; default one week)")
-    monitoring_.set_defaults(run=cmd_always_on_monitoring)
+    migrating = commands.add_parser("migrate")
+    migrating.add_argument("--by", metavar="NAME",
+                           help="the person whose signed migration commit carries the license text decisions it "
+                                "writes")
+    migrating.set_defaults(run=cmd_migrate)
     _data_commands(commands)
     args = parser.parse_args(argv)
     args.arguments = sys.argv[1:] if argv is None else list(argv)  # as the run's record names them
@@ -773,6 +679,9 @@ def _data_commands(commands):
     writes(command("remove", cmd_remove, "id", "path"))
     tags = writes(command("tags", cmd_tags, "id", "path"), patch=False)
     tags.add_argument("tags", nargs="*")
+    found = command("add-license-text", cmd_add_license_text, "id").add_mutually_exclusive_group(required=True)
+    found.add_argument("--file", metavar="PATH", help="a file of the source's final tree")
+    found.add_argument("--page", metavar="ADDRESS", help="a license page downloaded with the source")
     command("conversations", cmd_conversations, "id", "path")
     conversation = command("conversation", cmd_conversation, "id", "path", text=True)
     conversation.add_argument("line", type=int)

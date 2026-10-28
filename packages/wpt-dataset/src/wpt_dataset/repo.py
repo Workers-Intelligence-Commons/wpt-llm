@@ -12,7 +12,9 @@ Every file under data/ is opened here and nowhere else
                       + tools.json, the shared pool of tools its programs answer (optional)
     data/allowed-signers                  SSH keys allowed to sign decisions
     data/allowed-gpg-keys.asc             GPG keys allowed to sign decisions (optional)
-    data/reviewed-license-texts.json      reviews of license texts, which the source drafters read
+    data/license-texts/<id>/license-text.json
+                                          a license text's decision, kind and license
+                      + license-text.txt  the text itself (optional)
 
 Every command reaches these files through a Repo, and so do wpt-web's HTTP
 API and the `wpt-dataset` commands that read and write them, which are thin
@@ -69,9 +71,7 @@ import json
 import os
 import posixpath
 import re
-import secrets
 import shutil
-import socket
 import subprocess
 import sys
 import sysconfig
@@ -89,17 +89,37 @@ from wpt_utils.programs import program
 
 from .errors import DataAccessRefused, InvalidFile, NotFound, OutdatedSchema, RuleViolation, StaleFile
 from .licenses import check_license
+from .license_check import Coverage, check_pattern, field_of, pattern_for, text_id
 from .pools import parse
 
 ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}")
 PATCH = re.compile(r"(\d{4})-[A-Za-z0-9._-]+\.patch")
 NAME = re.compile(r"[a-z0-9][a-z0-9._-]*")
-EMPTY_CHECKSUM = "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"  # an empty manifest
-DRAFT_CHECKSUM = "sha256:" + "0" * 64  # a new source's, until fill-checksum (CONTRIBUTING.md, "Adding a source")
-# the start of a decision's `by` that names a machine, not a person: a machine drafts (always-on monitoring), and
-# never admits or refuses; a person's name holds no ':'
+# the start of a decision's `by` that names a machine, not a person: a machine never admits or refuses; a person's
+# name holds no ':'
 MACHINE = "machine:"
+# the `by` of a license entry the service layer sends back to under-review (Repo.save), and of one a migration
+# leaves under review: no person decided it
+SERVICE = MACHINE + "wpt-dataset"
+# what a license entry's decision is about: a save that changes one of them, without deciding the entry anew,
+# sends it back to under-review
+DECIDED_ON = ("license", "place", "expected")
+# what a decided (admitted or refused) license entry's decision holds, beyond DECIDED_ON: its coverage, and its text
+# when its place is the entry itself (the statement); a commit that changes any of it needs an allowed signature
+# (Repo.signature_reasons)
+ENTRY_SIGNED = DECIDED_ON + ("paths",)
+# what a decided license text's decision holds besides its text (named by its id): the exact files it is found by
+TEXT_SIGNED = ("files",)
+# the license of a work in the public domain: its entry's text is the proof (death dates, publication law), and its
+# place may be the entry itself
+PUBLIC_DOMAIN = "LicenseRef-public-domain"
 SOURCE_FILE = "source.json"
+# a license text's id, the sha256 of its normalized text (license_check.text_id), and the files of its folder
+TEXT_ID = re.compile(r"[0-9a-f]{64}")
+TEXT_FILE, TEXT_ITSELF = "license-text.json", "license-text.txt"
+# the earlier shape of the license texts: one file of reviews by key, which `wpt-dataset migrate` turns into
+# license-text items
+EARLIER_REVIEWS = "reviewed-license-texts.json"
 # a key type of an allowed-signers line (ssh-keygen ALLOWED SIGNERS), followed by the key in base64
 SIGNER_KEY = re.compile(r"(?:^|\s)(?:ssh-[a-z0-9-]+|ecdsa-sha2-[a-z0-9-]+|sk-[a-z0-9@.-]+)\s+[A-Za-z0-9+/]+=*(?:\s|$)")
 GPG_BLOCK = re.compile(r"-----BEGIN PGP PUBLIC KEY BLOCK-----.+?-----END PGP PUBLIC KEY BLOCK-----", re.DOTALL)
@@ -133,8 +153,8 @@ KINDS = {kind.name: kind for kind in (
          "image-tools"),
     Kind("allowed-signers", "text", "SSH keys allowed to sign decisions", single="allowed-signers"),
     Kind("allowed-gpg-keys", "text", "GPG keys allowed to sign decisions", single="allowed-gpg-keys.asc"),
-    Kind("reviewed-license-texts", "json", "reviews of license texts by the sha256 of their text, which the source "
-         "drafters read", "reviewed-license-texts", single="reviewed-license-texts.json"),
+    Kind("license-text", "json", "a license text's decision, kind and license, "
+         "data/license-texts/<id>/license-text.json (<id>: the sha256 of its normalized text)", "license-text"),
 )}
 RECIPE_FOLDERS = {"mixture": "mixtures", "tokenizer": "tokenizers", "model": "models"}
 IMAGE_FILES = {"dockerfile": "Dockerfile", "image-lock": "lock.json", "image-licenses": "licenses.json",
@@ -142,11 +162,13 @@ IMAGE_FILES = {"dockerfile": "Dockerfile", "image-lock": "lock.json", "image-lic
 
 
 def address_hash(address: str) -> str:
-    """The 8 hex characters that end a source id."""
+    """The 8 hex characters that end a new source's id: given once, when the
+    source is created, and never derived from its address again."""
     return hashlib.sha256(address.encode()).hexdigest()[:8]
 
 
 def source_id(origin: str, item: str | None, address: str) -> str:
+    """The id a new source gets from its origin, item and first address."""
     parts = [origin] + ([item] if item else []) + [address_hash(address)]
     sid = "-".join(parts)
     if not ID.fullmatch(sid):
@@ -154,9 +176,33 @@ def source_id(origin: str, item: str | None, address: str) -> str:
     return sid
 
 
+def line_number(given: str) -> int | None:
+    """The line a save of a conversation or rating names: a number from 1,
+    or None for "new" (a line added at the end); NotFound for anything
+    else."""
+    if given == "new":
+        return None
+    if given.isdigit() and int(given) >= 1:
+        return int(given)
+    raise NotFound(f"no line {given!r}: a number from 1, or new")
+
+
 @cache
 def schema(kind: str) -> dict:
     return json.loads(resources.files(__package__).joinpath(f"schemas/{kind}.schema.json").read_text())
+
+
+INSIDE_SOURCES = ("conversation", "task", "rating")  # a chat file's lines, a task.json, a rating file's lines
+
+
+def schema_of(name: str) -> dict:
+    """The JSON schema of a JSON kind of data file, or of a shape inside a
+    source's files (INSIDE_SOURCES); NotFound for any other name."""
+    kind = KINDS.get(name)
+    found = kind.schema if kind is not None else name if name in INSIDE_SOURCES else None
+    if found is None:
+        raise NotFound(f"no JSON schema for {name!r}")
+    return schema(found)
 
 
 @cache
@@ -394,12 +440,6 @@ class Document:
     problems: list[str]
 
 
-def machine_name() -> str:
-    """This machine's host name marked as a machine's (MACHINE): the `by`
-    of the drafts always-on monitoring saves when no person is named."""
-    return MACHINE + socket.gethostname()
-
-
 def check_person(name: str, where: str):
     """RuleViolation for a person's name holding ':', which MACHINE keeps
     for a machine's name."""
@@ -408,9 +448,9 @@ def check_person(name: str, where: str):
 
 
 def check_decision(decision: dict, where: str):
-    """RuleViolation unless a decision's `by` is a person's name (check_person)
-    or, for a source under review only, a machine's (MACHINE<host>): a
-    machine never admits or refuses."""
+    """RuleViolation unless a decision's `by` (a source's, or a license
+    entry's) is a person's name (check_person) or, under review only, a
+    machine's (MACHINE<host>): a machine never admits or refuses."""
     by = decision["by"]
     if not by.startswith(MACHINE):
         check_person(by, where)
@@ -426,15 +466,17 @@ def check_decision(decision: dict, where: str):
 def empty_source(name: str, *, license: str, attribution: str, text: str, by: str, formats: dict[str, str],
                  tags=(), started: str | None = None) -> dict:
     """The source.json of a new `empty` source (CONTRIBUTING.md, "Adding your
-    own texts"): text written for WPT, under one license for all its files,
-    each file's format by its path, under review ("under-review") until a
-    maintainer decides."""
+    own texts"): text written for WPT, each file's format by its path, under
+    one license entry that covers the same paths, whose place is the entry
+    itself (no statement can exist in text WPT writes itself); the source
+    and its entry under review ("under-review") until a maintainer decides."""
     today = started or date.today().isoformat()
-    document = {"type": "empty", "address": f"empty:{name}", "revision": today,
-                "checksum": EMPTY_CHECKSUM,
-                "licenses": [{"license": license, "paths": ["**"], "attribution": attribution, "text": text}],
+    decision = {"decision": "under-review", "by": by, "date": today}
+    document = {"type": "empty", "address": f"empty:{name}",
+                "licenses": [{"license": license, "paths": list(formats), "attribution": attribution,
+                              "place": {"entry": True}, "text": text, "decision": dict(decision)}],
                 "formats": [{"format": kind, "paths": [path]} for path, kind in formats.items()],
-                "decision": {"decision": "under-review", "by": by, "date": today}}
+                "decision": decision}
     if tags:
         document["tags"] = [{"tags": list(tags), "paths": ["**"]}]
     return document
@@ -496,36 +538,6 @@ def _lock_path(root: Path) -> Path:
 
 _LOCKS: dict[Path, _RepositoryLock] = {}  # one per repository root, shared by its Repo objects
 _LOCKS_LOCK = threading.Lock()
-
-NAMES_FOLDER = "wpt-names"  # beside the lock file (with its leading dot, at a root): one file per name held
-_HELD: list[int] = []  # the descriptors of the names this process holds, open until it ends
-
-
-def _hold_name(root: Path, prefix: str) -> str:
-    """A name, prefix, a dash and a token, that this process holds until it
-    ends: the first one of the folder beside the lock file that no process
-    holds, or a new one there. Each name is a file the operating system
-    locks for its process, so two processes never hold one name at once."""
-    lock = _lock_path(root)
-    folder = lock.with_name(("." if lock.name.startswith(".") else "") + NAMES_FOLDER)
-    folder.mkdir(exist_ok=True)
-    found = sorted(path.name for path in folder.glob(f"{prefix}-*"))
-    while True:
-        name = found.pop(0) if found else f"{prefix}-{secrets.token_hex(4)}"
-        descriptor = os.open(folder / name, os.O_RDWR | os.O_CREAT, 0o644)
-        try:
-            if os.name == "nt":
-                import msvcrt
-                msvcrt.locking(descriptor, msvcrt.LK_NBLCK, 1)
-            else:
-                import fcntl
-                fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except OSError:  # another process holds it
-            os.close(descriptor)
-            continue
-        _HELD.append(descriptor)
-        return name
-
 
 def _locked(method):
     """The method, run while holding its repository's lock: a version check
@@ -683,18 +695,6 @@ class Repo:
                 return cls(folder)
         raise RuleViolation(f"no data/sources folder at or above {here}")
 
-    def hold_name(self, prefix: str) -> str:
-        """A name of this checkout, prefix, a dash and a token, that this
-        process holds until it ends: a name no running process holds, one
-        a process that ended held when there is one. It is kept in the
-        repository's git folder, beside its lock file, where git status
-        never lists it. A program names what it leaves to finish by it, and
-        takes it up again when it starts next."""
-        if not NAME.fullmatch(prefix):
-            raise RuleViolation(f"{prefix!r}: a name is lowercase a-z, 0-9, '.', '_' and '-'")
-        with self._lock:
-            return _hold_name(self.root, prefix)
-
     # -- where each kind lives ---------------------------------------------------
     def _kind(self, kind: str) -> Kind:
         if kind not in KINDS:
@@ -709,13 +709,16 @@ class Repo:
             if name != found.single:
                 raise NotFound(f"{kind} has one file, {found.single}, not {name!r}")
             return self._data / found.single
-        pattern = ID if kind == "source" else NAME
+        pattern = ID if kind == "source" else TEXT_ID if kind == "license-text" else NAME
         if not pattern.fullmatch(name) and not (kind == "source" and name in self.source_ids()):
             what = ("a source id is <origin>-<item>-<hash> or <origin>-<hash>, lowercase a-z 0-9 '-'"
-                    if kind == "source" else "a name is lowercase a-z, 0-9, '.', '_' and '-'")
+                    if kind == "source" else "a license text's id is the sha256 of its normalized text, 64 of "
+                    "0-9 a-f" if kind == "license-text" else "a name is lowercase a-z, 0-9, '.', '_' and '-'")
             raise RuleViolation(f"no {kind} {name!r}: {what}")
         if kind == "source":
             return self._data / "sources" / name / SOURCE_FILE
+        if kind == "license-text":
+            return self._data / "license-texts" / name / TEXT_FILE
         if kind in RECIPE_FOLDERS:
             return self._data / "recipes" / RECIPE_FOLDERS[kind] / f"{name}.json"
         if kind == "lock":
@@ -743,6 +746,8 @@ class Repo:
             return [found.single] if (self._data / found.single).is_file() else []
         if kind == "source":
             return self.source_ids()
+        if kind == "license-text":
+            return self.license_text_ids()
         if kind in RECIPE_FOLDERS:
             folder = self._data / "recipes" / RECIPE_FOLDERS[kind]
             return sorted(p.stem for p in folder.glob("*.json") if not p.name.endswith(".lock.json")) \
@@ -786,7 +791,9 @@ class Repo:
         if kind == "source":
             return self.check_source(name)
         try:
-            if kind in RECIPE_FOLDERS:
+            if kind == "license-text":
+                self._check_license_text(name, load_json(self._path(kind, name), kind))
+            elif kind in RECIPE_FOLDERS:
                 self._check_recipe(kind, name)
             elif kind == "dockerfile":
                 self._image_folder(name)
@@ -805,11 +812,16 @@ class Repo:
         return sorted(p.name for p in folder.iterdir() if p.is_dir()) if folder.is_dir() else []
 
     def source(self, sid: str) -> Source:
+        patches = self.patches(sid)  # NotFound first
+        return Source(sid, load_json(self._data / "sources" / sid / SOURCE_FILE, "source"), patches)
+
+    def patches(self, sid: str) -> list[Patch]:
+        """A source's patches, in file-name order, whatever the shape of its
+        source.json (a migration reads them before the source can be read)."""
         folder = self._data / "sources" / sid
         if not ID.fullmatch(sid) and sid not in self.source_ids() or not folder.is_dir():
             raise NotFound(f"no source {sid}")
-        patches = [Patch(p.name, p.read_bytes()) for p in sorted(folder.iterdir()) if p.suffix == ".patch"]
-        return Source(sid, load_json(folder / SOURCE_FILE, "source"), patches)
+        return [Patch(p.name, p.read_bytes()) for p in sorted(folder.iterdir()) if p.suffix == ".patch"]
 
     def sources(self, note=None) -> list[Source]:
         """Every source. With a function as note, a source whose license text
@@ -841,13 +853,38 @@ class Repo:
         path = self._path(kind, name)
         return load_json(path, kind) if path.is_file() else None
 
-    def reviewed_license_texts(self) -> dict[str, dict]:
-        """The `texts` of data/reviewed-license-texts.json, validated: {key:
-        review} (licenses.reviewed finds a file's review); {} without the
-        file."""
-        kind = KINDS["reviewed-license-texts"]
-        path = self._path(kind.name, kind.single)
-        return load_json(path, kind.name)["texts"] if path.is_file() else {}
+    def license_text_ids(self) -> list[str]:
+        """The ids of the license texts, sorted: the folders of
+        data/license-texts/ that hold a license-text.json."""
+        folder = self._data / "license-texts"
+        return sorted(p.name for p in folder.iterdir() if (p / TEXT_FILE).is_file()) if folder.is_dir() else []
+
+    def license_texts(self) -> dict[str, dict]:
+        """{id: license-text.json} of every license text, validated
+        (license_check.LicenseTexts finds a file's text among them)."""
+        return {text: load_json(self._path("license-text", text), "license-text")
+                for text in self.license_text_ids()}
+
+    def license_text_itself(self, text: str) -> bytes | None:
+        """The bytes of a license text's license-text.txt, or None when it
+        has none."""
+        path = self._path("license-text", text).parent / TEXT_ITSELF
+        return path.read_bytes() if path.is_file() else None
+
+    def earlier_reviews(self) -> dict | None:
+        """The `texts` of data/reviewed-license-texts.json, the earlier shape
+        of the license texts, as it is ({key: review}), for `wpt-dataset
+        migrate`; None without the file. InvalidFile when it does not parse."""
+        path = self._data / EARLIER_REVIEWS
+        if not path.is_file():
+            return None
+        try:
+            texts = json.loads(path.read_text(encoding="utf-8")).get("texts")
+        except (UnicodeDecodeError, json.JSONDecodeError, AttributeError) as error:
+            raise InvalidFile(f"data/{EARLIER_REVIEWS}: {error}") from error
+        if not isinstance(texts, dict):
+            raise InvalidFile(f"data/{EARLIER_REVIEWS}: no `texts` object")
+        return texts
 
     def image_names(self) -> list[str]:
         folder = self._data / "images"
@@ -904,8 +941,14 @@ class Repo:
             except (InvalidFile, OutdatedSchema, RuleViolation) as error:
                 problems.append(str(error))
 
+        text_ids = set(self.license_text_ids())
         for sid in self.source_ids():
-            problems += self.check_source(sid)
+            problems += self.check_source(sid, text_ids)
+        for text in sorted(text_ids):
+            problems += self.problems("license-text", text)
+        if (self._data / EARLIER_REVIEWS).is_file():
+            problems.append(f"data/{EARLIER_REVIEWS}: an earlier shape (the reviews of license texts in one file); "
+                            f"run `wpt-dataset migrate`, which makes each a license text of data/license-texts/")
         for kind in RECIPE_FOLDERS:
             for name in self.names(kind):
                 attempt(self._check_recipe, kind, name)
@@ -914,26 +957,34 @@ class Repo:
                 attempt(load_json, self._path("lock", name), "lock")
         for name in self.image_names():
             attempt(self._check_image, name)
-        for kind in ("allowed-signers", "allowed-gpg-keys", "reviewed-license-texts"):
+        for kind in ("allowed-signers", "allowed-gpg-keys"):
             for name in self.names(kind):
                 problems += self.problems(kind, name)
         return problems
 
-    def check_source(self, sid) -> list[str]:
+    def check_source(self, sid, text_ids=None) -> list[str]:
         """Every rule on one source that needs no download: [] or one problem."""
         try:
-            self._check_source_document(sid, load_json(self._data / "sources" / sid / SOURCE_FILE, "source"))
+            self._check_source_document(sid, load_json(self._data / "sources" / sid / SOURCE_FILE, "source"),
+                                        text_ids)
         except (InvalidFile, OutdatedSchema, RuleViolation) as error:
             return [str(error)]
         return []
 
-    def check_fetched(self, sid: str, store, telemetry=None) -> tuple[int, int, dict]:
+    def check_fetched(self, sid: str, store, telemetry=None) -> tuple[int, int, dict, list]:
         """The rules on a fetched source, as `wpt-dataset check --fetch`
-        applies them: its checksum, cuts, patches, license and format maps,
+        applies them: its cuts, patches, license and format maps,
         and each file converted (chat and task files checked, the texts
         pointer tasks point to read from their sources and checked against
-        their sha256). Returns (entries, Markdown documents, {records file:
-        what it left out})."""
+        their sha256), and the statement at each license entry's place
+        (kept.statements). Returns (entries, Markdown documents, {records
+        file: what it left out}, the license_check.Statement of each entry
+        whose statement does not let its files train: not there, no
+        license text or one it does not expect, or a text not admitted).
+        Those are reported, not refused: a new source's texts start under
+        review, and the build leaves only that entry's files out."""
+        from .kept import statements
+        from .license_check import LicenseTexts
         from .manifest import SYMLINK
         from .markdown import documents, format_of
         from .sources import source_tree
@@ -948,40 +999,59 @@ class Repo:
                   if entry.mode != SYMLINK and format_of(source, path)["format"] != "task"}
         converted = sum(1 for _ in documents(source, tree, store, self, skipped, only=others))
         fill(list(of_source(source, tree, store, self).values()), self, store)
-        return len(tree), converted, skipped
+        found = statements(source, tree, store, LicenseTexts(self.license_texts()))
+        return len(tree), converted, skipped, [statement for statement in found if not statement.admitted]
 
-    def fill_checksum(self, sid: str, store, session, telemetry=None) -> tuple[str, dict[str, str]]:
-        """Fill in a draft source's checksum, excluding each file that is not
-        text (encoding.py) by its exact path, from one fetch kept in
-        session (download.fill), and write source.json. Returns (checksum,
-        {path excluded: why}). RuleViolation when the checksum is not
-        DRAFT_CHECKSUM."""
-        from .download import fill
+    def _check_license_text(self, text, document):
+        """The rules on a license text beyond its schema: a machine never
+        admits or refuses it, and its folder holds license-text.json and,
+        optionally, license-text.txt, whose normalized text has its id and
+        whose sha256 it lists."""
+        where = self.relative("license-text", text)
+        check_decision(document["decision"], where)
+        folder = self._path("license-text", text).parent
+        held = [p.name for p in folder.iterdir()] if folder.is_dir() else []
+        if unexpected := sorted(name for name in held if name not in (TEXT_FILE, TEXT_ITSELF)):
+            raise RuleViolation(f"{where}: unexpected file {unexpected[0]} beside it (a license text's folder holds "
+                                f"{TEXT_FILE} and, optionally, {TEXT_ITSELF})")
+        itself = folder / TEXT_ITSELF
+        if itself.is_file():
+            content = itself.read_bytes()
+            if text_id(content) != text:
+                raise RuleViolation(f"{where}: {TEXT_ITSELF}'s normalized text has the id {text_id(content)}, not "
+                                    f"{text}")
+            if _sha256(content) not in document["files"]:
+                raise RuleViolation(f"{where}: `files` does not list the sha256 of {TEXT_ITSELF}")
 
-        version = self.version("source", sid)
-        source = self.source(sid)
-        if source.data["checksum"] != DRAFT_CHECKSUM:
-            raise RuleViolation(f"{sid}: its checksum is filled in already; `wpt-dataset manifest {sid}` prints the "
-                                f"upstream's, `wpt-dataset check --fetch {sid}` checks it")
-        document, excluded = fill(source, store, session, telemetry)
-        self.save_source(sid, document, version)
-        return document["checksum"], excluded
-
-    def _check_source_document(self, sid, document):
+    def _check_source_document(self, sid, document, text_ids=None):
+        """The source rules that need no download; text_ids: the ids of the
+        license texts (read here when not given)."""
         if not ID.fullmatch(sid):
             raise RuleViolation(f"{sid}: a source id is <origin>-<item>-<hash> or <origin>-<hash>, lowercase a-z 0-9 '-'")
         check_decision(document["decision"], sid)
-        expected = address_hash(document["address"])
-        if not sid.endswith("-" + expected):
-            raise RuleViolation(f"{sid}: the id must end with {expected}, the hash of its address")
         if "addresses" in document:
             if document["address"] != document["addresses"][0]["address"]:
-                raise RuleViolation(f"{sid}: `address` must be the first of `addresses`, which gives the id")
+                raise RuleViolation(f"{sid}: `address` must be the first of `addresses`")
             folders = [part["folder"] for part in document["addresses"]]
             if len({folder.casefold() for folder in folders}) != len(folders):
                 raise RuleViolation(f"{sid}: each of `addresses` needs a folder of its own")
-        for entry in document["licenses"]:
+        for number, entry in enumerate(document["licenses"], start=1):
+            where = f"{sid}: license entry {number}"
             check_license(entry["license"], sid)
+            check_decision(entry["decision"], where)
+            for pattern in entry["paths"]:
+                check_pattern(pattern, where)
+            if "entry" in entry["place"]:
+                if document["type"] != "empty" and entry["license"] != PUBLIC_DOMAIN:
+                    raise RuleViolation(f"{where}: the entry itself is its place only where no statement can exist "
+                                        f"in the content: in an empty source (text WPT writes itself), or for "
+                                        f"{PUBLIC_DOMAIN} (a public-domain proof); name the file, field or page "
+                                        f"that states its license")
+            elif field_of(entry) is None:
+                text_ids = set(self.license_text_ids()) if text_ids is None else text_ids
+                if unknown := [text for text in entry["expected"] if text not in text_ids]:
+                    raise RuleViolation(f"{where}: expects {', '.join(unknown)}, not the id of a license text "
+                                        f"(data/license-texts/)")
         numbers = []
         folder = self._data / "sources" / sid
         for path in folder.iterdir() if folder.is_dir() else ():
@@ -993,9 +1063,6 @@ class Repo:
             numbers.append(int(match[1]))
         if sorted(numbers) != list(range(1, len(numbers) + 1)):
             raise RuleViolation(f"{sid}: patches must be numbered 0001, 0002, ... without gaps")
-        for cut in document.get("cuts", []):
-            if cut["end"] <= cut["start"]:
-                raise RuleViolation(f"{sid}: cut on {cut['path']} ends at or before its start")
         if "held_out_by" in document:
             try:
                 re.compile(document["held_out_by"]["pattern"])
@@ -1047,6 +1114,8 @@ class Repo:
             validate(content, found.schema, where)
         if kind == "source":
             self._check_source_document(name, content)
+        elif kind == "license-text":
+            self._check_license_text(name, content)
         elif kind == "mixture":
             check_mixture(content, where)
         elif kind == "image-tools":
@@ -1066,7 +1135,9 @@ class Repo:
         JSON kind, text for a text kind. version is what the caller read
         ("" for a new file): StaleFile when the file is not at that version
         any more. InvalidFile, OutdatedSchema or RuleViolation say why the
-        check refuses the content; then nothing is written. Text is written
+        check refuses the content; then nothing is written. A source's
+        license entry whose license, place or expected texts the save
+        changes goes back to under-review (sent_back). Text is written
         as UTF-8 with \\n line ends; JSON over an existing file keeps its
         layout where the meaning did not change (keep_layout). Returns the
         new version."""
@@ -1077,9 +1148,67 @@ class Repo:
         if found.form == "text" and not isinstance(content, str):
             raise InvalidFile(f"{self.relative(kind, name)}: send text")
         self._fresh(path, version)
+        if kind == "source" and version:
+            try:
+                content = sent_back(json.loads(path.read_text(encoding="utf-8")), content)
+            except (UnicodeDecodeError, json.JSONDecodeError):
+                pass  # nothing held to compare with: the save writes what it was given
         self._rules(kind, name, content)
         data = self._json_text(path, content) if found.form == "json" else content.replace("\r\n", "\n")
         return self._write_data(path, data.encode("utf-8"))
+
+    def add_found_license_text(self, sid: str, place: dict, store) -> tuple[str, str | None]:
+        """Add the license text found at a place of the source ({"file":
+        path} of its final tree, or {"page": address} downloaded with it),
+        as the license check reads it there, when no license text holds it
+        yet: a new item under review by SERVICE, its id the text's
+        (text_id), its file's sha256 in `files`, where it was found (the
+        path, or the page's address), its bytes as license-text.txt. A
+        person reads it and decides it. Returns (its id, its place in the
+        repository; None when an item holds that text already, and nothing
+        is written). NotFound when the source, its file or its stored page
+        is not there; NotDownloaded when the store does not hold the
+        source; RuleViolation for another kind of place."""
+        from .sources import license_page
+
+        if set(place) == {"file"}:
+            content = self.read_source_file(sid, place["file"], store)[1]
+            where = place["file"]
+        elif set(place) == {"page"}:
+            content, where = license_page(self.source(sid), store, place["page"]), place["page"]
+            if content is None:
+                raise NotFound(f"{sid}: the store holds no license page {where} for it; `wpt-dataset download "
+                               f"{sid}` fetches it with the source")
+        else:
+            raise RuleViolation(f"{sid}: a license text is found at a file or a page, not at {place}")
+        text = text_id(content)
+        if self.exists("license-text", text):
+            return text, None
+        document = {"decision": {"decision": "under-review", "by": SERVICE, "date": date.today().isoformat(),
+                                 "reason": "first met in a source: a person reads it"},
+                    "kind": "license", "found": {"source": sid, "path": where}, "files": [_sha256(content)],
+                    "explanation": ""}
+        return text, self.add_license_text(text, document, content)
+
+    @_locked
+    def add_license_text(self, text: str, document: dict, itself: bytes | None) -> str:
+        """Write a new license text (one first met in a source:
+        add_found_license_text, and the migration's), with its text itself
+        as license-text.txt when given, after the rules of `check`. StaleFile when it exists already; InvalidFile,
+        OutdatedSchema or RuleViolation say why the check refuses it, and
+        then nothing is written. Returns its place in the repository."""
+        path = self._path("license-text", text)
+        self._fresh(path, "")
+        where = self.relative("license-text", text)
+        validate(document, "license-text", where)
+        if itself is not None and (text_id(itself) != text or _sha256(itself) not in document["files"]):
+            raise RuleViolation(f"{where}: its text's normalized text has another id, or `files` does not list its "
+                                f"sha256")
+        self._check_license_text(text, document)
+        if itself is not None:
+            self._write_data(path.parent / TEXT_ITSELF, itself)
+        self._write_data(path, self._json_text(path, document).encode("utf-8"))
+        return where
 
     def save_source(self, sid, document, version) -> str:
         """save("source", ...): source.json, after the source rules."""
@@ -1200,7 +1329,11 @@ class Repo:
         the source then gives exactly those files and passes the rules of
         `wpt-dataset check --fetch`. formats: format entries source.json gets
         first, for new files no entry covers yet; tags: tag entries it gets
-        first, the same way; both are undone when the patch is refused.
+        first, the same way. In an empty source, a new file no license entry
+        covers yet gets its pattern (license_check.pattern_for: its top
+        folder, its kind at the top, or its path) added to the source's one
+        license entry (RuleViolation when it has several: a person says which
+        covers it). All are undone when the patch is refused.
         version is the source_version the caller read.
         A path that is a symbolic link, or lies under one, is refused
         (RuleViolation), except for removing the link itself: a write never
@@ -1211,10 +1344,21 @@ class Repo:
             raise StaleFile(f"{self.relative('source', sid).rsplit('/', 1)[0]}: changed on disk since it was read")
         source_path = self._path("source", sid)
         before = source_path.read_bytes()
+        source = self.source(sid)
+        added = [path for path, content in changes.items() if content is not None]
+        covered = sorted({pattern_for(path) for path in self.uncovered(sid, added, source)}) \
+            if source.data["type"] == "empty" else []
         try:
-            if formats or tags:
+            if formats or tags or covered:
                 document = json.loads(before)
+                licenses = document["licenses"]
+                if covered:
+                    if len(licenses) != 1:
+                        raise RuleViolation(f"{sid}: {', '.join(covered)}: no license entry covers it, and the "
+                                            f"source has {len(licenses)}; add it to the one that covers it")
+                    licenses = [{**licenses[0], "paths": licenses[0]["paths"] + list(covered)}]
                 self.save("source", sid, {**document, "formats": document["formats"] + list(formats),
+                                          "licenses": licenses,
                                           **({"tags": document.get("tags", []) + list(tags)} if tags else {})},
                           _sha256(before))
             with tempfile.TemporaryDirectory(prefix="wpt-change-") as tmp:
@@ -1421,6 +1565,11 @@ class Repo:
         formats = [] if self._format_entry(sid, path) else [{"format": format, "paths": [path]}]
         return self.change_source_files(sid, {path: content}, patch, version, store, formats)
 
+    def uncovered(self, sid, paths, source: Source | None = None) -> list[str]:
+        """Those of paths no license entry of the source covers."""
+        coverage = Coverage((source or self.source(sid)).data["licenses"])
+        return [path for path in paths if not coverage.all.matching(path)]
+
     def _written_for_wpt(self, sid, source: Source | None = None):
         """RuleViolation unless the source (read here when not given) is an
         `empty` one: conversations, tasks and ratings are text written for
@@ -1621,37 +1770,62 @@ class Repo:
     def signature_reasons(self, base: str | None, commit: str, changed: list[str]) -> list[str]:
         """Why a commit that changes these paths (from base, None for a first
         commit) must be signed by an allowed key: the lists of keys it
-        changes, and each source.json whose decision it changes."""
+        changes, each source.json whose source decision it changes, each
+        whose decided license entries it changes, and each license text
+        whose decision it changes (all three levels of decision are
+        signed). A decided (admitted or refused) entry or license text is
+        compared with what its decision holds (ENTRY_SIGNED, TEXT_SIGNED),
+        whatever its position: a change to it, or a decision that moves to
+        other content, needs a signature as a changed decision does."""
         lists = [f"data/{KINDS[kind].single}" for kind in ("allowed-signers", "allowed-gpg-keys")]
         reasons = [p for p in changed if p in lists]
         for path in changed:
             if path.startswith("data/sources/") and path.endswith(f"/{SOURCE_FILE}"):
-                if self._decision_at(base, path) != self._decision_at(commit, path):
+                before, after = self._decisions_at(base, path), self._decisions_at(commit, path)
+                if before[0] != after[0]:
                     reasons.append(f"decision in {path}")
+                if before[1] != after[1]:
+                    reasons.append(f"decided license entries in {path}")
+            elif path.startswith("data/license-texts/") and path.endswith(f"/{TEXT_FILE}"):
+                if self._decisions_at(base, path) != self._decisions_at(commit, path):
+                    reasons.append(f"license text decision in {path}")
         return reasons
 
-    def _decision_at(self, commit, path):
+    def _decisions_at(self, commit, path):
+        """(the decision, what decided items hold) of a source.json or a
+        license-text.json at a commit: for a source, each decided license
+        entry as what its decision holds (signed_entry), in a fixed order;
+        for a license text, what its decision holds (TEXT_SIGNED) when it is
+        decided, else None. (None, None) when the commit does not hold it,
+        and "unreadable" for what cannot be read."""
         if commit is None:
-            return None
+            return None, None
         data = self._show(commit, path)
         if data is None:
-            return None
+            return None, None
         try:
-            return json.loads(data).get("decision")
+            document = json.loads(data)
+            decision = document.get("decision")
+            if path.endswith(f"/{TEXT_FILE}"):
+                return decision, [document.get(key) for key in TEXT_SIGNED] if _decided(decision) else None
+            licenses = document.get("licenses")
+            entries = sorted(json_text(signed_entry(entry)) for entry in licenses
+                             if _decided(entry.get("decision"))) if isinstance(licenses, list) else None
+            return decision, entries
         except (json.JSONDecodeError, AttributeError):
-            return "unreadable"
+            return "unreadable", "unreadable"
 
     # -- migrations ------------------------------------------------------------------
     def versioned(self) -> list[tuple[str, str]]:
         """(kind, name) of every existing JSON file that carries its shape:
         sources, recipes, locks of existing tokenizer recipes, image files, the
-        reviewed license texts."""
+        license texts."""
         found = [("source", sid) for sid in self.source_ids()]
         found += [(kind, name) for kind in RECIPE_FOLDERS for name in self.names(kind)]
         found += [("lock", name) for name in self.names("tokenizer") if self.exists("lock", name)]
         found += [(kind, name) for name in self.image_names()
                   for kind in ("image-lock", "image-licenses", "image-tools") if self.exists(kind, name)]
-        found += [("reviewed-license-texts", name) for name in self.names("reviewed-license-texts")]
+        found += [("license-text", text) for text in self.license_text_ids()]
         return found
 
     def raw(self, kind: str, name: str):
@@ -1675,6 +1849,17 @@ class Repo:
         path = self._path(kind, name)
         self._write_data(path, self._json_text(path, document).encode("utf-8"))
         return self.relative(kind, name)
+
+    @_locked
+    def rewrite_earlier_reviews(self, texts: dict | None):
+        """Write data/reviewed-license-texts.json holding only these reviews,
+        or remove it (None): `wpt-dataset migrate` alone calls this, once it
+        made the others license texts."""
+        path = self._data / EARLIER_REVIEWS
+        if texts is None:
+            self._target(path).unlink(missing_ok=True)
+        else:
+            self._write_data(path, self._json_text(path, {"texts": texts}).encode("utf-8"))
 
     def validate_file(self, kind: str, name: str):
         load_json(self._path(kind, name), kind)
@@ -1714,6 +1899,53 @@ def _remove_empty_parents(folder: Path, top: Path):
     while folder != top and folder.is_dir() and not any(folder.iterdir()):
         folder.rmdir()
         folder = folder.parent
+
+
+def _entries_of(document) -> list | None:
+    licenses = document.get("licenses") if isinstance(document, dict) else None
+    return licenses if isinstance(licenses, list) and all(isinstance(e, dict) for e in licenses) else None
+
+
+def _decided(decision) -> bool:
+    """Whether a decision admits or refuses (anything but under-review)."""
+    return not (isinstance(decision, dict) and decision.get("decision") == "under-review")
+
+
+def signed_entry(entry: dict) -> dict:
+    """What a license entry's decision holds: ENTRY_SIGNED, its text when its
+    place is the entry itself, and the decision."""
+    keys = ENTRY_SIGNED + (("text",) if entry.get("place") == {"entry": True} else ())
+    return {**{key: entry.get(key) for key in keys}, "decision": entry.get("decision")}
+
+
+def sent_back(old, new, today: str | None = None):
+    """new, a source.json about to replace old, with each license entry the
+    save changes sent back to under-review: an entry that old does not hold
+    with the same license, place and expected texts (DECIDED_ON) and the
+    same decision, and whose decision is the one old held at its position
+    (the save does not decide it anew). Its decision becomes under-review
+    by SERVICE, with today's date and why. An entry already under review,
+    an entry old holds as it is (at any position), and an entry the save
+    decides anew (its decision is not old's at its position) keep theirs;
+    the signature of the commit that holds a decision is checked there
+    (commits.py). What is not a source with license entries is new as it
+    came: the check says what is wrong with it."""
+    before, after = _entries_of(old), _entries_of(new)
+    if before is None or after is None:
+        return new
+    held = [([entry.get(key) for key in DECIDED_ON], entry.get("decision")) for entry in before]
+    entries = []
+    for number, entry in enumerate(after):
+        decision = entry.get("decision")
+        unchanged = ([entry.get(key) for key in DECIDED_ON], decision) in held
+        decided_anew = number >= len(before) or before[number].get("decision") != decision
+        if unchanged or decided_anew or not isinstance(decision, dict) or decision.get("decision") == "under-review":
+            entries.append(entry)
+            continue
+        entries.append({**entry, "decision": {"decision": "under-review", "by": SERVICE,
+                                              "date": today or date.today().isoformat(),
+                                              "reason": "its license, place or expected texts changed"}})
+    return {**new, "licenses": entries}
 
 
 def check_mixture(mixture: dict, path):

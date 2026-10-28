@@ -95,20 +95,22 @@ def notice(provenance) -> str:
         f"Project: {REPOSITORY}",
         *_built_from(provenance), "", "",
         "Sources this model learned from", "",
-        "Each source with its exact revision, and for each license the paths it",
-        "covers and the credit it asks for, as recorded when the dataset was built.",
+        "Each source with the sha256 of the list of files it was built from (its",
+        "manifest), and for each license the paths it covers and the credit it asks",
+        "for, as recorded when the dataset was built.",
         "Their license texts follow the list, each text once.",
     ]
     texts = {}  # text -> the sources and licenses that give it
     for sid, source in sorted(learned_from(provenance).items()):
         addresses = [f"{part['address']} (into {part['folder']}/)" for part in source.get("addresses", [])]
         lines += ["", sid, *(f"  address:  {address}" for address in addresses or [source["address"]]),
-                  f"  revision: {source['revision']}"]
+                  f"  manifest: {source['manifest']}"]
         if source.get("credits"):
             lines.append(f"  credit of each document: {CREDITS_NAME}/{sid}.jsonl")
         for entry in source["licenses"]:
-            covers = ", ".join(entry["paths"]) + (f" (records whose license is {', '.join(map(repr, entry['values']))})"
-                                                  if entry.get("values") else "")
+            field = entry.get("place", {}).get("field")
+            covers = ", ".join(entry["paths"]) + (f" (records whose {field} is {', '.join(map(repr, entry['expected']))})"
+                                                  if field else "")
             lines += [f"  {entry['license']} for {covers}:",
                       *(f"    {line}" for line in entry["attribution"].splitlines())]
             if entry.get("text"):  # datasets built before shape 4 recorded no texts
@@ -144,8 +146,8 @@ def card(config, provenance, evals, drafter=None) -> str:
         *(f"{number}. {_step(step)}" for number, step in enumerate(provenance["steps"], start=1)), "",
         *_drafter(drafter),
         "## Sources", "",
-        "| Source | Revision | Licenses |", "|---|---|---|",
-        *(f"| {sid} | `{source['revision']}` | {', '.join(sorted({e['license'] for e in source['licenses']}))} |"
+        "| Source | Manifest | Licenses |", "|---|---|---|",
+        *(f"| {sid} | `{source['manifest']}` | {', '.join(sorted({e['license'] for e in source['licenses']}))} |"
           for sid, source in sorted(learned_from(provenance).items())), "",
         "Authors and the credit each source asks for: [NOTICE](NOTICE).", "",
         "## Evaluations", "",

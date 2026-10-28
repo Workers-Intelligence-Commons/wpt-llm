@@ -16,15 +16,18 @@ measured once when the folder is loaded.
 PyTorch and the model packages are imported only when a draft is asked
 for: the rest of wpt-web runs without them. One model folder stays loaded
 at a time, and is loaded again when a file of the folder or of its
-drafter/ changes (its weights included); one draft is written at a time. A
-folder that cannot be loaded (a broken checkpoint, a drafter of other
-weights, a tokenizer that does not match) is answered with 422. Only a fault
-of the folder's files is: missing or malformed files, a tokenizer or drafter
-that does not match, a state dict whose names or shapes do not fit. A fault
-of the machine (out of memory, a GPU driver error) is not the folder's: it
-is answered with 500, saying so. Any other exception (a bug, for example)
-is answered with 500 too, saying the fault is unknown, with its type and
-text: it blames neither the machine nor the folder.
+drafter/ changes (its weights included); one draft is written at a time.
+
+Every failure is a DraftFailed of its own kind, so the caller (the
+conversation editor's route) tells them apart by kind alone. A folder that
+cannot be loaded (a broken checkpoint, a drafter of other weights, a
+tokenizer that does not match) is Unloadable; only a fault of the folder's
+files is: missing or malformed files, a tokenizer or drafter that does not
+match, a state dict whose names or shapes do not fit. A fault of the
+machine (out of memory, a GPU driver error) is MachineFault, never the
+folder's. Any other exception while loading (a bug, for example) is
+UnknownFault, with its type and text: it blames neither the machine nor
+the folder.
 """
 
 import threading
@@ -35,39 +38,67 @@ from wpt_dataset.conversations import content_sha256
 MAX_NEW_TOKENS = 200  # as wpt-chat
 
 
+class DraftFailed(Exception):
+    """A draft that could not be written; each kind below names why. A
+    failed load leaves no model loaded; nothing else is changed."""
+
+
+class NoPyTorch(DraftFailed):
+    """PyTorch or the model packages are not installed on this machine."""
+
+
+class NotAModelFolder(DraftFailed):
+    """The folder holds no config.json."""
+
+
+class Unloadable(DraftFailed):
+    """A fault of the folder's files: missing or malformed files, a
+    tokenizer or drafter that does not match, a state dict whose names or
+    shapes do not fit. Its cause is that fault, and its text names it."""
+
+
+class MachineFault(DraftFailed):
+    """The machine failed while loading the model (out of memory, a CUDA
+    or HIP runtime error), not the folder."""
+
+
+class UnknownFault(DraftFailed):
+    """Loading the model failed with an exception known to be neither the
+    machine's nor the folder's (a bug, for example)."""
+
+
+class NotTokens(DraftFailed):
+    """The conversation cannot be written as tokens."""
+
+
+class EmptyDraft(DraftFailed):
+    """The model wrote nothing before ending its turn; asking again may
+    give a draft."""
+
+
 class Drafter:
     def __init__(self):
         self._lock = threading.Lock()
         self._loaded = None  # (folder, state of its files, model, drafter, costs, tokenizer, weights)
 
-    def draft(self, folder, conversation, max_new_tokens=None) -> tuple[int, dict]:
-        """(HTTP status, {"message": the drafted assistant message with its
-        metadata.draft}) or (status, {"problems": [...]})."""
+    def draft(self, folder, conversation, max_new_tokens=None) -> dict:
+        """The drafted assistant message, with its metadata.draft; one of
+        the DraftFailed kinds when none is written."""
         try:
             import torch  # noqa: F401  (the model packages need it)
             from wpt_inference import sample_tokens
             from wpt_tokenizer import Tokenizer, chat
         except ImportError as error:
-            return 503, {"problems": [f"{error}: install PyTorch first (uv run scripts/setup.py)"]}
+            raise NoPyTorch(f"{error}: install PyTorch first (uv run scripts/setup.py)") from error
         where = Path(folder).expanduser()
         if not (where / "config.json").is_file():
-            return 404, {"problems": [f"{folder} is not a WPT model folder (it has no config.json)"]}
+            raise NotAModelFolder(f"{folder} is not a WPT model folder (it has no config.json)")
         with self._lock:
-            try:
-                model, drafter, costs, tokenizer, weights = self._load(where.resolve())
-            except Unloadable as error:
-                cause = error.__cause__
-                return 422, {"problems": [f"{type(cause).__name__}: {cause}"]}
-            except Exception as error:  # not the folder's files: the machine, or an unknown fault
-                if _machines_fault(error):
-                    return 500, {"problems": [f"the machine failed while loading the model, not the model folder "
-                                              f"({type(error).__name__}: {error})"]}
-                return 500, {"problems": [f"unknown fault while loading the model; neither the machine nor the "
-                                          f"model folder is known to be the cause ({type(error).__name__}: {error})"]}
+            model, drafter, costs, tokenizer, weights = self._load(where.resolve())
             try:
                 ids = chat.prompt(tokenizer, conversation)
             except (KeyError, TypeError, ValueError) as error:
-                return 400, {"problems": [f"the conversation cannot be written as tokens: {error!r}"]}
+                raise NotTokens(f"the conversation cannot be written as tokens: {error!r}") from error
             generated = []
             for next_id in sample_tokens(model, ids, max_new_tokens=max_new_tokens or MAX_NEW_TOKENS,
                                          drafter=drafter, costs=costs):
@@ -76,14 +107,15 @@ class Drafter:
                 generated.append(next_id)
             content = chat.reply(tokenizer, generated)
         if not content:
-            return 422, {"problems": ["the model wrote nothing before ending its turn; ask again"]}
+            raise EmptyDraft("the model wrote nothing before ending its turn; ask again")
         draft = {"model": where.resolve().name, "weights": weights, "sha256": content_sha256(content), "edited": False}
-        return 200, {"message": {"role": "assistant", "content": content, "metadata": {"draft": draft}}}
+        return {"role": "assistant", "content": content, "metadata": {"draft": draft}}
 
     def _load(self, folder: Path):
         """(model, drafter, costs, tokenizer, weights) of the folder, from
-        the one loaded while none of its files changed; Unloadable, caused by
-        the error, when the folder cannot be loaded."""
+        the one loaded while none of its files changed; Unloadable,
+        MachineFault or UnknownFault, caused by the error, when it cannot be
+        loaded."""
         from wpt_inference import measure_costs
         from wpt_model import load_drafter, load_model, load_tokenizer, weight_hashes
         from wpt_tokenizer import Tokenizer
@@ -99,13 +131,22 @@ class Drafter:
                 drafter = load_drafter(folder, device)
                 weights = weight_hashes(folder)
             except Exception as error:
-                if not _folders_fault(error):
-                    raise  # not the folder's: the machine's, or unknown
-                raise Unloadable() from error
+                raise _load_failure(error) from error
             model.eval()
             costs = measure_costs(model, 1, drafter.block)  # this machine's pass times, once per folder
             self._loaded = (folder, state, model, drafter, costs, tokenizer, weights)
         return self._loaded[2:]
+
+
+def _load_failure(error: Exception) -> DraftFailed:
+    """The DraftFailed kind of a failure to load a model folder."""
+    if _folders_fault(error):
+        return Unloadable(f"{type(error).__name__}: {error}")
+    if _machines_fault(error):
+        return MachineFault(f"the machine failed while loading the model, not the model folder "
+                            f"({type(error).__name__}: {error})")
+    return UnknownFault(f"unknown fault while loading the model; neither the machine nor the model folder is "
+                        f"known to be the cause ({type(error).__name__}: {error})")
 
 
 def _folders_fault(error: Exception) -> bool:
@@ -129,10 +170,6 @@ def _machines_fault(error: Exception) -> bool:
     if isinstance(error, (MemoryError, torch.cuda.OutOfMemoryError)):
         return True
     return isinstance(error, RuntimeError) and ("CUDA" in str(error) or "HIP" in str(error))
-
-
-class Unloadable(Exception):
-    """A model folder that cannot be loaded; its cause says why."""
 
 
 def _files_state(folder: Path) -> tuple:

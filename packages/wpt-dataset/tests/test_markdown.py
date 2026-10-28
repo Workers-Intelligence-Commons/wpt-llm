@@ -30,8 +30,7 @@ FORMATS = [{"format": "xhtml", "paths": ["text/*.xhtml"]}, {"format": "text", "p
 def markdown_of(kit, repo, store, tmp_path, files, formats=FORMATS):
     tmp_path.mkdir(exist_ok=True)
     address, commit = kit.git_project(tmp_path / "book", files=files, executable=set(), symlinks={})
-    sid = kit.add_source(repo, store, "example", "book", {"type": "git", "address": address, "revision": commit,
-                                                           "formats": formats})
+    sid = kit.add_source(repo, store, "example", "book", {"type": "git", "address": address, "formats": formats})
     source = repo.source(sid)
     return {c.path: c.markdown for c in documents(source, source_tree(source, store)[0], store, repo)}
 
@@ -62,8 +61,7 @@ def test_code_outside_a_repository_names_its_path_without_a_root(kit, repo, stor
     folder, base = http_folder
     (folder / "run.py").write_bytes(b"print(1)\n")
     sid = kit.add_source(repo, store, "example", "script", {
-        "type": "http-file", "address": f"{base}/run.py", "revision": "2026-10-14",
-        "formats": [{"format": "code", "language": "python", "paths": ["**"]}]})
+        "type": "http", "address": f"{base}/run.py", "formats": [{"format": "code", "language": "python", "paths": ["**"]}]})
     source = repo.source(sid)
     assert [(c.path, c.markdown) for c in documents(source, source_tree(source, store)[0], store, repo)] == [
         ("run.py", b"```python path=\"run.py\"\nprint(1)\n```\n")]
@@ -118,8 +116,7 @@ def test_a_latin_1_gutenberg_page_becomes_utf_8_markdown_and_takes_a_removal_pat
     folder, base = http_folder
     (folder / "17489-h.htm").write_bytes(GUTENBERG.encode("latin-1"))
     sid = kit.add_source(repo, store, "gutenberg", "17489", {
-        "type": "http-file", "address": f"{base}/17489-h.htm", "revision": "2026-10-23",
-        "formats": [{"format": "html", "paths": ["**"]}]})
+        "type": "http", "address": f"{base}/17489-h.htm", "formats": [{"format": "html", "paths": ["**"]}]})
 
     def markdown():
         source = repo.source(sid)
@@ -269,8 +266,7 @@ def test_a_message_tree_gives_every_human_path_as_a_conversation(kit, repo, stor
         (folder / f"{item}.tar.gz").write_bytes(kit.tar_bytes(top=item, files={"messages.jsonl.gz": data},
                                                               executable=set(), symlinks={}))
         return kit.add_source(repo, store, "example", item, {
-            "type": "http-archive", "address": f"{base}/{item}.tar.gz", "revision": "2026-10-16",
-            "extract": {"strip": 1}, "formats": formats, "tags": [{"tags": ["answer-as-assistant"], "paths": ["**"]}]})
+            "type": "http", "address": f"{base}/{item}.tar.gz", "extract": {"strip": 1}, "formats": formats, "tags": [{"tags": ["answer-as-assistant"], "paths": ["**"]}]})
 
     sid = tree_source("talks", data)
 

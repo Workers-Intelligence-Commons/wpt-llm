@@ -19,6 +19,7 @@ from wpt_dataset.tasks import Task, Variant
 from wpt_eval import find, main
 from wpt_eval.attempts import Record
 
+ADMITTED = {"decision": "admitted", "by": "T", "date": "2026-10-17"}
 ROOT = Path(__file__).resolve().parents[3]  # the repository: its agent image holds the check library
 TASK = {"instructions": "Write hello into out.txt.", "image": "tiny",
         "limits": {"max_turns": 2, "max_tokens": 6, "command_seconds": 5}, "needs": [["write", "bash"]]}
@@ -40,12 +41,11 @@ def task_source(built, root, upstream, check="#!/bin/sh\necho 1\n", folders=("he
     for args in (["init", "-q"], ["add", "-A"], ["commit", "-q", "-m", "x"]):
         subprocess.run(["git", *args], cwd=upstream, env=GIT_ENV, check=True)
     commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=upstream, capture_output=True, text=True).stdout.strip()
-    data = {"type": "git", "address": str(upstream), "revision": commit,
-            "licenses": [{"license": "CC0-1.0", "paths": ["**"], "attribution": "Tasks, by Cy Author, 2026",
+    data = {"type": "git", "address": str(upstream), "licenses": [{"license": "CC0-1.0", "paths": ["**"], "attribution": "Tasks, by Cy Author, 2026",
                           "text": "Cy Author dedicates these tasks to the public domain.\n"}],
             "formats": [{"format": "task", "paths": ["**"]}], "tags": [{"tags": ["eval"], "paths": ["**"]}],
             "decision": {"decision": "admitted", "by": "T", "date": "2026-10-17"}}
-    data["checksum"] = built.checksum_of(data)
+    data = built.covered(data)
     sid = f"example-tasks-{address_hash(str(upstream))}"
     (root / "data" / "sources" / sid).mkdir()
     (root / "data" / "sources" / sid / "source.json").write_text(dump_json(data))
@@ -142,22 +142,23 @@ def test_the_shared_run_plays_real_attempts_in_containers(docker_runs, trained, 
 # -- the measures, on records made by hand ----------------------------------------------------------
 
 @pytest.fixture
-def repository(tmp_path, monkeypatch):
+def repository(tmp_path, monkeypatch, fetching):
     """tmp_path as a repository holding the agent image's check library;
     source(name, tags) writes an admitted source there and returns its id."""
     agent = tmp_path / "data" / "images" / "agent"
     agent.mkdir(parents=True)
     (tmp_path / "data" / "sources").mkdir()
+    fetching.write_texts(tmp_path)
     for name in ("Dockerfile", "wpt_check.py"):
         shutil.copy(ROOT / "data" / "images" / "agent" / name, agent / name)
     monkeypatch.chdir(tmp_path)
 
     def source(name, tags):
         address = f"https://example.org/{name}"
-        data = {"type": "git", "address": address, "revision": "0" * 40,
-                "licenses": [{"license": "CC0-1.0", "paths": ["**"], "attribution": "A", "text": "Public domain.\n"}],
-                "formats": [{"format": "text", "paths": ["**"]}], "tags": tags, "checksum": "sha256:" + "0" * 64,
-                "decision": {"decision": "admitted", "by": "T", "date": "2026-10-17"}}
+        data = {"type": "git", "address": address, "licenses": [{"license": "CC0-1.0", "paths": ["**/*.md", "**/*.py", "src/**"], "attribution": "A",
+                                                             **fetching.PLACE, "text": "Public domain.\n",
+                                                             "decision": ADMITTED}],
+                "formats": [{"format": "text", "paths": ["**"]}], "tags": tags, "decision": ADMITTED}
         sid = f"example-{name}-{address_hash(address)}"
         (tmp_path / "data" / "sources" / sid).mkdir(parents=True)
         (tmp_path / "data" / "sources" / sid / "source.json").write_text(dump_json(data))

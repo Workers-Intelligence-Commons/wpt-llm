@@ -47,6 +47,71 @@ def test_unsigned_decision_and_missing_sign_off_are_reported(kit, wpt_git):
     assert "no 'Signed-off-by: T <t@example.org>' line" in problems[1]
 
 
+def test_a_license_entry_s_decision_is_signed_as_the_source_s_is(kit, wpt_git):
+    # both levels of decision are a person's: a commit that changes only an entry's decision needs an allowed
+    # signature too, and one that changes only something else of the entry does not
+    path = wpt_git / "data" / "sources" / "example-x-12345678" / "source.json"
+
+    def write(entry_decision, attribution, *flags):
+        path.write_text(json.dumps({"decision": {"decision": "admitted"},
+                                    "licenses": [{"attribution": attribution, "decision": {"decision": entry_decision}}]}))
+        kit.run("git", "add", "-A", cwd=wpt_git)
+        kit.run("git", "commit", "-q", "-m", f"entry {entry_decision}", *flags, cwd=wpt_git)
+
+    write("under-review", "A", "-s", "-S")
+    write("admitted", "A", "-s")  # signed off, not signed
+    write("admitted", "B", "-s")  # the attribution only
+    head = kit.run("git", "rev-parse", "HEAD~1", cwd=wpt_git).decode()[:12]
+    assert check_commits(Repo(wpt_git), "HEAD~2..HEAD") == [
+        f"{head}: changes decided license entries in data/sources/example-x-12345678/source.json but is not signed "
+        "by an allowed key"]
+
+
+def test_an_admission_moved_to_other_content_is_signed_as_a_changed_decision_is(kit, wpt_git):
+    # an entry's decision holds its license, place, expected texts and coverage, whatever its position: a commit
+    # that swaps two entries' content while each position keeps its decision moves an admission to the other
+    # entry, and needs an allowed signature; one that only reorders the entries does not
+    path = wpt_git / "data" / "sources" / "example-x-12345678" / "source.json"
+    mit = {"license": "MIT", "paths": ["src/**"], "place": {"file": "LICENSE"}, "expected": ["a" * 64]}
+    gpl = {"license": "GPL-3.0-only", "paths": ["vendor/**"], "place": {"file": "COPYING"}, "expected": ["b" * 64]}
+    admitted, review = {"decision": "admitted"}, {"decision": "under-review"}
+
+    def write(entries, *flags):
+        path.write_text(json.dumps({"decision": admitted, "licenses": entries}))
+        kit.run("git", "add", "-A", cwd=wpt_git)
+        kit.run("git", "commit", "-q", "-m", "entries", *flags, cwd=wpt_git)
+
+    write([{**mit, "decision": admitted}, {**gpl, "decision": review}], "-s", "-S")
+    write([{**gpl, "decision": admitted}, {**mit, "decision": review}], "-s")  # swapped, not signed
+    write([{**gpl, "decision": admitted}, {**mit, "decision": review}][::-1], "-s")  # reordered only
+    write([{**mit, "decision": review}, {**gpl, "paths": ["**/*.c"], "decision": admitted}], "-s")  # coverage
+    swapped = kit.run("git", "rev-parse", "HEAD~2", cwd=wpt_git).decode()[:12]
+    widened = kit.run("git", "rev-parse", "HEAD", cwd=wpt_git).decode()[:12]
+    assert check_commits(Repo(wpt_git), "HEAD~3..HEAD") == [
+        f"{commit}: changes decided license entries in data/sources/example-x-12345678/source.json but is not "
+        "signed by an allowed key" for commit in (swapped, widened)]
+
+
+def test_a_license_text_s_decision_is_signed_as_a_source_s_is(kit, wpt_git):
+    # the third level of decision is a person's too: a commit that changes a license text's decision needs
+    # an allowed signature, and one that changes only its explanation does not
+    path = wpt_git / "data" / "license-texts" / ("a" * 64) / "license-text.json"
+    path.parent.mkdir(parents=True)
+
+    def write(decision, explanation, *flags):
+        path.write_text(json.dumps({"decision": {"decision": decision}, "explanation": explanation}))
+        kit.run("git", "add", "-A", cwd=wpt_git)
+        kit.run("git", "commit", "-q", "-m", f"text {decision}", *flags, cwd=wpt_git)
+
+    write("under-review", "A", "-s", "-S")
+    write("admitted", "A", "-s")  # signed off, not signed
+    write("admitted", "B", "-s")  # the explanation only
+    head = kit.run("git", "rev-parse", "HEAD~1", cwd=wpt_git).decode()[:12]
+    assert check_commits(Repo(wpt_git), "HEAD~2..HEAD") == [
+        f"{head}: changes license text decision in data/license-texts/{'a' * 64}/license-text.json but is not "
+        "signed by an allowed key"]
+
+
 def test_a_key_can_only_be_added_by_an_allowed_key(kit, wpt_git, tmp_path):
     commit(kit, wpt_git, "admitted", "-s", "-S")
     other = tmp_path / "other"

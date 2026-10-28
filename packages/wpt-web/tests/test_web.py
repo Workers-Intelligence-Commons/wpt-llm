@@ -4,16 +4,20 @@ import threading
 
 import pytest
 
+from wpt_dataset.license_check import text_id
 from wpt_dataset.repo import Repo, address_hash, dump_json
 from wpt_web import pages
 from wpt_web.server import make_server
 
 ADDRESS = "https://example.org/book.git"
 SID = f"example-book-{address_hash(ADDRESS)}"
+LICENSE_TEXT = "Copyright (c) 2026 Test Author\n\nPermission is hereby granted.\n"
+REVIEWED = text_id(LICENSE_TEXT.encode())  # the license text LICENSE_TEXT is, in the repository
 DOCUMENT = {
-    "type": "git", "address": ADDRESS, "revision": "0" * 40, "checksum": "sha256:" + "0" * 64,
-    "licenses": [{"license": "MIT", "paths": ["**"], "attribution": "Copyright (c) 2026 Test Author",
-                  "text": "Copyright (c) 2026 Test Author\n\nPermission is hereby granted.\n"}],
+    "type": "git", "address": ADDRESS,
+    "licenses": [{"license": "MIT", "paths": ["book/**"], "attribution": "Copyright (c) 2026 Test Author",
+                  "place": {"file": "book/LICENSE"}, "expected": [REVIEWED], "text": LICENSE_TEXT,
+                  "decision": {"decision": "under-review", "by": "Test Reviewer", "date": "2026-10-15"}}],
     "formats": [{"format": "text", "paths": ["**"]}],
     "decision": {"decision": "under-review", "by": "Test Reviewer", "date": "2026-10-15"},
 }
@@ -25,6 +29,10 @@ def web(tmp_path):
     (tmp_path / "wpt" / "data" / "sources" / SID).mkdir(parents=True)
     path = tmp_path / "wpt" / "data" / "sources" / SID / "source.json"
     path.write_text(dump_json(DOCUMENT), encoding="utf-8", newline="\n")
+    item = {"decision": {"decision": "admitted", "by": "Test Reviewer", "date": "2026-10-15"}, "kind": "license",
+            "license": "MIT", "files": [], "explanation": "test"}
+    (tmp_path / "wpt" / "data" / "license-texts" / REVIEWED).mkdir(parents=True)
+    (tmp_path / "wpt" / "data" / "license-texts" / REVIEWED / "license-text.json").write_text(json.dumps(item))
     static = tmp_path / "static"
     static.mkdir()
     (static / "index.html").write_text("<p>interface</p>")

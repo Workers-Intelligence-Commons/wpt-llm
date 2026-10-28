@@ -8,20 +8,24 @@ modify and improve. Anyone may serve WPT, for money too; whoever serves a
 modified version must share it. The principles are in the
 [charter](docs/charter.md).
 
-This repository is everything needed to rebuild a WPT model from nothing:
+This repository is everything needed to build a WPT model from nothing:
 the description of every source, the tools that fetch and check them, and
 the code that builds the data, trains, evaluates and runs the
 model. No checkpoint has been published yet.
 
 ## How it works
 
-**The repository is a lockfile, not a corpus.** Each source is a
-`data/sources/<id>/source.json`: its exact address, revision and checksum,
-the license of every path with the credit it asks for, how each file
-becomes Markdown, and the signed human decision that admitted or refused
-it. The data itself is downloaded into a store you control (a folder or
-an S3 bucket) and checked against its checksum, so anyone can rebuild
-exactly the same dataset. WPT hosts no data.
+**The repository describes a corpus; it does not hold one.** Each source
+is a `data/sources/<id>/source.json`: the address its content is fetched
+from, the license of every path with the place where its license
+statement must be found and the credit it asks for, how each file becomes
+Markdown, and the signed human decisions that admit or refuse it. The data
+itself is downloaded into a store you control (a folder or an S3 bucket),
+as upstream serves it when asked, and every build checks each license
+statement against the bytes the store holds. A rebuild gives today's
+content, license-checked, not the same bytes as an earlier one. The
+document list a model's dataset keeps (the sha256 of each document's
+Markdown) records what that model trained on. WPT hosts no data.
 
 - **Clear licenses only.** A source enters only when its license lets the
   weights be distributed under the AGPL; when in doubt, it is refused
@@ -49,7 +53,7 @@ through Docker Desktop.
 uv run scripts/setup.py                            # the PyTorch build for this machine's GPU
 echo "WPT_STORE=file://$HOME/wpt-store" >> .env    # where fetched and built data lives
 
-uv run wpt-dataset download                        # every admitted source, checked, into the store
+uv run wpt-dataset download                        # every admitted source, into the store
 uv run wpt-dataset build classics-test --stream    # convert, tokenize; prints a dataset id
 scripts/detach.sh uv run wpt-train classics-test <dataset id> --stream --out runs/first
 uv run wpt-eval runs/first                         # memorization and other tests, into the model card

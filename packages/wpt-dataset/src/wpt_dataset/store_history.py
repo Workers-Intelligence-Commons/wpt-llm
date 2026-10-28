@@ -4,12 +4,14 @@ store database (wpt_store.database) alone."""
 from wpt_store.database import DOWNLOADED
 
 
-def downloads_used(store, checksums: dict[str, str]) -> dict[str, dict | None]:
+def downloads_used(store, manifests: dict[str, str]) -> dict[str, dict | None]:
     """{source id: {"session": the folder of its run record, "time": UTC}
-    of the last download that kept the source's files under the checksum
-    given, or None when the database holds no such download}."""
+    of the last download that got the source's upstream tree whose manifest
+    the store names by the sha256 given (the `manifest` its `downloaded`
+    line's got records), or None when the database holds no such
+    download}."""
     with store.database() as found:
-        rows = found.execute("SELECT source, checksum, session, MAX(time) FROM lines WHERE outcome = ?"
-                             " GROUP BY source, checksum", (DOWNLOADED,)).fetchall()
-    kept = {(source, checksum): {"session": session, "time": time} for source, checksum, session, time in rows}
-    return {sid: kept.get((sid, checksum)) for sid, checksum in sorted(checksums.items())}
+        rows = found.execute("SELECT source, json_extract(got, '$.manifest') AS manifest, session, MAX(time)"
+                             " FROM lines WHERE outcome = ? GROUP BY source, manifest", (DOWNLOADED,)).fetchall()
+    kept = {(source, manifest): {"session": session, "time": time} for source, manifest, session, time in rows}
+    return {sid: kept.get((sid, manifest)) for sid, manifest in sorted(manifests.items())}

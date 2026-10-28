@@ -1,13 +1,12 @@
-import hashlib
 import json
 import re
 
 import pytest
 
-from wpt_dataset import builder, manifest, tasks
+from wpt_dataset import builder, erasure, manifest, tasks
 from wpt_dataset.build import write_document_list
 from wpt_dataset.repo import empty_source
-from wpt_dataset.sources import source_tree
+from wpt_dataset.sources import held_manifest, source_tree
 from wpt_dataset.tasks import EVAL
 from wpt_telemetry import Telemetry
 
@@ -34,12 +33,15 @@ def images(repo):
 
 
 def task_source(repo, store):
-    """An empty source made for the built tasks, its license text written and admitted, tagged finish-tasks."""
+    """An empty source made for the built tasks, its license text written and admitted, and its entry too,
+    tagged finish-tasks."""
     document = empty_source("built", license="CC0-1.0", attribution="A. Person, built tasks",
                             text="CC0 1.0 Universal\n", by="A. Person", formats={"README": "text"}, tags=["finish-tasks"])
     sid = repo.create_source("mine", "built", document, {}, "first", store)
     data = repo.source(sid).data
-    repo.save("source", sid, {**data, "decision": {"decision": "admitted", "by": "A. Person", "date": "2026-10-22"}},
+    admitted = {"decision": "admitted", "by": "A. Person", "date": "2026-10-22"}
+    repo.save("source", sid, {**data, "decision": admitted,
+                              "licenses": [{**entry, "decision": admitted} for entry in data["licenses"]]},
               repo.version("source", sid))
     return sid
 
@@ -49,8 +51,7 @@ def books(kit, repo, store, tmp_path):
     folder = tmp_path / "books"
     files = {f"book-{n}.txt": BOOK.replace("keeper", f"keeper {n}").encode() for n in range(3)}
     address, revision = kit.git_project(folder, files=files, executable=set(), symlinks={})
-    sid = kit.add_source(repo, store, "example", "books", {"type": "git", "address": address, "revision": revision,
-                                                           "tags": [{"tags": ["en"], "paths": ["**"]}]})
+    sid = kit.add_source(repo, store, "example", "books", {"type": "git", "address": address, "tags": [{"tags": ["en"], "paths": ["**"]}]})
     source_tree(repo.source(sid), store)  # fetched into the store, as `check --fetch` leaves it
     return sid
 
@@ -180,8 +181,8 @@ def test_read_the_manual_tasks_ask_for_a_result_of_ondrik_and_half_remove_its_ma
 def lamps(kit, repo, store, folder, revision, since, cuts=()):
     """The id of an admitted git source of folder's history from since to revision, in the store."""
     sid = kit.add_source(repo, store, "example", "lamps", {
-        "type": "git", "address": str(folder), "revision": revision, "history": {"since": since},
-        "licenses": kit.WITH_HISTORY, "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
+        "type": "git", "address": str(folder), "history": {"since": since},
+        "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
                                                   {"format": "text", "paths": ["LICENSE", "*.py", "*.txt", "docs/*"]}],
         **({"cuts": list(cuts)} if cuts else {})})
     source_tree(repo.source(sid), store)
@@ -296,8 +297,8 @@ def test_a_commit_whose_undo_fails_is_logged_and_the_next_one_is_drawn(kit, repo
     since = commit(kit, folder, "start", {"LICENSE": kit.LICENSE_TEXT.encode(), "lamps.py": b"LAMPS = 1\n"})
     older = commit(kit, folder, "Note the tides\n", {"tides.txt": b"high at noon\n"})
     head = commit(kit, folder, COMMIT, {"lamps.py": b"LAMPS = 2\n"})
-    lamps(kit, repo, store, folder, head, since, [{"path": "tides.txt", "start": 7, "end": 12,
-                                                   "sha256_after": hashlib.sha256(b"high at\n").hexdigest()}])
+    lamps(kit, repo, store, folder, head, since, [{"path": "tides.txt",
+                                                   **erasure.cut(b" noon", erasure.made_key(store))}])
     for seed in range(64):
         logged = []
         made = builder.build(repo, store, "commit-and-push", 1, seed, log=logged.append)
@@ -333,11 +334,11 @@ def test_a_stored_history_without_its_order_gives_no_task(kit, repo, store, tmp_
     assert builder.build(repo, store, "commit-and-push", 3, 1, log=logged.append) == {}
     assert [line for line in logged if manifest.ORDER in line] == [
         f"1 git sources with a history have no {manifest.ORDER} in the store and gave no task (their history was "
-        f"stored before histories kept their order; they give tasks once fetched under a new checksum)"]
+        f"stored before histories kept their order; they give tasks once downloaded again)"]
 
 
 def test_a_commit_whose_source_changed_is_refused_until_it_is_built_again(kit, repo, store, tmp_path):
-    # a task names the source checksum it was built from: a source fixed at
+    # a task names the source manifest it was built from: a source fixed at
     # another revision gives the model another history than its check expects
     images(repo)
     folder = tmp_path / "upstream"
@@ -349,9 +350,9 @@ def test_a_commit_whose_source_changed_is_refused_until_it_is_built_again(kit, r
     task = task_source(repo, store)
     document = {"instructions": "Commit and push.", "image": "agent", "limits": builder.LIMITS,
                 "needs": [["bash"]], "pointers": [{"for": "repository", "source": sid, "document": f".git/history/{head}",
-                                                   "checksum": "sha256:" + "0" * 64}]}
-    with pytest.raises(tasks.InvalidFile, match=rf"the repository pointer: {sid} now has the checksum "
-                                                rf"{repo.source(sid).data['checksum']}, not sha256:0+, which the task "
+                                                   "manifest": "0" * 64}]}
+    with pytest.raises(tasks.InvalidFile, match=rf"the repository pointer: {sid} now has the manifest "
+                                                rf"{held_manifest(repo.source(sid), store)}, not 0+, which the task "
                                                 rf"was built from; build the task again"):
         builder.write(repo, store, task, "commit-and-push",
                       {"commit-and-push/a": (document, builder.check_text("right = 1"), {})},
@@ -369,10 +370,10 @@ def test_the_builder_reports_the_act_and_check_shares_of_a_task_source(kit, repo
     folder.mkdir()
     kit.run("git", "init", "-q", cwd=folder)
     since = commit(kit, folder, "start", {"LICENSE": kit.LICENSE_TEXT.encode(), "lamps.py": b"LAMPS = 1\n"})
-    head = commit(kit, folder, COMMIT, {"lamps.py": b"LAMPS = 2\n"})
+    commit(kit, folder, COMMIT, {"lamps.py": b"LAMPS = 2\n"})
     lamps = kit.add_source(repo, store, "example", "lamps", {
-        "type": "git", "address": str(folder), "revision": head, "history": {"since": since},
-        "licenses": kit.WITH_HISTORY, "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
+        "type": "git", "address": str(folder), "history": {"since": since},
+        "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
                                                   {"format": "text", "paths": ["LICENSE", "*.py"]}],
         "tags": [{"tags": ["code"], "paths": ["**"]}]})
     source_tree(repo.source(lamps), store)

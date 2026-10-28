@@ -12,7 +12,7 @@ from wpt_dataset.cli import main
 from wpt_dataset.errors import DocumentListMissing, InvalidFile
 from wpt_dataset.manifest import EXECUTABLE, FILE
 from wpt_dataset.markdown import documents
-from wpt_dataset.sources import source_tree
+from wpt_dataset.sources import held_manifest, source_tree
 from wpt_telemetry import Telemetry
 
 TASK = {"instructions": "Write hello into out.txt.", "image": "tiny",
@@ -29,8 +29,7 @@ def add(kit, repo, store, folder, files, tags):
     (repo.root / "data" / "images" / "tiny" / "Dockerfile").write_text("ARG BASE=debian:trixie-slim\nFROM ${BASE}\n")
     address, commit = kit.git_project(folder, files=files, executable={p for p in files if p.endswith("/check")},
                                       symlinks={})
-    sid = kit.add_source(repo, store, "example", folder.name, {"type": "git", "address": address, "revision": commit,
-                                                               "formats": FORMATS, "tags": tags})
+    sid = kit.add_source(repo, store, "example", folder.name, {"type": "git", "address": address, "formats": FORMATS, "tags": tags})
     return repo.source(sid)
 
 
@@ -57,7 +56,7 @@ def test_tagged_task_folders_reach_their_step_and_never_pretraining(kit, repo, s
                                 {"memory": 8192, "disk": 1024, "processes": 256, "cpus": 4},
                                 ((tasks.Variant(("write",)), tasks.Variant(("bash",))),), area=("out.txt",),
                                 gates=("sources_first",), tags=frozenset({"finish-tasks"}))]
-    assert list(sources) == [source.id] and sources[source.id]["revision"] == source.data["revision"]
+    assert list(sources) == [source.id] and sources[source.id]["manifest"] == held_manifest(source, store)
     assert tasks.read(repo, store, "answer-as-assistant", 0) == ([], {})
     other = tasks.of_source(source, tree, store, repo)["tasks/other"]
     assert other.files == {} and (other.area, other.gates) == (None, ())
@@ -160,6 +159,29 @@ def test_a_pointer_whose_span_changed_or_whose_source_is_not_admitted_stops_the_
     path.write_text(path.read_text().replace('"admitted"', '"refused", "reason": "no license"'))
     with pytest.raises(InvalidFile, match=f"{book.id}: tasks point into it, but it is not admitted"):
         repo.check_fetched(task.id, store)
+
+
+def test_a_pointer_task_whose_passage_changed_is_left_out_alone_by_the_build(kit, repo, store, tmp_path):
+    # the build judges each task alone: a pointer whose passage the stored
+    # bytes no longer hold leaves its task out, named with why, and the
+    # source's other tasks stay
+    book = add(kit, repo, store, tmp_path / "book", {"notes.txt": BOOK}, [])
+    tree, _ = source_tree(book, store)
+    [text] = [c.markdown for c in documents(book, tree, store, repo)]
+    stale = {**pointer(book, text, "book.txt", 0, 10), "sha256": hashlib.sha256(b"other text").hexdigest()}
+    task = add(kit, repo, store, tmp_path / "work", {
+        "tasks/a/task.json": json.dumps({**TASK, "pointers": [stale]}).encode(), "tasks/a/check": CHECK,
+        "tasks/b/task.json": json.dumps({**TASK, "pointers": [pointer(book, text, "book.txt", 0, 10)]}).encode(),
+        "tasks/b/check": CHECK}, [{"tags": ["finish-tasks"], "paths": ["**"]}])
+    left_out = []
+
+    found, _ = tasks.read(repo, store, "finish-tasks", 0, dataset=listed(store), left_out=left_out)
+
+    assert [one.id for one in found] == [f"{task.id}/tasks/b"]
+    assert left_out == [{"task": f"{task.id}/tasks/a",
+                         "why": f"InvalidFile: {task.id}/tasks/a/task.json: the pointer to 'book.txt': the span "
+                                f"[0, 10] of {book.id}/notes.txt no longer holds the text it pointed to; build the "
+                                f"task again"}]
 
 
 def test_a_changed_source_checks_the_task_sources_that_point_into_it(kit, repo, store, tmp_path, monkeypatch,

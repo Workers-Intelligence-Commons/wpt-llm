@@ -45,8 +45,8 @@ def test_a_session_s_files_go_into_bundles_cut_between_files_and_read_back_one_b
     with Session(store, "20261025T120000Z-download-x-0001", "download", "abc123", False, bundle=4 * MB) as session:
         placed = {path: session.add(data) for path, data in files.items()}
         named(session, placed)
-        session.line("one-source", "downloaded", "abc123", revision="r1", checksum="sha256:" + "1" * 64,
-                     address="https://example.org/one", size=sum(map(len, files.values())))
+        session.line("one-source", "downloaded", "abc123", got={"commit": "r1"}, address="https://example.org/one",
+                     size=sum(map(len, files.values())))
     # a bundle closes once full, only between files; a file bigger than a bundle gets its own
     assert [placed[path].bundle.rsplit("/", 1)[1] for path in files] == ["000001", "000001", "000002", "000003"]
     assert (placed["b.txt"].start, placed["c.txt"].start) == (2 * MB, 0)
@@ -59,8 +59,9 @@ def test_a_session_s_files_go_into_bundles_cut_between_files_and_read_back_one_b
     with later.database() as found:
         assert found.execute("SELECT folder, command, wpt_commit, dirty, ended IS NOT NULL FROM sessions").fetchall() \
             == [("20261025T120000Z-download-x-0001", "download", "abc123", 0, 1)]
-        assert found.execute("SELECT source, revision, address, outcome, size, code FROM lines").fetchall() \
-            == [("one-source", "r1", "https://example.org/one", "downloaded", sum(map(len, files.values())), "abc123")]
+        assert found.execute("SELECT source, got, address, outcome, size, code FROM lines").fetchall() \
+            == [("one-source", '{"commit": "r1"}', "https://example.org/one", "downloaded",
+                 sum(map(len, files.values())), "abc123")]
 
 
 def test_a_crash_loses_only_the_bundle_being_filled_and_the_lines_since_the_last_sealed(reopen):
@@ -95,12 +96,64 @@ def test_sessions_that_replace_the_database_at_once_both_keep_their_rows(reopen)
 
     first.kind.replace = another_session_first
     with Session(first, "mine", "download", "abc123", False) as mine:
-        mine.line("my-source", "failed", "abc123", checksum="sha256:" + "2" * 64)
+        mine.line("my-source", "failed", "abc123", address="https://example.org/mine")
     assert raced
     with reopen().database() as found:
         assert found.execute("SELECT session, source, outcome FROM lines ORDER BY session").fetchall() \
             == [("mine", "my-source", "failed"), ("other", "other-source", "reused")]
         assert [row[0] for row in found.execute("SELECT folder FROM sessions ORDER BY folder")] == ["mine", "other"]
+
+
+def test_a_mark_asks_for_a_new_download_until_one_is_recorded_after_it(reopen):
+    # a person marks one source, or every source, for fresh content: a session that starts later sees it
+    # marked, until a line says it was downloaded after the mark; a reuse or a failure leaves the mark
+    store = reopen()
+    with Session(store, "first", "download", "abc123", False) as session:
+        session.line("one", "downloaded", "abc123")
+        session.line("two", "downloaded", "abc123")
+    store.mark(["one"])
+    with Session(reopen(), "second", "download", "abc123", False) as session:
+        assert (session.marked("one"), session.marked("two")) == (True, False)
+        session.line("one", "failed", "abc123")
+    with Session(reopen(), "third", "download", "abc123", False) as session:
+        assert session.marked("one")
+        session.line("one", "downloaded", "abc123")
+    store.mark()  # every source
+    with Session(reopen(), "fourth", "download", "abc123", False) as session:
+        assert (session.marked("one"), session.marked("two"), session.marked("never-seen")) == (True, True, True)
+        session.line("two", "downloaded", "abc123")
+    with Session(reopen(), "fifth", "download", "abc123", False) as session:
+        assert (session.marked("one"), session.marked("two")) == (True, False)
+
+
+def test_lines_of_the_shape_that_pinned_a_revision_and_a_checksum_keep_them_in_what_they_got(tmp_path):
+    # a store database written before lines recorded what a download got: its columns revision and checksum
+    # move into got, and new lines go in beside them
+    import sqlite3
+
+    from wpt_store.blocks import compressed
+
+    store = open_store((tmp_path / "store").as_uri())
+    old = sqlite3.connect(":memory:")
+    old.executescript("""
+        CREATE TABLE sessions (folder TEXT PRIMARY KEY, command TEXT NOT NULL, started TEXT NOT NULL, ended TEXT,
+                               wpt_commit TEXT NOT NULL, dirty INTEGER NOT NULL);
+        CREATE TABLE lines (session TEXT NOT NULL REFERENCES sessions (folder), number INTEGER NOT NULL,
+                            source TEXT NOT NULL, revision TEXT, checksum TEXT, address TEXT, time TEXT NOT NULL,
+                            outcome TEXT NOT NULL, size INTEGER, code TEXT NOT NULL, PRIMARY KEY (session, number));
+        INSERT INTO sessions VALUES ('old', 'download', '2026-10-01T00:00:00Z', '2026-10-01T01:00:00Z', 'abc', 0);
+        INSERT INTO lines VALUES ('old', 1, 'one', 'r1', 'sha256:aa', 'https://example.org/one',
+                                  '2026-10-01T00:30:00Z', 'downloaded', 10, 'abc');
+        INSERT INTO lines VALUES ('old', 2, 'two', NULL, NULL, NULL, '2026-10-01T00:40:00Z', 'failed', NULL, 'abc');
+    """)
+    store.kind.write("store.sqlite.zst", compressed(old.serialize()))
+    with Session(store, "new", "download", "abc123", False) as session:
+        session.line("two", "downloaded", "abc123", got={"commit": "c2"})
+    with store.database() as found:
+        assert found.execute("SELECT session, source, got, outcome FROM lines ORDER BY session, number").fetchall() \
+            == [("new", "two", '{"commit": "c2"}', "downloaded"),
+                ("old", "one", '{"checksum": "sha256:aa", "revision": "r1"}', "downloaded"),
+                ("old", "two", None, "failed")]
 
 
 def test_an_outcome_the_database_does_not_know_is_refused(reopen):
@@ -208,8 +261,8 @@ def test_an_action_runs_once_the_files_added_before_it_are_stored_and_never_afte
 
 
 def test_a_file_reads_back_from_its_session_before_and_after_its_bundle_is_sealed(reopen):
-    # what fill-checksum needs: the members of an archive read straight into
-    # the bundles are read back to check their text before the bundle is full
+    # what a download needs: the members of an archive read straight into
+    # the bundles are read back (a cut, a patch) before the bundle is full
     store = reopen()
     files = {"a.txt": text("a", MB + 7), "b.txt": text("b", 10), "after.txt": text("after", 2 * MB),
              "c.txt": text("c", 3 * MB)}

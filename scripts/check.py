@@ -56,9 +56,9 @@ IMAGE_CODE = ("packages/wpt-agent/src/wpt_agent/images.py", "packages/wpt-agent/
               "packages/wpt-dataset/src/wpt_dataset/schemas/image-licenses.schema.json")
 # whether an image's folder changed since the revision: only the service layer names the data folder
 IMAGES_CHANGED = "import sys; from wpt_dataset.repo import Repo; print(Repo('.').changed_since(sys.argv[1])[1])"
-# the one source fetched, a short book fixed at one git commit, so its download never
-# changes: it proves the fetch and its checks work; the sources a pull request adds or
-# changes are fetched by the maintainer
+# the one source fetched, a short book, small enough to download on every run: it proves
+# the fetch and its checks work; the sources a pull request adds or changes are fetched by
+# the maintainer
 SMALL_SOURCE = "standardebooks-joseph-conrad-ford-madox-ford-the-nature-of-a-crime-5366b0f3"
 
 

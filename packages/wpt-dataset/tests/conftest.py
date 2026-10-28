@@ -15,7 +15,7 @@ from pathlib import Path
 import pytest
 
 from wpt_dataset import download as downloading
-from wpt_dataset import manifest, sources
+from wpt_dataset import license_check, manifest, protocols, sources
 from wpt_dataset.repo import Repo, address_hash, dump_json
 from wpt_store import open_store
 
@@ -51,6 +51,16 @@ def project_diff(files=FILES, executable=EXECUTABLE, symlinks=SYMLINKS) -> bytes
     parts = [(path, added(path, "100755" if path in executable else "100644", content)) for path, content in files.items()]
     parts += [(path, added(path, "120000", target.encode())) for path, target in symlinks.items()]
     return b"".join(part for _, part in sorted(parts))
+
+
+def parquet_bytes(rows: list[dict]) -> bytes:
+    """A Parquet file of rows."""
+    import pyarrow as pa
+    import pyarrow.parquet as pq
+
+    buffer = io.BytesIO()
+    pq.write_table(pa.Table.from_pylist(rows), buffer)
+    return buffer.getvalue()
 
 
 def git_project(folder: Path, files=FILES, executable=EXECUTABLE, symlinks=SYMLINKS):
@@ -180,20 +190,75 @@ def store(tmp_path):
     return open_store((tmp_path / "store").as_uri())
 
 
+DECISION = {"decision": "admitted", "by": "Test Reviewer", "date": "2026-10-14"}  # an admission needs no reason
+ATTRIBUTION = "Copyright (c) 2026 Test Author, https://example.org/project"
+LICENSE_TEXT = "Copyright (c) 2026 Test Author\n\nPermission is hereby granted, free of charge, to any person.\n"
+# the license text LICENSE_TEXT is (MIT, admitted) in every test repository, and the place a license entry
+# finds it at unless a test says otherwise
+REVIEWED = license_check.text_id(LICENSE_TEXT.encode())
+TEXTS = {REVIEWED: {"decision": DECISION, "kind": "license", "license": "MIT", "files": [],
+                    "explanation": "a test's license text"}}
+PLACE = {"place": {"file": "LICENSE"}, "expected": [REVIEWED]}
+ITSELF = {"place": {"entry": True}}  # the place of an empty source's entry: the entry itself
+
+
+def stated(repo, tree, staged) -> dict:
+    """The place and expected text of a test source's default entry: its
+    LICENSE file (PLACE) when the upstream tree holds one; else its first
+    file (not a history file nor a link), whose text is written into the
+    repository as an admitted license text."""
+    if "LICENSE" in tree:
+        return PLACE
+    path = next((p for p, e in sorted(tree.items()) if not p.startswith(".git/") and e.mode != manifest.SYMLINK), None)
+    if path is None:  # nothing to state it: the test's entry is the entry itself
+        return ITSELF
+    return statement_in(repo, path, manifest.content(staged, tree[path]))
+
+
+def statement_in(repo, path: str, content: bytes) -> dict:
+    """The place and expected text of an entry whose statement is the file
+    at path, holding content: its text is written into the repository as
+    an admitted license text, so the build lets the entry's files train."""
+    text = license_check.text_id(content)
+    write_texts(repo.root, {text: {**TEXTS[REVIEWED], "explanation": f"a test's statement, in {path}"}})
+    return {"place": {"file": path}, "expected": [text]}
+
+
+def write_texts(root: Path, texts=None):
+    """data/license-texts/<id>/license-text.json of the repository at root, for each of TEXTS, or of the
+    texts given ({id: item})."""
+    for text, item in (TEXTS if texts is None else texts).items():
+        (root / "data" / "license-texts" / text).mkdir(parents=True, exist_ok=True)
+        (root / "data" / "license-texts" / text / "license-text.json").write_text(
+            json.dumps(item, indent=2) + "\n", encoding="utf-8", newline="\n")
+
+
 @pytest.fixture
 def repo(tmp_path):
     root = tmp_path / "wpt"
     for folder in ("sources", "recipes/mixtures", "recipes/tokenizers", "recipes/models"):
         (root / "data" / folder).mkdir(parents=True)
+    write_texts(root)
     return Repo(root)
 
 
-DECISION = {"decision": "admitted", "by": "Test Reviewer", "date": "2026-10-14"}  # an admission needs no reason
-ATTRIBUTION = "Copyright (c) 2026 Test Author, https://example.org/project"
-LICENSE_TEXT = "Copyright (c) 2026 Test Author\n\nPermission is hereby granted, free of charge, to any person.\n"
-# a source with a git history: the history files' own entry, then the tree's, whose `**` leaves them out
-WITH_HISTORY = [{"license": "MIT", "paths": [".git/history/**"], "attribution": ATTRIBUTION, "text": LICENSE_TEXT},
-                {"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION, "text": LICENSE_TEXT}]
+def covering(paths) -> list[str]:
+    """Coverage patterns in the allowed shapes for these paths, history files
+    aside: each top folder as `<folder>/**`, each file at the top by its path."""
+    paths = [path for path in paths if not path.startswith(".git/")]
+    return sorted({sources.exact_pattern(path.split("/", 1)[0]) + "/**" if "/" in path else
+                   sources.exact_pattern(path) for path in paths})
+
+
+def entry(paths, license="MIT", **more):
+    """A license entry covering paths, admitted (DECISION), its statement at
+    PLACE unless more gives its place."""
+    return {"license": license, "paths": list(paths), "attribution": ATTRIBUTION,
+            **({} if "place" in more else PLACE), "text": LICENSE_TEXT, "decision": DECISION, **more}
+
+
+# the project's files (FILES and SYMLINKS), as one license entry covers them
+PROJECT = covering([*FILES, *SYMLINKS])
 
 
 class Objects:
@@ -211,12 +276,12 @@ class Objects:
 
 
 def upstream(data, address, store):
-    """The upstream tree at address, its checksum not checked, each file's
-    content put into store as an object (sources.fetch); store is a
+    """The upstream tree at address, as it serves it, each file's
+    content put into store as an object (protocols.fetch); store is a
     wpt_store store, or a download's Staging."""
     with tempfile.TemporaryDirectory(prefix="wpt-test-fetch-") as tmp:
         sink = store if isinstance(store, downloading.Staging) else Objects(store)
-        return sources.fetch(data, address, sink, Path(tmp))
+        return protocols.fetch(data, address, sink, Path(tmp)).tree
 
 
 def session(store, command="test"):
@@ -235,23 +300,32 @@ def download(repo, store, *ids):
     return done
 
 
-def add_source(repo, store, origin, item, data, patches=(), compute_checksum=True, fetch=None):
-    """Write data/sources/<id>/source.json, filling in the checksum from the
-    real upstream, and download it into the store (fetch, default:
-    compute_checksum). Returns the source id."""
-    data = {"checksum": "sha256:" + "0" * 64,
-            "licenses": [{"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION, "text": LICENSE_TEXT}],
-            "formats": [{"format": "text", "paths": ["**"]}], "decision": DECISION, **data}
-    if compute_checksum:
-        with tempfile.TemporaryDirectory(prefix="wpt-test-staging-") as staging:
-            data["checksum"] = manifest.checksum(upstream(data, data["address"], downloading.Staging(staging)))
+def add_source(repo, store, origin, item, data, patches=(), fetch=True):
+    """Write data/sources/<id>/source.json and, with fetch, download it into
+    the store. Without `licenses`, one admitted MIT entry covers every file
+    the upstream gives (covering), read from it first, after an entry of
+    its own for the history files when it has any; its statement is the
+    upstream's LICENSE file (PLACE), or without one its first file, whose
+    text becomes an admitted license text of the repository (stated), so
+    the build lets its files train. Returns the source id."""
+    data = {"formats": [{"format": "text", "paths": ["**"]}], "decision": DECISION, **data}
+    if "licenses" not in data:
+        paths, place = [], ITSELF
+        if data["type"] != "empty":
+            with tempfile.TemporaryDirectory(prefix="wpt-test-staging-") as staging:
+                staged = downloading.Staging(staging)
+                tree = upstream(data, data["address"], staged)
+                paths, place = list(tree), stated(repo, tree, staged)
+        history = [entry([".git/history/**"], **place)] if any(path.startswith(".git/history/") for path in paths) \
+            else []
+        data["licenses"] = history + [entry(covering(paths) or ["README.md"], **place)]
     sid = "-".join([origin] + ([item] if item else []) + [address_hash(data["address"])])
     folder = repo.root / "data" / "sources" / sid
     folder.mkdir()
     (folder / "source.json").write_text(dump_json(data), encoding="utf-8", newline="\n")
     for i, patch in enumerate(patches, start=1):
         (folder / f"{i:04d}-change.patch").write_text(patch, encoding="utf-8", newline="\n")
-    if compute_checksum if fetch is None else fetch:
+    if fetch:
         download(repo, store, sid)
     return sid
 

@@ -14,12 +14,11 @@ import numpy as np
 import pytest
 import torch
 
-from wpt_dataset import manifest
 from wpt_agent.loop import CONFIDENCE
 from wpt_dataset.build import Document, is_held_out
 from wpt_dataset.repo import Repo, address_hash, dump_json
 from wpt_dataset import download
-from wpt_dataset.sources import fetch, held_out_group
+from wpt_dataset.sources import exact_pattern, held_out_group
 from wpt_eval import Context, find, open_context
 from wpt_eval.asking import CONTINUE, Question
 from wpt_model import load_model
@@ -127,11 +126,13 @@ def context_of(tmp_path, tokenizer, model, training=(), held_out=(), held_share=
 
 
 @pytest.fixture
-def root(tmp_path, monkeypatch):
+def root(tmp_path, monkeypatch, fetching):
     """The working folder: a repository whose agent image holds the
-    repository's check library, and no source."""
+    repository's check library, the license text every test
+    repository holds, and no source."""
     root = tmp_path / "wpt"
     (root / "data" / "sources").mkdir(parents=True)
+    fetching.write_texts(root)
     (root / "data" / "images" / "agent").mkdir(parents=True)
     for name in ("Dockerfile", "wpt_check.py"):
         (root / "data" / "images" / "agent" / name).write_bytes((AGENT / name).read_bytes())
@@ -246,14 +247,13 @@ def git_source(tmp_path, root, store, folder_name, files, data, fetched=True):
     for args in (["init", "-q"], ["add", "-A"], ["commit", "-q", "-m", "x"]):
         subprocess.run(["git", *args], cwd=folder, env=GIT_ENV, check=True)
     commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=folder, capture_output=True, text=True).stdout.strip()
-    data = {"type": "git", "address": str(folder), "revision": commit,
-            "licenses": [{"license": "MIT", "paths": ["**"], "attribution": "T", "text": "Copyright T\n"}],
-            "formats": [{"format": "text", "paths": ["**"]}],
-            "decision": {"decision": "admitted", "by": "T", "date": "2026-10-23", "reason": "test"}, **data}
-    staging = tmp_path / f"elsewhere-{folder_name}"
-    (staging / "download").mkdir(parents=True)
-    data["checksum"] = manifest.checksum(fetch(data, data["address"], download.Staging(staging / "files"),
-                                               staging / "download"))
+    decision = {"decision": "admitted", "by": "T", "date": "2026-10-23", "reason": "test"}
+    # its statement in LICENSE, as the license text the root holds expects
+    place = {"place": {"file": "LICENSE"}, "expected": sorted(p.name for p in (root / "data" / "license-texts").iterdir())}
+    data = {"type": "git", "address": str(folder), "licenses": [{"license": "MIT", "paths": sorted(map(exact_pattern, files)),
+                                                                 "attribution": "T", **place, "text": "Copyright T\n",
+                                                                 "decision": decision}],
+            "formats": [{"format": "text", "paths": ["**"]}], "decision": decision, **data}
     sid = f"ebible-{folder_name.replace('_', '-').removesuffix('.zip')}-{address_hash(str(folder))}"
     (root / "data" / "sources" / sid).mkdir()
     (root / "data" / "sources" / sid / "source.json").write_text(dump_json(data), encoding="utf-8", newline="\n")

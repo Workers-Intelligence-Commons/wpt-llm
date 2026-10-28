@@ -13,7 +13,7 @@ from types import SimpleNamespace
 import pytest
 
 from wpt_dataset import download as downloading
-from wpt_dataset import manifest, sources
+from wpt_dataset import license_check, manifest, protocols, sources
 from wpt_dataset.build import build_dataset
 from wpt_dataset.repo import Repo, address_hash, dump_json
 from wpt_store import open_store
@@ -38,12 +38,46 @@ TINY_DRAFTER = {"epochs": 1, "prompts": 4, "prompt_tokens": 8, "answer_tokens": 
                 "held_out": 0.25}
 
 
-def checksum_of(data) -> str:
-    """The checksum of what a source's address gives, kept nowhere."""
+# the license text LICENSE_TEXT is (MIT, admitted) in every test repository (write_texts), and the place a
+# license entry finds its statement at unless a test gives its own
+REVIEWED = license_check.text_id(LICENSE_TEXT.encode())
+PLACE = {"place": {"file": "LICENSE"}, "expected": [REVIEWED]}
+
+
+def write_texts(root: Path, text=REVIEWED, explanation="a test's license text"):
+    """data/license-texts/<id>/license-text.json of the repository at root: LICENSE_TEXT's, or the text
+    whose id is text, admitted."""
+    folder = root / "data" / "license-texts" / text
+    folder.mkdir(parents=True, exist_ok=True)
+    item = {"decision": {"decision": "admitted", "by": "T", "date": "2026-10-14"}, "kind": "license",
+            "license": "MIT", "files": [], "explanation": explanation}
+    (folder / "license-text.json").write_text(json.dumps(item) + "\n", encoding="utf-8", newline="\n")
+
+
+def covered(data, root: Path) -> dict:
+    """data with each license entry written over every file (paths `**`)
+    narrowed to the files its address gives, in the allowed shapes (each top
+    folder as `<folder>/**`, each top file by its path), and decided as the
+    source is. An entry that names no place finds its statement where the
+    upstream holds one, so the build lets its files train: its LICENSE file
+    (PLACE), or without one its first file, whose text becomes an admitted
+    license text of the repository at root."""
     with tempfile.TemporaryDirectory(prefix="wpt-test-staging-") as tmp:
         (Path(tmp) / "download").mkdir()
-        return manifest.checksum(sources.fetch(data, data["address"], downloading.Staging(Path(tmp) / "files"),
-                                               Path(tmp) / "download"))
+        staged = downloading.Staging(Path(tmp) / "files")
+        paths = protocols.fetch(data, data["address"], staged, Path(tmp) / "download").tree
+        if "LICENSE" in paths:
+            place = PLACE
+        else:
+            first = min(path for path, entry in paths.items() if entry.mode != manifest.SYMLINK)
+            text = license_check.text_id(manifest.content(staged, paths[first]))
+            write_texts(root, text, f"a test's statement, in {first}")
+            place = {"place": {"file": first}, "expected": [text]}
+    patterns = sorted({path.split("/", 1)[0] + "/**" if "/" in path else sources.exact_pattern(path) for path in paths})
+    licenses = [{**entry, "paths": patterns if entry["paths"] == ["**"] else entry["paths"],
+                 **({} if "place" in entry else place),
+                 "decision": entry.get("decision", data["decision"])} for entry in data["licenses"]]
+    return {**data, "licenses": licenses}
 
 
 def download(root, store, sid):
@@ -57,8 +91,9 @@ def download(root, store, sid):
 
 @pytest.fixture
 def fetching():
-    """checksum_of and download, for tests that write sources of their own."""
-    return SimpleNamespace(checksum_of=checksum_of, download=download)
+    """covered, download, write_texts and PLACE, for tests that write
+    sources of their own."""
+    return SimpleNamespace(covered=covered, download=download, write_texts=write_texts, PLACE=PLACE)
 
 
 @pytest.fixture
@@ -67,7 +102,7 @@ def built(tmp_path, monkeypatch):
     out; its 3000 training tokens draw only some of the training documents.
     The working folder tmp_path is the repository, and the store is
     WPT_STORE. Gives store, records(command) (the record folders of that
-    command's runs, oldest first), checksum_of(data) and download(source id)
+    command's runs, oldest first), covered(data) and download(source id)
     (for a test's own sources), dataset_id (built from the model recipe "d", a
     tiny model trained one step), source_id, attribution,
     recipe(name, model=..., training=..., drafter=..., steps=...), which
@@ -88,14 +123,14 @@ def built(tmp_path, monkeypatch):
     commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=upstream, capture_output=True, text=True).stdout.strip()
 
     root = tmp_path
+    write_texts(root)
     repo = Repo(root)
     store = open_store((tmp_path / "store").as_uri())
     def admitted(name, upstream, commit, license, attribution, text, formats, tags, held_out_by=None):
-        data = {"type": "git", "address": str(upstream), "revision": commit,
-                "licenses": [{"license": license, "paths": ["**"], "attribution": attribution, "text": text}],
+        data = {"type": "git", "address": str(upstream), "licenses": [{"license": license, "paths": ["**"], "attribution": attribution, "text": text}],
                 "formats": formats, "tags": tags, **({"held_out_by": held_out_by} if held_out_by else {}),
                 "decision": {"decision": "admitted", "by": "T", "date": "2026-10-14", "reason": "test"}}
-        data["checksum"] = checksum_of(data)
+        data = covered(data, root)
         sid = f"example-{name}-{address_hash(str(upstream))}"
         (root / "data" / "sources" / sid).mkdir(parents=True)
         (root / "data" / "sources" / sid / "source.json").write_text(dump_json(data))
@@ -155,7 +190,7 @@ def built(tmp_path, monkeypatch):
         return sorted(found, key=lambda run: run.start["started"])
 
     return SimpleNamespace(store=store, dataset_id=dataset_id, source_id=source_id, attribution=ATTRIBUTION,
-                           license_text=LICENSE_TEXT, recipe=recipe, records=records, checksum_of=checksum_of,
+                           license_text=LICENSE_TEXT, recipe=recipe, records=records, covered=lambda data: covered(data, root),
                            download=lambda sid: download(root, store, sid), source=source,
                            build=lambda name="d": build_dataset(repo, name, store, log=lambda _: None))
 

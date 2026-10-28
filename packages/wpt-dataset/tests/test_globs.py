@@ -4,7 +4,7 @@
 import itertools
 import random
 
-from wpt_dataset.manifest import Globs, glob_match, glob_match_any
+from wpt_dataset.manifest import Globs, PatternIndex, glob_match, glob_match_any
 
 PARTS = ["a", "A", "b.txt", "B.TXT", ".hidden", "é", "ü.md", "x y", "[x]", "a-b", "**", "*", "?", "*.txt", "*.TXT",
          "a?", "[ab]", "[!a]", "[a-c]", "[[]x]", "[]]", "[*]", "[?]", "[", "a]", "*.*", ".*", "..", ".", "", "\\",
@@ -47,3 +47,19 @@ def test_typical_source_rules():
                 "src/g/a.c": False, ".git": True, "a/.env": True, "a.b/c": False}
     assert {p: glob_match_any(p, exclude) for p in expected} == expected
     assert {p: glob_match_any(p, []) for p in expected} == dict.fromkeys(expected, False)
+
+
+def test_pattern_index_finds_every_list_that_matches():
+    """The one matcher of a source's entries (formats, tags, license
+    coverage) gives, for each path, exactly the lists glob_match_any
+    matches, whatever shape their patterns have."""
+    paths, patterns = _paths(), _patterns()
+    paths += ["src/a.js", "src/x/a.js", "a.tar.gz", "x/a.tar.gz", "x/CMakeLists.txt", "CMakeLists.txt", ".md",
+              "docs/.md", "a.", "src"]
+    patterns += ["**/*.js", "src/*.js", "*.tar.gz", "**/*.gz", "**/CMakeLists.txt", "x/**/CMakeLists.txt", "**/*.md",
+                 "*.", "src/**", "src/*", "**/*.[jt]s", "**/a*.js"]
+    random.seed(13)
+    lists = [random.sample(patterns, random.randint(1, 4)) for _ in range(300)]
+    index = PatternIndex(lists)
+    for path in paths:
+        assert index.matching(path) == [n for n, found in enumerate(lists) if glob_match_any(path, found)], path

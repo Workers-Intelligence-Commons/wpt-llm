@@ -50,16 +50,12 @@ version uses that vocabulary:
   vocabulary. A change of the tokenizer's code asks for no version: the
   lock keeps the vocabulary, and the code's hash is in the fingerprint of
   what the code makes, so a build never reuses a result an older code made.
-- **Every machine gets the same vocabulary.** A store that lacks it trains
-  it again from the documents the lock lists, and the result must have the
-  locked sha256 (`LockMismatch` otherwise). Training is deterministic: it
-  runs on one thread, and when two pairs are equally frequent the pair with
-  the smaller ids wins. When a listed document is no longer available (its
-  source changed or was cut), that store cannot rebuild it
-  (`LockedDocumentsMissing`): copy the vocabulary from a store that holds
-  it, or raise `version`. While a store rebuilds it, an admitted source
-  that fails, or is not in that store, is reported and left out, never a
-  stop: only the documents the lock lists decide.
+- **The vocabulary is shared through the store.** A locked vocabulary is
+  never trained again from the documents its lock lists, on this machine
+  or another: every build reads it from the store, checked against the
+  sha256 the lock keeps. A store that does not hold it stops the build
+  (`VocabularyMissing`), so a machine without access to the store that
+  holds it cannot use it.
 - **Erasure does not reach a locked vocabulary** until `version` is raised:
   merges learned from text that was erased later stay in it (see
   [erasure.md](erasure.md)).

@@ -1,15 +1,10 @@
 """From a source description to its final tree of documents.
 
     upstream tree (in the store)          -> put there by the download step (download.py), which
-                                             fetches it (fetch: an "empty" source has no files
-                                             and downloads nothing; a "huggingface" source is a
-                                             dataset pinned to a commit, see huggingface.py; a
-                                             source with `addresses` downloads each into its own
-                                             folder of the tree; an address whose robots.txt
-                                             forbids it, or cannot be read, is skipped for the
-                                             next mirror, see robots.py) and checks it against
-                                             `checksum`
-    erasure cuts, in the order listed     -> each checked by sha256_after
+                                             fetches it through the source's protocol (protocols/);
+                                             an "empty" source has no files and downloads nothing
+    erasure cuts, in the order listed     -> every run of the passage each names removed, found by its
+                                             keyed hashes (erasure.py)
     patches, in file-name order           -> applied with `git apply`
 
 Nothing here downloads a source: a source whose upstream tree is not in
@@ -17,40 +12,43 @@ the store is NotDownloaded. Every result is stored under the fingerprint
 of what produced it, so a step that already ran is a lookup: nothing is
 applied twice, and changing one patch rebuilds only that source.
 
-The store names an upstream tree by its checksum: the ref
-upstream/<checksum> points at its manifest, and upstream-files/<checksum>
-at its file list (wpt_store.sessions), which says where each downloaded
-file lies in its session's bundles. A tree downloaded before bundles has
-no file list: its files are store objects.
+The store names a source's upstream tree by upstream_key, the fingerprint
+of the source's id and of what its download reads (its type, which names
+its protocol, its addresses, extract rules, history and submodules, and
+the outside license pages its entries declare): the ref upstream/<key>
+points at its manifest, an object named by its content, and
+upstream-files/<key> at its file list (wpt_store.sessions), which says
+where each downloaded file lies in its session's bundles. The license
+pages downloaded with it are named by upstream-pages/<key>, a file list
+whose paths are the pages' addresses (stored_pages, license_page). A tree
+downloaded before bundles has no file list: its files are store objects. Which license entry covers each
+file is the license check's answer (license_check.py).
 """
 
 import contextlib
 import hashlib
-import itertools
 import json
 import os
-import shutil
 import subprocess
 import tempfile
-import urllib.error
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from urllib.parse import unquote, urlparse
 
 from wpt_store import parse_file_list
-from concurrent.futures import ThreadPoolExecutor
-
 from wpt_telemetry import Telemetry, set_ref
 from wpt_utils.parallel import in_order
-from wpt_utils.programs import code, program
+from wpt_utils.programs import code
 
-from . import archives, encoding, huggingface, manifest, records, retry, robots, workers
-from .errors import (ChecksumMismatch, CutFailed, FetchFailed, LicenseMapError, NotDownloaded, NotText, PatchFailed,
-                     UnsupportedEntry)
-from .manifest import FILE, SYMLINK, Entry, Extractor, glob_match_any
+from . import checks, erasure, license_check, manifest, records, workers
+from .errors import CutFailed, NotDownloaded, NotText, PatchFailed
+from .manifest import SYMLINK, Entry
 from .repo import Patch, Source
 
-USER_AGENT = "wpt-dataset (+https://github.com/Workers-Intelligence-Commons/wpt-llm)"
-UPSTREAM, UPSTREAM_FILES = "upstream", "upstream-files"  # the kinds of the refs naming an upstream tree by its checksum
+# the kinds of the refs naming an upstream tree and the license pages downloaded with it (upstream_key)
+UPSTREAM, UPSTREAM_FILES, UPSTREAM_PAGES = "upstream", "upstream-files", "upstream-pages"
+# what a download reads from a source's description, besides its id and its license pages: a change to any of
+# them is a new download
+FETCHED = ("type", "address", "addresses", "extract", "history", "submodules")
 
 
 def fingerprint(inputs) -> str:
@@ -59,44 +57,70 @@ def fingerprint(inputs) -> str:
 
 # -- upstream -----------------------------------------------------------------
 
+def upstream_key(source: Source) -> str:
+    """The name the store gives the source's upstream tree: the fingerprint
+    of its id and of what its download reads (FETCHED, and its license
+    pages when it declares any)."""
+    pages = license_pages(source)
+    return fingerprint({"kind": "upstream", "source": source.id, **({"pages": pages} if pages else {}),
+                        **{key: source.data[key] for key in FETCHED if key in source.data}})
+
+
+def license_pages(source: Source) -> list[str]:
+    """The outside addresses the source's license entries give as their
+    place ({"page": address}), each once, in order: what its download
+    stores with its files."""
+    return sorted({entry["place"]["page"] for entry in source.data.get("licenses", [])
+                   if isinstance(entry.get("place"), dict) and "page" in entry["place"]})
+
+
+def stored_pages(source: Source, store) -> dict:
+    """{address: wpt_store.Placed} of the license pages the store holds with
+    the source's upstream tree; {} when it holds none."""
+    listed = store.get_ref(UPSTREAM_PAGES, upstream_key(source))
+    return {address: placed for address, (_, placed) in parse_file_list(store.get_bytes(listed)).items()} \
+        if listed else {}
+
+
+def license_page(source: Source, store, address: str) -> bytes | None:
+    """The bytes of a license page downloaded with the source, checked
+    against their sha256; None when the store holds no such page for it
+    (what the license check reads at a page place, license_check.statement)."""
+    placed = stored_pages(source, store).get(address)
+    return store.read_file(placed) if placed is not None else None
+
+
 def upstream_tree(source: Source, store) -> dict[str, Entry]:
     """The source's upstream tree as the store holds it, each downloaded
     file placed in its bundle. An empty source's is empty, and needs no
     download. NotDownloaded when the store does not hold it."""
     if source.data["type"] == "empty":
-        if manifest.checksum({}) != source.data["checksum"]:
-            raise ChecksumMismatch(f"{source.id}: expected {source.data['checksum']}, got {manifest.checksum({})}")
         return {}
-    tree = stored_upstream(source.data["checksum"], store)
+    tree = stored_upstream(upstream_key(source), store)
     if tree is None:
-        raise NotDownloaded(f"{source.id}: its upstream files are not in {store}; `wpt-dataset download {source.id}` "
-                            f"fetches them")
+        raise _not_downloaded(source, store)
     return tree
 
 
-def stored_upstream(checksum: str, store) -> dict[str, Entry] | None:
-    """The upstream tree the store holds under a checksum, each downloaded
-    file placed in its bundle, or None."""
-    known = store.get_ref(UPSTREAM, checksum.removeprefix("sha256:"))
+def _not_downloaded(source: Source, store) -> NotDownloaded:
+    return NotDownloaded(f"{source.id}: its upstream files are not in {store}; `wpt-dataset download {source.id}` "
+                         f"fetches them")
+
+
+def stored_upstream(key: str, store) -> dict[str, Entry] | None:
+    """The upstream tree the store holds under a key (upstream_key), each
+    downloaded file placed in its bundle, or None."""
+    known = store.get_ref(UPSTREAM, key)
     if not known:
         return None
-    return manifest.placed_tree(manifest.parse_manifest(store.get_bytes(known)), stored_files(checksum, store))
+    return manifest.placed_tree(manifest.parse_manifest(store.get_bytes(known)), stored_files(key, store))
 
 
-def stored_files(checksum: str, store) -> dict:
+def stored_files(key: str, store) -> dict:
     """The file list (wpt_store.parse_file_list) of the upstream tree the
-    store holds under a checksum; {} for one downloaded before bundles."""
-    listed = store.get_ref(UPSTREAM_FILES, checksum.removeprefix("sha256:"))
+    store holds under a key; {} for one downloaded before bundles."""
+    listed = store.get_ref(UPSTREAM_FILES, key)
     return parse_file_list(store.get_bytes(listed)) if listed else {}
-
-
-UNREACHABLE = (OSError, urllib.error.URLError, subprocess.CalledProcessError)  # what a failed download raises
-
-
-def _reason(error) -> str:
-    if isinstance(error, subprocess.CalledProcessError) and error.stderr:
-        return error.stderr.decode(errors="replace").strip()
-    return str(error)
 
 
 def exact_pattern(path: str) -> str:
@@ -105,172 +129,44 @@ def exact_pattern(path: str) -> str:
     return manifest.WILDCARD.sub(lambda letter: f"[{letter[0]}]", path)
 
 
-def fetch(data: dict, address: str, store, tmp: Path, again=False) -> dict[str, Entry]:
-    """The upstream tree at one address, without checking its checksum:
-    downloaded into tmp, each kept file's content put into store (what a
-    download stores into: manifest.Extractor). An http-archive source's
-    archive is read while it downloads (archives.py). again: a git source
-    is read from the repositories tmp holds already, with no robots.txt,
-    asking only for any object it needs and lacks. A source with
-    `addresses` fetches each into its own folder of the one tree, and
-    into its own folder of tmp. A git source's entries hold their git
-    object ids (Entry.git). A download
-    that fails raises FetchFailed, naming the address it was for."""
-    extractor = Extractor(store, data.get("extract", {}))
-    parts = [(p["folder"], p["address"]) for p in data["addresses"]] if "addresses" in data else [("", address)]
-    for folder, part_address in parts:
-        (tmp / folder).mkdir(exist_ok=True)
-        try:
-            _fetch_into(data, part_address, extractor.within(folder), tmp / folder, again)
-        except UNREACHABLE as error:  # of several addresses, the one that failed is named here
-            raise FetchFailed(f"{part_address}: {_reason(error)}") from error
-    return extractor.finish()
-
-
-def _fetch_into(data: dict, address: str, extractor: Extractor, tmp: Path, again: bool):
-    """Add what one address holds to the extractor's tree (see fetch)."""
-    kind, revision = data["type"], data["revision"]
-    if kind != "empty" and not (again and kind == "git"):
-        robots.check(address, kind, USER_AGENT)  # before anything is downloaded
-    if kind == "http-file":
-        name = data.get("extract", {}).get("name") or unquote(urlparse(address).path.rsplit("/", 1)[-1])
-        if not name:
-            raise OSError(f"{address}: no file name in the address; set extract.name")
-        download = _download(address, tmp / "download")
-        if (path := extractor.kept(name)) is not None:
-            extractor.add_file(path, FILE, download)  # never read into memory: a file may hold gigabytes
-    elif kind == "http-archive":
-        archives.read(address, extractor, tmp, USER_AGENT)
-    elif kind == "git":
-        _read_git_source(data, address, tmp, extractor, again)
-    elif kind == "huggingface":
-        huggingface.read(address, revision, extractor, tmp, USER_AGENT)
-    elif kind == "mercurial":
-        hg = program("hg")
-
-        def clone():
-            shutil.rmtree(tmp / "repo", ignore_errors=True)  # a cut clone leaves a folder hg refuses
-            subprocess.run([hg, "clone", "-q", "-U", "-r", revision, address, str(tmp / "repo")],
-                           capture_output=True, check=True)
-
-        retry.call(clone, address)
-        manifest.read_mercurial(tmp / "repo", revision, extractor)
-    elif kind == "empty":
-        pass  # its patches hold every file
-    else:
-        raise ValueError(f"unknown source type {kind!r}")
-
-
-def _download(address: str, target: Path) -> Path:
-    def download():
-        with archives.get(address, USER_AGENT) as response, open(target, "wb") as out:
-            while block := response.read(1 << 20):
-                out.write(block)
-
-    retry.call(download, address)
-    return target
-
-
-def _read_git_source(data: dict, address: str, tmp: Path, extractor: Extractor, again=False):
-    """The commit, its history when asked, and each kept submodule at the
-    commit it pins, from the address `submodules` lists for it, recursively.
-    Only the contents of kept files are downloaded, and of those only the
-    ones the store does not hold already: the git objects the store
-    database's map knows (what the extractor stores into gives them,
-    known_objects) are taken from the store, their sha256 with them, and
-    the ones the history's patches need are written into the repository
-    from there (manifest.put_blobs); the history's own blobs that the tree
-    does not hold are kept for the map too (Extractor.keep_blobs). again:
-    each repository is in tmp already (fetch)."""
-    since = data["history"]["since"] if data.get("history") else None
-    listed, found = data.get("submodules", {}), set()
-    pending = [("", address, data["revision"], since)]
-    for number in itertools.count():
-        if not pending:
-            break
-        prefix, address, revision, since = pending.pop(0)
-        repo = tmp / f"repo-{number}"
-        if not again:
-            _git_fetch(address, revision, repo, full=since is not None)
-        history = manifest.git_history_blobs(repo, revision, extractor, since)
-        in_tree = manifest.git_blobs_needed(repo, revision, extractor, None, prefix)
-        needed = list(dict.fromkeys(in_tree + history))
-        known = extractor.store.known_objects(needed) if hasattr(extractor.store, "known_objects") else {}
-        _git_fetch_blobs(address, repo, [object_id for object_id in needed if object_id not in known])
-        # the blobs only the history's patches read are kept too, so a moved revision asks for none of them again
-        held = set(in_tree) | set(known)
-        extractor.keep_blobs(repo, [object_id for object_id in history if object_id not in held])
-        if history:  # the patches diff both sides of each change: git must hold them
-            lacking = manifest.missing_objects(repo, [object_id for object_id in history if object_id in known])
-            written = manifest.put_blobs(repo, [extractor.store.file_path(known[object_id]) for object_id in lacking])
-            if written != lacking:
-                raise FetchFailed(f"{address}: the store's copies of git objects do not give their ids back")
-        submodules = manifest.read_git(repo, revision, extractor, prefix, known)
-        if since:
-            manifest.read_git_history(repo, since, revision, extractor)
-        for path, commit in submodules.items():
-            if path not in listed:
-                raise UnsupportedEntry(f"{path}: a submodule with no address in `submodules`; list it or exclude it")
-            if not again:
-                robots.check(listed[path], "git", USER_AGENT)
-            found.add(path)
-            pending.append((path + "/", listed[path], commit, None))
-    if unused := sorted(set(listed) - found):
-        raise UnsupportedEntry(f"`submodules` lists {', '.join(unused)}, not a kept submodule of the revision")
-
-
-def _git_fetch(address: str, revision: str, repo: Path, full=False):
-    """The commit `revision` without file contents (git's partial fetch); with
-    `full`, its whole history too. A server that does not offer partial
-    fetches sends the contents as well."""
-    subprocess.run(["git", "init", "-q", "--bare", str(repo)], capture_output=True, check=True)
-    git = ["git", "-c", f"http.userAgent={USER_AGENT}", "-C", str(repo)]
-    for setting in (["remote", "add", "origin", address], ["config", "remote.origin.promisor", "true"],
-                    ["config", "remote.origin.partialclonefilter", "blob:none"]):
-        subprocess.run([*git, *setting], capture_output=True, check=True)
-    depth = [] if full else ["--depth", "1"]
-
-    def fetch(*what):
-        retry.call(lambda: subprocess.run([*git, "fetch", "-q", "--no-tags", "--filter=blob:none", *what],
-                                          capture_output=True, check=True), address)
-
-    try:
-        fetch(*depth, "origin", revision)
-    except subprocess.CalledProcessError:  # some servers only serve branch and tag tips
-        fetch("origin", "+refs/heads/*:refs/heads/*", "+refs/tags/*:refs/tags/*")
-    subprocess.run(["git", "-C", str(repo), "cat-file", "-e", f"{revision}^{{commit}}"], capture_output=True, check=True)
-
-
-def _git_fetch_blobs(address: str, repo: Path, object_ids: list[str]):
-    """The file contents a partial fetch left out, asked for by id in one request."""
-    missing = manifest.missing_objects(repo, object_ids)
-    if not missing:
-        return
-    command = ["git", "-c", f"http.userAgent={USER_AGENT}", "-C", str(repo), "fetch", "-q", "--no-tags",
-               "--no-write-fetch-head", "--filter=blob:none", "--stdin", "origin"]
-    wanted = "".join(object_id + "\n" for object_id in missing).encode()
-    retry.call(lambda: subprocess.run(command, input=wanted, capture_output=True, check=True), address)
-
-
 # -- cuts and patches -----------------------------------------------------------
 
 def apply_cuts(source_id: str, tree: dict[str, Entry], cuts: list[dict], store) -> dict[str, Entry]:
-    """Each cut removes bytes [start, end) from the file as the cuts before
-    it left it, and must give a file whose sha256 is sha256_after."""
+    """Each cut, in the order listed, removes from its file, as the cuts
+    before it left it, every run its keyed hashes name (erasure.apply,
+    under the store's cut key). CutFailed when its file is not in the tree
+    or none of its runs is found, CutKeyMissing when the store keeps no
+    cut key: the whole source is out until a person acts."""
+    if not cuts:
+        return tree
+    secret = erasure.key(store)
     tree = dict(tree)
     for cut in cuts:
         path = cut["path"]
         entry = tree.get(path)
+        where = f"{source_id}: cut on {path}"
         if entry is None or entry.mode == SYMLINK:
-            raise CutFailed(f"{source_id}: cut on {path}: no such file")
-        content = manifest.content(store, entry)
-        if not 0 <= cut["start"] < cut["end"] <= len(content):
-            raise CutFailed(f"{source_id}: cut on {path}: range {cut['start']}-{cut['end']} outside {len(content)} bytes")
-        after = content[:cut["start"]] + content[cut["end"]:]
-        if hashlib.sha256(after).hexdigest() != cut["sha256_after"]:
-            raise CutFailed(f"{source_id}: cut on {path}: the result does not match sha256_after")
-        tree[path] = Entry(entry.mode, store.put_bytes(after))
+            raise CutFailed(f"{where}: no such file")
+        tree[path] = Entry(entry.mode, store.put_bytes(erasure.apply(manifest.content(store, entry), cut, secret,
+                                                                     where)))
     return tree
+
+
+def new_cut(source: Source, store, path: str, start: int, end: int, note: str | None = None) -> dict:
+    """The cut entry that removes bytes [start, end) of an upstream file as
+    the source's cuts so far left it: its path, the passage's length and its
+    keyed hashes under the store's cut key (erasure.cut; the key is made on
+    the first cut). The passage itself goes nowhere. NotDownloaded when the
+    store does not hold the source, CutFailed for no such file or a range
+    outside it."""
+    tree = apply_cuts(source.id, upstream_tree(source, store), source.data.get("cuts", []), store)
+    entry, where = tree.get(path), f"{source.id}: cut on {path}"
+    if entry is None or entry.mode == SYMLINK:
+        raise CutFailed(f"{where}: no such file")
+    content = manifest.content(store, entry)
+    if not 0 <= start < end <= len(content):
+        raise CutFailed(f"{where}: range {start}-{end} outside its {len(content)} bytes")
+    return {"path": path, **erasure.cut(content[start:end], erasure.made_key(store)), **({"note": note} if note else {})}
 
 
 def apply_patches(source_id: str, tree: dict[str, Entry], patches: list[Patch], store) -> dict[str, Entry]:
@@ -404,6 +300,21 @@ def each_read(function, items, repo, store, copies=None, telemetry=None, what="s
             return list(in_order(run, items, executor, pool.sizing))
 
 
+def held_manifest(source: Source, store) -> str:
+    """The source's manifest as the records and tasks name it: the sha256
+    of the manifest of its upstream tree as the store holds it
+    (upstream_manifest), or the empty tree's (manifest.digest of no
+    files) for an empty source; what its download got, for the record
+    only; nothing decides on it. Read from the store's name for the tree,
+    never computed again. NotDownloaded when the store does not hold it."""
+    if source.data["type"] == "empty":
+        return manifest.digest({})
+    known = upstream_manifest(source, store)
+    if known is None:
+        raise _not_downloaded(source, store)
+    return known
+
+
 def copy_size(source: Source, store, wanted) -> int:
     """The bytes a conversion will copy to the disk, stated beforehand: the
     size, from the source's file list, of its upstream files whose path
@@ -414,28 +325,37 @@ def copy_size(source: Source, store, wanted) -> int:
     if source.data["type"] == "empty":
         return 0
     return sum({placed.sha256: placed.length for path, (_, placed) in
-                stored_files(source.data["checksum"], store).items() if wanted(path)}.values())
+                stored_files(upstream_key(source), store).items() if wanted(path)}.values())
 
 
 def copied_as_records(source: Source):
-    """Which paths the conversion of documents copies: the files read as
-    records (markdown.documents opens them and the file their join reads
-    as files)."""
-    return lambda path: is_records(source, path)
+    """Which paths the conversion of documents copies: the Parquet files
+    read as records (a records file is otherwise read as a stream from the
+    store, never copied: manifest.Stored)."""
+    return lambda path: is_records(source, path) and _seeks(path)
+
+
+def _seeks(path: str) -> bool:
+    """Whether a records file is read from a local copy (Parquet, whose
+    reader seeks) rather than as a stream."""
+    return path.lower().endswith(".parquet")
 
 
 def copied_by_pointers(source: Source, paths):
     """Which paths the reading of the documents tasks point into copies
     (markdown.chosen reads only the files the pointed paths, a file's or
-    <file>#<record id>, name): those of them read as records."""
+    <file>#<record id>, name): those of them read as records from a local
+    copy (Parquet)."""
     pointed = list(paths)
-    return lambda path: is_records(source, path) and any(p == path or p.startswith(f"{path}#") for p in pointed)
+    return lambda path: is_records(source, path) and _seeks(path) and any(p == path or p.startswith(f"{path}#")
+                                                                          for p in pointed)
 
 
 def copied_as_trees(source: Source):
     """Which paths the reading of conversations copies: the chat files read
-    as message trees (conversations.of_file opens them as files)."""
-    return lambda path: is_message_tree(source, path)
+    as message trees from a local copy (Parquet; conversations.of_file
+    reads the others as streams)."""
+    return lambda path: is_message_tree(source, path) and _seeks(path)
 
 
 def copied_for_repository(source: Source):
@@ -447,57 +367,86 @@ def copied_for_repository(source: Source):
 
 # -- the final tree -------------------------------------------------------------
 
-def tree_key(source: Source) -> str:
-    """The fingerprint of a source's final tree and of the check that its
-    files are text: its checksum, cuts, patches and formats (which decide
-    each file's encoding), and the code (wpt_utils.programs.code)."""
+def upstream_manifest(source: Source, store) -> str | None:
+    """The sha256 of the manifest object the store holds as the source's
+    upstream tree, None for an empty source (no upstream) and for one the
+    store does not hold."""
+    return None if source.data["type"] == "empty" else store.get_ref(UPSTREAM, upstream_key(source))
+
+
+def tree_key(source: Source, store) -> str:
+    """The fingerprint of a source's final tree: its upstream tree as the
+    store holds it (its manifest's sha256) and the license pages downloaded
+    with it, cuts (and the cut key they are matched under), patches,
+    formats (which decide each file's encoding), and the code
+    (wpt_utils.programs.code: the WPT repository's whole commit, every
+    uncommitted change under data/ included), so after any commit every
+    result keyed by it is computed again from the stored bytes."""
+    cuts = source.data.get("cuts", [])
     return fingerprint({
         "kind": "source-tree",
         "code": code(),
-        "checksum": source.data["checksum"],
+        "upstream": upstream_manifest(source, store),
+        **({"pages": store.get_ref(UPSTREAM_PAGES, upstream_key(source))} if license_pages(source) else {}),
         "formats": source.data["formats"],
-        "cuts": source.data.get("cuts", []),
+        "cuts": cuts,
+        **({"cut_key": store.get_ref(erasure.KEY_KIND, erasure.KEY_NAME)} if cuts else {}),
         "patches": [[p.name, hashlib.sha256(p.data).hexdigest()] for p in source.patches],
     })
 
 
-def source_tree(source: Source, store, telemetry=None) -> tuple[dict[str, Entry], str]:
-    """The source's final tree and the sha256 of its manifest object, each
-    file its patches left as it was placed where the download put it.
-    NotDownloaded when the store does not hold its upstream files. With a
-    telemetry, every ref it sets is recorded first (wpt_telemetry.set_ref)."""
-    key = tree_key(source)
+def final_tree(source: Source, store, telemetry=None) -> tuple[dict[str, Entry], str]:
+    """The source's final tree, its upstream tree with its cuts and patches
+    applied, and the sha256 of its manifest object, each file its patches
+    left as it was placed where the download put it; nothing checked.
+    NotDownloaded when the store does not hold its upstream files,
+    CutFailed (CutKeyMissing among them) or PatchFailed when a cut or a
+    patch does not apply. Kept under the ref source-trees/<tree_key>. With
+    a telemetry, every ref it sets is recorded first (wpt_telemetry.set_ref)."""
+    key = tree_key(source, store)
     known = store.get_ref("source-trees", key)
     if known:
         tree = manifest.parse_manifest(store.get_bytes(known))
         if source.data["type"] != "empty":
-            tree = manifest.placed_tree(tree, stored_files(source.data["checksum"], store))
-    else:
-        tree = upstream_tree(source, store)
-        tree = apply_cuts(source.id, tree, source.data.get("cuts", []), store)
-        tree = apply_patches(source.id, tree, source.patches, store)
-        if found := not_text(source, tree, store, first=True):
-            raise NotText(f"{source.id}: {next(iter(found.values()))}; exclude it in extract")
-        known = store.put_bytes(manifest.manifest_bytes(tree))
-        set_ref(store, "source-trees", key, known, telemetry or Telemetry.off())
+            tree = manifest.placed_tree(tree, stored_files(upstream_key(source), store))
+        return tree, known
+    tree = upstream_tree(source, store)
+    tree = apply_cuts(source.id, tree, source.data.get("cuts", []), store)
+    tree = apply_patches(source.id, tree, source.patches, store)
+    known = store.put_bytes(manifest.manifest_bytes(tree))
+    set_ref(store, "source-trees", key, known, telemetry or Telemetry.off())
+    return tree, known
+
+
+def source_tree(source: Source, store, telemetry=None) -> tuple[dict[str, Entry], str]:
+    """final_tree, refused whole for the commands that hold a source to
+    every rule (`check --fetch`, the writes of the service layer, `unpack`):
+    NotText for its first file that is not text, LicenseMapError for its
+    first file no license entry covers. The build leaves such files out
+    one by one instead (kept.py)."""
+    tree, known = final_tree(source, store, telemetry)
+    if found := not_text(source, tree, known, store, telemetry):
+        raise NotText(f"{source.id}: {next(iter(found.values()))}; exclude it in extract")
     check_license_map(source, tree)
     return tree, known
 
 
-def not_text(source: Source, tree: dict[str, Entry], store, first=False) -> dict[str, str]:
-    """{path: why} of the files of a final tree that must be text and are
-    not, under the encoding each states (encoding.py), in the tree's order
-    (symlinks, records files and message trees are read otherwise); with
-    first, only the first one."""
+def not_text(source: Source, tree: dict[str, Entry], known: str, store, telemetry=None) -> dict[str, str]:
+    """{path: why} of the files of a final tree (known: its manifest
+    object) that the text check (checks.py) finds are not text, in the
+    tree's order. Kept under the ref source-not-text/<fingerprint of the
+    tree, the formats and the code>, so a tree is read for it once."""
+    key = fingerprint({"kind": "source-not-text", "code": code(), "tree": known, "formats": source.data["formats"]})
+    held = store.get_ref("source-not-text", key)
+    if held:
+        return json.loads(store.get_bytes(held))
     found = {}
     for path, entry in tree.items():
-        if entry.mode != SYMLINK and not is_records(source, path) and not is_message_tree(source, path):
-            try:
-                encoding.decode(manifest.content(store, entry), encoding.entry_of(source, path), path)
-            except NotText as error:
-                found[path] = str(error)
-                if first:
-                    break
+        if checks.asks_text(source, path, entry):
+            if (why := checks.not_text(source, path, manifest.content(store, entry))) is not None:
+                found[path] = why
+    set_ref(store, "source-not-text", key, store.put_bytes(json.dumps(found, ensure_ascii=False).encode()),
+            telemetry or Telemetry.off())
     return found
 
 
@@ -509,46 +458,27 @@ def is_records(source: Source, path: str) -> bool:
 
 def records_entry(source: Source, path: str) -> dict | None:
     """The records format entry covering a path, or None."""
-    return next((e for e in manifest.format_entries(source.data["formats"], path) if e["format"] == "records"), None)
+    return next((e for e in manifest.format_entries(source, path) if e["format"] == "records"), None)
 
 
 def is_message_tree(source: Source, path: str) -> bool:
     """Whether a path is a chat file read as a message tree, which is read
     like a records file (JSON Lines, compressed or not, or Parquet)."""
-    return any(e["format"] == "chat" and "tree" in e and glob_match_any(path, e["paths"])
-               for e in source.data["formats"])
+    return any(e["format"] == "chat" and "tree" in e for e in manifest.format_entries(source, path))
 
 
 def check_license_map(source: Source, tree: dict[str, Entry]):
-    """Every path matches exactly one license entry, without `values`; a
-    records file whose format names a `license` field instead matches one
-    or more, each listing the license values of the records it covers, with
-    no value listed twice. A records file whose format names none is like
-    any other file: its records take its one entry."""
-    for path in tree:
-        found = manifest.license_entries(source.data["licenses"], path)
-        names = ", ".join(e["license"] for e in found)
-        entry = records_entry(source, path)
-        if entry is None or "license" not in entry:
-            if len(found) != 1:
-                what = "no license entry" if not found else f"{len(found)} license entries ({names})"
-                raise LicenseMapError(f"{source.id}: {path} matches {what}; every path must match exactly 1")
-            if "values" in found[0]:
-                what = "is not a records file" if entry is None else "is a records file with no `license` field"
-                raise LicenseMapError(f"{source.id}: {path} {what}, but its license entry lists `values`")
-            continue
-        if not found or any("values" not in e for e in found):
-            raise LicenseMapError(f"{source.id}: {path} is a records file: every license entry covering it "
-                                  f"lists the `values` it covers (found: {names or 'none'})")
-        values = [v for e in found for v in e["values"]]
-        repeated = sorted({v for v in values if values.count(v) > 1})
-        if repeated:
-            raise LicenseMapError(f"{source.id}: {path}: license values listed by several entries: {repeated}")
+    """LicenseMapError unless the license check covers every path of the
+    tree (license_check.coverage): each file by exactly one entry, a records
+    file's records by entries with the same field place."""
+    license_check.check_coverage(source.id, license_check.coverage(source.data["licenses"], tree,
+                                                                   lambda path: is_records(source, path)))
 
 
 def tags_of(source: Source, path: str) -> frozenset[str]:
-    return frozenset(t for e in source.data.get("tags", []) if glob_match_any(path, e["paths"])
-                     for t in e["tags"])
+    """The tags of a source's path: those of every tag entry covering it,
+    found by the source's one matcher (manifest.source_paths)."""
+    return manifest.source_paths(source).tags(path)
 
 
 def held_out_group(source: Source, path: str) -> str | None:
@@ -567,5 +497,4 @@ def held_out_group(source: Source, path: str) -> str | None:
 def in_store(source: Source, store) -> bool:
     """Whether the store holds the source's upstream files, so its tree
     can be read."""
-    return source.data["type"] == "empty" or store.get_ref(UPSTREAM, source.data["checksum"].removeprefix("sha256:")) \
-        is not None
+    return source.data["type"] == "empty" or store.get_ref(UPSTREAM, upstream_key(source)) is not None

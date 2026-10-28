@@ -4,14 +4,14 @@
   "title": "WPT source description (data/sources/<id>/source.json)",
   "type": "object",
   "additionalProperties": false,
-  "required": ["type", "address", "revision", "checksum", "licenses", "formats", "decision"],
+  "required": ["type", "address", "licenses", "formats", "decision"],
   "properties": {
-    "type": {"enum": ["http-file", "http-archive", "git", "mercurial", "huggingface", "empty"], "description": "empty: no upstream; the patches hold every file (text written for WPT); huggingface: a dataset repository on huggingface.co, address https://huggingface.co/datasets/<owner>/<name>"},
-    "address": {"type": "string", "minLength": 1, "description": "where to fetch it; its sha256 gives the id's hash part; with `addresses`, the first of them"},
+    "type": {"enum": ["http", "git", "mercurial", "empty"], "description": "the protocol that turns the address into files (protocols/): http, one file per address, an archive (by the end of its name: .zip, .tar, .tar.gz, .tgz, .tar.bz2, .tbz2, .tar.xz, .txz) unpacked into its members; git, a repository on any host at the commit its address serves, its large files through LFS (a Hugging Face dataset is one, at https://huggingface.co/datasets/<owner>/<name>); mercurial, a repository at its tip; empty: no upstream, the patches hold every file (text written for WPT)"},
+    "address": {"type": "string", "minLength": 1, "description": "where to fetch it; what upstream serves there when asked is what is taken. The source's id is given when it is created and never derived from the address again, so an address that changes keeps its source. With `addresses`, the first of them"},
     "addresses": {
       "type": "array",
       "minItems": 2,
-      "description": "http-file and http-archive only: several addresses, each fetched (with the source's type, revision and extract rules) into its own folder of the source's tree; `address` repeats the first one's address, which gives the id",
+      "description": "http only: several addresses, each fetched (with the source's extract rules) into its own folder of the source's tree; `address` repeats the first one's address",
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -23,15 +23,13 @@
         }
       }
     },
-    "revision": {"type": "string", "minLength": 1, "description": "git/mercurial/huggingface: full commit hash; http: fetch date YYYY-MM-DD; empty: the date the source was started"},
-    "checksum": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$", "description": "sha256 of the canonical manifest"},
     "extract": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "strip": {"type": "integer", "minimum": 0, "description": "leading path components removed from every path"},
         "exclude": {"type": "array", "items": {"$ref": "#/$defs/glob"}, "description": "paths (after strip) left out"},
-        "name": {"type": "string", "minLength": 1, "description": "http-file only: the file's path in the manifest"},
+        "name": {"type": "string", "minLength": 1, "description": "http only: the file's name, which says whether it is an archive, when the address's last path part does not give it; a file that is not an archive keeps it as its path"},
         "note": {"type": "string"}
       }
     },
@@ -39,7 +37,7 @@
       "type": "object",
       "additionalProperties": false,
       "required": ["since"],
-      "description": "git only: the commit history from `since` to `revision`, one file `.git/history/<commit>` per commit without merges, in git format-patch layout, limited to the files `extract` keeps",
+      "description": "git only: the commit history from `since` to the commit the download gets, one file `.git/history/<commit>` per commit without merges, in git format-patch layout, limited to the files `extract` keeps",
       "properties": {
         "since": {"type": "string", "pattern": "^([0-9a-f]{40}|[0-9a-f]{64})$", "description": "the first commit kept: the one from which the repository's root license file holds the license the source lists"}
       }
@@ -56,15 +54,79 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["license", "paths", "attribution", "text"],
+        "required": ["license", "paths", "attribution", "place", "text", "decision"],
         "properties": {
           "license": {"type": "string", "pattern": "^[A-Za-z0-9.+-]+( WITH [A-Za-z0-9.+-]+)?( (OR|AND) [A-Za-z0-9.+-]+( WITH [A-Za-z0-9.+-]+)?)*$", "description": "SPDX identifier or LicenseRef-<name>, or an expression: alternatives joined by OR, licenses that apply together joined by AND, each optionally WITH an exception"},
-          "paths": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/glob"}},
+          "paths": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/glob"}, "description": "the files the entry covers: exact paths, or patterns that name a folder (`src/*`, `src/**`) or a kind of file, in every folder (`**/*.js`) or in the top folder (`*.js`); a pattern made only of wildcards (`**` alone) is refused. Every file is covered by exactly one entry; the records of a records file, each by the one entry whose field place expects its value"},
           "attribution": {"type": "string", "minLength": 1, "description": "the credit this license asks for, written by a person: authors, title, copyright line, link"},
-          "values": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}, "description": "records files only: the values of a record's license field that this entry covers, exactly as the records hold them; a record whose value no entry lists is left out"},
+          "place": {
+            "type": "object",
+            "additionalProperties": false,
+            "minProperties": 1,
+            "maxProperties": 1,
+            "description": "where the license statement must be found: a file of the content (the covered file itself too), a field of each record, a page at an outside address (downloaded with the source), or the entry itself",
+            "properties": {
+              "file": {"type": "string", "minLength": 1, "description": "a path of the source's tree"},
+              "field": {"$ref": "#/$defs/field", "description": "a field of each record of the records files the entry covers; the entry covers the records whose field holds one of its expected values"},
+              "page": {"type": "string", "minLength": 1, "description": "an outside address"},
+              "entry": {"const": true, "description": "the signed entry's text is the statement, accepted as it stands; only where no statement can exist in the content: the text WPT writes itself, in an empty source, and a public-domain proof (LicenseRef-public-domain)"}
+            }
+          },
+          "expected": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {"type": "string", "minLength": 1},
+            "description": "what the statement at `place` must be: at a file or a page, the ids of the license texts (data/license-texts/<id>/) it may match; at a field, the values of a record's field the entry covers, exactly as the records hold them (other values as JSON). A record whose value no entry expects is covered by none. None for the entry itself"
+          },
           "text": {"type": "string", "description": "the license text as the source gives it (its LICENSE file, with its copyright line, and an Apache NOTICE file's content); for LicenseRef-public-domain, why the work is in the public domain. Every model trained on the source carries it in its NOTICE. Empty only while the source's decision is refused (a person writes it later); any other decision needs a text"},
+          "decision": {"$ref": "#/$defs/decision", "description": "whether this entry's license is accepted, signed by a person; a file trains only when its source, its entry and the license text found at its place are all admitted. A save that changes the entry's license, place or expected texts without deciding it anew sends it back to under-review"},
           "note": {"type": "string"}
-        }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "place": {
+                  "required": ["entry"]
+                }
+              }
+            },
+            "then": {
+              "not": {
+                "required": ["expected"]
+              }
+            },
+            "else": {
+              "required": ["expected"]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "place": {
+                  "anyOf": [
+                    {
+                      "required": ["file"]
+                    },
+                    {
+                      "required": ["page"]
+                    }
+                  ]
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "expected": {
+                  "items": {
+                    "pattern": "^(file:)?[0-9a-f]{64}$"
+                  }
+                }
+              }
+            }
+          }
+        ]
       }
     },
     "formats": {
@@ -80,7 +142,6 @@
           "language": {"type": "string", "pattern": "^[A-Za-z0-9_+#.-]+$", "description": "code only: the language named after the opening fence, for example python"},
           "text": {"$ref": "#/$defs/field", "description": "records only: the field holding the document's text (in an .xml file, every field is an XPath 1.0 expression)"},
           "as": {"enum": ["text", "markdown", "html"], "description": "records only: whether the text field is plain text (default), Markdown, or a web page converted as an html file is"},
-          "license": {"$ref": "#/$defs/field", "description": "records only: the field holding the record's license, matched against the `values` of the license entries; without it, every record takes the one license entry of its file, which lists no `values`"},
           "records": {"$ref": "#/$defs/field", "description": "records only: the file (.json, optionally .gz or .zst) is one JSON document, and this field of it holds the list of records"},
           "namespaces": {"type": "object", "additionalProperties": {"type": "string", "minLength": 1}, "description": "records only: the prefixes the XPath fields of an .xml records file use, each mapped to its namespace"},
           "join": {
@@ -129,7 +190,7 @@
            "then": {"required": ["id"]}},
           {"if": {"properties": {"format": {"const": "records"}}},
            "then": {"required": ["text"]},
-           "else": {"not": {"anyOf": [{"required": ["text"]}, {"required": ["as"]}, {"required": ["license"]}, {"required": ["id"]}, {"required": ["credit"]}, {"required": ["keep"]}, {"required": ["records"]}, {"required": ["namespaces"]}, {"required": ["join"]}, {"required": ["newest"]}, {"required": ["title"]}]}}}
+           "else": {"not": {"anyOf": [{"required": ["text"]}, {"required": ["as"]}, {"required": ["id"]}, {"required": ["credit"]}, {"required": ["keep"]}, {"required": ["records"]}, {"required": ["namespaces"]}, {"required": ["join"]}, {"required": ["newest"]}, {"required": ["title"]}]}}}
         ]
       }
     },
@@ -167,33 +228,25 @@
     },
     "cuts": {
       "type": "array",
+      "description": "erasure cuts (docs/erasure.md), applied in this order before the patches; made with `wpt-dataset cut`, which needs the store's cut key",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["path", "start", "end", "sha256_after"],
+        "required": ["path", "length", "hmac", "rolling"],
         "properties": {
-          "path": {"type": "string", "minLength": 1},
-          "start": {"type": "integer", "minimum": 0, "description": "first removed byte"},
-          "end": {"type": "integer", "minimum": 0, "description": "first byte kept after the cut"},
-          "sha256_after": {"type": "string", "pattern": "^[0-9a-f]{64}$", "description": "sha256 of the whole file after the cut"},
+          "path": {"type": "string", "minLength": 1, "description": "the upstream file the passage is removed from"},
+          "length": {"type": "integer", "minimum": 1, "description": "the passage's length in bytes"},
+          "hmac": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "HMAC-SHA256 of the passage under the store's cut key"
+          },
+          "rolling": {"type": "integer", "minimum": 0, "description": "the passage's rolling hash under the store's cut key"},
           "note": {"type": "string"}
         }
       }
     },
-    "decision": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["decision", "by", "date"],
-      "properties": {
-        "decision": {"enum": ["under-review", "admitted", "refused"]},
-        "by": {"type": "string", "minLength": 1},
-        "date": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
-        "reason": {"type": "string", "minLength": 1, "description": "required to refuse; optional under review; to admit, only for an exception (such as an explicit permission for content without a license)"},
-        "note": {"type": "string"}
-      },
-      "if": {"properties": {"decision": {"const": "refused"}}},
-      "then": {"required": ["reason"]}
-    },
+    "decision": {"$ref": "#/$defs/decision", "description": "the source's decision: whether WPT wants the source at all (docs/data-selection.md), signed by a person"},
     "note": {"type": "string"}
   },
   "allOf": [
@@ -202,37 +255,15 @@
       "else": {"properties": {"licenses": {"items": {"properties": {"text": {"minLength": 1}}}}}}
     },
     {
-      "if": {"properties": {"type": {"const": "git"}}},
-      "then": {"properties": {"revision": {"pattern": "^([0-9a-f]{40}|[0-9a-f]{64})$"}}}
-    },
-    {
-      "if": {"properties": {"type": {"const": "huggingface"}}},
-      "then": {"properties": {"revision": {"pattern": "^[0-9a-f]{40}$"}, "address": {"pattern": "^https://huggingface\\.co/datasets/[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$"}}}
-    },
-    {
-      "if": {"properties": {"type": {"const": "mercurial"}}},
-      "then": {"properties": {"revision": {"pattern": "^[0-9a-f]{40}$"}}}
-    },
-    {
-      "if": {"properties": {"type": {"enum": ["http-file", "http-archive", "empty"]}}},
-      "then": {"properties": {"revision": {"pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"}}}
-    },
-    {
       "if": {"properties": {"type": {"const": "empty"}}},
-      "then": {
-        "properties": {
-          "address": {"pattern": "^empty:[a-z0-9][a-z0-9._-]*$", "description": "empty:<name>, a name for the source; nothing is fetched"},
-          "checksum": {"const": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "description": "the checksum of an empty manifest"}
-        },
-        "not": {"anyOf": [{"required": ["extract"]}, {"required": ["mirrors"]}]}
-      }
+      "then": {"properties": {"address": {"pattern": "^empty:[a-z0-9][a-z0-9._-]*$", "description": "empty:<name>, a name for the source; nothing is fetched"}},"not": {"anyOf": [{"required": ["extract"]}, {"required": ["mirrors"]}]}}
     },
     {
       "if": {"required": ["addresses"]},
-      "then": {"properties": {"type": {"enum": ["http-file", "http-archive"]}}, "not": {"required": ["mirrors"]}}
+      "then": {"properties": { "type": {"const": "http"}},"not": {"required": ["mirrors"]}}
     },
     {
-      "if": {"properties": {"type": {"not": {"const": "http-file"}}}},
+      "if": {"properties": {"type": {"not": {"const": "http"}}}},
       "then": {"properties": {"extract": {"not": {"required": ["name"]}}}}
     },
     {
@@ -241,6 +272,31 @@
     }
   ],
   "$defs": {
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "by", "date"],
+      "properties": {
+        "decision": {
+          "enum": ["under-review", "admitted", "refused"]
+        },
+        "by": {"type": "string", "minLength": 1},
+        "date": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "reason": {"type": "string", "minLength": 1, "description": "required to refuse; optional under review; to admit, only for an exception (such as an explicit permission for content without a license)"},
+        "note": {"type": "string"}
+      },
+      "if": {
+        "properties": {
+          "decision": {"const": "refused"}
+        }
+      },
+      "then": {
+        "required": ["reason"]
+      }
+    },
     "glob": {"type": "string", "minLength": 1, "description": "path pattern: * matches within one folder, ** across folders"},
     "field": {"type": "string", "pattern": "^[^.]+(\\.[^.]+)*$", "description": "a record field; dots go into nested objects, for example metadata.license"}
   }

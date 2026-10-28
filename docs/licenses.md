@@ -439,11 +439,11 @@ alone, without an outside ruling, says so in its row.
 
 A GPL-family license (GPL, LGPL, AGPL, any version) counts as "-or-later"
 unless the license file, the package metadata or the repository's files
-state "only" for it. An explicit "only" statement always wins, over a
-reviewed license text's answer too. A license that states neither "only"
+state "only" for it. An explicit "only" statement always wins, over the
+license a license text item names too. A license that states neither "only"
 nor "or later" is "-or-later": the Program that specifies no version lets
 any version be chosen (GPL section 9, LGPL section 14, AGPL section 14).
-The rule applies to every source, whoever drafts it.
+The rule applies to every source, whoever writes it.
 
 | License (SPDX) | Why it is allowed | What to check |
 | --- | --- | --- |
@@ -501,36 +501,93 @@ in it is allowed, and its `text` holds every one of their texts. When the reposi
 "at your option"), the entry is `MIT OR Apache-2.0`. `AND` binds before `OR`, as in SPDX;
 parentheses are not accepted.
 
-### License texts
+### License entries
 
-Every license entry carries `text`: the license as the source gives it, with
+Each license entry of a source (`licenses` in its `source.json`) says
+three things, and carries its own decision:
+
+1. **Its place**, where its license statement must be found (`place`): a
+   file of the source's tree (`{"file": path}`, the covered file itself
+   too, for a file whose own header states its license), a field of each
+   record (`{"field": name}`), or a page at an outside address
+   (`{"page": address}`), which the download stores with the source's
+   files. A fourth place, the entry itself (`{"entry": true}`), is allowed
+   only where no statement can exist in the content: in an `empty` source
+   (text written for WPT, such as conversations, tasks and ratings) and
+   for `LicenseRef-public-domain` (a proof such as death dates or
+   publication law). There the signed entry's `text` is the statement.
+2. **What is expected there** (`expected`): at a file or a page, the ids
+   of the license texts it may match (items of `data/license-texts/`,
+   below), at least one; at a field, the exact values of that field the
+   entry covers. The entry itself expects nothing.
+3. **What it covers** (`paths`). Every file is covered by exactly one
+   entry. A records file whose entries name a field place is covered
+   record by record: each record by the entry that expects its field's
+   value. A record whose value no entry expects is covered by none and
+   left out; the build and `check --fetch` report its value with its
+   count, the proposal of an entry for that value, and a person adds that
+   entry, under review.
+
+Coverage patterns are narrow enough that the person signing sees at a
+glance what they cover:
+
+- a named folder with a star: `src/*` for its files, `src/**` for
+  everything under it;
+- a named kind of file in every folder (`**/*.js`) or in the top folder
+  (`*.js`);
+- an exact path.
+
+A pattern that names neither a folder nor a kind of file, such as `**`
+alone, is refused by the check. The person signing an entry refuses a
+pattern that covers someone else's code under the source's license (such
+as `vendor/*`); no program refuses it for them.
+
+**The statement match.** Every build reads each entry's statement in the
+bytes the store holds: the file at its place, or the page downloaded with
+the source. The statement is looked up among the license texts, by the
+sha256 of its bytes first, then by its normalized text; it matches when
+the text found is one the entry expects. A field place matches by its
+selection alone, and the entry itself as it stands. An upstream statement
+that changed matches no expected text, so the build leaves that entry's
+files out and reports it. A statement outside the declared places is
+never read.
+
+**The entry's text** (`text`) is the license as the source gives it, with
 its copyright line, followed for Apache-2.0 by the source's own `NOTICE`
 content; for `LicenseRef-public-domain`, the proof. MIT and BSD ask that
 their notice go with copies, and Apache asks for its license and the
 `NOTICE` content, so every model's `NOTICE` ends its list of sources with
 each distinct text once.
 
-### Reviewed license texts
+### License texts
 
-`data/reviewed-license-texts.json` holds the outcome of a review of each
-license file, notice, package metadata or README text that a source
-drafter's rules cannot identify alone ([architecture.md](architecture.md),
-"Source drafters"). Each review says what the text is: a license (its SPDX
-expression), a notice naming a license without its text, not a license at
-all, a text whose files are left out (and why), or a README whose words
-about AI or machine learning refuse no training. It also keeps the
-review's verdict and explanation. A review is found by the sha256 of
-one file's bytes first, then by the sha256 of the text's group: the text
-lowercased, without its copyright lines, every run of other characters
-than letters and digits made one space, so one license with other
-copyright holders shares one review
-(`wpt_dataset.licenses.reviewed`). A review never admits a source: a draft
-that uses it starts `under-review`, as every draft does. The file is
-written only through the service layer (`wpt-dataset save
-reviewed-license-texts reviewed-license-texts.json FILE --version V`, or
-`/api/documents/reviewed-license-texts/reviewed-license-texts.json` in
-`wpt-web`), and its schema is
-`packages/wpt-dataset/src/wpt_dataset/schemas/reviewed-license-texts.schema.json`.
+Every license text is an item of its own, like a source:
+`data/license-texts/<id>/`, with a `license-text.json` and, optionally,
+`license-text.txt`, the text itself. Its schema is
+`packages/wpt-dataset/src/wpt_dataset/schemas/license-text.schema.json`.
+
+- Its id is the sha256 of its normalized text: the text lowercased,
+  without its copyright lines, every run of characters other than letters
+  and digits made one space (`wpt_dataset.license_check.text_id`). So one
+  item serves every copy of the same license with other copyright
+  holders.
+- `files` lists the sha256 of each exact file it was seen as: a file is
+  found by its own sha256 first, then by its normalized text.
+- `license-text.json` holds its decision (`under-review`, `admitted` or
+  `refused`, signed like a source's), its kind (`license`, `notice`: it
+  names a license without its text, `not-a-license`, or `readme`: a README
+  read for what it says about training), its license when it is or names
+  one, where it was first found (a source id and a path), and the
+  reviewer's explanation.
+
+A license text is written only through the service layer: its
+`license-text.json` with `wpt-dataset save license-text ID FILE --version
+V`, or `wpt-web`'s documents routes, and a new item with its text, under
+review, from the bytes a downloaded source holds at a file or a license
+page (`wpt-dataset add-license-text ID --file PATH` or `--page ADDRESS`,
+or `wpt-web`'s `POST /api/sources/{id}/license-texts`), or by the
+migration that meets it in a source. A statement no license text holds is
+reported with the id its text would have.
 
 ### Still refused
 
@@ -615,8 +672,9 @@ when it is:
   is `LicenseRef-public-domain`, with the statement quoted in `text`.
 - **Every path has exactly one license entry.** A source can hold several
   licenses, each mapped to its paths, and each entry carries its credit
-  (`attribution`) and its text (`text`). Each path is checked on its own:
-  a file can carry another license than the rest of its source.
+  (`attribution`), its text (`text`), its place, what is expected there
+  and its decision ("License entries", above). Each path is checked on its
+  own: a file can carry another license than the rest of its source.
 - **Every file whose license allows it comes in.** Configuration, build
   files, license files and edition pages are data like any other. Only
   the rules on this page leave a file out, and files that are not text
@@ -625,9 +683,10 @@ when it is:
   a repository's license file for every file of the repository. A file no
   license covers is all rights reserved, and stays out.
 - **Records.** In a dataset whose records each carry their own license
-  value (a `records` file), each license entry lists in `values` the
-  exact values it covers, and a record enters only when its value is
-  listed: a value nobody reviewed never enters. A value is the license of
+  value (a `records` file), each license entry names that field as its
+  place and lists in `expected` the exact values it covers, and a record
+  enters only when its value is listed: a value nobody reviewed never
+  enters. A value is the license of
   that record's own content. A license the dataset gives its whole
   collection covers its records only when it is the license of the content
   itself: the dataset's makers made that content or state that it is under
@@ -689,8 +748,9 @@ when it is:
   refuses only such crawlers has not refused training.
 - **A robots.txt speaks for its own site**, which is not always the
   owner's: a refused address is skipped and the source's next mirror is
-  tried, read with its own robots.txt. The source fails (`CrawlForbidden`)
-  only when no address works and one of them refused. Only an answer 404
+  tried, read with its own robots.txt. The source fails only when no
+  address works, with the failure of its main address (`CrawlForbidden`
+  when that one refused). Only an answer 404
   (not found) or 410 (gone) means no rules; any other answer leaves the
   policy unknown, so that address is not used and the next mirror is
   tried.
@@ -700,18 +760,40 @@ when it is:
 
 ## Who decides
 
-A human decides every source; the decision is recorded in `source.json`
-(`decision`, with a reason for a refusal or an exceptional admission) and
-its commit must be signed by an allowed key (see
-[CONTRIBUTING.md](../CONTRIBUTING.md)). A source has exactly three states:
-`under-review` (not yet decided, where every new source starts, and where
-a doubt stays, its reason naming the missing fact), `admitted` and
-`refused`; only an admitted source enters a build. A source replaced
-because its address moved is refused by a person, its reason naming the new
-source's id. A refused source stays in the repository as a reference: it is
-never deleted. No program admits or refuses a source. A program such as a
-source drafter may draft a source's licenses and tags as help: its output is
-not a source of truth, a person checks it, and only a person admits a source. The build applies only the rules people wrote.
+People decide, at three levels, each recorded where it applies and
+signed:
+
+- **The source's decision** (`decision` in `source.json`): whether WPT
+  wants the source at all, a matter of data selection
+  ([data-selection.md](data-selection.md)).
+- **Each license entry's decision** (`decision` in the entry): whether its
+  coverage and its license are accepted for the files it covers. The
+  person refuses a pattern that covers someone else's code.
+- **Each license text's decision** (`decision` in its
+  `license-text.json`): whether that text is an accepted license
+  statement.
+
+A file trains only when its source, its entry and the text found at its
+entry's place are all admitted; a field place and the entry itself have
+no text to admit. Each decision has exactly three states: `under-review`
+(not yet decided, where everything new starts, and where a doubt stays,
+its reason naming the missing fact), `admitted` and `refused`, with a
+reason for a refusal or an exceptional admission. A commit that changes a
+decision at any level must be signed by an allowed key (see
+[CONTRIBUTING.md](../CONTRIBUTING.md)), and so must a commit that changes
+what an admitted or refused entry or text holds: an entry's license,
+place, expected texts and coverage (and its text, when its place is the
+entry itself), wherever the entry stands in the list, and a text's exact
+files. A refused source stays in the
+repository as a reference: it is never deleted.
+
+No program admits or refuses, at any level. The service layer sends a
+license entry back to `under-review` when a save changes its license, its
+place or its expected texts without deciding it anew; that decision then
+reads `by` `machine:wpt-dataset`, with the date and the reason. A record's
+value never sends an entry back. A machine's name (`machine:<name>`) may
+sign only an `under-review` decision. The build applies only the rules
+people wrote.
 
 A license question the maintainer cannot settle alone goes into
 [LEGAL-QUESTIONS.html](../LEGAL-QUESTIONS.html), the page for legal

@@ -5,8 +5,8 @@ git or Mercurial network error is tried again, up to ATTEMPTS times in all.
 The wait doubles from BASE seconds up to CAP, each one drawn at random below
 that limit (so many fetches failing together do not come back together),
 and follows a server's Retry-After up to CAP. Anything else, such as a 404
-or a checksum that differs, fails at once: trying again gives the same
-answer.
+or an LFS object whose bytes are not its pointer's, fails at once: trying
+again gives the same answer.
 
 Each new try is announced in one line, printed on stderr; inside a
 reporting(log) block (a command that records its run passes its

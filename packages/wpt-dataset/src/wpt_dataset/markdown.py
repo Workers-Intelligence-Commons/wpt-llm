@@ -73,7 +73,7 @@ caption) stays ordinary text; math, audio and video are left out.
 
 A file whose Markdown is empty gives no document, and neither does a git
 history's order file (`.git/history/order`): it stays in the source's tree
-and its checksum, and the builder reads it, but it is not a training
+and its manifest, and the builder reads it, but it is not a training
 document.
 
 The stream cache is keyed by the code (wpt_utils.programs.code), so a
@@ -91,7 +91,8 @@ from lxml import etree
 
 from . import conversations, encoding, manifest, ratings, records, tasks
 from .errors import FormatMapError, NotText
-from .manifest import ORDER, SYMLINK, format_entries, license_entries
+from .license_check import Coverage
+from .manifest import ORDER, SYMLINK, format_entries
 
 EPUB_TYPE = "{http://www.idpf.org/2007/ops}type"
 SKIPPED = {"head", "script", "style", "math", "audio", "video", "object", "template", "noscript"}
@@ -114,7 +115,7 @@ REPOSITORIES = {"git", "mercurial"}  # source types whose paths start at a repos
 
 
 def format_of(source, path: str) -> dict:
-    found = format_entries(source.data["formats"], path)
+    found = format_entries(source, path)
     if len(found) != 1:
         what = "no format entry" if not found else f"{len(found)} format entries"
         raise FormatMapError(f"{source.id}: {path} matches {what}; every path must match exactly 1")
@@ -128,14 +129,18 @@ class Converted(NamedTuple):
     record: records.Record | None  # for a records file, the record it comes from
 
 
-def documents(source, tree, store, repo, skipped: dict | None = None, only=None) -> Iterator[Converted]:
+def documents(source, tree, store, repo, skipped: dict | None = None, only=None,
+              trains=None) -> Iterator[Converted]:
     """Each document of a final tree, in file path order; links, chat,
     task and rating files, a git history's order file (ORDER) and documents whose
     Markdown is empty are left out; repo holds the images task folders
     name. skipped, when given, receives file -> records.Skipped for each
     records file. only, when given, is the set of files whose documents
     are wanted: the others are not read, and the task folders are not
-    checked.
+    checked. trains, when given, is the set of the numbers of the license
+    entries whose records train (kept.Kept.trains): a record of any other
+    entry is left out and counted (records.Skipped.untrained); every
+    entry's without it.
     Raises FormatMapError when a path matches no format entry or several,
     NotText when a file is not text (encoding.py) or an xhtml file is not
     well-formed, InvalidFile when a chat, rating or records file holds a
@@ -146,9 +151,10 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None)
     join_indexes = {}  # one index per join rule, for every records file of this tree
     newest_indexes = {}  # one index per records entry with `newest`, over every file it covers
 
-    def read(path):  # a records file in the store, and the file its entry's join reads with it
+    def read(path):  # a records file in the store, and the file its entry's join reads with it, read as streams
         joined = records.joined_file(formats[path], path, files, join_indexes)
-        return manifest.local_file(store, files[path]), manifest.local_file(store, joined) if joined else None
+        return (manifest.Stored(store, files[path], path),
+                manifest.Stored(store, joined, f"{path} (joined)") if joined else None)
 
     def newest(entry):
         if "newest" not in entry:
@@ -177,7 +183,7 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None)
             if records.joined_by(entry, path):
                 continue  # read with the records that join it
             file, joined = read(path)
-            yield from _records(source, path, entry, file, skipped, joined, newest(entry))
+            yield from _records(source, path, entry, file, skipped, joined, newest(entry), trains)
             continue
         if kind == "chat":
             conversations.of_file(source.id, path, entry, store, files[path])
@@ -205,27 +211,29 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None)
         tasks.of_source(source, tree, store, repo)
 
 
-def chosen(source, tree, store, repo, paths) -> dict[str, bytes]:
+def chosen(source, tree, store, repo, paths, trains=None) -> dict[str, bytes]:
     """{document path: Markdown} of those documents of a final tree that
     paths names (a file's path, or <file>#<record id>) and it holds; only
-    their files are read."""
+    their files are read. trains: as for documents."""
     files = {path[:end] for path in paths for end in [len(path), *(i for i, c in enumerate(path) if c == "#")]
              if path[:end] in tree}
-    return {found.path: found.markdown for found in documents(source, tree, store, repo, only=files)
+    return {found.path: found.markdown for found in documents(source, tree, store, repo, only=files, trains=trains)
             if found.path in paths}
 
 
-def _records(source, path, entry, file, skipped, joined, newest):
-    found = license_entries(source.data["licenses"], path)
-    if "license" in entry:
-        licenses = {value: license_entry["license"] for license_entry in found
-                    for value in license_entry.get("values", [])}
-    else:  # every record takes the file's one entry (sources.check_license_map)
-        licenses = {None: found[0]["license"]} if found else {}
+def _records(source, path, entry, file, skipped, joined, newest, trains):
+    licenses = source.data["licenses"]
+    covered = Coverage(licenses).covered(path, True)
+    if covered.field is not None:
+        # a value whose entry does not train maps to None: its records are left out and counted
+        expressions = {value: licenses[number]["license"] if trains is None or number in trains else None
+                       for value, number in covered.values.items()}
+    else:  # every record takes the file's one entry (license_check.py)
+        expressions = {None: licenses[covered.entry]["license"]} if covered.entry is not None else {}
     report = records.Skipped({})
     if skipped is not None:
         skipped[path] = report
-    for record in records.records(file, path, entry, licenses, report, joined, newest):
+    for record in records.records(file, path, entry, covered.field, expressions, report, joined, newest):
         kind = entry.get("as", "text")
         if kind == "markdown":
             markdown = record.text.encode("utf-8")

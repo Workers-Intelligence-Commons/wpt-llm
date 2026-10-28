@@ -3,8 +3,6 @@ import io
 import json
 import zipfile
 
-import pyarrow as pa
-import pyarrow.parquet as pq
 import pytest
 
 from wpt_dataset import markdown
@@ -15,12 +13,6 @@ from wpt_dataset.records import Skipped, joined_file, records
 from wpt_dataset.sources import source_tree
 
 
-def parquet_bytes(rows):
-    buffer = io.BytesIO()
-    pq.write_table(pa.Table.from_pylist(rows), buffer)
-    return buffer.getvalue()
-
-
 def records_source(kit, repo, store, http_folder, licenses, keep=None):
     folder, base = http_folder
     lines = [{"id": "a", "text": "first words", "metadata": {"license": "CC-BY", "url": "https://example.org/a"}},
@@ -28,15 +20,13 @@ def records_source(kit, repo, store, http_folder, licenses, keep=None):
              # some datasets store their metadata as a string holding JSON
              {"id": "c", "text": "third words", "metadata": json.dumps({"license": "CC0", "url": "https://example.org/c"})}]
     files = {"data/part-0.jsonl.gz": gzip.compress("".join(json.dumps(r) + "\n" for r in lines).encode()),
-             "data/part-1.parquet": parquet_bytes([
+             "data/part-1.parquet": kit.parquet_bytes([
                  {"id": "d", "text": "fourth words", "metadata": {"license": "CC0", "url": "https://example.org/d"}},
                  {"id": "e", "text": "", "metadata": {"license": "CC0", "url": "https://example.org/e"}}])}
     (folder / "dataset.tar.gz").write_bytes(kit.tar_bytes(top="dataset", files=files, executable=set(), symlinks={}))
-    record = {"format": "records", "paths": ["data/**"], "text": "text", "id": "id", "license": "metadata.license",
-              "credit": ["metadata.url"]} | ({"keep": keep} if keep else {})
+    record = {"format": "records", "paths": ["data/**"], "text": "text", "id": "id", "credit": ["metadata.url"]} | ({"keep": keep} if keep else {})
     return kit.add_source(repo, store, "example", "records", {
-        "type": "http-archive", "address": f"{base}/dataset.tar.gz", "revision": "2026-10-15",
-        "extract": {"strip": 1}, "formats": [record], "licenses": licenses})
+        "type": "http", "address": f"{base}/dataset.tar.gz", "extract": {"strip": 1}, "formats": [record], "licenses": licenses})
 
 
 def test_only_records_whose_license_value_is_listed_become_documents_with_their_credit(kit, repo, store, http_folder):
@@ -44,8 +34,8 @@ def test_only_records_whose_license_value_is_listed_become_documents_with_their_
     # record only when a license entry lists its value, and every model
     # trained on it can name each document's credit
     sid = records_source(kit, repo, store, http_folder, [
-        {"license": "CC-BY-4.0", "paths": ["data/**"], "values": ["CC-BY"], "attribution": kit.ATTRIBUTION, "text": "CC BY 4.0"},
-        {"license": "CC0-1.0", "paths": ["data/**"], "values": ["CC0"], "attribution": kit.ATTRIBUTION, "text": "CC0 1.0"}])
+        kit.entry(["data/**"], license="CC-BY-4.0", place={"field": "metadata.license"}, expected=["CC-BY"]),
+        kit.entry(["data/**"], license="CC0-1.0", place={"field": "metadata.license"}, expected=["CC0"])])
 
     documents, info, _ = gather(repo, store, log=lambda _: None)
 
@@ -59,12 +49,32 @@ def test_only_records_whose_license_value_is_listed_become_documents_with_their_
         {"document": f"{sid}/data/part-1.parquet#d", "license": "CC0-1.0", "credit": {"metadata.url": "https://example.org/d"}}]
 
 
+def test_a_record_of_an_entry_that_does_not_train_is_left_out_alone_and_counted(kit, repo, store, http_folder):
+    # an entry whose license is not admitted keeps its records out of
+    # training, each alone: the other records of the same files still train,
+    # and the dataset's record counts the values left out, per file
+    under_review = {"decision": "under-review", "by": "Test Reviewer", "date": "2026-10-27"}
+    sid = records_source(kit, repo, store, http_folder, [
+        kit.entry(["data/**"], license="CC-BY-4.0", place={"field": "metadata.license"}, expected=["CC-BY"]),
+        kit.entry(["data/**"], license="CC0-1.0", place={"field": "metadata.license"}, expected=["CC0"],
+                  decision=under_review)])
+
+    documents, info, _ = gather(repo, store, log=lambda _: None)
+
+    assert [d.id for d in documents] == [f"{sid}/data/part-0.jsonl.gz#a"]
+    check = info[sid]["check"]
+    assert check["records"] == {"data/part-0.jsonl.gz": {"unlisted": {"Various open data": 1}, "untrained": {"CC0": 1}},
+                                "data/part-1.parquet": {"untrained": {"CC0": 2}}}
+    assert check["left_out"] == [{"why": "entry", "entry": 1, "license": "CC0-1.0", "files": 0,
+                                  "detail": "the entry is under-review"}]
+
+
 def test_keep_rules_leave_out_records_whose_field_holds_another_value(kit, repo, store, http_folder):
     # a dataset can label a whole file with one license although part of it
     # comes from a publisher that license does not cover; another field of
     # the record then names the part to keep
     sid = records_source(kit, repo, store, http_folder, [
-        {"license": "CC0-1.0", "paths": ["data/**"], "values": ["CC0"], "attribution": kit.ATTRIBUTION, "text": "CC0 1.0"}],
+        kit.entry(["data/**"], license="CC0-1.0", place={"field": "metadata.license"}, expected=["CC0"])],
         keep=[{"field": "metadata.url", "in": ["https://example.org/d", "https://example.org/e"]}])
 
     documents, _, _ = gather(repo, store, log=lambda _: None)
@@ -72,13 +82,14 @@ def test_keep_rules_leave_out_records_whose_field_holds_another_value(kit, repo,
     assert [d.id for d in documents] == [f"{sid}/data/part-1.parquet#d"]
 
 
-def test_a_records_file_needs_license_entries_that_list_their_values(kit, repo, store, http_folder):
-    # without `values`, an entry would let every record of the file in,
-    # whatever license the record itself carries
+def test_the_entries_of_a_records_file_select_its_records_by_one_field(kit, repo, store, http_folder):
+    # beside an entry selecting records by a field, an entry with no field place would let every other record
+    # of the file in, whatever license the record itself carries
     sid = records_source(kit, repo, store, http_folder, [
-        {"license": "CC0-1.0", "paths": ["data/**"], "attribution": kit.ATTRIBUTION, "text": "CC0 1.0"}])
+        kit.entry(["data/**"], license="CC-BY-4.0", place={"field": "metadata.license"}, expected=["CC-BY"]),
+        kit.entry(["data/**"], license="CC0-1.0")])
 
-    with pytest.raises(LicenseMapError, match="every license entry covering it lists the `values`"):
+    with pytest.raises(LicenseMapError, match="every license entry covering it has the same field place"):
         source_tree(repo.source(sid), store)
 
 
@@ -89,11 +100,11 @@ def pages_source(kit, repo, store, http_folder, files, fields):
         name: "".join(json.dumps(row | {"license": [{"identifier": "CC0-1.0"}]}) + "\n" for row in rows).encode()
         for name, rows in files.items()}))
     return kit.add_source(repo, store, "example", "pages", {
-        "type": "http-archive", "address": f"{base}/pages.tar.gz", "revision": "2026-10-24", "extract": {"strip": 1},
-        "licenses": [{"license": "CC0-1.0", "paths": ["**"], "values": ['[{"identifier": "CC0-1.0"}]'],
-                      "attribution": kit.ATTRIBUTION, "text": "CC0 1.0"}],
-        "formats": [{"format": "records", "paths": ["*.ndjson"], "text": "html", "as": "html", "id": "identifier",
-                     "license": "license"} | fields]})
+        "type": "http", "address": f"{base}/pages.tar.gz", "extract": {"strip": 1},
+        "licenses": [kit.entry(["*.ndjson"], license="CC0-1.0", place={"field": "license"},
+                               expected=['[{"identifier": "CC0-1.0"}]'])],
+        "formats": [{"format": "records", "paths": ["*.ndjson"], "text": "html", "as": "html", "id": "identifier"}
+                    | fields]})
 
 
 def test_a_record_holding_a_web_page_becomes_its_title_then_the_markdown_of_the_page(kit, repo, store,
@@ -153,9 +164,7 @@ def test_records_listed_in_one_json_document_take_the_license_of_their_file(kit,
         "1770-08-23_p1.json": scan("1770-08-23", [("BOSTON", "first words"), ("", "")]),
         "1770-08-30_p1.json": scan("1770-08-30", [("LONDON", "second words")])}))
     sid = kit.add_source(repo, store, "example", "scans", {
-        "type": "http-archive", "address": f"{base}/paper_1770.tar.gz", "revision": "2026-10-23",
-        "licenses": [{"license": "LicenseRef-public-domain", "paths": ["**"], "attribution": kit.ATTRIBUTION,
-                      "text": "Published in the United States in 1770."}],
+        "type": "http", "address": f"{base}/paper_1770.tar.gz", "licenses": [kit.entry(["paper_1770/**"], license="LicenseRef-public-domain", **kit.ITSELF, text="Published in the United States in 1770.")],
         "formats": [{"format": "records", "paths": ["paper_*/*.json"], "records": "full articles", "text": "article",
                      "id": "id", "credit": ["headline"]}]})
 
@@ -175,7 +184,6 @@ NAMESPACES = {"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#", "edm": "http
 PUBLIC_DOMAIN_MARK = "http://creativecommons.org/publicdomain/mark/1.0/"
 ISSUE_FIELDS = {
     "format": "records", "paths": ["fulltext/**"], "namespaces": NAMESPACES, "text": "//edm:FullTextResource/rdf:value",
-    "license": "$metadata//edm:rights/@rdf:resource",
     "credit": ["$metadata//edm:ProvidedCHO/dc:title", "$metadata//edm:dataProvider"],
     "keep": [{"field": "number(substring($metadata//edm:ProvidedCHO/dcterms:issued, 1, 4)) <= 1955", "in": ["true"]}],
     "join": {"name": "metadata", "paths": ["metadata/**"], "key": "BibliographicResource_([0-9]+)\\.xml$",
@@ -228,11 +236,11 @@ def test_an_issue_takes_its_text_from_one_file_and_its_license_and_credit_from_t
         metadata_file(2): metadata(2, "1960-05-01", PUBLIC_DOMAIN_MARK),  # too recent
         metadata_file(4): metadata(4, "1900-01-01", "http://rightsstatements.org/vocab/InC/1.0/")}))  # 3 has none
     sid = kit.add_source(repo, store, "example", "library", {
-        "type": "http-archive", "address": f"{base}/fulltext.zip", "revision": "2026-10-23",
-        "addresses": [{"folder": "fulltext", "address": f"{base}/fulltext.zip"},
+        "type": "http", "address": f"{base}/fulltext.zip", "addresses": [{"folder": "fulltext", "address": f"{base}/fulltext.zip"},
                       {"folder": "metadata", "address": f"{base}/metadata.zip"}],
-        "licenses": [{"license": "LicenseRef-public-domain", "paths": ["**"], "values": [PUBLIC_DOMAIN_MARK],
-                      "attribution": kit.ATTRIBUTION, "text": "The publication's own public domain mark."}],
+        "licenses": [kit.entry(["fulltext/**", "metadata/**"], license="LicenseRef-public-domain",
+                               place={"field": "$metadata//edm:rights/@rdf:resource"}, expected=[PUBLIC_DOMAIN_MARK],
+                               text="The publication's own public domain mark.")],
         "formats": [ISSUE_FIELDS]})
 
     documents, info, _ = gather(repo, store, log=lambda _: None)
@@ -264,8 +272,8 @@ def test_an_xml_record_never_reads_an_external_entity(tmp_path):
     issue.write_bytes(fulltext(1, "words").replace(
         b"<!ENTITY text", f'<!ENTITY secret SYSTEM "{secret.as_uri()}">\n<!ENTITY text'.encode())
         .replace(b"<rdf:value>words", b"<rdf:value>&secret;"))
-    entry = {key: value for key, value in ISSUE_FIELDS.items() if key not in ("keep", "license", "join")}
+    entry = {key: value for key, value in ISSUE_FIELDS.items() if key not in ("keep", "join")}
 
     with pytest.raises(InvalidFile) as refused:
-        list(records(issue, "issue.xml", entry, {None: "LicenseRef-public-domain"}, Skipped({})))
+        list(records(issue, "issue.xml", entry, None, {None: "LicenseRef-public-domain"}, Skipped({})))
     assert "SECRET" not in str(refused.value)

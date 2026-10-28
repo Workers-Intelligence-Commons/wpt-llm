@@ -118,13 +118,13 @@
     "repository_pointer": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["for", "source", "document", "checksum"],
+      "required": ["for", "source", "document", "manifest"],
       "description": "/work made a git repository from a commit of a git source's history: at the real state just before the commit (every later commit undone, newest first, in the history's order), the commit's changes in its working tree and not committed, with a bare repository outside /work, at /tmp/origin.git, as its origin",
       "properties": {
         "for": {"const": "repository"},
         "source": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}$", "description": "the id of the git source whose history holds the commit"},
         "document": {"type": "string", "pattern": "^\\.git/history/[0-9a-f]{40,64}$", "description": "the commit's history file: .git/history/<commit>"},
-        "checksum": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$", "description": "the source's checksum when the task was built: the task is refused once it changes"},
+        "manifest": {"type": "string", "pattern": "^[0-9a-f]{64}$", "description": "the manifest of the source's upstream tree as the store held it when the task was built (the sha256 of its file list, manifest.digest): the task is refused once the store holds another"},
         "note": {"type": "string"}
       }
     },

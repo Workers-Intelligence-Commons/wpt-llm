@@ -59,8 +59,8 @@ def test_the_model_card_names_the_drafter_and_its_notice_adds_no_source(tmp_path
     # says what made the drafter and against which weights
     config = ModelConfig(**TINY)
     save_model(WPT(config), tmp_path, VOCABULARY, "test version 1")
-    source = {"address": "https://example.org/talks", "revision": "abc",
-              "licenses": [{"license": "CC0-1.0", "paths": ["**"], "attribution": "Talks, by Bo Speaker"}]}
+    source = {"address": "https://example.org/talks", "manifest": "1" * 64, "licenses": [{"license": "CC0-1.0", "paths": ["talks/**"],
+                                                                                  "attribution": "Talks, by Bo Speaker"}]}
     step = {"step": {"name": "answer-as-assistant"}, "method": {"name": "assistant-tokens"},
             "optimizer": {"name": "adamw"}, "environment": {"name": "conversations"}, "reads": "conversations",
             "locked": [], "updates": 1,

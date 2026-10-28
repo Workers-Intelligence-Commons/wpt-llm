@@ -1,14 +1,18 @@
 # Architecture
 
-**The repository is a lockfile, not a corpus.** It holds verifiable pointers
-(address, revision, checksum), patches and build recipes. The data itself is
-fetched on demand, then checked against its fingerprint, the same way
-`go.sum` in Go or `fetchurl` in Nix pin exact bytes.
+**The repository describes a corpus; it does not hold one.** It holds the
+description of every source (where it is fetched from, how, its license
+entries and the decisions on them), the license texts, patches and build
+recipes. The data itself is downloaded into a store, as upstream serves it
+when asked, and every build checks it, on the bytes the store holds.
 
-- We always know exactly which bytes were used.
 - The repository stays small, publishable and reviewable in git.
 - Every change to a source is a patch, separate from the source itself.
-- Provenance is not a promise written next to the data: CI checks it.
+- Licenses are checked against the bytes actually held, at the places each
+  source declares, by every build.
+- The content is not pinned. A rebuild from upstream gives today's
+  content, license-checked; a dataset's document list (each document's id
+  and the sha256 of its Markdown) records what a model trained on.
 
 ## Three layers
 
@@ -16,8 +20,104 @@ fetched on demand, then checked against its fingerprint, the same way
    never committed. Only its description is in the repository.
 2. **Erasure cuts and patches**: changes made by hand, kept as data next to
    the description.
-3. **Build**: everything mechanical and repeatable (deduplication, held-out
-   split, tokenization, shards). It is not content, so it is not a patch.
+3. **Build**: everything mechanical and repeatable from the stored bytes
+   (license check, deduplication, held-out split, tokenization, shards). It
+   is not content, so it is not a patch.
+
+## Two pieces
+
+WPT turns sources into datasets in two pieces. They make one whole, but
+each is designed and changed on its own, and neither does the other's job.
+
+1. **Download** puts a source's bytes into the store
+   ([The download step](#the-download-step)). It decides nothing about
+   licenses or content.
+2. **Build** turns the bytes in the store into a dataset
+   ([The build](#the-build)). It never contacts upstream.
+
+What they share is defined once and owned by neither: `source.json`, the
+license entries and the license texts, the three levels of decision
+([licenses.md](licenses.md), "Who decides"), what a protocol provides
+([Protocols](#protocols)) and the shared checks
+([Shared checks](#shared-checks)).
+
+Upkeep of the repository is commands a person runs; nothing runs on a
+schedule and no machine stays on for it:
+
+- A person adds a source, or moves an address to a newer version, by
+  editing `source.json` (the "Sources" page of `wpt-web`, `wpt-dataset save
+  source`), or with a script kept outside the repository.
+- A person marks sources for a new download to get fresh content
+  (`wpt-store mark`).
+- A person reads a build's report and adds the license entry or the
+  non-text path it names, or runs the task builder again
+  ([training.md](training.md), "The task builder").
+- The maintainer commits.
+
+## Components and services
+
+Each component has one role. Every operation is a service: a function with
+its inputs, its result and its named failures. The `wpt-dataset` commands
+and the `wpt-web` routes are controllers: each reads its input (arguments,
+a request), calls the same services, and presents the result. A controller
+holds no rule of its own, so the two interfaces cannot disagree. A long run
+started from `wpt-web` may run in its own process and still calls the same
+service.
+
+| Component | Role | Code |
+| --- | --- | --- |
+| service layer | the only code that reads or writes `data/` ([The service layer](#the-service-layer)) | `repo.py` |
+| protocols | turn an address into files; each owns its network effects and its named failures | `protocols/`, with the helpers `robots.py`, `retry.py`, `sites.py` and `lfs.py` |
+| download | decides which sources to fetch, asks their protocol, writes files and session lines into the store; never judges licenses | `download.py` |
+| license check | changes nothing: given a source's entries, its files or records and the license texts, it answers which entry covers each file or record, and for each entry whether the statement at its place matches a text it expects, which one, and that text's decision | `license_check.py` |
+| shared checks | change nothing; defined once and used by every command that applies them | `checks.py`, `erasure.py` |
+| build | asks the store for bytes, the shared checks and the license check; decides what is left out; writes its results to the store; never contacts upstream | `build.py`, `kept.py` |
+| task builder | builds pointer tasks from stored bytes, through the service layer | `builder.py` |
+
+A controller asks a service; download asks protocols and the store; the
+build asks the store, the shared checks and the license check. No
+component asks a controller. The code lives in
+`packages/wpt-dataset/src/wpt_dataset/`.
+
+## Protocols
+
+A protocol turns an address into files. Download and build know only
+protocols and files: nothing below a protocol knows which site a source
+comes from. A protocol provides only:
+
+- **Fetching**: given an address and the protocol's own options, it
+  delivers files, each a path and its bytes, and returns what it got, for
+  the record only (the commit, for example).
+- **Its failures, each named**: source gone (`SourceGone`), refused for too
+  many requests (`TooManyRequests`), refused by robots rules
+  (`CrawlForbidden`), robots rules unreadable (`RobotsUnreadable`), host
+  unreachable (`HostUnreachable`), server error through every retry
+  (`ServerError`), access refused (`AccessRefused`: HTTP 401, 403 or 451,
+  or a password prompt), incomplete (`Incomplete`). Anything else, such as
+  a message never seen before or a local error, is the general fetch
+  failure, `FetchFailed`. A source whose main address and mirrors fail in
+  different ways fails with its main address's kind.
+
+A source's `type` names its protocol:
+
+- `http`: one file per address. A file whose name (`extract.name`, or the
+  address's last path part) ends as an archive's (`.zip`, `.tar`,
+  `.tar.gz`, `.tgz`, `.tar.bz2`, `.tbz2`, `.tar.xz`, `.txz`) is unpacked
+  into its members; any other is one file under that name.
+- `git`: a repository on any host, at the commit its address serves when
+  asked. Its options are `history.since`, `submodules`, and LFS: a file the
+  repository stores outside itself is fetched by its sha256 through the
+  host's LFS batch request. A Hugging Face dataset is such a repository
+  (`https://huggingface.co/datasets/<owner>/<name>`): its file list comes
+  from git, and only the kept files are fetched.
+- `mercurial`: a repository at its tip.
+- `empty`: text written for WPT. It has no protocol, downloads nothing and
+  starts with no files; its patches hold every file.
+
+Robots rules and request limits apply per site, through the helpers the
+protocols use. Markdown conversion is chosen by file format. Another
+protocol is one more module in `protocols/` and one more name in
+`type`; nothing else changes.
 
 ## Sources
 
@@ -28,98 +128,83 @@ patches `0001-<name>.patch`, `0002-<name>.patch`... applied in that order.
 
 `<origin>-<item>-<hash>`, or `<origin>-<hash>` when the source has no
 natural item (lowercase `a-z 0-9 -`), for example `gutenberg-1342-05bda734`.
-`<hash>` is the first 8 hex characters of the sha256 of the source's
-`address`, so the id stays the same when the source moves to a new revision.
-`wpt-dataset source-id <origin> [<item>] <address>` prints it. An id is never
-reused.
-
-When a source moves to a new address, it becomes a new source with a new
-id; a person refuses the old one (`"decision": "refused"`), its reason naming the
-new source's id, mixtures naming it are updated, and its erasure cuts move
-to the new folder. When it publishes a new revision, the folder is updated
-in place: `revision` and `checksum` change, and its cuts and patches are
-redone in the same commit. Rebuilding an old recipe then needs the old
-commit of this repository.
+`wpt-dataset source-id <origin> [<item>] <address>` prints the id a new
+source gets: `<hash>` is the first 8 hex characters of the sha256 of its
+first address. The id is given once, when the source is created, and is
+never derived from the address again: an address that changes, such as a
+version moved in it, keeps the same source, its id, its decisions and its
+erasure cuts. An id is never reused.
 
 ### source.json
 
 ```json
 {
-  "type": "http-archive",
+  "type": "http",
   "address": "https://www.gutenberg.org/cache/epub/1342/pg1342-h.zip",
-  "revision": "2026-03-01",
-  "checksum": "sha256:...",
   "extract": { "strip": 1, "exclude": ["**/*.jpg"], "note": "" },
-  "licenses": [ { "license": "LicenseRef-public-domain", "paths": ["**"],
+  "licenses": [ { "license": "LicenseRef-public-domain", "paths": ["*.html"],
                   "attribution": "Jane Austen, Pride and Prejudice, Project Gutenberg, https://www.gutenberg.org/ebooks/1342",
-                  "text": "Public domain. Jane Austen died in 1817; ...", "note": "" } ],
-  "formats": [ { "format": "xhtml", "paths": ["**/*.xhtml"], "note": "" } ],
-  "tags": [ { "tags": ["en", "literature"], "paths": ["**"], "note": "" } ],
+                  "text": "Public domain. Jane Austen died in 1817; ...",
+                  "place": { "entry": true },
+                  "decision": { "decision": "admitted", "by": "...", "date": "2026-10-14" }, "note": "" } ],
+  "formats": [ { "format": "html", "paths": ["*.html"], "note": "" } ],
+  "tags": [ { "tags": ["en", "literature"], "paths": ["*.html"], "note": "" } ],
   "mirrors": [ { "address": "https://...", "note": "" } ],
-  "cuts": [ { "path": "...", "start": 0, "end": 0, "sha256_after": "...", "note": "" } ],
+  "cuts": [ { "path": "...", "length": 0, "hmac": "...", "rolling": 0, "note": "" } ],
   "decision": { "decision": "admitted", "by": "...", "date": "2026-10-14", "note": "" },
   "note": ""
 }
 ```
 
-- `type`: `http-file`, `http-archive` (tar, tar.gz, tar.bz2, tar.xz or zip),
-  `git`, `mercurial`, `huggingface` (a dataset on huggingface.co, pinned to
-  its commit; an archive it holds is unpacked, below), or `empty` for text
-  written for WPT: it downloads
-  nothing and starts with no files, and its patches hold every file. Its
-  `address` is a name, `empty:<name>`, its `revision` the date it was
-  started, and its `checksum` that of an empty manifest,
-  `sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`.
-- `addresses` (`http-file` and `http-archive` only): one source fetched
-  from several addresses, each into its own folder of the source's tree,
-  for a publisher that puts documents in one archive and their metadata
-  in another: `[{"folder": "fulltext", "address": ".../fulltext.zip"},
-  {"folder": "metadata", "address": ".../metadata.zip"}]`. Each
-  address is read with the source's `type`, `revision` and `extract`
-  (`strip` on the paths of what it holds, `exclude` on the paths with
-  their folder), and the manifest and checksum cover the one tree. `address`
-  stays, and repeats the first one's address, which gives the id; a source
-  with `addresses` has no `mirrors`. Every other source keeps its one
-  `address`, unpacked at the tree's root.
-- `revision`: the full commit hash for git and mercurial; the fetch date
-  (`YYYY-MM-DD`) for http, where the checksum is what pins the content; the
-  start date for `empty`.
-- `checksum`: the sha256 of the canonical manifest (below).
+- `type`: the protocol ([Protocols](#protocols)). An `empty` source's
+  `address` is a name, `empty:<name>`.
+- `address`: where to fetch it. What upstream serves there when asked is
+  what is taken; nothing pins a version or a checksum.
+- `addresses` (`http` only): one source fetched from several addresses,
+  each into its own folder of the source's tree, for a publisher that puts
+  documents in one archive and their metadata in another:
+  `[{"folder": "fulltext", "address": ".../fulltext.zip"},
+  {"folder": "metadata", "address": ".../metadata.zip"}]`. Each address is
+  read with the source's `extract` rules (`strip` on the paths of what it
+  holds, `exclude` on the paths with their folder) into one tree.
+  `address` repeats the first one's address; a source with `addresses` has
+  no `mirrors`. Every other source keeps its one `address`, unpacked at the
+  tree's root.
 - `extract`: `strip` removes leading path components (entries left with no
-  path are dropped), `exclude` leaves paths out, and `name` gives an
-  `http-file` its path.
-- `licenses`: SPDX identifiers (or `LicenseRef-<name>`, or alternatives
-  joined by `OR`, each optionally `WITH` an exception) mapped to paths by
-  glob patterns. Every path must match exactly one entry, or the check
-  fails; a new upstream file that matches no entry blocks the update until
-  someone assigns it. Each entry's `attribution` (required) is the credit
-  that license asks for, written by a person: authors, title, copyright
-  line, link. Its `text` (required) is the license as the source gives it,
-  with its copyright line and, for Apache-2.0, the source's `NOTICE`
-  content; for `LicenseRef-public-domain`, why the work is in the public
-  domain. Every model trained on the source repeats both in its `NOTICE`.
+  path are dropped), `exclude` leaves paths out, and `name` gives an `http`
+  file its name when the address does not.
+- `licenses`: the license entries. Each maps an SPDX identifier (or
+  `LicenseRef-<name>`, or an expression) to the paths it covers, names the
+  place where its license statement must be found and what is expected
+  there, and carries its own decision ([licenses.md](licenses.md),
+  "License entries"). Every path matches exactly one entry. Each entry's
+  `attribution` (required) is the credit that license asks for, written by
+  a person: authors, title, copyright line, link. Its `text` (required) is
+  the license as the source gives it, with its copyright line and, for
+  Apache-2.0, the source's `NOTICE` content; for
+  `LicenseRef-public-domain`, why the work is in the public domain. Every
+  model trained on the source repeats both in its `NOTICE`.
 - `formats`: how each file becomes Markdown, mapped to paths like
   `licenses`: every path matches exactly one entry. Training reads only
   Markdown (see "Documents are Markdown" below).
 - `tags`: describe paths (language, domain); pools select documents by
   tags.
-- `mirrors`: other addresses expected to give the same checksum.
+- `mirrors`: other addresses for the same source, with no promise of
+  identical bytes.
 - `history` (git only): adds one file per commit from `since` to the
-  revision, `.git/history/<commit>`, in `git format-patch` layout. A commit
-  that also changes files `extract` leaves out gets a diff limited to the
-  kept paths; when a kept path is also the folder of paths left out (a
-  submodule replacing a folder of the same name), those paths are excluded
-  from the diff by name. One more file, `.git/history/order`, holds the
-  commit order: every commit from `since` to the revision, merges included,
-  newest first and each before its parents (git's topological order), one
-  per line, a merge's line ending in ` merge`. Being part of the stored
-  tree, the order is covered by the source checksum, so a git source with a
-  history gets a new checksum once it is fetched with its order file; until
-  then its stored tree has no order file and gives no commit-and-push task.
-  The order file is not a training document: `markdown.documents`, which
-  every list of documents reads, leaves it out. Only patterns starting with
-  `.git/history/` give these files their license entry: `**` covers the
-  tree's files only (docs/licenses.md, "Rules").
+  commit the download gets, `.git/history/<commit>`, in `git format-patch`
+  layout. A commit that also changes files `extract` leaves out gets a
+  diff limited to the kept paths; when a kept path is also the folder of
+  paths left out (a submodule replacing a folder of the same name), those
+  paths are excluded from the diff by name. One more file,
+  `.git/history/order`, holds the commit order: every commit from `since`
+  to that commit, merges included, newest first and each before its
+  parents (git's topological order), one per line, a merge's line ending
+  in ` merge`. The order file is part of the stored tree, so the tree's
+  manifest covers it. It is not a training document: `markdown.documents`,
+  which every list of documents reads, leaves it out. Only patterns
+  starting with `.git/history/` give these files their license entry
+  ([licenses.md](licenses.md), "Rules").
 - `submodules` (git only): the address of each submodule the source reads,
   by its path.
 - `cuts`: erasure cuts; see [erasure.md](erasure.md).
@@ -128,15 +213,16 @@ commit of this repository.
   instead of the document id, so documents of any source with the same
   groups are held out together; see [data-selection.md](data-selection.md),
   "Held-out text and contamination".
-- `decision`: the human decision on the source (required), one of three
-  states: `under-review` (every new source, until a maintainer decides),
-  `admitted` or `refused`, by whom and when. `reason` (why) is required to
-  refuse, optional under review; an admission gives one only for an
-  exception, such as an explicit permission for content without a license.
-  The builds and `check --fetch` without ids
-  read only admitted sources; an `under-review` source is left out of them
-  as a refused one is. A refused source stays in the repository as a
-  reference and is never deleted.
+- `decision`: the source's decision (required): whether WPT wants the
+  source at all ([data-selection.md](data-selection.md), "The source's
+  decision"). One of three states: `under-review` (every new source, until
+  a maintainer decides), `admitted` or `refused`, by whom and when.
+  `reason` (why) is required to refuse, optional under review; an
+  admission gives one only for an exception, such as an explicit
+  permission for content without a license. The builds and `check --fetch`
+  without ids read only admitted sources; an `under-review` source is left
+  out of them as a refused one is. A refused source stays in the
+  repository as a reference and is never deleted.
 - Every object may hold a free-text `note`. It is data, so it survives
   migrations (comments would not).
 
@@ -147,53 +233,42 @@ rules.
 Globs: `*` matches within one folder, `**` across any number of folders.
 
 The schema is `packages/wpt-dataset/src/wpt_dataset/schemas/source.schema.json`.
-Mixture, model recipe, tokenizer recipe and lock files have schemas there
-too.
+Mixture, model recipe, tokenizer recipe, lock and license text files have
+schemas there too.
 
-### The manifest and the checksum
+### The manifest
 
-One line per entry, sorted by the UTF-8 bytes of the path:
+The store names the content of a tree by its manifest: the sha256 of the
+list of its files, one line per entry, sorted by the UTF-8 bytes of the
+path:
 
 ```
 <mode> <sha256> <path>
 ```
 
 `100644` is a file, `100755` an executable file, `120000` a symlink (its
-sha256 is that of the target text). Empty folders do not appear, so a git
-checkout and an archive of the same release give the same checksum and can
-be mirrors of each other. The checksum is `sha256:` + the sha256 of the
-manifest. `wpt-dataset manifest <id>` downloads a source, keeps it in the
-store under the checksum it found, and prints its manifest and checksum.
-`wpt-dataset fill-checksum <id> ...` fills in the checksum of a new
-`source.json` (all zeros until then) from one download: it excludes in
-`extract` each file that is not text ("Encodings", below) by its exact
-path (`*`, `?` and `[` written `[*]`, `[?]` and `[[]`). A git source's
-download is read again with those exclusions, since they change its
-history files; any other source's excluded files are left out of what was
-read. It keeps the upstream tree in the store as the download step keeps
-it ("The download step", below), huggingface sources included, and checks
-the source as `check --fetch` does, without downloading it again. A
-source with `addresses` is fetched from each of them, and a failed
-download names the address it was for.
+sha256 is that of the target text). Empty folders do not appear. The
+manifest is a plain hex digest, and it has that name and that form
+everywhere it appears: the session lines, a dataset's record, the
+conversations' and tasks' records, a task's repository pointer, and a
+model's `NOTICE` and card, which name each source by the manifest of the
+upstream tree it was built from.
+`wpt-dataset manifest <id>` downloads a source as `download` does (or
+finds it in the store) and prints the list of its upstream tree's files
+and that tree's manifest.
 
-A huggingface source unpacks the archives the dataset holds (`.tar`,
-`.tar.gz`, `.tar.bz2`, `.tar.xz` and `.zip`, by the end of the file's name:
-the kinds `http-archive` reads), so their members are the source's files,
-in the archive's folder, where unpacking it in place puts them, and the
-manifest and checksum cover the unpacked files, not the archives: a
-dataset holding `part_1.tar.gz` that holds `part_1/a.json` gives the
-source the file `part_1/a.json`. An `extract` exclusion matching an
-archive's own path leaves it out without downloading it, and one matching
-a member's path leaves that member out.
+The list of a tree's files is computed from the downloaded data itself
+(git's objects, mercurial's manifest, archive headers), never from files
+written to a disk, so Linux and Windows agree. A path that is not valid
+UTF-8, uses `\`, `.` or `..`, or differs from another only by letter
+case makes the source fail; an `extract` rule or a removal patch must
+leave it out first.
 
-The manifest is computed from the downloaded data itself (git's objects,
-mercurial's manifest, archive headers), never from files written to a disk,
-so Linux and Windows agree. A path that is not valid UTF-8, uses `\`, `.` or
-`..`, or differs from another only by letter case makes the source fail; an
-`extract` rule or a removal patch must leave it out first.
-
-Files that are not text (images, binaries) make the source fail too:
-exclude them in `extract`.
+A file that is not text (an image, a binary) is listed in `source.json` by
+its exact path, as an `extract` exclusion (`*`, `?` and `[` written `[*]`,
+`[?]` and `[[]`), so the store never holds it. The build leaves out alone
+a file that is not text and is not listed, and reports it, so a person
+adds the path.
 
 ### Encodings
 
@@ -202,8 +277,9 @@ encoding: it is decoded to Unicode, and everything the pipeline stores or
 emits from it (Markdown, tokens, wpt-web's views) is UTF-8; every encoding
 stated this way converts without loss.
 One function decides a file's encoding for every reader
-(`packages/wpt-dataset/src/wpt_dataset/encoding.py`): the check,
-`fill-checksum`, the Markdown of every format, `markdown-check`, the build,
+(`packages/wpt-dataset/src/wpt_dataset/encoding.py`), through the text
+check ([Shared checks](#shared-checks)): the check, the build's text check,
+the Markdown of every format, `markdown-check`, the build,
 wpt-web's file views and the evaluations that read a source's files. The
 statements it reads, in this order:
 
@@ -218,22 +294,19 @@ statements it reads, in this order:
 | `code` in css | the `@charset "...";` that starts the file |
 
 Nothing is guessed: a file that states no encoding is UTF-8 text, or no
-text at all, as before. `chat` and `rating` files are JSON, UTF-8 by its
+text at all. `chat` and `rating` files are JSON, UTF-8 by its
 standard, and every file of a `task` folder is UTF-8 by the task format
 ([training.md](training.md)): no statement is read in them. A stated encoding Python does not know, or bytes
-that do not decode under it, make the file no text: the check names the
-file and why, and `fill-checksum` excludes it as it excludes a binary file.
-A source drafted before this rule may hold such files in its `extract`
-exclusions; to take them in, remove those exclusions, set `checksum` back
-to the zeros and run `fill-checksum` again.
+that do not decode under it, make the file no text: `check --fetch` names
+the file and why, and the build leaves it out as it leaves out a binary
+file.
 
-A file keeps its own bytes everywhere else: its checksum, `wpt-dataset
+A file keeps its own bytes everywhere else: the store, `wpt-dataset
 unpack` and the patches hold them as upstream wrote them, and git's diffs
 carry them as they are, so a removal patch on a Latin-1 page is made and
 applied like any other (edit the unpacked file in its own encoding).
 wpt-web saves an edited file in the encoding the file it replaces states.
-A git history's files (`.git/history/<commit>`) are WPT's own UTF-8 text,
-as before: a diff's bytes that are not UTF-8 are replaced there, whatever
+A git history's files (`.git/history/<commit>`) are WPT's own UTF-8 text: a diff's bytes that are not UTF-8 are replaced there, whatever
 the changed file states.
 
 ### Patches
@@ -265,29 +338,36 @@ license was respected.
 
 ### When a source fails
 
+A failure is judged per item: a source, a license entry, a file, a task.
+Training from a commit where some fail, each left out and named, is
+allowed.
+
 A download that fails for a reason that may pass (a timeout, a cut
 connection, an HTTP answer of 408, 425, 429 or 5xx, a git or Mercurial
 network error) is tried again, up to 5 attempts in all. The wait doubles
 from 4 seconds up to 60, each one drawn at random below that limit, and
 follows a server's `Retry-After` up to 60 seconds. Anything else (a 404, a
-robots.txt refusal, a checksum that differs) fails at once, since asking
-again gives the same answer (`wpt_dataset/retry.py`).
+robots.txt refusal) fails at once, since asking again gives the same
+answer (`wpt_dataset/retry.py`).
 
-A download that still fails (its checksum differs because the site rebuilt
-the file, every address fails) fails that source in the download step.
-`wpt-dataset build` then goes on without it: a source that is not in the
-store is left out, and listed, with its error (`NotDownloaded`), under
-`skipped` in the dataset record and in the build's run record; the
-model's `provenance.json` repeats the list as `skipped_sources`.
+A download that still fails fails that source in the download step, with
+its named failure ([Protocols](#protocols)). It stores nothing for that
+source: the store keeps what it held before. `wpt-dataset build` reads
+what the store holds; a source that is not in the store is left out, and
+listed, with its error (`NotDownloaded`), under `skipped` in the dataset
+record and in the build's run record; the model's `provenance.json`
+repeats the list as `skipped_sources`. A cut or a patch that does not
+apply leaves the whole source out the same way, until a person makes the
+cut or the patch again.
 
-A source in the store that fails in the build (a patch no longer applies,
-a file is broken) stops `wpt-dataset build`. With `--skip-failed` (or
+A source in the store that fails in the build for another reason (a file
+is broken) stops `wpt-dataset build`. With `--skip-failed` (or
 `WPT_SKIP_FAILED=1`), the build leaves it out instead and lists it the
-same way. A missing program
-(such as `hg`) stops the build anyway, since it fails every source that
-needs it. Training a new vocabulary never skips a source: its lock freezes
-the vocabulary for every later model of that version, so the first build
-of a new tokenizer version needs every source.
+same way. A missing program (such as `hg`) stops the build anyway, since
+it fails every source that needs it. Training a new vocabulary never
+skips a source: its lock freezes the vocabulary for every later model of
+that version, so the first build of a new tokenizer version needs every
+source.
 
 `wpt-dataset download` and `wpt-dataset check --fetch` try every source
 they were given, even after one failed, and end with the list of failures
@@ -306,7 +386,7 @@ tree, as its `formats` entry says
 | `code` | one fenced code block whose opening line names the language and the path: ```` ```python path="./src/main.py" ```` (the entry's `language`); in a git or Mercurial source the path starts with `./`, the repository's root, and in any other source it is written as it is (```` ```python path="src/main.py" ````), since no repository root exists |
 | `xhtml` | web pages written as strict XML, such as EPUB books, read by lxml (a malformed file stops the build): headings, paragraphs, lists, quotations, emphasis, tables; a table inside a table's cell follows that table as a table of its own; a dialogue row becomes `**Speaker:** words`; a note reference becomes a Markdown note (`[^12]`) with the note's text at the end of the document that refers to it, or is dropped when the note is not in the source; a label already taken by another note gets a number, `[^12-2]`, then `[^12-3]`; an image becomes a marker, below |
 | `html` | web pages that are not strict XML, such as Project Gutenberg's, read by lxml's HTML parser (which refuses no page) and converted as `xhtml` pages are; EPUB's note marks exist only in XML, so an html page's notes are Project Gutenberg's: a link of class `fnanchor` (or `noteref`, `noteRef`) to an element of class `footnote` or `fndiv`, or to anything inside one, in the same page, is a note reference, and that element (or, when it holds the targets of links in several of its children, the child holding the target) becomes a Markdown note as an EPUB note does, with one label however many links refer to it; inside such a note, a link back to a reference (or to the empty anchor just before one), and the element of class `label` holding it, are left out; a note no such link refers to, and every other link, stay ordinary text where the page prints them, so `markdown-check` finds no unpaired note; printed page numbers, such as Gutenberg's `{92}` (class `pagenum`), stay as the page shows them |
-| `records` | a dataset file holding many documents (JSON Lines, optionally `.gz` or `.zst`, or Parquet): each record whose license value an entry lists, and that the `keep` rules keep, is one document, `<file>#<record id>`; its text field is read as `text` above, kept as it is with `"as": "markdown"`, or converted as an `html` page with `"as": "html"`, for a dataset of web pages (no note comes from another file). A `title` field's value becomes the document's first line, `# <title>`, then a blank line. Ids repeat at no point in a file, unless `newest` names a date field (ISO 8601), which needs an `id` field that every record holds: of the records that share an id in all the files the entry covers, only the one with the latest date is read, and when the dates are equal the later one (in path order, then in its file), as a dataset holding several revisions of one document needs. Three more shapes: with `records`, a `.json` file (optionally `.gz` or `.zst`) is one JSON document, and that dotted field of it holds the list of records (`"records": "full articles"`); without a `license` field, every record takes the one license entry of its path, which lists no `values`, as a dataset stating one license for all its records needs; an `.xml` file is one record whose fields are XPath 1.0 expressions, their prefixes in the entry's `namespaces` (nodes give the string value of the first one, none when there is none; any other value as it is), and a `join` lets it read one more file of the tree: the one of the join's `paths` whose path holds the same key (`key`, a regular expression searched in the record file's path, `joined_key` in the joined file's, each giving its groups joined by one space, or its whole match), as the XPath variable the join's `name` names (an empty node set when no file holds the key); the joined files give no document. A newspaper issue published as a full-text file and a metadata file is read this way: the text from the first, the license value and the credit from the second, found by the issue's id in the other address's folder. XML is read with no external entity, no external DTD and no network; only the entities its own DTD declares are expanded |
+| `records` | a dataset file holding many documents (JSON Lines, optionally `.gz` or `.zst`, or Parquet): each record that a license entry covers (the entry whose field place expects the value of that field in the record) and that the `keep` rules keep is one document, `<file>#<record id>`; its text field is read as `text` above, kept as it is with `"as": "markdown"`, or converted as an `html` page with `"as": "html"`, for a dataset of web pages (no note comes from another file). A `title` field's value becomes the document's first line, `# <title>`, then a blank line. Ids repeat at no point in a file, unless `newest` names a date field (ISO 8601), which needs an `id` field that every record holds: of the records that share an id in all the files the entry covers, only the one with the latest date is read, and when the dates are equal the later one (in path order, then in its file), as a dataset holding several revisions of one document needs. Three more shapes: with `records`, a `.json` file (optionally `.gz` or `.zst`) is one JSON document, and that dotted field of it holds the list of records (`"records": "full articles"`); when the one license entry covering the file has no field place, every record takes it, as a dataset stating one license for all its records needs; an `.xml` file is one record whose fields are XPath 1.0 expressions, their prefixes in the entry's `namespaces` (nodes give the string value of the first one, none when there is none; any other value as it is), and a `join` lets it read one more file of the tree: the one of the join's `paths` whose path holds the same key (`key`, a regular expression searched in the record file's path, `joined_key` in the joined file's, each giving its groups joined by one space, or its whole match), as the XPath variable the join's `name` names (an empty node set when no file holds the key); the joined files give no document. A newspaper issue published as a full-text file and a metadata file is read this way: the text from the first, the license value and the credit from the second, found by the issue's id in the other address's folder. XML is read with no external entity, no external DTD and no network; only the entities its own DTD declares are expanded |
 | `chat` | conversations for training, one JSON object per line ([chat-format.md](chat-format.md)); each line is checked, and the file gives no pre-training document: a dataset's build keeps each conversation with its file's tags, and only a training step whose `tag` setting is one of them reads it |
 | `task` | the files of task folders for agentic training (`task.json`, `files/`, `check`; [training.md](training.md)); each folder is checked, and its files give no pre-training document: a dataset's build keeps each task with the tags of its `task.json`, and only a training step whose `tag` setting is one of them reads it: `finish-tasks` and `finish-tasks-with-less-writing` both ask for `finish-tasks`. A task built by a program holds pointers into the documents of other sources, never their text, which the readers fill in from the store ([training.md](training.md), "Pointer tasks") |
 | `rating` | people's pass or fail on the attempts of a `wpt-eval` run, one rating per line ([evaluation.md](evaluation.md), "People's ratings"); each line is checked, and the file gives no pre-training document: a measure only, which no training step reads |
@@ -329,23 +409,27 @@ Every result is stored under the fingerprint of what produced it: the sha256
 of its inputs, including WPT's own code. No version number identifies the
 code: it is the commit of the checkout it runs from plus a sha256 of its
 uncommitted changes, every tracked file's difference and every untracked
-file git does not ignore (`wpt_utils.programs.code`). Any commit, and any
-uncommitted change, makes every stored result unknown, so nothing is
-reused across code that may differ. Code installed as packages, outside a
+file git does not ignore (`wpt_utils.programs.code`). The commit is the
+WPT repository's whole commit, so it covers `data/` too: the sources, the
+license texts and their decisions. Any commit, and any uncommitted change,
+makes every stored result unknown, so nothing is reused across code or data
+that may differ. The store keeps downloads across commits; everything
+computed from them is computed again at the next build. Code installed as packages, outside a
 git checkout, is identified by a sha256 of the installed `wpt-*` packages'
 files instead.
 
 | Result | Fingerprint covers |
 | --- | --- |
-| upstream tree | the source checksum |
-| final source tree (and the check that its files are text) | checksum, cuts, each patch's sha256, the formats (they decide each file's encoding), the code |
+| upstream tree (what the download stored) | the source's id and what its download reads: its `type`, `address`, `addresses`, `extract`, `history`, `submodules`, and the outside license pages its entries declare |
+| final source tree (and the check that its files are text) | the upstream tree's manifest, the license pages stored with it, cuts (and the cut key), each patch's sha256, the formats (they decide each file's encoding), the code |
+| what a source keeps for training, and its check result | the final tree, the license pages, the license entries, the code |
 | vocabulary | the code, tokenizer recipe (with its `version`), the documents it is trained on (id and sha256 of their Markdown); frozen by the recipe's lock until `version` is raised ([tokenizer.md](tokenizer.md)) |
-| dataset | the code, the model recipe's data part, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, revision, checksum, tree and licenses (with attribution), the sources skipped (not in the store, or failing with `--skip-failed`: each by its id and the kind of its error), and the objects of its conversations and tasks |
+| dataset | the code, the model recipe's data part, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, the manifest of its upstream tree, its final tree, licenses (with attribution) and check result, the sources skipped (not in the store, or failing with `--skip-failed`: each by its id and the kind of its error), and the objects of its conversations and tasks |
 | training step's result | the fingerprint of the step before it, the step (its files, method, environment, optimizer, settings and locked parts), the fingerprint of the dataset part it reads (`text`, `conversations` or `tasks`, in the record's `fingerprints`), the recipe's seed and the code; no hardware option ([training.md](training.md), "Step results and reuse") |
 
-So "already done" is a lookup: nothing is downloaded or applied twice, and
-changing one patch rebuilds only that source. A dataset whose record lacks a field
-the build writes is built again.
+So "already done" is a lookup for the same code and data: nothing is
+applied twice. A dataset whose record lacks a field the build writes is
+built again.
 
 Beside the dataset's record (the ref `datasets/<id>`), the build keeps the
 dataset's document list under the ref `dataset-documents/<id>`: one JSON
@@ -353,8 +437,7 @@ line per document, in the build's order, with its `id`, the `sha256` of its
 Markdown (the one the dataset fingerprint reads) and its `tag`, `training`
 or `held-out`, from the same split its shards are cut by. A new build
 writes the list before the record's ref, so a dataset is never there
-without it; a dataset built before builds kept the list never gets one. The
-task reader takes the held-out texts from it
+without it. The task reader takes the held-out texts from it
 ([data-selection.md](data-selection.md), "Held-out text and
 contamination").
 
@@ -384,73 +467,86 @@ size, from its file list, on the disk its copies go to.
 
 ### The download step
 
-Only `wpt-dataset download`, `check --fetch` (before its other checks),
-`fill-checksum` and `manifest` download sources, through one piece of code
+Only `wpt-dataset download`, `check --fetch` (before its other checks) and
+`manifest` download sources, through one piece of code
 (`wpt_dataset/download.py`). Every other command, the build included, reads
 the upstream files from the store, and a source that is not there fails
 with `NotDownloaded`, naming the command that fetches it. An `empty`
 source has no upstream and needs no download.
 
-For each source, the download step first looks in the store: a source
-whose upstream tree is there is not fetched again. Otherwise each address
-is fetched in turn (the main one, then each mirror) into a staging folder
-on the machine (an `http-archive` source straight into the bundles,
-below), and its tree's checksum compared with the source's. The
-first that matches is kept: its files go into the session's bundles, each
-content once, and its manifest and file list are stored. Once the bundles
-holding them are stored, the refs `upstream-files/<checksum>` (the file
-list) and `upstream/<checksum>` (the manifest) name them. When no address
-matches, the source fails, and no file list names what upstream gave. A
-tree with no file list holds its files as store objects; a tree's files
-that a patch leaves as they were keep where they lie. A git source asks
-its server only for the files the store does not hold already: the store
-database maps each git object id it has stored to that file's sha256 and
-place, for every source alike, so a new revision fetches only the files
-that changed. The map gives a session only places in its own bundles or
-in bundles of sessions that have ended, which are never rewritten or
-deleted, so no session's end deletes a bundle another session's file
-list names.
+A source is downloaded when, and only when:
 
-An `http-archive` source is read while it downloads
-(`wpt_dataset/archives.py`): each member goes straight into the
-session's bundles as it is read, with no copy of the archive on the disk,
-and its sha256 comes from the bytes read, so its manifest and checksum are
-the ones a copy on the disk gives. The store keeps the members, never the
-archive. A zip, whose table of contents is at its end, is read through
-range requests when its server gives its size: its last bytes are asked
-for whether or not the server says it serves byte ranges. A server that
-answers with the whole file instead, or gives no size, has the zip saved
-to a file on the disk first. A tar is read as it arrives. A
-hard link to a member the source leaves out makes it read the archive a
-second time as it arrives, holding in memory the members such links
-need, since their content went by unread. One fetch puts each content
-in the bundles once, however many times it reads the archive. An answer
-that ends before its announced size is a cut connection, tried again
-like any other. When the checksum differs, the members read stay in the
-bundles, in no file list. `fill-checksum` reads
-the members back from the bundles for its text check, and its exclusions
-leave entries out of what that one download read. An `http-archive`
-source downloaded again while the store holds its tree puts nothing in
-the bundles.
+- the store does not hold it. The store names a source's upstream tree by
+  its id and everything its download reads (its `type`, addresses,
+  `extract`, `history.since`, `submodules` and the outside license pages
+  its entries declare), so a new source, an address that changed and
+  changed fetch options all find nothing held; a changed license page
+  downloads the whole source again, so the tree and its pages come from
+  the same moment;
+- or it is marked in the store database for a new download, after its
+  last download (`wpt-store mark ID ...`, or `--all` for every source): a
+  person's way to ask for fresh content.
+
+Nothing else triggers it: no question to upstream about changes, no server
+hint (length, date, ETag). A stale store is accepted.
+
+For each source to download, every license page its entries declare is
+fetched first, through the HTTP protocol. Then each address is fetched in
+turn (the main one, then each mirror) through the source's protocol, into
+a staging folder on the machine (an `http` source straight into the
+bundles, below). The first address that gives its files is kept: its files
+and the license pages go into the session's bundles, each content once,
+and once the bundles holding them are stored, the refs
+`upstream-pages/<key>` (the pages), `upstream-files/<key>` (the file
+list) and `upstream/<key>` (the tree's paths, modes and sha256s, stored
+under its manifest) name them, the last one last.
+An upstream checksum, where a protocol has one (LFS gives each file's
+sha256), only checks that the bytes arrived intact. A failed download
+stores nothing for that source: no ref names what it fetched, and the
+store keeps what it held before. A tree's files that a patch leaves as
+they were keep where they lie.
+
+A git source asks its server only for the files the store does not hold
+already: the store database maps each git object id it has stored to that
+file's sha256 and place, for every source alike, so a commit that moved
+fetches only the files that changed. The map gives a session only places
+in its own bundles or in bundles of sessions that have ended, which are
+never rewritten or deleted, so no session's end deletes a bundle another
+session's file list names.
+
+An archive of an `http` source is read while it downloads
+(`wpt_dataset/archives.py`): each member goes straight into the session's
+bundles as it is read, with no copy of the archive on the disk, and its
+sha256 comes from the bytes read, so its manifest is the one a copy on the
+disk gives. The store keeps the members, never the archive. A zip, whose
+table of contents is at its end, is read through range requests when its
+server gives its size: its last bytes are asked for whether or not the
+server says it serves byte ranges. A server that answers with the whole
+file instead, or gives no size, has the zip saved to a file on the disk
+first. A tar is read as it arrives. A hard link to a member the source
+leaves out makes it read the archive a second time as it arrives, holding
+in memory the members such links need, since their content went by
+unread. One fetch puts each content in the bundles once, however many
+times it reads the archive. An answer that ends before its announced size
+is a cut connection, tried again like any other. When the download fails,
+the members read stay in the bundles, in no file list.
 
 Each run of these commands is a session: its record in the store
 ([observability.md](observability.md)), and one line in the store
-database per source, `downloaded` (fetched and checked, even when the
-store held its tree already) or `reused` (found in the store), and
-one `failed` line per address that failed (it could not be fetched, its
-robots.txt forbids it, it served an entry a tree cannot hold, or it gave
-another checksum), with the checksum it gave. A failure that is not the
-address's (the store's, a missing program, an interrupted run, a file a
-patch makes that is not text) gets no line. With
-`download --stream` (or `WPT_STREAM=1`), the downloading machine keeps no
-copy of the bundles once the store holds them; without it, an S3 store
-keeps a copy in its local cache folder and reads it first.
-`wpt-store list` lists what the database says, from the database
-alone: each source's last outcome, revision and checksum, and its last
-download's time, address, repository commit and size; then every session,
-in the order they started. A build is a session too, with no bundle: one
-`reused` line for each source it read. No other reading command opens a
-session.
+database per source, `downloaded` or `reused` (found in the store), and
+one `failed` line per address or license page that failed. A
+`downloaded` line records what the download got, for the record only (the
+commit, for example); nothing decides on it. A failure that is not the
+address's (the store's, a missing program, an interrupted run) gets no
+line. With `download --stream` (or `WPT_STREAM=1`), the downloading
+machine keeps no copy of the bundles once the store holds them; without
+it, an S3 store keeps a copy in its local cache folder and reads it first.
+`wpt-store list` lists what the database says, from the database alone:
+each source's last outcome, whether it is marked, and its last download's
+time, what it got, address, repository commit and size; then every
+session, in the order they started. A build is a session too, with no
+bundle: one `reused` line for each source it read. No other reading
+command opens a session.
 
 Several sources download at once: as many as `wpt_utils.parallel` allows,
 and at most, from one site (the host of the source's address, and the
@@ -460,16 +556,70 @@ one line per site, from what each site publishes, and a small default for
 every other site; a line is added or changed by a commit, like code. A
 site may also have a limit per time, a number of requests in a number of
 seconds: every HTTP request this process sends to the site waits while
-it would pass that limit. A site may have both kinds: huggingface.co takes
-16 sources at once, and its published rate, 3,000 requests per 5 minutes,
-is the limit that holds. Requests sent by git or Mercurial are not
-counted. The results come in the order of the sources, whatever ran at
-once.
+it would pass that limit, LFS requests included. A site may have both
+kinds. Requests sent by git or Mercurial themselves are not counted. The
+results come in the order of the sources, whatever ran at once.
 
 A dataset's record names, for each source, the session and time of the
 download that kept the files it used (`downloads`), from the store
 database. It is not part of the dataset id, so the same files downloaded
 again give the same dataset.
+
+### The build
+
+`wpt-dataset build` turns the bytes in the store into a dataset
+(`wpt_dataset/build.py`) and never contacts upstream. For each admitted
+source, several at once:
+
+1. Its final tree: the upstream tree, then its erasure cuts, then its
+   patches. A cut or a patch that does not apply takes the whole source
+   out until a person acts.
+2. What it keeps (`wpt_dataset/kept.py`). The build asks the shared checks
+   and the license check, and leaves out alone, each reported with why:
+   - a file no license entry covers;
+   - a file that is not text and is not listed;
+   - every file of an entry that does not let its files train: the entry
+     is not admitted, or the statement at its place, in the stored bytes
+     (a file of the final tree, or a license page stored with the
+     source), matches no text the entry expects, or matches one that is
+     not admitted;
+   - each record whose field value no entry expects, or whose entry does
+     not train.
+3. The Markdown of every kept file and record, then tokens.
+
+A pointer task whose passage is not in the stored bytes is left out alone
+and reported the same way ([training.md](training.md), "Pointer tasks").
+The dataset record keeps each document's id and sha256, and each source's
+check result: which statement was found at which place, which license
+text matched it and that text's decision, and what was left out and why.
+
+The license check of a source is kept in the store per final tree,
+license pages, license entries and code, so it runs once per commit. That
+recompute after every commit is fast by design: the download stores an
+archive's members one by one, so the build never unpacks an archive;
+sources are processed
+in parallel, sized by `wpt_utils.parallel`; and a file's format, tags and
+license entry are each found with one matcher compiled over all of a
+source's patterns, never by trying each entry in turn
+(`wpt_dataset.manifest.PatternIndex`).
+
+### Shared checks
+
+Each check is defined once and used by every command that applies it (the
+build, the task builder, `check --fetch`, the writes of the service
+layer), so they cannot disagree. None changes anything.
+
+- **Text check** (`checks.py`): whether a file is text ("Encodings",
+  above).
+- **License match** (`license_check.py`): a statement is looked up among
+  the license texts, by the sha256 of its bytes, then by its normalized
+  text, and matches when it is a text its entry expects; it trains only
+  when that text is admitted ([licenses.md](licenses.md), "License
+  entries").
+- **Pointer-task check** (`checks.py`): whether a task's passage, in the
+  Markdown of its document, still holds its sha256.
+- **Cut match** (`erasure.py`): every run of a cut's length in its file
+  whose keyed hashes are the cut's ([erasure.md](erasure.md)).
 
 The store is set by one setting, `WPT_STORE`, in the environment or in
 `.env` at the repository root:
@@ -518,8 +668,8 @@ included. A session that starts removes every such file whose lock it
 can take, the leftovers of a session that stopped. A local store writes
 each bundle to the disk for good (fsync) before the store database names
 it. At its end, a session rewrites every bundle of its own that holds
-bytes no file list names (the members of an archive whose checksum
-differed, a file `fill-checksum` excluded): only the named files are
+bytes no file list names (what a download that failed had read): only
+the named files are
 kept, in a new bundle, the file lists and the map of git objects name the
 new places, and the old bundle is deleted once the store database names
 them. A bundle no file list names at all is deleted.
@@ -527,10 +677,11 @@ them. A bundle no file list names at all is deleted.
 The store database, `store.sqlite.zst`, is one compressed SQLite file
 about the store and nothing else. It holds every session (its run record
 folder, command, start, end, repository commit and whether the working
-tree had changes) and its lines (source, revision, checksum, address
-used, time, outcome `downloaded`, `reused` or `failed`, size, WPT
-version), and the map of git objects (each git object id, the sha256 of
-its content, its bundle and its place there). A session puts its rows in at each sealed bundle and at its
+tree had changes) and its lines (source, what the download got, for the
+record only, address used, time, outcome `downloaded`, `reused` or
+`failed`, size, WPT version), the marks for a new download (a source, or
+every source, and when), and the map of git objects (each git object id,
+the sha256 of its content, its bundle and its place there). A session puts its rows in at each sealed bundle and at its
 end. A full bundle is sealed while the next one fills, so a crash loses
 only the bundles not yet sealed and the lines since the last one. A
 bundle that cannot be stored stops its session: nothing more is added or
@@ -539,10 +690,14 @@ read: a conditional upload on S3, a lock in a local folder. When another
 session replaced it meanwhile, it is read again, the rows are put in
 again, and the replace is tried again.
 
+The store also keeps the cut key that erasure cuts are matched under
+([erasure.md](erasure.md)) and the locked vocabularies
+([tokenizer.md](tokenizer.md)): a machine without access to the store
+matches no cut and uses no locked vocabulary.
+
 The store also holds the record of every run of `wpt-dataset download`,
-`check --fetch`, `fill-checksum`, `manifest`, `build` and `source-drafter`,
-each round of `always-on-monitoring`,
-`wpt-train` and `wpt-eval`: one folder per run under
+`check --fetch`, `manifest`, `build` and `build-tokenizer`, `wpt-train`,
+`wpt-eval` and `wpt-manager`: one folder per run under
 `records/`, written by name rather than by content, each file compressed
 (a local store adds a record file's lines to one plain file while the
 record runs, and compresses it into one part when the record ends;
@@ -556,10 +711,10 @@ sources and their patches, the chat, task and rating files inside them, the
 model, tokenizer and mixture recipes, the image Dockerfiles and their
 pools of tools (`tools.json`), the two
 signer lists (`allowed-signers`, `allowed-gpg-keys.asc`), and the
-reviewed license texts (`reviewed-license-texts.json`,
-[licenses.md](licenses.md), "Reviewed license texts"). Every command
+license texts (`license-texts/<id>/`, [licenses.md](licenses.md),
+"License texts"). Every command
 that uses this data goes through it: `wpt-dataset` (`check`, `migrate`,
-`build`, `check-commits`, `source-drafter` and the rest), `wpt-train`, the
+`build`, `check-commits` and the rest), `wpt-train`, the
 image commands of `wpt-agent`, and `wpt-web`. It hands out documents, bytes
 and versions, never a path under `data/`.
 
@@ -603,6 +758,12 @@ and versions, never a path under `data/`.
   failing, and `wpt-dataset check` names it too, as a note that is not a
   failure. A source that is admitted needs its text, and a source with an
   empty text takes no files until it is written.
+- A save of a source that changes a license entry's license, place or
+  expected texts, without deciding that entry anew, sends the entry back
+  to `under-review`: its decision then reads `by` `machine:wpt-dataset`,
+  with the date and the reason. The source's decision and its other
+  entries stay. A commit holding such a change needs an allowed signature,
+  as every decision change does.
 - JSON is written with two spaces of indent, characters outside ASCII kept
   as they are, except U+2028, U+2029 and U+0085, always written as escapes,
   even in values a save keeps unchanged, so that no line splitter cuts a
@@ -675,7 +836,6 @@ request body against the same description), and `wpt-dataset` commands.
 | tasks | `tasks ID`, `task ID FOLDER`, `save-task ID FOLDER` | `/api/sources/{id}/tasks[/{folder}]`; page "Tasks" |
 | people's ratings of attempts ([evaluation.md](evaluation.md), "People's ratings") | `ratings ID PATH`, `save-rating ID PATH LINE` (or `new`) | `/api/sources/{id}/ratings/{path}[/{line}]`, and the attempts of `wpt-eval` runs from the store, `/api/runs[/{folder}/attempts]`; page "Ratings" |
 | git's status of `data/` | `status` | `/api/status`, on every page |
-| source drafters and their runs ("Source drafters", below) | `source-drafters`, `source-drafter NAME\|FILE --by NAME ...` | `/api/source-drafters`, `POST /api/source-drafters/{name}/runs`, `/api/source-drafter-runs[/{folder}]`; page "Source drafters" |
 
 The HTTP API answers 404 when the thing does not exist, 409 for a stale
 save, 422 for content the rules refuse (with their messages) and 503 when
@@ -688,139 +848,18 @@ the commands, it asks for no login and no header. What that leaves open
 while it runs: a web page open in the same browser can send it a
 cross-origin `POST` with `Content-Type: text/plain`, which the browser
 sends without asking first, so such a page can start sources
-(`POST /api/sources`), ask for drafts (`POST /api/drafts`) or start a run
-of a built-in source drafter (`POST /api/source-drafters/{name}/runs`); and a site
+(`POST /api/sources`) or ask for drafts (`POST /api/drafts`); and a site
 that makes its own name resolve to 127.0.0.1 (DNS rebinding) can reach
 every route, reading people's texts and changing data files in the working
 tree. Nothing is committed by `wpt-web`, so every change shows in
 `git status` and in the page's list of changed files before a commit.
 
-## Source drafters
-
-A source drafter is a program that writes `source.json` drafts from what a
-site publishes, to add its sources or to move them to a new revision. It
-is one Python file, a built-in in
-`packages/wpt-dataset/src/wpt_dataset/source_drafters/` or any path given
-to `wpt-dataset source-drafter`:
-
-```python
-from wpt_dataset.source_drafter import Candidate, Drafted, NeedsPerson, Skipped
-
-SETTINGS = {"run": "20250320"}  # changed by --set NAME=VALUE, typed from these defaults
-
-def check(settings):  # optional: raise ValueError on settings that cannot go together
-    ...
-
-def candidates(context):  # what the site offers: Candidate(name, source id if known, facts)
-    ...
-
-def draft(candidate, context):  # context: repo (read only), store, settings, by, today,
-                                # work (an empty folder for this draft), fact(key, compute), fetch(address)
-    return Drafted(origin, item, document)  # or Skipped(reason), or NeedsPerson(reason, notes)
-```
-
-The framework (`wpt_dataset/source_drafter.py`) does the rest:
-
-- A drafted document is saved through the service layer, its decision
-  `under-review` by the run's `--by` and dated the day of the run. No
-  program admits or refuses a source.
-- A draft whose source exists (the same id) updates it in place: the
-  draft's `revision`, `checksum`, `extract`, `formats`, `submodules` and
-  `history` replace the file's (a field the draft leaves out is removed),
-  and everything else stays as it is. When the revision and the exclusions
-  stay the same and the draft gives the placeholder checksum, the
-  existing checksum stays, since the same content is pinned already.
-  When the draft's `licenses` are the same as the file's, the decision
-  stays. When they differ, the draft's replace them and the source goes
-  back to `under-review`, so the commit that holds it needs an allowed
-  signature ([CONTRIBUTING.md](../CONTRIBUTING.md), "Decisions are
-  signed").
-- A draft may name sources it supersedes (`Drafted.supersedes`, the ids
-  of sources it replaces, such as the same site's source at an older
-  address). Once the draft is saved, each of those that is `admitted`
-  or `refused` goes back to `under-review` (by the run's `--by`, dated
-  the day of the run) and nothing else in it changes. Refusing a replaced
-  source stays a person's decision. The Wikipedia source drafter names the same wiki's sources
-  from older dump runs.
-- A source that has patches is never written: its outcome is "stopped",
-  with a note, since a person redoes its patches on the new revision.
-- Every outcome (drafted, skipped, needs-a-person, stopped, failed) is
-  recorded in the run's record, `records/<folder>/` in the store
-  ([observability.md](observability.md)), and, unless it failed, in the
-  record of what is done, one ref per candidate in the store. The same
-  command, on any machine sharing the store, drafts only what is left; a
-  failed candidate is drafted again. The record of what is done is kept
-  per source drafter and settings: other settings start again, and
-  `--again` drafts the chosen candidates even when they are done.
-- `context.fact(key, compute)` keeps a site fact (a listing, a dump's
-  statistics, an official license text) in the store, computed once.
-- Several drafts run at once, as many as `wpt_utils.parallel` allows, in
-  worker processes when that is more than one.
-  The saves and the records stay in the command's own process, in the
-  candidates' order, so the outcomes are the same however many drafted
-  at once.
-
-Fetches from a site go through `context.fetch`, which follows the site's
-robots.txt and tries a failure that may pass again, as a source's fetch
-does. A page whose answer carries an ETag is kept in the store with it.
-The next fetch of the same request, on any machine sharing the store,
-asks the site whether the page changed (`If-None-Match`); an answer 304
-gives the kept page, and GitHub does not count such answers against its
-limit. A draft's checksum is the placeholder until `wpt-dataset
-fill-checksum` fills it in. The built-ins are listed by `wpt-dataset
-source-drafters`, with their settings.
-
-The page "Source drafters" of `wpt-web` lists the built-ins, starts a run
-as a separate process (`wpt-dataset source-drafter`), and follows its
-progress from its record. A run that ends before it writes its record is
-listed with its exit code and the end of its error output.
-
-A run started there stops when `wpt-web` stops, its worker processes
-with it, and `wpt-web` starts it again, with the same arguments, when it
-starts next. Each running `wpt-web` holds a name of its checkout, kept in
-the repository's git folder, which no other process holds at the same
-time; a `wpt-web` started later takes up the name of one that ended. A
-run's record names the `wpt-web` that started it by that name, so a
-`wpt-web` starts again only its own runs, never one that another
-`wpt-web`, on this machine or another sharing the store, still runs.
-
-## Always-on monitoring
-
-`wpt-dataset always-on-monitoring` keeps the sources of the checkout it
-runs in current, in rounds without end, for a machine that stays on
-(`wpt_dataset/monitoring.py`). A round runs every built-in source drafter
-on every candidate, with its default settings, each run with its own
-record, as `wpt-dataset source-drafter --again` runs it. Only a license
-change sends a source back to `under-review`, as for any source drafter
-run. The round then downloads every admitted source again, in one
-session: an admitted draft's checksum is filled in as `fill-checksum`
-fills it, and every other admitted source is downloaded even when its
-tree is in the store, its files already held there not stored twice, and
-a git source asking only for the files the store does not hold. A source
-whose upstream no longer gives its checksum fails, and only the failure
-is recorded. Each source that came is checked as `check --fetch` checks
-it. Sources under review or refused are not downloaded.
-
-The drafts carry the `by` given with `--by`, or without it
-`machine:<host>`, this machine's name marked as a machine's. A machine
-drafts and never decides: the check refuses an `admitted` or `refused`
-decision whose `by` starts with `machine:`, and refuses a colon in a
-person's name.
-
-A source drafter that cannot run, and a source that fails, are printed
-at the end of the round, and the next round comes all the same. The
-pause between the end of one round and the start of the next is one week,
-changed by `--pause` or `WPT_MONITORING_PAUSE`, in seconds; the option
-wins. Nothing is committed: the drafts and the filled checksums stay in
-the checkout. A record the store refuses stops the monitoring with exit
-code 3, as it stops any recorded command.
-
 ## Packages
 
 | Package | Role |
 | --- | --- |
-| `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; the service layer (`repo.py`), the only code that reads or writes `data/`; the task builder (`builder.py`, run by `scripts/build_tasks.py`); the source drafters (`source_drafter.py`, the built-ins in `source_drafters/`); the always-on monitoring (`monitoring.py`); command `wpt-dataset` |
-| `wpt-store` | the content-addressed store (its kinds: a local folder or S3), its compression, its sessions with their bundles, the store database, its record folders, the model folders kept under a run's name (`models/<name>`), and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules; command `wpt-store` (`list`: what the store database says; `copy-out`: a kept model folder, checked against its sha256s) |
+| `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; the service layer (`repo.py`), the only code that reads or writes `data/`; the protocols (`protocols/`), the download step (`download.py`), the license check (`license_check.py`), the shared checks (`checks.py`, `erasure.py`), the build (`build.py`, `kept.py`); the task builder (`builder.py`, run by `scripts/build_tasks.py`); command `wpt-dataset` |
+| `wpt-store` | the content-addressed store (its kinds: a local folder or S3), its compression, its sessions with their bundles, the store database, its record folders, the model folders kept under a run's name (`models/<name>`), and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules; command `wpt-store` (`list`: what the store database says; `mark`: sources marked for a new download; `copy-out`: a kept model folder, checked against its sha256s) |
 | `wpt-telemetry` | the record of one command run in the store, sent live to an OpenTelemetry backend when one is set ([observability.md](observability.md)) |
 | `wpt-tokenizer` | the byte-level BPE tokenizer, Rust inside |
 | `wpt-web` | a local web interface over the service layer: one small server on 127.0.0.1, one file per page (Python routes, React page), an editor for every kind of data, a conversation editor that asks a WPT model folder for drafts, and its OpenAPI description; its interface is built with Bun when it starts; command `wpt-web` |
@@ -877,18 +916,25 @@ branch, as a push would:
   locking and building it; when those files change, the next check locks
   and builds again and removes the old image.
 - `wpt-dataset check`: every file matches its schema and current shape,
-  source ids match their address, licenses are on the allowed list (with
-  their text), patches are numbered without gaps, mixture weights add up to
-  1 and pool expressions parse, recipes name existing recipes.
+  licenses are on the allowed list (with their text), coverage patterns
+  have an allowed shape, each license entry expects license texts that
+  exist and takes the entry itself as its place only where that is
+  allowed, no machine admits or refuses at any level, each license text's
+  id is that of its text, patches are numbered without gaps, mixture
+  weights add up to 1 and pool expressions parse, recipes name existing
+  recipes.
 - `wpt-dataset check --fetch
   standardebooks-joseph-conrad-ford-madox-ford-the-nature-of-a-crime-5366b0f3`:
-  one short book, fixed at one git commit so its download never changes, is
-  downloaded (or found in the store), and its checksum, cuts, patches,
-  license map and text are checked, which proves the fetch and its checks work. The sources a pull
+  one short book is downloaded (or found in the store), and its cuts,
+  patches, license map and text are checked, which proves the fetch and
+  its checks work. The sources a pull
   request adds or changes are not fetched here: the maintainer runs
   `wpt-dataset check --fetch` on them before merging.
 - `wpt-dataset check-commits <range>`: DCO sign-off on every commit, and a
-  signature from an allowed key on every commit that changes a decision.
+  signature from an allowed key on every commit that changes a decision, at
+  any of its three levels (a source's, a license entry's, a license
+  text's), or what an admitted or refused entry or text holds, compared by
+  content rather than by position.
 
 It runs every check even after one failed, then lists which passed. There
 is no local hook: run it before pushing.
@@ -915,16 +961,53 @@ leaves empty and the check then names each file to fill in. The steps today:
   review" becomes `under-review` without that reason, and `retired` becomes
   `refused`, keeping its reason; the tags `sft`, `grpo` and `token-efficiency`
   become `answer-as-assistant`, `finish-tasks` and
-  `finish-tasks-with-less-writing` in every tag list.
+  `finish-tasks-with-less-writing` in every tag list; the types
+  `http-file` and `http-archive` become `http` and `huggingface` becomes
+  `git` (an `http` source whose file's name says otherwise than its old
+  type stays as it is, for a person to give `extract.name`); a source with
+  `checksum` and `revision`, and license entries without their place,
+  expected texts and decision, gets them (below).
+- the license texts: before any step, the reviews of
+  `data/reviewed-license-texts.json` become license text items; a review
+  held for one exact file that no item can hold stays in that file, for a
+  person.
 - model recipes: the architecture of an earlier model (`n_embd`, gated MLA)
   becomes the current one, its numbers a person fills in; the window length
   in the architecture and the `training` steps and batch size become one
   stage; a recipe without a `drafter` section gets one with the values every
   recipe states; `training` and `posttrain` become one list of `steps`.
-- task files: a task with `replies` and no `answered_in` gets it empty.
+- task files: a task with `replies` and no `answered_in` gets it empty. A
+  repository pointer's `checksum` becomes `manifest`, its `sha256:`
+  prefix dropped.
 - tokenizer recipes: a recipe without `version` gets 1. A lock without the
   list of its documents cannot be converted: delete it and build again.
 - every kind: a `schema` field is dropped.
 
 A file `migrate` cannot rewrite, such as a source's `chat` file (upstream's
 bytes), goes through `migrate.upgrade` where it is read.
+
+The source step that gives license entries their place reads, for each
+source that needs it, its file list and license files from the store, or
+else from its upstream, never as a full download
+(`wpt_dataset/upstream_files.py`); a source of several `addresses`, or
+one it cannot list otherwise, stays in its earlier shape and is named.
+`checksum` and `revision` go. A `**` pattern is narrowed into the allowed
+shapes, covering the same files. Each entry gets its place:
+
+- an entry that selected records by `values`: the record field the
+  records format named, its values the ones it expects;
+- a `LicenseRef-public-domain` entry, and an entry of an `empty` source:
+  the entry itself;
+- any other: the license file whose text it matches among the license
+  texts, that text its expected one. A license file no item holds is
+  compared with the standard texts of one SPDX release (`spdx.py`, fetched
+  once); a match becomes an admitted item, any other a new item under
+  review, with its text.
+
+These entries keep the source's signed admission, carried by the signed
+migration commit of the person `migrate --by NAME` names: an entry that
+selects records, a public-domain one, and one whose license file is an
+admitted text of its own license. Every other entry goes under review. A
+source with no license-named file, or holding a file whose review stays
+in `data/reviewed-license-texts.json`, stays in its earlier shape and is
+named.

@@ -76,59 +76,65 @@ together.
    GitHub's robots.txt forbids `/*.git` addresses to AI training
    crawlers, and the plain address serves the same repository.
 3. Create `data/sources/<id>/source.json` (see
-   [docs/architecture.md](docs/architecture.md)), with `checksum` set to
-   `sha256:` followed by 64 zeros for now, and a `decision` stating
-   `"under-review"`, with your name (`by`) and today's `date` (see
-   "Decisions are signed").
-4. `uv run wpt-dataset fill-checksum <id>` downloads it once into the
-   store, excludes in `extract` every file that is not text (binary
-   files), each by its exact path, writes the checksum in `source.json`,
-   and checks the source as `check --fetch` does (step 5) without
-   downloading it again. It takes
-   several ids, fills each, and lists the failures at the end. A file is
-   text when it is UTF-8, or when it states its own encoding (a
-   byte-order mark, an HTML page's `<meta charset>`, an XML declaration,
-   Project Gutenberg's `Character set encoding:` line, a Python coding
-   line) and decodes under it; nothing is guessed ([docs/architecture.md](docs/architecture.md),
-   "Encodings"). Map every file in `formats` before running it: the format
-   says which statement the file can make, and a file no records or chat
-   format reads is checked as text.
-   `uv run wpt-dataset manifest <id>` downloads a source without checking
-   its checksum, keeps it in the store, and prints its manifest and
-   checksum. A publisher that rebuilds its archives gives another checksum
-   on a later fetch: update `revision`, set `checksum` back to the zeros,
-   and fill it again. Map every path to exactly one license in `licenses`,
-   and to exactly one format in `formats` (how it becomes Markdown,
+   [docs/architecture.md](docs/architecture.md)), with its `address`
+   (what upstream serves there when asked is what is taken), a `decision`
+   stating `"under-review"`, with your name (`by`) and today's `date`, and
+   the same decision in each license entry (see "Decisions are signed").
+   Map every path to exactly one license entry in `licenses`, and to
+   exactly one format in `formats` (how it becomes Markdown,
    [docs/architecture.md](docs/architecture.md), "Documents are Markdown":
    an EPUB page is `xhtml`, a web page that is not strict XML, such as
-   Project Gutenberg's, is `html`). In
-   each license entry, write in `attribution` the credit that license asks
+   Project Gutenberg's, is `html`). Write each entry's coverage with the
+   allowed pattern shapes: a named folder (`src/**`), a named kind of file
+   (`**/*.js`, `*.js`) or an exact path, never `**` alone. Give each entry
+   its `place`, the file, record field or outside page where its license
+   statement is, and in `expected` the ids of the license texts in
+   `data/license-texts/` that statement may be (a text not there yet is
+   added as a new item, under review, with `wpt-dataset add-license-text
+   ID --file PATH` or `--page ADDRESS` once the source is downloaded: it
+   prints the item's id, the sha256 of its normalized text, which
+   `check --fetch` and the build also name for a text they do not know), or
+   the record values it covers
+   ([docs/licenses.md](docs/licenses.md), "License entries"). In each
+   license entry, write in `attribution` the credit that license asks
    for, as the source gives it: authors, title, copyright line, link, and
    in `text` the license as the source gives it (its license file with its
    copyright line, then an Apache `NOTICE` file's content; for public
    domain, why). Every model trained on the source repeats both in its
    notice.
-   A dataset on huggingface.co is `"type": "huggingface"`, pinned to the
-   dataset's commit; `fill-checksum` downloads every file it keeps, as for
-   any other source. An archive the dataset holds (tar, tar.gz, tar.bz2,
-   tar.xz, zip) is unpacked into its folder and its members are the
-   source's files: exclude in `extract` the archives the source must not
-   hold by their own paths, which keeps them from being downloaded. A source published at several
+4. `uv run wpt-dataset download <id>` puts it in the store. A file is
+   text when it is UTF-8, or when it states its own encoding (a
+   byte-order mark, an HTML page's `<meta charset>`, an XML declaration,
+   Project Gutenberg's `Character set encoding:` line, a Python coding
+   line) and decodes under it; nothing is guessed ([docs/architecture.md](docs/architecture.md),
+   "Encodings"). List every file that is not text in `extract`'s
+   `exclude`, by its exact path (`*`, `?` and `[` written `[*]`, `[?]` and
+   `[[]`): `check --fetch` (step 5) names each one. Map every file in
+   `formats` first: the format says which statement the file can make,
+   and a file no records or chat format reads is checked as text.
+   `uv run wpt-dataset manifest <id>` prints the manifest of the stored
+   upstream tree.
+   A dataset on huggingface.co is a git repository, `"type": "git"` at
+   `https://huggingface.co/datasets/<owner>/<name>`: its file list comes
+   from git, its large files through LFS, and only the files `extract`
+   keeps are downloaded. An archive inside a git repository stays one
+   file. A source published at several
    addresses (its documents in one archive and their metadata in another)
    lists them in `addresses`, each with the
    folder of the tree it fills, and repeats the first one in `address`
    ([docs/architecture.md](docs/architecture.md), "source.json"). A file
    holding many documents, each with its own
    license (JSON Lines, optionally `.gz` or `.zst`, or Parquet), is in the
-   `records` format: it names the record's `text`, `license`, `id` and
-   `credit` fields, and each license entry covering it lists in `values`
-   the license values it covers ([docs/licenses.md](docs/licenses.md),
-   "Rules"). A text field that holds Markdown says `"as": "markdown"`, and
-   one that holds a web page says `"as": "html"`; a `title` field gives
+   `records` format: it names the record's `text`, `id` and `credit`
+   fields, and each license entry covering it names the license field as
+   its place (`{"field": "metadata.license"}`) and lists in `expected` the
+   values it covers ([docs/licenses.md](docs/licenses.md), "Rules"). A
+   text field that holds Markdown says `"as": "markdown"`, and one that
+   holds a web page says `"as": "html"`; a `title` field gives
    the document its heading, and a dataset holding several revisions of
    one record names their date field in `newest`. A dataset that states
-   one license for all its records names
-   no `license` field, and its files take their one license entry. A
+   one license for all its records gives its one license entry another
+   place, and every record takes it. A
    JSON document whose field holds the list of records names that field in
    `records`; an XML file is one record, its fields XPath expressions with
    the entry's `namespaces`, and a `join` reads the license and credit from
@@ -136,13 +142,13 @@ together.
    "Documents are Markdown").
    A git source may add its history: `"history": {"since": "<commit>"}`
    gives one file `.git/history/<commit>` per commit from `since` to the
-   revision (merges left out), in `git format-patch` layout and limited
+   commit the download gets (merges left out), in `git format-patch` layout and limited
    to the files `extract` keeps, and `.git/history/order`, the commits'
    order with the merges marked. `since` is the commit from which the root
    license file holds the license the source lists; give these files a
    `code` format with the language `patch` and a license entry of their
-   own, `.git/history/**`: an entry written `**` covers only the tree's
-   files ([docs/licenses.md](docs/licenses.md), "Rules").
+   own, `.git/history/**`: no other pattern covers them
+   ([docs/licenses.md](docs/licenses.md), "Rules").
    A git source downloads only the contents of the files it keeps. A
    submodule (a folder pointing to a commit of another repository) is
    either excluded in `extract` or read at that commit from the address
@@ -150,7 +156,8 @@ together.
    own submodules follow the same rule, by their full path. Its files
    need a license entry like any other path.
 5. `uv run wpt-dataset check --fetch <id>` must pass (it also converts every
-   file to Markdown), and `uv run wpt-dataset markdown-check <id>` (every
+   file to Markdown, and names each license entry whose statement would
+   keep its files out of a build), and `uv run wpt-dataset markdown-check <id>` (every
    note complete, no leftover markup), then `uv run scripts/check.py`.
 6. Open a pull request. Say what the source is, its license, and anything a
    reviewer should know; use `note` fields for reasons that must stay with
@@ -173,9 +180,10 @@ hand:
 
 1. Choose its id: `uv run wpt-dataset source-id <origin> [<item>] empty:<name>`.
 2. Create `data/sources/<id>/source.json` with `"type": "empty"`, the
-   address `empty:<name>`, today's date as `revision`, the empty checksum,
-   a license you choose for your text (for example `CC0-1.0`) with your
-   `attribution`, its tags, and the decision.
+   address `empty:<name>`, a license entry for your text with a license
+   you choose (for example `CC0-1.0`), your `attribution`, the entry
+   itself as its place (`{"entry": true}`) and its decision, its tags, and
+   the source's decision.
 3. `uv run wpt-dataset unpack <id> <folder>` (a folder outside the
    repository), write or edit your files there, then
    `uv run wpt-dataset patch <id> <folder> <name>`. Each later change is the
@@ -187,35 +195,49 @@ an erasure can remove it from future builds, never from that history (see
 good. Your signed-off commit certifies you wrote it, and it holds no other
 person's personal data and no output of another company's model.
 
-No program admits or refuses a source. A program such as a source
-drafter may draft a source's licenses and tags as help: its output is not
-a source of truth, a person checks it, and only a person admits a source,
-after reviewing it. Tools such as ScanCode may help you find license
-texts; they never decide.
+No program admits or refuses a source, a license entry or a license
+text. A script kept outside the repository may write a source's
+description as help: its output is not a source of truth, a person checks
+it, and only a person admits, after reviewing it. Tools such as ScanCode
+may help you find license texts; they never decide.
 
 ## Decisions are signed
 
-A source is in exactly one of three states, its `decision`:
-`under-review`, a source not yet decided, where every new source starts
-and where a doubt stays; `admitted`; or `refused`. Each gives who set it (`by`)
-and when (`date`). The builds and
-`check --fetch` without ids read only admitted sources: an `under-review`
-source is left out of them exactly as a refused one is.
+Decisions are made at three levels, each signed by a person
+([docs/licenses.md](docs/licenses.md), "Who decides"):
 
-A person's name holds no colon. The `by` of a draft that always-on
-monitoring saves without a person's name is `machine:<host>`, the name of
-the machine it ran on: a machine drafts, and `check` refuses an
-`admitted` or `refused` decision whose `by` is a machine's.
+- the source's `decision`: whether WPT wants the source at all;
+- each license entry's `decision`: whether its coverage and license are
+  accepted for the files it covers;
+- each license text's `decision`, in
+  `data/license-texts/<id>/license-text.json`: whether that text is an
+  accepted license statement.
 
-A maintainer admits a source by setting `decision` to `admitted`, with their
-name and the date. An admission needs no reason: the license map and its
-texts already say why the source is allowed. It carries one only for an
+Each decision is in exactly one of three states: `under-review`, not yet
+decided, where everything new starts and where a doubt stays; `admitted`;
+or `refused`. Each gives who set it (`by`) and when (`date`). A file
+trains only when its source, its entry and the text found at its entry's
+place are all admitted. The builds and `check --fetch` without ids read
+only admitted sources: an `under-review` source is left out of them
+exactly as a refused one is.
+
+A person's name holds no colon. A save that changes a license entry's
+license, place or expected texts without deciding it anew sends that entry
+back to `under-review`, with the `by` `machine:wpt-dataset`: `check`
+refuses an `admitted` or `refused` decision whose `by` is a machine's.
+
+A maintainer admits a source, an entry or a license text by setting its
+`decision` to `admitted`, with their name and the date. An admission needs
+no reason: the license map and its texts already say why the source is
+allowed. It carries one only for an
 exception, such as an explicit permission for content without a license.
 Refusing a source always gives the reason, so nobody reviews it again from
 scratch; a source under review may give one (a doubt gives the missing
 fact). A refused source stays in the repository as a reference: it is
-never deleted. A commit that changes any `decision`
-must be signed (`git commit -S`) by an SSH key listed in
+never deleted. A commit that changes any `decision`, at any of the three
+levels, or what an admitted or refused entry or license text holds (an
+entry's license, place, expected texts and coverage, and its text when its
+place is the entry itself; a text's `files`), must be signed (`git commit -S`) by an SSH key listed in
 `data/allowed-signers` or a GPG key in `data/allowed-gpg-keys.asc`; CI
 checks the signature against the lists as they stood before the commit, so
 a new key can only be added by a commit signed with a key already listed.
@@ -231,12 +253,22 @@ decisions.
 
 ## Changing a source
 
-- **New upstream revision**: update `revision` and `checksum` in place, and
-  redo its cuts and patches in the same commit.
-- **New address**: that is a new source with a new id; refuse the old one
-  (`"decision": "refused"`, its `reason` naming the new source's id),
-  update the mixtures naming it, and
-  move its erasure cuts.
+- **New address or newer version**: edit `address` in place (the "Sources"
+  page of `wpt-web`, or `wpt-dataset save source`). The source keeps its
+  id, its decisions and its history; the next download fetches the new
+  address. A cut or patch that no longer applies takes the source out of
+  the builds until it is made again.
+- **Fresh content at the same address**: `uv run wpt-store mark <id>`
+  (or `--all`) marks it for a new download; the next `download` fetches it
+  in full.
+- **A license that changed**: changing an entry's license, place or
+  expected texts sends that entry back to `under-review`; the source's
+  decision and its other entries stay.
+- **What a build reports**: a file no entry covers, a file that is not
+  text and is not listed, a record value no entry expects, a pointer task
+  whose passage is gone. Add the entry or the `extract` path, or run the
+  task builder again ([docs/training.md](docs/training.md), "The task
+  builder").
 - **Patches**: `0001-<name>.patch`, `0002-<name>.patch`... in git's format,
   applied in order after the erasure cuts. Removal patches are welcome.
 
@@ -318,7 +350,7 @@ decision)" tag (only "maintainer's decision alone" stays, for a license
 choice with no outside ruling) or an account of earlier versions. Rules
 are general: they name no source and no example, so they hold for any
 number of sources. Dates that belong to the content stay, such as a
-source's revision or a lawyer's answer in `LEGAL-QUESTIONS.html`. A
+author's death date or a lawyer's answer in `LEGAL-QUESTIONS.html`. A
 migration step (`wpt-dataset migrate`) says what it changes in a file of
 an older shape, not when that shape changed.
 

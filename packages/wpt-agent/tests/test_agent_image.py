@@ -6,6 +6,7 @@ folder, as the image holds them; the last test runs them in the image
 itself, built from its lock (skipped without Docker)."""
 
 import ast
+import importlib
 import importlib.machinery
 import importlib.util
 import json
@@ -51,17 +52,23 @@ LOOKING = {tool["name"] for tool in [{"name": "read"}, {"name": "bash"}, SEARCH,
 def load(name):
     """A file of the image's folder as a module, the library's or a tool's
     program, its folder on the path as in the image (the programs import
-    wpt_tools)."""
-    if str(FOLDER) not in sys.path:
-        sys.path.insert(0, str(FOLDER))
+    wpt_tools) while it runs. The folder is listed and wpt_tools imported
+    here, by the test, never by the program being loaded nor by a later
+    import elsewhere: the service layer's audit hook refuses any other code
+    that reads under data/, so the folder leaves the path once it is
+    loaded."""
     path = FOLDER / (f"{name}.py" if name.startswith("wpt_") else f"tools/{name}")
     spec = importlib.util.spec_from_loader(name, importlib.machinery.SourceFileLoader(name, str(path)))
     module = importlib.util.module_from_spec(spec)
     writes = sys.dont_write_bytecode
     sys.dont_write_bytecode = True  # a __pycache__ in the image's folder would change the image
+    sys.path.insert(0, str(FOLDER))
     try:
+        importlib.import_module("wpt_tools")
         spec.loader.exec_module(module)
     finally:
+        sys.path.remove(str(FOLDER))
+        sys.path_importer_cache.pop(str(FOLDER), None)
         sys.dont_write_bytecode = writes
     return module
 
@@ -336,7 +343,7 @@ def prepared(tmp_path):
     tree[f".git/history/{head}"] = Entry(FILE, store.put_bytes(patch))
     tree[ORDER] = Entry(FILE, store.put_bytes(f"{head}\n{start}\n".encode()))
     pointer = Pointer("repository", "", "example-lamps-0123abcd", f".git/history/{head}", None, "",
-                      checksum="sha256:" + "0" * 64)
+                      manifest="0" * 64)
     return repository("test", pointer, tree, store)
 
 

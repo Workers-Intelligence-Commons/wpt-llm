@@ -1,9 +1,23 @@
 # Data selection
 
+## The source's decision
+
+Each source carries its own decision (`decision` in its `source.json`),
+signed by a person: whether WPT wants that source at all. It is a decision
+about data selection, under the rules of this document and of
+[licenses.md](licenses.md) on synthetic data and on other companies'
+models. Whether its licenses are accepted is decided apart, for each
+license entry and each license text ([licenses.md](licenses.md), "Who
+decides"). A change to a license entry sends that entry back
+to under review and leaves the source's decision as it is.
+
 ## Documents
 
-Every file of an admitted source's final tree (after cuts and patches) is a
-document, identified as `<source id>/<path>`. Symlinks are not documents.
+Every file of an admitted source's final tree (after cuts and patches)
+that the build keeps is a document, identified as `<source id>/<path>`.
+The build keeps a file when its license entry and the license text found
+at that entry's place are admitted too, the file is text, and an entry
+covers it ([architecture.md](architecture.md), "The build"). Symlinks are not documents.
 A document is the file's Markdown, read in the encoding the file states,
 else UTF-8, and written as UTF-8 ([architecture.md](architecture.md),
 "Encodings"); an image in a web page
@@ -20,8 +34,8 @@ A git source with `history` adds one document per commit,
 `<source id>/.git/history/<commit>`: the commit as `git format-patch`
 writes it, limited to the files the source keeps. Its order file,
 `.git/history/order` ([architecture.md](architecture.md), `history`),
-stays a file of the source's stored tree, covered by its checksum, but it
-is not a training document: the build, the vocabulary and every other
+stays a file of the source's stored tree, but it is not a training
+document: the build, the vocabulary and every other
 list of documents leave it out.
 
 **Exact duplicates are removed**: when several documents have the same

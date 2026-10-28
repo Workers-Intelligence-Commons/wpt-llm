@@ -5,8 +5,9 @@ it the author certifies the Developer Certificate of Origin and, for a
 source, that its license was read, that no "no AI" wish was found, and that
 it holds no personal data (see CONTRIBUTING.md).
 
-A commit that changes any source's `decision`, or the lists of keys allowed
-to sign decisions (data/allowed-signers for SSH keys, data/allowed-gpg-keys.asc
+A commit that changes any decision (a source's, a license entry's, a
+license text's: data/license-texts/<id>/license-text.json), or the lists
+of keys allowed to sign decisions (data/allowed-signers for SSH keys, data/allowed-gpg-keys.asc
 for GPG keys), must be signed by a key from those lists as they stood before
 the commit; the very first commit is checked against its own lists. A
 Signed-off-by line alone proves nothing: anyone can type it. The lists

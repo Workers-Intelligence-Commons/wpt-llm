@@ -86,10 +86,12 @@ import re
 from dataclasses import dataclass
 
 from . import manifest, markdown, pools
-from .errors import InvalidFile, RuleViolation
+from .errors import CutFailed, InvalidFile, PatchFailed, RuleViolation
+from .kept import kept
+from .license_check import LicenseTexts
 from .manifest import HISTORY, ORDER
 from .repo import Repo
-from .sources import in_store, source_tree, tags_of
+from .sources import held_manifest, in_store, tags_of
 from .tasks import CHECK, EVAL, FILES, LOOKING, REMOTE, TASK, Pointer, looks, repository, undoable
 
 READ_THE_MANUAL = "read-the-manual"
@@ -339,33 +341,34 @@ def _documents(repo, store, expression, wanted, rng, log):
     """{source id: [document]} of the admitted sources in the store, each
     with up to `wanted` documents drawn from those the expression selects
     (a reservoir: every document has the same odds), each holding a plain
-    paragraph."""
-    found, absent = {}, 0
+    paragraph, among the files and records the build keeps (kept.py)."""
+    found, absent, texts = {}, 0, LicenseTexts(repo.license_texts())
     for source in repo.sources(log):
         if not source.admitted or source.data["type"] == "empty":
             continue
         if not in_store(source, store):
             absent += 1
             continue
-        tree, _ = source_tree(source, store)
-        selected = {path for path in tree if not path.startswith(HISTORY)
+        if (held := _kept(source, store, texts, log)) is None:
+            continue
+        selected = {path for path in held.tree if not path.startswith(HISTORY)
                     and pools.matches(expression, tags_of(source, path))}
         if not selected:
             continue
-        kept, seen = [], 0
-        for converted in markdown.documents(source, tree, store, repo, only=selected):
+        taken, seen = [], 0
+        for converted in markdown.documents(source, held.tree, store, repo, only=selected, trains=held.trains):
             if len(converted.markdown) > DOCUMENT or not any(plain(converted.markdown, p)
                                                              for p in paragraphs(converted.markdown)):
                 continue
             seen += 1
             document = {"source": source.id, "path": converted.path, "address": source.data["address"],
                         "markdown": converted.markdown}
-            if len(kept) < wanted:
-                kept.append(document)
+            if len(taken) < wanted:
+                taken.append(document)
             elif (place := rng.randrange(seen)) < wanted:
-                kept[place] = document
-        if kept:
-            found[source.id] = kept
+                taken[place] = document
+        if taken:
+            found[source.id] = taken
     if absent:
         log(f"{absent} admitted sources are not in the store and gave no task (wpt-dataset check --fetch fetches "
             f"them)")
@@ -527,14 +530,17 @@ def _commits(repo, store, count, rng, log) -> list:
     (tasks.repository: a failed undo, or git refusing the parent commit,
     turned into InvalidFile) is logged and skipped. Only a taken commit is
     made into a repository. A source whose stored history has no order
-    file (ORDER), stored before histories kept one, gives none."""
+    file (ORDER), stored before histories kept one, gives none. Each
+    source's tree is the one the build keeps (kept.py)."""
     sources = [s for s in repo.sources(log) if s.admitted and s.data["type"] == "git" and s.data.get("history")]
-    candidates, absent, unordered = [], 0, 0
+    candidates, absent, unordered, texts = [], 0, 0, LicenseTexts(repo.license_texts())
     for source in sources:
         if not in_store(source, store):
             absent += 1
             continue
-        tree, _ = source_tree(source, store)
+        if (held := _kept(source, store, texts, log)) is None:
+            continue
+        tree = held.tree
         if ORDER not in tree:
             unordered += 1
             continue
@@ -548,7 +554,7 @@ def _commits(repo, store, count, rng, log) -> list:
             f"fetches them)")
     if unordered:
         log(f"{unordered} git sources with a history have no {ORDER} in the store and gave no task (their history "
-            f"was stored before histories kept their order; they give tasks once fetched under a new checksum)")
+            f"was stored before histories kept their order; they give tasks once downloaded again)")
     rng.shuffle(candidates)
     made = []
     for source, tree, document in candidates:
@@ -560,15 +566,26 @@ def _commits(repo, store, count, rng, log) -> list:
     return made
 
 
+def _kept(source, store, texts, log):
+    """The source as the build keeps it (kept.kept), or None, named in log,
+    when a cut or a patch takes it out."""
+    try:
+        return kept(source, store, texts)
+    except (CutFailed, PatchFailed) as error:
+        log(f"{source.id}: left out, {type(error).__name__}: {error}")
+        return None
+
+
 def _commit(source, tree, document, store, log):
     """(task.json, check, files) of a task on the commit of the history
     file `document` of a source's stored tree, its pointer naming the
-    source's checksum; None, named in log, when tasks.repository refuses
+    manifest of the source's upstream tree as the store holds it
+    (sources.held_manifest); None, named in log, when tasks.repository refuses
     it (InvalidFile); any other failure stops the build."""
-    pointer = {"for": "repository", "source": source.id, "document": document, "checksum": source.data["checksum"]}
+    pointer = {"for": "repository", "source": source.id, "document": document, "manifest": held_manifest(source, store)}
     try:
         repository(source.id, Pointer("repository", "", source.id, document, None, "",
-                                      checksum=pointer["checksum"]), tree, store)
+                                      manifest=pointer["manifest"]), tree, store)
     except InvalidFile as error:  # a commit that cannot be made is left out, named
         log(f"{source.id}/{document}: left out, {error}")
         return None
