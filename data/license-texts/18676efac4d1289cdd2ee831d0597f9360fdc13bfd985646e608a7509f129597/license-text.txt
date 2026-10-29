@@ -1,0 +1,96 @@
+{
+  "name": "llmz",
+  "type": "module",
+  "description": "LLMz - An LLM-native Typescript VM built on top of Zui",
+  "version": "0.9.5",
+  "files": [
+    "dist",
+    "DOCS.md"
+  ],
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "workerd": "./dist/index.workerd.js",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "repository": {
+    "url": "https://github.com/botpress/botpress"
+  },
+  "scripts": {
+    "generate": "pnpm build:markdown",
+    "build": "tsdown && pnpm tsc --emitDeclarationOnly --noCheck",
+    "check:type": "tsc --noEmit",
+    "watch": "tsdown --watch",
+    "test": "vitest --run",
+    "test:e2e": "vitest run --config vitest.e2e.config.ts",
+    "test:e2e:update": "vitest -u run --config vitest.e2e.config.ts",
+    "test:e2e:watch": "vitest --config vitest.e2e.config.ts",
+    "build:markdown": "node --loader ts-node/esm ./scripts/compile-markdown.mts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@jitl/quickjs-singlefile-browser-release-sync": "^0.31.0",
+    "acorn": "^8.17.0",
+    "bytes": "^3.1.2",
+    "exponential-backoff": "^3.1.1",
+    "json5": "^2.2.3",
+    "jsonrepair": "^3.10.0",
+    "lodash-es": "^4.17.21",
+    "magic-string": "^0.30.21",
+    "ms": "^2.1.3",
+    "quickjs-emscripten-core": "^0.31.0",
+    "ulid": "^3.0.2"
+  },
+  "devDependencies": {
+    "@botpress/cli": "workspace:*",
+    "@jitl/quickjs-wasmfile-release-sync": "^0.31.0",
+    "@microsoft/api-extractor": "^7.49.0",
+    "@types/bytes": "^3.1.5",
+    "@types/json-schema": "^7.0.12",
+    "@types/lodash-es": "^4.17.12",
+    "@types/ms": "^0.7.34",
+    "@types/node": "^22.16.4",
+    "chalk": "^4.1.2",
+    "diff": "^8.0.1",
+    "dotenv": "^16.4.4",
+    "esbuild": "^0.25.10",
+    "glob": "^9.3.4",
+    "oxfmt": "^0.61.0",
+    "source-map-js": "1.2.1",
+    "tsdown": "^0.22.14",
+    "tsx": "^4.19.2"
+  },
+  "peerDependencies": {
+    "@botpress/client": "2.8.0",
+    "@botpress/cognitive": "1.2.2",
+    "@bpinternal/thicktoken": "^3.1.0",
+    "@bpinternal/zui": "^2.4.1"
+  },
+  "dependenciesMeta": {
+    "@bpinternal/zui": {
+      "injected": true
+    }
+  },
+  "peerDependenciesMeta": {
+    "@botpress/client": {
+      "optional": true
+    },
+    "@botpress/cognitive": {
+      "optional": false
+    },
+    "@bpinternal/thicktoken": {
+      "optional": false
+    },
+    "@bpinternal/zui": {
+      "optional": false
+    }
+  },
+  "packageManager": "pnpm@10.29.3"
+}

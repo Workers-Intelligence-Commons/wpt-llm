@@ -1,0 +1,43 @@
+{
+  "name": "mastra-example",
+  "private": true,
+  "version": "0.1.8",
+  "type": "module",
+  "description": "Example project for Mastra",
+  "main": "src/index.ts",
+  "scripts": {
+    "clean": "git clean -xdf node_modules",
+    "start": "bun src/index.ts",
+    "tool-router": "bun src/tool-router.ts",
+    "smoke": "bun src/smoke.ts",
+    "dev": "bun --watch src/index.ts",
+    "cf:dev": "wrangler dev",
+    "cf:dry-run": "wrangler deploy --dry-run --outdir dist-worker",
+    "typecheck": "tsc --noEmit -p ./tsconfig.json && tsc --noEmit -p ./tsconfig.worker.json",
+    "lint": "oxlint -c ../../../.oxlintrc.json src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "composio",
+    "example",
+    "mastra"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ai-sdk/openai": "^3.0.125",
+    "@composio/core": "workspace:*",
+    "@composio/mastra": "workspace:*",
+    "@mastra/core": "catalog:",
+    "ai": "^6.0.302",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "catalog:",
+    "@types/bun": "catalog:",
+    "@types/node": "^26.6.4",
+    "typescript": "catalog:",
+    "wrangler": "catalog:"
+  }
+}

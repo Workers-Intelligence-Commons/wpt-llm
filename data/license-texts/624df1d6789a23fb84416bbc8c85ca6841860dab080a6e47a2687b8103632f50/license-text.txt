@@ -1,0 +1,41 @@
+[package]
+rust-version = "1.88"
+name = "tinyjuice-module"
+version = "0.10.5"
+edition = "2024"
+license = "GPL-3.0-only"
+description = "Trusted TinyBus module adapter for TinyJuice."
+repository = "https://github.com/tinyhumansai/tinyjuice"
+publish = false
+
+[features]
+# Link this adapter into a host binary without exporting the shared C names.
+static-link = []
+linked = ["static-link"]
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+
+[dependencies]
+tinyjuice = { path = "../..", default-features = false, features = ["jq"] }
+# The interface vocabulary. Shared with hosts, so this adapter cannot drift
+# from what a caller was compiled against.
+tinyjuice-bus = { path = "../tinyjuice-bus" }
+tinybus = { version = ">=0.1.3, <0.2", default-features = false, features = ["macros", "modules"] }
+tinybus-module = ">=0.1.3, <0.2"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "sync"] }
+serde_json = "1"
+# The CCR store's durable tier is blobs on the host's storage ports, reached
+# over the storage bus. The module has no storage backend or file of its own.
+tinyjuice-drivers = { path = "../tinyjuice-drivers" }
+tinystoragedrivers-core = { version = ">=0.8.0, <1", git = "https://github.com/tinyhumansai/tinystoragedrivers", tag = "v0.11.0" }
+tinystoragedrivers-busproxy = { version = ">=0.8.0, <1", git = "https://github.com/tinyhumansai/tinystoragedrivers", tag = "v0.11.0" }
+log = "0.4"
+
+[dev-dependencies]
+# Tests serve the storage objects on the in-memory broker the module connects to.
+tinystoragedrivers-client = { version = ">=0.8.0, <1", git = "https://github.com/tinyhumansai/tinystoragedrivers", tag = "v0.11.0" }
+tinybus = { version = ">=0.1.3, <0.2", default-features = false, features = ["test-support"] }
+tempfile = "3"
+async-trait = "0.1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "time"] }

@@ -1,0 +1,28 @@
+[package]
+name = "tinymemes-client"
+version = "0.4.0"
+edition = "2024"
+rust-version = "1.88"
+license = "GPL-3.0-only"
+description = "Typed TinyBus clients for the TinyMemes module, without linking its implementation."
+repository = "https://github.com/tinyhumansai/tinymemes"
+
+[features]
+default = []
+host-callback = ["tinybus/modules"]
+
+[dependencies]
+tinymemes-bus = { path = "../tinymemes-bus" }
+tinybus = { git = "https://github.com/tinyhumansai/tinybus", rev = "d5b949be8ea56eb5a17289a09aa28e8c09bd88b7", default-features = false }
+
+[dev-dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+tinybus = { git = "https://github.com/tinyhumansai/tinybus", rev = "d5b949be8ea56eb5a17289a09aa28e8c09bd88b7", default-features = false, features = ["modules"] }
+
+[lints.rust]
+missing_docs = "warn"
+missing_debug_implementations = "warn"
+rust_2018_idioms = { level = "warn", priority = -1 }
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }

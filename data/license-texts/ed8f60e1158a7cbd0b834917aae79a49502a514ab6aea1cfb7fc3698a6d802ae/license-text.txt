@@ -1,0 +1,33 @@
+{
+  "name": "cloud-core",
+  "version": "0.0.1",
+  "description": "Core shared packages",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "2.25.0",
+    "bunyan": "1.8.0",
+    "bunyan-prettystream": "github:emorikawa/node-bunyan-prettystream",
+    "googleapis": "9.0.0",
+    "isomorphic-core": "0.x.x",
+    "mysql": "2.12.0",
+    "promise-props": "1.0.0",
+    "promise.prototype.finally": "2.0.1",
+    "redis": "2.6.3",
+    "request": "2.79.0",
+    "rx-lite": "4.0.8",
+    "sequelize": "3.28.0",
+    "signalfx": "3.0.1",
+    "sqlite3": "3.1.8",
+    "underscore": "1.8.3",
+    "xoauth2": "1.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "6.x.x",
+    "jasmine": "2.x.x"
+  },
+  "author": "Nylas",
+  "license": "ISC",
+  "scripts": {
+    "test": "NODE_ENV=test babel-node spec/run.es6"
+  }
+}

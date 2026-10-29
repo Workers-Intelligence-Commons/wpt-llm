@@ -1,0 +1,97 @@
+{
+  "name": "@composio/cli",
+  "version": "0.0.0-development",
+  "description": "Composio CLI",
+  "main": "./dist/bin.mjs",
+  "private": true,
+  "bin": {
+    "composio": "./bin/composio.mjs"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ComposioHQ/composio.git",
+    "directory": "ts/packages/cli"
+  },
+  "files": [
+    "README.md",
+    "bin",
+    "dist"
+  ],
+  "scripts": {
+    "clean": "git clean -xdf node_modules",
+    "cli": "bun run src/bin.ts",
+    "build:binary": "bun run ./scripts/build-binary.ts",
+    "build:companions": "bun run ./scripts/build-companion-modules.ts",
+    "build:binary:cross": "bun run ./scripts/build-binary-cross.ts",
+    "build:binary:all": "bun run ./scripts/build-all-binaries.ts",
+    "build:binary:package": "bun run ./scripts/package-binaries.ts",
+    "build:binary:checksums": "bun run ./scripts/generate-checksums.ts",
+    "build:skills": "tsx ./scripts/build-skills.ts",
+    "validate:skills": "tsx ./scripts/validate-skills.ts",
+    "validate:boundaries": "tsx ./scripts/validate-lint-boundaries.ts",
+    "validate:command-tests": "tsx ./scripts/validate-command-tests.ts",
+    "lint:effect": "tsx ./scripts/check-effect-diagnostics.ts",
+    "install:binary": "bun run ./scripts/install-binary.ts ./dist/composio",
+    "table:metrics": "bun run ./scripts/optimize-metrics-table.ts",
+    "generate:toolkit-slugs": "bun run ./scripts/generate-toolkit-slugs.ts",
+    "mock": "bun run ./scripts/copy-mocks-from-cache.ts",
+    "prebuild": "pnpm run typecheck",
+    "build": "tsdown",
+    "bin": "./dist/composio",
+    "test": "pnpm run validate:skills && pnpm run validate:boundaries && pnpm run validate:command-tests && vitest run",
+    "prepublishOnly": "pnpm run build && pnpm run build:binary",
+    "typecheck:src": "tsc --noEmit -p ./tsconfig.src.json",
+    "typecheck:test": "tsc --noEmit -p ./tsconfig.test.json",
+    "typecheck": "pnpm run typecheck:src && pnpm run typecheck:test",
+    "record": "bun run ./scripts/record.ts"
+  },
+  "keywords": [
+    "composio",
+    "mcp",
+    "cli"
+  ],
+  "author": "Alberto Schiabel <alberto.schiabel@gmail.com> (https://github.com/jkomyno)",
+  "license": "ISC",
+  "devDependencies": {
+    "@effect/language-service": "catalog:",
+    "@effect/vitest": "catalog:",
+    "@types/bun": "catalog:",
+    "@types/semver": "^7.8.0",
+    "tempy": "^3.2.0",
+    "tsdown": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:ts6",
+    "vitest": "catalog:"
+  },
+  "dependencies": {
+    "@clack/core": "catalog:",
+    "@clack/prompts": "catalog:",
+    "@composio/cli-keyring": "workspace:*",
+    "@composio/client": "catalog:",
+    "@composio/core": "workspace:*",
+    "@composio/json-schema-to-effect-schema": "workspace:*",
+    "@composio/ts-builders": "workspace:*",
+    "@effect/platform-bun": "catalog:",
+    "effect": "catalog:",
+    "extract-zip": "^2.0.1",
+    "fast-string-width": "^3.0.2",
+    "indent-string": "^5.0.0",
+    "json5": "^2.2.3",
+    "open": "^11.0.4",
+    "openapi-typescript": "^7.13.0",
+    "picocolors": "catalog:",
+    "pusher-js": "^8.6.0",
+    "semver": "^7.8.5",
+    "source-map-js": "^1.2.2",
+    "superjson": "^2.2.6",
+    "zod": "catalog:"
+  },
+  "gitHead": "4fae6e54d5c150fba955cc5fa314281da5a1e064",
+  "module": "./dist/bin.mjs",
+  "types": "./dist/bin.d.mts",
+  "exports": {
+    ".": "./dist/bin.mjs",
+    "./package.json": "./package.json"
+  }
+}

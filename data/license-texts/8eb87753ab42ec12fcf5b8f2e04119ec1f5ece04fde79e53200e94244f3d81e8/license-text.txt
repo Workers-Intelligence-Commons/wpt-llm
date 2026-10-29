@@ -1,0 +1,54 @@
+{
+  "name": "@composio/llamaindex",
+  "version": "0.11.1",
+  "description": "Agentic Provider for llamaindex in Composio SDK",
+  "main": "src/index.ts",
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ComposioHQ/composio.git",
+    "directory": "ts/packages/providers/llamaindex"
+  },
+  "bugs": {
+    "url": "https://github.com/ComposioHQ/composio/issues"
+  },
+  "homepage": "https://github.com/ComposioHQ/composio/tree/next/ts/packages/providers/llamaindex#readme",
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/index.mjs",
+    "types": "dist/index.d.mts"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "README.md",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "composio",
+    "provider",
+    "llamaindex"
+  ],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "@composio/core": ">=0.10.0 <1.0.0 || >=1.0.0-beta.0 <1.0.0",
+    "llamaindex": "^0.12.0"
+  },
+  "devDependencies": {
+    "@composio/core": "workspace:*",
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
+  }
+}

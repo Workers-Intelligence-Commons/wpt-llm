@@ -1,0 +1,28 @@
+{
+  "name": "@formbricks/vite-plugins",
+  "license": "MIT",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "homepage": "https://formbricks.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/formbricks/formbricks"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "clean": "rimraf .turbo node_modules dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@formbricks/config-eslint": "workspace:*",
+    "@formbricks/config-typescript": "workspace:*",
+    "postcss": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}

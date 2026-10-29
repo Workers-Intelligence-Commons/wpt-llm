@@ -1,0 +1,161 @@
+{
+  "name": "@composio/core",
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.3"
+  },
+  "version": "0.24.0",
+  "description": "",
+  "main": "src/index.ts",
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/index.mjs",
+    "types": "dist/index.d.mts"
+  },
+  "imports": {
+    "#platform": {
+      "workerd": "./dist/platform/workerd.mjs",
+      "edge-light": "./dist/platform/workerd.mjs",
+      "node": "./dist/platform/node.mjs",
+      "default": "./dist/platform/node.mjs"
+    },
+    "#files": {
+      "workerd": "./dist/models/Files.workerd.mjs",
+      "edge-light": "./dist/models/Files.workerd.mjs",
+      "node": "./dist/models/Files.node.mjs",
+      "default": "./dist/models/Files.node.mjs"
+    },
+    "#file_tool_modifier": {
+      "workerd": "./dist/utils/modifiers/FileToolModifier.workerd.mjs",
+      "edge-light": "./dist/utils/modifiers/FileToolModifier.workerd.mjs",
+      "node": "./dist/utils/modifiers/FileToolModifier.node.mjs",
+      "default": "./dist/utils/modifiers/FileToolModifier.node.mjs"
+    },
+    "#config_defaults": {
+      "workerd": "./dist/utils/config-defaults/ConfigDefaults.workerd.mjs",
+      "edge-light": "./dist/utils/config-defaults/ConfigDefaults.workerd.mjs",
+      "node": "./dist/utils/config-defaults/ConfigDefaults.node.mjs",
+      "default": "./dist/utils/config-defaults/ConfigDefaults.node.mjs"
+    },
+    "#ssrf_guard": {
+      "workerd": "./dist/utils/ssrfGuard.workerd.mjs",
+      "edge-light": "./dist/utils/ssrfGuard.workerd.mjs",
+      "node": "./dist/utils/ssrfGuard.node.mjs",
+      "default": "./dist/utils/ssrfGuard.node.mjs"
+    },
+    "#client_identity": "./package.json"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./experimental": {
+      "types": "./dist/experimental/index.d.mts",
+      "default": "./dist/experimental/index.mjs"
+    },
+    "./platform": {
+      "workerd": {
+        "types": "./dist/platform/workerd.d.mts",
+        "default": "./dist/platform/workerd.mjs"
+      },
+      "edge-light": {
+        "types": "./dist/platform/workerd.d.mts",
+        "default": "./dist/platform/workerd.mjs"
+      },
+      "node": {
+        "types": "./dist/platform/node.d.mts",
+        "default": "./dist/platform/node.mjs"
+      },
+      "default": {
+        "types": "./dist/platform/node.d.mts",
+        "default": "./dist/platform/node.mjs"
+      }
+    },
+    "./utils/json-schema": {
+      "types": "./dist/utils/json-schema.d.mts",
+      "default": "./dist/utils/json-schema.mjs"
+    },
+    "./utils/ssrf-guard": {
+      "workerd": {
+        "types": "./dist/utils/ssrfGuard.workerd.d.mts",
+        "default": "./dist/utils/ssrfGuard.workerd.mjs"
+      },
+      "edge-light": {
+        "types": "./dist/utils/ssrfGuard.workerd.d.mts",
+        "default": "./dist/utils/ssrfGuard.workerd.mjs"
+      },
+      "node": {
+        "types": "./dist/utils/ssrfGuard.node.d.mts",
+        "default": "./dist/utils/ssrfGuard.node.mjs"
+      },
+      "default": {
+        "types": "./dist/utils/ssrfGuard.node.d.mts",
+        "default": "./dist/utils/ssrfGuard.node.mjs"
+      }
+    },
+    "./generated": {
+      "types": "./generated/index.d.ts",
+      "default": "./generated/index.js"
+    }
+  },
+  "files": [
+    "README.md",
+    "docs",
+    "dist",
+    "generated",
+    "src"
+  ],
+  "scripts": {
+    "clean": "git clean -xdf node_modules",
+    "build": "pnpm exec tsdown",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit --skipLibCheck && tsc --noEmit --skipLibCheck -p tsconfig.type-tests.json",
+    "generate:docs": "tsx scripts/generate-docs.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "contributors": [
+    "Alberto Schiabel <alberto.schiabel@gmail.com> (https://github.com/jkomyno)"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "@hono/node-server": "^2.1.4",
+    "@type-challenges/utils": "^0.1.1",
+    "@types/semver": "^7.8.0",
+    "ajv": "^8.20.0",
+    "fast-check": "^4.10.2",
+    "hono": "catalog:",
+    "tsdown": "catalog:",
+    "tsx": "catalog:",
+    "typedoc": "^0.28.20",
+    "typescript": "catalog:ts6",
+    "vitest": "catalog:",
+    "zod": "catalog:"
+  },
+  "peerDependencies": {
+    "zod": ">=3.25.76 <5"
+  },
+  "dependencies": {
+    "@composio/client": "catalog:",
+    "@composio/json-schema-to-zod": "workspace:*",
+    "@types/json-schema": "^7.0.15",
+    "is-fs-case-sensitive": "^2.0.0",
+    "openai": "catalog:",
+    "picocolors": "catalog:",
+    "pusher-js": "^8.6.0",
+    "semver": "^7.8.5",
+    "undici": "^7.30.0",
+    "zod-to-json-schema": "catalog:"
+  },
+  "gitHead": "4fae6e54d5c150fba955cc5fa314281da5a1e064",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ComposioHQ/composio.git",
+    "directory": "ts/packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/ComposioHQ/composio/issues"
+  },
+  "homepage": "https://github.com/ComposioHQ/composio/tree/next/ts/packages/core#readme"
+}

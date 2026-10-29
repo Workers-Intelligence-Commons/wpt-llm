@@ -1,0 +1,122 @@
+{
+  "name": "@formbricks/survey-ui",
+  "license": "MIT",
+  "version": "1.0.4",
+  "description": "React UI components for building surveys and forms - includes NPS, rating scales, multi-select, file upload, and more. Built with Radix UI and Tailwind CSS.",
+  "homepage": "https://formbricks.com",
+  "type": "module",
+  "keywords": [
+    "react",
+    "survey",
+    "form",
+    "ui",
+    "components",
+    "nps",
+    "rating",
+    "questionnaire",
+    "feedback",
+    "formbricks",
+    "tailwindcss",
+    "typescript",
+    "accessible"
+  ],
+  "author": {
+    "name": "Formbricks",
+    "url": "https://formbricks.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/formbricks/formbricks",
+    "directory": "packages/survey-ui"
+  },
+  "bugs": {
+    "url": "https://github.com/formbricks/formbricks/issues"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "source": "./src/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles": "./dist/survey-ui.css",
+    "./parts": {
+      "types": "./dist/lib/parts.d.ts",
+      "import": "./dist/lib/parts.js"
+    },
+    "./youtube-id": {
+      "types": "./dist/lib/youtube-id.d.ts",
+      "import": "./dist/lib/youtube-id.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite build --watch --mode dev",
+    "build": "vite build && node scripts/assert-scoped-css.mjs",
+    "build:dev": "vite build --mode dev && node scripts/assert-scoped-css.mjs",
+    "go": "vite build --watch --mode dev",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "preview": "vite preview",
+    "prepack": "node scripts/assert-pnpm-publish.mjs",
+    "prepublishOnly": "node scripts/assert-pnpm-publish.mjs",
+    "clean": "rimraf .turbo node_modules dist coverage",
+    "ui:add": "npx shadcn@latest add",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "@formkit/auto-animate": "catalog:",
+    "@radix-ui/react-checkbox": "catalog:",
+    "@radix-ui/react-dropdown-menu": "catalog:",
+    "@radix-ui/react-popover": "catalog:",
+    "@radix-ui/react-progress": "1.1.8",
+    "@radix-ui/react-radio-group": "catalog:",
+    "@radix-ui/react-slot": "catalog:",
+    "class-variance-authority": "catalog:",
+    "clsx": "catalog:",
+    "date-fns": "catalog:",
+    "isomorphic-dompurify": "catalog:",
+    "lucide-react": "catalog:",
+    "react-day-picker": "catalog:",
+    "tailwind-merge": "catalog:"
+  },
+  "devDependencies": {
+    "@formbricks/config-eslint": "workspace:*",
+    "@formbricks/config-typescript": "workspace:*",
+    "@formbricks/vite-plugins": "workspace:*",
+    "@storybook/react": "catalog:",
+    "@storybook/react-vite": "catalog:",
+    "@tailwindcss/postcss": "catalog:",
+    "@tailwindcss/vite": "catalog:",
+    "@testing-library/react": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "preact": "catalog:",
+    "jsdom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "rimraf": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-dts": "catalog:",
+    "vite-tsconfig-paths": "catalog:",
+    "vitest": "catalog:"
+  }
+}

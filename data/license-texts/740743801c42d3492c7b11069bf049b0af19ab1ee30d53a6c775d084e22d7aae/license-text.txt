@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "drivers-evergreen-tools"
+version = "0.1.0"
+description = 'Scripts for drivers-evergreen-tools'
+requires-python = ">=3.9"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Steven Silvester", email = "steve.silvester@mongodb.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: Implementation :: CPython",
+]
+dependencies = [
+  # mongodl.py loads certifi's CA bundle explicitly rather than relying on
+  # the interpreter's own default cert paths, which don't always match the
+  # host (e.g. uv's managed Python builds on less common architectures).
+  "certifi",
+  # mongodl.py's "latest"/"latest-build" download path fetches from a
+  # private S3 bucket, requiring an assumed-role chain through boto3.
+  "boto3",
+]
+
+[project.scripts]
+mongodl = "mongodl:main"
+mongosh-dl = "mongosh_dl:main"
+socks5srv = "socks5srv:main"
+
+[tool.hatch.build]
+include = ["mongodl.py", "mongosh_dl.py", "server_artifacts.py", "socks5srv.py"]

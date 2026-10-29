@@ -1,0 +1,34 @@
+{
+  "name": "vercel-example",
+  "private": true,
+  "version": "0.1.17",
+  "description": "",
+  "main": "src/ai.ts",
+  "scripts": {
+    "clean": "git clean -xdf node_modules",
+    "start": "bun src/ai.ts",
+    "start:stream": "bun src/stream.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typecheck": "tsc --noEmit -p ./tsconfig.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ai-sdk/mcp": "catalog:",
+    "@ai-sdk/openai": "catalog:",
+    "@composio/core": "workspace:*",
+    "@composio/vercel": "workspace:*",
+    "@modelcontextprotocol/sdk": "catalog:",
+    "ai": "catalog:",
+    "dotenv": "catalog:",
+    "zod": "catalog:",
+    "zod-to-json-schema": "catalog:"
+  },
+  "devDependencies": {
+    "@types/bun": "catalog:",
+    "@types/node": "^26.6.4",
+    "typescript": "catalog:"
+  },
+  "type": "module"
+}

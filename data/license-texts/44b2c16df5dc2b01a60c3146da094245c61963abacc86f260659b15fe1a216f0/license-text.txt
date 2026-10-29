@@ -1,0 +1,49 @@
+[package]
+name = "tinymemes-module"
+version = "0.4.0"
+edition = "2024"
+rust-version = "1.88"
+license = "GPL-3.0-only"
+description = "Stateless TinyMemes content operations over the TinyBus module ABI."
+repository = "https://github.com/tinyhumansai/tinymemes"
+
+[features]
+default = []
+# Link the module into a host binary without exporting the shared C names; the
+# host admits it in-process with `linked_module()`.
+static-link = []
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+tinystoragedrivers-bus = { git = "https://github.com/tinyhumansai/tinystoragedrivers", tag = "v0.11.0" }
+tinymemes = { path = "../.." }
+tinymemes-bus = { path = "../tinymemes-bus" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+async-trait = "0.1"
+tracing = "0.1"
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls"] }
+tokio = { version = "1", features = ["sync", "time", "rt"] }
+tinybus = { git = "https://github.com/tinyhumansai/tinybus", rev = "d5b949be8ea56eb5a17289a09aa28e8c09bd88b7", default-features = false }
+tinybus-module = { git = "https://github.com/tinyhumansai/tinybus", rev = "d5b949be8ea56eb5a17289a09aa28e8c09bd88b7" }
+
+[dev-dependencies]
+tinymemes-client = { path = "../tinymemes-client" }
+sha2 = "0.10"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+tinybus = { git = "https://github.com/tinyhumansai/tinybus", rev = "d5b949be8ea56eb5a17289a09aa28e8c09bd88b7", default-features = false, features = ["modules"] }
+
+[lints.rust]
+missing_docs = "warn"
+missing_debug_implementations = "warn"
+rust_2018_idioms = { level = "warn", priority = -1 }
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }
+
+[[test]]
+name = "static_link"
+path = "tests/static_link.rs"
+required-features = ["static-link"]

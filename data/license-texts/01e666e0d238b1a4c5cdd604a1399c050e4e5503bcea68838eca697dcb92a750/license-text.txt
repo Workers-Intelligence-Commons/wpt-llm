@@ -1,0 +1,245 @@
+{
+  "name": "@actual-app/core",
+  "version": "26.10.0",
+  "description": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/actualbudget/actual.git",
+    "directory": "packages/loot-core"
+  },
+  "files": [
+    "src",
+    "@types",
+    "migrations",
+    "typings",
+    "default-db.sqlite",
+    "default-filesystem.mjs",
+    "default-filesystem.d.ts",
+    "!src/**/*.test.ts",
+    "!src/**/__tests__/**",
+    "!src/**/__snapshots__/**",
+    "!src/**/__mocks__/**",
+    "!@types/**/*.test.d.ts",
+    "!@types/**/*.test.d.ts.map",
+    "!@types/**/__tests__/**",
+    "!@types/**/__mocks__/**"
+  ],
+  "imports": {
+    "#platform/server/asyncStorage": {
+      "electron": "./src/platform/server/asyncStorage/index.electron.ts",
+      "api": "./src/platform/server/asyncStorage/index.api.ts",
+      "default": "./src/platform/server/asyncStorage/index.ts"
+    },
+    "#platform/server/connection": {
+      "electron": "./src/platform/server/connection/index.electron.ts",
+      "api": "./src/platform/server/connection/index.api.ts",
+      "default": "./src/platform/server/connection/index.ts"
+    },
+    "#platform/server/fetch": {
+      "electron": "./src/platform/server/fetch/index.electron.ts",
+      "api": "./src/platform/server/fetch/index.api.ts",
+      "default": "./src/platform/server/fetch/index.ts"
+    },
+    "#platform/server/fs": {
+      "electron": "./src/platform/server/fs/index.electron.ts",
+      "api": "./src/platform/server/fs/index.api.ts",
+      "default": "./src/platform/server/fs/index.ts"
+    },
+    "#platform/server/fs/path-join": {
+      "electron": "./src/platform/server/fs/path-join.electron.ts",
+      "api": "./src/platform/server/fs/path-join.api.ts",
+      "default": "./src/platform/server/fs/path-join.ts"
+    },
+    "#platform/server/memory": {
+      "electron": "./src/platform/server/memory/index.electron.ts",
+      "api": "./src/platform/server/memory/index.api.ts",
+      "default": "./src/platform/server/memory/index.ts"
+    },
+    "#platform/server/sqlite": {
+      "electron": "./src/platform/server/sqlite/index.electron.ts",
+      "api": "./src/platform/server/sqlite/index.api.ts",
+      "default": "./src/platform/server/sqlite/index.ts"
+    },
+    "#platform/client/connection": {
+      "electron-renderer": "./src/platform/client/connection/index.electron.ts",
+      "default": "./src/platform/client/connection/index.ts"
+    },
+    "#server/encryption/encryption-internals": {
+      "electron": "./src/server/encryption/encryption-internals.electron.ts",
+      "api": "./src/server/encryption/encryption-internals.api.ts",
+      "default": "./src/server/encryption/encryption-internals.ts"
+    },
+    "#shared/platform": {
+      "electron": "./src/shared/platform.electron.ts",
+      "api": "./src/shared/platform.api.ts",
+      "default": "./src/shared/platform.ts"
+    },
+    "#mocks": "./src/mocks/index.ts",
+    "#platform/client/undo": "./src/platform/client/undo/index.ts",
+    "#platform/exceptions": "./src/platform/exceptions/index.ts",
+    "#platform/server/indexeddb": "./src/platform/server/indexeddb/index.ts",
+    "#platform/server/log": "./src/platform/server/log/index.ts",
+    "#server/aql": "./src/server/aql/index.ts",
+    "#server/db": "./src/server/db/index.ts",
+    "#server/encryption": "./src/server/encryption/index.ts",
+    "#server/importers": "./src/server/importers/index.ts",
+    "#server/rules": "./src/server/rules/index.ts",
+    "#server/sync": "./src/server/sync/index.ts",
+    "#server/transactions": "./src/server/transactions/index.ts",
+    "#types/models": "./src/types/models/index.ts",
+    "#platform/client/*": "./src/platform/client/*.ts",
+    "#platform/server/*": "./src/platform/server/*.ts",
+    "#platform/*": "./src/platform/*.ts",
+    "#server/*": "./src/server/*.ts",
+    "#shared/environment": {
+      "electron": "./src/shared/environment.ts",
+      "api": "./src/shared/environment.ts",
+      "default": "./src/shared/environment.browser.ts"
+    },
+    "#shared/*": "./src/shared/*.ts",
+    "#types/*": "./src/types/*.ts",
+    "#mocks/*": "./src/mocks/*.ts",
+    "#migrations/*": "./migrations/*.js",
+    "#*": "./src/*.ts"
+  },
+  "exports": {
+    "./client/accounts/*": "./src/client/accounts/*.ts",
+    "./client/app/*": "./src/client/app/*.ts",
+    "./client/budgets/*": "./src/client/budgets/*.ts",
+    "./client/data-hooks/schedules": "./src/client/data-hooks/schedules.tsx",
+    "./client/data-hooks/*": "./src/client/data-hooks/*.ts",
+    "./client/modals/*": "./src/client/modals/*.ts",
+    "./client/notifications/*": "./src/client/notifications/*.ts",
+    "./client/prefs/*": "./src/client/prefs/*.ts",
+    "./client/queries/*": "./src/client/queries/*.ts",
+    "./client/redux": "./src/client/redux/index.ts",
+    "./client/store": "./src/client/store/index.ts",
+    "./client/store/mock": "./src/client/store/mock.ts",
+    "./client/users/*": "./src/client/users/*.ts",
+    "./client/queries": "./src/client/queries.ts",
+    "./client/query-helpers": "./src/client/query-helpers.ts",
+    "./client/query-hooks": "./src/client/query-hooks.ts",
+    "./client/reports": "./src/client/reports.ts",
+    "./client/shared-listeners": "./src/client/shared-listeners.ts",
+    "./client/SpreadsheetProvider": "./src/client/SpreadsheetProvider.tsx",
+    "./client/transfer": "./src/client/transfer.ts",
+    "./client/undo": "./src/client/undo.ts",
+    "./mocks": "./src/mocks/index.ts",
+    "./platform/client/backend-worker": "./src/platform/client/backend-worker.ts",
+    "./platform/client/browser-preload": "./src/platform/client/browser-preload/index.ts",
+    "./platform/client/browser-server/coordinator": "./src/platform/client/browser-server/coordinator.ts",
+    "./platform/client/connection": {
+      "electron-renderer": "./src/platform/client/connection/index.electron.ts",
+      "api": "./src/platform/client/connection/index.api.ts",
+      "default": "./src/platform/client/connection/index.ts"
+    },
+    "./platform/client/undo": "./src/platform/client/undo/index.ts",
+    "./platform/exceptions": "./src/platform/exceptions/index.ts",
+    "./platform/server/asyncStorage": {
+      "electron": "./src/platform/server/asyncStorage/index.electron.ts",
+      "api": "./src/platform/server/asyncStorage/index.api.ts",
+      "default": "./src/platform/server/asyncStorage/index.ts"
+    },
+    "./platform/server/connection": {
+      "electron": "./src/platform/server/connection/index.electron.ts",
+      "api": "./src/platform/server/connection/index.api.ts",
+      "default": "./src/platform/server/connection/index.ts"
+    },
+    "./platform/server/fetch": {
+      "electron": "./src/platform/server/fetch/index.electron.ts",
+      "api": "./src/platform/server/fetch/index.api.ts",
+      "default": "./src/platform/server/fetch/index.ts"
+    },
+    "./platform/server/fs": {
+      "electron": "./src/platform/server/fs/index.electron.ts",
+      "api": "./src/platform/server/fs/index.api.ts",
+      "default": "./src/platform/server/fs/index.ts"
+    },
+    "./platform/server/log": "./src/platform/server/log/index.ts",
+    "./platform/server/sqlite": {
+      "electron": "./src/platform/server/sqlite/index.electron.ts",
+      "api": "./src/platform/server/sqlite/index.api.ts",
+      "default": "./src/platform/server/sqlite/index.ts"
+    },
+    "./server/budget/types/*": "./src/server/budget/types/*.d.ts",
+    "./server/*": "./src/server/*.ts",
+    "./shared/platform": {
+      "electron": "./src/shared/platform.electron.ts",
+      "api": "./src/shared/platform.api.ts",
+      "default": "./src/shared/platform.ts"
+    },
+    "./shared/environment": {
+      "electron": "./src/shared/environment.ts",
+      "api": "./src/shared/environment.ts",
+      "default": "./src/shared/environment.browser.ts"
+    },
+    "./shared/*": "./src/shared/*.ts",
+    "./types/models": "./src/types/models/index.ts",
+    "./types/*": "./src/types/*.ts",
+    "./typings/*": "./typings/*.ts",
+    "./lib-dist/electron/bundle.desktop.js": "./lib-dist/electron/bundle.desktop.js",
+    "./default-filesystem": {
+      "types": "./default-filesystem.d.ts",
+      "default": "./default-filesystem.mjs"
+    }
+  },
+  "scripts": {
+    "build:node": "cross-env NODE_ENV=production vite build --config ./vite.desktop.config.mts",
+    "watch:node": "cross-env NODE_ENV=development vite build --config ./vite.desktop.config.mts --watch",
+    "test": "npm-run-all -cp 'test:*'",
+    "test:node": "ENV=node vitest --run",
+    "test:web": "ENV=web vitest --run -c vitest.web.config.ts",
+    "typecheck": "tsgo -b && tsc-strict",
+    "build": "tsgo -b",
+    "prepack": "yarn build && node scripts/add-types-conditions.mts",
+    "postpack": "node scripts/restore-package-json.mts"
+  },
+  "dependencies": {
+    "@jlongster/sql.js": "^1.6.7",
+    "@rschedule/core": "^1.5.0",
+    "@rschedule/standard-date-adapter": "^1.5.0",
+    "absurd-sql": "0.0.54",
+    "better-sqlite3": "^13.0.3",
+    "csv-parse": "^7.0.2",
+    "csv-stringify": "^6.8.1",
+    "date-fns": "^4.4.0",
+    "es-toolkit": "^1.49.0",
+    "fflate": "^0.8.3",
+    "handlebars": "^4.7.10",
+    "hyperformula": "^3.3.0",
+    "lru-cache": "^11.5.2",
+    "mitt": "^3.0.1",
+    "uuid": "^14.0.2",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "@actual-app/crdt": "workspace:*",
+    "@actual-app/vite-plugin-peggy": "workspace:*",
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/jlongster__sql.js": "npm:@types/sql.js@latest",
+    "@types/node": "^22.20.1",
+    "@typescript/native-preview": "beta",
+    "assert": "^2.1.0",
+    "browserify-zlib": "^0.2.0",
+    "buffer": "^6.0.3",
+    "cross-env": "^10.1.0",
+    "crypto-browserify": "^3.12.1",
+    "fake-indexeddb": "^6.2.5",
+    "fast-check": "^4.9.0",
+    "jest-diff": "^30.4.1",
+    "jsverify": "^0.8.4",
+    "mockdate": "^3.0.5",
+    "npm-run-all": "^4.1.5",
+    "path-browserify": "^1.0.1",
+    "rollup-plugin-visualizer": "^7.0.1",
+    "stream-browserify": "^3.0.0",
+    "timers-browserify": "^2.0.12",
+    "typescript-strict-plugin": "^2.4.4",
+    "util": "^0.12.5",
+    "vite": "^8.1.5",
+    "vite-plugin-node-polyfills": "patch:vite-plugin-node-polyfills@npm%3A0.28.0#~/.yarn/patches/vite-plugin-node-polyfills-npm-0.28.0-bac39616ee.patch",
+    "vitest": "^5.0.0",
+    "yargs": "^18.0.0"
+  }
+}

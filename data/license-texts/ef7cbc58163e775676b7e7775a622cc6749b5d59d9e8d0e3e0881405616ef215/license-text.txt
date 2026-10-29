@@ -1,0 +1,18 @@
+{
+  "author": "Al Johri",
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "sass": "^1.105.1"
+  },
+  "description": "Test application for heroku multi buildpack.",
+  "engines": {
+    "node": "24.x.x",
+    "npm": "11.x.x"
+  },
+  "license": "ISC",
+  "name": "test-buildpack-multi",
+  "scripts": {
+    "postinstall": "bundle exec ruby generate_content.rb && mkdir -p static/.tmp/styles && npx sass static/styles/main.scss static/.tmp/styles/main.css --load-path=node_modules"
+  },
+  "version": "0.0.0"
+}

@@ -1,0 +1,35 @@
+{
+	"name": "extension-manager",
+	"version": "1.0.0",
+	"description": "Extension manager process responsible for loading and unloading extension bundles",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"typecheck": "tsc --noEmit",
+		"build-only": "node scripts/build.mjs",
+		"build": "run-p typecheck build-only",
+		"dev": "nodemon -e ts,tsx --watch src --watch ../api/src --exec \"node scripts/dev.mjs\"",
+		"format": "biome format --write"
+	},
+	"keywords": [
+		"vicinae",
+		"vicinae-extensions"
+	],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@vicinae/api": "file:../api",
+		"@vicinae/raycast-api-compat": "file:../raycast-api-compat",
+		"react-reconciler": "0.32.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.3.2",
+		"@types/node": "22.17.2",
+		"@types/react": "19.1.17",
+		"@types/react-reconciler": "0.32.1",
+		"esbuild": "0.25.9",
+		"nodemon": "3.1.10",
+		"npm-run-all": "4.1.5",
+		"typescript": "5.9.2"
+	}
+}

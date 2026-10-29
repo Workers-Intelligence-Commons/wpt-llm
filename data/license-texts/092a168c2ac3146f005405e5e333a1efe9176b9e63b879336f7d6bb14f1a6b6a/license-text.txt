@@ -1,0 +1,21 @@
+[package]
+rust-version = "1.88"
+name = "tinyjuice-drivers"
+version = "0.9.0"
+edition = "2024"
+license = "GPL-3.0-only"
+description = "TinyJuice on the tinystoragedrivers ports: the CCR store as expiring blobs."
+repository = "https://github.com/tinyhumansai/tinyjuice"
+# Not published: it depends on `tinystoragedrivers-core` by git tag, which a
+# crates.io package cannot do. The published crates stay free of any storage
+# dependency.
+publish = false
+
+[dependencies]
+tinyjuice = { path = "../..", default-features = false }
+tinystoragedrivers-core = { version = ">=0.8.0, <1", git = "https://github.com/tinyhumansai/tinystoragedrivers", tag = "v0.11.0", features = ["blocking"] }
+log = "0.4"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "time"] }
+async-trait = "0.1"

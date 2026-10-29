@@ -1,0 +1,18 @@
+{
+  "decision": {
+    "decision": "under-review",
+    "by": "machine:wpt-dataset",
+    "date": "2026-10-29",
+    "reason": "first met in a source: a person reads it"
+  },
+  "kind": "notice",
+  "found": {
+    "source": "github-vercel-vercel-8d82b5ab",
+    "path": "packages/fs-detectors/test/fixtures/32-monorepo-highly-nested/src/frontend/app-one/package.json"
+  },
+  "files": [
+    "d62b2d58d30de49a63013c75803628c9d78c34306fd03e7908a3f16129086474"
+  ],
+  "explanation": "A package.json whose license field declares \"ISC\": it names the license without its text, so the entry's text holds that license's official text.",
+  "license": "ISC"
+}

@@ -1,0 +1,40 @@
+{
+  "name": "@composio/ts-builders",
+  "version": "0.2.2",
+  "description": "Fork of @prisma/ts-builders",
+  "private": true,
+  "main": "dist/index.mjs",
+  "type": "module",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ComposioHQ/composio.git",
+    "directory": "ts/packages/ts-builders"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/babel__helper-validator-identifier": "^7.15.2",
+    "helper-validator-identifier": "link:@types/@babel/helper-validator-identifier",
+    "tsdown": "catalog:",
+    "vitest": "catalog:"
+  },
+  "scripts": {
+    "clean": "git clean -xdf node_modules",
+    "build": "tsdown",
+    "test": "vitest run"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "dependencies": {
+    "@babel/helper-validator-identifier": "^8.0.6"
+  }
+}

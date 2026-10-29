@@ -1,0 +1,18 @@
+{
+  "decision": {
+    "decision": "under-review",
+    "by": "machine:wpt-dataset",
+    "date": "2026-10-29",
+    "reason": "first met in a source: a person reads it"
+  },
+  "kind": "notice",
+  "found": {
+    "source": "github-vercel-vercel-8d82b5ab",
+    "path": "packages/fs-detectors/test/fixtures/25-multiple-lock-files-yarn/a/package.json"
+  },
+  "files": [
+    "bf1b993372e2823d70b80febc8866c1f774ffe8c8abbe0922460ce189d63cd21"
+  ],
+  "explanation": "A package.json whose license field declares \"ISC\": it names the license without its text, so the entry's text holds that license's official text.",
+  "license": "ISC"
+}

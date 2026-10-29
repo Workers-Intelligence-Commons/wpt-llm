@@ -1,0 +1,60 @@
+{
+    "name": "@heyputer/puter.js",
+    "version": "2.6.4",
+    "description": "Puter.js gives you auth, cloud storage, database, AI, and more through a single JavaScript library. It is the go-to backend for AI-generated apps.",
+    "homepage": "https://docs.puter.com",
+    "main": "src/index.js",
+    "types": "./index.d.ts",
+    "typings": "./index.d.ts",
+    "type": "module",
+    "files": [
+        "dist/puter.cjs",
+        "src/",
+        "types/",
+        "index.d.ts"
+    ],
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/HeyPuter/puter.git",
+        "directory": "src/puter-js"
+    },
+    "keywords": [
+        "puter",
+        "puter.js",
+        "puterjs"
+    ],
+    "scripts": {
+        "start-server": "npx http-server --cors -c-1",
+        "start-webpack": "webpack --stats=errors-only && webpack --output-filename puter.dev.js --watch --devtool source-map --stats=errors-only",
+        "start": "concurrently \"npm run start-server\" \"npm run start-webpack\"",
+        "test": "npx http-server --cors -c-1 -o /test",
+        "test:e2e": "playwright test",
+        "test:e2e:headed": "playwright test --headed",
+        "test:e2e:ui": "playwright test --ui",
+        "test:e2e:record": "PUTER_TEST_RECORD=1 playwright test",
+        "test:e2e:report": "playwright show-report",
+        "playwright:install": "playwright install chromium",
+        "build": "npm run build:types && webpack && { echo \"// Copyright 2024-present Puter Technologies Inc. All rights reserved.\"; echo \"// Generated on $(date '+%Y-%m-%d %H:%M')\n\"; cat ./dist/puter.js; } > temp && mv temp ./dist/puter.js",
+        "build:types": "tsc -p tsconfig.types.json",
+        "build:coverage": "webpack --env coverage",
+        "prepublishOnly": "npm run build && mv dist/puter.js dist/puter.cjs && npm version patch"
+    },
+    "author": "Puter Technologies Inc.",
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "@playwright/test": "^1.49.0",
+        "concurrently": "^8.2.2",
+        "http-server": "^14.1.1",
+        "webpack-cli": "^5.1.4"
+    },
+    "dependencies": {
+        "@heyputer/kv.js": "^0.2.1",
+        "open": "^10.2.0",
+        "path-browserify": "1.0.1",
+        "postal-mime": "^3.0.1",
+        "socket.io-client": "^4.8.4"
+    }
+}

@@ -1,0 +1,46 @@
+[package]
+name = "tinywallet-bus"
+version = "0.23.3"
+edition = "2024"
+rust-version = "1.85"
+license = "GPL-3.0-only"
+description = "The TinyBus wire contract for TinyWallet: member names, payload types, and contract version."
+repository = "https://github.com/tinyhumansai/tinywallet"
+readme = "README.md"
+# Same reasoning as the root crate: hosts take this repository as a git
+# submodule, so a registry upload would be a third distribution channel nobody
+# reads.
+publish = false
+
+# Contract-only vocabulary. No implementation dependency, even optionally.
+[dependencies]
+# Serialized shared payloads and identifiers.
+serde = { version = "1", optional = true }
+# The wire host callback DTOs carry opaque JSON payloads.
+serde_json = { version = "1", optional = true }
+# Error vocabulary derives; no crypto execution crosses this dependency.
+thiserror = "2"
+
+[dev-dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[features]
+default = ["wire"]
+serde = ["dep:serde", "serde/derive"]
+wire = ["serde", "dep:serde_json"]
+# Legacy feature names accepted for a transition release; none links behavior.
+# Consumers must call the compiled module instead of importing algorithms.
+btc = []
+evm = []
+solana = []
+tron = []
+keccak = []
+net = []
+asset = []
+eip712 = []
+abi = []
+tx-codec = ["wire"]
+
+[lints]
+workspace = true

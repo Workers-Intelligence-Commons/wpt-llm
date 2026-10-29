@@ -1,0 +1,135 @@
+[package]
+name = "tinywallet-module"
+version = "0.23.3"
+edition = "2024"
+rust-version = "1.85"
+license = "GPL-3.0-only"
+description = "Trusted TinyBus module adapter for TinyWallet."
+repository = "https://github.com/tinyhumansai/tinywallet"
+publish = false
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+
+[dependencies]
+# The wire contract both sides speak. Taken directly rather than through
+# `tinywallet`'s re-export so the module's identity and the host's come from one
+# definition: a host that spells `BUS_NAME` itself and a module that spells it
+# itself is exactly the drift this crate exists to remove.
+tinywallet-bus = { path = "../tinywallet-bus" }
+# Executes chain construction and signing inside the compiled module.
+tinywallet-crypto = { path = "../tinywallet-crypto", default-features = false, features = ["net"] }
+# Owns provider routes, quotes, and approved Web3 execution.
+tinywallet-web3 = { path = "../tinywallet-web3" }
+# Owns payment authorization, budget reservations, and ledger accounting.
+tinywallet-x402 = { path = "../tinywallet-x402", features = ["pay"] }
+# Only used for the standard header map passed into TinyWallet's parser; no
+# module operation opens an HTTP client or makes a direct network request.
+reqwest = { version = "0.13", default-features = false }
+# Encodes signed EVM transactions and signing payload bytes.
+hex = "0.4"
+# Supplies payment timestamps and expiry values for module-owned services.
+chrono = { version = "0.4", default-features = false, features = ["clock", "serde", "std"] }
+# The pure wallet library stays independently publishable and bus-agnostic.
+# Every chain feature is on here: carrying them is the entire point of the
+# module, since it is what lets the host drop them.
+tinywallet = { path = "../..", default-features = false, features = [
+    "btc",
+    "evm",
+    "solana",
+    "tron",
+    "keccak",
+    "key",
+    "tx",
+    "wire",
+    "eip712",
+    "abi",
+] }
+# TinyBus provides the typed service interface and the dynamic module host ABI.
+tinybus = { version = ">=0.1.3, <0.2", git = "https://github.com/tinyhumansai/tinybus", rev = "eb5cf727", default-features = false, features = [
+    "macros",
+    "modules",
+] }
+# The module-side SDK owns its runtime and exports the stable C entrypoints.
+tinybus-module = { version = ">=0.1.3, <0.2", git = "https://github.com/tinyhumansai/tinybus", rev = "eb5cf727" }
+# The module runtime drives asynchronous host callbacks and serializes service
+# lifecycle changes against in-flight operations.
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "sync", "time"] }
+# Method arguments and returns are the `tinywallet::wire` contract, decoded from
+# and encoded to JSON frames.
+serde_json = "1"
+# Derives serialization for module-side callback and service types.
+serde = "1"
+# Implements asynchronous provider ports used by Web3 and x402.
+async-trait = "0.1"
+# Base58 for a Solana transaction id, which is its 64-byte signature. The
+# library's own encoder takes a 32-byte address, so it does not fit here.
+bs58 = "0.5"
+# Signing. These were dev-dependencies for as long as the host held the key and
+# these tests only had to imitate it; they are real dependencies now that the
+# module signs. `secp-recovery` is required, not incidental: three of the four
+# chains need the recovery id, and the non-recoverable API cannot produce it.
+bitcoin = { version = "0.32", default-features = false, features = ["std", "secp-recovery"] }
+ed25519-dalek = { version = "2", default-features = false, features = ["std"] }
+# Wiping the recovery phrase once the call that needed it has returned. This
+# does not make the module safe against a reader of its address space — nothing
+# can, since a loaded module shares the host's — and it does not reach the JSON
+# frame the bus decoded from. It bounds how long this module's own copy stays
+# legible, which keeps it out of core dumps and swap. See `wipe`.
+zeroize = "1"
+# Storage over the bus: the module reaches the host's storage (x402 payments
+# stream and budget-hold documents) through the ports crate's bus transport, not
+# a process-local registry.
+tinystoragedrivers-core = { workspace = true }
+tinystoragedrivers-bus = { workspace = true }
+tinystoragedrivers-client = { workspace = true }
+tinystoragedrivers-busproxy = { workspace = true }
+# Diagnostics for the storage connection and hold-lease renewal.
+log = "0.4"
+# Generates opaque service, quote, and pending-payment identifiers.
+uuid = { version = "1", features = ["v4"] }
+
+[features]
+default = []
+# Local dev/test only: export the module through `linked_module()` instead of the
+# C ABI symbols so several modules can share one executable. Released modules
+# are always built without it.
+static-link = []
+linked = ["static-link"]
+# Test-artifact only (the module E2E builds the cdylib with it): when the host
+# has not provisioned x402 ledger storage, fall back to in-memory storage
+# instead of failing closed. Released modules are never built with it.
+e2e-memory-storage = []
+
+[lints]
+workspace = true
+
+[dev-dependencies]
+# Encodes and decodes the Solana transaction fixtures in native tests.
+base64 = "0.23"
+# The native lifecycle fixture stages and hashes the actual cdylib to attest it.
+sha2 = "0.11"
+# Isolates native artifact admission and ledger fixtures from user files.
+tempfile = "3"
+# The loader E2E admits the built module from its adjacent digest manifest and
+# uses TinyBus's shared lifecycle helpers.
+tinybus = { version = ">=0.1.3, <0.2", git = "https://github.com/tinyhumansai/tinybus", rev = "eb5cf727", default-features = false, features = [
+    "macros",
+    "modules",
+    "test-support",
+] }
+# The loader E2E builds request documents directly rather than through the wire
+# types, so a rename on either side shows up as the contract change it is.
+serde_json = "1"
+# The service tests sign the way a host does — with the recoverable secp256k1
+# API directly — so they exercise the real boundary rather than a helper.
+bitcoin = { version = "0.32", default-features = false, features = ["std", "secp-recovery"] }
+# The E2E signs a Solana transfer the way a host would, with its own ed25519 key.
+ed25519-dalek = { version = "2", default-features = false, features = ["std"] }
+# The E2E drives a real broker and a real loader.
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "time"] }
+
+[[test]]
+name = "static_link"
+path = "tests/static_link.rs"
+required-features = ["static-link"]

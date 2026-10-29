@@ -1,0 +1,50 @@
+{
+	"name": "@gradio/paramviewer",
+	"version": "0.12.0",
+	"description": "Gradio UI packages",
+	"type": "module",
+	"author": "",
+	"license": "ISC",
+	"private": false,
+	"main_changeset": true,
+	"main": "./Index.svelte",
+	"exports": {
+		".": {
+			"types": "./dist/Index.svelte.d.ts",
+			"gradio": "./Index.svelte",
+			"svelte": "./dist/Index.svelte",
+			"default": "./dist/Index.svelte"
+		},
+		"./ParamViewer": {
+			"types": "./dist/ParamViewer.svelte.d.ts",
+			"gradio": "./ParamViewer.svelte",
+			"svelte": "./dist/ParamViewer.svelte",
+			"default": "./dist/ParamViewer.svelte"
+		},
+		"./example": {
+			"types": "./dist/Example.svelte.d.ts",
+			"gradio": "./Example.svelte",
+			"svelte": "./dist/Example.svelte",
+			"default": "./dist/Example.svelte"
+		},
+		"./package.json": "./package.json"
+	},
+	"dependencies": {
+		"@gradio/atoms": "workspace:^",
+		"@gradio/statustracker": "workspace:^",
+		"@gradio/utils": "workspace:^",
+		"prismjs": "^1.30.0"
+	},
+	"devDependencies": {
+		"@gradio/preview": "workspace:^",
+		"@types/prismjs": "^1.26.5"
+	},
+	"peerDependencies": {
+		"svelte": "^5.48.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gradio-app/gradio.git",
+		"directory": "js/paramviewer"
+	}
+}

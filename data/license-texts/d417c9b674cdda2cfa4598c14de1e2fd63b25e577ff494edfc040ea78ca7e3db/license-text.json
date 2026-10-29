@@ -1,0 +1,18 @@
+{
+  "decision": {
+    "decision": "under-review",
+    "by": "machine:wpt-dataset",
+    "date": "2026-10-29",
+    "reason": "first met in a source: a person reads it"
+  },
+  "kind": "notice",
+  "found": {
+    "source": "github-vercel-turborepo-9b4561e3",
+    "path": "turborepo-tests/integration/fixtures/oxc_repro/package.json"
+  },
+  "files": [
+    "10138ccbc3783e2613c0b8926c1e57718dd9042715d2128f4432caff75fd8666"
+  ],
+  "explanation": "A package.json whose license field declares \"ISC\": it names the license without its text, so the entry's text holds that license's official text.",
+  "license": "ISC"
+}

@@ -1,0 +1,52 @@
+{
+	"name": "@gradio/dataframe",
+	"version": "0.24.6",
+	"description": "Gradio UI packages",
+	"type": "module",
+	"author": "",
+	"license": "ISC",
+	"private": false,
+	"main_changeset": true,
+	"main": "./Index.svelte",
+	"dependencies": {
+		"@gradio/atoms": "workspace:^",
+		"@gradio/button": "workspace:^",
+		"@gradio/checkbox": "workspace:^",
+		"@gradio/client": "workspace:^",
+		"@gradio/icons": "workspace:^",
+		"@gradio/markdown-code": "workspace:^",
+		"@gradio/statustracker": "workspace:^",
+		"@gradio/upload": "workspace:^",
+		"@gradio/utils": "workspace:^",
+		"@types/d3-dsv": "^3.0.7",
+		"@types/katex": "^0.16.7",
+		"d3-dsv": "^3.0.1",
+		"dequal": "^2.0.3",
+		"@tanstack/table-core": "^8.21.3",
+		"@tanstack/virtual-core": "^3.13.6"
+	},
+	"exports": {
+		".": {
+			"gradio": "./Index.svelte",
+			"svelte": "./dist/standalone/Index.svelte",
+			"types": "./dist/standalone/Index.svelte.d.ts"
+		},
+		"./example": {
+			"gradio": "./Example.svelte",
+			"svelte": "./dist/Example.svelte",
+			"types": "./dist/Example.svelte.d.ts"
+		},
+		"./package.json": "./package.json"
+	},
+	"peerDependencies": {
+		"svelte": "^5.48.0"
+	},
+	"devDependencies": {
+		"@gradio/preview": "workspace:^"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gradio-app/gradio.git",
+		"directory": "js/dataframe"
+	}
+}

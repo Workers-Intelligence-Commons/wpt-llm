@@ -1,0 +1,18 @@
+{
+  "decision": {
+    "decision": "under-review",
+    "by": "machine:wpt-dataset",
+    "date": "2026-10-29",
+    "reason": "first met in a source: a person reads it"
+  },
+  "kind": "notice",
+  "found": {
+    "source": "github-ds300-patch-package-a0a5fd50",
+    "path": "integration-tests/broken-patch-file/package.json"
+  },
+  "files": [
+    "42e08402332a226c0776104dbd5b7d91743f9582ed554995206e01927907cef7"
+  ],
+  "explanation": "A package.json whose license field declares \"ISC\": it names the license without its text, so the entry's text holds that license's official text.",
+  "license": "ISC"
+}

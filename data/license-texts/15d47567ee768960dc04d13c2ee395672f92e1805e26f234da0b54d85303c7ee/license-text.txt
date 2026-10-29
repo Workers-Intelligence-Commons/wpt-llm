@@ -1,0 +1,41 @@
+{
+	"name": "@gradio/checkboxgroup",
+	"version": "0.12.2",
+	"description": "Gradio UI packages",
+	"type": "module",
+	"author": "",
+	"license": "ISC",
+	"private": false,
+	"main_changeset": true,
+	"main": "./Index.svelte",
+	"exports": {
+		".": {
+			"gradio": "./Index.svelte",
+			"svelte": "./dist/Index.svelte",
+			"types": "./dist/Index.svelte.d.ts"
+		},
+		"./example": {
+			"gradio": "./Example.svelte",
+			"svelte": "./dist/Example.svelte",
+			"types": "./dist/Example.svelte.d.ts"
+		},
+		"./package.json": "./package.json"
+	},
+	"dependencies": {
+		"@gradio/atoms": "workspace:^",
+		"@gradio/statustracker": "workspace:^",
+		"@gradio/utils": "workspace:^",
+		"dequal": "^2.0.3"
+	},
+	"devDependencies": {
+		"@gradio/preview": "workspace:^"
+	},
+	"peerDependencies": {
+		"svelte": "^5.48.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gradio-app/gradio.git",
+		"directory": "js/checkboxgroup"
+	}
+}

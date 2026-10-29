@@ -1,0 +1,18 @@
+{
+    "name": "wox-docs",
+    "version": "1.0.0",
+    "description": "Wox documentation and website",
+    "main": "index.js",
+    "scripts": {
+        "docs:dev": "node scripts/generate-changelog-pages.mjs && vitepress dev docs",
+        "docs:build": "node scripts/generate-changelog-pages.mjs --check-readme && vitepress build docs",
+        "docs:preview": "vitepress preview docs"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "vitepress": "^1.0.0"
+    },
+    "packageManager": "pnpm@11.9.0"
+}

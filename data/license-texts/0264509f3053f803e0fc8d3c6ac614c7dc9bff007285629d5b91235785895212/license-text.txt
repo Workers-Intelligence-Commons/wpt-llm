@@ -1,0 +1,131 @@
+[package]
+name = "tinywallet-x402"
+version = "0.23.3"
+edition = "2024"
+rust-version = "1.85"
+license = "GPL-3.0-only"
+description = "The x402 machine-payment protocol for TinyWallet: wire types, EIP-712 and ERC-20 encoding, the payment ledger, the 402 client, and the x402_request agent tool."
+repository = "https://github.com/tinyhumansai/tinywallet"
+readme = "../../README.md"
+# Same reasoning as the root crate: hosts take this repository as a git
+# submodule, so a registry upload would be a third distribution channel nobody
+# reads.
+publish = false
+
+# Payment execution depends on `tinywallet-crypto`; the optional agent-tool
+# adapter also reads its static declaration from `tinywallet-bus`. Neither
+# dependency links `bitcoin`, `k256` or `coins-*` in this crate.
+[dependencies]
+# Address validation and the crate-wide `Error` that `abi` reports through.
+# Default features off so this crate never turns on a chain the caller did not
+# ask for; `abi` enables the two it needs.
+tinywallet-crypto = { path = "../tinywallet-crypto", default-features = false, optional = true }
+# Static prompt-facing tool declaration, enabled only with the tool adapter.
+tinywallet-bus = { path = "../tinywallet-bus", default-features = false, features = ["wire"], optional = true }
+# Derive macros for the `eip712::Error` and `abi::Error` types.
+thiserror = { version = "2", optional = true }
+# Keccak-256, the hash EIP-712 struct hashes and the ERC-20 selector are
+# defined over. Pinned to the same 0.12 line as `tinywallet-crypto`.
+sha3 = { version = "0.12", optional = true }
+# Derives on the x402 wire types and the ledger records.
+serde = { version = "1", features = ["derive"], optional = true }
+# The `extensions` field of the payment payloads is an open JSON object, and the
+# ledger is JSONL.
+serde_json = { version = "1", optional = true }
+# The `Tool` trait the `x402_request` agent tool implements. Workspace git
+# dependency, so a host that already links tinytools unifies to one copy.
+tinytools = { workspace = true, optional = true }
+# `Transport` and `PaymentSigner` are used as `dyn` objects with async methods,
+# and `Tool` is an async trait, so the object-safety shim is needed.
+async-trait = { version = "0.1", optional = true }
+# `Tool::execute` returns `anyhow::Result`; the trait fixes the error type.
+anyhow = { version = "1", optional = true }
+# The 402 client, the `ProxyPolicy` seam (it takes a `reqwest::ClientBuilder`)
+# and the tool's HTTP calls. Default features off so this crate picks no TLS
+# stack of its own: the host's reqwest feature set decides that once for the
+# whole graph. `rustls-tls` is not enabled here for the same reason.
+reqwest = { version = "0.13", default-features = false, optional = true }
+# The PAYMENT-REQUIRED / PAYMENT-SIGNATURE / PAYMENT-RESPONSE headers are
+# base64-encoded JSON.
+base64 = { version = "0.23", optional = true }
+# Hex for EIP-3009 signatures and nonces and the Solana memo nonce.
+hex = { version = "0.4", optional = true }
+# Base58 for Solana account keys and the recent blockhash.
+bs58 = { version = "0.5", default-features = false, features = ["std"], optional = true }
+# The ATA program-derived address is the first candidate that is *off* the
+# ed25519 curve, which needs point decompression. The `alloc` feature is all
+# that takes. Kept off the `k256` / `bitcoin` side of the tree entirely.
+curve25519-dalek = { version = "5", default-features = false, features = ["alloc"], optional = true }
+# SHA-256 for the ATA derivation and the payment nonces. On 0.11 to unify with
+# `tinywallet-crypto`.
+sha2 = { version = "0.11", optional = true }
+# Structured logging for the payment flow; the host installs the logger.
+log = { version = "0.4", optional = true }
+# Timestamps on ledger records and the day / month budget windows.
+chrono = { version = "0.4", default-features = false, features = ["clock", "serde", "std"], optional = true }
+# Record ids in the `x402_request` tool.
+uuid = { version = "1", features = ["v4"], optional = true }
+
+# The storage ports the ledger persists through (payments stream, budget hold
+# document). Ports only; the host chooses the backend.
+tinystoragedrivers-core = { workspace = true, optional = true }
+# `block_in_place` only: the ledger's synchronous API blocks on storage calls,
+# and on a multi-thread runtime that must hand its worker off first, or a
+# storage transport that needs the same runtime (the bus) starves.
+tokio = { version = "1", default-features = false, features = ["rt-multi-thread"], optional = true }
+
+[dev-dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+# Drives the async tests; the crate itself pulls in no runtime.
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "time", "net", "io-util", "sync"] }
+# A loopback HTTP server so the 402 client and the tool are exercised against a
+# real socket, without network access.
+axum = { version = "0.8", default-features = false, features = ["http1", "tokio"] }
+# `Full<Bytes>` is a `Sync` HTTP body; wrapped with `reqwest::Body::wrap` it is a
+# streaming body that cannot be cloned, which the replay tests need.
+http-body-util = "0.1"
+# The root crate's `key` gate derives a known account from a BIP-39 mnemonic, so
+# `FakePaymentSigner` signs as exactly the account a real wallet would. A
+# dev-dependency only: never linked into a host.
+tinywallet = { path = "../..", default-features = false, features = ["key", "solana"] }
+# Local secp256k1 / ed25519 signing for `FakePaymentSigner`, and to recover the
+# signer from an EIP-3009 signature in tests.
+k256 = { version = "0.13", default-features = false, features = ["ecdsa"] }
+ed25519-dalek = { version = "2", default-features = false, features = ["std"] }
+
+[features]
+default = ["wire"]
+# The x402 v2 header payloads and the rules for reading them.
+wire = ["dep:serde", "dep:serde_json"]
+# EIP-712 typed-data hashing and the EIP-3009 authorization x402 signs. Pure
+# keccak over a fixed byte layout — no chain client, no bignum, no signer.
+eip712 = ["dep:sha3", "dep:thiserror"]
+# ERC-20 `transfer` calldata. Needs EVM address validation and EIP-55 checksums
+# from the crypto crate, and the uint256 helpers from `eip712`.
+abi = ["eip712", "dep:tinywallet-crypto", "tinywallet-crypto/evm", "tinywallet-crypto/keccak"]
+# The rail-neutral spending ledger: records, budgets, the JSONL file, and the
+# process-wide handle.
+ledger = ["dep:serde", "dep:serde_json", "dep:chrono", "dep:log", "dep:tinystoragedrivers-core", "dep:tokio"]
+# Paying a 402 challenge: header codec, the client, and the EVM and Solana
+# payment builders behind the `PaymentSigner` seam. Solana reads the recent
+# blockhash through `tinywallet_crypto::rpc::Transport`.
+pay = [
+    "wire",
+    "ledger",
+    "abi",
+    "tinywallet-crypto/net",
+    "dep:thiserror",
+    "dep:async-trait",
+    "dep:reqwest",
+    "dep:base64",
+    "dep:hex",
+    "dep:bs58",
+    "dep:curve25519-dalek",
+    "dep:sha2",
+]
+# The `x402_request` agent tool.
+tools = ["pay", "dep:tinywallet-bus", "dep:tinytools", "dep:anyhow", "dep:uuid"]
+
+[lints]
+workspace = true

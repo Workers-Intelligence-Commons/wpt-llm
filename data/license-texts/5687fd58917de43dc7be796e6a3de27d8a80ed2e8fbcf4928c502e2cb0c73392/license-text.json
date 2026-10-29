@@ -1,0 +1,18 @@
+{
+  "decision": {
+    "decision": "under-review",
+    "by": "machine:wpt-dataset",
+    "date": "2026-10-29",
+    "reason": "first met in a source: a person reads it"
+  },
+  "kind": "notice",
+  "found": {
+    "source": "github-biomejs-biome-6a1de1ab",
+    "path": "crates/biome_json_analyze/tests/specs/suspicious/noUntrustedLicenses/fsf_required/node_modules/non-fsf-pkg/package.json"
+  },
+  "files": [
+    "876e0a8907708cb92b1267dd597fee8909d77c6c7c09ea7835c67c9657ae7bec"
+  ],
+  "explanation": "A package.json whose license field declares \"0BSD\": it names the license without its text, so the entry's text holds that license's official text.",
+  "license": "0BSD"
+}

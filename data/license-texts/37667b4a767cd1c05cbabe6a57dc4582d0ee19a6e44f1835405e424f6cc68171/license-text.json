@@ -1,0 +1,18 @@
+{
+  "decision": {
+    "decision": "under-review",
+    "by": "machine:wpt-dataset",
+    "date": "2026-10-29",
+    "reason": "first met in a source: a person reads it"
+  },
+  "kind": "notice",
+  "found": {
+    "source": "github-google-osv-scanner-7bc6ab6f",
+    "path": "cmd/osv-scanner/fix/testdata/relax-npm/package.json"
+  },
+  "files": [
+    "aaa46963917a22bee25658ce287e980302a8090ce6ce2711016a2a865e716653"
+  ],
+  "explanation": "A package.json whose license field declares \"ISC\": it names the license without its text, so the entry's text holds that license's official text.",
+  "license": "ISC"
+}

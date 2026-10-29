@@ -1,0 +1,35 @@
+{
+  "name": "tools-example",
+  "private": true,
+  "version": "0.1.8",
+  "description": "Example project for Tools",
+  "main": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p ./tsconfig.json",
+    "start": "bun src/index.ts",
+    "dev": "bun --watch src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "composio",
+    "example",
+    "tools"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ai-sdk/openai": "catalog:",
+    "@composio/core": "workspace:*",
+    "@composio/vercel": "workspace:*",
+    "ai": "catalog:",
+    "dotenv": "catalog:",
+    "openai": "catalog:",
+    "zod": "catalog:",
+    "zod-to-json-schema": "catalog:"
+  },
+  "devDependencies": {
+    "@types/bun": "catalog:",
+    "typescript": "catalog:"
+  },
+  "type": "module"
+}

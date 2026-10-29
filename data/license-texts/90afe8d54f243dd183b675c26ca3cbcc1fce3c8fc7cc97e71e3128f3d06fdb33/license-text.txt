@@ -1,0 +1,38 @@
+{
+  "name": "claurst",
+  "version": "0.2.0",
+  "description": "Open-source, multi-provider terminal coding agent built in Rust",
+  "license": "GPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kuberwastaken/claurst.git"
+  },
+  "homepage": "https://claurst.kuber.studio",
+  "bugs": {
+    "url": "https://github.com/kuberwastaken/claurst/issues"
+  },
+  "keywords": [
+    "ai",
+    "coding-agent",
+    "claude",
+    "anthropic",
+    "terminal",
+    "tui",
+    "rust"
+  ],
+  "author": "Kuber Mehta",
+  "bin": {
+    "claurst": "bin/claurst"
+  },
+  "scripts": {
+    "postinstall": "node install.js"
+  },
+  "files": [
+    "bin/",
+    "install.js",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=16"
+  }
+}

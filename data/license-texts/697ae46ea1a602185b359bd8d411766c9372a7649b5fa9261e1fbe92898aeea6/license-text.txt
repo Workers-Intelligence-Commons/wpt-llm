@@ -1,0 +1,24 @@
+{
+  "name": "plugins-service",
+  "version": "0.0.1",
+  "description": "Plugin service worker for Actual",
+  "license": "ISC",
+  "author": "",
+  "main": "plugin-sw.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production vite build",
+    "build-dev": "cross-env NODE_ENV=development vite build",
+    "watch": "cross-env NODE_ENV=development vite build --watch",
+    "typecheck": "tsgo -b && tsc-strict"
+  },
+  "dependencies": {
+    "workbox-precaching": "^7.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.1",
+    "@typescript/native-preview": "beta",
+    "cross-env": "^10.1.0",
+    "typescript-strict-plugin": "^2.4.4",
+    "vite": "^8.1.5"
+  }
+}

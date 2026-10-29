@@ -1,0 +1,18 @@
+{
+  "decision": {
+    "decision": "under-review",
+    "by": "machine:wpt-dataset",
+    "date": "2026-10-29",
+    "reason": "first met in a source: a person reads it"
+  },
+  "kind": "notice",
+  "found": {
+    "source": "github-vercel-vercel-8d82b5ab",
+    "path": "packages/fs-detectors/test/fixtures/43-nx-json-misshaped/apps/app-one/package.json"
+  },
+  "files": [
+    "008bc5edf4705ee790646fbad99b5adf538e9b177418e1708167edf44afffe72"
+  ],
+  "explanation": "A package.json whose license field declares \"ISC\": it names the license without its text, so the entry's text holds that license's official text.",
+  "license": "ISC"
+}

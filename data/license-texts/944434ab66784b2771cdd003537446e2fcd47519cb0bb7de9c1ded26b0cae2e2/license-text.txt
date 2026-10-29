@@ -1,0 +1,29 @@
+{
+  "name": "build-font",
+  "description": "A internal used package to build the font.",
+  "private": true,
+  "version": "1.0.0",
+  "main": "main.ts",
+  "type": "module",
+  "scripts": {
+    "start": "node ./src/main.ts",
+    "test": "vitest run",
+    "typecheck": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/blob": "^2.8.0",
+    "fs-extra": "^11.4.0",
+    "minimist": "^1.2.8",
+    "oslllo-svg-fixer": "^6.0.1",
+    "svgtofont": "^6.5.3"
+  },
+  "devDependencies": {
+    "@lucide/helpers": "workspace:*",
+    "@types/fs-extra": "^11.0.4",
+    "@types/minimist": "^1.2.5",
+    "@types/node": "^26.4.1"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "name": "@nuclearplayer/plugin-sdk",
+  "version": "2.9.0",
+  "description": "Plugin SDK for Nuclear music player",
+  "type": "module",
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./dist/index.d.ts"
+    },
+    "./mcp": {
+      "import": "./src/mcp/index.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && api-extractor run --local && pnpm clean:dts",
+    "build:npm": "tsc && vite build --mode npm && api-extractor run --local && pnpm clean:dts",
+    "clean:dts": "rm -rf dist/api dist/mcp dist/react dist/test dist/types dist/types.d.ts dist/*.d.ts.map dist/tsdoc-metadata.json",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest --run --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist build .turbo node_modules/.vite"
+  },
+  "dependencies": {
+    "@nuclearplayer/model": "workspace:*",
+    "@nuclearplayer/ui": "workspace:*",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.542.0",
+    "react": "^18.3.1",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@microsoft/api-extractor": "^7.51.1",
+    "@nuclearplayer/eslint-config": "workspace:*",
+    "@nuclearplayer/tailwind-config": "workspace:*",
+    "@tailwindcss/vite": "^4.1.11",
+    "@testing-library/jest-dom": "^7.0.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/react": "^18.3.23",
+    "@vitejs/plugin-react": "^6.0.0",
+    "@vitest/coverage-v8": "^5.0.0",
+    "jsdom": "^26.1.0",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.9.2",
+    "vite": "^8.0.0",
+    "vite-plugin-dts": "^5.0.0",
+    "vitest": "^5.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1"
+  },
+  "keywords": [
+    "nuclear",
+    "music",
+    "player",
+    "plugin",
+    "sdk",
+    "react"
+  ],
+  "author": {
+    "name": "nukeop",
+    "email": "12746779+nukeop@users.noreply.github.com"
+  },
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nukeop/nuclear.git",
+    "directory": "packages/plugin-sdk"
+  },
+  "homepage": "https://github.com/nukeop/nuclear#readme",
+  "bugs": {
+    "url": "https://github.com/nukeop/nuclear/issues"
+  }
+}

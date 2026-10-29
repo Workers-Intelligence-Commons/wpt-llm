@@ -1,0 +1,98 @@
+[workspace]
+
+[package]
+name = "tinyvoice-module"
+version = "0.3.2"
+edition = "2024"
+rust-version = "1.88"
+license = "GPL-3.0-only"
+description = "Trusted TinyBus module adapter for TinyVoice."
+repository = "https://github.com/tinyhumansai/tinyvoice"
+publish = false
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+
+[features]
+default = ["native-hotkeys"]
+static-link = []
+native-hotkeys = []
+
+[dependencies]
+# Native generic provider/tool-loop execution belongs inside the compiled module.
+# Version requirements, never nested paths: a host that links this module beside
+# others (OpenHuman's `openhuman-modules-linked`) patches these names to its own
+# single TinyAgents, and two path copies of one package cannot both be written
+# to a lockfile. The `[patch.crates-io]` table below keeps standalone builds on
+# the recorded canonical TinyAgents submodule.
+tinyagents-live = ">=2.1.4, <3"
+tinyagents-harness = ">=2.1.4, <3"
+tinytools = "0.5"
+async-trait = "0.1"
+anyhow = "1"
+
+# Opaque native recording/output leases must not rebind after a module reload.
+getrandom = "0.4"
+
+# The transport-free TinyBus wire contract: names, payload types, and version.
+tinyvoice-bus = { version = "0.1.4", path = "../tinyvoice-bus" }
+# The pure voice library stays independently usable and bus-agnostic; this
+# crate exists so the vendored TinyBus dependency never reaches it.
+tinyvoice = { version = "0.3.2", path = "../tinyvoice", features = ["capture", "hotkey"] }
+# TinyBus provides the typed service interface and the dynamic module host ABI.
+tinybus = { version = ">=0.1.3, <0.2", default-features = false, features = ["macros", "modules"] }
+# The module-side SDK owns its runtime and exports the stable C entrypoints.
+tinybus-module = ">=0.1.3, <0.2"
+# The module's methods are `async fn` on a served object, so it needs a runtime
+# even though every operation underneath is synchronous.
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+# Bus frames are JSON, where a raw byte array costs ~3.5 bytes per byte.
+# Base64 is 1.34x, which is what keeps an audio payload inside a frame.
+base64 = "0.22"
+# VAD configuration and event lists remain JSON values in the stable ABI.
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+rustix = { version = "1", features = ["net"] }
+x11rb = { version = "0.13.2", features = ["record"] }
+
+[target.'cfg(target_os = "windows")'.dependencies]
+tinyvoice-hotkey-win = { path = "../tinyvoice-hotkey-win" }
+
+[lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+missing_debug_implementations = "warn"
+unreachable_pub = "warn"
+rust_2018_idioms = { level = "warn", priority = -1 }
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+unwrap_used = "warn"
+expect_used = "warn"
+panic = "warn"
+todo = "warn"
+unimplemented = "warn"
+missing_errors_doc = "warn"
+missing_panics_doc = "warn"
+doc_markdown = "warn"
+must_use_candidate = "warn"
+
+[lints.rustdoc]
+broken_intra_doc_links = "warn"
+private_intra_doc_links = "warn"
+
+[dev-dependencies]
+futures-util = "0.3"
+tokio-tungstenite = "0.29"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "time", "test-util"] }
+
+[patch.crates-io]
+tinyagents-live = { path = "../../vendor/tinyagents/crates/tinyagents-live" }
+tinyagents-harness = { path = "../../vendor/tinyagents/crates/tinyagents-harness" }
+tinytools = { path = "../../vendor/tinyagents/vendor/tinytools/crates/tinytools" }
+tinybus = { path = "../../vendor/tinybus/crates/tinybus" }
+tinybus-module = { path = "../../vendor/tinybus/crates/tinybus-module" }
+tinybus-macros = { path = "../../vendor/tinybus/crates/tinybus-macros" }

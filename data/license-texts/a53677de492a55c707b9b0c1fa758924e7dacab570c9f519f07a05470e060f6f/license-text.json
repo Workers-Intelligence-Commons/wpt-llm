@@ -1,0 +1,18 @@
+{
+  "decision": {
+    "decision": "under-review",
+    "by": "machine:wpt-dataset",
+    "date": "2026-10-29",
+    "reason": "first met in a source: a person reads it"
+  },
+  "kind": "notice",
+  "found": {
+    "source": "github-biomejs-biome-6a1de1ab",
+    "path": "crates/biome_json_analyze/tests/specs/suspicious/noUntrustedLicenses/deny_option/node_modules/denied-pkg/package.json"
+  },
+  "files": [
+    "1046f6f96ec3f0d739479b6c359d61c58c3bb48c1a83d2b39f7abb4c58cc44a0"
+  ],
+  "explanation": "A package.json whose license field declares \"ISC\": it names the license without its text, so the entry's text holds that license's official text.",
+  "license": "ISC"
+}

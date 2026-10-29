@@ -1,0 +1,89 @@
+[package]
+name = "tinywallet-crypto"
+version = "0.23.3"
+edition = "2024"
+rust-version = "1.85"
+license = "GPL-3.0-only"
+description = "Pure crypto-rail primitives for TinyWallet: chains, addresses, reference data, the RPC transport seam, and transaction verification."
+repository = "https://github.com/tinyhumansai/tinywallet"
+readme = "../../README.md"
+# Same reasoning as the root crate: hosts take this repository as a git
+# submodule, so a registry upload would be a third distribution channel nobody
+# reads.
+publish = false
+
+# Deliberately free of every signing and key-derivation library: no `bitcoin`,
+# no `k256`, no `coins-*`. Every dependency here is a hash, a codec, or serde.
+# CI asserts the absence with `cargo tree -e normal -i bitcoin`.
+[dependencies]
+# Shared serialized vocabulary; implementation re-exports these exact types.
+tinywallet-bus = { path = "../tinywallet-bus", default-features = false }
+
+# Derive macros for the crate-wide error type in `src/error/mod.rs`.
+thiserror = "2"
+# Base58 (Solana) and base58check (Tron) address decoding. `check` brings in
+# the checksum variant Tron addresses require.
+bs58 = { version = "0.5", features = ["check"], optional = true }
+# Hex codec for the Tron hex-address form the TronGrid API speaks.
+hex = { version = "0.4", optional = true }
+# bech32/bech32m segwit address encoding and decoding, checksum variant
+# selection and witness-program length rules included. This is what lets a host
+# validate a Bitcoin address without the `bitcoin` crate's native secp256k1
+# build; see `src/address/btc.rs`.
+bech32 = { version = "0.12", optional = true }
+# SHA-256: Bitcoin's HASH160, Tron's base58check checksum, and the Tron txid.
+sha2 = { version = "0.11", optional = true }
+# Keccak-256 for EIP-55 checksums on EVM addresses.
+#
+# Pinned to 0.12. The root crate's `coins-bip32` still depends on `sha3` 0.10,
+# so a consumer that also enables the root crate's `key` feature resolves both
+# 0.10 and 0.12; this pin does not remove that second copy.
+sha3 = { version = "0.12", optional = true }
+# Async trait methods for the `Transport` seam in `src/rpc/`. Rust cannot yet
+# express an object-safe async trait natively, and `Transport` must be
+# `dyn`-compatible because chain code takes `&dyn Transport`.
+async-trait = { version = "0.1", optional = true }
+# The `Transport` seam moves JSON payloads across the host boundary.
+serde_json = { version = "1", optional = true }
+# Serde derives on `Chain`, `TronTransfer` and the `Transport` payload types.
+serde = { version = "1", optional = true }
+
+[dev-dependencies]
+# Drives the async `Transport` tests. The crate itself pulls in no runtime —
+# picking one is the host's call, so it is a dev-dependency only.
+tokio = { version = "1", features = ["macros", "rt"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[features]
+# Every feature the bus exposed before the split, so `default` matches it.
+default = ["btc", "evm", "solana", "tron", "keccak", "net", "asset", "tx-codec"]
+# Bitcoin address parsing and validation. Dependency-light on purpose: base58
+# via `bs58` (already here for Solana and Tron) and segwit via `bech32`.
+btc = ["dep:bs58", "dep:bech32", "dep:sha2"]
+# Serde derives on the crate's core types (`Chain`, `TronTransfer`). A named
+# gate rather than relying on `dep:serde` being implied, because
+# `#[cfg(feature = "serde")]` has to name something that actually exists.
+serde = ["dep:serde", "serde/derive", "tinywallet-bus/serde"]
+# EVM address validation. Dependency-free: an EVM address is 20 hex-encoded
+# bytes, so the whole format is spelled out in `src/address/evm.rs`.
+evm = []
+# Solana base58 address validation.
+solana = ["dep:bs58"]
+# Tron base58check address validation and hex conversion.
+tron = ["dep:bs58", "dep:hex"]
+# EIP-55 mixed-case checksum support for EVM addresses.
+keccak = ["evm", "dep:sha3"]
+# The `Transport` network seam (`tinywallet_crypto::rpc`). The one module that
+# models I/O, and it still performs none — the host supplies the implementation.
+net = ["dep:async-trait", "dep:serde_json", "serde"]
+# Network and token reference data. Pure tables; the tests cross-check every
+# contract address against the address validators, so it needs every chain gate.
+asset = ["btc", "evm", "solana", "tron"]
+# The half of transaction handling that reads and checks bytes rather than
+# producing signatures: `tx::proto` (the structural protobuf reader) and the
+# verification half of `tx::tron`.
+tx-codec = ["dep:sha2", "serde", "tron"]
+
+[lints]
+workspace = true

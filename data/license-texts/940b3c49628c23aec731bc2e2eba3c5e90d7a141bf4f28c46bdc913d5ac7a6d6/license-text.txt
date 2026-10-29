@@ -1,0 +1,22 @@
+{
+  "name": "ses-email-action",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "dolthub",
+  "license": "ISC",
+  "scripts": {
+    "build": "ncc build index.js"
+  },
+  "dependencies": {
+    "@actions/core": "^2.0.3",
+    "@aws-sdk/client-ses": "^3.982.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.4"
+  },
+  "overrides": {
+    "fast-xml-parser": "^5.3.6"
+  }
+}

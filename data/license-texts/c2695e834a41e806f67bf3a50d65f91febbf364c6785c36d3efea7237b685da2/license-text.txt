@@ -1,0 +1,55 @@
+{
+  "name": "ig-ui",
+  "displayName": "ImageGlass Web UI",
+  "version": "9.4.0",
+  "description": "ImageGlass Web UI",
+  "scripts": {
+    "start": "webpack --watch --config ./webpack.config.js --progress --mode=production",
+    "build": "webpack         --config ./webpack.config.js --progress --mode=production",
+    "css": "sass ./src/styles/main.scss ./dist/main.css"
+  },
+  "keywords": [
+    "npm",
+    "npm-package",
+    "babel",
+    "typescript",
+    "eslint",
+    "webpack"
+  ],
+  "author": "Duong Dieu Phap",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/d2phap/ImageGlass/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/d2phap/ImageGlass.git"
+  },
+  "homepage": "https://imageglass.org",
+  "devDependencies": {
+    "@babel/core": "^8.0.1",
+    "@babel/preset-env": "^8.0.2",
+    "@types/lodash.merge": "^4.6.9",
+    "@typescript-eslint/eslint-plugin": "^8.66.0",
+    "@typescript-eslint/parser": "^8.66.0",
+    "babel-loader": "^10.1.1",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^14.0.0",
+    "css-loader": "^7.1.4",
+    "eslint": "^10.8.0",
+    "eslint-webpack-plugin": "^6.0.0",
+    "sass": "^1.102.0",
+    "sass-loader": "^17.0.0",
+    "style-loader": "^4.0.0",
+    "terser-webpack-plugin": "^5.6.1",
+    "ts-loader": "^9.6.2",
+    "tsconfig-paths-webpack-plugin": "^4.2.0",
+    "typescript": "^6.0.3",
+    "webpack": "^5.109.2",
+    "webpack-cli": "^7.2.2",
+    "webpack-utf8-bom": "^1.4.0"
+  },
+  "dependencies": {
+    "lodash.merge": "^4.6.2"
+  }
+}

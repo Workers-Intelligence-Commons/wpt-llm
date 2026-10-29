@@ -1,0 +1,35 @@
+{
+  "name": "mcp-example",
+  "private": true,
+  "version": "0.1.8",
+  "description": "Example project for Mcp",
+  "main": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p ./tsconfig.json",
+    "start": "bun src/index.ts",
+    "dev": "bun --watch src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "composio",
+    "example",
+    "mcp"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ai-sdk/mcp": "catalog:",
+    "@ai-sdk/openai": "catalog:",
+    "@composio/core": "workspace:*",
+    "@composio/vercel": "workspace:*",
+    "@modelcontextprotocol/sdk": "catalog:",
+    "ai": "catalog:",
+    "dotenv": "catalog:"
+  },
+  "devDependencies": {
+    "@types/bun": "catalog:",
+    "@types/node": "^26.6.4",
+    "typescript": "catalog:"
+  },
+  "type": "module"
+}

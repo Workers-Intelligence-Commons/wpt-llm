@@ -1,0 +1,61 @@
+{
+  "name": "@follow/electron-main",
+  "type": "module",
+  "private": true,
+  "author": "Folo Team",
+  "license": "GPL-3.0-only",
+  "homepage": "https://github.com/RSSNext",
+  "repository": {
+    "url": "https://github.com/RSSNext/follow",
+    "type": "git"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/export.d.ts",
+      "import": "./dist/export.js"
+    }
+  },
+  "types": "./dist/export.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@electron-toolkit/preload": "3.0.2",
+    "@electron-toolkit/utils": "4.0.0",
+    "@eneris/push-receiver": "4.4.0",
+    "@follow-app/client-sdk": "catalog:",
+    "@follow-app/readability": "workspace:*",
+    "@follow/shared": "workspace:*",
+    "@follow/utils": "workspace:*",
+    "builder-util-runtime": "9.7.0",
+    "electron-context-menu": "5.1.0",
+    "electron-ipc-decorator": "1.0.2",
+    "electron-log": "5.4.4",
+    "electron-squirrel-startup": "1.0.1",
+    "electron-store": "11.0.2",
+    "electron-updater": "6.8.9",
+    "es-toolkit": "1.52.0",
+    "font-list": "2.1.0",
+    "i18next": "26.4.2",
+    "js-yaml": "5.4.2",
+    "ky": "2.1.0",
+    "linkedom": "0.18.13",
+    "lowdb": "7.0.1",
+    "node-machine-id": "1.1.12",
+    "ofetch": "1.5.1",
+    "pathe": "2.0.3",
+    "semver": "7.8.5",
+    "tar": "7.5.22",
+    "vscode-languagedetection": "npm:@vscode/vscode-languagedetection@1.0.23"
+  },
+  "devDependencies": {
+    "@follow/models": "workspace:*",
+    "@follow/types": "workspace:*",
+    "@types/node": "26.6.2",
+    "electron": "44.4.3",
+    "electron-devtools-installer": "4.0.0",
+    "typescript": "catalog:"
+  }
+}

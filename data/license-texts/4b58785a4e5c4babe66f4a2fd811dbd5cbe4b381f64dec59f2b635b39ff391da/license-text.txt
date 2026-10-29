@@ -1,0 +1,86 @@
+[package]
+name = "tinywallet-web3"
+version = "0.23.3"
+edition = "2024"
+rust-version = "1.85"
+license = "GPL-3.0-only"
+description = "Wallet, swap, bridge and dapp flows for TinyWallet, behind host seams."
+repository = "https://github.com/tinyhumansai/tinywallet"
+readme = "../../README.md"
+# Same reasoning as the root crate: hosts take this repository as a git
+# submodule, so a registry upload would be a third distribution channel nobody
+# reads.
+publish = false
+
+# Deliberately free of every signing and key-derivation library: no `bitcoin`,
+# no `k256`, no `coins-*`. Keys never enter this crate; a host implements
+# `WalletSigner` (usually by calling the loaded wallet module) and hands the
+# crate signatures. CI asserts the absence with `cargo tree -e normal -i bitcoin`.
+[dependencies]
+# The chain vocabulary, address rules, `rpc::Transport` seam and the Tron
+# transaction verifier. Every gate the wallet flows use is named explicitly,
+# because the crate is taken with default features off.
+tinywallet-crypto = { path = "../tinywallet-crypto", default-features = false, features = ["btc", "evm", "solana", "tron", "keccak", "net", "asset", "tx-codec"] }
+# Only the `wire` types (`TransactionSpec`, `Signature`, `DerivedAccount`, ...)
+# that `WalletSigner` speaks. Default features off keeps the compat re-exports
+# of the crypto modules out of this crate's graph.
+tinywallet-bus = { path = "../tinywallet-bus", default-features = false, features = ["wire"] }
+# ERC-20 `transfer(address,uint256)` calldata for token transfers. Taken from
+# the crate that owns it rather than through the bus compat shims, which are
+# removed next minor release.
+tinywallet-x402 = { path = "../tinywallet-x402", default-features = false, features = ["abi"] }
+# Optional agent tools: the shared `Tool` trait. The `tools` feature is what
+# keeps a library consumer that only wants the engine free of it.
+tinytools = { workspace = true, optional = true }
+# `Tool::execute` returns `anyhow::Result`, so the `tools` feature needs it to
+# name the return type.
+anyhow = { version = "1", optional = true }
+# The seam traits (`WalletSigner`, `WalletAccounts`, `Web3Backend`) and the
+# `tinytools::Tool` impls are async and used as trait objects.
+async-trait = "0.1"
+# Serde derives on the wallet wire types, and `Value` for the untyped RPC
+# payloads chains return and the backend quote passthrough.
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+# Diagnostics only. The host decides where log records go, so the crate takes
+# the facade rather than a subscriber.
+log = "0.4"
+# Hex for the Tron hex-address form, Solana transaction blobs and signature
+# bytes, and EVM calldata.
+hex = "0.4"
+# Base58 for Solana public keys and the blockhash TronGrid-style APIs return.
+bs58 = "0.5"
+# Base64 for the Solana `sendTransaction` payload.
+base64 = "0.23"
+# SHA-256 for the Solana program-derived-address search that names an
+# Associated Token Account.
+sha2 = "0.11"
+# Ed25519 point decompression: a program-derived address must be *off* the
+# curve, and this is the only place that check is needed. Default features off
+# and only `alloc`, so no signing code comes with it.
+curve25519-dalek = { version = "5", default-features = false, features = ["alloc"] }
+# The per-engine quote stores are shared across async tasks. `parking_lot`
+# guards return directly (no poisoning), which keeps `unwrap` out of library
+# code, and it is already in every OpenHuman graph.
+parking_lot = "0.12"
+
+[dev-dependencies]
+# Drives the async seams in tests. The crate itself pulls in no runtime.
+tokio = { version = "1", features = ["macros", "rt"] }
+# `FakeSigner` derives real accounts from the well-known test mnemonic through
+# the root crate's `key` gate, so the addresses the tests pin are the real
+# derivations rather than strings someone typed. Dev only: `key` is the one
+# place the derivation stack lives, and it never reaches a host build.
+tinywallet = { path = "../..", default-features = false, features = ["key", "btc", "evm", "solana", "tron"] }
+# `FakeSigner` signs Solana messages for real, so tests can verify that the
+# bytes the engine broadcasts carry a valid ed25519 signature.
+ed25519-dalek = { version = "2", default-features = false, features = ["std"] }
+
+[features]
+default = []
+# Agent tools over the wallet engine and the swap/bridge/dapp service. Needs
+# Rust 1.88, because `tinytools` does; the rest of the crate builds on 1.85.
+tools = ["dep:tinytools", "dep:anyhow"]
+
+[lints]
+workspace = true

@@ -1,0 +1,28 @@
+{
+  "name": "harness",
+  "version": "1.0.0",
+  "description": "Test infrastructure for this repo. Not to be published.",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "server.ts",
+  "scripts": {
+    "start": "tsx server.ts",
+    "test": "vitest run"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "^1.31.0",
+    "@types/node": "^25.3.3",
+    "openai": "^6.17.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11",
+    "yaml": "^2.8.2"
+  },
+  "overrides": {
+    "@hono/node-server": "^1.19.15"
+  }
+}

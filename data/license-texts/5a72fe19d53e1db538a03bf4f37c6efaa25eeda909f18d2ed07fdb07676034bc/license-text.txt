@@ -1,0 +1,53 @@
+{
+  "name": "@formbricks/js-core",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "version": "1.0.0",
+  "description": "Js core for Formbricks that contains the logic for executing the @formbricks/js library and is loaded asynchronously over the Formbricks API.",
+  "homepage": "https://formbricks.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/formbricks/formbricks"
+  },
+  "keywords": [
+    "Formbricks",
+    "surveys",
+    "experience management"
+  ],
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.umd.cjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.umd.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite build --watch --mode dev",
+    "build": "vite build",
+    "build:dev": "vite build --mode dev",
+    "go": "vite build --watch --mode dev",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "clean": "rimraf .turbo node_modules dist coverage",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "author": "Formbricks <hola@formbricks.com>",
+  "devDependencies": {
+    "@formbricks/config-eslint": "workspace:*",
+    "@formbricks/config-typescript": "workspace:*",
+    "@formbricks/vite-plugins": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-dts": "catalog:",
+    "vitest": "catalog:"
+  }
+}
