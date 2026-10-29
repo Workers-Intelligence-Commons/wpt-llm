@@ -735,6 +735,11 @@ when it is:
   repository's root license file when that file holds an admitted text of
   one of its licenses. A place is one file, so it cannot show every
   license of the expression.
+- **A license file that lists bundled components** is admitted for the
+  files under allowed licenses when its list gives some named files a
+  license that is refused or on no allowed list. Each of those files is
+  excluded from the source by its path. A list that names its files too
+  vaguely to exclude them keeps the text a doubt.
 - **GitHub repositories with 10,000 stars or more** are a collection to
   draw sources from, forks and archived ones included, when their license
   is allowed, whether GitHub recognizes the license file or reading the

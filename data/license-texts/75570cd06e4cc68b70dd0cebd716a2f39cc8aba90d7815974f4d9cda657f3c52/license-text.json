@@ -1,9 +1,9 @@
 {
   "decision": {
-    "decision": "under-review",
-    "by": "machine:wpt-dataset",
-    "date": "2026-10-28",
-    "reason": "first met in the migration: a person reads it"
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-29",
+    "reason": "This is Apache Doris's standard Apache-2.0 text followed by a long list of bundled components. Most parts are allowed (BSD, MIT, PSF-2.0, the Lucent UTF-8 notice, public-domain MurmurHash3, UPL-1.0 or BSD). However, be/tools/FlameGraph/*.pl is under CDDL-1.0, and the bundled elkjs is distributed under the EPL-2.0 alone, which Doris elected. Both licenses are refused. The be/src/util/jsonb* part also points to Facebook's BSD license with a separate patent grant whose text the file does not hold."
   },
   "kind": "license",
   "found": {
@@ -13,5 +13,6 @@
   "files": [
     "8de7cd61de61c05d2b33abaa0ae8dc949fa53adad3721095332b27c1b8d91a16"
   ],
-  "explanation": ""
+  "explanation": "This is Apache Doris's standard Apache-2.0 text followed by a long list of bundled components. Most parts are allowed (BSD, MIT, PSF-2.0, the Lucent UTF-8 notice, public-domain MurmurHash3, UPL-1.0 or BSD). However, be/tools/FlameGraph/*.pl is under CDDL-1.0, and the bundled elkjs is distributed under the EPL-2.0 alone, which Doris elected. Both licenses are refused. The be/src/util/jsonb* part also points to Facebook's BSD license with a separate patent grant whose text the file does not hold.",
+  "license": "Apache-2.0 AND BSD-3-Clause AND BSD-2-Clause AND MIT AND PSF-2.0 AND LicenseRef-public-domain AND UPL-1.0 AND CDDL-1.0 AND EPL-2.0"
 }
