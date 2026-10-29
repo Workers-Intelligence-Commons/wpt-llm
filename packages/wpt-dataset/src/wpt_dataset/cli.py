@@ -2,8 +2,9 @@
 
     wpt-dataset download [ID ...] [--stream]
                                           fetch sources into the store (all admitted, or the ids
-                                          given), each as its address serves it when asked, several
-                                          at once; a source already there is not fetched again
+                                          given), each as its address serves it when asked (a git
+                                          source at its `revision`), several at once; a source
+                                          already there is not fetched again
                                           unless it is marked for a new download (`wpt-store mark`);
                                           every source is tried, and the failures listed at the end
     wpt-dataset check                     every rule that needs no download
@@ -324,7 +325,7 @@ def cmd_build(args, repo):
 
 
 def cmd_migrate(args, repo):
-    changed = migrate.migrate(repo)
+    changed = migrate.migrate(repo, open_store=lambda: _store(repo))
     print(f"{len(changed)} files rewritten")
     return 0
 

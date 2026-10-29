@@ -10,9 +10,10 @@ import pytest
 
 from wpt_dataset import archives, download, license_check, manifest, robots, sites
 from wpt_dataset.cli import main
-from wpt_dataset.errors import SourceGone
+from wpt_dataset.errors import FetchFailed, SourceGone
 from wpt_dataset.kept import kept
-from wpt_dataset.sources import license_page, source_tree, stored_upstream, upstream_key, upstream_manifest
+from wpt_dataset.sources import (license_page, source_tree, stored_upstream, upstream_key, upstream_manifest,
+                                 upstream_tree)
 from wpt_store.cli import main as store_command
 
 
@@ -71,6 +72,39 @@ def test_download_keeps_each_source_in_bundles_records_its_session_and_reuses_it
         assert line.endswith(f", manifest {upstream_manifest(repo.source(sid), store)}")
     [line] = [line for line in out if line.startswith(f"  {git}: ")]
     assert f" bytes, commit {commit}, manifest " in line  # what the download got, for the record
+
+
+def test_a_git_source_downloads_exactly_its_revision_and_downloads_again_when_it_moves(kit, repo, store, tmp_path):
+    # upstream's later commits may add files no license entry covers: the store holds the commit the source
+    # names, whatever upstream's HEAD is, and a later commit enters only once the revision names it
+    address, first = kit.git_project(tmp_path / "project")
+    folder = tmp_path / "project"
+    (folder / "README.md").write_bytes(b"a later readme\n")
+    (folder / "added.bin").write_bytes(b"\x00\xff a later file\n")
+    kit.run("git", "add", "README.md", "added.bin", cwd=folder)
+    kit.run("git", "commit", "-q", "-m", "later", cwd=folder)
+    later = kit.head(folder)
+    sid = kit.add_source(repo, store, "example", "project", {"type": "git", "address": address, "revision": first})
+
+    tree = upstream_tree(repo.source(sid), store)
+    assert sorted(tree) == sorted([*kit.FILES, *kit.SYMLINKS])
+    assert manifest.content(store, tree["README.md"]) == kit.FILES["README.md"]
+
+    path = repo.root / "data" / "sources" / sid / "source.json"
+    path.write_text(kit.dump_json({**repo.source(sid).data, "revision": later}), encoding="utf-8", newline="\n")
+    kit.download(repo, store, sid)  # not marked: the moved revision is not what the store holds
+
+    tree = upstream_tree(repo.source(sid), store)
+    assert manifest.content(store, tree["README.md"]) == b"a later readme\n" and "added.bin" in tree
+    with store.database() as found:
+        got = [json.loads(row[0])["commit"] for row in
+               found.execute("SELECT got FROM lines WHERE outcome = 'downloaded' ORDER BY time, number")]
+    assert got == [first, later]
+
+    # a commit upstream does not serve (a branch rewritten) fails the source; the store keeps what it held
+    path.write_text(kit.dump_json({**repo.source(sid).data, "revision": "1" * 40}), encoding="utf-8", newline="\n")
+    with pytest.raises(FetchFailed, match=f"does not serve the commit {'1' * 40}"):
+        kit.download(repo, store, sid)
 
 
 def test_downloads_running_at_once_give_what_one_at_a_time_gives(kit, repo, store, tmp_path, http_folder,

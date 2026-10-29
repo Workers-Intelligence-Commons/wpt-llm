@@ -6,8 +6,8 @@
   "additionalProperties": false,
   "required": ["type", "address", "licenses", "formats", "decision"],
   "properties": {
-    "type": {"enum": ["http", "git", "mercurial", "empty"], "description": "the protocol that turns the address into files (protocols/): http, one file per address, an archive (by the end of its name: .zip, .tar, .tar.gz, .tgz, .tar.bz2, .tbz2, .tar.xz, .txz) unpacked into its members; git, a repository on any host at the commit its address serves, its large files through LFS (a Hugging Face dataset is one, at https://huggingface.co/datasets/<owner>/<name>); mercurial, a repository at its tip; empty: no upstream, the patches hold every file (text written for WPT)"},
-    "address": {"type": "string", "minLength": 1, "description": "where to fetch it; what upstream serves there when asked is what is taken. The source's id is given when it is created and never derived from the address again, so an address that changes keeps its source. With `addresses`, the first of them"},
+    "type": {"enum": ["http", "git", "mercurial", "empty"], "description": "the protocol that turns the address into files (protocols/): http, one file per address, an archive (by the end of its name: .zip, .tar, .tar.gz, .tgz, .tar.bz2, .tbz2, .tar.xz, .txz) unpacked into its members; git, a repository on any host at the commit `revision` names, its large files through LFS (a Hugging Face dataset is one, at https://huggingface.co/datasets/<owner>/<name>); mercurial, a repository at its tip; empty: no upstream, the patches hold every file (text written for WPT)"},
+    "address": {"type": "string", "minLength": 1, "description": "where to fetch it; what upstream serves there when asked is what is taken, and for a git source the commit `revision` names. The source's id is given when it is created and never derived from the address again, so an address that changes keeps its source. With `addresses`, the first of them"},
     "addresses": {
       "type": "array",
       "minItems": 2,
@@ -23,6 +23,7 @@
         }
       }
     },
+    "revision": {"type": "string", "pattern": "^[0-9a-f]{40}$", "description": "git only, and required there: the full id of the commit the download fetches; a later upstream commit is taken only once this field names it"},
     "extract": {
       "type": "object",
       "additionalProperties": false,
@@ -37,15 +38,15 @@
       "type": "object",
       "additionalProperties": false,
       "required": ["since"],
-      "description": "git only: the commit history from `since` to the commit the download gets, one file `.git/history/<commit>` per commit without merges, in git format-patch layout, limited to the files `extract` keeps",
+      "description": "git only: the commit history from `since` to `revision`, one file `.git/history/<commit>` per commit without merges, in git format-patch layout, limited to the files `extract` keeps",
       "properties": {
-        "since": {"type": "string", "pattern": "^([0-9a-f]{40}|[0-9a-f]{64})$", "description": "the first commit kept: the one from which the repository's root license file holds the license the source lists"}
+        "since": {"type": "string", "pattern": "^([0-9a-f]{40}|[0-9a-f]{64})$", "description": "the first commit kept, an ancestor of `revision`: the one from which the repository's root license file holds the license the source lists"}
       }
     },
     "submodules": {
       "type": "object",
       "minProperties": 1,
-      "description": "git only: the address of each kept submodule, by its path from the source's root (a submodule's own submodules too); its files are read at the commit the tree pins. An excluded submodule needs none",
+      "description": "git only: the address of each kept submodule, by its path from the source's root (a submodule's own submodules too); its files are read at the commit the tree of `revision` names for it. An excluded submodule needs none",
       "additionalProperties": {"type": "string", "minLength": 1}
     },
     "licenses": {
@@ -267,8 +268,9 @@
       "then": {"properties": {"extract": {"not": {"required": ["name"]}}}}
     },
     {
-      "if": {"properties": {"type": {"not": {"const": "git"}}}},
-      "then": {"not": {"anyOf": [{"required": ["history"]}, {"required": ["submodules"]}]}}
+      "if": {"properties": {"type": {"const": "git"}}},
+      "then": {"required": ["revision"]},
+      "else": {"not": {"anyOf": [{"required": ["revision"]}, {"required": ["history"]}, {"required": ["submodules"]}]}}
     }
   ],
   "$defs": {

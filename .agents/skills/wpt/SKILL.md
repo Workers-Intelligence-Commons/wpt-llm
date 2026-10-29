@@ -7,13 +7,15 @@ description: How to work in the WPT repository (Workers' Pre-trained Transformer
 
 WPT trains a language model only on content whose license is clear. The
 repository holds pointers to the data, not the data: every source is a
-`data/sources/<id>/source.json` with its address, its license entries
+`data/sources/<id>/source.json` with its address (and, for a git source,
+the full id of the commit it downloads, `revision`), its license entries
 (each with the place of its statement, the license texts expected there
 and its own decision) and its decision; the license texts are items of
 `data/license-texts/<id>/`; everything fetched or built lives in a store
 named by the `WPT_STORE` setting (environment, or `.env` at the root).
-The content is not pinned: a download takes what upstream serves when
-asked. The documents in
+A git source is pinned to its `revision`, which whoever writes the source
+writes; any other source is not pinned, and a download takes what upstream
+serves when asked. The documents in
 `docs/` hold every decision; read the one that covers your change before
 changing it. Every text in the repository, this skill included, describes
 only the current state: no decision dates, no history, and a change may
@@ -59,7 +61,7 @@ where a step needs them, run through Docker Desktop.
 | Job | Command | Reads | Writes |
 | --- | --- | --- | --- |
 | id of a new source | `uv run wpt-dataset source-id ORIGIN [ITEM] ADDRESS` (given once, when the source is created; an address that changes later keeps the id) | | prints the id |
-| download sources into the store | `uv run wpt-dataset download [ID ...] [--stream]` (no ID: every admitted source; several at once, at most as many from one site, and at most as many requests to a site in a span of time, as `packages/wpt-dataset/src/wpt_dataset/sites.txt` says; each as its address serves it when asked; a source is downloaded only when the store does not hold it (a new source, an address or fetch options that changed) or when it is marked; a failed download stores nothing and the store keeps what it held; `--stream`: no copy kept on this machine) | the upstream | the store: its bundles, its database, its run record `records/<folder>/` |
+| download sources into the store | `uv run wpt-dataset download [ID ...] [--stream]` (no ID: every admitted source; several at once, at most as many from one site, and at most as many requests to a site in a span of time, as `packages/wpt-dataset/src/wpt_dataset/sites.txt` says; each as its address serves it when asked, a git source at exactly its `revision`; a source is downloaded only when the store does not hold it (a new source, an address, revision or fetch options that changed) or when it is marked; a failed download stores nothing and the store keeps what it held; `--stream`: no copy kept on this machine) | the upstream | the store: its bundles, its database, its run record `records/<folder>/` |
 | ask for fresh content | `uv run wpt-store mark ID [ID ...]` or `--all` (the next download of each fetches it in full, though the store holds it) | | the store database |
 | what the store holds and when it was downloaded | `uv run wpt-store list` | the store database | prints every session and each source's last outcome, whether it is marked, and last download |
 | copy a kept model out of the store | `uv run wpt-store copy-out NAME FOLDER` (NAME: the run's name; FOLDER must not exist; every file checked against its sha256) | the store's `models/NAME` | FOLDER |

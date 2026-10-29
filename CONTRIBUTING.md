@@ -80,6 +80,10 @@ together.
    (what upstream serves there when asked is what is taken), a `decision`
    stating `"under-review"`, with your name (`by`) and today's `date`, and
    the same decision in each license entry (see "Decisions are signed").
+   A git source also names, in `revision`, the full id of the commit you
+   reviewed (40 hexadecimal characters): the download fetches exactly
+   that commit, so upstream's later commits enter only when a person moves
+   `revision` and reviews them.
    Map every path to exactly one license entry in `licenses`, and to
    exactly one format in `formats` (how it becomes Markdown,
    [docs/architecture.md](docs/architecture.md), "Documents are Markdown":
@@ -141,11 +145,12 @@ together.
    another file of the same record ([docs/architecture.md](docs/architecture.md),
    "Documents are Markdown").
    A git source may add its history: `"history": {"since": "<commit>"}`
-   gives one file `.git/history/<commit>` per commit from `since` to the
-   commit the download gets (merges left out), in `git format-patch` layout and limited
+   gives one file `.git/history/<commit>` per commit from `since` to
+   `revision` (merges left out), in `git format-patch` layout and limited
    to the files `extract` keeps, and `.git/history/order`, the commits'
    order with the merges marked. `since` is the commit from which the root
-   license file holds the license the source lists; give these files a
+   license file holds the license the source lists, an ancestor of
+   `revision`; give these files a
    `code` format with the language `patch` and a license entry of their
    own, `.git/history/**`: no other pattern covers them
    ([docs/licenses.md](docs/licenses.md), "Rules").
@@ -253,14 +258,15 @@ decisions.
 
 ## Changing a source
 
-- **New address or newer version**: edit `address` in place (the "Sources"
+- **New address or newer version**: edit `address` in place, and for a
+  git source `revision`, the full id of the newer commit (the "Sources"
   page of `wpt-web`, or `wpt-dataset save source`). The source keeps its
   id, its decisions and its history; the next download fetches the new
-  address. A cut or patch that no longer applies takes the source out of
-  the builds until it is made again.
+  address or commit. A cut or patch that no longer applies takes the
+  source out of the builds until it is made again.
 - **Fresh content at the same address**: `uv run wpt-store mark <id>`
   (or `--all`) marks it for a new download; the next `download` fetches it
-  in full.
+  in full. A git source then gets the same commit again.
 - **A license that changed**: changing an entry's license, place or
   expected texts sends that entry back to `under-review`; the source's
   decision and its other entries stay.

@@ -276,7 +276,7 @@ def test_a_repository_pointer_takes_the_tags_of_the_files_its_commit_changes(kit
 
 def test_a_new_download_of_a_moved_upstream_with_a_history_asks_only_for_new_files_and_gives_the_full_fetch(
         kit, repo, store, tmp_path, monkeypatch):
-    # given a git source with a history in the store whose upstream moved to a newer commit, downloaded
+    # given a git source with a history in the store whose revision moved to a newer commit, downloaded
     # again: the download asks upstream only for the contents the store lacks (the new file, and an older
     # version only the history's patches read, which no tree holds); git diffs the patches against the
     # contents it takes from the store, so the tree is the one a fetch without the store gives
@@ -297,9 +297,11 @@ def test_a_new_download_of_a_moved_upstream_with_a_history_asks_only_for_new_fil
         "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
                     {"format": "text", "paths": ["LICENSE", "main.py", "notes.txt"]}]})
     later = commit(kit, folder, "print three", {"main.py": b"print(3)\n"})
+    moved = {**repo.source(sid).data, "revision": later}
+    (repo.root / "data" / "sources" / sid / "source.json").write_text(kit.dump_json(moved), encoding="utf-8",
+                                                                     newline="\n")
     with tempfile.TemporaryDirectory() as staging:
-        full = manifest.digest(kit.upstream(repo.source(sid).data, str(folder), download.Staging(staging)))
-    store.mark([sid])  # marked for a new download
+        full = manifest.digest(kit.upstream(moved, str(folder), download.Staging(staging)))
     asked, real = [], git.fetch_blobs
     monkeypatch.setattr(git, "fetch_blobs",
                         lambda address, folder, ids: asked.append(sorted(ids)) or real(address, folder, ids))

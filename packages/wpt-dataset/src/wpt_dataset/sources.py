@@ -48,7 +48,7 @@ from .repo import Patch, Source
 UPSTREAM, UPSTREAM_FILES, UPSTREAM_PAGES = "upstream", "upstream-files", "upstream-pages"
 # what a download reads from a source's description, besides its id and its license pages: a change to any of
 # them is a new download
-FETCHED = ("type", "address", "addresses", "extract", "history", "submodules")
+FETCHED = ("type", "address", "addresses", "revision", "extract", "history", "submodules")
 
 
 def fingerprint(inputs) -> str:

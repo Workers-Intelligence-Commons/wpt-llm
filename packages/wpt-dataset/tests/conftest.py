@@ -275,13 +275,26 @@ class Objects:
         return self.store.put_file(path)
 
 
+def head(address) -> str:
+    """The commit a local git repository's HEAD names."""
+    return run("git", "-C", str(address), "rev-parse", "HEAD").decode().strip()
+
+
+def pinned(data, address) -> dict:
+    """data with, for a git source that names none, the commit its local
+    repository's HEAD names as its `revision`: what the person who writes a
+    git source writes."""
+    return {**data, "revision": head(address)} if data.get("type") == "git" and "revision" not in data else data
+
+
 def upstream(data, address, store):
     """The upstream tree at address, as it serves it, each file's
     content put into store as an object (protocols.fetch); store is a
-    wpt_store store, or a download's Staging."""
+    wpt_store store, or a download's Staging. A git source without a
+    `revision` is fetched at its HEAD (pinned)."""
     with tempfile.TemporaryDirectory(prefix="wpt-test-fetch-") as tmp:
         sink = store if isinstance(store, downloading.Staging) else Objects(store)
-        return protocols.fetch(data, address, sink, Path(tmp)).tree
+        return protocols.fetch(pinned(data, address), address, sink, Path(tmp)).tree
 
 
 def session(store, command="test"):
@@ -307,8 +320,11 @@ def add_source(repo, store, origin, item, data, patches=(), fetch=True):
     its own for the history files when it has any; its statement is the
     upstream's LICENSE file (PLACE), or without one its first file, whose
     text becomes an admitted license text of the repository (stated), so
-    the build lets its files train. Returns the source id."""
+    the build lets its files train. A git source without a `revision` gets
+    the commit its local repository's HEAD names (pinned). Returns the
+    source id."""
     data = {"formats": [{"format": "text", "paths": ["**"]}], "decision": DECISION, **data}
+    data = pinned(data, data["address"])
     if "licenses" not in data:
         paths, place = [], ITSELF
         if data["type"] != "empty":

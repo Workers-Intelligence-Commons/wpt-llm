@@ -14,7 +14,7 @@ SID = f"example-book-{address_hash(ADDRESS)}"
 LICENSE_TEXT = "Copyright (c) 2026 Test Author\n\nPermission is hereby granted.\n"
 REVIEWED = text_id(LICENSE_TEXT.encode())  # the license text LICENSE_TEXT is, in the repository
 DOCUMENT = {
-    "type": "git", "address": ADDRESS,
+    "type": "git", "address": ADDRESS, "revision": "0" * 40,
     "licenses": [{"license": "MIT", "paths": ["book/**"], "attribution": "Copyright (c) 2026 Test Author",
                   "place": {"file": "book/LICENSE"}, "expected": [REVIEWED], "text": LICENSE_TEXT,
                   "decision": {"decision": "under-review", "by": "Test Reviewer", "date": "2026-10-15"}}],

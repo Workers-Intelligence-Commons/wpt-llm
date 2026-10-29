@@ -21,9 +21,11 @@ from, the license of every path with the place where its license
 statement must be found and the credit it asks for, how each file becomes
 Markdown, and the signed human decisions that admit or refuse it. The data
 itself is downloaded into a store you control (a folder or an S3 bucket),
-as upstream serves it when asked, and every build checks each license
-statement against the bytes the store holds. A rebuild gives today's
-content, license-checked, not the same bytes as an earlier one. The
+as upstream serves it when asked (a git repository at the one commit its
+source names), and every build checks each license statement against the
+bytes the store holds. A rebuild gives each git source at that commit and
+every other source's current content, license-checked, so it may not give
+the same bytes as an earlier one. The
 document list a model's dataset keeps (the sha256 of each document's
 Markdown) records what that model trained on. WPT hosts no data.
 

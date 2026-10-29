@@ -4,15 +4,18 @@
 description of every source (where it is fetched from, how, its license
 entries and the decisions on them), the license texts, patches and build
 recipes. The data itself is downloaded into a store, as upstream serves it
-when asked, and every build checks it, on the bytes the store holds.
+when asked (a git repository at the commit its source names), and every
+build checks it, on the bytes the store holds.
 
 - The repository stays small, publishable and reviewable in git.
 - Every change to a source is a patch, separate from the source itself.
 - Licenses are checked against the bytes actually held, at the places each
   source declares, by every build.
-- The content is not pinned. A rebuild from upstream gives today's
-  content, license-checked; a dataset's document list (each document's id
-  and the sha256 of its Markdown) records what a model trained on.
+- A git source is pinned to one commit, its `revision`: upstream's later
+  commits enter only when a person moves it. Every other source is not
+  pinned, so a rebuild from upstream gives its current content,
+  license-checked. A dataset's document list (each document's id and the
+  sha256 of its Markdown) records what a model trained on.
 
 ## Three layers
 
@@ -104,8 +107,9 @@ A source's `type` names its protocol:
   address's last path part) ends as an archive's (`.zip`, `.tar`,
   `.tar.gz`, `.tgz`, `.tar.bz2`, `.tbz2`, `.tar.xz`, `.txz`) is unpacked
   into its members; any other is one file under that name.
-- `git`: a repository on any host, at the commit its address serves when
-  asked. Its options are `history.since`, `submodules`, and LFS: a file the
+- `git`: a repository on any host, at exactly the commit the source's
+  `revision` names. Its options are `history.since`, `submodules`, and
+  LFS: a file the
   repository stores outside itself is fetched by its sha256 through the
   host's LFS batch request. A Hugging Face dataset is such a repository
   (`https://huggingface.co/datasets/<owner>/<name>`): its file list comes
@@ -159,7 +163,12 @@ erasure cuts. An id is never reused.
 - `type`: the protocol ([Protocols](#protocols)). An `empty` source's
   `address` is a name, `empty:<name>`.
 - `address`: where to fetch it. What upstream serves there when asked is
-  what is taken; nothing pins a version or a checksum.
+  what is taken; only a git source names a version, its `revision`, and no
+  source names a checksum.
+- `revision` (git only, required): the full id of the commit the download
+  fetches, 40 hexadecimal characters. Whoever writes a git source writes
+  it; a later upstream commit enters only once a person writes its id
+  here, and the check refuses a git source without one.
 - `addresses` (`http` only): one source fetched from several addresses,
   each into its own folder of the source's tree, for a publisher that puts
   documents in one archive and their metadata in another:
@@ -191,14 +200,15 @@ erasure cuts. An id is never reused.
   tags.
 - `mirrors`: other addresses for the same source, with no promise of
   identical bytes.
-- `history` (git only): adds one file per commit from `since` to the
-  commit the download gets, `.git/history/<commit>`, in `git format-patch`
-  layout. A commit that also changes files `extract` leaves out gets a
+- `history` (git only): adds one file per commit from `since` to
+  `revision`, `.git/history/<commit>`, in `git format-patch` layout;
+  `since` must be an ancestor of `revision`. A commit that also changes
+  files `extract` leaves out gets a
   diff limited to the kept paths; when a kept path is also the folder of
   paths left out (a submodule replacing a folder of the same name), those
   paths are excluded from the diff by name. One more file,
   `.git/history/order`, holds the commit order: every commit from `since`
-  to that commit, merges included, newest first and each before its
+  to `revision`, merges included, newest first and each before its
   parents (git's topological order), one per line, a merge's line ending
   in ` merge`. The order file is part of the stored tree, so the tree's
   manifest covers it. It is not a training document: `markdown.documents`,
@@ -206,7 +216,7 @@ erasure cuts. An id is never reused.
   starting with `.git/history/` give these files their license entry
   ([licenses.md](licenses.md), "Rules").
 - `submodules` (git only): the address of each submodule the source reads,
-  by its path.
+  by its path, read at the commit the tree of `revision` names for it.
 - `cuts`: erasure cuts; see [erasure.md](erasure.md).
 - `held_out_by`: a `pattern` (a Python regular expression) searched in each
   document's path; where it is found, the held-out hash reads its groups
@@ -420,7 +430,7 @@ files instead.
 
 | Result | Fingerprint covers |
 | --- | --- |
-| upstream tree (what the download stored) | the source's id and what its download reads: its `type`, `address`, `addresses`, `extract`, `history`, `submodules`, and the outside license pages its entries declare |
+| upstream tree (what the download stored) | the source's id and what its download reads: its `type`, `address`, `addresses`, `revision`, `extract`, `history`, `submodules`, and the outside license pages its entries declare |
 | final source tree (and the check that its files are text) | the upstream tree's manifest, the license pages stored with it, cuts (and the cut key), each patch's sha256, the formats (they decide each file's encoding), the code |
 | what a source keeps for training, and its check result | the final tree, the license pages, the license entries, the code |
 | vocabulary | the code, tokenizer recipe (with its `version`), the documents it is trained on (id and sha256 of their Markdown); frozen by the recipe's lock until `version` is raised ([tokenizer.md](tokenizer.md)) |
@@ -478,14 +488,16 @@ A source is downloaded when, and only when:
 
 - the store does not hold it. The store names a source's upstream tree by
   its id and everything its download reads (its `type`, addresses,
-  `extract`, `history.since`, `submodules` and the outside license pages
-  its entries declare), so a new source, an address that changed and
-  changed fetch options all find nothing held; a changed license page
+  `revision`, `extract`, `history.since`, `submodules` and the outside
+  license pages its entries declare), so a new source, an address that
+  changed, a revision moved to another commit and changed fetch options
+  all find nothing held; a changed license page
   downloads the whole source again, so the tree and its pages come from
   the same moment;
 - or it is marked in the store database for a new download, after its
   last download (`wpt-store mark ID ...`, or `--all` for every source): a
-  person's way to ask for fresh content.
+  person's way to ask for fresh content. A marked git source downloads
+  the same commit again: only a new `revision` brings a later one.
 
 Nothing else triggers it: no question to upstream about changes, no server
 hint (length, date, ETag). A stale store is accepted.
@@ -506,13 +518,18 @@ stores nothing for that source: no ref names what it fetched, and the
 store keeps what it held before. A tree's files that a patch leaves as
 they were keep where they lie.
 
+A git source fetches the commit its `revision` names, and only that
+commit. A server that serves only branch and tag tips is asked for those,
+and the commit must be among what they hold; an address that does not
+serve the commit fails with `FetchFailed`, naming it.
+
 A git source asks its server only for the files the store does not hold
 already: the store database maps each git object id it has stored to that
-file's sha256 and place, for every source alike, so a commit that moved
-fetches only the files that changed. The map gives a session only places
-in its own bundles or in bundles of sessions that have ended, which are
-never rewritten or deleted, so no session's end deletes a bundle another
-session's file list names.
+file's sha256 and place, for every source alike, so a revision moved to
+another commit fetches only the files that changed. The map gives a
+session only places in its own bundles or in bundles of sessions that
+have ended, which are never rewritten or deleted, so no session's end
+deletes a bundle another session's file list names.
 
 An archive of an `http` source is read while it downloads
 (`wpt_dataset/archives.py`): each member goes straight into the session's
@@ -976,7 +993,11 @@ leaves empty and the check then names each file to fill in. The steps today:
   review" becomes `under-review` without that reason, and `retired` becomes
   `refused`, keeping its reason; the tags `sft`, `grpo` and `token-efficiency`
   become `answer-as-assistant`, `finish-tasks` and
-  `finish-tasks-with-less-writing` in every tag list.
+  `finish-tasks-with-less-writing` in every tag list; a git source without
+  `revision` gets the commit it was reviewed at: the last `revision` its
+  `source.json` held in the repository's git history, else the commit its
+  last download in the store got, else an empty one for a person to
+  fill in. Only the service layer reads that history.
 - model recipes: the architecture of an earlier model (`n_embd`, gated MLA)
   becomes the current one, its numbers a person fills in; the window length
   in the architecture and the `training` steps and batch size become one

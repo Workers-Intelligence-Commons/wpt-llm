@@ -201,6 +201,62 @@ def test_migrating_a_source_without_credit_text_or_formats_asks_a_person_for_att
     assert migrate(repo, log=lambda _: None) == [] and repo.check() == []
 
 
+def test_a_git_source_without_a_full_commit_as_its_revision_is_refused(kit, repo, store, git_upstream):
+    # a git source downloads exactly the commit it names, so the check refuses one that names none
+    sid = kit.add_source(repo, store, "example", "ok", {"type": "git", "address": git_upstream[0]}, fetch=False)
+    path = repo.root / "data" / "sources" / sid / "source.json"
+    document = json.loads(path.read_text())
+    assert document["revision"] == git_upstream[1] and repo.check() == []
+    for revision in ("", "main", git_upstream[1][:12]):
+        path.write_text(dump_json({**document, "revision": revision}))
+        assert any(sid in problem and "revision" in problem for problem in repo.check()), revision
+    path.write_text(dump_json({key: value for key, value in document.items() if key != "revision"}))
+    assert any(sid in problem and "a git source without its revision" in problem for problem in repo.check())
+
+    book = kit.add_source(repo, store, "example", "book", {"type": "http", "address": "https://example.org/b.txt",
+                                                           "licenses": [kit.entry(["b.txt"])]}, fetch=False)
+    book_path = repo.root / "data" / "sources" / book / "source.json"
+    book_path.write_text(dump_json({**json.loads(book_path.read_text()), "revision": git_upstream[1]}))
+    assert any(book in problem for problem in repo.check())  # only a git source names a commit
+
+
+def test_migrating_a_git_source_gives_it_the_commit_it_was_reviewed_at_else_its_last_download(kit, repo, store, git_upstream):
+    # the revision a source was reviewed at is the last one its source.json held in the repository's git
+    # history; a source whose history holds none takes the commit its last download in the store got; with
+    # neither, only a person can choose it, so it stays empty and the check names the file
+    reviewed, downloaded = git_upstream[1], "d" * 40
+
+    def added(n, name):
+        sid = kit.add_source(repo, store, "example", name, {"type": "git", "address": git_upstream[0] + "/" * n},
+                             fetch=False)
+        return sid, repo.root / "data" / "sources" / sid / "source.json"
+
+    def unpinned(path):
+        path.write_text(dump_json({key: value for key, value in json.loads(path.read_text()).items()
+                                   if key != "revision"}))
+
+    kit.run("git", "init", "-q", cwd=repo.root)
+    first = added(0, "reviewed")
+    kit.run("git", "add", "-A", cwd=repo.root)
+    kit.run("git", "commit", "-q", "-m", "a source at its revision", cwd=repo.root)
+    unpinned(first[1])
+    later = [added(1, "downloaded"), added(2, "unknown")]  # their history never holds a revision
+    for _, path in later:
+        unpinned(path)
+    kit.run("git", "add", "-A", cwd=repo.root)
+    kit.run("git", "commit", "-q", "-m", "sources without a revision", cwd=repo.root)
+    ids, paths = zip(first, *later)
+    with kit.session(store) as running:  # a download of each of the first two, at a commit the store records
+        for sid in ids[:2]:
+            running.line(sid, "downloaded", "test", got={"commit": downloaded, "manifest": "0" * 64})
+
+    with pytest.raises(InvalidFile, match=re.escape(str(paths[2]))):
+        migrate(repo, log=lambda _: None, open_store=lambda: store)
+    assert [json.loads(path.read_text())["revision"] for path in paths] == [reviewed, downloaded, ""]
+    assert [problem for problem in repo.check() if "revision" in problem] and \
+        all(ids[2] in problem for problem in repo.check() if "revision" in problem)
+
+
 def test_a_license_expression_passes_when_one_alternative_is_allowed(kit, repo, store, git_upstream):
     # WPT uses dual-licensed content under the alternative it allows; licenses
     # joined by AND all apply, so each must be allowed; an exception after WITH

@@ -127,7 +127,7 @@ def built(tmp_path, monkeypatch):
     repo = Repo(root)
     store = open_store((tmp_path / "store").as_uri())
     def admitted(name, upstream, commit, license, attribution, text, formats, tags, held_out_by=None):
-        data = {"type": "git", "address": str(upstream), "licenses": [{"license": license, "paths": ["**"], "attribution": attribution, "text": text}],
+        data = {"type": "git", "address": str(upstream), "revision": commit, "licenses": [{"license": license, "paths": ["**"], "attribution": attribution, "text": text}],
                 "formats": formats, "tags": tags, **({"held_out_by": held_out_by} if held_out_by else {}),
                 "decision": {"decision": "admitted", "by": "T", "date": "2026-10-14", "reason": "test"}}
         data = covered(data, root)

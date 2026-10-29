@@ -1,10 +1,13 @@
-"""The git protocol: a repository on any host, at the commit its address
-serves when asked (its HEAD).
+"""The git protocol: a repository on any host, at the commit the source's
+`revision` names.
 
     robots.txt of the address's site   -> read first, for the address and the two paths a fetch asks for
                                           (robots.py); a refusal is CrawlForbidden
-    the commit, without file contents  -> a partial fetch (a server that offers none sends the contents
-                                          too); with `history.since`, the commits since then as well
+    the commit `revision`, without     -> a partial fetch of that commit (a server that serves only branch
+    file contents                         and tag tips is asked for those, and the commit must be among
+                                          what they hold; a server that offers no partial fetch sends the
+                                          contents too); with `history.since`, the commits since then as
+                                          well, `since` an ancestor of `revision`
     the kept files' contents           -> only those the store does not hold: the git objects the store
                                           database's map knows (what the extractor stores into gives
                                           them, known_objects) are taken from the store, their sha256 with
@@ -20,11 +23,13 @@ serves when asked (its HEAD).
 A Hugging Face dataset is such a repository: its file list comes from git,
 and only the kept files are fetched, its large files through LFS.
 
-What it got, for the record: {"commit": the commit the address served}.
+What it got, for the record: {"commit": `revision`}.
 
 Failures: what protocols.base.named makes of what git and urllib raise
 (SourceGone, TooManyRequests, ServerError, AccessRefused, HostUnreachable,
-Incomplete, FetchFailed); CrawlForbidden, RobotsUnreadable (robots.py);
+Incomplete, FetchFailed); FetchFailed for a commit the address does not
+serve (the source's `revision`, or the one the parent names for a
+submodule); CrawlForbidden, RobotsUnreadable (robots.py);
 the failures of lfs.py; UnsupportedEntry for a kept submodule with no
 address in `submodules`, an address `submodules` lists for no kept
 submodule, or a tree entry that is neither a file nor a symlink; BadPath
@@ -37,7 +42,7 @@ import subprocess
 from pathlib import Path
 
 from .. import lfs, manifest, retry, robots
-from ..errors import UnsupportedEntry
+from ..errors import FetchFailed, UnsupportedEntry
 from ..manifest import Extractor
 from .base import USER_AGENT
 
@@ -49,21 +54,19 @@ ENGLISH = {**os.environ, "LC_ALL": "C", "LANGUAGE": "", "GIT_TERMINAL_PROMPT": "
 
 
 def fetch(address: str, data: dict, extractor: Extractor, tmp: Path) -> dict:
-    """The files of the commit address serves added to extractor (see the
-    module's docstring), its repositories in the empty folder tmp."""
+    """The files of the commit data's `revision` names added to extractor
+    (see the module's docstring), its repositories in the empty folder tmp."""
     robots.check(address, "git", USER_AGENT)  # before anything is downloaded
     since = data["history"]["since"] if data.get("history") else None
-    listed, found, served = data.get("submodules", {}), set(), None
-    pending = [("", address, None, since)]
+    listed, found = data.get("submodules", {}), set()
+    pending = [("", address, data["revision"], since, "`revision`")]
     store = extractor.store
     for number in itertools.count():
         if not pending:
             break
-        prefix, address, revision, since = pending.pop(0)
+        prefix, address, revision, since, named = pending.pop(0)
         repo = tmp / f"repo-{number}"
-        fetch_commit(address, revision, repo, full=since is not None)
-        revision = revision or _head(repo)
-        served = served or revision
+        fetch_commit(address, revision, repo, named, full=since is not None)
         history = manifest.git_history_blobs(repo, revision, extractor, since)
         in_tree = manifest.git_blobs_needed(repo, revision, extractor, None, prefix)
         needed = list(dict.fromkeys(in_tree + history))
@@ -87,10 +90,10 @@ def fetch(address: str, data: dict, extractor: Extractor, tmp: Path) -> dict:
                 raise UnsupportedEntry(f"{path}: a submodule with no address in `submodules`; list it or exclude it")
             robots.check(listed[path], "git", USER_AGENT)
             found.add(path)
-            pending.append((path + "/", listed[path], commit, None))
+            pending.append((path + "/", listed[path], commit, None, f"the commit its parent names for {path}"))
     if unused := sorted(set(listed) - found):
         raise UnsupportedEntry(f"`submodules` lists {', '.join(unused)}, not a kept submodule of the commit")
-    return {"commit": served}
+    return {"commit": data["revision"]}
 
 
 def _large(address: str, folder: Path):
@@ -107,11 +110,11 @@ def _large(address: str, folder: Path):
     return large
 
 
-def fetch_commit(address: str, revision: str | None, repo: Path, full=False):
-    """The commit `revision` (None: the one the address's HEAD names, kept as
-    the repository's FETCH_HEAD) without file contents (git's partial
-    fetch); with `full`, its whole history too. A server that does not offer
-    partial fetches sends the contents as well."""
+def fetch_commit(address: str, revision: str, repo: Path, named: str, full=False):
+    """The commit `revision` without file contents (git's partial fetch);
+    with `full`, its whole history too. A server that does not offer partial
+    fetches sends the contents as well. FetchFailed when the address does
+    not serve that commit, its message saying what names it (named)."""
     subprocess.run(["git", "init", "-q", "--bare", str(repo)], capture_output=True, check=True)
     git = ["git", "-c", f"http.userAgent={USER_AGENT}", "-C", str(repo)]
     for setting in (["remote", "add", "origin", address], ["config", "remote.origin.promisor", "true"],
@@ -123,21 +126,15 @@ def fetch_commit(address: str, revision: str | None, repo: Path, full=False):
         retry.call(lambda: subprocess.run([*git, "fetch", "-q", "--no-tags", "--filter=blob:none", *what],
                                           capture_output=True, check=True, env=ENGLISH), address)
 
-    if revision is None:
-        fetch(*depth, "origin", "HEAD")
-        return
     try:
         fetch(*depth, "origin", revision)
     except subprocess.CalledProcessError:  # some servers only serve branch and tag tips
         fetch("origin", "+refs/heads/*:refs/heads/*", "+refs/tags/*:refs/tags/*")
-    subprocess.run(["git", "-C", str(repo), "cat-file", "-e", f"{revision}^{{commit}}"], capture_output=True,
-                   check=True, env=ENGLISH)
-
-
-def _head(repo: Path) -> str:
-    """The commit a fetch of the address's HEAD gave (fetch_commit)."""
-    return subprocess.run(["git", "-C", str(repo), "rev-parse", "FETCH_HEAD^{commit}"], capture_output=True,
-                          check=True).stdout.decode().strip()
+    # GIT_NO_LAZY_FETCH: a commit the fetches did not bring is not asked for again
+    held = subprocess.run(["git", "-C", str(repo), "cat-file", "-e", f"{revision}^{{commit}}"], capture_output=True,
+                          env={**ENGLISH, "GIT_NO_LAZY_FETCH": "1"})
+    if held.returncode:
+        raise FetchFailed(f"{address}: does not serve the commit {revision} ({named})")
 
 
 def fetch_blobs(address: str, repo: Path, object_ids: list[str]):

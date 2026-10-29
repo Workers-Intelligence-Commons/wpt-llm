@@ -250,7 +250,7 @@ def git_source(tmp_path, root, store, folder_name, files, data, fetched=True):
     decision = {"decision": "admitted", "by": "T", "date": "2026-10-23", "reason": "test"}
     # its statement in LICENSE, as the license text the root holds expects
     place = {"place": {"file": "LICENSE"}, "expected": sorted(p.name for p in (root / "data" / "license-texts").iterdir())}
-    data = {"type": "git", "address": str(folder), "licenses": [{"license": "MIT", "paths": sorted(map(exact_pattern, files)),
+    data = {"type": "git", "address": str(folder), "revision": commit, "licenses": [{"license": "MIT", "paths": sorted(map(exact_pattern, files)),
                                                                  "attribution": "T", **place, "text": "Copyright T\n",
                                                                  "decision": decision}],
             "formats": [{"format": "text", "paths": ["**"]}], "decision": decision, **data}

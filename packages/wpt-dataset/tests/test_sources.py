@@ -519,7 +519,7 @@ def test_each_way_upstream_fails_is_named(kit, store, monkeypatch):
                 (f"{base}/forbidden", "mercurial", AccessRefused),
                 (f"{base}/cut.txt", "http", Incomplete), (f"{base}/archive.tar.gz", "http", Incomplete)):
             with pytest.raises(failure, match=f"^{address}") as raised:
-                kit.upstream({"type": kind}, address, store)
+                kit.upstream({"type": kind, **({"revision": "0" * 40} if kind == "git" else {})}, address, store)
             assert type(raised.value) is failure
     finally:
         server.shutdown()

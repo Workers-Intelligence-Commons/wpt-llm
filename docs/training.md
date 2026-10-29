@@ -2091,7 +2091,8 @@ round's value is `mean_reward`). Its settings are those of `finish-tasks`
 **The data is exactly repeatable from the same store**, for audits: the
 same stored bytes, cuts, patches, vocabulary and code give the same tokens.
 A rebuild from upstream is not: a new download takes what upstream serves
-when asked, and the dataset's document list (each document's id and the
+when asked (a git source the commit it names, while upstream still serves
+it), and the dataset's document list (each document's id and the
 sha256 of its Markdown) records what a model trained on. Shards are compared by their token hash, which covers
 only their rows, not the bytes of the Parquet file (a newer pyarrow may write
 different bytes for the same tokens).

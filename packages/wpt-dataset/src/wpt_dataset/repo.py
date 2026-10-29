@@ -1740,6 +1740,57 @@ class Repo:
         result = self._git("show", f"{commit}:{path}", check=False)
         return result.stdout if result.returncode == 0 else None
 
+    def committed_values(self, kind: str, names, key: str) -> dict[str, object]:
+        """{name: the value of key in the newest version of that file, in
+        the git history of this repository's HEAD, whose JSON object holds
+        key} for each of the names of files of kind that has one: what a
+        migration step reads where a field an earlier shape held is needed
+        again. {} when the repository is not a git working tree."""
+        places = {self.relative(kind, name): name for name in names}
+        if not places:
+            return {}
+        top = posixpath.commonpath([posixpath.dirname(place) for place in places])
+        log = self._git("-c", "core.quotePath=false", "log", "--format=%x00%H", "--name-only", "--no-renames",
+                        "--", top, check=False)
+        if log.returncode:
+            return {}
+        commits: dict[str, list[str]] = {}  # place -> the commits that changed it, newest first
+        for chunk in log.stdout.decode("utf-8", errors="replace").split("\0")[1:]:
+            commit, *changed = chunk.splitlines()
+            for place in changed:
+                if place in places:
+                    commits.setdefault(place, []).append(commit)
+        found, depth = {}, 0
+        while asked := [(place, versions[depth]) for place, versions in commits.items()
+                        if place not in found and depth < len(versions)]:
+            for (place, _), document in zip(asked, self._committed_json(asked)):
+                if isinstance(document, dict) and key in document:
+                    found[place] = document[key]
+            depth += 1
+        return {places[place]: value for place, value in found.items()}
+
+    def _committed_json(self, asked: list[tuple[str, str]]) -> list[object]:
+        """The JSON of each (place, commit) as that commit holds it, in one
+        git process; None for one the commit does not hold or that is not
+        JSON."""
+        wanted = "".join(f"{commit}:{place}\n" for place, commit in asked).encode()
+        out = subprocess.run([program("git"), "-C", str(self.root), "cat-file", "--batch"], input=wanted,
+                             capture_output=True, check=True).stdout
+        documents, at = [], 0
+        for _ in asked:
+            end = out.index(b"\n", at)
+            header, at = out[at:end].split(), end + 1
+            if len(header) != 3:  # "<name> missing", or ambiguous: the commit does not hold it
+                documents.append(None)
+                continue
+            size = int(header[2])
+            body, at = out[at:at + size], at + size + 1
+            try:
+                documents.append(json.loads(body))
+            except (UnicodeDecodeError, json.JSONDecodeError):
+                documents.append(None)
+        return documents
+
     def signer_lists_at(self, commit: str) -> tuple[bytes | None, bytes | None]:
         """(data/allowed-signers, data/allowed-gpg-keys.asc) as they stood at
         a commit; None for a file the commit does not hold."""

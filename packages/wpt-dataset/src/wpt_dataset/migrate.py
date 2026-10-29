@@ -11,8 +11,10 @@ here, in the list of its kind:
                                 lambda doc, where: {...}))
 
 The change must leave a field difference for `applies` to find. A step gets
-where the file lives too (Where: its name for messages, and the text of a
-file next to it, for the rare step that reads one).
+where the file lives too (Where: its name for messages, the text of a file
+next to it, for the rare step that reads one, and for a git source the
+commit it was reviewed at, from the repository's git history, or else the
+commit its last download got, from the store).
 
 `wpt-dataset migrate` then rewrites every file a step applies to, and
 checks the result against the schema. A file migrate cannot rewrite, such as
@@ -21,7 +23,10 @@ memory by upgrade() each time it is read.
 """
 
 import itertools
+import re
 from typing import Callable, NamedTuple
+
+from wpt_store.listing import listing
 
 from .errors import DatasetError, OutdatedSchema
 from .repo import Repo
@@ -52,10 +57,12 @@ class MigrationIncomplete(DatasetError):
 class Where:
     """Where a file being migrated lives, for a migration step: str() names
     it in messages, sibling_text and remove_sibling read or remove a file
-    beside it (repo.Located)."""
+    beside it (repo.Located), and revision() gives a git source the commit
+    it was reviewed at, else the commit its last download got (Revisions)."""
 
-    def __init__(self, repo: Repo, kind: str, name: str):
+    def __init__(self, repo: Repo, kind: str, name: str, revisions: "Revisions"):
         self._located = repo.located(kind, name)
+        self._name, self._revisions = name, revisions
 
     def __str__(self):
         return str(self._located)
@@ -65,6 +72,56 @@ class Where:
 
     def remove_sibling(self, name: str):
         self._located.remove_sibling(name)
+
+    def revision(self) -> str | None:
+        return self._revisions.of(self._name)
+
+
+COMMIT = re.compile(r"[0-9a-f]{40}")  # the full commit id a git source's `revision` holds
+
+
+def _lacks_revision(document) -> bool:
+    """Whether the document is a git source without `revision`."""
+    return isinstance(document, dict) and document.get("type") == "git" and "revision" not in document
+
+
+class Revisions:
+    """The commit each git source without `revision` (_lacks_revision) gets:
+    the commit it was reviewed at (the last `revision` its source.json held
+    in the repository's git history), else the commit its last download in
+    the store got (wpt_store.listing, the store open_store() gives; none
+    without one), else None. Only a full commit id counts. Read when first
+    asked, for every such source at once: the store only when the history
+    leaves one without it."""
+
+    def __init__(self, repo: Repo, open_store=None):
+        self._repo, self._open_store = repo, open_store
+        self.committed: dict[str, str] | None = None  # source id -> commit, from the repository's history
+        self.downloaded: dict[str, str] = {}  # source id -> commit, from the store, for the others
+
+    def of(self, sid: str) -> str | None:
+        if self.committed is None:
+            self._read()
+        return self.committed.get(sid) or self.downloaded.get(sid)
+
+    def _read(self):
+        lacking = []
+        for sid in self._repo.source_ids():
+            try:
+                document = self._repo.raw("source", sid)
+            except DatasetError:  # the check names it
+                continue
+            if _lacks_revision(document):
+                lacking.append(sid)
+        held = self._repo.committed_values("source", lacking, "revision")
+        self.committed = {sid: value for sid, value in held.items()
+                          if isinstance(value, str) and COMMIT.fullmatch(value)}
+        rest = set(lacking) - set(self.committed)
+        if rest and self._open_store is not None:
+            for state in listing(self._open_store())[0]:
+                commit = (state.got or {}).get("commit")
+                if state.source in rest and isinstance(commit, str) and COMMIT.fullmatch(commit):
+                    self.downloaded[state.source] = commit
 
 
 def _entries(document, key) -> list[dict]:
@@ -157,6 +214,21 @@ def _source_tags(document, _where):
                                  for entry in document["tags"]]}
 
 
+def _source_revision(document, where):
+    """A git source names the commit it downloads (`revision`), placed after
+    its address: the commit it was reviewed at, else the commit its last
+    download got (Where.revision). Where
+    none is known, only a person can choose it, so the step leaves it empty
+    and the check that follows names each file to fill in."""
+    revision = where.revision() or ""
+    migrated = {}
+    for key, value in document.items():
+        migrated[key] = value
+        if key == "address":
+            migrated["revision"] = revision
+    return migrated if "revision" in migrated else {**migrated, "revision": revision}
+
+
 STEPS["source"] += [
     Step("a license entry without its credit", lambda d: any("attribution" not in e for e in _entries(d, "licenses")),
          _source_attribution),
@@ -165,6 +237,7 @@ STEPS["source"] += [
          _source_text, _drop_moved_license_files),
     Step("a decision of an earlier kind", _old_decision, _source_decision),
     Step("a tag that names a step by its old name", _old_tags, _source_tags),
+    Step("a git source without its revision", _lacks_revision, _source_revision),
 ]
 
 # the numbers of the architecture an earlier shape did not hold
@@ -387,16 +460,18 @@ def upgrade(document, kind: str, path, steps=None):
     return _applied(document, kind, path, STEPS if steps is None else steps)[0]
 
 
-def migrate(repo: Repo, steps=None, log=print) -> list[str]:
+def migrate(repo: Repo, steps=None, log=print, open_store=None) -> list[str]:
     """Rewrite every file that is of an earlier shape, through the service
     layer (Repo.rewrite). Returns the places of the files changed
     (data/...). A file a step cannot rewrite (a DatasetError) stays as it
     is, and the others are rewritten: MigrationIncomplete then names each
-    with why."""
+    with why. open_store() gives the store a step may read (Revisions),
+    asked only when one does; without it, the store holds nothing."""
     steps = STEPS if steps is None else steps
     changed, left = [], []
+    revisions = Revisions(repo, open_store)
     for kind, name in repo.versioned():
-        where = Where(repo, kind, name)
+        where = Where(repo, kind, name, revisions)
         try:
             migrated, applied = _applied(repo.raw(kind, name), kind, where, steps)
         except DatasetError as error:

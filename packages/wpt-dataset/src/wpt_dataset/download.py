@@ -1,15 +1,16 @@
 """The download step: sources fetched into the store, each as its address
-serves it when asked, in one session (wpt_store.sessions) of the command
-that runs it. It decides which sources to fetch, asks their protocol
-(protocols/) and writes what they give into the store; it never judges
-licenses or content.
+serves it when asked (a git source at the commit its `revision` names), in
+one session (wpt_store.sessions) of the command that runs it. It decides
+which sources to fetch, asks their protocol (protocols/) and writes what
+they give into the store; it never judges licenses or content.
 
-A source is downloaded when, and only when (its three triggers):
+A source is downloaded when, and only when (its triggers):
 
     the store does not hold it          the store keys what it holds by sources.upstream_key: its
-                                        address and how it is fetched (`extract`, `history.since`,
-                                        `submodules`, its protocol, its license pages), so a source
-                                        whose address or fetch options changed is not held either
+                                        address and how it is fetched (`revision`, `extract`,
+                                        `history.since`, `submodules`, its protocol, its license
+                                        pages), so a source whose address, revision or fetch options
+                                        changed is not held either
     it is marked                        the store database holds a mark for it, or for every source,
                                         made after its last download (Session.marked; `wpt-store
                                         mark`): a person's way to ask for fresh content

@@ -41,7 +41,7 @@ def task_source(built, root, upstream, check="#!/bin/sh\necho 1\n", folders=("he
     for args in (["init", "-q"], ["add", "-A"], ["commit", "-q", "-m", "x"]):
         subprocess.run(["git", *args], cwd=upstream, env=GIT_ENV, check=True)
     commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=upstream, capture_output=True, text=True).stdout.strip()
-    data = {"type": "git", "address": str(upstream), "licenses": [{"license": "CC0-1.0", "paths": ["**"], "attribution": "Tasks, by Cy Author, 2026",
+    data = {"type": "git", "address": str(upstream), "revision": commit, "licenses": [{"license": "CC0-1.0", "paths": ["**"], "attribution": "Tasks, by Cy Author, 2026",
                           "text": "Cy Author dedicates these tasks to the public domain.\n"}],
             "formats": [{"format": "task", "paths": ["**"]}], "tags": [{"tags": ["eval"], "paths": ["**"]}],
             "decision": {"decision": "admitted", "by": "T", "date": "2026-10-17"}}
@@ -155,7 +155,7 @@ def repository(tmp_path, monkeypatch, fetching):
 
     def source(name, tags):
         address = f"https://example.org/{name}"
-        data = {"type": "git", "address": address, "licenses": [{"license": "CC0-1.0", "paths": ["**/*.md", "**/*.py", "src/**"], "attribution": "A",
+        data = {"type": "git", "address": address, "revision": "0" * 40, "licenses": [{"license": "CC0-1.0", "paths": ["**/*.md", "**/*.py", "src/**"], "attribution": "A",
                                                              **fetching.PLACE, "text": "Public domain.\n",
                                                              "decision": ADMITTED}],
                 "formats": [{"format": "text", "paths": ["**"]}], "tags": tags, "decision": ADMITTED}
