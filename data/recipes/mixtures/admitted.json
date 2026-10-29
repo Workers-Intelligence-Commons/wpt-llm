@@ -1,0 +1,11 @@
+{
+  "pools": [
+    {
+      "name": "all",
+      "select": "code || !(code)",
+      "weight": 1,
+      "note": "Every document (code || !(code) matches any tags), so every kind of text takes a share by its size; with more tokens than the recipe asks, the build takes a seeded random part of the documents."
+    }
+  ],
+  "note": "Every admitted document, in proportion to its size."
+}

@@ -1,0 +1,70 @@
+{
+  "data": {
+    "mixture": "admitted",
+    "tokenizer": "admitted",
+    "total_tokens": 2925565920,
+    "held_out": 0.001
+  },
+  "model": {
+    "n_layer": 10,
+    "global_attention": [
+      "CSA",
+      "HCA",
+      "CSA"
+    ],
+    "d_model": 512,
+    "kda_heads": 4,
+    "kda_head_dim": 128,
+    "attention_heads": 8,
+    "attention_head_dim": 128,
+    "query_rank": 128,
+    "output_groups": 2,
+    "output_rank": 256,
+    "index_heads": 8,
+    "index_head_dim": 128,
+    "index_top_k": 64,
+    "n_experts": 32,
+    "top_k": 4,
+    "expert_width": 256,
+    "latent_width": 256,
+    "shared_width": 512,
+    "engram_layers": [
+      2
+    ],
+    "engram_order": 3,
+    "engram_heads": 8,
+    "engram_dim": 16,
+    "engram_table_size": 50021
+  },
+  "seed": 1337,
+  "steps": [
+    {
+      "step": "read-text",
+      "optimizer": {
+        "name": "muon"
+      },
+      "settings": {
+        "stages": [
+          {
+            "block_size": 32768,
+            "steps": 2790,
+            "batch_size": 32
+          }
+        ]
+      },
+      "locked": []
+    }
+  ],
+  "drafter": {
+    "prompts": 256,
+    "prompt_tokens": 64,
+    "answer_tokens": 256,
+    "epochs": 10,
+    "learning_rate": 0.0006,
+    "held_out": 0.1,
+    "anchors": 512,
+    "batch": 8,
+    "seed": 0
+  },
+  "note": "The smallest of a series of models for watching behaviors appear as size grows, not for release: 146M parameters (the 102M recipe's width of 512 and its experts, 10 layers; layers 4 and 10 CSA, layer 8 HCA), the admitted mixture's 32,768-token vocabulary, whose two tables are 33.6M of them, and 20 tokens per parameter (about 2.93B), read as 2,790 updates of 32 windows of 32K tokens (1M tokens each). Muon keeps its defaults, the 2,000-update warm-up included. Untested in a full run. Both heads' scores over a 32K window take about 8 GiB in 32-bit, four times those of an 8,192-token vocabulary, so one 16 GB GPU is estimated to need --recompute --micro-batch 1 --segment 8192 (not measured)."
+}

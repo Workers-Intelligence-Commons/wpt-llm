@@ -837,9 +837,9 @@ file lacks.
 A new recipe's name is an adjective and an animal drawn by `uv run
 scripts/recipe_name.py`, among about 11.5 million names, so the name says
 nothing about the GPU or size it was made for; the recipe's `note` says
-that. Three recipes exist, each of one stage (none yet sets V4's 4K, 16K,
-64K and 1M stages), all on the admitted public-domain books (about 4.3M
-tokens) until a larger mixture exists:
+that. Four recipes exist, each of one stage (none yet sets V4's 4K, 16K,
+64K and 1M stages). The first three read the admitted public-domain books
+(about 4.3M tokens); `interstitial-pecker` reads every admitted document:
 
 - `classics-test`: 4.8M parameters, 256-token windows, a test to see every
   step work on one machine. Its one global layer is CSA (4 heads of 128, an
@@ -860,6 +860,17 @@ tokens) until a larger mixture exists:
   for about 8 GB with `--recompute --micro-batch 1`. On an integrated
   Radeon 860M, one 32K window of random tokens peaked at 6.57 GiB
   (training.md); it is meant for a stronger GPU. No full run yet.
+- `interstitial-pecker`: 146M parameters, the smallest of a series for
+  watching behaviors appear as size grows, not for release. It keeps
+  `watery-tardigrade`'s width of 512 and its experts and has 10 layers
+  (layers 4 and 10 CSA, layer 8 HCA), since depth matters more than width
+  below 1B parameters ([MobileLLM](https://arxiv.org/abs/2402.14905)). Its
+  vocabulary is the `admitted` mixture's 32,768 tokens, whose two tables
+  take 33.6M parameters. It reads 20 tokens per parameter (about 2.93B) as
+  2,790 updates of 32 windows of 32K tokens. Both heads' scores over one
+  32K window take about 8 GiB in 32-bit, so one 16 GB GPU is estimated to
+  need `--recompute --micro-batch 1 --segment 8192`; nothing is measured
+  yet. No full run yet.
 
 V4's head width of 512 and its ratios (a latent of a quarter of the width,
 8 heads per output group) do not fit widths of 128 to 512, so the heads are
