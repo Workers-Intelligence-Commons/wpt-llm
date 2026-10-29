@@ -204,6 +204,8 @@ def test_a_file_is_text_in_the_encoding_it_states_and_nothing_is_guessed(data, e
 def test_markdown_check_finds_broken_notes_and_leftover_tags():
     # a converter mistake on a new kind of input must show, not slip into training
     assert problems("Text.[^1] An escaped \\<i> and `<b>` in code.\n\n[^1]: The note.\n") == []
+    # a definition starts a line: a reference before a colon inside a sentence is a reference
+    assert problems("The words of Benavente[^4]:\n\n[^4]: The note.\n") == []
     assert problems("Text.[^2] and <span class=\"x\">more</span>\n\n[^3]: Lost.\n") == [
         "note [^2] has no definition", "note [^3] is defined but never referred to",
         "unescaped HTML tag '<span'", "unescaped HTML tag '</span>'"]

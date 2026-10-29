@@ -23,7 +23,8 @@ from .sources import source_tree
 
 CHECKED = {"text", "xhtml", "html"}
 CODE_SPAN = re.compile(r"(`+)(?!`).*?(?<!`)\1(?!`)", re.S)
-REFERENCE = re.compile(r"(?<!\\)\[\^([^\]\s]+)\](?!:)")
+# a reference: every [^label] but a definition's, which starts a line and is followed by ":"
+REFERENCE = re.compile(r"(?<!\\)(?:(?<!^)\[\^([^\]\s]+)\]|^\[\^([^\]\s]+)\](?!:))", re.M)
 DEFINITION = re.compile(r"^\[\^([^\]\s]+)\]:", re.M)
 TAG = re.compile(r"(?<!\\)</?[A-Za-z][A-Za-z0-9-]*(?:\s|/?>)")
 
@@ -39,7 +40,8 @@ class SourceReport:
 def problems(markdown: str) -> list[str]:
     """What is wrong in one converted document (empty when nothing is)."""
     text = CODE_SPAN.sub("", markdown)
-    references, definitions = set(REFERENCE.findall(text)), set(DEFINITION.findall(text))
+    references = {m.group(1) or m.group(2) for m in REFERENCE.finditer(text)}
+    definitions = set(DEFINITION.findall(text))
     found = [f"note [^{label}] has no definition" for label in sorted(references - definitions)]
     found += [f"note [^{label}] is defined but never referred to" for label in sorted(definitions - references)]
     found += [f"unescaped HTML tag {match.group().strip()!r}" for match in TAG.finditer(text)]
