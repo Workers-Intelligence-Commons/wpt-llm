@@ -23,7 +23,7 @@ ALLOWED = frozenset({
     "CC0-1.0", "Unlicense", "0BSD", "MIT", "MIT-0", "BSD-1-Clause", "BSD-2-Clause", "BSD-2-Clause-Patent",
     "BSD-3-Clause", "ISC", "Apache-2.0", "Zlib", "BSL-1.0", "X11", "NCSA", "PostgreSQL", "UPL-1.0",
     "Python-2.0", "PSF-2.0", "Unicode-3.0", "Unicode-DFS-2016", "Artistic-2.0", "WTFPL", "HPND", "W3C",
-    "curl", "BlueOak-1.0.0",
+    "curl", "BlueOak-1.0.0", "FSFAP", "BSD-3-Clause-No-Nuclear-Warranty",
     # GPLv3 family, which AGPL section 13 accepts
     "GPL-3.0-only", "GPL-3.0-or-later", "LGPL-3.0-only", "LGPL-3.0-or-later",
     "AGPL-3.0-only", "AGPL-3.0-or-later",

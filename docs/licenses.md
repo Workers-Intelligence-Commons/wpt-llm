@@ -434,6 +434,8 @@ alone, without an outside ruling, says so in its row.
 | `Unicode-3.0`, `Unicode-DFS-2016` | FSF: compatible with every GPL version | |
 | `Artistic-2.0` | FSF: compatible through its section 4(c)(ii) | Artistic-1.0 is refused; a choice between Artistic and the GPL is written as an expression (below) |
 | `BlueOak-1.0.0` | Blue Oak Council's model permissive license | no FSF ruling; its text sets no condition the AGPL forbids |
+| `FSFAP` | FSF: the GNU All-Permissive License is "compatible with the GNU GPL", in its older wording without the warranty sentence too | the notice and its copyright line go into `text` |
+| `BSD-3-Clause-No-Nuclear-Warranty` | BSD-3-Clause's terms, plus an acknowledgement that the software is not designed for nuclear facilities: it disclaims a warranty and sets no condition on use (maintainer's decision alone) | the copyright line goes into `text` with the license, as for BSD-3-Clause |
 
 ### GPLv3 family
 
@@ -740,6 +742,9 @@ when it is:
   license that is refused or on no allowed list. Each of those files is
   excluded from the source by its path. A list that names its files too
   vaguely to exclude them keeps the text a doubt.
+- **A choice of law and courts is not a condition on copying or use**,
+  and neither is a statement that the license file itself declares not
+  binding. The license they accompany decides.
 - **GitHub repositories with 10,000 stars or more** are a collection to
   draw sources from, forks and archived ones included, when their license
   is allowed, whether GitHub recognizes the license file or reading the
