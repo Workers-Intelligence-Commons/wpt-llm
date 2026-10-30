@@ -1,18 +1,23 @@
-"""Files on this machine's disk that one live process owns: a bundle being
-filled (wpt_store.sessions), a temporary copy of the store database and a
-session's rows (wpt_store.database), all in the store's cache folder.
+"""Files and folders on this machine's disk that one live process owns: a
+bundle being filled (wpt_store.sessions), a temporary copy of the store
+database and a session's rows (wpt_store.database), all in the store's
+cache folder, and a download's temporary folder (wpt_dataset.download).
 
 Each one lies beside a lock file (its name, then LOCK) that the owning
 process holds; the system releases the lock when the process ends, crash
 included. A file whose lock can be taken is one no live process owns
-(unowned). Removing one removes its files first and its lock file last,
-so a lock file left alone means a removal that did not finish. A lock is
+(unowned); one whose lock file this process may not open belongs to
+another user and is never unowned. Removing one removes its files (a
+folder with everything in it) first and its lock file last, so a lock
+file left alone means a removal that did not finish. A lock is
 held only once its lock file is still the one at that name: a process that
 waited for a lock while another removed its file tries again on the new
 one, so two processes never both hold one file.
 """
 
 import os
+import shutil
+import stat
 import threading
 from pathlib import Path
 
@@ -23,8 +28,8 @@ _held, _held_lock = set(), threading.Lock()  # the local files this process hold
 
 
 class LocalFile:
-    """A local file (path(), and the files beside it whose names add one
-    of endings to its name) and its lock, held by this process: taken here
+    """A local file or folder (path(), and the files beside it whose names
+    add one of endings to its name) and its lock, held by this process: taken here
     (waiting while another process holds it), or the descriptor lock that
     unowned took."""
 
@@ -52,20 +57,21 @@ class LocalFile:
                 _held.discard(self.base)
 
     def remove(self):
-        """The files removed, then the lock released and its file removed."""
+        """The files (a folder with everything in it) removed, then the lock
+        released and its file removed."""
         if self.lock is None:
             return
         try:
             for ending in self.endings:
-                self.path(ending).unlink(missing_ok=True)
+                _remove(self.path(ending))
         finally:
             self.release()
             self.path(LOCK).unlink(missing_ok=True)
 
 
 def unowned(folder, start, endings=("",)) -> list[LocalFile]:
-    """The local files in folder whose name starts with start that no live
-    process owns, their locks taken: those found by any of their files or
+    """The local files (or folders) in folder whose name starts with start
+    that no live process owns, their locks taken: those found by any of their files or
     by their lock file alone. Never one this process holds (the system's
     lock does not keep it from taking its own on every system)."""
     folder = Path(folder)
@@ -88,14 +94,34 @@ def unowned(folder, start, endings=("",)) -> list[LocalFile]:
     return taken
 
 
+def _remove(path: Path):
+    if path.is_dir() and not path.is_symlink():
+        shutil.rmtree(path, onexc=_writable_again)
+    else:
+        path.unlink(missing_ok=True)
+
+
+def _writable_again(function, path, error):
+    """shutil.rmtree's answer to an entry it could not remove: one that is
+    read only (git writes its object files so, and Windows refuses to
+    remove such a file) is made writable and removed again."""
+    if isinstance(error, FileNotFoundError):
+        return
+    if not isinstance(error, PermissionError):
+        raise error
+    os.chmod(path, stat.S_IREAD | stat.S_IWRITE | (stat.S_IEXEC if os.path.isdir(path) else 0))
+    function(path)
+
+
 def _take(lock, wait) -> int | None:
     """The lock of the lock file at lock, held: its descriptor, once the
     file locked is still the one at that name; None, without wait, while
-    another process holds it or after it removed it."""
+    another process holds it, after it removed it, or when this process
+    may not open it (another user's, in a folder several users share)."""
     while True:
         try:
             descriptor = lock_file(lock) if wait else try_lock_file(lock)
-        except FileNotFoundError:  # its folder removed meanwhile
+        except (FileNotFoundError, PermissionError):  # its folder removed meanwhile, or not this user's
             if wait:
                 raise
             return None

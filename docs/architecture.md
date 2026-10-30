@@ -543,6 +543,15 @@ stores nothing for that source: no ref names what it fetched, and the
 store keeps what it held before. A tree's files that a patch leaves as
 they were keep where they lie.
 
+Each download works in a temporary folder of its own,
+`wpt-download-<random>` in the system's temporary folder, beside a lock
+file the process holds while the download runs; the download removes
+both when it ends, whatever its outcome. A process stopped by a signal or
+a crash leaves them, and every new session on the machine removes each
+such folder whose lock it can take, never one a live process holds. A
+folder whose lock file or files it cannot open or remove, such as another
+user's, stays, and the session goes on.
+
 A git source fetches the commit its `revision` names, and only that
 commit. A server that serves only branch and tag tips is asked for those,
 and the commit must be among what they hold; an address that does not
@@ -554,7 +563,10 @@ file's sha256 and place, for every source alike, so a revision moved to
 another commit fetches only the files that changed. The map gives a
 session only places in its own bundles or in bundles of sessions that
 have ended, which are never rewritten or deleted, so no session's end
-deletes a bundle another session's file list names.
+deletes a bundle another session's file list names. A session reads the
+map from the copy of the store database it reads once, on the machine's
+disk, and writes into that copy the git objects of each source it
+downloads, so it finds them again without holding them in memory.
 
 An archive of an `http` source is read while it downloads
 (`wpt_dataset/archives.py`): each member goes straight into the session's

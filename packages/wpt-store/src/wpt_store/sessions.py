@@ -20,7 +20,10 @@ files, which the store database's git_objects table maps from their git
 object id to where the store holds them (known_objects), so a git source
 reuses what another one stored. That table gives out only places that
 stay: in a bundle of a session that has ended (its bundles are sealed for
-good, see the end below) or of this session.
+good, see the end below) or of this session. A session reads it from the
+copy of the store database it reads once, on this machine's disk, and
+writes into that copy the git objects of each list it names, so it finds
+them again without holding them in memory.
 
 A bundle fills on this machine's disk first, in the store's cache folder,
 as PARTIAL<random>, owned by the session through a lock file beside it
@@ -295,8 +298,8 @@ class Session:
         # and for each bundle not known to be named whole, {(start, length): sha256} of its files named so far
         self._sizes, self._open = {}, {}
         self._lists, self._touching, self._listed = {}, {}, 0  # _List by number; bundle -> numbers of lists in it
-        self._fresh = {}  # git object id -> Placed, of the lists this session named
-        # the database read once, the sessions that had ended then, and which bundles the store holds
+        # the database read once (with what this session named and remembered since, _learn), the sessions that had
+        # ended then, and which bundles the store holds
         self._known, self._ended_sessions, self._known_lock, self._bundles = None, set(), threading.Lock(), {}
 
     def __enter__(self):
@@ -429,14 +432,20 @@ class Session:
         bundle stored earlier that the list's files lie in, the list is
         stored again with their new places and action runs again with it.
         KeyError for a git object whose path the list does not hold."""
+        named = _List(dict(files), action, dict(git_objects or {}))
+        for object_id, path in named.git_objects.items():
+            if path not in named.files:
+                raise KeyError(f"git object {object_id}: {path!r} is not a file of the list")
         with self._lock:
             self._check()
             if self._ended:
                 raise ValueError(f"session {self.folder} has ended")
-            named = _List(dict(files), action, dict(git_objects or {}))
-            for object_id, path in named.git_objects.items():
-                if path not in named.files:
-                    raise KeyError(f"git object {object_id}: {path!r} is not a file of the list")
+        # known before the list is named, so that a list named is always known; outside _lock: adds and reads go on
+        self._learn({object_id: named.files[path][1] for object_id, path in named.git_objects.items()})
+        with self._lock:
+            self._check()
+            if self._ended:
+                raise ValueError(f"session {self.folder} has ended")
             self._listed += 1
             for _, placed in named.files.values():
                 number = self._own(placed)
@@ -446,8 +455,6 @@ class Session:
                     self._touching.setdefault(number, set()).add(self._listed)
             if named.touching:
                 self._lists[self._listed] = named
-            for object_id, path in named.git_objects.items():
-                self._fresh[object_id] = named.files[path][1]
             for number in list(named.touching):
                 self._whole_yet(number)
             self._actions.append(lambda: self._store_list(named))
@@ -463,7 +470,9 @@ class Session:
         lasting = {object_id: placed for object_id, placed in git_objects.items() if self._lasting(placed.bundle)}
         with self._lock:
             self._check()
-            self._fresh |= lasting
+        self._learn(lasting)
+        with self._lock:
+            self._check()
             self._rows += [{"object_id": object_id, "sha256": placed.sha256, "bundle": placed.bundle,
                             "start": placed.start, "length": placed.length}
                            for object_id, placed in sorted(lasting.items())]
@@ -477,11 +486,11 @@ class Session:
 
     def known_objects(self, object_ids) -> dict[str, Placed]:
         """{git object id: where the store holds its content} for each of
-        object_ids the store database's git_objects table (read once per
-        session) or this session's named lists know, whose bundle is this
-        session's or one of a session that had ended when the table was
-        read (no other session can then remove it), and is held by the
-        store."""
+        object_ids the git_objects table of this session's read copy of the
+        store database knows (_read_known; with what this session named and
+        remembered, _learn), whose bundle is this session's or one of a
+        session that had ended when the table was read (no other session
+        can then remove it), and is held by the store."""
         object_ids = list(dict.fromkeys(object_ids))
         found = {}
         with self._known_lock:
@@ -491,15 +500,31 @@ class Session:
                 for object_id, sha256, bundle, start, length in self._known.execute(
                         f"SELECT object_id, sha256, bundle, start, length FROM git_objects WHERE object_id IN "
                         f"({', '.join('?' * len(part))})", part):
-                    if bundle.rpartition("/")[0] in self._ended_sessions:
+                    folder = bundle.rpartition("/")[0]
+                    if folder == self.folder or folder in self._ended_sessions:
                         found[object_id] = Placed(bundle, start, length, sha256)
-        with self._lock:
-            found |= {object_id: self._fresh[object_id] for object_id in object_ids if object_id in self._fresh}
         return {object_id: placed for object_id, placed in found.items() if self._held(placed.bundle)}
+
+    def _learn(self, git_objects: dict):
+        """{git object id: Placed} written into the git_objects table of
+        this session's read copy of the store database, replacing what it
+        held for them: what known_objects gives from now on. The copy lies
+        on this machine's disk, so what a long session names takes no
+        memory; it never goes back into the store (the session's rows do)."""
+        if not git_objects:
+            return
+        with self._known_lock:
+            self._read_known()
+            self._known.executemany(
+                "INSERT OR REPLACE INTO git_objects (object_id, sha256, bundle, start, length) VALUES (?, ?, ?, ?, ?)",
+                [(object_id, placed.sha256, placed.bundle, placed.start, placed.length)
+                 for object_id, placed in git_objects.items()])
+            self._known.commit()
 
     def _read_known(self):
         """Under _known_lock: the store database read, once per session,
-        with the sessions that had ended then."""
+        into a copy on this machine's disk (database.read), with the
+        sessions that had ended then."""
         if self._known is None:
             self._known = self.store.database(threads=True)
             self._ended_sessions = {folder for folder, in self._known.execute(

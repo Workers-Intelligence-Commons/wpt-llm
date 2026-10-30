@@ -46,7 +46,16 @@ git object ids the store database maps to the contents it holds are taken
 from the store (protocols/git.py).
 
 An empty source has no upstream: it needs no download and gets no line.
-The staging folder is removed in every case.
+
+Each download works in a temporary folder of its own, WORK<random> in the
+system's temporary folder: its staging folders and what its protocol
+fetches lie there. The process holds a lock file beside it while the
+download runs (wpt_store.local_files), and removes it, then the lock file,
+once the download ends, whatever its outcome. A process that a signal
+stops or that crashes leaves both: every new session on the machine
+(session()) removes each such folder no live process owns, and never one
+a live process owns. A folder the session cannot open or remove, such as
+another user's in a temporary folder several users share, stays.
 
 How many run at once: the rule of wpt_utils.parallel, each download's
 memory measured as it runs (its git processes' too), and at most the limit at once sites.txt gives the source's site (the
@@ -70,6 +79,7 @@ the run.
 import contextlib
 import hashlib
 import os
+import secrets
 import shutil
 import tempfile
 from pathlib import Path
@@ -77,6 +87,7 @@ from urllib.parse import urlparse
 
 from wpt_store import StoreError
 from wpt_store.database import DOWNLOADED, FAILED, REUSED  # the store database's outcomes
+from wpt_store.local_files import LocalFile, unowned
 from wpt_telemetry import Telemetry, set_ref
 from wpt_utils.files import sha256_file
 from wpt_utils.parallel import Done, Sizing, each as each_item
@@ -89,6 +100,8 @@ from .protocols.base import UNREACHABLE
 from .repo import Source
 from .sources import (UPSTREAM, UPSTREAM_FILES, UPSTREAM_PAGES, license_pages, stored_files, stored_upstream,
                       upstream_key)
+
+WORK = "wpt-download-"  # the start of the name of a download's temporary folder
 
 
 class Staging:
@@ -233,10 +246,42 @@ def recorded(store, command, arguments, ids, env_file):
 def session(store, telemetry, stream=False):
     """A new session of store named by telemetry's run record, at this
     repository's commit (wpt_store.sessions): the session a downloading
-    command's run downloads into."""
+    command's run downloads into, once the temporary folders that no
+    live process owns are removed (remove_unowned_folders)."""
+    remove_unowned_folders()
     where = repository()
     return store.session(telemetry.folder, telemetry.command, where["repository_commit"] or "",
                          bool(where["repository_dirty"]), stream=stream)
+
+
+def remove_unowned_folders() -> list[str]:
+    """Remove every download's temporary folder (WORK...) in the system's
+    temporary folder that no live process owns (local_files.unowned): the
+    leftovers of a process that stopped without removing them. Their
+    names. One the system refuses to remove stays, for a later session:
+    removing it is not the session's work, so it never stops one."""
+    removed = []
+    for left in unowned(tempfile.gettempdir(), WORK):
+        name = left.path().name if left.path().exists() else None
+        try:
+            left.remove()
+        except OSError:
+            continue
+        if name:
+            removed.append(name)
+    return removed
+
+
+@contextlib.contextmanager
+def _work_folder():
+    """A new temporary folder for one download, owned by this process
+    through its lock file while the with block runs, then removed."""
+    local = LocalFile(Path(tempfile.gettempdir()) / (WORK + secrets.token_hex(8)))
+    try:
+        local.path().mkdir()
+        yield local.path()
+    finally:
+        local.remove()
 
 
 def address_in(repo):
@@ -287,7 +332,7 @@ def one(source: Source, store, session, telemetry=None) -> str | None:
         return REUSED
     addresses = [source.data["address"]] + [m["address"] for m in source.data.get("mirrors", [])]
     failures = []
-    with tempfile.TemporaryDirectory(prefix="wpt-download-") as tmp:
+    with _work_folder() as tmp:
         pages = _pages(session, source, Path(tmp) / "pages")
         for number, address in enumerate(addresses):
             staging, folder = _folders(Path(tmp) / f"address-{number}", session)

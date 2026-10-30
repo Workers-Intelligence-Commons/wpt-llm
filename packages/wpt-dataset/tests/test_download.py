@@ -289,3 +289,50 @@ def test_a_failed_new_download_leaves_what_the_store_held(kit, repo, store, http
 
     after = source_tree(repo.source(sid), store)[0]
     assert after == before and manifest.content(store, after["first/a/one.txt"]) == b"version one\n"
+
+
+def test_a_new_session_removes_the_download_folders_a_stopped_process_left_and_keeps_the_others(
+        kit, repo, store, tmp_path, http_folder, monkeypatch):
+    # a download stopped by a signal or a crash leaves its temporary folder; the next session on the machine
+    # removes it, leaves the one a live process still downloads into and one whose lock file it may not open
+    # (another user's), and downloads all the same
+    import os
+    import stat
+    import tempfile
+    from pathlib import Path
+
+    from wpt_store.local_files import LOCK
+    from wpt_utils.files import lock_file, unlock_file
+
+    if os.name != "nt" and os.geteuid() == 0:
+        pytest.skip("root opens a read-only file for writing")
+    git, book = two_sources(kit, repo, store, tmp_path, http_folder)
+    monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)
+    # a temporary folder of this test's own, so that other tests' live downloads do not show in it; a short name,
+    # so that socket paths inside it stay within the system's limit
+    temporary = Path(tempfile.mkdtemp(prefix="wpt-test-"))
+    for name in ("TMPDIR", "TEMP", "TMP"):
+        monkeypatch.setenv(name, str(temporary))
+    monkeypatch.setattr(tempfile, "tempdir", None)  # found again from the environment
+    names = ("stopped", "live", "foreign")
+    stopped, live, foreign = (temporary / f"{download.WORK}{name}" for name in names)
+    for folder in (stopped, live, foreign):
+        (folder / "address-0" / "files").mkdir(parents=True)
+        (folder / "address-0" / "files" / "a-file").write_bytes(b"bytes a download had fetched\n")
+    (temporary / f"{stopped.name}{LOCK}").touch()  # its process is gone: nobody holds the lock
+    held = lock_file(temporary / f"{live.name}{LOCK}")  # its process is alive
+    foreign_lock = temporary / f"{foreign.name}{LOCK}"
+    foreign_lock.touch()
+    foreign_lock.chmod(stat.S_IREAD)  # this process may not open it for writing
+    try:
+        assert main(["--root", str(repo.root), "download", git, book]) == 0
+        left = sorted(path.name for path in temporary.glob(download.WORK + "*"))
+        # the session's own folders are gone too
+        assert left == sorted([foreign.name, foreign_lock.name, live.name, f"{live.name}{LOCK}"])
+        assert (live / "address-0" / "files" / "a-file").is_file()
+        assert (foreign / "address-0" / "files" / "a-file").is_file()
+    finally:
+        unlock_file(held)
+        foreign_lock.chmod(stat.S_IREAD | stat.S_IWRITE)
+        shutil.rmtree(temporary, ignore_errors=True)
