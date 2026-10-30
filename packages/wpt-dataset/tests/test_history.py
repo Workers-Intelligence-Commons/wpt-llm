@@ -316,3 +316,63 @@ def test_a_new_download_of_a_moved_upstream_with_a_history_asks_only_for_new_fil
     patch = manifest.content(store, tree[f".git/history/{later}"]).decode()
     assert "-print(2)\n+print(3)" in patch
     assert manifest.content(store, tree["main.py"]) == b"print(3)\n"
+
+
+def test_a_first_download_fetches_the_whole_history_with_its_contents_and_gives_what_asking_by_id_gives(
+        kit, tmp_path, monkeypatch):
+    # given a git source with a history, a commit before `since` and an excluded file, downloaded for the first
+    # time, expect one fetch with every content and none by id, and the tree, its manifest, the blob ids its
+    # entries hold and the blobs kept for the map alone the ones asking for the missing blobs by id gives (what a
+    # server that cannot send the whole history is asked), because a first download takes the whole fetch only to
+    # spend less per blob, never to change what is stored
+    import tempfile
+    from pathlib import Path
+
+    from wpt_dataset import download, protocols
+    from wpt_dataset.errors import FetchFailed
+    from wpt_dataset.protocols import git
+
+    folder = tmp_path / "upstream"
+    folder.mkdir()
+    kit.run("git", "init", "-q", cwd=folder)
+    for setting in ("uploadpack.allowFilter", "uploadpack.allowAnySHA1InWant"):  # partial fetches, as on GitHub
+        kit.run("git", "config", setting, "true", cwd=folder)
+    commit(kit, folder, "before the history", {"old.py": b"print(0)\n"})
+    since = commit(kit, folder, "start under the license", {"LICENSE": kit.LICENSE_TEXT.encode(),
+                                                             "main.py": b"print(1)\n"})
+    later = commit(kit, folder, "print two", {"main.py": b"print(2)\n", "notes.txt": b"notes\n",
+                                              "video.bin": b"large\n"})
+    excluded = kit.run("git", "rev-parse", f"{later}:video.bin", cwd=folder).decode().strip()
+    data = {"type": "git", "address": str(folder), "revision": later, "history": {"since": since},
+            "extract": {"exclude": ["video.bin"]}}
+    asked, wholes, real_blobs, real_commit = [], [], git.fetch_blobs, git.fetch_commit
+    monkeypatch.setattr(git, "fetch_blobs",
+                        lambda address, repo, ids: asked.append(sorted(ids)) or real_blobs(address, repo, ids))
+
+    def counting(*args, contents=False, **kwargs):
+        wholes.append(contents)
+        return real_commit(*args, contents=contents, **kwargs)
+
+    monkeypatch.setattr(git, "fetch_commit", counting)
+
+    def first_download():
+        with tempfile.TemporaryDirectory() as staging, tempfile.TemporaryDirectory() as tmp:
+            staged = download.Staging(staging)
+            tree = protocols.fetch(data, str(folder), staged, Path(tmp)).tree
+            return manifest.digest(tree), {path: (entry, entry.git) for path, entry in tree.items()}, staged.mapped
+
+    whole = first_download()
+    assert asked == [] and True in wholes
+    assert excluded not in whole[2] and excluded not in {git_id for _, git_id in whole[1].values()}
+
+    def refuse(*args, contents=False, **kwargs):
+        if contents:
+            raise FetchFailed("the server cannot send the whole history")
+        return real_commit(*args, **kwargs)
+
+    monkeypatch.setattr(git, "fetch_commit", refuse)
+    by_id = first_download()
+
+    assert asked and whole == by_id
+    # the version of main.py only the history's patch reads is kept for the map alone, and nothing else
+    assert set(whole[2]) == {kit.run("git", "rev-parse", f"{since}:main.py", cwd=folder).decode().strip()}

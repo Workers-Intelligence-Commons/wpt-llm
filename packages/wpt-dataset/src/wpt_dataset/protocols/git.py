@@ -12,6 +12,12 @@
                                           database's map knows (what the extractor stores into gives
                                           them, known_objects) are taken from the store, their sha256 with
                                           them; the others are asked for by id, in one request
+    the same, when the store lacks    -> a second fetch of the commit, and of its history when the
+    half or more of those contents (a     source has one, with every content, into a new repository
+    first download)                       that replaces the first: git spends some twenty times more per
+                                          blob on a request by id; what the source does not keep comes
+                                          with it and is never stored; a server that cannot send it all
+                                          is asked for the missing contents by id instead
     a file git stores with LFS (its    -> the LFS object it names, through the repository's LFS batch
     blob a pointer)                       request (lfs.py), streamed to the disk: the file's bytes are the
                                           object's, and the pointer's id is what the map learns
@@ -21,7 +27,9 @@
                                           `submodules` lists for it, recursively
 
 A Hugging Face dataset is such a repository: its file list comes from git,
-and only the kept files are fetched, its large files through LFS.
+its large files through LFS. A first download brings the whole history with
+every content, and what the source does not keep is never stored; an update
+asks only for the files the store lacks.
 
 What it got, for the record: {"commit": `revision`}.
 
@@ -38,6 +46,7 @@ for a path the tree cannot hold.
 
 import itertools
 import os
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -71,7 +80,25 @@ def fetch(address: str, data: dict, extractor: Extractor, tmp: Path) -> dict:
         in_tree = manifest.git_blobs_needed(repo, revision, extractor, None, prefix)
         needed = list(dict.fromkeys(in_tree + history))
         known = store.known_objects(needed) if hasattr(store, "known_objects") else {}
-        fetch_blobs(address, repo, [object_id for object_id in needed if object_id not in known])
+        missing = manifest.missing_objects(repo, [object_id for object_id in needed if object_id not in known])
+        # a first download misses nearly every blob it needs and an update nearly none, so one half of them
+        # missing tells the two apart; git spends far less per blob when one fetch brings every content than when
+        # they are asked for by id, so a first download takes that fetch: what the source does not keep comes with
+        # it and is deleted with tmp, never stored
+        if missing and 2 * len(missing) >= len(needed):
+            shutil.rmtree(repo)  # the whole fetch makes a new repository
+            whole = repo.with_name(f"{repo.name}-whole")
+            try:
+                fetch_commit(address, revision, whole, named, full=since is not None, contents=True)
+                repo = whole
+            except (FetchFailed, subprocess.CalledProcessError):
+                # a server that cannot send some blob of the history (one deleted upstream) fails the whole fetch;
+                # the request by id asks only for the blobs the source needs, and raises its own failure if it fails
+                shutil.rmtree(whole, ignore_errors=True)
+                fetch_commit(address, revision, repo, named, full=since is not None)
+                fetch_blobs(address, repo, missing)
+        else:
+            fetch_blobs(address, repo, missing)
         # the blobs only the history's patches read are kept too, so a later download asks for none of them again
         held = set(in_tree) | set(known)
         extractor.keep_blobs(repo, [object_id for object_id in history if object_id not in held])
@@ -110,20 +137,23 @@ def _large(address: str, folder: Path):
     return large
 
 
-def fetch_commit(address: str, revision: str, repo: Path, named: str, full=False):
-    """The commit `revision` without file contents (git's partial fetch);
-    with `full`, its whole history too. A server that does not offer partial
-    fetches sends the contents as well. FetchFailed when the address does
-    not serve that commit, its message saying what names it (named)."""
+def fetch_commit(address: str, revision: str, repo: Path, named: str, full=False, contents=False):
+    """The commit `revision`, into a new repository at repo: without file
+    contents (git's partial fetch), or with them with `contents`; with
+    `full`, its whole history too. A server that does not offer partial
+    fetches sends the contents either way. FetchFailed when the address
+    does not serve that commit, its message saying what names it (named)."""
     subprocess.run(["git", "init", "-q", "--bare", str(repo)], capture_output=True, check=True)
     git = ["git", "-c", f"http.userAgent={USER_AGENT}", "-C", str(repo)]
-    for setting in (["remote", "add", "origin", address], ["config", "remote.origin.promisor", "true"],
-                    ["config", "remote.origin.partialclonefilter", "blob:none"]):
+    partial = [] if contents else [["config", "remote.origin.promisor", "true"],
+                                   ["config", "remote.origin.partialclonefilter", "blob:none"]]
+    for setting in (["remote", "add", "origin", address], *partial):
         subprocess.run([*git, *setting], capture_output=True, check=True)
     depth = [] if full else ["--depth", "1"]
+    filtered = [] if contents else ["--filter=blob:none"]
 
     def fetch(*what):
-        retry.call(lambda: subprocess.run([*git, "fetch", "-q", "--no-tags", "--filter=blob:none", *what],
+        retry.call(lambda: subprocess.run([*git, "fetch", "-q", "--no-tags", *filtered, *what],
                                           capture_output=True, check=True, env=ENGLISH), address)
 
     try:

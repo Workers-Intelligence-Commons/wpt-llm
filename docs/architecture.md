@@ -113,7 +113,8 @@ A source's `type` names its protocol:
   repository stores outside itself is fetched by its sha256 through the
   host's LFS batch request. A Hugging Face dataset is such a repository
   (`https://huggingface.co/datasets/<owner>/<name>`): its file list comes
-  from git, and only the kept files are fetched.
+  from git, and a first download brings the whole history with every
+  content, which what the source does not keep never leaves.
 - `mercurial`: a repository at its tip.
 - `empty`: text written for WPT. It has no protocol, downloads nothing and
   starts with no files; its patches hold every file.
@@ -560,7 +561,17 @@ serve the commit fails with `FetchFailed`, naming it.
 A git source asks its server only for the files the store does not hold
 already: the store database maps each git object id it has stored to that
 file's sha256 and place, for every source alike, so a revision moved to
-another commit fetches only the files that changed. The map gives a
+another commit fetches only the files that changed. It learns which
+files those are from a first fetch of the commit without file contents,
+and asks for them by id. When the map lacks half or more of the files
+the source keeps, as on a first download, a second fetch brings the
+commit, and its history when the source has one, with every content
+instead, because git spends some twenty times more per file on a request
+by id. That fetch also brings files the source does not keep and versions
+older than `history.since`; they are deleted with the download's
+temporary folder and never stored. A server that cannot send every
+content fails that fetch, and the files the source keeps are then asked
+for by id. The map gives a
 session only places in its own bundles or in bundles of sessions that
 have ended, which are never rewritten or deleted, so no session's end
 deletes a bundle another session's file list names. A session reads the

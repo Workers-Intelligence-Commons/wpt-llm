@@ -121,7 +121,7 @@ together.
    A dataset on huggingface.co is a git repository, `"type": "git"` at
    `https://huggingface.co/datasets/<owner>/<name>`: its file list comes
    from git, its large files through LFS, and only the files `extract`
-   keeps are downloaded. An archive inside a git repository stays one
+   keeps are stored. An archive inside a git repository stays one
    file. A source published at several
    addresses (its documents in one archive and their metadata in another)
    lists them in `addresses`, each with the

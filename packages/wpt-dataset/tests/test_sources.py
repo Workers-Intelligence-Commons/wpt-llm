@@ -99,10 +99,13 @@ def offer_partial_fetches(folder):
         subprocess.run(["git", "config", setting, "true"], cwd=folder, check=True)
 
 
-def test_a_git_source_never_downloads_the_content_of_an_excluded_file(kit, store, tmp_path):
+def test_a_git_source_never_stores_the_content_of_an_excluded_file_and_downloads_when_the_server_cannot_send_it(
+        kit, store, tmp_path):
     # a repository's videos or datasets can weigh gigabytes the source leaves
-    # out; here the excluded file's content is gone from the server, so any
-    # download of it would fail
+    # out, and its first download may bring them, but they are never stored;
+    # here the excluded file's content is gone from the server, so the fetch
+    # with every content fails and the source downloads through the request
+    # by id for the files it keeps
     address, commit = kit.git_project(tmp_path / "upstream", files={**kit.FILES, "video.bin": b"large\n"})
     offer_partial_fetches(address)
     blob = kit.run("git", "rev-parse", f"{commit}:video.bin", cwd=address).decode().strip()
@@ -113,6 +116,9 @@ def test_a_git_source_never_downloads_the_content_of_an_excluded_file(kit, store
     without, without_commit = kit.git_project(tmp_path / "without")  # the same project without that file
     assert manifest.digest(tree) == manifest.digest(
         kit.upstream({"type": "git"}, without, store))
+    assert "video.bin" not in tree
+    assert blob not in {entry.git for entry in tree.values()}
+    assert hashlib.sha256(b"large\n").hexdigest() not in {entry.sha256 for entry in tree.values()}
 
 
 def test_a_kept_submodule_gives_its_files_under_its_folder_and_an_excluded_one_is_skipped(kit, store, tmp_path):
