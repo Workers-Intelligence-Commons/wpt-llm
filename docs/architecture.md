@@ -666,8 +666,14 @@ Every object is compressed with zstd while it is written, in frames of
 about 1 MB compressed apart (zstd's seekable format, which plain zstd
 reads), so a byte range is read without the rest. It is kept compressed
 only when that is smaller, and as it is otherwise. Large files are
-compressed several frames at once, and sent to S3 several parts at once,
-as `wpt_utils.parallel` allows. Refs are written as they are.
+compressed several frames at once, as `wpt_utils.parallel` allows. They
+go to S3 in parts of 64 MB, and every upload of a process sends its parts
+through one shared limit of 32 at once: S3-compatible stores such as R2
+give each connection a few MiB/s, so a link fills only with many
+connections at once, and uploads that run together do not multiply them.
+That limit is set for network work, not by the cores; a part starts only
+while the memory rule of `wpt_utils.parallel` allows. Refs are written as
+they are.
 
 A session is one run of one downloading command, named by its run
 record's folder. The files it stores go into its own bundles of about
@@ -698,17 +704,32 @@ tree had changes) and its lines (source, what the download got, for the
 record only, address used, time, outcome `downloaded`, `reused` or
 `failed`, size, WPT version), the marks for a new download (a source, or
 every source, and when), and the map of git objects (each git object id,
-the sha256 of its content, its bundle and its place there). A session
-writes its rows to its own file at each sealed bundle (see below). It
-puts them into the store database at its start, at its end, and at a
-sealed bundle once the bundles it stored since the last put hold ten
-times the bytes the database takes in the store. Each put reads and
-stores the whole database, so its copies stay about a tenth of what the
-session stores, and the database may lag a running session by several
-bundles. A full bundle is sealed while the next one fills, so a crash
-loses only the bundles not yet sealed and the lines since the last one. A
-bundle that cannot be stored stops its session: nothing more is added or
-recorded, and the lines that went with that bundle are not kept.
+the sha256 of its content, its bundle and its place there).
+
+A full bundle is handed over with the lines, the git objects and the
+actions (such as setting a source's refs) that came since the previous
+one, and the thread that filled it stores it while the others fill the
+next. Up to four full bundles are stored at once, so their parts keep the
+upload limit busy; a new bundle waits to begin while four are being
+stored, which bounds the cache folder to about five bundles. Once a
+bundle is stored, its handover is recorded, strictly in the order the
+bundles were handed over: its actions run, once every file added before
+them is stored, and its rows go into the session's own file (see below).
+A read of a file of the session waits only for that file's own bundle to
+be stored, never for another bundle or for the store database.
+
+A session puts its rows into the store database at its start, at its
+end, and when a handover is recorded once the bundles recorded since the
+last put hold ten times the bytes the database takes in the store. Each
+put reads and stores the whole database, so its copies stay about a
+tenth of what the session stores, and the database may lag a running
+session by several bundles. A crash loses the lines and the bundles of
+every handover not yet recorded, a stored bundle included when an earlier
+one was still being stored. A bundle that cannot be stored stops its
+session: nothing more is added or recorded, the handovers before it are
+still recorded, and the lines that went with that bundle or a later one
+are not kept. A bundle stored whose handover is never recorded stays in
+the store: the database names none of its files, and nothing removes it.
 
 Every read or change of the store database goes through a copy on the
 disk of the machine that runs it, in the store's cache folder, never

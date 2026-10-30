@@ -8,12 +8,12 @@ store holding many downloaded files one after the other, compressed as
 the store compresses every file (wpt_store.Store), in frames of about
 1 MB, so one downloaded file is read back alone (Store.read_file). With
 keep_local, a store whose files are not on this machine (S3) keeps a copy
-of each sealed bundle in its cache folder; without it, the only copy left
+of each stored bundle in its cache folder; without it, the only copy left
 is the store's. A bundle is cut only between files, once it holds BUNDLE
 bytes or more; a file bigger than BUNDLE gets a bundle of its own. Where a
 file went is a Placed: its bundle, start and length in the bundle's
 original bytes, and its sha256, which every read checks. Session.read
-gives a file back before its bundle is sealed too, from the bundle's
+gives a file back before its bundle is full too, from the bundle's
 partial copy on this machine. A file several sources hold is stored again
 for each of them: no table of every file the store holds, but for git
 files, which the store database's git_objects table maps from their git
@@ -36,33 +36,43 @@ mode is the caller's, kept as it is (wpt_dataset's manifest modes). A file
 list is handed to name(), which stores it once its files are, and tells
 the caller where it lies.
 
-The session's lines (one per download, use of a source already in the
-store, failure) go into the session's own file on this machine's disk
-(database.Rows, in the store's cache folder) with the session's own row
-each time a bundle is sealed, and at the end, and so do the git objects
-of the file lists named meanwhile (their git_objects table). From that
-file they go into the store database (wpt_store.database, database.put)
-at the end, and at a seal once the bundles stored since the last put
-hold DATABASE_SHARE times the bytes the database takes in the store or
-more: every put reads and stores the database whole, so its copies stay
-about a tenth of what a session stores. An action handed to then() or
-name() (such as setting the refs that name a downloaded source's files)
-runs at the seal, just before those rows go into the file: once every
-file added before it is stored. A bundle is on the
-disk (local store) or held by S3 before the database names it. A full
-bundle is sealed while the next one fills; should it fill too before the
-first is sealed, adding waits. A crash loses only the bundles not yet
-sealed (the one being sealed and the one being filled) and the rows added
-since the last one was sealed. Rows that reached the session's file but
-not the database stay in that file, and the next session that starts on
-this machine puts them in, then removes the file.
+A full bundle is handed over, together with the session's lines (one per
+download, use of a source already in the store, failure), the actions
+handed to then() or name() and the git objects of the file lists named
+since the previous handover; the end hands over the last bundle the same
+way. The add that filled the bundle stores it while the other threads go
+on filling the next one, and up to STORING full bundles are stored at
+once; an add that would begin a new bundle while STORING are being stored
+waits for one of them. A Session.read of a file in a bundle handed over
+waits only for that bundle to be stored.
+
+Once a bundle is stored, its handover is recorded, after every earlier
+handover, in the order they were handed over: its actions run (such as
+setting the refs that name a downloaded source's files), once every file
+added before them is stored, then its rows go into the session's own file
+on this machine's disk (database.Rows, in the store's cache folder) with
+the session's own row. From that file they go into the store database
+(wpt_store.database, database.put) at the end, and when a handover is
+recorded once the bundles recorded since the last put hold DATABASE_SHARE
+times the bytes the database takes in the store or more: every put reads
+and stores the database whole, so its copies stay about a tenth of what a
+session stores. One thread at a time records, so a put holds back the
+recording of later handovers but not their storing, nor a read. A bundle
+is on the disk (local store) or held by S3 before the database names it.
+A crash loses the rows and the bundles of every handover not yet
+recorded, a stored bundle included when an earlier one was still being
+stored. A bundle stored whose handover is never recorded, after a crash
+or a failure, stays in the store: the database names none of its files,
+and nothing removes it. Rows that reached the session's file but not the
+database stay in that file, and the next session that starts on this
+machine puts them in, then removes the file.
 
 The session's row goes into the database when it starts, so that a session
 that ends later sees it running. A session that cannot put it in removes
 its file and raises. The end (end()) seals the bundles for good: a bundle holding bytes that
 no named file list names (a try that failed, a download that failed and
 named nothing) is rewritten without them. The one
-being filled is rewritten before it is stored; one sealed earlier becomes
+being filled is rewritten before it is stored; one stored earlier becomes
 a new bundle of the session, every file list naming it is stored again
 with its files' new places and its action runs again, and the old bundle
 is marked for removal in the database together with the new places (the
@@ -76,16 +86,17 @@ the bytes the git map names that no file list of a tree names, such as the
 blobs a git source's history needs, are kept by the rewrite and move with
 it, and their rows follow them.
 
-Failures: what the store raised while sealing a bundle or putting the
-rows in the database. The bundles not yet sealed and the rows that had
-not reached the session's file are then lost (those in it go in with the
-next session), and the session cannot go on: every later add, line
-and end raises that same failure and writes nothing; the actions handed
-to then() or name() with them never run. A failing action stops the
-session the same way. ValueError for an outcome the database does not
-know, or a file added after the end.
+Failures: what the store raised while storing a bundle or putting the
+rows in the database. The session cannot go on: every later add, line
+and end raises that same failure and writes nothing. The handovers before
+the one that failed are still recorded as their bundles are stored; that
+one and every later one are lost: none of their actions runs past the
+failure, and their rows that had not reached the session's file never do
+(the rows in it go in with the next session). A failing action stops the session the same way. ValueError
+for an outcome the database does not know, or a file added after the end.
 """
 
+import collections
 import hashlib
 import json
 import os
@@ -100,12 +111,16 @@ from .errors import CorruptObject
 from .local_files import LocalFile, unowned
 from .names import check_record_name
 
-BUNDLE = 4 << 30  # bytes: a bundle is sealed once it holds this many or more
+BUNDLE = 4 << 30  # bytes: a bundle is handed over once it holds this many or more
 CHUNK = 1 << 20  # bytes of a local file read at once
 PARTIAL = ".partial-bundle-"  # the start of the name of a bundle being filled on this machine's disk
 PART = 64 << 20  # bytes of one file copied at once when a bundle is rewritten
 QUERY = 500  # git object ids asked for in one query of the store database
 DATABASE_SHARE = 10  # bytes of bundles stored between two puts, per byte the store database takes in the store
+# full bundles being stored at once, at most: two of about 1 GB stored keep wpt_store.kinds.UPLOADS parts going, and
+# two more keep them going while one sends its last parts and the next one compresses its last frames; each is a
+# compressed file in the cache folder until it is stored
+STORING = 4
 
 
 @dataclass(frozen=True)
@@ -209,12 +224,32 @@ class _List:
     ran: bool = False
 
 
+@dataclass(eq=False)
+class _Handed:
+    """One handover: a full bundle (a _Partial, or None at an end with
+    nothing to store) and what is recorded once it is stored, after every
+    earlier handover. settled is set once its bundle is stored or it is
+    lost; size is the bytes its bundle takes in the store."""
+
+    index: int  # its place in the order of handing over, from 1
+    bundle: object
+    row: dict
+    lines: list
+    actions: list
+    rows: list
+    marks: list
+    put: bool
+    settled: threading.Event = field(default_factory=threading.Event)
+    size: int = 0
+    lost: bool = False  # never recorded: it, or one before it, failed
+
+
 class Session:
     """A session of one command: add() files into its bundles, read() them
     back, name() the file lists that say where they lie, line() what
     happened to each source, end() when the command ends (or use it as a
-    context manager). Several threads may add and record at once; a full
-    bundle is sealed while the others go on filling the next one."""
+    context manager). Several threads may add and record at once; full
+    bundles are stored while the others go on filling the next one."""
 
     def __init__(self, store, folder, command, commit, dirty, bundle=BUNDLE, keep_local=True):
         check_record_name(folder)
@@ -237,18 +272,25 @@ class Session:
             for rows in left:
                 rows.close()  # removed once put in, kept otherwise
         self._remove(removable)
-        # _lock guards everything below but _failure and the git objects' lookup. _sealing is held while one
-        # bundle is sealed; it is taken under _lock, so bundles are sealed one at a time in the order they
-        # were handed over
-        self._lock, self._sealing = threading.Lock(), threading.Lock()
+        # _lock guards everything below but the git objects' lookup and what only the thread holding _recording
+        # touches (_stored, _database_size, _removable). _changed is signalled whenever a handover's bundle is
+        # stored or lost, a handover is recorded, or the session ends
+        self._lock = threading.Lock()
+        self._changed = threading.Condition(self._lock)
+        self._recording = threading.Lock()  # held by the one thread recording handovers, in their order
+        self._handed = collections.deque()  # the handovers not yet recorded, in the order they were handed over
+        self._storing = {}  # bundle number -> its handover, for the bundles handed over and not yet stored
+        self._lost = None  # the index of the first handover that will never be recorded
+        self._removable = []  # what the last put gave: bundles no running session can read any more
+        self._handovers = 0  # how many handovers there were
         self._number = 0  # the last bundle begun
         self._filling = None  # the bundle being filled: a _Partial
         self._lines, self._counted = [], 0  # lines not yet handed over with a bundle, and how many were added
         self._actions = []  # then()'s and name()'s actions not yet handed over with a bundle
         self._rows = []  # remember()'s git object rows not yet handed over with a bundle
         self._ended = False
-        self._stored = 0  # bytes of bundles stored since the last put
-        self._failure = None  # what a seal or a put raised: the session cannot go on
+        self._stored = 0  # bytes of bundles recorded since the last put
+        self._failure = None  # what storing a bundle, an action or a put raised: the session cannot go on
         # what the named file lists name, for the end's rewrite: each bundle's original bytes once handed over,
         # and for each bundle not known to be named whole, {(start, length): sha256} of its files named so far
         self._sizes, self._open = {}, {}
@@ -271,8 +313,9 @@ class Session:
 
     def add(self, source) -> Placed:
         """Store one downloaded file (bytes, or a local file's path) in this
-        session's bundles. Readable once its bundle is sealed: at once when
-        it fills the bundle, at the end otherwise."""
+        session's bundles. A call that fills the bundle stores it before it
+        returns; one that would begin a new bundle while STORING others are
+        still being stored waits for one of them."""
         size = len(source) if isinstance(source, (bytes, bytearray, memoryview)) else os.path.getsize(source)
         placed = None
         while placed is None:
@@ -280,13 +323,19 @@ class Session:
                 self._check()
                 if self._ended:
                     raise ValueError(f"session {self.folder} has ended")
+                if self._filling is None and len(self._storing) >= STORING:
+                    self._changed.wait()  # _lock is free meanwhile: reads and lines go on
+                    continue
                 if self._filling is not None and self._filling.size + size > self.bundle:
                     full = self._hand_over()  # the file does not fit: it goes into the next bundle
                 else:
                     placed = self._write(source)
                     full = self._hand_over() if placed.start + placed.length >= self.bundle else None
             if full is not None:
-                self._seal(full)
+                try:
+                    self._store(full)
+                finally:
+                    self._record()
         return placed
 
     def _write(self, source) -> Placed:
@@ -313,21 +362,23 @@ class Session:
 
     def read(self, placed: Placed) -> bytes:
         """One file of the store, checked against its sha256: one this
-        session added whether its bundle is sealed or not (one in the
+        session added whether its bundle is stored or not (one in the
         bundle being filled is read from that bundle's partial copy on this
-        machine; one in a bundle being sealed once it is stored), one of
-        another session's bundle from the store. CorruptObject when the
-        bytes do not match their sha256."""
+        machine; one in a bundle handed over once that bundle is stored,
+        whatever else is being stored or put meanwhile), one of another
+        session's bundle from the store. CorruptObject when the bytes do
+        not match their sha256."""
         number = self._own(placed)
-        data = None
+        data = storing = None
         with self._lock:
             self._check()
             if number is not None and self._filling is not None and number == self._filling.number:
                 data = self._filling.read(placed.start, placed.length)
+            elif number is not None:
+                storing = self._storing.get(number)
         if data is None:
-            if number is not None:
-                with self._sealing:  # the bundle is sealed or being sealed: wait for its seal to end
-                    pass
+            if storing is not None:
+                storing.settled.wait()  # its bundle stored, or lost
                 with self._lock:
                     self._check()
             return self.store.read_file(placed)
@@ -354,8 +405,10 @@ class Session:
 
     def then(self, action):
         """Run action() once every file added so far is stored: when the
-        bundle being filled (or, when none is, the next one or the end) is
-        sealed, before the rows recorded so far go into the database."""
+        handover of the bundle being filled (or, when none is, of the next
+        one or of the end) is recorded, after the actions handed over
+        before it and before the rows recorded so far go into the
+        database."""
         with self._lock:
             self._check()
             if self._ended:
@@ -373,7 +426,7 @@ class Session:
         of the list that are git blobs: those this session placed go into
         the store database's git_objects table with where they lie, and
         known_objects() gives them from now on. Should the end rewrite a
-        bundle sealed earlier that the list's files lie in, the list is
+        bundle stored earlier that the list's files lie in, the list is
         stored again with their new places and action runs again with it.
         KeyError for a git object whose path the list does not hold."""
         with self._lock:
@@ -402,7 +455,7 @@ class Session:
     def remember(self, git_objects: dict):
         """Put {git object id: Placed} of files the store holds already (a
         tree an earlier session stored) into the store database's
-        git_objects table, with the rows of the next bundle sealed, and
+        git_objects table, with the rows of the next handover, and
         give them from known_objects() from now on: those in a bundle of a
         session that has ended. The others are left out: a session still
         running may yet rewrite its bundle and remove it, and this
@@ -479,11 +532,9 @@ class Session:
                 self._check()
                 return
             self._ended = True
+            self._changed.notify_all()  # an add waiting for room raises now
         try:
-            with self._sealing:  # a bundle another thread handed over is sealed first
-                pass
-            with self._lock:
-                self._check()
+            self._settle()  # the bundles other threads handed over are recorded first
             marks, rows = [], []
             try:
                 with self._lock:
@@ -496,19 +547,34 @@ class Session:
                     self._check()
                     self._rewrite_filling()
                     self.row["ended"] = now()
-                    last = self._hand_over(rows, [{"bundle": bundle, "marked": now()} for bundle in marks])
+                    last = self._hand_over(rows, [{"bundle": bundle, "marked": now()} for bundle in marks], put=True)
             except BaseException as error:
-                if self._failure is None:
-                    self._failure = error
+                with self._lock:
+                    if self._failure is None:
+                        self._failure = error
                 raise
-            removable = self._seal(last, put=True)
+            try:
+                self._store(last)
+            finally:
+                self._record()
+            self._settle()
         finally:
             # the rows file goes once the database holds all of it, and stays for a later session otherwise
             self._row_file.close()
             with self._known_lock:
                 if self._known is not None:
                     self._known.close()
-        self._remove(removable)
+        self._remove(self._removable)
+
+    def _settle(self):
+        """Wait until every handover is recorded, then raise the failure
+        that stopped the session, if any. Once a handover is lost, no
+        later one is ever recorded, and none is being recorded: the wait
+        ends there."""
+        with self._lock:
+            while self._handed and not self._handed[0].lost:
+                self._changed.wait()
+            self._check()
 
     def _remove(self, removable):
         """Remove the bundles the database marks that no session which
@@ -519,7 +585,7 @@ class Session:
         database.forget(self.store.kind, self.store.cache, removable)
 
     def _rewrite_sealed(self, number) -> list[dict]:
-        """A bundle sealed earlier rewritten as a new bundle of the session
+        """A bundle stored earlier rewritten as a new bundle of the session
         holding only its named files (none when it holds none), every list
         naming it stored again with their new places and its action run
         again: the git object rows to put."""
@@ -582,7 +648,8 @@ class Session:
         return lists
 
     def _store_list(self, named_list) -> list[dict]:
-        """Outside _lock, at a seal: a named list stored and its action run;
+        """Outside _lock, when a handover is recorded or at the end's
+        rewrite: a named list stored and its action run;
         the git object rows of its files this session placed."""
         if named_list.action is not None:
             named_list.action(self.store.put_bytes(file_list_bytes(named_list.files)))
@@ -618,52 +685,106 @@ class Session:
         self._lines, self._actions, self._rows = [], [], []
         raise self._failure
 
-    def _hand_over(self, rows=(), marks=()):
-        """Under _lock: the bundle being filled (or None), the session's row,
-        the lines and the actions so far, and rows (git objects) and marks
-        (bundles to remove), to seal and put together; the next add begins a
-        new bundle. Takes _sealing, which _seal releases."""
+    def _hand_over(self, rows=(), marks=(), put=False):
+        """Under _lock: a _Handed of the bundle being filled (or None), the
+        session's row, the lines and the actions so far, and rows (git
+        objects) and marks (bundles to remove), to store and record
+        together, after every earlier handover; the next add begins a new
+        bundle. put: the rows go into the database whatever DATABASE_SHARE
+        says."""
         filling = self._filling
         if filling is not None:
             self._sizes[filling.number] = filling.size
             self._whole_yet(filling.number)
-        handed = (filling, dict(self.row), self._lines, self._actions, self._rows + list(rows), list(marks))
+        self._handovers += 1
+        handed = _Handed(self._handovers, filling, dict(self.row), self._lines, self._actions,
+                         self._rows + list(rows), list(marks), put)
         self._filling, self._lines, self._actions, self._rows = None, [], [], []
-        self._sealing.acquire()
+        self._handed.append(handed)
+        if filling is not None:
+            self._storing[filling.number] = handed
         return handed
 
-    def _seal(self, handed, put=False):
-        """Outside _lock, holding _sealing: store the bundle, run the actions
-        handed over with it, then put its rows and marks in the session's
-        file, and that file in the database when put is true or enough bytes
-        were stored since the last put (DATABASE_SHARE). A failure stops the
-        session. The bundles the database then marks that no running session
-        can read any more: those it gives back."""
-        filling, row, lines, actions, rows, marks = handed
+    def _store(self, handed):
+        """Outside _lock: the bundle handed over stored, while others are
+        stored and recorded, unless an earlier handover was lost (this one
+        then goes with it). A failure stops the session."""
+        filling, error = handed.bundle, None
         try:
-            if self._failure is not None:  # an earlier bundle was lost: this one goes with it
-                raise self._failure
-            if filling is not None:
-                original, stored = filling.seal()
-                self.store.keep_compressed(f"bundles/{self._name(filling.number)}", filling.path, original, stored,
-                                           self.keep_local)
-                self._stored += stored
-            for action in actions:
-                rows += action() or []
-            self._row_file.add(row, lines, rows, marks)
-            if not put and self._stored < DATABASE_SHARE * self._database_size:
-                return []
-            removable, self._database_size = database.put(self.store.kind, self.store.cache, [self._row_file])
-            self._stored = 0
-            return removable
-        except BaseException as error:
-            if self._failure is None:
-                self._failure = error
-            raise
+            if filling is not None and not self._lost_before(handed):
+                original, handed.size = filling.seal()
+                self.store.keep_compressed(f"bundles/{self._name(filling.number)}", filling.path, original,
+                                           handed.size, self.keep_local)
+        except BaseException as caught:
+            error = caught
         finally:
             if filling is not None:
                 filling.remove()
-            self._sealing.release()
+            with self._lock:
+                if error is not None or self._lost_before(handed):
+                    self._lose(handed, error)
+                if filling is not None:
+                    del self._storing[filling.number]
+                handed.settled.set()
+                self._changed.notify_all()
+        if error is not None:
+            raise error
+
+    def _record(self):
+        """Record every handover whose turn has come, in the order they were
+        handed over, unless another thread is recording them (it then
+        records these too): the next one's turn comes once its bundle is
+        stored and the one before it is recorded. Recording one runs its
+        actions, then puts its rows and marks in the session's file, and
+        that file in the database when the handover says so or the bundles
+        recorded since the last put hold DATABASE_SHARE times the bytes the
+        database takes in the store. A failure stops the session; no later
+        handover is recorded."""
+        while self._recording.acquire(blocking=False):
+            try:
+                while (handed := self._turn()) is not None:
+                    try:
+                        rows = handed.rows
+                        for action in handed.actions:
+                            rows += action() or []
+                        self._row_file.add(handed.row, handed.lines, rows, handed.marks)
+                        self._stored += handed.size
+                        if handed.put or self._stored >= DATABASE_SHARE * self._database_size:
+                            self._removable, self._database_size = database.put(self.store.kind, self.store.cache,
+                                                                                [self._row_file])
+                            self._stored = 0
+                    except BaseException as error:
+                        with self._lock:
+                            self._lose(handed, error)
+                            self._changed.notify_all()
+                        raise
+                    with self._lock:
+                        self._handed.popleft()
+                        self._changed.notify_all()
+            finally:
+                self._recording.release()
+            if self._turn() is None:  # a turn that came while _recording was released is recorded by this thread
+                return
+
+    def _turn(self):
+        """The handover whose turn to be recorded has come, or None."""
+        with self._lock:
+            handed = self._handed[0] if self._handed else None
+            return handed if handed is not None and handed.settled.is_set() and not handed.lost else None
+
+    def _lost_before(self, handed) -> bool:
+        """Under _lock or not: whether the session stopped at a handover
+        before this one, or at no handover."""
+        lost = self._lost
+        return self._failure is not None and (lost is None or lost < handed.index)
+
+    def _lose(self, handed, error):
+        """Under _lock: no handover from this one on is recorded; error (or
+        the failure that came first) stops the session."""
+        handed.lost = True
+        self._lost = handed.index if self._lost is None else min(self._lost, handed.index)
+        if self._failure is None:
+            self._failure = error
 
 
 def _blocks(source):

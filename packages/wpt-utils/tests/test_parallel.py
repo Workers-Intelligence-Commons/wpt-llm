@@ -63,6 +63,16 @@ def test_a_new_item_starts_only_while_a_quarter_of_the_machine_stays_free():
     assert sizing.may_start(11) and not sizing.may_start(12)
 
 
+def test_network_work_takes_its_own_limit_and_busy_cores_do_not_stop_it():
+    # uploads wait on the link, not on the processors: a busy machine still sends as many as the link wants
+    machine = Fake(cores=16, available=64 * GB, total=64 * GB, idle=0.0)
+    sizing = Sizing("test parts", machine, measure=lambda running: 0.1 * GB, network=32)
+    assert sizing.limit == 32
+    assert sizing.may_start(31) and not sizing.may_start(32)
+    machine.available = 16.05 * GB  # the memory rule holds the same: 15.95 GB left is under a quarter of 64 GB
+    assert not sizing.may_start(5)
+
+
 def run(sizing, items, work, settle=0.0):
     """in_order's results, and the most items that ran at once."""
     lock, now, peak = threading.Lock(), [0], [0]

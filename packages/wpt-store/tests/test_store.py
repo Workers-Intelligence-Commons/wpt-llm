@@ -1,4 +1,6 @@
 import shutil
+import threading
+import time
 from compression import zstd
 
 import boto3
@@ -420,3 +422,80 @@ def test_a_refused_replace_of_an_object_already_stored_counts_as_stored(tmp_path
     with pytest.raises(PermissionError):
         store.put_file(source)
     assert list(target.parent.iterdir()) == []
+
+
+def test_uploads_in_parts_running_at_once_share_one_limit_of_parts_in_flight(tmp_path, monkeypatch):
+    # bundles stored at the same moment must not multiply the connections to S3: their parts share one limit
+    from wpt_store import kinds
+
+    monkeypatch.setattr(kinds, "UPLOADS", 3)
+    monkeypatch.setattr(kinds, "SETTLE", 0.0)  # a started part shows in the measures at once
+    monkeypatch.setattr(kinds, "_parts", None)  # this process's parts, made again with that limit
+    lock, running, peak, sent = threading.Lock(), [0], [0], {}
+
+    class Client:
+        def create_multipart_upload(self, Bucket, Key):
+            return {"UploadId": Key}
+
+        def upload_part(self, Bucket, Key, UploadId, PartNumber, Body):
+            with lock:
+                running[0] += 1
+                peak[0] = max(peak[0], running[0])
+            time.sleep(0.3)
+            with lock:
+                running[0] -= 1
+                sent.setdefault(Key, {})[PartNumber] = Body
+            return {"ETag": f"{Key}-{PartNumber}"}
+
+        def complete_multipart_upload(self, Bucket, Key, UploadId, MultipartUpload):
+            sent[Key]["done"] = [part["PartNumber"] for part in MultipartUpload["Parts"]]
+
+        def abort_multipart_upload(self, Bucket, Key, UploadId):
+            raise AssertionError("no upload fails here")
+
+    bucket = kinds.Bucket(Client(), "bucket", "", part=10)
+    files = {}
+    for name in ("one", "two"):
+        files[name] = tmp_path / name
+        files[name].write_bytes(name.encode() * 20)  # 60 bytes: 6 parts
+    uploads = [threading.Thread(target=bucket.write, args=(name, path)) for name, path in files.items()]
+    for upload in uploads:
+        upload.start()
+    for upload in uploads:
+        upload.join(60)
+    assert peak[0] == 3  # three at once in all, not three for each upload
+    for name, path in files.items():
+        parts = sent[name]
+        assert parts.pop("done") == [1, 2, 3, 4, 5, 6]
+        assert b"".join(parts[number] for number in sorted(parts)) == path.read_bytes()
+
+
+def test_a_failed_part_stops_the_parts_of_its_upload_that_have_not_started(tmp_path, monkeypatch):
+    # after a part fails, sending the parts still waiting only wastes the link before the upload is aborted
+    from wpt_store import kinds
+
+    parts = kinds._Parts()
+    parts.sizing.may_start = lambda running, unseen: running == 0  # one part at a time: the others wait
+    monkeypatch.setattr(kinds, "_parts", parts)
+    sent, aborted = [], []
+
+    class Client:
+        def create_multipart_upload(self, Bucket, Key):
+            return {"UploadId": Key}
+
+        def upload_part(self, Bucket, Key, UploadId, PartNumber, Body):
+            sent.append(PartNumber)
+            raise ConnectionError("the link dropped")
+
+        def complete_multipart_upload(self, Bucket, Key, UploadId, MultipartUpload):
+            raise AssertionError("an upload with a failed part is never completed")
+
+        def abort_multipart_upload(self, Bucket, Key, UploadId):
+            aborted.append(Key)
+
+    source = tmp_path / "file"
+    source.write_bytes(b"x" * 60)  # 6 parts of 10 bytes
+    with pytest.raises(ConnectionError, match="the link dropped"):
+        kinds.Bucket(Client(), "bucket", "", part=10).write("file", source)
+    assert len(sent) == 1
+    assert aborted == ["file"]

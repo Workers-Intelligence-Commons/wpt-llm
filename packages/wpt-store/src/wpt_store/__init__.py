@@ -18,8 +18,10 @@ frames of about 1 MB that a range read takes one by one (wpt_store.blocks),
 and kept so only when that saves space: objects/<first 2 hex>/<sha256>.zst
 then, objects/<first 2 hex>/<sha256> as it is otherwise (Store.keep_smaller
 for objects, Store.keep_compressed for bundles). Which of the two names a
-file is stored under is found once and kept in memory. Large files are compressed several frames
-at once, and sent to S3 several parts at once, as wpt_utils.parallel allows.
+file is stored under is found once and kept in memory. Large files are
+compressed several frames at once, as wpt_utils.parallel allows, and sent
+to S3 in parts that every upload of the process sends together, at most
+wpt_store.kinds.UPLOADS at once in total.
 Refs, too small to shrink, are written as they are; record files are
 compressed, except the one a local store adds lines to while its record
 runs.
@@ -87,7 +89,7 @@ from wpt_utils.parallel import Sizing, in_order
 
 from . import blocks, database, sessions
 from .errors import CorruptObject, MissingObject, MixedRecord, StoreError, StoreSettingError
-from .kinds import Absent, Bucket, Folder, atomic_copy, sync_file, sync_folder
+from .kinds import UPLOADS, Absent, Bucket, Folder, atomic_copy, sync_file, sync_folder
 from .names import NAME, NAME_CHARACTERS, as_record_name, check_record_name, check_ref
 from .sessions import Placed, Session, file_list_bytes, parse_file_list, remove_unowned_partials
 
@@ -948,7 +950,9 @@ class S3Store(Store):
                 aws_session_token=self.settings.get("session_token"),
                 endpoint_url=self.settings.get("endpoint_url"),
                 region_name=self.settings.get("region", S3_DEFAULT_REGION),
-                config=Config(ignore_configured_endpoint_urls=True))
+                # as many open connections as the upload parts at once, and as a whole file's copy fetches
+                config=Config(ignore_configured_endpoint_urls=True,
+                              max_pool_connections=UPLOADS + Sizing("downloads").limit))
         self.client = client
         cache = Path(cache_dir) if cache_dir else _default_cache() / bucket / (self.prefix or "_")
         super().__init__(Bucket(self.client, bucket, self.prefix), cache)

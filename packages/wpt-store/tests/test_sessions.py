@@ -1,3 +1,4 @@
+import hashlib
 import os
 import threading
 
@@ -5,7 +6,8 @@ import boto3
 import pytest
 from moto import mock_aws
 
-from wpt_store import CorruptObject, MissingObject, Session, file_list_bytes, open_store, parse_file_list, sessions
+from wpt_store import (CorruptObject, MissingObject, Placed, Session, database, file_list_bytes, open_store,
+                       parse_file_list, sessions)
 
 MB = 1 << 20
 
@@ -242,6 +244,89 @@ def test_files_go_on_into_the_next_bundle_while_a_full_one_is_being_stored(reope
     later = reopen()
     assert later.read_file(placed["first"]) == text("first", 2 * MB)
     assert later.read_file(placed["second"]) == text("second", MB)
+
+
+def test_a_file_of_a_stored_bundle_reads_back_while_another_bundle_is_stored_and_the_rows_are_put_in(reopen,
+                                                                                                       monkeypatch):
+    # a download reads back what it stored (a cut, a patch) while other threads store bundles and put the store
+    # database in, both of which take minutes on a slow link
+    monkeypatch.setattr(sessions, "DATABASE_SHARE", 0)  # every stored bundle puts its rows in the database
+    store = reopen()
+    real_put, real_keep = database.put, store.keep_compressed
+    putting, storing, go_on = threading.Event(), threading.Event(), threading.Event()
+    first = text("first", 2 * MB)
+
+    def slow_put(*args):
+        if not putting.is_set():
+            putting.set()
+            assert go_on.wait(30)
+        return real_put(*args)
+
+    def slow_second(key, *rest):
+        if key.endswith("/000002"):
+            storing.set()
+            assert go_on.wait(30)
+        return real_keep(key, *rest)
+
+    store.keep_compressed = slow_second
+    with Session(store, "reading", "download", "abc123", False, bundle=2 * MB) as session:
+        monkeypatch.setattr(database, "put", slow_put)
+        adding = [threading.Thread(target=session.add, args=(first,)),  # its rows' put waits
+                  threading.Thread(target=session.add, args=(text("second", 2 * MB),))]  # its store waits
+        adding[0].start()
+        assert putting.wait(30)
+        adding[1].start()
+        assert storing.wait(30)
+        read = []
+        reading = threading.Thread(target=lambda: read.append(session.read(
+            Placed("reading/000001", 0, len(first), hashlib.sha256(first).hexdigest()))))
+        reading.start()
+        reading.join(10)
+        go_on.set()
+        assert read == [first]  # it did not wait for the other bundle, nor for the put
+        for thread in adding:
+            thread.join(30)
+
+
+def test_bundles_stored_out_of_order_have_their_actions_and_rows_recorded_in_the_order_they_were_handed_over(
+        reopen, monkeypatch):
+    monkeypatch.setattr(sessions, "DATABASE_SHARE", 0)  # every recorded bundle puts its rows in the database
+    store = reopen()
+    real = store.keep_compressed
+    storing_first, go_on = threading.Event(), threading.Event()
+
+    def slow_first(key, *rest):
+        if key.endswith("/000001"):
+            storing_first.set()
+            assert go_on.wait(30)
+        return real(key, *rest)
+
+    store.keep_compressed = slow_first
+    ran = []
+    with Session(store, "ordered", "download", "abc123", False, bundle=2 * MB) as session:
+        session.line("first", "downloaded", "abc123")
+        placed = {"first": session.add(text("first", MB))}
+        session.then(lambda: ran.append("first"))
+        filling = threading.Thread(target=lambda: placed.update(fills=session.add(text("fills", MB))))
+        filling.start()  # fills the first bundle, whose store waits
+        assert storing_first.wait(30)
+        session.line("second", "downloaded", "abc123")
+        session.then(lambda: ran.append("second"))  # after files of both bundles
+        placed["second"] = session.add(text("second", 2 * MB))  # the second bundle, stored at once
+        assert placed["second"].bundle.endswith("/000002")
+        assert session.read(placed["second"]) == text("second", 2 * MB)
+        assert ran == []  # the first bundle is not stored yet
+        with reopen().database() as found:
+            assert found.execute("SELECT count(*) FROM lines").fetchone() == (0,)  # nor are the second's rows in
+        go_on.set()
+        filling.join(30)
+        assert ran == ["first", "second"]
+        with reopen().database() as found:
+            assert found.execute("SELECT source FROM lines ORDER BY number").fetchall() == [("first",), ("second",)]
+        named(session, placed)
+    later = reopen()
+    assert {name: later.read_file(where) for name, where in placed.items()} \
+        == {"first": text("first", MB), "fills": text("fills", MB), "second": text("second", 2 * MB)}
 
 
 @pytest.mark.parametrize("stream", [False, True])

@@ -15,6 +15,10 @@ and lets the item start only while, once the item is counted,
   what is free now and what was free at the start less the sizes of the
   running items (so what they already wrote is counted once).
 
+Work that waits on the network rather than on the processors (a Sizing
+given a network limit) takes that limit instead of the cores' share and
+leaves the idle cores out; the memory and disk rules hold the same.
+
 One item's memory is measured live, never given: what one running item was
 last measured taking (Threads for items on this process's threads,
 Processes for items in worker processes; each counts the programs an item
@@ -346,19 +350,28 @@ class Sizing:
     starts, and may_start, measured again before each new item. measure
     gives one item's memory now from how many run (Threads by default;
     process_pool sets Processes). disk, when given, gives the bytes an
-    item writes to the disk of folder (default: the temporary folder's)."""
+    item writes to the disk of folder (default: the temporary folder's).
+    network, when given, makes it work that waits on the network: at most
+    that many items, whatever the cores."""
 
-    def __init__(self, what="workers", machine=None, measure=None, disk=None, folder=None):
+    def __init__(self, what="workers", machine=None, measure=None, disk=None, folder=None, network=None):
         self.machine = machine or Machine()
         self.measure = measure or Threads()
         self.disk, self.folder = disk, (folder or _temporary()) if disk else None
         self.free_at_start = self.machine.free_disk(self.folder) if disk else None
         self.item_memory = None  # what one running item was last measured taking
         self._measured = None  # the monotonic time of the last memory measure
-        self.limit = max(1, int(self.machine.cores * SHARE))
-        self.why = (f"at most {self.limit} {what} ({SHARE:.0%} of {self.machine.cores} cores); each more only while a "
-                    f"quarter of the memory{', of the free disk' if disk else ''} and of the cores stays free, at the "
-                    "memory a running one is measured taking")
+        self.network = network
+        if network is None:
+            self.limit = max(1, int(self.machine.cores * SHARE))
+            self.why = (f"at most {self.limit} {what} ({SHARE:.0%} of {self.machine.cores} cores); each more only "
+                        f"while a quarter of the memory{', of the free disk' if disk else ''} and of the cores stays "
+                        "free, at the memory a running one is measured taking")
+        else:
+            self.limit = max(1, network)
+            self.why = (f"at most {self.limit} {what} (network work); each more only while a quarter of the memory"
+                        f"{' and of the free disk' if disk else ''} stays free, at the memory a running one is "
+                        "measured taking")
 
     def need(self, item) -> int:
         """The bytes item writes to the counted disk: 0 without disk, and 0
@@ -383,8 +396,9 @@ class Sizing:
         one each stay at or above a quarter of the cores, and the free disk
         (the lesser of what is free now and what was free when the work
         started less needs) less need stays at or above a quarter of the
-        free disk when the work started. A measure this machine does not give leaves
-        the others to decide."""
+        free disk when the work started. Network work leaves the idle cores
+        out. A measure this machine does not give leaves the others to
+        decide."""
         # every running item shows in the measures: one item's memory is known; at most every SAMPLE seconds
         if unseen == 0 and (self._measured is None or time.monotonic() - self._measured >= SAMPLE):
             self._measured = time.monotonic()
@@ -408,6 +422,8 @@ class Sizing:
             room = self.free_at_start - needs if free is None else min(free, self.free_at_start - needs)
             if room - need < self.free_at_start * (1 - SHARE):
                 return False
+        if self.network is not None:
+            return True
         idle = self.machine.idle_cores()
         return idle is None or idle - taken >= self.machine.cores * (1 - SHARE)
 

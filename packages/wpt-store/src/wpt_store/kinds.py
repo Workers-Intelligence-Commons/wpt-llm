@@ -47,14 +47,19 @@ a folder leaves no partial file under the key.
 
 import os
 import tempfile
-from concurrent.futures import ThreadPoolExecutor
+import threading
+import time
+from concurrent.futures import ThreadPoolExecutor, wait
 from pathlib import Path
 
 from wpt_utils.files import lock_file, unlock_file
-from wpt_utils.parallel import Sizing, in_order
+from wpt_utils.parallel import POLL, SETTLE, Sizing
 
 CHUNK = 1 << 20  # bytes copied at once
 PART = 64 << 20  # bytes per part of an S3 upload: a file larger than this goes up in parts, several at once
+# parts sent to S3 at once by every upload of this process together: R2 gives each connection a few MiB/s, so the
+# link fills only with many connections at once
+UPLOADS = 32
 
 
 class Absent(Exception):
@@ -169,9 +174,85 @@ def _version(stat):
     return f"{stat.st_ino}:{stat.st_mtime_ns}:{stat.st_size}"  # every replace makes a new file, so a new number
 
 
+class _Parts:
+    """The parts every upload of this process sends, on threads of their
+    own: at most UPLOADS at once in total, however many uploads run, each
+    more only as wpt_utils.parallel's rule for network work allows (a
+    Sizing with UPLOADS as its network limit: the memory the running parts
+    are measured taking, not the cores)."""
+
+    def __init__(self):
+        self.sizing = Sizing("upload parts", network=UPLOADS)
+        self.executor = ThreadPoolExecutor(UPLOADS, thread_name_prefix="upload-part")
+        self.changed = threading.Condition()
+        self.started = []  # the monotonic time each running part started
+
+    def run(self, send, numbers) -> list:
+        """send(number) for each of numbers, results in their order. The
+        first failure is raised once every part already started has ended;
+        the parts not started by then never start."""
+        failed = threading.Event()  # set by this run's first failure: its parts still waiting never start
+        futures = [self.executor.submit(self._one, send, number, failed) for number in numbers]
+        try:
+            return [future.result() for future in futures]
+        except BaseException as error:
+            self._stop(failed)
+            for future in futures:
+                future.cancel()
+            wait(futures)
+            if isinstance(error, _NotStarted):  # a part waiting before the failing one: raise the failure itself
+                errors = (future.exception() for future in futures if not future.cancelled())
+                raise next(found for found in errors if found is not None and not isinstance(found, _NotStarted))
+            raise
+
+    def _stop(self, failed):
+        with self.changed:
+            failed.set()
+            self.changed.notify_all()  # wakes this run's waiting parts at once
+
+    def _one(self, send, number, failed):
+        with self.changed:
+            while True:
+                if failed.is_set():
+                    raise _NotStarted()
+                now = time.monotonic()
+                unseen = sum(now - started < SETTLE for started in self.started)
+                if self.sizing.may_start(len(self.started), unseen):
+                    break
+                self.changed.wait(POLL)  # a part's end wakes it sooner
+            started = time.monotonic()
+            self.started.append(started)
+        try:
+            return send(number)
+        except BaseException:
+            self._stop(failed)
+            raise
+        finally:
+            with self.changed:
+                self.started.remove(started)
+                self.changed.notify_all()
+
+
+class _NotStarted(Exception):
+    """A part that never started because another part of its upload failed."""
+
+
+_parts, _parts_lock = None, threading.Lock()
+
+
+def _upload_parts() -> _Parts:
+    """This process's _Parts, made at its first upload in parts."""
+    global _parts
+    with _parts_lock:
+        if _parts is None:
+            _parts = _Parts()
+        return _parts
+
+
 class Bucket:
     """A store's files as keys under s3://bucket/prefix. A file larger than
-    part goes up in parts, as many at once as wpt_utils.parallel allows."""
+    part goes up in parts of that size, sent with those of every other
+    upload of this process, UPLOADS at most at once in total (_Parts)."""
 
     def __init__(self, client, bucket, prefix, part=PART):
         self.client, self.bucket, self.prefix, self.part = client, bucket, prefix.strip("/"), part
@@ -212,9 +293,7 @@ class Bucket:
             return {"PartNumber": number, "ETag": answer["ETag"]}
 
         try:
-            sizing = Sizing("uploads")
-            with ThreadPoolExecutor(sizing.limit) as executor:
-                parts = list(in_order(send, range(1, -(-size // self.part) + 1), executor, sizing))
+            parts = _upload_parts().run(send, range(1, -(-size // self.part) + 1))
             self.client.complete_multipart_upload(Bucket=self.bucket, Key=self.key(key), UploadId=upload,
                                                   MultipartUpload={"Parts": parts})
         except BaseException:
