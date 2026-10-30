@@ -114,7 +114,7 @@ from .errors import (CutFailed, DatasetError, NotDownloaded, PatchFailed, PoolEr
                      VocabularyMissing)
 from .kept import kept
 from .repo import Repo
-from .sources import copied_as_records, copy_size, fingerprint, held_manifest, held_out_group, tags_of, tree_key
+from .sources import copied_as_records, copy_size, fingerprint, held_manifest, held_out_group, tags_of
 
 # the failures that take a whole source out of every build, recorded and never a stop: not in the store, or a
 # cut or a patch that does not apply, until a person acts
@@ -398,21 +398,25 @@ def source_tokens(repo, source, store, tokenizer, vocabulary: str, texts, teleme
     Every local copy its conversion needs, and its tokens until they are
     stored, are in a temporary folder, removed before it returns.
 
-    Kept under a ref named after what decides it (the final tree, formats,
-    licenses, code (wpt_utils.programs.code), vocabulary), so a source that
-    did not change is never converted again. With a telemetry, the ref is recorded
+    Kept under the ref source-tokens/<fingerprint of what decides it: the
+    key its Kept is kept under (kept.kept_key: the final tree, the license
+    entries, the formats, the license check's answer, the code outside
+    data/), the source's type and the vocabulary>, so a source is converted
+    again only when one of them changed. The license check runs first, on
+    every call, and so do, on a source found again, the checks of its tree
+    that read data/ beyond it (markdown.tree_checks): a found source fails
+    where a converted one does. With a telemetry, the ref is recorded
     before it is set (wpt_telemetry.set_ref)."""
-    key = fingerprint({"kind": "source-tokens", "tree": tree_key(source, store), "formats": source.data["formats"],
-                       "licenses": [[e["license"], e["paths"], e.get("place"), e.get("expected")]
-                                    for e in source.data["licenses"]],
-                       "code": code(), "vocabulary": vocabulary})
-    known = store.get_ref("source-tokens", key)
-    if known:
-        return json.loads(store.get_bytes(known))
     with tempfile.TemporaryDirectory(prefix="wpt-stream-") as tmp:
         tmp = Path(tmp)
         copies = store.copies_in(tmp / "copies")
         held, skipped = kept(source, copies, texts, telemetry), {}
+        key = fingerprint({"kind": "source-tokens", "kept": held.key, "type": source.data["type"],
+                           "vocabulary": vocabulary})
+        known = store.get_ref("source-tokens", key)
+        if known:
+            markdown.tree_checks(source, held.tree, copies, repo)
+            return json.loads(store.get_bytes(known))
         documents, offset = [], 0
         with open(tmp / "tokens.u32", "wb") as out:
             for converted in markdown.documents(source, held.tree, copies, repo, skipped, trains=held.trains):

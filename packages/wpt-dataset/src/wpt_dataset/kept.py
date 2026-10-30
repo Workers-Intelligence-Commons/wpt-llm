@@ -20,11 +20,15 @@ asks the shared checks (checks.py) and the license check
                  stays: each record of an entry that does not train is left
                  out when it is read (markdown.documents, `trains`)
 
-Nothing here asks upstream or changes the source. The result is kept in
-the store under the ref source-kept/<fingerprint of the final tree, the
-license pages, the license entries and the code (wpt_utils.programs.code:
-the WPT repository's whole commit, data/ included, so the decisions of
-the license texts too)>, so a source is checked once per commit.
+Nothing here asks upstream or changes the source. The license check's
+answer (statements: for each entry, the license text found at its place
+and that text's decision) is computed on every call, a few small reads of
+the stored bytes. The rest is kept in the store under the ref
+source-kept/<kept_key: the final tree, the license entries, the formats,
+that answer and the code outside data/ (wpt_utils.programs.code_outside)>,
+so a source is checked again only when one of them changed: a change to
+another source, or to a license text this source does not match, leaves
+it found again.
 """
 
 import dataclasses
@@ -32,13 +36,12 @@ import json
 from dataclasses import dataclass
 
 from wpt_telemetry import Telemetry, set_ref
-from wpt_utils.programs import code
+from wpt_utils.programs import code_outside
 
 from . import license_check, manifest
 from .manifest import Entry
-from .repo import Source
-from .sources import (UPSTREAM_PAGES, final_tree, fingerprint, is_records, license_page, license_pages, not_text,
-                      upstream_key)
+from .repo import DATA_FOLDER, Source
+from .sources import final_tree, fingerprint, is_records, license_page, not_text
 
 UNCOVERED, NOT_TEXT, ENTRY = "uncovered", "not-text", "entry"  # why something is left out
 
@@ -52,6 +55,7 @@ class Kept:
     statements: list[dict]  # the license check of each entry, in order (license_check.Statement as a dict)
     left_out: list[dict]  # [{"why": UNCOVERED or NOT_TEXT, "path", "detail"}, {"why": ENTRY, "entry", "license",
     #                        "files", "detail"}], in the tree's order, then the entries'
+    key: str  # the fingerprint it is kept under (kept_key), which a result made from it holds
 
     def result(self) -> dict:
         """What a dataset's record keeps of the check: the statements and
@@ -65,20 +69,29 @@ def kept(source: Source, store, texts: license_check.LicenseTexts, telemetry=Non
     out; the caller decides what that means for its own work."""
     telemetry = telemetry or Telemetry.off()
     tree, known = final_tree(source, store, telemetry)
-    licenses = source.data["licenses"]
-    key = fingerprint({"kind": "source-kept", "code": code(), "tree": known, "licenses": licenses,
-                       **({"pages": store.get_ref(UPSTREAM_PAGES, upstream_key(source))}
-                          if license_pages(source) else {})})
+    found = [dataclasses.asdict(statement) for statement in statements(source, tree, store, texts)]
+    key = kept_key(source, known, found)
     held = store.get_ref("source-kept", key)
     if held:
-        found = json.loads(store.get_bytes(held))
+        checked = json.loads(store.get_bytes(held))
     else:
-        found = _checked(source, tree, known, store, texts, telemetry)
-        set_ref(store, "source-kept", key, store.put_bytes(json.dumps(found, ensure_ascii=False).encode()),
+        checked = _checked(source, tree, known, store, found, telemetry)
+        set_ref(store, "source-kept", key, store.put_bytes(json.dumps(checked, ensure_ascii=False).encode()),
                 telemetry)
-    out = set(found["out"])
-    return Kept({path: entry for path, entry in tree.items() if path not in out}, known, frozenset(found["trains"]),
-                found["statements"], found["left_out"])
+    out = set(checked["out"])
+    return Kept({path: entry for path, entry in tree.items() if path not in out}, known,
+                frozenset(checked["trains"]), found, checked["left_out"], key)
+
+
+def kept_key(source: Source, known: str, found: list[dict]) -> str:
+    """The fingerprint of a source's Kept: everything its check reads, the
+    final tree (known: its manifest object), the license entries, the
+    formats (which file is a records file, which is not text), the
+    statements found on that tree (found, license_check.Statement as
+    dicts) and the code outside data/. Nothing else of data/ is in it: the
+    license texts enter only through the statements."""
+    return fingerprint({"kind": "source-kept", "code_outside_data": code_outside(DATA_FOLDER), "tree": known,
+                        "licenses": source.data["licenses"], "formats": source.data["formats"], "statements": found})
 
 
 def statements(source: Source, tree: dict[str, Entry], store,
@@ -95,11 +108,11 @@ def statements(source: Source, tree: dict[str, Entry], store,
     return license_check.statements(source.data["licenses"], read, texts)
 
 
-def _checked(source, tree, known, store, texts, telemetry) -> dict:
-    """{"out": the paths left out, "trains", "statements", "left_out"} of
-    one final tree (known: its manifest object)."""
+def _checked(source, tree, known, store, found, telemetry) -> dict:
+    """{"out": the paths left out, "trains", "left_out"} of one final tree
+    (known: its manifest object) under its statements (found, as dicts)."""
     licenses = source.data["licenses"]
-    found = statements(source, tree, store, texts)
+    found = [license_check.Statement(**statement) for statement in found]
     trains = {number for number, entry in enumerate(licenses) if license_check.trains(entry, found[number])}
     coverage = license_check.Coverage(licenses)
     unreadable = not_text(source, tree, known, store, telemetry)
@@ -119,8 +132,7 @@ def _checked(source, tree, known, store, texts, telemetry) -> dict:
         if number not in trains:
             left_out.append({"why": ENTRY, "entry": number, "license": entry["license"],
                              "files": by_entry.get(number, 0), "detail": _why(entry, found[number])})
-    return {"out": out, "trains": sorted(trains), "statements": [dataclasses.asdict(s) for s in found],
-            "left_out": left_out}
+    return {"out": out, "trains": sorted(trains), "left_out": left_out}
 
 
 def _why(entry: dict, statement: license_check.Statement) -> str:

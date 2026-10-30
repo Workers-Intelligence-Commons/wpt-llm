@@ -11,10 +11,11 @@ come back to the asking process and are put together there in the items'
 order, so they are the ones a conversion of one item at a time gives.
 
 A worker opens the asking process's repository (Repo), uses its code()
-(wpt_utils.programs), so its fingerprints are the asking process's, and
-the store each item is given (wpt_store opens the same store there). What
-it records goes into the run's record under the span the asking thread is
-in (wpt_telemetry's join), each item a part of its own.
+and its code outside the data folder (wpt_utils.programs.codes), so its
+fingerprints are the asking process's, and the store each item is given
+(wpt_store opens the same store there). What it records goes into the
+run's record under the span the asking thread is in (wpt_telemetry's
+join), each item a part of its own.
 
     with Pool(repo, "sources at once") as pool:
         pool.call(function, *arguments, telemetry=telemetry)   # from any thread
@@ -27,10 +28,10 @@ import os
 
 from wpt_telemetry import Telemetry
 from wpt_utils.parallel import Sizing, process_pool
-from wpt_utils.programs import code, set_code
+from wpt_utils.programs import codes, set_code
 
 from .license_check import LicenseTexts
-from .repo import Repo
+from .repo import DATA_FOLDER, Repo
 
 _REPO = None  # in a worker process: the asking process's repository, set once by _start
 _TEXTS = None  # in a worker process: its repository's license texts, read on their first use
@@ -80,7 +81,7 @@ class Pool:
         self._pool = None
 
     def __enter__(self):
-        self._pool = process_pool(self.sizing, self.sizing.limit, _start, (self._root, code()))
+        self._pool = process_pool(self.sizing, self.sizing.limit, _start, (self._root, codes(DATA_FOLDER)))
         return self
 
     def __exit__(self, kind, error, traceback):

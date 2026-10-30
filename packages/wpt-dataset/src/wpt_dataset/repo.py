@@ -113,6 +113,7 @@ TEXT_SIGNED = ("files",)
 # the license of a work in the public domain: its entry's text is the proof (death dates, publication law), and its
 # place may be the entry itself
 PUBLIC_DOMAIN = "LicenseRef-public-domain"
+DATA_FOLDER = "data"  # the repository's data, a top-level folder of its root (Repo.data_folder)
 SOURCE_FILE = "source.json"
 # a license text's id, the sha256 of its normalized text (license_check.text_id), and the files of its folder
 TEXT_ID = re.compile(r"[0-9a-f]{64}")
@@ -672,7 +673,7 @@ class Located:
 class Repo:
     def __init__(self, root):
         self.root = Path(root)
-        self._data = self.root / "data"
+        self._data = self.root / DATA_FOLDER
         _guard(self._data)
         key = self.root.resolve()
         with _LOCKS_LOCK:

@@ -76,9 +76,9 @@ history's order file (`.git/history/order`): it stays in the source's tree
 and its manifest, and the builder reads it, but it is not a training
 document.
 
-The stream cache is keyed by the code (wpt_utils.programs.code), so a
-change to what this module makes of a file makes the Markdown again
-(docs/architecture.md).
+The stream cache (build.source_tokens) is keyed by the code outside
+data/ (wpt_utils.programs.code_outside), so a change to what this module
+makes of a file makes the Markdown again (docs/architecture.md).
 """
 
 import posixpath
@@ -136,8 +136,8 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None,
     Markdown is empty are left out; repo holds the images task folders
     name. skipped, when given, receives file -> records.Skipped for each
     records file. only, when given, is the set of files whose documents
-    are wanted: the others are not read, and the task folders are not
-    checked. trains, when given, is the set of the numbers of the license
+    are wanted: the others are not read, and the checks of the whole tree
+    (tree_checks) do not run. trains, when given, is the set of the numbers of the license
     entries whose records train (kept.Kept.trains): a record of any other
     entry is left out and counted (records.Skipped.untrained); every
     entry's without it.
@@ -208,7 +208,18 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None,
         if markdown.strip():
             yield Converted(path, markdown, path, None)
     if only is None:
-        tasks.of_source(source, tree, store, repo)
+        tree_checks(source, tree, store, repo)
+
+
+def tree_checks(source, tree, store, repo) -> None:
+    """The checks of a whole final tree that give no document and read
+    data/ beyond the source: its task folders (tasks.of_source), which read
+    every source id and repo's data/images/. documents runs them after the
+    last document when only is not given. A caller that reuses a stored
+    conversion of the tree runs them itself, so that it fails where a
+    conversion does.
+    Raises InvalidFile when a task folder is not valid."""
+    tasks.of_source(source, tree, store, repo)
 
 
 def chosen(source, tree, store, repo, paths, trains=None) -> dict[str, bytes]:

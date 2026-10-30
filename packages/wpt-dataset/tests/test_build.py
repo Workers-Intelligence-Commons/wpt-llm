@@ -10,11 +10,13 @@ from wpt_dataset import build, conversations, license_check, markdown, sources, 
 from wpt_dataset.build import build_dataset, document_list, is_held_out
 from wpt_dataset.cli import main
 from wpt_dataset.errors import SourceGone, PoolError, TokenizerVersionNeeded, VocabularyMissing
+from wpt_dataset.repo import DATA_FOLDER
 from wpt_dataset.sources import stored_files, upstream_key
 from wpt_store import CorruptObject, open_store
 from wpt_store.shards import read_shard, token_hash
 from wpt_telemetry import Telemetry
 from wpt_tokenizer import Tokenizer
+from wpt_utils import programs
 from wpt_utils.parallel import Sizing
 
 FRENCH = ["le chat dort sur le tapis rouge", "la pluie tombe sur la ville grise", "un enfant lit un livre ancien",
@@ -485,6 +487,42 @@ def test_sources_converted_at_once_give_the_dataset_converted_one_at_a_time(kit,
         assert many[part] == one[part]
     assert [s["token_sha256"] for s in many["shards"] + many["held_out_shards"]] == \
            [s["token_sha256"] for s in one["shards"] + one["held_out_shards"]]
+
+
+def test_a_source_s_kept_files_and_tokens_are_made_again_only_when_its_own_inputs_change(kit, repo, store, corpus,
+                                                                                        tmp_path, monkeypatch):
+    # a commit that changes only data/ converts again only the sources
+    # whose inputs changed: another source, with a license text this
+    # source does not match, leaves this source's source-kept and
+    # source-tokens refs found again; a change to the decision of the text
+    # this source matched, or to the code outside data/, makes both again
+    sid = setup_recipes(kit, repo, store, corpus, total_tokens=500)
+    tokenizer, vocabulary, _ = build.build_tokenizer(repo, "main", store, log=lambda _: None)
+    for name in ("_CODE", "_OUTSIDE", "_GIVEN"):  # put back as they were when the test ends
+        monkeypatch.setattr(programs, name, getattr(programs, name))
+    outside = programs.code_outside(DATA_FOLDER)
+
+    def made() -> dict[str, int]:
+        build.source_tokens(repo, repo.source(sid), store, tokenizer, vocabulary,
+                            license_check.LicenseTexts(repo.license_texts()))
+        return {kind: len(list((store.root / "refs" / kind).iterdir())) for kind in ("source-kept", "source-tokens")}
+
+    assert made() == {"source-kept": 1, "source-tokens": 1}
+    folder, _ = kit.git_project(tmp_path / "other", files={"notes.txt": b"another source's own text. " * 20},
+                                executable=set(), symlinks={})
+    other = kit.add_source(repo, store, "example", "other", {"type": "git", "address": folder})
+    matched = repo.source(sid).data["licenses"][0]["expected"][0]
+    assert repo.source(other).data["licenses"][0]["expected"] != [matched]  # a text this source does not match
+    # the commit that adds it: a new whole commit (code()), the same code outside data/
+    programs.set_code({"code": {"commit": "0" * 40, "changes": None}, "outside": {DATA_FOLDER: outside}})
+    assert made() == {"source-kept": 1, "source-tokens": 1}
+
+    item = repo.license_texts()[matched]
+    kit.write_texts(repo.root, {matched: {**item, "decision": {**item["decision"], "decision": "refused",
+                                                               "reason": "a test's refusal"}}})
+    assert made() == {"source-kept": 2, "source-tokens": 2}
+    programs.set_code({"code": {"commit": "1" * 40, "changes": None}, "outside": {DATA_FOLDER: "1" * 64}})
+    assert made() == {"source-kept": 3, "source-tokens": 3}
 
 
 def test_a_streamed_build_leaves_no_copy_of_a_source_s_files_on_this_machine(kit, repo, store, tmp_path):

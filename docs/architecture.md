@@ -422,17 +422,40 @@ uncommitted changes, every tracked file's difference and every untracked
 file git does not ignore (`wpt_utils.programs.code`). The commit is the
 WPT repository's whole commit, so it covers `data/` too: the sources, the
 license texts and their decisions. Any commit, and any uncommitted change,
-makes every stored result unknown, so nothing is reused across code or data
-that may differ. The store keeps downloads across commits; everything
-computed from them is computed again at the next build. Code installed as packages, outside a
-git checkout, is identified by a sha256 of the installed `wpt-*` packages'
-files instead.
+makes every result keyed by it unknown.
+
+A result computed from one source's own inputs alone holds the code
+outside `data/` instead (`wpt_utils.programs.code_outside`): a
+sha256 of the commit's files outside `data/` and of the uncommitted
+changes outside `data/`. Beside it, its fingerprint holds every input of
+`data/` its computation reads. A commit that changes only other files of
+`data/` leaves such a result's fingerprint the same, so it is found
+again.
+
+The license check reads the license texts, which every source shares.
+Each build runs it again for every source, outside the store's results,
+before the work it keeps: a few small reads per source of the stored
+bytes at each entry's place. Its answer, for each entry the license text
+found at its place and that text's decision, is part of the fingerprint
+of what a source keeps for training. A new license text that a source
+does not match, or a change to another text, leaves that answer and that
+fingerprint the same.
+
+A task source's tasks are checked against every source id and the files
+of `data/images/`. That check also runs on every build, so it is no part
+of any fingerprint. A commit that changes only `data/` therefore converts
+and tokenizes again only the sources whose own inputs changed.
+
+The store keeps downloads across commits. Code installed as packages,
+outside a git checkout, is identified by a sha256 of the installed
+`wpt-*` packages' files instead, in both places.
 
 | Result | Fingerprint covers |
 | --- | --- |
 | upstream tree (what the download stored) | the source's id and what its download reads: its `type`, `address`, `addresses`, `revision`, `extract`, `history`, `submodules`, and the outside license pages its entries declare |
-| final source tree (and the check that its files are text) | the upstream tree's manifest, the license pages stored with it, cuts (and the cut key), each patch's sha256, the formats (they decide each file's encoding), the code |
-| what a source keeps for training, and its check result | the final tree, the license pages, the license entries, the code |
+| final source tree (and the check that its files are text) | the upstream tree's manifest, the license pages stored with it, cuts (and the cut key), each patch's sha256, the formats (they decide each file's encoding), the code outside `data/` |
+| what a source keeps for training, and its check result | the final tree, the license entries (with their decisions), the formats, the license check's answer (for each entry, the license text found at its place and that text's decision), the code outside `data/` |
+| a source's tokens (`--stream`) | the fingerprint of what the source keeps for training (the code outside `data/` included), the source's `type`, the vocabulary |
 | vocabulary | the code, tokenizer recipe (with its `version`), the documents it is trained on (id and sha256 of their Markdown); frozen by the recipe's lock until `version` is raised ([tokenizer.md](tokenizer.md)) |
 | dataset | the code, the model recipe's data part, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, the manifest of its upstream tree, its final tree, licenses (with attribution) and check result, the sources skipped (not in the store, or failing with `--skip-failed`: each by its id and the kind of its error), and the objects of its conversations and tasks |
 | training step's result | the fingerprint of the step before it, the step (its files, method, environment, optimizer, settings and locked parts), the fingerprint of the dataset part it reads (`text`, `conversations` or `tasks`, in the record's `fingerprints`), the recipe's seed and the code; no hardware option ([training.md](training.md), "Step results and reuse") |
@@ -459,11 +482,13 @@ folder on this machine, deleted once the source is tokens; every other
 file is read from the store by range, so a conversion never opens a file
 of the store itself. The store keeps one token object per source
 (every document's tokens, one after the other), its final manifest and a
-summary, under a ref named after the final tree, the formats, the
-licenses, the code and the vocabulary; a source that did not change is
-never converted again. The documents, the dataset id and the shards are
-the same as without `--stream`. What it does not keep is the documents'
-Markdown. Without `--stream`, the store keeps everything, as above.
+summary, under a ref named after what the source keeps for training,
+its `type` and the vocabulary ("Fingerprints and the store"); a source
+whose inputs did not change is never converted again. The documents, the
+dataset id and the shards are the same as without `--stream`. What it
+does not keep is the documents' Markdown. Without `--stream`, the store
+keeps everything, as above, and has no per-source conversion result:
+every build converts every source again.
 
 The build converts sources and reads their conversations and tasks in
 worker processes, several at once, and turns several documents into
@@ -610,9 +635,10 @@ The dataset record keeps each document's id and sha256, and each source's
 check result: which statement was found at which place, which license
 text matched it and that text's decision, and what was left out and why.
 
-The license check of a source is kept in the store per final tree,
-license pages, license entries and code, so it runs once per commit. That
-recompute after every commit is fast by design: the download stores an
+Every build runs the license check of every source again; what the
+build keeps of a source is kept in the store under the check's answer and
+its other inputs ("Fingerprints and the store"). What every build reads
+again is fast by design: the download stores an
 archive's members one by one, so the build never unpacks an archive;
 sources are processed
 in parallel, sized by `wpt_utils.parallel`; and a file's format, tags and
@@ -925,7 +951,7 @@ tree. Nothing is committed by `wpt-web`, so every change shows in
 | `wpt-model` | the WPT network ([model.md](model.md)) and its drafter, its safetensors model folders, and their license documents (`LICENSE`, `NOTICE`, model card) |
 | `wpt-training` | the training loop (global batch, evaluation, checkpoints, resuming) that runs one training step, with its plug points: strategies (how the hardware is used), and the parts of a step ([training.md](training.md), "Steps"): methods (how the model learns from an example), environments (where the examples come from), optimizers (how an update changes the weights) and the steps that name one of each, with the model parts they lock |
 | `wpt-inference` | sampling through the model's generation cache: several rows from one prompt, the model's next chat message (`next_message`, which `wpt-chat --chat` and the text measures of `wpt-eval` both write with), speculative decoding with a drafter and its scheduler, the scheduler's pass times (measured, recorded, replayed); training a model's drafter (`drafting.py`), which `wpt-train` runs at the end of every run, so it uses `wpt-model` |
-| `wpt-utils` | helpers several packages share, one submodule each: `wpt_utils.device` picks the best GPU, else the CPU; `wpt_utils.programs` starts the outside programs WPT runs (`program(name)`, with a clear error when one is missing), identifies the code every fingerprint holds (`code()`: the checkout's commit and a hash of its uncommitted changes, the one place that reads the commit) and gives that commit, and whether there are changes, in the shape the records name them (`repository()`), without importing PyTorch; `wpt_utils.files.sha256_file` is the one way a file is hashed, by the store, the model folders and the run records alike; `wpt_utils.files.lock_file` is the lock the operating system holds on a file for one process, which the service layer and a local store's database share; `wpt_utils.settings.typed` types the settings of a training step and of its method, environment and optimizer from the defaults each file declares; `wpt_utils.parallel` is the one rule that sizes parallel work (at most 75% of the cores; before each new item it measures again and starts it only while a quarter of the memory, of the cores and, where the items write to a disk, of the free disk stays free, one item's memory being what running items are measured taking, never a given figure; it never stops a running item) and runs items that way with their results in the items' order, an error an item may fail with becoming that item's result |
+| `wpt-utils` | helpers several packages share, one submodule each: `wpt_utils.device` picks the best GPU, else the CPU; `wpt_utils.programs` starts the outside programs WPT runs (`program(name)`, with a clear error when one is missing), identifies the code a fingerprint holds (`code()`: the checkout's commit and a hash of its uncommitted changes, the one place that reads the commit; `code_outside(folder)`: a sha256 of the checkout without one top-level folder, which, given `data/`, a result computed from one source's own inputs alone holds) and gives that commit, and whether there are changes, in the shape the records name them (`repository()`), without importing PyTorch; `wpt_utils.files.sha256_file` is the one way a file is hashed, by the store, the model folders and the run records alike; `wpt_utils.files.lock_file` is the lock the operating system holds on a file for one process, which the service layer and a local store's database share; `wpt_utils.settings.typed` types the settings of a training step and of its method, environment and optimizer from the defaults each file declares; `wpt_utils.parallel` is the one rule that sizes parallel work (at most 75% of the cores; before each new item it measures again and starts it only while a quarter of the memory, of the cores and, where the items write to a disk, of the free disk stays free, one item's memory being what running items are measured taking, never a given figure; it never stops a running item) and runs items that way with their results in the items' order, an error an item may fail with becoming that item's result |
 | `wpt-agent` | the agent harness of agentic training: the tools (the four built-in ones, `ask`, and those a task or its image's pool declares, answered by programs in the image) and each attempt's choice of them, one Docker container per attempt, the images of `data/images/` and their locks, the agent loop and the task's check, and the playing of a task's attempts (`wpt_agent.play`), which the `agent-tasks` environment of the `finish-tasks` and `finish-tasks-with-less-writing` steps and the agent measures of `wpt-eval` share, so `wpt-eval` does not depend on `wpt-train`; commands `wpt-agent lock-image` and `wpt-agent build-image` |
 | `wpt-worker` | the gpu worker, which runs the GPU work of a training on its machine, the link to it from the wpt manager's side, and the gradients exchanged between gpu workers in different places ([machines.md](machines.md)) |
 | `wpt-train`, `wpt-eval`, `wpt-chat`, `wpt-manager` | the applications; `wpt-manager` runs download, build, training and the optional evaluation as one command, and rents its gpu workers through providers when asked ([machines.md](machines.md)) |

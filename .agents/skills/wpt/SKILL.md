@@ -400,7 +400,13 @@ what the whole text gives (docs/model.md, "What a layer passes on").
 - Start external programs through `wpt_utils.programs.program(name)`,
   which reports a missing tool clearly.
 - A fingerprint holds `wpt_utils.programs.code()` (the commit and a hash of
-  the uncommitted changes), never a version number of WPT's own code.
+  the uncommitted changes), never a version number of WPT's own code. A
+  result computed from one source's own inputs alone holds
+  `wpt_utils.programs.code_outside(wpt_dataset.repo.DATA_FOLDER)` instead,
+  and holds in its fingerprint every input of `data/` its computation
+  reads. A file of `data/` that every source shares enters only as what
+  the source found in it, found again on every build, as the license
+  check's answer enters what a source keeps.
 - Parallel work sizes itself with `wpt_utils.parallel.Sizing`, which
   measures each item's memory as it runs: never give a memory figure per
   item. A source's conversion or reading goes through

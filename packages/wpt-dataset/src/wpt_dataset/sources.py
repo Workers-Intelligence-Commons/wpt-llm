@@ -37,12 +37,12 @@ from pathlib import Path
 from wpt_store import parse_file_list
 from wpt_telemetry import Telemetry, set_ref
 from wpt_utils.parallel import in_order
-from wpt_utils.programs import code
+from wpt_utils.programs import code_outside
 
 from . import checks, erasure, license_check, manifest, records, workers
 from .errors import CutFailed, NotDownloaded, NotText, PatchFailed
 from .manifest import SYMLINK, Entry
-from .repo import Patch, Source
+from .repo import DATA_FOLDER, Patch, Source
 
 # the kinds of the refs naming an upstream tree and the license pages downloaded with it (upstream_key)
 UPSTREAM, UPSTREAM_FILES, UPSTREAM_PAGES = "upstream", "upstream-files", "upstream-pages"
@@ -378,14 +378,14 @@ def tree_key(source: Source, store) -> str:
     """The fingerprint of a source's final tree: its upstream tree as the
     store holds it (its manifest's sha256) and the license pages downloaded
     with it, cuts (and the cut key they are matched under), patches,
-    formats (which decide each file's encoding), and the code
-    (wpt_utils.programs.code: the WPT repository's whole commit, every
-    uncommitted change under data/ included), so after any commit every
-    result keyed by it is computed again from the stored bytes."""
+    formats (which decide each file's encoding), and the code outside
+    data/ (wpt_utils.programs.code_outside). It holds nothing else
+    of data/, so a commit that changes only other files of data/ leaves it
+    the same."""
     cuts = source.data.get("cuts", [])
     return fingerprint({
         "kind": "source-tree",
-        "code": code(),
+        "code_outside_data": code_outside(DATA_FOLDER),
         "upstream": upstream_manifest(source, store),
         **({"pages": store.get_ref(UPSTREAM_PAGES, upstream_key(source))} if license_pages(source) else {}),
         "formats": source.data["formats"],
@@ -435,8 +435,11 @@ def not_text(source: Source, tree: dict[str, Entry], known: str, store, telemetr
     """{path: why} of the files of a final tree (known: its manifest
     object) that the text check (checks.py) finds are not text, in the
     tree's order. Kept under the ref source-not-text/<fingerprint of the
-    tree, the formats and the code>, so a tree is read for it once."""
-    key = fingerprint({"kind": "source-not-text", "code": code(), "tree": known, "formats": source.data["formats"]})
+    tree, the formats and the code outside data/
+    (wpt_utils.programs.code_outside)>, so a tree is read for it
+    once."""
+    key = fingerprint({"kind": "source-not-text", "code_outside_data": code_outside(DATA_FOLDER), "tree": known,
+                       "formats": source.data["formats"]})
     held = store.get_ref("source-not-text", key)
     if held:
         return json.loads(store.get_bytes(held))
