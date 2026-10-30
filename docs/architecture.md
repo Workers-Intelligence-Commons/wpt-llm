@@ -698,9 +698,15 @@ tree had changes) and its lines (source, what the download got, for the
 record only, address used, time, outcome `downloaded`, `reused` or
 `failed`, size, WPT version), the marks for a new download (a source, or
 every source, and when), and the map of git objects (each git object id,
-the sha256 of its content, its bundle and its place there). A session puts its rows in at each sealed bundle and at its
-end. A full bundle is sealed while the next one fills, so a crash loses
-only the bundles not yet sealed and the lines since the last one. A
+the sha256 of its content, its bundle and its place there). A session
+writes its rows to its own file at each sealed bundle (see below). It
+puts them into the store database at its start, at its end, and at a
+sealed bundle once the bundles it stored since the last put hold ten
+times the bytes the database takes in the store. Each put reads and
+stores the whole database, so its copies stay about a tenth of what the
+session stores, and the database may lag a running session by several
+bundles. A full bundle is sealed while the next one fills, so a crash
+loses only the bundles not yet sealed and the lines since the last one. A
 bundle that cannot be stored stops its session: nothing more is added or
 recorded, and the lines that went with that bundle are not kept.
 

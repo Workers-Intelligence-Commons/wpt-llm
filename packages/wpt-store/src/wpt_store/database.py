@@ -179,12 +179,13 @@ class Copy(sqlite3.Connection):
             self.close()
 
 
-def put(kind, folder, rows) -> list[str]:
+def put(kind, folder, rows) -> tuple[list[str], int]:
     """Put the rows of local session files (rows: Rows) into the database in
     the store, replacing what it holds for them, through a copy in folder;
     once they are in, each of rows is applied() (Rows). Returns the bundles
-    the database now marks that may be removed: those with no session still
-    running (not ended) that started before the bundle was marked.
+    the database now marks that may be removed (those with no session still
+    running, not ended, that started before the bundle was marked) and the
+    bytes the database now takes in the store.
     CorruptObject when the stored file is not a database (nothing written).
     A failure of the store leaves the database as it was, or as replaced
     with these rows, and rows as they were."""
@@ -202,10 +203,10 @@ def put(kind, folder, rows) -> list[str]:
                 connection.execute("DETACH DATABASE rows")
         return [bundle for bundle, in connection.execute(REMOVABLE)]
 
-    removable = _change(kind, folder, put_in)
+    removable, size = _change(kind, folder, put_in)
     for one in rows:
         one.applied()
-    return removable
+    return removable, size
 
 
 def mark(kind, folder, sources, at: str):
@@ -330,7 +331,8 @@ def unowned_rows(folder) -> list[Rows]:
 def _change(kind, folder, edit):
     """edit(connection) run on a local copy of the database, then the copy
     replacing the stored file, both tried again until no other session
-    replaced it meanwhile: what edit returned."""
+    replaced it meanwhile: what edit returned, and the bytes of the stored
+    file."""
     while True:
         local, version = _copy(kind, folder)
         try:
@@ -347,7 +349,7 @@ def _change(kind, folder, edit):
                 writer.close()
             try:
                 kind.replace(KEY, local.path(PACKED), version)
-                return result
+                return result, local.path(PACKED).stat().st_size
             except Changed:
                 pass
         finally:

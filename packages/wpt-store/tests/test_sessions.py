@@ -1,10 +1,11 @@
+import os
 import threading
 
 import boto3
 import pytest
 from moto import mock_aws
 
-from wpt_store import CorruptObject, MissingObject, Session, file_list_bytes, open_store, parse_file_list
+from wpt_store import CorruptObject, MissingObject, Session, file_list_bytes, open_store, parse_file_list, sessions
 
 MB = 1 << 20
 
@@ -78,6 +79,24 @@ def test_a_crash_loses_only_the_bundle_being_filled_and_the_lines_since_the_last
     with later.database() as found:
         assert found.execute("SELECT folder, dirty, ended FROM sessions").fetchall() == [("crashed", 1, None)]
         assert found.execute("SELECT count(*) FROM lines").fetchone() == (0,)
+
+
+def test_a_seal_puts_the_rows_in_the_database_only_once_the_bundles_since_the_last_put_outweigh_it(reopen):
+    # every put reads and stores the whole database: bundles much smaller than it leave their rows in the
+    # session's file until enough bytes were stored, or until the end
+    store = reopen()
+    with Session(store, "growing", "download", "abc123", False, bundle=MB) as session:
+        session.line("small", "downloaded", "abc123")
+        named(session, {"small.txt": session.add(text("small", MB))})  # compresses to far less than the database
+        with reopen().database() as found:
+            assert found.execute("SELECT count(*) FROM lines").fetchone() == (0,)
+        session.line("large", "downloaded", "abc123")
+        named(session, {"large.bin": session.add(os.urandom(40 * MB))})  # does not compress: outweighs it
+        with reopen().database() as found:
+            assert found.execute("SELECT source FROM lines ORDER BY number").fetchall() == [("small",), ("large",)]
+        session.line("last", "reused", "abc123")
+    with reopen().database() as found:
+        assert found.execute("SELECT count(*) FROM lines").fetchone() == (3,)
 
 
 def test_sessions_that_replace_the_database_at_once_both_keep_their_rows(reopen):
@@ -162,9 +181,10 @@ def test_an_outcome_the_database_does_not_know_is_refused(reopen):
         session.line("x", "checked", "abc123")
 
 
-def test_a_bundle_that_could_not_be_stored_stops_the_session_and_its_lines_are_never_recorded(reopen):
+def test_a_bundle_that_could_not_be_stored_stops_the_session_and_its_lines_are_never_recorded(reopen, monkeypatch):
     # an upload fails while the second bundle is sealed: its file and the
     # line recorded with it must not reach the database as downloaded
+    monkeypatch.setattr(sessions, "DATABASE_SHARE", 0)  # every seal puts its rows in the database
     store = reopen()
     real = store.keep_compressed
     sealed = []
@@ -417,9 +437,11 @@ def test_git_objects_a_session_names_are_known_to_later_sessions_while_their_bun
                                                                                                "d" * 40]
 
 
-def test_git_objects_of_a_session_still_running_are_not_given_out_since_its_end_may_remove_their_bundle(reopen):
+def test_git_objects_of_a_session_still_running_are_not_given_out_since_its_end_may_remove_their_bundle(reopen,
+                                                                                                    monkeypatch):
     # a session seals a bundle holding a failed try next to a git file it names; another session running at the
     # same time must not name that file where it lies: the first one's end rewrites the bundle and removes it
+    monkeypatch.setattr(sessions, "DATABASE_SHARE", 0)  # every seal puts its rows in the database
     store = reopen()
     first = Session(store, "first", "download", "abc123", False, bundle=2 * MB)
     good = first.add(text("good", MB))
@@ -493,8 +515,9 @@ def test_a_local_bundle_is_on_the_disk_before_the_database_names_it(tmp_path, mo
 
 CRASH = """
 import os, sys
-from wpt_store import Session, database, open_store
+from wpt_store import Session, database, open_store, sessions
 
+sessions.DATABASE_SHARE = 0  # every seal puts its rows in the database
 real = database.put
 calls = []
 

@@ -37,15 +37,18 @@ list is handed to name(), which stores it once its files are, and tells
 the caller where it lies.
 
 The session's lines (one per download, use of a source already in the
-store, failure) go into the store database
-(wpt_store.database) with the session's own row each time a bundle is
-sealed, and at the end, and so do the git objects of the file lists
-named meanwhile (their git_objects table). They go first into the
-session's own file on this machine's disk (database.Rows, in the store's
-cache folder), then from it into the store database (database.put). An
-action handed to then() or name() (such as setting the refs that name a
-downloaded source's files) runs at the same moment, just before those
-rows go in: once every file added before it is stored. A bundle is on the
+store, failure) go into the session's own file on this machine's disk
+(database.Rows, in the store's cache folder) with the session's own row
+each time a bundle is sealed, and at the end, and so do the git objects
+of the file lists named meanwhile (their git_objects table). From that
+file they go into the store database (wpt_store.database, database.put)
+at the end, and at a seal once the bundles stored since the last put
+hold DATABASE_SHARE times the bytes the database takes in the store or
+more: every put reads and stores the database whole, so its copies stay
+about a tenth of what a session stores. An action handed to then() or
+name() (such as setting the refs that name a downloaded source's files)
+runs at the seal, just before those rows go into the file: once every
+file added before it is stored. A bundle is on the
 disk (local store) or held by S3 before the database names it. A full
 bundle is sealed while the next one fills; should it fill too before the
 first is sealed, adding waits. A crash loses only the bundles not yet
@@ -102,6 +105,7 @@ CHUNK = 1 << 20  # bytes of a local file read at once
 PARTIAL = ".partial-bundle-"  # the start of the name of a bundle being filled on this machine's disk
 PART = 64 << 20  # bytes of one file copied at once when a bundle is rewritten
 QUERY = 500  # git object ids asked for in one query of the store database
+DATABASE_SHARE = 10  # bytes of bundles stored between two puts, per byte the store database takes in the store
 
 
 @dataclass(frozen=True)
@@ -225,7 +229,7 @@ class Session:
         try:
             left = database.unowned_rows(store.cache)
             self._row_file.add(dict(self.row))
-            removable = database.put(store.kind, store.cache, [self._row_file, *left])
+            removable, self._database_size = database.put(store.kind, store.cache, [self._row_file, *left])
         except BaseException:
             self._row_file.discard()  # a session that could not start ran nothing: its row alone is not kept
             raise
@@ -243,6 +247,7 @@ class Session:
         self._actions = []  # then()'s and name()'s actions not yet handed over with a bundle
         self._rows = []  # remember()'s git object rows not yet handed over with a bundle
         self._ended = False
+        self._stored = 0  # bytes of bundles stored since the last put
         self._failure = None  # what a seal or a put raised: the session cannot go on
         # what the named file lists name, for the end's rewrite: each bundle's original bytes once handed over,
         # and for each bundle not known to be named whole, {(start, length): sha256} of its files named so far
@@ -496,7 +501,7 @@ class Session:
                 if self._failure is None:
                     self._failure = error
                 raise
-            removable = self._seal(last)
+            removable = self._seal(last, put=True)
         finally:
             # the rows file goes once the database holds all of it, and stays for a later session otherwise
             self._row_file.close()
@@ -627,11 +632,13 @@ class Session:
         self._sealing.acquire()
         return handed
 
-    def _seal(self, handed):
+    def _seal(self, handed, put=False):
         """Outside _lock, holding _sealing: store the bundle, run the actions
-        handed over with it, then put its rows and marks in the database. A
-        failure stops the session. The bundles the database then marks that
-        no running session can read any more: those it gives back."""
+        handed over with it, then put its rows and marks in the session's
+        file, and that file in the database when put is true or enough bytes
+        were stored since the last put (DATABASE_SHARE). A failure stops the
+        session. The bundles the database then marks that no running session
+        can read any more: those it gives back."""
         filling, row, lines, actions, rows, marks = handed
         try:
             if self._failure is not None:  # an earlier bundle was lost: this one goes with it
@@ -640,10 +647,15 @@ class Session:
                 original, stored = filling.seal()
                 self.store.keep_compressed(f"bundles/{self._name(filling.number)}", filling.path, original, stored,
                                            self.keep_local)
+                self._stored += stored
             for action in actions:
                 rows += action() or []
             self._row_file.add(row, lines, rows, marks)
-            return database.put(self.store.kind, self.store.cache, [self._row_file])
+            if not put and self._stored < DATABASE_SHARE * self._database_size:
+                return []
+            removable, self._database_size = database.put(self.store.kind, self.store.cache, [self._row_file])
+            self._stored = 0
+            return removable
         except BaseException as error:
             if self._failure is None:
                 self._failure = error
