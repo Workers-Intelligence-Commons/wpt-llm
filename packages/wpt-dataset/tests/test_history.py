@@ -1,4 +1,5 @@
 import re
+import tempfile
 
 import pytest
 
@@ -245,7 +246,10 @@ def test_history_files_are_the_bytes_of_one_format_patch_per_commit(kit, store, 
     commits = manifest._history_commits(folder, root, head)
     whole = [c for c, changes in manifest._changed_paths(folder, commits).items()
              if not any(path.startswith("vendor/") for path, _ in changes)]
-    cut = sum(len(manifest._group_patches(folder, whole[i:i + group])) for i in range(0, len(whole), group))
+    cut = 0
+    for i in range(0, len(whole), group):
+        with tempfile.TemporaryFile() as out:
+            cut += len(manifest._group_patches(folder, whole[i:i + group], out))
     assert cut == (0 if quoted and group == 500 else len(whole))  # every group cut, or the one group not
 
 

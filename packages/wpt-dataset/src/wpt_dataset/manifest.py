@@ -28,11 +28,13 @@ import glob
 import hashlib
 import io
 import itertools
+import mmap
 import os
 import re
 import stat
 import subprocess
 import tarfile
+import tempfile
 import zipfile
 from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
@@ -660,24 +662,38 @@ def read_git_history(repo: Path, since: str, revision: str, extractor: Extractor
         if paths:
             limits[commit] = None if len(paths) == len(changed[commit]) else _only(paths, changed[commit])
 
-    def patch(commit):
+    def patch(commit, out):
         specs = limits[commit]
         if any("\n" in s or "\r" in s for s in specs):  # no line of standard input can hold such a path
-            return [(commit, _git(repo, *FORMAT_PATCH, "-1", commit, "--", *specs))]
+            return [_written(repo, out, commit, *FORMAT_PATCH, "-1", commit, "--", *specs)]
         # the paths go on standard input, after "--": a command line has a limit (32,767 characters on
         # Windows) that a commit changing thousands of files passes
         lines = "".join(line + "\n" for line in (commit, "--", *specs))
-        return [(commit, _git(repo, *FORMAT_PATCH, "-1", "--stdin", input=lines.encode("utf-8", "surrogateescape")))]
+        return [_written(repo, out, commit, *FORMAT_PATCH, "-1", "--stdin",
+                         input=lines.encode("utf-8", "surrogateescape"))]
+
+    def written(task):
+        # git writes a task's patches into a file of its own, read back one patch at a time: a group of commits
+        # can write hundreds of megabytes
+        out = tempfile.TemporaryFile(dir=repo)
+        try:
+            return out, task(out)
+        except BaseException:
+            out.close()
+            raise
 
     whole = [c for c, paths in limits.items() if paths is None]
     tasks = [functools.partial(_whole_patches, repo, whole[start:start + PATCH_GROUP])
              for start in range(0, len(whole), PATCH_GROUP)]
     tasks += [functools.partial(patch, c) for c, paths in limits.items() if paths is not None]
     with concurrent.futures.ThreadPoolExecutor(HISTORY_THREADS) as pool:
-        for patches in _in_order(pool, tasks, 2 * HISTORY_THREADS):
-            for commit, text in patches:
-                # a diff may hold bytes in any encoding; the file must be UTF-8 text
-                extractor.add(HISTORY + commit, FILE, text.decode("utf-8", errors="replace").encode("utf-8"))
+        for out, patches in _in_order(pool, [functools.partial(written, task) for task in tasks], 2 * HISTORY_THREADS):
+            with out:
+                for commit, start, end in patches:
+                    out.seek(start)
+                    # a diff may hold bytes in any encoding; the file must be UTF-8 text
+                    extractor.add(HISTORY + commit, FILE,
+                                  out.read(end - start).decode("utf-8", errors="replace").encode("utf-8"))
 
 
 HISTORY_THREADS = 8  # git calls at once while reading a history's patches
@@ -710,34 +726,45 @@ FORMAT_PATCH = ("format-patch", "--root", "--stdout", "--no-signature", "--no-re
 HEADER = re.compile(rb"(?<![^\n])From ([0-9a-f]+) Mon Sep 17 00:00:00 2001\n")  # a patch's first line
 
 
-PATCH_GROUP = 500  # commits per git call, so a call's output stays a bounded size
+PATCH_GROUP = 500  # commits per git call
 
 
-def _whole_patches(repo, commits) -> list[tuple[str, bytes]]:
-    """(commit, what `format-patch -1 <commit>` writes) for each of commits
-    (at most PATCH_GROUP), from one `git format-patch --stdin`
+def _whole_patches(repo, commits, out) -> list[tuple[str, int, int]]:
+    """(commit, start, end) of what `format-patch -1 <commit>` writes, in
+    out (an empty file open for reading and writing), for each of commits
+    (at most PATCH_GROUP): from one `git format-patch --stdin`
     (_group_patches), or one call per commit when they cannot be cut."""
-    cut = _group_patches(repo, commits)
-    return [(commit, cut[commit] if commit in cut else _git(repo, *FORMAT_PATCH, "-1", commit)) for commit in commits]
+    cut = _group_patches(repo, commits, out)
+    if cut:
+        return [(commit, *cut[commit]) for commit in commits]
+    out.truncate(0)
+    return [_written(repo, out, commit, *FORMAT_PATCH, "-1", commit) for commit in commits]
 
 
-def _group_patches(repo, commits) -> dict[str, bytes]:
-    """{commit: its patch} from one `git format-patch --stdin`, which writes
-    the commits oldest first with one blank line between two patches. Each
-    patch is cut where the next commit's first line starts. A message or a
-    diff may hold such a line too: when the commits' first lines appear more
-    than once, or out of order, nothing is cut and the result is empty."""
+def _group_patches(repo, commits, out) -> dict[str, tuple[int, int]]:
+    """{commit: (start, end) of its patch in out} from one `git
+    format-patch --stdin` written into out (an empty file open for reading
+    and writing), which writes the commits oldest first with one blank line
+    between two patches. Each patch is cut where the next commit's first
+    line starts. A message or a diff may hold such a line too: when the
+    commits' first lines appear more than once, or out of order, nothing is
+    cut and the result is empty."""
     if not commits:
         return {}
-    out = _git(repo, *FORMAT_PATCH, "--stdin", "--no-walk=unsorted", "-N", input="".join(c + "\n" for c in commits).encode())
+    size = _written(repo, out, None, *FORMAT_PATCH, "--stdin", "--no-walk=unsorted", "-N",
+                    input="".join(c + "\n" for c in commits).encode())[2]
+    if not size:
+        return {}
     asked, order = set(commits), commits[::-1]
-    found = [(match[1].decode(), match.start()) for match in HEADER.finditer(out) if match[1].decode() in asked]
-    if [commit for commit, _ in found] != order or found[0][1] != 0:
-        return {}
-    ends = [start - 1 for _, start in found[1:]] + [len(out)]  # the next patch's start, less the blank line
-    if any(out[end - 1:end + 1] != b"\n\n" for end in ends[:-1]):
-        return {}
-    return {commit: out[start:end] for (commit, start), end in zip(found, ends)}
+    # read through a mapping of the file: its pages are the file's, never the process's own memory
+    with mmap.mmap(out.fileno(), 0, access=mmap.ACCESS_READ) as text:
+        found = [(match[1].decode(), match.start()) for match in HEADER.finditer(text) if match[1].decode() in asked]
+        if [commit for commit, _ in found] != order or found[0][1] != 0:
+            return {}
+        ends = [start - 1 for _, start in found[1:]] + [size]  # the next patch's start, less the blank line
+        if any(text[end - 1:end + 1] != b"\n\n" for end in ends[:-1]):
+            return {}
+    return {commit: (start, end) for (commit, start), end in zip(found, ends)}
 
 
 def _history_commits(repo, since, revision) -> list[str]:
@@ -788,6 +815,15 @@ def _changed_paths(repo, commits) -> dict[str, list[tuple[str, list[str]]]]:
 def _git(repo, *args, input=None) -> bytes:
     return subprocess.run(["git", "-C", str(repo), *args], input=input, capture_output=True, check=True,
                           env=PLAIN_GIT).stdout
+
+
+def _written(repo, out, commit, *args, input=None) -> tuple[str, int, int]:
+    """(commit, start, end) of what a git call writes, added at the end of
+    out (a file open for reading and writing)."""
+    start = out.seek(0, os.SEEK_END)
+    subprocess.run(["git", "-C", str(repo), *args], input=input, stdout=out, stderr=subprocess.PIPE, check=True,
+                   env=PLAIN_GIT)
+    return commit, start, out.seek(0, os.SEEK_END)
 
 
 def _git_blobs(repo, object_ids):
