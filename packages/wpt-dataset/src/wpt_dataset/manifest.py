@@ -18,6 +18,7 @@ headers, git or mercurial objects), never from files written to a disk, so
 Linux and Windows compute the same manifest.
 """
 
+import collections
 import concurrent.futures
 import contextlib
 import copy
@@ -662,18 +663,35 @@ def read_git_history(repo: Path, since: str, revision: str, extractor: Extractor
     def patch(commit):
         specs = limits[commit]
         if any("\n" in s or "\r" in s for s in specs):  # no line of standard input can hold such a path
-            return commit, _git(repo, *FORMAT_PATCH, "-1", commit, "--", *specs)
+            return [(commit, _git(repo, *FORMAT_PATCH, "-1", commit, "--", *specs))]
         # the paths go on standard input, after "--": a command line has a limit (32,767 characters on
         # Windows) that a commit changing thousands of files passes
         lines = "".join(line + "\n" for line in (commit, "--", *specs))
-        return commit, _git(repo, *FORMAT_PATCH, "-1", "--stdin", input=lines.encode("utf-8", "surrogateescape"))
+        return [(commit, _git(repo, *FORMAT_PATCH, "-1", "--stdin", input=lines.encode("utf-8", "surrogateescape")))]
 
-    with concurrent.futures.ThreadPoolExecutor(8) as pool:
-        limited = pool.map(patch, [c for c, paths in limits.items() if paths is not None])
-        for commit, text in itertools.chain(_whole_patches(repo, [c for c, paths in limits.items() if paths is None]),
-                                            limited):
-            # a diff may hold bytes in any encoding; the file must be UTF-8 text
-            extractor.add(HISTORY + commit, FILE, text.decode("utf-8", errors="replace").encode("utf-8"))
+    whole = [c for c, paths in limits.items() if paths is None]
+    tasks = [functools.partial(_whole_patches, repo, whole[start:start + PATCH_GROUP])
+             for start in range(0, len(whole), PATCH_GROUP)]
+    tasks += [functools.partial(patch, c) for c, paths in limits.items() if paths is not None]
+    with concurrent.futures.ThreadPoolExecutor(HISTORY_THREADS) as pool:
+        for patches in _in_order(pool, tasks, 2 * HISTORY_THREADS):
+            for commit, text in patches:
+                # a diff may hold bytes in any encoding; the file must be UTF-8 text
+                extractor.add(HISTORY + commit, FILE, text.decode("utf-8", errors="replace").encode("utf-8"))
+
+
+HISTORY_THREADS = 8  # git calls at once while reading a history's patches
+
+
+def _in_order(pool, tasks, ahead):
+    """The results of tasks (functions taking no argument) run on pool, in
+    the tasks' order, with at most `ahead` tasks started and not yet taken
+    from here: a result waits in memory only until its turn."""
+    tasks = iter(tasks)
+    started = collections.deque(pool.submit(task) for task in itertools.islice(tasks, ahead))
+    while started:
+        yield started.popleft().result()
+        started.extend(pool.submit(task) for task in itertools.islice(tasks, 1))
 
 
 def _only(kept, changed) -> list[str]:
@@ -692,20 +710,15 @@ FORMAT_PATCH = ("format-patch", "--root", "--stdout", "--no-signature", "--no-re
 HEADER = re.compile(rb"(?<![^\n])From ([0-9a-f]+) Mon Sep 17 00:00:00 2001\n")  # a patch's first line
 
 
-PATCH_GROUP = 500  # commits per git call, so one call's output is in memory at a time
+PATCH_GROUP = 500  # commits per git call, so a call's output stays a bounded size
 
 
-def _whole_patches(repo, commits):
-    """(commit, what `format-patch -1 <commit>` writes) for commits given
-    newest first, one group of PATCH_GROUP commits at a time, so only one
-    group's patches are in memory: from one `git format-patch --stdin` per
-    group (_group_patches), or one call per commit for a group that cannot
-    be cut."""
-    for start in range(0, len(commits), PATCH_GROUP):
-        group = commits[start:start + PATCH_GROUP]
-        cut = _group_patches(repo, group)
-        for commit in group:
-            yield commit, cut[commit] if commit in cut else _git(repo, *FORMAT_PATCH, "-1", commit)
+def _whole_patches(repo, commits) -> list[tuple[str, bytes]]:
+    """(commit, what `format-patch -1 <commit>` writes) for each of commits
+    (at most PATCH_GROUP), from one `git format-patch --stdin`
+    (_group_patches), or one call per commit when they cannot be cut."""
+    cut = _group_patches(repo, commits)
+    return [(commit, cut[commit] if commit in cut else _git(repo, *FORMAT_PATCH, "-1", commit)) for commit in commits]
 
 
 def _group_patches(repo, commits) -> dict[str, bytes]:
