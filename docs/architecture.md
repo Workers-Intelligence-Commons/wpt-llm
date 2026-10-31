@@ -785,8 +785,10 @@ disk of the machine that runs it, in the store's cache folder, never
 through one in memory, so only the disk bounds its size. A change is made
 in that copy, and the compressed copy replaces the stored file whole, only
 if it is unchanged since it was read: a conditional upload on S3, a lock
-in a local folder. When another session replaced it meanwhile, it is read
-again, the change is made again, and the replace is tried again.
+in a local folder. A copy larger than one part goes up in parts, and the
+request that completes them carries the condition. When another session
+replaced it meanwhile, it is read again, the change is made again, and the
+replace is tried again.
 
 A session's rows go first into its own SQLite file in that cache folder,
 then from it into the store database. Rows are keyed by the session and

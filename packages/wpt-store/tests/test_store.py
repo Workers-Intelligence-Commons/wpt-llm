@@ -1,3 +1,4 @@
+import os
 import shutil
 import threading
 import time
@@ -424,6 +425,33 @@ def test_a_refused_replace_of_an_object_already_stored_counts_as_stored(tmp_path
     assert list(target.parent.iterdir()) == []
 
 
+def test_a_replace_larger_than_one_part_goes_up_in_parts_under_its_condition(tmp_path, monkeypatch):
+    # a single upload is refused above 5 GiB, which the store database outgrows: a replace in parts must still
+    # only replace the version it read
+    from wpt_store import kinds
+    from wpt_store.kinds import Changed
+
+    for name, value in {"AWS_ACCESS_KEY_ID": "test", "AWS_SECRET_ACCESS_KEY": "test",
+                        "AWS_DEFAULT_REGION": "us-east-1"}.items():
+        monkeypatch.setenv(name, value)
+    monkeypatch.delenv("AWS_ENDPOINT_URL", raising=False)
+    monkeypatch.delenv("AWS_PROFILE", raising=False)
+    big = tmp_path / "big.bin"
+    big.write_bytes(os.urandom(11 << 20))
+    with mock_aws():
+        client = boto3.client("s3")
+        client.create_bucket(Bucket="wpt-test")
+        bucket = kinds.Bucket(client, "wpt-test", "store", part=5 << 20)
+        first = bucket.replace("database", big, None)
+        assert bucket.read("database") == (big.read_bytes(), first)
+        assert first.strip('"').endswith("-3")  # three parts, not one upload
+        with pytest.raises(Changed):
+            bucket.replace("database", big, None)  # a file is there now
+        big.write_bytes(os.urandom(11 << 20))
+        second = bucket.replace("database", big, first)
+        assert bucket.read("database") == (big.read_bytes(), second)
+
+
 def test_uploads_in_parts_running_at_once_share_one_limit_of_parts_in_flight(tmp_path, monkeypatch):
     # bundles stored at the same moment must not multiply the connections to S3: their parts share one limit
     from wpt_store import kinds
@@ -449,6 +477,7 @@ def test_uploads_in_parts_running_at_once_share_one_limit_of_parts_in_flight(tmp
 
         def complete_multipart_upload(self, Bucket, Key, UploadId, MultipartUpload):
             sent[Key]["done"] = [part["PartNumber"] for part in MultipartUpload["Parts"]]
+            return {"ETag": f"{Key}-done"}
 
         def abort_multipart_upload(self, Bucket, Key, UploadId):
             raise AssertionError("no upload fails here")

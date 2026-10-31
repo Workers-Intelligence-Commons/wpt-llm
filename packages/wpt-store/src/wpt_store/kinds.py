@@ -252,7 +252,9 @@ def _upload_parts() -> _Parts:
 class Bucket:
     """A store's files as keys under s3://bucket/prefix. A file larger than
     part goes up in parts of that size, sent with those of every other
-    upload of this process, UPLOADS at most at once in total (_Parts)."""
+    upload of this process, UPLOADS at most at once in total (_Parts); a
+    replace in parts puts its condition on the request that completes it,
+    which S3 and R2 refuse as they refuse a conditional single upload."""
 
     def __init__(self, client, bucket, prefix, part=PART):
         self.client, self.bucket, self.prefix, self.part = client, bucket, prefix.strip("/"), part
@@ -281,7 +283,9 @@ class Bucket:
         if move:
             Path(source).unlink()
 
-    def _write_parts(self, key, source, size):
+    def _write_parts(self, key, source, size, guard=None):
+        """source sent in parts, then completed under guard (the conditional
+        headers of a replace, none for a write): the new version's ETag."""
         upload = self.client.create_multipart_upload(Bucket=self.bucket, Key=self.key(key))["UploadId"]
 
         def send(number):
@@ -294,8 +298,8 @@ class Bucket:
 
         try:
             parts = _upload_parts().run(send, range(1, -(-size // self.part) + 1))
-            self.client.complete_multipart_upload(Bucket=self.bucket, Key=self.key(key), UploadId=upload,
-                                                  MultipartUpload={"Parts": parts})
+            return self.client.complete_multipart_upload(Bucket=self.bucket, Key=self.key(key), UploadId=upload,
+                                                         MultipartUpload={"Parts": parts}, **(guard or {}))["ETag"]
         except BaseException:
             self.client.abort_multipart_upload(Bucket=self.bucket, Key=self.key(key), UploadId=upload)
             raise
@@ -327,7 +331,10 @@ class Bucket:
         from botocore.exceptions import ClientError
 
         guard = {"IfNoneMatch": "*"} if version is None else {"IfMatch": version}
+        size = os.path.getsize(source)
         try:
+            if size > self.part:  # a single upload is refused above 5 GiB
+                return self._write_parts(key, source, size, guard)
             with open(source, "rb") as body:  # sent as it is read from the disk
                 return self.client.put_object(Bucket=self.bucket, Key=self.key(key), Body=body, **guard)["ETag"]
         except ClientError as error:
