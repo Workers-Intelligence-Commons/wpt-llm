@@ -466,7 +466,7 @@ def test_migrating_a_lock_drops_the_tokenizer_code_s_version(kit, repo):
 
 
 # the smallest training part of a recipe with `training` and `posttrain`, which becomes its read-text step (kit.STEPS)
-TRAINING = {"method": "adamw", "settings": {}, "stages": [{"block_size": 16, "steps": 1, "batch_size": 4}],
+TRAINING = {"method": "muon", "settings": {}, "stages": [{"block_size": 16, "steps": 1, "batch_size": 4}],
               "eval_every": 1, "eval_batches": 1, "seed": 1337}
 
 
@@ -539,11 +539,11 @@ def test_migrating_a_model_recipe_with_training_and_post_training_apart_makes_it
     # docs/training.md, "Steps": the training becomes read-text, its method
     # the step's optimizer and its loss settings the step's; each
     # post-training step follows under the name of the step that does the
-    # same, its learning rate and weight decay given to adamw, a tag naming
-    # an old step renamed with it
+    # same, under by-part, carrying its learning rate and weight decay, a
+    # tag naming an old step renamed with it
     path = kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
     new = json.loads(path.read_text())
-    training = {**TRAINING, "method": "muon", "settings": {"lr": 0.02, "mtp_weight": 0.5}}
+    training = {**TRAINING, "settings": {"lr": 0.02, "mtp_weight": 0.5}}
     path.write_text(dump_json(with_training(new, training, [
         "sft", {"step": "grpo", "settings": {"learning_rate": 1e-6, "rounds": 2}},
         {"step": "token-efficiency", "settings": {"tag": "grpo", "weight_decay": 0.1}}])))
@@ -552,11 +552,28 @@ def test_migrating_a_model_recipe_with_training_and_post_training_apart_makes_it
     assert list(migrated) == ["data", "model", "seed", "steps", "drafter"]
     assert migrated["seed"] == 1337
     assert migrated["steps"] == [
-        {"step": "read-text", "optimizer": {"name": "muon", "settings": {"lr": 0.02}},
+        {"step": "read-text", "optimizer": {"name": "by-part", "settings": {"lr": 0.02}},
          "settings": {"stages": TRAINING["stages"], "eval_every": 1, "eval_batches": 1, "mtp_weight": 0.5},
          "locked": []},
         {"step": "answer-as-assistant", "settings": {}},
         {"step": "finish-tasks", "settings": {"rounds": 2},
-         "optimizer": {"name": "adamw", "settings": {"lr": 1e-6}}},
+         "optimizer": {"name": "by-part", "settings": {"lr": 1e-6}}},
         {"step": "finish-tasks-with-less-writing", "settings": {"tag": "finish-tasks"},
-         "optimizer": {"name": "adamw", "settings": {"weight_decay": 0.1}}}]
+         "optimizer": {"name": "by-part", "settings": {"weight_decay": 0.1}}}]
+
+
+def test_migrating_a_model_recipe_whose_steps_name_muon_or_adamw_renames_them_by_part_keeping_their_settings(kit, repo):
+    # docs/training.md, "Optimizers": the name changes and the entry's own
+    # settings stay, none added
+    path = kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
+    new = json.loads(path.read_text())
+    text = {**new["steps"][0], "optimizer": {"name": "adamw", "settings": {"lr": 1e-3}}}
+    path.write_text(dump_json({**new, "steps": [
+        text, {"step": "answer-as-assistant", "optimizer": {"name": "muon", "settings": {"warmup": 5}}},
+        {"step": "finish-tasks", "optimizer": {"name": "adamw"}}, {"step": "finish-tasks-with-less-writing"}]}))
+    assert migrate(repo, log=lambda _: None) == [path.relative_to(repo.root).as_posix()]
+    assert json.loads(path.read_text())["steps"] == [
+        {**text, "optimizer": {"name": "by-part", "settings": {"lr": 1e-3}}},
+        {"step": "answer-as-assistant", "optimizer": {"name": "by-part", "settings": {"warmup": 5}}},
+        {"step": "finish-tasks", "optimizer": {"name": "by-part"}},
+        {"step": "finish-tasks-with-less-writing"}]

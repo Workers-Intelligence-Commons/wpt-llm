@@ -61,7 +61,7 @@ tasks.
 ```json
 "seed": 1337,
 "steps": [
-  {"step": "read-text", "optimizer": {"name": "muon", "settings": {"lr": 0.002}},
+  {"step": "read-text", "optimizer": {"name": "by-part", "settings": {"lr": 0.002}},
    "settings": {"stages": [{"block_size": 4096, "steps": 2000, "batch_size": 256}], "eval_every": 200,
                 "eval_batches": 20},
    "locked": []},
@@ -112,10 +112,10 @@ The built-in steps:
 
 | step | method | environment | optimizer | locked |
 | --- | --- | --- | --- | --- |
-| `read-text` | `next-token` | `text-windows` | `muon` | none |
-| `answer-as-assistant` | `assistant-tokens` | `conversations` | `adamw`, lr 1e-4, no weight decay | `balancing` |
-| `finish-tasks` | `grpo` | `agent-tasks` | `adamw`, lr 1e-6, no weight decay | `routers`, `balancing` |
-| `finish-tasks-with-less-writing` | `grpo` | `agent-tasks` | `adamw`, lr 1e-6, no weight decay | `routers`, `balancing` |
+| `read-text` | `next-token` | `text-windows` | `by-part`, its defaults | none |
+| `answer-as-assistant` | `assistant-tokens` | `conversations` | `by-part`, lr 1e-4, no weight decay, constant schedule, early stop on (no evaluations, so it never fires) | `balancing` |
+| `finish-tasks` | `grpo` | `agent-tasks` | `by-part`, lr 1e-6, no weight decay, constant schedule, early stop on (no evaluations, so it never fires) | `routers`, `balancing` |
+| `finish-tasks-with-less-writing` | `grpo` | `agent-tasks` | `by-part`, lr 1e-6, no weight decay, constant schedule, early stop on (no evaluations, so it never fires) | `routers`, `balancing` |
 
 A recipe whose steps are `read-text` alone makes a base model. The model's
 context (`config.json`'s `block_size`) is the last window length of the
@@ -245,32 +245,49 @@ update (a learning-rate schedule, gradient clipping) and just after it, at
 the start of each stage after the first (`stage`), which evaluation is the
 best and when to stop, and the state a resumed step needs. `run` gives the
 tokens of the step's examples, the parameters it trains, its number of
-updates and the log. The step keeps the weights of the evaluation its
-optimizer judged best in its last stage, or its last weights when it has
-no evaluation.
+updates and the log. The file may also define `check(settings)`, which
+raises `ValueError` for settings that cannot go together, so the run is
+refused before any step trains. The step keeps the weights of the
+evaluation its optimizer judged best in its last stage, or its last
+weights when it has no evaluation.
 
-- `muon`: how WPT models read text (model.md, "Training"). Muon for matrix
-  weights as DeepSeek-V4 runs it (8 then 2 Newton-Schulz steps, updates of
-  RMS 0.18), per head for the query, key and value projections, per expert
-  for routed experts and per output group or merging projection in CSA
-  and HCA; AdamW for the embedding, the output head, norms, mHC's biases
-  and gating factors, attention sinks and merging biases; Adam at
-  `table_lr_factor` times the rate, without weight decay, for Engram's
-  tables; no QK-Clip (DeepSeek-V4). The learning rate warms up over
-  `warmup` updates to `lr`, then falls to `first_factor` of it after
-  `first_drop` of the step's updates and to `second_factor` after
-  `second_drop`. Settings and defaults: `lr` 0.002, `weight_decay` 0.1,
-  `momentum` 0.95, `beta1` 0.9, `beta2` 0.95, `eps` 1e-8,
-  `table_lr_factor` 5, `warmup` 2000, `first_drop` 0.8, `first_factor`
-  0.316, `second_drop` 0.9, `second_factor` 0.1. It needs a model that
-  names its parameters' roles.
-- `adamw`: AdamW at a constant learning rate. It stops a stage early when
-  the validation loss, smoothed over the last `smoothing` evaluations, has
-  not improved by `min_improve` for `patience` evaluations; the smaller the
-  tokens-per-parameter ratio, the smaller the improvement it asks for.
-  Settings: `lr` 0.0003, `weight_decay` 0.01 (PyTorch's own), `patience`
-  10, `min_improve` 0.01, `smoothing` 3, `chinchilla` 20 (the tokens per
-  parameter at which `min_improve` applies in full).
+The built-in optimizer is `by-part`: each kind of weight under its own
+update rule, the rule the model names for each of its parameters (model.md,
+"Training"). It needs a model that names its parameters' roles.
+
+- Muon for matrix weights as DeepSeek-V4 runs it (8 then 2 Newton-Schulz
+  steps, updates of RMS 0.18), per head for the query, key and value
+  projections, per expert for routed experts and per output group or
+  merging projection in CSA and HCA; no QK-Clip (DeepSeek-V4).
+- AdamW for the embedding, the output head, norms, mHC's biases and gating
+  factors, attention sinks and merging biases.
+- Adam at `table_lr_factor` times the rate, without weight decay, for
+  Engram's tables.
+
+`schedule` chooses how the learning rate moves. With `steps`, it warms up
+over `warmup` updates to `lr`, then falls to `first_factor` of it after
+`first_drop` of the step's updates and to `second_factor` after
+`second_drop`. With `constant`, every update uses `lr`.
+
+Early stop and the best evaluation need evaluations, and only an
+environment that makes them gives them: among the built-in ones,
+`text-windows`. Under `conversations` and `agent-tasks`, a step runs
+every update and keeps its last weights, whatever `patience` says.
+
+Early stop is off while `patience` is 0. Then the best evaluation is the
+lowest validation loss. With a `patience` above 0, the validation loss is
+smoothed over the last `smoothing` evaluations, and the best evaluation
+is the last one that improved it by `min_improve`. A stage stops early
+once `patience` evaluations in a row have not improved it. The smaller
+the tokens-per-parameter ratio, the smaller the improvement it asks for:
+`chinchilla` is the tokens per parameter at which `min_improve` applies in
+full.
+
+Settings and defaults: `lr` 0.002, `weight_decay` 0.1, `momentum` 0.95,
+`beta1` 0.9, `beta2` 0.95, `eps` 1e-8, `table_lr_factor` 5, `schedule`
+`steps`, `warmup` 2000, `first_drop` 0.8, `first_factor` 0.316,
+`second_drop` 0.9, `second_factor` 0.1, `patience` 0, `min_improve` 0.01,
+`smoothing` 3, `chinchilla` 20.
 
 ### Writing a step
 
@@ -285,7 +302,8 @@ a step file that puts them together, without changes to the runner.
 
 The `read-text` step reads the dataset's text: next-token prediction
 (`next-token`) on windows of the training shards (`text-windows`), the
-windows growing stage by stage, under Muon. Its settings are `stages`,
+windows growing stage by stage, under `by-part` on its multi-step
+schedule, without early stop. Its settings are `stages`,
 `eval_every` (200) and `eval_batches` (20), with the method's. Each update
 draws its windows at random places of the training tokens, seeded by the
 seed, the step's number in the recipe and the update only: a second
@@ -367,9 +385,9 @@ Each stage is evaluated at its first and last updates and every
 `eval_every` updates, on windows of its length: a longer window predicts
 better, so losses are compared within a stage only. When a stage after
 the first starts, the optimizer hears of it (`Optimizer.stage`) and the
-best evaluation so far is forgotten: `muon` and `adamw` start counting
-again, and the step keeps the best weights of its last stage. An
-optimizer's early stop (`adamw`'s patience) ends its stage, and the next
+best evaluation so far is forgotten: `by-part` starts counting again, and
+the step keeps the best weights of its last stage. An optimizer's early
+stop (`by-part`'s `patience`) ends its stage, and the next
 stage starts. A held-out part shorter than a stage's window measures that
 stage's validation loss on the training text, which the log says.
 
@@ -2027,7 +2045,10 @@ Its settings are the `agent-tasks` environment's, their defaults: `tag`
 both forms), `reward` (`weighed`), `reference` (0), `temperature` (1),
 `top_k` (0, every token), `check_seconds` (300), `result_bytes` (4000)
 and the five weights ("Rewards", above). Its optimizer is
-`adamw` at a learning rate of 1e-6, without weight decay. A recipe's
+`by-part` at a constant learning rate of 1e-6, without weight decay, with
+its early stop on ("Optimizers", above). The `agent-tasks` environment
+makes no evaluations, so the early stop never stops the step and it keeps
+its last weights. A recipe's
 entry changes them ("Steps", above). The containers' sizes are not among
 them: they belong to each task.
 

@@ -19,9 +19,12 @@ random anchors in the answer (`anchors` at most per answer, drawn again
 each epoch, as DFlash), the drafter learns DSpark's losses: cross-entropy on
 the answer's tokens, the total variation distance to the model's
 distribution, and the confidence head's prediction of the chance each
-draft is kept (Drafter.losses). AdamW, gradients clipped, a cosine schedule
-after a warm-up (DFlash's training values). The experts' routing biases
-follow Quantile Balancing after each update, as the model's.
+draft is kept (Drafter.losses). The model's update rule moves its weights
+(wpt_model.MuonAdamW over Drafter.optimizer_roles): Muon for its matrices,
+AdamW for the rest. Gradients are clipped, and the learning rate follows a
+cosine schedule after a warm-up (DFlash's training values). The experts'
+routing biases follow Quantile Balancing after each update, as the
+model's.
 
 On the held-out prompts, the drafter then drafts for the model, every draft
 verified, and each round records each draft's confidence and whether the
@@ -42,6 +45,7 @@ from dataclasses import asdict, dataclass, fields
 
 import torch
 
+from wpt_model import MuonAdamW
 from wpt_model.drafter import Drafter, DrafterConfig, calibrate, temperature_grid, training_blocks
 
 from . import Writer
@@ -56,7 +60,7 @@ class Settings:
     """How a drafter is trained: the model recipe's `drafter` section, but
     its shape (DrafterConfig: features, layers, block, markov_rank)."""
     epochs: int = 10            # passes over the answers (DSpark trains each drafter for 10 epochs)
-    learning_rate: float = 6e-4  # AdamW, DFlash's
+    learning_rate: float = 6e-4  # DFlash's
     weight_decay: float = 0.0
     warm_up: float = 0.04       # share of the updates the learning rate rises over, then a cosine decay to 0 (DFlash)
     clip: float = 1.0           # gradient norm clipping (DFlash)
@@ -147,7 +151,7 @@ def _train(model, prompts, held, config, settings, stops, device, telemetry):
     updates = settings.epochs * math.ceil(len(training) / settings.batch)
     telemetry.event("drafter.settings", settings=asdict(settings), drafter=shape, prompts=len(prompts),
                     training=len(training), held=len(held_out), tokens=sum(len(ids) - start for ids, start in answers))
-    optimizer = torch.optim.AdamW(drafter.parameters(), lr=settings.learning_rate, weight_decay=settings.weight_decay)
+    optimizer = MuonAdamW(drafter.optimizer_roles(), settings.learning_rate, settings.weight_decay)
     warm = max(1, math.ceil(settings.warm_up * updates))
     rate = torch.optim.lr_scheduler.LambdaLR(optimizer, lambda u: (u + 1) / warm if u < warm else
                                              0.5 * (1 + math.cos(math.pi * (u - warm) / max(1, updates - warm))))

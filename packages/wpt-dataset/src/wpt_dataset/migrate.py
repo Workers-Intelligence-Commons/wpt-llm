@@ -319,7 +319,7 @@ def _model_drafter(document, _where):
 # the settings of the old `muon` that make the loss, which the read-text step's method holds
 NEXT_TOKEN_OLD = ("mtp_weight", "mtp_late_weight", "mtp_switch")
 # the old post-training steps and the training steps that do the same, and the settings of theirs that
-# belong to the step's optimizer (adamw), under that optimizer's names
+# belong to the step's optimizer (by-part), under that optimizer's names
 STEPS_OLD = {"sft": "answer-as-assistant", "grpo": "finish-tasks", "token-efficiency": "finish-tasks-with-less-writing"}
 OPTIMIZER_OLD = {"learning_rate": "lr", "weight_decay": "weight_decay"}
 
@@ -332,7 +332,7 @@ def _model_steps(document, _where):
     its stages, eval_every and eval_batches the step's settings, nothing
     locked; its seed becomes the recipe's `seed`. Each post-training step
     follows under its new name (STEPS_OLD), the settings of its learning
-    rate and weight decay given to its optimizer, adamw, and a `tag` setting
+    rate and weight decay given to its optimizer, by-part, and a `tag` setting
     that names an old step renamed with it; a step given as a Python file
     keeps its name and settings, and the check that follows says what the
     file lacks. `steps` and `seed` go where `training` was, `posttrain`
@@ -356,7 +356,7 @@ def _model_steps(document, _where):
         # a tag that names an old step names the step that does the same
         step = {"step": STEPS_OLD[name], "settings": {key: STEPS_OLD.get(value, value) if key == "tag" else value
                                                       for key, value in settings.items() if key not in OPTIMIZER_OLD}}
-        steps.append({**step, **({"optimizer": {"name": "adamw", "settings": optimizer}} if optimizer else {})})
+        steps.append({**step, **({"optimizer": {"name": "by-part", "settings": optimizer}} if optimizer else {})})
     migrated = {}
     for key, value in document.items():
         if key == "training":
@@ -366,6 +366,23 @@ def _model_steps(document, _where):
     return migrated
 
 
+# the optimizers a step once named, which by-part replaces
+OPTIMIZERS_OLD = ("muon", "adamw")
+
+
+def _old_optimizer(step) -> bool:
+    return isinstance(step, dict) and isinstance(step.get("optimizer"), dict) \
+        and step["optimizer"].get("name") in OPTIMIZERS_OLD
+
+
+def _model_by_part(document, _where):
+    """A step's optimizer named muon or adamw is named by-part (docs/training.md,
+    "Optimizers"); its settings stay the entry's own."""
+    def renamed(step):
+        return {**step, "optimizer": {**step["optimizer"], "name": "by-part"}} if _old_optimizer(step) else step
+    return {**document, "steps": [renamed(step) for step in document["steps"]]}
+
+
 STEPS["model"] += [
     Step("an architecture with n_embd", lambda d: _architecture(d, "n_embd"), _model_heads),
     Step("an architecture with gated MLA", lambda d: _architecture(d, "mla_heads"), _model_attention),
@@ -373,6 +390,8 @@ STEPS["model"] += [
          _model_stages),
     Step("no drafter section", lambda d: "training" in d and "drafter" not in d, _model_drafter),
     Step("training and post-training apart", lambda d: "training" in d and "posttrain" in d, _model_steps),
+    Step("a step under muon or adamw",
+         lambda d: isinstance(d.get("steps"), list) and any(map(_old_optimizer, d["steps"])), _model_by_part),
 ]
 
 

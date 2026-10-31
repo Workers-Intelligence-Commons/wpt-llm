@@ -61,6 +61,7 @@ from .experts import Experts
 from .layers import EPS
 from .mhc import STREAMS, Connection
 from .notice import DRAFTER_NAME
+from .optimizer import roles
 from .sparse import sparse_attention
 
 BLOCK = 5            # the most drafts per round: DSpark-5, the production drafter
@@ -252,6 +253,15 @@ class Drafter(nn.Module):
         parts = {name: (value * weights).sum() / len(anchors) for name, value in
                  (("ce", ce), ("tv", tv), ("confidence", confidence))}
         return sum(LOSS_WEIGHTS[name] * value for name, value in parts.items()), parts
+
+    def optimizer_roles(self):
+        """(name, parameter, role, view) for every parameter, by the model's
+        rule (optimizer.roles, WPT.optimizer_roles): the fusing projection
+        and the attention and expert matrices take Muon, head by head and
+        expert by expert; the mask vector, the norms, mHC's biases and
+        gating factors, the Markov head's two matrices and the confidence
+        head take AdamW, as the model's embedding and output head."""
+        return roles(self, (self.mask, self.markov_in.weight, self.markov_out.weight, self.confidence.weight))
 
     def after_update(self, reduce):
         """After each optimizer step: Quantile Balancing sets the experts'

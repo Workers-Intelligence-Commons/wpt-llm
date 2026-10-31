@@ -62,7 +62,7 @@ def test_the_model_card_names_the_drafter_and_its_notice_adds_no_source(tmp_path
     source = {"address": "https://example.org/talks", "manifest": "1" * 64, "licenses": [{"license": "CC0-1.0", "paths": ["talks/**"],
                                                                                   "attribution": "Talks, by Bo Speaker"}]}
     step = {"step": {"name": "answer-as-assistant"}, "method": {"name": "assistant-tokens"},
-            "optimizer": {"name": "adamw"}, "environment": {"name": "conversations"}, "reads": "conversations",
+            "optimizer": {"name": "by-part"}, "environment": {"name": "conversations"}, "reads": "conversations",
             "locked": [], "updates": 1,
             "weights_update": 1, "stages": [{"block_size": None, "steps": 1, "batch_size": 8}],
             "best_validation_loss": None, "reused": False, "sources": ["example-talks"]}
@@ -91,6 +91,24 @@ def test_the_markov_head_s_rank_follows_the_model_s_width():
     assert default_markov_rank(8) == 1  # never 0
     assert DrafterConfig.for_model(ModelConfig(**TINY)).markov_rank == 1
     assert DrafterConfig.for_model(ModelConfig(**TINY), markov_rank=7).markov_rank == 7
+
+
+def test_the_drafter_s_matrices_take_muon_as_the_model_s_and_its_heads_take_adamw():
+    # docs/model.md, "The drafter": the fusing projection, attention and
+    # experts by the model's rule (heads apart, experts apart); the mask,
+    # norms, mHC's biases and gates, the Markov and confidence heads under
+    # AdamW, as the model's embedding and output head; every parameter once
+    config = ModelConfig(**TINY)
+    drafter = Drafter(config, DrafterConfig.for_model(config))
+    roles = {name: (role, view) for name, _, role, view in drafter.optimizer_roles()}
+    assert list(roles) == [name for name, _ in drafter.named_parameters()]
+    assert roles["fuse.weight"] == ("matrix", (1, 16, 16))
+    assert roles["layers.0.attention.q_up.weight"] == ("matrix", (2, 128, 8))  # 2 heads
+    assert roles["layers.0.experts.w_gate"] == ("matrix", (4, 8, 8))  # 4 experts
+    vectors = ["mask", "fuse_norm.weight", "final_norm.weight", "layers.0.attention_streams.b_res",
+               "layers.0.attention_streams.a_pre", "layers.0.attention.sink", "markov_in.weight", "markov_out.weight",
+               "confidence.weight", "confidence.bias"]
+    assert [roles[name] for name in vectors] == [("vector", None)] * len(vectors)
 
 
 def test_the_drafter_reads_layers_from_the_second_to_the_third_to_last():

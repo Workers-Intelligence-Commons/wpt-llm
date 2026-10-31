@@ -8,8 +8,8 @@ model it locks (wpt_model.PARTS):
     a method       how a loss is made from a batch of examples (methods/:
                    `next-token`, `assistant-tokens`, `grpo`)
     an optimizer   how the weights move, with its schedule and its verdict on
-                   each evaluation (optimizers/: `muon`, `adamw`); a recipe may
-                   give a step another one, so any loss runs with any optimizer
+                   each evaluation (optimizers/: `by-part`); a recipe may give
+                   a step another one, so any loss runs with any optimizer
     an environment where the examples come from (environments/: `text-windows`,
                    `conversations`, `agent-tasks`)
 

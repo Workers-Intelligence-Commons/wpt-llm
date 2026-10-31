@@ -1,7 +1,8 @@
 # Model architecture
 
 This page describes the architecture WPT models use and why; the code is
-`packages/wpt-model` and the `muon` optimizer of `packages/wpt-training`.
+`packages/wpt-model`, update rule included, and the `by-part` optimizer of
+`packages/wpt-training`, which runs it with a schedule.
 Every component comes from published research (cited at the end) and is
 trained from scratch: no weights or outputs of those models are used.
 
@@ -687,13 +688,19 @@ Details DSpark leaves open, and WPT's choice for each:
 - A row whose pending tokens are more than its anchor (a tool result) first
   has them read in a pass of their own, so the drafter's context reaches
   its anchor.
-- Training values DSpark does not give come from DFlash: AdamW at 6e-4,
-  gradients clipped at 1, a cosine schedule after a 4% warm-up, 512 anchors
-  per answer redrawn each epoch; DSpark's 10 epochs; weight decay 0, 8
-  answers per update, 256 prompts of at most 64 tokens each drawn from the
-  training documents by a seeded reservoir, answers of at most 256 tokens
-  written at temperature 1 without top `k`, and 10% of the prompts held out
-  (WPT's).
+- The update rule: the model's ("Training"). The fusing projection, the
+  attention matrices and the expert matrices take Muon, head by head and
+  expert by expert as in the model; the mask vector, the norms, mHC's
+  biases and gating factors, the Markov head's `W1` and `W2` and the
+  confidence projection take AdamW, as the model's embedding and output
+  head do. AdamW's part keeps the model's betas, 0.9 and 0.95.
+- Training values DSpark does not give come from DFlash: a learning rate
+  of 6e-4, gradients clipped at 1, a cosine schedule after a 4% warm-up,
+  512 anchors per answer redrawn each epoch; DSpark's 10 epochs; weight
+  decay 0, 8 answers per update, 256 prompts of at most 64 tokens each
+  drawn from the training documents by a seeded reservoir, answers of at
+  most 256 tokens written at temperature 1 without top `k`, and 10% of the
+  prompts held out (WPT's).
 
 Conflicts with DeepSeek-V4's published values: none; the drafter replaces
 V4's MTP-1 for drafting, as DSpark replaced it in V4's production. A cost
@@ -754,11 +761,19 @@ AdamW's quality with about 52% of the compute.
   take AdamW in [DeepSeek-V4.1][v41]); Adam with 5 times the base learning
   rate and no weight decay for Engram tables (DeepSeek's Engram setting).
 
-**Schedule.** Multi-step ([DeepSeek LLM][llm], also used in the [mHC paper][mhc]): linear
+The kind of weight chooses the rule, never the training step: every
+built-in step trains under this rule, through the `by-part` optimizer
+([training.md](training.md), "Optimizers"), and so does the drafter ("The
+drafter").
+
+**Schedule.** Multi-step for `read-text` ([DeepSeek LLM][llm], also used in the [mHC paper][mhc]): linear
 warm-up to the maximum over 2,000 updates, then 31.6% of it after 80% of the
 training tokens and 10% after 90%. DeepSeek reports final results matching
 cosine decay, and a run can be extended by continuing from a checkpoint
-taken before the first drop.
+taken before the first drop. The steps after it run at a constant learning
+rate. Their early stop on the validation loss is on, but their
+environments make no evaluations, so it never stops them and they keep
+their last weights.
 
 **Numbers.** BF16 for weights' computations on GPUs, FP32 for the weights
 themselves, the optimizer state, the attention scores and output, the
@@ -797,7 +812,7 @@ and the repository:
   file's, its optimizer and that optimizer's settings, its settings and
   the parts it locks ([training.md](training.md), "Steps"): the
   `read-text` step's stages (each its window length, updates and batch, in
-  order), evaluations, MTP loss weights and Muon settings among them; the
+  order), evaluations, MTP loss weights and `by-part` settings among them; the
   model's context is the last window length of the last step that reads
   text windows;
 - the drafter (`drafter`): its shape and how it is trained ("The
@@ -829,10 +844,13 @@ step's), its stages and evaluations the step's settings, nothing locked;
 each post-training step follows under the name of the step that does the
 same (`sft` as `answer-as-assistant`, `grpo` as `finish-tasks`,
 `token-efficiency` as `finish-tasks-with-less-writing`), its learning
-rate and weight decay given to its optimizer, `adamw`, and a `tag` setting
-naming one of those steps renamed with it. A step given as a Python file
-keeps its name and settings, and the check that follows says what the
-file lacks.
+rate and weight decay given to its optimizer, `by-part`, and a `tag`
+setting naming one of those steps renamed with it. A step given as a
+Python file keeps its name and settings, and the check that follows says
+what the file lacks.
+
+A step whose optimizer is `muon` or `adamw` is named `by-part`; the
+entry keeps its own settings and gains none.
 
 A new recipe's name is an adjective and an animal drawn by `uv run
 scripts/recipe_name.py`, among about 11.5 million names, so the name says

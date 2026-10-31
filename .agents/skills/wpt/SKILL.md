@@ -326,12 +326,12 @@ def start(settings, data): ...  # a wpt_training.Environment: stage_list, tokens
 
 # optimizers/NAME.py: how the weights move, with its schedule
 SETTINGS = {...}
-def start(model, settings, run): ...  # a wpt_training.Optimizer over run's parameters
+def start(model, settings, run): ...  # a wpt_training.Optimizer over run's parameters; optionally check(settings)
 
 # steps/NAME.py: puts them together
 METHOD = "next-token"
 ENVIRONMENT = "text-windows"
-OPTIMIZER = {"name": "muon", "settings": {...}}
+OPTIMIZER = {"name": "by-part", "settings": {...}}
 LOCKED = ()        # model parts left as they are (wpt_model.PARTS)
 SETTINGS = {...}   # defaults for its method's and environment's settings
 ```

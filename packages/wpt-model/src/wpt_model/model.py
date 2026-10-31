@@ -36,7 +36,7 @@ import torch
 import torch.nn as nn
 from torch.utils.checkpoint import checkpoint
 
-from .attention import CSA_RATIO, HCA_RATIO, Attention, Compressor
+from .attention import CSA_RATIO, HCA_RATIO, Attention
 from .cache import Cache, Recorder
 from .config import ModelConfig, global_layers
 from .engram import Engram
@@ -44,6 +44,7 @@ from .experts import SHARED_EXPERTS, Experts, Routes
 from .kda import KDA
 from .layers import EPS, FeedForward
 from .mhc import STREAMS, Connection
+from .optimizer import roles
 from .sequence import WHOLE, Carried, Split
 
 HASH_LAYERS = 3   # the first 3 layers' experts are hash-routed
@@ -314,45 +315,7 @@ class WPT(nn.Module):
         return found
 
     def optimizer_roles(self):
-        """(name, parameter, role, view) for every parameter. Role "matrix"
-        (Muon): view is the (matrices, rows, columns) shape it is
-        orthogonalized as, one matrix per head for the query, key and value
-        projections, one per expert for routed experts, and one per
-        logically separate matrix elsewhere (DeepSeek-V4): each output
-        group's projection, and a merging's two projection pairs. Role
-        "vector" (AdamW): the embedding, the output head, norms, mHC's
-        biases and gating factors, KDA's decay scalars, the convolutions,
-        the attention sinks and the merging's positional biases. Role
-        "table" (Engram's tables). view is None for the last two."""
-        heads = {}
-        for module in self.modules():
-            if isinstance(module, KDA):
-                heads.update({id(module.q.weight): module.heads, id(module.k.weight): module.heads,
-                              id(module.v.weight): module.heads})
-            elif isinstance(module, Attention):  # its one key-value head is one matrix
-                heads.update({id(module.q_up.weight): module.heads, id(module.out_down.weight): module.groups})
-                if module.indexer is not None:
-                    heads[id(module.indexer.q.weight)] = module.indexer.heads
-            elif isinstance(module, Compressor):
-                heads.update({id(module.value.weight): module.parts, id(module.score.weight): module.parts})
-        vectors = {id(self.embedding.weight), id(self.head.weight)}
-        tables = set()
-        for module in self.modules():
-            if isinstance(module, nn.Conv1d):
-                vectors.add(id(module.weight))
-            elif isinstance(module, Connection):
-                vectors.update(id(p) for name, p in module.named_parameters() if name != "phi.weight")
-            elif isinstance(module, Engram):
-                tables.update(id(table.weight) for table in module.tables)
-            elif isinstance(module, Compressor):
-                vectors.add(id(module.position))
-        for name, p in self.named_parameters():
-            if id(p) in tables:
-                yield name, p, "table", None
-            elif id(p) in vectors or p.ndim < 2:
-                yield name, p, "vector", None
-            elif p.ndim == 3:
-                yield name, p, "matrix", tuple(p.shape)
-            else:
-                n = heads.get(id(p), 1)
-                yield name, p, "matrix", (n, p.shape[0] // n, p.shape[1])
+        """(name, parameter, role, view) for every parameter, by the rule of
+        optimizer.roles, with the embedding and the output head among the
+        "vector" ones (AdamW)."""
+        return roles(self, (self.embedding.weight, self.head.weight))

@@ -13,7 +13,8 @@ Each is a Python file, a built-in by its name or any path:
     strategy file:     def start() -> Strategy
     method file:       READS = "<kind of examples>"; SETTINGS = {...}
                        def start(settings) -> Method
-    optimizer file:    SETTINGS = {...}; def start(model, settings, run) -> Optimizer
+    optimizer file:    SETTINGS = {...}; def start(model, settings, run) -> Optimizer;
+                       optional check(settings)
     environment file:  GIVES = "<kind of examples>"; SETTINGS = {...}
                        def start(settings, data) -> Environment, on the gpu worker; optional
                        check(settings), context(settings): the window length it trains at,
@@ -582,7 +583,8 @@ def load_step(entry: dict, parts) -> Step:
     (wpt_utils.settings.typed); the step's and its environment's
     check(settings), when they have one, then pass. An optimizer the entry
     names takes the step's settings for it when it is the step's own, else
-    its own defaults, then the entry's. parts: the names the model gives
+    its own defaults, then the entry's, and its file's check(settings),
+    when it has one, then passes. parts: the names the model gives
     its parts (wpt_model.PARTS); a locked name not among them is refused.
     PluginError says what cannot be."""
     plugin = _load("steps", entry["step"], needs=("METHOD", "ENVIRONMENT", "OPTIMIZER"))
@@ -610,6 +612,10 @@ def load_step(entry: dict, parts) -> Step:
     base = own.get("settings", {}) if chosen["name"] == own["name"] else {}
     optimizer_defaults = _typed(getattr(optimizer.module, "SETTINGS", {}), base, optimizer.file)
     optimizer_settings = _typed(optimizer_defaults, chosen.get("settings", {}), optimizer.file)
+    try:
+        getattr(optimizer.module, "check", lambda settings: None)(optimizer_settings)
+    except ValueError as error:
+        raise PluginError(f"{optimizer.file}: {error}") from None
     locked = tuple(entry.get("locked", getattr(module, "LOCKED", ())))
     unknown = [name for name in locked if name not in parts]
     if unknown:

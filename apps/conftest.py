@@ -31,7 +31,7 @@ TINY_MODEL = {"n_layer": 4, "global_attention": ["CSA"], "d_model": 16, "kda_hea
               "shared_width": 16, "engram_layers": [2], "engram_order": 3, "engram_heads": 2, "engram_dim": 4,
               "engram_table_size": 31}
 # the read-text step of the recipe "d": the optimizer, its settings, the step's text windows, the recipe's seed
-ONE_STEP = {"optimizer": "muon", "settings": {}, "stages": [{"block_size": 16, "steps": 1, "batch_size": 4}],
+ONE_STEP = {"optimizer": "by-part", "settings": {}, "stages": [{"block_size": 16, "steps": 1, "batch_size": 4}],
             "eval_every": 2, "eval_batches": 20, "seed": 1337}
 # the drafter every run trains at its end, as small and short as still trains and calibrates one
 TINY_DRAFTER = {"epochs": 1, "prompts": 4, "prompt_tokens": 8, "answer_tokens": 8, "batch": 2, "anchors": 4,

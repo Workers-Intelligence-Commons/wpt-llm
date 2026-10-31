@@ -351,7 +351,7 @@ MODEL = {"n_layer": 2, "global_attention": ["CSA"], "d_model": 16, "kda_heads": 
          "index_heads": 2, "index_head_dim": 128, "index_top_k": 2, "n_experts": 4, "top_k": 2, "expert_width": 8, "latent_width": 8,
          "shared_width": 16, "engram_layers": [1], "engram_order": 3, "engram_heads": 2, "engram_dim": 4,
          "engram_table_size": 31}
-STEPS = [{"step": "read-text", "optimizer": {"name": "adamw", "settings": {}},
+STEPS = [{"step": "read-text", "optimizer": {"name": "by-part", "settings": {}},
           "settings": {"stages": [{"block_size": 16, "steps": 1, "batch_size": 4}], "eval_every": 1,
                        "eval_batches": 1}, "locked": []}]
 

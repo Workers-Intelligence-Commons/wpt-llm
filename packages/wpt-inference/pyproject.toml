@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Token-by-token sampling from any next-token model, and training a WPT model's drafter"
 license = "AGPL-3.0-or-later"
 requires-python = ">=3.14"
-dependencies = ["wpt-model", "wpt-utils", "wpt-tokenizer"]  # wpt-model: the drafter that drafting.py trains; wpt-utils: the processor's name in the scheduler's setup; wpt-tokenizer: the chat template next_message reads through; torch comes from the root group that scripts/setup.py picks
+dependencies = ["wpt-model", "wpt-utils", "wpt-tokenizer"]  # wpt-model: the drafter that drafting.py trains, and its update rule; wpt-utils: the processor's name in the scheduler's setup; wpt-tokenizer: the chat template next_message reads through; torch comes from the root group that scripts/setup.py picks
 
 [build-system]
 requires = ["uv_build>=0.13.0,<0.14.0"]

@@ -285,7 +285,7 @@ def test_a_step_that_fails_after_a_checkpoint_keeps_it_for_resume(built, tmp_pat
     (tmp_path / "fails_once.py").write_text(FAILS_ONCE)
     environment = str(tmp_path / "fails_once.py")
     (tmp_path / "fails-once-step.py").write_text(f"METHOD = 'next-token'\nENVIRONMENT = {environment!r}\n"
-                                                 "OPTIMIZER = {'name': 'muon'}\n")
+                                                 "OPTIMIZER = {'name': 'by-part'}\n")
     (tmp_path / "fail").touch()
     monkeypatch.setenv("WPT_TEST_FAIL", str(tmp_path / "fail"))
     recipe = built.recipe("fails", steps=[{"step": str(tmp_path / "fails-once-step.py"), "settings": one_stage(3)}])
@@ -496,7 +496,7 @@ def test_finish_tasks_learns_from_scored_attempts_at_the_tasks_tagged_for_it(doc
     answered(monkeypatch)
     train([built.recipe("base", training=one_stage(1, 64)), dataset, "--out", "base"])
     step = {"step": "finish-tasks", "settings": {"rounds": 1, "group": 2, "tasks_per_update": 1},
-            "optimizer": {"name": "adamw", "settings": {"lr": 1e-2, "weight_decay": 0.0}}}
+            "optimizer": {"name": "by-part", "settings": {"lr": 1e-2, "weight_decay": 0.0}}}
     recipe = built.recipe("agent", training=one_stage(1, 64), steps=[step])
     err = refused(capsys, [recipe, dataset, "--out", "model"])
     assert "image 'tiny' is not built on this machine" in err and "wpt-agent build-image tiny" in err
@@ -550,7 +550,7 @@ def test_finish_tasks_with_less_writing_learns_from_the_tasks_finish_tasks_reads
     # 16 reference attempts all fail 1 time in 65536; 8 attempts all equal, in each of 2 rounds, 1 time in 16384
     step = {"step": "finish-tasks-with-less-writing",
             "settings": {"rounds": 2, "group": 8, "reference": 16, "tasks_per_update": 1},
-            "optimizer": {"name": "adamw", "settings": {"lr": 1e-2, "weight_decay": 0.0}}}
+            "optimizer": {"name": "by-part", "settings": {"lr": 1e-2, "weight_decay": 0.0}}}
     train([built.recipe("agent", training=one_stage(1, 1024), steps=[step]), dataset, "--out", "model"])
 
     before, after = load_file(tmp_path / "base" / "model.safetensors"), load_file(tmp_path / "model" / "model.safetensors")

@@ -73,7 +73,7 @@
             "type": "object", "additionalProperties": false, "required": ["name"],
             "description": "the optimizer the step's loss moves the weights with; left out, the step's own",
             "properties": {
-              "name": {"type": "string", "minLength": 1, "description": "a built-in optimizer of wpt_training (muon, adamw) or a .py file"},
+              "name": {"type": "string", "minLength": 1, "description": "a built-in optimizer of wpt_training (by-part) or a .py file"},
               "settings": {"$ref": "#/$defs/settings", "description": "its settings; those left out keep the step's defaults for its own optimizer, else the optimizer's"}
             }
           },

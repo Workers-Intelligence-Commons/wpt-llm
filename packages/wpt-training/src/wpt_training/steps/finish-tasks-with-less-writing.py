@@ -8,6 +8,6 @@ attempt's reward growing as it gets shorter than the reference's."""
 
 METHOD = "grpo"
 ENVIRONMENT = "agent-tasks"
-OPTIMIZER = {"name": "adamw", "settings": {"lr": 1e-6, "weight_decay": 0.0}}
+OPTIMIZER = {"name": "by-part", "settings": {"lr": 1e-6, "weight_decay": 0.0, "schedule": "constant", "patience": 10}}
 LOCKED = ("routers", "balancing")
 SETTINGS = {"tag": "finish-tasks", "reward": "shorter", "reference": 8}
