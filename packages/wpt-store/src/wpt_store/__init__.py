@@ -14,7 +14,7 @@ every read. A ref is a small named pointer to an object (for example a build
 fingerprint to its result), so "already done" is a lookup.
 
 Every file a store writes is compressed while it is written, with zstd in
-frames of about 1 MB that a range read takes one by one (wpt_store.blocks),
+frames of about 1 MB that a range read takes a few at a time (wpt_store.blocks),
 and kept so only when that saves space: objects/<first 2 hex>/<sha256>.zst
 then, objects/<first 2 hex>/<sha256> as it is otherwise (Store.keep_smaller
 for objects, Store.keep_compressed for bundles). Which of the two names a
@@ -100,6 +100,8 @@ OPEN = ".open"  # the end of the key of the plain file a local store adds a reco
 TAIL = 64 << 10  # bytes read at a compressed file's end for its seek table: the whole table up to 8,000 frames
 DOWNLOAD = 64 << 20  # bytes of one file fetched in one request, when a whole file is copied from the store
 FRAMES_KEPT = 64  # decompressed frames kept in memory for range reads (about 64 MB)
+READ_AHEAD = 16  # frames one range read fetches at most when it needs some that are not kept: about 16 MB per
+# request, fewer than FRAMES_KEPT so that all of them stay kept
 TABLES_KEPT = 1024  # seek tables kept in memory
 KEYS_KEPT = 1 << 16  # keys files were found under (compressed or not) kept in memory
 
@@ -562,7 +564,9 @@ class Store:
     def _range(self, key, start, length, kind=None):
         """length original bytes of a stored file from start (fewer when it
         ends first): read in place when it is not compressed, else from
-        the frames that hold them, each decompressed once and kept a while.
+        the frames that hold them, each decompressed once and kept a while;
+        the frames not kept are read in one request, with up to READ_AHEAD
+        frames from the first of them on.
         kind: where to read it (default: the store's own kind)."""
         kind = kind or self.kind
         if not key.endswith(PACKED):
@@ -574,13 +578,18 @@ class Store:
         found = {i: self._frames.get((key, i)) for i in frames}
         wanted = [i for i in frames if found[i] is None]
         if wanted:
-            first, last = wanted[0], wanted[-1]
+            first = wanted[0]
+            last = max(wanted[-1], min(first + READ_AHEAD, len(table.sizes)) - 1)
             data = kind.read(key, table.stored[first], table.stored[last + 1] - table.stored[first])[0]
             for i in range(first, last + 1):
                 if found.get(i) is None:
-                    at = table.stored[i] - table.stored[first]
-                    found[i] = self._frame(key, table, i, data[at:at + table.sizes[i][0]])
-                    self._frames.put((key, i), found[i])
+                    frame = self._frames.get((key, i))  # another thread may have kept it meanwhile
+                    if frame is None:
+                        at = table.stored[i] - table.stored[first]
+                        frame = self._frame(key, table, i, data[at:at + table.sizes[i][0]])
+                        self._frames.put((key, i), frame)
+                    if i in found:
+                        found[i] = frame
         joined = b"".join(found[i] for i in frames)
         at = start - table.original[frames[0]]
         return joined[at:at + length]

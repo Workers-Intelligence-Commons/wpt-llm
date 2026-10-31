@@ -104,6 +104,8 @@ def fetch(address: str, data: dict, extractor: Extractor, tmp: Path) -> dict:
         extractor.keep_blobs(repo, [object_id for object_id in history if object_id not in held])
         if history:  # the patches diff both sides of each change: git must hold them
             lacking = manifest.missing_objects(repo, [object_id for object_id in history if object_id in known])
+            # in the order the files lie in the bundles, so each bundle read serves the next files too
+            lacking.sort(key=lambda object_id: (known[object_id].bundle, known[object_id].start))
             written = manifest.put_blobs(repo, [store.file_path(known[object_id]) for object_id in lacking])
             # a stored copy that is not the blob itself (an LFS file's, which is the object it points to) is
             # asked for upstream

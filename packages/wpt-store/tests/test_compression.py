@@ -102,3 +102,23 @@ def test_each_object_is_looked_for_once_however_many_ranges_are_read(store):
     for at in range(0, 1000, 100):
         assert reader.read_range(noise, at, 100) == NOISE[at:at + 100]
     assert len(probes) == 2  # its compressed name, then its own, once
+
+
+def test_a_range_read_fetches_the_frames_after_it_and_the_next_range_sends_no_request(store):
+    key = store.put_bytes(TEXT)
+    reader = open_store(store.root.as_uri() if hasattr(store, "root") else f"s3://{store.bucket}/{store.prefix}")
+    sizes = []
+    real = reader.kind.read
+
+    def counted(key, start=0, length=None):
+        sizes.append(length)
+        return real(key, start, length)
+
+    reader.kind.read = counted
+    assert reader.read_range(key, 10, 100) == TEXT[10:110]
+    sent = len(sizes)
+    for at in (blocks.FRAME + 5, 3 * blocks.FRAME + 7, len(TEXT) - 50):
+        assert reader.read_range(key, at, 40) == TEXT[at:at + 40]
+        size = min(blocks.FRAME, len(TEXT) - at + 4)
+        assert reader.read_range(key, at - 4, size) == TEXT[at - 4:at - 4 + size]
+    assert len(sizes) == sent
