@@ -8,8 +8,14 @@ and follows a server's Retry-After up to CAP. Anything else, such as a 404
 or an LFS object whose bytes are not its pointer's, fails at once: trying
 again gives the same answer.
 
-Each new try is announced in one line, printed on stderr; inside a
-reporting(log) block (a command that records its run passes its
+A download that streams a file (archives.py) and is cut continues from the
+byte it reached instead of starting over (resume). A cut that came after
+new bytes uses up no try; a cut that brought none uses up one, and the wait
+doubles with the cuts in a row that brought none. After ATTEMPTS tries
+without progress the cut fails the try, as any failure does.
+
+Each new try, and each resume, is announced in one line, printed on stderr;
+inside a reporting(log) block (a command that records its run passes its
 telemetry.log), the line goes to log instead, which records and prints it.
 """
 
@@ -60,11 +66,26 @@ def call(action, what: str, sleep=time.sleep):
         except Exception as error:
             if attempt == ATTEMPTS or not transient(error):
                 raise
-            wait = _retry_after(error)
-            if wait is None:
-                wait = random.uniform(0, min(CAP, BASE * 2 ** (attempt - 1)))
+            wait = _wait(error, attempt)
             _report(f"{what}: {_describe(error)}; trying again in {wait:.0f}s ({attempt + 1}/{ATTEMPTS})", error=True)
             sleep(wait)
+
+
+def resume(what: str, error, position: int, stalls: int, sleep=time.sleep):
+    """Announce and wait out a cut that a download continues from byte
+    position; stalls counts the cuts in a row that brought no new bytes,
+    this one included."""
+    wait = _wait(error, max(stalls, 1))
+    _report(f"{what}: {_describe(error)}; resuming at byte {position} in {wait:.0f}s ({stalls + 1}/{ATTEMPTS})",
+            error=True)
+    sleep(wait)
+
+
+def _wait(error, attempt: int) -> float:
+    wait = _retry_after(error)
+    if wait is None:
+        wait = random.uniform(0, min(CAP, BASE * 2 ** (attempt - 1)))
+    return wait
 
 
 def transient(error) -> bool:

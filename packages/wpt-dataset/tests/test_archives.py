@@ -220,3 +220,65 @@ def test_an_archive_whose_answer_is_cut_is_read_again_and_each_member_stored_onc
     found, _ = source_tree(repo.source(sid), store)
     assert {path: manifest.content(store, entry) for path, entry in found.items()} == \
         {path: content for path, (_, content) in tree.items()}
+
+
+@pytest.mark.parametrize("cuts, changes", [(7, False), (1, True)])
+def test_a_tar_whose_answer_is_cut_continues_from_the_byte_reached(kit, repo, store, tmp_path, monkeypatch,
+                                                                   cuts, changes):
+    # 7 cuts, each after new bytes, are more than retry.ATTEMPTS and use up no try; when the file changed
+    # after the first cut (If-Range does not match: the server answers 200), the try starts over from byte 0
+    folder, asked, left = tmp_path / "cuts", [], [cuts]
+    folder.mkdir()
+
+    class Cutting(kit.QuietHandler):
+        """Serves a file with its ETag, ranges tied by If-Range, every answer cut after 1/8 of the file
+        while cuts are left; the ETag changes after the first cut when `changes`."""
+
+        def do_GET(self):
+            if self.path != "/project.tar.gz":  # robots.txt
+                self.send_error(404)
+                return
+            data = Path(self.translate_path(self.path)).read_bytes()
+            etag = '"v2"' if changes and left[0] < cuts else '"v1"'
+            first, wanted = 0, self.headers.get("Range")
+            asked.append(int(wanted.removeprefix("bytes=").partition("-")[0]) if wanted else None)
+            if wanted and self.headers.get("If-Range", etag) == etag:
+                first = asked[-1]
+                self.send_response(206)
+                self.send_header("Content-Range", f"bytes {first}-{len(data) - 1}/{len(data)}")
+            else:
+                self.send_response(200)
+            self.send_header("ETag", etag)
+            self.send_header("Accept-Ranges", "bytes")
+            self.send_header("Content-Length", str(len(data) - first))
+            self.end_headers()
+            cut = left[0] > 0
+            left[0] -= cut
+            self.wfile.write(data[first:first + len(data) // 8] if cut else data[first:])
+            self.close_connection = True
+
+    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), functools.partial(Cutting, directory=str(folder)))
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    big = "".join(hashlib.sha256(str(i).encode()).hexdigest() for i in range(8000)).encode()  # compresses little
+    tree = {"README.md": (FILE, README), "big.txt": (FILE, big), "guide.txt": (FILE, GUIDE)}
+    (folder / "project.tar.gz").write_bytes(tar_bytes([(path, tarfile.REGTYPE, content, 0o644)
+                                                       for path, (_, content) in tree.items()], "gz"))
+    sid = kit.add_source(repo, store, "example", "project", {
+        "type": "http", "address": f"http://127.0.0.1:{server.server_address[1]}/project.tar.gz",
+        "licenses": [kit.entry(sorted(tree))]}, fetch=False)
+    monkeypatch.setattr(retry, "BASE", 0)  # no wait between the answers
+    assert cuts > retry.ATTEMPTS or changes
+    added = added_to_bundles(monkeypatch)
+
+    kit.download(repo, store, sid)
+    server.shutdown()
+
+    if changes:  # asked for the rest, got the whole file of another version, started over
+        assert asked[0] is None and asked[1] > 0 and asked[2] is None and len(asked) == 3
+    else:
+        assert asked[0] is None and asked[1:] == sorted(set(asked[1:])) and len(asked) == cuts + 1
+        assert all(position > 0 for position in asked[1:])
+    assert sorted(added) == sorted(hashlib.sha256(content).hexdigest() for _, content in tree.values())
+    found, _ = source_tree(repo.source(sid), store)
+    assert {path: manifest.content(store, entry) for path, entry in found.items()} == \
+        {path: content for path, (_, content) in tree.items()}

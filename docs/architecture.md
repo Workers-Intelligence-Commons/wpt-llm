@@ -593,7 +593,12 @@ leaves out makes it read the archive a second time as it arrives, holding
 in memory the members such links need, since their content went by
 unread. One fetch puts each content in the bundles once, however many
 times it reads the archive. An answer that ends before its announced size
-is a cut connection, tried again like any other. When the download fails,
+is a cut connection. A tar whose server gives its size, a validator (`ETag`,
+else `Last-Modified`) and `Accept-Ranges: bytes` continues from the byte
+reached through a range request tied to that version; a cut that came after
+new bytes uses up no try, and any answer but those bytes (the file changed)
+starts the try over. Any other archive is tried again like any other
+download. When the download fails,
 the members read stay in the bundles, in no file list.
 
 Each run of these commands is a session: its record in the store
