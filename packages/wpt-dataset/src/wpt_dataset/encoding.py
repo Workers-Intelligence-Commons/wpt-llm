@@ -29,7 +29,7 @@ that read a source's files. The statements read, the first that applies:
 - `code` in css: the @charset "..."; that starts the file.
 
 A file that states no encoding is UTF-8 text, or no text at all, as before:
-nothing is guessed. Nothing in `chat` and `rating` files is read as a
+nothing is guessed. Nothing in `chat`, `rating` and `probe` files is read as a
 statement, since they are JSON, UTF-8 by its standard, nor in a `task`
 folder's files, UTF-8 by the task format (docs/training.md). A stated
 encoding Python does not know, or bytes that do not decode under it, make
@@ -48,7 +48,7 @@ from .manifest import format_entries
 
 BOMS = [(codecs.BOM_UTF32_LE, "utf-32-le"), (codecs.BOM_UTF32_BE, "utf-32-be"), (codecs.BOM_UTF8, "utf-8"),
         (codecs.BOM_UTF16_LE, "utf-16-le"), (codecs.BOM_UTF16_BE, "utf-16-be")]  # UTF-32 LE before UTF-16 LE
-UTF_8 = {"chat", "task", "rating"}  # formats whose own standard says UTF-8
+UTF_8 = {"chat", "task", "rating", "probe"}  # formats whose own standard says UTF-8
 SPACE = rb"[\t\n\f\r ]"
 COMMENT = re.compile(rb"<!--.*?(?:-->|\Z)", re.S)
 META = re.compile(rb"<meta[\t\n\f\r /]([^>]*)", re.I)

@@ -1,12 +1,14 @@
 """The text measures (calibration, reading_gain, bible_verses) on a stand-in
 model that knows the right answers, so each result shows what the measure
 counts; the generation, the chat template, the confidence question and the
-check library's rules are the real ones."""
+check library's rules are the real ones. The probes test, which asks a
+question many times and flags replies by patterns, on the same stand-in."""
 
 import importlib.util
 import json
 import os
 import subprocess
+from fractions import Fraction
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -16,10 +18,10 @@ import torch
 
 from wpt_agent.loop import CONFIDENCE
 from wpt_dataset.build import Document, is_held_out
-from wpt_dataset.repo import Repo, address_hash, dump_json
+from wpt_dataset.repo import Repo, address_hash, dump_json, empty_source
 from wpt_dataset import download
 from wpt_dataset.sources import exact_pattern, held_out_group
-from wpt_eval import Context, find, open_context
+from wpt_eval import Context, asking, find, main, open_context
 from wpt_eval.asking import CONTINUE, Question
 from wpt_model import load_model
 from wpt_store import open_store
@@ -364,3 +366,84 @@ def test_calibration_runs_as_is_on_a_pre_trained_model(trained, tmp_path, root):
     assert data["training"]["questions"] == data["held_out"]["questions"] == 2
     for part in ("training", "held_out"):
         assert 0 <= data[part]["accuracy"] <= 1 and 0 <= data[part]["brier"] <= 1
+
+
+def probe_source(root: Path, store, probes) -> str:
+    """An admitted empty source of root holding probes in probes/probes.jsonl."""
+    repo = Repo(root)
+    document = empty_source("probes", license="CC0-1.0", attribution="A. Person, probes", text="CC0 1.0 Universal\n",
+                            by="A. Person", formats={"probes/probes.jsonl": "probe"})
+    sid = repo.create_source("mine", "probes", document, {}, "first", store)
+    version = repo.source_version(sid)
+    for probe in probes:
+        version = repo.save_probe(sid, "probes/probes.jsonl", None, probe, "asked", version, store)
+    document = repo.read("source", sid).document
+    repo.save("source", sid, {**document, "decision": {"decision": "admitted", "by": "A. Person",
+                                                       "date": "2026-10-23"}}, repo.version("source", sid))
+    return sid
+
+
+def test_each_question_is_asked_ceil_3_over_the_rate_times_and_its_flagged_replies_are_shown(tokenizer, tmp_path,
+                                                                                            root):
+    # given a model that replies one fixed text to each question, the
+    # question whose pattern (case-insensitive by its own flag) matches has
+    # every reply flagged and the other none; each is asked ceil(3 / rate)
+    # times, and the model card shows each flagged reply word for word
+    # with the pattern that matched, its thinking included
+    store = open_store((tmp_path / "store").as_uri())
+    sid = probe_source(root, store, [{"question": "First placeholder?", "patterns": ["nothing", "(?i)ALARM"]},
+                                         {"question": "Second placeholder?", "patterns": ["alarm"]},
+                                         {"question": "Third placeholder?", "patterns": ["alarm"]}])
+    replies = {"First placeholder?": said("an alarm reply with ``` inside"), "Second placeholder?": said("a calm reply"),
+               "Third placeholder?": [{"type": "thinking", "text": "an alarm thought"}, *said("a calm reply")]}
+    model = Oracle(tokenizer, lambda prompt: replies[prompt.split("<|im_start|>user\n")[-1].split("<|im_end|>")[0]])
+    context = Context(tmp_path, Served(model), tokenizer, "cpu", {}, store, probe_rate=Fraction(1, 2))
+    result = built_in("probes").run(context)
+
+    data = result.data
+    assert data["ran"] and data["replies_per_question"] == 6 and data["rate"] == "1/2"
+    first, second, third = data["questions"]
+    assert (first["source"], first["path"], first["line"]) == (sid, "probes/probes.jsonl", 1)
+    assert (first["replies"], first["flagged"], first["share"]) == (6, 6, 1.0)
+    assert (second["replies"], second["flagged"], second["share"]) == (6, 0, 0.0)
+    assert [a["pattern"] for a in first["answers"]] == ["(?i)ALARM"] * 6
+    assert len(second["answers"]) == 6 and {a["pattern"] for a in second["answers"]} == {None}
+    assert first["answers"][0]["reply"] == replies["First placeholder?"]
+    # the whole reply is matched and shown as written, its thinking included
+    assert (third["flagged"], third["answers"][0]["reply"]) == (6, replies["Third placeholder?"])
+    assert result.text.count("<think>\nan alarm thought\n</think>\n\na calm reply") == 6
+    assert "6 of 6 replies flagged (100.0%)" in result.text and "0 of 6 replies flagged (0.0%)" in result.text
+    assert result.text.count("````\nan alarm reply with ``` inside\n````") == 6
+    assert result.text.count("```\n(?i)ALARM\n```") == 6
+
+
+def test_the_rule_of_three_counts_exactly():
+    module = built_in("probes")
+    assert [module.replies_per_question(Fraction(rate)) for rate in ("1/100", "0.03", "1", "0.007")] == \
+           [300, 100, 3, 429]
+
+
+def test_wpt_eval_samples_the_same_replies_again_and_says_when_there_is_no_probe(trained, monkeypatch):
+    # through the command, the rate comes from --probe-rate (or
+    # WPT_PROBE_RATE), and a tiny trained model's sampled replies come
+    # again the same on a second run, written in batches of 4 and 2 rows
+    # that draw one after the other from the question's generator; without a
+    # probe file the test says it did not run
+    monkeypatch.setattr(asking, "BATCH", 4)
+    main([str(trained.folder), "probes"])
+    data = json.loads((trained.folder / "evals" / "probes.json").read_text())["data"]
+    assert not data["ran"] and data["reason"] == "no admitted source holds a probe file"
+    assert data["replies_per_question"] == 300
+
+    probe_source(Path.cwd(), trained.store, [{"question": "Placeholder question?", "patterns": ["."]}])
+    monkeypatch.setenv("WPT_PROBE_RATE", "0.5")
+    found = []
+    for _ in range(2):
+        main([str(trained.folder), "probes"])
+        found.append(json.loads((trained.folder / "evals" / "probes.json").read_text())["data"])
+    assert found[0] == found[1]
+    [asked] = found[0]["questions"]
+    assert found[0]["rate"] == "1/2" and asked["replies"] == len(asked["answers"]) == 6
+    assert trained.records("wpt-eval")[-1].start["inputs"]["probe_rate"] == "1/2"
+    main([str(trained.folder), "--probe-rate", "1/3", "probes"])
+    assert json.loads((trained.folder / "evals" / "probes.json").read_text())["data"]["replies_per_question"] == 9

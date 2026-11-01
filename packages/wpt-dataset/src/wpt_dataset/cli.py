@@ -46,7 +46,7 @@
 Reading and writing the data files, through the service layer (wpt_dataset.repo;
 wpt-web's HTTP API does the same). Every write applies the rules of `check` and
 is refused when the file changed since VERSION, the version `show` (or `files`,
-`conversations`, `tasks`, `ratings`) printed; VERSION '' writes a new file:
+`conversations`, `tasks`, `ratings`, `probes`) printed; VERSION '' writes a new file:
 
     wpt-dataset kinds                     the kinds of data files, and who writes each
     wpt-dataset list KIND                 the names of the files of a kind
@@ -89,6 +89,10 @@ A source's files change only through patches (as unpack, an edit and patch):
     wpt-dataset ratings ID PATH           the ratings of a rating file: the attempt each rates, who, when
     wpt-dataset save-rating ID PATH LINE|new [FILE] [--remove] --patch NAME --version VERSION
                                           replace, add or remove a person's pass or fail on an attempt *
+    wpt-dataset probes ID PATH            the probes of a probe file: how many patterns each holds
+    wpt-dataset save-probe ID PATH LINE|new [FILE] [--remove] --patch NAME --version VERSION
+                                          replace, add or remove a question of the probes test and
+                                          the patterns that flag an alarming reply *
 
 * reads or writes a person's text. An AI assistant uses only the other
 commands and options, for structure and metadata, never these: it may run
@@ -541,6 +545,24 @@ def cmd_save_rating(args, repo):
     return 0
 
 
+def cmd_probes(args, repo):
+    version, found = repo.probes(args.id, args.path, _store(repo))
+    for line, probe in enumerate(found, start=1):  # the question and the patterns are the person's: not shown here
+        print(f"line {line}: {len(probe['patterns'])} patterns")
+    _versioned(version)
+    return 0
+
+
+def cmd_save_probe(args, repo):
+    line = None if args.line == "new" else int(args.line)
+    if args.remove == bool(args.file):
+        raise InvalidFile("give FILE, or --remove")
+    probe = None if args.remove else _json(_input(args.file), args.file)
+    version = repo.save_probe(args.id, args.path, line, probe, args.patch, args.version, _store(repo))
+    print(f"recorded as the next patch of {args.id}, version {version}")
+    return 0
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="wpt-dataset", description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -683,6 +705,10 @@ def _data_commands(commands):
     save.add_argument("--remove", action="store_true")
     command("ratings", cmd_ratings, "id", "path")
     save = writes(command("save-rating", cmd_save_rating, "id", "path", "line", text=True))
+    save.add_argument("file", nargs="?")
+    save.add_argument("--remove", action="store_true")
+    command("probes", cmd_probes, "id", "path")
+    save = writes(command("save-probe", cmd_save_probe, "id", "path", "line", text=True))
     save.add_argument("file", nargs="?")
     save.add_argument("--remove", action="store_true")
 

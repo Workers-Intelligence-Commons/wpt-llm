@@ -876,12 +876,13 @@ those of its `tag` setting.
 ### Record format
 
 The shape of recorded demonstrations and environment recordings is not
-settled yet. The code reads three kinds of records, each a format of
+settled yet. The code reads four kinds of records, each a format of
 a source's files: conversations (`chat`, one JSON object per line, as
 [chat-format.md](chat-format.md) says, turned into tokens by a template
 before training, with media such as screenshots as separate files named by
-their sha256), tasks (`task`, "Tasks", below) and people's ratings
-(`rating`, [evaluation.md](evaluation.md), "People's ratings"). Whatever
+their sha256), tasks (`task`, "Tasks", below), people's ratings
+(`rating`, [evaluation.md](evaluation.md), "People's ratings") and probes
+(`probe`, [evaluation.md](evaluation.md), "Probes"). Whatever
 the shape, a record's license, credit and decision are its source's, and
 its contributor is the signed-off commit that adds it.
 

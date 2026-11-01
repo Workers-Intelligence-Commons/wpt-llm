@@ -329,6 +329,26 @@ def test_the_rating_page_lists_a_runs_attempts_and_records_a_persons_verdict(web
     assert repo.check() == []
 
 
+def test_the_probe_page_writes_a_probe_file_line_by_line(web):
+    # a person's question and patterns become a line of a probe file of an
+    # empty source (docs/evaluation.md, "Probes"), and a pattern Python
+    # cannot compile is refused with the rule's message
+    request, repo, _ = web
+    sid = new_source(request, {"notes.txt": {"format": "text", "text": TEXT}})
+    route = f"/api/sources/{sid}/probes/{path('probes/probes.jsonl')}"
+    status, listing = request("GET", route)
+    assert status == 200 and listing["probes"] == []
+    probe = {"question": "Placeholder question?", "patterns": ["(?i)placeholder"]}
+    status, saved = request("PUT", f"{route}/new", {"probe": probe, "patch": "asked", "version": listing["version"]})
+    assert status == 200, saved
+    assert request("GET", route)[1] == {"version": saved["version"], "probes": [probe]}
+    status, refused = request("PUT", f"{route}/1", {"probe": {**probe, "patterns": ["(unclosed"]}, "patch": "wrong",
+                                                    "version": saved["version"]})
+    assert status == 422 and "not a regular expression" in refused["problems"][0]
+    assert request("GET", "/api/schemas/probe")[1]["required"] == ["question", "patterns"]
+    assert repo.check() == []
+
+
 def test_every_route_is_in_the_openapi_description_and_bodies_follow_it(web):
     request, repo, _ = web
     status, description = request("GET", "/api/openapi.json")

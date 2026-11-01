@@ -190,7 +190,8 @@ def schema(kind: str) -> dict:
     return json.loads(resources.files(__package__).joinpath(f"schemas/{kind}.schema.json").read_text())
 
 
-INSIDE_SOURCES = ("conversation", "task", "rating")  # a chat file's lines, a task.json, a rating file's lines
+INSIDE_SOURCES = ("conversation", "task", "rating", "probe")  # a chat file's lines, a task.json, a rating
+# file's and a probe file's lines
 
 
 def schema_of(name: str) -> dict:
@@ -1494,9 +1495,31 @@ class Repo:
 
         return self._save_line(sid, path, line, rating, "rating", parse, patch, version, store, same=attempt_of)
 
+    # -- probes: lines of a probe file ------------------------------------------------
+    def probes(self, sid: str, path: str, store) -> tuple[str, list[dict]]:
+        """(version, probes) of a probe file of the source (questions for
+        the probes test and the patterns that flag an alarming reply;
+        probes.py); an absent file has none."""
+        from .probes import parse
+
+        return self._lines(sid, path, "probe", parse, store)
+
+    @_locked
+    def save_probe(self, sid: str, path: str, line: int | None, probe: dict | None, patch: str, version: str,
+                   store) -> str:
+        """Replace the probe on line `line` (from 1), add one at the end
+        (line None), or remove one (probe None), through a patch
+        (change_source_files), in a probe file of an `empty` source, as
+        save_conversation does with conversations. A new probe file gets
+        its own `probe` format entry when none covers it. The whole file
+        must pass the probe rules (probes.py). Returns the new version."""
+        from .probes import parse
+
+        return self._save_line(sid, path, line, probe, "probe", parse, patch, version, store)
+
     def _lines(self, sid, path, format, parse, store) -> tuple[str, list[dict]]:
         """(version, parse's documents) of a file of the source in format
-        (chat, rating), one document per line; an absent file has none."""
+        (chat, rating, probe), one document per line; an absent file has none."""
         self._editable(sid, path, format)
         try:
             version, data = self.read_source_file(sid, path, store)
@@ -1506,7 +1529,7 @@ class Repo:
 
     def _save_line(self, sid, path, line, document, format, parse, patch, version, store, same=None) -> str:
         """Replace, add or remove one line of a file in format (chat,
-        rating) of an `empty` source, as the next patch, keeping a replaced
+        rating, probe) of an `empty` source, as the next patch, keeping a replaced
         line's layout where its meaning did not change; the whole file must
         pass parse. same, when given, says what a document is the same as:
         a document added (line None) replaces the line whose document gives
@@ -1552,12 +1575,12 @@ class Repo:
 
     def _written_for_wpt(self, sid, source: Source | None = None):
         """RuleViolation unless the source (read here when not given) is an
-        `empty` one: conversations, tasks and ratings are text written for
+        `empty` one: conversations, tasks, ratings and probes are text written for
         WPT (CONTRIBUTING.md, "Adding your own texts"), never a change to
         upstream's files."""
         kind = (source or self.source(sid)).data["type"]
         if kind != "empty":
-            raise RuleViolation(f"{sid} is a {kind} source: conversations, tasks and ratings are written in an "
+            raise RuleViolation(f"{sid} is a {kind} source: conversations, tasks, ratings and probes are written in an "
                                 f"empty source")
 
     def _editable(self, sid, path, format):

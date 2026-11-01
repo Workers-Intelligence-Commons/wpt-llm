@@ -305,7 +305,7 @@ statements it reads, in this order:
 | `code` in css | the `@charset "...";` that starts the file |
 
 Nothing is guessed: a file that states no encoding is UTF-8 text, or no
-text at all. `chat` and `rating` files are JSON, UTF-8 by its
+text at all. `chat`, `rating` and `probe` files are JSON, UTF-8 by its
 standard, and every file of a `task` folder is UTF-8 by the task format
 ([training.md](training.md)): no statement is read in them. A stated encoding Python does not know, or bytes
 that do not decode under it, make the file no text: `check --fetch` names
@@ -401,6 +401,7 @@ tree, as its `formats` entry says
 | `chat` | conversations for training, one JSON object per line ([chat-format.md](chat-format.md)); each line is checked, and the file gives no pre-training document: a dataset's build keeps each conversation with its file's tags, and only a training step whose `tag` setting is one of them reads it |
 | `task` | the files of task folders for agentic training (`task.json`, `files/`, `check`; [training.md](training.md)); each folder is checked, and its files give no pre-training document: a dataset's build keeps each task with the tags of its `task.json`, and only a training step whose `tag` setting is one of them reads it: `finish-tasks` and `finish-tasks-with-less-writing` both ask for `finish-tasks`. A task built by a program holds pointers into the documents of other sources, never their text, which the readers fill in from the store ([training.md](training.md), "Pointer tasks") |
 | `rating` | people's pass or fail on the attempts of a `wpt-eval` run, one rating per line ([evaluation.md](evaluation.md), "People's ratings"); each line is checked, and the file gives no pre-training document: a measure only, which no training step reads |
+| `probe` | questions the `probes` test of `wpt-eval` asks a model and the patterns that flag an alarming reply, one probe per line ([evaluation.md](evaluation.md), "Probes"); each line is checked, its patterns included, and the file gives no pre-training document: a measure only, which no dataset build keeps and no training step reads |
 
 In `xhtml` and `html` pages, an image the page shows (`<img>`, or an
 inline `<svg>`) is never dropped silently: in its place the Markdown holds
@@ -822,7 +823,7 @@ record runs, and compresses it into one part when the record ends;
 
 `packages/wpt-dataset/src/wpt_dataset/repo.py` is the only code that reads
 or writes the repository's data: the
-sources and their patches, the chat, task and rating files inside them, the
+sources and their patches, the chat, task, rating and probe files inside them, the
 model, tokenizer and mixture recipes, the image Dockerfiles and their
 pools of tools (`tools.json`), the two
 signer lists (`allowed-signers`, `allowed-gpg-keys.asc`), and the
@@ -888,10 +889,10 @@ and versions, never a path under `data/`.
   a new key goes after the key the saved document puts before it, and a new
   key or item is written with the indent and spacing of the last member of
   its object or array.
-- Conversations, tasks and ratings are written only in an `empty` source,
-  text written for WPT ([chat-format.md](chat-format.md), "Writing a chat
-  file"; [training.md](training.md), "Tasks";
-  [evaluation.md](evaluation.md), "People's ratings").
+- Conversations, tasks, ratings and probes are written only in an `empty`
+  source, text written for WPT ([chat-format.md](chat-format.md), "Writing
+  a chat file"; [training.md](training.md), "Tasks";
+  [evaluation.md](evaluation.md), "People's ratings" and "Probes").
 - A source's text changes only through a patch: the layer unpacks the
   source into a temporary folder, puts the change in, and records the
   difference as the next patch, kept only when the source then gives
@@ -950,6 +951,7 @@ request body against the same description), and `wpt-dataset` commands.
 | conversations | `conversations ID PATH`, `conversation ID PATH LINE`, `save-conversation ID PATH LINE` (or `new`) | `/api/sources/{id}/conversations/{path}[/{line}]`, `POST /api/drafts`; page "Conversations" |
 | tasks | `tasks ID`, `task ID FOLDER`, `save-task ID FOLDER` | `/api/sources/{id}/tasks[/{folder}]`; page "Tasks" |
 | people's ratings of attempts ([evaluation.md](evaluation.md), "People's ratings") | `ratings ID PATH`, `save-rating ID PATH LINE` (or `new`) | `/api/sources/{id}/ratings/{path}[/{line}]`, and the attempts of `wpt-eval` runs from the store, `/api/runs[/{folder}/attempts]`; page "Ratings" |
+| probes of the `probes` test ([evaluation.md](evaluation.md), "Probes") | `probes ID PATH`, `save-probe ID PATH LINE` (or `new`) | `/api/sources/{id}/probes/{path}[/{line}]`; page "Probes" |
 | git's status of `data/` | `status` | `/api/status`, on every page |
 
 The HTTP API answers 404 when the thing does not exist, 409 for a stale

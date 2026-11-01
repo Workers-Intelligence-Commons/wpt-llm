@@ -178,7 +178,10 @@ paste your text, and the page makes the source, under review
 and "Tasks" pages write the conversations and tasks training steps read the same
 way, its "Ratings" page your pass or fail on a model's attempts (a
 measure only, never a training signal:
-[docs/evaluation.md](docs/evaluation.md), "People's ratings"), and every
+[docs/evaluation.md](docs/evaluation.md), "People's ratings"), its
+"Probes" page the questions the `probes` test asks a model and the
+patterns that flag an alarming reply (a measure only too:
+[docs/evaluation.md](docs/evaluation.md), "Probes"), and every
 page shows which data files git sees as changed.
 `uv run wpt-dataset new-source` does the same on the command line. By
 hand:
@@ -315,7 +318,7 @@ commands only for structure and metadata: the kinds and names of files,
 `source.json`, recipes, file lists, tags, git's status; never to read or
 write people's texts, so it never runs the commands and options that do
 (`read`, `write`, `conversation`, `save-conversation`, `task`,
-`save-task`, `save-rating`, and `new-source`'s `--file` and
+`save-task`, `save-rating`, `save-probe`, and `new-source`'s `--file` and
 `--license-text`, marked `*`
 in `uv run wpt-dataset --help`). It may start a new source with
 `new-source` without `--file` and `--license-text`: the source is made with its license, attribution,
@@ -341,8 +344,8 @@ other text ([docs/training.md](docs/training.md), "Where records
 live"): their license, credit and decision are the source's, in its
 `source.json`, and the signed-off commit that adds them names their
 contributor. Their shape is not settled yet; the code reads
-conversations in the `chat` format, tasks in the `task` format and
-ratings in the `rating` format.
+conversations in the `chat` format, tasks in the `task` format,
+ratings in the `rating` format and probes in the `probe` format.
 
 ## Writing about the project
 

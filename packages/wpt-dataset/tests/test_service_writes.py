@@ -511,3 +511,56 @@ def test_a_license_text_first_met_in_a_source_is_added_under_review_and_then_fou
                                     license_check.LicenseTexts(repo.license_texts()))
     assert (found.found, found.decision, found.admitted) == (text, "under-review", False)
     assert repo.add_found_license_text(sid, {"file": "COPYING"}, store) == (text, None)
+
+
+PROBE = {"question": "Placeholder question?", "patterns": ["(?i)placeholder", r"\bword\b"]}
+
+
+def test_probes_are_lines_of_a_probe_file_of_an_empty_source_and_never_a_document(kit, repo, store):
+    # the probes test's questions and patterns are a person's text, stored as
+    # a file of an empty source so the measure is reproducible, and a
+    # measure only: never a pre-training document; a pattern Python cannot
+    # compile is refused, as every pattern must flag replies
+    from wpt_dataset.markdown import documents
+    from wpt_dataset.sources import source_tree
+
+    sid = own_source(repo, store, {"notes.txt": "text"})
+    version = repo.save_probe(sid, "probes/probes.jsonl", None, PROBE, "asked", repo.source_version(sid), store)
+    other = {"question": "Another placeholder?", "patterns": ["other"]}
+    version = repo.save_probe(sid, "probes/probes.jsonl", None, other, "more", version, store)
+    version = repo.save_probe(sid, "probes/probes.jsonl", 1, {**PROBE, "patterns": ["changed"]}, "changed", version,
+                              store)
+    assert repo.probes(sid, "probes/probes.jsonl", store) == (version, [{**PROBE, "patterns": ["changed"]}, other])
+    source = repo.source(sid)
+    assert {"format": "probe", "paths": ["probes/probes.jsonl"]} in source.data["formats"]
+    assert [found.path for found in documents(source, source_tree(source, store)[0], store, repo)] == []
+    assert repo.check() == [] and repo.check_fetched(sid, store)[:2] == (1, 0)
+
+    for wrong, error in (({**PROBE, "patterns": ["(unclosed"]}, "at patterns/0: not a regular expression"),
+                         ({**PROBE, "patterns": []}, "at patterns"),
+                         ({"patterns": ["x"]}, "'question' is a required property")):
+        with pytest.raises(InvalidFile, match=error):
+            repo.save_probe(sid, "probes/probes.jsonl", None, wrong, "wrong", version, store)
+    with pytest.raises(RuleViolation, match="in the text format, not probe"):
+        repo.save_probe(sid, "notes.txt", None, PROBE, "wrong", version, store)
+    assert len(repo.source(sid).patches) == 3  # the three probes saved, nothing refused
+    version = repo.save_probe(sid, "probes/probes.jsonl", 2, None, "removed", version, store)
+    assert repo.probes(sid, "probes/probes.jsonl", store)[1] == [{**PROBE, "patterns": ["changed"]}]
+
+
+def test_the_probes_of_admitted_sources_are_read_for_the_test_and_others_are_not(repo, store):
+    # the probes test reads the probes of admitted sources only, in source,
+    # path and line order, each naming where it lives
+    from wpt_dataset import probes
+
+    sid = own_source(repo, store, {"notes.txt": "text"})
+    version = repo.save_probe(sid, "probes/b.jsonl", None, PROBE, "asked", repo.source_version(sid), store)
+    version = repo.save_probe(sid, "probes/a.jsonl", None, {"question": "First?", "patterns": ["x"]}, "more",
+                              version, store)
+    assert probes.read(repo, store) == ([], [])  # under review
+    document = repo.read("source", sid).document
+    repo.save("source", sid, {**document, "decision": {"decision": "admitted", "by": "A. Person",
+                                                       "date": "2026-10-23"}}, repo.version("source", sid))
+    assert probes.read(repo, store) == ([probes.Probe(sid, "probes/a.jsonl", 1, "First?", ("x",)),
+                                         probes.Probe(sid, "probes/b.jsonl", 1, PROBE["question"],
+                                                      tuple(PROBE["patterns"]))], [])

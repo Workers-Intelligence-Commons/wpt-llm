@@ -63,6 +63,9 @@ caption) stays ordinary text; math, audio and video are left out.
 - `rating`: people's pass or fail ratings of measure attempts, one per
   line (see ratings.py). Each rating is checked, and the file gives no
   document: a measure only, never a training signal.
+- `probe`: questions for the probes test and the patterns that flag an
+  alarming reply, one probe per line (see probes.py). Each probe is
+  checked, and the file gives no document: a measure only.
 - `records`: one document per record whose license enters (see
   records.py), at the path `<file>#<record id>`; its text field is read as
   `text` above, kept as it is when the entry says `"as": "markdown"`, or
@@ -89,7 +92,7 @@ from urllib.parse import unquote, urlparse
 
 from lxml import etree
 
-from . import conversations, encoding, manifest, ratings, records, tasks
+from . import conversations, encoding, manifest, probes, ratings, records, tasks
 from .errors import FormatMapError, NotText
 from .license_check import Coverage
 from .manifest import ORDER, SYMLINK, format_entries
@@ -132,7 +135,7 @@ class Converted(NamedTuple):
 def documents(source, tree, store, repo, skipped: dict | None = None, only=None,
               trains=None) -> Iterator[Converted]:
     """Each document of a final tree, in file path order; links, chat,
-    task and rating files, a git history's order file (ORDER) and documents whose
+    task, rating and probe files, a git history's order file (ORDER) and documents whose
     Markdown is empty are left out; repo holds the images task folders
     name. skipped, when given, receives file -> records.Skipped for each
     records file. only, when given, is the set of files whose documents
@@ -143,7 +146,7 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None,
     entry's without it.
     Raises FormatMapError when a path matches no format entry or several,
     NotText when a file is not text (encoding.py) or an xhtml file is not
-    well-formed, InvalidFile when a chat, rating or records file holds a
+    well-formed, InvalidFile when a chat, rating, probe or records file holds a
     line that is not valid or a task folder is not."""
     files = {path: entry for path, entry in tree.items() if entry.mode != SYMLINK}
     formats = {path: format_of(source, path) for path in files}
@@ -192,6 +195,9 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None,
             continue  # checked by folder, below
         if kind == "rating":
             ratings.parse(source.id, path, manifest.content(store, files[path]))
+            continue
+        if kind == "probe":
+            probes.parse(source.id, path, manifest.content(store, files[path]))
             continue
         if kind in ("markdown", "text", "code"):
             content = encoding.decode(manifest.content(store, files[path]), entry, f"{source.id}: {path}")

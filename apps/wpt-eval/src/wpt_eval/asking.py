@@ -16,6 +16,9 @@ chat template, as wpt-chat --chat does, always taking its likeliest token
 (wpt_agent.GREEDY), so a run gives the same answers again on the same setup.
 It writes on a gpu worker (context.model.writer(), docs/machines.md,
 "Evaluation"), and a measure's generator (generator()) is made there.
+A measure that samples instead (the probes test) asks samples() for
+the tokens of several replies to one prompt, written in batches of at most BATCH rows
+and drawn as its wpt_agent.Sampling says.
 
 The measure builds the answer, as the agent loop does: the conversation's
 metadata.answer is {"answer": the reply's text}, with "confidence" where
@@ -46,6 +49,7 @@ from .attempts import library
 
 SEED = 1  # every measure's generator and draws
 MAX_TOKENS = 512  # tokens of one reply at most: a paragraph's rest is at most 800 bytes
+BATCH = 64  # replies() writes at most this many rows at once
 CONTINUE = "Continue this passage: "
 
 
@@ -136,16 +140,39 @@ def ask(context, text, generator, max_tokens=MAX_TOKENS, confident=False) -> dic
 
 
 def _reply(context, messages, generator, max_tokens) -> list[dict]:
-    """The blocks of the model's next message after messages: the tokens it
-    writes after the chat template's prompt, up to <|im_end|> or the end of
-    a document, which are left out, or max_tokens."""
+    """The blocks of the model's next message after messages, its likeliest
+    token always taken (replies)."""
+    return replies(context, messages, 1, generator, wpt_agent.GREEDY, max_tokens)[0]
+
+
+def replies(context, messages, count, generator, sampling, max_tokens=MAX_TOKENS) -> list[list[dict]]:
+    """The blocks of count next messages of the model after messages
+    (samples, each read by chat.reply)."""
+    return [chat.reply(context.tokenizer, tokens)
+            for tokens in samples(context, messages, count, generator, sampling, max_tokens)]
+
+
+def samples(context, messages, count, generator, sampling, max_tokens=MAX_TOKENS) -> list[list[int]]:
+    """The tokens of count next messages of the model after messages,
+    drawn as sampling (wpt_agent.Sampling) says: the tokens each writes
+    after the chat template's prompt, up to <|im_end|> or the end of a
+    document, which are left out, or max_tokens. They are written in
+    batches of at most BATCH rows, one writer after another from the same
+    prompt, each going on with generator where the last one left it, so a
+    batch's memory stays the same whatever count is."""
     prompt = chat.prompt(context.tokenizer, {"messages": messages})
-    writer = context.model.writer(prompt, 1, temperature=wpt_agent.GREEDY.temperature, top_k=wpt_agent.GREEDY.top_k,
-                                  stops=(chat.IM_END, END), generator=generator)
-    written = writer.write({}, {0: max_tokens})[0]
-    if written and written[-1] in (chat.IM_END, END):
-        written = written[:-1]
-    return chat.reply(context.tokenizer, written)
+    found = []
+    for start in range(0, count, BATCH):
+        rows = min(BATCH, count - start)
+        writer = context.model.writer(prompt, rows, temperature=sampling.temperature, top_k=sampling.top_k,
+                                      stops=(chat.IM_END, END), generator=generator)
+        written = writer.write({}, {row: max_tokens for row in range(rows)})
+        for row in range(rows):
+            tokens = written[row]
+            if tokens and tokens[-1] in (chat.IM_END, END):
+                tokens = tokens[:-1]
+            found.append(tokens)
+    return found
 
 
 def block(conversation) -> dict:

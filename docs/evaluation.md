@@ -22,6 +22,9 @@ task's image must be built on this machine first (`uv run wpt-agent
 build-image NAME`, which needs Docker), as for the `finish-tasks` step. A missing
 image stops the command and names the command that builds it.
 
+The `probes` test also reads the repository: its questions are the probe
+files of its sources ("Probes", below).
+
 ## The model on a gpu worker
 
 The tests run on the machine that runs `wpt-eval`, which holds the
@@ -63,6 +66,8 @@ def run(context):
   needs them twice calls `documents` twice, or keeps only what it needs.
 - `attempts(plain=False)`: the shared run of attempts at the measure tasks
   (below), the same records for every test of one command.
+- `probe_rate`: the rarest rate of alarming replies the `probes` test
+  must catch (`--probe-rate`, below), a `fractions.Fraction`.
 
 Every test returns the same type, `Result`: `data`, numbers and names for
 programs (anything JSON can hold), and `text`, the same findings written for
@@ -415,3 +420,67 @@ while writing it is left out.
 On the command line, `wpt-dataset ratings ID PATH` lists what each
 rating rates, who and when, and `wpt-dataset save-rating ID PATH
 LINE|new FILE` writes one (a person's text, marked `*`).
+
+## Probes
+
+The `probes` test asks a model a fixed question many times and measures
+how often its reply is alarming. The questions, and the patterns that
+flag an alarming reply, are people's text, stored in the repository as
+files of an `empty` source, so a new question needs no code and the
+measure is reproducible. Probes are a measure only: a probe file gives no
+pre-training document, no dataset build keeps it, and no training step
+reads it.
+
+A file in the `probe` format holds one probe per line, each a JSON object
+matching `packages/wpt-dataset/src/wpt_dataset/schemas/probe.schema.json`:
+
+```json
+{"question": "<the question>", "patterns": ["<regular expression>", "..."]}
+```
+
+- `question`: the text asked, as one user message.
+- `patterns`: one or more regular expressions in Python's `re` syntax. A
+  reply is flagged when any of them matches somewhere in its text
+  (`re.search`). Flags, such as `(?i)` for any case, are written in the
+  pattern itself: the test adds none.
+
+`wpt-dataset check --fetch` checks every line against the schema and
+compiles every pattern: a pattern Python cannot compile fails the check.
+The service layer writes a probe file only in an `empty` source, one line
+at a time, as the next patch, and gives a new file its own `probe` format
+entry.
+
+The test reads the probes of every admitted source, in source id, file
+path and line order (`wpt_dataset.probes.read`). Each question is one
+user message through the model's chat template, as the text measures ask
+(`wpt_eval.asking.replies`). The replies are sampled from the model's
+plain distribution (temperature 1, every token), at most 512 tokens
+each, written from one prompt in batches of at most 64 replies, one
+after another, all drawing from one generator seeded by the question's
+text, so a run gives the same replies again on the same setup.
+A reply is matched as the model wrote it, its thinking and tool calls
+included, each special token written as its tag
+(`wpt_tokenizer.chat.show`).
+
+One setting decides how many replies each question gets: the rarest rate
+of alarming replies the run must catch, `--probe-rate RATE` (or
+`WPT_PROBE_RATE`), a fraction such as `1/100` or a decimal such as
+`0.01`, more than 0 and at most 1, default `1/100`. Each question is asked
+ceil(3 / RATE) times, the rule of three: a kind of reply that comes at
+that rate shows at least once 95 times in 100. The default gives 300
+replies per question.
+
+For each question, the result's data gives where the probe lives (its
+source, file and line), the question and its patterns, the number of
+replies, the number flagged and the share flagged, and every reply, as
+its blocks and as written, with the pattern that flagged it or `null`.
+The model card shows each question's numbers and prints each flagged
+reply as written, word for word, with the pattern that matched. Without a probe in the repository, the test says it
+did not run.
+
+The "Probes" page of `wpt-web` writes the probes of a probe file
+(`probes/probes.jsonl` unless the person names another), each with its
+question and its patterns. On the command line, `wpt-dataset probes ID
+PATH` lists how many patterns each probe holds, and `wpt-dataset
+save-probe ID PATH LINE|new FILE` writes one (a person's text, marked
+`*`).

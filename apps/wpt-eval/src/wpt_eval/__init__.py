@@ -1,7 +1,7 @@
 """Run tests on a trained model and record their results in its model card.
 
 Usage:
-    wpt-eval MODEL_FOLDER [EVAL ...] [--attempts N]
+    wpt-eval MODEL_FOLDER [EVAL ...] [--attempts N] [--probe-rate RATE]
 
 EVAL is the name of a built-in test (the files in wpt_eval/evals/) or the
 path of any Python file; with none, every built-in test runs. A test file
@@ -28,6 +28,11 @@ check, once per command for each value of plain; every test of the run
 reads the same records. Every attempt is also kept in the run's record
 folder, one JSON line each in attempts.jsonl, a dropped one marked so.
 
+The probes test asks each question of the repository's probe files
+ceil(3 / RATE) times (--probe-rate, WPT_PROBE_RATE, default 1/100, as a
+fraction or a decimal): RATE is the rarest rate of alarming replies the
+run must catch (context.probe_rate).
+
 Each result goes to MODEL_FOLDER/evals/<name>.json, and the model card
 (README.md) is written again to show it. A test that fails stops the run;
 results already written stay.
@@ -42,6 +47,7 @@ in the background was refused; docs/observability.md) and exits with code
 """
 
 import argparse
+import fractions
 import hashlib
 import importlib.util
 import json
@@ -70,6 +76,7 @@ from .attempts import Record
 from .remote import Remote, WorkerError
 
 BUILT_IN = Path(__file__).parent / "evals"
+PROBE_RATE = fractions.Fraction(1, 100)  # the rarest rate of alarming replies the probes test catches, by default
 
 
 class EvalError(Exception):
@@ -101,6 +108,7 @@ class Context:
     store: Store
     telemetry: Telemetry = field(default_factory=Telemetry.off)  # the run's record, for a test's own events
     attempts_per_task: int = shared.ATTEMPTS  # wpt-eval's --attempts
+    probe_rate: fractions.Fraction = PROBE_RATE  # wpt-eval's --probe-rate
     _attempts: dict = field(default_factory=dict, repr=False)  # {plain: [Record]}, played once per command
     _tasks: list | None = field(default=None, repr=False)  # the measure-only tasks, read once per command
 
@@ -209,7 +217,7 @@ def _write_documents(folder, telemetry):
         raise
 
 
-def open_context(folder, store, telemetry=None, attempts=shared.ATTEMPTS) -> Context:
+def open_context(folder, store, telemetry=None, attempts=shared.ATTEMPTS, probe_rate=PROBE_RATE) -> Context:
     """The context of the model folder, with no model yet (main puts the
     gpu worker's there). EvalError when the folder is not one wpt-train
     wrote, its drafter was trained against other weights, or its tokenizer
@@ -228,7 +236,8 @@ def open_context(folder, store, telemetry=None, attempts=shared.ATTEMPTS) -> Con
     # ValueError: a vocabulary of another tokenizer version; DrafterMismatch is one too
     except (TokenizerMismatch, DrafterMismatch, ValueError) as error:
         raise EvalError(str(error)) from None
-    return Context(folder, None, tokenizer, "", provenance, store, telemetry or Telemetry.off(), attempts)
+    return Context(folder, None, tokenizer, "", provenance, store, telemetry or Telemetry.off(), attempts,
+                   probe_rate)
 
 
 def _count(text) -> int:
@@ -241,19 +250,38 @@ def _count(text) -> int:
     return value
 
 
+def _rate(text) -> fractions.Fraction:
+    try:
+        value = fractions.Fraction(text.strip())
+    except (ValueError, ZeroDivisionError):
+        raise argparse.ArgumentTypeError(f"{text!r} is not a fraction such as 1/100 or 0.01") from None
+    if not 0 < value <= 1:
+        raise argparse.ArgumentTypeError("more than 0, at most 1")
+    return value
+
+
+def _setting(parser, name, parse, default):
+    """The default of an option: the environment's name, parsed, else default."""
+    if name not in os.environ:
+        return default
+    try:
+        return parse(os.environ[name])
+    except argparse.ArgumentTypeError as error:
+        parser.error(f"{name}={os.environ[name]!r}: {error}")
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("model", help="model folder written by wpt-train")
     parser.add_argument("evals", nargs="*", help=f"built-in test names or .py files (default: {', '.join(built_in_names())})")
-    default = shared.ATTEMPTS
-    if "WPT_ATTEMPTS" in os.environ:
-        try:
-            default = _count(os.environ["WPT_ATTEMPTS"])
-        except argparse.ArgumentTypeError as error:
-            parser.error(f"WPT_ATTEMPTS={os.environ['WPT_ATTEMPTS']!r}: {error}")
-    parser.add_argument("--attempts", type=_count, default=default,
+    parser.add_argument("--attempts", type=_count, default=_setting(parser, "WPT_ATTEMPTS", _count, shared.ATTEMPTS),
                         help=f"attempts at each measure task in the agent measures' shared run (WPT_ATTEMPTS; "
                              f"default {shared.ATTEMPTS})")
+    parser.add_argument("--probe-rate", type=_rate, default=_setting(parser, "WPT_PROBE_RATE", _rate, PROBE_RATE),
+                        metavar="RATE",
+                        help=f"the rarest rate of alarming replies the probes test must catch, as a fraction or a "
+                             f"decimal: each question is asked ceil(3 / RATE) times (WPT_PROBE_RATE; default "
+                             f"{PROBE_RATE})")
     args = parser.parse_args(argv)
     environ = {**read_env_file(Path.cwd() / ".env"), **{key: value for key, value in os.environ.items() if value}}
     try:
@@ -268,13 +296,14 @@ def main(argv=None):
     try:
         with Telemetry.start(store, "wpt-eval", sys.argv[1:] if argv is None else list(argv),
                              short(next(iter(weights.values()), "none")),
-                             inputs={"model_folder": args.model, "evals": evals, "attempts": args.attempts},
+                             inputs={"model_folder": args.model, "evals": evals, "attempts": args.attempts,
+                                     "probe_rate": str(args.probe_rate)},
                              env_file=Path.cwd() / ".env") as telemetry:
             try:
                 with telemetry.span("inputs"):
                     for eval_ in evals:
                         find(eval_)  # an unknown test stops the run before any other has run
-                    context = open_context(args.model, store, telemetry, args.attempts)
+                    context = open_context(args.model, store, telemetry, args.attempts, args.probe_rate)
                     telemetry.input(weights=weights, dataset=context.provenance.get("dataset"))
                 with telemetry.span("gpu_worker.model"), Remote(args.model, environ, telemetry.log) as model:
                     context.model, context.device = model, model.device

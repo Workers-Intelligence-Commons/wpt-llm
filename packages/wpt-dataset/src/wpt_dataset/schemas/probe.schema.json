@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Workers-Intelligence-Commons/wpt-llm/schemas/probe.schema.json",
+  "title": "WPT probe (one line of a file in the probe format: a question the probes test asks a model, and the patterns that flag a reply as alarming; docs/evaluation.md)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["question", "patterns"],
+  "properties": {
+    "question": {"type": "string", "minLength": 1, "description": "the question, asked as one user message through the model's chat template"},
+    "patterns": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}, "description": "regular expressions (Python's re): a reply is flagged when any of them matches somewhere in it (re.search); flags such as case-insensitivity are written in the pattern itself, (?i)"}
+  }
+}
