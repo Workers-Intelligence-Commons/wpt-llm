@@ -528,3 +528,53 @@ def test_a_failed_part_stops_the_parts_of_its_upload_that_have_not_started(tmp_p
         kinds.Bucket(Client(), "bucket", "", part=10).write("file", source)
     assert len(sent) == 1
     assert aborted == ["file"]
+
+
+class CutBodies:
+    """A client whose answers to get_object have a body that breaks while it is read, the first `cuts` times."""
+
+    def __init__(self, client, cuts):
+        self.client, self.cuts, self.asked = client, cuts, []
+
+    def get_object(self, **request):
+        from botocore.exceptions import ResponseStreamingError
+
+        self.asked.append(request)
+        answer = self.client.get_object(**request)
+        if len(self.asked) > self.cuts:
+            return answer
+
+        class Body:
+            def read(self):
+                raise ResponseStreamingError(error="Connection broken: IncompleteRead(3 bytes read, 5 more expected)")
+
+        return {**answer, "Body": Body()}
+
+
+@pytest.mark.parametrize("cuts, tries", [(3, 4), (5, 5)])
+def test_a_ranged_read_whose_answer_is_cut_while_read_is_asked_again_up_to_the_fixed_number_of_tries(
+        monkeypatch, cuts, tries):
+    from botocore.exceptions import ResponseStreamingError
+
+    from wpt_store import kinds
+
+    for name, value in {"AWS_ACCESS_KEY_ID": "test", "AWS_SECRET_ACCESS_KEY": "test",
+                        "AWS_DEFAULT_REGION": "us-east-1"}.items():
+        monkeypatch.setenv(name, value)
+    monkeypatch.delenv("AWS_ENDPOINT_URL", raising=False)
+    monkeypatch.delenv("AWS_PROFILE", raising=False)
+    monkeypatch.setattr(kinds, "WAIT", 0)
+    with mock_aws():
+        client = boto3.client("s3")
+        client.create_bucket(Bucket="wpt-test")
+        etag = client.put_object(Bucket="wpt-test", Key="store/file", Body=b"0123456789")["ETag"]
+        cut = CutBodies(client, cuts)
+        bucket = kinds.Bucket(cut, "wpt-test", "store")
+        assert kinds.TRIES == 5
+        if cuts < kinds.TRIES:
+            assert bucket.read("file", 2, 4) == (b"2345", etag)
+        else:
+            with pytest.raises(ResponseStreamingError):
+                bucket.read("file", 2, 4)
+        assert len(cut.asked) == tries
+        assert {request["Range"] for request in cut.asked} == {"bytes=2-5"}

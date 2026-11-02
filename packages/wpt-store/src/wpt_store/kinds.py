@@ -45,6 +45,7 @@ nothing written). Anything else is what the folder or the bucket raised
 a folder leaves no partial file under the key.
 """
 
+import http.client
 import os
 import tempfile
 import threading
@@ -60,6 +61,8 @@ PART = 64 << 20  # bytes per part of an S3 upload: a file larger than this goes 
 # parts sent to S3 at once by every upload of this process together: R2 gives each connection a few MiB/s, so the
 # link fills only with many connections at once
 UPLOADS = 32
+TRIES = 5  # times one read of an object's bytes is asked for in all, when its answer is cut while it is read
+WAIT = 1  # seconds waited after the first cut answer of a read; doubled after each one that follows
 
 
 class Absent(Exception):
@@ -304,6 +307,26 @@ class Bucket:
             self.client.abort_multipart_upload(Bucket=self.bucket, Key=self.key(key), UploadId=upload)
             raise
 
+    def _get(self, key, span):
+        """The bytes and ETag of the answer to a get of key. An answer cut
+        while its body is read (a broken or timed out connection) is asked
+        for again, the same request, TRIES times in all with a wait that
+        doubles from WAIT; the last cut raises as it is. An answer that is
+        an error is raised at once."""
+        from botocore.exceptions import ConnectionClosedError, ReadTimeoutError, ResponseStreamingError
+        from urllib3.exceptions import ProtocolError
+
+        cut = (ResponseStreamingError, ReadTimeoutError, ConnectionClosedError, ProtocolError,
+               http.client.IncompleteRead, ConnectionError, TimeoutError)
+        for attempt in range(TRIES):
+            answer = self.client.get_object(Bucket=self.bucket, Key=self.key(key), **span)
+            try:
+                return answer["Body"].read(), answer["ETag"]
+            except cut:
+                if attempt == TRIES - 1:
+                    raise
+            time.sleep(WAIT * 2 ** attempt)
+
     def read(self, key, start=0, length=None):
         from botocore.exceptions import ClientError
 
@@ -316,9 +339,8 @@ class Bucket:
                 span = {"Range": f"bytes={start}-"} if start else {}
             else:
                 span = {"Range": f"bytes={start}-{start + length - 1}"}
-            answer = self.client.get_object(Bucket=self.bucket, Key=self.key(key), **span)
-            data = answer["Body"].read()
-            return (data if length is None else data[:length]), answer["ETag"]
+            data, etag = self._get(key, span)
+            return (data if length is None else data[:length]), etag
         except ClientError as error:
             code = error.response["Error"]["Code"]
             if code in ("404", "NoSuchKey", "NotFound"):

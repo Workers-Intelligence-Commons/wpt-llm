@@ -720,7 +720,8 @@ every kind.
 Every object is compressed with zstd while it is written, in frames of
 about 1 MB compressed apart (zstd's seekable format, which plain zstd
 reads), so a byte range is read without the rest. It is kept compressed
-only when that is smaller, and as it is otherwise. Large files are
+only when that is smaller, and as it is otherwise. An S3 answer cut while
+it is read is asked again, up to 5 tries in all. Large files are
 compressed several frames at once, as `wpt_utils.parallel` allows. They
 go to S3 in parts of 64 MB, and every upload of a process sends its parts
 through one shared limit of 32 at once: S3-compatible stores such as R2
