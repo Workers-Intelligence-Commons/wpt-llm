@@ -9,6 +9,7 @@ import socket
 import stat
 import subprocess
 import sys
+import tomllib
 from pathlib import Path
 
 import pytest
@@ -296,6 +297,33 @@ def test_a_run_another_manager_runs_is_left_to_it(built, fake, tmp_path, monkeyp
     assert not fake.calls and not built.records("wpt-manager")
     assert json.loads((kept / "busy.json").read_text())["workers"] == busy.state["workers"]
     busy.release()
+
+
+def test_skypilot_writes_the_runpod_key_into_its_own_file_under_home_before_it_runs_sky(tmp_path):
+    # SkyPilot enables RunPod only when ~/.runpod/config.toml holds the key; the file is the
+    # manager's setting, replaced at each run, readable by its owner only, absent without the setting
+    bin_folder, home = tmp_path / "bin", tmp_path / "home"
+    bin_folder.mkdir()
+    (home / ".runpod").mkdir(parents=True)
+    (home / ".runpod" / "config.toml").write_text('[default]\napi_key = "old"\n')
+    (bin_folder / "sky").write_text(f"#!{sys.executable}\n")
+    (bin_folder / "sky").chmod(0o755)
+    settings = {"PATH": f"{bin_folder}{os.pathsep}{os.environ['PATH']}", "HOME": str(home)}
+    config = home / ".runpod" / "config.toml"
+
+    SkyPilot(settings, tmp_path).stop("wpt-one")
+    assert tomllib.loads(config.read_text()) == {"default": {"api_key": "old"}}  # no setting: left alone
+
+    key = 'a"b\\c-key'
+    SkyPilot({**settings, "RUNPOD_API_KEY": key}, tmp_path).stop("wpt-one")
+    assert tomllib.loads(config.read_text(encoding="utf-8")) == {"default": {"api_key": key}}
+    assert stat.S_IMODE(config.stat().st_mode) == 0o600
+    assert stat.S_IMODE(config.parent.stat().st_mode) == 0o700
+    assert [path.name for path in config.parent.iterdir()] == ["config.toml"]
+
+    fresh = tmp_path / "fresh"
+    SkyPilot({**settings, "HOME": str(fresh)}, tmp_path).stop("wpt-one")
+    assert not (fresh / ".runpod").exists()  # no setting: nothing written
 
 
 def test_skypilot_rents_several_workers_as_one_cluster_and_reads_each_node_s_addresses(tmp_path):

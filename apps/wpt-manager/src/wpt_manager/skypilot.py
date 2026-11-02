@@ -27,11 +27,16 @@ places of their own.
 SkyPilot gets its own provider keys only (environment()): never the
 store's settings or keys. It reads the clouds' keys from the environment
 names of SKY_PROVIDERS, or as it always does, from its own files under HOME.
+SkyPilot enables RunPod only when ~/.runpod/config.toml exists, so
+runpod_config() writes RunPod's key from RUNPOD_API_KEY into that file.
 """
 
+import json
+import os
 import re
 import shutil
 import subprocess
+import tempfile
 import time
 from pathlib import Path
 
@@ -63,6 +68,28 @@ def environment(settings, extra=None) -> dict:
     return {**kept, **(extra or {})}
 
 
+def runpod_config(settings) -> None:
+    """Write RunPod's key, the manager's RUNPOD_API_KEY, into SkyPilot's own
+    file, `.runpod/config.toml` under HOME, which SkyPilot reads RunPod's key
+    from and copies onto every machine it rents. The folder is readable by
+    its owner only, the file is created readable by its owner only, and an
+    existing file is replaced. Without the setting, nothing is written."""
+    key = settings.get("RUNPOD_API_KEY")
+    if not key:
+        return
+    folder = Path(settings.get("HOME") or Path.home()) / ".runpod"
+    folder.mkdir(mode=0o700, parents=True, exist_ok=True)
+    folder.chmod(0o700)
+    handle, temporary = tempfile.mkstemp(dir=folder, prefix="config.toml.")  # created with mode 0600
+    try:
+        with os.fdopen(handle, "w", encoding="utf-8", newline="\n") as out:
+            out.write(f"[default]\napi_key = {json.dumps(key)}\n")  # a JSON string is a TOML basic string
+        os.replace(temporary, folder / "config.toml")
+    except BaseException:
+        Path(temporary).unlink(missing_ok=True)
+        raise
+
+
 class SkyPilot(Provider):
     POLL = 10.0  # seconds between two looks at a rented worker that does not listen yet
     cluster = True
@@ -72,6 +99,7 @@ class SkyPilot(Provider):
         if sky is None:
             raise RentalError("sky is not installed (or not on the search path): SkyPilot rents the gpu workers "
                               "(WPT_RENTAL_PROVIDER=skypilot); the manager's image installs it")
+        runpod_config(self.settings)
         return subprocess.run([sky, *arguments], cwd=self.root, capture_output=True, text=True, encoding="utf-8",
                               errors="replace", env=environment(self.settings, extra))
 

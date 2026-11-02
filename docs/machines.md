@@ -229,6 +229,13 @@ setting: on-demand by default, interruptible (spot) when chosen. A
 provider's keys come from the environment or `.env`, as other settings
 do.
 
+RunPod's key is `RUNPOD_API_KEY`. SkyPilot reads RunPod's key only from its
+own file, `.runpod/config.toml` under the manager's `HOME`. The manager
+writes that file from `RUNPOD_API_KEY` before each `sky` command and
+replaces any file already there. The folder and the file are readable by
+their owner only. Without `RUNPOD_API_KEY`, the manager leaves the file
+alone. SkyPilot copies that file onto each machine it rents.
+
 The run's workers stay on the manager's disk (`WPT_MANAGER_STATE`, one file
 per run, readable by its owner only), never in the store: each worker's
 key, its token included, and for a rented one its provider and rental
