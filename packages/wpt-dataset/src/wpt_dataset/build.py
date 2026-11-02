@@ -108,10 +108,10 @@ from wpt_utils.parallel import Sizing, each, in_order
 from wpt_utils.programs import code
 
 from . import conversations as chat_files
-from . import download, markdown, pools, store_history, workers
+from . import download, markdown, pools, store_history, trained, workers
 from . import tasks as task_files
 from .errors import (CutFailed, DatasetError, NotDownloaded, PatchFailed, PoolError, TokenizerVersionNeeded,
-                     VocabularyMissing)
+                     TrainedListMissing, VocabularyMissing)
 from .kept import kept
 from .repo import Repo
 from .sources import copied_as_records, copy_size, fingerprint, held_manifest, held_out_group, tags_of
@@ -573,10 +573,18 @@ def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, telem
       does not hold it gives VocabularyMissing: a machine without access to
       the store that holds it cannot use it.
 
+    The lock names the documents the vocabulary was trained on by one
+    object of the store, their sorted list (wpt_dataset.trained), with its
+    sha256 and its number of lines; a store that does not hold it gives
+    TrainedListMissing.
+
     With stream, training reads each source's documents in the sources'
-    order (streamed_documents) instead of keeping them in the store; the
-    vocabulary is the same, since training counts words and its result
-    does not depend on the order of the documents.
+    order (streamed_documents) instead of keeping them in the store, and
+    keeps no list of them in memory. Training reads every document and
+    counts chunks in a table of a fixed number of slots (wpt_tokenizer):
+    while the documents have no more distinct chunks than that, the
+    vocabulary is the same whatever the order of the documents; beyond it,
+    it depends on the order.
 
     With a session (wpt_store.sessions), a `reused` line for each source
     whose upstream tree the training read (none when the vocabulary was
@@ -595,45 +603,52 @@ def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, telem
             raise VocabularyMissing(f"tokenizer {name} version {recipe['version']}: its locked vocabulary {vocabulary} "
                                     f"is not in {store}; a locked vocabulary is shared through the store that holds "
                                     f"it, never trained again")
-        key = fingerprint({"kind": "vocabulary", "code": code(), "recipe": recipe, "documents": lock["documents"]})
+        if not store.has(lock["documents_sha256"]):
+            raise TrainedListMissing(f"tokenizer {name} version {recipe['version']}: the list of the documents it "
+                                     f"was trained on, {lock['documents_sha256']}, is not in {store}; it is shared "
+                                     f"through the store that holds the vocabulary")
+        key = fingerprint({"kind": "vocabulary", "code": code(), "recipe": recipe,
+                           "documents": lock["documents_sha256"]})
         return Tokenizer.from_bytes(store.get_bytes(vocabulary)), vocabulary, key
 
     read = set()  # the sources whose upstream tree the training read
-    if stream:
-        trees = _pool_trees(repo.recipe("mixture", recipe["mixture"]))
-        trained = []
+    with trained.TrainedList() as listed:
+        if stream:
+            trees = _pool_trees(repo.recipe("mixture", recipe["mixture"]))
 
-        def selected_texts():
-            for document, text in streamed_documents(repo, store, telemetry, log, used=read):
-                if _pool_of(document, trees) is not None:
-                    trained.append([document.id, document.sha256])
-                    yield text
+            def selected_texts():
+                for document, text in streamed_documents(repo, store, telemetry, log, used=read):
+                    if _pool_of(document, trees) is not None:
+                        listed.add(document.id, document.sha256)
+                        yield text
 
-        log(f"training tokenizer {name} version {recipe['version']} on the documents its mixture selects, "
-            f"streamed from the sources (vocab_size {recipe['vocab_size']:,})")
-        tokenizer = Tokenizer.train(selected_texts(), recipe["vocab_size"])
-        if not trained:
-            raise PoolError(f"tokenizer {name}: mixture {recipe['mixture']} selects no documents")
-        trained.sort()
-        key = fingerprint({"kind": "vocabulary", "code": code(), "recipe": recipe, "documents": trained})
-        vocabulary = store.put_bytes(tokenizer.to_bytes())
-    else:
-        mixture = repo.recipe("mixture", recipe["mixture"])
-        documents, info, _ = gather(repo, store, log, telemetry=telemetry)
-        read |= set(info)
-        selected = sorted((d for pool in assign(documents, mixture).values() for d in pool), key=lambda d: d.id)
-        if not selected:
-            raise PoolError(f"tokenizer {name}: mixture {recipe['mixture']} selects no documents")
-        trained = [[d.id, d.sha256] for d in selected]
-        key = fingerprint({"kind": "vocabulary", "code": code(), "recipe": recipe, "documents": trained})
-        vocabulary = store.get_ref("vocabularies", key)
-        if vocabulary is not None and store.has(vocabulary):
-            tokenizer = Tokenizer.from_bytes(store.get_bytes(vocabulary))
-        else:
-            log(f"training tokenizer {name} version {recipe['version']} on {len(trained):,} documents "
-                f"(vocab_size {recipe['vocab_size']:,})")
-            tokenizer = Tokenizer.train((store.get_bytes(sha256) for _, sha256 in trained), recipe["vocab_size"])
+            log(f"training tokenizer {name} version {recipe['version']} on the documents its mixture selects, "
+                f"streamed from the sources (vocab_size {recipe['vocab_size']:,})")
+            tokenizer = Tokenizer.train(selected_texts(), recipe["vocab_size"])
+            if not listed.count:
+                raise PoolError(f"tokenizer {name}: mixture {recipe['mixture']} selects no documents")
+            documents_sha256, document_count = listed.put(store)
+            key = fingerprint({"kind": "vocabulary", "code": code(), "recipe": recipe, "documents": documents_sha256})
             vocabulary = store.put_bytes(tokenizer.to_bytes())
+        else:
+            mixture = repo.recipe("mixture", recipe["mixture"])
+            documents, info, _ = gather(repo, store, log, telemetry=telemetry)
+            read |= set(info)
+            selected = sorted((d for pool in assign(documents, mixture).values() for d in pool), key=lambda d: d.id)
+            if not selected:
+                raise PoolError(f"tokenizer {name}: mixture {recipe['mixture']} selects no documents")
+            for d in selected:
+                listed.add(d.id, d.sha256)
+            documents_sha256, document_count = listed.put(store)
+            key = fingerprint({"kind": "vocabulary", "code": code(), "recipe": recipe, "documents": documents_sha256})
+            vocabulary = store.get_ref("vocabularies", key)
+            if vocabulary is not None and store.has(vocabulary):
+                tokenizer = Tokenizer.from_bytes(store.get_bytes(vocabulary))
+            else:
+                log(f"training tokenizer {name} version {recipe['version']} on {document_count:,} documents "
+                    f"(vocab_size {recipe['vocab_size']:,})")
+                tokenizer = Tokenizer.train((store.get_bytes(d.sha256) for d in selected), recipe["vocab_size"])
+                vocabulary = store.put_bytes(tokenizer.to_bytes())
     set_ref(store, "vocabularies", key, vocabulary, telemetry)
 
     if session is not None:
@@ -641,7 +656,8 @@ def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, telem
             download.used(repo.source(sid), store, session)
     # recorded, and in the store, before the lock changes: a record that cannot be written leaves it as it was
     telemetry.irreversible("tokenizer.lock", path=repo.relative("lock", name), vocabulary=vocabulary)
-    written = repo.write_generated("lock", name, {"recipe": recipe, "documents": trained,
+    written = repo.write_generated("lock", name, {"recipe": recipe, "documents_sha256": documents_sha256,
+                                                  "document_count": document_count,
                                                   "vocabulary_sha256": vocabulary})
     log(f"wrote {written}: commit it so every machine uses this vocabulary, and keep the store that holds it")
     return tokenizer, vocabulary, key

@@ -26,8 +26,10 @@ import itertools
 import re
 from typing import Callable, NamedTuple
 
+from wpt_store import StoreError
 from wpt_store.listing import listing
 
+from . import trained
 from .errors import DatasetError, OutdatedSchema
 from .repo import Repo
 
@@ -76,6 +78,10 @@ class Where:
     def revision(self) -> str | None:
         return self._revisions.of(self._name)
 
+    def store(self):
+        """The store a step may write to (Revisions.store)."""
+        return self._revisions.store()
+
 
 COMMIT = re.compile(r"[0-9a-f]{40}")  # the full commit id a git source's `revision` holds
 
@@ -98,6 +104,17 @@ class Revisions:
         self._repo, self._open_store = repo, open_store
         self.committed: dict[str, str] | None = None  # source id -> commit, from the repository's history
         self.downloaded: dict[str, str] = {}  # source id -> commit, from the store, for the others
+
+    def store(self):
+        """The store open_store() gives; OutdatedSchema when there is none to ask or it cannot be opened."""
+        if self._open_store is None:
+            raise OutdatedSchema("this step needs the store that holds the data; run `wpt-dataset migrate`, which "
+                                 "opens the store WPT_STORE names")
+        try:
+            return self._open_store()
+        except StoreError as error:
+            raise OutdatedSchema(f"this step needs the store that holds the data, and it cannot be opened: {error}") \
+                from None
 
     def of(self, sid: str) -> str | None:
         if self.committed is None:
@@ -434,9 +451,20 @@ def _lock_without_documents(document, _where):
                          "so it cannot be converted: delete it and build again")
 
 
+def _lock_documents_listed(document, where):
+    """The lock's list of documents becomes one object of the store the step is given (the one WPT_STORE names),
+    named in the lock by its sha256 and counted."""
+    store = where.store()
+    documents_sha256, count = trained.put_pairs(store, document["documents"])
+    return {**{key: value for key, value in document.items() if key != "documents"},
+            "documents_sha256": documents_sha256, "document_count": count}
+
+
 STEPS["lock"] += [
-    Step("no list of the documents its vocabulary was trained on", lambda d: "documents" not in d,
-         _lock_without_documents),
+    Step("no list of the documents its vocabulary was trained on",
+         lambda d: "documents" not in d and "documents_sha256" not in d, _lock_without_documents),
+    Step("the documents its vocabulary was trained on listed in the lock", lambda d: "documents" in d,
+         _lock_documents_listed),
     Step("the tokenizer code's version", lambda d: "wpt_tokenizer" in d,
          lambda d, _where: {key: value for key, value in d.items() if key != "wpt_tokenizer"}),
 ]

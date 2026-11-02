@@ -153,6 +153,29 @@ def test_migrate_drops_the_shape_number_of_every_kind_of_file(kit, repo, store, 
     assert not any("schema" in json.loads(path.read_text()) for path in paths) and repo.check() == []
 
 
+def test_migrating_a_lock_puts_the_list_of_its_documents_in_the_store(kit, repo, store):
+    # a lock that carried the trained documents now names their list, an object of the store
+    documents = [["b/two.txt", "2" * 64], ["a/one.txt", "1" * 64], ["a-b/three.txt", "3" * 64]]
+    mixture = kit.write_recipe(repo, "mixture", "main", {"pools": [{"name": "a", "select": "a", "weight": 1}]})
+    recipe = {"version": 1, "mixture": "main", "vocab_size": 600}
+    kit.write_recipe(repo, "tokenizer", "main", recipe)
+    path = mixture.parent.parent / "tokenizers" / "main.lock.json"
+    vocabulary = store.put_bytes(b"a vocabulary")
+    path.write_text(dump_json({"recipe": recipe, "documents": documents, "vocabulary_sha256": vocabulary}))
+
+    with pytest.raises(MigrationIncomplete, match="needs the store"):  # nothing to put the list in
+        migrate(repo, log=lambda _: None)
+    assert "documents" in json.loads(path.read_text())
+
+    assert migrate(repo, log=lambda _: None, open_store=lambda: store) == [path.relative_to(repo.root).as_posix()]
+    lock = json.loads(path.read_text())
+    assert lock == {"recipe": recipe, "documents_sha256": lock["documents_sha256"], "document_count": 3,
+                    "vocabulary_sha256": vocabulary}
+    assert store.get_bytes(lock["documents_sha256"]) == ('["a-b/three.txt", "' + "3" * 64 + '"]\n["a/one.txt", "'
+                                                         + "1" * 64 + '"]\n["b/two.txt", "' + "2" * 64 + '"]\n').encode()
+    assert migrate(repo, log=lambda _: None) == []
+
+
 def test_migrating_a_source_renames_the_old_training_step_tags(kit, repo, store, git_upstream):
     # docs/training.md, "Steps": a tag that picks a step's examples is the
     # step's name; sft, grpo and token-efficiency become the names of the
@@ -458,7 +481,8 @@ def test_migrating_a_lock_drops_the_tokenizer_code_s_version(kit, repo):
     kit.write_recipe(repo, "mixture", "m", {"pools": [{"name": "a", "select": "a", "weight": 1}]})
     kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})
     lock = repo.root / "data" / "recipes" / "tokenizers" / "t.lock.json"
-    current = {"recipe": {"version": 1}, "documents": [["a", "2" * 64]], "vocabulary_sha256": "1" * 64}
+    current = {"recipe": {"version": 1}, "documents_sha256": "2" * 64, "document_count": 1,
+               "vocabulary_sha256": "1" * 64}
     lock.write_text(dump_json({**current, "wpt_tokenizer": "0.1.0"}))
     assert outdated(json.loads(lock.read_text()), "lock") == ["the tokenizer code's version"]
     assert migrate(repo, log=lambda _: None) == [lock.relative_to(repo.root).as_posix()]

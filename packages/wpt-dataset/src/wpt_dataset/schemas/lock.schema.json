@@ -4,15 +4,15 @@
   "title": "WPT tokenizer lock (data/recipes/tokenizers/<name>.lock.json), written by the build: the frozen vocabulary of one recipe version",
   "type": "object",
   "additionalProperties": false,
-  "required": ["recipe", "documents", "vocabulary_sha256"],
+  "required": ["recipe", "documents_sha256", "document_count", "vocabulary_sha256"],
   "properties": {
     "recipe": {"type": "object", "description": "the tokenizer recipe as it was when the vocabulary was trained, version included"},
-    "documents": {
-      "type": "array",
-      "minItems": 1,
-      "description": "[document id, sha256 of its Markdown] for every document it was trained on, in training order",
-      "items": {"type": "array", "prefixItems": [{"type": "string", "minLength": 1}, {"type": "string", "pattern": "^[0-9a-f]{64}$"}], "items": false, "minItems": 2}
+    "documents_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "the sha256 of the object, in the store that holds the vocabulary, that lists every document it was trained on: one line `<document id><TAB><sha256 of its Markdown>` each, sorted by the line's bytes"
     },
+    "document_count": {"type": "integer", "minimum": 1, "description": "the number of lines of that list"},
     "vocabulary_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "note": {"type": "string"}
   }

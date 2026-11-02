@@ -16,6 +16,23 @@ hot loops in Rust (PyO3, built by maturin when the workspace is installed).
   about a million, then it starts again empty), so threads encoding at
   once never wait for each other, and the tokens never depend on the cache.
   A thread's cache goes when the thread ends.
+- Training reads every document, but counts the chunks in a table of a
+  fixed number of slots (Space-Saving: Metwally, Agrawal and El Abbadi,
+  2005), so the memory does not grow with the corpus. A chunk already in
+  the table has its count raised; a new chunk takes a free slot with count 1;
+  when the table is full, the slot with the smallest count is evicted and
+  the new chunk takes it with the evicted count plus 1, recording the evicted
+  count as its error. A chunk's true count is then between its count less
+  its error and its count, and every chunk more frequent than the smallest
+  count is in the table. Equal counts are told apart by the chunk's bytes,
+  so the same documents in the same order always give the same table and
+  the same vocabulary. The merges are learned from the table's chunks and
+  counts. While the documents have no more distinct chunks than the slots,
+  no chunk is evicted, every count is exact and the order of the documents
+  does not matter. The number of slots (50,000,000) is fixed in the
+  tokenizer's code, never measured from the machine, so a vocabulary never
+  depends on the machine that trained it; it keeps reading and learning
+  together within about 25 GB.
 
 ## Vocabularies
 
@@ -32,9 +49,13 @@ tokenizer recipe, shared by every dataset and model that uses it.
 
 The first build of a recipe version trains the vocabulary on the documents
 its mixture selects (each once), and writes
-`data/recipes/tokenizers/<name>.lock.json`: the recipe, every document it
-was trained on (`[id, sha256 of its Markdown]`) and the vocabulary's sha256. Commit it. From then on, every build of that
-version uses that vocabulary:
+`data/recipes/tokenizers/<name>.lock.json`: the recipe, the vocabulary's
+sha256, and the list of the documents it was trained on, named by its sha256
+(`documents_sha256`) and its number of lines (`document_count`). The list is
+one object of the store: a line per document, the JSON array
+`["<id>", "<sha256 of its Markdown>"]`, sorted by the line's bytes, written while the documents are read
+and sorted on disk, so it is never held in memory whole. Commit the lock.
+From then on, every build of that version uses that vocabulary:
 
 - **Adding or changing sources never retrains it.** Many datasets and
   models, whatever their training settings, share one vocabulary, so a
@@ -55,7 +76,8 @@ version uses that vocabulary:
   or another: every build reads it from the store, checked against the
   sha256 the lock keeps. A store that does not hold it stops the build
   (`VocabularyMissing`), so a machine without access to the store that
-  holds it cannot use it.
+  holds it cannot use it. The list of the trained documents is shared the
+  same way: a store without it stops the build (`TrainedListMissing`).
 - **Erasure does not reach a locked vocabulary** until `version` is raised:
   merges learned from text that was erased later stay in it (see
   [erasure.md](erasure.md)).

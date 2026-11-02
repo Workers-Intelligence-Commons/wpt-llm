@@ -156,6 +156,12 @@ class VocabularyMissing(DatasetError):
     store, or raise the recipe's `version` to train a new one."""
 
 
+class TrainedListMissing(DatasetError):
+    """The list of the documents a locked vocabulary was trained on is not in
+    the store: the lock names it by its sha256, and it is shared through the
+    store that holds it, as the vocabulary is."""
+
+
 class DocumentListMissing(DatasetError):
     """Reading pointer tasks for the measures needs the model's dataset's
     document list, and that dataset predates document lists (or no dataset

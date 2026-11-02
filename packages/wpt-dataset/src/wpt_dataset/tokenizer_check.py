@@ -11,6 +11,7 @@ shows when raising the recipe's version would help.
 
 from dataclasses import dataclass
 
+from . import trained as trained_documents
 from .build import build_tokenizer, gather
 from .errors import RoundTripFailed
 from .repo import Repo
@@ -33,7 +34,8 @@ def check_tokenizer(repo: Repo, name: str, store, log=print) -> list[SourceRepor
     """One report per admitted source, in source order. Raises RoundTripFailed
     on the first document that does not decode back to its bytes."""
     tokenizer, _, _ = build_tokenizer(repo, name, store, log)
-    trained = {doc_id.split("/", 1)[0] for doc_id, _ in repo.generated("lock", name)["documents"]}
+    lock = repo.generated("lock", name)
+    trained = {doc_id.split("/", 1)[0] for doc_id, _ in trained_documents.read(store, lock["documents_sha256"])}
     documents, _, _ = gather(repo, store, log)
     reports = {}
     for document in documents:

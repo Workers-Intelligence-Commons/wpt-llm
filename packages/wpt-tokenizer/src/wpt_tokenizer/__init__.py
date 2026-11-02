@@ -19,7 +19,7 @@ import json
 from collections.abc import Iterable
 from pathlib import Path
 
-from ._native import END, FIRST_MERGE, RUSTC_VERSION, VERSION, Codec, Trainer  # RUSTC_VERSION: the compiler that built _native
+from ._native import END, FIRST_MERGE, RUSTC_VERSION, SLOTS, VERSION, Codec, Trainer  # RUSTC_VERSION: the compiler that built _native
 
 __version__ = VERSION
 FORMAT = "wpt-bpe"
@@ -39,15 +39,20 @@ class Tokenizer:
         self._codec = Codec(self.merges)
 
     @classmethod
-    def train(cls, documents: Iterable[bytes], vocab_size: int) -> "Tokenizer":
+    def train(cls, documents: Iterable[bytes], vocab_size: int, slots: int = SLOTS) -> "Tokenizer":
         """Learn up to vocab_size - 513 merges from the documents.
 
         Fewer merges are learned when no pair of tokens occurs twice anymore.
+        Every document is read, but at most `slots` distinct chunks are
+        counted at once (the Trainer's table): a corpus with more distinct
+        chunks than that has the counts of its rarer chunks approximate, and
+        the vocabulary then depends on the order of the documents. The default
+        is a fixed number, so a vocabulary never depends on the machine.
         """
         if vocab_size < BASE_SIZE:
             raise ValueError(f"vocab_size must be at least {BASE_SIZE} (256 bytes, END and 256 reserved ids), "
                              f"got {vocab_size}")
-        trainer = Trainer()
+        trainer = Trainer(slots)
         for document in documents:
             trainer.add(document)
         return cls(trainer.train(vocab_size - BASE_SIZE))

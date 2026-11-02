@@ -9,7 +9,7 @@ import pytest
 from wpt_dataset import build, conversations, license_check, markdown, sources, tasks, workers
 from wpt_dataset.build import build_dataset, document_list, is_held_out
 from wpt_dataset.cli import main
-from wpt_dataset.errors import SourceGone, PoolError, TokenizerVersionNeeded, VocabularyMissing
+from wpt_dataset.errors import PoolError, SourceGone, TokenizerVersionNeeded, TrainedListMissing, VocabularyMissing
 from wpt_dataset.repo import DATA_FOLDER
 from wpt_dataset.sources import stored_files, upstream_key
 from wpt_store import CorruptObject, open_store
@@ -55,16 +55,24 @@ def setup_recipes(kit, repo, store, corpus, total_tokens, held_out=0.0):
     return sid
 
 
+def listed_documents(store, dataset_id) -> bytes:
+    """The list of trained documents the lock must name when every document of the dataset trained the
+    vocabulary: one JSON `[id, sha256]` line each, sorted, built from the dataset's own document list."""
+    return b"".join(sorted((json.dumps([d["id"], d["sha256"]], ensure_ascii=False) + "\n").encode()
+                          for d in document_list(store, dataset_id)))
+
+
 def fresh_store(kit, repo, folder, sid, shared=None):
     """A new store (another machine) with the source downloaded into it,
-    and the locked vocabularies of shared copied into it: a locked
-    vocabulary reaches another machine through the store, never by
-    training again."""
+    and the locked vocabularies of shared, with the lists of their documents,
+    copied into it: a locked vocabulary reaches another machine through the
+    store, never by training again."""
     fresh = open_store(folder.as_uri())
     kit.download(repo, fresh, sid)
     for name in repo.names("lock") if shared is not None else ():
-        locked = repo.generated("lock", name)["vocabulary_sha256"]
-        fresh.put_bytes(shared.get_bytes(locked))
+        lock = repo.generated("lock", name)
+        for locked in (lock["vocabulary_sha256"], lock["documents_sha256"]):
+            fresh.put_bytes(shared.get_bytes(locked))
     return fresh
 
 
@@ -199,7 +207,9 @@ def test_the_locked_vocabulary_stays_until_its_version_is_raised(kit, repo, stor
     first = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))
     lock_path = (repo.root / "data" / "recipes" / "tokenizers" / "main.lock.json")
     lock = json.loads(lock_path.read_text())
-    assert lock["vocabulary_sha256"] == first["tokenizer"]["vocabulary"] and len(lock["documents"]) == 10
+    assert lock["vocabulary_sha256"] == first["tokenizer"]["vocabulary"] and lock["document_count"] == 10
+    assert "documents" not in lock
+    assert store.get_bytes(lock["documents_sha256"]) == listed_documents(store, first["id"])
     assert first["tokenizer"]["recipe_version"] == 1
 
     folder, commit = kit.git_project(tmp_path / "more", files={"en/new.txt": b"zebras graze quietly. " * 30},
@@ -217,6 +227,9 @@ def test_the_locked_vocabulary_stays_until_its_version_is_raised(kit, repo, stor
     with pytest.raises(VocabularyMissing, match=lock["vocabulary_sha256"]):
         build_dataset(repo, "small", fresh, log=lambda _: None)
     assert fresh.put_bytes(store.get_bytes(lock["vocabulary_sha256"])) == lock["vocabulary_sha256"]
+    with pytest.raises(TrainedListMissing, match=lock["documents_sha256"]):  # the list of its documents is shared too
+        build_dataset(repo, "small", fresh, log=lambda _: None)
+    assert fresh.put_bytes(store.get_bytes(lock["documents_sha256"])) == lock["documents_sha256"]
     assert record_of(fresh, build_dataset(repo, "small", fresh, log=lambda _: None))["tokenizer"]["vocabulary"] \
         == lock["vocabulary_sha256"]
 
@@ -232,7 +245,7 @@ def test_the_locked_vocabulary_stays_until_its_version_is_raised(kit, repo, stor
     third = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))
     new_lock = json.loads(lock_path.read_text())
     assert third["tokenizer"]["recipe_version"] == 2 and third["tokenizer"]["vocabulary"] == new_lock["vocabulary_sha256"]
-    assert new_lock["vocabulary_sha256"] != lock["vocabulary_sha256"] and len(new_lock["documents"]) == 11
+    assert new_lock["vocabulary_sha256"] != lock["vocabulary_sha256"] and new_lock["document_count"] == 11
 
 
 def test_a_change_of_the_tokenizer_code_asks_for_no_version_and_leaves_the_lock_as_it_is(kit, repo, store, corpus,
@@ -243,7 +256,7 @@ def test_a_change_of_the_tokenizer_code_asks_for_no_version_and_leaves_the_lock_
     first = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))
     lock_path = repo.root / "data" / "recipes" / "tokenizers" / "main.lock.json"
     locked = lock_path.read_bytes()
-    assert set(json.loads(locked)) == {"recipe", "documents", "vocabulary_sha256"}
+    assert set(json.loads(locked)) == {"recipe", "documents_sha256", "document_count", "vocabulary_sha256"}
     assert "version" not in first["tokenizer"] and "recipe_version" in first["tokenizer"]
 
     monkeypatch.setattr(build, "code", lambda: "another tokenizer code")
@@ -278,6 +291,12 @@ def test_a_streamed_build_gives_the_same_dataset_and_keeps_no_markdown(kit, repo
     kit.write_recipe(repo, "mixture", "main", {"pools": [{"name": "all", "select": "fr || en", "weight": 1}]})
     streamed_store = fresh_store(kit, repo, tmp_path / "streamed", sid)
     streamed_id = build_dataset(repo, "small", streamed_store, log=lambda _: None, stream=True)  # trains the vocabulary
+    lock_path = repo.root / "data" / "recipes" / "tokenizers" / "main.lock.json"
+    lock = json.loads(lock_path.read_text())
+    assert lock["document_count"] == 10 and "documents" not in lock
+    assert streamed_store.get_bytes(lock["documents_sha256"]) == listed_documents(streamed_store, streamed_id)
+    assert build_dataset(repo, "small", streamed_store, log=lambda _: None, stream=True) == streamed_id
+    assert json.loads(lock_path.read_text()) == lock  # a later build reuses the lock
     normal_store = fresh_store(kit, repo, tmp_path / "normal", sid, shared=streamed_store)
     normal_id = build_dataset(repo, "small", normal_store, log=lambda _: None)  # with the vocabulary it locked
 
@@ -603,7 +622,9 @@ def test_a_source_left_out_gives_the_same_dataset_on_any_machine_and_never_moves
     held = record_of(whole, build_dataset(repo, "small", whole, log=lambda _: None))  # locks the vocabulary
     assert held["conversations"]["sources"] == [talks]
     other = fresh_store(kit, repo, tmp_path / "other", sid, shared=whole)  # given the vocabulary the first build locked
-    store.put_bytes(whole.get_bytes(held["tokenizer"]["vocabulary"]))  # and so is this machine
+    lock = repo.generated("lock", "main")
+    for locked in (lock["vocabulary_sha256"], lock["documents_sha256"]):
+        store.put_bytes(whole.get_bytes(locked))  # and so is this machine
 
     here = build_dataset(repo, "small", store, log=lambda _: None)
     assert build_dataset(repo, "small", other, log=lambda _: None) == here
