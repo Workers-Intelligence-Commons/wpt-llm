@@ -672,15 +672,16 @@ def _training_part(recipe) -> dict:
 
 def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TOKENS, stream=False,
                   skip_failed=False, telemetry=None, session=None) -> str:
-    """Build (or find) the dataset of a model recipe's data part and return
-    its id; with stream, keeping no document's Markdown and no source's
+    """Build (or find) the dataset of a model recipe's data part (name: a
+    model recipe's, or SERIES:SIZE, Repo.model_recipe) and return its id; with stream, keeping no document's Markdown and no source's
     files on this machine; leaving out the sources not in the store, and
     with skip_failed every source that fails (see the module's docstring).
     With a session (wpt_store.sessions), a `reused` line for each source
     whose upstream tree the dataset holds. Only the data part counts:
-    recipes with the same data share one dataset."""
+    recipes with the same data share one dataset, as every size of a
+    series does."""
     telemetry = telemetry or Telemetry.off()
-    recipe = repo.recipe("model", name)["data"]
+    recipe = repo.model_recipe(name)["data"]
     mixture = repo.recipe("mixture", recipe["mixture"])
     telemetry.event("dataset.recipe", recipe_name=name, recipe=recipe, mixture=mixture)
     with telemetry.span("tokenizer", recipe=recipe["tokenizer"], stream=stream) as span:

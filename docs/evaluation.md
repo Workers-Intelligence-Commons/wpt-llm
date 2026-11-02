@@ -7,6 +7,7 @@ model card.
 uv run wpt-eval runs/default                      # every built-in test
 uv run wpt-eval runs/default memorization         # one built-in test
 uv run wpt-eval runs/default path/to/my_test.py   # any Python file
+uv run wpt-eval runs/default held-out-loss --kind-by origin   # held-out loss by kind of text
 ```
 
 It reads the model folder that `wpt-train` wrote, and the dataset the model
@@ -25,13 +26,17 @@ image stops the command and names the command that builds it.
 The `probes` test also reads the repository: its questions are the probe
 files of its sources ("Probes", below).
 
+`wpt-scaling` fits the scaling curve of several trained models and
+predicts the loss of a model before it trains ("Scaling curve", below).
+
 ## The model on a gpu worker
 
 The tests run on the machine that runs `wpt-eval`, which holds the
 tokenizer, the store and the sandboxes. The model runs on a gpu worker
 (the first key of `WPT_GPU_WORKERS`, else a local worker), which the
 command sends the checkout and the folder's weight files; what a test asks
-of the model goes through the link, as token ids
+of the model goes through the link, as token ids, and the losses come back
+as numbers
 ([machines.md](machines.md), "Evaluation").
 
 ## Writing a test
@@ -51,8 +56,10 @@ def run(context):
 
 - `model`: the model, which runs on a gpu worker (below): `model.config`,
   `model.generator(seed)`, `model.writer(prompt, rows, temperature=...,
-  top_k=..., stops=...)` and `model.greedy(prompts, steps)`, all in token
-  ids; it holds no tensors on this machine;
+  top_k=..., stops=...)`, `model.greedy(prompts, steps)` and
+  `model.losses(windows)`, the next-token loss in nats of each token of each
+  window after its first, read with only the window's earlier tokens before
+  it; all in token ids, and it holds no tensors on this machine;
 - `device`: where the model runs, in words;
 - `tokenizer`, `folder`, and `provenance` (the folder's
   `provenance.json`);
@@ -68,6 +75,8 @@ def run(context):
   (below), the same records for every test of one command.
 - `probe_rate`: the rarest rate of alarming replies the `probes` test
   must catch (`--probe-rate`, below), a `fractions.Fraction`.
+- `kind_by`: the field the `held-out-loss` test groups the held-out text
+  by (`--kind-by`, below), or `None`.
 
 Every test returns the same type, `Result`: `data`, numbers and names for
 programs (anything JSON can hold), and `text`, the same findings written for
@@ -95,6 +104,95 @@ memorization. Exact reproductions of training documents well above the
 baseline mean the model outputs pieces of its sources. The result lists
 exact reproductions by source, so the sources whose attribution matters most
 are visible.
+
+## Held-out loss
+
+`held-out-loss`: the model's next-token loss on every held-out token, in
+nats per token, over the whole held-out part and by kind of text. Every
+size of a model series shares one held-out part
+([model.md](model.md), "Model series"), so the losses of its sizes are
+measured on the same text.
+
+- The held-out documents are read as one stream, each once, in shard
+  order, each after the end-of-document token that ends the document
+  before it, and the first after one end-of-document token.
+- The stream is cut into windows of the model's `block_size` plus 1
+  tokens, each window starting at the last token of the window before.
+  Every token of every document is predicted exactly once, with the
+  earlier tokens of its window before it.
+- The gpu worker reads each window through the model's generation cache,
+  4,096 tokens at a time, so the scores it holds at once are those of
+  4,096 tokens, whatever the window's length.
+- Each token's loss goes to its document. The result gives the loss, the
+  tokens and the documents of the whole held-out part and of each source.
+
+`--kind-by FIELD` (or `WPT_KIND_BY`) also groups the documents by one field
+of their sources (`wpt_eval/kinds.py`), `tag` unless it names another, and
+gives each kind's loss: the mean
+over the tokens of its documents. A document of several kinds counts in
+each, and a document the field gives no value is in the kind `(none)`.
+
+- `origin`: the source's origin, the part of its id before the first `-`
+  ([architecture.md](architecture.md), "The id").
+- `tag`: the document's tags, as its source's tag entries give them in the
+  repository, with the commits of a repository's history read as
+  `code-versus-other` reads them (`wpt_dataset.tasks.document_tags`).
+- `format`: the formats of the source's format entries that cover the
+  document's file, in the repository.
+
+The setting's default is `tag`, so an evaluation that sets nothing (the
+one `WPT_EVALUATE=1` makes in `wpt-manager`'s run included) groups by tag.
+
+## Scaling curve
+
+`wpt-scaling` fits loss against training compute over several trained
+models, and predicts the loss of a model recipe before it trains:
+
+```sh
+uv run wpt-scaling run-256x5 run-384x8 runs/512x10 --predict eldest-titmouse:640x13
+```
+
+Each model is a model folder, or the name of a run whose model folder the
+store keeps (`models/NAME`). Nothing is written. Each model's
+`provenance.json` and `evals/held-out-loss.json` give one point:
+
+- Compute: C = M x D. M, the training compute per token, is the one a
+  series' plan counts ([model.md](model.md), "Model series"): 6 times the
+  parameters one token uses plus the attention term, at the window length
+  of the recipe's last text-window stage. D is the tokens its text-window steps trained on: for each
+  stage, the updates done, times the windows of an update, times the
+  window length. A step that continues the one before it
+  ([training.md](training.md), "Continued steps") reports its updates from
+  1, so it counts only the updates it adds to that step's.
+- Loss: the overall loss of its `held-out-loss` evaluation (above): the
+  loss per token over the full held-out text its provenance names.
+
+A model without that evaluation is named in the output and left out of the
+fit. `WPT_EVALUATE=1` in `wpt-manager`'s run, or `wpt-eval FOLDER
+held-out-loss`, makes the evaluation. A fit needs 2 models that have it.
+
+Every model in the fit must hold out the same text: models whose held-out
+shards differ are refused, since their losses are not comparable.
+
+The fit is least squares on the losses. With 2 or 3 points, it is a
+power law, L = a x C^-b, the form of the compute scaling law of Kaplan et
+al. With 4 points or more, it adds an irreducible loss E, at least 0:
+L = a x C^-b + E, the power law plus a constant of Henighan et al., whose
+loss is the sum of an irreducible loss and a power law in compute. The
+constant takes a third number, so it waits for a fourth point to leave the
+fit something to check. With 2 points, the curve passes through both, and
+the command says nothing checks it. DeepSeek LLM predicts its larger
+models' loss from such a power law fitted to small models.
+
+`--predict RECIPE`, a model recipe's name or `SERIES:SIZE`, gives the loss
+the fit predicts at the compute that recipe plans: the same count, from
+its stages with every update done. It may repeat.
+
+Sources:
+
+- [Scaling Laws for Neural Language Models (Kaplan et al.)](https://arxiv.org/abs/2001.08361)
+- [Scaling Laws for Autoregressive Generative Modeling (Henighan et al.)](https://arxiv.org/abs/2010.14701)
+- [DeepSeek LLM: scaling laws](https://arxiv.org/abs/2401.02954)
 
 ## The shared run of attempts
 

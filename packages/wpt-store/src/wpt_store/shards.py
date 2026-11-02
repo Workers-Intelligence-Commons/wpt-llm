@@ -164,16 +164,20 @@ class ShardStream:
     store, its local copy. Which shards are in use depends only on
     `consumed`, so a resumed run and any number of processes use the same
     ones. Each shard's rows are checked against its token hash when its
-    token file is built (see token_file)."""
+    token file is built (see token_file). With a limit, the tokens are the
+    first `limit` of the shards (a prefix, as prefix_shards cuts it): the
+    walk starts again after them."""
 
-    def __init__(self, store, shards, window: int):
+    def __init__(self, store, shards, window: int, limit: int | None = None):
         if not shards:
             raise ValueError("no shards to stream")
-        self.store, self.shards = store, shards
-        self.window = max(1, min(window, len(shards)))
+        self.store, self.shards = store, prefix_shards(shards, limit)
+        self.window = max(1, min(window, len(self.shards)))
         self.ends = []
-        for shard in shards:
+        for shard in self.shards:
             self.ends.append((self.ends[-1] if self.ends else 0) + shard["tokens"])
+        if limit is not None:
+            self.ends[-1] = min(self.ends[-1], limit)
         self._open = {}
         self._ahead = None
         self._pool = concurrent.futures.ThreadPoolExecutor(1)
@@ -198,7 +202,9 @@ class ShardStream:
                     path, self._ahead = self._ahead[1].result(), None
                 else:
                     path = self._prepare(index)
-                self._open[index] = np.memmap(path, dtype="<u4", mode="r")
+                array = np.memmap(path, dtype="<u4", mode="r")
+                start = self.ends[index - 1] if index else 0
+                self._open[index] = array[:self.ends[index] - start]  # the last shard of a prefix, cut at its end
         upcoming = (first + self.window) % len(self.shards)
         if upcoming not in wanted and (self._ahead is None or self._ahead[0] != upcoming):
             if self._ahead is not None:
@@ -260,6 +266,20 @@ class Joined:
             pieces.append(np.asarray(self.parts[i][start - base:end - base]))
             start = end
         return np.concatenate(pieces) if pieces else np.zeros(0, dtype="<u4")
+
+
+def prefix_shards(shards, limit: int | None) -> list:
+    """The shards that hold the first `limit` tokens of these shards'
+    tokens, in order (every shard when limit is None)."""
+    if limit is None:
+        return list(shards)
+    found, total = [], 0
+    for shard in shards:
+        if total >= limit:
+            break
+        found.append(shard)
+        total += shard["tokens"]
+    return found
 
 
 def sources_of(store, shards) -> set[str]:

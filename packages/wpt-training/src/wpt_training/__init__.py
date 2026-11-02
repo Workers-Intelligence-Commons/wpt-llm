@@ -36,12 +36,12 @@ processes, and a resumed step continues exactly where it stopped.
 """
 
 from .plugins import (SENT, Context, Data, Environment, Method, Optimizer, PluginError, Run, Stage, Step, StepFailed,
-                      Strategy, TextMethod, Verdict, WINDOWS, built_in, in_process, load_step, load_strategy, step_seed,
-                      strategy_plugin)
+                      Strategy, TextMethod, Verdict, WINDOWS, built_in, check_continuations, draw_numbers, in_process,
+                      load_step, load_strategy, step_seed, strategy_plugin)
 from .runner import Checkpoint, FolderCheckpoint, Interrupted, Options, SettingsMismatch, Trained, train, weights
 from .states import load_state, save_state
 
 __all__ = ["SENT", "Checkpoint", "Context", "Data", "Environment", "FolderCheckpoint", "Interrupted", "Method", "Optimizer", "Options",
            "PluginError", "Run", "SettingsMismatch", "Stage", "Step", "StepFailed", "Strategy", "TextMethod",
-           "Trained", "Verdict", "WINDOWS", "built_in", "in_process", "load_state", "load_step", "load_strategy",
+           "Trained", "Verdict", "WINDOWS", "built_in", "check_continuations", "draw_numbers", "in_process", "load_state", "load_step", "load_strategy",
            "save_state", "step_seed", "strategy_plugin", "train", "weights"]

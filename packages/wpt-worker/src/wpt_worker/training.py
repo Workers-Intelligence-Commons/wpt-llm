@@ -20,6 +20,9 @@ them, or the first process alone otherwise:
        manager called through data.call (env.call), its checkpoint written
        on this machine and, as WPT_LINK_CHECKPOINTS says, sent to the
        manager (LinkCheckpoint); then step.done, which keeps its result.
+       A step that continues the one before it (Step.continues) starts
+       from that step's whole last state, its own when it trained here,
+       else the reused one the plan names, and draws as that step does.
        The first start of a job removes the checkpoint folders earlier
        runs' jobs left on this machine (after a stop or a crash), which no
        later run reads
@@ -74,7 +77,8 @@ from wpt_store import StoreError
 from wpt_store.shards import documents
 from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry
 from wpt_training import (SENT, WINDOWS, Checkpoint, Data, FolderCheckpoint, Interrupted, Options, PluginError,
-                          SettingsMismatch, StepFailed, load_state, load_step, load_strategy, save_state, train, weights)
+                          SettingsMismatch, StepFailed, draw_numbers, load_state, load_step, load_strategy, save_state,
+                          train, weights)
 from wpt_training.launch import REFUSED, STOPPED, launch
 from wpt_utils.device import describe
 
@@ -305,6 +309,7 @@ def _train(spec, link, store, work, strategy, telemetry):
         steps = [load_step(entry, PARTS) for entry in spec["steps"]]
     except PluginError as error:
         raise Refused(f"PluginError: {error}") from None
+    draws = draw_numbers(steps)
     other = next((step for step in steps if step.reads != WINDOWS), None)
     if strategy.splits_windows and other is not None:
         raise Refused(f"InputError: --strategy split splits text windows only, and the step {other.name} reads "
@@ -335,11 +340,17 @@ def _train(spec, link, store, work, strategy, telemetry):
 
     record = spec["record"]
     marks, reused = plan["marks"], plan["reused"]
+    # the whole last state of a step the next one continues (Step.continues), kept until that step starts
+    continued = FolderCheckpoint(work / "continued")
+    if strategy.is_main:
+        continued.remove()
     if reused:
         state = None
         if strategy.is_main:
             state = load_state(download(link, plan["state"], work / "reused.safetensors"),
                                only=("model", "best_model"))
+            if reused < len(steps) and steps[reused].continues:
+                continued.save_file(work / "reused.safetensors")
             (work / "reused.safetensors").unlink()
         model.load_state_dict(strategy.broadcast(weights(state) if strategy.is_main else None))
         del state
@@ -353,17 +364,18 @@ def _train(spec, link, store, work, strategy, telemetry):
     for number, (step, mark) in enumerate(zip(steps, marks), 1):
         if number <= reused:
             continue
-        data = Data(step.name, store, record, model_config, strategy, telemetry, log, seed, number, **data_options,
-                    call=environment_call(link, number), writing=writing)
+        data = Data(step.name, store, record, model_config, strategy, telemetry, log, seed, draws[number - 1],
+                    **data_options, call=environment_call(link, number), writing=writing)
         try:
             with telemetry.span("step", step=step.name, number=number, fingerprint=mark) as span:
                 method = step.start_method()
                 environment = step.start_environment(data)
                 try:
-                    trained = train(model, strategy, step, method, environment, seed, number,
+                    trained = train(model, strategy, step, method, environment, seed, draws[number - 1],
                                     Options(options["checkpoint_every"], options["segment"]), checkpoint=checkpoint,
                                     resume=resume, identity=mark, done=marks[:number - 1], log=log,
-                                    telemetry=telemetry, save_last=True)  # its result is kept from the checkpoint
+                                    telemetry=telemetry, save_last=True,  # its result is kept from the checkpoint
+                                    start=continued if step.continues else None)
                     sources = environment.sources if strategy.is_main else {}
                 finally:
                     environment.close()
@@ -381,6 +393,9 @@ def _train(spec, link, store, work, strategy, telemetry):
             about = {"number": number, "reached": _reached(trained), "sources": dict(sorted(sources.items()))}
             sent_state = None if checkpoint.every else upload(link, local.path)
             call(link, "step.done", json.dumps(about).encode(), state=sent_state)
+            continued.remove()
+            if number < len(steps) and steps[number].continues:  # the next step goes on from this state
+                continued.save_file(local.path)
             local.remove()  # the manager keeps the step's result
         strategy.barrier()
         resume = False  # the step that stopped, when one did, is done

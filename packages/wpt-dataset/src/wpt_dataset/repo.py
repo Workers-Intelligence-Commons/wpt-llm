@@ -7,6 +7,7 @@ Every file under data/ is opened here and nowhere else
     data/recipes/mixtures/<name>.json
     data/recipes/tokenizers/<name>.json   + <name>.lock.json (written by `wpt-dataset build-tokenizer`)
     data/recipes/models/<name>.json       data, architecture and training steps of one model
+    data/recipes/series/<name>.json       a model series: the rules its sizes share and the sizes
     data/images/<name>/Dockerfile         a container image of agentic tasks (and any file it copies)
                       + lock.json, licenses.json (written by `wpt-agent lock-image`)
                       + tools.json, the shared pool of tools its programs answer (optional)
@@ -87,6 +88,7 @@ import jsonschema
 from wpt_utils.files import lock_file, unlock_file
 from wpt_utils.programs import program
 
+from . import series
 from .errors import DataAccessRefused, InvalidFile, NotFound, OutdatedSchema, RuleViolation, StaleFile
 from .licenses import check_license
 from .license_check import Coverage, check_pattern, field_of, pattern_for, text_id
@@ -142,6 +144,8 @@ KINDS = {kind.name: kind for kind in (
     Kind("mixture", "json", "a mixture recipe: pools and their weights", "mixture"),
     Kind("tokenizer", "json", "a tokenizer recipe", "tokenizer"),
     Kind("model", "json", "a model recipe: data, architecture and training steps", "model"),
+    Kind("series", "json", "a model series: the rules its sizes share and the list of sizes, each size a model",
+         "series"),
     Kind("lock", "json", "a tokenizer recipe's lock: the vocabulary it froze", "lock", "wpt-dataset build-tokenizer"),
     Kind("dockerfile", "text", "the Dockerfile of a container image of agentic tasks"),
     Kind("image-lock", "json", "an image's lock: its base, archive date and packages", "image-lock",
@@ -154,7 +158,9 @@ KINDS = {kind.name: kind for kind in (
     Kind("license-text", "json", "a license text's decision, kind and license, "
          "data/license-texts/<id>/license-text.json (<id>: the sha256 of its normalized text)", "license-text"),
 )}
-RECIPE_FOLDERS = {"mixture": "mixtures", "tokenizer": "tokenizers", "model": "models"}
+RECIPE_FOLDERS = {"mixture": "mixtures", "tokenizer": "tokenizers", "model": "models", "series": "series"}
+SIZE_OF = ":"  # SERIES:SIZE[:RUN] names one size of a series (or another run of it) wherever a model recipe's
+#                name goes (Repo.model_recipe)
 IMAGE_FILES = {"dockerfile": "Dockerfile", "image-lock": "lock.json", "image-licenses": "licenses.json",
                "image-tools": "tools.json"}
 
@@ -843,6 +849,43 @@ class Repo:
             check_mixture(document, path)
         return document
 
+    def model_recipe(self, given: str) -> dict:
+        """The model recipe a name gives: NAME, the file of
+        data/recipes/models/; SERIES:SIZE, that size of the series file
+        data/recipes/series/SERIES.json, derived from it (series.py);
+        SERIES:SIZE:RUN, another run of that size (a decay branch, a
+        learning rate of the check: series.runs). A RuleViolation when
+        there is no such recipe, series, size or run."""
+        name, separated, rest = given.partition(SIZE_OF)
+        if not separated:
+            return self.recipe("model", given)
+        size, _, run = rest.partition(SIZE_OF)
+        document = self.recipe("series", name)
+        if size not in series.sizes(document):
+            raise RuleViolation(f"no size {size!r} in the series {name}; its sizes are "
+                                f"{', '.join(series.sizes(document))}")
+        try:
+            return series.run_recipe(document, series.plan(document, size, self.vocab_size(document)), run)
+        except ValueError as error:
+            raise RuleViolation(f"series {name}: {error}") from None
+
+    def series_plans(self, name: str) -> list[series.Plan]:
+        """Every size's numbers in the series file of that name (series.Plan)."""
+        document = self.recipe("series", name)
+        return series.plans(document, self.vocab_size(document))
+
+    def series_total_tokens(self, name: str) -> int:
+        """The training tokens of the one dataset of the series file of that name (series.data_part)."""
+        return series.data_part(self.recipe("series", name))["total_tokens"]
+
+    def series_runs(self, name: str, found: series.Plan) -> list[dict]:
+        """What each other run of a size of the series file of that name does (series.run_numbers)."""
+        return series.run_numbers(self.recipe("series", name), found)
+
+    def vocab_size(self, recipe: dict) -> int:
+        """The vocabulary size the tokenizer recipe of a model recipe's or a series' data part asks for."""
+        return self.recipe("tokenizer", recipe["data"]["tokenizer"])["vocab_size"]
+
     def recipe_names(self, kind: str) -> list[str]:
         return self.names(kind)
 
@@ -1070,9 +1113,14 @@ class Repo:
             document = self.recipe(kind, name)
         if kind == "tokenizer":
             self.recipe("mixture", document["mixture"])
-        if kind == "model":
+        if kind in ("model", "series"):
             self.recipe("mixture", document["data"]["mixture"])
             self.recipe("tokenizer", document["data"]["tokenizer"])
+        if kind == "series":
+            try:
+                series.check(document)
+            except ValueError as error:
+                raise RuleViolation(f"{self.relative(kind, name)}: {error}") from None
 
     def _check_signers(self, kind, text):
         """allowed-signers: every line that is not blank or a # comment names

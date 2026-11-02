@@ -39,8 +39,9 @@
     wpt-dataset tokenizer-check NAME      encode and decode every admitted document with that
                                           vocabulary: exact round trip, characters per token
     wpt-dataset build NAME [--stream] [--skip-failed]
-                                          build (or find) the data of a model recipe; prints the
-                                          dataset id
+                                          build (or find) the data of a model recipe (NAME, or
+                                          SERIES:SIZE for a size of a series: every size of a
+                                          series has the same data); prints the dataset id
     wpt-dataset migrate                   rewrite data files to the current shapes
 
 Reading and writing the data files, through the service layer (wpt_dataset.repo;
@@ -51,6 +52,10 @@ is refused when the file changed since VERSION, the version `show` (or `files`,
     wpt-dataset kinds                     the kinds of data files, and who writes each
     wpt-dataset list KIND                 the names of the files of a kind
     wpt-dataset show KIND NAME            print a file (its version and problems on stderr)
+    wpt-dataset series NAME               the sizes a series file derives: each one's shape,
+                                          parameters, compute, tokens and training settings,
+                                          and its other runs (SERIES:SIZE:RUN: decay branches,
+                                          the learning-rate check)
     wpt-dataset save KIND NAME FILE --version VERSION
                                           write a file from FILE ('-': standard input)
     wpt-dataset status                    git's status of every changed file under data/
@@ -375,6 +380,26 @@ def cmd_show(args, repo):
     return 0
 
 
+def cmd_series(args, repo):
+    plans = repo.series_plans(args.name)
+    print(f"series {args.name}: one dataset of {repo.series_total_tokens(args.name):,} training tokens; "
+          f"wpt-train {args.name}:SIZE reads its first prefix tokens")
+    for plan in plans:
+        model = plan.model
+        print(f"{plan.size}: width {model['d_model']}, {model['n_layer']} layers, global "
+              f"{'/'.join(model['global_attention'])}, Engram at {', '.join(map(str, model['engram_layers']))}; "
+              f"{plan.parameters:,} parameters without the vocabulary tables, {plan.total_parameters:,} with them; "
+              f"M {plan.flops_per_token:.4g} FLOPs per token, C {plan.compute:.4g}, D {plan.tokens:.4g} tokens; "
+              f"learning rate {plan.learning_rate:g}, batch {plan.batch_size} windows of {plan.block_size:,} "
+              f"(the law: {plan.batch_tokens:,.0f} tokens), {plan.updates:,} updates, warm-up {plan.warmup:,}, "
+              f"prefix {plan.prefix_tokens:,} tokens")
+        for run in repo.series_runs(args.name, plan):
+            print(f"  {args.name}:{plan.size}:{run['run']}: {run['updates']:,} updates"
+                  + (f", decaying after update {run['start']:,} of the trunk" if run["start"] is not None else "")
+                  + f", learning rate {run['learning_rate']:g}")
+    return 0
+
+
 def cmd_save(args, repo):
     data = _input(args.file)
     json_kind = args.kind in KINDS and KINDS[args.kind].form == "json"  # save names an unknown kind itself
@@ -666,6 +691,7 @@ def _data_commands(commands):
     command("kinds", cmd_kinds)
     command("list", cmd_list, "kind")
     command("show", cmd_show, "kind", "name")
+    command("series", cmd_series, "name")
     writes(command("save", cmd_save, "kind", "name", "file"), patch=False)
     command("status", cmd_status)
     new = command("new-source", cmd_new_source, "origin")

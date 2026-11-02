@@ -9,7 +9,9 @@ Usage:
 Settings, from the environment, else from the .env file at the
 repository's root (an empty value counts as unset):
 
-    WPT_RECIPE        the model recipe, a file name in data/recipes/models/ without .json;
+    WPT_RECIPE        the model recipe, a file name in data/recipes/models/ without .json, or
+                      SERIES:SIZE, a size of a series file of data/recipes/series/, or
+                      SERIES:SIZE:RUN, another run of that size;
                       required: the manager refuses to start without it
     WPT_RUN           the run's name (letters, digits, '.', '_', '-'); unset, the manager goes on
                       with the run RUN_FILE names (at the repository's root, git-ignored) when
@@ -233,10 +235,12 @@ def _main(argv) -> int:
     recipe = environ.get("WPT_RECIPE", "")
     if not recipe:
         print("WPT_RECIPE is not set: name the model recipe to train (a file name in data/recipes/models/, without "
-              ".json), in the environment or in .env", file=sys.stderr)
+              ".json, or SERIES:SIZE[:RUN], a size of a series of data/recipes/series/ or another run of it), in the "
+              "environment or in .env",
+              file=sys.stderr)
         return leave(REFUSED)
     try:
-        Repo(root).recipe("model", recipe)  # refused now, not after the download
+        Repo(root).model_recipe(recipe)  # refused now, not after the download
     except DatasetError as error:
         print(f"{type(error).__name__}: {error}", file=sys.stderr)
         return leave(REFUSED)

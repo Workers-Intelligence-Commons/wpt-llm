@@ -79,7 +79,9 @@
           },
           "settings": {"$ref": "#/$defs/settings", "description": "the step's settings (those of its method and environment among them); those left out keep the step's defaults"},
           "locked": {"type": "array", "items": {"type": "string"}, "uniqueItems": true,
-                     "description": "the parts of the model the step leaves unchanged, by the names docs/model.md, \"Parts\", gives (an unknown name is refused); left out, the step's own"}
+                     "description": "the parts of the model the step leaves unchanged, by the names docs/model.md, \"Parts\", gives (an unknown name is refused); left out, the step's own"},
+          "continues": {"type": "boolean",
+                        "description": "true: the step goes on from the whole state the step before it left (its weights, the optimizer's, method's and environment's state, its count of updates) and draws as it does, as one step stopped and resumed; it has the same step, method, environment, optimizer and locked parts, and more updates (docs/training.md, \"Continued steps\"); left out, false: it starts from the weights alone"}
         }
       }
     },

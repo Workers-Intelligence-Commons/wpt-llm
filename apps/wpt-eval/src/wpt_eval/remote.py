@@ -11,6 +11,8 @@ tests, which hold the tokenizer, the store and the sandboxes, run here.
                                                 a writer, as wpt_inference.Writer writes
         model.greedy(prompts, steps)            the tokens written greedily after each of prompts,
                                                 token lists of one length
+        model.losses(windows)                   the next-token loss of each token of each window
+                                                after its first (wpt_worker.evaluation.losses)
 
 wpt_worker.evaluation.Served has the same names for a model in this
 process. The worker's job (wpt_worker.evaluation) runs on its own thread
@@ -24,6 +26,8 @@ import tempfile
 import threading
 from dataclasses import asdict
 from pathlib import Path
+
+import numpy as np
 
 from wpt_dataset.repo import Repo
 from wpt_model import ModelConfig, weight_files
@@ -107,6 +111,17 @@ class Remote:
         header, _ = self.worker.call(self.channel, "model.greedy", prompts=[list(row) for row in prompts],
                                      steps=steps)
         return header["tokens"]
+
+    def losses(self, windows) -> list[np.ndarray]:
+        lengths = [len(window) for window in windows]
+        body = np.concatenate([np.asarray(window, dtype="<u4") for window in windows]).tobytes() if windows else b""
+        _, found = self.worker.call(self.channel, "model.losses", body, lengths=lengths)
+        values, start, parts = np.frombuffer(found, dtype="<f4"), 0, []
+        for length in lengths:
+            count = max(length - 1, 0)
+            parts.append(values[start:start + count].astype(np.float32))
+            start += count
+        return parts
 
     def _serve(self, spec):
         """The job's requests, answered until it ends."""

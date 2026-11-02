@@ -9,6 +9,7 @@ dependencies = ["wpt-tokenizer", "wpt-store", "wpt-telemetry", "wpt-model", "wpt
 
 [project.scripts]
 wpt-eval = "wpt_eval:main"
+wpt-scaling = "wpt_eval.scaling:main"
 
 [build-system]
 requires = ["uv_build>=0.13.0,<0.14.0"]

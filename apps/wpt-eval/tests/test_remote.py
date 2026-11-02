@@ -7,6 +7,7 @@ import os
 import subprocess
 import sys
 
+import numpy as np
 import pytest
 
 from wpt_eval import main
@@ -33,6 +34,9 @@ def test_the_model_on_a_gpu_worker_writes_what_the_same_model_in_this_process_wr
     with Remote(trained.folder, dict(os.environ)) as remote:
         assert remote.config == local.config and remote.device == local.device
         assert remote.greedy(PROMPTS, 6) == local.greedy(PROMPTS, 6)
+        windows = [[END, *range(5, 30)], [END, 7]]  # the held-out-loss test's windows cross the link as token ids
+        for far, near in zip(remote.losses(windows), local.losses(windows)):
+            np.testing.assert_allclose(far, near, rtol=1e-6)
         settings = {"temperature": 0.8, "top_k": 40, "stops": [END]}
         far = remote.writer(PROMPTS[0], 2, generator=remote.generator(7), **settings)
         near = local.writer(PROMPTS[0], 2, generator=local.generator(7), **settings)

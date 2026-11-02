@@ -244,8 +244,8 @@ rules.
 Globs: `*` matches within one folder, `**` across any number of folders.
 
 The schema is `packages/wpt-dataset/src/wpt_dataset/schemas/source.schema.json`.
-Mixture, model recipe, tokenizer recipe, lock and license text files have
-schemas there too.
+Mixture, model recipe, model series, tokenizer recipe, lock and license
+text files have schemas there too.
 
 ### The manifest
 
@@ -987,7 +987,7 @@ tree. Nothing is committed by `wpt-web`, so every change shows in
 | `wpt-utils` | helpers several packages share, one submodule each: `wpt_utils.device` picks the best GPU, else the CPU; `wpt_utils.programs` starts the outside programs WPT runs (`program(name)`, with a clear error when one is missing), identifies the code a fingerprint holds (`code()`: the checkout's commit and a hash of its uncommitted changes, the one place that reads the commit; `code_outside(folder)`: a sha256 of the checkout without one top-level folder, which, given `data/`, a result computed from one source's own inputs alone holds) and gives that commit, and whether there are changes, in the shape the records name them (`repository()`), without importing PyTorch; `wpt_utils.files.sha256_file` is the one way a file is hashed, by the store, the model folders and the run records alike; `wpt_utils.files.lock_file` is the lock the operating system holds on a file for one process, which the service layer and a local store's database share; `wpt_utils.settings.typed` types the settings of a training step and of its method, environment and optimizer from the defaults each file declares; `wpt_utils.parallel` is the one rule that sizes parallel work (at most 75% of the cores; before each new item it measures again and starts it only while a quarter of the memory, of the cores and, where the items write to a disk, of the free disk stays free, one item's memory being what running items are measured taking, never a given figure; it never stops a running item) and runs items that way with their results in the items' order, an error an item may fail with becoming that item's result |
 | `wpt-agent` | the agent harness of agentic training: the tools (the four built-in ones, `ask`, and those a task or its image's pool declares, answered by programs in the image) and each attempt's choice of them, one Docker container per attempt, the images of `data/images/` and their locks, the agent loop and the task's check, and the playing of a task's attempts (`wpt_agent.play`), which the `agent-tasks` environment of the `finish-tasks` and `finish-tasks-with-less-writing` steps and the agent measures of `wpt-eval` share, so `wpt-eval` does not depend on `wpt-train`; commands `wpt-agent lock-image` and `wpt-agent build-image` |
 | `wpt-worker` | the gpu worker, which runs the GPU work of a training on its machine, the link to it from the wpt manager's side, and the gradients exchanged between gpu workers in different places ([machines.md](machines.md)) |
-| `wpt-train`, `wpt-eval`, `wpt-chat`, `wpt-manager` | the applications; `wpt-manager` runs download, build, training and the optional evaluation as one command, and rents its gpu workers through providers when asked ([machines.md](machines.md)) |
+| `wpt-train`, `wpt-eval`, `wpt-chat`, `wpt-manager` | the applications; `wpt-eval` also holds `wpt-scaling`, the scaling curve of several trained models ([evaluation.md](evaluation.md), "Scaling curve"); `wpt-manager` runs download, build, training and the optional evaluation as one command, and rents its gpu workers through providers when asked ([machines.md](machines.md)) |
 
 ## Checks
 

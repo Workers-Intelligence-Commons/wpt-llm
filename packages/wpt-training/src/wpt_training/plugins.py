@@ -278,7 +278,9 @@ class Optimizer:
     def stage(self, number: int, block_size: int):
         """Called when a stage after the first starts (number from 1): the
         windows are now block_size tokens long, and the evaluations that
-        follow are not comparable with earlier ones."""
+        follow are not comparable with earlier ones. Called too when a step
+        that continues the one before it starts, with the stage it starts
+        in: the evaluations before it are not its own."""
 
     def evaluated(self, step: int, val_loss: float) -> Verdict:
         return Verdict(best=True, stop=False)
@@ -502,7 +504,11 @@ class Step:
     """A recipe's step, every file read and every setting typed: its file
     and name, its method, environment and optimizer (Plugins), its settings
     (all of them, then those of its method and of its environment), its
-    optimizer's settings, and the parts it locks."""
+    optimizer's settings, and the parts it locks. continues: the step goes
+    on from the whole state the step before it left (its weights, the
+    optimizer's, method's and environment's state, and its count of
+    updates), as one step that stopped and was resumed, instead of from its
+    weights alone (check_continuations, draw_numbers)."""
     name: str
     plugin: Plugin
     method: Plugin
@@ -513,6 +519,7 @@ class Step:
     environment_settings: dict
     optimizer_settings: dict
     locked: tuple = field(default_factory=tuple)
+    continues: bool = False
 
     @property
     def reads(self) -> str:
@@ -525,7 +532,7 @@ class Step:
         return {"step": self.plugin.record(), "method": self.method.record(),
                 "environment": self.environment.record(), "reads": self.reads,
                 "optimizer": {**self.optimizer.record(), "settings": self.optimizer_settings},
-                "settings": self.settings, "locked": list(self.locked)}
+                "settings": self.settings, "locked": list(self.locked), "continues": self.continues}
 
     def context(self) -> int | None:
         """The window length the step leaves the model reading at, from its
@@ -620,6 +627,51 @@ def load_step(entry: dict, parts) -> Step:
     unknown = [name for name in locked if name not in parts]
     if unknown:
         raise PluginError(f"{plugin.file}: no part of the model is named {unknown[0]!r} (parts: {', '.join(parts)})")
+    continues = entry.get("continues", False)
+    if type(continues) is not bool:
+        raise PluginError(f"{plugin.file}: continues {continues!r}: true or false")
     return Step(plugin.name, plugin, method, environment, optimizer, settings,
                 {key: settings[key] for key in method_defaults}, {key: settings[key] for key in environment_defaults},
-                optimizer_settings, locked)
+                optimizer_settings, locked, continues)
+
+
+def _updates(step: Step) -> int | None:
+    """The updates of a step whose settings list its stages (text windows), else None."""
+    stages = step.environment_settings.get("stages")
+    return sum(stage["steps"] for stage in stages) if isinstance(stages, list) else None
+
+
+def check_continuations(steps: list[Step]):
+    """ValueError for a step that continues the one before it (Step.continues)
+    and cannot: it is the first, or its step, method, environment, optimizer
+    or locked parts are not those of the step before it (the state it goes
+    on from is theirs), or, both listing stages, it has no update left
+    after the updates of the step before it."""
+    for number, step in enumerate(steps, 1):
+        if not step.continues:
+            continue
+        if number == 1:
+            raise ValueError(f"step 1 {step.name} continues the step before it, and there is none")
+        before = steps[number - 2]
+        mine = (step.plugin.record(), step.method.record(), step.environment.record(), step.optimizer.record(),
+                step.locked)
+        theirs = (before.plugin.record(), before.method.record(), before.environment.record(),
+                  before.optimizer.record(), before.locked)
+        if mine != theirs:
+            raise ValueError(f"step {number} {step.name} continues step {number - 1} {before.name}: it must have the "
+                             "same step, method, environment, optimizer and locked parts")
+        found, left = _updates(before), _updates(step)
+        if found is not None and left is not None and left <= found:
+            raise ValueError(f"step {number} {step.name} continues step {number - 1}, which makes {found:,} updates: "
+                             f"it must have more than that, and it has {left:,}")
+
+
+def draw_numbers(steps: list[Step]) -> list[int]:
+    """The number each step's draws read with the seed (Data.number, the
+    runner's dropout): its own place in the list from 1, or for a step that
+    continues the one before it, that one's, so a step and its continuations
+    draw as one step."""
+    found = []
+    for number, step in enumerate(steps, 1):
+        found.append(found[-1] if step.continues and found else number)
+    return found

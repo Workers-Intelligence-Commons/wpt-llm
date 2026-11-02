@@ -1,0 +1,104 @@
+{
+  "data": {
+    "mixture": "admitted",
+    "tokenizer": "admitted",
+    "held_out": 0.001
+  },
+  "reference": {
+    "n_layer": 10,
+    "d_model": 512,
+    "kda_heads": 4,
+    "kda_head_dim": 128,
+    "attention_heads": 8,
+    "attention_head_dim": 128,
+    "query_rank": 128,
+    "output_groups": 2,
+    "output_rank": 256,
+    "index_heads": 8,
+    "index_head_dim": 128,
+    "index_top_k": 64,
+    "n_experts": 32,
+    "top_k": 4,
+    "expert_width": 256,
+    "latent_width": 256,
+    "shared_width": 512,
+    "engram_layers": [
+      2
+    ],
+    "engram_order": 3,
+    "engram_heads": 8,
+    "engram_dim": 16,
+    "engram_table_size": 50021
+  },
+  "global_attention": [
+    "CSA",
+    "HCA"
+  ],
+  "block_size": 32768,
+  "laws": {
+    "learning_rate": {
+      "coefficient": 0.3118,
+      "exponent": -0.125
+    },
+    "batch_tokens": {
+      "coefficient": 0.292,
+      "exponent": 0.3271
+    },
+    "model_flops": {
+      "coefficient": 0.1715,
+      "exponent": 0.5243
+    },
+    "tokens": {
+      "coefficient": 5.8316,
+      "exponent": 0.4757
+    }
+  },
+  "warmup_share": 0.04,
+  "seed": 1337,
+  "sizes": [
+    {
+      "name": "256x5",
+      "d_model": 256
+    },
+    {
+      "name": "384x8",
+      "d_model": 384
+    },
+    {
+      "name": "512x10",
+      "d_model": 512
+    },
+    {
+      "name": "640x13",
+      "d_model": 640
+    },
+    {
+      "name": "768x15",
+      "d_model": 768
+    }
+  ],
+  "drafter": {
+    "prompts": 256,
+    "prompt_tokens": 64,
+    "answer_tokens": 256,
+    "epochs": 10,
+    "learning_rate": 0.0006,
+    "held_out": 0.1,
+    "anchors": 512,
+    "batch": 8,
+    "seed": 0
+  },
+  "branches": [
+    0.25,
+    0.5,
+    1
+  ],
+  "learning_rate_check": [
+    0.25,
+    0.5,
+    1,
+    2,
+    4
+  ],
+  "note": "A ladder of five sizes for a clean scaling test: interstitial-pecker's shape (width 512, 10 layers) scaled in width by multiples of 128, the layers kept at its 51.2 of width per layer, every size on the admitted mixture's 32,768-token vocabulary and 32K-token windows. One dataset, built for the largest size, serves all five: each reads its start. Untested in a full run."
+}

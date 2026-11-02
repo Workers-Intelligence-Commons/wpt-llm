@@ -13,8 +13,9 @@ session, which would otherwise end it and lose its output:
 `scripts/detach.sh uv run wpt-train ...` on Linux and macOS. Both write its
 output to `runs/logs/<date-time>.log` and print how to follow and stop it.
 
-`wpt-train` takes a model recipe (`data/recipes/models/<name>.json`, see
-[model.md](model.md)) and the id of the dataset built from it, and never
+`wpt-train` takes a model recipe (`data/recipes/models/<name>.json`,
+`SERIES:SIZE`, a size of a model series, or `SERIES:SIZE:RUN`, another run
+of that size; see [model.md](model.md), "Model recipes") and the id of the dataset built from it, and never
 builds: build and training fail separately. A dataset built from another
 data part than the recipe's is refused. Everything that changes the
 resulting model comes from the recipe: the architecture's numbers, the
@@ -56,7 +57,8 @@ A recipe's `steps` list says what is done to the model, in order, on one
 model: each step starts from the weights the one before it left. The recipe
 has one `seed`; each step mixes its number in the list into it, so two
 identical steps in one recipe draw different windows, conversations and
-tasks.
+tasks. A step that continues the one before it draws as that step does
+("Continued steps").
 
 ```json
 "seed": 1337,
@@ -88,8 +90,8 @@ environment for each update's batch, lets the method learn from it,
 updates, evaluates, writes checkpoints, and stops on a signal.
 
 An entry is `{"step": NAME}` with, optionally, `optimizer` (`{"name",
-"settings"}`), `settings` and `locked`; each part left out takes the step
-file's own. `NAME` is a built-in step or the path of a Python file. The
+"settings"}`), `settings`, `locked` and `continues` ("Continued steps");
+each part left out takes the step file's own, and `continues` is false. `NAME` is a built-in step or the path of a Python file. The
 settings are the defaults of the step's method and environment, then the
 step file's, then the entry's, each of its default's type (an integer
 where a number is expected is taken, text is converted;
@@ -162,7 +164,7 @@ first steps with an earlier run reuses them, and a run that failed after
 some steps continues from the first step not kept. The main process reads
 the result and sends its weights to every process. Reuse means the same
 inputs, not the same bits ("What is exactly repeatable", below). Each step
-starts its own optimizer. `provenance.json` says, for each step, its
+starts its own optimizer, except a step that continues the one before it. `provenance.json` says, for each step, its
 fingerprint, its result and whether this run reused it.
 
 A step that cannot do its part, such as one whose loss is not finite or
@@ -173,6 +175,27 @@ the step wrote before it failed stays, and the message names it: the
 same command with `--resume` continues the step from it, and deleting it
 starts the step over (a run with other settings for that step needs it
 deleted, "Checkpoints and resuming", below).
+
+### Continued steps
+
+A step with `continues: true` goes on from the whole state the step before
+it left, as one step that stopped and was resumed: its weights, the
+optimizer's, method's and environment's state, and its count of updates.
+Its first update is the one after the last update of the step before it,
+and its schedules (the learning rate, the weight of multi-token
+prediction) count its own updates in all. Its draws read the number of the
+step it continues, so the two draw the same windows as one step would.
+When the step before it is reused, it goes on from that step's kept
+state.
+
+It has the same step, method, environment, optimizer and locked parts as
+the step before it, and, both listing stages, more updates; a recipe that
+breaks this is refused before any step runs. It forgets the best
+evaluation of the steps before it, as a new stage does: it keeps the
+weights of its own best evaluation. Its fingerprint chains to the step
+before it as every step's does, so two recipes that share a step's whole
+chain share its kept result. The decay branches of a model series are
+built this way ([model.md](model.md), "Model series").
 
 ### Methods
 
@@ -304,7 +327,8 @@ The `read-text` step reads the dataset's text: next-token prediction
 (`next-token`) on windows of the training shards (`text-windows`), the
 windows growing stage by stage, under `by-part` on its multi-step
 schedule, without early stop. Its settings are `stages`,
-`eval_every` (200) and `eval_batches` (20), with the method's. Each update
+`eval_every` (200), `eval_batches` (20) and `prefix_tokens` (0, "Prefix"
+below), with the method's. Each update
 draws its windows at random places of the training tokens, seeded by the
 seed, the step's number in the recipe and the update only: a second
 `read-text` step draws other windows than the first. Dropout reads the
@@ -317,6 +341,20 @@ token hashes and their tokens written once into one file per part, in the
 store's `scratch/` folder (`<store folder>/scratch/` for a local store,
 the cache for S3). A later run reuses that file when it still matches the
 sha256 recorded when it was written. `scratch/` can be deleted at any time.
+
+### Prefix
+
+`prefix_tokens`, when above 0, makes the step's training tokens the first
+`prefix_tokens` of the dataset's, in the shards' order, and nothing after
+them. Only the shards that hold them are copied (or streamed), the windows
+are drawn from them alone, and the step learned from the sources of those
+shards. With `--stream`, the walk over the shards starts again after the
+prefix. The held-out shards stay whole. A dataset with fewer training
+tokens than the prefix is refused before any step runs. The build already
+put the rows in a pseudo-random order, so a prefix holds every kind of
+text in about the dataset's proportions. Each size of a model series reads
+its prefix of the series' one dataset (model.md, "Model series"), and the
+setting is part of the step's fingerprint.
 
 ### Streaming: a dataset larger than the disk
 

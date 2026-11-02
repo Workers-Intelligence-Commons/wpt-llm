@@ -1,8 +1,11 @@
 """The documents pages: every kind of data file other than a source's own
 files (recipes, Dockerfiles, the signer lists, and the generated locks and
 license lists, which are only read here), and the JSON schema of each JSON
-kind, which the recipe editors are built from. As `wpt-dataset kinds`,
-`list`, `show` and `save`, through the service layer."""
+kind, which the recipe editors are built from, and the sizes a series
+file derives. As `wpt-dataset kinds`, `list`, `show`, `save` and `series`,
+through the service layer."""
+
+from dataclasses import asdict
 
 from wpt_dataset.repo import KINDS, schema_of
 
@@ -42,6 +45,11 @@ def routes(context):
     def kind_schema(values, body):
         return 200, schema_of(values["kind"])
 
+    @refusals
+    def series_sizes(values, body):
+        name = values["name"]
+        return 200, [{**asdict(plan), "runs": repo.series_runs(name, plan)} for plan in repo.series_plans(name)]
+
     return [
         Route("GET", "/api/kinds", kinds, "every kind of data file, who writes it, and the names that exist",
               answer={"type": "array", "items": {"type": "object"}}),
@@ -55,6 +63,12 @@ def routes(context):
               "makes a new one",
               body={"type": "object", "required": ["version"],
                     "properties": {"document": {}, "text": STRING, "version": VERSION}}, answer=SAVED),
+        Route("GET", "/api/series/{name}", series_sizes,
+              "every size a series file derives, in its order: its shape (model), parameters without and with "
+              "the vocabulary tables, compute per token and in all, tokens, learning rate, batch, updates, warm-up "
+              "and the prefix of the series' dataset it reads, and its other runs (SERIES:SIZE:RUN): each one's "
+              "name, updates, the trunk's update a decay branch goes on from, and learning rate",
+              answer={"type": "array", "items": {"type": "object"}}),
         Route("GET", "/api/schemas/{kind}", kind_schema,
               "the JSON schema of a JSON kind, or of a conversation or a task", answer={"type": "object"}),
     ]

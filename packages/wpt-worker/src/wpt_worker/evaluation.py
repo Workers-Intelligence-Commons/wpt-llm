@@ -14,14 +14,18 @@ ready, and then answers until the manager ends it:
                                  (wpt_worker.writing)
     model.greedy                 the tokens the model writes greedily after each of several
                                  prompts of one length (greedy())
+    model.losses                 the next-token loss of every token of several windows after
+                                 the first (losses())
     eval.end                     the manager is done: the job ends with code 0
 
 Served answers the same calls for a model in the caller's own process, with
-the names the manager's side has (config, device, generator, writer and
-greedy): a test cannot tell where the model is.
+the names the manager's side has (config, device, generator, writer,
+greedy and losses): a test cannot tell where the model is.
 """
 
 import threading
+
+import numpy as np
 from pathlib import Path
 
 import torch
@@ -38,7 +42,7 @@ class Served:
     """A model in this process: config (the model's config), device (a
     description of where it runs), generator() (a new seeded generator: its
     number), writer() (a writer on the model, as wpt_worker.writing.RemoteWriter
-    is one on a gpu worker's) and greedy()."""
+    is one on a gpu worker's), greedy() and losses()."""
 
     def __init__(self, model):
         self.model, self.config = model, model.config
@@ -55,6 +59,9 @@ class Served:
     def greedy(self, prompts: list[list[int]], steps: int) -> list[list[int]]:
         return greedy(self.model, prompts, steps)
 
+    def losses(self, windows: list[list[int]]) -> list[np.ndarray]:
+        return losses(self.model, windows)
+
 
 @torch.no_grad()
 def greedy(model, prompts: list[list[int]], steps: int) -> list[list[int]]:
@@ -65,6 +72,30 @@ def greedy(model, prompts: list[list[int]], steps: int) -> list[list[int]]:
         logits = model(ids[:, -model.config.block_size:])[:, -1, :]
         ids = torch.cat([ids, logits.argmax(dim=-1, keepdim=True)], dim=1)
     return ids[:, len(prompts[0]):].tolist()
+
+
+LOSS_CHUNK = 4096  # tokens of a window read in one pass: the scores of one pass are LOSS_CHUNK x vocab_size
+
+
+@torch.no_grad()
+def losses(model, windows: list[list[int]]) -> list[np.ndarray]:
+    """For each window (token ids), the next-token loss, in nats, of each
+    of its tokens after the first, read with only the window's earlier
+    tokens before it: float32, one fewer than the window. The window is
+    read through the model's generation cache (docs/model.md,
+    "Generation"), LOSS_CHUNK tokens at a time, so the scores held at once
+    stay LOSS_CHUNK x vocab_size whatever the window's length."""
+    device, found = next(model.parameters()).device, []
+    for window in windows:
+        ids = torch.tensor(window, dtype=torch.long, device=device)
+        cache, parts = model.new_cache(1), []
+        for start in range(0, len(window) - 1, LOSS_CHUNK):
+            end = min(start + LOSS_CHUNK, len(window) - 1)
+            scores, _ = model.extend(ids[start:end].unsqueeze(0), cache)
+            parts.append(torch.nn.functional.cross_entropy(scores[0].float(), ids[start + 1:end + 1],
+                                                           reduction="none"))
+        found.append(torch.cat(parts).cpu().numpy().astype(np.float32) if parts else np.zeros(0, np.float32))
+    return found
 
 
 def run(spec, link, work: Path) -> int:
@@ -85,11 +116,18 @@ def run(spec, link, work: Path) -> int:
     def answer(header, body):
         return {"tokens": greedy(model, header["prompts"], header["steps"])}, b""
 
+    def scored(header, body):
+        tokens, windows, start = np.frombuffer(body, dtype="<u4"), [], 0
+        for length in header["lengths"]:
+            windows.append(tokens[start:start + length].tolist())
+            start += length
+        return {}, b"".join(found.astype("<f4").tobytes() for found in losses(model, windows))
+
     def end(header, body):
         done.set()
 
     with writing(model):
-        link.handlers.update({"model.greedy": answer, "eval.end": end})
+        link.handlers.update({"model.greedy": answer, "model.losses": scored, "eval.end": end})
         call(link, "ready", device=device)
         link.serve(until=done.is_set)
     return 0

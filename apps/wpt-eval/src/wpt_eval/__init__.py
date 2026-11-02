@@ -1,7 +1,7 @@
 """Run tests on a trained model and record their results in its model card.
 
 Usage:
-    wpt-eval MODEL_FOLDER [EVAL ...] [--attempts N] [--probe-rate RATE]
+    wpt-eval MODEL_FOLDER [EVAL ...] [--attempts N] [--probe-rate RATE] [--kind-by FIELD]
 
 EVAL is the name of a built-in test (the files in wpt_eval/evals/) or the
 path of any Python file; with none, every built-in test runs. A test file
@@ -16,8 +16,8 @@ The result carries data for programs and the same findings as text for
 people. The model is on a gpu worker (wpt_eval.remote, docs/machines.md,
 "Evaluation"): the first of WPT_GPU_WORKERS, or a local one; a test reaches
 it through the context only: context.model.config, .device (where it runs,
-in words), .generator(seed), .writer(prompt, rows, ...) and
-.greedy(prompts, steps).
+in words), .generator(seed), .writer(prompt, rows, ...),
+.greedy(prompts, steps) and .losses(windows).
 
 The agent measures share one run of attempts (wpt_eval.attempts):
 context.attempts(plain) plays N attempts (--attempts, WPT_ATTEMPTS, default
@@ -32,6 +32,11 @@ The probes test asks each question of the repository's probe files
 ceil(3 / RATE) times (--probe-rate, WPT_PROBE_RATE, default 1/100, as a
 fraction or a decimal): RATE is the rarest rate of alarming replies the
 run must catch (context.probe_rate).
+
+The held-out-loss test gives the model's loss on every held-out token,
+and the loss of each kind of text by one field of the documents' sources
+(--kind-by FIELD, WPT_KIND_BY: origin, tag or format, default tag;
+wpt_eval.kinds; context.kind_by).
 
 Each result goes to MODEL_FOLDER/evals/<name>.json, and the model card
 (README.md) is written again to show it. A test that fails stops the run;
@@ -72,10 +77,12 @@ from wpt_utils.programs import code
 from wpt_worker.link import LinkError
 
 from . import attempts as shared
+from .kinds import FIELDS
 from .attempts import Record
 from .remote import Remote, WorkerError
 
 BUILT_IN = Path(__file__).parent / "evals"
+KIND_BY = "tag"  # the field the held-out-loss test groups its losses by, by default
 PROBE_RATE = fractions.Fraction(1, 100)  # the rarest rate of alarming replies the probes test catches, by default
 
 
@@ -109,6 +116,7 @@ class Context:
     telemetry: Telemetry = field(default_factory=Telemetry.off)  # the run's record, for a test's own events
     attempts_per_task: int = shared.ATTEMPTS  # wpt-eval's --attempts
     probe_rate: fractions.Fraction = PROBE_RATE  # wpt-eval's --probe-rate
+    kind_by: str | None = None  # wpt-eval's --kind-by: the field the held-out-loss test groups by (wpt_eval.kinds)
     _attempts: dict = field(default_factory=dict, repr=False)  # {plain: [Record]}, played once per command
     _tasks: list | None = field(default=None, repr=False)  # the measure-only tasks, read once per command
 
@@ -217,7 +225,8 @@ def _write_documents(folder, telemetry):
         raise
 
 
-def open_context(folder, store, telemetry=None, attempts=shared.ATTEMPTS, probe_rate=PROBE_RATE) -> Context:
+def open_context(folder, store, telemetry=None, attempts=shared.ATTEMPTS, probe_rate=PROBE_RATE,
+                 kind_by=None) -> Context:
     """The context of the model folder, with no model yet (main puts the
     gpu worker's there). EvalError when the folder is not one wpt-train
     wrote, its drafter was trained against other weights, or its tokenizer
@@ -237,7 +246,7 @@ def open_context(folder, store, telemetry=None, attempts=shared.ATTEMPTS, probe_
     except (TokenizerMismatch, DrafterMismatch, ValueError) as error:
         raise EvalError(str(error)) from None
     return Context(folder, None, tokenizer, "", provenance, store, telemetry or Telemetry.off(), attempts,
-                   probe_rate)
+                   probe_rate, kind_by)
 
 
 def _count(text) -> int:
@@ -258,6 +267,12 @@ def _rate(text) -> fractions.Fraction:
     if not 0 < value <= 1:
         raise argparse.ArgumentTypeError("more than 0, at most 1")
     return value
+
+
+def _field(text) -> str:
+    if text not in FIELDS:
+        raise argparse.ArgumentTypeError(f"{text!r}: choose {', '.join(FIELDS)}")
+    return text
 
 
 def _setting(parser, name, parse, default):
@@ -282,6 +297,10 @@ def main(argv=None):
                         help=f"the rarest rate of alarming replies the probes test must catch, as a fraction or a "
                              f"decimal: each question is asked ceil(3 / RATE) times (WPT_PROBE_RATE; default "
                              f"{PROBE_RATE})")
+    parser.add_argument("--kind-by", type=_field, default=_setting(parser, "WPT_KIND_BY", _field, KIND_BY),
+                        metavar="FIELD",
+                        help=f"the field of the held-out documents' sources the held-out-loss test groups its "
+                             f"losses by: {', '.join(FIELDS)} (WPT_KIND_BY; default: {KIND_BY})")
     args = parser.parse_args(argv)
     environ = {**read_env_file(Path.cwd() / ".env"), **{key: value for key, value in os.environ.items() if value}}
     try:
@@ -297,13 +316,14 @@ def main(argv=None):
         with Telemetry.start(store, "wpt-eval", sys.argv[1:] if argv is None else list(argv),
                              short(next(iter(weights.values()), "none")),
                              inputs={"model_folder": args.model, "evals": evals, "attempts": args.attempts,
-                                     "probe_rate": str(args.probe_rate)},
+                                     "probe_rate": str(args.probe_rate), "kind_by": args.kind_by},
                              env_file=Path.cwd() / ".env") as telemetry:
             try:
                 with telemetry.span("inputs"):
                     for eval_ in evals:
                         find(eval_)  # an unknown test stops the run before any other has run
-                    context = open_context(args.model, store, telemetry, args.attempts, args.probe_rate)
+                    context = open_context(args.model, store, telemetry, args.attempts, args.probe_rate,
+                                           args.kind_by)
                     telemetry.input(weights=weights, dataset=context.provenance.get("dataset"))
                 with telemetry.span("gpu_worker.model"), Remote(args.model, environ, telemetry.log) as model:
                     context.model, context.device = model, model.device

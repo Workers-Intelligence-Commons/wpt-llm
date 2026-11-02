@@ -1,0 +1,460 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Workers-Intelligence-Commons/wpt-llm/schemas/series.schema.json",
+  "title": "WPT model series (data/recipes/series/<name>.json): the rules its sizes share and the list of sizes; SERIES:SIZE names one size wherever a model recipe's name goes",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "data",
+    "reference",
+    "global_attention",
+    "block_size",
+    "laws",
+    "warmup_share",
+    "seed",
+    "sizes",
+    "drafter"
+  ],
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    }
+  },
+  "properties": {
+    "data": {
+      "description": "what `wpt-dataset build SERIES:SIZE` builds, one dataset for every size: its total tokens are the largest size's, and each size reads its start",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mixture",
+        "tokenizer",
+        "held_out"
+      ],
+      "properties": {
+        "mixture": {
+          "$ref": "#/$defs/name",
+          "description": "a file name in data/recipes/mixtures/, without .json"
+        },
+        "tokenizer": {
+          "$ref": "#/$defs/name",
+          "description": "a file name in data/recipes/tokenizers/, without .json"
+        },
+        "held_out": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 1,
+          "description": "share of every source's documents kept out of training"
+        }
+      }
+    },
+    "reference": {
+      "description": "the reference model every size scales from (a model recipe's `model` without global_attention): its widths scale with d_model, its counts stay, its layers keep its width per layer, its Engram table size scales with the cube of d_model (docs/model.md, \"Model series\")",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "n_layer",
+        "d_model",
+        "kda_heads",
+        "kda_head_dim",
+        "attention_heads",
+        "attention_head_dim",
+        "query_rank",
+        "output_groups",
+        "output_rank",
+        "index_heads",
+        "index_head_dim",
+        "index_top_k",
+        "n_experts",
+        "top_k",
+        "expert_width",
+        "latent_width",
+        "shared_width",
+        "engram_layers",
+        "engram_order",
+        "engram_heads",
+        "engram_dim",
+        "engram_table_size"
+      ],
+      "properties": {
+        "n_layer": {
+          "type": "integer",
+          "minimum": 2,
+          "description": "a global layer (CSA or HCA) every 4th layer and the last, KDA elsewhere"
+        },
+        "d_model": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "width of the residual streams"
+        },
+        "kda_heads": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "kda_head_dim": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "keys and values of a KDA head"
+        },
+        "attention_heads": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "query heads of CSA, HCA and the multi-token prediction block"
+        },
+        "attention_head_dim": {
+          "type": "integer",
+          "minimum": 128,
+          "multipleOf": 64,
+          "description": "each query head and the one key-value head: the 64 rotary dimensions and FP8 blocks of 64"
+        },
+        "query_rank": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "width of the query latent, shared with the indexer"
+        },
+        "output_groups": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "groups of the grouped output projection; divides attention_heads"
+        },
+        "output_rank": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "width of each group's intermediate output"
+        },
+        "index_heads": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "query heads of the CSA indexer"
+        },
+        "index_head_dim": {
+          "type": "integer",
+          "minimum": 128,
+          "description": "each indexer head and key: a power of 2 (the Hadamard rotation), more than the 64 rotary dimensions"
+        },
+        "index_top_k": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "merged entries each query attends to in a CSA layer"
+        },
+        "n_experts": {
+          "type": "integer",
+          "minimum": 2,
+          "description": "routed experts per layer"
+        },
+        "top_k": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "routed experts per token, fewer than n_experts"
+        },
+        "expert_width": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "hidden width of a routed expert"
+        },
+        "latent_width": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "width of the space routed experts work in"
+        },
+        "shared_width": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "hidden width of each of the 2 shared experts"
+        },
+        "engram_layers": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uniqueItems": true,
+          "description": "layers (numbered from 1) that get Engram memory"
+        },
+        "engram_order": {
+          "type": "integer",
+          "minimum": 2,
+          "description": "largest N-gram; orders 2 .. N are read"
+        },
+        "engram_heads": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16,
+          "description": "hash heads per order"
+        },
+        "engram_dim": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "width of one table row"
+        },
+        "engram_table_size": {
+          "type": "integer",
+          "minimum": 2,
+          "exclusiveMaximum": 2147483648,
+          "description": "each table has a distinct prime size, the smallest at or above this; a size gets the nearest prime to this x (its d_model / the reference's)^3"
+        }
+      }
+    },
+    "global_attention": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "CSA",
+          "HCA"
+        ]
+      },
+      "minItems": 1,
+      "description": "the kinds the global layers (every 4th layer and the last) take in turn, from the first"
+    },
+    "block_size": {
+      "type": "integer",
+      "minimum": 2,
+      "description": "the training windows' length, at every size"
+    },
+    "laws": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "learning_rate",
+        "batch_tokens",
+        "model_flops",
+        "tokens"
+      ],
+      "description": "power laws of the compute C (FLOPs), each coefficient x C^exponent (DeepSeek LLM's scaling laws)",
+      "properties": {
+        "learning_rate": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "coefficient",
+            "exponent"
+          ],
+          "description": "the peak learning rate",
+          "properties": {
+            "coefficient": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "exponent": {
+              "type": "number"
+            }
+          }
+        },
+        "batch_tokens": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "coefficient",
+            "exponent"
+          ],
+          "description": "the batch, in tokens",
+          "properties": {
+            "coefficient": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "exponent": {
+              "type": "number"
+            }
+          }
+        },
+        "model_flops": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "coefficient",
+            "exponent"
+          ],
+          "description": "the non-embedding FLOPs per token, M, that C trains best: a size's M gives its C",
+          "properties": {
+            "coefficient": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "exponent": {
+              "type": "number"
+            }
+          }
+        },
+        "tokens": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "coefficient",
+            "exponent"
+          ],
+          "description": "the training tokens, D, that C trains best",
+          "properties": {
+            "coefficient": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "exponent": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "warmup_share": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "exclusiveMaximum": 1,
+      "description": "share of a size's updates the learning rate rises over"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "the initial weights and every step's draws (text windows, the order of conversations and tasks, the tools offered, the sampled tokens) come from it, each step mixing its number in the list into it, and every step's fingerprint names it (docs/training.md, \"Steps\")"
+    },
+    "sizes": {
+      "type": "array",
+      "minItems": 1,
+      "description": "the sizes, each a model",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "d_model"
+        ],
+        "properties": {
+          "name": {
+            "$ref": "#/$defs/name",
+            "description": "what SERIES:SIZE names"
+          },
+          "d_model": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "the size's width; every width of the reference scales to a whole number at it"
+          }
+        }
+      }
+    },
+    "drafter": {
+      "description": "the drafter wpt-train trains at the end of every run, after the last step (docs/model.md, \"The drafter\"; wpt_inference.drafting); a setting left out keeps its default",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 1,
+          "description": "the model layers whose hidden states the drafter reads, numbered from 1 to the model's n_layer (a run refuses another before it trains); default: wpt_model.drafter.feature_layers"
+        },
+        "layers": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "the drafter's backbone layers"
+        },
+        "block": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "tokens drafted per round"
+        },
+        "markov_rank": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "rank of the Markov head; default 256 x d_model / 4096"
+        },
+        "epochs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "learning_rate": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "weight_decay": {
+          "type": "number",
+          "minimum": 0
+        },
+        "warm_up": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "share of the updates the learning rate rises over"
+        },
+        "clip": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "gradient norm clipping"
+        },
+        "anchors": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "anchors drawn from each answer per epoch"
+        },
+        "batch": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "answers per update"
+        },
+        "prompts": {
+          "type": "integer",
+          "minimum": 2,
+          "description": "training documents whose beginnings are prompts"
+        },
+        "prompt_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "the most tokens of a document's beginning in its prompt"
+        },
+        "answer_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "the most tokens of each answer the model writes"
+        },
+        "temperature": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "top_k": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "held_out": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1,
+          "description": "share of the prompts kept apart for calibration and the measure"
+        },
+        "ece_bins": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "branches": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "exclusiveMinimum": 0
+      },
+      "uniqueItems": true,
+      "description": "decay branches of every size, each a share of the size's updates: SERIES:SIZE:branch-SHARE goes on from the size's trunk, its read-text step at the peak rate, at the last update before its first drop, and decays to its own updates (docs/model.md, \"Model series\"); left out, none"
+    },
+    "learning_rate_check": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "exclusiveMinimum": 0
+      },
+      "uniqueItems": true,
+      "description": "factors of the law's learning rate: SERIES:SIZE:lr-FACTOR is the smallest size's own run at FACTOR times it (docs/model.md, \"Model series\"); left out, none"
+    },
+    "note": {
+      "type": "string"
+    }
+  }
+}

@@ -10,6 +10,13 @@ recipe and the update only; with
 --stream, from the shards in use once the updates before it have used
 their tokens (wpt_store.shards.ShardStream).
 
+prefix_tokens, when above 0, makes the training tokens the first
+prefix_tokens of the dataset's, in the shards' order, and nothing after
+them: the windows, the shards copied or streamed and the sources the step
+learned from are those of that start. Each size of a model series reads
+its prefix of the series' one dataset (docs/model.md, "Model series").
+A dataset with fewer training tokens is refused before any step runs.
+
 Each process takes --micro-batch windows per pass (default: all of its
 share of the batch) and adds passes up until the batch is complete: pass a
 of process r is slice (a * world_size + r) of the batch, so the batch
@@ -27,12 +34,12 @@ import hashlib
 import numpy as np
 import torch
 
-from wpt_store.shards import ShardStream, sources_of, token_file
+from wpt_store.shards import ShardStream, prefix_shards, sources_of, token_file
 from wpt_training import WINDOWS, Environment, Stage
 from wpt_training import parts as windows_in_parts
 
 GIVES = WINDOWS
-SETTINGS = {"stages": [], "eval_every": 200, "eval_batches": 20}
+SETTINGS = {"stages": [], "eval_every": 200, "eval_batches": 20, "prefix_tokens": 0}
 STAGE = ("block_size", "steps", "batch_size")
 
 
@@ -49,6 +56,15 @@ def check(settings):
     for key in ("eval_every", "eval_batches"):
         if settings[key] < 1:
             raise ValueError(f"{key}: at least 1")
+    if settings["prefix_tokens"] < 0:
+        raise ValueError("prefix_tokens: 0 (every training token) or more")
+
+
+def check_dataset(settings, record, store):
+    """ValueError when the dataset holds fewer training tokens than the prefix the step reads."""
+    if settings["prefix_tokens"] > record["total_tokens"]:
+        raise ValueError(f"the step reads the first {settings['prefix_tokens']:,} training tokens; the dataset has "
+                         f"{record['total_tokens']:,}")
 
 
 def context(settings) -> int:
@@ -91,7 +107,9 @@ class TextWindows(Environment):
         self.stage_list = tuple(Stage(stage["steps"], stage["batch_size"], stage["block_size"])
                                 for stage in settings["stages"])
         self.batches = batching(self.stage_list, data.micro_batch, 1 if strategy.splits_windows else strategy.world_size)
-        self.train_tokens, self.val_tokens = _token_arrays(data.store, data.record, strategy, data.stream_shards)
+        self.prefix = settings["prefix_tokens"] or None
+        self.train_tokens, self.val_tokens = _token_arrays(data.store, data.record, strategy, data.stream_shards,
+                                                           self.prefix)
         longest = max(stage.block_size for stage in self.stage_list)
         if len(self.train_tokens) <= longest + 1:
             self.close()
@@ -102,9 +120,10 @@ class TextWindows(Environment):
 
     @property
     def sources(self):
-        """The sources of the training shards' documents."""
+        """The sources of the documents of the training shards it reads."""
         record = self.data.record
-        return {sid: record["sources"][sid] for sid in sorted(sources_of(self.data.store, record["shards"]))}
+        return {sid: record["sources"][sid]
+                for sid in sorted(sources_of(self.data.store, prefix_shards(record["shards"], self.prefix)))}
 
     def stage(self, index):
         self.index = index
@@ -159,23 +178,24 @@ class TextWindows(Environment):
             self.train_tokens.close()
 
 
-def _token_arrays(store, record, strategy, stream_shards=None):
+def _token_arrays(store, record, strategy, stream_shards=None, prefix=None):
     """(training tokens, held-out tokens) as arrays read from disk on demand.
     One process per machine builds the files, checking every shard. With
     stream_shards, the training tokens are a ShardStream that keeps only
-    that many shards on disk at once."""
-    parts = ("held_out_shards",) if stream_shards else ("shards", "held_out_shards")
+    that many shards on disk at once. With a prefix, the training tokens
+    are the first prefix tokens, from the shards that hold them alone."""
+    shards = prefix_shards(record["shards"], prefix)
     if strategy.is_local_main:
-        for part in parts:
-            token_file(store, record[part])
+        if not stream_shards:
+            token_file(store, shards)
+        token_file(store, record["held_out_shards"])
     strategy.barrier()
     held_out = (np.memmap(token_file(store, record["held_out_shards"]), dtype="<u4", mode="r")
                 if record["held_out_shards"] else np.zeros(0, dtype="<u4"))
     if stream_shards:
-        return ShardStream(store, record["shards"], stream_shards), held_out
-    training = (np.memmap(token_file(store, record["shards"]), dtype="<u4", mode="r") if record["shards"] else
-                np.zeros(0, dtype="<u4"))
-    return training, held_out
+        return ShardStream(store, record["shards"], stream_shards, prefix), held_out
+    training = (np.memmap(token_file(store, shards), dtype="<u4", mode="r") if shards else np.zeros(0, dtype="<u4"))
+    return training[:prefix], held_out
 
 
 def start(settings, data):

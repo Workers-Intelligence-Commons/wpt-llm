@@ -136,7 +136,7 @@ def stage_of(stages, step) -> tuple[int, object, int, int]:
 
 def train(model, strategy, step, method, environment, seed: int, number: int, options: Options = Options(),
           checkpoint: Checkpoint | None = None, resume=False, identity=None, done=(), log=print, telemetry=None,
-          save_last=False) -> Trained:
+          save_last=False, start: Checkpoint | None = None) -> Trained:
     """Run one step (a wpt_training.Step, its method and environment
     started; number, its place in the recipe from 1, which dropout reads
     with the seed) on model, in place, then load the weights of the evaluation
@@ -154,7 +154,14 @@ def train(model, strategy, step, method, environment, seed: int, number: int, op
     stream); done: the identities of steps already finished, whose
     checkpoint counts as none. A checkpoint holds the weights and the
     optimizer's, method's and environment's state; weights(state) gives
-    the weights the step leaves the model with.
+    the weights the step leaves the model with. start: for a step that
+    continues the one before it (Step.continues), where that step's last
+    state is; with no checkpoint of this step to resume, the step goes on
+    from that state as a resumed step would, at the update after its last
+    (ValueError when it has no update left, or there is no such state),
+    except that the best evaluation of the steps before it is forgotten,
+    as at a new stage (Optimizer.stage): it keeps the weights of its own
+    best evaluation.
 
     The environment's stages run in order, each drawing batches of its own
     number of examples (a batch depends only on the seeds and the update);
@@ -192,13 +199,21 @@ def train(model, strategy, step, method, environment, seed: int, number: int, op
         elif state is not None and state["signature"] != signature:
             raise SettingsMismatch(f"the checkpoint in {checkpoint} was written by another step or with other "
                                    "settings")
-        if state is None:
+        if state is None and start is None:
             log(f"no checkpoint of {step.name} in {checkpoint}: starting at update 1")
-        else:
-            environment.load_state_dict(state["environment"])
+    continued = state is None and start is not None
+    if continued:
+        state = strategy.broadcast(start.load() if strategy.is_main else None)
+        if state is None:
+            raise ValueError(f"{step.name} continues the step before it, and {start} holds no state of it")
+    if state is not None:
+        environment.load_state_dict(state["environment"])
     environment.begin(model, strategy)  # with the weights the step starts from
     stages = environment.stage_list
     updates = sum(stage.steps for stage in stages)
+    if continued and state["next_step"] > updates:
+        raise ValueError(f"{step.name} continues a step that made {state['next_step'] - 1:,} updates, and it has "
+                         f"{updates:,}: no update is left to it")
     frozen = _freeze(model, (*step.locked, *method.unreached))
     try:
         trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
@@ -210,7 +225,7 @@ def train(model, strategy, step, method, environment, seed: int, number: int, op
         wrapped = strategy.wrap(model)
         return _loop(model, strategy, step, method, environment, optimizer, wrapped, (seed, number), options,
                      checkpoint, state, signature, log, record, save_last, stages, updates,
-                     BALANCING not in step.locked)
+                     BALANCING not in step.locked, start if continued else None)
     finally:
         for parameter in frozen:
             parameter.requires_grad_(True)
@@ -231,7 +246,7 @@ def _freeze(model, names) -> list:
 
 
 def _loop(model, strategy, step, method, environment, optimizer, wrapped, draws, options, checkpoint, state,
-          signature, log, record, save_last, stages, updates, balance):
+          signature, log, record, save_last, stages, updates, balance, continued=None):
     first_step, best_val, best_state, best_step, best_indexer, reached, skipped = 1, None, None, None, None, {}, 0
     if state is not None:
         model.load_state_dict(state["model"])
@@ -240,8 +255,15 @@ def _loop(model, strategy, step, method, environment, optimizer, wrapped, draws,
         first_step, best_val, best_state = state["next_step"], state["best_val"], state["best_model"]
         best_step, best_indexer, reached = state["best_step"], state["best_indexer"], dict(state["reached"])
         skipped = state["skipped"]
-        record.event("training.resumed", step=state["step"], checkpoint=str(checkpoint))
-        log(f"{step.name}: resumed from update {state['step']}")
+        if continued is None:
+            record.event("training.resumed", step=state["step"], checkpoint=str(checkpoint))
+            log(f"{step.name}: resumed from update {state['step']}")
+        else:  # the state the step before it left; its best evaluation is forgotten, as at a new stage
+            best_val, best_state, best_step, best_indexer = None, None, None, None
+            index, stage, _, _ = stage_of(stages, first_step)
+            optimizer.stage(index + 1, stage.block_size)
+            record.event("training.continued", step=state["step"], state=str(continued))
+            log(f"{step.name}: continues the step before it from update {state['step']}")
 
     def evaluate(update):
         model.eval()

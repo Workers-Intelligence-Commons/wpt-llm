@@ -303,8 +303,9 @@ manager, which holds the tokenizer, the store and the sandboxes. A job
 (`wpt_worker.evaluation`) loads the model folder's weights on the worker,
 which the manager offers as files, and answers what the tests ask of the
 model: a seeded generator, writers that write until a stop token or a limit
-(the same ones a training attempt uses), and greedy writing for the
-memorization measure. The tests cannot tell where the model is.
+(the same ones a training attempt uses), greedy writing for the
+memorization measure, and the next-token losses of windows of tokens for
+the held-out-loss measure. The tests cannot tell where the model is.
 
 `wpt-eval` uses the first key in `WPT_GPU_WORKERS` (the manager passes it
 the rentals it still holds, before it gives them back), else a local
@@ -355,7 +356,7 @@ wins (`WPT_STORE`, the manager's folders, `HOME`, `DOCKER_HOST`).
 
 | Setting | Meaning |
 | --- | --- |
-| `WPT_RECIPE` | the model recipe; required, Compose refuses to start without it |
+| `WPT_RECIPE` | the model recipe, `SERIES:SIZE` for a size of a model series, or `SERIES:SIZE:RUN` for another run of it; required, Compose refuses to start without it |
 | `WPT_RUN` | the run's name; unset, the manager makes one and writes it into `wpt-run.txt` at the repository's root (git-ignored), with the line that copies its model out of the store |
 | `WPT_EVALUATE` | `1`: evaluate the model at the end; off by default |
 | `WPT_STORE` | the store; unset, a folder on the Compose volume `wpt-store`. A `file://` store must name a folder on a volume or a mounted folder: the manager refuses one in the container's own files, which go with the container |

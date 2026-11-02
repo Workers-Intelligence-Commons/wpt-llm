@@ -124,8 +124,8 @@ function documentsPage(path: string, title: string, intro: string, names: string
 }
 
 export const recipes = documentsPage("recipes", "Recipes",
-  "Model, mixture and tokenizer recipes (docs/model.md), and the locks that build-tokenizer writes.",
-  ["model", "mixture", "tokenizer", "lock"]);
+  "Model recipes and series, mixture and tokenizer recipes (docs/model.md), and the locks that build-tokenizer writes.",
+  ["model", "series", "mixture", "tokenizer", "lock"]);
 export const images = documentsPage("images", "Images",
   "The container images of agentic tasks: each Dockerfile, its pool of tools, and the lock and license list that lock-image writes.",
   ["dockerfile", "image-tools", "image-lock", "image-licenses"]);

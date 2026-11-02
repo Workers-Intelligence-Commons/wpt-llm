@@ -5,9 +5,15 @@ Usage:
     wpt-train RECIPE DATASET_ID --strategy ddp --processes N [options]
 
 RECIPE is a file name in data/recipes/models/, without .json, in the
-repository holding the current folder. Everything that changes the
-resulting model comes from it: the architecture's numbers, the seed, and
-its steps, which run in order on one model (docs/training.md, "Steps"):
+repository holding the current folder, or SERIES:SIZE, one size of the
+series file data/recipes/series/SERIES.json, whose model recipe the
+series derives (wpt_dataset.series; docs/model.md, "Model series"): every
+size of a series reads the start of the series' one dataset; or
+SERIES:SIZE:RUN, another run of that size (a decay branch, a learning
+rate of the check). Everything
+that changes the resulting model comes from it: the architecture's
+numbers, the seed, and its steps, which run in order on one model
+(docs/training.md, "Steps"):
 each a built-in step of wpt_training (read-text, answer-as-assistant,
 finish-tasks, finish-tasks-with-less-writing) or a .py file, with its
 method, environment, optimizer, settings and locked parts. The model's
@@ -171,8 +177,8 @@ from wpt_store import NAME as STORE_NAME
 from wpt_store import StoreError, read_env_file, store_from_settings
 from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry, file_hashes, set_ref, short
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer, chat
-from wpt_training import (WINDOWS, Checkpoint, FolderCheckpoint, PluginError, load_state, load_step, save_state,
-                          strategy_plugin, weights)
+from wpt_training import (WINDOWS, Checkpoint, FolderCheckpoint, PluginError, check_continuations, load_state,
+                          load_step, save_state, strategy_plugin, weights)
 from wpt_training.launch import REFUSED, STOPPED
 from wpt_utils.programs import code, repository
 from wpt_worker.link import LinkError
@@ -236,7 +242,8 @@ def parse_args(argv=None, environ=None):
     environ = os.environ if environ is None else environ
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("recipe", nargs="?", default=environ.get("WPT_RECIPE"),
-                        help="model recipe: a file name in data/recipes/models/, without .json (WPT_RECIPE)")
+                        help="model recipe: a file name in data/recipes/models/, without .json, or SERIES:SIZE[:RUN], "
+                             "a size of a series file of data/recipes/series/ or another run of it (WPT_RECIPE)")
     parser.add_argument("dataset", nargs="?", default=environ.get("WPT_DATASET"),
                         help="dataset id that `wpt-dataset build RECIPE` printed (WPT_DATASET)")
     for name, kind, default, text in OPTIONS:
@@ -266,10 +273,10 @@ def parse_args(argv=None, environ=None):
 
 
 def load_recipe(name):
-    """The model recipe of that name, checked against its schema, from the
-    repository holding the current folder."""
+    """The model recipe of that name (or SERIES:SIZE[:RUN]), checked against its
+    schema, from the repository holding the current folder."""
     try:
-        return Repo.find().recipe("model", name)
+        return Repo.find().model_recipe(name)
     except DatasetError as error:
         raise InputError(str(error)) from None
 
@@ -301,6 +308,10 @@ def plan(recipe) -> tuple[list, int]:
     the strategy asked is the gpu worker's to check: it starts the
     strategy.)"""
     steps = [load_step(entry, PARTS) for entry in recipe["steps"]]
+    try:
+        check_continuations(steps)
+    except ValueError as error:
+        raise InputError(str(error)) from None
     contexts = [step.context() for step in steps if step.context() is not None]
     if not contexts:
         raise InputError("no step reads text windows, so nothing sets the model's context; start the recipe with "

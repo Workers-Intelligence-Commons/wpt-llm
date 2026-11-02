@@ -33,8 +33,8 @@ from . import trained
 from .errors import DatasetError, OutdatedSchema
 from .repo import Repo
 
-KINDS_WITH_STEPS = ("source", "mixture", "model", "tokenizer", "lock", "conversation", "task", "rating", "probe",
-                    "image-lock", "image-licenses", "image-tools", "license-text")
+KINDS_WITH_STEPS = ("source", "mixture", "model", "series", "tokenizer", "lock", "conversation", "task", "rating",
+                    "probe", "image-lock", "image-licenses", "image-tools", "license-text")
 
 
 class Step(NamedTuple):

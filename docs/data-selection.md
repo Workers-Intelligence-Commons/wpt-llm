@@ -96,7 +96,8 @@ part is what a build enforces:
 ```
 
 `wpt-dataset build <name>` builds the data part of the model recipe of
-that name and prints the dataset id: the fingerprint of the data part, the
+that name (or of `SERIES:SIZE`, a size of a model series, whose data part
+every size of the series shares) and prints the dataset id: the fingerprint of the data part, the
 mixture, the vocabulary and every document. Recipes with the same data
 part share one dataset, and `wpt-train` refuses a dataset built from
 another data part than its recipe's. It reads the sources `wpt-dataset

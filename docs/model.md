@@ -9,8 +9,9 @@ trained from scratch: no weights or outputs of those models are used.
 The design is one family for every size: a mixture-of-experts model that
 reads long texts, aiming at a context of 1M tokens, which a recipe reaches
 by stages of growing windows (training.md, "Stages"). The numbers of a given size (layers, width, experts, table
-sizes) are not fixed here: each size is a model recipe (below), since a
-small model may not want the ratios of a large one.
+sizes) are not fixed here: each size is a model recipe, or a size of a
+model series (below), since a small model may not want the ratios of a
+large one.
 
 **Weights whose global layers use gated MLA do not load.** Their
 `config.json` names MLA numbers that `ModelConfig` refuses, and their
@@ -767,10 +768,12 @@ built-in step trains under this rule, through the `by-part` optimizer
 drafter").
 
 **Schedule.** Multi-step for `read-text` ([DeepSeek LLM][llm], also used in the [mHC paper][mhc]): linear
-warm-up to the maximum over 2,000 updates, then 31.6% of it after 80% of the
-training tokens and 10% after 90%. DeepSeek reports final results matching
+warm-up to the maximum over the recipe's `warmup` updates (2,000 by
+default; 4% of the updates at every size of a model series), then 31.6% of
+it after 80% of the training tokens and 10% after 90%. DeepSeek reports final results matching
 cosine decay, and a run can be extended by continuing from a checkpoint
-taken before the first drop. The steps after it run at a constant learning
+taken before the first drop; a model series' decay branches go on from
+such a state ("Model series"). The steps after it run at a constant learning
 rate. Their early stop on the validation loss is on, but their
 environments make no evaluations, so it never stops them and they keep
 their last weights.
@@ -796,7 +799,9 @@ are computed in a fixed order, over the whole global batch.
 
 A model recipe, `data/recipes/models/<name>.json`, says everything that
 changes the resulting model, so a release model is rebuilt from one file
-and the repository:
+and the repository, or from a series file, the name of one of its sizes
+(and of that size's run, when it is another than its own) and the
+repository ("Model series", below). A model recipe holds:
 
 - the data: mixture, tokenizer recipe, total tokens and held-out share
   (what a dataset recipe held before; dataset recipes are folded into
@@ -852,7 +857,7 @@ what the file lacks.
 A step whose optimizer is `muon` or `adamw` is named `by-part`; the
 entry keeps its own settings and gains none.
 
-A new recipe's name is an adjective and an animal drawn by `uv run
+A new recipe's or series' name is an adjective and an animal drawn by `uv run
 scripts/recipe_name.py`, among about 11.5 million names, so the name says
 nothing about the GPU or size it was made for; the recipe's `note` says
 that. Four recipes exist, each of one stage (none yet sets V4's 4K, 16K,
@@ -897,6 +902,129 @@ the output groups together as wide as the model. The indexer follows
 V4-Flash's in proportion to the width (4096 there): `64 * d / 4096` heads
 and a top `512 * d / 4096` entries, each head 128 wide as V4's; so 2 heads
 and top 16 at width 128, 5 and 40 at 320, 8 and 64 at 512.
+
+### Model series
+
+A model series, `data/recipes/series/<name>.json`, is one file for several
+sizes of one model, so the rules of a scaling test are written once and
+each size follows them. It holds the rules every size shares and the list
+of sizes, each a name and a width. `SERIES:SIZE` names one size wherever a
+model recipe's name goes (`wpt-dataset build`, `wpt-train`, `WPT_RECIPE`),
+and `wpt-dataset series NAME` prints what each size gets. The code derives
+each size's model recipe (`wpt_dataset.series`):
+
+- the shape: the series' `reference` model scaled to the size's width.
+  Every width inside the model scales with it (KDA heads, attention heads,
+  query latent, output width, indexer heads and top `k`, expert, latent
+  and shared widths), and every count stays (head dimensions, output
+  groups, experts and top `k`, Engram's heads, order and row width).
+  Engram's table size grows with the cube of the width, as the parameters
+  do (the layers grow with the width too), so its tables keep the
+  reference's share of them: the size is the reference's times
+  `(d_model / the reference's d_model)^3`, rounded to the nearest prime
+  (the model hashes into tables of prime size and gives each table the
+  smallest prime at or above this one), which is the reference's own size
+  at the reference's width. A width at which one
+  of the widths is not a whole number is refused. The layers keep the reference's
+  width per layer, rounded half up, and the Engram layers its fractions of
+  depth. The global layers sit where the model puts them, every 4th layer
+  and the last, and take the series' `global_attention` kinds in turn.
+- the parameters, counted as `wpt_model` builds the model: without the two
+  vocabulary tables (the embedding and the output head), the usual
+  scaling-law convention, and with them.
+- the training, from the series' `laws`, which are [DeepSeek LLM][llm]'s
+  (its equations 1 and 4): `eta_opt = 0.3118 C^-0.1250`,
+  `B_opt = 0.2920 C^0.3271` tokens, `M_opt = 0.1715 C^0.5243` and
+  `D_opt = 5.8316 C^0.4757`, for the compute `C` in FLOPs. A size's
+  non-embedding compute per token is the paper's form,
+  `M = 6 N + 12 n_layer d_model l`, with `N` the parameters one token
+  uses and `l` the series' `block_size`. `N` leaves out the two
+  vocabulary tables, counts only the `top_k` routed experts of the
+  `n_experts` in each layer (the others do not run for the token), counts
+  the shared experts and every other weight, and leaves out Engram's
+  lookup tables (a row is read, not multiplied) while counting its
+  projections. The attention term is the paper's, applied as the paper
+  writes it: CSA, HCA and KDA attend less than full attention over the
+  window, so it overstates their attention compute, and the series keeps
+  the paper's form rather than a count of its own. The size's compute is
+  the `C` whose `M_opt` is that `M`, and its tokens the `D_opt` of that `C`
+  (DeepSeek's split of compute between model and data). The learning rate is the law's, rounded to 4
+  significant digits, and AdamW's rates carry over to Muon ("Training").
+  The batch is the law's in whole windows of the series' `block_size`, at
+  least 1, and the updates read `D` tokens. The warm-up is the series'
+  `warmup_share` of the updates, at least 1; the drops stay at 80% and 90%.
+- the data: one dataset for the whole series. Its data part holds the
+  series' mixture, tokenizer recipe and held-out share, and the most
+  tokens any size's run reads (its own, or its trunk's, below), so every size's recipe has the same data part and
+  `wpt-dataset build` of any size builds the same dataset. Each size's
+  `read-text` step reads only the start of its training tokens
+  (`prefix_tokens`: its updates times its batch times the window plus one,
+  training.md, "Prefix"), so every size sees the same documents in the
+  same order, and all of them share the held-out part.
+
+The seed and the drafter are the series' own, the same at every size. The
+model's provenance holds the size's derived recipe and the name
+`SERIES:SIZE`.
+
+A size has other runs, each named `SERIES:SIZE:RUN` wherever a model
+recipe's name goes, and `wpt-dataset series NAME` lists them:
+
+- `branch-SHARE`, a decay branch, one per share of the series' `branches`:
+  SHARE times the size's updates, rounded half up. Every branch of a size
+  goes on from one trunk: the size's `read-text` step at its peak rate
+  after its warm-up, with no drop and the early weight of multi-token
+  prediction. A branch starts its decay after its last update at the peak,
+  80% of its updates, so its decay's schedule is the one the multi-step
+  schedule gives a run of its updates ("Schedule"). Its recipe is the
+  trunk cut into consecutive steps that end at the starts of the size's
+  branches, up to its own start, then its decay; each of them continues
+  the one before it ([training.md](training.md), "Continued steps"). Two
+  branches of a size hold the same trunk steps up to the shorter one's
+  start, so `wpt-train` reuses their kept results and the trunk trains
+  once. The trunk reads the prefix of the size's longest branch, or the
+  size's own when it is longer, so every branch of a size draws its
+  windows from the same tokens. A branch whose decay would start inside
+  the warm-up is refused, and so are two branches of a size with the same
+  updates. The multi-token prediction's weight switches in the decay, at
+  its first update, which is where the size's own run switches it: after
+  80% of its updates (`mtp_switch` 0.8 in every size's recipe), so a size's
+  own run and its full-length branch are the same recipe up to the cut of
+  the trunk into steps. The step defaults of other model recipes are their
+  own (`mtp_switch`, [training.md](training.md), "Steps").
+- `lr-FACTOR`, at the smallest size only (the fewest parameters), one per
+  factor of the series' `learning_rate_check`: the size's own run at
+  FACTOR times the law's learning rate, rounded to 4 significant digits.
+  It checks whether the laws' learning rate holds for Muon at that size.
+
+Each run's model folder and record are those of any `wpt-train` run.
+
+`wpt-scaling` fits the trained sizes' loss against their compute and
+predicts the loss of a larger size before it trains, and the
+`held-out-loss` test of `wpt-eval` measures each size on the held-out part
+they share, by kind of text ([evaluation.md](evaluation.md), "Scaling
+curve" and "Held-out loss").
+
+One series exists, `eldest-titmouse`: `interstitial-pecker`'s shape as its
+reference (width 512, 10 layers, 51.2 of width per layer), CSA and HCA in
+turn, the `admitted` vocabulary of 32,768 tokens and 32K-token windows,
+and five sizes. The parameters are counted without the vocabulary tables,
+then with them; the learning rate is AdamW's peak:
+
+| size | layers | global layers | parameters | with the tables | one token uses | tokens | learning rate | batch (windows) | updates | warm-up |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `256x5` | 5 | CSA, HCA | 15.1M | 31.9M | 6.6M | 2.43B | 1.694e-3 | 8 | 9,271 | 371 |
+| `384x8` | 8 | CSA, HCA | 51.3M | 76.5M | 21.1M | 5.50B | 1.367e-3 | 13 | 12,902 | 516 |
+| `512x10` | 10 | CSA, HCA, CSA | 112.7M | 146.3M | 44.9M | 8.94B | 1.203e-3 | 18 | 15,161 | 606 |
+| `640x13` | 13 | CSA, HCA, CSA, HCA | 224.2M | 266.1M | 87.3M | 14.19B | 1.065e-3 | 25 | 17,317 | 693 |
+| `768x15` | 15 | CSA, HCA, CSA, HCA | 371.7M | 422.1M | 142.7M | 19.49B | 9.801e-4 | 32 | 18,585 | 743 |
+
+Its data part asks for the 19.49B training tokens of `768x15`. Engram's
+tables are 10.7% to 11.6% of every size's parameters (1.6M at `256x5`,
+12.8M at `512x10`, 43.2M at `768x15`). Every size has three decay
+branches, `branch-0.25`, `branch-0.5` and `branch-1`, shares of its own
+updates, and the smallest size, `256x5`, has the learning-rate check at
+0.25, 0.5, 1, 2 and 4 times the law's rate (`lr-1` is its own run). None of
+these sizes has trained yet.
 
 ## Limits of the evidence
 
