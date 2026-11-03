@@ -142,6 +142,25 @@ def test_drafter_feature_layers_the_model_does_not_have_are_refused_before_train
     assert not [e for e in built.records("wpt-train")[-1].events if e.get("name") == "training.step"]
 
 
+def test_kernels_named_that_cannot_work_on_the_gpu_worker_refuse_the_run_before_training(built, monkeypatch, capsys):
+    # docs/model.md, "Attention": a named form is the one that runs or the
+    # run stops with the reason, never another form; here a worker with no
+    # GPU asked for Triton's kernels. A name that is no form is refused too
+    for name, value in ON_CPU.items():
+        monkeypatch.setenv(name, value)  # the local gpu worker's processes see no GPU
+    with pytest.raises(SystemExit) as refused:
+        main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model", "--kernels", "triton"])
+    assert refused.value.code == 2
+    assert "KernelUnavailable: Triton kernels run on a GPU, and this process runs on cpu" in capsys.readouterr().err
+    assert not [e for e in built.records("wpt-train")[-1].events if e.get("name") == "training.step"]
+
+    monkeypatch.setenv("WPT_KERNELS", "fast")
+    with pytest.raises(SystemExit) as refused:
+        main(["d", built.dataset_id, "--out", "model"])
+    assert refused.value.code == 2 and "WPT_KERNELS='fast': not one of tilelang, triton, pytorch" in \
+        capsys.readouterr().err
+
+
 def test_a_drafter_that_cannot_be_trained_refuses_the_run_and_its_steps_stay_kept(built, tmp_path, capsys):
     # held_out keeps both prompts apart: nothing is left to learn from. The
     # step's result was kept when it ended, even with no checkpoint during

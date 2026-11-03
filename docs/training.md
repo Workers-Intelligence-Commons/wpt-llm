@@ -2171,7 +2171,7 @@ and PyTorch versions, so the same inputs give equivalent but not identical
 weights. On a GPU, the attention kernels also add up the entries' gradients
 in the order the GPU's atomic additions take, so two runs on one GPU can
 differ slightly too (docs/model.md, "Attention"); `wpt-train` logs whether
-TileLang, Triton or PyTorch computes the attention. The updates themselves are the same: each update's
+TileLang, Triton or PyTorch computes the attention, which `--kernels` names. The updates themselves are the same: each update's
 examples, and any random draw a model makes, come from the seed and the update, and a resumed step
 continues the same updates; a reused step's result stands for its inputs, whatever machine trained
 it. The attempts of a task step depend on the model's own sampling, and the checks may differ, as

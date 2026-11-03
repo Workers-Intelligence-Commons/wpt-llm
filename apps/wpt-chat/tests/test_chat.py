@@ -114,3 +114,42 @@ def test_a_chat_is_a_conversation_in_the_current_shape(tmp_path, monkeypatch):
         asked.append(json.loads(json.dumps(conversation))) or ([{"type": "text", "text": "hi"}], "hi")))
     main([str(folder), "--chat"])
     validate(asked[0], "conversation", "wpt-chat --chat")
+
+
+def test_the_kernels_named_reach_the_attention_before_the_model_loads_and_one_that_cannot_work_stops_the_command(
+        tmp_path, monkeypatch, capsys):
+    # docs/model.md, "Attention": --kernels and WPT_KERNELS name the form
+    # for the device; a form that cannot work stops the command
+    import wpt_chat
+
+    folder = model_folder(tmp_path / "model")
+    monkeypatch.setattr("builtins.input", lambda prompt: "")
+    asked = []
+    real = wpt_chat.kernels
+
+    def watching(device, form):
+        asked.append(form)
+        return real(device, form)
+
+    monkeypatch.setattr(wpt_chat, "kernels", watching)
+    monkeypatch.setattr(wpt_chat, "select_device", lambda: torch.device("cpu"))
+    monkeypatch.delenv("WPT_KERNELS", raising=False)
+    main([str(folder)])
+    assert asked == []  # unnamed on the CPU: nothing to decide
+
+    monkeypatch.setenv("WPT_KERNELS", "triton")  # the environment names it; here no GPU can run it
+    with pytest.raises(SystemExit) as stopped:
+        main([str(folder)])
+    assert asked == ["triton"] and "KernelUnavailable: Triton kernels run on a GPU" in str(stopped.value)
+    monkeypatch.delenv("WPT_KERNELS")
+    with pytest.raises(SystemExit) as stopped:
+        main([str(folder), "--kernels", "tilelang"])
+    assert asked == ["triton", "tilelang"] and "KernelUnavailable: TileLang kernels run on a GPU" in str(stopped.value)
+    main([str(folder), "--kernels", "pytorch"])  # the PyTorch form works anywhere
+    assert asked == ["triton", "tilelang", "pytorch"]
+
+    monkeypatch.setenv("WPT_KERNELS", "fast")
+    with pytest.raises(SystemExit) as refused:
+        main([str(folder)])
+    assert refused.value.code == 2 and "WPT_KERNELS='fast': not one of tilelang, triton, pytorch" in \
+        capsys.readouterr().err

@@ -223,6 +223,12 @@ the clouds it supports (`RUNPOD_`, `LAMBDA_`, `GOOGLE_` and the like), and
 include `AWS_*`, which the store never reads. It never gets the store's
 settings or keys (`WPT_STORE` and `WPT_STORE_*`).
 
+The manager runs the training, and the evaluation with `WPT_EVALUATE=1`,
+on rented workers with `WPT_KERNELS=triton`, so the Triton kernels compute
+the attention on the rented GPUs ([model.md](model.md), "Attention"). A
+`WPT_KERNELS` in the settings is passed on unchanged. Workers a person
+started get no `WPT_KERNELS` from the manager.
+
 The manager sets each rented worker's token itself and never prints it
 whole: at most its first 4 characters, then stars. Rental kind is a
 setting: on-demand by default, interruptible (spot) when chosen. A
@@ -309,7 +315,10 @@ the held-out-loss measure. The tests cannot tell where the model is.
 
 `wpt-eval` uses the first key in `WPT_GPU_WORKERS` (the manager passes it
 the rentals it still holds, before it gives them back), else a local
-worker. A number in `WPT_GPU_WORKERS` is refused: `wpt-eval` rents nothing.
+worker. Its `--kernels` (`WPT_KERNELS`) goes to the job in the job's spec;
+the job decides the attention's form before it loads the model, and a form
+that cannot work on the worker ends the job with exit code 2 and the
+reason on the manager's standard error, which refuses the evaluation. A number in `WPT_GPU_WORKERS` is refused: `wpt-eval` rents nothing.
 
 ## Sandboxes
 
@@ -362,6 +371,7 @@ wins (`WPT_STORE`, the manager's folders, `HOME`, `DOCKER_HOST`).
 | `WPT_STORE` | the store; unset, a folder on the Compose volume `wpt-store`. A `file://` store must name a folder on a volume or a mounted folder: the manager refuses one in the container's own files, which go with the container |
 | `WPT_STORE_FOLDER` | a folder of the machine, mounted at the same path in the container in place of the volume `wpt-store`; set `WPT_STORE` to `file://` and that path |
 | `WPT_STORE_ACCESS_KEY_ID`, `WPT_STORE_SECRET_ACCESS_KEY`, `WPT_STORE_SESSION_TOKEN`, `WPT_STORE_ENDPOINT_URL`, `WPT_STORE_REGION` | an S3 store's keys and place; the store reads no `AWS_*` setting |
+| `WPT_KERNELS` | `tilelang`, `triton` or `pytorch`: what computes the attention; unset, rented workers get `triton` for the training and the evaluation |
 | `WPT_GPU_WORKERS` | the gpu workers' keys, or how many to rent; unset, a local worker in the container |
 | `WPT_RENTAL_PROVIDER` | who rents the gpu workers; default `skypilot` |
 | `WPT_RENTAL_KIND` | `on-demand` (the default) or `interruptible` |

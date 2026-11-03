@@ -30,6 +30,7 @@ UnknownFault, with its type and text: it blames neither the machine nor
 the folder.
 """
 
+import os
 import threading
 from pathlib import Path
 
@@ -59,7 +60,8 @@ class Unloadable(DraftFailed):
 
 class MachineFault(DraftFailed):
     """The machine failed while loading the model (out of memory, a CUDA
-    or HIP runtime error), not the folder."""
+    or HIP runtime error, or a WPT_KERNELS that names no form or one that
+    cannot work here), not the folder."""
 
 
 class UnknownFault(DraftFailed):
@@ -118,6 +120,7 @@ class Drafter:
         loaded."""
         from wpt_inference import measure_costs
         from wpt_model import load_drafter, load_model, load_tokenizer, weight_hashes
+        from wpt_model.sparse import KernelUnavailable, kernels
         from wpt_tokenizer import Tokenizer
         from wpt_utils.device import select_device
 
@@ -125,6 +128,10 @@ class Drafter:
         if self._loaded is None or self._loaded[:2] != (folder, state):
             self._loaded = None  # the old model goes before the new one loads
             device = select_device()
+            try:  # the attention's form WPT_KERNELS names (docs/model.md, "Attention"); unset, the automatic choice
+                kernels(device, os.environ.get("WPT_KERNELS") or None)
+            except (KernelUnavailable, ValueError) as error:  # this machine's setting, never the folder's fault
+                raise MachineFault(f"WPT_KERNELS: {type(error).__name__}: {error}") from error
             try:
                 tokenizer = Tokenizer.from_bytes(load_tokenizer(folder))
                 model = load_model(folder, device)  # DrafterMismatch: its drafter is missing or of other weights

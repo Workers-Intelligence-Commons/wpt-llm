@@ -39,6 +39,13 @@ of the model goes through the link, as token ids, and the losses come back
 as numbers
 ([machines.md](machines.md), "Evaluation").
 
+`--kernels FORM` (or `WPT_KERNELS`) names what computes the model's
+attention on the worker: `tilelang`, `triton` or `pytorch`, as for
+`wpt-train` ([model.md](model.md), "Attention"). A name that is none of
+these is refused. The worker decides the form before it loads the model,
+and a form that cannot work there refuses the evaluation before any test
+runs. Unnamed, the worker chooses by what is installed for its GPU.
+
 ## Writing a test
 
 A test is one Python file that defines `run`:

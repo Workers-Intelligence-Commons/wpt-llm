@@ -81,6 +81,7 @@ def fake(built, tmp_path, monkeypatch):
     monkeypatch.setenv("WPT_RENTAL_PROVIDER", "fake")
     monkeypatch.setenv("FAKE_FOLDER", str(tmp_path / "rented"))
     monkeypatch.setenv("WPT_RECIPE", "d")
+    monkeypatch.setenv("WPT_KERNELS", "pytorch")  # the fake rents this machine, which may have no GPU
     yield Fake
     for group in Fake.cluster_of.values():
         for process, _, _ in group:
@@ -520,6 +521,63 @@ def test_the_evaluation_runs_on_the_rented_workers_before_they_are_given_back(bu
     [(_, calls, environ)] = order
     [(_, name, _)] = calls  # rented, not yet stopped
     assert Key.parse(environ["WPT_GPU_WORKERS"]).host == "127.0.0.1" and fake.calls[-1] == ("stop", name)
+
+
+def test_training_on_rented_workers_names_the_triton_kernels_unless_the_settings_name_the_kernels(
+        built, fake, tmp_path, monkeypatch):
+    # docs/machines.md: the manager runs wpt-train on the NVIDIA GPUs it
+    # rents with WPT_KERNELS=triton; a WPT_KERNELS of the settings is left
+    # as it is, and workers a person started get none from the manager
+    real = wpt_manager.run_command
+    named = []
+
+    def watching(step, arguments, log, last_line=False, environ=None):
+        if arguments[0] == "wpt-train":
+            named.append({**os.environ, **environ}.get("WPT_KERNELS"))  # what wpt-train gets
+            raise Failed(step, 2)
+        return real(step, arguments, log, last_line, environ)
+
+    monkeypatch.setattr(wpt_manager, "run_command", watching)
+    monkeypatch.delenv("WPT_KERNELS")
+    for run, workers, kernels in (("rented", "1", None), ("asked", "1", "tilelang"),
+                                  ("started", str(Key("127.0.0.1", 9, "0" * 64, "person-token")), None)):
+        monkeypatch.setenv("WPT_RUN", run)
+        monkeypatch.setenv("WPT_GPU_WORKERS", workers)
+        if kernels:
+            monkeypatch.setenv("WPT_KERNELS", kernels)
+        else:
+            monkeypatch.delenv("WPT_KERNELS", raising=False)
+        with pytest.raises(SystemExit):  # the training stood in for fails: the run stops there
+            main([])
+    assert named == ["triton", "tilelang", None]
+
+
+def test_the_evaluation_on_rented_workers_names_the_triton_kernels_unless_the_settings_name_the_kernels(
+        built, fake, tmp_path, monkeypatch):
+    # docs/machines.md: wpt-eval gets what wpt-train gets, WPT_KERNELS=triton
+    # on rented workers, a WPT_KERNELS of the settings as it is
+    real = wpt_manager.run_command
+    named = []
+
+    def watching(step, arguments, log, last_line=False, environ=None):
+        if arguments[0] == "wpt-eval":
+            named.append({**os.environ, **environ}.get("WPT_KERNELS"))  # what wpt-eval gets
+            return None
+        if arguments[0] == "wpt-train":  # this machine may have no GPU for the Triton kernels: train with PyTorch's
+            environ = {**environ, "WPT_KERNELS": "pytorch"}
+        return real(step, arguments, log, last_line, environ)
+
+    monkeypatch.setattr(wpt_manager, "run_command", watching)
+    monkeypatch.setenv("WPT_EVALUATE", "1")
+    monkeypatch.setenv("WPT_GPU_WORKERS", "1")
+    for run, kernels in (("rented", None), ("asked", "pytorch")):
+        monkeypatch.setenv("WPT_RUN", run)
+        if kernels:
+            monkeypatch.setenv("WPT_KERNELS", kernels)
+        else:
+            monkeypatch.delenv("WPT_KERNELS", raising=False)
+        main([])
+    assert named == ["triton", "pytorch"]
 
 
 def test_a_failed_run_is_continued_by_the_same_command_under_the_name_wpt_run_txt_holds(built, tmp_path,

@@ -14,6 +14,11 @@ scheduler's pass times are measured once, when the model is loaded;
 names, environment or .env), refused when they were measured on another
 setup (the model's config, the drafter's block, the device).
 
+--kernels FORM (WPT_KERNELS: tilelang, triton or pytorch) names what computes
+the model's attention on the GPU, as for wpt-train (docs/model.md,
+"Attention"); a form that cannot work here stops the command before the
+model loads.
+
 --chat talks to a model trained on conversations (the answer-as-assistant
 step, docs/training.md; docs/chat-format.md):
 each line you type is a user message, the conversation so far goes through
@@ -27,11 +32,13 @@ generated text, and the sources the model learned from.
 
 import argparse
 import io
+import os
 import sys
 from pathlib import Path
 
 from wpt_inference import COSTS_FILE, costs_setup, measure_costs, next_message, replayed_costs, sample_tokens
 from wpt_model import TokenizerMismatch, load_drafter, load_model, load_tokenizer
+from wpt_model.sparse import FORMS, KernelUnavailable, kernels, named_form
 from wpt_model.notice import LICENSE, NOTICE_NAME, OUTPUT_LICENSE, REPOSITORY
 from wpt_store import StoreError, store_from_settings
 from wpt_tokenizer import Tokenizer, chat
@@ -91,12 +98,25 @@ def main(argv=None):
     parser.add_argument("--scheduler-costs", metavar="RECORD_FOLDER",
                         help="read the drafter scheduler's pass times that a run recorded on the same setup: the name "
                              f"of its record folder in the store, which holds {COSTS_FILE} (default: measure them)")
+    try:
+        default = named_form(os.environ["WPT_KERNELS"]) if "WPT_KERNELS" in os.environ else None
+    except argparse.ArgumentTypeError as error:
+        parser.error(f"WPT_KERNELS={os.environ['WPT_KERNELS']!r}: {error}")
+    parser.add_argument("--kernels", type=named_form, default=default, metavar="FORM",
+                        help=f"what computes the attention on the GPU: {', '.join(FORMS)}; one that cannot work "
+                             "here stops the command (WPT_KERNELS; default: the first kernels installed for the "
+                             "GPU, else pytorch)")
     args = parser.parse_args(argv)
     if args.about:
         print(about(args.model), end="")
         return
 
     device = select_device()
+    if device.type == "cuda" or args.kernels:  # decided once, before the model loads (docs/model.md, "Attention")
+        try:
+            kernels(device, args.kernels)
+        except KernelUnavailable as error:
+            sys.exit(f"KernelUnavailable: {error}")
     try:
         tokenizer = Tokenizer.from_bytes(load_tokenizer(args.model))
         model = load_model(args.model, device)  # refuses a folder whose drafter is missing or of other weights

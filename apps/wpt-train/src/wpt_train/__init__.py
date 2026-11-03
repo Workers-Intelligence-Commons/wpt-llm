@@ -55,7 +55,9 @@ GPU, and is refused for a recipe with a step that reads something else. On
 one GPU, --segment runs a longer window as consecutive segments of that
 many tokens; with `split`, each process runs its slice of a longer window
 in segments of that many tokens. Each gives the same training as whole
-windows.
+windows. --kernels names what computes the attention on the gpu worker
+(wpt_model.sparse; docs/model.md, "Attention"); one that cannot work there
+refuses the run.
 
 A step's batch is the number of examples per update over every process
 together, so the same recipe trains the same way on any hardware. Each
@@ -173,6 +175,7 @@ from wpt_inference.drafting import settings as drafter_settings
 from wpt_model import PARTS, WPT, ModelConfig, canonical_ids, save_drafter, save_model, weight_files, weight_hashes
 from wpt_model.drafter import Drafter
 from wpt_model.notice import WEIGHT_METADATA, write_credits, write_documents
+from wpt_model.sparse import FORMS, named_form
 from wpt_store import NAME as STORE_NAME
 from wpt_store import StoreError, read_env_file, store_from_settings
 from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry, file_hashes, set_ref, short
@@ -235,6 +238,9 @@ OPTIONS = [
                                    "measure them)"),
     ("max-restarts", int, 3, "after a crash, start every process again this many times at most, continuing from "
                              "the checkpoint (0: run in this process, never restart)"),
+    ("kernels", named_form, None, f"what computes the attention: {', '.join(FORMS)}; one that cannot work on the "
+                                   "gpu worker stops the run (default: the first kernels installed for its GPU, "
+                                   "else pytorch)"),
 ]
 
 
@@ -699,7 +705,8 @@ def _train(args, recipe, strategy_file, steps, context, store, telemetry, enviro
             "options": {"strategy": args.strategy, "processes": args.processes, "max_restarts": args.max_restarts,
                         "micro_batch": args.micro_batch, "checkpoint_every": args.checkpoint_every,
                         "segment": args.segment, "stream": args.stream, "stream_shards": args.stream_shards,
-                        "recompute": args.recompute, "resume": args.resume, "scheduler_costs": args.scheduler_costs}}
+                        "recompute": args.recompute, "resume": args.resume, "scheduler_costs": args.scheduler_costs,
+                        "kernels": args.kernels}}
     try:
         checkout_root = code_root()
         placed = machines(keys(environ))  # refused before any worker is reached

@@ -2,7 +2,8 @@
 "Evaluation"): what a test asks of the model goes through the link, and the
 tests, which hold the tokenizer, the store and the sandboxes, run here.
 
-    with Remote(folder, environ) as model:      the first gpu worker WPT_GPU_WORKERS lists, or
+    with Remote(folder, environ, log, kernels) as model:
+                                                the first gpu worker WPT_GPU_WORKERS lists, or
                                                 a local one, loaded with the folder's weights
         model.config                            the model's config (wpt_model.ModelConfig)
         model.device                            where the worker runs it, in words
@@ -13,6 +14,10 @@ tests, which hold the tokenizer, the store and the sandboxes, run here.
                                                 token lists of one length
         model.losses(windows)                   the next-token loss of each token of each window
                                                 after its first (wpt_worker.evaluation.losses)
+
+kernels names what computes the model's attention there (one of
+wpt_model.sparse.FORMS, or None to choose): a form that cannot work on the
+worker ends the job before the model loads, and the block raises LinkError.
 
 wpt_worker.evaluation.Served has the same names for a model in this
 process. The worker's job (wpt_worker.evaluation) runs on its own thread
@@ -43,8 +48,8 @@ class WorkerError(Exception):
 
 
 class Remote:
-    def __init__(self, folder, environ, log=print):
-        self.folder, self.environ, self.log = Path(folder), environ, log
+    def __init__(self, folder, environ, log=print, kernels=None):
+        self.folder, self.environ, self.log, self.kernels = Path(folder), environ, log, kernels
         self.config = ModelConfig.load(self.folder / CONFIG_NAME)
         self.worker = self.channel = self.thread = self.files = None
         self.device = None
@@ -65,7 +70,8 @@ class Remote:
             self.worker.send_checkout(Repo(root).data_folder(), root)
             self.files = Files(Path(tempfile.mkdtemp(prefix="wpt-eval-link-")))
             weights = {name: self.files.offer(self.folder / name) for name in weight_files(self.folder)}
-            spec = {"task": "wpt-eval", "model": asdict(self.config), "weights": weights}
+            spec = {"task": "wpt-eval", "model": asdict(self.config), "weights": weights,
+                    "kernels": self.kernels}
             self.thread = threading.Thread(target=self._serve, args=(spec,), name="eval-job", daemon=True)
             self.thread.start()
             while not self.ready.wait(0.2):

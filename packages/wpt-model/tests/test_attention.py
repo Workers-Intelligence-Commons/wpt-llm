@@ -237,23 +237,49 @@ def recipe_rows(B, T, k, generator):
     return torch.cat([window.expand(B, -1, -1), torch.where(chosen >= 0, chosen + T, -1)], -1)
 
 
+def window_rows(B, T):
+    """Index rows as the MTP block's attention builds them: the window alone,
+    its -1s at the end of the row."""
+    window = _window(torch.arange(T), min(T, WINDOW))  # a table that starts WINDOW - 1 rows before the first token
+    return torch.where(window >= 0, window - (WINDOW - 1), -1).expand(B, -1, -1).contiguous()
+
+
+def hca_rows(B, T, length, generator):
+    """Index rows as an HCA layer builds them, for T queries drawn from a text
+    of length tokens, its first 64 among them: the window, then every merged
+    entry, -1 for each not yet complete, so a query's row ends in a run of
+    -1s as long as the entries still to come (all of them before token 127)."""
+    positions = torch.cat([torch.arange(64), torch.randint(64, length, (T - 64,), generator=generator)]).sort().values
+    every = torch.arange(length // HCA_RATIO)
+    merged = every.masked_fill(every >= (positions[:, None] + 1) // HCA_RATIO, -1)
+    rows = torch.cat([window_rows(1, length)[0][positions], torch.where(merged >= 0, merged + length, -1)], -1)
+    return rows.expand(B, -1, -1).contiguous()
+
+
+# the rows of each kind of layer: (index rows, entries in the table)
+ROWS = {"CSA": lambda B, T, k, generator: (recipe_rows(B, T, k, generator), T + T // CSA_RATIO),
+        "HCA": lambda B, T, k, generator: (hca_rows(B, T, 64 * HCA_RATIO, generator), 64 * HCA_RATIO + 64),
+        "window": lambda B, T, k, generator: (window_rows(B, T), T)}
+
+
 def relative_error(got, expected):
     return ((got.cpu() - expected).abs().max() / expected.abs().max()).item()
 
 
 @needs_kernels
 @each_kernel
-@pytest.mark.parametrize("heads, k", RECIPES[:3])
-def test_the_attention_kernels_give_the_pytorch_result(chosen, heads, k):
+@pytest.mark.parametrize("rows, heads, k", [("CSA", heads, k) for heads, k in RECIPES[:3]]
+                         + [("HCA", 4, None), ("HCA", 8, None), ("window", 4, None), ("window", 8, None)])
+def test_the_attention_kernels_give_the_pytorch_result(chosen, rows, heads, k):
     # docs/model.md: kernels compute from BF16 inputs; against the PyTorch
-    # form on the same BF16 values, on rows as the recipes' CSA layers make
-    # them: the output, the weights and the log-sum-exp within 1e-2, 1e-4 and
-    # 1e-4 of their largest value, and every gradient within 1e-2
+    # form on the same BF16 values, on rows as the recipes' layers make them
+    # (CSA's, HCA's with 64 merged entries, the MTP block's window alone):
+    # the output, the weights and the log-sum-exp within 1e-2, 1e-4 and 1e-4
+    # of their largest value, and every gradient within 1e-2
     device, generator = select_device(), torch.Generator().manual_seed(0)
     B, T, c = 2, 600, 128
-    idx = recipe_rows(B, T, k, generator)
-    q, kv = (torch.randn(*shape, generator=generator).bfloat16().float()
-             for shape in ((B, T, heads, c), (B, T + T // CSA_RATIO, c)))
+    idx, N = ROWS[rows](B, T, k, generator)
+    q, kv = (torch.randn(*shape, generator=generator).bfloat16().float() for shape in ((B, T, heads, c), (B, N, c)))
     sink = torch.randn(heads, generator=generator)
     inputs = [t.requires_grad_() for t in (q, kv, sink)]
     out, weights = _SparseAttention.apply(*inputs, idx, c ** -0.5)
@@ -304,23 +330,27 @@ def test_the_indexer_kernel_gives_the_pytorch_scores_and_choice(chosen, heads, k
 
 
 @needs_kernels
-def test_a_csa_layer_trains_with_the_kernels_as_with_pytorch():
+@pytest.mark.parametrize("ratio, T", [(CSA_RATIO, 300), (HCA_RATIO, 1100), (0, 300)], ids=["CSA", "HCA", "MTP"])
+def test_a_layer_trains_with_the_kernels_as_with_pytorch(ratio, T):
     # docs/model.md: on a GPU with kernels, training passes use them too
     # (the attention, its statistics for the indexer's target, its backward
-    # pass, and the indexer's scores): a CSA layer's output, indexer loss and
-    # gradients agree with the PyTorch form's on the CPU within 1e-2 of
-    # their largest value
+    # pass, and the indexer's scores): a CSA layer's, an HCA layer's (8
+    # merged entries) and the MTP block's attention's output, CSA's indexer
+    # loss, and gradients agree with the PyTorch form's on the CPU within
+    # 1e-2 of their largest value
     torch.manual_seed(0)
     device = select_device()
-    layer = randomized(Attention(CONFIG, CSA_RATIO))
-    x = torch.randn(2, 300, CONFIG.d_model)
+    layer = randomized(Attention(CONFIG, ratio))
+    x = torch.randn(2, T, CONFIG.d_model)
     results = []
     for where in ("cpu", device):
         layer.zero_grad()
         here = layer.to(where)
         out, loss = here(x.to(where), indexer_loss=True)
-        (out.square().mean() + loss).backward()
-        results.append([out.detach().cpu(), loss.detach().cpu()] + [p.grad.cpu() for p in here.parameters()])
+        losses = [] if loss is None else [loss]
+        (out.square().mean() + sum(losses)).backward()
+        results.append([out.detach().cpu()] + [each.detach().cpu() for each in losses]
+                       + [p.grad.cpu() for p in here.parameters()])
     assert kernels(device) is not None
     assert all(relative_error(got, want) < 1e-2 for got, want in zip(results[1], results[0]))
 
@@ -337,11 +367,13 @@ def test_installed_kernels_that_cannot_work_stop_instead_of_falling_back(monkeyp
     # docs/model.md: which form runs is decided once; TileLang installed
     # without nvcc, or kernels that do not run on this GPU, are an error
     # with its reason, and neither TileLang nor Triton installed means
-    # PyTorch. Stand-ins play the installed packages: neither the real
-    # import nor a GPU is exercised
+    # PyTorch. Stand-ins play the installed packages and an NVIDIA GPU
+    # under Linux, whatever runs the test: neither the real import nor a GPU
+    # is exercised
     gpu = torch.device("cuda")
     monkeypatch.setattr(sparse, "_kernels", sparse._UNDECIDED)
     monkeypatch.setattr(torch.version, "cuda", "13.0")
+    monkeypatch.setattr(sys, "platform", "linux")
     monkeypatch.setattr(sparse, "_installed", lambda name: True)
     monkeypatch.setattr(sparse, "_nvcc", lambda: None)
     with pytest.raises(KernelUnavailable, match="nvcc"):
@@ -356,6 +388,36 @@ def test_installed_kernels_that_cannot_work_stop_instead_of_falling_back(monkeyp
 
     monkeypatch.setattr(sparse, "_installed", lambda name: False)
     assert kernels(gpu) is None and kernels(torch.device("cpu")) is None
+
+
+def test_named_kernels_that_cannot_work_stop_instead_of_another_form(monkeypatch):
+    # docs/model.md: a form a run names is the one that runs or the run
+    # stops with the reason: kernels not installed, TileLang off an NVIDIA
+    # GPU under Linux, kernels without a GPU; pytorch is PyTorch though
+    # kernels are installed, and another form named once it is decided is
+    # an error too. Stand-ins play the installed packages and the
+    # machine, as above
+    gpu = torch.device("cuda")
+    monkeypatch.setattr(sparse, "_kernels", sparse._UNDECIDED)
+    monkeypatch.setattr(sparse, "_installed", lambda name: name == "tilelang")
+    monkeypatch.setattr(torch.version, "cuda", "13.0")
+    monkeypatch.setattr(sys, "platform", "linux")
+    with pytest.raises(KernelUnavailable, match="Triton kernels were asked for, and triton is not installed"):
+        kernels(gpu, "triton")
+    monkeypatch.setattr(sys, "platform", "win32")
+    with pytest.raises(KernelUnavailable, match="TileLang kernels run on an NVIDIA GPU under Linux only"):
+        kernels(gpu, "tilelang")
+    monkeypatch.setattr(sys, "platform", "linux")
+    monkeypatch.setattr(torch.version, "cuda", None)  # an AMD GPU
+    with pytest.raises(KernelUnavailable, match="TileLang kernels run on an NVIDIA GPU under Linux only"):
+        kernels(gpu, "tilelang")
+    with pytest.raises(KernelUnavailable, match="Triton kernels run on a GPU, and this process runs on cpu"):
+        kernels(torch.device("cpu"), "triton")
+
+    monkeypatch.setattr(sparse, "_installed", lambda name: True)
+    assert kernels(gpu, "pytorch") is None and kernels(torch.device("cpu"), "pytorch") is None
+    with pytest.raises(KernelUnavailable, match="the attention's form is pytorch in this process"):
+        kernels(gpu, "triton")
 
 
 def test_the_mtp_block_sees_only_the_last_128_tokens():

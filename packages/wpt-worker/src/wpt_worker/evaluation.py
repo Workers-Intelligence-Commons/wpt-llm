@@ -4,8 +4,12 @@ tests, which hold the tokenizer, the store, the sandboxes and the model
 folder; the job holds the model and answers what the tests ask of it,
 through the link. It deals only in token ids, as every job does.
 
-The manager's spec holds the model's config and the weight files it
-offers; the job downloads them (checked against their sha256), loads the
+The manager's spec holds the model's config, the weight files it offers
+and the form of the attention it names (spec["kernels"], one of
+wpt_model.sparse.FORMS, or None); the job decides the attention's form
+first, as wpt-train's does (docs/model.md, "Attention"), and a form that
+cannot work here ends it with exit code 2 and the reason on its standard
+error. It then downloads the files (checked against their sha256), loads the
 model on the machine's best device in eval mode, tells the manager it is
 ready, and then answers until the manager ends it:
 
@@ -23,6 +27,7 @@ the names the manager's side has (config, device, generator, writer,
 greedy and losses): a test cannot tell where the model is.
 """
 
+import sys
 import threading
 
 import numpy as np
@@ -32,6 +37,8 @@ import torch
 from safetensors.torch import load_file
 
 from wpt_model import WPT, ModelConfig
+from wpt_model.sparse import KernelUnavailable, kernels
+from wpt_training.launch import REFUSED
 from wpt_utils.device import describe, select_device
 
 from .job import call, download
@@ -100,6 +107,15 @@ def losses(model, windows: list[list[int]]) -> list[np.ndarray]:
 
 def run(spec, link, work: Path) -> int:
     config = ModelConfig(**spec["model"])
+    device, named = select_device(), spec["kernels"]
+    if device.type == "cuda" or named:  # decided once, before the model loads (docs/model.md, "Attention")
+        try:
+            chosen = kernels(device, named)
+        except KernelUnavailable as error:
+            print(f"KernelUnavailable: {error}", file=sys.stderr)
+            return REFUSED
+        print("attention: " + (f"{chosen.NAME} kernels" if chosen else "PyTorch (--kernels pytorch)" if named
+                               else "PyTorch (neither TileLang nor Triton is installed)"))
     state = {}
     for name, offer in spec["weights"].items():
         path = download(link, offer, work / "weights" / name)
@@ -108,9 +124,9 @@ def run(spec, link, work: Path) -> int:
     model = WPT(config)
     model.load_state_dict(state)
     del state
-    model = model.to(select_device())
+    model = model.to(device)
     model.eval()
-    device, done = describe(next(model.parameters()).device), threading.Event()
+    where, done = describe(device), threading.Event()
     writing = Writing(link)
 
     def answer(header, body):
@@ -128,6 +144,6 @@ def run(spec, link, work: Path) -> int:
 
     with writing(model):
         link.handlers.update({"model.greedy": answer, "model.losses": scored, "eval.end": end})
-        call(link, "ready", device=device)
+        call(link, "ready", device=where)
         link.serve(until=done.is_set)
     return 0

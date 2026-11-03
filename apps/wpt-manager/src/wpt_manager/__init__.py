@@ -55,16 +55,20 @@ exit code when it fails:
                                          reaches Docker (the sandboxes' machine); none without tasks
     3. wpt-train RECIPE ID --run NAME --resume --out FOLDER/NAME
                                          through the run's gpu workers, rented first when
-                                         WPT_GPU_WORKERS asks; the run's checkpoint is the store's,
-                                         under NAME, so the same command with the same WPT_RUN
-                                         continues it. A gpu worker lost (wpt-train's exit code 4)
-                                         that the manager rented is reported, given back and
+                                         WPT_GPU_WORKERS asks, with WPT_KERNELS=triton on rented
+                                         ones unless the settings set WPT_KERNELS; the run's
+                                         checkpoint is the store's, under NAME, so the same command
+                                         with the same WPT_RUN continues it. A gpu worker lost
+                                         (wpt-train's exit code 4) that the manager rented is
+                                         reported, given back and
                                          replaced, and the step runs again from the last
                                          checkpoint in the store; so does a crash of a training
                                          process on one of several workers (exit code 5), on the
                                          workers that answer; both count against the same limit,
                                          WPT_REPLACEMENTS times
-    4. wpt-eval FOLDER/NAME              with WPT_EVALUATE only, on the run's first gpu worker
+    4. wpt-eval FOLDER/NAME              with WPT_EVALUATE only, on the run's first gpu worker,
+                                         with WPT_KERNELS=triton on a rented one unless the
+                                         settings set WPT_KERNELS
     5. the model folder into the store, ref models/NAME (wpt_store.models), recorded first;
        then the folder is removed: the store holds it
 
@@ -120,6 +124,7 @@ RUN_FILE = "wpt-run.txt"  # at the repository's root, git-ignored: the run name 
 DEFAULT_FOLDER = Path("runs") / "manager"
 DEFAULT_STATE = Path("runs") / "manager-state"  # the runs' gpu workers, their tokens included (machines.py)
 CONTAINER_SETTING = "WPT_MANAGER_CONTAINER"
+KERNELS, RENTED_KERNELS = "WPT_KERNELS", "triton"  # wpt-train's --kernels, on rented gpu workers
 SWEEP = 300.0  # seconds between two tries to stop the rentals that could not be stopped
 RUN_LINE = re.compile(r"# run (\S+) of the recipe (\S+);")  # the first line of RUN_FILE
 # each command the manager runs, by the Python that runs it
@@ -432,7 +437,8 @@ def _run(recipe, name, out, evaluate, store, telemetry, environ, root, workers) 
             _train(recipe, name, out, dataset, telemetry, environ, root, workers)
             if evaluate:  # on the run's gpu workers, rented ones included, which are given back after it
                 with telemetry.span("manager.evaluate", folder=str(out)):
-                    run_command("evaluate", ["wpt-eval", str(out)], log, environ={WORKERS: workers.text()})
+                    run_command("evaluate", ["wpt-eval", str(out)], log,
+                                environ={WORKERS: workers.text(), **kernels(workers, environ)})
         finally:
             _stop_workers(workers, environ, root, telemetry)
     except Failed as error:
@@ -465,7 +471,7 @@ def _train(recipe, name, out, dataset, telemetry, environ, root, workers):
         try:
             with telemetry.span("manager.train", dataset=dataset, folder=str(out), workers=len(workers.keys())):
                 run_command("train", ["wpt-train", recipe, dataset, "--run", name, "--resume", "--out", str(out)],
-                            log, environ={WORKERS: workers.text()})
+                            log, environ={WORKERS: workers.text(), **kernels(workers, environ)})
             return
         except Failed as error:
             if error.code not in (LOST, CRASHED):
@@ -477,6 +483,13 @@ def _train(recipe, name, out, dataset, telemetry, environ, root, workers):
                 log(f"RentalError: {failed}", error=True)
                 raise error from None
             log("the run resumes from the last checkpoint in the store")
+
+
+def kernels(workers, environ) -> dict:
+    """WPT_KERNELS=triton for a training or an evaluation on rented gpu
+    workers, unless the settings name the attention's form themselves
+    (docs/machines.md)."""
+    return {KERNELS: RENTED_KERNELS} if workers.groups() and not environ.get(KERNELS) else {}
 
 
 def _stop_workers(workers, environ, root, telemetry):

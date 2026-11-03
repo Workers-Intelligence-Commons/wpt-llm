@@ -2,6 +2,7 @@
 
 Usage:
     wpt-eval MODEL_FOLDER [EVAL ...] [--attempts N] [--probe-rate RATE] [--kind-by FIELD]
+                [--kernels FORM]
 
 EVAL is the name of a built-in test (the files in wpt_eval/evals/) or the
 path of any Python file; with none, every built-in test runs. A test file
@@ -17,7 +18,10 @@ people. The model is on a gpu worker (wpt_eval.remote, docs/machines.md,
 "Evaluation"): the first of WPT_GPU_WORKERS, or a local one; a test reaches
 it through the context only: context.model.config, .device (where it runs,
 in words), .generator(seed), .writer(prompt, rows, ...),
-.greedy(prompts, steps) and .losses(windows).
+.greedy(prompts, steps) and .losses(windows). --kernels FORM (WPT_KERNELS:
+tilelang, triton or pytorch) names what computes the model's attention on
+the gpu worker, as for wpt-train (docs/model.md, "Attention"); a form that
+cannot work there refuses the evaluation before any test runs.
 
 The agent measures share one run of attempts (wpt_eval.attempts):
 context.attempts(plain) plays N attempts (--attempts, WPT_ATTEMPTS, default
@@ -67,6 +71,7 @@ import numpy as np
 
 from wpt_agent import Unready
 from wpt_model import DrafterMismatch, TokenizerMismatch, check_drafter, load_tokenizer, weight_hashes
+from wpt_model.sparse import FORMS, named_form
 from wpt_model.notice import CARD_NAME, EVALS_NAME, documents
 from wpt_store import Store, StoreError, read_env_file, store_from_settings
 from wpt_store.shards import documents as documents_of
@@ -301,6 +306,11 @@ def main(argv=None):
                         metavar="FIELD",
                         help=f"the field of the held-out documents' sources the held-out-loss test groups its "
                              f"losses by: {', '.join(FIELDS)} (WPT_KIND_BY; default: {KIND_BY})")
+    parser.add_argument("--kernels", type=named_form, default=_setting(parser, "WPT_KERNELS", named_form, None),
+                        metavar="FORM",
+                        help=f"what computes the attention on the gpu worker: {', '.join(FORMS)}; one that cannot "
+                             "work there refuses the evaluation (WPT_KERNELS; default: the first kernels installed "
+                             "for its GPU, else pytorch)")
     args = parser.parse_args(argv)
     environ = {**read_env_file(Path.cwd() / ".env"), **{key: value for key, value in os.environ.items() if value}}
     try:
@@ -316,7 +326,8 @@ def main(argv=None):
         with Telemetry.start(store, "wpt-eval", sys.argv[1:] if argv is None else list(argv),
                              short(next(iter(weights.values()), "none")),
                              inputs={"model_folder": args.model, "evals": evals, "attempts": args.attempts,
-                                     "probe_rate": str(args.probe_rate), "kind_by": args.kind_by},
+                                     "probe_rate": str(args.probe_rate), "kind_by": args.kind_by,
+                                     "kernels": args.kernels},
                              env_file=Path.cwd() / ".env") as telemetry:
             try:
                 with telemetry.span("inputs"):
@@ -325,7 +336,7 @@ def main(argv=None):
                     context = open_context(args.model, store, telemetry, args.attempts, args.probe_rate,
                                            args.kind_by)
                     telemetry.input(weights=weights, dataset=context.provenance.get("dataset"))
-                with telemetry.span("gpu_worker.model"), Remote(args.model, environ, telemetry.log) as model:
+                with telemetry.span("gpu_worker.model"), Remote(args.model, environ, telemetry.log, args.kernels) as model:
                     context.model, context.device = model, model.device
                     for eval_ in evals:
                         record = run_eval(context, eval_)

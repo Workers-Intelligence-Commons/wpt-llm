@@ -203,34 +203,46 @@ training included, in one of two languages:
   since DeepSeek published no backward pass: one gives each head's softmax
   denominator and each entry's weight (the indexer's target), the other the
   gradients of the queries and entries.
-- **Triton**, on any other NVIDIA or AMD GPU (Linux, where PyTorch brings
-  Triton, and Windows through `triton-windows` in the `cuda` build):
+- **Triton**, on any NVIDIA or AMD GPU where it is installed (Linux,
+  where PyTorch brings Triton, and Windows through `triton-windows` in the
+  `cuda` build), chosen where TileLang is not installed, or when named:
   translations of the same four kernels (`triton_kernels.py`).
 
 The indexer's loss stays in PyTorch, since it reads only the chosen
 entries. Which form runs is decided once, before the first use
-(`wpt-train` decides it before training and logs it): neither TileLang nor
-Triton installed means the PyTorch form; TileLang installed without the
-CUDA compiler `nvcc` it needs (on `PATH`, or under `CUDA_HOME` or
+(`wpt-train` decides it before training and logs it). `wpt-train`,
+`wpt-eval` and `wpt-chat` each take `--kernels` (or `WPT_KERNELS`) to name
+it: `triton`, `tilelang` or `pytorch`; `wpt-web`'s model drafts read
+`WPT_KERNELS`. Unnamed, TileLang runs where it is installed on an NVIDIA GPU under Linux,
+else Triton where it is installed, else the PyTorch form. The training
+and the evaluation `wpt-manager` runs on rented machines name `triton`
+unless its settings name the form. A form named after the decision must be the one decided. A
+kernel form that cannot work stops the run with its reason, never a switch
+to another form: one named but not installed, TileLang named off an NVIDIA
+GPU under Linux, kernels named on a machine with no GPU, TileLang without
+the CUDA compiler `nvcc` it needs (on `PATH`, or under `CUDA_HOME` or
 `CUDA_PATH`), a TileLang or Triton that fails to import, or a kernel that
 does not compile or run on this GPU (each is compiled and run once on a
-small input) stops the run with that reason. A failure inside a later call
-is an error, never a switch to the PyTorch form.
+small input). A failure inside a later call is an error, never a switch to
+the PyTorch form.
 
 The kernels compute from BF16 queries and entries (the entries' FP8 values
-are exact in BF16) and FP8 indexer queries and keys, where the PyTorch form
-computes in FP32, and they add up the entries' gradients across queries in
-whatever order the GPU's atomic additions take; so training and evaluations
-on a machine where kernels run may give slightly different numbers from
-those of a machine where they do not, and from one run to the next. Tests
-check each kernel against the PyTorch form at the recipes' head counts and
-top `k`, on index rows as CSA layers make them (the window, with its gaps
-mid-row, then the chosen entries): the attention's output within 1% of its
+are exact in BF16) and FP8 indexer queries and keys, where the PyTorch
+form computes in FP32, and they add up the entries' gradients across
+queries in whatever order the GPU's atomic additions take; so training and
+evaluations on a machine where kernels run may give slightly different
+numbers from those of a machine where they do not, and from one run to the
+next. Tests check each kernel against the PyTorch form at the recipes'
+head counts and top `k`, on index rows as each layer kind makes them
+(CSA's: the window, with its gaps mid-row, then the chosen entries; HCA's:
+the window, then every merged entry, those not yet complete left out; the
+MTP block's: the window alone): the attention's output within 1% of its
 largest value, its gradients within 1%, the weights and softmax
 denominators within 0.01%, and the indexer's scores within 0.1%, its top
-`k` as good; a whole CSA layer's output, indexer loss and gradients within
-1% of the PyTorch form on the CPU. They check the PyTorch form against the
-formulas of the paper.
+`k` as good. Whole CSA and HCA layers and the MTP block's attention give
+their output, CSA's indexer loss, and their gradients within 1% of the
+PyTorch form on the CPU. They check the PyTorch form against the formulas
+of the paper.
 
 ## Long windows
 

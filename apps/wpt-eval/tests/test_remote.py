@@ -86,3 +86,31 @@ def test_a_number_of_gpu_workers_to_rent_is_refused_before_anything_runs(trained
     with pytest.raises(SystemExit, match="WorkerError: WPT_GPU_WORKERS=2: a number of gpu workers to rent"):
         main([str(trained.folder)])
     assert not (trained.folder / "evals").exists()
+
+
+def test_kernels_named_that_cannot_work_on_the_gpu_worker_refuse_the_evaluation_before_it_runs(trained, tmp_path,
+                                                                                             monkeypatch, capsys):
+    # docs/model.md, "Attention": a named form is the one that runs or the
+    # run stops with the reason; here a worker with no GPU asked for Triton's
+    # kernels, before the model is loaded and before any test. A name that is
+    # no form is refused too
+    test = tmp_path / "ran.py"
+    test.write_text("from wpt_eval import Result\n\ndef run(context):\n    return Result({}, 'ran')\n")
+    with pytest.raises(SystemExit) as refused:
+        main([str(trained.folder), str(test), "--kernels", "triton"])
+    assert refused.value.code != 0
+    captured = capsys.readouterr()
+    assert "KernelUnavailable: Triton kernels run on a GPU, and this process runs on cpu" in captured.out + captured.err
+    assert not (trained.folder / "evals" / "ran.json").exists()
+
+    monkeypatch.setenv("WPT_KERNELS", "fast")
+    with pytest.raises(SystemExit) as refused:
+        main([str(trained.folder), str(test)])
+    assert refused.value.code == 2 and "WPT_KERNELS='fast': not one of tilelang, triton, pytorch" in \
+        capsys.readouterr().err
+    assert not (trained.folder / "evals" / "ran.json").exists()
+
+
+def test_the_kernels_named_pytorch_are_carried_to_the_job_and_the_model_still_writes(trained):
+    with Remote(trained.folder, dict(os.environ), kernels="pytorch") as remote:
+        assert remote.greedy(PROMPTS, 3) == Served(load_model(trained.folder)).greedy(PROMPTS, 3)

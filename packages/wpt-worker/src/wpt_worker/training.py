@@ -324,12 +324,14 @@ def _train(spec, link, store, work, strategy, telemetry):
     model = WPT(model_config)
     model.set_canonical_ids(torch.tensor(spec["canonical"], dtype=torch.long))  # Engram's, from the vocabulary
     model.recompute = options["recompute"]
-    if strategy.device.type == "cuda":  # decided once, before training (docs/model.md, "Attention")
+    named = options["kernels"]
+    if strategy.device.type == "cuda" or named:  # decided once, before training (docs/model.md, "Attention")
         try:
-            chosen = kernels(strategy.device)
+            chosen = kernels(strategy.device, named)
         except KernelUnavailable as error:
             raise Refused(f"KernelUnavailable: {error}") from None
         log("attention: " + (f"{chosen.NAME} kernels" if chosen
+                             else "PyTorch (--kernels pytorch)" if named
                              else "PyTorch (neither TileLang nor Triton is installed)"))
     model = model.to(strategy.device)
     parameters = sum(p.numel() for p in model.parameters())

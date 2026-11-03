@@ -378,3 +378,24 @@ def test_the_source_list_checks_each_source_once(web, monkeypatch):
     monkeypatch.setattr(Repo, "check_source", lambda self, sid: checked.append(sid) or check_source(self, sid))
     status, listed = request("GET", "/api/sources")
     assert status == 200 and len(listed) == 2 and sorted(checked) == sorted(s["id"] for s in listed)
+
+
+def test_a_kernel_form_wpt_kernels_names_that_cannot_work_stops_a_draft_before_the_model_loads(tmp_path, monkeypatch):
+    # docs/model.md, "Attention": wpt-web's drafts read WPT_KERNELS like every command that runs the model; a form
+    # that cannot work here, or no form at all, is this machine's setting, never the folder's fault
+    import torch
+    import wpt_model
+    import wpt_utils.device
+
+    folder = tmp_path / "model"
+    folder.mkdir()
+    (folder / "config.json").write_text("{}", encoding="utf-8")
+    loaded = []
+    monkeypatch.setattr(wpt_utils.device, "select_device", lambda: torch.device("cpu"))
+    monkeypatch.setattr(wpt_model, "load_model", lambda *_: loaded.append(True))
+    asked = conversation(text("user", "hello"))
+    for setting in ("triton", "fast"):  # Triton runs on a GPU only; "fast" names no form
+        monkeypatch.setenv("WPT_KERNELS", setting)
+        with pytest.raises(MachineFault, match="WPT_KERNELS"):
+            Drafter().draft(str(folder), asked)
+    assert not loaded

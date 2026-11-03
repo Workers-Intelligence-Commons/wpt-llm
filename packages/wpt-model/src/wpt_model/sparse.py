@@ -23,8 +23,9 @@ included (kernels()):
     TileLang  an NVIDIA GPU under Linux with TileLang installed
               (tilelang_kernels.py: DeepSeek's attention and FP8 indexer
               kernels, and WPT's backward kernels)
-    Triton    any other NVIDIA or AMD GPU where Triton is installed
-              (triton_kernels.py: translations of the same)
+    Triton    any NVIDIA or AMD GPU where Triton is installed, where
+              TileLang is not or when named (triton_kernels.py:
+              translations of the same)
 
 Kernels read the queries and entries in BF16 (the entries' FP8 values are
 exact in BF16) and the indexer's queries and keys in FP8. The indexer's
@@ -33,13 +34,17 @@ Tests check each form against the formulas, and the kernels against the
 PyTorch form.
 
 Which form runs is decided once per process, at the first GPU pass (or
-before, by wpt-train): neither TileLang nor Triton installed means PyTorch;
-an installed one that cannot work (no CUDA compiler for TileLang, an import
-that fails, a kernel that does not compile or run on this GPU) is
+before, by wpt-train, which may name it: FORMS). Unnamed, the form is the
+first of TileLang and Triton installed for this GPU, else PyTorch; a later
+call that names another form is KernelUnavailable. A kernel form, named or
+installed, that cannot work (not installed when named, TileLang off an
+NVIDIA GPU under Linux or without its CUDA compiler, no GPU, an import that
+fails, a kernel that does not compile or run on this GPU) is
 KernelUnavailable, which stops the run. A failure inside a later call is an
-error like any other, never a switch to PyTorch.
+error like any other, never a switch to another form.
 """
 
+import argparse
 import importlib.util
 import os
 import shutil
@@ -52,45 +57,71 @@ from .formats import fp8_parts
 
 BLOCK_VALUES = 1 << 24  # gathered values per block of queries: 64 MiB in FP32
 
+FORMS = ("tilelang", "triton", "pytorch")  # the forms a run may name
+_NAMES = {"tilelang": "TileLang", "triton": "Triton"}
 _UNDECIDED = object()
 _kernels = _UNDECIDED
+_form = None  # the form decided, one of FORMS, once _kernels is
+
+
+def named_form(text):
+    """A form a command's --kernels or WPT_KERNELS names (FORMS), as an
+    argparse type."""
+    if text not in FORMS:
+        raise argparse.ArgumentTypeError(f"not one of {', '.join(FORMS)}: {text!r}")
+    return text
 
 
 class KernelUnavailable(RuntimeError):
-    """TileLang or Triton is installed for this GPU but its kernels cannot
-    work here: the reason says why. Nothing has been computed."""
+    """The kernels named, or installed for this GPU, cannot work here: the
+    reason says why. Nothing has been computed."""
 
 
-def kernels(device):
+def kernels(device, form=None):
     """The kernels that compute the attention on device (a module with
     NAME, attention, statistics, attention_backward and index_scores), or
-    None for the PyTorch form; decided at the first call on a GPU. Raises
-    KernelUnavailable when TileLang or Triton is installed but cannot work."""
-    global _kernels
+    None for the PyTorch form; decided at the first call on a GPU. form, one
+    of FORMS, names the form at that call; None chooses it. Raises
+    KernelUnavailable when the kernels named or installed cannot work, or
+    when a later call names another form than the one decided."""
+    global _kernels, _form
+    if form not in (None, *FORMS):
+        raise ValueError(f"no attention form {form!r}: one of {', '.join(FORMS)}")
     if device.type != "cuda":
+        if form in _NAMES:
+            raise KernelUnavailable(f"{_NAMES[form]} kernels run on a GPU, and this process runs on {device.type}")
         return None
     if _kernels is _UNDECIDED:
-        _kernels = _decide(device)
+        form = form or ("tilelang" if torch.version.cuda and sys.platform == "linux" and _installed("tilelang")
+                        else "triton" if _installed("triton") else "pytorch")
+        _kernels, _form = _decide(device, form), form
+    elif form not in (None, _form):
+        raise KernelUnavailable(f"the attention's form is {_form} in this process, decided at its first GPU "
+                                f"pass, and {form} was asked for after it")
     return _kernels
 
 
-def _decide(device):
-    if torch.version.cuda and sys.platform == "linux" and _installed("tilelang"):
+def _decide(device, form):
+    if form in _NAMES and not _installed(form):
+        raise KernelUnavailable(f"{_NAMES[form]} kernels were asked for, and {form} is not installed")
+    if form == "pytorch":
+        return None
+    if form == "tilelang":
+        if not (torch.version.cuda and sys.platform == "linux"):
+            raise KernelUnavailable("TileLang kernels run on an NVIDIA GPU under Linux only")
         if _nvcc() is None:
             raise KernelUnavailable("TileLang compiles its attention kernels with the CUDA compiler (nvcc), which "
                                     "is not here: install the CUDA Toolkit and put nvcc on PATH or set CUDA_HOME, "
-                                    "or remove tilelang to use the Triton kernels")
+                                    "or name the Triton kernels instead")
         try:
             from . import tilelang_kernels as chosen
         except Exception as error:  # an ImportError, or an error of TileLang's own while it starts
             raise KernelUnavailable(f"TileLang is installed but does not import: {error}") from error
-    elif _installed("triton"):
+    else:
         try:
             from . import triton_kernels as chosen
         except Exception as error:
             raise KernelUnavailable(f"Triton is installed but does not import: {error}") from error
-    else:
-        return None
     try:  # every kernel compiled and run once, so that a GPU they cannot run on stops the run now
         _try(chosen, device)
     except Exception as error:
