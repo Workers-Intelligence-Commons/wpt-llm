@@ -25,10 +25,11 @@ answer (statements: for each entry, the license text found at its place
 and that text's decision) is computed on every call, a few small reads of
 the stored bytes. The rest is kept in the store under the ref
 source-kept/<kept_key: the final tree, the license entries, the formats,
-that answer and the code outside data/ (wpt_utils.programs.code_outside)>,
-so a source is checked again only when one of them changed: a change to
-another source, or to a license text this source does not match, leaves
-it found again.
+that answer and the code of this module (wpt_utils.programs.code_of: the
+source files of the WPT modules it imports)>, so a source is checked again
+only when one of them changed: a change to another source, to a license
+text this source does not match, or to a file of the checkout this module
+does not import, leaves it found again.
 """
 
 import dataclasses
@@ -36,11 +37,11 @@ import json
 from dataclasses import dataclass
 
 from wpt_telemetry import Telemetry, set_ref
-from wpt_utils.programs import code_outside
+from wpt_utils.programs import code_of
 
 from . import license_check, manifest
 from .manifest import Entry
-from .repo import DATA_FOLDER, Source
+from .source_data import Source
 from .sources import final_tree, fingerprint, is_records, license_page, not_text
 
 UNCOVERED, NOT_TEXT, ENTRY = "uncovered", "not-text", "entry"  # why something is left out
@@ -88,9 +89,10 @@ def kept_key(source: Source, known: str, found: list[dict]) -> str:
     final tree (known: its manifest object), the license entries, the
     formats (which file is a records file, which is not text), the
     statements found on that tree (found, license_check.Statement as
-    dicts) and the code outside data/. Nothing else of data/ is in it: the
-    license texts enter only through the statements."""
-    return fingerprint({"kind": "source-kept", "code_outside_data": code_outside(DATA_FOLDER), "tree": known,
+    dicts) and the code of this module (wpt_utils.programs.code_of).
+    Nothing else of the checkout is in it: the license texts enter only
+    through the statements."""
+    return fingerprint({"kind": "source-kept", "code": code_of(__name__), "tree": known,
                         "licenses": source.data["licenses"], "formats": source.data["formats"], "statements": found})
 
 

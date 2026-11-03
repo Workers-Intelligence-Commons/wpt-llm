@@ -78,7 +78,7 @@ import sys
 import sysconfig
 import tempfile
 import threading
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass
 from datetime import date
 from functools import cache, wraps
 from importlib import resources
@@ -93,6 +93,7 @@ from .errors import DataAccessRefused, InvalidFile, NotFound, OutdatedSchema, Ru
 from .licenses import check_license
 from .license_check import Coverage, check_pattern, field_of, pattern_for, text_id
 from .pools import parse
+from .source_data import Patch, Source
 
 ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}")
 PATCH = re.compile(r"(\d{4})-[A-Za-z0-9._-]+\.patch")
@@ -401,35 +402,6 @@ def _indent_of(lead: str, otherwise: str) -> str:
 
 def _sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
-
-
-@dataclass(frozen=True)
-class Patch:
-    name: str  # NNNN-<name>.patch
-    data: bytes
-
-
-@dataclass(frozen=True)
-class Source:
-    id: str
-    data: dict
-    patches: list[Patch] = field(default_factory=list)  # in file-name order
-
-    @property
-    def admitted(self) -> bool:
-        return self.data["decision"]["decision"] == "admitted"
-
-    @property
-    def unwritten(self) -> bool:
-        """Whether a license entry has no text yet (the schema allows that
-        only while the source is not admitted (under review or refused): a
-        person writes it later)."""
-        return any(entry["text"] == "" for entry in self.data["licenses"])
-
-    @property
-    def note(self) -> str:
-        """The note a reader prints when it leaves this source out for that."""
-        return f"{self.id}: left out, a license text is empty (a person writes it, `save source`)"
 
 
 @dataclass(frozen=True)

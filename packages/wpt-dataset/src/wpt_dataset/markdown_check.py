@@ -18,7 +18,8 @@ import re
 from dataclasses import dataclass, field
 
 from .markdown import documents, format_of
-from .repo import Repo, Source
+from .repo import Repo
+from .source_data import Source
 from .sources import source_tree
 
 CHECKED = {"text", "xhtml", "html"}

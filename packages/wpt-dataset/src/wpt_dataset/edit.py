@@ -32,7 +32,8 @@ from pathlib import Path
 from . import encoding, manifest
 from .errors import EditError, NotFound
 from .manifest import EXECUTABLE, FILE, SYMLINK, Entry
-from .repo import PATCH, Repo, Source
+from .repo import PATCH, Repo
+from .source_data import Source
 from .sources import load_index, new_cut, source_tree, temporary_git
 
 

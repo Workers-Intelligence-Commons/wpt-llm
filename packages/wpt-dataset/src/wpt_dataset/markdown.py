@@ -79,9 +79,10 @@ history's order file (`.git/history/order`): it stays in the source's tree
 and its manifest, and the builder reads it, but it is not a training
 document.
 
-The stream cache (build.source_tokens) is keyed by the code outside
-data/ (wpt_utils.programs.code_outside), so a change to what this module
-makes of a file makes the Markdown again (docs/architecture.md).
+The stream cache (build.source_tokens) is keyed by the code of the
+modules build imports, this one among them (wpt_utils.programs.code_of),
+so a change to what this module makes of a file makes the Markdown again
+(docs/architecture.md).
 """
 
 import posixpath

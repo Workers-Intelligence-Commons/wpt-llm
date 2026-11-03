@@ -97,7 +97,7 @@ from . import manifest, retry, sites
 from .errors import DatasetError, FetchFailed
 from .protocols import EMPTY, fetch, http, named
 from .protocols.base import UNREACHABLE
-from .repo import Source
+from .source_data import Source
 from .sources import (UPSTREAM, UPSTREAM_FILES, UPSTREAM_PAGES, license_pages, stored_files, stored_upstream,
                       upstream_key)
 

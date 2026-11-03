@@ -19,7 +19,6 @@ from wpt_dataset.errors import (AccessRefused, BadPath, CrawlForbidden, CutFaile
 from protego import Protego
 
 from wpt_dataset import lfs, retry, robots
-from wpt_dataset.repo import DATA_FOLDER
 from wpt_dataset.sources import source_tree
 from wpt_utils import programs
 
@@ -206,16 +205,16 @@ def test_a_cut_removes_every_run_of_its_passage_and_one_not_found_takes_the_sour
 def test_a_commit_that_changes_only_data_finds_a_source_s_tree_again_and_a_change_to_the_code_does_not(
         kit, repo, store, git_upstream, monkeypatch):
     # a source's final tree and its text check are keyed by its own files
-    # and the code outside data/ (wpt_utils.programs.code_outside):
-    # a commit that adds another source changes the whole commit (code())
-    # but not that, so neither is made again; a change to the code outside
-    # data/ makes both again
+    # and the code of the modules sources.py imports
+    # (wpt_utils.programs.code_of): a commit that adds another source
+    # changes the whole commit (code()) but not that, so neither is made
+    # again; a change to that code makes both again
     patch = ("diff --git a/README.md b/README.md\n--- a/README.md\n+++ b/README.md\n@@ -1 +1 @@\n"
              "-the cat sat on the mat and the dog sat on the log\n+the cat sat on the mat.\n")
     sid = kit.add_source(repo, store, "example", "project", {"type": "git", "address": git_upstream[0]},
                          patches=[patch])
-    outside = programs.code_outside(DATA_FOLDER)
-    for name in ("_CODE", "_OUTSIDE", "_GIVEN"):  # put back as they were when the test ends
+    keyed = programs.code_of("wpt_dataset.sources")
+    for name in ("_CODE", "_MODULES", "_GIVEN"):  # put back as they were when the test ends
         monkeypatch.setattr(programs, name, getattr(programs, name))
 
     def made() -> dict[str, int]:
@@ -225,9 +224,9 @@ def test_a_commit_that_changes_only_data_finds_a_source_s_tree_again_and_a_chang
     first = made()
     assert first == {"source-trees": 1, "source-not-text": 1}
     kit.add_source(repo, store, "example", "other", {"type": "git", "address": git_upstream[0] + "/"})
-    programs.set_code({"code": {"commit": "0" * 40, "changes": None}, "outside": {DATA_FOLDER: outside}})
+    programs.set_code({"code": {"commit": "0" * 40, "changes": None}, "modules": {"wpt_dataset.sources": keyed}})
     assert made() == first
-    programs.set_code({"code": {"commit": "0" * 40, "changes": None}, "outside": {DATA_FOLDER: "1" * 64}})
+    programs.set_code({"code": {"commit": "0" * 40, "changes": None}, "modules": {"wpt_dataset.sources": "1" * 64}})
     assert made() == {"source-trees": 2, "source-not-text": 2}
 
 

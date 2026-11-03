@@ -410,14 +410,21 @@ what the whole text gives (docs/model.md, "What a layer passes on").
   produce the same bytes as Linux.
 - Start external programs through `wpt_utils.programs.program(name)`,
   which reports a missing tool clearly.
-- A fingerprint holds `wpt_utils.programs.code()` (the commit and a hash of
-  the uncommitted changes), never a version number of WPT's own code. A
-  result computed from one source's own inputs alone holds
-  `wpt_utils.programs.code_outside(wpt_dataset.repo.DATA_FOLDER)` instead,
-  and holds in its fingerprint every input of `data/` its computation
-  reads. A file of `data/` that every source shares enters only as what
-  the source found in it, found again on every build, as the license
-  check's answer enters what a source keeps.
+- A fingerprint never holds a version number of WPT's own code. A result
+  of the data pipeline holds `wpt_utils.programs.code_of(__name__)` of the
+  module that computes it, and holds in its fingerprint every input of
+  `data/` its computation reads; any other result holds
+  `wpt_utils.programs.code()` (the commit and a hash of the uncommitted
+  changes). A worker process that computes such a fingerprint gets its
+  starter's codes (`wpt_utils.programs.codes`, `set_code`): add the module
+  to `wpt_dataset.workers.KEYED`. The code of a module is that of the
+  modules its import statements reach, wherever they stand: keep the
+  tree and license-check stages (`sources.py`, `kept.py`) from importing
+  the build, tasks, Markdown or download code, and name a new file that
+  is not Python in a keyed package in `wpt_dataset.workers.NOT_PYTHON`.
+  A file of `data/` that every source
+  shares enters only as what the source found in it, found again on
+  every build, as the license check's answer enters what a source keeps.
 - Parallel work sizes itself with `wpt_utils.parallel.Sizing`, which
   measures each item's memory as it runs: never give a memory figure per
   item. A source's conversion or reading goes through

@@ -17,10 +17,12 @@
     shards         Parquet files in the store (see wpt_store.shards), rows in a
                    fixed pseudo-random order derived from the dataset id
 
-The dataset id is the fingerprint of every input, the code
-(wpt_utils.programs.code: its commit and a hash of its uncommitted
-changes) among them, so building the same recipe on the same data with
-the same code again is a lookup. A dataset whose record has
+The dataset id is the fingerprint of every input, the code of this module
+(wpt_utils.programs.code_of: the source files of the WPT modules it
+imports) among them, so building the same recipe on the same data with
+the same code again is a lookup, and a change to a file of the checkout
+this module does not import (a document, a test, another application)
+leaves it the same. A dataset whose record has
 another shape than the current one (current_record) is built again, its record replaced.
 
 Beside its record, every dataset keeps its document list (write_document_list): each document's id, the sha256 of its
@@ -113,7 +115,7 @@ from wpt_store.shards import write_shard
 from wpt_telemetry import Telemetry, set_ref
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
 from wpt_utils.parallel import Sizing, each, in_order
-from wpt_utils.programs import code
+from wpt_utils.programs import code, code_of
 
 from . import conversations as chat_files
 from . import download, markdown, pools, store_history, trained, workers
@@ -459,9 +461,10 @@ def source_tokens(repo, source, store, tokenizer, vocabulary: str, texts, teleme
 
     Kept under the ref source-tokens/<fingerprint of what decides it: the
     key its Kept is kept under (kept.kept_key: the final tree, the license
-    entries, the formats, the license check's answer, the code outside
-    data/), the source's type and the vocabulary>, so a source is converted
-    again only when one of them changed. The license check runs first, on
+    entries, the formats, the license check's answer, the code of the kept
+    module), the source's type, the vocabulary and the code of this module
+    (wpt_utils.programs.code_of)>, so a source is converted again only when
+    one of them changed. The license check runs first, on
     every call, and so do, on a source found again, the checks of its tree
     that read data/ beyond it (markdown.tree_checks): a found source fails
     where a converted one does. With a telemetry, the ref is recorded
@@ -470,8 +473,8 @@ def source_tokens(repo, source, store, tokenizer, vocabulary: str, texts, teleme
         tmp = Path(tmp)
         copies = store.copies_in(tmp / "copies")
         held, skipped = kept(source, copies, texts, telemetry), {}
-        key = fingerprint({"kind": "source-tokens", "kept": held.key, "type": source.data["type"],
-                           "vocabulary": vocabulary})
+        key = fingerprint({"kind": "source-tokens", "code": code_of(__name__), "kept": held.key,
+                           "type": source.data["type"], "vocabulary": vocabulary})
         known = store.get_ref("source-tokens", key)
         if known:
             markdown.tree_checks(source, held.tree, copies, repo)
@@ -618,6 +621,10 @@ def document_list(store, dataset_id: str) -> list[dict] | None:
 
 def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, telemetry=None, session=None):
     """(tokenizer, vocabulary object sha256, fingerprint) of a tokenizer recipe.
+    The fingerprint, the key of the ref vocabularies/<fingerprint>, holds
+    the code of this module (wpt_utils.programs.code_of: the source files of
+    the WPT modules it imports), the recipe and the sha256 of the list of
+    the documents the vocabulary is trained on.
 
     The lock file freezes one vocabulary per recipe version, so adding or
     changing sources never retrains it:
@@ -666,7 +673,7 @@ def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, telem
             raise TrainedListMissing(f"tokenizer {name} version {recipe['version']}: the list of the documents it "
                                      f"was trained on, {lock['documents_sha256']}, is not in {store}; it is shared "
                                      f"through the store that holds the vocabulary")
-        key = fingerprint({"kind": "vocabulary", "code": code(), "recipe": recipe,
+        key = fingerprint({"kind": "vocabulary", "code": code_of(__name__), "recipe": recipe,
                            "documents": lock["documents_sha256"]})
         return Tokenizer.from_bytes(store.get_bytes(vocabulary)), vocabulary, key
 
@@ -688,7 +695,8 @@ def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, telem
             if not listed.count:
                 raise PoolError(f"tokenizer {name}: mixture {recipe['mixture']} selects no documents")
             documents_sha256, document_count = listed.put(store)
-            key = fingerprint({"kind": "vocabulary", "code": code(), "recipe": recipe, "documents": documents_sha256})
+            key = fingerprint({"kind": "vocabulary", "code": code_of(__name__), "recipe": recipe,
+                               "documents": documents_sha256})
             vocabulary = store.put_bytes(tokenizer.to_bytes())
         else:
             mixture = repo.recipe("mixture", recipe["mixture"])
@@ -700,7 +708,8 @@ def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, telem
             for d in selected:
                 listed.add(d.id, d.sha256)
             documents_sha256, document_count = listed.put(store)
-            key = fingerprint({"kind": "vocabulary", "code": code(), "recipe": recipe, "documents": documents_sha256})
+            key = fingerprint({"kind": "vocabulary", "code": code_of(__name__), "recipe": recipe,
+                               "documents": documents_sha256})
             vocabulary = store.get_ref("vocabularies", key)
             if vocabulary is not None and store.has(vocabulary):
                 tokenizer = Tokenizer.from_bytes(store.get_bytes(vocabulary))
@@ -778,7 +787,7 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
                                          {d.sha256 for d in documents if d.id in held_ids}, telemetry,
                                          temporary_copies(store) if stream else None)
     text_inputs = {
-        "kind": "dataset", "code": code(), "recipe": recipe, "mixture": mixture, "vocabulary": vocabulary,
+        "kind": "dataset", "code": code_of(__name__), "recipe": recipe, "mixture": mixture, "vocabulary": vocabulary,
         # a document's held-out group only when it has one, so earlier ids stay the same
         "documents": [[d.id, d.sha256, sorted(d.tags), *([d.group] if d.group is not None else [])] for d in documents],
         # the record copies their licenses and attribution: a change rebuilds it

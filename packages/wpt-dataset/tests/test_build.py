@@ -1,16 +1,17 @@
 import hashlib
 import importlib
+import importlib.machinery
+import importlib.util
 import json
 import shutil
 from pathlib import Path
 
 import pytest
 
-from wpt_dataset import build, conversations, license_check, markdown, sources, tasks, workers
+from wpt_dataset import build, conversations, kept, license_check, markdown, sources, tasks, workers
 from wpt_dataset.build import build_dataset, document_list, is_held_out
 from wpt_dataset.cli import main
 from wpt_dataset.errors import DatasetError, PoolError, SourceGone, TokenizerVersionNeeded, TrainedListMissing, VocabularyMissing
-from wpt_dataset.repo import DATA_FOLDER
 from wpt_dataset.sources import stored_files, upstream_key
 from wpt_store import CorruptObject, open_store
 from wpt_store.shards import read_shard, token_hash
@@ -259,7 +260,7 @@ def test_a_change_of_the_tokenizer_code_asks_for_no_version_and_leaves_the_lock_
     assert set(json.loads(locked)) == {"recipe", "documents_sha256", "document_count", "vocabulary_sha256"}
     assert "version" not in first["tokenizer"] and "recipe_version" in first["tokenizer"]
 
-    monkeypatch.setattr(build, "code", lambda: "another tokenizer code")
+    monkeypatch.setattr(build, "code_of", lambda module: "another tokenizer code")
     second = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))
     assert second["tokenizer"]["vocabulary"] == first["tokenizer"]["vocabulary"] and lock_path.read_bytes() == locked
     assert second["fingerprints"] != first["fingerprints"]  # the code is part of what made the tokens
@@ -566,12 +567,13 @@ def test_a_source_s_kept_files_and_tokens_are_made_again_only_when_its_own_input
     # whose inputs changed: another source, with a license text this
     # source does not match, leaves this source's source-kept and
     # source-tokens refs found again; a change to the decision of the text
-    # this source matched, or to the code outside data/, makes both again
+    # this source matched, or to the code of the modules kept.py and
+    # build.py import (wpt_utils.programs.code_of), makes both again
     sid = setup_recipes(kit, repo, store, corpus, total_tokens=500)
     tokenizer, vocabulary, _ = build.build_tokenizer(repo, "main", store, log=lambda _: None)
-    for name in ("_CODE", "_OUTSIDE", "_GIVEN"):  # put back as they were when the test ends
+    for name in ("_CODE", "_MODULES", "_GIVEN"):  # put back as they were when the test ends
         monkeypatch.setattr(programs, name, getattr(programs, name))
-    outside = programs.code_outside(DATA_FOLDER)
+    keyed = programs.codes(*workers.KEYED)["modules"]
 
     def made() -> dict[str, int]:
         build.source_tokens(repo, repo.source(sid), store, tokenizer, vocabulary,
@@ -584,16 +586,54 @@ def test_a_source_s_kept_files_and_tokens_are_made_again_only_when_its_own_input
     other = kit.add_source(repo, store, "example", "other", {"type": "git", "address": folder})
     matched = repo.source(sid).data["licenses"][0]["expected"][0]
     assert repo.source(other).data["licenses"][0]["expected"] != [matched]  # a text this source does not match
-    # the commit that adds it: a new whole commit (code()), the same code outside data/
-    programs.set_code({"code": {"commit": "0" * 40, "changes": None}, "outside": {DATA_FOLDER: outside}})
+    # the commit that adds it: a new whole commit (code()), the same code of the modules
+    programs.set_code({"code": {"commit": "0" * 40, "changes": None}, "modules": keyed})
     assert made() == {"source-kept": 1, "source-tokens": 1}
 
     item = repo.license_texts()[matched]
     kit.write_texts(repo.root, {matched: {**item, "decision": {**item["decision"], "decision": "refused",
                                                                "reason": "a test's refusal"}}})
     assert made() == {"source-kept": 2, "source-tokens": 2}
-    programs.set_code({"code": {"commit": "1" * 40, "changes": None}, "outside": {DATA_FOLDER: "1" * 64}})
+    programs.set_code({"code": {"commit": "1" * 40, "changes": None},
+                       "modules": {**keyed, "wpt_dataset.kept": "1" * 64}})
     assert made() == {"source-kept": 3, "source-tokens": 3}
+    programs.set_code({"code": {"commit": "1" * 40, "changes": None},
+                       "modules": {**keyed, "wpt_dataset.kept": "1" * 64, "wpt_dataset.build": "1" * 64}})
+    assert made() == {"source-kept": 3, "source-tokens": 4}
+
+
+def test_a_worker_process_finds_what_its_starter_kept_under_the_starter_s_codes(kit, repo, store, corpus,
+                                                                              monkeypatch):
+    # a source's conversion runs in a worker process, which must find the
+    # results its starter keyed: given its starter's codes, the worker
+    # computes the starter's key, even codes that differ from what it would
+    # find from the files itself, and so finds the starter's result
+    sid = setup_recipes(kit, repo, store, corpus, total_tokens=500)
+    for name in ("_CODE", "_MODULES", "_GIVEN"):  # put back as they were when the test ends
+        monkeypatch.setattr(programs, name, getattr(programs, name))
+    programs.set_code({"code": programs.code(), "modules": {module: "1" * 64 for module in workers.KEYED}})
+    texts = license_check.LicenseTexts(repo.license_texts())
+    here = kept.kept(repo.source(sid), store, texts)
+    with workers.Pool(repo, "sources at once") as pool:
+        there = pool.call(kept.kept, repo.source(sid), store, texts)
+    assert there.key == here.key
+    assert len(list((store.root / "refs" / "source-kept").iterdir())) == 1
+
+
+def test_every_file_that_is_not_python_in_a_keyed_package_is_named_with_whether_it_enters_the_keys():
+    # a key holds Python files and compiled modules only: a new file of another kind in a keyed package (a table
+    # the code reads, say) would change results without changing a key, until someone says whether it enters
+    packages = {}
+    for module in workers.KEYED:
+        for name in programs._imported(module)[0]:
+            top = name.partition(".")[0]
+            packages[top] = Path(importlib.util.find_spec(top).submodule_search_locations[0])
+    suffixes = tuple(importlib.machinery.EXTENSION_SUFFIXES)
+    found = {file.relative_to(folder.parent).as_posix()
+             for folder in packages.values() for file in folder.rglob("*")
+             if file.is_file() and file.suffix != ".py" and not file.name.endswith(suffixes)
+             and "__pycache__" not in file.parts}
+    assert found == set(workers.NOT_PYTHON)
 
 
 def test_a_streamed_build_leaves_no_copy_of_a_source_s_files_on_this_machine(kit, repo, store, tmp_path):

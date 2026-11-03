@@ -23,7 +23,8 @@ from wpt_utils.programs import MissingTool
 
 from .download import wanted
 from .errors import DatasetError
-from .repo import Repo, Source
+from .repo import Repo
+from .source_data import Source
 from .sources import source_tree
 from .tasks import has_tasks, pointed_sources
 

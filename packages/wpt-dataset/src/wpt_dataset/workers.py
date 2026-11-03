@@ -11,8 +11,9 @@ come back to the asking process and are put together there in the items'
 order, so they are the ones a conversion of one item at a time gives.
 
 A worker opens the asking process's repository (Repo), uses its code()
-and its code outside the data folder (wpt_utils.programs.codes), so its
-fingerprints are the asking process's, and the store each item is given
+and its code_of() of every module whose code a worker's fingerprints hold
+(KEYED, wpt_utils.programs.codes), so its fingerprints are the asking
+process's, and the store each item is given
 (wpt_store opens the same store there). What it records goes into the
 run's record under the span the asking thread is in (wpt_telemetry's
 join), each item a part of its own.
@@ -31,15 +32,29 @@ from wpt_utils.parallel import Sizing, process_pool
 from wpt_utils.programs import codes, set_code
 
 from .license_check import LicenseTexts
-from .repo import DATA_FOLDER, Repo
+
+# the modules whose code (wpt_utils.programs.code_of) the fingerprints a worker computes hold: the final tree and
+# its text check (sources), what a source keeps (kept), a source's tokens (build)
+KEYED = ("wpt_dataset.sources", "wpt_dataset.kept", "wpt_dataset.build")
+# every file that is not Python in the src folders of the packages of the KEYED modules, and whether it enters the
+# keys. None does: the schemas only refuse a document, and the site list only decides which sites a download
+# may reach, so neither decides a saved result. (A compiled module is no entry: it enters by the files that build it.)
+NOT_PYTHON = {
+    "wpt_dataset/sites.txt": False,
+    **{f"wpt_dataset/schemas/{kind}.schema.json": False for kind in (
+        "conversation", "image-licenses", "image-lock", "image-tools", "license-text", "lock", "mixture", "model",
+        "probe", "rating", "series", "source", "task", "tokenizer")},
+}
 
 _REPO = None  # in a worker process: the asking process's repository, set once by _start
 _TEXTS = None  # in a worker process: its repository's license texts, read on their first use
 
 
-def repo() -> Repo:
+def repo():
     """The repository of the process that asked for this work (in a worker
-    process), as Repo gives it."""
+    process), as Repo gives it. (This module does not import repo.py: the
+    class comes from the asking process, so the code of a worker's
+    fingerprints stays that of the modules it computes them with.)"""
     if _REPO is None:
         raise RuntimeError("wpt_dataset.workers.repo() is for a worker process")
     return _REPO
@@ -55,10 +70,10 @@ def license_texts() -> LicenseTexts:
     return _TEXTS
 
 
-def _start(root: str, found: dict):
+def _start(opener, root: str, found: dict):
     global _REPO
     set_code(found)
-    _REPO = Repo(root)
+    _REPO = opener(root)
 
 
 def _run(function, arguments, record_store, command, environment):
@@ -75,13 +90,13 @@ class Pool:
     there), measuring the workers' memory. A with block owns them: leaving
     it ends them, at once when it is left by an error or a stop."""
 
-    def __init__(self, repo: Repo, what: str, disk=None, folder=None):
+    def __init__(self, repo, what: str, disk=None, folder=None):
         self.sizing = Sizing(what, disk=disk, folder=folder)
-        self._root = str(repo.root)
+        self._opener, self._root = type(repo), str(repo.root)
         self._pool = None
 
     def __enter__(self):
-        self._pool = process_pool(self.sizing, self.sizing.limit, _start, (self._root, codes(DATA_FOLDER)))
+        self._pool = process_pool(self.sizing, self.sizing.limit, _start, (self._opener, self._root, codes(*KEYED)))
         return self
 
     def __exit__(self, kind, error, traceback):
