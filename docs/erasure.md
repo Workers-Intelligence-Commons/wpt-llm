@@ -25,7 +25,7 @@ repository is public:
             "rolling": 123456789 } ]
 ```
 
-- `wpt-dataset cut ID PATH START END --version V` makes a cut from bytes
+- `wpt dataset cut ID PATH START END --version V` makes a cut from bytes
   `[START, END)` of the file as the cuts before it left it, read from the
   store. A person checks the range on the stored file first.
 - `hmac` is the HMAC-SHA256 of the passage, and `rolling` its rolling hash,

@@ -1,6 +1,6 @@
 ---
 name: wpt-training-run
-description: How to start a WPT training run so it survives a closed terminal or SSH session and keeps its log. Use it before running wpt-train (or any long wpt-* command such as a large build or evaluation) on Windows, Linux or macOS, locally or over SSH, and when a run must be followed, stopped or resumed.
+description: How to start a WPT training run so it survives a closed terminal or SSH session and keeps its log. Use it before running wpt train (or any long `wpt` subcommand such as a large build or evaluation) on Windows, Linux or macOS, locally or over SSH, and when a run must be followed, stopped or resumed.
 ---
 
 # Starting a training run
@@ -10,7 +10,7 @@ is how a run is started and looked after.
 
 ## Before the run
 
-- The dataset is built from the model recipe: `uv run wpt-dataset build
+- The dataset is built from the model recipe: `uv run wpt dataset build
   NAME` prints its id. A first build of a tokenizer recipe writes its lock
   (`data/recipes/tokenizers/NAME.lock.json`): commit it.
 - PyTorch is installed for this machine's GPU: a plain `uv sync` removes
@@ -27,8 +27,8 @@ from the repository folder:
 
 | System | Command |
 | --- | --- |
-| Windows (PowerShell) | `.\scripts\detach.ps1 uv run wpt-train RECIPE DATASET_ID --out runs/NAME [options]` |
-| Linux, macOS | `scripts/detach.sh uv run wpt-train RECIPE DATASET_ID --out runs/NAME [options]` |
+| Windows (PowerShell) | `.\scripts\detach.ps1 uv run wpt train RECIPE DATASET_ID --out runs/NAME [options]` |
+| Linux, macOS | `scripts/detach.sh uv run wpt train RECIPE DATASET_ID --out runs/NAME [options]` |
 
 On a Windows machine, use the Windows row from PowerShell, never a WSL
 shell (the `wpt` skill, "Setting up a machine").
@@ -94,5 +94,5 @@ may move to another machine.
 
 The GPUs may be on another machine than the store: start a gpu worker
 there (`docker compose -f compose.yaml -f compose.nvidia.yaml up` with the files of `deploy/gpu-worker/` and `wpt_worker/` copied beside them, or `compose.amd.yaml`) and give its
-key to `wpt-train` as `WPT_GPU_WORKERS` (docs/machines.md). The run is
+key to `wpt train` as `WPT_GPU_WORKERS` (docs/machines.md). The run is
 started, followed, stopped and resumed on the manager's machine, as above.

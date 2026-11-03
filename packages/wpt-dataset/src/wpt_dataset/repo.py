@@ -5,11 +5,11 @@ Every file under data/ is opened here and nowhere else
 
     data/sources/<id>/source.json         + NNNN-*.patch
     data/recipes/mixtures/<name>.json
-    data/recipes/tokenizers/<name>.json   + <name>.lock.json (written by `wpt-dataset build-tokenizer`)
+    data/recipes/tokenizers/<name>.json   + <name>.lock.json (written by `wpt dataset build-tokenizer`)
     data/recipes/models/<name>.json       data, architecture and training steps of one model
     data/recipes/series/<name>.json       a model series: the rules its sizes share and the sizes
     data/images/<name>/Dockerfile         a container image of agentic tasks (and any file it copies)
-                      + lock.json, licenses.json (written by `wpt-agent lock-image`)
+                      + lock.json, licenses.json (written by `wpt agent lock-image`)
                       + tools.json, the shared pool of tools its programs answer (optional)
     data/allowed-signers                  SSH keys allowed to sign decisions
     data/allowed-gpg-keys.asc             GPG keys allowed to sign decisions (optional)
@@ -17,8 +17,8 @@ Every file under data/ is opened here and nowhere else
                                           a license text's decision, kind and license
                       + license-text.txt  the text itself (optional)
 
-Every command reaches these files through a Repo, and so do wpt-web's HTTP
-API and the `wpt-dataset` commands that read and write them, which are thin
+Every command reaches these files through a Repo, and so do wpt web's HTTP
+API and the `wpt dataset` commands that read and write them, which are thin
 layers over it. A test (packages/wpt-dataset/tests/test_data_access.py)
 fails when other code names the data folder. A Repo hands out documents,
 bytes and versions, never a path under data/; external programs get what
@@ -27,7 +27,7 @@ an image's files as a tar archive).
 
 Each kind of file is one of KINDS. Reading gives a Document: its text, its
 JSON (for a JSON kind), its version and the problems the check finds in
-it. Every write applies the rules of `wpt-dataset check` to what it writes
+it. Every write applies the rules of `wpt dataset check` to what it writes
 and writes nothing when one fails; it is also refused, with StaleFile, when
 the file changed since the caller read it. A version is the sha256 of the
 file's bytes ("" for a file that does not exist yet); for a source's files,
@@ -42,7 +42,7 @@ The rules every write follows:
 
 - one lock per repository holds each version check and its write together,
   so two saves of the same version cannot both pass: across processes
-  (wpt-web and wpt-dataset at the same moment) a lock the operating system
+  (wpt web and wpt dataset at the same moment) a lock the operating system
   holds on a file in the repository's git folder (fcntl.flock on Linux and
   macOS, msvcrt.locking on Windows), which it releases when the process
   ends, crash included, so a lock is never left behind; inside a process an
@@ -103,7 +103,7 @@ NAME = re.compile(r"[a-z0-9][a-z0-9._-]*")
 MACHINE = "machine:"
 # the `by` of a license entry the service layer sends back to under-review (Repo.save), and of one a migration
 # leaves under review: no person decided it
-SERVICE = MACHINE + "wpt-dataset"
+SERVICE = MACHINE + "wpt dataset"
 # what a license entry's decision is about: a save that changes one of them, without deciding the entry anew,
 # sends it back to under-review
 DECIDED_ON = ("license", "place", "expected")
@@ -147,11 +147,11 @@ KINDS = {kind.name: kind for kind in (
     Kind("model", "json", "a model recipe: data, architecture and training steps", "model"),
     Kind("series", "json", "a model series: the rules its sizes share and the list of sizes, each size a model",
          "series"),
-    Kind("lock", "json", "a tokenizer recipe's lock: the vocabulary it froze", "lock", "wpt-dataset build-tokenizer"),
+    Kind("lock", "json", "a tokenizer recipe's lock: the vocabulary it froze", "lock", "wpt dataset build-tokenizer"),
     Kind("dockerfile", "text", "the Dockerfile of a container image of agentic tasks"),
     Kind("image-lock", "json", "an image's lock: its base, archive date and packages", "image-lock",
-         "wpt-agent lock-image"),
-    Kind("image-licenses", "json", "an image's packages and their licenses", "image-licenses", "wpt-agent lock-image"),
+         "wpt agent lock-image"),
+    Kind("image-licenses", "json", "an image's packages and their licenses", "image-licenses", "wpt agent lock-image"),
     Kind("image-tools", "json", "an image's shared pool of tools, each answered by a program in the image",
          "image-tools"),
     Kind("allowed-signers", "text", "SSH keys allowed to sign decisions", single="allowed-signers"),
@@ -239,7 +239,7 @@ def validate(document, kind: str, path):
 
     earlier = outdated(document, kind)
     if earlier:
-        raise OutdatedSchema(f"{path}: an earlier shape ({'; '.join(earlier)}); run `wpt-dataset migrate`")
+        raise OutdatedSchema(f"{path}: an earlier shape ({'; '.join(earlier)}); run `wpt dataset migrate`")
     try:
         error = jsonschema.exceptions.best_match(_validator(kind).iter_errors(document))
         if error is not None:
@@ -764,7 +764,7 @@ class Repo:
         return _sha256(path.read_bytes()) if path.is_file() else ""
 
     def problems(self, kind: str, name: str) -> list[str]:
-        """What `wpt-dataset check` finds in that one file: [] or its problems."""
+        """What `wpt dataset check` finds in that one file: [] or its problems."""
         if kind == "source":
             return self.check_source(name)
         try:
@@ -968,7 +968,7 @@ class Repo:
         return []
 
     def check_fetched(self, sid: str, store, telemetry=None) -> tuple[int, int, dict, list]:
-        """The rules on a fetched source, as `wpt-dataset check --fetch`
+        """The rules on a fetched source, as `wpt dataset check --fetch`
         applies them: its cuts, patches, license and format maps,
         and each file converted (chat and task files checked, the texts
         pointer tasks point to read from their sources and checked against
@@ -1178,7 +1178,7 @@ class Repo:
         elif set(place) == {"page"}:
             content, where = license_page(self.source(sid), store, place["page"]), place["page"]
             if content is None:
-                raise NotFound(f"{sid}: the store holds no license page {where} for it; `wpt-dataset download "
+                raise NotFound(f"{sid}: the store holds no license page {where} for it; `wpt dataset download "
                                f"{sid}` fetches it with the source")
         else:
             raise RuleViolation(f"{sid}: a license text is found at a file or a page, not at {place}")
@@ -1325,10 +1325,10 @@ class Repo:
     def change_source_files(self, sid: str, changes: dict[str, bytes | None], patch: str, version: str, store,
                             formats=(), tags=()) -> str:
         """Change, add (bytes) or remove (None) final files of the source, as
-        `wpt-dataset unpack`, an edit and `wpt-dataset patch` would: the
+        `wpt dataset unpack`, an edit and `wpt dataset patch` would: the
         difference becomes the next patch, NNNN-<patch>.patch, kept only if
         the source then gives exactly those files and passes the rules of
-        `wpt-dataset check --fetch`. formats: format entries source.json gets
+        `wpt dataset check --fetch`. formats: format entries source.json gets
         first, for new files no entry covers yet; tags: tag entries it gets
         first, the same way. In an empty source, a new file no license entry
         covers yet gets its pattern (license_check.pattern_for: its top
@@ -1387,7 +1387,7 @@ class Repo:
     def add_patch(self, sid: str, name: str, data: bytes, expected: dict, store) -> str:
         """Write data as the source's next patch, NNNN-<name>.patch, and keep
         it only if the source then gives exactly the expected tree ({path:
-        Entry}) and passes the rules of `wpt-dataset check --fetch`;
+        Entry}) and passes the rules of `wpt dataset check --fetch`;
         otherwise remove it and raise why. Called by edit.write_patch, which
         makes data from a folder. Returns the patch's place in the
         repository."""
@@ -1915,7 +1915,7 @@ class Repo:
 
     @_locked
     def rewrite(self, kind: str, name: str, document) -> str:
-        """Write a migrated file as its migration left it: `wpt-dataset
+        """Write a migrated file as its migration left it: `wpt dataset
         migrate` alone calls this. A step leaves a field only a person can
         fill empty, so the result may not pass the check yet; migrate then
         validates every file and names those to fill in. Returns its place

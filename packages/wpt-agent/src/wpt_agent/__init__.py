@@ -2,7 +2,7 @@
 the tools offered to it, and the task's check scores what it left and the
 attempt's conversation.
 
-    images.built(root, name)    the task's image, built by `wpt-agent build-image` from
+    images.built(root, name)    the task's image, built by `wpt agent build-image` from
                                 data/images/<name>/ and its lock
     Sandbox(image, files, ...)  one fresh container per attempt: no network, limited sizes, the
                                 files in /work, the model's commands run as a non-root user

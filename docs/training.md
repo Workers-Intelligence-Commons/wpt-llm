@@ -3,17 +3,17 @@
 ## Training
 
 ```sh
-uv run wpt-dataset build classics-test     # prints the dataset id
-uv run wpt-train classics-test <dataset id>
+uv run wpt dataset build classics-test     # prints the dataset id
+uv run wpt train classics-test <dataset id>
 ```
 
 A run takes minutes to days, so start it detached from the terminal or SSH
 session, which would otherwise end it and lose its output:
-`.\scripts\detach.ps1 uv run wpt-train ...` on Windows,
-`scripts/detach.sh uv run wpt-train ...` on Linux and macOS. Both write its
+`.\scripts\detach.ps1 uv run wpt train ...` on Windows,
+`scripts/detach.sh uv run wpt train ...` on Linux and macOS. Both write its
 output to `runs/logs/<date-time>.log` and print how to follow and stop it.
 
-`wpt-train` takes a model recipe (`data/recipes/models/<name>.json`,
+`wpt train` takes a model recipe (`data/recipes/models/<name>.json`,
 `SERIES:SIZE`, a size of a model series, or `SERIES:SIZE:RUN`, another run
 of that size; see [model.md](model.md), "Model recipes") and the id of the dataset built from it, and never
 builds: build and training fail separately. A dataset built from another
@@ -23,18 +23,18 @@ seed, the steps ("Steps", below) with their settings, and the drafter. The
 command-line options say only how the hardware runs it; each also comes
 from an environment variable (`WPT_` + the option name in capitals,
 `--micro-batch` -> `WPT_MICRO_BATCH`; the recipe and the dataset id from
-`WPT_RECIPE` and `WPT_DATASET`). `uv run wpt-train --help` lists them.
+`WPT_RECIPE` and `WPT_DATASET`). `uv run wpt train --help` lists them.
 
 The dataset holds everything the steps read: the text's shards, and the
 conversations and tasks its build found ([data-selection.md](data-selection.md)).
 Its record gives a fingerprint (a sha256) for each of these parts, `text`,
 `conversations` and `tasks`, which the steps' fingerprints read ("Step
 results and reuse", below). A source added after the build reaches training
-only once it is downloaded into the store (`wpt-dataset download`) and the
+only once it is downloaded into the store (`wpt dataset download`) and the
 dataset is built again.
 
-`wpt-train` trains through gpu workers, one per machine
-([machines.md](machines.md)): each worker's job runs the steps on its GPUs, and `wpt-train` answers it from
+`wpt train` trains through gpu workers, one per machine
+([machines.md](machines.md)): each worker's job runs the steps on its GPUs, and `wpt train` answers it from
 the store, the tokenizer and the run's record. The job's main process
 records the run in the store, through that link: what it read, every step
 and every update's loss, duration and learning rates, every evaluation and
@@ -46,9 +46,9 @@ lines refused in the background), it finishes its update unrecorded and
 every process stops after it, as for Ctrl+C: the checkpoint is saved, and
 `--resume` continues from it without losing an update. The broken record
 does not name that checkpoint (nor, with `--run`, its store ref). When
-`wpt-train`'s own record breaks while the job trains (on S3, a group of
+`wpt train`'s own record breaks while the job trains (on S3, a group of
 its lines refused in the background), it stops the job as Ctrl+C does: its
-processes finish their update and save the checkpoint, and `wpt-train`
+processes finish their update and save the checkpoint, and `wpt train`
 exits with code 3.
 
 ## Steps
@@ -534,7 +534,7 @@ with its indexer choosing, HCA, the windows, Engram, the experts, mHC, the
 MTP block). Split windows are checked in FP32 to `2e-4` of the largest
 gradient, against `1e-6` for segments, since KDA's composed transforms
 round differently (model.md, "Long windows"; the split tests keep that
-tolerance in FP32). A run of `wpt-train` with `--strategy split --processes
+tolerance in FP32). A run of `wpt train` with `--strategy split --processes
 2 --segment 128` trains the same model as one process on whole windows.
 
 Measured on a Radeon 860M (an integrated AMD GPU sharing the machine's
@@ -645,7 +645,7 @@ whose job is the training's processes; `--processes` starts them on the
 worker's machine:
 
 ```sh
-uv run wpt-train <recipe> <dataset id> --strategy ddp --processes 2
+uv run wpt train <recipe> <dataset id> --strategy ddp --processes 2
 ```
 
 (`split` starts the same way.) A run on several gpu workers starts
@@ -735,15 +735,15 @@ the training in the job's first process and never restarts. Three exits are neve
 settings or options that do not fit, a step that failed, a drafter that
 could not be trained), which would refuse again, a record that could not be
 written (exit code 3), and a stop asked for (exit code 130). A bug that
-crashes every time stops after the last restart, and `wpt-train` exits
+crashes every time stops after the last restart, and `wpt train` exits
 with the crash's exit code. Restarts stay on one machine: on several gpu
-workers, a crash ends the job on every one, and `wpt-train` exits with
-code 5; `wpt-manager` resumes the run from the checkpoint it holds, as for
+workers, a crash ends the job on every one, and `wpt train` exits with
+code 5; `wpt manager` resumes the run from the checkpoint it holds, as for
 a lost worker ([machines.md](machines.md), "A lost gpu worker").
 
 A gpu worker lost (it cannot be reached, or its link breaks) stops the run
 with exit code 4; `--resume` continues it from the checkpoint the manager
-holds, and `wpt-manager` does so itself on a replacement for a worker it
+holds, and `wpt manager` does so itself on a replacement for a worker it
 rented ([machines.md](machines.md), "A lost gpu worker").
 
 ## The drafter
@@ -789,7 +789,7 @@ The model folder holds:
   project, and `tokenizer` (the tokenizer recipe and version, such as
   `classics version 1`) and `tokenizer_sha256`;
 - `tokenizer.json`, the dataset's vocabulary, exactly the bytes those
-  headers name: `wpt-chat` and `wpt-eval` refuse another (see
+  headers name: `wpt chat` and `wpt eval` refuse another (see
   [tokenizer.md](tokenizer.md));
 - `provenance.json`, what produced the model: each step, its fingerprint,
   result and what it reached, and every source the steps learned from
@@ -806,7 +806,7 @@ The model folder holds:
   settings, its losses, the calibration and the measure: `load_model`
   refuses a folder without it or whose drafter names other weights
   ([model.md](model.md), "The drafter");
-- `evals/`, results written by `wpt-eval` (see [evaluation.md](evaluation.md)),
+- `evals/`, results written by `wpt eval` (see [evaluation.md](evaluation.md)),
   shown in the model card.
 
 The main process writes the folder beside its target, as a hidden folder
@@ -839,12 +839,12 @@ remove it by hand. The run still succeeds, unless it was interrupted.
 cannot disagree with it. Each step's record in `provenance.json` names the
 sources it read; `NOTICE` lists every one of them, with the credit and the
 license text of each, and the model card names them under each step. Run
-`wpt-eval` on the folder to measure it.
+`wpt eval` on the folder to measure it.
 
-`wpt-chat <model folder>` continues text typed by the user, until the model
+`wpt chat <model folder>` continues text typed by the user, until the model
 ends the document. Its start line names the licenses and where the notice
-is; `wpt-chat <model folder> --about` prints the folder's `NOTICE`. A model
-trained on text only continues text. `wpt-chat <model folder> --chat`
+is; `wpt chat <model folder> --about` prints the folder's `NOTICE`. A model
+trained on text only continues text. `wpt chat <model folder> --chat`
 talks to a model trained on conversations: it keeps the history, writes it
 with the chat template ([chat-format.md](chat-format.md)), and shows the
 model's thinking and tool calls with their tags, without running the
@@ -871,13 +871,13 @@ is systematic.
   training"), such as a model's own attempt as the reference of a reward
   ("Rewards", below).
 - A demonstration's `assistant` message may start as a draft written by a
-  WPT model, in the conversation editor of `wpt-web`: the person edits it
+  WPT model, in the conversation editor of `wpt web`: the person edits it
   or confirms it as it is, and the message's `metadata.draft` records the
   model folder, the sha256 of its weights and of the draft, and whether the
   person changed it ([chat-format.md](chat-format.md), "Model drafts"). An
   unedited confirmed draft is allowed.
 - An AI assistant (a coding agent helping a contributor) works with the
-  data only through the `wpt-dataset` commands for structure and metadata,
+  data only through the `wpt dataset` commands for structure and metadata,
   never through the ones that read or write people's texts; it may start a
   source with `new-source` without `--file` and `--license-text`
   (CONTRIBUTING.md, "Models and generated text").
@@ -950,7 +950,7 @@ conversation does not fit the model's context (cutting it would drop the
 answers it holds), when one has no assistant message, and when the loss
 is not finite. It needs a vocabulary
 of tokenizer 0.3.0 or later, which reserves the chat template's ids. Talk
-to the result with `uv run wpt-chat FOLDER --chat`.
+to the result with `uv run wpt chat FOLDER --chat`.
 
 ## The finish-tasks step
 
@@ -1004,7 +1004,7 @@ folder per task:
   `instructions` and this one-line form. The agent loop opens an attempt
   with `instructions`, or with `terse` when its caller asks
   (`wpt_agent.attempts(..., terse=True)`; a task without the field is
-  refused there). It holds no line break: `wpt-dataset check --fetch`
+  refused there). It holds no line break: `wpt dataset check --fetch`
   refuses one, naming the `task.json`.
 - `image`: the folder in `data/images/` the attempt's container comes from.
 - `limits`: `max_turns`, the assistant turns in one attempt; `max_tokens`,
@@ -1064,22 +1064,22 @@ folder per task:
   rest ("Rewards", below). There is no gate for every task beyond the
   missing answer.
 
-Task files are a source's bytes, which `wpt-dataset migrate` never
+Task files are a source's bytes, which `wpt dataset migrate` never
 rewrites: a `task.json` of an earlier shape (a task with `replies` and no
 `answered_in`) is read in the current shape each time it is read
 (`migrate.upgrade`), by the build, the measures and the task editor of
-`wpt-web`, whose save then writes the current shape. Only a person
+`wpt web`, whose save then writes the current shape. Only a person
 knows where a task's answers live, so a task with replies gets an empty
-`answered_in`, which `wpt-dataset check --fetch` then refuses, naming its
+`answered_in`, which `wpt dataset check --fetch` then refuses, naming its
 `task.json` to fill in.
 
 A task folder is a folder holding `task.json` that is not inside another
 task's `files/`; every other file of the format is a task folder's `check`
-or under its `files/`. `wpt-dataset check --fetch` checks each folder
+or under its `files/`. `wpt dataset check --fetch` checks each folder
 against `packages/wpt-dataset/src/wpt_dataset/schemas/task.schema.json`,
 and checks that its `image` is a folder of `data/images/` holding a
 `Dockerfile`. CI does not fetch the sources a change touches: the
-maintainer runs `wpt-dataset check --fetch` on a pull request's sources
+maintainer runs `wpt dataset check --fetch` on a pull request's sources
 before merging, which catches a task naming an image that is gone. The same
 check refuses a task whose sizes break the rule on `disk` and `memory`
 above, naming its `task.json`, and one whose tools break the rules of
@@ -1097,7 +1097,7 @@ carries its tag. Every file of a task folder is UTF-8 text, as the task
 format defines: an encoding stated inside such a file is not read
 ([architecture.md](architecture.md), "Encodings").
 
-The task editor of `wpt-web` and `wpt-dataset save-task` write a task
+The task editor of `wpt web` and `wpt dataset save-task` write a task
 folder through the service layer:
 
 - only in an `empty` source;
@@ -1140,7 +1140,7 @@ the text from the store, each span checked against its sha256. Each entry of
   say; "Scores", below).
 
 When a task is read, every source its pointers name must be admitted; its
-final tree comes from the store, where `wpt-dataset download` put it
+final tree comes from the store, where `wpt dataset download` put it
 (nothing downloads it here), read as the build keeps it, the
 document is converted as the build converts it, and the span must hold the
 bytes its `sha256` names and must not cut a character (the pointer-task
@@ -1151,7 +1151,7 @@ the document it points into, until the builder makes it again. The build
 leaves a task out alone, and names it with why in the dataset record
 (`left_out_tasks`), when it breaks, when a source it points into is not
 admitted, and when the build left that source out (not in the store, or a
-cut or patch that does not apply). `wpt-dataset check --fetch` fills in
+cut or patch that does not apply). `wpt dataset check --fetch` fills in
 every pointer of the sources it checks and refuses a task that breaks,
 naming the task and the pointer, and `check --changed` also checks every
 task source whose pointers point into a source the change touches.
@@ -1356,12 +1356,12 @@ any other change.
 An image's pool of tools is `data/images/<name>/tools.json` (optional),
 written by people like the Dockerfile: `{"tools": [...]}`,
 each tool declared as a task declares its own, its program a file the
-Dockerfile puts in the image. `wpt-dataset check` checks it against
+Dockerfile puts in the image. `wpt dataset check` checks it against
 `image-tools.schema.json` and refuses a tool declared twice or taking the
 name of a built-in tool or `ask`. A changed pool is a changed image
 folder, which needs a new build.
 
-`uv run wpt-agent lock-image NAME` pulls the base, pins it by digest,
+`uv run wpt agent lock-image NAME` pulls the base, pins it by digest,
 takes the current moment as the snapshot, checks that apt on the base,
 after `apt-get update`, reads its package lists only from the snapshot
 hosts (it refuses the base otherwise), builds the image, and writes
@@ -1370,7 +1370,7 @@ the version of every installed package) and `licenses.json` (every
 installed package, its version and its licenses; [licenses.md](licenses.md),
 "Container images of agentic tasks"). Commit both. It refuses to replace
 an existing lock unless given `--force`: locking again is the person's
-choice. `wpt-dataset check` checks both files against their schemas
+choice. `wpt dataset check` checks both files against their schemas
 (`image-lock.schema.json`, `image-licenses.schema.json`).
 
 Every build reads its packages from the dated archive of the base's
@@ -1382,7 +1382,7 @@ server's certificate, since the base images hold no certificates; it
 checks the archive's signatures and every package's checksum itself, and
 accepts the dated archive's expired Release files.
 
-`uv run wpt-agent build-image NAME` builds the image from its lock on this
+`uv run wpt agent build-image NAME` builds the image from its lock on this
 machine (the base by digest, the snapshot, every package as
 `name=version`), and stops when the build installed other packages than the
 lock pins. Like `lock-image`, and through the same code, it first checks
@@ -1486,7 +1486,7 @@ rules stay out of reach. The text of a seal starts with no `-`, so it
 never reads as an option, and `--turns` takes 1 to 1,000,000.
 
 A change to the library or to a program changes the image's folder, so
-every machine builds the image again (`wpt-agent build-image agent`); a
+every machine builds the image again (`wpt agent build-image agent`); a
 change to its packages also locks it again (`lock-image agent --force`).
 The library and the programs are tested in the repository
 (`packages/wpt-agent/tests/test_agent_image.py`), once for every check
@@ -1595,7 +1595,7 @@ count. So `cd docs && cat a.md` looks and `echo cat a.md` does not. Which
 offered tools look is decided in one place, `wpt_dataset.tasks.looks`
 (`read`, `bash`, and a declaration marked `looks`): the agent loop writes
 their real names into the conversation's `metadata.looking`, which the
-library reads, and `wpt-dataset check` refuses an `answered_by` naming any
+library reads, and `wpt dataset check` refuses an `answered_by` naming any
 other tool.
 
 The trace rules of #37 are `read_before_write`, `sources_first` and
@@ -1616,7 +1616,7 @@ uv run scripts/build_tasks.py KIND SOURCE --count N [--seed S] [--select EXPRESS
 ```
 
 `SOURCE` is an `empty` source a person makes for the tasks, like any text
-written for WPT (`wpt-dataset new-source`, then its license text, tagged
+written for WPT (`wpt dataset new-source`, then its license text, tagged
 `finish-tasks`); a maintainer admits it. A run replaces everything under `KIND/` in
 it by `N` tasks, as one new patch checked as `check --fetch` checks it,
 every pointer filled in. The tasks come from the admitted sources already
@@ -1767,7 +1767,7 @@ The first committed task set holds all 4 kinds, about 2,500 tasks of each,
 about 10,000 in all, and reports its shares this way. The 70/30 mix between
 the two shares is settled later, once more kinds of tasks are defined: only
 the program-built kinds are defined so far. Building the set needs every
-admitted source it reads downloaded into the store first (`uv run wpt-dataset
+admitted source it reads downloaded into the store first (`uv run wpt dataset
 download`), on a machine that holds them, the task sources made and
 admitted, and one run per kind with `--count 2500`.
 
@@ -2170,7 +2170,7 @@ tables, and the tokenizer uses none.
 and PyTorch versions, so the same inputs give equivalent but not identical
 weights. On a GPU, the attention kernels also add up the entries' gradients
 in the order the GPU's atomic additions take, so two runs on one GPU can
-differ slightly too (docs/model.md, "Attention"); `wpt-train` logs whether
+differ slightly too (docs/model.md, "Attention"); `wpt train` logs whether
 TileLang, Triton or PyTorch computes the attention, which `--kernels` names. The updates themselves are the same: each update's
 examples, and any random draw a model makes, come from the seed and the update, and a resumed step
 continues the same updates; a reused step's result stands for its inputs, whatever machine trained

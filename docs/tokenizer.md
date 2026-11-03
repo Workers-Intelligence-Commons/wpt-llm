@@ -64,7 +64,7 @@ From then on, every build of that version uses that vocabulary:
   models, whatever their training settings, share one vocabulary, so a
   model can keep training on new data. A source the vocabulary was not
   trained on still encodes exactly, since every byte has a token, only less
-  compactly; `wpt-dataset tokenizer-check <name>` shows by how much.
+  compactly; `wpt dataset tokenizer-check <name>` shows by how much.
 - **A new vocabulary takes a new version.** For a big change (much more
   data, another size) or a change of the tokenizing algorithm, raise
   `version` in the recipe: the next build trains a new vocabulary and
@@ -99,13 +99,13 @@ mean other tokens.
   sha256, and writes it into the model folder as `tokenizer.json`. Every
   weight file's header names it: `tokenizer` (such as
   `classics version 1`) and `tokenizer_sha256`.
-- `wpt-chat` and `wpt-eval` load `tokenizer.json` only when its sha256
+- `wpt chat` and `wpt eval` load `tokenizer.json` only when its sha256
   is the one in the weights' headers (`TokenizerMismatch` otherwise), so a
   model never runs with another vocabulary.
 
 ### Checking a vocabulary on the data
 
-`wpt-dataset tokenizer-check <name>` encodes then decodes every document of
+`wpt dataset tokenizer-check <name>` encodes then decodes every document of
 every admitted source with the locked vocabulary: each must give back its
 exact bytes (`RoundTripFailed` otherwise). It prints, per source, the
 documents, characters, tokens and characters per token, and marks the

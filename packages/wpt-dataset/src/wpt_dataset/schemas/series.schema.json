@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/Workers-Intelligence-Commons/wpt-llm/schemas/series.schema.json",
+  "$id": "https://github.com/Workers-Intelligence-Commons/wpt/schemas/series.schema.json",
   "title": "WPT model series (data/recipes/series/<name>.json): the rules its sizes share and the list of sizes; SERIES:SIZE names one size wherever a model recipe's name goes",
   "type": "object",
   "additionalProperties": false,
@@ -23,7 +23,7 @@
   },
   "properties": {
     "data": {
-      "description": "what `wpt-dataset build SERIES:SIZE` builds, one dataset for every size: its total tokens are the largest size's, and each size reads its start",
+      "description": "what `wpt dataset build SERIES:SIZE` builds, one dataset for every size: its total tokens are the largest size's, and each size reads its start",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -332,7 +332,7 @@
       }
     },
     "drafter": {
-      "description": "the drafter wpt-train trains at the end of every run, after the last step (docs/model.md, \"The drafter\"; wpt_inference.drafting); a setting left out keeps its default",
+      "description": "the drafter wpt train trains at the end of every run, after the last step (docs/model.md, \"The drafter\"; wpt_inference.drafting); a setting left out keeps its default",
       "type": "object",
       "additionalProperties": false,
       "properties": {

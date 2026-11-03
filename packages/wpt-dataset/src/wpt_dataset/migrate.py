@@ -16,7 +16,7 @@ next to it, for the rare step that reads one, and for a git source the
 commit it was reviewed at, from the repository's git history, or else the
 commit its last download got, from the store).
 
-`wpt-dataset migrate` then rewrites every file a step applies to, and
+`wpt dataset migrate` then rewrites every file a step applies to, and
 checks the result against the schema. A file migrate cannot rewrite, such as
 a source's chat file (upstream's bytes), is brought to the current shape in
 memory by upgrade() each time it is read.
@@ -31,7 +31,7 @@ from wpt_store.listing import listing
 
 from . import trained
 from .errors import DatasetError, OutdatedSchema
-from .repo import Repo
+from .repo import SERVICE, Repo
 
 KINDS_WITH_STEPS = ("source", "mixture", "model", "series", "tokenizer", "lock", "conversation", "task", "rating",
                     "probe", "image-lock", "image-licenses", "image-tools", "license-text")
@@ -108,7 +108,7 @@ class Revisions:
     def store(self):
         """The store open_store() gives; OutdatedSchema when there is none to ask or it cannot be opened."""
         if self._open_store is None:
-            raise OutdatedSchema("this step needs the store that holds the data; run `wpt-dataset migrate`, which "
+            raise OutdatedSchema("this step needs the store that holds the data; run `wpt dataset migrate`, which "
                                  "opens the store WPT_STORE names")
         try:
             return self._open_store()
@@ -322,7 +322,7 @@ DRAFTER_DEFAULTS = {"prompts": 256, "prompt_tokens": 64, "answer_tokens": 256, "
 
 def _model_drafter(document, _where):
     """The `drafter` section (docs/model.md, "The drafter"): the drafter that
-    wpt-train trains at the end of every run. It goes in after `training`,
+    wpt train trains at the end of every run. It goes in after `training`,
     with the training values every recipe states (DRAFTER_DEFAULTS); the
     settings it leaves out keep their defaults."""
     migrated = {}
@@ -468,6 +468,26 @@ STEPS["lock"] += [
     Step("the tokenizer code's version", lambda d: "wpt_tokenizer" in d,
          lambda d, _where: {key: value for key, value in d.items() if key != "wpt_tokenizer"}),
 ]
+
+# the `by` that the two steps below replace with SERVICE
+DASHED_SERVICE = "machine:wpt-dataset"
+
+
+def _by_dashed_service(decision) -> bool:
+    return isinstance(decision, dict) and decision.get("by") == DASHED_SERVICE
+
+
+def _entries_decided_by_dashed_service(document, _where):
+    return {**document, "licenses": [
+        {**entry, "decision": {**entry["decision"], "by": SERVICE}} if _by_dashed_service(entry.get("decision"))
+        else entry for entry in document["licenses"]]}
+
+
+STEPS["source"].append(Step(f"a license entry decided by {DASHED_SERVICE}",
+                            lambda d: any(_by_dashed_service(e.get("decision")) for e in _entries(d, "licenses")),
+                            _entries_decided_by_dashed_service))
+STEPS["license-text"].append(Step(f"a decision by {DASHED_SERVICE}", lambda d: _by_dashed_service(d.get("decision")),
+                                  lambda d, _where: {**d, "decision": {**d["decision"], "by": SERVICE}}))
 
 # an earlier shape carried a number in `schema`; no file does now
 for _kind in KINDS_WITH_STEPS:

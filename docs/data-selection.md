@@ -95,12 +95,12 @@ part is what a build enforces:
           "total_tokens": 2000000000, "held_out": 0.001 }
 ```
 
-`wpt-dataset build <name>` builds the data part of the model recipe of
+`wpt dataset build <name>` builds the data part of the model recipe of
 that name (or of `SERIES:SIZE`, a size of a model series, whose data part
 every size of the series shares) and prints the dataset id: the fingerprint of the data part, the
 mixture, the vocabulary and every document. Recipes with the same data
-part share one dataset, and `wpt-train` refuses a dataset built from
-another data part than its recipe's. It reads the sources `wpt-dataset
+part share one dataset, and `wpt train` refuses a dataset built from
+another data part than its recipe's. It reads the sources `wpt dataset
 download` put in the store and downloads none; a source that is not
 there is left out and listed in the record. A task pointing into a
 source the build left out, one not downloaded among them, stops the build,

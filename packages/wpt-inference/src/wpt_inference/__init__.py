@@ -51,7 +51,7 @@ it kept), what a drafter's calibration learns from (wpt_inference.drafting).
 
 The writer has no idea what the tokens mean; the caller says which tokens
 end a turn (stops) and how many tokens each row may write. next_message
-is the one exception, shared by wpt-chat --chat and the text measures: the
+is the one exception, shared by wpt chat --chat and the text measures: the
 tokens of the assistant's next message, through the chat template.
 """
 

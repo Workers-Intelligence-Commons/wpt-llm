@@ -1,0 +1,74 @@
+"""The documents pages: every kind of data file other than a source's own
+files (recipes, Dockerfiles, the signer lists, and the generated locks and
+license lists, which are only read here), and the JSON schema of each JSON
+kind, which the recipe editors are built from, and the sizes a series
+file derives. As `wpt dataset kinds`, `list`, `show`, `save` and `series`,
+through the service layer."""
+
+from dataclasses import asdict
+
+from wpt_dataset.repo import KINDS, schema_of
+
+from ..server import Route
+from .common import SAVED, STRING, VERSION, refusals
+
+def routes(context):
+    repo = context.repo
+
+    def kinds(values, body):
+        return 200, [kind | {"names": repo.names(kind["name"])} for kind in repo.kinds()]
+
+    @refusals
+    def names(values, body):
+        return 200, repo.names(values["kind"])
+
+    @refusals
+    def read(values, body):
+        found = repo.read(values["kind"], values["name"])
+        return 200, {"kind": found.kind, "name": found.name, "text": found.text, "document": found.document,
+                     "version": found.version, "problems": found.problems}
+
+    @refusals
+    def save(values, body):
+        kind = values["kind"]
+        if kind in KINDS and KINDS[kind].form == "json":
+            if "document" not in body:
+                return 400, {"problems": [f"{kind} is JSON: send {{document, version}}"]}
+            content = body["document"]
+        else:
+            if not isinstance(body.get("text"), str):
+                return 400, {"problems": [f"{kind} is text: send {{text, version}}"]}
+            content = body["text"]
+        return 200, {"version": repo.save(kind, values["name"], content, body["version"])}
+
+    @refusals
+    def kind_schema(values, body):
+        return 200, schema_of(values["kind"])
+
+    @refusals
+    def series_sizes(values, body):
+        name = values["name"]
+        return 200, [{**asdict(plan), "runs": repo.series_runs(name, plan)} for plan in repo.series_plans(name)]
+
+    return [
+        Route("GET", "/api/kinds", kinds, "every kind of data file, who writes it, and the names that exist",
+              answer={"type": "array", "items": {"type": "object"}}),
+        Route("GET", "/api/documents/{kind}", names, "the names of the files of a kind",
+              answer={"type": "array", "items": STRING}),
+        Route("GET", "/api/documents/{kind}/{name}", read,
+              "a file: its text, its JSON, its version and what the check finds in it",
+              answer={"type": "object", "required": ["text", "document", "version", "problems"]}),
+        Route("PUT", "/api/documents/{kind}/{name}", save,
+              "write a file people write (not a generated one) through the rules of the check; version \"\" "
+              "makes a new one",
+              body={"type": "object", "required": ["version"],
+                    "properties": {"document": {}, "text": STRING, "version": VERSION}}, answer=SAVED),
+        Route("GET", "/api/series/{name}", series_sizes,
+              "every size a series file derives, in its order: its shape (model), parameters without and with "
+              "the vocabulary tables, compute per token and in all, tokens, learning rate, batch, updates, warm-up "
+              "and the prefix of the series' dataset it reads, and its other runs (SERIES:SIZE:RUN): each one's "
+              "name, updates, the trunk's update a decay branch goes on from, and learning rate",
+              answer={"type": "array", "items": {"type": "object"}}),
+        Route("GET", "/api/schemas/{kind}", kind_schema,
+              "the JSON schema of a JSON kind, or of a conversation or a task", answer={"type": "object"}),
+    ]

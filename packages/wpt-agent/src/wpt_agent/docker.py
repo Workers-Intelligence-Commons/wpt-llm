@@ -1,4 +1,4 @@
-"""Starting the docker command: the one place wpt-agent runs it.
+"""Starting the docker command: the one place wpt agent runs it.
 
 Docker is found through wpt_utils.programs.program. Every failure to run
 it, or a non-zero exit, is DockerFailed; images.py and sandbox.py turn it

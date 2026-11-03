@@ -5,7 +5,7 @@ encoding, decoded to Unicode, and whatever the pipeline stores or emits
 from it is UTF-8. Every reader of a
 source's files as text decodes them here: the check
 (sources.not_text), the Markdown of every format (markdown.py, so the
-build and markdown-check too), wpt-web's file views and the evaluations
+build and markdown-check too), wpt web's file views and the evaluations
 that read a source's files. The statements read, the first that applies:
 
 - a byte-order mark, in any file: UTF-8, UTF-16 LE or BE, UTF-32 LE or BE;
@@ -34,7 +34,7 @@ statement, since they are JSON, UTF-8 by its standard, nor in a `task`
 folder's files, UTF-8 by the task format (docs/training.md). A stated
 encoding Python does not know, or bytes that do not decode under it, make
 the file no text, and NotText names why. A file written in place of
-another (wpt-web's saves) is encoded the same way (encode).
+another (wpt web's saves) is encoded the same way (encode).
 
 Nothing rewrites a file's bytes: the store, `unpack` and the patches
 keep them as upstream wrote them, and git's diffs carry them as they are.

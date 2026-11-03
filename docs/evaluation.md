@@ -1,37 +1,37 @@
 # Evaluation
 
-`wpt-eval` runs tests on a trained model and records their results in its
+`wpt eval` runs tests on a trained model and records their results in its
 model card.
 
 ```sh
-uv run wpt-eval runs/default                      # every built-in test
-uv run wpt-eval runs/default memorization         # one built-in test
-uv run wpt-eval runs/default path/to/my_test.py   # any Python file
-uv run wpt-eval runs/default held-out-loss --kind-by origin   # held-out loss by kind of text
+uv run wpt eval runs/default                      # every built-in test
+uv run wpt eval runs/default memorization         # one built-in test
+uv run wpt eval runs/default path/to/my_test.py   # any Python file
+uv run wpt eval runs/default held-out-loss --kind-by origin   # held-out loss by kind of text
 ```
 
-It reads the model folder that `wpt-train` wrote, and the dataset the model
+It reads the model folder that `wpt train` wrote, and the dataset the model
 was trained on from the store named by `WPT_STORE`, checking every shard
 against its recorded hash. Each result goes to `<model folder>/evals/<name>.json`
 and the model card (`README.md`) is written again to show it. Training a new
 model into the same folder removes the old results: they describe other
 weights.
 
-The agent measures (below) also need the repository: `wpt-eval` runs from
+The agent measures (below) also need the repository: `wpt eval` runs from
 inside it, since the measure tasks are task files of its sources, and each
-task's image must be built on this machine first (`uv run wpt-agent
+task's image must be built on this machine first (`uv run wpt agent
 build-image NAME`, which needs Docker), as for the `finish-tasks` step. A missing
 image stops the command and names the command that builds it.
 
 The `probes` test also reads the repository: its questions are the probe
 files of its sources ("Probes", below).
 
-`wpt-scaling` fits the scaling curve of several trained models and
+`wpt scaling` fits the scaling curve of several trained models and
 predicts the loss of a model before it trains ("Scaling curve", below).
 
 ## The model on a gpu worker
 
-The tests run on the machine that runs `wpt-eval`, which holds the
+The tests run on the machine that runs `wpt eval`, which holds the
 tokenizer, the store and the sandboxes. The model runs on a gpu worker
 (the first key of `WPT_GPU_WORKERS`, else a local worker), which the
 command sends the checkout and the folder's weight files; what a test asks
@@ -41,7 +41,7 @@ as numbers
 
 `--kernels FORM` (or `WPT_KERNELS`) names what computes the model's
 attention on the worker: `tilelang`, `triton` or `pytorch`, as for
-`wpt-train` ([model.md](model.md), "Attention"). A name that is none of
+`wpt train` ([model.md](model.md), "Attention"). A name that is none of
 these is refused. The worker decides the form before it loads the model,
 and a form that cannot work there refuses the evaluation before any test
 runs. Unnamed, the worker chooses by what is installed for its GPU.
@@ -51,7 +51,7 @@ runs. Unnamed, the worker chooses by what is installed for its GPU.
 A test is one Python file that defines `run`:
 
 ```python
-from wpt_eval import Result
+from wpt.eval import Result
 
 def run(context):
     documents = context.documents("held_out")
@@ -91,7 +91,7 @@ people, which the model card shows. A test is plain code, not a recipe file,
 so it can measure whatever the question needs. The result file also records
 the test file's sha256, so a result names the exact code that produced it.
 
-Built-in tests live in `apps/wpt-eval/src/wpt_eval/evals/`; a new file there
+Built-in tests live in `apps/wpt/src/wpt/eval/evals/`; a new file there
 is a new built-in test.
 
 ## Memorization
@@ -134,7 +134,7 @@ measured on the same text.
   tokens and the documents of the whole held-out part and of each source.
 
 `--kind-by FIELD` (or `WPT_KIND_BY`) also groups the documents by one field
-of their sources (`wpt_eval/kinds.py`), `tag` unless it names another, and
+of their sources (`wpt/eval/kinds.py`), `tag` unless it names another, and
 gives each kind's loss: the mean
 over the tokens of its documents. A document of several kinds counts in
 each, and a document the field gives no value is in the kind `(none)`.
@@ -148,15 +148,15 @@ each, and a document the field gives no value is in the kind `(none)`.
   document's file, in the repository.
 
 The setting's default is `tag`, so an evaluation that sets nothing (the
-one `WPT_EVALUATE=1` makes in `wpt-manager`'s run included) groups by tag.
+one `WPT_EVALUATE=1` makes in `wpt manager`'s run included) groups by tag.
 
 ## Scaling curve
 
-`wpt-scaling` fits loss against training compute over several trained
+`wpt scaling` fits loss against training compute over several trained
 models, and predicts the loss of a model recipe before it trains:
 
 ```sh
-uv run wpt-scaling run-256x5 run-384x8 runs/512x10 --predict eldest-titmouse:640x13
+uv run wpt scaling run-256x5 run-384x8 runs/512x10 --predict eldest-titmouse:640x13
 ```
 
 Each model is a model folder, or the name of a run whose model folder the
@@ -175,7 +175,7 @@ store keeps (`models/NAME`). Nothing is written. Each model's
   loss per token over the full held-out text its provenance names.
 
 A model without that evaluation is named in the output and left out of the
-fit. `WPT_EVALUATE=1` in `wpt-manager`'s run, or `wpt-eval FOLDER
+fit. `WPT_EVALUATE=1` in `wpt manager`'s run, or `wpt eval FOLDER
 held-out-loss`, makes the evaluation. A fit needs 2 models that have it.
 
 Every model in the fit must hold out the same text: models whose held-out
@@ -209,7 +209,7 @@ measure-only tasks of every admitted source, whatever their tags, as
 `eval`, the hash share of every task source, and the pointer tasks on
 held-out text ([training.md](training.md), "Measure tasks"), read
 with the model's own `held_out` share and dataset (its `provenance.json`),
-once per command. The run is `wpt_eval/attempts.py`. Its attempts are
+once per command. The run is `wpt/eval/attempts.py`. Its attempts are
 played by `wpt_agent.play`, the function the `finish-tasks` step plays its own
 with: each in a fresh container of the task's image, written together by
 the model alone, then scored by the task's check. The model always writes
@@ -268,7 +268,7 @@ exists for base models.
 A measure reads an attempt by the same rules as the checks: the check
 library of the task's image (`wpt_check.py`,
 [training.md](training.md), "The check library"), loaded through
-the service layer by `wpt_eval.attempts.library`. Each measure gives the
+the service layer by `wpt.eval.attempts.library`. Each measure gives the
 mean score, and the pass rate of its attempts: an attempt passes when its
 score is 1, its `correct` part at full marks with every gate of its task
 holding (a broken gate scores the attempt 0). The rest of the rewards (the
@@ -339,11 +339,11 @@ commit changes count (`wpt_dataset.tasks.document_tags`, through
 
 Three built-in tests measure requirements 3 and 5 on text the model never
 trained on: `calibration` (#28), `reading_gain` (#34, its text form) and
-`bible_verses` (#35). They share `wpt_eval/asking.py`:
+`bible_verses` (#35). They share `wpt/eval/asking.py`:
 
 - A question is one user message through the model's chat template
   (`wpt_tokenizer.chat`). The model writes each reply through
-  the chat template, as `wpt-chat --chat` does, on the gpu worker
+  the chat template, as `wpt chat --chat` does, on the gpu worker
   (`context.model.writer`), always taking its likeliest token (`wpt_agent.GREEDY`), so a run gives
   the same replies again on the same setup.
 - `calibration` and `reading_gain` ask for the rest of a paragraph. The
@@ -368,7 +368,7 @@ trained on: `calibration` (#28), `reading_gain` (#34, its text form) and
   `bible_verses` asks for no confidence.
 - Each measure keeps the answer it built from the replies in its result's
   data as a `json` block, a shape that can go back into sources
-  (`wpt_eval.asking.block`): `{"answer": <the reply's text>, "confidence":
+  (`wpt.eval.asking.block`): `{"answer": <the reply's text>, "confidence":
   <0 to 1>}` where a confidence is asked, `null` when it is missing, and
   `{"answer": <the verse written>}` in `bible_verses`.
 - Every measure runs as is on any model, a pre-trained one included: a
@@ -483,12 +483,12 @@ the `rating` format holds one rating per line, each a JSON object matching
 
 ```json
 {"task": "<source id>/<task folder>", "weights": {"model.safetensors": "<sha256>"},
- "record": "<wpt-eval run record folder>", "attempt": 1, "plain": false, "verdict": "pass",
+ "record": "<wpt eval run record folder>", "attempt": 1, "plain": false, "verdict": "pass",
  "by": "A. Person", "date": "2026-10-23"}
 ```
 
 - `task`, `record`, `attempt` and `plain`: the attempt it rates, as the
-  `attempts.jsonl` of a `wpt-eval` run record holds it (the task's id, the
+  `attempts.jsonl` of a `wpt eval` run record holds it (the task's id, the
   run's record folder in the store, the attempt's index, and whether the
   attempt was offered only its needed tools under their real names, which
   tells apart two attempts of one task with the same index in one
@@ -502,17 +502,17 @@ the `rating` format holds one rating per line, each a JSON object matching
 A person rates an attempt once: their newer rating replaces their earlier
 one. The data rules hold it for every way of saving: a rating file with two
 ratings by one person of one attempt (the same task, record, attempt,
-`plain` and `by`) fails `wpt-dataset check --fetch`, and the service layer,
+`plain` and `by`) fails `wpt dataset check --fetch`, and the service layer,
 adding a person's rating of an attempt they rated already, replaces their
 earlier line.
 
-`wpt-dataset check --fetch` checks every line against the schema and the
+`wpt dataset check --fetch` checks every line against the schema and the
 date against the calendar; a rating file, like a chat or task file, gives
 no pre-training document. The service layer writes a rating file only in
 an `empty` source, one line at a time, as the next patch, and gives a new
 file its own `rating` format entry.
 
-The "Ratings" page of `wpt-web` lists the `wpt-eval` runs in the store that
+The "Ratings" page of `wpt web` lists the `wpt eval` runs in the store that
 wrote attempts, then one run's attempts: each attempt's result (its answer
 and the model's final reply, the last assistant message before the
 confidence question, with every message below) and its changes to `/work`,
@@ -522,8 +522,8 @@ name another). An attempt Docker dropped is shown with its error and cannot
 be rated. A last line of `attempts.jsonl` cut short by a run that stopped
 while writing it is left out.
 
-On the command line, `wpt-dataset ratings ID PATH` lists what each
-rating rates, who and when, and `wpt-dataset save-rating ID PATH
+On the command line, `wpt dataset ratings ID PATH` lists what each
+rating rates, who and when, and `wpt dataset save-rating ID PATH
 LINE|new FILE` writes one (a person's text, marked `*`).
 
 ## Probes
@@ -549,7 +549,7 @@ matching `packages/wpt-dataset/src/wpt_dataset/schemas/probe.schema.json`:
   (`re.search`). Flags, such as `(?i)` for any case, are written in the
   pattern itself: the test adds none.
 
-`wpt-dataset check --fetch` checks every line against the schema and
+`wpt dataset check --fetch` checks every line against the schema and
 compiles every pattern: a pattern Python cannot compile fails the check.
 The service layer writes a probe file only in an `empty` source, one line
 at a time, as the next patch, and gives a new file its own `probe` format
@@ -558,7 +558,7 @@ entry.
 The test reads the probes of every admitted source, in source id, file
 path and line order (`wpt_dataset.probes.read`). Each question is one
 user message through the model's chat template, as the text measures ask
-(`wpt_eval.asking.replies`). The replies are sampled from the model's
+(`wpt.eval.asking.replies`). The replies are sampled from the model's
 plain distribution (temperature 1, every token), at most 512 tokens
 each, written from one prompt in batches of at most 64 replies, one
 after another, all drawing from one generator seeded by the question's
@@ -583,9 +583,9 @@ The model card shows each question's numbers and prints each flagged
 reply as written, word for word, with the pattern that matched. Without a probe in the repository, the test says it
 did not run.
 
-The "Probes" page of `wpt-web` writes the probes of a probe file
+The "Probes" page of `wpt web` writes the probes of a probe file
 (`probes/probes.jsonl` unless the person names another), each with its
-question and its patterns. On the command line, `wpt-dataset probes ID
-PATH` lists how many patterns each probe holds, and `wpt-dataset
+question and its patterns. On the command line, `wpt dataset probes ID
+PATH` lists how many patterns each probe holds, and `wpt dataset
 save-probe ID PATH LINE|new FILE` writes one (a person's text, marked
 `*`).

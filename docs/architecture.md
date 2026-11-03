@@ -48,10 +48,10 @@ Upkeep of the repository is commands a person runs; nothing runs on a
 schedule and no machine stays on for it:
 
 - A person adds a source, or moves an address to a newer version, by
-  editing `source.json` (the "Sources" page of `wpt-web`, `wpt-dataset save
+  editing `source.json` (the "Sources" page of `wpt web`, `wpt dataset save
   source`), or with a script kept outside the repository.
 - A person marks sources for a new download to get fresh content
-  (`wpt-store mark`).
+  (`wpt store mark`).
 - A person reads a build's report and adds the license entry or the
   non-text path it names, or runs the task builder again
   ([training.md](training.md), "The task builder").
@@ -60,12 +60,12 @@ schedule and no machine stays on for it:
 ## Components and services
 
 Each component has one role. Every operation is a service: a function with
-its inputs, its result and its named failures. The `wpt-dataset` commands
-and the `wpt-web` routes are controllers: each reads its input (arguments,
+its inputs, its result and its named failures. The `wpt dataset` commands
+and the `wpt web` routes are controllers: each reads its input (arguments,
 a request), calls the same services, and presents the result. A controller
-holds no rule of its own, so the two interfaces cannot disagree. A long run
-started from `wpt-web` may run in its own process and still calls the same
-service.
+holds no rule of its own, so the two interfaces cannot disagree. A job
+started from `wpt web` runs a `wpt` subcommand in its own process, which
+calls the same services.
 
 | Component | Role | Code |
 | --- | --- | --- |
@@ -133,7 +133,7 @@ patches `0001-<name>.patch`, `0002-<name>.patch`... applied in that order.
 
 `<origin>-<item>-<hash>`, or `<origin>-<hash>` when the source has no
 natural item (lowercase `a-z 0-9 -`), for example `gutenberg-1342-05bda734`.
-`wpt-dataset source-id <origin> [<item>] <address>` prints the id a new
+`wpt dataset source-id <origin> [<item>] <address>` prints the id a new
 source gets: `<hash>` is the first 8 hex characters of the sha256 of its
 first address. The id is given once, when the source is created, and is
 never derived from the address again: an address that changes, such as a
@@ -266,7 +266,7 @@ everywhere it appears: the session lines, a dataset's record, the
 conversations' and tasks' records, a task's repository pointer, and a
 model's `NOTICE` and card, which name each source by the manifest of the
 upstream tree it was built from.
-`wpt-dataset manifest <id>` downloads a source as `download` does (or
+`wpt dataset manifest <id>` downloads a source as `download` does (or
 finds it in the store) and prints the list of its upstream tree's files
 and that tree's manifest.
 
@@ -287,13 +287,13 @@ adds the path.
 
 A file whose encoding is stated in the file itself is text in that
 encoding: it is decoded to Unicode, and everything the pipeline stores or
-emits from it (Markdown, tokens, wpt-web's views) is UTF-8; every encoding
+emits from it (Markdown, tokens, wpt web's views) is UTF-8; every encoding
 stated this way converts without loss.
 One function decides a file's encoding for every reader
 (`packages/wpt-dataset/src/wpt_dataset/encoding.py`), through the text
 check ([Shared checks](#shared-checks)): the check, the build's text check,
 the Markdown of every format, `markdown-check`, the build,
-wpt-web's file views and the evaluations that read a source's files. The
+wpt web's file views and the evaluations that read a source's files. The
 statements it reads, in this order:
 
 | Where | Statement |
@@ -314,11 +314,11 @@ that do not decode under it, make the file no text: `check --fetch` names
 the file and why, and the build leaves it out as it leaves out a binary
 file.
 
-A file keeps its own bytes everywhere else: the store, `wpt-dataset
+A file keeps its own bytes everywhere else: the store, `wpt dataset
 unpack` and the patches hold them as upstream wrote them, and git's diffs
 carry them as they are, so a removal patch on a Latin-1 page is made and
 applied like any other (edit the unpacked file in its own encoding).
-wpt-web saves an edited file in the encoding the file it replaces states.
+wpt web saves an edited file in the encoding the file it replaces states.
 A git history's files (`.git/history/<commit>`) are WPT's own UTF-8 text: a diff's bytes that are not UTF-8 are replaced there, whatever
 the changed file states.
 
@@ -333,12 +333,12 @@ A git index silently drops every path under `.git/`, so every such path
 (the files of a git history, `.git/history/<commit>` and
 `.git/history/order`, or any other) is set aside while the patches apply
 and comes back exactly as it was; a patch that names one fails, as git
-refuses it. For the same reason `wpt-dataset patch` refuses a folder whose
+refuses it. For the same reason `wpt dataset patch` refuses a folder whose
 `.git/` files differ from the source's: a patch cannot change them.
 
-Patches are not written by hand: `wpt-dataset unpack <id> <folder>` writes a
+Patches are not written by hand: `wpt dataset unpack <id> <folder>` writes a
 source's final files (after cuts and patches) into a folder outside the
-repository; after editing them, `wpt-dataset patch <id> <folder> <name>`
+repository; after editing them, `wpt dataset patch <id> <folder> <name>`
 records the difference as the next patch, `NNNN-<name>.patch`. It then
 applies every patch again and keeps the new one only if the source gives
 exactly the folder's files and passes its license map.
@@ -365,7 +365,7 @@ answer (`wpt_dataset/retry.py`).
 
 A download that still fails fails that source in the download step, with
 its named failure ([Protocols](#protocols)). It stores nothing for that
-source: the store keeps what it held before. `wpt-dataset build` reads
+source: the store keeps what it held before. `wpt dataset build` reads
 what the store holds; a source that is not in the store is left out, and
 listed, with its error (`NotDownloaded`), under `skipped` in the dataset
 record and in the build's run record; the model's `provenance.json`
@@ -374,7 +374,7 @@ apply leaves the whole source out the same way, until a person makes the
 cut or the patch again.
 
 A source in the store that fails in the build for another reason (a file
-is broken) stops `wpt-dataset build`. With `--skip-failed` (or
+is broken) stops `wpt dataset build`. With `--skip-failed` (or
 `WPT_SKIP_FAILED=1`), the build leaves it out instead and lists it the
 same way. A missing program (such as `hg`) stops the build anyway, since
 it fails every source that needs it. Training a new vocabulary never
@@ -382,7 +382,7 @@ skips a source: its lock freezes the vocabulary for every later model of
 that version, so the first build of a new tokenizer version needs every
 source.
 
-`wpt-dataset download` and `wpt-dataset check --fetch` try every source
+`wpt dataset download` and `wpt dataset check --fetch` try every source
 they were given, even after one failed, and end with the list of failures
 and their reasons.
 
@@ -402,8 +402,8 @@ tree, as its `formats` entry says
 | `records` | a dataset file holding many documents (JSON Lines, optionally `.gz` or `.zst`, or Parquet): each record that a license entry covers (the entry whose field place expects the value of that field in the record) and that the `keep` rules keep is one document, `<file>#<record id>`; its text field is read as `text` above, kept as it is with `"as": "markdown"`, or converted as an `html` page with `"as": "html"`, for a dataset of web pages (no note comes from another file). A `title` field's value becomes the document's first line, `# <title>`, then a blank line. Ids repeat at no point in a file, unless `newest` names a date field (ISO 8601), which needs an `id` field that every record holds: of the records that share an id in all the files the entry covers, only the one with the latest date is read, and when the dates are equal the later one (in path order, then in its file), as a dataset holding several revisions of one document needs. Three more shapes: with `records`, a `.json` file (optionally `.gz` or `.zst`) is one JSON document, and that dotted field of it holds the list of records (`"records": "full articles"`); when the one license entry covering the file has no field place, every record takes it, as a dataset stating one license for all its records needs; an `.xml` file is one record whose fields are XPath 1.0 expressions, their prefixes in the entry's `namespaces` (nodes give the string value of the first one, none when there is none; any other value as it is), and a `join` lets it read one more file of the tree: the one of the join's `paths` whose path holds the same key (`key`, a regular expression searched in the record file's path, `joined_key` in the joined file's, each giving its groups joined by one space, or its whole match), as the XPath variable the join's `name` names (an empty node set when no file holds the key); the joined files give no document. A newspaper issue published as a full-text file and a metadata file is read this way: the text from the first, the license value and the credit from the second, found by the issue's id in the other address's folder. XML is read with no external entity, no external DTD and no network; only the entities its own DTD declares are expanded |
 | `chat` | conversations for training, one JSON object per line ([chat-format.md](chat-format.md)); each line is checked, and the file gives no pre-training document: a dataset's build keeps each conversation with its file's tags, and only a training step whose `tag` setting is one of them reads it |
 | `task` | the files of task folders for agentic training (`task.json`, `files/`, `check`; [training.md](training.md)); each folder is checked, and its files give no pre-training document: a dataset's build keeps each task with the tags of its `task.json`, and only a training step whose `tag` setting is one of them reads it: `finish-tasks` and `finish-tasks-with-less-writing` both ask for `finish-tasks`. A task built by a program holds pointers into the documents of other sources, never their text, which the readers fill in from the store ([training.md](training.md), "Pointer tasks") |
-| `rating` | people's pass or fail on the attempts of a `wpt-eval` run, one rating per line ([evaluation.md](evaluation.md), "People's ratings"); each line is checked, and the file gives no pre-training document: a measure only, which no training step reads |
-| `probe` | questions the `probes` test of `wpt-eval` asks a model and the patterns that flag an alarming reply, one probe per line ([evaluation.md](evaluation.md), "Probes"); each line is checked, its patterns included, and the file gives no pre-training document: a measure only, which no dataset build keeps and no training step reads |
+| `rating` | people's pass or fail on the attempts of a `wpt eval` run, one rating per line ([evaluation.md](evaluation.md), "People's ratings"); each line is checked, and the file gives no pre-training document: a measure only, which no training step reads |
+| `probe` | questions the `probes` test of `wpt eval` asks a model and the patterns that flag an alarming reply, one probe per line ([evaluation.md](evaluation.md), "Probes"); each line is checked, its patterns included, and the file gives no pre-training document: a measure only, which no dataset build keeps and no training step reads |
 
 In `xhtml` and `html` pages, an image the page shows (`<img>`, or an
 inline `<svg>`) is never dropped silently: in its place the Markdown holds
@@ -501,7 +501,7 @@ without it. The task reader takes the held-out texts from it
 ([data-selection.md](data-selection.md), "Held-out text and
 contamination").
 
-`wpt-dataset build --stream` (or `WPT_STREAM=1`) keeps less: each source's
+`wpt dataset build --stream` (or `WPT_STREAM=1`) keeps less: each source's
 documents are turned into Markdown and tokens, and only the tokens are
 kept. A file its conversion needs as a file (a records file, a message
 tree, a file its patches change) is copied from the store into a temporary
@@ -529,7 +529,7 @@ size, from its file list, on the disk its copies go to.
 
 ### The download step
 
-Only `wpt-dataset download`, `check --fetch` (before its other checks) and
+Only `wpt dataset download`, `check --fetch` (before its other checks) and
 `manifest` download sources, through one piece of code
 (`wpt_dataset/download.py`). Every other command, the build included, reads
 the upstream files from the store, and a source that is not there fails
@@ -547,7 +547,7 @@ A source is downloaded when, and only when:
   downloads the whole source again, so the tree and its pages come from
   the same moment;
 - or it is marked in the store database for a new download, after its
-  last download (`wpt-store mark ID ...`, or `--all` for every source): a
+  last download (`wpt store mark ID ...`, or `--all` for every source): a
   person's way to ask for fresh content. A marked git source downloads
   the same commit again: only a new `revision` brings a later one.
 
@@ -637,7 +637,7 @@ address's (the store's, a missing program, an interrupted run) gets no
 line. With `download --stream` (or `WPT_STREAM=1`), the downloading
 machine keeps no copy of the bundles once the store holds them; without
 it, an S3 store keeps a copy in its local cache folder and reads it first.
-`wpt-store list` lists what the database says, from the database alone:
+`wpt store list` lists what the database says, from the database alone:
 each source's last outcome, whether it is marked, and its last download's
 time, what it got, address, repository commit and size; then every
 session, in the order they started. A build is a session too, with no
@@ -663,7 +663,7 @@ again give the same dataset.
 
 ### The build
 
-`wpt-dataset build` turns the bytes in the store into a dataset
+`wpt dataset build` turns the bytes in the store into a dataset
 (`wpt_dataset/build.py`) and never contacts upstream. For each admitted
 source, several at once:
 
@@ -849,9 +849,9 @@ The store also keeps the cut key that erasure cuts are matched under
 ([tokenizer.md](tokenizer.md)): a machine without access to the store
 matches no cut and uses no locked vocabulary.
 
-The store also holds the record of every run of `wpt-dataset download`,
-`check --fetch`, `manifest`, `build` and `build-tokenizer`, `wpt-train`,
-`wpt-eval` and `wpt-manager`: one folder per run under
+The store also holds the record of every run of `wpt dataset download`,
+`check --fetch`, `manifest`, `build` and `build-tokenizer`, `wpt train`,
+`wpt eval` and `wpt manager`: one folder per run under
 `records/`, written by name rather than by content, each file compressed
 (a local store adds a record file's lines to one plain file while the
 record runs, and compresses it into one part when the record ends;
@@ -867,23 +867,23 @@ pools of tools (`tools.json`), the two
 signer lists (`allowed-signers`, `allowed-gpg-keys.asc`), and the
 license texts (`license-texts/<id>/`, [licenses.md](licenses.md),
 "License texts"). Every command
-that uses this data goes through it: `wpt-dataset` (`check`, `migrate`,
-`build`, `check-commits` and the rest), `wpt-train`, the
-image commands of `wpt-agent`, and `wpt-web`. It hands out documents, bytes
+that uses this data goes through it: `wpt dataset` (`check`, `migrate`,
+`build`, `check-commits` and the rest), `wpt train`, the
+image commands of `wpt agent`, and `wpt web`. It hands out documents, bytes
 and versions, never a path under `data/`.
 
 - Every file has a version: the sha256 of its bytes, or `""` for a file
   that does not exist yet. A source's files share one version, over its
   `source.json` and every patch. A save names the version it started from
   and is refused when the file changed since (a stale save).
-- Every write applies the rules of `wpt-dataset check` to the new content
+- Every write applies the rules of `wpt dataset check` to the new content
   first, and replaces the file in one step (a temporary file, then a
   rename), so a refused or interrupted save leaves the old file. Text files
   are written with `\n` line endings.
 - One lock per repository holds each version check together with the write
   it allows, across processes as well as threads: two saves of one version,
-  from two tabs of `wpt-web`, a double click, or `wpt-web` and
-  `wpt-dataset` at the same moment, cannot both pass; the second is a stale
+  from two tabs of `wpt web`, a double click, or `wpt web` and
+  `wpt dataset` at the same moment, cannot both pass; the second is a stale
   save. Between processes it is a lock the operating system holds on the
   file `wpt-data.lock` in the repository's git folder (`.git`, or the
   folder a worktree's `.git` file names; `.wpt-data.lock` at the root of a
@@ -891,7 +891,7 @@ and versions, never a path under `data/`.
   macOS and `msvcrt.locking` on Windows. The system releases it when the
   process ends, a crash included, so a lock is never left behind to block
   the next save. Inside a process, the threads share one lock per
-  repository (`wpt-web` serves each request on its own thread).
+  repository (`wpt web` serves each request on its own thread).
 - A write through a symbolic link writes the link's target when that target
   is inside the repository, and is refused otherwise: a data file that is a
   link, or lies in a folder that is one, is written at the place the links
@@ -906,15 +906,15 @@ and versions, never a path under `data/`.
   a folder that is not a git working tree.
 - A license entry's `text` may be empty only while the source is not
   admitted, that is `under-review` or `refused`: the schema says so, and a
-  person writes the text later (`wpt-dataset save source`, or the "Sources"
-  page). Every reader of the sources (`wpt-dataset build`, with its
+  person writes the text later (`wpt dataset save source`, or the "Sources"
+  page). Every reader of the sources (`wpt dataset build`, with its
   readers of chat and task files, `check --fetch`, `check --changed`) leaves such a source out with a note naming it, instead of
-  failing, and `wpt-dataset check` names it too, as a note that is not a
+  failing, and `wpt dataset check` names it too, as a note that is not a
   failure. A source that is admitted needs its text, and a source with an
   empty text takes no files until it is written.
 - A save of a source that changes a license entry's license, place or
   expected texts, without deciding that entry anew, sends the entry back
-  to `under-review`: its decision then reads `by` `machine:wpt-dataset`,
+  to `under-review`: its decision then reads `by` `machine:wpt dataset`,
   with the date and the reason. The source's decision and its other
   entries stay. A commit holding such a change needs an allowed signature,
   as every decision change does.
@@ -934,12 +934,12 @@ and versions, never a path under `data/`.
 - A source's text changes only through a patch: the layer unpacks the
   source into a temporary folder, puts the change in, and records the
   difference as the next patch, kept only when the source then gives
-  exactly those files and passes the checks of `wpt-dataset check --fetch`
+  exactly those files and passes the checks of `wpt dataset check --fetch`
   ([Patches](#patches)). A new chat file or task folder gets its own format
   entry in `source.json` when none covers it.
 - Generated files (a tokenizer's `.lock.json`, an image's `lock.json` and
   `licenses.json`) are readable everywhere and written only by the command
-  that makes them (`wpt-dataset build-tokenizer`, `wpt-agent lock-image`),
+  that makes them (`wpt dataset build-tokenizer`, `wpt agent lock-image`),
   through the layer, which checks them against their schema.
 - The signer lists are checked too: each line of `allowed-signers` that is
   neither empty nor a comment holds a key (a key type such as
@@ -976,11 +976,11 @@ they build the repositories they check and read what a command wrote.
 ### Two interfaces
 
 Every kind of data has two interfaces, both thin layers over the service
-layer: the HTTP API of `wpt-web`,
+layer: the HTTP API of `wpt web`,
 described in OpenAPI 3.1 at `/api/openapi.json` (the server checks every
-request body against the same description), and `wpt-dataset` commands.
+request body against the same description), and `wpt dataset` commands.
 
-| Kind | `wpt-dataset` | `wpt-web` |
+| Kind | `wpt dataset` | `wpt web` |
 | --- | --- | --- |
 | any kind of file: list, read, write | `kinds`, `list KIND`, `show KIND NAME`, `save KIND NAME FILE --version V` | `/api/kinds`, `/api/documents/{kind}[/{name}]`, `/api/schemas/{kind}`; pages "Recipes", "Images", "Signers" |
 | a new empty source | `new-source ORIGIN [ITEM] NAME ...` (without `--license-text`, a person writes the license text later; an empty `--license-text` file is an error; `--format FORMAT=PATTERN` declares a format entry with no file) | `POST /api/sources`; page "New source" |
@@ -988,43 +988,94 @@ request body against the same description), and `wpt-dataset` commands.
 | a source's files | `files ID`, `read ID PATH`, `write ID PATH FILE`, `remove ID PATH`, `tags ID PATH [TAG ...]` | `/api/sources/{id}/files[/{path}]`, `/api/sources/{id}/tags/{path}` |
 | conversations | `conversations ID PATH`, `conversation ID PATH LINE`, `save-conversation ID PATH LINE` (or `new`) | `/api/sources/{id}/conversations/{path}[/{line}]`, `POST /api/drafts`; page "Conversations" |
 | tasks | `tasks ID`, `task ID FOLDER`, `save-task ID FOLDER` | `/api/sources/{id}/tasks[/{folder}]`; page "Tasks" |
-| people's ratings of attempts ([evaluation.md](evaluation.md), "People's ratings") | `ratings ID PATH`, `save-rating ID PATH LINE` (or `new`) | `/api/sources/{id}/ratings/{path}[/{line}]`, and the attempts of `wpt-eval` runs from the store, `/api/runs[/{folder}/attempts]`; page "Ratings" |
+| people's ratings of attempts ([evaluation.md](evaluation.md), "People's ratings") | `ratings ID PATH`, `save-rating ID PATH LINE` (or `new`) | `/api/sources/{id}/ratings/{path}[/{line}]`, and the attempts of `wpt eval` runs from the store, `/api/runs[/{folder}/attempts]`; page "Ratings" |
 | probes of the `probes` test ([evaluation.md](evaluation.md), "Probes") | `probes ID PATH`, `save-probe ID PATH LINE` (or `new`) | `/api/sources/{id}/probes/{path}[/{line}]`; page "Probes" |
 | git's status of `data/` | `status` | `/api/status`, on every page |
+| every other job of the command line: a `wpt dataset` command that reads or writes no person's text, `store`, `agent`, `train`, `eval`, `scaling`, `manager`, and `chat --about` | `wpt SUBCOMMAND ARGS...` | `POST /api/jobs/{job}` (for example `/api/jobs/dataset/download`, `/api/jobs/train`), then `/api/jobs[/{id}[/lines/{first}\|/records]]`; page "Jobs" |
 
 The HTTP API answers 404 when the thing does not exist, 409 for a stale
 save, 422 for content the rules refuse (with their messages) and 503 when
 a tool or the store is missing on this machine. Both interfaces write files
 and show git's status; commits stay in git.
 
-`wpt-web` listens only on 127.0.0.1 and checks neither the `Host` header
+A job route starts the subcommand as a child process of the server,
+`python -m wpt SUBCOMMAND ARGS...`, in the repository's folder, with the
+arguments the request gives and no standard input, and the server tells it
+the job's id (the `WPT_JOB` setting), which the subcommand's run record
+names (`job` in `start.json`, [observability.md](observability.md)). Any
+number of jobs run at once. Following a job gives the lines it printed to
+standard output and standard error (the last 20000) and its run record,
+where it writes one; a job lives as long as its process, and a stopped
+server forgets its jobs (it interrupts those still running first) while
+their run records stay in the store. No route runs a `wpt dataset`
+command that reads or writes a person's text (`read`, `write`,
+`conversation`, `save-conversation`, `task`, `save-task`, `save-rating`,
+`save-probe`), `new-source`'s options that do (`--file`, `--license-text`),
+`wpt chat` but for `--about` (it reads what a person types), or `wpt web`.
+
+`wpt web` listens only on 127.0.0.1 and checks neither the `Host` header
 nor a request's `Content-Type`: like
 the commands, it asks for no login and no header. What that leaves open
 while it runs: a web page open in the same browser can send it a
 cross-origin `POST` with `Content-Type: text/plain`, which the browser
 sends without asking first, so such a page can start sources
-(`POST /api/sources`) or ask for drafts (`POST /api/drafts`); and a site
+(`POST /api/sources`), ask for drafts (`POST /api/drafts`) or start any
+job (`POST /api/jobs/...`: a download, a build, a training run); and a site
 that makes its own name resolve to 127.0.0.1 (DNS rebinding) can reach
-every route, reading people's texts and changing data files in the working
-tree. Nothing is committed by `wpt-web`, so every change shows in
+every route, reading people's texts, changing data files in the working
+tree and starting jobs. Nothing is committed by `wpt web`, so every change shows in
 `git status` and in the page's list of changed files before a commit.
 
 ## Packages
 
 | Package | Role |
 | --- | --- |
-| `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; the service layer (`repo.py`), the only code that reads or writes `data/`; a source as read (`source_data.py`); the protocols (`protocols/`), the download step (`download.py`), the license check (`license_check.py`), the shared checks (`checks.py`, `erasure.py`), the build (`build.py`, `kept.py`); the task builder (`builder.py`, run by `scripts/build_tasks.py`); command `wpt-dataset` |
-| `wpt-store` | the content-addressed store (its kinds: a local folder or S3), its compression, its sessions with their bundles, the store database, its record folders, the model folders kept under a run's name (`models/<name>`), and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules; command `wpt-store` (`list`: what the store database says; `mark`: sources marked for a new download; `copy-out`: a kept model folder, checked against its sha256s) |
+| `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; the service layer (`repo.py`), the only code that reads or writes `data/`; a source as read (`source_data.py`); the protocols (`protocols/`), the download step (`download.py`), the license check (`license_check.py`), the shared checks (`checks.py`, `erasure.py`), the build (`build.py`, `kept.py`); the task builder (`builder.py`, run by `scripts/build_tasks.py`) |
+| `wpt-store` | the content-addressed store (its kinds: a local folder or S3), its compression, its sessions with their bundles, the store database, its record folders, the model folders kept under a run's name (`models/<name>`), and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules; what the store database says (`listing.py`), and a kept model folder copied out, checked against its sha256s (`models.py`) |
 | `wpt-telemetry` | the record of one command run in the store, sent live to an OpenTelemetry backend when one is set ([observability.md](observability.md)) |
 | `wpt-tokenizer` | the byte-level BPE tokenizer, Rust inside |
-| `wpt-web` | a local web interface over the service layer: one small server on 127.0.0.1, one file per page (Python routes, React page), an editor for every kind of data, a conversation editor that asks a WPT model folder for drafts, and its OpenAPI description; its interface is built with Bun when it starts; command `wpt-web` |
 | `wpt-model` | the WPT network ([model.md](model.md)) and its drafter, its safetensors model folders, and their license documents (`LICENSE`, `NOTICE`, model card) |
 | `wpt-training` | the training loop (global batch, evaluation, checkpoints, resuming) that runs one training step, with its plug points: strategies (how the hardware is used), and the parts of a step ([training.md](training.md), "Steps"): methods (how the model learns from an example), environments (where the examples come from), optimizers (how an update changes the weights) and the steps that name one of each, with the model parts they lock |
-| `wpt-inference` | sampling through the model's generation cache: several rows from one prompt, the model's next chat message (`next_message`, which `wpt-chat --chat` and the text measures of `wpt-eval` both write with), speculative decoding with a drafter and its scheduler, the scheduler's pass times (measured, recorded, replayed); training a model's drafter (`drafting.py`), which `wpt-train` runs at the end of every run, so it uses `wpt-model` |
+| `wpt-inference` | sampling through the model's generation cache: several rows from one prompt, the model's next chat message (`next_message`, which `wpt chat --chat` and the text measures of `wpt eval` both write with), speculative decoding with a drafter and its scheduler, the scheduler's pass times (measured, recorded, replayed); training a model's drafter (`drafting.py`), which `wpt train` runs at the end of every run, so it uses `wpt-model` |
 | `wpt-utils` | helpers several packages share, one submodule each: `wpt_utils.device` picks the best GPU, else the CPU; `wpt_utils.programs` starts the outside programs WPT runs (`program(name)`, with a clear error when one is missing), identifies the code (`code()`: the checkout's commit and a hash of its uncommitted changes, the one place that reads the commit, which records and a training step's fingerprint hold; `code_of(module)`: a sha256 of the source files of the WPT modules a module imports, found from its import statements, which the fingerprints of the data pipeline hold) and gives that commit, and whether there are changes, in the shape the records name them (`repository()`), without importing PyTorch; `wpt_utils.files.sha256_file` is the one way a file is hashed, by the store, the model folders and the run records alike; `wpt_utils.files.lock_file` is the lock the operating system holds on a file for one process, which the service layer and a local store's database share; `wpt_utils.settings.typed` types the settings of a training step and of its method, environment and optimizer from the defaults each file declares; `wpt_utils.parallel` is the one rule that sizes parallel work (at most 75% of the cores; before each new item it measures again and starts it only while a quarter of the memory, of the cores and, where the items write to a disk, of the free disk stays free, one item's memory being what running items are measured taking, never a given figure; it never stops a running item) and runs items that way with their results in the items' order, an error an item may fail with becoming that item's result |
-| `wpt-agent` | the agent harness of agentic training: the tools (the four built-in ones, `ask`, and those a task or its image's pool declares, answered by programs in the image) and each attempt's choice of them, one Docker container per attempt, the images of `data/images/` and their locks, the agent loop and the task's check, and the playing of a task's attempts (`wpt_agent.play`), which the `agent-tasks` environment of the `finish-tasks` and `finish-tasks-with-less-writing` steps and the agent measures of `wpt-eval` share, so `wpt-eval` does not depend on `wpt-train`; commands `wpt-agent lock-image` and `wpt-agent build-image` |
+| `wpt-agent` | the agent harness of agentic training: the tools (the four built-in ones, `ask`, and those a task or its image's pool declares, answered by programs in the image) and each attempt's choice of them, one Docker container per attempt, the images of `data/images/` and their locks, the agent loop and the task's check, and the playing of a task's attempts (`wpt_agent.play`), which the `agent-tasks` environment of the `finish-tasks` and `finish-tasks-with-less-writing` steps and the agent measures of `wpt eval` share, so `wpt eval` does not depend on `wpt train`; an image's lock and build (`images.py`) |
 | `wpt-worker` | the gpu worker, which runs the GPU work of a training on its machine, the link to it from the wpt manager's side, and the gradients exchanged between gpu workers in different places ([machines.md](machines.md)) |
-| `wpt-train`, `wpt-eval`, `wpt-chat`, `wpt-manager` | the applications; `wpt-eval` also holds `wpt-scaling`, the scaling curve of several trained models ([evaluation.md](evaluation.md), "Scaling curve"); `wpt-manager` runs download, build, training and the optional evaluation as one command, and rents its gpu workers through providers when asked ([machines.md](machines.md)) |
+| `wpt` (`apps/wpt`) | the app: the `wpt` command and its web server, two controllers over the services above ([The app](#the-app)) |
+
+The libraries hold services only, and no command. Those that run without
+the repository, `wpt-worker` (on a gpu worker's machine), `wpt-model` and
+`wpt-inference` (a model folder and the text it writes), install alone.
+
+## The app
+
+One project, `wpt` (`apps/wpt`; the workspace's root project is
+`wpt-workspace`), holds the one command, `wpt`, and its two controllers
+over the same services:
+
+- the subcommands: `wpt dataset`, `wpt store`, `wpt agent`, `wpt train`,
+  `wpt eval`, `wpt scaling`, `wpt chat`, `wpt manager` and `wpt web`, each
+  with its own options (`wpt SUBCOMMAND --help`). The module `wpt`
+  (`apps/wpt/src/wpt/__init__.py`) names the module whose `main` runs each
+  one and imports it only when it runs, so a light subcommand never loads
+  PyTorch; `python -m wpt` is the same command. The controllers of the
+  data rules, the store and the agent harness are `wpt/dataset.py`,
+  `wpt/store.py` and `wpt/agent.py`; the jobs are the subpackages
+  `wpt.train`, `wpt.eval` (with `wpt.eval.scaling`), `wpt.chat` and
+  `wpt.manager`.
+- the web server, `wpt web` (`wpt/web/`: `server.py`, one file per page
+  in `pages/`, `ui.py`, which builds the interface of `apps/wpt/ui` with
+  Bun, and the services only the server uses: `drafts.py`, a model
+  folder's draft of the next assistant message, `attempts.py`, the
+  attempts of the store's `wpt eval` runs for the rating page, and
+  `jobs.py`, the subcommands it runs as child processes). It listens on
+  127.0.0.1 only; another machine reaches it through an SSH tunnel or
+  Tailscale. Its job routes start and follow the subcommands ([Two
+  interfaces](#two-interfaces)).
+
+The wpt manager runs each of its steps as a subcommand of the same
+command (`python -m wpt dataset download`, and so on). The app's tests
+live in `apps/wpt/tests/`, one folder per controller or job, and share
+their setup through `apps/wpt/tests/conftest.py`.
 
 ## Checks
 
@@ -1051,12 +1102,14 @@ branch, as a push would:
   alone decide. The check prints the number, the sample's result and both
   inputs.
 - The image build tests (marked `image_build`, in
-  `packages/wpt-agent/tests/test_images.py`, and the test of the agent
-  image's tools and check library in `test_agent_image.py`) lock and build
+  `apps/wpt/tests/agent/test_images.py`, and the test of the agent
+  image's tools and check library in
+  `packages/wpt-agent/tests/test_agent_image.py`) lock and build
   real images, which takes minutes. They run only when the push changes
   image code: `packages/wpt-agent/src/wpt_agent/images.py`,
-  `packages/wpt-agent/tests/test_images.py`, `test_agent_image.py`,
-  `packages/wpt-agent/tests/conftest.py`,
+  `apps/wpt/tests/agent/test_images.py`,
+  `packages/wpt-agent/tests/test_agent_image.py`, the root `conftest.py`
+  (the `image` fixture),
   `packages/wpt-dataset/src/wpt_dataset/repo.py` (its `Repo.image_files`
   decides which files an image's tag covers), the schemas
   `image-lock.schema.json` and `image-licenses.schema.json` in
@@ -1064,13 +1117,13 @@ branch, as a push would:
   `data/images/`. Otherwise the check leaves it out and says so; a plain
   `uv run pytest` runs it with every other test.
 - The two task step tests that run attempts in a real image
-  (`apps/wpt-train/tests/test_steps.py`) keep its lock in
+  (`apps/wpt/tests/train/test_steps.py`) keep its lock in
   `.pytest_cache/` and the built image in Docker, for as long as the
   image's files and `wpt_agent/images.py` stay the same. Only the first
   check on a machine, and every CI run (which starts empty), pays for
   locking and building it; when those files change, the next check locks
   and builds again and removes the old image.
-- `wpt-dataset check`: every file matches its schema and current shape,
+- `wpt dataset check`: every file matches its schema and current shape,
   licenses are on the allowed list (with their text), coverage patterns
   have an allowed shape, each license entry expects license texts that
   exist and takes the entry itself as its place only where that is
@@ -1078,14 +1131,14 @@ branch, as a push would:
   id is that of its text, patches are numbered without gaps, mixture
   weights add up to 1 and pool expressions parse, recipes name existing
   recipes.
-- `wpt-dataset check --fetch
+- `wpt dataset check --fetch
   standardebooks-joseph-conrad-ford-madox-ford-the-nature-of-a-crime-5366b0f3`:
   one short book is downloaded (or found in the store), and its cuts,
   patches, license map and text are checked, which proves the fetch and
   its checks work. The sources a pull
   request adds or changes are not fetched here: the maintainer runs
-  `wpt-dataset check --fetch` on them before merging.
-- `wpt-dataset check-commits <range>`: DCO sign-off on every commit, and a
+  `wpt dataset check --fetch` on them before merging.
+- `wpt dataset check-commits <range>`: DCO sign-off on every commit, and a
   signature from an allowed key on every commit that changes a decision, at
   any of its three levels (a source's, a license entry's, a license
   text's), or what an admitted or refused entry or text holds, compared by
@@ -1100,7 +1153,7 @@ No data file carries a shape number. A migration step recognizes an old
 shape by its fields: it says whether a document has the old shape and
 rewrites it. When a shape changes, the change comes with a step in
 `packages/wpt-dataset/src/wpt_dataset/migrate.py`, in the list of the kind
-of file it changes, and `wpt-dataset migrate` rewrites every file a step
+of file it changes, and `wpt dataset migrate` rewrites every file a step
 applies to, then checks every file against its schema. A step needs a field
 difference to find, so a change to a shape leaves one (a field that an old
 file lacks, or has and a current one does not). Until `migrate` ran, a

@@ -1,4 +1,4 @@
-"""Every failure wpt-dataset reports. Callers tell them apart by class, never
+"""Every failure wpt dataset reports. Callers tell them apart by class, never
 by message; the message carries the details (which file, which path). A
 program the work needs and does not find (mercurial, GnuPG) raises
 wpt_utils.programs.MissingTool."""
@@ -27,7 +27,7 @@ class NotFound(DatasetError):
 
 
 class OutdatedSchema(DatasetError):
-    """A file uses an older shape; `wpt-dataset migrate` rewrites it."""
+    """A file uses an older shape; `wpt dataset migrate` rewrites it."""
 
 
 class FetchFailed(DatasetError):
@@ -83,13 +83,13 @@ class RobotsUnreadable(FetchFailed):
 
 class CrawlForbidden(FetchFailed):
     """The robots.txt of an address's site forbids it to every crawler, to
-    wpt-dataset, or to an AI training crawler. Nothing was downloaded from
+    wpt (WPT's own fetcher), or to an AI training crawler. Nothing was downloaded from
     it. Raised for one address, and for a source whose main address was
     refused this way."""
 
 
 class NotDownloaded(DatasetError):
-    """The store does not hold the source's upstream files: `wpt-dataset
+    """The store does not hold the source's upstream files: `wpt dataset
     download` fetches them. Nothing is downloaded anywhere else."""
 
 

@@ -1,5 +1,5 @@
 """wpt-train's steps as a gpu worker's job (docs/machines.md): the part of
-the training that needs the GPUs, started by the wpt manager (wpt_train)
+the training that needs the GPUs, started by the wpt manager (wpt.train)
 with the spec it built.
 
 With --processes above 1 or --max-restarts above 0, or when the run
@@ -7,7 +7,7 @@ spans several gpu workers, the job's first process starts the training's
 processes (wpt_training.launch), each again `python -m wpt_worker.job`
 with its own channel, and starts them again after a crash (on one gpu
 worker only: across machines, a crash ends the job on every one, and the
-manager resumes the run from its checkpoint, wpt_train.CRASHED); each of
+manager resumes the run from its checkpoint, wpt.train.CRASHED); each of
 them, or the first process alone otherwise:
 
     1. loads the strategy and the recipe's steps (the files outside the
@@ -45,10 +45,10 @@ that machine only, and the strategy is wpt_worker.peers.Bridged, which
 exchanges the gradients between the machines over their TLS links; only
 --strategy ddp runs that way.
 
-Exit codes are wpt-train's: 2 refused, 3 the record could not be written,
+Exit codes are wpt train's: 2 refused, 3 the record could not be written,
 130 stopped.
 
-It lives in wpt-worker rather than in wpt-train because wpt_train imports
+It lives in wpt-worker rather than in wpt train because wpt.train imports
 the tokenizer when it loads, which a job refuses (wpt_worker.job), and
 because wpt-worker's dependencies are the libraries a worker installs for
 its job: what this module imports.
@@ -123,7 +123,7 @@ def run(spec, link, work: Path) -> int:
     try:
         several = machines["count"] > 1
         if (options["processes"] > 1 or options["max_restarts"] > 0 or several) and "LOCAL_RANK" not in os.environ:
-            with Telemetry.join(store, "wpt-train", environ) as telemetry:
+            with Telemetry.join(store, "wpt train", environ) as telemetry:
                 log = lambda text: telemetry.log(text, error=True)  # noqa: E731
                 try:
                     placed = placement(machines, options)
@@ -133,15 +133,15 @@ def run(spec, link, work: Path) -> int:
                 restarts = options["max_restarts"]
                 if several and restarts:
                     log(f"{machines['count']} gpu workers: a crashed process ends the job on every one of them, "
-                        "with no restart here (restarts stay on one machine); wpt-train then exits with code 5, "
-                        "which wpt-manager resumes from the checkpoint")
+                        "with no restart here (restarts stay on one machine); wpt train then exits with code 5, "
+                        "which wpt manager resumes from the checkpoint")
                     restarts = 0
                 return launch(options["processes"], ["-m", "wpt_worker.job"], max_restarts=restarts, log=log,
                               environ={**telemetry.child_environment(), **placed["environ"]},
                               first_rank=placed["first_rank"], world_size=placed["world_size"],
                               master=placed["master"])
         main = os.environ.get("RANK", "0") == "0"
-        with (Telemetry.join(store, "wpt-train", environ) if main else Telemetry.off()) as telemetry:
+        with (Telemetry.join(store, "wpt train", environ) if main else Telemetry.off()) as telemetry:
             return _run(spec, link, store, work, telemetry)
     except RecordError as error:
         print(f"RecordError: {error}; stopped, nothing more was recorded", file=sys.stderr)

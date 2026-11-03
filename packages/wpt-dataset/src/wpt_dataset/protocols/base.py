@@ -35,7 +35,7 @@ import urllib.error
 from ..archives import EndedEarly
 from ..errors import AccessRefused, FetchFailed, HostUnreachable, Incomplete, ServerError, SourceGone, TooManyRequests
 
-USER_AGENT = "wpt-dataset (+https://github.com/Workers-Intelligence-Commons/wpt-llm)"
+USER_AGENT = "wpt (+https://github.com/Workers-Intelligence-Commons/wpt)"
 UNREACHABLE = (OSError, urllib.error.URLError, subprocess.CalledProcessError, http.client.HTTPException)
 GONE_HTTP, REFUSED_HTTP, DENIED_HTTP = (404, 410), 429, (401, 403, 451)
 # what git (through curl) and Mercurial print, lowercased, for each failure; read in this order

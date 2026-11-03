@@ -7,7 +7,7 @@ through the link. It deals only in token ids, as every job does.
 The manager's spec holds the model's config, the weight files it offers
 and the form of the attention it names (spec["kernels"], one of
 wpt_model.sparse.FORMS, or None); the job decides the attention's form
-first, as wpt-train's does (docs/model.md, "Attention"), and a form that
+first, as wpt train's does (docs/model.md, "Attention"), and a form that
 cannot work here ends it with exit code 2 and the reason on its standard
 error. It then downloads the files (checked against their sha256), loads the
 model on the machine's best device in eval mode, tells the manager it is

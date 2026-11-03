@@ -60,7 +60,7 @@ folder) and the time of the download that put the files it used in the
 store, from the store database (`downloads`; None for a source with no
 such download, an empty one or one downloaded before the store kept
 sessions). It is not part of the dataset id: the same files downloaded
-again give the same dataset. `wpt-dataset build` runs as a session of its
+again give the same dataset. `wpt dataset build` runs as a session of its
 own, which holds a `reused` line for each source whose upstream tree the
 dataset holds.
 
@@ -877,13 +877,13 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
 
 
 def run(repo: Repo, name: str, store, arguments, stream=False, skip_failed=False) -> str:
-    """`wpt-dataset build`: build_dataset of the model recipe name, recorded
+    """`wpt dataset build`: build_dataset of the model recipe name, recorded
     in the store (wpt_telemetry: records/<UTC>-wpt-dataset-build-<name>-.../)
     with a session whose lines name each source it read (`reused`), the
     session ended before the record. Returns the dataset id. The failures
     of build_dataset, RecordError when the record cannot be written, and
     StoreError when the session cannot."""
-    with Telemetry.start(store, "wpt-dataset-build", arguments, name, inputs={"recipe": name},
+    with Telemetry.start(store, "wpt dataset build", arguments, name, inputs={"recipe": name},
                          env_file=repo.root / ".env") as telemetry:
         with download.session(store, telemetry) as session:
             dataset_id = build_dataset(repo, name, store, log=telemetry.log, stream=stream, skip_failed=skip_failed,
@@ -893,11 +893,11 @@ def run(repo: Repo, name: str, store, arguments, stream=False, skip_failed=False
 
 
 def run_tokenizer(repo: Repo, name: str, store, arguments, stream=False) -> tuple[str, str]:
-    """`wpt-dataset build-tokenizer`: build_tokenizer of the tokenizer recipe
+    """`wpt dataset build-tokenizer`: build_tokenizer of the tokenizer recipe
     name, recorded and with a session as run does. Returns (vocabulary
     object sha256, fingerprint). The failures of build_tokenizer, and those
     of the record and the session, as run."""
-    with Telemetry.start(store, "wpt-dataset-build-tokenizer", arguments, name, inputs={"tokenizer": name},
+    with Telemetry.start(store, "wpt dataset build-tokenizer", arguments, name, inputs={"tokenizer": name},
                          env_file=repo.root / ".env") as telemetry:
         with download.session(store, telemetry) as session:
             _, vocabulary, key = build_tokenizer(repo, name, store, log=telemetry.log, stream=stream,

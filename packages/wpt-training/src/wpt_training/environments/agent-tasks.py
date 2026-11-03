@@ -4,7 +4,7 @@ A dataset with no task tagged `tag` is refused before any step runs
 (check_dataset).
 
 Each task's image must be built where the wpt manager's sandboxes run
-first (`wpt-agent build-image NAME`, on the Docker host DOCKER_HOST names,
+first (`wpt agent build-image NAME`, on the Docker host DOCKER_HOST names,
 the manager's machine by default): the manager plays the attempts, its
 gpu worker's model writes their tokens (data.writing; the manager turns
 text into tokens and back, the worker deals only in token ids), and every

@@ -69,7 +69,7 @@ def test_a_statement_matches_when_its_place_holds_a_license_text_the_entry_expec
     assert (found[0].found, found[0].decision) == (text_id(MIT), "admitted")  # another copyright holder, one text
     assert found[1].problem == f"the license text there ({'c' * 64}) is not one it expects"
     assert found[2].problem == (f"no license text holds the text there (its id would be {text_id(tree['README'])}; "
-                                "`wpt-dataset add-license-text` adds it, under review)")
+                                "`wpt dataset add-license-text` adds it, under review)")
     assert found[3].problem == "the file lib/LICENSE is not there"
 
 

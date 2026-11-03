@@ -16,7 +16,7 @@ For a commit that adds or changes a source, signing off also certifies that:
 - you read the source's license, and every path it covers;
 - you looked for a "no AI training" wish from the owner (README, a
   machine-readable text-and-data-mining reservation) and found none
-  (`wpt-dataset` also skips any address whose site's robots.txt forbids it
+  (`wpt dataset` also skips any address whose site's robots.txt forbids it
   and tries the next mirror; see [docs/licenses.md](docs/licenses.md));
 - the source holds no personal data.
 
@@ -71,7 +71,7 @@ together.
    kind of license hides a trap. CC BY-SA 4.0, the one grey-zone license,
    is allowed until legal review says otherwise. Public domain must hold
    under the law of the country where the work was first published.
-2. Choose the id: `uv run wpt-dataset source-id <origin> [<item>] <address>`.
+2. Choose the id: `uv run wpt dataset source-id <origin> [<item>] <address>`.
    For a git repository on GitHub, write the address without `.git`:
    GitHub's robots.txt forbids `/*.git` addresses to AI training
    crawlers, and the plain address serves the same repository.
@@ -94,7 +94,7 @@ together.
    its `place`, the file, record field or outside page where its license
    statement is, and in `expected` the ids of the license texts in
    `data/license-texts/` that statement may be (a text not there yet is
-   added as a new item, under review, with `wpt-dataset add-license-text
+   added as a new item, under review, with `wpt dataset add-license-text
    ID --file PATH` or `--page ADDRESS` once the source is downloaded: it
    prints the item's id, the sha256 of its normalized text, which
    `check --fetch` and the build also name for a text they do not know), or
@@ -106,7 +106,7 @@ together.
    copyright line, then an Apache `NOTICE` file's content; for public
    domain, why). Every model trained on the source repeats both in its
    notice.
-4. `uv run wpt-dataset download <id>` puts it in the store. A file is
+4. `uv run wpt dataset download <id>` puts it in the store. A file is
    text when it is UTF-8, or when it states its own encoding (a
    byte-order mark, an HTML page's `<meta charset>`, an XML declaration,
    Project Gutenberg's `Character set encoding:` line, a Python coding
@@ -116,7 +116,7 @@ together.
    `[[]`): `check --fetch` (step 5) names each one. Map every file in
    `formats` first: the format says which statement the file can make,
    and a file no records or chat format reads is checked as text.
-   `uv run wpt-dataset manifest <id>` prints the manifest of the stored
+   `uv run wpt dataset manifest <id>` prints the manifest of the stored
    upstream tree.
    A dataset on huggingface.co is a git repository, `"type": "git"` at
    `https://huggingface.co/datasets/<owner>/<name>`: its file list comes
@@ -160,9 +160,9 @@ together.
    `submodules` gives for its path, `{"vendor/lib": "https://..."}`; its
    own submodules follow the same rule, by their full path. Its files
    need a license entry like any other path.
-5. `uv run wpt-dataset check --fetch <id>` must pass (it also converts every
+5. `uv run wpt dataset check --fetch <id>` must pass (it also converts every
    file to Markdown, and names each license entry whose statement would
-   keep its files out of a build), and `uv run wpt-dataset markdown-check <id>` (every
+   keep its files out of a build), and `uv run wpt dataset markdown-check <id>` (every
    note complete, no leftover markup), then `uv run scripts/check.py`.
 6. Open a pull request. Say what the source is, its license, and anything a
    reviewer should know; use `note` fields for reasons that must stay with
@@ -172,7 +172,7 @@ together.
 
 Text written for WPT, by you, lives in the repository itself, as the
 patches of an `empty` source (see [docs/architecture.md](docs/architecture.md)).
-The simplest way is the "New source" page of `uv run wpt-web`: write or
+The simplest way is the "New source" page of `uv run wpt web`: write or
 paste your text, and the page makes the source, under review
 (`under-review`), with your text as its first patch; its "Conversations"
 and "Tasks" pages write the conversations and tasks training steps read the same
@@ -183,18 +183,18 @@ measure only, never a training signal:
 patterns that flag an alarming reply (a measure only too:
 [docs/evaluation.md](docs/evaluation.md), "Probes"), and every
 page shows which data files git sees as changed.
-`uv run wpt-dataset new-source` does the same on the command line. By
+`uv run wpt dataset new-source` does the same on the command line. By
 hand:
 
-1. Choose its id: `uv run wpt-dataset source-id <origin> [<item>] empty:<name>`.
+1. Choose its id: `uv run wpt dataset source-id <origin> [<item>] empty:<name>`.
 2. Create `data/sources/<id>/source.json` with `"type": "empty"`, the
    address `empty:<name>`, a license entry for your text with a license
    you choose (for example `CC0-1.0`), your `attribution`, the entry
    itself as its place (`{"entry": true}`) and its decision, its tags, and
    the source's decision.
-3. `uv run wpt-dataset unpack <id> <folder>` (a folder outside the
+3. `uv run wpt dataset unpack <id> <folder>` (a folder outside the
    repository), write or edit your files there, then
-   `uv run wpt-dataset patch <id> <folder> <name>`. Each later change is the
+   `uv run wpt dataset patch <id> <folder> <name>`. Each later change is the
    same two commands and one more patch.
 
 Committed text stays public in the repository's history, clones and forks:
@@ -231,7 +231,7 @@ exactly as a refused one is.
 
 A person's name holds no colon. A save that changes a license entry's
 license, place or expected texts without deciding it anew sends that entry
-back to `under-review`, with the `by` `machine:wpt-dataset`: `check`
+back to `under-review`, with the `by` `machine:wpt dataset`: `check`
 refuses an `admitted` or `refused` decision whose `by` is a machine's.
 
 A maintainer admits a source, an entry or a license text by setting its
@@ -263,11 +263,11 @@ decisions.
 
 - **New address or newer version**: edit `address` in place, and for a
   git source `revision`, the full id of the newer commit (the "Sources"
-  page of `wpt-web`, or `wpt-dataset save source`). The source keeps its
+  page of `wpt web`, or `wpt dataset save source`). The source keeps its
   id, its decisions and its history; the next download fetches the new
   address or commit. A cut or patch that no longer applies takes the
   source out of the builds until it is made again.
-- **Fresh content at the same address**: `uv run wpt-store mark <id>`
+- **Fresh content at the same address**: `uv run wpt store mark <id>`
   (or `--all`) marks it for a new download; the next `download` fetches it
   in full. A git source then gets the same commit again.
 - **A license that changed**: changing an entry's license, place or
@@ -301,7 +301,7 @@ attempt with the model's own attempt at the full form
 
 A conversation's `assistant` message may start as a draft of a WPT model:
 in the conversation editor of
-`wpt-web`, a WPT model folder writes the next reply, and you edit it or
+`wpt web`, a WPT model folder writes the next reply, and you edit it or
 confirm it as it is. The message's `metadata.draft` says exactly what the
 model did: the model folder's name, the sha256 of each of its weights
 files, the sha256 of the draft as the model wrote it, and `edited`,
@@ -313,20 +313,20 @@ which the server does not check: that
 a WPT model wrote the draft, and its model, weights and sha256. See
 [docs/chat-format.md](docs/chat-format.md), "Model drafts".
 
-An AI assistant (a coding agent helping you) uses the `wpt-dataset`
+An AI assistant (a coding agent helping you) uses the `wpt dataset`
 commands only for structure and metadata: the kinds and names of files,
 `source.json`, recipes, file lists, tags, git's status; never to read or
 write people's texts, so it never runs the commands and options that do
 (`read`, `write`, `conversation`, `save-conversation`, `task`,
 `save-task`, `save-rating`, `save-probe`, and `new-source`'s `--file` and
 `--license-text`, marked `*`
-in `uv run wpt-dataset --help`). It may start a new source with
+in `uv run wpt dataset --help`). It may start a new source with
 `new-source` without `--file` and `--license-text`: the source is made with its license, attribution,
 format entries and tags, and the license text left empty (`--format
 FORMAT=PATTERN` declares a format entry, such as `markdown=**/*.md` or
 `text=notes/*.txt`, without any file; an empty `--license-text` file is an
 error, not a text to write later); you then write the license text
-(`wpt-dataset save source`, or the "Sources" page of `wpt-web`), and the
+(`wpt dataset save source`, or the "Sources" page of `wpt web`), and the
 check names the source until you do (the text may be empty only while
 the source is not admitted, that is `under-review` or `refused`, and
 builds and checks leave such a source out with a note), then add your
@@ -360,7 +360,7 @@ choice with no outside ruling) or an account of earlier versions. Rules
 are general: they name no source and no example, so they hold for any
 number of sources. Dates that belong to the content stay, such as a
 author's death date or a lawyer's answer in `LEGAL-QUESTIONS.html`. A
-migration step (`wpt-dataset migrate`) says what it changes in a file of
+migration step (`wpt dataset migrate`) says what it changes in a file of
 an older shape, not when that shape changed.
 
 ## Code
@@ -377,13 +377,14 @@ a short book fixed at one git commit, so its download never changes), which
 proves the fetch and its checks work, and the checks on your commits, compared with the
 upstream branch. A green run means a green CI. Neither check.py nor CI
 downloads the sources a pull request adds or changes: the maintainer runs
-`uv run wpt-dataset check --fetch` on them before merging. There is no
+`uv run wpt dataset check --fetch` on them before merging. There is no
 local hook. The tests run in parallel, each process with one PyTorch thread and
 no GPU, as in CI (a plain `uv run pytest` uses the GPU), on as many processes
 as both 75% of the cores and 75% of the available memory (divided by the memory
 a sample of the tests held when it ran alone first) allow, at least 1. The image build test runs only when your push changes image
-code (`packages/wpt-agent/src/wpt_agent/images.py`, the wpt-agent tests
-`test_images.py` and `conftest.py`, the image lock and image licenses schemas
+code (`packages/wpt-agent/src/wpt_agent/images.py`, the tests
+`apps/wpt/tests/agent/test_images.py` and
+`packages/wpt-agent/tests/test_agent_image.py`, the root `conftest.py`, the image lock and image licenses schemas
 of wpt-dataset, or `data/images/`); otherwise `uv run pytest` runs it. The task
 step tests keep their pinned and built image in `.pytest_cache/` and in Docker, so
 only the first check on a machine, and every CI run, which starts empty, pays
@@ -393,7 +394,7 @@ A test checks that the code works, not that it works well: it runs without crash
 (finite numbers, values in their range, tokens come out, training changes
 the weights it reaches), and two routes the code says are the same give the
 same result within rounding. Whether a method is efficient or a good idea
-is a question for an evaluation (`wpt-eval`, docs/evaluation.md), never for
+is a question for an evaluation (`wpt eval`, docs/evaluation.md), never for
 a test: a test that asks for a quality, such as a trained part beating a
 simple one, fails on one processor and passes on another, by rounding and
 chance, not by a bug.

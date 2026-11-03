@@ -12,7 +12,7 @@ A source is downloaded when, and only when (its triggers):
                                         pages), so a source whose address, revision or fetch options
                                         changed is not held either
     it is marked                        the store database holds a mark for it, or for every source,
-                                        made after its last download (Session.marked; `wpt-store
+                                        made after its last download (Session.marked; `wpt store
                                         mark`): a person's way to ask for fresh content
 
 Nothing else: no question to upstream about changes, no server hint. A
@@ -237,7 +237,7 @@ def recorded(store, command, arguments, ids, env_file):
     with every new try of a download in it (retry.reporting). Its session
     (session()) opens inside it and ends before it."""
     main_id = ids[0] if len(ids) == 1 else f"{len(ids)}-sources"
-    with (Telemetry.start(store, f"wpt-dataset-{command}", arguments, main_id, inputs={"sources": list(ids)},
+    with (Telemetry.start(store, f"wpt dataset {command}", arguments, main_id, inputs={"sources": list(ids)},
                           env_file=env_file) as telemetry,
           retry.reporting(telemetry.log)):
         yield telemetry

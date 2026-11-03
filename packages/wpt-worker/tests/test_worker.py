@@ -136,8 +136,8 @@ def test_a_key_says_where_its_worker_is_and_its_token_is_never_shown_whole():
 
 
 def test_a_number_of_workers_to_rent_is_refused_where_keys_are_due():
-    # wpt-manager rents the workers a number asks for; wpt-train takes keys
-    with pytest.raises(ValueError, match="a number of gpu workers to rent is wpt-manager's setting"):
+    # wpt manager rents the workers a number asks for; wpt train takes keys
+    with pytest.raises(ValueError, match="a number of gpu workers to rent is wpt manager's setting"):
         keys({"WPT_GPU_WORKERS": "2"})
 
 

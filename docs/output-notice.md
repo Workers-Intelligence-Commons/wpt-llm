@@ -73,7 +73,7 @@ of republishing but want to know what is in the model.
 ## The address
 
 Clauses 2 and 3 link to
-https://github.com/Workers-Intelligence-Commons/wpt-llm, the repository
+https://github.com/Workers-Intelligence-Commons/wpt, the repository
 under the project's organization. This link gets copied into outputs and
 can never be corrected there: if the repository moves again or a project
 domain is chosen, the notice changes for new outputs only. GitHub redirects a moved
@@ -94,8 +94,8 @@ look.
   `output_license` and `notice` (the folder's NOTICE and the project's
   address), so the licenses travel with a weight file even alone. Other
   formats (GGUF key-value pairs) need the same when weights are converted.
-- **The tool serving the model**: `wpt-chat` names the licenses and the
-  notice on its start line, and `wpt-chat --about` prints the notice.
+- **The tool serving the model**: `wpt chat` names the licenses and the
+  notice on its start line, and `wpt chat --about` prints the notice.
 
 ## One source of truth
 
@@ -112,11 +112,11 @@ source does not exist yet.
 - [ ] Have OUTPUT-NOTICE reviewed by a lawyer
 - [ ] Choose a stable domain name for the attribution address, or keep the
       repository address
-- [ ] Measure memorization on the model to publish: `wpt-eval <model folder>
+- [ ] Measure memorization on the model to publish: `wpt eval <model folder>
       memorization` (see [evaluation.md](evaluation.md))
 - [x] Check section 2, sections 15 and 16, and license compatibility in the
       official AGPL text (section 7 also matters, see clause 1)
 - [x] Decide where the clauses live: OUTPUT-NOTICE
 - [x] Generate NOTICE, the model card block and the metadata from the source
       descriptions
-- [x] Show the notice in `wpt-chat` (`--about`)
+- [x] Show the notice in `wpt chat` (`--about`)

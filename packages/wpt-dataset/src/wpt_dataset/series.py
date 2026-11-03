@@ -54,7 +54,7 @@ A size has other runs besides its own, each named SERIES:SIZE:RUN
                   each continuing the one before it, then its decay, which
                   continues the last of them to the branch's updates. Two
                   branches share the trunk's steps they both hold, and
-                  wpt-train reuses their kept results: the trunk trains
+                  wpt train reuses their kept results: the trunk trains
                   once. The trunk reads the prefix of the size's longest
                   branch, or the size's own when it is longer.
     lr-FACTOR     at the smallest size (the fewest parameters) only, one per

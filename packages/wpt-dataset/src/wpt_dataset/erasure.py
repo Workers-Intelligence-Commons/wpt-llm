@@ -26,7 +26,7 @@ staying; none confirmed is CutFailed, which takes the whole source out
 until a person makes the cut again.
 
 Nothing here reads or writes data/: cut gives the entry a person's
-source.json holds, and the service layer writes it (cli.py).
+source.json holds, and the service layer writes it (`wpt dataset cut`).
 """
 
 import hashlib

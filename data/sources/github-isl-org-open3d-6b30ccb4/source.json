@@ -545,7 +545,7 @@
       "text": "Eigen is primarily MPL2 licensed. See COPYING.MPL2 and these links:\n  http://www.mozilla.org/MPL/2.0/\n  http://www.mozilla.org/MPL/2.0/FAQ.html\n\nSome files contain third-party code under BSD or LGPL licenses, whence the other\nCOPYING.* files here.\n\nAll the LGPL code is either LGPL 2.1-only, or LGPL 2.1-or-later.\nFor this reason, the COPYING.LGPL file contains the LGPL 2.1 text.\n\nIf you want to guarantee that the Eigen code that you are #including is licensed\nunder the MPL2 and possibly more permissive licenses (like BSD), #define this\npreprocessor symbol:\n  EIGEN_MPL2_ONLY\nFor example, with most compilers, you could add this to your project CXXFLAGS:\n  -DEIGEN_MPL2_ONLY\nThis will cause a compilation error to be generated if you #include any code that is\nLGPL licensed.\n",
       "decision": {
         "decision": "under-review",
-        "by": "machine:wpt-dataset",
+        "by": "machine:wpt dataset",
         "date": "2026-10-28",
         "reason": "the migration found no admitted text of its own license at its place"
       },

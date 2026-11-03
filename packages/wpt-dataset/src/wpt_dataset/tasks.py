@@ -39,7 +39,7 @@ lists glob patterns of the paths under /work an attempt may change
 (wpt_agent.play scores it), and its `gates` the parts that must be 1 for
 an attempt to score at all (wpt_agent.gated). A task.json of an earlier
 shape is brought to the current one when it is read (migrate.upgrade):
-task files are a source's bytes, which `wpt-dataset migrate` never
+task files are a source's bytes, which `wpt dataset migrate` never
 rewrites.
 
 A task built by a program is a pointer task: task.json's `pointers` name,

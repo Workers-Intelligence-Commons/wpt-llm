@@ -5,7 +5,8 @@ robots.txt is read (RFC 9309, through protego). The source is refused when
 the rules forbid the address to
 
 - every crawler (the `*` group),
-- WPT's own fetcher (`wpt-dataset`), or
+- WPT's own fetcher (`wpt`, the name the download's User-Agent
+  starts with), or
 - any crawler in TRAINING_CRAWLERS, those whose operator documents that
   they gather data to train AI models.
 
@@ -33,7 +34,7 @@ from protego import Protego
 from . import retry, sites
 from .errors import CrawlForbidden, HostUnreachable, RobotsUnreadable
 
-WPT_AGENT = "wpt-dataset"
+WPT_AGENT = "wpt"
 MAX_BYTES = 500 * 1024  # the standard asks crawlers to read at least 500 KiB
 NO_FILE = (404, 410)  # the only answers that mean "this site has no robots.txt"
 

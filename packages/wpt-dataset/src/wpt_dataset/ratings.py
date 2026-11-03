@@ -2,7 +2,7 @@
 
 A file in the `rating` format is JSON Lines: one rating per line, each
 matching schemas/rating.schema.json. A rating names the attempt it rates
-as a wpt-eval run record's attempts.jsonl holds it (the task id, the
+as a wpt eval run record's attempts.jsonl holds it (the task id, the
 record folder, the attempt's index and whether it was plain), the model's
 weights as the record's ids.json names them, and the person's verdict,
 pass or fail, who rated and when. Ratings are stored as files of an

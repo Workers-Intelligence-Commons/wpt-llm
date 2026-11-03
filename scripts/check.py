@@ -21,11 +21,11 @@ In order, each one run even when an earlier one failed:
               IMAGE_CODE or an image's folder (plain `uv run pytest` runs
               every test, serially)
     rust      the tokenizer's Rust tests
-    data      wpt-dataset check: the data rules
-    sources   wpt-dataset check --fetch SMALL_SOURCE: one small source fetched and
+    data      wpt dataset check: the data rules
+    sources   wpt dataset check --fetch SMALL_SOURCE: one small source fetched and
               checked, to prove the fetch and its checks work; the sources a
               pull request adds or changes are fetched by the maintainer
-    commits   wpt-dataset check-commits RANGE: sign-offs and decision signatures
+    commits   wpt dataset check-commits RANGE: sign-offs and decision signatures
 
 BASE defaults to where this branch left its upstream branch (for example
 origin/main), RANGE to BASE..HEAD: what a push would send. CI passes both
@@ -48,9 +48,9 @@ UV = os.environ.get("UV", "uv")  # uv tells the scripts it runs where it is
 ENVIRON = {k: v for k, v in os.environ.items() if k != "VIRTUAL_ENV"}
 SAMPLE_EVERY = 40  # every this many-th collected test is in the sample whose memory sizes the test processes
 # what the image build test covers: a change to any of these, or to an image's folder, runs it
-IMAGE_CODE = ("packages/wpt-agent/src/wpt_agent/images.py", "packages/wpt-agent/tests/test_images.py",
+IMAGE_CODE = ("packages/wpt-agent/src/wpt_agent/images.py", "apps/wpt/tests/agent/test_images.py",
               "packages/wpt-agent/tests/test_agent_image.py",
-              "packages/wpt-agent/tests/conftest.py",
+              "conftest.py",  # the image fixture
               "packages/wpt-dataset/src/wpt_dataset/repo.py",  # Repo.image_files: what the image's tag covers
               "packages/wpt-dataset/src/wpt_dataset/schemas/image-lock.schema.json",
               "packages/wpt-dataset/src/wpt_dataset/schemas/image-licenses.schema.json")
@@ -149,9 +149,9 @@ def checks(base, range_):
         ("tests", tests),
         ("rust", lambda: ([[UV, "run", "rustc", "--version"], [UV, "run", "cargo", "test"]], rust, None,
                           with_python_library())),
-        ("data", lambda: ([[UV, "run", "wpt-dataset", "check"]], ROOT, None, ENVIRON)),
-        ("sources", lambda: ([[UV, "run", "wpt-dataset", "check", "--fetch", SMALL_SOURCE]], ROOT, None, ENVIRON)),
-        ("commits", lambda: ([[UV, "run", "wpt-dataset", "check-commits", range_]], ROOT, None, ENVIRON)),
+        ("data", lambda: ([[UV, "run", "wpt", "dataset", "check"]], ROOT, None, ENVIRON)),
+        ("sources", lambda: ([[UV, "run", "wpt", "dataset", "check", "--fetch", SMALL_SOURCE]], ROOT, None, ENVIRON)),
+        ("commits", lambda: ([[UV, "run", "wpt", "dataset", "check-commits", range_]], ROOT, None, ENVIRON)),
     ]
 
 

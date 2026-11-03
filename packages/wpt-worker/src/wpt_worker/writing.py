@@ -1,6 +1,6 @@
 """Writing tokens through the link (docs/machines.md): the model lives on a
 gpu worker, and what asks it to write (an environment's part on the wpt
-manager, a test of wpt-eval) lives on the manager, which holds the
+manager, a test of wpt eval) lives on the manager, which holds the
 tokenizer.
 
     Writers          the writers (wpt_inference.Writer) of one model on this machine, started and

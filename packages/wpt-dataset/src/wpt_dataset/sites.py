@@ -1,4 +1,4 @@
-"""How politely wpt-dataset downloads from each site: the limits of
+"""How politely wpt dataset downloads from each site: the limits of
 sites.txt, in this package.
 
 Two kinds of line, each for a host and every host under it

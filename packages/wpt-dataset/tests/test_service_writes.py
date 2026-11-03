@@ -141,7 +141,7 @@ with Repo(sys.argv[1])._lock:
 
 
 def test_the_lock_holds_across_processes_and_a_crashed_holder_leaves_none(repo):
-    # wpt-web and wpt-dataset are two processes: one waits while the other holds the lock, and a holder that
+    # wpt web and wpt dataset are two processes: one waits while the other holds the lock, and a holder that
     # dies (killed, as a crash would end it) releases it with its process
     def holder():
         process = subprocess.Popen([sys.executable, "-c", LOCK_HOLDER, str(repo.root)], stdin=subprocess.PIPE,
@@ -442,7 +442,7 @@ def test_a_save_that_changes_an_entry_s_license_sends_that_entry_alone_back_to_u
 
     saved = repo.raw("source", sid)
     assert saved["licenses"][0]["license"] == "Apache-2.0"
-    assert saved["licenses"][0]["decision"] == {"decision": "under-review", "by": "machine:wpt-dataset",
+    assert saved["licenses"][0]["decision"] == {"decision": "under-review", "by": "machine:wpt dataset",
                                                 "date": saved["licenses"][0]["decision"]["date"],
                                                 "reason": "its license, place or expected texts changed"}
     assert saved["licenses"][1] == document["licenses"][1] and saved["decision"] == document["decision"]
@@ -482,7 +482,7 @@ def test_a_save_that_swaps_two_entries_content_sends_back_the_one_given_an_admis
     saved = repo.raw("source", sid)
     assert saved["licenses"][0]["license"] == "CC0-1.0"
     assert saved["licenses"][0]["decision"]["decision"] == "under-review"
-    assert saved["licenses"][0]["decision"]["by"] == "machine:wpt-dataset"
+    assert saved["licenses"][0]["decision"]["by"] == "machine:wpt dataset"
     assert saved["licenses"][1] == swapped["licenses"][1]
 
 
@@ -502,7 +502,7 @@ def test_a_license_text_first_met_in_a_source_is_added_under_review_and_then_fou
     assert text == license_check.text_id(words)
     assert written == f"data/license-texts/{text}/license-text.json"
     item = repo.license_texts()[text]
-    assert item["decision"]["decision"] == "under-review" and item["decision"]["by"] == "machine:wpt-dataset"
+    assert item["decision"]["decision"] == "under-review" and item["decision"]["by"] == "machine:wpt dataset"
     assert item["found"] == {"source": sid, "path": "COPYING"}
     assert item["files"] == [hashlib.sha256(words).hexdigest()]
     assert repo.license_text_itself(text) == words

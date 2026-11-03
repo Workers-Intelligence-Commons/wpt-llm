@@ -69,10 +69,10 @@ class NoCheckout(Exception):
 def keys(environ) -> list[Key]:
     """The gpu workers WPT_GPU_WORKERS lists (keys separated by spaces or
     commas); ValueError for one that is not a key, and for a number of
-    workers to rent, which wpt-manager rents."""
+    workers to rent, which wpt manager rents."""
     found = [text for text in re.split(r"[\s,]+", environ.get(WORKERS, "")) if text]
     if len(found) == 1 and found[0].isdigit():
-        raise ValueError(f"{WORKERS}={found[0]}: a number of gpu workers to rent is wpt-manager's setting, which "
+        raise ValueError(f"{WORKERS}={found[0]}: a number of gpu workers to rent is wpt manager's setting, which "
                          "rents them and gives their keys; here, list the workers' keys")
     return [Key.parse(text) for text in found]
 

@@ -206,13 +206,13 @@ def test_each_thread_records_under_its_own_spans(tmp_path):
     assert outside["span"] == run  # a thread given no span records under the run's own
 
 def test_a_launcher_never_writes_back_an_older_copy_of_the_ids(tmp_path):
-    # wpt-train's launcher opens the record, its training process joins it and
+    # wpt train's launcher opens the record, its training process joins it and
     # adds the ids it wrote; whatever the launcher adds later keeps them
     store = open_store((tmp_path / "store").as_uri())
-    with Telemetry.start(store, "wpt-train", [], "d", inputs={"recipe": "d"}, env_file=tmp_path / ".env",
+    with Telemetry.start(store, "wpt train", [], "d", inputs={"recipe": "d"}, env_file=tmp_path / ".env",
                          environ={}) as launcher:
         environment = launcher.child_environment()
-        with Telemetry.join(open_store((tmp_path / "store").as_uri()), "wpt-train", environment,
+        with Telemetry.join(open_store((tmp_path / "store").as_uri()), "wpt train", environment,
                             env_file=tmp_path / ".env") as child:
             child.output(weights={"model.safetensors": "ab" * 32})
         launcher.input(restarts=0)
@@ -220,6 +220,20 @@ def test_a_launcher_never_writes_back_an_older_copy_of_the_ids(tmp_path):
     assert record(store, launcher.folder, "ids.json") == {
         "inputs": {"recipe": "d", "restarts": 0}, "outputs": {"weights": {"model.safetensors": "ab" * 32}}}
     assert launcher.folder.split("-")[2:4] == ["train", "d"]  # <time>-wpt-train-<main id>-<random>
+
+
+def test_a_command_is_recorded_as_typed_and_its_folder_is_named_with_hyphens_and_the_job_that_started_it(tmp_path):
+    store = open_store((tmp_path / "store").as_uri())
+    with Telemetry.start(store, "wpt dataset build", ["small"], "small", env_file=tmp_path / ".env",
+                         environ={wpt_telemetry.JOB: "0123abcd"}) as job:
+        pass
+    with Telemetry.start(store, "wpt dataset build", ["small"], "small", env_file=tmp_path / ".env",
+                         environ={}) as by_hand:
+        pass
+    assert "-wpt-dataset-build-small-" in job.folder
+    assert record(store, job.folder, "start.json")["command"] == "wpt dataset build"
+    assert record(store, job.folder, "start.json")["job"] == "0123abcd"
+    assert "job" not in record(store, by_hand.folder, "start.json")
 
 
 def test_on_s3_each_span_is_sent_when_it_ends_and_a_refused_send_stops_the_run(tmp_path, monkeypatch):

@@ -247,7 +247,7 @@ def statement(number: int, entry: dict, read, texts: LicenseTexts) -> Statement:
     if found is None:
         return Statement(number, place, None, False,
                          problem=f"no license text holds the text there (its id would be {text_id(content)}; "
-                                 f"`wpt-dataset add-license-text` adds it, under review)")
+                                 f"`wpt dataset add-license-text` adds it, under review)")
     decision = texts.decision(found)
     if found not in entry["expected"]:
         return Statement(number, place, found, False, decision,

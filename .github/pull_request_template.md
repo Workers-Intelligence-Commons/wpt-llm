@@ -15,7 +15,7 @@ documentation. -->
 - [ ] The documentation is updated in the same change as the code
 - [ ] A new package has its row in `docs/licenses.md`
 - [ ] Nothing personal or secret is in the change, its commits or its logs
-- [ ] A change of a data file's shape comes with its migration (`wpt-dataset migrate`)
+- [ ] A change of a data file's shape comes with its migration (`wpt dataset migrate`)
 
 ## A source
 

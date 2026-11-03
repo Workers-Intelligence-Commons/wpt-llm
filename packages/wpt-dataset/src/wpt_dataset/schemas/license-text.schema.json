@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/Workers-Intelligence-Commons/wpt-llm/schemas/license-text.schema.json",
+  "$id": "https://github.com/Workers-Intelligence-Commons/wpt/schemas/license-text.schema.json",
   "title": "WPT license text (data/license-texts/<id>/license-text.json): one license text (a license file, a notice, a README) and its decision (docs/licenses.md). <id> is the sha256 of its normalized text: its first 200,000 bytes read as UTF-8, lowercased, without the lines naming a copyright, then every run of characters other than a-z and 0-9 made one space, trimmed (wpt_dataset.license_check.text_id). license-text.txt beside it, when there, holds the text itself",
   "type": "object",
   "additionalProperties": false,

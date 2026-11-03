@@ -1,4 +1,4 @@
-"""Which sources `wpt-dataset check` downloads and then checks as `check
+"""Which sources `wpt dataset check` downloads and then checks as `check
 --fetch` does (Repo.check_fetched). It changes nothing: it reads data/
 through the service layer, and, for `--changed`, the store, to find the
 sources the pointer tasks point into.

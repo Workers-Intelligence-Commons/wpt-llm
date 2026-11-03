@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/Workers-Intelligence-Commons/wpt-llm/schemas/model.schema.json",
+  "$id": "https://github.com/Workers-Intelligence-Commons/wpt/schemas/model.schema.json",
   "title": "WPT model recipe (data/recipes/models/<name>.json): everything that changes the resulting model",
   "type": "object",
   "additionalProperties": false,
@@ -11,7 +11,7 @@
   },
   "properties": {
     "data": {
-      "description": "what `wpt-dataset build` builds; recipes with the same data share one dataset",
+      "description": "what `wpt dataset build` builds; recipes with the same data share one dataset",
       "type": "object",
       "additionalProperties": false,
       "required": ["mixture", "tokenizer", "total_tokens", "held_out"],
@@ -61,7 +61,7 @@
     },
     "seed": {"type": "integer", "minimum": 0, "description": "the initial weights and every step's draws (text windows, the order of conversations and tasks, the tools offered, the sampled tokens) come from it, each step mixing its number in the list into it, and every step's fingerprint names it (docs/training.md, \"Steps\")"},
     "steps": {
-      "description": "what is done to the model, in order, by one wpt-train run (docs/training.md, \"Steps\"); the model's context is the last window length of the last step that reads text windows",
+      "description": "what is done to the model, in order, by one wpt train run (docs/training.md, \"Steps\"); the model's context is the last window length of the last step that reads text windows",
       "type": "array", "minItems": 1,
       "items": {
         "type": "object",
@@ -86,7 +86,7 @@
       }
     },
     "drafter": {
-      "description": "the drafter wpt-train trains at the end of every run, after the last step (docs/model.md, \"The drafter\"; wpt_inference.drafting); a setting left out keeps its default",
+      "description": "the drafter wpt train trains at the end of every run, after the last step (docs/model.md, \"The drafter\"; wpt_inference.drafting); a setting left out keeps its default",
       "type": "object",
       "additionalProperties": false,
       "properties": {

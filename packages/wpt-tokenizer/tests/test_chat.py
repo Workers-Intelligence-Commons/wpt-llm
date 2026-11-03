@@ -36,7 +36,7 @@ def test_a_conversation_becomes_chatml_with_qwen_tags_and_learns_only_the_assist
 
 
 def test_a_generated_reply_reads_back_into_the_blocks_it_was_written_from():
-    # wpt-chat keeps the model's answers as blocks, so the history it sends
+    # wpt chat keeps the model's answers as blocks, so the history it sends
     # back through the template is the conversation that happened
     ids = chat.encode(TOKENIZER, {"messages": [{"role": "assistant", "content": ASSISTANT}]})[0]
     body = ids[ids.index(SPECIAL["<|im_start|>"]) + 1 + len(TOKENIZER.encode(b"assistant\n")):

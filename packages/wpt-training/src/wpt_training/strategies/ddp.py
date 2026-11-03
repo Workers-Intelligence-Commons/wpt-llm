@@ -1,9 +1,9 @@
 """Several processes, one per GPU (or several on the CPU), on the gpu
 worker's machine; each holds a full copy of the model and their gradients
-are averaged (PyTorch's DistributedDataParallel). wpt-train's --processes
+are averaged (PyTorch's DistributedDataParallel). wpt train's --processes
 starts them:
 
-    wpt-train RECIPE DATASET_ID --strategy ddp --processes 2 ...
+    wpt train RECIPE DATASET_ID --strategy ddp --processes 2 ...
 
 GPUs talk through NCCL (RCCL on AMD), the CPU through gloo. Windows has
 gloo only.

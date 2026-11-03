@@ -28,7 +28,7 @@ body:
     id: prompt
     attributes:
       label: "Prompt"
-      description: "The exact text you gave the model, or the whole conversation if you used `wpt-chat --chat`."
+      description: "The exact text you gave the model, or the whole conversation if you used `wpt chat --chat`."
       render: text
     validations:
       required: true
@@ -51,7 +51,7 @@ body:
     id: sampling
     attributes:
       label: "Sampling settings"
-      description: "Every setting of the generation: the command with its options (`--max-new-tokens`, `--chat`). `wpt-chat` samples at temperature 0.8 with top-k 40; write the temperature and top-k you used only if you called the model through code with other values, and add any seed. Write \"defaults\" if you changed none."
+      description: "Every setting of the generation: the command with its options (`--max-new-tokens`, `--chat`). `wpt chat` samples at temperature 0.8 with top-k 40; write the temperature and top-k you used only if you called the model through code with other values, and add any seed. Write \"defaults\" if you changed none."
     validations:
       required: true
   - type: textarea

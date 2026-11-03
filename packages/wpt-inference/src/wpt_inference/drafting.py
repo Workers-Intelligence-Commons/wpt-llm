@@ -1,12 +1,12 @@
 """Training a model's drafter (docs/model.md, "The drafter";
-wpt_model.Drafter). A model and its drafter are one unit: wpt-train trains
+wpt_model.Drafter). A model and its drafter are one unit: wpt train trains
 one at the end of every run, after the recipe's last step, against the
 final weights. The model is frozen while it does: only the drafter learns.
 
 The prompts are the beginnings of the dataset's training documents: of
 every document read once, `prompts` drawn at random (a seeded reservoir),
 each the document's first `prompt_tokens` tokens after the document start
-(the END token, as wpt-chat begins a text). The model alone writes each
+(the END token, as wpt chat begins a text). The model alone writes each
 answer, sampling at `temperature` (and `top_k`) with no drafter, up to a
 stop token or `answer_tokens`: the rest of each document, the text people
 wrote, is never kept, and the drafter learns to propose what the model

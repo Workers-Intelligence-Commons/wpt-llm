@@ -61,7 +61,7 @@ the batch before writing the rest. Each license entry names the place of
 its statement and the license texts expected there, with coverage
 patterns of the allowed shapes (`docs/licenses.md`, "License entries"); a
 license text not yet in `data/license-texts/` becomes a new item, under
-review, with `wpt-dataset add-license-text ID --file PATH` (or `--page
+review, with `wpt dataset add-license-text ID --file PATH` (or `--page
 ADDRESS`) once the source is downloaded. A new
 source, each of its entries and each new license text start
 `under-review`, as `CONTRIBUTING.md` says.
@@ -69,8 +69,8 @@ source, each of its entries and each new license text start
 ## 4. Check every source
 
 ```sh
-uv run wpt-dataset check --fetch ID [ID ...]   # cuts, patches, license and format maps, text, statements
-uv run wpt-dataset markdown-check ID [ID ...]  # notes complete, no leftover tags
+uv run wpt dataset check --fetch ID [ID ...]   # cuts, patches, license and format maps, text, statements
+uv run wpt dataset markdown-check ID [ID ...]  # notes complete, no leftover tags
 ```
 
 Look at the start of a few documents' Markdown, at least one per kind of

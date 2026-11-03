@@ -2,39 +2,35 @@ version = 1
 revision = 5
 requires-python = ">=3.14"
 resolution-markers = [
-    "extra != 'group-7-wpt-llm-cpu' and extra != 'group-7-wpt-llm-cuda' and extra != 'group-7-wpt-llm-rocm' and extra == 'group-7-wpt-llm-xpu'",
-    "extra != 'group-7-wpt-llm-cpu' and extra != 'group-7-wpt-llm-cuda' and extra == 'group-7-wpt-llm-rocm' and extra != 'group-7-wpt-llm-xpu'",
-    "sys_platform == 'darwin' and extra != 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-cuda' and extra != 'group-7-wpt-llm-rocm' and extra != 'group-7-wpt-llm-xpu'",
-    "sys_platform != 'darwin' and extra != 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-cuda' and extra != 'group-7-wpt-llm-rocm' and extra != 'group-7-wpt-llm-xpu'",
-    "sys_platform != 'darwin' and extra == 'group-7-wpt-llm-cpu' and extra != 'group-7-wpt-llm-cuda' and extra != 'group-7-wpt-llm-rocm' and extra != 'group-7-wpt-llm-xpu'",
-    "sys_platform == 'darwin' and extra == 'group-7-wpt-llm-cpu' and extra != 'group-7-wpt-llm-cuda' and extra != 'group-7-wpt-llm-rocm' and extra != 'group-7-wpt-llm-xpu'",
-    "extra != 'group-7-wpt-llm-cpu' and extra != 'group-7-wpt-llm-cuda' and extra != 'group-7-wpt-llm-rocm' and extra != 'group-7-wpt-llm-xpu'",
+    "extra != 'group-13-wpt-workspace-cpu' and extra != 'group-13-wpt-workspace-cuda' and extra != 'group-13-wpt-workspace-rocm' and extra == 'group-13-wpt-workspace-xpu'",
+    "extra != 'group-13-wpt-workspace-cpu' and extra != 'group-13-wpt-workspace-cuda' and extra == 'group-13-wpt-workspace-rocm' and extra != 'group-13-wpt-workspace-xpu'",
+    "sys_platform == 'darwin' and extra != 'group-13-wpt-workspace-cpu' and extra == 'group-13-wpt-workspace-cuda' and extra != 'group-13-wpt-workspace-rocm' and extra != 'group-13-wpt-workspace-xpu'",
+    "sys_platform != 'darwin' and extra != 'group-13-wpt-workspace-cpu' and extra == 'group-13-wpt-workspace-cuda' and extra != 'group-13-wpt-workspace-rocm' and extra != 'group-13-wpt-workspace-xpu'",
+    "sys_platform != 'darwin' and extra == 'group-13-wpt-workspace-cpu' and extra != 'group-13-wpt-workspace-cuda' and extra != 'group-13-wpt-workspace-rocm' and extra != 'group-13-wpt-workspace-xpu'",
+    "sys_platform == 'darwin' and extra == 'group-13-wpt-workspace-cpu' and extra != 'group-13-wpt-workspace-cuda' and extra != 'group-13-wpt-workspace-rocm' and extra != 'group-13-wpt-workspace-xpu'",
+    "extra != 'group-13-wpt-workspace-cpu' and extra != 'group-13-wpt-workspace-cuda' and extra != 'group-13-wpt-workspace-rocm' and extra != 'group-13-wpt-workspace-xpu'",
 ]
 conflicts = [[
-    { package = "wpt-llm", group = "cpu" },
-    { package = "wpt-llm", group = "cuda" },
-    { package = "wpt-llm", group = "rocm" },
-    { package = "wpt-llm", group = "xpu" },
+    { package = "wpt-workspace", group = "cpu" },
+    { package = "wpt-workspace", group = "cuda" },
+    { package = "wpt-workspace", group = "rocm" },
+    { package = "wpt-workspace", group = "xpu" },
 ]]
 
 [manifest]
 members = [
+    "wpt",
     "wpt-agent",
-    "wpt-chat",
     "wpt-dataset",
-    "wpt-eval",
     "wpt-inference",
-    "wpt-llm",
-    "wpt-manager",
     "wpt-model",
     "wpt-store",
     "wpt-telemetry",
     "wpt-tokenizer",
-    "wpt-train",
     "wpt-training",
     "wpt-utils",
-    "wpt-web",
     "wpt-worker",
+    "wpt-workspace",
 ]
 
 [[package]]
@@ -42,7 +38,7 @@ name = "apache-tvm-ffi"
 version = "0.1.9"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "sys_platform != 'darwin'" },
+    { name = "typing-extensions" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/6f/60/1e787a0b5ebf318483235be2a689ee367173983067e441b8379564f667c0/apache_tvm_ffi-0.1.9.tar.gz", hash = "sha256:d2d402587e8906de0a07f4746aa78f3d452c7efe3625d4bb39ac2ad693bce530", size = 2513731, upload-time = "2026-02-27T19:28:06.602Z" }
 wheels = [
@@ -813,7 +809,7 @@ name = "ml-dtypes"
 version = "0.6.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy", marker = "sys_platform != 'darwin'" },
+    { name = "numpy" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/12/72/307d7c4bd0600601c7133fba5cb78af7db968152951c1cd473abb1cda782/ml_dtypes-0.6.0.tar.gz", hash = "sha256:5e60251d32ced5598972e4d5e06a2f044341f9291402551a3f6f0ec44f9299b0", size = 3032327, upload-time = "2026-08-13T14:14:40.215Z" }
 wheels = [
@@ -1725,15 +1721,16 @@ name = "tilelang"
 version = "0.1.8"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "apache-tvm-ffi", marker = "sys_platform != 'darwin'" },
-    { name = "cloudpickle", marker = "sys_platform != 'darwin'" },
-    { name = "ml-dtypes", marker = "sys_platform != 'darwin'" },
-    { name = "numpy", marker = "sys_platform != 'darwin'" },
-    { name = "psutil", marker = "sys_platform != 'darwin'" },
-    { name = "torch", version = "2.14.1+cu130", source = { registry = "https://download.pytorch.org/whl/cu130" }, marker = "sys_platform != 'darwin'" },
-    { name = "tqdm", marker = "sys_platform != 'darwin'" },
-    { name = "typing-extensions", marker = "sys_platform != 'darwin'" },
-    { name = "z3-solver", marker = "sys_platform != 'darwin'" },
+    { name = "apache-tvm-ffi" },
+    { name = "cloudpickle" },
+    { name = "ml-dtypes" },
+    { name = "numpy" },
+    { name = "psutil" },
+    { name = "setuptools", marker = "sys_platform == 'darwin'" },
+    { name = "torch", version = "2.14.1+cu130", source = { registry = "https://download.pytorch.org/whl/cu130" } },
+    { name = "tqdm" },
+    { name = "typing-extensions" },
+    { name = "z3-solver" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/e6/27/6e363f48f878389078e2899756b8fecc326388b585122fd7f8a86590dfab/tilelang-0.1.8.tar.gz", hash = "sha256:da967821698eb7a79a76d27fbe25e314a3273f2b12ba4833e981658139d0e6d9", size = 93247335, upload-time = "2026-02-16T14:03:28.706Z" }
 wheels = [
@@ -1808,7 +1805,7 @@ resolution-markers = [
 ]
 dependencies = [
     { name = "cuda-bindings", marker = "python_full_version < '3.15' and sys_platform == 'linux'" },
-    { name = "cuda-toolkit", extra = ["cublas", "cudart", "cufft", "cufile", "cupti", "curand", "cusolver", "cusparse", "nvjitlink", "nvrtc", "nvtx"], marker = "(sys_platform == 'linux' and extra == 'group-7-wpt-llm-cuda') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-cuda') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-rocm') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-xpu') or (extra == 'group-7-wpt-llm-cuda' and extra == 'group-7-wpt-llm-rocm') or (extra == 'group-7-wpt-llm-cuda' and extra == 'group-7-wpt-llm-xpu') or (extra == 'group-7-wpt-llm-rocm' and extra == 'group-7-wpt-llm-xpu')" },
+    { name = "cuda-toolkit", extra = ["cublas", "cudart", "cufft", "cufile", "cupti", "curand", "cusolver", "cusparse", "nvjitlink", "nvrtc", "nvtx"], marker = "(sys_platform == 'linux' and extra == 'group-13-wpt-workspace-cuda') or (extra == 'group-13-wpt-workspace-cpu' and extra == 'group-13-wpt-workspace-cuda') or (extra == 'group-13-wpt-workspace-cpu' and extra == 'group-13-wpt-workspace-rocm') or (extra == 'group-13-wpt-workspace-cpu' and extra == 'group-13-wpt-workspace-xpu') or (extra == 'group-13-wpt-workspace-cuda' and extra == 'group-13-wpt-workspace-rocm') or (extra == 'group-13-wpt-workspace-cuda' and extra == 'group-13-wpt-workspace-xpu') or (extra == 'group-13-wpt-workspace-rocm' and extra == 'group-13-wpt-workspace-xpu')" },
     { name = "filelock" },
     { name = "fsspec" },
     { name = "jinja2" },
@@ -2009,6 +2006,41 @@ wheels = [
 ]
 
 [[package]]
+name = "wpt"
+version = "0.1.0"
+source = { editable = "apps/wpt" }
+dependencies = [
+    { name = "jsonschema" },
+    { name = "numpy" },
+    { name = "wpt-agent" },
+    { name = "wpt-dataset" },
+    { name = "wpt-inference" },
+    { name = "wpt-model" },
+    { name = "wpt-store" },
+    { name = "wpt-telemetry" },
+    { name = "wpt-tokenizer" },
+    { name = "wpt-training" },
+    { name = "wpt-utils" },
+    { name = "wpt-worker" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "jsonschema", specifier = ">=4.23" },
+    { name = "numpy", specifier = ">=2" },
+    { name = "wpt-agent", editable = "packages/wpt-agent" },
+    { name = "wpt-dataset", editable = "packages/wpt-dataset" },
+    { name = "wpt-inference", editable = "packages/wpt-inference" },
+    { name = "wpt-model", editable = "packages/wpt-model" },
+    { name = "wpt-store", editable = "packages/wpt-store" },
+    { name = "wpt-telemetry", editable = "packages/wpt-telemetry" },
+    { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
+    { name = "wpt-training", editable = "packages/wpt-training" },
+    { name = "wpt-utils", editable = "packages/wpt-utils" },
+    { name = "wpt-worker", editable = "packages/wpt-worker" },
+]
+
+[[package]]
 name = "wpt-agent"
 version = "0.1.0"
 source = { editable = "packages/wpt-agent" }
@@ -2023,27 +2055,6 @@ dependencies = [
 requires-dist = [
     { name = "wpt-dataset", editable = "packages/wpt-dataset" },
     { name = "wpt-inference", editable = "packages/wpt-inference" },
-    { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
-    { name = "wpt-utils", editable = "packages/wpt-utils" },
-]
-
-[[package]]
-name = "wpt-chat"
-version = "0.1.0"
-source = { editable = "apps/wpt-chat" }
-dependencies = [
-    { name = "wpt-inference" },
-    { name = "wpt-model" },
-    { name = "wpt-store" },
-    { name = "wpt-tokenizer" },
-    { name = "wpt-utils" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "wpt-inference", editable = "packages/wpt-inference" },
-    { name = "wpt-model", editable = "packages/wpt-model" },
-    { name = "wpt-store", editable = "packages/wpt-store" },
     { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
     { name = "wpt-utils", editable = "packages/wpt-utils" },
 ]
@@ -2078,35 +2089,6 @@ requires-dist = [
 ]
 
 [[package]]
-name = "wpt-eval"
-version = "0.1.0"
-source = { editable = "apps/wpt-eval" }
-dependencies = [
-    { name = "numpy" },
-    { name = "wpt-agent" },
-    { name = "wpt-dataset" },
-    { name = "wpt-model" },
-    { name = "wpt-store" },
-    { name = "wpt-telemetry" },
-    { name = "wpt-tokenizer" },
-    { name = "wpt-utils" },
-    { name = "wpt-worker" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "numpy", specifier = ">=2" },
-    { name = "wpt-agent", editable = "packages/wpt-agent" },
-    { name = "wpt-dataset", editable = "packages/wpt-dataset" },
-    { name = "wpt-model", editable = "packages/wpt-model" },
-    { name = "wpt-store", editable = "packages/wpt-store" },
-    { name = "wpt-telemetry", editable = "packages/wpt-telemetry" },
-    { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
-    { name = "wpt-utils", editable = "packages/wpt-utils" },
-    { name = "wpt-worker", editable = "packages/wpt-worker" },
-]
-
-[[package]]
 name = "wpt-inference"
 version = "0.1.0"
 source = { editable = "packages/wpt-inference" }
@@ -2121,99 +2103,6 @@ requires-dist = [
     { name = "wpt-model", editable = "packages/wpt-model" },
     { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
     { name = "wpt-utils", editable = "packages/wpt-utils" },
-]
-
-[[package]]
-name = "wpt-llm"
-version = "0.1.0"
-source = { virtual = "." }
-
-[package.dev-dependencies]
-cpu = [
-    { name = "torch", version = "2.14.1", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform == 'darwin' and extra == 'group-7-wpt-llm-cpu') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-cuda') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-rocm') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-xpu') or (extra == 'group-7-wpt-llm-cuda' and extra == 'group-7-wpt-llm-rocm') or (extra == 'group-7-wpt-llm-cuda' and extra == 'group-7-wpt-llm-xpu') or (extra == 'group-7-wpt-llm-rocm' and extra == 'group-7-wpt-llm-xpu')" },
-    { name = "torch", version = "2.14.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform != 'darwin' and extra == 'group-7-wpt-llm-cpu') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-cuda') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-rocm') or (extra == 'group-7-wpt-llm-cpu' and extra == 'group-7-wpt-llm-xpu') or (extra == 'group-7-wpt-llm-cuda' and extra == 'group-7-wpt-llm-rocm') or (extra == 'group-7-wpt-llm-cuda' and extra == 'group-7-wpt-llm-xpu') or (extra == 'group-7-wpt-llm-rocm' and extra == 'group-7-wpt-llm-xpu')" },
-]
-cuda = [
-    { name = "apache-tvm-ffi", marker = "sys_platform == 'linux'" },
-    { name = "tilelang", marker = "sys_platform == 'linux'" },
-    { name = "torch", version = "2.14.1+cu130", source = { registry = "https://download.pytorch.org/whl/cu130" } },
-    { name = "triton-windows", marker = "sys_platform == 'win32'" },
-]
-dev = [
-    { name = "moto", extra = ["s3"] },
-    { name = "pytest" },
-    { name = "pytest-xdist" },
-    { name = "wpt-chat" },
-    { name = "wpt-dataset" },
-    { name = "wpt-eval" },
-    { name = "wpt-manager" },
-    { name = "wpt-train" },
-    { name = "wpt-web" },
-    { name = "wpt-worker" },
-]
-rocm = [
-    { name = "torch", version = "2.14.1+rocm7.2", source = { registry = "https://download.pytorch.org/whl/rocm7.2" }, marker = "sys_platform == 'linux'" },
-    { name = "triton-rocm", marker = "sys_platform == 'linux'" },
-]
-xpu = [
-    { name = "torch", version = "2.14.1+xpu", source = { registry = "https://download.pytorch.org/whl/xpu" } },
-    { name = "triton-xpu" },
-]
-
-[package.metadata]
-
-[package.metadata.requires-dev]
-cpu = [{ name = "torch", specifier = ">=2.14", index = "https://download.pytorch.org/whl/cpu", conflict = { package = "wpt-llm", group = "cpu" } }]
-cuda = [
-    { name = "apache-tvm-ffi", marker = "sys_platform == 'linux'", specifier = "<0.1.10" },
-    { name = "tilelang", marker = "sys_platform == 'linux'", specifier = "==0.1.8" },
-    { name = "torch", specifier = ">=2.14", index = "https://download.pytorch.org/whl/cu130", conflict = { package = "wpt-llm", group = "cuda" } },
-    { name = "triton-windows", marker = "sys_platform == 'win32'", specifier = ">=3.8,<3.9" },
-]
-dev = [
-    { name = "moto", extras = ["s3"], specifier = ">=5" },
-    { name = "pytest", specifier = ">=8" },
-    { name = "pytest-xdist", specifier = ">=3" },
-    { name = "wpt-chat", editable = "apps/wpt-chat" },
-    { name = "wpt-dataset", editable = "packages/wpt-dataset" },
-    { name = "wpt-eval", editable = "apps/wpt-eval" },
-    { name = "wpt-manager", editable = "apps/wpt-manager" },
-    { name = "wpt-train", editable = "apps/wpt-train" },
-    { name = "wpt-web", editable = "packages/wpt-web" },
-    { name = "wpt-worker", editable = "packages/wpt-worker" },
-]
-rocm = [
-    { name = "torch", marker = "sys_platform == 'linux'", specifier = ">=2.14", index = "https://download.pytorch.org/whl/rocm7.2", conflict = { package = "wpt-llm", group = "rocm" } },
-    { name = "triton-rocm", marker = "sys_platform == 'linux'", index = "https://download.pytorch.org/whl/rocm7.2", conflict = { package = "wpt-llm", group = "rocm" } },
-]
-xpu = [
-    { name = "torch", specifier = ">=2.14", index = "https://download.pytorch.org/whl/xpu", conflict = { package = "wpt-llm", group = "xpu" } },
-    { name = "triton-xpu", index = "https://download.pytorch.org/whl/xpu", conflict = { package = "wpt-llm", group = "xpu" } },
-]
-
-[[package]]
-name = "wpt-manager"
-version = "0.1.0"
-source = { editable = "apps/wpt-manager" }
-dependencies = [
-    { name = "wpt-dataset" },
-    { name = "wpt-eval" },
-    { name = "wpt-store" },
-    { name = "wpt-telemetry" },
-    { name = "wpt-train" },
-    { name = "wpt-utils" },
-    { name = "wpt-worker" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "wpt-dataset", editable = "packages/wpt-dataset" },
-    { name = "wpt-eval", editable = "apps/wpt-eval" },
-    { name = "wpt-store", editable = "packages/wpt-store" },
-    { name = "wpt-telemetry", editable = "packages/wpt-telemetry" },
-    { name = "wpt-train", editable = "apps/wpt-train" },
-    { name = "wpt-utils", editable = "packages/wpt-utils" },
-    { name = "wpt-worker", editable = "packages/wpt-worker" },
 ]
 
 [[package]]
@@ -2278,37 +2167,6 @@ name = "wpt-tokenizer"
 source = { editable = "packages/wpt-tokenizer" }
 
 [[package]]
-name = "wpt-train"
-version = "0.1.0"
-source = { editable = "apps/wpt-train" }
-dependencies = [
-    { name = "numpy" },
-    { name = "wpt-dataset" },
-    { name = "wpt-inference" },
-    { name = "wpt-model" },
-    { name = "wpt-store" },
-    { name = "wpt-telemetry" },
-    { name = "wpt-tokenizer" },
-    { name = "wpt-training" },
-    { name = "wpt-utils" },
-    { name = "wpt-worker" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "numpy", specifier = ">=2" },
-    { name = "wpt-dataset", editable = "packages/wpt-dataset" },
-    { name = "wpt-inference", editable = "packages/wpt-inference" },
-    { name = "wpt-model", editable = "packages/wpt-model" },
-    { name = "wpt-store", editable = "packages/wpt-store" },
-    { name = "wpt-telemetry", editable = "packages/wpt-telemetry" },
-    { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
-    { name = "wpt-training", editable = "packages/wpt-training" },
-    { name = "wpt-utils", editable = "packages/wpt-utils" },
-    { name = "wpt-worker", editable = "packages/wpt-worker" },
-]
-
-[[package]]
 name = "wpt-training"
 version = "0.1.0"
 source = { editable = "packages/wpt-training" }
@@ -2341,33 +2199,6 @@ version = "0.1.0"
 source = { editable = "packages/wpt-utils" }
 
 [[package]]
-name = "wpt-web"
-version = "0.1.0"
-source = { editable = "packages/wpt-web" }
-dependencies = [
-    { name = "jsonschema" },
-    { name = "wpt-dataset" },
-    { name = "wpt-inference" },
-    { name = "wpt-model" },
-    { name = "wpt-store" },
-    { name = "wpt-telemetry" },
-    { name = "wpt-tokenizer" },
-    { name = "wpt-utils" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "jsonschema", specifier = ">=4.23" },
-    { name = "wpt-dataset", editable = "packages/wpt-dataset" },
-    { name = "wpt-inference", editable = "packages/wpt-inference" },
-    { name = "wpt-model", editable = "packages/wpt-model" },
-    { name = "wpt-store", editable = "packages/wpt-store" },
-    { name = "wpt-telemetry", editable = "packages/wpt-telemetry" },
-    { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
-    { name = "wpt-utils", editable = "packages/wpt-utils" },
-]
-
-[[package]]
 name = "wpt-worker"
 version = "0.1.0"
 source = { editable = "packages/wpt-worker" }
@@ -2394,6 +2225,62 @@ requires-dist = [
     { name = "wpt-telemetry", editable = "packages/wpt-telemetry" },
     { name = "wpt-training", editable = "packages/wpt-training" },
     { name = "wpt-utils", editable = "packages/wpt-utils" },
+]
+
+[[package]]
+name = "wpt-workspace"
+version = "0.1.0"
+source = { virtual = "." }
+
+[package.dev-dependencies]
+cpu = [
+    { name = "torch", version = "2.14.1", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform == 'darwin' and extra == 'group-13-wpt-workspace-cpu') or (extra == 'group-13-wpt-workspace-cpu' and extra == 'group-13-wpt-workspace-cuda') or (extra == 'group-13-wpt-workspace-cpu' and extra == 'group-13-wpt-workspace-rocm') or (extra == 'group-13-wpt-workspace-cpu' and extra == 'group-13-wpt-workspace-xpu') or (extra == 'group-13-wpt-workspace-cuda' and extra == 'group-13-wpt-workspace-rocm') or (extra == 'group-13-wpt-workspace-cuda' and extra == 'group-13-wpt-workspace-xpu') or (extra == 'group-13-wpt-workspace-rocm' and extra == 'group-13-wpt-workspace-xpu')" },
+    { name = "torch", version = "2.14.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform != 'darwin' and extra == 'group-13-wpt-workspace-cpu') or (extra == 'group-13-wpt-workspace-cpu' and extra == 'group-13-wpt-workspace-cuda') or (extra == 'group-13-wpt-workspace-cpu' and extra == 'group-13-wpt-workspace-rocm') or (extra == 'group-13-wpt-workspace-cpu' and extra == 'group-13-wpt-workspace-xpu') or (extra == 'group-13-wpt-workspace-cuda' and extra == 'group-13-wpt-workspace-rocm') or (extra == 'group-13-wpt-workspace-cuda' and extra == 'group-13-wpt-workspace-xpu') or (extra == 'group-13-wpt-workspace-rocm' and extra == 'group-13-wpt-workspace-xpu')" },
+]
+cuda = [
+    { name = "apache-tvm-ffi", marker = "sys_platform == 'linux'" },
+    { name = "tilelang", marker = "sys_platform == 'linux'" },
+    { name = "torch", version = "2.14.1+cu130", source = { registry = "https://download.pytorch.org/whl/cu130" } },
+    { name = "triton-windows", marker = "sys_platform == 'win32'" },
+]
+dev = [
+    { name = "moto", extra = ["s3"] },
+    { name = "pytest" },
+    { name = "pytest-xdist" },
+    { name = "wpt" },
+]
+rocm = [
+    { name = "torch", version = "2.14.1+rocm7.2", source = { registry = "https://download.pytorch.org/whl/rocm7.2" }, marker = "sys_platform == 'linux'" },
+    { name = "triton-rocm", marker = "sys_platform == 'linux'" },
+]
+xpu = [
+    { name = "torch", version = "2.14.1+xpu", source = { registry = "https://download.pytorch.org/whl/xpu" } },
+    { name = "triton-xpu" },
+]
+
+[package.metadata]
+
+[package.metadata.requires-dev]
+cpu = [{ name = "torch", specifier = ">=2.14", index = "https://download.pytorch.org/whl/cpu", conflict = { package = "wpt-workspace", group = "cpu" } }]
+cuda = [
+    { name = "apache-tvm-ffi", marker = "sys_platform == 'linux'", specifier = "<0.1.10" },
+    { name = "tilelang", marker = "sys_platform == 'linux'", specifier = "==0.1.8" },
+    { name = "torch", specifier = ">=2.14", index = "https://download.pytorch.org/whl/cu130", conflict = { package = "wpt-workspace", group = "cuda" } },
+    { name = "triton-windows", marker = "sys_platform == 'win32'", specifier = ">=3.8,<3.9" },
+]
+dev = [
+    { name = "moto", extras = ["s3"], specifier = ">=5" },
+    { name = "pytest", specifier = ">=8" },
+    { name = "pytest-xdist", specifier = ">=3" },
+    { name = "wpt", editable = "apps/wpt" },
+]
+rocm = [
+    { name = "torch", marker = "sys_platform == 'linux'", specifier = ">=2.14", index = "https://download.pytorch.org/whl/rocm7.2", conflict = { package = "wpt-workspace", group = "rocm" } },
+    { name = "triton-rocm", marker = "sys_platform == 'linux'", index = "https://download.pytorch.org/whl/rocm7.2", conflict = { package = "wpt-workspace", group = "rocm" } },
+]
+xpu = [
+    { name = "torch", specifier = ">=2.14", index = "https://download.pytorch.org/whl/xpu", conflict = { package = "wpt-workspace", group = "xpu" } },
+    { name = "triton-xpu", index = "https://download.pytorch.org/whl/xpu", conflict = { package = "wpt-workspace", group = "xpu" } },
 ]
 
 [[package]]

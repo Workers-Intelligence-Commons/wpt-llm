@@ -1,14 +1,17 @@
 """The record of one WPT command run: what it read, what it did and what it
 wrote, so that afterwards one can know exactly what happened.
 
-wpt-dataset build, wpt-train and wpt-eval each open one
+wpt dataset build, wpt train and wpt eval each open one
 Telemetry per run. Its record is its own folder of the store named by
 WPT_STORE, records/<folder>/ (see wpt_store), named
-<UTC start>-<command>-<main id>-<8 random hex digits>, where the main id is
-what the run is about (a recipe name, a short dataset id, a short weights
-hash: the command chooses):
+<UTC start>-<command>-<main id>-<8 random hex digits>, where the command is
+the one that ran (`wpt train`; as_record_name turns each space into a '-':
+`wpt-train`) and the main id is what the run is about (a recipe name, a short
+dataset id, a short weights hash: the command chooses):
 
-    start.json     the command, its arguments, when it started, the tools,
+    start.json     the command, its arguments, when it started, the job
+                   that started it (the WPT_JOB setting of `wpt web`, when
+                   it started the command), the tools,
                    the code (its commit and a hash of its uncommitted
                    changes), the repository commit, and the trace id the live backend
                    shows it under
@@ -31,7 +34,7 @@ the end of every span, before every step that cannot be undone
 lines of the last few seconds. When the store does not take a part,
 RecordError is raised, and every later call raises it again without
 writing anything: the command stops, since without its record it must do
-nothing more (wpt-train's training process still saves its checkpoint
+nothing more (wpt train's training process still saves its checkpoint
 first, unrecorded), and exits with RECORD_FAILED. A send that fails in the
 background interrupts the main thread, as Ctrl+C would: on Linux and macOS
 the flush thread sends the main thread a real SIGINT, which also cuts short
@@ -42,8 +45,8 @@ _thread.interrupt_main, which takes effect only once the main thread runs
 Python code again, after a wait ends. The KeyboardInterrupt it raises
 leaves the with block, and close() turns it into RecordError, never into a
 stop by the user (exit code 130). Where the main thread runs a handler of
-its own for Ctrl+C (wpt-train's training loop, its launcher), that handler
-runs instead and the next call raises RecordError (wpt-train's training
+its own for Ctrl+C (wpt train's training loop, its launcher), that handler
+runs instead and the next call raises RecordError (wpt train's training
 loop first finishes its step and saves its checkpoint). In a process that
 ignores Ctrl+C (started in the background by a shell that is not
 interactive), or leaves it to the system's default, there is no
@@ -66,7 +69,7 @@ fails gets one warning on stderr; the run goes on and each later batch is
 tried again quietly, so the live view resumes when the backend is back.
 The store record is the account; the live view is a convenience.
 
-A process started by another one for the same run (wpt-train's launcher
+A process started by another one for the same run (wpt train's launcher
 starts the training processes) joins its record: the launcher writes
 start.json and end.json, the joined process its own spans, events and ids.
 """
@@ -108,6 +111,7 @@ RECORD_FAILED = 3  # the exit code of a command whose record could not be writte
 ENDPOINT = "OTEL_EXPORTER_OTLP_ENDPOINT"
 JOIN_FOLDER = "WPT_RECORD_FOLDER"  # set by a launcher for the processes that join its record
 JOIN_PARENT = "WPT_RECORD_PARENT"  # <trace id>-<span id> of the launcher's span they belong under
+JOB = "WPT_JOB"  # set by `wpt web` for a command it starts: the id of the job, which start.json then names
 START, EVENTS, IDS, END = "start.json", "events.jsonl", "ids.json", "end.json"
 FLUSH_SECONDS = 5  # the store is sent the lines it holds back at least this often
 FLUSH_THREAD = "wpt-telemetry-flush"
@@ -165,13 +169,14 @@ class Telemetry:
         ids.json are written before it returns (RecordError when the store
         refuses them)."""
         moment = datetime.now(UTC)
-        folder = f"{moment:%Y%m%dT%H%M%SZ}-{command}-{as_record_name(main_id)}-{secrets.token_hex(4)}"
+        folder = f"{moment:%Y%m%dT%H%M%SZ}-{as_record_name(command)}-{as_record_name(main_id)}-{secrets.token_hex(4)}"
         live = _Live(command, folder, _endpoint(env_file, environ), echo or _print)
         telemetry = cls(store, folder, command, live, echo or _print, owner=True)
         try:
+            job = (os.environ if environ is None else environ).get(JOB)
             telemetry._write(START, _json({"command": command, "arguments": list(arguments),
                                            "started": _iso(moment), "trace": telemetry.trace,
-                                           "inputs": dict(inputs or {}), **_where()}))
+                                           "inputs": dict(inputs or {}), **({"job": job} if job else {}), **_where()}))
             telemetry._write(IDS, _json({"inputs": dict(inputs or {}), "outputs": {}}))
             telemetry._line({"kind": "span_start", "span": telemetry._root.id, "parent": None, "name": command,
                              "attributes": {}})

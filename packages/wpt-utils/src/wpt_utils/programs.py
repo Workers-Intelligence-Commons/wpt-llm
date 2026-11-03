@@ -24,7 +24,7 @@ from pathlib import Path
 
 class MissingTool(Exception):
     """A program the work needs (mercurial for mercurial sources, GnuPG for
-    GPG-signed commits, Bun for wpt-web) is not installed."""
+    GPG-signed commits, Bun for wpt web) is not installed."""
 
 
 def program(name: str) -> str:
@@ -53,7 +53,7 @@ def repository() -> dict:
 _CODE = None
 _MODULES = {}
 _GIVEN = False
-WPT = "wpt_"  # how the top-level name of every module of WPT's own packages starts
+WPT = "wpt_"  # how the top-level name of every module of WPT's libraries starts (none imports the app's `wpt`)
 
 
 def code() -> dict:

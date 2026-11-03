@@ -40,7 +40,7 @@ are vague or missing, from its license files. All of them were checked for
 the versions below.
 
 **When a version changes** in `uv.lock`, `Cargo.lock` or
-`packages/wpt-web/ui/bun.lock`, check that row
+`apps/wpt/ui/bun.lock`, check that row
 again (the license can change between versions) and update its version
 here; a new package gets a row, a removed one loses its row. The required
 packages must stay compatible with AGPL-3.0-or-later.
@@ -301,7 +301,7 @@ run the model's
 commands in containers built on each machine from the Dockerfiles in
 `data/images/`
 ([training.md](training.md), "Images"). Locking an image
-(`wpt-agent lock-image`) records every package installed in it, with its
+(`wpt agent lock-image`) records every package installed in it, with its
 version and its licenses, in `licenses.json` next to the image's
 `lock.json`. No limit applies to which licenses an image may hold: the
 record says what is there, and it is not a list of allowed licenses. The
@@ -359,9 +359,9 @@ them on the user's machine, under their own terms. Distributing WPT
 together with them (a container image, an installer) needs its own license
 check first, above all for the NVIDIA, Intel and AMD runtimes.
 
-### The web interface (`packages/wpt-web/ui/bun.lock`)
+### The web interface (`apps/wpt/ui/bun.lock`)
 
-Bun installs these when `wpt-web` builds its interface. Only React,
+Bun installs these when `wpt web` builds its interface. Only React,
 React DOM and scheduler end up in the built files the browser loads; the
 others build them. lightningcss's MPL-2.0 names the AGPL as a Secondary
 License (its section 1.12).
@@ -583,11 +583,11 @@ Every license text is an item of its own, like a source:
   reviewer's explanation.
 
 A license text is written only through the service layer: its
-`license-text.json` with `wpt-dataset save license-text ID FILE --version
-V`, or `wpt-web`'s documents routes, and a new item with its text, under
+`license-text.json` with `wpt dataset save license-text ID FILE --version
+V`, or `wpt web`'s documents routes, and a new item with its text, under
 review, from the bytes a downloaded source holds at a file or a license
-page (`wpt-dataset add-license-text ID --file PATH` or `--page ADDRESS`,
-or `wpt-web`'s `POST /api/sources/{id}/license-texts`), or by the
+page (`wpt dataset add-license-text ID --file PATH` or `--page ADDRESS`,
+or `wpt web`'s `POST /api/sources/{id}/license-texts`), or by the
 migration that meets it in a source. A statement no license text holds is
 reported with the id its text would have.
 
@@ -623,7 +623,7 @@ when it is:
 | --- | --- |
 | `PDDL-1.0` |  |
 | `CDLA-Permissive-2.0` | sharing the data itself needs the license text, which WPT never does (it holds pointers) |
-| `CDLA-Sharing-1.0` | Results may hold no more than a de minimis part of the data (section 1.11): measure memorization (`wpt-eval FOLDER memorization`) before publishing weights trained on it |
+| `CDLA-Sharing-1.0` | Results may hold no more than a de minimis part of the data (section 1.11): measure memorization (`wpt eval FOLDER memorization`) before publishing weights trained on it |
 | `ODC-By-1.0` | it covers a database, not the documents in it: each document needs its own license |
 | `OGL-UK-3.0` | it excludes personal data, third-party rights and logos; default credit: "Contains public sector information licensed under the Open Government Licence v3.0." |
 | `OGL-Canada-2.0` |  |
@@ -755,10 +755,11 @@ when it is:
   leaves the content out, wherever it is hosted. Review looks for them on
   every source.
 - **robots.txt is enforced in the code**, with no setting to turn it off:
-  before any download from an http(s) address, `wpt-dataset` reads the
+  before any download from an http(s) address, `wpt dataset` reads the
   site's robots.txt (RFC 9309) and does not download from that address when
-  it is forbidden to every crawler (`*`), to `wpt-dataset` itself, or to an
-  AI training crawler. Those are the crawlers whose operator documents that
+  it is forbidden to every crawler (`*`), to WPT's own fetcher (the name
+  `wpt`, which its User-Agent starts with), or to an AI training
+  crawler. Those are the crawlers whose operator documents that
   they gather training data, listed with the link to that statement in
   `packages/wpt-dataset/src/wpt_dataset/robots.py`. A crawler that only
   fetches a page at a person's request is not on the list: a site that
@@ -807,7 +808,7 @@ repository as a reference: it is never deleted.
 No program admits or refuses, at any level. The service layer sends a
 license entry back to `under-review` when a save changes its license, its
 place or its expected texts without deciding it anew; that decision then
-reads `by` `machine:wpt-dataset`, with the date and the reason. A record's
+reads `by` `machine:wpt dataset`, with the date and the reason. A record's
 value never sends an entry back. A machine's name (`machine:<name>`) may
 sign only an `under-review` decision. The build applies only the rules
 people wrote.

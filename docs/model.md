@@ -210,12 +210,12 @@ training included, in one of two languages:
 
 The indexer's loss stays in PyTorch, since it reads only the chosen
 entries. Which form runs is decided once, before the first use
-(`wpt-train` decides it before training and logs it). `wpt-train`,
-`wpt-eval` and `wpt-chat` each take `--kernels` (or `WPT_KERNELS`) to name
-it: `triton`, `tilelang` or `pytorch`; `wpt-web`'s model drafts read
+(`wpt train` decides it before training and logs it). `wpt train`,
+`wpt eval` and `wpt chat` each take `--kernels` (or `WPT_KERNELS`) to name
+it: `triton`, `tilelang` or `pytorch`; `wpt web`'s model drafts read
 `WPT_KERNELS`. Unnamed, TileLang runs where it is installed on an NVIDIA GPU under Linux,
 else Triton where it is installed, else the PyTorch form. The training
-and the evaluation `wpt-manager` runs on rented machines name `triton`
+and the evaluation `wpt manager` runs on rented machines name `triton`
 unless its settings name the form. A form named after the decision must be the one decided. A
 kernel form that cannot work stops the run with its reason, never a switch
 to another form: one named but not installed, TileLang named off an NVIDIA
@@ -253,11 +253,11 @@ A window too long for one GPU runs in parts, and both ways give exactly the
 loss and gradients of the whole window at once, so they are hardware
 options (training.md, "Long windows"), never part of the recipe:
 
-- **Segments**, on one GPU (`wpt-train --segment N`): the window runs as
+- **Segments**, on one GPU (`wpt train --segment N`): the window runs as
   consecutive segments of `N` tokens, each passing to the next what its
   layers need of the earlier tokens, and the gradients flow back across
   every boundary.
-- **Slices**, across processes (`wpt-train --strategy split`):
+- **Slices**, across processes (`wpt train --strategy split`):
   DeepSeek-V4's two-stage contextual parallelism ([V4][v4], section
   3.4.3). Each process holds a contiguous slice of `s` tokens; stage 1,
   process `i` sends what the next one needs of its last tokens (for CSA,
@@ -521,9 +521,9 @@ than 16 new tokens and its chunked kernel for more; the attention through
 the same TileLang or Triton kernels as training, where they run.
 
 `wpt_inference.Writer` writes through the cache (`sample_tokens` for one
-text); `wpt-chat`, the sample `wpt-train` prints, the drafter's training
+text); `wpt chat`, the sample `wpt train` prints, the drafter's training
 and the attempts of the `finish-tasks` and `finish-tasks-with-less-writing`
-steps use it. `wpt-chat` and `wpt-train`'s sample draft with the model's
+steps use it. `wpt chat` and `wpt train`'s sample draft with the model's
 drafter. The attempts of those steps are written by the model alone,
 without a drafter: the weights change at every update, a drafter is trained
 only at the end of a run, and the attempts then depend on the seed alone,
@@ -543,7 +543,7 @@ folder's `drafter/` (`config.json`, `model.safetensors`,
 **One unit**. The model and its drafter are one unit and a hard dependency,
 with separate weights:
 
-- `wpt-train` trains a drafter at the end of every run, after the
+- `wpt train` trains a drafter at the end of every run, after the
   recipe's last step, against the final weights, the model frozen
   (training.md, "The drafter"). The drafter is not a training step.
 - The drafter's `provenance.json` names the sha256 of every weight file it
@@ -569,7 +569,7 @@ training values explicitly ("Model recipes"), equal to today's defaults, so
 a later change of a default does not change their drafters. `features`
 numbers the model's layers from 1 to its `n_layer`;
 `DrafterConfig.for_model` checks them against the model's layers when a run
-starts, so `wpt-train` refuses a layer the model does not have before
+starts, so `wpt train` refuses a layer the model does not have before
 any step runs.
 
 A round drafts a block after the anchor, the last token the model wrote
@@ -603,7 +603,7 @@ and has not read yet:
   are verified while the expected tokens per second of the model's pass
   grow, from a table of the pass's times, and the first that does not pay
   stops the admission, so a draft's admission never depends on the draft
-  itself. The times are measured once per run of `wpt-train`
+  itself. The times are measured once per run of `wpt train`
   (`wpt_inference.measure_costs`) and written into the
   run's record as `scheduler-costs.json`, with the setup they were measured
   on: the model's config, the drafter's block (the drafts per round), the
@@ -632,11 +632,11 @@ and has not read yet:
   last resort. On macOS, a `sysctl` that is not on the search path never
   stops a run: the name is then the architecture. A file recorded on
   the CPU before, whose device is `cpu` alone, is refused like any other
-  setup. `wpt-train
+  setup. `wpt train
   --scheduler-costs FOLDER` replays the times an earlier run recorded in its record folder `FOLDER`
-  instead of measuring them, and `wpt-chat --scheduler-costs FOLDER` reads
+  instead of measuring them, and `wpt chat --scheduler-costs FOLDER` reads
   them instead of measuring them when it loads the model; each refuses
-  times recorded on another setup, naming each difference, `wpt-train`
+  times recorded on another setup, naming each difference, `wpt train`
   before any step runs. A writer given no
   times verifies every draft.
 
@@ -798,7 +798,7 @@ simulated in FP32. The kernels, where they run, read queries and entries
 in BF16 and the indexer's in FP8. CPUs compute in FP32. No layer uses dropout, as in the
 papers.
 
-**Memory.** `wpt-train --recompute` keeps only each layer's input during a
+**Memory.** `wpt train --recompute` keeps only each layer's input during a
 pass and runs the layer again during the backward pass: the same result
 with much less memory, about a third slower (training.md). The layers'
 second run records no balancing counts, and the indexer loss counts once.
@@ -841,10 +841,10 @@ across processes included), number of processes, streaming, output folder,
 run name, resuming, micro-batch, recomputing, segments, checkpoints, weight
 file size and restarts. Mixtures and tokenizer recipes stay separate files,
 since several models share them. A model has at least 2 layers: the last is
-CSA or HCA, the others start with KDA. `wpt-dataset migrate` brings a recipe of an earlier
+CSA or HCA, the others start with KDA. `wpt dataset migrate` brings a recipe of an earlier
 shape to the current one, step by step. A recipe with the MLA numbers gets
 the CSA and HCA ones at 0 and an empty `global_attention` (gated MLA's
-numbers say neither), which a person then fills in; `wpt-dataset check`
+numbers say neither), which a person then fills in; `wpt dataset check`
 names each file until then. A recipe with the model's `block_size` and the
 training's `steps` and `batch_size` gets one stage of the training's
 `stages` (training.md, "Stages"). A recipe without the `drafter` section
@@ -921,8 +921,8 @@ A model series, `data/recipes/series/<name>.json`, is one file for several
 sizes of one model, so the rules of a scaling test are written once and
 each size follows them. It holds the rules every size shares and the list
 of sizes, each a name and a width. `SERIES:SIZE` names one size wherever a
-model recipe's name goes (`wpt-dataset build`, `wpt-train`, `WPT_RECIPE`),
-and `wpt-dataset series NAME` prints what each size gets. The code derives
+model recipe's name goes (`wpt dataset build`, `wpt train`, `WPT_RECIPE`),
+and `wpt dataset series NAME` prints what each size gets. The code derives
 each size's model recipe (`wpt_dataset.series`):
 
 - the shape: the series' `reference` model scaled to the size's width.
@@ -968,7 +968,7 @@ each size's model recipe (`wpt_dataset.series`):
 - the data: one dataset for the whole series. Its data part holds the
   series' mixture, tokenizer recipe and held-out share, and the most
   tokens any size's run reads (its own, or its trunk's, below), so every size's recipe has the same data part and
-  `wpt-dataset build` of any size builds the same dataset. Each size's
+  `wpt dataset build` of any size builds the same dataset. Each size's
   `read-text` step reads only the start of its training tokens
   (`prefix_tokens`: its updates times its batch times the window plus one,
   training.md, "Prefix"), so every size sees the same documents in the
@@ -979,7 +979,7 @@ model's provenance holds the size's derived recipe and the name
 `SERIES:SIZE`.
 
 A size has other runs, each named `SERIES:SIZE:RUN` wherever a model
-recipe's name goes, and `wpt-dataset series NAME` lists them:
+recipe's name goes, and `wpt dataset series NAME` lists them:
 
 - `branch-SHARE`, a decay branch, one per share of the series' `branches`:
   SHARE times the size's updates, rounded half up. Every branch of a size
@@ -992,7 +992,7 @@ recipe's name goes, and `wpt-dataset series NAME` lists them:
   branches, up to its own start, then its decay; each of them continues
   the one before it ([training.md](training.md), "Continued steps"). Two
   branches of a size hold the same trunk steps up to the shorter one's
-  start, so `wpt-train` reuses their kept results and the trunk trains
+  start, so `wpt train` reuses their kept results and the trunk trains
   once. The trunk reads the prefix of the size's longest branch, or the
   size's own when it is longer, so every branch of a size draws its
   windows from the same tokens. A branch whose decay would start inside
@@ -1008,11 +1008,11 @@ recipe's name goes, and `wpt-dataset series NAME` lists them:
   FACTOR times the law's learning rate, rounded to 4 significant digits.
   It checks whether the laws' learning rate holds for Muon at that size.
 
-Each run's model folder and record are those of any `wpt-train` run.
+Each run's model folder and record are those of any `wpt train` run.
 
-`wpt-scaling` fits the trained sizes' loss against their compute and
+`wpt scaling` fits the trained sizes' loss against their compute and
 predicts the loss of a larger size before it trains, and the
-`held-out-loss` test of `wpt-eval` measures each size on the held-out part
+`held-out-loss` test of `wpt eval` measures each size on the held-out part
 they share, by kind of text ([evaluation.md](evaluation.md), "Scaling
 curve" and "Held-out loss").
 

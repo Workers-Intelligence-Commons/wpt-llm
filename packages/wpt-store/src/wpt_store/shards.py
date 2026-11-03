@@ -101,10 +101,10 @@ def documents(store, shards, passes=None):
     once), each shard checked (read_verified) before its documents are
     given; one shard is in memory at a time, and for a remote store each
     shard's local copy is released once read. The disk then holds at most
-    one shard only when the shards were not already local (wpt-train
-    --stream, whose ShardStream released each one, or a wpt-train run
+    one shard only when the shards were not already local (wpt train
+    --stream, whose ShardStream released each one, or a wpt train run
     whose steps read no text windows); copies already there, as after
-    wpt-train without --stream, go one by one as they are read. passes, a collections.Counter when given, counts
+    wpt train without --stream, go one by one as they are read. passes, a collections.Counter when given, counts
     each document's rows, the times the shards hold it: whole once every
     document was given."""
     seen = set()

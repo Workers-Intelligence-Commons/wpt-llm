@@ -34,7 +34,7 @@ Tests check each form against the formulas, and the kernels against the
 PyTorch form.
 
 Which form runs is decided once per process, at the first GPU pass (or
-before, by wpt-train, which may name it: FORMS). Unnamed, the form is the
+before, by wpt train, which may name it: FORMS). Unnamed, the form is the
 first of TileLang and Triton installed for this GPU, else PyTorch; a later
 call that names another form is KernelUnavailable. A kernel form, named or
 installed, that cannot work (not installed when named, TileLang off an

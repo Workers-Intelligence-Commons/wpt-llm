@@ -17,7 +17,7 @@ refuses a tokenizer.json that does not match (TokenizerMismatch).
 A model and its drafter are one unit, with separate weights: load_model
 refuses a folder whose drafter is missing, or whose drafter's provenance
 names other weights than the folder's (their sha256, weight_hashes), as
-DrafterMismatch. No option skips it: wpt-train writes the drafter with
+DrafterMismatch. No option skips it: wpt train writes the drafter with
 the weights it was trained against.
 """
 
@@ -119,7 +119,7 @@ def check_drafter(directory):
         provenance = json.loads((drafter / "provenance.json").read_text(encoding="utf-8"))
     except FileNotFoundError:
         raise DrafterMismatch(f"{directory}: no drafter ({DRAFTER_NAME}/); a model folder holds the drafter "
-                              "wpt-train trained for its weights") from None
+                              "wpt train trained for its weights") from None
     if not (drafter / CONFIG_NAME).exists():
         raise DrafterMismatch(f"{directory}: its drafter ({DRAFTER_NAME}/) was not saved whole")
     trained = (provenance.get("target") or {}).get("weights")

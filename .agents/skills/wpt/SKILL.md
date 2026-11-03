@@ -1,6 +1,6 @@
 ---
 name: wpt
-description: How to work in the WPT repository (Workers' Pre-trained Transformer) with its own tools. Use it before adding or changing a source, a recipe, the model, training, an evaluation or a training step, before running any wpt-* command, and before every push. It names the command for each job, what each one reads and writes, how to extend evaluation and training, and the rules that keep `scripts/check.py` green.
+description: How to work in the WPT repository (Workers' Pre-trained Transformer) with its own tools. Use it before adding or changing a source, a recipe, the model, training, an evaluation or a training step, before running any `wpt` subcommand, and before every push. It names the subcommand for each job, what each one reads and writes, how to extend evaluation and training, and the rules that keep `scripts/check.py` green.
 ---
 
 # WPT tooling
@@ -53,46 +53,53 @@ install; run `scripts/setup.py` again after it. `uv run` does not remove it.
 A Rust toolchain is needed: the tokenizer is built from source.
 
 On Windows, work in Windows itself (PowerShell), never inside WSL: clone,
-set up, build, train and run every wpt-* command there. Linux containers,
+set up, build, train and run every `wpt` subcommand there. Linux containers,
 where a step needs them, run through Docker Desktop.
 
 ## The commands
 
+Every job is a subcommand of one command, `wpt` (`apps/wpt`; `uv run wpt
+--help` lists them); `wpt web` serves the same services in a browser, on
+127.0.0.1 only, and starts and follows every subcommand as a job, except the
+`wpt dataset` commands marked `*` in `wpt dataset --help` (people's texts)
+and the typing of `wpt chat` (docs/architecture.md, "The app" and "Two
+interfaces").
+
 | Job | Command | Reads | Writes |
 | --- | --- | --- | --- |
-| id of a new source | `uv run wpt-dataset source-id ORIGIN [ITEM] ADDRESS` (given once, when the source is created; an address that changes later keeps the id) | | prints the id |
-| download sources into the store | `uv run wpt-dataset download [ID ...] [--stream]` (no ID: every admitted source; several at once, at most as many from one site, and at most as many requests to a site in a span of time, as `packages/wpt-dataset/src/wpt_dataset/sites.txt` says; each as its address serves it when asked, a git source at exactly its `revision`; a source is downloaded only when the store does not hold it (a new source, an address, revision or fetch options that changed) or when it is marked; a failed download stores nothing and the store keeps what it held; `--stream`: no copy kept on this machine) | the upstream | the store: its bundles, its database, its run record `records/<folder>/` |
-| ask for fresh content | `uv run wpt-store mark ID [ID ...]` or `--all` (the next download of each fetches it in full, though the store holds it) | | the store database |
-| what the store holds and when it was downloaded | `uv run wpt-store list` | the store database | prints every session and each source's last outcome, whether it is marked, and last download |
-| copy a kept model out of the store | `uv run wpt-store copy-out NAME FOLDER` (NAME: the run's name; FOLDER must not exist; every file checked against its sha256) | the store's `models/NAME` | FOLDER |
-| download, build and train in one command | `docker compose up` with `COMPOSE_FILE=deploy/manager/compose.yaml` in `.env` (or `uv run wpt-manager`), `WPT_RECIPE` required, `WPT_RUN` the run's name (unset: a new one, written into the git-ignored `wpt-run.txt` with its copy-out line), `WPT_EVALUATE=1` to evaluate at the end; `WPT_GPU_WORKERS`: the gpu workers' keys, or how many to rent (rented workers run the training and the evaluation with `WPT_KERNELS=triton` unless the settings set `WPT_KERNELS`; `WPT_RENTAL_GPUS`, `WPT_RENTAL_KIND`, `WPT_RENTAL_PROVIDER`; a lost rented worker, or a crash on several workers, resumes the run up to `WPT_REPLACEMENTS` times; the container exits when the runs are over, and `docker compose up` again continues a failed run); goes on first with its own runs a crash cut short; builds the images of the dataset's tasks where `DOCKER_HOST` reaches Docker; settings from the environment, else from `.env` (docs/machines.md) | the recipe, the upstreams, the store | the store: its sources, dataset, checkpoint and the model under `models/NAME` (the manager's own copy of the folder removed); the tasks' images on the Docker host; its run record `records/<folder>/`; its runs' gpu workers, tokens included, in `WPT_MANAGER_STATE` (never the store); rentals at the provider, stopped once the evaluation or training ends, and tried again until stopped |
-| a gpu worker on a machine with GPUs | `docker compose -f compose.yaml -f compose.nvidia.yaml up` (or `compose.amd.yaml`; the files of `deploy/gpu-worker/` plus `wpt_worker/` copied beside them; prints its key `wpt-worker://TOKEN@HOST:PORT#PIN`; give it, one per machine, to `wpt-train` in `WPT_GPU_WORKERS`; docs/machines.md) | what the wpt manager sends it | its own folder (certificate, checkout, libraries, checkpoints); never the store |
-| manifest of a source's stored tree | `uv run wpt-dataset manifest ID` (downloads it as `download` does, or finds it in the store) | the upstream, the store | the store; prints the list of the tree's files and the tree's manifest (the sha256 of that list) |
-| erase a passage | `uv run wpt-dataset cut ID PATH START END --version V` (bytes of the file as the cuts before left it; the cut names the passage by its length and two hashes keyed by the store's cut key, never its text; docs/erasure.md) | the store | `data/sources/ID/source.json`; the store's cut key on the first cut (keep a backup) |
-| edit a source's files | `uv run wpt-dataset unpack ID FOLDER`, edit, `uv run wpt-dataset patch ID FOLDER NAME` | the source, the folder | the folder; then `data/sources/ID/NNNN-NAME.patch` |
-| check the data rules | `uv run wpt-dataset check [--fetch [ID ...]] [--changed REV]` (`--fetch`: the sources are downloaded as `download` does, then checked strictly: cuts, patches, license and format maps, every file text, pointer tasks; it names each file that is not text, to list in `extract`, and each license entry whose statement would keep its files out (not there, a text no item holds, with that text's id, one it does not expect, or one not admitted), without failing; failures listed at the end) | `data/` | the store, with `--fetch` |
-| build a vocabulary | `uv run wpt-dataset build-tokenizer NAME [--stream]` | a tokenizer recipe | the store; its run record `records/<folder>/`; `data/recipes/tokenizers/NAME.lock.json` (commit it) |
-| check a vocabulary on the data | `uv run wpt-dataset tokenizer-check NAME` | the lock, admitted sources | prints characters per token per source |
-| build a dataset | `uv run wpt-dataset build NAME [--stream] [--skip-failed]` (NAME: a model recipe, or `SERIES:SIZE`, a size of a model series, every size of which builds the same dataset; never contacts upstream; reads only downloaded sources: one not in the store, or whose cut or patch does not apply, is left out and listed in the record; each item that fails alone is left out and reported in the record: a file no license entry covers, a file that is not text, the files and records of an entry that does not train (not admitted, or its statement in the stored bytes matches no admitted text it expects), a task whose pointer no longer holds its passage or points into a source left out; every commit recomputes every source from the stored bytes; sources converted in worker processes, several at once, the same dataset as one at a time; `--stream`: only tokens kept, no Markdown, only the files a conversion needs as files copied into a temporary folder deleted once the source is tokens; `--skip-failed`: any other failing source is left out and listed in the record instead of stopping) | the data part of the model recipe NAME | the store; its run record `records/<folder>/`; a session in the store database with a `reused` line per source it read; prints the dataset id |
-| migrate data files | `uv run wpt-dataset migrate` | `data/` | rewrites files whose shape is behind |
-| check the Markdown of sources | `uv run wpt-dataset markdown-check [ID ...]` | the sources | prints notes and problems per source |
-| train | `uv run wpt-train RECIPE DATASET_ID [--out FOLDER] [--stream] [--recompute] [--segment N] [--run NAME] [--scheduler-costs RECORD_FOLDER] [--kernels FORM] [options]`, started detached (skill `wpt-training-run`; RECIPE: a model recipe, or `SERIES:SIZE`, a size of a model series, which reads the start of the series' dataset, or `SERIES:SIZE:RUN`, another run of that size (`branch-SHARE`, a decay branch that goes on from the size's trunk; `lr-FACTOR`, at the smallest size, the learning-rate check); trains through gpu workers, the keys of `WPT_GPU_WORKERS` (one per machine), or else a local one it starts; exit code 4 when a gpu worker is lost; `WPT_LINK_CHECKPOINTS`: `step-ends`, the default, or `every`, the checkpoints that come back from the worker; docs/machines.md; runs the recipe's `steps` in order, starting from the result of the last of its first steps the store already holds, so a run reuses the steps it shares with an earlier one; a dataset that holds nothing for a step refuses the run before any step trains; a step that cannot do its part (`StepFailed`) stops the run with exit code 2, no result of it kept but the checkpoint it wrote, which `--resume` continues (with `WPT_LINK_CHECKPOINTS=every`; with `step-ends` it stays on the worker and `--resume` starts the step over), the results of the steps before it kept; ends by training the model's drafter; `--scheduler-costs`: replay the drafter scheduler's pass times an earlier run recorded on the same setup; a checkpoint is always written just before the drafter, so a drafter failure resumes with `--resume`; `--stream`: a few shards on disk at a time; `--recompute`: much less memory, about a third slower; `--segment N`: windows longer than N tokens run as segments of N, the same training in the memory of N tokens plus what the segments hand on, up to twice the time; with `--strategy split`, each process's slice runs in segments of N; `--run`: the checkpoint in the store, so another machine can continue; `--kernels`: `triton`, `tilelang` or `pytorch` computes the attention, one that cannot work refusing the run (unset: the first kernels installed for the GPU; `wpt-manager` names `triton` on rented workers); docs/model.md, "Attention") | the model recipe, the store | a model folder; each step's result, the store's `steps/<fingerprint>`; its run record `records/<folder>/` in the store (one per command, over restarts); `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
-| train on several GPUs | `uv run wpt-train RECIPE DATASET_ID --strategy ddp --processes N [options]`, or `--strategy split` to split each window between the GPUs (windows too long for one; DeepSeek-V4's contextual parallelism) (on the gpu worker's machine) | the store | the same |
-| evaluate | `uv run wpt-eval FOLDER [EVAL ...] [--attempts N] [--probe-rate RATE] [--kind-by FIELD] [--kernels FORM]` (from inside the repository; the model runs on the first gpu worker of `WPT_GPU_WORKERS`, else a local one; the agent measures play N attempts, default 4, at every measure task, so each task's image must be built; the `probes` test asks each question of the probe files ceil(3 / RATE) times, default 1/100; the `held-out-loss` test gives the loss on every held-out token, each source's and each kind of text's, by `--kind-by origin`, `tag` (the default) or `format`, or `WPT_KIND_BY`; `--kernels tilelang`, `triton` or `pytorch`, or `WPT_KERNELS`, names what computes the attention on the gpu worker, and one that cannot work there refuses the evaluation) | the folder, the store, the measure tasks, the probe files | `FOLDER/evals/<name>.json`, `README.md`; its run record `records/<folder>/` in the store, with `attempts.jsonl` |
-| fit the scaling curve and predict a loss | `uv run wpt-scaling MODEL MODEL [MODEL ...] [--predict RECIPE ...]` (MODEL: a model folder or a run's name the store keeps; loss against compute C = M x tokens trained, M as a series' plan counts it, L = a x C^-b, plus an irreducible loss from 4 points; the loss is the overall loss of the model's `evals/held-out-loss.json`, and a model without it is named and left out (`WPT_EVALUATE=1` or `wpt-eval` makes it); RECIPE: a model recipe or `SERIES:SIZE`, predicted at its planned compute; docs/evaluation.md, "Scaling curve") | each model's `provenance.json` and `evals/held-out-loss.json`, from its folder or the store's `models/NAME`; the recipes | prints the points, the fit and the predictions |
+| id of a new source | `uv run wpt dataset source-id ORIGIN [ITEM] ADDRESS` (given once, when the source is created; an address that changes later keeps the id) | | prints the id |
+| download sources into the store | `uv run wpt dataset download [ID ...] [--stream]` (no ID: every admitted source; several at once, at most as many from one site, and at most as many requests to a site in a span of time, as `packages/wpt-dataset/src/wpt_dataset/sites.txt` says; each as its address serves it when asked, a git source at exactly its `revision`; a source is downloaded only when the store does not hold it (a new source, an address, revision or fetch options that changed) or when it is marked; a failed download stores nothing and the store keeps what it held; `--stream`: no copy kept on this machine) | the upstream | the store: its bundles, its database, its run record `records/<folder>/` |
+| ask for fresh content | `uv run wpt store mark ID [ID ...]` or `--all` (the next download of each fetches it in full, though the store holds it) | | the store database |
+| what the store holds and when it was downloaded | `uv run wpt store list` | the store database | prints every session and each source's last outcome, whether it is marked, and last download |
+| copy a kept model out of the store | `uv run wpt store copy-out NAME FOLDER` (NAME: the run's name; FOLDER must not exist; every file checked against its sha256) | the store's `models/NAME` | FOLDER |
+| download, build and train in one command | `docker compose up` with `COMPOSE_FILE=deploy/manager/compose.yaml` in `.env` (or `uv run wpt manager`), `WPT_RECIPE` required, `WPT_RUN` the run's name (unset: a new one, written into the git-ignored `wpt-run.txt` with its copy-out line), `WPT_EVALUATE=1` to evaluate at the end; `WPT_GPU_WORKERS`: the gpu workers' keys, or how many to rent (rented workers run the training and the evaluation with `WPT_KERNELS=triton` unless the settings set `WPT_KERNELS`; `WPT_RENTAL_GPUS`, `WPT_RENTAL_KIND`, `WPT_RENTAL_PROVIDER`; a lost rented worker, or a crash on several workers, resumes the run up to `WPT_REPLACEMENTS` times; the container exits when the runs are over, and `docker compose up` again continues a failed run); goes on first with its own runs a crash cut short; builds the images of the dataset's tasks where `DOCKER_HOST` reaches Docker; settings from the environment, else from `.env` (docs/machines.md) | the recipe, the upstreams, the store | the store: its sources, dataset, checkpoint and the model under `models/NAME` (the manager's own copy of the folder removed); the tasks' images on the Docker host; its run record `records/<folder>/`; its runs' gpu workers, tokens included, in `WPT_MANAGER_STATE` (never the store); rentals at the provider, stopped once the evaluation or training ends, and tried again until stopped |
+| a gpu worker on a machine with GPUs | `docker compose -f compose.yaml -f compose.nvidia.yaml up` (or `compose.amd.yaml`; the files of `deploy/gpu-worker/` plus `wpt_worker/` copied beside them; prints its key `wpt-worker://TOKEN@HOST:PORT#PIN`; give it, one per machine, to `wpt train` in `WPT_GPU_WORKERS`; docs/machines.md) | what the wpt manager sends it | its own folder (certificate, checkout, libraries, checkpoints); never the store |
+| manifest of a source's stored tree | `uv run wpt dataset manifest ID` (downloads it as `download` does, or finds it in the store) | the upstream, the store | the store; prints the list of the tree's files and the tree's manifest (the sha256 of that list) |
+| erase a passage | `uv run wpt dataset cut ID PATH START END --version V` (bytes of the file as the cuts before left it; the cut names the passage by its length and two hashes keyed by the store's cut key, never its text; docs/erasure.md) | the store | `data/sources/ID/source.json`; the store's cut key on the first cut (keep a backup) |
+| edit a source's files | `uv run wpt dataset unpack ID FOLDER`, edit, `uv run wpt dataset patch ID FOLDER NAME` | the source, the folder | the folder; then `data/sources/ID/NNNN-NAME.patch` |
+| check the data rules | `uv run wpt dataset check [--fetch [ID ...]] [--changed REV]` (`--fetch`: the sources are downloaded as `download` does, then checked strictly: cuts, patches, license and format maps, every file text, pointer tasks; it names each file that is not text, to list in `extract`, and each license entry whose statement would keep its files out (not there, a text no item holds, with that text's id, one it does not expect, or one not admitted), without failing; failures listed at the end) | `data/` | the store, with `--fetch` |
+| build a vocabulary | `uv run wpt dataset build-tokenizer NAME [--stream]` | a tokenizer recipe | the store; its run record `records/<folder>/`; `data/recipes/tokenizers/NAME.lock.json` (commit it) |
+| check a vocabulary on the data | `uv run wpt dataset tokenizer-check NAME` | the lock, admitted sources | prints characters per token per source |
+| build a dataset | `uv run wpt dataset build NAME [--stream] [--skip-failed]` (NAME: a model recipe, or `SERIES:SIZE`, a size of a model series, every size of which builds the same dataset; never contacts upstream; reads only downloaded sources: one not in the store, or whose cut or patch does not apply, is left out and listed in the record; each item that fails alone is left out and reported in the record: a file no license entry covers, a file that is not text, the files and records of an entry that does not train (not admitted, or its statement in the stored bytes matches no admitted text it expects), a task whose pointer no longer holds its passage or points into a source left out; every commit recomputes every source from the stored bytes; sources converted in worker processes, several at once, the same dataset as one at a time; `--stream`: only tokens kept, no Markdown, only the files a conversion needs as files copied into a temporary folder deleted once the source is tokens; `--skip-failed`: any other failing source is left out and listed in the record instead of stopping) | the data part of the model recipe NAME | the store; its run record `records/<folder>/`; a session in the store database with a `reused` line per source it read; prints the dataset id |
+| migrate data files | `uv run wpt dataset migrate` | `data/` | rewrites files whose shape is behind |
+| check the Markdown of sources | `uv run wpt dataset markdown-check [ID ...]` | the sources | prints notes and problems per source |
+| train | `uv run wpt train RECIPE DATASET_ID [--out FOLDER] [--stream] [--recompute] [--segment N] [--run NAME] [--scheduler-costs RECORD_FOLDER] [--kernels FORM] [options]`, started detached (skill `wpt-training-run`; RECIPE: a model recipe, or `SERIES:SIZE`, a size of a model series, which reads the start of the series' dataset, or `SERIES:SIZE:RUN`, another run of that size (`branch-SHARE`, a decay branch that goes on from the size's trunk; `lr-FACTOR`, at the smallest size, the learning-rate check); trains through gpu workers, the keys of `WPT_GPU_WORKERS` (one per machine), or else a local one it starts; exit code 4 when a gpu worker is lost; `WPT_LINK_CHECKPOINTS`: `step-ends`, the default, or `every`, the checkpoints that come back from the worker; docs/machines.md; runs the recipe's `steps` in order, starting from the result of the last of its first steps the store already holds, so a run reuses the steps it shares with an earlier one; a dataset that holds nothing for a step refuses the run before any step trains; a step that cannot do its part (`StepFailed`) stops the run with exit code 2, no result of it kept but the checkpoint it wrote, which `--resume` continues (with `WPT_LINK_CHECKPOINTS=every`; with `step-ends` it stays on the worker and `--resume` starts the step over), the results of the steps before it kept; ends by training the model's drafter; `--scheduler-costs`: replay the drafter scheduler's pass times an earlier run recorded on the same setup; a checkpoint is always written just before the drafter, so a drafter failure resumes with `--resume`; `--stream`: a few shards on disk at a time; `--recompute`: much less memory, about a third slower; `--segment N`: windows longer than N tokens run as segments of N, the same training in the memory of N tokens plus what the segments hand on, up to twice the time; with `--strategy split`, each process's slice runs in segments of N; `--run`: the checkpoint in the store, so another machine can continue; `--kernels`: `triton`, `tilelang` or `pytorch` computes the attention, one that cannot work refusing the run (unset: the first kernels installed for the GPU; `wpt manager` names `triton` on rented workers); docs/model.md, "Attention") | the model recipe, the store | a model folder; each step's result, the store's `steps/<fingerprint>`; its run record `records/<folder>/` in the store (one per command, over restarts); `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
+| train on several GPUs | `uv run wpt train RECIPE DATASET_ID --strategy ddp --processes N [options]`, or `--strategy split` to split each window between the GPUs (windows too long for one; DeepSeek-V4's contextual parallelism) (on the gpu worker's machine) | the store | the same |
+| evaluate | `uv run wpt eval FOLDER [EVAL ...] [--attempts N] [--probe-rate RATE] [--kind-by FIELD] [--kernels FORM]` (from inside the repository; the model runs on the first gpu worker of `WPT_GPU_WORKERS`, else a local one; the agent measures play N attempts, default 4, at every measure task, so each task's image must be built; the `probes` test asks each question of the probe files ceil(3 / RATE) times, default 1/100; the `held-out-loss` test gives the loss on every held-out token, each source's and each kind of text's, by `--kind-by origin`, `tag` (the default) or `format`, or `WPT_KIND_BY`; `--kernels tilelang`, `triton` or `pytorch`, or `WPT_KERNELS`, names what computes the attention on the gpu worker, and one that cannot work there refuses the evaluation) | the folder, the store, the measure tasks, the probe files | `FOLDER/evals/<name>.json`, `README.md`; its run record `records/<folder>/` in the store, with `attempts.jsonl` |
+| fit the scaling curve and predict a loss | `uv run wpt scaling MODEL MODEL [MODEL ...] [--predict RECIPE ...]` (MODEL: a model folder or a run's name the store keeps; loss against compute C = M x tokens trained, M as a series' plan counts it, L = a x C^-b, plus an irreducible loss from 4 points; the loss is the overall loss of the model's `evals/held-out-loss.json`, and a model without it is named and left out (`WPT_EVALUATE=1` or `wpt eval` makes it); RECIPE: a model recipe or `SERIES:SIZE`, predicted at its planned compute; docs/evaluation.md, "Scaling curve") | each model's `provenance.json` and `evals/held-out-loss.json`, from its folder or the store's `models/NAME`; the recipes | prints the points, the fit and the predictions |
 | build program-built tasks | `uv run scripts/build_tasks.py KIND SOURCE --count N [--seed S] [--select EXPRESSION]` (kinds `find-the-passage`, `evidence-removed`, `look-or-ask`, `commit-and-push`, `read-the-manual`; SOURCE an empty source a person made; docs/training.md, "The task builder") | admitted sources in the store | everything under `KIND/` in SOURCE, as its next patch |
-| lock an image of agentic tasks | `uv run wpt-agent lock-image NAME [--force]` (needs Docker; `--force` replaces an existing lock) | `data/images/NAME/Dockerfile`, the base image's registry, the dated package archive | `data/images/NAME/lock.json` and `licenses.json` (commit them) |
-| build an image of agentic tasks | `uv run wpt-agent build-image NAME` (needs Docker; before `wpt-train` with `finish-tasks` or `finish-tasks-with-less-writing`, and before `wpt-eval`'s agent measures) | `data/images/NAME/`, the base image's registry, the dated package archive | a local Docker image |
-| continue text | `uv run wpt-chat FOLDER` (`--kernels tilelang`, `triton` or `pytorch`, or `WPT_KERNELS`, names what computes the attention, and one that cannot work stops the command; `--about` prints its NOTICE; `--chat` talks to a model trained on conversations; `--scheduler-costs RECORD_FOLDER` reads the scheduler's pass times a run recorded on the same setup instead of measuring them) | the folder; with `--scheduler-costs`, the store | |
-| the sizes of a model series | `uv run wpt-dataset series NAME` (each size's shape, parameters without and with the vocabulary tables, compute, tokens, learning rate, batch, updates, warm-up and prefix, and its other runs `SERIES:SIZE:RUN`) | `data/recipes/series/NAME.json`, through the service layer | prints them |
-| the kinds of data files, their names, one file | `uv run wpt-dataset kinds`, `list KIND`, `show KIND NAME` | `data/`, through the service layer | prints them (version and problems on stderr) |
-| write a data file people write | `uv run wpt-dataset save KIND NAME FILE --version VERSION` (`''`: a new file; a save of a source that changes an entry's license, place or expected texts without deciding it anew sends that entry back to `under-review`) | the file | that file, after the rules of `check`; refused when it changed since VERSION |
-| a source's files, tags and git status | `uv run wpt-dataset files ID`, `tags ID PATH [TAG ...] --version V`, `remove ID PATH --patch NAME --version V`, `status` | the source | `source.json`, or the next patch |
-| a new empty source, without its texts | `uv run wpt-dataset new-source ORIGIN [ITEM] NAME --license L --attribution TEXT --by NAME [--tag TAG ...] [--chat PATH ...] [--format FORMAT=PATTERN ...]` (never `--file` or `--license-text`: the person writes the license text, then the files) | | `data/sources/ID/source.json`, `under-review`, its license text empty |
-| add a license text a source holds | `uv run wpt-dataset add-license-text ID --file PATH` or `--page ADDRESS` (the bytes at that file of its final tree, or that license page downloaded with it; nothing written when a license text holds them already) | the source in the store | `data/license-texts/<text id>/` (`license-text.json` under review, `license-text.txt`); prints the text id |
+| lock an image of agentic tasks | `uv run wpt agent lock-image NAME [--force]` (needs Docker; `--force` replaces an existing lock) | `data/images/NAME/Dockerfile`, the base image's registry, the dated package archive | `data/images/NAME/lock.json` and `licenses.json` (commit them) |
+| build an image of agentic tasks | `uv run wpt agent build-image NAME` (needs Docker; before `wpt train` with `finish-tasks` or `finish-tasks-with-less-writing`, and before `wpt eval`'s agent measures) | `data/images/NAME/`, the base image's registry, the dated package archive | a local Docker image |
+| continue text | `uv run wpt chat FOLDER` (`--kernels tilelang`, `triton` or `pytorch`, or `WPT_KERNELS`, names what computes the attention, and one that cannot work stops the command; `--about` prints its NOTICE; `--chat` talks to a model trained on conversations; `--scheduler-costs RECORD_FOLDER` reads the scheduler's pass times a run recorded on the same setup instead of measuring them) | the folder; with `--scheduler-costs`, the store | |
+| the sizes of a model series | `uv run wpt dataset series NAME` (each size's shape, parameters without and with the vocabulary tables, compute, tokens, learning rate, batch, updates, warm-up and prefix, and its other runs `SERIES:SIZE:RUN`) | `data/recipes/series/NAME.json`, through the service layer | prints them |
+| the kinds of data files, their names, one file | `uv run wpt dataset kinds`, `list KIND`, `show KIND NAME` | `data/`, through the service layer | prints them (version and problems on stderr) |
+| write a data file people write | `uv run wpt dataset save KIND NAME FILE --version VERSION` (`''`: a new file; a save of a source that changes an entry's license, place or expected texts without deciding it anew sends that entry back to `under-review`) | the file | that file, after the rules of `check`; refused when it changed since VERSION |
+| a source's files, tags and git status | `uv run wpt dataset files ID`, `tags ID PATH [TAG ...] --version V`, `remove ID PATH --patch NAME --version V`, `status` | the source | `source.json`, or the next patch |
+| a new empty source, without its texts | `uv run wpt dataset new-source ORIGIN [ITEM] NAME --license L --attribution TEXT --by NAME [--tag TAG ...] [--chat PATH ...] [--format FORMAT=PATTERN ...]` (never `--file` or `--license-text`: the person writes the license text, then the files) | | `data/sources/ID/source.json`, `under-review`, its license text empty |
+| add a license text a source holds | `uv run wpt dataset add-license-text ID --file PATH` or `--page ADDRESS` (the bytes at that file of its final tree, or that license page downloaded with it; nothing written when a license text holds them already) | the source in the store | `data/license-texts/<text id>/` (`license-text.json` under review, `license-text.txt`); prints the text id |
 | a person's texts (people only, never an AI assistant) | `read`, `write`, `conversation`, `save-conversation`, `task`, `save-task`, `save-rating`, `save-probe`, and `new-source --file` and `--license-text` (marked `*` in `--help`) | | |
-| conversation, task, rating and probe structure | `uv run wpt-dataset conversations ID PATH` (roles, drafts), `tasks ID` (image, limits, files), `ratings ID PATH` (the attempt each rates, who, when; never the verdict), `probes ID PATH` (how many patterns each holds; never the question nor the patterns) | the source | prints them |
-| edit every kind of data in a browser | `uv run wpt-web` (needs Bun), then http://127.0.0.1:8410/ (HTTP API described at `/api/openapi.json`; page "Ratings": people's pass or fail on the attempts of a `wpt-eval` run, a measure only, docs/evaluation.md; page "Probes": the questions of the `probes` test and the patterns that flag an alarming reply, a measure only; page "Sources": a source's description, its address and license entries included) | `data/`, a WPT model folder for drafts, the store's `wpt-eval` run records for ratings, `packages/wpt-web/ui` | data files through the service layer; `ui/node_modules`, `ui/dist` |
+| conversation, task, rating and probe structure | `uv run wpt dataset conversations ID PATH` (roles, drafts), `tasks ID` (image, limits, files), `ratings ID PATH` (the attempt each rates, who, when; never the verdict), `probes ID PATH` (how many patterns each holds; never the question nor the patterns) | the source | prints them |
+| edit every kind of data in a browser | `uv run wpt web` (needs Bun), then http://127.0.0.1:8410/ (HTTP API described at `/api/openapi.json`; page "Ratings": people's pass or fail on the attempts of a `wpt eval` run, a measure only, docs/evaluation.md; page "Probes": the questions of the `probes` test and the patterns that flag an alarming reply, a measure only; page "Sources": a source's description, its address and license entries included; page "Jobs": start a subcommand and follow what it prints and its run record) | `data/`, a WPT model folder for drafts, the store's `wpt eval` run records for ratings, `apps/wpt/ui` | data files through the service layer; `ui/node_modules`, `ui/dist` |
 
 Everything that changes a model comes from its model recipe
 (`data/recipes/models/NAME.json`: data, architecture, seed, the training
@@ -112,7 +119,7 @@ with its updates (`steps`) and its `batch_size`, which is global (over
 every process) (docs/training.md, "Stages"); the model's context is the
 last window length of the last step that reads text windows. Segments and split windows give
 the whole window's loss and gradients, so they are options, never part of
-the recipe (docs/training.md, "Long windows"). The `wpt-train` options only
+the recipe (docs/training.md, "Long windows"). The `wpt train` options only
 say how the hardware runs it, and each also comes from `WPT_<OPTION>` in the
 environment (`--micro-batch` -> `WPT_MICRO_BATCH`); `--help` on any command
 lists them. A crash restarts the processes on the gpu worker on their own, up to
@@ -122,15 +129,15 @@ with `--resume` continues from `FOLDER/checkpoint/` (or, with `--run NAME`,
 from the store, on any machine). Exit codes: 2 refused, 3 the run's record
 could not be written, 130 stopped.
 
-Every run of `wpt-dataset download`, `check --fetch`, `manifest`, `build`,
-`build-tokenizer`, `wpt-train`, `wpt-eval` and `wpt-manager` writes its record into its own store folder, `records/<UTC
+Every run of `wpt dataset download`, `check --fetch`, `manifest`, `build`,
+`build-tokenizer`, `wpt train`, `wpt eval` and `wpt manager` writes its record into its own store folder, `records/<UTC
 time>-<command>-<main id>-<random>/` (main id: the source id or `<count>-sources`, the recipe name, a short
 dataset id or a short weights hash): `start.json`, `events.jsonl` (spans, events,
 every printed line), `ids.json` (the ids read and written, which chain the
 runs together), `end.json`. With `OTEL_EXPORTER_OTLP_ENDPOINT` set
 (environment or `.env`), the same goes live to an OpenTelemetry backend
 (`deploy/otel-lgtm/compose.yaml`). A backend failure is one warning; a
-record the store refuses stops the command with exit code 3 (`wpt-train`
+record the store refuses stops the command with exit code 3 (`wpt train`
 first finishes its update and saves its checkpoint). A training step's
 environment records its own events and files through `data.telemetry`, and
 an evaluation through `context.telemetry`.
@@ -163,19 +170,21 @@ The license texts (`data/license-texts/<id>/`) are one of its kinds. Code elsewh
 bytes and versions, never for a path under `data/`; `packages/wpt-dataset/tests/test_data_access.py` fails
 otherwise, and an audit hook the layer sets refuses such an access at run
 time (`DataAccessRefused`), except from tests. Every write applies the
-rules of `wpt-dataset check`, refuses a stale save (one lock, across
+rules of `wpt dataset check`, refuses a stale save (one lock, across
 processes, holds the version check and the write), writes a symbolic
 link's target only inside the repository, writes U+2028, U+2029 and
 U+0085 as escapes, and keeps a JSON file's layout where its meaning did
 not change. A new kind of data gets both interfaces, a
-`wpt-dataset` command and a `wpt-web` route with its JSON Schema, both thin
-layers over the service layer.
+`wpt dataset` command and a `wpt web` route with its JSON Schema, both thin
+layers over the service layer. A new subcommand of `wpt` gets its job route
+in `apps/wpt/src/wpt/web/pages/jobs.py`, unless it reads or writes a
+person's text or reads what a person types.
 
 ## Patches and text written for WPT
 
-Never write a patch by hand. `wpt-dataset unpack` writes a source's final
+Never write a patch by hand. `wpt dataset unpack` writes a source's final
 files into a folder outside the repository; after the edit,
-`wpt-dataset patch` records the difference as the next patch and keeps it
+`wpt dataset patch` records the difference as the next patch and keeps it
 only if the source then gives exactly the folder's files and passes its
 license map.
 
@@ -191,19 +200,19 @@ build keeps the tagged conversations and tasks of its admitted sources,
 so a step reads them only from a dataset built after they were added. People's pass or fail on a model's measure
 attempts are `rating` files of such a source, one rating per line, a
 measure only that no training step reads (docs/evaluation.md, "People's
-ratings"). The questions the `probes` test of `wpt-eval` asks and the
+ratings"). The questions the `probes` test of `wpt eval` asks and the
 patterns that flag an alarming reply are `probe` files of such a source,
 one probe per line, a measure only too (docs/evaluation.md, "Probes").
 Committed text
 stays in the repository's history for good.
 
-As an AI assistant, use the `wpt-dataset` commands only for structure and
+As an AI assistant, use the `wpt dataset` commands only for structure and
 metadata, never to read or write people's texts (CONTRIBUTING.md, "Models
 and generated text"): never run `read`, `write`, `conversation`,
 `save-conversation`, `task`, `save-task`, `save-rating` or `save-probe`, and never call the matching
-`wpt-web` routes. You may run `new-source` without `--file` and
+`wpt web` routes. You may run `new-source` without `--file` and
 `--license-text`, never with them. People write
-their texts in `wpt-web` or with those commands themselves. An `assistant`
+their texts in `wpt web` or with those commands themselves. An `assistant`
 message may start as a WPT model's draft that a person edited or
 confirmed; its `metadata.draft` records it (docs/chat-format.md, "Model
 drafts").
@@ -223,7 +232,7 @@ company's model may enter the data, so:
   writing their text yourself.
 - Pass the result to the tools with shell commands: `unpack`, copy the
   formatted files into the folder, `patch`, then `scripts/check.py`;
-  never through the commands marked `*` in `wpt-dataset --help`.
+  never through the commands marked `*` in `wpt dataset --help`.
 - From a session with an AI assistant, keep only the person's own
   messages.
 
@@ -244,7 +253,7 @@ No data file carries a shape number: a step recognizes an old shape by its
 fields. To change a shape: update the schema file, add a `Step` (what it
 finds, how it rewrites) to the list of its kind in `wpt_dataset/migrate.py`,
 with an old shape that leaves a field difference to find, and run
-`wpt-dataset migrate`. A file `migrate` cannot rewrite, such as a source's `chat`
+`wpt dataset migrate`. A file `migrate` cannot rewrite, such as a source's `chat`
 file (upstream's bytes), goes through `migrate.upgrade` where it is read.
 Never edit data files by hand for a shape change. A field only a
 person can fill is left empty by the migration, and the check then names
@@ -252,7 +261,7 @@ each file to fill in.
 
 ## The model folder
 
-`wpt-train` writes `config.json`, the weights (each safetensors header
+`wpt train` writes `config.json`, the weights (each safetensors header
 carries `license`, `output_license`, `notice`, `tokenizer` and
 `tokenizer_sha256`), `tokenizer.json` (loaded only through
 `wpt_model.load_tokenizer`, which checks it against those headers),
@@ -260,12 +269,12 @@ carries `license`, `output_license`, `notice`, `tokenizer` and
 from), and `LICENSE`, `NOTICE` and `README.md` (the model card).
 `NOTICE` and `README.md` come from `wpt_model.notice.write_documents`, which
 reads only the folder's own files: change what they say there, never by
-editing a generated folder. `wpt-train` writes the folder beside its
+editing a generated folder. `wpt train` writes the folder beside its
 target and renames it into place; training into an existing folder replaces
 it as a whole (its `evals/`, checkpoint and any other file go with it).
 Every model folder holds `drafter/` (`config.json`, weights with the same
 header, `provenance.json`): the drafter for speculative decoding, which
-`wpt-train` trains at the end of every run against the final weights. A model and its drafter are one unit: `load_model` and
+`wpt train` trains at the end of every run against the final weights. A model and its drafter are one unit: `load_model` and
 `load_drafter` refuse a folder whose drafter is missing or names other
 weights' sha256 (`DrafterMismatch`), and nothing skips the check; a
 folder written by hand gets one through `save_drafter`, whose provenance
@@ -279,11 +288,11 @@ differ: change both together.
 
 ## Writing an evaluation
 
-One Python file, a built-in in `apps/wpt-eval/src/wpt_eval/evals/` or any
-path given to `wpt-eval`:
+One Python file, a built-in in `apps/wpt/src/wpt/eval/evals/` or any
+path given to `wpt eval`:
 
 ```python
-from wpt_eval import Result
+from wpt.eval import Result
 
 def run(context):  # context: model (on a gpu worker: config, generator,
                    # writer, greedy, losses), tokenizer, device, folder, provenance, store,
@@ -292,7 +301,7 @@ def run(context):  # context: model (on a gpu worker: config, generator,
                    # iterate, never assume a list; attempts(plain=False),
                    # the agent measures' shared run of attempts at the
                    # measure tasks, played once per command;
-                   # probe_rate (wpt-eval's --probe-rate); kind_by (--kind-by, default tag)
+                   # probe_rate (wpt eval's --probe-rate); kind_by (--kind-by, default tag)
     ...
     return Result(data={...}, text="the same findings, for people")
 ```
@@ -304,7 +313,7 @@ that the model card shows. Details: `docs/evaluation.md`.
 
 A strategy (how the hardware is used) is one Python file, a built-in in
 `packages/wpt-training/src/wpt_training/strategies/` or any path given to
-`wpt-train --strategy`:
+`wpt train --strategy`:
 
 ```python
 from wpt_training import Strategy
@@ -362,7 +371,7 @@ the whole dataset, and never the hardware options (`--stream` included). After t
 weights; the drafter is not a step. Details: `docs/training.md`, "Steps".
 
 The `finish-tasks` steps play their attempts through `wpt_agent.play` with
-the model alone (no drafter), as the agent measures of `wpt-eval` do, and
+the model alone (no drafter), as the agent measures of `wpt eval` do, and
 keep every attempt as a line of `<step>-attempts.jsonl` in the run's
 record folder: a chat-format conversation whose `metadata` identifies the
 attempt. A task's check prints named parts (`correct` and the rules it
@@ -380,7 +389,7 @@ from wpt_inference import Writer, next_message, sample_tokens
 
 for token in sample_tokens(model, ids, max_new_tokens=200):  # one text
     ...
-reply = next_message(model, tokenizer, conversation, max_new_tokens=512)  # the next chat message, as wpt-chat --chat
+reply = next_message(model, tokenizer, conversation, max_new_tokens=512)  # the next chat message, as wpt chat --chat
 writer = Writer(model, prompt, rows=8, stops=[...], routes=True)  # several attempts from one prompt
 written = writer.write({row: tokens_it_reads_first}, {row: most_tokens_it_may_write})
 ```
@@ -433,15 +442,18 @@ what the whole text gives (docs/model.md, "What a layer passes on").
 - Test isolation: a test never writes into the real store, cache or user
   settings; set `WPT_STORE`, `XDG_CACHE_HOME` and `LOCALAPPDATA` to the
   test's own folder when it touches them.
-- The application tests share their setup (a dataset built from a git
+- The app's tests share their setup (a dataset built from a git
   project, a tiny trained model) through the `built` and `trained`
-  fixtures in `apps/conftest.py`.
+  fixtures in `apps/wpt/tests/conftest.py`; the builders of throwaway
+  repositories, upstream projects and HTTP servers (the `kit` fixture)
+  that the tests of wpt-dataset and of `wpt dataset` use are in the root
+  `conftest.py`.
 - A new third-party package in `uv.lock` or `Cargo.lock` gets a row in
   `docs/licenses.md` (version and license, read from its metadata), and a
   changed version gets its row checked again.
 - The repository is public: never commit personal paths, machine names,
   credentials, or data that is not a pointer to a licensed source. A person's
   name holds no colon; the one machine name committed is
-  `machine:wpt-dataset`, the `by` of a license entry the service layer
+  `machine:wpt dataset`, the `by` of a license entry the service layer
   sent back to `under-review`, and `check` refuses an `admitted` or
   `refused` decision by a machine.

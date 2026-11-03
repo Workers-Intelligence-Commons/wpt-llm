@@ -7,7 +7,7 @@ sequence.Split). The processes' gradients add up to the whole window's,
 so a window too long for one GPU trains exactly as it would on one. They
 are started like ddp's:
 
-    wpt-train RECIPE DATASET_ID --strategy split --processes 2 ...
+    wpt train RECIPE DATASET_ID --strategy split --processes 2 ...
 
 Each window's length must split into slices of a multiple of 128 tokens.
 GPUs talk through NCCL (RCCL on AMD), the CPU through gloo.

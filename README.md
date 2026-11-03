@@ -55,12 +55,15 @@ through Docker Desktop.
 uv run scripts/setup.py                            # the PyTorch build for this machine's GPU
 echo "WPT_STORE=file://$HOME/wpt-store" >> .env    # where fetched and built data lives
 
-uv run wpt-dataset download                        # every admitted source, into the store
-uv run wpt-dataset build classics-test --stream    # convert, tokenize; prints a dataset id
-scripts/detach.sh uv run wpt-train classics-test <dataset id> --stream --out runs/first
-uv run wpt-eval runs/first                         # memorization and other tests, into the model card
-uv run wpt-chat runs/first                         # continue text with the model
+uv run wpt dataset download                        # every admitted source, into the store
+uv run wpt dataset build classics-test --stream    # convert, tokenize; prints a dataset id
+scripts/detach.sh uv run wpt train classics-test <dataset id> --stream --out runs/first
+uv run wpt eval runs/first                         # memorization and other tests, into the model card
+uv run wpt chat runs/first                         # continue text with the model
 ```
+
+Every job is a subcommand of one command, `wpt` (`uv run wpt --help`
+lists them, and `uv run wpt SUBCOMMAND --help` gives each one's options).
 
 `classics-test` is a small model recipe over the admitted public-domain
 books, enough to see every step work on one machine. A model recipe
@@ -72,13 +75,13 @@ hardware runs it.
 **Streaming** keeps disk use small at each step, for data larger than the
 disk:
 
-- `wpt-dataset download --stream` keeps no copy on the downloading
+- `wpt dataset download --stream` keeps no copy on the downloading
   machine of what an S3 store holds.
-- `wpt-dataset build --stream` takes each source from the store into a
+- `wpt dataset build --stream` takes each source from the store into a
   temporary folder, turns it into tokens and deletes the folder; the store
   keeps their tokens, not their Markdown. The dataset and its id are the
   same as without it.
-- `wpt-train --stream` reads the training shards a few at a time (8 by
+- `wpt train --stream` reads the training shards a few at a time (8 by
   default, about 2 GB, `--stream-shards`) instead of copying them all to
   disk first.
 
@@ -95,14 +98,14 @@ the same command with `--resume` continues.
 | move a run to another machine | `--run NAME`: the checkpoint lives in the store; `--run NAME --resume` there |
 | use several GPUs | `--strategy ddp --processes N`, on the gpu worker's machine |
 | train on another machine's GPUs | a gpu worker on each machine (`deploy/gpu-worker/compose.yaml`, with `compose.nvidia.yaml` or `compose.amd.yaml` for GPUs), their keys in `WPT_GPU_WORKERS` ([machines](docs/machines.md)) |
-| rent the GPUs | `WPT_GPU_WORKERS=N` and `WPT_RENTAL_GPUS` for `wpt-manager`, which rents N gpu workers through SkyPilot (as one cluster in one request), replaces a lost one and gives them back at the end ([machines](docs/machines.md)) |
-| download, build and train in one command | `docker compose up`, with `COMPOSE_FILE=deploy/manager/compose.yaml` and `WPT_RECIPE` set in `.env`; then `wpt-store copy-out NAME runs/NAME` ([machines](docs/machines.md)) |
-| build despite a broken source | `wpt-dataset build --skip-failed`: it is left out and listed (a source not downloaded always is) |
-| teach the model to chat | conversations tagged `answer-as-assistant` in a source, downloaded (`wpt-dataset download`) and the dataset built again, and a recipe whose `steps` add `answer-as-assistant` after `read-text`: `wpt-train RECIPE DATASET_ID --out runs/chat`, then `wpt-chat runs/chat --chat` ([training](docs/training.md)) |
-| teach the model to finish tasks as an agent | tasks tagged `finish-tasks` in a source, downloaded and the dataset built again, their images in `data/images/` locked with `wpt-agent lock-image NAME` and built with `wpt-agent build-image NAME`, and a recipe whose `steps` hold `finish-tasks` (needs Docker; [training](docs/training.md)) |
+| rent the GPUs | `WPT_GPU_WORKERS=N` and `WPT_RENTAL_GPUS` for `wpt manager`, which rents N gpu workers through SkyPilot (as one cluster in one request), replaces a lost one and gives them back at the end ([machines](docs/machines.md)) |
+| download, build and train in one command | `docker compose up`, with `COMPOSE_FILE=deploy/manager/compose.yaml` and `WPT_RECIPE` set in `.env`; then `wpt store copy-out NAME runs/NAME` ([machines](docs/machines.md)) |
+| build despite a broken source | `wpt dataset build --skip-failed`: it is left out and listed (a source not downloaded always is) |
+| teach the model to chat | conversations tagged `answer-as-assistant` in a source, downloaded (`wpt dataset download`) and the dataset built again, and a recipe whose `steps` add `answer-as-assistant` after `read-text`: `wpt train RECIPE DATASET_ID --out runs/chat`, then `wpt chat runs/chat --chat` ([training](docs/training.md)) |
+| teach the model to finish tasks as an agent | tasks tagged `finish-tasks` in a source, downloaded and the dataset built again, their images in `data/images/` locked with `wpt agent lock-image NAME` and built with `wpt agent build-image NAME`, and a recipe whose `steps` hold `finish-tasks` (needs Docker; [training](docs/training.md)) |
 | teach the agent to reach the same result with fewer tokens | `finish-tasks-with-less-writing` after `finish-tasks` in the recipe's `steps`: it trains on the same tasks ([training](docs/training.md)) |
 | train long windows on a small GPU | `--recompute`: layers run again in the backward pass instead of keeping their values |
-| write your own texts, conversations and tasks, and edit recipes, in a browser | `wpt-web` (needs Bun), then http://127.0.0.1:8410/; the same through `wpt-dataset` commands ([architecture](docs/architecture.md), "Two interfaces") |
+| write your own texts, conversations and tasks, and edit recipes, in a browser | `wpt web` (needs Bun), then http://127.0.0.1:8410/ (this machine only; another one reaches it through an SSH tunnel or Tailscale); the same through `wpt dataset` commands, and the page "Jobs" starts the other commands and follows what they print ([architecture](docs/architecture.md), "Two interfaces") |
 
 Every option also comes from the environment (`--micro-batch` is
 `WPT_MICRO_BATCH`), and `--help` lists them all. Details:

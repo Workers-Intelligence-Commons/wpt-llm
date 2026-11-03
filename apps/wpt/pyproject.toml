@@ -1,0 +1,21 @@
+[project]
+name = "wpt"
+version = "0.1.0"
+description = "The wpt command and its local web server: two controllers over the WPT libraries' services"
+license = "AGPL-3.0-or-later"
+requires-python = ">=3.14"
+# wpt-agent: the measure tasks' attempts and the images of agentic tasks; wpt-worker: the gpu worker that trains
+# and holds the model; jsonschema: the web server checks every request and answer against its route's schema;
+# torch comes from the root group that scripts/setup.py picks
+dependencies = ["wpt-tokenizer", "wpt-store", "wpt-telemetry", "wpt-model", "wpt-inference", "wpt-training", "wpt-utils",
+                "wpt-dataset", "wpt-agent", "wpt-worker", "numpy>=2", "jsonschema>=4.23"]
+
+[project.scripts]
+wpt = "wpt:main"
+
+[tool.uv.build-backend]
+module-name = "wpt"
+
+[build-system]
+requires = ["uv_build>=0.13.0,<0.14.0"]
+build-backend = "uv_build"

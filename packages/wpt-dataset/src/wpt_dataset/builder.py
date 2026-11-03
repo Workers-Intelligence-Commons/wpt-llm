@@ -370,7 +370,7 @@ def _documents(repo, store, expression, wanted, rng, log):
         if taken:
             found[source.id] = taken
     if absent:
-        log(f"{absent} admitted sources are not in the store and gave no task (wpt-dataset check --fetch fetches "
+        log(f"{absent} admitted sources are not in the store and gave no task (wpt dataset check --fetch fetches "
             f"them)")
     return found
 
@@ -550,7 +550,7 @@ def _commits(repo, store, count, rng, log) -> list:
             continue
         candidates += [(source, tree, path) for path in undoable(tree, store)]
     if absent:
-        log(f"{absent} git sources with a history are not in the store and gave no task (wpt-dataset check --fetch "
+        log(f"{absent} git sources with a history are not in the store and gave no task (wpt dataset check --fetch "
             f"fetches them)")
     if unordered:
         log(f"{unordered} git sources with a history have no {ORDER} in the store and gave no task (their history "

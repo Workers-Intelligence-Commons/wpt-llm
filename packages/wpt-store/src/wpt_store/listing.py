@@ -1,6 +1,6 @@
 """What the store database (database.py) says about the sources'
 downloads and the sessions that made them, read from it alone: the
-listing `wpt-store list` prints."""
+listing `wpt store list` prints."""
 
 import json
 from dataclasses import dataclass

@@ -81,7 +81,7 @@ def ssh_powershell(host, script):
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--host", help="SSH destination, e.g. user@machine (WPT_SYNC_HOST)")
-    parser.add_argument("--dest", help="folder on Windows, e.g. C:/Users/user/Projets/wpt-llm (WPT_SYNC_DEST)")
+    parser.add_argument("--dest", help="folder on Windows, e.g. C:/Users/user/Projets/wpt (WPT_SYNC_DEST)")
     args = parser.parse_args()
     settings = read_env_file(ENV_FILE) | os.environ
     args.host = args.host or settings.get("WPT_SYNC_HOST")

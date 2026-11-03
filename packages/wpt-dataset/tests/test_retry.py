@@ -17,7 +17,7 @@ def test_a_download_tried_again_inside_a_command_is_in_its_record(tmp_path, caps
             raise TimeoutError("the server did not answer")
         return b"the file"
 
-    with (Telemetry.start(store, "wpt-dataset-build", [], "d", env_file=tmp_path / ".env", environ={}) as telemetry,
+    with (Telemetry.start(store, "wpt dataset build", [], "d", env_file=tmp_path / ".env", environ={}) as telemetry,
           retry.reporting(telemetry.log)):
         assert retry.call(download, "https://example.org/book.txt", sleep=lambda _: None) == b"the file"
 

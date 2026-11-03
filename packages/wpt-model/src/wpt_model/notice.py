@@ -34,7 +34,7 @@ from wpt_utils.programs import code_name
 
 LICENSE = "AGPL-3.0-or-later"
 OUTPUT_LICENSE = "CC0-1.0"
-REPOSITORY = "https://github.com/Workers-Intelligence-Commons/wpt-llm"
+REPOSITORY = "https://github.com/Workers-Intelligence-Commons/wpt"
 NOTICE_NAME, CARD_NAME, LICENSE_NAME, EVALS_NAME, CREDITS_NAME = "NOTICE", "README.md", "LICENSE", "evals", "CREDITS"
 DRAFTER_NAME = "drafter"  # the drafter's folder (drafter.py)
 WEIGHT_METADATA = {"license": LICENSE, "output_license": OUTPUT_LICENSE,
@@ -153,7 +153,7 @@ def card(config, provenance, evals, drafter=None) -> str:
         "## Evaluations", "",
     ]
     if not evals:
-        lines += ["None yet: run `wpt-eval <model folder>`.", ""]
+        lines += ["None yet: run `wpt eval <model folder>`.", ""]
     for result in evals:
         lines += [f"### {result['name']}", "", result["text"].rstrip(), "",
                   f"`{result['file']}` (sha256 `{result['file_sha256'][:12]}`), {_eval_code(result)}, "
@@ -163,9 +163,9 @@ def card(config, provenance, evals, drafter=None) -> str:
 
 def _eval_code(result) -> str:
     """The code a result was measured with: code() of wpt_utils.programs
-    in a result that names its code, wpt-eval's package version in an
+    in a result that names its code, wpt eval's package version in an
     older one that names it."""
-    return f"code {code_name(result['code'])}" if "code" in result else f"wpt-eval {result['wpt_eval']}"
+    return f"code {code_name(result['code'])}" if "code" in result else f"wpt eval {result['wpt_eval']}"
 
 
 def learned_from(provenance) -> dict:

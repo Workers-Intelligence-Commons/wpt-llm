@@ -62,13 +62,13 @@ person then edits or confirms, and its metadata records that
   written as tokens.
 
 A conversation without any `metadata`, or whose messages hold none, stays
-valid. `wpt-dataset migrate` rewrites the repository's own files, and a
+valid. `wpt dataset migrate` rewrites the repository's own files, and a
 source's `chat` file, whose bytes may be upstream's, is brought to the
 current shape as it is read (`wpt_dataset.migrate.upgrade`).
 
 ## Model drafts
 
-In the conversation editor of `wpt-web`, a person can ask a WPT model
+In the conversation editor of `wpt web`, a person can ask a WPT model
 folder for the next `assistant` message. The reply appears as a draft that
 the person edits or confirms as it is; only then does it join the
 conversation. The message's
@@ -82,8 +82,8 @@ conversation. The message's
   outside ASCII kept as they are (`wpt_dataset.conversations.content_sha256`).
 - `edited`: whether the person changed it, which is exactly whether the
   sha256 of the message's `content` now differs from `sha256`. The
-  service layer (`Repo.save_conversation`, behind `wpt-web` and
-  `wpt-dataset save-conversation`) computes it when the conversation is
+  service layer (`Repo.save_conversation`, behind `wpt web` and
+  `wpt dataset save-conversation`) computes it when the conversation is
   saved, whatever the editor sent.
 
 In `sha256`, a whole number is written as an integer (`2.0` as `2`), as a
@@ -91,12 +91,12 @@ browser writes it back, so a draft the editor sends back unchanged still
 gives its sha256.
 
 `metadata.draft` is a claim the client makes, which the server does not
-check: neither `wpt-web` nor `wpt-dataset save-conversation` checks that a
+check: neither `wpt web` nor `wpt dataset save-conversation` checks that a
 WPT model wrote the draft, nor its `model`, `weights` or `sha256`. They set
 only `edited`, from whether the message's `content` still gives the
 `sha256` the client sent.
 
-`wpt-dataset check` refuses a `draft` on any message but an `assistant`
+`wpt dataset check` refuses a `draft` on any message but an `assistant`
 one, and an `edited` that does not match the content (a chat file made
 another way, such as with `unpack` and `patch`). An unedited
 confirmed draft is allowed: confirming it is the person's choice that the
@@ -105,7 +105,7 @@ the start.
 
 ## Writing a chat file
 
-The conversation editor and `wpt-dataset save-conversation` write only in a
+The conversation editor and `wpt dataset save-conversation` write only in a
 chat file of an `empty` source, text written for WPT; an upstream source's
 chat file stays upstream's. Each line is the conversation's JSON on one
 line, with U+2028, U+2029 and U+0085 always written as `\u2028`, `\u2029`
@@ -179,7 +179,7 @@ measures").
 ## Files
 
 Conversations are files of a source, in the `chat` format: JSON Lines, one
-conversation per line. `wpt-dataset check --fetch` checks every line
+conversation per line. `wpt dataset check --fetch` checks every line
 against `packages/wpt-dataset/src/wpt_dataset/schemas/conversation.schema.json`
 (only an `assistant` message holds `thinking` or `tool_call` blocks, only a
 `tool` message holds `tool_result` blocks) and checks that each

@@ -64,7 +64,7 @@ def exercise_records(store, reopen):
     assert store.read_record("run-1", "events.jsonl") == b"one\ntwo\nthree\n"
     assert store.read_record("run-1", "start.json") == b'{"command": "x"}\n'
 
-    # wpt-train's launcher and its training process add to one file in turn;
+    # wpt train's launcher and its training process add to one file in turn;
     # reading gives their lines in the order they were added, even when each
     # process sends its lines later (an S3 store sends them in groups)
     launcher, child = reopen(), reopen()

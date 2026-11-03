@@ -103,7 +103,7 @@ def upstream_tree(source: Source, store) -> dict[str, Entry]:
 
 
 def _not_downloaded(source: Source, store) -> NotDownloaded:
-    return NotDownloaded(f"{source.id}: its upstream files are not in {store}; `wpt-dataset download {source.id}` "
+    return NotDownloaded(f"{source.id}: its upstream files are not in {store}; `wpt dataset download {source.id}` "
                          f"fetches them")
 
 

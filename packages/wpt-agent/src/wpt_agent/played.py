@@ -113,7 +113,7 @@ def play(task, offers, keep, *, tokenizer, built, sampling: Sampling, check_seco
     given, makes the writers in place of wpt_inference.Writer on model and
     generator. Returns what keep returned, in order."""
     if writer is None:
-        from wpt_inference import Writer  # PyTorch is loaded only by what writes: wpt-agent's own commands need none
+        from wpt_inference import Writer  # PyTorch is loaded only by what writes: wpt agent's own commands need none
 
         def writer(prompt, rows, **settings):
             return Writer(model, prompt, rows, generator=generator, **settings)

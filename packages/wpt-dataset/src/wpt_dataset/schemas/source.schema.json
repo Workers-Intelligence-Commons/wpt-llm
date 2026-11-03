@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/Workers-Intelligence-Commons/wpt-llm/schemas/source.schema.json",
+  "$id": "https://github.com/Workers-Intelligence-Commons/wpt/schemas/source.schema.json",
   "title": "WPT source description (data/sources/<id>/source.json)",
   "type": "object",
   "additionalProperties": false,
@@ -229,7 +229,7 @@
     },
     "cuts": {
       "type": "array",
-      "description": "erasure cuts (docs/erasure.md), applied in this order before the patches; made with `wpt-dataset cut`, which needs the store's cut key",
+      "description": "erasure cuts (docs/erasure.md), applied in this order before the patches; made with `wpt dataset cut`, which needs the store's cut key",
       "items": {
         "type": "object",
         "additionalProperties": false,

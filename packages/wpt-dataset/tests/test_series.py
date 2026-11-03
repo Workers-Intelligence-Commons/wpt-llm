@@ -106,7 +106,7 @@ def test_each_size_is_a_model_recipe_and_every_size_shares_the_data_of_the_large
     for plan in plans:
         recipe = repo.model_recipe(f"{SERIES}:{plan.size}")
         validate(recipe, "model", f"{SERIES}:{plan.size}")
-        assert recipe["data"] == data  # one dataset: `wpt-dataset build` of any size finds the same one
+        assert recipe["data"] == data  # one dataset: `wpt dataset build` of any size finds the same one
         assert recipe["model"] == plan.model and recipe["seed"] == ladder["seed"]
         assert recipe["drafter"] == ladder["drafter"]
         [step] = recipe["steps"]

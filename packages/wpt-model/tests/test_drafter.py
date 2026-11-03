@@ -72,14 +72,14 @@ def test_the_model_card_names_the_drafter_and_its_notice_adds_no_source(tmp_path
     provenance["sources"] = {"example-talks": source}
     (tmp_path / "provenance.json").write_text(json.dumps(provenance))
     save_drafter(Drafter(config, DrafterConfig.for_model(config)), tmp_path, "test version 1", "0" * 64, provenance={
-        "trained_by": {"command": "wpt-train", "recipe_name": "chat"}, "dataset": "d" * 64,
+        "trained_by": {"command": "wpt train", "recipe_name": "chat"}, "dataset": "d" * 64,
         "target": {"weights": {"model.safetensors": "e" * 64}},
         "acceptance": {"verified": 10, "accepted": 4, "rounds": 6, "tokens_per_round": 10 / 6},
         "sources": {"example-other": {**source, "address": "https://example.org/other"}}})  # never read
     texts = documents(tmp_path)
     assert "example-talks" in texts["NOTICE"] and "example-other" not in texts["NOTICE"]
     card = texts["README.md"]
-    assert "## Drafter" in card and "`wpt-train`, recipe `chat`" in card and "`dddddddddddd`" in card
+    assert "## Drafter" in card and "`wpt train`, recipe `chat`" in card and "`dddddddddddd`" in card
     assert "`model.safetensors` (sha256 `eeeeeeeeeeee`)" in card and "4 of 10 drafts kept" in card
     assert "example-other" not in card
 

@@ -3,7 +3,7 @@
 A training run has three roles, which may share one machine or each have
 their own:
 
-- the **wpt manager**: the machine that runs `wpt-train` (or `wpt-manager`,
+- the **wpt manager**: the machine that runs `wpt train` (or `wpt manager`,
   below). It holds the store and its credentials, the tokenizer, the run's
   record, the checkpoint and the model folder, and it plays every agentic
   attempt;
@@ -13,8 +13,8 @@ their own:
 
 ## One code path
 
-`wpt-train` always trains through gpu workers. `WPT_GPU_WORKERS` lists
-their keys, one gpu worker per machine. With none, `wpt-train` starts a
+`wpt train` always trains through gpu workers. `WPT_GPU_WORKERS` lists
+their keys, one gpu worker per machine. With none, `wpt train` starts a
 local worker on its own machine (`python -m wpt_worker --local`), reached
 over the same link: the training runs the same way on one machine and on
 several. A local worker ends with its manager, and its folder is
@@ -190,16 +190,16 @@ about 90 seconds, through TCP's own checks: its link breaks, and the
 worker is lost.
 
 A crashed process restarts the job's processes on one machine only. On
-several machines, a crash ends the job on every worker, and `wpt-train`
+several machines, a crash ends the job on every worker, and `wpt train`
 exits with code 5. The manager resumes the run from the last checkpoint
 like a lost worker ("A lost gpu worker").
 
 ## Rented gpu workers
 
-`wpt-manager` rents its gpu workers itself when `WPT_GPU_WORKERS` is a
+`wpt manager` rents its gpu workers itself when `WPT_GPU_WORKERS` is a
 number: how many to rent. A provider is one small interface of ours, with
 three operations: rent machines running gpu workers, give their addresses,
-stop them (`apps/wpt-manager/src/wpt_manager/rental.py`). SkyPilot
+stop them (`apps/wpt/src/wpt/manager/rental.py`). SkyPilot
 (Apache-2.0, its `sky` command, in the manager's image) is one
 implementation, from `deploy/gpu-worker/skypilot.yaml`. It starts the
 worker with SkyPilot's own file mounts, which copy `start.sh` and
@@ -254,7 +254,7 @@ its outcome: each one is tried, and each failed try is recorded
 A rental that could not be stopped stays named in its run's file. The manager
 tries to stop every rental still named in any run file at each start and,
 until none is left, every 300 seconds, each try a record of its own
-(command `wpt-manager`, name `rentals`). It stays up trying, since a
+(command `wpt manager`, name `rentals`). It stays up trying, since a
 machine costs money while it runs.
 
 One manager at a time runs a run: it holds the run's lock in
@@ -264,7 +264,7 @@ a run whose lock is held, and refuses to start it (exit code 2).
 
 ## A lost gpu worker
 
-`wpt-train` exits with code 4 when a gpu worker is lost: it cannot be
+`wpt train` exits with code 4 when a gpu worker is lost: it cannot be
 reached, refuses the link, or its link breaks. Its record names it
 (`gpu_worker.lost`). The manager then looks at each worker: one that
 answers on its port with its pinned certificate is there. Each worker it
@@ -285,7 +285,7 @@ run stops, and the message says to start it again.
 
 When it starts, the manager first goes on with each of its own runs that
 did not end: no other manager holds its lock, there is no model under the
-run's name in the store, and the run's last `wpt-manager` record there has
+run's name in the store, and the run's last `wpt manager` record there has
 no end. A run's file is marked ended once the run ends, whatever its
 outcome, and the manager reads only the others. It reconnects to that
 run's workers with the keys its disk holds; a rented worker that is gone
@@ -303,7 +303,7 @@ the store yet, and otherwise makes a new name.
 
 ## Evaluation
 
-With `WPT_EVALUATE=1`, or by hand with `wpt-eval FOLDER`, the evaluation
+With `WPT_EVALUATE=1`, or by hand with `wpt eval FOLDER`, the evaluation
 runs its model on a gpu worker through the link. The tests stay on the
 manager, which holds the tokenizer, the store and the sandboxes. A job
 (`wpt_worker.evaluation`) loads the model folder's weights on the worker,
@@ -313,12 +313,12 @@ model: a seeded generator, writers that write until a stop token or a limit
 memorization measure, and the next-token losses of windows of tokens for
 the held-out-loss measure. The tests cannot tell where the model is.
 
-`wpt-eval` uses the first key in `WPT_GPU_WORKERS` (the manager passes it
+`wpt eval` uses the first key in `WPT_GPU_WORKERS` (the manager passes it
 the rentals it still holds, before it gives them back), else a local
 worker. Its `--kernels` (`WPT_KERNELS`) goes to the job in the job's spec;
 the job decides the attention's form before it loads the model, and a form
 that cannot work on the worker ends the job with exit code 2 and the
-reason on the manager's standard error, which refuses the evaluation. A number in `WPT_GPU_WORKERS` is refused: `wpt-eval` rents nothing.
+reason on the manager's standard error, which refuses the evaluation. A number in `WPT_GPU_WORKERS` is refused: `wpt eval` rents nothing.
 
 ## Sandboxes
 
@@ -330,17 +330,17 @@ through a short-lived container with no network
 
 ## The manager's Compose file
 
-`wpt-manager` runs the whole pipeline as one command, each step its own
+`wpt manager` runs the whole pipeline as one command, each step its own
 command:
 
-1. `wpt-dataset download`: every admitted source into the store;
-2. `wpt-dataset build RECIPE`: the dataset, then `wpt-agent build-image
+1. `wpt dataset download`: every admitted source into the store;
+2. `wpt dataset build RECIPE`: the dataset, then `wpt agent build-image
    NAME` for each image the dataset's tasks name, where `DOCKER_HOST`
    reaches Docker (nothing without tasks);
-3. `wpt-train RECIPE DATASET_ID --run NAME --resume`: the training, through
+3. `wpt train RECIPE DATASET_ID --run NAME --resume`: the training, through
    the run's gpu workers (rented first when `WPT_GPU_WORKERS` is a
    number), its checkpoint in the store under the run's name;
-4. `wpt-eval`, only with `WPT_EVALUATE=1`;
+4. `wpt eval`, only with `WPT_EVALUATE=1`;
 5. the model folder into the store, under the run's name; the manager's
    own copy of the folder is then removed.
 
@@ -358,7 +358,7 @@ The settings file is one file, the `.env` at the repository's root.
 Compose reads it, with `COMPOSE_FILE=deploy/manager/compose.yaml` in it
 (or `-f deploy/manager/compose.yaml --env-file .env` on the command line).
 The manager reads the same file again inside the container for what its
-environment leaves unset or empty, so `wpt-train`'s options (such as
+environment leaves unset or empty, so `wpt train`'s options (such as
 `WPT_STRATEGY` and `WPT_PROCESSES`) come from there. Where a setting names
 a path of the host and the container has its own, the container's value
 wins (`WPT_STORE`, the manager's folders, `HOME`, `DOCKER_HOST`).
@@ -386,7 +386,7 @@ The file includes `deploy/otel-lgtm/compose.yaml`, so the live view starts
 with it ([observability.md](observability.md), "The live view") and
 `WPT_GRAFANA_PASSWORD` is required too. It mounts the checkout at `/repo`:
 the manager runs that code and sends it to its gpu workers. The volume
-`wpt-manager` holds the manager's own files: its runs' workers
+`wpt manager` holds the manager's own files: its runs' workers
 (`WPT_MANAGER_STATE`), the model folders before they go into the store,
 the libraries, and its `HOME`, where SkyPilot keeps its clusters and keys.
 
@@ -398,11 +398,11 @@ each file's sha256 and size. At the end, the manager prints the line that
 copies it out:
 
 ```sh
-uv run wpt-store copy-out NAME runs/NAME
+uv run wpt store copy-out NAME runs/NAME
 ```
 
-`wpt-store copy-out` writes the folder into a new folder, beside it first,
+`wpt store copy-out` writes the folder into a new folder, beside it first,
 then renames it into place, and checks every file against its sha256 and
-size: a file that differs stops it and leaves no folder. `wpt-store list`
+size: a file that differs stops it and leaves no folder. `wpt store list`
 lists what the store database says: every session and each source's last
 outcome and download.

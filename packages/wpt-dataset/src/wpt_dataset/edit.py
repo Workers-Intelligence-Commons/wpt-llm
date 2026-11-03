@@ -15,7 +15,7 @@
 
 Patches made this way are always well formed. The service layer checks the
 result: the source with the new patch must give exactly the folder's files
-and pass the rules of `wpt-dataset check --fetch`. Otherwise the patch file
+and pass the rules of `wpt dataset check --fetch`. Otherwise the patch file
 is removed again and the error raised (a patch that applies to the wrong
 result is PatchFailed).
 
@@ -61,7 +61,7 @@ def write_patch(repo: Repo, source: Source, store, folder, name: str) -> str:
     """Record the difference between the source's final files and folder as
     its next patch, through the service layer (Repo.add_patch, which keeps
     it only if the source then gives exactly the folder's files and passes
-    the rules of `wpt-dataset check --fetch`). Returns the patch's place in
+    the rules of `wpt dataset check --fetch`). Returns the patch's place in
     the repository."""
     folder = _outside(repo, folder)
     if not PATCH.fullmatch(f"0001-{name}.patch"):

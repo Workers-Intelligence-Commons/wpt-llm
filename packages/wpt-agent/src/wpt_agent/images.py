@@ -140,7 +140,7 @@ def lock(root, name, *, force=False, log=print) -> str:
     repo.write_generated("image-lock", name, {"base": base, "snapshot": snapshot, "packages": installed})
     repo.write_generated("image-licenses", name, {"packages": licenses})
     log(f"{len(installed)} packages locked in {locked}, their licenses in {licensed}; "
-        f"build the image with `wpt-agent build-image {name}`")
+        f"build the image with `wpt agent build-image {name}`")
     return locked
 
 
@@ -154,7 +154,7 @@ def build(root, name, log=print) -> str:
     except DatasetError as error:
         raise ImageError(str(error)) from None
     if pinned is None:
-        raise ImageError(f"{locked} does not exist: run `wpt-agent lock-image {name}` and commit it")
+        raise ImageError(f"{locked} does not exist: run `wpt agent lock-image {name}` and commit it")
     if docker_has(wanted):
         log(f"{wanted} is built already")
         return wanted
@@ -177,7 +177,7 @@ def built(root, name) -> str:
     wanted = tag(root, name)
     if not docker_has(wanted):
         raise ImageError(f"image {name!r} is not built on this machine for its current files: "
-                         f"run `uv run wpt-agent build-image {name}`")
+                         f"run `uv run wpt agent build-image {name}`")
     return wanted
 
 
