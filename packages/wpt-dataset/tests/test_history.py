@@ -4,7 +4,6 @@ import tempfile
 import pytest
 
 from wpt_dataset import manifest
-from wpt_dataset.build import gather
 from wpt_dataset.edit import unpack, write_patch
 from wpt_dataset.errors import EditError, PatchFailed
 from wpt_dataset.markdown import format_of
@@ -40,7 +39,7 @@ def test_a_git_history_gives_one_patch_per_commit_since_the_license_limited_to_k
                     {"format": "code", "language": "python", "paths": ["**/*.py"]},
                     {"format": "text", "paths": ["LICENSE"]}]})
 
-    documents, _, _ = gather(repo, store, log=lambda _: None)
+    documents, _ = kit.converted(repo, store)
 
     ids = sorted(d.id for d in documents)
     # the order file stays in the stored tree but is not a document
@@ -48,7 +47,7 @@ def test_a_git_history_gives_one_patch_per_commit_since_the_license_limited_to_k
     assert ids == sorted([f"{sid}/.git/history/{since}", f"{sid}/.git/history/{change}", f"{sid}/LICENSE",
                           f"{sid}/main.py"])
     assert before not in " ".join(ids) and vendored not in " ".join(ids)
-    patch = store.get_bytes(next(d.sha256 for d in documents if d.id.endswith(change))).decode()
+    patch = next(d.markdown for d in documents if d.id.endswith(change)).decode()
     assert f"From {change} " in patch and "From: T <t@example.org>" in patch and "Subject: [PATCH] print two" in patch
     assert "-print(1)\n+print(2)" in patch and "vendor/lib.py" not in patch
 
@@ -403,5 +402,5 @@ def test_only_format_patterns_starting_with_the_history_folder_match_its_files(k
         expected = ("code", "patch") if path.startswith(manifest.HISTORY) else ("text", None)
         found = format_of(source, path)  # no FormatMapError
         assert (found["format"], found.get("language")) == expected
-    documents, _, _ = gather(repo, store, log=lambda _: None)
+    documents, _ = kit.converted(repo, store)
     assert f"{sid}/x/order" in {d.id for d in documents} and f"{sid}/{manifest.ORDER}" not in {d.id for d in documents}

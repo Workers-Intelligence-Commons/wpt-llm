@@ -76,7 +76,7 @@ from wpt_inference.drafting import settings as drafter_settings
 from wpt_model import PARTS, WPT, ModelConfig
 from wpt_model.sparse import KernelUnavailable, kernels
 from wpt_store import StoreError
-from wpt_store.shards import documents
+from wpt_store.shards import documents, prefix_shards
 from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry
 from wpt_training import (SENT, WINDOWS, Checkpoint, Data, FolderCheckpoint, Interrupted, Limit, Options, PluginError,
                           SettingsMismatch, StepFailed, StopSignals, draw_numbers, load_state, load_step, load_strategy,
@@ -481,6 +481,15 @@ def _reached(trained) -> dict:
             "skipped": trained.skipped}  # updates with nothing to learn
 
 
+def drafter_shards(spec, steps) -> list:
+    """The training shards the drafter draws its prompts from: those the
+    run's text steps read, never one past the longest prefix they read
+    (wpt_store.shards.prefix_shards). A step that reads every training
+    token, or a run with no text step, leaves every shard."""
+    prefixes = [step.settings["prefix_tokens"] for step in steps if step.reads == WINDOWS]
+    return prefix_shards(spec["record"]["shards"], max(prefixes) if prefixes and all(prefixes) else None)
+
+
 def _finish(spec, link, store, work, model, model_config, drafter_config, drafting, setup, plan, steps, strategy,
             telemetry):
     """The drafter, the scheduler's pass times and a sample, sent to the manager."""
@@ -490,7 +499,7 @@ def _finish(spec, link, store, work, model, model_config, drafter_config, drafti
     stops = (end, im_end) if turns else (end,)
     try:
         with telemetry.span("drafter", **asdict(drafter_config), stops=list(stops)):
-            drafter = train_drafter(model, (tokens for _, _, tokens in documents(store, spec["record"]["shards"])),
+            drafter = train_drafter(model, (tokens for _, _, tokens in documents(store, drafter_shards(spec, steps))),
                                     drafter_config, drafting, end=end, stops=stops, device=strategy.device,
                                     telemetry=telemetry)
     except DrafterFailed as error:

@@ -11,8 +11,8 @@ is how a run is started and looked after.
 ## Before the run
 
 - The dataset is built from the model recipe: `uv run wpt dataset build
-  NAME` prints its id. A first build of a tokenizer recipe writes its lock
-  (`data/recipes/tokenizers/NAME.lock.json`): commit it.
+  NAME` prints its id. The first build that names a vocabulary with no lock
+  writes its lock (`data/recipes/tokenizers/NAME.lock.json`): commit it.
 - PyTorch is installed for this machine's GPU: a plain `uv sync` removes
   it, `uv run scripts/setup.py` puts it back.
 - The model folder (`--out`, under `runs/`, which git ignores) is new, or

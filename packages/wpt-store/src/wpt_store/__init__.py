@@ -73,6 +73,7 @@ import collections
 import contextlib
 import copy
 import hashlib
+import itertools
 import os
 import re
 import secrets
@@ -100,6 +101,7 @@ PACKED = ".zst"  # the end of a key whose file is compressed
 OPEN = ".open"  # the end of the key of the plain file a local store adds a record file's lines to while it runs
 TAIL = 64 << 10  # bytes read at a compressed file's end for its seek table: the whole table up to 8,000 frames
 DOWNLOAD = 64 << 20  # bytes of one file fetched in one request, when a whole file is copied from the store
+RUN_BYTES = 16 << 20  # original bytes of frames one request of fetch_files takes, past which the next run starts
 FRAMES_KEPT = 64  # decompressed frames kept in memory for range reads (about 64 MB)
 READ_AHEAD = 16  # frames one range read of a kind that reads in place (a folder) fetches at most when it needs some
 # that are not kept: about 16 MB per request, fewer than FRAMES_KEPT so that all of them stay kept
@@ -366,8 +368,12 @@ class Store:
         return Session(self, folder, command, commit, dirty, keep_local=not stream)
 
     def read_file(self, placed: Placed) -> bytes:
-        """One file a session stored, checked against its sha256.
-        MissingObject when its bundle is not in the store (or not sealed)."""
+        """One file a session stored, checked against its sha256: from the
+        copy fetch_files made, when there is one. MissingObject when its
+        bundle is not in the store (or not sealed)."""
+        local = self.cache / placed.sha256[:2] / placed.sha256
+        if self.copies_only and local.is_file():
+            return local.read_bytes()
         key, kind = self._bundle(placed)
         with self._reading(f"bundle {placed.bundle}", key):
             data = self._range(key, placed.start, placed.length, kind)
@@ -375,6 +381,60 @@ class Store:
             raise CorruptObject(f"bundle {placed.bundle}: the {placed.length} bytes at {placed.start} "
                                 f"do not match their sha256 {placed.sha256}")
         return data
+
+    def fetch_files(self, places: list[Placed]):
+        """In a view of copies_in, a local copy of each of these files of a
+        session, each checked against its sha256, for read_file to read:
+        only the frames that hold them are fetched, and the frames next to
+        each other go in one request, up to REQUESTS requests at once. A
+        frame is fetched once, however many files it holds, or once more
+        where two runs of frames meet (_runs). Each request's frames are let
+        go once its files are copied, so memory holds REQUESTS runs at most,
+        however many frames the files touch."""
+        for bundle, placed in itertools.groupby(sorted(places, key=lambda p: p.bundle), key=lambda p: p.bundle):
+            placed = list(placed)
+            key, kind = self._bundle(placed[0])
+            with self._reading(f"bundle {bundle}", key):
+                if key.endswith(PACKED):
+                    self._fetch_frames(key, kind, placed)
+                else:
+                    for file in placed:
+                        self._copy_fetched(file, self._range(key, file.start, file.length, kind))
+
+    def _copy_fetched(self, file: Placed, data: bytes):
+        """Keep one fetched file's bytes as its local copy, once they match
+        its sha256."""
+        if len(data) != file.length or hashlib.sha256(data).hexdigest() != file.sha256:
+            raise CorruptObject(f"bundle {file.bundle}: the {file.length} bytes at {file.start} do not match "
+                                f"their sha256 {file.sha256}")
+        local = self.cache / file.sha256[:2] / file.sha256
+        local.parent.mkdir(parents=True, exist_ok=True)
+        fd, tmp = tempfile.mkstemp(dir=local.parent, prefix=".partial-")
+        with os.fdopen(fd, "wb") as out:
+            out.write(data)
+        _replace_object(tmp, local)
+
+    def _fetch_frames(self, key, kind, places):
+        """Copy these files out of a compressed bundle (fetch_files), one
+        run of frames at a time on each of REQUESTS threads."""
+        table = self._table(key, kind)
+        frameless = [file for file in places if not table.frames(file.start, file.length)]
+        for file in frameless:
+            self._copy_fetched(file, b"")
+
+        def copied(run):
+            frames, files = run
+            at = table.stored[frames.start]
+            data = kind.read(key, at, table.stored[frames.stop] - at)[0]
+            held = b"".join(self._frame(key, table, frame, data[table.stored[frame] - at:table.stored[frame + 1] - at])
+                            for frame in frames)
+            del data
+            for file in files:
+                start = file.start - table.original[frames.start]
+                self._copy_fetched(file, held[start:start + file.length])
+
+        with ThreadPoolExecutor(REQUESTS) as pool:
+            list(pool.map(copied, _runs(table, [file for file in places if file not in frameless])))
 
     def file_path(self, placed: Placed) -> Path:
         """A local file holding one file a session stored, checked against
@@ -747,6 +807,12 @@ class Store:
             raise MissingObject(f"no record file {folder}/{name} in the store")
         return data
 
+    def record_reader(self, folder: str, name: str) -> "RecordReader":
+        """A reader of the lines added to a record file, for a run that is
+        still going: each read() gives only what is new since the last."""
+        _check_record(folder, name)
+        return RecordReader(self, folder, name)
+
     def record_files(self, folder: str) -> list[str]:
         """The names of a record folder's files, sorted; [] for no folder."""
         _check_record(folder)
@@ -833,6 +899,16 @@ class Store:
             plain = None
         if not parts and plain is None:
             return self._record_object(folder, name)
+        joined = self._joined_parts(parts)
+        if plain:
+            if joined and not joined[-1].endswith(b"\n"):
+                joined.append(b"\n")
+            joined.append(plain)
+        return b"".join(joined)
+
+    def _joined_parts(self, parts):
+        """The additions of these parts of a record file, in the order they
+        were made, as a list of bytes."""
         additions = []
         for key in parts:
             writer = key.rsplit("/", 1)[1].split("-")[1]
@@ -859,17 +935,38 @@ class Store:
                 joined.append(b"\n")
             joined.append(data)
             last_writer = writer if data else last_writer
-        if plain:
-            if joined and not joined[-1].endswith(b"\n"):
-                joined.append(b"\n")
-            joined.append(plain)
-        return b"".join(joined)
+        return joined
 
     def _raw_record_files(self, folder):
         return set(self._record_files_under(f"records/{folder}/"))
 
     def _raw_record_folders(self):
         return {name for name, is_folder in self._record_files_under("records/").items() if is_folder}
+
+
+class RecordReader:
+    """The new lines of one record file (Store.record_reader): each read()
+    fetches only the parts it has not read yet and, for a local store's run
+    that is still going, the end of its plain file. When the run ends, that
+    file becomes a part that repeats what was read of it, which is left out."""
+
+    def __init__(self, store, folder, name):
+        self.store, self.seen, self.plain = store, set(), 0
+        self.prefix, self.open_key = f"records/{folder}/{name}/", f"records/{folder}/{name}{OPEN}"
+
+    def read(self) -> bytes:
+        kind = self.store.kind
+        new = [key for key in kind.list(self.prefix) if key not in self.seen]
+        self.seen.update(new)
+        data = b"".join(self.store._joined_parts(new))
+        try:
+            more = kind.read(self.open_key, self.plain)[0]
+        except Absent:
+            if new:
+                data, self.plain = data[self.plain:], 0
+            return data
+        self.plain += len(more)
+        return data + more
 
 
 class LocalStore(Store):
@@ -1083,6 +1180,25 @@ def read_env_file(path) -> dict:
 def _default_cache():
     base = os.environ.get("LOCALAPPDATA") if os.name == "nt" else os.environ.get("XDG_CACHE_HOME")
     return Path(base or Path.home() / ".cache") / "wpt-store"
+
+
+def _runs(table, places) -> list[tuple[range, list[Placed]]]:
+    """(frames next to each other, the files they hold) that together hold
+    these files of a compressed bundle, each at least one frame long. A file
+    is never split between two runs. A run past RUN_BYTES of original bytes
+    takes no more files, so when files lie one against the other, the frame
+    two of them share belongs to both runs."""
+    runs = []
+    for file in sorted(places, key=lambda place: place.start):
+        held = table.frames(file.start, file.length)
+        frames, files = runs[-1] if runs else (range(0), [])
+        size = table.original[frames.stop] - table.original[frames.start]
+        if frames and held.start <= frames.stop and size < RUN_BYTES:
+            files.append(file)
+            runs[-1] = range(frames.start, max(frames.stop, held.stop)), files
+        else:
+            runs.append((held, [file]))
+    return runs
 
 
 def _replace_object(tmp, target: Path):

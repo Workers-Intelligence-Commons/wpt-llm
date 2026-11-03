@@ -106,9 +106,13 @@ last built for it, which `wpt train` reads when it is given no id. It reads the 
 download` put in the store and downloads none; a source that is not
 there is left out and listed in the record. A task pointing into a
 source the build left out, one not downloaded among them, stops the build,
-naming the task and the source. With `--stream`, it keeps
-only the tokens of each source's documents in the store, not their
-Markdown, and no source's files on the machine; the dataset is the same
+naming the task and the source. It reads only the documents its pools need:
+each pool draws them from an index of the store's records, in a seeded
+order of whole frames (the 1 MiB unit the store fetches: the files that
+start in one frame of one bundle go together, a file stored on its own
+alone), by bytes, in rounds until its share is met, so a build fetches about
+the bytes it chooses. A pool's share is passed by one frame's files at most. With `--stream`, it
+keeps none of their Markdown on the machine; the dataset is the same
 ([architecture.md](architecture.md), "Fingerprints and the store"). There is no
 tokens-per-parameter rule: a model may be data-starved or oversized for its
 data. Model size is the recipe's `model` part.

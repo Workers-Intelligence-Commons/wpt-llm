@@ -63,14 +63,12 @@
 # the store). `docker compose up` again continues a run that failed (wpt-run.txt
 # names it), and starts the next run when the last one finished.
 #
-# The live view of the runs (deploy/otel-lgtm/compose.yaml) starts with it,
-# so WPT_GRAFANA_PASSWORD is required too. The checkout is mounted at /repo:
-# the manager runs its code, sends it to its gpu worker, and writes
-# wpt-run.txt there. At the end it prints the line that copies the model
-# out of the store into runs/ of the checkout.
-include:
-  - ../otel-lgtm/compose.yaml
-
+# The live view of the runs is optional: compose.live.yaml, beside this file,
+# starts it with the manager and is the only one that needs
+# WPT_GRAFANA_PASSWORD. The checkout is mounted at /repo: the manager runs its
+# code, sends it to its gpu worker, and writes wpt-run.txt there. At the end it
+# prints the line that copies the model out of the store into runs/ of the
+# checkout.
 services:
   manager:
     build: .
@@ -88,7 +86,6 @@ services:
       WPT_MANAGER_COMMAND: docker compose --env-file .env -f deploy/manager/compose.yaml run --rm manager uv run --no-sync
       UV_PROJECT_ENVIRONMENT: /manager/venv  # the libraries, on the volume: kept from one start to the next
       UV_CACHE_DIR: /manager/uv-cache
-      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-lgtm:4318
       # passed on only when set
       WPT_GPU_WORKERS:
       WPT_RENTAL_PROVIDER:
@@ -111,8 +108,6 @@ services:
       - ${WPT_STORE_FOLDER:-wpt-store}:${WPT_STORE_FOLDER:-/store}
       - wpt-manager:/manager
       - /var/run/docker.sock:/var/run/docker.sock  # the sandboxes, on this machine's Docker
-    depends_on:
-      - otel-lgtm
     restart: on-failure
 
 volumes:

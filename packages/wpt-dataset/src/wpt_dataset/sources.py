@@ -35,7 +35,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from wpt_store import parse_file_list
-from wpt_telemetry import Telemetry, set_ref
+from wpt_telemetry import Telemetry, set_result_ref
 from wpt_utils.parallel import in_order
 from wpt_utils.programs import code_of
 
@@ -403,7 +403,7 @@ def final_tree(source: Source, store, telemetry=None) -> tuple[dict[str, Entry],
     NotDownloaded when the store does not hold its upstream files,
     CutFailed (CutKeyMissing among them) or PatchFailed when a cut or a
     patch does not apply. Kept under the ref source-trees/<tree_key>. With
-    a telemetry, every ref it sets is recorded first (wpt_telemetry.set_ref)."""
+    a telemetry, every ref it sets is recorded first (wpt_telemetry.set_result_ref)."""
     key = tree_key(source, store)
     known = store.get_ref("source-trees", key)
     if known:
@@ -415,7 +415,7 @@ def final_tree(source: Source, store, telemetry=None) -> tuple[dict[str, Entry],
     tree = apply_cuts(source.id, tree, source.data.get("cuts", []), store)
     tree = apply_patches(source.id, tree, source.patches, store)
     known = store.put_bytes(manifest.manifest_bytes(tree))
-    set_ref(store, "source-trees", key, known, telemetry or Telemetry.off())
+    set_result_ref(store, "source-trees", key, known, telemetry or Telemetry.off())
     return tree, known
 
 
@@ -448,7 +448,7 @@ def not_text(source: Source, tree: dict[str, Entry], known: str, store, telemetr
         if checks.asks_text(source, path, entry):
             if (why := checks.not_text(source, path, manifest.content(store, entry))) is not None:
                 found[path] = why
-    set_ref(store, "source-not-text", key, store.put_bytes(json.dumps(found, ensure_ascii=False).encode()),
+    set_result_ref(store, "source-not-text", key, store.put_bytes(json.dumps(found, ensure_ascii=False).encode()),
             telemetry or Telemetry.off())
     return found
 

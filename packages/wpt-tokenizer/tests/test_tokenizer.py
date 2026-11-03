@@ -172,3 +172,14 @@ def test_any_number_of_threads_learns_the_same_merges():
 def test_a_trainer_needs_a_slot():
     with pytest.raises(ValueError, match="at least 1 slot"):
         Trainer(0)
+
+
+def test_training_says_how_many_merges_it_has_learned_while_it_learns(monkeypatch):
+    import wpt_tokenizer
+
+    monkeypatch.setattr(wpt_tokenizer, "WATCH_SECONDS", 0.001)
+    told = []
+    documents = [" ".join(f"word{i}x{j}" for i in range(3000)).encode() for j in range(5)]
+    trained = Tokenizer.train(documents, 4000, merged=told.append)
+    assert trained.vocab_size == Tokenizer.train(documents, 4000).vocab_size  # watching changes nothing
+    assert told and told == sorted(told) and told[-1] > 0

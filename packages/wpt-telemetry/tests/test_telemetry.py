@@ -11,7 +11,7 @@ import pytest
 
 import wpt_telemetry
 from wpt_store import LocalStore, open_store
-from wpt_telemetry import ENDPOINT, FLUSH_THREAD, RecordError, Telemetry
+from wpt_telemetry import ENDPOINT, FLUSH_THREAD, RecordError, Telemetry, runs
 
 # Seconds a test gives what it waits for, far more than a loaded machine holds a thread back: it
 # costs nothing, since the wait ends when the thing happens; only a test that fails waits them out.
@@ -240,10 +240,10 @@ def test_a_command_is_recorded_as_typed_and_its_folder_is_named_with_hyphens_and
     assert "job" not in record(store, by_hand.folder, "start.json")
 
 
-def test_on_s3_each_span_is_sent_when_it_ends_and_a_refused_send_stops_the_run(tmp_path, monkeypatch):
-    # an S3 store sends lines in groups; a span's lines must be in the bucket
-    # once it ends, and a group the bucket refuses must stop the run like any
-    # other part of the record
+def test_on_s3_lines_go_in_groups_and_a_refused_send_stops_the_run(tmp_path, monkeypatch):
+    # an S3 store sends lines in groups: a span's end sends nothing, a step that
+    # cannot be undone sends every line before it, and a group the bucket
+    # refuses must stop the run like any other part of the record
     import boto3
     from moto import mock_aws
 
@@ -259,15 +259,16 @@ def test_on_s3_each_span_is_sent_when_it_ends_and_a_refused_send_stops_the_run(t
             with Telemetry.start(store, "wpt-example", [], "d", env_file=tmp_path / ".env", environ={}) as telemetry:
                 with telemetry.span("training"):
                     telemetry.event("training.step", values={"train_loss": 2.0}, step=1)
+                assert "events.jsonl" not in open_store("s3://wpt-test/records").record_files(telemetry.folder)
+                telemetry.irreversible("model.folder_replaced")
                 ended = [e["kind"] for e in events(open_store("s3://wpt-test/records"), telemetry.folder)]
-                assert ended[-3:] == ["span_start", "event", "span_end"]
+                assert ended[-4:] == ["span_start", "event", "span_end", "event"]
 
                 def refused(**request):
                     raise OSError("the bucket refused the request")
 
                 monkeypatch.setattr(store.client, "put_object", refused)
-                with telemetry.span("saving"):
-                    pass
+                telemetry.irreversible("model.folder_replaced")
                 telemetry.log("never reached")
         assert "end.json" not in store.record_files(telemetry.folder)
 
@@ -495,3 +496,87 @@ def test_the_end_of_a_run_waits_about_one_timeout_per_kind_for_a_backend_that_ne
         silent.close()
     assert ending_sends and len(ending_sends) == len(set(ending_sends))
     assert waited < 25  # the default timeout of 10 seconds would take 30; far above the 3 this one takes, for a loaded machine
+
+
+def test_a_run_is_listed_shown_and_followed_from_its_record(tmp_path):
+    store = LocalStore(tmp_path / "store")
+    with pytest.raises(ValueError, match="boom"):
+        with Telemetry.start(store, "wpt dataset build", ["small"], "small", env_file=tmp_path / ".env", environ={},
+                             echo=lambda *_: None) as telemetry:
+            telemetry.log("reading")
+            with telemetry.span("documents"):
+                telemetry.event("pool", name="en")
+                telemetry.event("pool", name="fr")
+            with telemetry.span("shards"):
+                raise ValueError("boom")
+    going = Telemetry.start(store, "wpt train", [], "going", env_file=tmp_path / ".env", environ={},
+                            echo=lambda *_: None)
+    with going.span("step"):
+        going.log("update 1")
+        reader = store.record_reader(going.folder, "events.jsonl")
+        assert b"update 1" in reader.read()
+        assert reader.read() == b""  # only what is new
+        going.log("update 2")
+        assert b"update 2" in reader.read() and b"update 1" not in reader.read()
+        [ended, running] = runs.runs(store)
+        assert (ended.command, ended.status, running.status) == ("wpt dataset build", "failed", "no end")
+        assert runs.summary(store, going.folder).stage == ["wpt train", "step"]
+
+    def run_ends(_seconds):  # the run goes on during the wait of whoever follows it, and ends
+        going.log("update 3")
+        going.close()
+
+    going_lines = runs.follow(store, going.folder, wait=run_ends)
+    assert "update 1" in next(going_lines)
+    lines = list(going_lines)
+    assert sum("update 3" in line for line in lines) == 1 and sum("update 2" in line for line in lines) == 1
+    assert sum("update 1" in line for line in lines) == 0  # no line twice, when the end makes the plain file a part
+
+    found = runs.summary(store, runs.find(store, "wpt-dataset-build"))
+    assert found.arguments == ["small"] and found.error.startswith("ValueError: boom")
+    assert found.spans == {"documents": 1, "shards": 1, "wpt dataset build": 1}
+    assert found.events == {"pool": 2} and found.lines == 1
+    assert any("shards failed" in line for line in found.errors)
+    with pytest.raises(ValueError, match="0 record folders"):
+        runs.find(store, "no such run")
+
+
+def test_a_long_stage_says_how_far_it_is_every_few_minutes(tmp_path, monkeypatch):
+    # done out of total, the rate, the time left and the memory, at most once per period
+    printed = []
+    telemetry = Telemetry.off(echo=lambda text, error: printed.append(text))
+    moments = iter([0, 60, 200, 210, 400])
+    monkeypatch.setattr(wpt_telemetry.time, "monotonic", lambda: next(moments))
+    monkeypatch.setattr(wpt_telemetry, "memory", lambda: (2 * 2**30, 8 * 2**30))
+    with telemetry.progress("reading", 1000, "files") as progress:
+        for _ in range(4):
+            progress.advance(100)
+    assert printed == ["reading: 200 of 1,000 files, 1.0 files/s, about 13 min left, memory 6.0 of 8.0 GiB",
+                       "reading: 400 of 1,000 files, 1.0 files/s, about 10 min left, memory 6.0 of 8.0 GiB"]
+
+
+def test_a_stage_stuck_on_one_long_item_still_prints_until_it_ends(monkeypatch):
+    # a source that runs for hours in one worker advances nothing, and the line still comes; once the stage ends, none
+    printed = []
+    telemetry = Telemetry.off(echo=lambda text, error: printed.append(text))
+    monkeypatch.setattr(wpt_telemetry, "PROGRESS_SECONDS", 0.01)
+    with telemetry.progress("reading", 10, "sources"):
+        while len(printed) < 2:
+            time.sleep(0.01)
+    assert printed[0].startswith("reading: 0 of 10 sources, 0.0 sources/s, time left unknown")
+    ended = len(printed)
+    time.sleep(0.05)
+    assert len(printed) == ended
+
+
+def test_a_stage_s_rate_counts_from_its_with_block_not_from_before_it(monkeypatch):
+    # a stage made before its work starts: the time before the block is not in the rate or the time left
+    printed = []
+    telemetry = Telemetry.off(echo=lambda text, error: printed.append(text))
+    moments = iter([1000, 1200, 1200])
+    monkeypatch.setattr(wpt_telemetry.time, "monotonic", lambda: next(moments))
+    monkeypatch.setattr(wpt_telemetry, "memory", lambda: None)
+    stage = telemetry.progress("merges", 400, "merges")
+    with stage:
+        stage.advance(200)
+    assert printed == ["merges: 200 of 400 merges, 1.0 merges/s, about 3 min left"]

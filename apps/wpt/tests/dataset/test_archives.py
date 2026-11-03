@@ -18,7 +18,6 @@ from pathlib import Path
 import pytest
 
 from wpt_dataset import archives, manifest, retry
-from wpt_dataset.build import gather
 from wpt.dataset import main
 from wpt_dataset.manifest import EXECUTABLE, FILE, SYMLINK, Entry
 from wpt_dataset.sources import source_tree
@@ -155,9 +154,9 @@ def test_an_archive_read_while_it_downloads_gives_what_a_copy_on_the_disk_gives(
 
         out = [line for line in capsys.readouterr().out.splitlines() if line.startswith(sid)]
         tree, _ = source_tree(repo.source(sid), store)
-        documents, _, _ = gather(repo, store, log=lambda _: None)
+        documents, _ = kit.converted(repo, store)
         results[way] = (code, out, manifest.manifest_bytes(tree),
-                        [(d.id, store.get_bytes(d.sha256)) for d in documents])
+                        [(d.id, d.markdown) for d in documents])
         if way == "read while it downloads":
             archive_gets = [wanted for path, wanted in asked if path == f"/{file}"]
             assert len(added) == len(set(added))  # each content in the bundles once

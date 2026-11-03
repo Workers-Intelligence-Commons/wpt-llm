@@ -482,7 +482,8 @@ outside its project enters by its own bytes.
 | upstream tree (what the download stored) | the source's id and what its download reads: its `type`, `address`, `addresses`, `revision`, `extract`, `history`, `submodules`, and the outside license pages its entries declare |
 | final source tree (and the check that its files are text) | the upstream tree's manifest, the license pages stored with it, cuts (and the cut key), each patch's sha256, the formats (they decide each file's encoding), the code of the modules `sources.py` imports |
 | what a source keeps for training, and its check result | the final tree, the license entries (with their decisions), the formats, the license check's answer (for each entry, the license text found at its place and that text's decision), the code of the modules `kept.py` imports |
-| a source's tokens (`--stream`) | the fingerprint of what the source keeps for training, the code of the modules `build.py` imports, the source's `type`, the vocabulary |
+| the Markdown of a source's chosen files (on this machine) | the fingerprint of what the source keeps for training, the code of the modules `reading.py` imports, the source's `type` |
+| a source's tokens | that Markdown's fingerprint, the code of the modules `reading.py` imports, the vocabulary, the paths of the chosen files |
 | vocabulary | the code of the modules `build.py` imports, the tokenizer recipe (with its `version`), the sha256 of the list of the documents it is trained on (id and sha256 of their Markdown); frozen by the recipe's lock until `version` is raised ([tokenizer.md](tokenizer.md)) |
 | dataset | the code of the modules `build.py` imports, the model recipe's data part, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, the manifest of its upstream tree, its final tree, licenses (with attribution) and check result, the sources skipped (not in the store, or failing with `--skip-failed`: each by its id and the kind of its error), and the objects of its conversations and tasks |
 | training step's result | the fingerprint of the step before it, the step (its files, method, environment, optimizer, settings and locked parts), the fingerprint of the dataset part it reads (`text`, `conversations` or `tasks`, in the record's `fingerprints`), the recipe's seed and the code; no hardware option ([training.md](training.md), "Step results and reuse") |
@@ -501,31 +502,64 @@ without it. The task reader takes the held-out texts from it
 ([data-selection.md](data-selection.md), "Held-out text and
 contamination").
 
-`wpt dataset build --stream` (or `WPT_STREAM=1`) keeps less: each source's
-documents are turned into Markdown and tokens, and only the tokens are
-kept. A file its conversion needs as a file (a records file, a message
-tree, a file its patches change) is copied from the store into a temporary
-folder on this machine, deleted once the source is tokens; every other
-file is read from the store by range, so a conversion never opens a file
-of the store itself. The store keeps one token object per source
-(every document's tokens, one after the other), its final manifest and a
-summary, under a ref named after what the source keeps for training,
-its `type` and the vocabulary ("Fingerprints and the store"); a source
-whose inputs did not change is never converted again. The documents, the
-dataset id and the shards are the same as without `--stream`. What it
-does not keep is the documents' Markdown. Without `--stream`, the store
-keeps everything, as above, and has no per-source conversion result:
-every build converts every source again.
+A build works in three steps, and only the last reads text:
 
-The build converts sources and reads their conversations and tasks in
-worker processes, several at once, and turns several documents into
-tokens at once, as many as `wpt_utils.parallel` allows. Each source is
-converted or read on its own (with `--stream`, in its own temporary
-folder), and the results are put together in the order of the source ids
-and of the documents, so a document found in several sources stays with
-the first, and the dataset id and the shards are the same on any machine
-and with any number of workers. How many run at once counts each source's
-size, from its file list, on the disk its copies go to.
+1. Index. The store's records already say each downloaded file's bundle,
+   position, size and sha256, and each source's formats, licenses and tags.
+   The index holds every file that can give a document, from those records
+   alone. Files with the same sha256 are one document: the index keeps the
+   first in source id order.
+2. Choose. The recipe's mixture draws its documents from the index, by
+   bytes, in a seeded order of its own for each pool. The unit of the draw is
+   a frame: the files of a pool that start in the same 1 MiB frame of the
+   same bundle are one group, in bundle order, and a file stored on its own
+   is a group of its own. The seed of a group is fixed by the pool's name and
+   the group's own name (the bundle's name and the frame number, or the
+   file's sha256), never a position in the index, so a source added later
+   moves no group before another. A build thus fetches about the bytes it
+   chooses, where a draw of single files would touch nearly every frame of a
+   pool of small files.
+3. Read. Only the chosen files are read, source after source in bundle
+   order. A source's small files are fetched together, in requests of the
+   frames next to each other, and each request's frames leave memory once
+   its files are copied. Their Markdown is kept in packs, compressed files
+   on this machine, so the vocabulary and the tokens read each file once.
+   A source's documents come out in file path order, whichever packs hold
+   them.
+
+The choice comes in rounds. The first guesses 4 bytes per token. A pool
+that then holds fewer training tokens than its share draws again, at the
+bytes per token it measured, until it reaches its share or the index has no
+more of it, so every pool holds its share. The draw gives whole groups, so
+a pool may pass its share by one group at most.
+
+The Markdown never goes to the store. The packs stay in the store's cache
+folder for the next build, under a folder named after what decides the
+conversion ("Fingerprints and the store"); with `--stream` (or
+`WPT_STREAM=1`) they go to a temporary folder deleted when the build ends.
+The documents, the dataset id and the shards are the same either way. A
+file its conversion needs as a file (a Parquet records file, a message
+tree, a file its patches change) is copied from the store into a temporary
+folder on this machine, deleted once the source is read; every other file
+is read from the store by range, so a conversion never opens a file of the
+store itself. The store keeps one token object per source and round (every
+document's tokens, one after the other), its final manifest and a summary,
+under a ref named after the Markdown's fingerprint, the vocabulary and the
+chosen paths; a source whose inputs did not change is never read again.
+
+`--plan` on `build` and `build-tokenizer` stops after the first choice and
+prints what the build would read and compute: each pool's documents and
+bytes, whether a vocabulary would be trained, and the files, bytes, sources
+and bundles to read.
+
+The build reads sources and their conversations and tasks in worker
+processes, several at once, as many as `wpt_utils.parallel` allows. Each
+source is read on its own, and the results are put together in the order
+of the source ids and of the documents, so the dataset id and the shards
+are the same on any machine and with any number of workers. How many run at
+once counts each source's chosen bytes on the disk its copies go to. The
+conversations and tasks do not depend on the choice: every indexed source
+that holds some is read.
 
 ### The download step
 
@@ -1197,7 +1231,9 @@ leaves empty and the check then names each file to fill in. The steps today:
 - task files: a task with `replies` and no `answered_in` gets it empty. A
   repository pointer's `checksum` becomes `manifest`, its `sha256:`
   prefix dropped.
-- tokenizer recipes: a recipe without `version` gets 1. A lock without the
+- tokenizer recipes: a recipe without `version` gets 1. A recipe's
+  `mixture` gives way to `sample_bytes`, 10 GB, in the recipe and in the
+  copy of it its lock keeps, so the lock stays valid. A lock without the
   list of its documents cannot be converted: delete it and build again.
 - every kind: a `schema` field is dropped.
 

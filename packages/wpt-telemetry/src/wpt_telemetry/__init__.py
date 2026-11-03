@@ -28,10 +28,12 @@ dataset id, a short weights hash: the command chooses):
 
 Each file written whole is in the store before the call that makes it
 returns; a run with no end.json did not reach its end. The store holds
-added lines back (see wpt_store): they are sent every FLUSH_SECONDS, at
-the end of every span, before every step that cannot be undone
-(irreversible) and at the end of the run, so a crash loses at most the
-lines of the last few seconds. When the store does not take a part,
+added lines back (see wpt_store): they are sent every FLUSH_SECONDS, before
+every step that cannot be undone (irreversible) and at the end of the run,
+so a crash loses at most the lines of the last FLUSH_SECONDS, and a long
+run writes a few large parts instead of one small part per span or ref.
+Setting a ref that names a result the build can compute again
+(set_result_ref) waits for the next group of lines. When the store does not take a part,
 RecordError is raised, and every later call raises it again without
 writing anything: the command stops, since without its record it must do
 nothing more (wpt train's training process still saves its checkpoint
@@ -72,6 +74,12 @@ The store record is the account; the live view is a convenience.
 A process started by another one for the same run (wpt train's launcher
 starts the training processes) joins its record: the launcher writes
 start.json and end.json, the joined process its own spans, events and ids.
+
+progress() gives a long stage's Progress: every PROGRESS_SECONDS while the
+stage's with block runs, one printed line says how much is done out of the
+total, the rate, an estimate of the time left and the memory in use.
+
+wpt_telemetry.runs reads a store's records back.
 """
 
 import _thread
@@ -105,6 +113,7 @@ from opentelemetry.trace import NonRecordingSpan, SpanContext, Status, StatusCod
 
 from wpt_store import MissingObject, MixedRecord, as_record_name, check_record_name, read_env_file
 from wpt_utils.files import sha256_file
+from wpt_utils.parallel import memory
 from wpt_utils.programs import code, repository
 
 RECORD_FAILED = 3  # the exit code of a command whose record could not be written; never restarted
@@ -113,8 +122,10 @@ JOIN_FOLDER = "WPT_RECORD_FOLDER"  # set by a launcher for the processes that jo
 JOIN_PARENT = "WPT_RECORD_PARENT"  # <trace id>-<span id> of the launcher's span they belong under
 JOB = "WPT_JOB"  # set by `wpt web` for a command it starts: the id of the job, which start.json then names
 START, EVENTS, IDS, END = "start.json", "events.jsonl", "ids.json", "end.json"
-FLUSH_SECONDS = 5  # the store is sent the lines it holds back at least this often
+FLUSH_SECONDS = 30  # the store is sent the lines it holds back at least this often
+PROGRESS_SECONDS = 180  # a long stage prints how far it is at most this often
 FLUSH_THREAD = "wpt-telemetry-flush"
+PROGRESS_THREAD = "wpt-telemetry-progress"
 SHORT = 8  # characters of a hash or a dataset id in a record folder's name
 METRIC_INTERVAL_MS = 10_000  # live values are sent every 10 s unless OTEL_METRIC_EXPORT_INTERVAL says otherwise
 PACKAGES = ("torch",)  # the outside packages whose version start.json names; the code itself is code()
@@ -134,6 +145,77 @@ class Span:
 
     def set(self, **attributes):
         self.attributes.update(attributes)
+
+
+class Progress:
+    """How far a long stage is (Telemetry.progress). A with block is the
+    stage: its clock starts there, and until the block ends a line prints
+    once PROGRESS_SECONDS have passed since the last one, whether or not
+    work advanced, so a stage stuck on one long item still says it is alive.
+    advance() from any thread."""
+
+    def __init__(self, telemetry, what, total, unit):
+        self.telemetry, self.what, self.total, self.unit = telemetry, what, total, unit
+        self.done = 0
+        self._lock = threading.Lock()
+        self._ended = threading.Event()
+
+    def __enter__(self):
+        self.started = self.printed = time.monotonic()
+        self._timer = threading.Thread(target=self._print_regularly, name=PROGRESS_THREAD, daemon=True)
+        self._timer.start()
+        return self
+
+    def __exit__(self, *_):
+        self._ended.set()
+        self._timer.join()
+        return False
+
+    def advance(self, count=1):
+        with self._lock:
+            self.done += count
+        self._print_when_due()
+
+    def _print_when_due(self):
+        with self._lock:
+            now = time.monotonic()
+            due = now - self.printed >= PROGRESS_SECONDS
+            if due:
+                self.printed = now
+            done, seconds = self.done, now - self.started
+        if due:
+            self.telemetry.log(self.line(done, seconds))
+
+    def _print_regularly(self):
+        while not self._ended.wait(PROGRESS_SECONDS):
+            try:
+                self._print_when_due()
+            except (RecordError, RuntimeError):
+                return  # a record that broke or closed: the command's own thread stops on it
+
+    def line(self, done, seconds) -> str:
+        """The line of a stage that did done of its total in seconds."""
+        rate = done / seconds if seconds > 0 else 0
+        left = f"about {_duration((self.total - done) / rate)} left" if rate > 0 else "time left unknown"
+        return (f"{self.what}: {done:,} of {self.total:,} {self.unit}, {rate:,.1f} {self.unit}/s, {left}"
+                f"{_memory_in_use()}")
+
+
+def _duration(seconds) -> str:
+    """Seconds as people read them: 45 s, 12 min, 3.5 h."""
+    if seconds < 90:
+        return f"{seconds:.0f} s"
+    return f"{seconds / 60:.0f} min" if seconds < 5400 else f"{seconds / 3600:.1f} h"
+
+
+def _memory_in_use() -> str:
+    """The machine's memory in use, as the end of a progress line; nothing
+    on a machine that does not say."""
+    found = memory()
+    if found is None:
+        return ""
+    available, total = found
+    return f", memory {(total - available) / 2**30:.1f} of {total / 2**30:.1f} GiB"
 
 
 class Telemetry:
@@ -217,15 +299,16 @@ class Telemetry:
         one records, and for code run outside a command."""
         return cls(None, None, "", None, echo or _print, owner=False)
 
-    def child_environment(self) -> dict:
+    def child_environment(self, flush=True) -> dict:
         """What a process started for this run needs to join its record,
         under this thread's current span, and to send to the same live
-        backend. The lines held back are sent first, so the record is whole
-        up to here."""
+        backend. With flush, the lines held back are sent first, so the
+        record is whole up to here."""
         self._check_open()
         if self.store is None:
             return {}
-        self._flush()
+        if flush:
+            self._flush()
         endpoint = self._live.failure.endpoint if self._live and self._live.failure else None
         return {JOIN_FOLDER: self.folder, JOIN_PARENT: f"{self.trace}-{self._stack[-1].id}",
                 **({ENDPOINT: endpoint} if endpoint else {})}
@@ -342,6 +425,18 @@ class Telemetry:
         self._check_name(name)
         self._append(name, data)
 
+    def add_lines(self, lines):
+        """Add [(file name, lines)] that a process of this run held back to
+        their files of this record (wpt_dataset.workers)."""
+        self._check_open()
+        for name, data in lines:
+            self._append(name, data)
+
+    def progress(self, what, total, unit="items") -> Progress:
+        """A Progress for a long stage of total units, to run as a with
+        block; see the module's docstring."""
+        return Progress(self, what, total, unit)
+
     def irreversible(self, name, /, values=None, **attributes):
         """Record, as event() does, a step that cannot be undone, just before
         taking it, and send it with every line the store holds back: the
@@ -374,6 +469,7 @@ class Telemetry:
                 if self.store is not None and self._broken is None and not isinstance(error, RecordError):
                     status, code, text = _ending(error)
                     self._end_span(self._root, self.command, self._clock, error if status != "succeeded" else None)
+                    self._flush()
                     if self._owner:
                         self._write(END, _json({"status": status, "exit_code": code,
                                                 "error": text,
@@ -415,7 +511,6 @@ class Telemetry:
             line["error"] = _describe(error)
             line["traceback"] = _traceback(error)
         self._line(line)
-        self._flush()
         if self._live:
             self._live.end(span.otel, span.attributes, line.get("error"))
 
@@ -708,6 +803,15 @@ def _interrupt_main():
         _thread.interrupt_main()
     elif callable(signal.getsignal(signal.SIGINT)):
         signal.pthread_kill(threading.main_thread().ident, signal.SIGINT)
+
+
+def set_result_ref(store, kind, name, sha, telemetry):
+    """store.set_ref(kind, name, sha) of a result the build can compute
+    again: the event "store.ref_set" goes with the next group of lines, so a
+    run that sets one ref per source writes no part of the record for each.
+    A crash may leave such a ref unrecorded; the ref then only saves work."""
+    telemetry.event("store.ref_set", ref=f"{kind}/{name}", object=sha)
+    store.set_ref(kind, name, sha)
 
 
 def set_ref(store, kind, name, sha, telemetry):

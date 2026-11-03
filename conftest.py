@@ -483,6 +483,30 @@ def write_recipe(repo, kind, name, document):
     return path
 
 
+def converted(repo, store):
+    """What the conversion makes of every admitted source, in source id
+    order, each Markdown once: (each document as a namespace of its id and
+    markdown, {source id: {"check": its check result, "credits": each
+    credit}})."""
+    from wpt_dataset import build, license_check, markdown
+    from wpt_dataset.kept import kept
+
+    documents, info, seen = [], {}, set()
+    texts = license_check.LicenseTexts(repo.license_texts())
+    for source in repo.sources(lambda _: None):
+        if source.admitted:
+            held, skipped, credits = kept(source, store, texts), {}, []
+            for found in markdown.documents(source, held.tree, store, repo, skipped, trains=held.trains):
+                if found.markdown not in seen:
+                    seen.add(found.markdown)
+                    documents.append(SimpleNamespace(id=f"{source.id}/{found.path}", markdown=found.markdown))
+                    if found.record:
+                        credits.append({"document": documents[-1].id, "license": found.record.license,
+                                        "credit": found.record.credit})
+            info[source.id] = {"check": build.checked(held, skipped), "credits": credits}
+    return documents, info
+
+
 @pytest.fixture
 def kit():
     """This module's builders and constants (test files cannot import

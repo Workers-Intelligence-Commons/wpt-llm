@@ -79,8 +79,8 @@ history's order file (`.git/history/order`): it stays in the source's tree
 and its manifest, and the builder reads it, but it is not a training
 document.
 
-The stream cache (build.source_tokens) is keyed by the code of the
-modules build imports, this one among them (wpt_utils.programs.code_of),
+The packs of a build's Markdown (reading.py) are keyed by the code of the
+modules reading imports, this one among them (wpt_utils.programs.code_of),
 so a change to what this module makes of a file makes the Markdown again
 (docs/architecture.md).
 """
@@ -134,7 +134,7 @@ class Converted(NamedTuple):
 
 
 def documents(source, tree, store, repo, skipped: dict | None = None, only=None,
-              trains=None) -> Iterator[Converted]:
+              trains=None, newest_indexes: dict | None = None) -> Iterator[Converted]:
     """Each document of a final tree, in file path order; links, chat,
     task, rating and probe files, a git history's order file (ORDER) and documents whose
     Markdown is empty are left out; repo holds the images task folders
@@ -144,7 +144,9 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None,
     (tree_checks) do not run. trains, when given, is the set of the numbers of the license
     entries whose records train (kept.Kept.trains): a record of any other
     entry is left out and counted (records.Skipped.untrained); every
-    entry's without it.
+    entry's without it. newest_indexes, when given, keeps each `newest`
+    index (records.newest_index reads every file its entry covers) for the
+    next call on the same source and tree, as a batch of its files.
     Raises FormatMapError when a path matches no format entry or several,
     NotText when a file is not text (encoding.py) or an xhtml file is not
     well-formed, InvalidFile when a chat, rating, probe or records file holds a
@@ -153,7 +155,7 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None,
     formats = {path: format_of(source, path) for path in files}
     pages = {}  # parsed xhtml and html files, xhtml ones also read for the notes they hold
     join_indexes = {}  # one index per join rule, for every records file of this tree
-    newest_indexes = {}  # one index per records entry with `newest`, over every file it covers
+    newest_indexes = {} if newest_indexes is None else newest_indexes  # per records entry with `newest`, over its files
 
     def read(path):  # a records file in the store, and the file its entry's join reads with it, read as streams
         joined = records.joined_file(formats[path], path, files, join_indexes)

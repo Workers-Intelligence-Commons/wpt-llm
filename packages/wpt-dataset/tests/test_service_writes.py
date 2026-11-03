@@ -250,7 +250,7 @@ def test_line_and_paragraph_separators_are_escaped_even_in_values_a_save_keeps(k
 
 
 def test_an_empty_license_text_is_allowed_only_while_the_source_is_not_admitted(kit, repo, store):
-    from wpt_dataset import build, conversations, tasks
+    from wpt_dataset import choice, conversations, tasks
     from wpt_dataset.errors import InvalidFile
 
     document = empty_source("notes", license="CC0-1.0", attribution="A. Person, notes", text="", by="A. Person",
@@ -267,7 +267,7 @@ def test_an_empty_license_text_is_allowed_only_while_the_source_is_not_admitted(
         repo.create_source("mine", "other", document, {"notes.txt": b"x\n"}, "first", store)
 
     notes = []  # every reader leaves it out with a note naming it
-    assert build.gather(repo, store, notes.append)[:2] == ([], {})
+    assert not len(choice.build(repo, store, log=notes.append).rows)
     assert conversations.read(repo, store, "answer-as-assistant", log=notes.append) == ([], {})
     assert tasks.read(repo, store, "finish-tasks", 0, log=notes.append) == ([], {})
     assert [n for n in notes if n == repo.source(sid).note] == [repo.source(sid).note] * 3 and sid in notes[0]

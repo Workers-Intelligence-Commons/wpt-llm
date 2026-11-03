@@ -10,10 +10,20 @@
     "documents_sha256": {
       "type": "string",
       "pattern": "^[0-9a-f]{64}$",
-      "description": "the sha256 of the object, in the store that holds the vocabulary, that lists every document it was trained on: one line `<document id><TAB><sha256 of its Markdown>` each, sorted by the line's bytes"
+      "description": "the sha256 of the object, in the store that holds the vocabulary, that lists every document it was trained on: one line each, the JSON array of the document id and the sha256 of its Markdown, sorted by the line's bytes"
     },
     "document_count": {"type": "integer", "minimum": 1, "description": "the number of lines of that list"},
     "vocabulary_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "left_out": {
+      "type": "array",
+      "description": "the sources left out of the build that trained the vocabulary, each with the kind of its error; absent when none was",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source", "error"],
+        "properties": {"source": {"type": "string"}, "error": {"type": "string"}}
+      }
+    },
     "note": {"type": "string"}
   }
 }

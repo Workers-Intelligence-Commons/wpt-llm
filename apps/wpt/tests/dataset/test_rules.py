@@ -5,12 +5,14 @@ import re
 import pytest
 
 from wpt.dataset import main
+from wpt_dataset.build import locked_vocabulary
 from wpt_dataset.errors import InvalidFile, OutdatedSchema, RuleViolation
 from wpt_dataset.license_check import text_id
 from wpt_dataset.migrate import NEW_ATTENTION, MigrationIncomplete, Step, migrate, outdated, upgrade
 from wpt_dataset.pools import matches, parse
-from wpt_dataset.repo import dump_json, validate
+from wpt_dataset.repo import Repo, dump_json, validate
 from wpt_dataset.sources import upstream_manifest
+from wpt_tokenizer import Tokenizer
 
 
 def test_pool_expressions_follow_usual_precedence():
@@ -157,7 +159,7 @@ def test_migrating_a_lock_puts_the_list_of_its_documents_in_the_store(kit, repo,
     # a lock that carried the trained documents now names their list, an object of the store
     documents = [["b/two.txt", "2" * 64], ["a/one.txt", "1" * 64], ["a-b/three.txt", "3" * 64]]
     mixture = kit.write_recipe(repo, "mixture", "main", {"pools": [{"name": "a", "select": "a", "weight": 1}]})
-    recipe = {"version": 1, "mixture": "main", "vocab_size": 600}
+    recipe = {"version": 1, "sample_bytes": 10**9, "vocab_size": 600}
     kit.write_recipe(repo, "tokenizer", "main", recipe)
     path = mixture.parent.parent / "tokenizers" / "main.lock.json"
     vocabulary = store.put_bytes(b"a vocabulary")
@@ -368,7 +370,7 @@ def test_command_line_builds_a_dataset_and_prints_its_id(kit, repo, store, git_u
     kit.add_source(repo, store, "example", "ok", {
         "type": "git", "address": git_upstream[0], "tags": [{"tags": ["text"], "paths": ["**"]}]})
     kit.write_recipe(repo, "mixture", "m", {"pools": [{"name": "text", "select": "text", "weight": 1}]})
-    kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})
+    kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "sample_bytes": 10**9, "vocab_size": 556})
     kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
     monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)
@@ -416,7 +418,8 @@ def test_building_a_tokenizer_is_a_session_with_a_reused_line_for_each_source_it
     [sid] = [kit.add_source(repo, store, "example", "ok", {
         "type": "git", "address": git_upstream[0], "tags": [{"tags": ["text"], "paths": ["**"]}]})]
     kit.write_recipe(repo, "mixture", "m", {"pools": [{"name": "text", "select": "text", "weight": 1}]})
-    kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})
+    kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "sample_bytes": 10**9, "vocab_size": 556})
+    kit.write_model_recipe(repo, "t", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
     monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)
 
@@ -445,7 +448,7 @@ def test_a_build_whose_record_breaks_writes_no_lock_file(kit, repo, store, git_u
     kit.add_source(repo, store, "example", "ok", {
         "type": "git", "address": git_upstream[0], "tags": [{"tags": ["text"], "paths": ["**"]}]})
     kit.write_recipe(repo, "mixture", "m", {"pools": [{"name": "text", "select": "text", "weight": 1}]})
-    kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})
+    kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "sample_bytes": 10**9, "vocab_size": 556})
     kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
     monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)
@@ -470,16 +473,31 @@ def test_migrating_tokenizer_files(kit, repo):
     with pytest.raises(MigrationIncomplete, match=re.escape(f"OutdatedSchema: {lock}: the lock does not list the "
                                                             f"documents")):
         migrate(repo, log=lambda _: None)
-    assert json.loads(recipe.read_text()) == {"mixture": "m", "vocab_size": 556, "version": 1}
+    assert json.loads(recipe.read_text()) == {"sample_bytes": 10_000_000_000, "vocab_size": 556, "version": 1}
     lock.unlink()  # what the message asks; the next build writes a current lock
     kit.write_recipe(repo, "mixture", "m", {"pools": [{"name": "a", "select": "a", "weight": 1}]})
     assert migrate(repo, log=lambda _: None) == []
 
 
+def test_a_vocabulary_recipe_and_its_lock_lose_their_mixture_together_and_the_lock_stays_valid(kit, repo, store):
+    recipe = kit.write_recipe(repo, "tokenizer", "t", {"version": 2, "mixture": "m", "vocab_size": 556})
+    lock = repo.root / "data" / "recipes" / "tokenizers" / "t.lock.json"
+    tokenizer = Tokenizer.train([b"some text to learn from"], 556)
+    vocabulary, documents = store.put_bytes(tokenizer.to_bytes()), store.put_bytes(b'["a/b", "' + b"0" * 64 + b'"]\n')
+    lock.write_text(json.dumps({"recipe": {"schema": 2, "version": 2, "mixture": "m", "vocab_size": 556},
+                                "vocabulary_sha256": vocabulary, "documents_sha256": documents, "document_count": 1}))
+
+    migrate(repo, log=lambda _: None)
+
+    assert json.loads(recipe.read_text()) == {"version": 2, "sample_bytes": 10_000_000_000, "vocab_size": 556}
+    assert json.loads(lock.read_text())["recipe"] == json.loads(recipe.read_text())
+    assert locked_vocabulary(Repo(repo.root), "t", store)[1] == vocabulary
+
+
 def test_migrating_a_lock_drops_the_tokenizer_code_s_version(kit, repo):
     # the vocabulary's fingerprint holds the tokenizer code's hash; the lock records no version of the code
     kit.write_recipe(repo, "mixture", "m", {"pools": [{"name": "a", "select": "a", "weight": 1}]})
-    kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})
+    kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "sample_bytes": 10**9, "vocab_size": 556})
     lock = repo.root / "data" / "recipes" / "tokenizers" / "t.lock.json"
     current = {"recipe": {"version": 1}, "documents_sha256": "2" * 64, "document_count": 1,
                "vocabulary_sha256": "1" * 64}

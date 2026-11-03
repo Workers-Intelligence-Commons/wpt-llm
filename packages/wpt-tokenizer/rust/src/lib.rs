@@ -20,6 +20,7 @@ use std::cmp::Reverse;
 use std::cell::RefCell;
 use std::collections::{BinaryHeap, HashMap};
 use std::ops::Range;
+use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex, Weak};
 use std::thread::{self, ThreadId};
 
@@ -190,6 +191,7 @@ impl Summary {
 #[pyclass]
 struct Trainer {
     table: Summary,
+    merged: AtomicUsize, // the merges learned so far, for whoever watches `train` from another thread
 }
 
 #[pymethods]
@@ -202,7 +204,7 @@ impl Trainer {
         if slots == 0 {
             return Err(PyValueError::new_err("a trainer needs at least 1 slot"));
         }
-        Ok(Trainer { table: Summary::new(slots) })
+        Ok(Trainer { table: Summary::new(slots), merged: AtomicUsize::new(0) })
     }
 
     /// Count the chunks of one document.
@@ -230,8 +232,13 @@ impl Trainer {
         };
         Ok(py.detach(|| {
             let entries = self.table.entries().into_iter().map(|(chunk, count, _)| (chunk, count)).collect();
-            learn_on(entries, n_merges, threads, SLICE_MIN)
+            learn_on(entries, n_merges, threads, SLICE_MIN, &self.merged)
         }))
+    }
+
+    /// How many merges `train` has learned so far, readable from another thread while it runs.
+    fn merged(&self) -> usize {
+        self.merged.load(Ordering::Relaxed)
     }
 }
 
@@ -297,7 +304,7 @@ fn rewrite(words: &mut [Vec<u32>], base: usize, freq: &[i64], affected: &[usize]
 /// inside one merge is independent between words: it runs on `threads` threads over slices of the words, and
 /// the slices' results are combined in slice order, so the merges are the same for any number of threads.
 /// `min_slice`: the fewest words a slice holds.
-fn learn_on(entries: Vec<(&[u8], u64)>, n_merges: usize, threads: usize, min_slice: usize) -> Vec<Pair> {
+fn learn_on(entries: Vec<(&[u8], u64)>, n_merges: usize, threads: usize, min_slice: usize, merged: &AtomicUsize) -> Vec<Pair> {
     let freq: Vec<i64> = entries.iter().map(|&(_, c)| c as i64).collect();
     let mut words: Vec<Vec<u32>> = per_part(slices(entries.len(), threads, min_slice), |slice| {
         entries[slice].iter().map(|(w, _)| w.iter().map(|&b| b as u32).collect::<Vec<u32>>()).collect::<Vec<_>>()
@@ -346,6 +353,7 @@ fn learn_on(entries: Vec<(&[u8], u64)>, n_merges: usize, threads: usize, min_sli
         }
         let new_id = FIRST_MERGE + merges.len() as u32;
         merges.push(pair);
+        merged.store(merges.len(), Ordering::Relaxed);
 
         // the words listed under the pair, once each, in ascending order (a list may name a word more than
         // once, or one that no longer holds the pair)
@@ -645,7 +653,7 @@ mod tests {
             assert!(expected.len() > 3, "{name} learns something");
             for threads in [1, 2, 3, 8] {
                 // a slice of 16 words, so that the slices and the threads really are used
-                assert_eq!(learn_on(entries.clone(), 200, threads, 16), expected, "{name} on {threads} threads");
+                assert_eq!(learn_on(entries.clone(), 200, threads, 16, &AtomicUsize::new(0)), expected, "{name} on {threads} threads");
             }
         }
     }

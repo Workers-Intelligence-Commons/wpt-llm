@@ -1,0 +1,17 @@
+# The live view of the manager's runs, on top of compose.yaml: the backend of
+# deploy/otel-lgtm/compose.yaml starts with the manager, which sends it every
+# run. Put both files in COMPOSE_FILE in .env, with the separator of the
+# machine's system (: on Linux and macOS, ; on Windows):
+#
+#     COMPOSE_FILE=deploy/manager/compose.yaml:deploy/manager/compose.live.yaml
+#
+# WPT_GRAFANA_PASSWORD is then required (docs/observability.md, "The live view").
+include:
+  - ../otel-lgtm/compose.yaml
+
+services:
+  manager:
+    environment:
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-lgtm:4318
+    depends_on:
+      - otel-lgtm

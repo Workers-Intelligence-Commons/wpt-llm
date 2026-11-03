@@ -1083,8 +1083,6 @@ class Repo:
             raise RuleViolation(f"recipe name {name!r}: lowercase a-z, 0-9, '.', '_' and '-' only")
         if document is None:
             document = self.recipe(kind, name)
-        if kind == "tokenizer":
-            self.recipe("mixture", document["mixture"])
         if kind in ("model", "series"):
             self.recipe("mixture", document["data"]["mixture"])
             self.recipe("tokenizer", document["data"]["tokenizer"])

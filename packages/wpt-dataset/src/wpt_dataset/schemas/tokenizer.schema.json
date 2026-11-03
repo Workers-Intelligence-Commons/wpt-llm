@@ -4,10 +4,10 @@
   "title": "WPT tokenizer recipe (data/recipes/tokenizers/<name>.json)",
   "type": "object",
   "additionalProperties": false,
-  "required": ["version", "mixture", "vocab_size"],
+  "required": ["version", "sample_bytes", "vocab_size"],
   "properties": {
     "version": {"type": "integer", "minimum": 1, "description": "the vocabulary's version: raise it to train a new vocabulary (more data, another size, a new tokenizer); until then the locked one is reused"},
-    "mixture": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$", "description": "the documents of this mixture's pools train the vocabulary, each once"},
+    "sample_bytes": {"type": "integer", "minimum": 1, "description": "the bytes of file text, at most, of the seeded sample that trains the vocabulary, drawn from the chosen documents of the first dataset that names it, in its pools' proportions"},
     "vocab_size": {"type": "integer", "minimum": 257, "description": "256 bytes + end-of-document + merges"},
     "note": {"type": "string"}
   }

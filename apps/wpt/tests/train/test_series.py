@@ -4,10 +4,13 @@ recipe's name goes."""
 
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
 from wpt_dataset import build as dataset_build
 from wpt_dataset.build import build_dataset, last_dataset
 from wpt_dataset.repo import Repo
+from wpt_training import WINDOWS
+from wpt_worker.training import drafter_shards
 from wpt.train import main as train
 
 # a series of two sizes of the application tests' tiny model; laws chosen so that C = M and D = M / 2000:
@@ -30,6 +33,20 @@ TINY = {
     "drafter": {"epochs": 1, "prompts": 4, "prompt_tokens": 8, "answer_tokens": 8, "batch": 2, "anchors": 4,
                 "held_out": 0.25},
 }
+
+
+def test_the_drafter_reads_the_shards_the_run_s_steps_read_and_none_past_their_prefix():
+    shards = [{"object": str(number), "tokens": 100} for number in range(4)]
+    spec = {"record": {"shards": shards}}
+
+    def text(prefix):
+        return SimpleNamespace(reads=WINDOWS, settings={"prefix_tokens": prefix})
+
+    turns = SimpleNamespace(reads="conversations", settings={})
+    assert drafter_shards(spec, [text(150)]) == shards[:2]
+    assert drafter_shards(spec, [text(150), text(250), turns]) == shards[:3]  # the longest prefix
+    assert drafter_shards(spec, [text(150), text(0)]) == shards  # one step reads every training token
+    assert drafter_shards(spec, [turns]) == shards  # no text step
 
 
 def test_every_size_of_a_series_builds_one_dataset_and_a_size_trains_on_its_start(built, tmp_path):

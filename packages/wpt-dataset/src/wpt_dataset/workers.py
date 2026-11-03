@@ -16,7 +16,11 @@ and its code_of() of every module whose code a worker's fingerprints hold
 process's, and the store each item is given
 (wpt_store opens the same store there). What it records goes into the
 run's record under the span the asking thread is in (wpt_telemetry's
-join), each item a part of its own.
+join): the worker holds its lines back (Held) and the asking process adds
+them to the record when the item ends, so an item writes no part of the
+record of its own, and a worker that dies loses the lines of its item. A
+ref a worker sets names a result that can be computed again
+(wpt_telemetry.set_result_ref), never a step that cannot be undone.
 
     with Pool(repo, "sources at once") as pool:
         pool.call(function, *arguments, telemetry=telemetry)   # from any thread
@@ -27,15 +31,15 @@ arguments and, as telemetry=, the record it writes to.
 
 import os
 
-from wpt_telemetry import Telemetry
+from wpt_telemetry import START, Telemetry
 from wpt_utils.parallel import Sizing, process_pool
 from wpt_utils.programs import codes, set_code
 
 from .license_check import LicenseTexts
 
 # the modules whose code (wpt_utils.programs.code_of) the fingerprints a worker computes hold: the final tree and
-# its text check (sources), what a source keeps (kept), a source's tokens (build)
-KEYED = ("wpt_dataset.sources", "wpt_dataset.kept", "wpt_dataset.build")
+# its text check (sources), what a source keeps (kept), a source's Markdown and tokens (reading)
+KEYED = ("wpt_dataset.sources", "wpt_dataset.kept", "wpt_dataset.reading")
 # every file that is not Python in the src folders of the packages of the KEYED modules, and whether it enters the
 # keys. None does: the schemas only refuse a document, and the site list only decides which sites a download
 # may reach, so neither decides a saved result. (A compiled module is no entry: it enters by the files that build it.)
@@ -76,11 +80,41 @@ def _start(opener, root: str, found: dict):
     _REPO = opener(root)
 
 
+class Held:
+    """The store a worker records through: the lines it adds wait in
+    `lines`, [(file name, lines)], for the asking process. Every other call
+    goes to the store itself."""
+
+    def __init__(self, store):
+        self.store, self.lines = store, []
+
+    def __getattr__(self, name):
+        return getattr(self.store, name)
+
+    def read_record(self, folder, name):
+        return b"" if name == START else self.store.read_record(folder, name)  # the asking process wrote it
+
+    def append_record(self, folder, name, data):
+        self.lines.append((name, data))
+
+    def flush_records(self):
+        pass
+
+    def __str__(self):
+        return str(self.store)
+
+
 def _run(function, arguments, record_store, command, environment):
+    """(function's result, the error it raised, the lines its record holds
+    back) in a worker."""
     if not environment:
-        return function(*arguments, telemetry=Telemetry.off())
-    with Telemetry.join(record_store, command, {**os.environ, **environment}) as telemetry:
-        return function(*arguments, telemetry=telemetry)
+        return function(*arguments, telemetry=Telemetry.off()), None, []
+    held = Held(record_store)
+    try:
+        with Telemetry.join(held, command, {**os.environ, **environment}) as telemetry:
+            return function(*arguments, telemetry=telemetry), None, held.lines
+    except Exception as error:
+        return None, error, held.lines
 
 
 class Pool:
@@ -110,6 +144,10 @@ class Pool:
         error raised here. With a telemetry, the worker records under the
         span this thread is in."""
         telemetry = telemetry or Telemetry.off()
-        environment = telemetry.child_environment()
-        return self._pool.submit(_run, function, arguments, telemetry.store, telemetry.command,
-                                 environment).result()
+        environment = telemetry.child_environment(flush=False)
+        value, error, lines = self._pool.submit(_run, function, arguments, telemetry.store, telemetry.command,
+                                                environment).result()
+        telemetry.add_lines(lines)
+        if error is not None:
+            raise error
+        return value

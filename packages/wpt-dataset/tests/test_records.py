@@ -6,7 +6,6 @@ import zipfile
 import pytest
 
 from wpt_dataset import markdown
-from wpt_dataset.build import gather
 from wpt_dataset.errors import InvalidFile, LicenseMapError
 from wpt_dataset.manifest import FILE, Entry
 from wpt_dataset.records import Skipped, joined_file, records
@@ -37,13 +36,12 @@ def test_only_records_whose_license_value_is_listed_become_documents_with_their_
         kit.entry(["data/**"], license="CC-BY-4.0", place={"field": "metadata.license"}, expected=["CC-BY"]),
         kit.entry(["data/**"], license="CC0-1.0", place={"field": "metadata.license"}, expected=["CC0"])])
 
-    documents, info, _ = gather(repo, store, log=lambda _: None)
+    documents, info = kit.converted(repo, store)
 
     assert [d.id for d in documents] == [f"{sid}/data/part-0.jsonl.gz#a", f"{sid}/data/part-0.jsonl.gz#c",
                                          f"{sid}/data/part-1.parquet#d"]
-    assert store.get_bytes(documents[0].sha256) == b"first words\n"
-    credits = [json.loads(line) for line in store.get_bytes(info[sid]["credits"]).decode().splitlines()]
-    assert credits == [
+    assert documents[0].markdown == b"first words\n"
+    assert info[sid]["credits"] == [
         {"document": f"{sid}/data/part-0.jsonl.gz#a", "license": "CC-BY-4.0", "credit": {"metadata.url": "https://example.org/a"}},
         {"document": f"{sid}/data/part-0.jsonl.gz#c", "license": "CC0-1.0", "credit": {"metadata.url": "https://example.org/c"}},
         {"document": f"{sid}/data/part-1.parquet#d", "license": "CC0-1.0", "credit": {"metadata.url": "https://example.org/d"}}]
@@ -59,7 +57,7 @@ def test_a_record_of_an_entry_that_does_not_train_is_left_out_alone_and_counted(
         kit.entry(["data/**"], license="CC0-1.0", place={"field": "metadata.license"}, expected=["CC0"],
                   decision=under_review)])
 
-    documents, info, _ = gather(repo, store, log=lambda _: None)
+    documents, info = kit.converted(repo, store)
 
     assert [d.id for d in documents] == [f"{sid}/data/part-0.jsonl.gz#a"]
     check = info[sid]["check"]
@@ -77,7 +75,7 @@ def test_keep_rules_leave_out_records_whose_field_holds_another_value(kit, repo,
         kit.entry(["data/**"], license="CC0-1.0", place={"field": "metadata.license"}, expected=["CC0"])],
         keep=[{"field": "metadata.url", "in": ["https://example.org/d", "https://example.org/e"]}])
 
-    documents, _, _ = gather(repo, store, log=lambda _: None)
+    documents, _ = kit.converted(repo, store)
 
     assert [d.id for d in documents] == [f"{sid}/data/part-1.parquet#d"]
 
@@ -118,10 +116,10 @@ def test_a_record_holding_a_web_page_becomes_its_title_then_the_markdown_of_the_
     sid = pages_source(kit, repo, store, http_folder, {"pages_0.ndjson": [{"identifier": 7, "name": "Page one", "html": page}]},
                        {"title": "name"})
 
-    documents, _, _ = gather(repo, store, log=lambda _: None)
+    documents, _ = kit.converted(repo, store)
 
     assert [d.id for d in documents] == [f"{sid}/pages_0.ndjson#7"]
-    assert store.get_bytes(documents[0].sha256) == b"# Page one\n\nSome *words*.\n\n[image: A map]\n"
+    assert documents[0].markdown == b"# Page one\n\nSome *words*.\n\n[image: A map]\n"
 
 
 def test_of_several_revisions_of_one_record_only_the_newest_enters(kit, repo, store, http_folder):
@@ -139,9 +137,9 @@ def test_of_several_revisions_of_one_record_only_the_newest_enters(kit, repo, st
                            {"identifier": 9, "date_modified": "2025-02-01T00:00:00Z", "html": "<p>9 newer</p>"}]},
         {"newest": "date_modified"})
 
-    documents, _, _ = gather(repo, store, log=lambda _: None)
+    documents, _ = kit.converted(repo, store)
 
-    assert {d.id: store.get_bytes(d.sha256) for d in documents} == {
+    assert {d.id: d.markdown for d in documents} == {
         f"{sid}/pages_0.ndjson#7": b"7 newer\n", f"{sid}/pages_0.ndjson#8": b"8 only\n",
         f"{sid}/pages_0.ndjson#10": b"10 second\n", f"{sid}/pages_1.ndjson#9": b"9 newer\n"}
 
@@ -168,14 +166,13 @@ def test_records_listed_in_one_json_document_take_the_license_of_their_file(kit,
         "formats": [{"format": "records", "paths": ["paper_*/*.json"], "records": "full articles", "text": "article",
                      "id": "id", "credit": ["headline"]}]})
 
-    documents, info, _ = gather(repo, store, log=lambda _: None)
+    documents, info = kit.converted(repo, store)
 
     first, second = f"{sid}/paper_1770/1770-08-23_p1.json#1_1770-08-23_p1.json", \
         f"{sid}/paper_1770/1770-08-30_p1.json#1_1770-08-30_p1.json"
     assert [d.id for d in documents] == [first, second]
-    assert store.get_bytes(documents[1].sha256) == b"second words\n"
-    credits = [json.loads(line) for line in store.get_bytes(info[sid]["credits"]).decode().splitlines()]
-    assert credits == [{"document": first, "license": "LicenseRef-public-domain", "credit": {"headline": "BOSTON"}},
+    assert documents[1].markdown == b"second words\n"
+    assert info[sid]["credits"] == [{"document": first, "license": "LicenseRef-public-domain", "credit": {"headline": "BOSTON"}},
                        {"document": second, "license": "LicenseRef-public-domain", "credit": {"headline": "LONDON"}}]
 
 
@@ -243,13 +240,12 @@ def test_an_issue_takes_its_text_from_one_file_and_its_license_and_credit_from_t
                                text="The publication's own public domain mark.")],
         "formats": [ISSUE_FIELDS]})
 
-    documents, info, _ = gather(repo, store, log=lambda _: None)
+    documents, info = kit.converted(repo, store)
 
     issue = f"{sid}/fulltext/9200396/BibliographicResource_1.xml#1"
     assert [d.id for d in documents] == [issue]
-    assert store.get_bytes(documents[0].sha256) == markdown.text("JOURNAL\nissue 1")
-    credits = [json.loads(line) for line in store.get_bytes(info[sid]["credits"]).decode().splitlines()]
-    assert credits == [{"document": issue, "license": "LicenseRef-public-domain",
+    assert documents[0].markdown == markdown.text("JOURNAL\nissue 1")
+    assert info[sid]["credits"] == [{"document": issue, "license": "LicenseRef-public-domain",
                         "credit": {"$metadata//edm:ProvidedCHO/dc:title": "Journal - 1788-02-01",
                                    "$metadata//edm:dataProvider": "A national library"}}]
 

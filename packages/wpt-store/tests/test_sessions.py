@@ -1,11 +1,14 @@
+import dataclasses
 import hashlib
 import os
 import threading
+import tracemalloc
 
 import boto3
 import pytest
 from moto import mock_aws
 
+import wpt_store
 from wpt_store import (CorruptObject, MissingObject, Placed, Session, database, file_list_bytes, open_store,
                        parse_file_list, sessions)
 
@@ -722,3 +725,56 @@ def test_rows_files_a_crash_left_half_made_or_half_removed_do_not_stop_later_ses
     with store.database() as found:
         assert found.execute("SELECT folder FROM sessions ORDER BY folder").fetchall() == [("after",), ("next",)]
     assert list(store.cache.glob(ROWS + "*")) == []
+
+
+def test_files_fetched_together_are_read_back_from_their_copies_each_frame_fetched_once(reopen, tmp_path, monkeypatch):
+    store = reopen()
+    files = {f"{number}.txt": text(str(number), 300_000) for number in range(12)}
+    with Session(store, "20261025T120000Z-download-x-0001", "download", "abc123", False) as session:
+        placed = {path: session.add(data) for path, data in files.items()}
+        named(session, placed)
+    later = reopen()
+    view = later.copies_in(tmp_path / "copies")
+    asked, read = [], view.kind.read
+
+    def counted(key, start, length=None):
+        asked.append((key, start, length))
+        return read(key, start, length)
+
+    monkeypatch.setattr(view.kind, "read", counted)
+    chosen = [placed["2.txt"], placed["3.txt"], placed["9.txt"]]  # two files share a frame, a third lies apart
+    view.fetch_files(chosen)
+    data = [(start, length) for key, start, length in asked if length is not None and start >= 0]
+    assert len(data) == len(set(data)) and len(data) <= 2  # the frames next to each other go in one request
+    monkeypatch.setattr(view.kind, "read", lambda *_: pytest.fail("a fetched file was read from the store again"))
+    assert [view.read_file(where) for where in chosen] == [files["2.txt"], files["3.txt"], files["9.txt"]]
+
+
+def test_fetching_many_files_never_holds_all_their_frames_at_once(reopen, tmp_path, monkeypatch):
+    # chosen files spread thinly over a bundle touch far more frames than their own bytes; a file that spans
+    # frames stays whole however the frames are cut into runs
+    store = reopen()
+    files = {f"{number}.txt": text(str(number), 1_500_000) for number in range(16)}
+    with Session(store, "20261025T120000Z-download-x-0001", "download", "abc123", False) as session:
+        placed = {path: session.add(data) for path, data in files.items()}
+        named(session, placed)
+    view = reopen().copies_in(tmp_path / "copies")
+    monkeypatch.setattr(wpt_store, "RUN_BYTES", 1)
+    monkeypatch.setattr(wpt_store, "REQUESTS", 1)
+
+    tracemalloc.start()
+    view.fetch_files(list(placed.values()))
+    _, peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+
+    assert peak < sum(map(len, files.values())) / 2
+    assert [view.read_file(where) for where in placed.values()] == list(files.values())
+
+
+def test_a_fetched_file_that_does_not_match_its_sha256_is_refused(reopen, tmp_path):
+    store = reopen()
+    with Session(store, "20261025T120000Z-download-x-0001", "download", "abc123", False) as session:
+        placed = session.add(text("a", 1000))
+        named(session, {"a.txt": placed})
+    with pytest.raises(CorruptObject, match="do not match their sha256"):
+        reopen().copies_in(tmp_path / "copies").fetch_files([dataclasses.replace(placed, sha256="0" * 64)])

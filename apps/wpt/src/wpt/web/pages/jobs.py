@@ -33,8 +33,10 @@ JOBS = {
     "dataset/markdown-check": (("dataset", "markdown-check"), "check the Markdown made from text, xhtml and html "
                                "files", None),
     "dataset/download": (("dataset", "download"), "fetch sources into the store", None),
-    "dataset/build-tokenizer": (("dataset", "build-tokenizer"), "train (or find) the vocabulary of a tokenizer "
-                                "recipe", None),
+    "dataset/exclude-unusable": (("dataset", "exclude-unusable"), "write every unusable file of a source as an "
+                                 "exact-path exclude", None),
+    "dataset/build-tokenizer": (("dataset", "build-tokenizer"), "train (or find) the vocabulary a dataset "
+                                "recipe names", None),
     "dataset/tokenizer-check": (("dataset", "tokenizer-check"), "encode and decode every admitted document with a "
                                 "vocabulary", None),
     "dataset/build": (("dataset", "build"), "build (or find) the data of a model recipe; prints the dataset id",
@@ -60,6 +62,9 @@ JOBS = {
                         None),
     "dataset/probes": (("dataset", "probes"), "the probes of a probe file: how many patterns each holds", None),
     "store/list": (("store", "list"), "every session and every source the store database knows", None),
+    "store/runs": (("store", "runs"), "every run recorded in the store", None),
+    "store/run": (("store", "run"), "one run: its stage, counts, last events and errors; --follow prints its lines "
+                  "until it ends", None),
     "store/mark": (("store", "mark"), "mark sources for a new download in full", None),
     "store/copy-out": (("store", "copy-out"), "a model folder the store keeps, into a new folder of this machine",
                        None),

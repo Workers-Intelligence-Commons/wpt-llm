@@ -171,7 +171,7 @@ def built(tmp_path, monkeypatch):
                                      "steps": [read_text, *steps], "drafter": {**TINY_DRAFTER, **(drafter or {})}})
 
     write("mixture", "m", {"pools": [{"name": "en", "select": "en", "weight": 1}]})
-    write("tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})
+    write("tokenizer", "t", {"version": 1, "sample_bytes": 10**9, "vocab_size": 556})
     dataset_id = build_dataset(repo, recipe(), store, log=lambda _: None)
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())  # where each command run also writes its record
     monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)  # no live backend, whatever this machine sets

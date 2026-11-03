@@ -442,9 +442,12 @@ wins (`WPT_STORE`, the manager's folders, `HOME`, `DOCKER_HOST`).
 | `WPT_LINK_CHECKPOINTS` | `every` or `step-ends` |
 | `DOCKER_HOST` | where the sandboxes run; unset, the machine's own Docker, whose socket the file mounts |
 
-The file includes `deploy/otel-lgtm/compose.yaml`, so the live view starts
-with it ([observability.md](observability.md), "The live view") and
-`WPT_GRAFANA_PASSWORD` is required too. It mounts the checkout at `/repo`:
+The live view ([observability.md](observability.md), "The live view") is
+optional: `deploy/manager/compose.live.yaml`, added to `COMPOSE_FILE`
+(`COMPOSE_FILE=deploy/manager/compose.yaml:deploy/manager/compose.live.yaml`,
+with `;` on Windows), starts it with the manager and points the manager at
+it, and only then is `WPT_GRAFANA_PASSWORD` required. The file mounts the
+checkout at `/repo`:
 the manager runs that code and sends it to its gpu workers. The volume
 `wpt manager` holds the manager's own files: its runs' workers
 (`WPT_MANAGER_STATE`), the model folders before they go into the store,

@@ -20,6 +20,11 @@ asks the shared checks (checks.py) and the license check
                  stays: each record of an entry that does not train is left
                  out when it is read (markdown.documents, `trains`)
 
+A build reads only the files it chose (kept_files): the text check then
+runs on those alone, its answers kept with their Markdown (reading.py), and
+what is left out for its license is decided for the whole tree without
+reading a file of it.
+
 Nothing here asks upstream or changes the source. The license check's
 answer (statements: for each entry, the license text found at its place
 and that text's decision) is computed on every call, a few small reads of
@@ -36,7 +41,7 @@ import dataclasses
 import json
 from dataclasses import dataclass
 
-from wpt_telemetry import Telemetry, set_ref
+from wpt_telemetry import Telemetry, set_result_ref
 from wpt_utils.programs import code_of
 
 from . import license_check, manifest
@@ -63,6 +68,18 @@ class Kept:
         what was left out."""
         return {"statements": self.statements, "left_out": self.left_out}
 
+    def less(self, unreadable: dict[str, str]) -> "Kept":
+        """The same Kept with the files of unreadable, {path: why}, left out
+        as not text."""
+        out = {path: why for path, why in unreadable.items() if path in self.tree}
+        if not out:
+            return self
+        paths = [item for item in self.left_out if "path" in item]
+        paths += [{"why": NOT_TEXT, "path": path, "detail": why} for path, why in out.items()]
+        return dataclasses.replace(self, tree={path: entry for path, entry in self.tree.items() if path not in out},
+                                   left_out=sorted(paths, key=lambda item: item["path"].encode())
+                                   + [item for item in self.left_out if "path" not in item])
+
 
 def kept(source: Source, store, texts: license_check.LicenseTexts, telemetry=None) -> Kept:
     """The source's Kept (see the module's docstring). What final_tree
@@ -77,11 +94,32 @@ def kept(source: Source, store, texts: license_check.LicenseTexts, telemetry=Non
         checked = json.loads(store.get_bytes(held))
     else:
         checked = _checked(source, tree, known, store, found, telemetry)
-        set_ref(store, "source-kept", key, store.put_bytes(json.dumps(checked, ensure_ascii=False).encode()),
+        set_result_ref(store, "source-kept", key, store.put_bytes(json.dumps(checked, ensure_ascii=False).encode()),
                 telemetry)
     out = set(checked["out"])
     return Kept({path: entry for path, entry in tree.items() if path not in out}, known,
                 frozenset(checked["trains"]), found, checked["left_out"], key)
+
+
+def kept_files(source: Source, tree: dict[str, Entry], known: str, store, texts: license_check.LicenseTexts) -> Kept:
+    """A final tree's Kept (known: its manifest object) before any text
+    check: nothing but the statements is read, and nothing is kept under a
+    ref. Kept.less leaves out what a text check finds."""
+    found = [dataclasses.asdict(statement) for statement in statements(source, tree, store, texts)]
+    checked = _left_out(source, tree, found, {})
+    out = set(checked["out"])
+    return Kept({path: entry for path, entry in tree.items() if path not in out}, known,
+                frozenset(checked["trains"]), found, checked["left_out"], kept_key(source, known, found))
+
+
+def skipped_values(skipped: dict) -> dict:
+    """For each records file that left records out, the values no entry
+    lists (`unlisted`) and those of an entry that does not train
+    (`untrained`), each with its count (skipped: markdown.documents')."""
+    values = {path: {kind: {str(value): count for value, count in getattr(found, kind).items()}
+                     for kind in ("unlisted", "untrained") if getattr(found, kind)}
+              for path, found in skipped.items()}
+    return {path: found for path, found in values.items() if found}
 
 
 def kept_key(source: Source, known: str, found: list[dict]) -> str:
@@ -112,12 +150,17 @@ def statements(source: Source, tree: dict[str, Entry], store,
 
 def _checked(source, tree, known, store, found, telemetry) -> dict:
     """{"out": the paths left out, "trains", "left_out"} of one final tree
-    (known: its manifest object) under its statements (found, as dicts)."""
+    (known: its manifest object) under its statements (found, as dicts),
+    every file of it read for the text check."""
+    return _left_out(source, tree, found, not_text(source, tree, known, store, telemetry))
+
+
+def _left_out(source, tree, found, unreadable) -> dict:
+    """_checked's answer, the text check's answer being unreadable."""
     licenses = source.data["licenses"]
     found = [license_check.Statement(**statement) for statement in found]
     trains = {number for number, entry in enumerate(licenses) if license_check.trains(entry, found[number])}
     coverage = license_check.Coverage(licenses)
-    unreadable = not_text(source, tree, known, store, telemetry)
     out, left_out, by_entry = [], [], {}
     for path, entry in tree.items():
         covered = coverage.covered(path, is_records(source, path))

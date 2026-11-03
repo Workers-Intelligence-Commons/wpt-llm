@@ -777,14 +777,18 @@ After the last step, the gpu worker's main process trains the model's drafter
 ([model.md](model.md), "The drafter"): a model and its drafter are one
 unit, so every run trains one, against the final weights, the model frozen,
 with the recipe's `drafter` section. Its prompts are the beginnings of the
-dataset's training documents, and the model alone writes the answers, each
+documents of the training shards the run's steps read: when every step that
+reads text windows reads a prefix, the shards that hold the longest prefix,
+never a shard past it, so the drafter fetches nothing the model never
+trained on (a step that reads every training token, or a run with no such
+step, leaves every shard). The model alone writes the answers, each
 up to the end of a document and, when a step trained on conversations or
 tasks, `<|im_end|>`, the end of a turn: no text people wrote as an answer,
 and no conversation of a step, reaches it. No option skips it. A drafter
 that cannot be trained (too few prompts, a loss that is not finite, no
 draft verified) refuses the run (exit code 2) and writes no model folder;
 every step's result is kept, so the same command trains the drafter again
-without training. The drafter reads the training shards once at the end of
+without training. The drafter reads those shards once at the end of
 the run, one shard at a time, to draw its prompts; from a remote store,
 each shard's local copy is released once read. The disk then holds at most
 one shard only when the shards were not already local: with `--stream`,

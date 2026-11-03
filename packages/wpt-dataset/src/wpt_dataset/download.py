@@ -273,7 +273,7 @@ def remove_unowned_folders() -> list[str]:
 
 
 @contextlib.contextmanager
-def _work_folder():
+def work_folder():
     """A new temporary folder for one download, owned by this process
     through its lock file while the with block runs, then removed."""
     local = LocalFile(Path(tempfile.gettempdir()) / (WORK + secrets.token_hex(8)))
@@ -330,12 +330,11 @@ def one(source: Source, store, session, telemetry=None) -> str | None:
     if stored_upstream(key, store) is not None and not session.marked(source.id):
         _reused(source, key, store, session)
         return REUSED
-    addresses = [source.data["address"]] + [m["address"] for m in source.data.get("mirrors", [])]
     failures = []
-    with _work_folder() as tmp:
+    with work_folder() as tmp:
         pages = _pages(session, source, Path(tmp) / "pages")
-        for number, address in enumerate(addresses):
-            staging, folder = _folders(Path(tmp) / f"address-{number}", session)
+        for number, address in enumerate(addresses(source)):
+            staging, folder = folders(Path(tmp) / f"address-{number}", session)
             sink = _sink(source.data, staging, session)
             try:
                 fetched = _fetch(session, source, address, sink, folder)
@@ -346,7 +345,13 @@ def one(source: Source, store, session, telemetry=None) -> str | None:
             session.line(source.id, DOWNLOADED, code_name(), got={**fetched.got, "manifest": described},
                          address=address, size=size)
             return DOWNLOADED
-    raise _failure(source, failures)
+    raise failure(source, failures)
+
+
+def addresses(source: Source) -> list[str]:
+    """The addresses to try in turn for a source's files: its own, then its
+    mirrors'."""
+    return [source.data["address"]] + [mirror["address"] for mirror in source.data.get("mirrors", [])]
 
 
 def _pages(session, source, folder) -> dict[str, Path]:
@@ -367,7 +372,7 @@ def _pages(session, source, folder) -> dict[str, Path]:
     return pages
 
 
-def _failure(source, failures: list[FetchFailed]) -> FetchFailed:
+def failure(source, failures: list[FetchFailed]) -> FetchFailed:
     """The source's failure when no address gave its files: of the kind
     its main address (the first of failures) failed with, each address and
     its failure named."""
@@ -390,7 +395,7 @@ def _reused(source, key, store, session):
                  size=_stored_size(stored_files(key, store)))
 
 
-def _folders(tmp, session):
+def folders(tmp, session):
     """(the staging folder, reading what the store holds through session,
     and the folder downloads go into) inside tmp, made new."""
     folder = Path(tmp) / "download"

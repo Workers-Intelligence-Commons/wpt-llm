@@ -40,21 +40,31 @@ hot loops in Rust (PyO3, built by maturin when the workspace is installed).
 ## Vocabularies
 
 A vocabulary (the list of merges) is a build result: one per version of a
-tokenizer recipe, shared by every dataset and model that uses it.
+tokenizer recipe, shared by every dataset and model that names it.
 
 `data/recipes/tokenizers/<name>.json`:
 
 ```json
-{ "version": 1, "mixture": "<mixture name>", "vocab_size": 32000, "note": "" }
+{ "version": 1, "sample_bytes": 10000000000, "vocab_size": 32000, "note": "" }
 ```
+
+`sample_bytes` is the size of the sample that trains it, in file bytes.
 
 ### The lock freezes it
 
-The first build of a recipe version trains the vocabulary on the documents
-its mixture selects (each once), and writes
+A dataset recipe names its vocabulary. The first build of a dataset that
+names a recipe version with no lock draws a seeded sample of its own chosen
+documents, each pool taking its weight of `sample_bytes` at most, as the
+start of its chosen documents up to a whole frame's group (the unit the
+choice draws, [data-selection.md](data-selection.md)), trains the
+vocabulary on it (each document once), and writes
 `data/recipes/tokenizers/<name>.lock.json`: the recipe, the vocabulary's
 sha256, and the list of the documents it was trained on, named by its sha256
-(`documents_sha256`) and its number of lines (`document_count`). The list is
+(`documents_sha256`) and its number of lines (`document_count`). `wpt dataset
+build-tokenizer <dataset recipe>` does the same and stops before any token.
+A vocabulary is frozen for good, so such a build stops when a source is left
+out, unless `--skip-failed` asks for it; the lock then lists each source left
+out with the kind of its error (`left_out`). The list is
 one object of the store: a line per document, the JSON array
 `["<id>", "<sha256 of its Markdown>"]`, sorted by the line's bytes, written while the documents are read
 and sorted on disk, so it is never held in memory whole. Commit the lock.
@@ -109,7 +119,7 @@ mean other tokens.
 every admitted source with the locked vocabulary: each must give back its
 exact bytes (`RoundTripFailed` otherwise). It prints, per source, the
 documents, characters, tokens and characters per token, and marks the
-sources the vocabulary was not trained on.
+sources the vocabulary was not trained on. It writes nothing to the store.
 
 A vocabulary file is canonical JSON:
 

@@ -552,7 +552,7 @@ with separate weights:
   weights (`DrafterMismatch`), and no option skips the check.
 - A drafter that cannot be trained (too few prompts, a loss that is not
   finite, no draft verified) fails the run, which writes nothing.
-- The prompts are the beginnings of the dataset's training documents
+- The prompts are the beginnings of the training documents the run read
   (each the document start and its first `prompt_tokens` tokens; the rest
   of the document is never read), and the model alone writes the answers,
   each up to the end of a document and, when a step trained on
@@ -900,7 +900,7 @@ that. Four recipes exist, each of one stage (none yet sets V4's 4K, 16K,
   `watery-tardigrade`'s width of 512 and its experts and has 10 layers
   (layers 4 and 10 CSA, layer 8 HCA), since depth matters more than width
   below 1B parameters ([MobileLLM](https://arxiv.org/abs/2402.14905)). Its
-  vocabulary is the `admitted` mixture's 32,768 tokens, whose two tables
+  vocabulary is the `admitted` recipe's 32,768 tokens, whose two tables
   take 33.6M parameters. It reads 20 tokens per parameter (about 2.93B) as
   2,790 updates of 32 windows of 32K tokens. Both heads' scores over one
   32K window take about 8 GiB in 32-bit, so one 16 GB GPU is estimated to

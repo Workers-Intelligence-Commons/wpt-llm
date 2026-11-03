@@ -439,8 +439,19 @@ STEPS["task"].append(Step("a repository pointer that names its tree by a checksu
                           _task_manifest))
 
 
+SAMPLE_BYTES = 10_000_000_000  # what a vocabulary's sample holds when its recipe gains the field
+
+
+def _sampled_recipe(recipe):
+    """A vocabulary recipe with its mixture gone and the sample size in its place, in the file's field order."""
+    return {("sample_bytes" if key == "mixture" else key): SAMPLE_BYTES if key == "mixture" else value
+            for key, value in recipe.items() if key != "schema"}
+
+
 STEPS["tokenizer"] += [
     Step("no vocabulary version", lambda d: "version" not in d, lambda d, _where: {**d, "version": 1}),
+    Step("a vocabulary trained on a mixture of its own", lambda d: "mixture" in d,
+         lambda d, _where: _sampled_recipe(d)),
 ]
 
 
@@ -467,6 +478,9 @@ STEPS["lock"] += [
          _lock_documents_listed),
     Step("the tokenizer code's version", lambda d: "wpt_tokenizer" in d,
          lambda d, _where: {key: value for key, value in d.items() if key != "wpt_tokenizer"}),
+    # the lock keeps the recipe it was trained under: it moves with the recipe, so the lock stays valid
+    Step("a recipe with a mixture of its own", lambda d: "mixture" in d.get("recipe", {}),
+         lambda d, _where: {**d, "recipe": _sampled_recipe(d["recipe"])}),
 ]
 
 # the `by` that the two steps below replace with SERVICE

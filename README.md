@@ -57,7 +57,7 @@ echo "WPT_STORE=file://$HOME/wpt-store" >> .env    # where fetched and built dat
 uv run wpt doctor                                  # what this machine still lacks, and how to fix it
 
 uv run wpt dataset download                        # every admitted source, into the store
-uv run wpt dataset build classics-test --stream    # convert, tokenize; prints a dataset id
+uv run wpt dataset build classics-test --stream    # choose, convert, tokenize; prints a dataset id
 scripts/detach.sh uv run wpt train classics-test --stream --out runs/first
 uv run wpt eval runs/first                         # memorization and other tests, into the model card
 uv run wpt chat runs/first                         # continue text with the model
@@ -78,10 +78,9 @@ disk:
 
 - `wpt dataset download --stream` keeps no copy on the downloading
   machine of what an S3 store holds.
-- `wpt dataset build --stream` takes each source from the store into a
-  temporary folder, turns it into tokens and deletes the folder; the store
-  keeps their tokens, not their Markdown. The dataset and its id are the
-  same as without it.
+- `wpt dataset build --stream` keeps the Markdown of the documents it
+  chose in a temporary folder deleted when it ends, not in the store's cache
+  folder. The dataset and its id are the same as without it.
 - `wpt train --stream` reads the training shards a few at a time (8 by
   default, about 2 GB, `--stream-shards`) instead of copying them all to
   disk first.

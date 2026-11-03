@@ -13,7 +13,9 @@ PyTorch because no build is part of the default install. uv runs this script
 in its own empty environment, so it works before anything is installed.
 
 On Windows it ends with a note: the folders to leave out of Microsoft
-Defender's scanning, and the command that does it. It changes nothing itself.
+Defender's scanning, and the command that does it. On an AMD GPU that needs
+settings of its own to run, it ends with those settings. It changes nothing
+itself.
 """
 
 import argparse
@@ -28,6 +30,12 @@ from urllib.parse import unquote, urlparse
 ROOT = Path(__file__).resolve().parent.parent
 # PCI vendor ids, in order of preference when a machine has several GPUs
 VENDORS = [("10de", "NVIDIA", "cuda"), ("1002", "AMD", "rocm"), ("8086", "Intel", "xpu")]
+KFD_NODES = Path("/sys/class/kfd/kfd/topology/nodes")  # what the AMD kernel driver reports, one folder per device
+# the AMD chips the ROCm build of pyproject.toml runs only with settings of their own, by the driver's
+# gfx_target_version: {chip: (its name, [(setting, value, why)])}
+AMD_SETTINGS = {110502: ("gfx1152, the Radeon 860M", [
+    ("HSA_OVERRIDE_GFX_VERSION", "11.5.1", "the build holds no code for this chip; this runs the closest chip's"),
+    ("HIP_LAUNCH_BLOCKING", "1", "the recipes of 32 experts crash in their first update without it")])}
 
 
 def gpu_vendors():
@@ -58,6 +66,32 @@ def pick_backend(vendors):
                 continue
             return name, backend
     return None, "cpu"
+
+
+def amd_chips(nodes=KFD_NODES):
+    """The gfx_target_version of every GPU the AMD kernel driver reports."""
+    chips = set()
+    for properties in Path(nodes).glob("*/properties"):
+        try:
+            for line in properties.read_text(encoding="utf-8").splitlines():
+                key, _, value = line.partition(" ")
+                if key == "gfx_target_version" and int(value):
+                    chips.add(int(value))
+        except (OSError, ValueError):
+            continue
+    return chips
+
+
+def amd_note(chips):
+    """What each chip of AMD_SETTINGS needs in the environment of every `wpt`
+    command, as lines to copy."""
+    for chip in sorted(chips & AMD_SETTINGS.keys()):
+        name, settings = AMD_SETTINGS[chip]
+        print(f"\nThis machine's GPU ({name}) needs these settings for GPU work. Set them in the environment "
+              f"(ROCm reads them from there, never from .env):\n")
+        for setting, value, why in settings:
+            print(f"    export {setting}={value}    # {why}")
+        print("\nThis script changed nothing.")
 
 
 def store_folder():
@@ -111,6 +145,8 @@ def main():
     code = subprocess.run([uv, "sync", "--group", backend], cwd=ROOT).returncode
     if sys.platform == "win32":
         defender_note()
+    if backend == "rocm":
+        amd_note(amd_chips())
     sys.exit(code)
 
 

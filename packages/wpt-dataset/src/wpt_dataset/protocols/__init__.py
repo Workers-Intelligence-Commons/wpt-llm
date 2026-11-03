@@ -45,14 +45,16 @@ class Fetched(NamedTuple):
     got: dict
 
 
-def fetch(data: dict, address: str, store, tmp: Path) -> Fetched:
+def fetch(data: dict, address: str, store, tmp: Path, unusable: dict | None = None) -> Fetched:
     """The files a source's protocol gives at one address (with `addresses`,
     each of them into its own folder of the one tree, and of tmp), each
     kept file's content put into store (what a download stores into:
     manifest.Extractor). A failure to reach upstream is a named protocol
     failure (base.named) whose message starts with the address it was
-    for."""
+    for. With a dict as unusable, a file upstream does not give goes into
+    it, {path: why}, and the fetch goes on (Extractor.unusable)."""
     extractor = Extractor(store, data.get("extract", {}))
+    extractor.unusable = unusable
     if data["type"] == EMPTY:
         return Fetched(extractor.finish(), {})
     protocol = PROTOCOLS[data["type"]]

@@ -7,8 +7,10 @@ import stat
 import tarfile
 import subprocess
 import threading
+import urllib.error
 import zipfile
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -19,7 +21,7 @@ from wpt_dataset.errors import (AccessRefused, BadPath, CrawlForbidden, CutFaile
                                 SourceGone, TooManyRequests, UnsupportedEntry)
 from protego import Protego
 
-from wpt_dataset import lfs, retry, robots
+from wpt_dataset import lfs, retry, robots, unusable
 from wpt_dataset.sources import source_tree
 from wpt_utils import programs
 
@@ -494,6 +496,60 @@ def test_a_file_git_stores_with_lfs_is_read_as_the_object_it_points_to_and_fetch
     store.mark([sid])  # a person asks for fresh content: downloaded again, its LFS object taken from the store
     assert [done.value for done in kit.download(repo, store, sid)] == ["downloaded"]
     assert len(fetched) == 1
+
+
+def test_every_unusable_file_of_a_source_is_found_in_one_pass_and_excluded_for_review(
+        kit, repo, store, tmp_path, monkeypatch, capsys):
+    # three LFS objects upstream no longer gives and a file that is not text: one run names all four, where a
+    # download stops at the first. The LFS host's answers are simulated (lfs.py's own test holds its exchange)
+    gone, refused, good = b"a gone object\n", b"an object over its allowance\n", b"a good object\n"
+    lost = b"an object on a host that no longer resolves\n"
+    address, _ = kit.git_project(tmp_path / "dataset", files={
+        "README.md": b"# a dataset\n", "data/gone*.txt": lfs_pointer(gone), "data/lost.txt": lfs_pointer(lost),
+        "data/refused.txt": lfs_pointer(refused), "data/good.txt": lfs_pointer(good),
+        "picture.txt": b"\xff\xd8\xff\xe0 not text"}, executable=set(), symlinks={})
+
+    def download(where, sha256, size, target, user_agent):
+        if sha256 == hashlib.sha256(gone).hexdigest():
+            raise SourceGone(f"{where}: LFS object {sha256}: not held")
+        if sha256 == hashlib.sha256(refused).hexdigest():
+            raise urllib.error.HTTPError(where, 403, "over the allowance", {}, None)
+        if sha256 == hashlib.sha256(lost).hexdigest():
+            raise urllib.error.URLError("Name or service not known")
+        target.write_bytes(good)
+        return target
+
+    monkeypatch.setattr(lfs, "download", download)
+    sid = kit.add_source(repo, store, "example", "dataset", {
+        "type": "git", "address": address, "extract": {"exclude": ["old/**"], "note": "old/ is not ours."},
+        "licenses": [kit.entry(["README.md", "data/**", "picture.txt"])]}, fetch=False)
+    monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+
+    assert cli.main(["--root", str(repo.root), "exclude-unusable", sid]) == 0
+
+    assert "4 files excluded" in capsys.readouterr().out
+    extract = repo.source(sid).data["extract"]
+    assert extract["exclude"] == ["old/**", "data/gone[*].txt", "data/lost.txt", "data/refused.txt", "picture.txt"]
+    assert extract["note"].startswith("old/ is not ours. data/gone*.txt: SourceGone: ")
+    assert "data/refused.txt: HTTPError" in extract["note"] and "picture.txt: " in extract["note"]
+    assert "data/lost.txt: URLError" in extract["note"]
+    assert [done.value for done in kit.download(repo, store, sid)] == ["downloaded"]  # the download now goes through
+    assert set(source_tree(repo.source(sid), store)[0]) == {"README.md", "data/good.txt"}
+
+
+def test_unusable_files_are_found_through_a_mirror_when_the_main_address_is_dead(kit, repo, store, tmp_path, monkeypatch):
+    # a download of this source works, through its mirror: the search for its unusable files must too
+    address, commit = kit.git_project(tmp_path / "dataset", files={"good.txt": b"words\n", "picture.txt": b"\xff\xd8 x"},
+                                      executable=set(), symlinks={})
+    sid = kit.add_source(repo, store, "example", "mirrored", {
+        "type": "git", "address": str(tmp_path / "gone"), "revision": commit, "mirrors": [{"address": address}],
+        "licenses": [kit.entry(["good.txt", "picture.txt"])]}, fetch=False)
+    monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+
+    assert list(unusable.exclude(repo, sid)) == ["picture.txt"]
+
+    with pytest.raises(FetchFailed, match="every address failed"):  # no address gives it: nothing is written
+        unusable.find(SimpleNamespace(id=sid, data={**repo.source(sid).data, "mirrors": []}))
 
 
 def unused_port() -> int:

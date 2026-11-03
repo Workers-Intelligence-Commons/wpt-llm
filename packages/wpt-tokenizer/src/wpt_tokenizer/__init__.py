@@ -16,6 +16,7 @@ ids would mean other tokens.
 """
 
 import json
+import threading
 from collections.abc import Iterable
 from pathlib import Path
 
@@ -24,6 +25,7 @@ from ._native import END, FIRST_MERGE, RUSTC_VERSION, SLOTS, VERSION, Codec, Tra
 __version__ = VERSION
 FORMAT = "wpt-bpe"
 BASE_SIZE = FIRST_MERGE  # 256 bytes, END and the 256 reserved ids
+WATCH_SECONDS = 5  # how often train tells its watcher how many merges it learned
 # The special tokens in use, with their fixed ids; an id once given never
 # changes, and a new one takes the next free id up to 512.
 SPECIAL = {name: END + 1 + i for i, name in enumerate([
@@ -39,7 +41,7 @@ class Tokenizer:
         self._codec = Codec(self.merges)
 
     @classmethod
-    def train(cls, documents: Iterable[bytes], vocab_size: int, slots: int = SLOTS) -> "Tokenizer":
+    def train(cls, documents: Iterable[bytes], vocab_size: int, slots: int = SLOTS, merged=None) -> "Tokenizer":
         """Learn up to vocab_size - 513 merges from the documents.
 
         Fewer merges are learned when no pair of tokens occurs twice anymore.
@@ -48,6 +50,8 @@ class Tokenizer:
         chunks than that has the counts of its rarer chunks approximate, and
         the vocabulary then depends on the order of the documents. The default
         is a fixed number, so a vocabulary never depends on the machine.
+        merged, when given, is called every few seconds while the merges are
+        learned, with the number of merges learned so far.
         """
         if vocab_size < BASE_SIZE:
             raise ValueError(f"vocab_size must be at least {BASE_SIZE} (256 bytes, END and 256 reserved ids), "
@@ -55,7 +59,21 @@ class Tokenizer:
         trainer = Trainer(slots)
         for document in documents:
             trainer.add(document)
-        return cls(trainer.train(vocab_size - BASE_SIZE))
+        if merged is None:
+            return cls(trainer.train(vocab_size - BASE_SIZE))
+        done = threading.Event()
+
+        def watch():
+            while not done.wait(WATCH_SECONDS):
+                merged(trainer.merged())
+
+        watcher = threading.Thread(target=watch, daemon=True)
+        watcher.start()
+        try:
+            return cls(trainer.train(vocab_size - BASE_SIZE))
+        finally:
+            done.set()
+            watcher.join()
 
     @property
     def vocab_size(self) -> int:

@@ -26,15 +26,18 @@ import dataclasses
 import functools
 import glob
 import hashlib
+import http.client
 import io
 import itertools
 import mmap
 import os
 import re
+import ssl
 import stat
 import subprocess
 import tarfile
 import tempfile
+import urllib.error
 import zipfile
 from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
@@ -42,7 +45,7 @@ from pathlib import Path, PurePosixPath
 from wpt_store import CorruptObject
 from wpt_utils.programs import program
 
-from .errors import BadPath, Incomplete, UnsupportedEntry
+from .errors import BadPath, FetchFailed, Incomplete, UnsupportedEntry
 
 FILE, EXECUTABLE, SYMLINK = "100644", "100755", "120000"
 MODES = (FILE, EXECUTABLE, SYMLINK)
@@ -305,6 +308,7 @@ class Extractor:
         self.excluded = Globs(extract.get("exclude", []))
         self.paths: dict[bytes | str, str | None] = {}  # kept's answers: history commits repeat paths
         self.tree: dict[str, Entry] = {}
+        self.unusable: dict[str, str] | None = None  # with a dict, {path: why} of the files upstream did not give
 
     def within(self, folder: str, strip: int | None = None) -> "Extractor":
         """An extractor adding to the same tree, each entry's path (after
@@ -504,6 +508,12 @@ def read_archive(path: Path, extractor: Extractor):
             raise UnsupportedEntry(f"{path.name}: neither a zip nor a tar archive") from error
 
 
+# what asking a host for one file raises when the host refuses it or cannot be reached; a failure here (a full
+# disk) is none of them, so it stops the fetch instead of naming a good file
+FILE_NOT_GIVEN = (FetchFailed, urllib.error.URLError, ConnectionError, TimeoutError, ssl.SSLError,
+                  http.client.HTTPException)
+
+
 def read_git(repo: Path, revision: str, extractor: Extractor, prefix: str = "", known=None,
              large=None) -> dict[str, str]:
     """Entries of a commit, from git's own objects, each path after `prefix`
@@ -514,8 +524,9 @@ def read_git(repo: Path, revision: str, extractor: Extractor, prefix: str = "", 
     kept entry holds its blob's id (Entry.git). large(blob), when given,
     is a local file holding the file a blob stands for when the blob is not
     the file itself (an LFS pointer), None otherwise: that file's bytes are
-    the entry's. Returns the kept submodules, each path with the commit it
-    pins; an excluded submodule is skipped."""
+    the entry's. A failure of large to get that file (FILE_NOT_GIVEN) goes
+    into extractor.unusable, when it has one, and the file is left out. Returns the kept submodules, each
+    path with the commit it pins; an excluded submodule is skipped."""
     known = known or {}
     entries, submodules = [], {}
     for path, mode, kind, object_id in _git_tree(repo, revision, prefix):
@@ -531,7 +542,13 @@ def read_git(repo: Path, revision: str, extractor: Extractor, prefix: str = "", 
             entries.append((path, mode, object_id))
     with contextlib.closing(_git_blobs(repo, [e[2] for e in entries])) as contents:
         for (path, mode, object_id), content in zip(entries, contents):
-            file = large(content) if large is not None and mode != SYMLINK else None
+            try:
+                file = large(content) if large is not None and mode != SYMLINK else None
+            except FILE_NOT_GIVEN as error:
+                if extractor.unusable is None:
+                    raise
+                extractor.unusable[extractor.kept(path)] = f"{type(error).__name__}: {error}"
+                continue
             if file is None:
                 extractor.add(path, mode, content, object_id)
             elif (kept := extractor.kept(path)) is not None:
