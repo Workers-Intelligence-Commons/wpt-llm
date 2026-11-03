@@ -1082,7 +1082,14 @@ their setup through `apps/wpt/tests/conftest.py`.
 `uv run scripts/check.py` runs every check, the same way on any machine
 and in CI (`.github/workflows/ci.yml`, on every pull request and push), so
 a green run before pushing means a green CI. It compares with the upstream
-branch, as a push would:
+branch, as a push would.
+`uv run scripts/check.py --working-tree` checks the files as they are, so
+work needs no commit to be checked. It runs every check below but the
+commits, and the image build tests when the files as they are, new ones git
+does not track yet included, differ in image code from the upstream branch.
+It says that it left the commits out, and a push still needs a run without it.
+
+The checks:
 
 - `uv.lock` matches every `pyproject.toml`.
 - The tests of every package, and the Rust tests. None needs a server: the
@@ -1090,7 +1097,15 @@ branch, as a push would:
   process. The tests run in parallel (pytest-xdist), each process limited
   to one PyTorch thread and kept off the GPU, as in CI, since a GPU that
   shares the machine's memory gives every process its own share of it; a
-  plain `uv run pytest` still uses the GPU. The number of processes is
+  plain `uv run pytest` still uses the GPU. A test passes in both. One whose
+  claim a GPU cannot hold keeps its programs off the GPU in both (the
+  `on_the_cpu` fixture of the root `conftest.py`): a comparison of two
+  trainings bit for bit, since two runs on one GPU differ
+  ([training.md](training.md), "What is exactly repeatable"), and several
+  processes of a training on one machine, since NCCL refuses two processes on
+  one GPU. A limit in seconds on what a test waits for stands far above what
+  that takes, so other work on the machine does not reach it. The number of
+  processes is
   fixed before they start, so it comes from `wpt_utils.parallel.limit`,
   the rule's form for a count fixed in advance. The check first runs a
   sample of the tests (every 40th, in collection order) alone, and

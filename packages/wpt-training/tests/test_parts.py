@@ -259,13 +259,12 @@ def assert_counts_add_up(found, model, routed, processes, T, segment, routing):
     assert_routed_alike(added, routed, routing)
 
 
-def split_runs(tmp_path, monkeypatch, recompute, runs, routing):
-    """Each run (processes, window length, segment) on CPU processes (gloo)
-    gives the whole window's losses and gradients, the gradients summed over
-    the processes, its validation loss, and, for each process, the scores
-    and balancing counts of its slice of the window."""
-    monkeypatch.setenv("CUDA_VISIBLE_DEVICES", "")
-    monkeypatch.setenv("HIP_VISIBLE_DEVICES", "")
+def split_runs(tmp_path, recompute, runs, routing):
+    """Each run (processes, window length, segment) on CPU processes (gloo:
+    the caller takes the on_the_cpu fixture) gives the whole window's losses
+    and gradients, the gradients summed over the processes, its validation
+    loss, and, for each process, the scores and balancing counts of its slice
+    of the window."""
     script = tmp_path / "worker.py"
     script.write_text(WORKER, encoding="utf-8", newline="\n")
     for processes, T, segment in runs:
@@ -293,17 +292,17 @@ def split_runs(tmp_path, monkeypatch, recompute, runs, routing):
 
 
 @RECOMPUTE
-def test_a_window_split_across_processes_trains_as_the_whole_window(tmp_path, monkeypatch, recompute, routing):
+def test_a_window_split_across_processes_trains_as_the_whole_window(tmp_path, on_the_cpu, recompute, routing):
     # DeepSeek-V4's contextual parallelism on 2 and 4 CPU processes: 512
     # tokens in slices of 256 or 128, the KDA memory combined from every
     # slice's transform, the merged entries gathered
-    split_runs(tmp_path, monkeypatch, recompute, [(2, 512, 0), (4, 512, 0)], routing)
+    split_runs(tmp_path, recompute, [(2, 512, 0), (4, 512, 0)], routing)
 
 
 @RECOMPUTE
-def test_a_window_split_across_processes_in_segments_trains_as_the_whole_window(tmp_path, monkeypatch, recompute,
+def test_a_window_split_across_processes_in_segments_trains_as_the_whole_window(tmp_path, on_the_cpu, recompute,
                                                                                 routing):
     # 768 tokens on 2 processes in segments of 128: three parts of 256
     # tokens, each split in two, so every process trains its slice as three
     # segments and the parts hand on what they pass on, gradients included
-    split_runs(tmp_path, monkeypatch, recompute, [(2, 768, 128)], routing)
+    split_runs(tmp_path, recompute, [(2, 768, 128)], routing)

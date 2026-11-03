@@ -9,6 +9,7 @@
 
 Usage:
     uv run scripts/check.py [--base REV] [--range RANGE]
+    uv run scripts/check.py --working-tree [--base REV]
 
 In order, each one run even when an earlier one failed:
 
@@ -18,8 +19,9 @@ In order, each one run even when an earlier one failed:
               and its memory was measured: on as many processes as 75% of the cores and
               75% of the available memory (that memory each) both allow; the image build
               test (marked image_build) only when BASE..HEAD changes
-              IMAGE_CODE or an image's folder (plain `uv run pytest` runs
-              every test, serially)
+              IMAGE_CODE or an image's folder, or with --working-tree when the
+              files as they are differ there from BASE (plain `uv run pytest`
+              runs every test, serially)
     rust      the tokenizer's Rust tests
     data      wpt dataset check: the data rules
     sources   wpt dataset check --fetch SMALL_SOURCE: one small source fetched and
@@ -32,6 +34,11 @@ origin/main), RANGE to BASE..HEAD: what a push would send. CI passes both
 from the push or pull request. The tools come from the machine, as in CI:
 uv, git, cargo, and mercurial and GnuPG for the sources that need them.
 Exits with 1 when a check failed.
+
+With --working-tree, the files are checked as they are, committed or not, and
+the commits check is left out, since work not committed has no commit to read.
+A green run then says nothing about the commits: a push still needs a run
+without it.
 """
 
 import argparse
@@ -56,6 +63,8 @@ IMAGE_CODE = ("packages/wpt-agent/src/wpt_agent/images.py", "apps/wpt/tests/agen
               "packages/wpt-dataset/src/wpt_dataset/schemas/image-licenses.schema.json")
 # whether an image's folder changed since the revision: only the service layer names the data folder
 IMAGES_CHANGED = "import sys; from wpt_dataset.repo import Repo; print(Repo('.').changed_since(sys.argv[1])[1])"
+# the same for the files as they are, whose changes include the new files git does not track yet
+IMAGES_DIFFER = "import sys; from wpt_dataset.repo import Repo; print(Repo('.').images_differ(sys.argv[1]))"
 # the one source fetched, a short book, small enough to download on every run: it proves
 # the fetch and its checks work; the sources a pull request adds or changes are fetched by
 # the maintainer
@@ -81,26 +90,44 @@ def upstream_base():
         found = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
         if found.returncode == 0:
             return found.stdout.strip()
-    sys.exit("no upstream branch to compare with: pass --base and --range")
+    sys.exit("no upstream branch to compare with: pass --base, and --range without --working-tree")
 
 
-def image_tests(base):
-    """pytest's arguments for the image build test, and the line that says
-    whether it runs and why: it runs only when base..HEAD changes a file of
-    IMAGE_CODE or an image's folder."""
-    changed = subprocess.run(["git", "diff", "--name-only", base, "HEAD"], cwd=ROOT, capture_output=True, text=True)
-    if changed.returncode:
-        sys.exit(f"git diff --name-only {base} HEAD failed: {changed.stderr.strip()}")
-    touched = [path for path in changed.stdout.splitlines() if path in IMAGE_CODE]
-    folders = subprocess.run([UV, "run", "python", "-c", IMAGES_CHANGED, base], cwd=ROOT, env=ENVIRON,
-                             capture_output=True, text=True)
+def changed_paths(base, working_tree):
+    """The paths that changed since base: up to HEAD, what a push sends, or
+    with working_tree up to the files as they are, new ones git does not
+    track yet included."""
+    commands = ([["git", "diff", "--name-only", base], ["git", "ls-files", "--others", "--exclude-standard"]]
+                if working_tree else [["git", "diff", "--name-only", base, "HEAD"]])
+    paths = []
+    for command in commands:
+        found = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
+        if found.returncode:
+            sys.exit(f"{' '.join(command)} failed: {found.stderr.strip()}")
+        paths += found.stdout.splitlines()
+    return paths
+
+
+def images_changed(base, working_tree):
+    """Whether an image's folder changed since base."""
+    folders = subprocess.run([UV, "run", "python", "-c", IMAGES_DIFFER if working_tree else IMAGES_CHANGED, base],
+                             cwd=ROOT, env=ENVIRON, capture_output=True, text=True)
     if folders.returncode:
         sys.exit(f"cannot tell whether an image's folder changed since {base}: {folders.stderr.strip()}")
-    if folders.stdout.strip() == "True":
+    return folders.stdout.strip() == "True"
+
+
+def image_tests(base, working_tree):
+    """pytest's arguments for the image build test, and the line that says
+    whether it runs and why: it runs only when the paths changed since base
+    hold a file of IMAGE_CODE or an image's folder."""
+    touched = [path for path in changed_paths(base, working_tree) if path in IMAGE_CODE]
+    if images_changed(base, working_tree):
         touched.append("an image's folder under data/images/")
+    what = "the working tree" if working_tree else "this push"
     if touched:
-        return [], f"the image build test runs: this push changes {', '.join(touched)}"
-    return ["-m", "not image_build"], "the image build test is left out: this push changes no image code"
+        return [], f"the image build test runs: {what} changes {', '.join(touched)}"
+    return ["-m", "not image_build"], f"the image build test is left out: {what} changes no image code"
 
 
 def sample_of(test_ids, every=SAMPLE_EVERY):
@@ -130,29 +157,32 @@ def test_processes(deselect):
     return count, f"{len(sample)} sample tests ran alone ({'passed' if code == 0 else 'FAILED'}); {held}\n{why}"
 
 
-def checks(base, range_):
-    """(name, what to run) of every check: what to run is a function that
-    gives (commands, folder, the line printed before them or None, the
-    environment they run in), called when the check starts."""
+def checks(base, range_, working_tree=False):
+    """(name, what to run) of every check, with working_tree all but the
+    commits: what to run is a function that gives (commands, folder, the line
+    printed before them or None, the environment they run in), called when the
+    check starts."""
     # inside the folder, so rustup applies rust-toolchain.toml; through uv, so the
     # Rust build finds the project's Python even where none is on the search path
     rust = ROOT / "packages" / "wpt-tokenizer" / "rust"
 
     def tests():
-        deselect, why = image_tests(base)
+        deselect, why = image_tests(base, working_tree)
         count, sizing = test_processes(deselect)
         return ([[UV, "run", "pytest", "-rs", "-n", str(count), "--dist", "loadgroup", *deselect]], ROOT,
                 f"{sizing}\n{why}", ENVIRON)
 
-    return [
+    every = [
         ("lock", lambda: ([[UV, "lock", "--check"]], ROOT, None, ENVIRON)),
         ("tests", tests),
         ("rust", lambda: ([[UV, "run", "rustc", "--version"], [UV, "run", "cargo", "test"]], rust, None,
                           with_python_library())),
         ("data", lambda: ([[UV, "run", "wpt", "dataset", "check"]], ROOT, None, ENVIRON)),
         ("sources", lambda: ([[UV, "run", "wpt", "dataset", "check", "--fetch", SMALL_SOURCE]], ROOT, None, ENVIRON)),
-        ("commits", lambda: ([[UV, "run", "wpt", "dataset", "check-commits", range_]], ROOT, None, ENVIRON)),
     ]
+    if working_tree:
+        return every
+    return [*every, ("commits", lambda: ([[UV, "run", "wpt", "dataset", "check-commits", range_]], ROOT, None, ENVIRON))]
 
 
 def run(commands, folder, env):
@@ -171,18 +201,24 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--base", help="revision the push starts from, which decides whether the image build test runs (default: where HEAD left its upstream)")
     parser.add_argument("--range", dest="range_", help="commits to check (default: BASE..HEAD)")
+    parser.add_argument("--working-tree", action="store_true",
+                        help="check the files as they are, committed or not, and leave out the commits check")
     args = parser.parse_args()
+    if args.working_tree and args.range_:
+        parser.error("--range names commits to check, and --working-tree checks none")
     base = args.base or upstream_base()
     range_ = args.range_ or f"{base}..HEAD"
 
     results = []
-    for name, prepare in checks(base, range_):
+    for name, prepare in checks(base, range_, args.working_tree):
         print(f"\n== {name}", flush=True)
         commands, folder, why, env = prepare()
         if why:
             print(why, flush=True)
         results.append((name, run(commands, folder, env)))
     print("\n" + "\n".join(f"{'passed' if ok else 'FAILED'}  {name}" for name, ok in results))
+    if args.working_tree:
+        print("left out  commits: a push still needs a run without --working-tree", flush=True)
     sys.exit(0 if all(ok for _, ok in results) else 1)
 
 

@@ -13,6 +13,10 @@ import wpt_telemetry
 from wpt_store import LocalStore, open_store
 from wpt_telemetry import ENDPOINT, FLUSH_THREAD, RecordError, Telemetry
 
+# Seconds a test gives what it waits for, far more than a loaded machine holds a thread back: it
+# costs nothing, since the wait ends when the thing happens; only a test that fails waits them out.
+PATIENCE = 120
+
 
 def record(store, folder, name):
     return json.loads(store.read_record(folder, name))
@@ -292,7 +296,7 @@ def test_a_record_that_broke_in_the_background_ends_the_run_in_record_error(tmp_
     try:
         with pytest.raises(RecordError, match="No space left on device"):
             with Telemetry.start(store, "wpt-example", [], "d", env_file=tmp_path / ".env", environ={}) as telemetry:
-                time.sleep(0.5)  # the flush thread fails meanwhile
+                telemetry._flusher.join(PATIENCE)  # it ends once a send failed
     finally:
         signal.signal(signal.SIGINT, previous)
     assert "end.json" not in store.record_files(telemetry.folder)
@@ -303,12 +307,14 @@ def test_a_send_refused_in_the_background_interrupts_the_run_before_its_next_rec
     # and as a record failure, not as a stop the user asked for
     refused_in_the_background(monkeypatch)
     store = open_store((tmp_path / "store").as_uri())
-    started = time.monotonic()
+    finished = False
     with pytest.raises(RecordError, match="No space left on device"):
         with Telemetry.start(store, "wpt-example", [], "d", env_file=tmp_path / ".env", environ={}):
-            while time.monotonic() - started < 30:  # work that records nothing
+            started = time.monotonic()
+            while time.monotonic() - started < PATIENCE:  # work that records nothing
                 pass
-    assert time.monotonic() - started < 10
+            finished = True
+    assert not finished  # the end of the run would raise the same error
 
 
 @pytest.mark.skipif(not hasattr(signal, "pthread_kill"), reason="Windows interrupts only between Python lines")
@@ -321,18 +327,19 @@ def test_a_send_refused_in_the_background_ends_a_wait_of_the_main_thread(tmp_pat
 
     refused_in_the_background(monkeypatch)
     store = open_store((tmp_path / "store").as_uri())
-    started = time.monotonic()
+    finished = False
     with pytest.raises(RecordError, match="No space left on device"):
         with Telemetry.start(store, "wpt-example", [], "d", env_file=tmp_path / ".env", environ={}):
             if waiting == "sleep":
-                time.sleep(30)
+                time.sleep(PATIENCE)
             else:
-                with subprocess.Popen([sys.executable, "-c", "import time; time.sleep(30)"]) as child:
+                with subprocess.Popen([sys.executable, "-c", f"import time; time.sleep({PATIENCE})"]) as child:
                     try:
                         child.wait()
                     finally:
                         child.kill()
-    assert time.monotonic() - started < 10
+            finished = True
+    assert not finished  # the end of the run would raise the same error
 
 
 def test_a_ctrl_c_while_a_broken_record_closes_still_ends_in_record_error(tmp_path, monkeypatch):
@@ -374,7 +381,7 @@ def test_an_interruption_that_left_the_lock_taken_does_not_stop_the_record_from_
         closed.set()
 
     threading.Thread(target=run, daemon=True).start()
-    assert closed.wait(10)
+    assert closed.wait(PATIENCE)
 
 
 def test_a_record_failure_while_the_record_starts_ends_in_record_error_not_a_stop(tmp_path, monkeypatch):
@@ -390,8 +397,8 @@ def test_a_record_failure_while_the_record_starts_ends_in_record_error_not_a_sto
     monkeypatch.setattr(LocalStore, "_raw_write_record", slow)
     store = open_store((tmp_path / "store").as_uri())
     with pytest.raises(RecordError, match="No space left on device"):
-        with Telemetry.start(store, "wpt-example", [], "d", env_file=tmp_path / ".env", environ={}):
-            time.sleep(1)
+        with Telemetry.start(store, "wpt-example", [], "d", env_file=tmp_path / ".env", environ={}) as telemetry:
+            telemetry._flusher.join(PATIENCE)  # it ends once a send failed
 
 
 def test_a_bad_file_name_or_a_mixed_file_is_the_callers_error_and_the_record_goes_on(tmp_path):
@@ -458,8 +465,21 @@ def test_after_the_run_ends_every_recording_call_is_refused(tmp_path, monkeypatc
 def test_the_end_of_a_run_waits_about_one_timeout_per_kind_for_a_backend_that_never_answers(tmp_path, monkeypatch):
     # docs/observability.md bounds the wait at the end of a run by the
     # exporter's timeout for each of the three kinds of data, however many
-    # batches a silent backend left waiting
+    # batches a silent backend left waiting: at most one send of each kind
+    # waits once the run ends, and each lasts the timeout set here
     monkeypatch.setenv("OTEL_EXPORTER_OTLP_TIMEOUT", "1")
+    real = wpt_telemetry._Failure.send
+    ending_sends = []
+
+    def counting(self, export, batch, success, failure):  # success: which kind of data this is
+        def counted(batch):
+            if self.closing:
+                ending_sends.append(success)
+            return export(batch)
+
+        return real(self, counted, batch, success, failure)
+
+    monkeypatch.setattr(wpt_telemetry._Failure, "send", counting)
     silent = socket.socket()
     silent.bind(("127.0.0.1", 0))
     silent.listen(64)  # the system accepts the connections; nothing ever answers
@@ -473,4 +493,5 @@ def test_the_end_of_a_run_waits_about_one_timeout_per_kind_for_a_backend_that_ne
         waited = time.monotonic() - ending
     finally:
         silent.close()
-    assert waited < 3 * 1 + 2  # three kinds, one timeout each, and some slack
+    assert ending_sends and len(ending_sends) == len(set(ending_sends))
+    assert waited < 25  # the default timeout of 10 seconds would take 30; far above the 3 this one takes, for a loaded machine

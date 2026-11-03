@@ -39,6 +39,10 @@ on every commit, an allowed signature on every commit that changes a
 green CI. It needs a git clone with an upstream branch; elsewhere pass
 `--base` and `--range`.
 
+To check work before committing it, run `uv run scripts/check.py
+--working-tree`: every check but the commits, on the files as they are. The
+push still needs the run above.
+
 Commits are signed off (`git commit -s`): CI refuses any commit without a
 `Signed-off-by` line.
 
@@ -442,6 +446,12 @@ what the whole text gives (docs/model.md, "What a layer passes on").
 - Test isolation: a test never writes into the real store, cache or user
   settings; set `WPT_STORE`, `XDG_CACHE_HOME` and `LOCALAPPDATA` to the
   test's own folder when it touches them.
+- A test passes both alone and under pytest-xdist. One that compares two
+  trainings bit for bit, or runs several processes of a training on this
+  machine, takes the `on_the_cpu` fixture of the root `conftest.py`
+  (docs/architecture.md, "Checks").
+- A test that must see something happen waits for that thing, not for a
+  length of time, and a limit in seconds stands far above what it takes.
 - The app's tests share their setup (a dataset built from a git
   project, a tiny trained model) through the `built` and `trained`
   fixtures in `apps/wpt/tests/conftest.py`; the builders of throwaway

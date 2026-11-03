@@ -157,9 +157,10 @@ def test_the_hardware_options_stay_out_of_a_step_s_fingerprint(built, tmp_path, 
     assert "step 1 read-text: reused" in capsys.readouterr().out
 
 
-def test_the_steps_after_a_reused_one_train_as_in_a_run_of_every_step(built, tmp_path):
+def test_the_steps_after_a_reused_one_train_as_in_a_run_of_every_step(built, on_the_cpu, tmp_path):
     # reusing a kept step gives its weights, so what follows learns the same
-    # as in a run that trained every step itself
+    # as in a run that trained every step itself; on the CPU, since two runs
+    # on a GPU differ even with no step reused (docs/training.md, "What is exactly repeatable")
     sid = built.source(tmp_path / "talks", {"talks.jsonl": (json.dumps(TALK) + "\n").encode()},
                        [{"format": "chat", "paths": ["**"]}], [{"tags": ["answer-as-assistant"], "paths": ["**"]}],
                        "Talks, by Bo Speaker, 2026", "Bo Speaker dedicates these talks to the public domain.\n")

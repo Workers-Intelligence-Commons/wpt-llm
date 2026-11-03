@@ -25,7 +25,9 @@ from wpt_worker.link import Key
 class Fake(Provider):
     """Rents gpu workers as processes of this machine, with the token the
     manager set; a rental of several is a cluster, its workers in the place
-    of the rental's name at the machine's private address. With lose, the
+    of the rental's name at the machine's private address. The fixture keeps
+    them off the GPU: each stands for a machine of its own, and NCCL refuses
+    two processes on one GPU. With lose, the
     first worker it rents ends right after it gave its address, as a machine
     the provider takes back. failures: how many stops fail first."""
 
@@ -75,13 +77,13 @@ Fake.cluster_of = {}
 
 
 @pytest.fixture
-def fake(built, tmp_path, monkeypatch):
+def fake(built, on_the_cpu, tmp_path, monkeypatch):
     Fake.calls, Fake.processes, Fake.lose, Fake.failures, Fake.cluster_of = [], {}, False, 0, {}
     monkeypatch.setattr(rental, "providers", lambda: {"fake": Fake})
     monkeypatch.setenv("WPT_RENTAL_PROVIDER", "fake")
     monkeypatch.setenv("FAKE_FOLDER", str(tmp_path / "rented"))
     monkeypatch.setenv("WPT_RECIPE", "d")
-    monkeypatch.setenv("WPT_KERNELS", "pytorch")  # the fake rents this machine, which may have no GPU
+    monkeypatch.setenv("WPT_KERNELS", "pytorch")  # the fake's workers have no GPU
     yield Fake
     for group in Fake.cluster_of.values():
         for process, _, _ in group:

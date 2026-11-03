@@ -1,6 +1,5 @@
 import json
 import threading
-import time
 from types import SimpleNamespace
 
 import pytest
@@ -157,13 +156,15 @@ def test_a_send_refused_in_the_background_stops_the_evaluation_before_its_next_r
 
     monkeypatch.setattr(wpt_telemetry, "FLUSH_SECONDS", 0.02)
     monkeypatch.setattr(LocalStore, "_raw_flush_records", refused_in_the_background)
-    test = tmp_path / "long.py"  # works for 30 seconds without recording anything
-    test.write_text("import time\nfrom wpt.eval import Result\n\ndef run(context):\n"
-                    "    started = time.monotonic()\n    while time.monotonic() - started < 30:\n        pass\n"
+    finished = tmp_path / "finished"
+    test = tmp_path / "long.py"  # works without recording anything, far longer than a loaded machine delays the stop
+    test.write_text("import pathlib, time\nfrom wpt.eval import Result\n\ndef run(context):\n"
+                    "    started = time.monotonic()\n    while time.monotonic() - started < 120:\n        pass\n"
+                    f"    pathlib.Path({str(finished)!r}).touch()\n"
                     "    return Result(data={}, text='')\n")
-    started = time.monotonic()
     with pytest.raises(SystemExit) as stopped:
         main([str(trained.folder), str(test)])
-    assert stopped.value.code == 3 and time.monotonic() - started < 15
+    assert stopped.value.code == 3
+    assert not finished.exists()  # the end of the run would give the same code
     assert "No space left on device" in capsys.readouterr().err
     assert not (trained.folder / "evals").exists()

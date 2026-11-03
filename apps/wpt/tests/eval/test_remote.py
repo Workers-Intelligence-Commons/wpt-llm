@@ -17,14 +17,8 @@ from wpt_tokenizer import END
 from wpt_worker.evaluation import Served
 from wpt_worker.link import Key
 
-ON_CPU = {"CUDA_VISIBLE_DEVICES": "", "HIP_VISIBLE_DEVICES": ""}
+pytestmark = pytest.mark.usefixtures("on_the_cpu")
 PROMPTS = [[END, 5, 6, 7, 8], [END, 9, 10, 11, 12], [END, 13, 14, 15, 16]]
-
-
-@pytest.fixture(autouse=True)
-def on_the_cpu(monkeypatch):
-    for name, value in ON_CPU.items():
-        monkeypatch.setenv(name, value)
 
 
 def test_the_model_on_a_gpu_worker_writes_what_the_same_model_in_this_process_writes(trained):

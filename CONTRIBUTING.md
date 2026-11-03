@@ -368,6 +368,7 @@ an older shape, not when that shape changed.
 ```sh
 uv run scripts/setup.py      # once per machine: installs the right PyTorch build
 uv run scripts/check.py      # every check CI runs, before you push
+uv run scripts/check.py --working-tree   # the same on work not committed yet, without the commit checks
 ```
 
 `scripts/check.py` is what CI runs too: the tests of every package, the Rust

@@ -5,7 +5,8 @@ from concurrent.futures import ThreadPoolExecutor
 
 import pytest
 
-from wpt_utils.parallel import Done, Machine, Processes, Sizing, Threads, each, in_order, limit, peak, process_pool
+from wpt_utils.parallel import (SAMPLE, Done, Machine, Processes, Sizing, Threads, each, in_order, limit, peak,
+                                process_pool)
 
 GB = 1e9
 
@@ -146,12 +147,15 @@ def test_items_just_started_count_as_taking_their_share_before_the_measures_show
     assert peak == 7
 
 
-def test_instant_items_are_not_slowed_by_the_measures():
-    # every start measures again; measuring must not wait SAMPLE (0.1 s) each time, which would take 20 s here
-    start = time.monotonic()
-    results, _ = run(Sizing("instant items"), range(200), lambda item: item)
+def test_instant_items_are_not_slowed_by_the_measures(monkeypatch):
+    # every start measures the idle cores again; only the first measure may wait SAMPLE, or these items would take 20 s
+    real, waits = time.sleep, []
+    monkeypatch.setattr(time, "sleep", lambda seconds: waits.append(seconds) or real(seconds))
+    machine = Machine()
+    monkeypatch.setattr(machine, "memory", lambda: None)  # the idle cores alone decide, however full this machine is
+    results, _ = run(sizing_of(machine), range(200), lambda item: item)
     assert results == list(range(200))
-    assert time.monotonic() - start < 5.0
+    assert waits.count(SAMPLE) <= 1
 
 
 def test_an_item_s_failure_is_raised_at_its_turn_after_the_results_before_it():

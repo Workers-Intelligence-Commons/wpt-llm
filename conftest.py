@@ -1,8 +1,8 @@
 """Shared setup for the tests of every package and application: one
 PyTorch thread and no GPU per test process when pytest-xdist runs the tests
-in parallel (scripts/check.py), whether Docker runs on this machine and a
-Debian-based image the sandbox tests run in, how two passes over the same
-tokens may differ in routing, and the builders of throwaway repositories,
+in parallel (scripts/check.py), the `on_the_cpu` fixture, whether Docker runs
+on this machine and a Debian-based image the sandbox tests run in, how two
+passes over the same tokens may differ in routing, and the builders of throwaway repositories,
 upstream projects and HTTP servers (the `kit` fixture and the fixtures
 beside it), which the tests of wpt-dataset and those of the app's
 `wpt dataset` use. Test files reach them as fixtures (they cannot import
@@ -29,6 +29,8 @@ from wpt_dataset import license_check, manifest, protocols, sources
 from wpt_dataset.repo import Repo, address_hash, dump_json
 from wpt_store import open_store
 
+NO_GPU = {"CUDA_VISIBLE_DEVICES": "", "HIP_VISIBLE_DEVICES": ""}  # the settings that hide every GPU from a program
+
 # In a pytest-xdist worker, PyTorch and the programs it starts use 1 thread
 # and no GPU, as in CI: every worker taking every core makes the machine
 # unusable, and on a GPU that shares the machine's memory every worker
@@ -38,7 +40,7 @@ from wpt_store import open_store
 # a serial run keeps the defaults and the GPU.
 if "PYTEST_XDIST_WORKER" in os.environ:
     os.environ["OMP_NUM_THREADS"] = os.environ["MKL_NUM_THREADS"] = "1"
-    os.environ["CUDA_VISIBLE_DEVICES"] = os.environ["HIP_VISIBLE_DEVICES"] = ""
+    os.environ.update(NO_GPU)
 
 
 def pytest_configure(config):
@@ -51,6 +53,14 @@ def pytest_configure(config):
     except ImportError:
         return
     torch.set_num_threads(1)
+
+
+@pytest.fixture
+def on_the_cpu(monkeypatch):
+    """Every program the test starts sees no GPU, in a serial run too, where
+    this machine's GPU would otherwise be theirs (docs/architecture.md, "Checks")."""
+    for name, value in NO_GPU.items():
+        monkeypatch.setenv(name, value)
 
 
 @pytest.fixture(scope="session")

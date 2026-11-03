@@ -88,7 +88,8 @@ def test_a_job_runs_the_subcommand_with_the_arguments_given_and_its_lines_are_fo
     assert status == 200 and started["command"] == "wpt dataset check --fetch a b"
     view, lines = followed(request, started["id"])
     assert view["state"] == "succeeded" and view["exit_code"] == 0 and view["ended"]
-    assert lines == [{"stream": "stdout", "text": "checked --fetch a b"}, {"stream": "stderr", "text": "a warning"}]
+    assert sorted(lines, key=lambda line: line["stream"], reverse=True) == [  # each stream has its own reader
+        {"stream": "stdout", "text": "checked --fetch a b"}, {"stream": "stderr", "text": "a warning"}]
     status, failed = request("POST", "/api/jobs/dataset/check", {"args": ["--fail"]})
     view, _ = followed(request, failed["id"])
     assert view["state"] == "failed" and view["exit_code"] == 3
@@ -98,9 +99,9 @@ def test_a_job_runs_the_subcommand_with_the_arguments_given_and_its_lines_are_fo
 def test_lines_are_followed_from_the_number_asked_for(web):
     request, _, _ = web
     job = request("POST", "/api/jobs/dataset/check", {})[1]["id"]
-    followed(request, job)
+    _, lines = followed(request, job)
     status, rest = request("GET", f"/api/jobs/{job}/lines/1")
-    assert status == 200 and rest == {"first": 1, "next": 2, "lines": [{"stream": "stderr", "text": "a warning"}]}
+    assert status == 200 and rest == {"first": 1, "next": 2, "lines": lines[1:]}
     assert request("GET", f"/api/jobs/{job}/lines/5")[1] == {"first": 2, "next": 2, "lines": []}
     assert request("GET", f"/api/jobs/{job}/lines/x")[0] == 404
 

@@ -17,7 +17,7 @@ from safetensors.torch import load_file
 from wpt.train import LOST, main
 from wpt_worker.link import Key, LinkError
 
-ON_CPU = {"CUDA_VISIBLE_DEVICES": "", "HIP_VISIBLE_DEVICES": ""}  # gloo on every system, no GPU needed
+pytestmark = pytest.mark.usefixtures("on_the_cpu")  # gloo on every system, no GPU needed
 
 
 def one_stage(steps):
@@ -28,7 +28,7 @@ def start_worker(stack, tmp_path, name) -> Key:
     """A gpu worker of its own, for one manager, as a person would start
     one; its key."""
     process = subprocess.Popen([sys.executable, "-m", "wpt_worker", "--local"], stdout=subprocess.PIPE, text=True,
-                               env={**os.environ, **ON_CPU, "WPT_WORKER_FOLDER": str(tmp_path / name)})
+                               env={**os.environ, "WPT_WORKER_FOLDER": str(tmp_path / name)})
     stack.callback(process.wait, 120)
     stack.callback(process.stdout.close)
     return Key.parse(process.stdout.readline())
@@ -36,7 +36,7 @@ def start_worker(stack, tmp_path, name) -> Key:
 
 def train(built, tmp_path, recipe, out, workers="", *options):
     subprocess.run([sys.executable, "-m", "wpt", "train", recipe, built.dataset_id, "--out", out, "--strategy", "ddp",
-                    *options], cwd=tmp_path, env={**os.environ, **ON_CPU, "WPT_GPU_WORKERS": workers}, check=True)
+                    *options], cwd=tmp_path, env={**os.environ, "WPT_GPU_WORKERS": workers}, check=True)
     return load_file(tmp_path / out / "model.safetensors")
 
 

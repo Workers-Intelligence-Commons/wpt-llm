@@ -1780,6 +1780,12 @@ class Repo:
         existing = set(self.source_ids())
         return sorted(ids & existing), any(p.startswith("data/images/") for p in changed), sorted(ids - existing)
 
+    def images_differ(self, revision: str) -> bool:
+        """Whether the files under data/images/ as they are differ from the
+        git revision, the new files git does not track yet included."""
+        new = self._git("ls-files", "--others", "--exclude-standard", "--", "data/images").stdout
+        return self.changed_since(revision)[1] or bool(new)
+
     def _show(self, commit: str, path: str) -> bytes | None:
         result = self._git("show", f"{commit}:{path}", check=False)
         return result.stdout if result.returncode == 0 else None

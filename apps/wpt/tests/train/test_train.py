@@ -142,12 +142,11 @@ def test_drafter_feature_layers_the_model_does_not_have_are_refused_before_train
     assert not [e for e in built.records("wpt train")[-1].events if e.get("name") == "training.step"]
 
 
-def test_kernels_named_that_cannot_work_on_the_gpu_worker_refuse_the_run_before_training(built, monkeypatch, capsys):
+def test_kernels_named_that_cannot_work_on_the_gpu_worker_refuse_the_run_before_training(built, on_the_cpu, monkeypatch,
+                                                                                         capsys):
     # docs/model.md, "Attention": a named form is the one that runs or the
     # run stops with the reason, never another form; here a worker with no
     # GPU asked for Triton's kernels. A name that is no form is refused too
-    for name, value in ON_CPU.items():
-        monkeypatch.setenv(name, value)  # the local gpu worker's processes see no GPU
     with pytest.raises(SystemExit) as refused:
         main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model", "--kernels", "triton"])
     assert refused.value.code == 2
@@ -466,22 +465,17 @@ def test_a_dataset_built_from_another_recipe_data_is_refused(built, tmp_path, ca
     assert not (tmp_path / "model").exists()
 
 
-ON_CPU = {"CUDA_VISIBLE_DEVICES": "", "HIP_VISIBLE_DEVICES": ""}  # gloo on every system, no GPU needed
-
-
 def weights(folder):
     return load_file(folder / "model.safetensors")
 
 
-def test_two_processes_train_the_same_model_as_one(built, tmp_path):
+def test_two_processes_train_the_same_model_as_one(built, on_the_cpu, tmp_path):
     # the batch is global: 2 processes of 2 windows each, or 1 process adding up
     # 2 passes of 2 windows, must take the same steps, dropout included
-    env = {**os.environ, **ON_CPU}
     recipe = built.recipe("four", training=one_stage(4))
     for out, command in [("one", ["-m", "wpt", "train", "--micro-batch", "2"]), ("two", ["-m", "wpt", "train", "--processes", "2", "--strategy", "ddp"])]:
         forget_steps(built.store)  # the hardware is no part of a step's fingerprint: each run trains
-        subprocess.run([sys.executable, *command, recipe, built.dataset_id, "--out", out],
-                       cwd=tmp_path, env=env, check=True)
+        subprocess.run([sys.executable, *command, recipe, built.dataset_id, "--out", out], cwd=tmp_path, check=True)
 
     one, two = weights(tmp_path / "one"), weights(tmp_path / "two")
     assert one.keys() == two.keys()
@@ -491,18 +485,17 @@ def test_two_processes_train_the_same_model_as_one(built, tmp_path):
     assert provenance["strategy"]["processes"] == 2
 
 
-def test_split_windows_in_segments_train_the_same_model_as_one_process(built, tmp_path):
+def test_split_windows_in_segments_train_the_same_model_as_one_process(built, on_the_cpu, tmp_path):
     # docs/training.md, "Long windows": 2 processes split each 512-token
     # window, each running its slice in segments of 128 tokens, one window
     # per pass; the batch of 2 windows takes 2 passes in each process, and
     # the model is the one a single process trains on whole windows
-    env = {**os.environ, **ON_CPU}
     recipe = built.recipe("split", training=one_stage(2, 512, 2))
     for out, options in [("one", []), ("two", ["--processes", "2", "--strategy", "split", "--micro-batch", "1",
                                               "--segment", "128"])]:
         forget_steps(built.store)
         subprocess.run([sys.executable, "-m", "wpt", "train", recipe, built.dataset_id, "--out", out, *options],
-                       cwd=tmp_path, env=env, check=True)
+                       cwd=tmp_path, check=True)
 
     one, two = weights(tmp_path / "one"), weights(tmp_path / "two")
     assert one.keys() == two.keys()
@@ -714,19 +707,17 @@ def test_a_stopped_run_saves_its_step_and_continues_on_another_machine(built, tm
     assert built.store.get_ref("checkpoints", "fox-1") is None and not built.store.has(saved)
 
 
-def test_a_crashed_run_starts_again_on_its_own(built, tmp_path):
+def test_a_crashed_run_starts_again_on_its_own(built, on_the_cpu, tmp_path):
     # a long run must survive a crash nobody watches: the processes start again
     # and continue from the checkpoint, without anyone typing --resume
     options = [*interrupting(
         built, tmp_path, "if os.environ.get('CRASH') and os.environ['TORCHELASTIC_RESTART_COUNT'] == '0': "
                          "raise RuntimeError('power cut')"), "--checkpoint-every", "2"]
-    env = {**os.environ, **ON_CPU}
-    subprocess.run([sys.executable, "-m", "wpt", "train", *options, "--out", "whole"],
-                   cwd=tmp_path, env=env, check=True)
+    subprocess.run([sys.executable, "-m", "wpt", "train", *options, "--out", "whole"], cwd=tmp_path, check=True)
     forget_steps(built.store)
     run = subprocess.run([sys.executable, "-m", "wpt", "train", *options, "--out", "restarted"],
-                         cwd=tmp_path, env={**env, "CRASH": "1", "WPT_MAX_RESTARTS": "1"}, capture_output=True,
-                         text=True)
+                         cwd=tmp_path, env={**os.environ, "CRASH": "1", "WPT_MAX_RESTARTS": "1"},
+                         capture_output=True, text=True)
 
     assert run.returncode == 0, run.stderr
     assert "power cut" in run.stderr and "starting every process again (1 of 1 restarts)" in run.stderr
