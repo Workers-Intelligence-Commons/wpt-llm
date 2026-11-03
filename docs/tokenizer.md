@@ -33,6 +33,9 @@ hot loops in Rust (PyO3, built by maturin when the workspace is installed).
   tokenizer's code, never measured from the machine, so a vocabulary never
   depends on the machine that trained it; it keeps reading and learning
   together within about 25 GB.
+- The learning step uses every core of the machine: the merges come one
+  after the other, and the work inside each one is shared between threads.
+  It gives the same vocabulary as on one core, whatever the number of cores.
 
 ## Vocabularies
 

@@ -11,14 +11,15 @@
 //! ASCII whitespace, or a run of whitespace. The rule looks at bytes only, so
 //! results never depend on a Unicode version.
 //!
-//! Training is deterministic: it runs on one thread, and when two pairs are
-//! equally frequent the pair with the smaller (left, right) ids wins. Chunks
+//! Training is deterministic: the merges are the same on any machine and with any number of threads, and
+//! when two pairs are equally frequent the pair with the smaller (left, right) ids wins. Chunks
 //! are counted in a table of a fixed number of slots (Summary), so the memory
 //! does not grow with the corpus.
 
 use std::cmp::Reverse;
 use std::cell::RefCell;
-use std::collections::{BinaryHeap, HashMap, HashSet};
+use std::collections::{BinaryHeap, HashMap};
+use std::ops::Range;
 use std::sync::{Arc, Mutex, Weak};
 use std::thread::{self, ThreadId};
 
@@ -218,23 +219,117 @@ impl Trainer {
     }
 
     /// Learn up to `n_merges` merges from the table's chunks and counts; stops early when no pair occurs
-    /// twice. Returns the merges in the order learned, as (left id, right id).
-    fn train(&self, py: Python<'_>, n_merges: usize) -> Vec<Pair> {
-        py.detach(|| learn(self.table.entries().into_iter().map(|(chunk, count, _)| (chunk, count)).collect(), n_merges))
+    /// twice. Returns the merges in the order learned, as (left id, right id). `threads`: how many threads
+    /// work on a merge (default: the machine's); the merges are the same for any number.
+    #[pyo3(signature = (n_merges, threads = None))]
+    fn train(&self, py: Python<'_>, n_merges: usize, threads: Option<usize>) -> PyResult<Vec<Pair>> {
+        let threads = match threads {
+            Some(0) => return Err(PyValueError::new_err("training needs at least 1 thread")),
+            Some(threads) => threads,
+            None => thread::available_parallelism().map_or(1, |n| n.get()),
+        };
+        Ok(py.detach(|| {
+            let entries = self.table.entries().into_iter().map(|(chunk, count, _)| (chunk, count)).collect();
+            learn_on(entries, n_merges, threads, SLICE_MIN)
+        }))
     }
 }
 
-/// Learn merges from distinct chunks and their counts, sorted by chunk bytes so nothing depends on hash order.
-fn learn(entries: Vec<(&[u8], u64)>, n_merges: usize) -> Vec<Pair> {
-    let mut words: Vec<Vec<u32>> = entries.iter().map(|(w, _)| w.iter().map(|&b| b as u32).collect()).collect();
-    let freq: Vec<i64> = entries.iter().map(|&(_, c)| c as i64).collect();
+/// Words per slice at least: fewer words than twice this stay on the calling thread, since a thread costs more
+/// than the work it would take.
+const SLICE_MIN: usize = 4096;
 
-    let mut pair_count: HashMap<Pair, i64> = HashMap::new();
-    let mut where_: HashMap<Pair, HashSet<usize>> = HashMap::new();
-    for (i, word) in words.iter().enumerate() {
+/// What one slice of words gives back for one merge: the change of each pair's count (a pair a word lost or
+/// gained, zero included) and the words that now hold each new pair.
+struct Rewritten {
+    delta: HashMap<Pair, i64>,
+    holders: HashMap<Pair, Vec<usize>>, // ascending
+}
+
+/// The slices `0..len` is cut into: as many as `threads`, none with fewer than `min_slice` items, one when the
+/// work is small. They depend on `len`, `threads` and `min_slice` only.
+fn slices(len: usize, threads: usize, min_slice: usize) -> Vec<Range<usize>> {
+    let count = (len / min_slice.max(1)).clamp(1, threads.max(1));
+    let size = len.div_ceil(count);
+    (0..count).map(|k| (k * size).min(len)..((k + 1) * size).min(len)).collect()
+}
+
+/// `work` on each part, the results in part order. A single part runs on the calling thread.
+fn per_part<P: Send, T: Send>(parts: Vec<P>, work: impl Fn(P) -> T + Sync) -> Vec<T> {
+    if parts.len() == 1 {
+        return parts.into_iter().map(work).collect();
+    }
+    thread::scope(|scope| {
+        let work = &work;
+        let handles: Vec<_> = parts.into_iter().map(|part| scope.spawn(move || work(part))).collect();
+        handles.into_iter().map(|handle| handle.join().unwrap_or_else(|panic| std::panic::resume_unwind(panic))).collect()
+    })
+}
+
+/// Rewrite, in place, the words of `affected` that hold `pair`. `words` starts at the word `base`, and holds
+/// all of `affected`, which is ascending.
+fn rewrite(words: &mut [Vec<u32>], base: usize, freq: &[i64], affected: &[usize], pair: Pair, new_id: u32) -> Rewritten {
+    let mut out = Rewritten { delta: HashMap::new(), holders: HashMap::new() };
+    for &i in affected {
+        let word = &mut words[i - base];
+        if !pairs_of(word).any(|p| p == pair) {
+            continue;
+        }
+        let merged = merge_word(word, pair, new_id);
         for p in pairs_of(word) {
-            *pair_count.entry(p).or_insert(0) += freq[i];
-            where_.entry(p).or_default().insert(i);
+            *out.delta.entry(p).or_insert(0) -= freq[i];
+        }
+        for p in pairs_of(&merged) {
+            *out.delta.entry(p).or_insert(0) += freq[i];
+            let held = out.holders.entry(p).or_default();
+            if held.last() != Some(&i) {
+                held.push(i);
+            }
+        }
+        *word = merged;
+    }
+    out
+}
+
+/// Learn merges from distinct chunks and their counts, sorted by chunk bytes so nothing depends on hash order.
+///
+/// The merges come one after the other, since each depends on the counts the earlier ones left. The work
+/// inside one merge is independent between words: it runs on `threads` threads over slices of the words, and
+/// the slices' results are combined in slice order, so the merges are the same for any number of threads.
+/// `min_slice`: the fewest words a slice holds.
+fn learn_on(entries: Vec<(&[u8], u64)>, n_merges: usize, threads: usize, min_slice: usize) -> Vec<Pair> {
+    let freq: Vec<i64> = entries.iter().map(|&(_, c)| c as i64).collect();
+    let mut words: Vec<Vec<u32>> = per_part(slices(entries.len(), threads, min_slice), |slice| {
+        entries[slice].iter().map(|(w, _)| w.iter().map(|&b| b as u32).collect::<Vec<u32>>()).collect::<Vec<_>>()
+    })
+    .into_iter()
+    .flatten()
+    .collect();
+
+    // each slice counts its own words; the slices' tables are added in slice order, so a pair's words stay in
+    // ascending order
+    let counted = per_part(slices(words.len(), threads, min_slice), |slice| {
+        let mut count: HashMap<Pair, i64> = HashMap::new();
+        let mut holders: HashMap<Pair, Vec<usize>> = HashMap::new();
+        for i in slice {
+            for p in pairs_of(&words[i]) {
+                *count.entry(p).or_insert(0) += freq[i];
+                let held = holders.entry(p).or_default();
+                if held.last() != Some(&i) {
+                    held.push(i);
+                }
+            }
+        }
+        (count, holders)
+    });
+    let mut pair_count: HashMap<Pair, i64> = HashMap::new();
+    let mut where_: HashMap<Pair, Vec<usize>> = HashMap::new();
+    for (count, holders) in counted {
+        for (p, c) in count {
+            *pair_count.entry(p).or_insert(0) += c;
+        }
+        for (p, mut held) in holders {
+            where_.entry(p).or_default().append(&mut held);
         }
     }
     // max count first; on a tie, the smallest pair
@@ -252,28 +347,37 @@ fn learn(entries: Vec<(&[u8], u64)>, n_merges: usize) -> Vec<Pair> {
         let new_id = FIRST_MERGE + merges.len() as u32;
         merges.push(pair);
 
-        let mut affected: Vec<usize> = where_.remove(&pair).unwrap_or_default().into_iter().collect();
+        // the words listed under the pair, once each, in ascending order (a list may name a word more than
+        // once, or one that no longer holds the pair)
+        let mut affected = where_.remove(&pair).unwrap_or_default();
         affected.sort_unstable();
-        let mut changed: HashSet<Pair> = HashSet::new();
-        for i in affected {
-            if !pairs_of(&words[i]).any(|p| p == pair) {
-                continue;
+        affected.dedup();
+        // each slice of `affected` gets the stretch of `words` it covers, so the threads rewrite in place
+        let parts = slices(affected.len(), threads, min_slice);
+        let mut rest = &mut words[..];
+        let mut base = 0;
+        let mut stretches = Vec::new();
+        for (k, part) in parts.iter().enumerate() {
+            let end = parts.get(k + 1).map_or(base + rest.len(), |next| affected[next.start]);
+            let (stretch, tail) = rest.split_at_mut(end - base);
+            stretches.push((stretch, base, &affected[part.clone()]));
+            rest = tail;
+            base = end;
+        }
+        let rewritten = per_part(stretches, |(stretch, base, affected)| rewrite(stretch, base, &freq, affected, pair, new_id));
+        let mut changed: Vec<Pair> = Vec::new();
+        for part in rewritten {
+            for (p, d) in part.delta {
+                *pair_count.entry(p).or_insert(0) += d;
+                changed.push(p);
             }
-            let merged = merge_word(&words[i], pair, new_id);
-            for p in pairs_of(&words[i]) {
-                *pair_count.get_mut(&p).unwrap() -= freq[i];
-                changed.insert(p);
+            for (p, mut held) in part.holders {
+                where_.entry(p).or_default().append(&mut held);
             }
-            for p in pairs_of(&merged) {
-                *pair_count.entry(p).or_insert(0) += freq[i];
-                where_.entry(p).or_default().insert(i);
-                changed.insert(p);
-            }
-            words[i] = merged;
         }
         pair_count.remove(&pair);
-        let mut changed: Vec<Pair> = changed.into_iter().collect();
         changed.sort_unstable();
+        changed.dedup();
         for p in changed {
             if let Some(&c) = pair_count.get(&p)
                 && c > 0
@@ -485,5 +589,73 @@ mod tests {
         assert!(ids.iter().all(|one| *one == codec.encode_bytes(b"ab ab abc")));
         // the four threads ended: only this one's cache is left
         assert_eq!(codec.caches.lock().unwrap().keys().collect::<Vec<_>>(), vec![&thread::current().id()]);
+    }
+
+    /// Byte-pair merges by recounting every pair of every word after each merge (nothing shared with `learn_on`).
+    fn recounted(entries: &[(&[u8], u64)], n_merges: usize) -> Vec<Pair> {
+        let mut words: Vec<Vec<u32>> = entries.iter().map(|(w, _)| w.iter().map(|&b| b as u32).collect()).collect();
+        let mut merges = Vec::new();
+        while merges.len() < n_merges {
+            let mut counts: HashMap<Pair, u64> = HashMap::new();
+            for (word, (_, n)) in words.iter().zip(entries) {
+                for p in word.windows(2) {
+                    *counts.entry((p[0], p[1])).or_insert(0) += n;
+                }
+            }
+            let Some((&pair, &best)) = counts.iter().min_by_key(|&(&p, &n)| (Reverse(n), p)) else { break };
+            if best < 2 {
+                break;
+            }
+            let new_id = FIRST_MERGE + merges.len() as u32;
+            merges.push(pair);
+            words = words.iter().map(|w| merge_word(w, pair, new_id)).collect();
+        }
+        merges
+    }
+
+    /// `count` distinct chunks of `alphabet` letters, up to `longest` long, with counts from 1 to `top`.
+    fn random_chunks(seed: u64, count: usize, alphabet: u8, longest: usize, top: u64) -> Vec<(Vec<u8>, u64)> {
+        let mut state = seed;
+        let mut next = move |n: u64| {
+            state = state.wrapping_mul(6364136223846793005).wrapping_add(1442695040888963407);
+            (state >> 33) % n
+        };
+        let mut seen = std::collections::BTreeMap::new();
+        while seen.len() < count {
+            let word: Vec<u8> = (0..1 + next(longest as u64)).map(|_| b'a' + next(alphabet as u64) as u8).collect();
+            seen.insert(word, 1 + next(top));
+        }
+        seen.into_iter().collect()
+    }
+
+    fn borrowed(chunks: &[(Vec<u8>, u64)]) -> Vec<(&[u8], u64)> {
+        chunks.iter().map(|(w, n)| (&w[..], *n)).collect()
+    }
+
+    #[test]
+    fn every_thread_count_learns_the_merges_of_a_recount() {
+        let handmade: Vec<(Vec<u8>, u64)> =
+            [("aaab", 3), ("aab", 2), ("abab", 5), ("baba", 5), ("ab", 9), ("b", 1)].iter().map(|&(w, n)| (w.as_bytes().to_vec(), n)).collect();
+        let ties = random_chunks(1, 3000, 4, 9, 1); // every count is 1: nearly every choice is a tie
+        let mixed = random_chunks(2, 3000, 6, 12, 40);
+        let repeated: Vec<(Vec<u8>, u64)> = (0..40).map(|k| (b"abcab".repeat(30 + k), 1 + k as u64 % 3)).collect();
+        for (name, chunks) in [("handmade", handmade), ("ties", ties), ("mixed", mixed), ("repeated", repeated)] {
+            let entries = borrowed(&chunks);
+            let expected = recounted(&entries, 200);
+            assert!(expected.len() > 3, "{name} learns something");
+            for threads in [1, 2, 3, 8] {
+                // a slice of 16 words, so that the slices and the threads really are used
+                assert_eq!(learn_on(entries.clone(), 200, threads, 16), expected, "{name} on {threads} threads");
+            }
+        }
+    }
+
+    #[test]
+    fn small_inputs_stay_on_one_slice_and_large_ones_split_in_order() {
+        assert_eq!(slices(0, 8, 4096), vec![0..0]);
+        assert_eq!(slices(8191, 8, 4096), vec![0..8191]);
+        let split = slices(10, 4, 1);
+        assert_eq!(split, vec![0..3, 3..6, 6..9, 9..10]);
+        assert_eq!(slices(3, 4, 1).into_iter().flatten().collect::<Vec<_>>(), vec![0, 1, 2]);
     }
 }

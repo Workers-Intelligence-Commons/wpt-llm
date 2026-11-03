@@ -157,6 +157,18 @@ def test_with_few_slots_every_document_is_read_and_each_count_is_within_its_boun
     assert again.entries() == held and again.train(100) == trainer.train(100)
 
 
+def test_any_number_of_threads_learns_the_same_merges():
+    documents = corpus()
+    expected = reference_merges(true_counts(documents), 100)
+    trainer = Trainer()
+    for document in documents:
+        trainer.add(document)
+    assert trainer.train(100) == expected
+    assert [trainer.train(100, threads=threads) for threads in (1, 2, 7)] == [expected] * 3
+    with pytest.raises(ValueError, match="at least 1 thread"):
+        trainer.train(100, threads=0)
+
+
 def test_a_trainer_needs_a_slot():
     with pytest.raises(ValueError, match="at least 1 slot"):
         Trainer(0)
