@@ -76,6 +76,8 @@ class Changed(Exception):
 class Folder:
     """A store's files under one local folder, each key a path below it."""
 
+    ahead = False  # whether a read waits so long that several are worth keeping in flight (wpt_store.ahead)
+
     def __init__(self, root):
         self.root = Path(root)
 
@@ -258,6 +260,8 @@ class Bucket:
     upload of this process, UPLOADS at most at once in total (_Parts); a
     replace in parts puts its condition on the request that completes it,
     which S3 and R2 refuse as they refuse a conditional single upload."""
+
+    ahead = True
 
     def __init__(self, client, bucket, prefix, part=PART):
         self.client, self.bucket, self.prefix, self.part = client, bucket, prefix.strip("/"), part

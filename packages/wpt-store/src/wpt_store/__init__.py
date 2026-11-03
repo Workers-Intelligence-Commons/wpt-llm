@@ -88,6 +88,7 @@ from wpt_utils.files import lock_file, sha256_file, unlock_file
 from wpt_utils.parallel import Sizing, in_order
 
 from . import blocks, database, sessions
+from .ahead import REQUESTS, Ahead
 from .errors import CorruptObject, MissingObject, MixedRecord, StoreError, StoreSettingError
 from .kinds import UPLOADS, Absent, Bucket, Folder, atomic_copy, sync_file, sync_folder
 from .names import NAME, NAME_CHARACTERS, as_record_name, check_record_name, check_ref
@@ -100,8 +101,8 @@ OPEN = ".open"  # the end of the key of the plain file a local store adds a reco
 TAIL = 64 << 10  # bytes read at a compressed file's end for its seek table: the whole table up to 8,000 frames
 DOWNLOAD = 64 << 20  # bytes of one file fetched in one request, when a whole file is copied from the store
 FRAMES_KEPT = 64  # decompressed frames kept in memory for range reads (about 64 MB)
-READ_AHEAD = 16  # frames one range read fetches at most when it needs some that are not kept: about 16 MB per
-# request, fewer than FRAMES_KEPT so that all of them stay kept
+READ_AHEAD = 16  # frames one range read of a kind that reads in place (a folder) fetches at most when it needs some
+# that are not kept: about 16 MB per request, fewer than FRAMES_KEPT so that all of them stay kept
 TABLES_KEPT = 1024  # seek tables kept in memory
 KEYS_KEPT = 1 << 16  # keys files were found under (compressed or not) kept in memory
 
@@ -164,6 +165,7 @@ class Store:
         self._copies = Folder(self.cache)  # the local copies of bundles, read through the same five operations
         self._record_kinds = {}  # (folder, name) -> WHOLE or APPENDED, as this store learned it
         self._tables, self._frames, self._keys = _Kept(TABLES_KEPT), _Kept(FRAMES_KEPT), _Kept(KEYS_KEPT)
+        self._ahead = Ahead()  # reads of a kind that waits (S3) with several requests in flight
         self._compressing, self._compressing_lock = None, threading.Lock()
         # record lines added and not yet sent: (folder, name) -> [(time, number, data)]; see _raw_append_record
         self._writer, self._pending, self._added, self._last = secrets.token_hex(4), {}, 0, 0
@@ -577,10 +579,16 @@ class Store:
             return b""
         found = {i: self._frames.get((key, i)) for i in frames}
         wanted = [i for i in frames if found[i] is None]
+        if not wanted and kind.ahead:
+            self._ahead.reached(key, table, frames[-1], lambda at, count: kind.read(key, at, count)[0])
         if wanted:
             first = wanted[0]
-            last = max(wanted[-1], min(first + READ_AHEAD, len(table.sizes)) - 1)
-            data = kind.read(key, table.stored[first], table.stored[last + 1] - table.stored[first])[0]
+            if kind.ahead:  # the blocks after those needed are requested ahead, not with this read
+                first, last = self._ahead.cover(table, first, wanted[-1])
+                data = self._ahead.fetch(key, table, first, last, lambda at, count: kind.read(key, at, count)[0])
+            else:
+                last = max(wanted[-1], min(first + READ_AHEAD, len(table.sizes)) - 1)
+                data = kind.read(key, table.stored[first], table.stored[last + 1] - table.stored[first])[0]
             for i in range(first, last + 1):
                 if found.get(i) is None:
                     frame = self._frames.get((key, i))  # another thread may have kept it meanwhile
@@ -662,6 +670,7 @@ class Store:
         for stored in (key, key + PACKED):
             self._tables.drop(lambda kept: kept == stored)
             self._frames.drop(lambda kept: kept[0] == stored)
+            self._ahead.forget(stored)
 
     # Record folders
 
@@ -959,9 +968,10 @@ class S3Store(Store):
                 aws_session_token=self.settings.get("session_token"),
                 endpoint_url=self.settings.get("endpoint_url"),
                 region_name=self.settings.get("region", S3_DEFAULT_REGION),
-                # as many open connections as the upload parts at once, and as a whole file's copy fetches
+                # as many open connections as the upload parts at once, as a whole file's copy fetches, and as the reads
+                # in flight at once (wpt_store.ahead)
                 config=Config(ignore_configured_endpoint_urls=True,
-                              max_pool_connections=UPLOADS + Sizing("downloads").limit))
+                              max_pool_connections=UPLOADS + Sizing("downloads").limit + REQUESTS))
         self.client = client
         cache = Path(cache_dir) if cache_dir else _default_cache() / bucket / (self.prefix or "_")
         super().__init__(Bucket(self.client, bucket, self.prefix), cache)

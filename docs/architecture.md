@@ -731,6 +731,18 @@ That limit is set for network work, not by the cores; a part starts only
 while the memory rule of `wpt_utils.parallel` allows. Refs are written as
 they are.
 
+Reads from S3 keep the same many connections busy. A compressed file's
+frames are fetched in blocks of 8 frames, one request each, and a read
+requests the blocks it needs together, at most 8 requests in flight per
+process. When a reader goes through a file in order (a large file, or a
+bundle's files one after another), the blocks after the one it works on
+are requested ahead, so its next data arrives while it processes the
+current data. The compressed bytes requested ahead and not yet taken stay
+within 64 MB per process. A request ahead that fails raises at the read
+that takes its block. What a read returns, and so what a build writes,
+does not depend on the timing. A local folder reads in place, one request
+at a time.
+
 A session is one run of one downloading command, named by its run
 record's folder. The files it stores go into its own bundles of about
 4 GB, cut only between files; a larger file gets a bundle of its own.

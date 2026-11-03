@@ -578,3 +578,85 @@ def test_a_ranged_read_whose_answer_is_cut_while_read_is_asked_again_up_to_the_f
                 bucket.read("file", 2, 4)
         assert len(cut.asked) == tries
         assert {request["Range"] for request in cut.asked} == {"bytes=2-5"}
+
+
+class SlowAnswers:
+    """A client whose get_object answers after a delay, counting the requests in flight, and raising `fail` for a
+    request that starts at or after the byte `fail_from`."""
+
+    def __init__(self, client, delay=0.05, fail_from=None, fail=None):
+        self.client, self.delay, self.fail_from, self.fail = client, delay, fail_from, fail
+        self.lock, self.now, self.most = threading.Lock(), 0, 0
+
+    def __getattr__(self, name):
+        return getattr(self.client, name)
+
+    def get_object(self, **request):
+        start = request.get("Range", "bytes=0-").removeprefix("bytes=").split("-")[0]
+        with self.lock:
+            self.now += 1
+            self.most = max(self.most, self.now)
+        try:
+            time.sleep(self.delay)
+            if self.fail_from is not None and start.isdigit() and int(start) >= self.fail_from:
+                raise self.fail
+            return self.client.get_object(**request)
+        finally:
+            with self.lock:
+                self.now -= 1
+
+
+def stored_text(tmp_path, monkeypatch, **slow):
+    """(a client over moto, a store over it reading with frames of one block each, the object's sha256, its bytes):
+    a text of 12 frames stored through one store and read back through another with an empty cache."""
+    import random
+
+    from wpt_store import S3Store, ahead
+
+    for name, value in {"AWS_ACCESS_KEY_ID": "test", "AWS_SECRET_ACCESS_KEY": "test",
+                        "AWS_DEFAULT_REGION": "us-east-1"}.items():
+        monkeypatch.setenv(name, value)
+    monkeypatch.delenv("AWS_ENDPOINT_URL", raising=False)
+    monkeypatch.delenv("AWS_PROFILE", raising=False)
+    raw = boto3.client("s3")
+    raw.create_bucket(Bucket="wpt-test")
+    words = [os.urandom(3).hex() for _ in range(2000)]
+    generator = random.Random(1)
+    text = " ".join(generator.choice(words) for _ in range(2_000_000)).encode()[:12 << 20]
+    sha = S3Store("wpt-test", "p", tmp_path / "writer", client=raw).put_bytes(text)
+    slow_client = SlowAnswers(raw, **slow)
+    store = S3Store("wpt-test", "p", tmp_path / "reader", client=slow_client)
+    store._ahead = ahead.Ahead(requests=4, limit=3 << 20, frames=1)
+    return slow_client, store, sha, text
+
+
+def test_a_stored_file_read_in_order_over_a_slow_link_gives_the_same_bytes_with_requests_in_flight_together(
+        tmp_path, monkeypatch):
+    # R2 answers each request slowly: reading a file in order must keep several requests in flight, and the
+    # bytes ahead of the reader must stay within the limit, whatever the timing
+    with mock_aws():
+        client, store, sha, text = stored_text(tmp_path, monkeypatch)
+        read = []
+        for start in range(0, len(text), 256 << 10):
+            read.append(store.read_range(sha, start, min(256 << 10, len(text) - start)))
+            held = sum(size for _, size in store._ahead._held.values())
+            assert held <= store._ahead.limit
+        assert b"".join(read) == text
+        assert 2 <= client.most <= 4  # more than one at once, never more than the fixed number
+
+
+def test_an_error_on_a_range_fetched_ahead_is_raised_at_the_read_that_needs_it(tmp_path, monkeypatch):
+    class LinkDown(Exception):
+        pass
+
+    with mock_aws():
+        client, store, sha, text = stored_text(tmp_path, monkeypatch)
+        table = store._table(store._found(sha))
+        client.fail_from, client.fail = table.stored[8], LinkDown("the link dropped")  # from the 9th frame on
+        frame = table.original[1]  # the original bytes of one frame, about 1 MB
+        for start in range(0, 6 * frame, frame):  # the reads before: fine, though blocks ahead already failed
+            assert store.read_range(sha, start, frame) == text[start:start + frame]
+        with pytest.raises(LinkDown):
+            for start in range(6 * frame, len(text), frame):
+                store.read_range(sha, start, frame)
+        assert start + frame > table.original[8]  # the read that needed the failed block, not an earlier one
