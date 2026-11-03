@@ -9,7 +9,7 @@ import pytest
 from wpt_dataset import build, conversations, license_check, markdown, sources, tasks, workers
 from wpt_dataset.build import build_dataset, document_list, is_held_out
 from wpt_dataset.cli import main
-from wpt_dataset.errors import PoolError, SourceGone, TokenizerVersionNeeded, TrainedListMissing, VocabularyMissing
+from wpt_dataset.errors import DatasetError, PoolError, SourceGone, TokenizerVersionNeeded, TrainedListMissing, VocabularyMissing
 from wpt_dataset.repo import DATA_FOLDER
 from wpt_dataset.sources import stored_files, upstream_key
 from wpt_store import CorruptObject, open_store
@@ -418,6 +418,58 @@ def test_a_broken_source_stops_the_build_unless_skipping_is_asked(kit, repo, sto
         assert record["documents"] == record_of(store, first)["documents"]
 
 
+def broken_sources(kit, repo, store, tmp_path, count=2):
+    """The ids of sources in the store whose format map gives the files of en/ two entries."""
+    ids = []
+    for number in range(count):
+        folder, _ = kit.git_project(tmp_path / f"twice{number}", files={"en/a.txt": b"owls hunt at night. " * 30},
+                                    executable=set(), symlinks={})
+        ids.append(kit.add_source(repo, store, "example", f"twice{number}", {
+            "type": "git", "address": folder, "tags": [{"tags": ["en"], "paths": ["**"]}],
+            "formats": [{"format": "text", "paths": ["**"]}, {"format": "text", "paths": ["en/**"]}]}))
+    return ids
+
+
+def nothing_converted(monkeypatch):
+    """Make any conversion of a source (the first reading of a text) fail the test."""
+    def converted(*arguments, **more):
+        raise AssertionError("a source was converted")
+
+    monkeypatch.setattr(build, "each_source", converted)
+
+
+@pytest.mark.parametrize("stream", [False, True])
+def test_a_broken_format_map_stops_every_build_before_a_text_is_read_and_names_each_source(
+        kit, repo, store, corpus, tmp_path, monkeypatch, stream):
+    setup_recipes(kit, repo, store, corpus, total_tokens=2000)
+    twice = broken_sources(kit, repo, store, tmp_path)
+    nothing_converted(monkeypatch)
+
+    for run in (lambda: build.build_tokenizer(repo, "main", store, log=lambda _: None, stream=stream),
+                lambda: build_dataset(repo, "small", store, log=lambda _: None, stream=stream)):
+        with pytest.raises(DatasetError) as stopped:
+            run()
+        message = str(stopped.value)
+        assert all(f"{sid}: en/a.txt matches 2 format entries" in message for sid in twice)
+        assert message.count("matches 2 format entries") == 2  # the corpus is not named: its map is sound
+
+
+@pytest.mark.parametrize("stream", [False, True])
+def test_skipping_failed_sources_lists_a_broken_format_map_and_builds_the_others(
+        kit, repo, store, corpus, tmp_path, stream):
+    setup_recipes(kit, repo, store, corpus, total_tokens=2000)
+    first = build_dataset(repo, "small", store, log=lambda _: None)  # also locks the vocabulary
+    twice = broken_sources(kit, repo, store, tmp_path)
+
+    with pytest.raises(DatasetError, match="fail their format map"):
+        build_dataset(repo, "small", store, log=lambda _: None, stream=stream)
+    record = record_of(store, build_dataset(repo, "small", store, log=lambda _: None, stream=stream,
+                                            skip_failed=True))
+    assert [s["source"] for s in record["skipped"]] == twice
+    assert all("matches 2 format entries" in s["error"] for s in record["skipped"])
+    assert record["documents"] == record_of(store, first)["documents"]
+
+
 class Machine:
     """A machine with plenty of everything, as wpt_utils.parallel measures it."""
 
@@ -494,7 +546,7 @@ def test_sources_converted_at_once_give_the_dataset_converted_one_at_a_time(kit,
         events = [json.loads(line) for line in fresh.read_record(telemetry.folder, "events.jsonl").splitlines()]
         at_once = [e["attributes"]["limit"] for e in events if e["kind"] == "event" and e["name"] == "sources.at_once"]
         assert at_once and set(at_once) == {max(1, int(cores * 0.75))}
-        kind = "source-tokens" if stream else "source-trees"  # what each source's conversion stores once
+        kind = "source-tokens" if stream else "source-kept"  # what each source's conversion stores once
         refs = [source_of(events, e["span"]) for e in events
                 if e["kind"] == "event" and e["name"] == "store.ref_set" and e["attributes"]["ref"].startswith(kind)]
         assert sorted(refs) == sorted(ids)  # recorded by the worker, under its source's span

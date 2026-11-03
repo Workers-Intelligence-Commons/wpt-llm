@@ -215,7 +215,9 @@ erasure cuts. An id is never reused.
   manifest covers it. It is not a training document: `markdown.documents`,
   which every list of documents reads, leaves it out. Only patterns
   starting with `.git/history/` give these files their license entry
-  ([licenses.md](licenses.md), "Rules").
+  ([licenses.md](licenses.md), "Rules"), and only format patterns
+  starting with `.git/history/` give them their format entry; every other
+  format pattern never matches them.
 - `submodules` (git only): the address of each submodule the source reads,
   by its path, read at the commit the tree of `revision` names for it.
 - `cuts`: erasure cuts; see [erasure.md](erasure.md).

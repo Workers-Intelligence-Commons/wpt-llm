@@ -600,7 +600,9 @@ def format_entries(source, path: str) -> list[dict]:
     """The format entries of a source covering path, in their order: a
     records entry covers the files its `join` reads too (records.py). Every
     place that maps a path to its format entry goes through here, and so
-    through the source's one matcher (source_paths)."""
+    through the source's one matcher (source_paths). A history file
+    (.git/history/...) is covered only by patterns that start with
+    `.git/history/`."""
     return source_paths(source).format_entries(path)
 
 
@@ -612,11 +614,14 @@ class SourcePaths:
 
     def __init__(self, data: dict):
         self.formats, self.tag_entries = data["formats"], data.get("tags", [])
-        self._formats = PatternIndex([e["paths"] + e.get("join", {}).get("paths", []) for e in self.formats])
+        patterns = [e["paths"] + e.get("join", {}).get("paths", []) for e in self.formats]
+        self._formats = PatternIndex(patterns)
+        self._history = PatternIndex([[p for p in found if p.startswith(HISTORY)] for found in patterns])
         self._tags = PatternIndex([e["paths"] for e in self.tag_entries])
 
     def format_entries(self, path: str) -> list[dict]:
-        return [self.formats[number] for number in self._formats.matching(path)]
+        index = self._history if path.startswith(HISTORY) else self._formats
+        return [self.formats[number] for number in index.matching(path)]
 
     def tags(self, path: str) -> frozenset[str]:
         return frozenset(tag for number in self._tags.matching(path) for tag in self.tag_entries[number]["tags"])

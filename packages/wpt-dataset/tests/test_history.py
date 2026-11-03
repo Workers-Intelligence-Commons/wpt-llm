@@ -7,6 +7,7 @@ from wpt_dataset import manifest
 from wpt_dataset.build import gather
 from wpt_dataset.edit import unpack, write_patch
 from wpt_dataset.errors import EditError, PatchFailed
+from wpt_dataset.markdown import format_of
 from wpt_dataset.license_check import Coverage
 from wpt_dataset.sources import source_tree
 
@@ -380,3 +381,27 @@ def test_a_first_download_fetches_the_whole_history_with_its_contents_and_gives_
     assert asked and whole == by_id
     # the version of main.py only the history's patch reads is kept for the map alone, and nothing else
     assert set(whole[2]) == {kit.run("git", "rev-parse", f"{since}:main.py", cwd=folder).decode().strip()}
+
+
+def test_only_format_patterns_starting_with_the_history_folder_match_its_files(kit, repo, store, tmp_path):
+    # a source's own file named `order` and the history's order file share a name: the pattern meant for the
+    # source's files never matches the history's, so each path has exactly one format entry
+    folder = tmp_path / "upstream"
+    folder.mkdir()
+    kit.run("git", "init", "-q", cwd=folder)
+    since = commit(kit, folder, "add the files", {"LICENSE": kit.LICENSE_TEXT.encode(), "x/order": b"b\na\n"})
+    commit(kit, folder, "reorder", {"x/order": b"a\nb\n"})
+    sid = kit.add_source(repo, store, "example", "order", {
+        "type": "git", "address": str(folder), "history": {"since": since},
+        "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
+                    {"format": "text", "paths": ["**/order", "LICENSE"]}]})
+    source = repo.source(sid)
+
+    tree, _ = source_tree(source, store)
+    assert manifest.ORDER in tree and "x/order" in tree
+    for path in tree:
+        expected = ("code", "patch") if path.startswith(manifest.HISTORY) else ("text", None)
+        found = format_of(source, path)  # no FormatMapError
+        assert (found["format"], found.get("language")) == expected
+    documents, _, _ = gather(repo, store, log=lambda _: None)
+    assert f"{sid}/x/order" in {d.id for d in documents} and f"{sid}/{manifest.ORDER}" not in {d.id for d in documents}

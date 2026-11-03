@@ -28,6 +28,14 @@ Markdown and its tag, training or held-out, under a ref named by the
 dataset id, so a model's provenance finds it. A dataset built
 before builds wrote one never gets one.
 
+Before any text is read, the vocabulary build and the dataset build apply
+every source's format map to the file list of its final tree
+(check_formats): a path that matches no format entry or several fails
+there, in the minutes the lists take, and every failing source is named
+at once. The check calls the function the conversion calls later
+(markdown.format_of), so the two cannot disagree. A build asked to skip
+failing sources leaves those out and lists them.
+
 The build never contacts upstream: it reads the upstream files and the
 license pages the download step put in the store (download.py). A
 failure is judged per item. A file no license entry covers, a file that
@@ -113,8 +121,9 @@ from . import tasks as task_files
 from .errors import (CutFailed, DatasetError, NotDownloaded, PatchFailed, PoolError, TokenizerVersionNeeded,
                      TrainedListMissing, VocabularyMissing)
 from .kept import kept
+from .manifest import SYMLINK
 from .repo import Repo
-from .sources import copied_as_records, copy_size, fingerprint, held_manifest, held_out_group, tags_of
+from .sources import copied_as_records, copy_size, final_tree, fingerprint, held_manifest, held_out_group, tags_of
 
 # the failures that take a whole source out of every build, recorded and never a stop: not in the store, or a
 # cut or a patch that does not apply, until a person acts
@@ -124,6 +133,7 @@ DEFAULT_MAX_EPOCHS = 4
 SHARD_TOKENS = 1 << 26  # about 64M tokens (256 MB of uint32) per shard
 NGRAM = 13  # contamination check: runs of 13 words, as in the GPT-3 paper
 STREAM_READERS = 16  # documents read at once from a streamed build's token objects
+FORMAT_CHECKS = 16  # sources whose format map is checked at once
 DOCUMENT_LIST = "dataset-documents"  # the kind of the ref, named by the dataset id, of a dataset's document list
 TRAINING, HELD_OUT = "training", "held-out"  # a listed document's tag
 # the top-level fields every record this code writes holds (conversations and tasks only when the sources hold
@@ -148,7 +158,55 @@ class Document:
         return self.group or self.id
 
 
-def gather(repo: Repo, store, log=print, skipped=None, telemetry=None, skip_failed=False):
+def format_failures(source, store, telemetry) -> str | None:
+    """The error of a source's format map on its final tree's file list, as
+    the conversion would raise it (markdown.format_of on each file that is
+    not a symbolic link, as markdown.documents does), or None. No file is
+    read but the ones its cuts and patches name (final_tree, which keeps
+    the tree for the conversion that follows); a source that is out of
+    every build (OUT) gives None: the build lists it by itself."""
+    try:
+        tree, _ = final_tree(source, store, telemetry)
+        for path, entry in tree.items():
+            if entry.mode != SYMLINK:
+                markdown.format_of(source, path)
+    except OUT:
+        return None
+    except (DatasetError, CorruptObject, MissingObject) as error:
+        return f"{type(error).__name__}: {error}"
+    return None
+
+
+def check_formats(repo: Repo, store, log=print, skipped=None, telemetry=None, skip_failed=False) -> set[str]:
+    """Check the format map of every admitted source before any text is
+    read (format_failures), several sources at once. With a list as
+    skipped and skip_failed, each failing source is added to it
+    and its id returned: the caller leaves those sources out. Otherwise
+    DatasetError names every failing source."""
+    telemetry = telemetry or Telemetry.off()
+    admitted = [source for source in repo.sources(log) if source.admitted]
+    with telemetry.span("formats", sources=len(admitted)) as span:
+        parent = telemetry.current()
+
+        def checked_source(source):
+            with telemetry.within(parent):
+                return format_failures(source, store, telemetry)
+
+        with ThreadPoolExecutor(FORMAT_CHECKS) as pool:
+            errors = list(pool.map(checked_source, admitted))
+        failed = [(source, error) for source, error in zip(admitted, errors) if error is not None]
+        span.set(failed=[source.id for source, _ in failed])
+    if not failed:
+        return set()
+    if skipped is None or not skip_failed:
+        raise DatasetError(f"{len(failed)} of {len(admitted)} admitted sources fail their format map; nothing was "
+                           f"read:\n" + "\n".join(error for _, error in failed))
+    for source, error in failed:
+        skipped.append({"source": source.id, "error": error})
+    return {source.id for source, _ in failed}
+
+
+def gather(repo: Repo, store, log=print, skipped=None, telemetry=None, skip_failed=False, without=frozenset()):
     """(documents, sources info, number of duplicates removed). A source with
     records files gets `credits` in its info: the store object listing, one
     JSON line per document it gives, the document id, its license and the
@@ -157,10 +215,11 @@ def gather(repo: Repo, store, log=print, skipped=None, telemetry=None, skip_fail
     failing source with skip_failed (see _skip); otherwise its error stops.
     A source whose license text is empty is left out, and log is called
     with a note naming it. Sources are converted several at once
-    (each_source), and their documents put together in the sources' order."""
+    (each_source), and their documents put together in the sources' order.
+    The sources whose ids are in without are not read."""
     telemetry = telemetry or Telemetry.off()
     documents, info, seen, duplicates = [], {}, set(), 0
-    admitted = [source for source in repo.sources(log) if source.admitted]
+    admitted = [source for source in repo.sources(log) if source.admitted and source.id not in without]
     # closed at once when a source stops the others, so the sources still running end first
     with contextlib.closing(each_source(_converted, admitted, repo, store, telemetry)) as converted:
         for done, span in converted:
@@ -437,17 +496,17 @@ def source_tokens(repo, source, store, tokenizer, vocabulary: str, texts, teleme
 
 
 def gather_streamed(repo: Repo, store, vocabulary: str, log=print, skipped=None, telemetry=None,
-                    skip_failed=False):
+                    skip_failed=False, without=frozenset()):
     """gather's (documents, sources info, duplicates), plus every document's
     tokens (PackedDocuments), from source_tokens with the vocabulary object
     vocabulary: no document's Markdown
     stays in the store, and no source's files on this machine. Several
     sources at once (each_source), put together in the sources' order.
-    skipped, skip_failed: as in gather."""
+    skipped, skip_failed, without: as in gather."""
     telemetry = telemetry or Telemetry.off()
     documents, info, seen, duplicates = [], {}, set(), 0
     tokens = PackedDocuments(store)
-    admitted = [source for source in repo.sources(log) if source.admitted]
+    admitted = [source for source in repo.sources(log) if source.admitted and source.id not in without]
     with contextlib.closing(each_source(_tokenized, admitted, repo, store, telemetry, (vocabulary,),
                                         stream=True)) as converted:  # as in gather
         for done, span in converted:
@@ -611,6 +670,7 @@ def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, telem
                            "documents": lock["documents_sha256"]})
         return Tokenizer.from_bytes(store.get_bytes(vocabulary)), vocabulary, key
 
+    check_formats(repo, store, log, telemetry=telemetry)
     read = set()  # the sources whose upstream tree the training read
     with trained.TrainedList() as listed:
         if stream:
@@ -684,21 +744,24 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
     recipe = repo.model_recipe(name)["data"]
     mixture = repo.recipe("mixture", recipe["mixture"])
     telemetry.event("dataset.recipe", recipe_name=name, recipe=recipe, mixture=mixture)
+    skipped = []
+    without = check_formats(repo, store, log, skipped, telemetry, skip_failed)
     with telemetry.span("tokenizer", recipe=recipe["tokenizer"], stream=stream) as span:
         tokenizer, vocabulary, tokenizer_key = build_tokenizer(repo, recipe["tokenizer"], store, log, stream=stream,
                                                                telemetry=telemetry)
         span.set(vocabulary=vocabulary, fingerprint=tokenizer_key, vocab_size=tokenizer.vocab_size)
     telemetry.input(recipe=name, tokenizer=recipe["tokenizer"], vocabulary=vocabulary)
-    skipped = []
     with telemetry.span("documents", stream=stream, skip_failed=skip_failed) as span:
         if stream:
             documents, sources_info, duplicates, packed = gather_streamed(repo, store, vocabulary,
                                                                            log=lambda _: None, skipped=skipped,
                                                                            telemetry=telemetry,
-                                                                           skip_failed=skip_failed)
+                                                                           skip_failed=skip_failed,
+                                                                           without=without)
         else:
             documents, sources_info, duplicates = gather(repo, store, log=lambda _: None, skipped=skipped,
-                                                         telemetry=telemetry, skip_failed=skip_failed)
+                                                         telemetry=telemetry, skip_failed=skip_failed,
+                                                         without=without)
         span.set(documents=len(documents), sources=len(sources_info), duplicates=duplicates, skipped=skipped)
     telemetry.input(sources={sid: info["manifest"] for sid, info in sorted(sources_info.items())},
                     skipped_sources=[failed["source"] for failed in skipped])
