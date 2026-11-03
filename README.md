@@ -54,10 +54,11 @@ through Docker Desktop.
 ```sh
 uv run scripts/setup.py                            # the PyTorch build for this machine's GPU
 echo "WPT_STORE=file://$HOME/wpt-store" >> .env    # where fetched and built data lives
+uv run wpt doctor                                  # what this machine still lacks, and how to fix it
 
 uv run wpt dataset download                        # every admitted source, into the store
 uv run wpt dataset build classics-test --stream    # convert, tokenize; prints a dataset id
-scripts/detach.sh uv run wpt train classics-test <dataset id> --stream --out runs/first
+scripts/detach.sh uv run wpt train classics-test --stream --out runs/first
 uv run wpt eval runs/first                         # memorization and other tests, into the model card
 uv run wpt chat runs/first                         # continue text with the model
 ```

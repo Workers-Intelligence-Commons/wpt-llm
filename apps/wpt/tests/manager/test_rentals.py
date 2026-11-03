@@ -9,6 +9,8 @@ import socket
 import stat
 import subprocess
 import sys
+import threading
+import time
 import tomllib
 from pathlib import Path
 
@@ -16,9 +18,11 @@ import pytest
 
 import wpt.manager
 from wpt.manager import RUN_FILE, Failed, main, rental, unfinished
+from wpt.train import LOST
 from wpt.manager.machines import Workers
-from wpt.manager.rental import Address, Provider, RentalError
+from wpt.manager.rental import Address, Cap, Provider, RentalError
 from wpt.manager.skypilot import SkyPilot
+from wpt_training import load_state
 from wpt_worker.link import Key
 
 
@@ -48,7 +52,7 @@ class Fake(Provider):
         Fake.processes[name] = found[0]
         Fake.cluster_of[name] = found
 
-    def address(self, name):
+    def address(self, name, watch):
         process, line, _ = Fake.processes[name]
         key = Key.parse(line)  # what the worker printed: its token hidden
         if Fake.lose and len(Fake.processes) == 1:
@@ -56,7 +60,7 @@ class Fake(Provider):
             process.wait()
         return Address(key.host, key.port, key.pin)
 
-    def addresses(self, name, count):
+    def addresses(self, name, count, watch):
         keys = [Key.parse(line) for _, line, _ in Fake.cluster_of[name]]
         return [Address(key.host, key.port, key.pin, key.place, key.private) for key in keys]
 
@@ -174,16 +178,12 @@ def test_bad_rental_settings_are_refused_before_anything_runs(built, fake, monke
     assert not built.records("wpt manager") and not fake.calls
 
 
-def test_a_manager_that_comes_back_goes_on_with_its_unfinished_run_on_its_workers_and_starts_no_other(
-        built, fake, tmp_path, monkeypatch, capsys):
-    # Docker starts the same container again after a crash: its run has a
-    # record with no end, and its rented worker is still there; the manager
-    # reconnects to it with the key its disk holds and goes on; with no
-    # WPT_RUN it starts no other run
-    monkeypatch.delenv("WPT_RUN", raising=False)
+def cut_run(built, tmp_path) -> Workers:
+    """The run named cut, which a crash left with its rental wpt-cut-1 and
+    a record with no end."""
     provider = Fake(dict(os.environ), tmp_path)
     provider.rent("wpt-cut-1", "token-of-the-cut-run", False)
-    found = provider.address("wpt-cut-1")
+    found = provider.address("wpt-cut-1", lambda: None)
     key = Key(found.host, found.port, found.pin, "token-of-the-cut-run")
     kept = tmp_path / "runs" / "manager-state"
     workers = Workers.new(kept, "cut", "d")
@@ -196,6 +196,17 @@ def test_a_manager_that_comes_back_goes_on_with_its_unfinished_run_on_its_worker
                                                                "arguments": [], "inputs": {"run": "cut"}}).encode())
     built.store.write_record(folder, "ids.json", json.dumps({"inputs": {"run": "cut"}, "outputs": {}}).encode())
     built.store.append_record(folder, "events.jsonl", b"")
+    return workers
+
+
+def test_a_manager_that_comes_back_goes_on_with_its_unfinished_run_on_its_workers_and_starts_no_other(
+        built, fake, tmp_path, monkeypatch, capsys):
+    # Docker starts the same container again after a crash: its run has a
+    # record with no end, and its rented worker is still there; the manager
+    # reconnects to it with the key its disk holds and goes on; with no
+    # WPT_RUN it starts no other run
+    monkeypatch.delenv("WPT_RUN", raising=False)
+    cut_run(built, tmp_path)
     assert unfinished(built.store, "cut")
 
     main([])
@@ -235,7 +246,7 @@ elif arguments[0] == "down" and arguments[-1] == "wpt-gone":
                 "WPT_STORE_SECRET_ACCESS_KEY": "store-secret", "GITHUB_TOKEN": "x", "WPT_RECIPE": "d"}
     sky = SkyPilot(settings, tmp_path)
     sky.rent("wpt-one", "secret-token-123", True)
-    assert sky.address("wpt-one") == Address("34.0.0.9", 30123, pin)
+    assert sky.address("wpt-one", lambda: None) == Address("34.0.0.9", 30123, pin)
     sky.stop("wpt-one")
     sky.stop("wpt-gone")  # already given back: nothing to do
     seen = [json.loads(line) for line in calls.read_text().splitlines()]
@@ -358,7 +369,7 @@ if sys.argv[1] == "logs":
     config = home / ".sky" / "generated" / "ssh" / "wpt-big"
     assert sky._cluster("wpt-big", 2) is None  # no node has an address to be reached at yet
     config.write_text("Host wpt-big\n  HostName 34.0.0.1\nHost wpt-big-worker1\n  HostName 34.0.0.2\n")
-    assert sky.addresses("wpt-big", 2) == [Address("34.0.0.1", 8470, pins[0], "wpt-big", "10.0.0.1"),
+    assert sky.addresses("wpt-big", 2, lambda: None) == [Address("34.0.0.1", 8470, pins[0], "wpt-big", "10.0.0.1"),
                                           Address("34.0.0.2", 8470, pins[1], "wpt-big", "10.0.0.2")]
 
 
@@ -413,14 +424,14 @@ def test_a_lost_worker_of_a_cluster_replaces_the_whole_cluster_and_a_crash_with_
     settings = dict(os.environ)
     workers = Workers.new(tmp_path / "state", "pair", "d")
     recorder = Recorder()
-    workers.prepare({**settings, "WPT_GPU_WORKERS": "2"}, tmp_path, recorder)
+    workers.prepare({**settings, "WPT_GPU_WORKERS": "2"}, tmp_path, recorder, lambda: None)
     [first] = [call[1] for call in fake.calls if call[0] == "rent"]
     keys = workers.keys()
     assert [(key.place, key.private) for key in keys] == [(first, "127.0.0.1"), (first, "127.0.0.1")]
     assert keys[0].token == keys[1].token  # one rental, one token
 
     # a training process crashed: every worker still answers, so none is replaced and the run resumes
-    assert workers.recover(settings, tmp_path, recorder)
+    assert workers.recover(settings, tmp_path, recorder, lambda: None)
     assert [call[0] for call in fake.calls] == ["rent"] and workers.state["resumed"] == 1
     assert "every gpu worker answers again" in recorder.logs[-1]
 
@@ -428,7 +439,7 @@ def test_a_lost_worker_of_a_cluster_replaces_the_whole_cluster_and_a_crash_with_
     process = fake.cluster_of[first][1][0]
     process.kill()
     process.wait()
-    assert workers.recover(settings, tmp_path, recorder)
+    assert workers.recover(settings, tmp_path, recorder, lambda: None)
     [_, stop, second] = fake.calls
     assert stop == ("stop", first) and second[0] == "rent" and second[3] == 2
     assert [name for name, _ in recorder.events if name == "manager.worker_lost"] == ["manager.worker_lost"]
@@ -445,7 +456,7 @@ def test_a_crash_of_a_training_process_on_several_workers_resumes_the_run_within
     crashes = [5]
     tried = []
 
-    def crashing(step, arguments, log, last_line=False, environ=None):
+    def crashing(step, arguments, log, last_line=False, environ=None, stops=None):
         if arguments[0] == "train":
             tried.append(list(arguments))
             if crashes:
@@ -509,7 +520,7 @@ def test_the_evaluation_runs_on_the_rented_workers_before_they_are_given_back(bu
     real = wpt.manager.run_command
     order = []
 
-    def watching(step, arguments, log, last_line=False, environ=None):
+    def watching(step, arguments, log, last_line=False, environ=None, stops=None):
         if arguments[0] == "eval":
             order.append(("eval", list(fake.calls), environ))
             return None
@@ -533,7 +544,7 @@ def test_training_on_rented_workers_names_the_triton_kernels_unless_the_settings
     real = wpt.manager.run_command
     named = []
 
-    def watching(step, arguments, log, last_line=False, environ=None):
+    def watching(step, arguments, log, last_line=False, environ=None, stops=None):
         if arguments[0] == "train":
             named.append({**os.environ, **environ}.get("WPT_KERNELS"))  # what wpt train gets
             raise Failed(step, 2)
@@ -561,7 +572,7 @@ def test_the_evaluation_on_rented_workers_names_the_triton_kernels_unless_the_se
     real = wpt.manager.run_command
     named = []
 
-    def watching(step, arguments, log, last_line=False, environ=None):
+    def watching(step, arguments, log, last_line=False, environ=None, stops=None):
         if arguments[0] == "eval":
             named.append({**os.environ, **environ}.get("WPT_KERNELS"))  # what wpt eval gets
             return None
@@ -587,7 +598,7 @@ def test_a_failed_run_is_continued_by_the_same_command_under_the_name_wpt_run_tx
     real = wpt.manager.run_command
     fail = [True]
 
-    def failing(step, arguments, log, last_line=False, environ=None):
+    def failing(step, arguments, log, last_line=False, environ=None, stops=None):
         if arguments[0] == "train" and fail:
             fail.pop()
             raise Failed(step, 1)
@@ -627,7 +638,7 @@ def test_in_the_container_a_run_that_failed_or_was_refused_exits_with_0_and_says
 
     monkeypatch.setenv("WPT_RECIPE", "d")
 
-    def failing(step, arguments, log, last_line=False, environ=None):
+    def failing(step, arguments, log, last_line=False, environ=None, stops=None):
         raise Failed(step, 3)
 
     monkeypatch.setattr(wpt.manager, "run_command", failing)
@@ -640,3 +651,268 @@ def test_in_the_container_a_run_that_failed_or_was_refused_exits_with_0_and_says
     with pytest.raises(SystemExit) as stopped:
         main([])
     assert stopped.value.code == 3
+
+
+class Priced(Fake):
+    def price(self, interruptible, count=1):
+        return 2.5 * count
+
+
+def stopping_recipe(built, tmp_path, at_update_3):
+    """A model recipe of 5 updates whose optimizer does at_update_3 (Python
+    code), when the environment names STOP_AT, then waits for the manager to
+    pass the stop on."""
+    optimizer = tmp_path / "stopping.py"
+    optimizer.write_text(
+        "import os\nimport time\nimport torch\n"
+        "from pathlib import Path\nfrom wpt_training import Optimizer, Verdict\n\n"
+        "SETTINGS = {'lr': 0.01}\n\n"
+        "class Stopping(Optimizer):\n"
+        "    def __init__(self, model, settings):\n"
+        "        self.optimizer = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], "
+        "lr=settings['lr'])\n\n"
+        "    def before_update(self, step):\n"
+        "        if step == 3 and os.environ.get('STOP_AT'):\n"
+        f"            {at_update_3}\n"
+        "            time.sleep(3)\n\n"
+        "def start(model, settings, run):\n    return Stopping(model, settings)\n")
+    stages = [{"block_size": 16, "steps": 5, "batch_size": 4}]
+    return built.recipe("stopping", training={"stages": stages, "optimizer": str(optimizer)})
+
+
+def checkpoint_step(built, name) -> int:
+    return load_state(built.store.path(built.store.get_ref("checkpoints", name)))["step"]
+
+
+def test_wpt_manager_stop_saves_the_checkpoint_gives_the_machines_back_and_the_same_command_goes_on(
+        built, fake, tmp_path, monkeypatch):
+    # the machines go back with nothing lost, from the middle of a step, under the default WPT_LINK_CHECKPOINTS
+    monkeypatch.setattr(wpt.manager, "WATCH", 0.1)
+    update_3 = tmp_path / "update-3"
+    monkeypatch.setenv("WPT_RECIPE", stopping_recipe(built, tmp_path, "Path(os.environ['STOP_AT']).touch()"))
+    monkeypatch.setenv("STOP_AT", str(update_3))
+    monkeypatch.setenv("WPT_GPU_WORKERS", "1")
+    monkeypatch.setenv("WPT_RUN", "wanted")
+
+    def person():
+        while not update_3.exists():
+            time.sleep(0.05)
+        main(["stop"])
+
+    asking = threading.Thread(target=person, daemon=True)
+    asking.start()
+    with pytest.raises(SystemExit) as stopped:
+        main([])
+    asking.join()
+    assert stopped.value.code == 130
+    [(_, name, _), stop] = fake.calls
+    assert stop == ("stop", name) and fake.cluster_of[name][0][0].poll() is not None
+    assert checkpoint_step(built, "wanted") == 3
+    assert built.store.get_ref("models", "wanted") is None
+    [run] = built.records("wpt manager")
+    assert [e["attributes"]["reason"] for e in run.events if e.get("name") == "manager.stop"] == ["wpt manager stop"]
+    assert not (tmp_path / "runs" / "manager-state" / "wanted.stop").exists()  # the next start is not stopped by it
+
+    monkeypatch.delenv("STOP_AT")
+    main([])
+    assert built.store.get_ref("models", "wanted") is not None
+    assert [e["attributes"]["step"] for e in built.records("wpt train")[-1].events
+            if e.get("name") == "training.resumed"] == [3]
+
+
+def test_wpt_manager_stop_is_refused_when_no_manager_runs_a_run(built, tmp_path, capsys):
+    with pytest.raises(SystemExit) as refused:
+        main(["stop"])
+    assert refused.value.code == 2 and "no wpt manager runs a run" in capsys.readouterr().err
+
+
+def test_the_cost_cap_prints_the_projection_first_stops_the_run_like_a_stop_and_holds_until_it_is_raised(
+        built, fake, tmp_path, monkeypatch, capfd):
+    monkeypatch.setattr(rental, "providers", lambda: {"fake": Priced})
+    monkeypatch.setattr(wpt.manager, "WATCH", 0.1)
+    reached = tmp_path / "reached"
+    real = Workers.spent
+    monkeypatch.setattr(Workers, "spent", lambda self, now=None: (9.0, 3.6) if reached.exists() else real(self))
+    monkeypatch.setenv("WPT_RECIPE", stopping_recipe(built, tmp_path, "Path(os.environ['STOP_AT']).touch()"))
+    monkeypatch.setenv("STOP_AT", str(reached))
+    monkeypatch.setenv("WPT_GPU_WORKERS", "1")
+    monkeypatch.setenv("WPT_RUN", "capped")
+    monkeypatch.setenv("WPT_BUDGET", "9")
+    monkeypatch.setenv("WPT_MAX_HOURS", "100")
+    with pytest.raises(SystemExit) as stopped:
+        main([])
+    assert stopped.value.code == 130
+    assert "$2.50 an hour" in capfd.readouterr().out
+    [(_, name, _), stop] = fake.calls
+    assert stop == ("stop", name) and checkpoint_step(built, "capped") == 3
+    [run] = built.records("wpt manager")
+    named = [e.get("name") for e in run.events]
+    assert "manager.price" in named and named.index("manager.price") < next(
+        index for index, e in enumerate(run.events) if e.get("name") == "manager.rent")
+    assert [e["attributes"]["reason"] for e in run.events if e.get("name") == "manager.stop"] == [
+        "the cost cap: $9.00 spent, WPT_BUDGET is $9.00"]
+
+    # the cap is the run's, over its starts: the same command rents nothing until the cap is raised
+    monkeypatch.delenv("STOP_AT")
+    with pytest.raises(SystemExit) as stopped:
+        main([])
+    assert stopped.value.code == 130 and len(fake.calls) == 2
+    monkeypatch.setenv("WPT_BUDGET", "10")
+    main([])
+    assert built.store.get_ref("models", "capped") is not None
+
+
+def test_a_lost_worker_is_not_replaced_once_a_stop_is_under_way(built, fake, tmp_path, monkeypatch):
+    monkeypatch.setenv("WPT_GPU_WORKERS", "1")
+    monkeypatch.setenv("WPT_RUN", "lost-stop")
+    real = wpt.manager.run_command
+
+    def losing(step, arguments, log, last_line=False, environ=None, stops=None):
+        if step != "train":
+            return real(step, arguments, log, last_line, environ, stops)
+        (tmp_path / "runs" / "manager-state" / "lost-stop.stop").touch()
+        raise Failed(step, LOST)
+
+    monkeypatch.setattr(wpt.manager, "run_command", losing)
+    with pytest.raises(SystemExit) as stopped:
+        main([])
+    assert stopped.value.code == LOST
+    assert [call[0] for call in fake.calls] == ["rent", "stop"]
+
+
+@pytest.mark.parametrize("asked", ["cap", "stop"])
+def test_a_run_that_comes_back_holding_rentals_is_stopped_during_its_commands_before_training(
+        built, fake, tmp_path, monkeypatch, asked):
+    # idle rentals bill during the download too: neither the cap nor a stop waits for the build
+    monkeypatch.delenv("WPT_RUN", raising=False)
+    monkeypatch.setattr(wpt.manager, "WATCH", 0.1)
+    monkeypatch.setattr(wpt.manager, "COMMAND", ["-c", "import time; time.sleep(60)"])
+    workers = cut_run(built, tmp_path)
+    if asked == "cap":
+        workers.state["rentals"] = [{"name": "wpt-cut-1", "price": 2.0, "started": time.time() - 7200, "stopped": None}]
+        workers.save()
+        monkeypatch.setenv("WPT_BUDGET", "3")
+    else:
+        (tmp_path / "runs" / "manager-state" / "cut.stop").touch()
+    started = time.monotonic()
+    with pytest.raises(SystemExit) as stopped:
+        main([])
+    assert stopped.value.code == 130 and time.monotonic() - started < 30
+    assert ("stop", "wpt-cut-1") in fake.calls and state(tmp_path, "cut")["workers"] == []
+    assert built.records("wpt train") == []
+
+
+def test_a_stop_during_a_rental_s_wait_for_its_address_gives_the_rental_back_before_training(
+        built, fake, tmp_path, monkeypatch):
+    class Waiting(Fake):
+        def address(self, name, watch):
+            (tmp_path / "runs" / "manager-state" / "waited.stop").touch()
+            while True:
+                watch()
+                time.sleep(0.01)
+
+    monkeypatch.setattr(rental, "providers", lambda: {"fake": Waiting})
+    monkeypatch.setenv("WPT_GPU_WORKERS", "1")
+    monkeypatch.setenv("WPT_RUN", "waited")
+    with pytest.raises(SystemExit) as stopped:
+        main([])
+    assert stopped.value.code == 130
+    [(_, name, _), stop] = fake.calls
+    assert stop == ("stop", name) and built.records("wpt train") == []
+
+
+def test_workers_rented_one_by_one_stop_being_rented_once_a_stop_comes(fake, tmp_path, monkeypatch):
+    class Alone(Fake):
+        cluster = False
+
+    def watch():
+        if len([call for call in fake.calls if call[0] == "rent"]) == 1:
+            raise Failed("workers", 130)
+
+    monkeypatch.setattr(rental, "providers", lambda: {"fake": Alone})
+    monkeypatch.setenv("WPT_RENTAL_GPUS", "x")
+    workers = Workers.new(tmp_path / "state", "pair", "d")
+    recorder = Recorder()
+    with pytest.raises(Failed):
+        workers.prepare({**os.environ, "WPT_GPU_WORKERS": "2"}, tmp_path, recorder, watch)
+    assert [call[0] for call in fake.calls] == ["rent"]
+    workers.stop(dict(os.environ), tmp_path, recorder)
+    assert [call[0] for call in fake.calls] == ["rent", "stop"]
+
+
+def test_skypilot_s_wait_for_an_address_ends_with_what_watch_raises(tmp_path):
+    (tmp_path / "sky").write_text("#!/bin/sh\n")  # it never prints a key
+    (tmp_path / "sky").chmod(0o755)
+    calls = []
+
+    def watch():
+        calls.append(1)
+        if len(calls) == 2:
+            raise Failed("workers", 130)
+
+    sky = SkyPilot({**os.environ, "PATH": f"{tmp_path}{os.pathsep}{os.environ['PATH']}"}, tmp_path)
+    sky.POLL = 0.01
+    with pytest.raises(Failed):
+        sky.address("wpt-one", watch)
+
+
+def test_a_cap_in_dollars_is_refused_without_a_price_and_a_cap_that_is_no_number_before_anything_runs(
+        built, fake, monkeypatch, capsys):
+    monkeypatch.setenv("WPT_GPU_WORKERS", "1")
+    monkeypatch.setenv("WPT_RUN", "no-price")
+    monkeypatch.setenv("WPT_BUDGET", "ten")
+    with pytest.raises(SystemExit) as refused:
+        main([])
+    assert refused.value.code == 2 and "WPT_BUDGET='ten': a number above 0" in capsys.readouterr().err
+    assert not built.records("wpt manager")
+
+    monkeypatch.setenv("WPT_BUDGET", "10")
+    with pytest.raises(SystemExit) as refused:
+        main([])
+    assert refused.value.code == 2 and "WPT_BUDGET needs the provider's price" in capsys.readouterr().err
+    assert fake.calls == []
+
+
+def test_what_a_run_spent_counts_every_rental_at_its_price_and_a_running_one_to_now(tmp_path):
+    rentals = [{"name": "a", "price": 2.0, "started": 0.0, "stopped": 3600.0},
+               {"name": "b", "price": 4.0, "started": 1800.0, "stopped": None},  # beside a for half an hour
+               {"name": "c", "price": None, "started": 9000.0, "stopped": 10800.0}]
+    workers = Workers(tmp_path / "run.json", {"run": "run", "workers": [], "rentals": rentals}, None)
+    dollars, hours = workers.spent(now=10800.0)
+    assert dollars == pytest.approx(2.0 + 4.0 * 2.5)  # a rental with no known price counts for the hours alone
+    assert hours == pytest.approx(3.0)
+
+
+def test_the_first_cap_reached_stops_the_run_and_the_projection_says_where():
+    both = Cap(dollars=10.0, hours=2.0)
+    assert both.reached(9.0, 1.9) is None
+    assert "WPT_BUDGET" in both.reached(10.0, 0.5)
+    assert "WPT_MAX_HOURS" in both.reached(1.0, 2.0)
+    assert "after 2.00 more hours, at $9.00 in all" in both.projected(4.0, 1.0, 0.0)  # the dollars would last 2.25
+    assert "after 0.50 more hours, at $5.00 in all" in Cap(dollars=5.0).projected(8.0, 1.0, 0.0)
+    assert "no cap" in Cap().projected(8.0, 0.0, 0.0)
+
+
+def test_skypilot_reads_the_price_of_the_row_it_chose_without_renting(tmp_path):
+    bin_folder = tmp_path / "bin"
+    bin_folder.mkdir()
+    calls = tmp_path / "calls.jsonl"
+    (bin_folder / "sky").write_text(f"""#!{sys.executable}
+import json, sys
+with open({str(calls)!r}, "a") as out:
+    out.write(json.dumps(sys.argv[1:]) + "\\n")
+print("Considered resources (2 nodes):")
+print(" INFRA   INSTANCE     vCPUs   Mem(GB)   GPUS     COST ($)   CHOSEN")
+print(" RunPod  8x_H100_SXM  128     1024      H100:8   44.32      \\x1b[32m   \\u2714\\x1b[0m")
+print(" Lambda  gpu_8x_h100  208     1800      H100:8   47.60")
+""", encoding="utf-8")
+    (bin_folder / "sky").chmod(0o755)
+    settings = {**os.environ, "PATH": f"{bin_folder}{os.pathsep}{os.environ['PATH']}", "WPT_RENTAL_GPUS": "H100:8"}
+    assert SkyPilot(settings, tmp_path).price(True, 2) == 44.32
+    [arguments] = [json.loads(line) for line in calls.read_text().splitlines()]
+    assert arguments[:3] == ["launch", "--dryrun", "-y"] and "--use-spot" in arguments
+    assert arguments[arguments.index("--num-nodes") + 1] == "2" and "-c" not in arguments
+
+    (bin_folder / "sky").write_text(f"#!{sys.executable}\nprint('no plan')\n")
+    with pytest.raises(RentalError, match="gave no price"):
+        SkyPilot(settings, tmp_path).price(False)

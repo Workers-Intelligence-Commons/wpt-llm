@@ -1,8 +1,8 @@
 """Train a model as a model recipe says, on the dataset built from it.
 
 Usage:
-    wpt train RECIPE DATASET_ID [options]
-    wpt train RECIPE DATASET_ID --strategy ddp --processes N [options]
+    wpt train RECIPE [DATASET_ID] [options]
+    wpt train RECIPE [DATASET_ID] --strategy ddp --processes N [options]
 
 RECIPE is a file name in data/recipes/models/, without .json, in the
 repository holding the current folder, or SERIES:SIZE, one size of the
@@ -18,7 +18,9 @@ each a built-in step of wpt_training (read-text, answer-as-assistant,
 finish-tasks, finish-tasks-with-less-writing) or a .py file, with its
 method, environment, optimizer, settings and locked parts. The model's
 context is the last window length of the last step that reads text
-windows. DATASET_ID is what `wpt dataset build RECIPE` prints; the dataset
+windows. DATASET_ID is what `wpt dataset build RECIPE` prints; without it,
+the dataset last built for the recipe, which the store names (for a size of
+a series, the one last built for the series). The dataset
 comes from the store named by WPT_STORE (environment or .env), and a
 dataset built from another data part than the recipe's is refused. It
 holds everything the steps read: the text's shards, and the conversations
@@ -91,10 +93,15 @@ machine using the same store can continue. Run the same command
 with --resume to continue the step that stopped (on other hardware too);
 the steps before it are reused. With step-ends (the default), a checkpoint
 inside a step stays on the gpu worker, where only that job's restarts read
-it: --resume then starts the stopped step over, and the stop's message
-says so. Once the step ends, its last checkpoint
-becomes its kept result, as it is. Ctrl+C or SIGTERM finishes the update and saves before
-stopping. After a crash, every process on the gpu worker starts again, up
+it. Once the step ends, its last checkpoint
+becomes its kept result, as it is. Ctrl+C or SIGTERM finishes the update and
+writes a checkpoint, whatever --checkpoint-every says, which comes back
+whatever WPT_LINK_CHECKPOINTS says, and --resume continues from it.
+--stop-after-minutes and --stop-after-updates stop the run the same way,
+whichever comes first, counted over every step it trains from the end of
+its first update, which also compiles the kernels. Such a run ends by
+printing and recording what it measured from there: the tokens per second
+and the time its text windows take at that speed. After a crash, every process on the gpu worker starts again, up
 to --max-restarts times (default 3), and continues from the worker's own
 checkpoint; 0 starts no launcher there.
 
@@ -133,7 +140,7 @@ from the checkpoint the manager holds), 5 a crash of a training process on
 one of several gpu workers (the jobs on every worker were stopped; the
 same command with --resume continues from the checkpoint the manager holds,
 as after a lost worker; on one gpu worker a crash is the process's own exit
-code, after its restarts), 130 stopped by a signal, others a crash. A step that fails keeps no result;
+code, after its restarts), 130 stopped by a signal or a limit, others a crash. A step that fails keeps no result;
 a checkpoint it wrote stays, which --resume continues and deleting it
 starts the step over; the results of the steps before it stay in the
 store.
@@ -166,7 +173,7 @@ import tempfile
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
-from wpt_dataset.build import current_record
+from wpt_dataset.build import current_record, last_dataset
 from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
 from wpt_dataset.sources import fingerprint
@@ -238,6 +245,11 @@ OPTIONS = [
                                    "measure them)"),
     ("max-restarts", int, 3, "after a crash, start every process again this many times at most, continuing from "
                              "the checkpoint (0: run in this process, never restart)"),
+    ("stop-after-minutes", float, 0, "stop as a stop signal does after this many minutes of training, counted from "
+                                     "the end of the first update, and print the speed measured and the time the "
+                                     "whole run takes at that speed (0: no limit)"),
+    ("stop-after-updates", int, 0, "stop as a stop signal does after this many updates, over every step this "
+                                   "command trains, and print what --stop-after-minutes prints (0: no limit)"),
     ("kernels", named_form, None, f"what computes the attention: {', '.join(FORMS)}; one that cannot work on the "
                                    "gpu worker stops the run (default: the first kernels installed for its GPU, "
                                    "else pytorch)"),
@@ -251,7 +263,8 @@ def parse_args(argv=None, environ=None):
                         help="model recipe: a file name in data/recipes/models/, without .json, or SERIES:SIZE[:RUN], "
                              "a size of a series file of data/recipes/series/ or another run of it (WPT_RECIPE)")
     parser.add_argument("dataset", nargs="?", default=environ.get("WPT_DATASET"),
-                        help="dataset id that `wpt dataset build RECIPE` printed (WPT_DATASET)")
+                        help="dataset id that `wpt dataset build RECIPE` printed; default: the dataset last built "
+                             "for the recipe (WPT_DATASET)")
     for name, kind, default, text in OPTIONS:
         variable = "WPT_" + name.upper().replace("-", "_")
         if variable in environ:
@@ -271,8 +284,10 @@ def parse_args(argv=None, environ=None):
                         help="continue the step that stopped from its checkpoint: the model folder's, or with --run "
                              "the store's (WPT_RESUME)")
     args = parser.parse_args(argv)
-    if not args.recipe or not args.dataset:
-        parser.error("give the model recipe and the dataset id (or set WPT_RECIPE and WPT_DATASET)")
+    if not args.recipe:
+        parser.error("give the model recipe (or set WPT_RECIPE)")
+    if args.stop_after_minutes < 0 or args.stop_after_updates < 0:
+        parser.error("--stop-after-minutes and --stop-after-updates: 0 (no limit) or more")
     if args.run is not None and not STORE_NAME.fullmatch(args.run):
         parser.error(f"--run {args.run!r}: use letters, digits, '.', '_' and '-' only")
     return args
@@ -301,7 +316,7 @@ def load_dataset(store, dataset_id, recipe):
                          "recipe again with the current wpt dataset")
     if record.get("recipe") != recipe["data"]:
         raise InputError(f"dataset {dataset_id} was built from {record.get('recipe_name')!r} with another data part "
-                         "than this recipe's; build this recipe with `wpt dataset build` and use the id it prints")
+                         "than this recipe's; build this recipe with `wpt dataset build`")
     tokenizer = Tokenizer.from_bytes(store.get_bytes(record["tokenizer"]["vocabulary"]))  # sha256-checked by the store
     return record, record_object, tokenizer
 
@@ -434,8 +449,14 @@ def main(argv=None):
     arguments = sys.argv[1:] if argv is None else list(argv)
     try:
         store = store_from_settings(Path.cwd() / ".env")
+        if args.dataset is None:
+            args.dataset = last_dataset(store, args.recipe)
     except StoreError as error:  # no store, no record: nothing has started
         print(f"{type(error).__name__}: {error}", file=sys.stderr)
+        sys.exit(REFUSED)
+    if args.dataset is None:
+        print(f"no dataset was built for {args.recipe}: run `wpt dataset build {args.recipe}`, or give a dataset id",
+              file=sys.stderr)
         sys.exit(REFUSED)
     try:
         with Telemetry.start(store, "wpt train", arguments, short(args.dataset),
@@ -706,7 +727,8 @@ def _train(args, recipe, strategy_file, steps, context, store, telemetry, enviro
                         "micro_batch": args.micro_batch, "checkpoint_every": args.checkpoint_every,
                         "segment": args.segment, "stream": args.stream, "stream_shards": args.stream_shards,
                         "recompute": args.recompute, "resume": args.resume, "scheduler_costs": args.scheduler_costs,
-                        "kernels": args.kernels}}
+                        "kernels": args.kernels, "stop_after_minutes": args.stop_after_minutes,
+                        "stop_after_updates": args.stop_after_updates}}
     try:
         checkout_root = code_root()
         placed = machines(keys(environ))  # refused before any worker is reached

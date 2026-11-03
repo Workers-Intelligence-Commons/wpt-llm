@@ -18,10 +18,11 @@ from safetensors.torch import load_file
 from wpt_inference import COSTS_FILE, DRAFT, costs_setup, replayed_costs
 from wpt_model import load_drafter, load_model, load_tokenizer, tokenizer_identity, weight_hashes
 import wpt_telemetry
-from wpt_store import LocalStore
+from wpt_store import LocalStore, StoreError
 from wpt_telemetry import FLUSH_THREAD
 from wpt_tokenizer import Tokenizer
 from wpt_utils.device import select_device
+from wpt.dataset import main as dataset
 from wpt.train import main
 from wpt_training import load_state
 
@@ -681,15 +682,79 @@ def test_streamed_training_never_copies_the_whole_dataset_to_disk(built, tmp_pat
     assert record["shards"][0]["sources"] == [built.source_id]
 
 
+def test_a_stop_saves_a_checkpoint_even_when_the_run_writes_none_during_a_step(built, tmp_path, monkeypatch):
+    # a stop keeps what the machines did, whatever --checkpoint-every says
+    options = [*interrupting(built, tmp_path, "signal.raise_signal(signal.SIGTERM)"), "--checkpoint-every", "0"]
+    with pytest.raises(SystemExit) as stopped:
+        main([*options, "--out", "here"])
+    assert stopped.value.code == 130
+    assert load_state(tmp_path / "here" / "checkpoint" / "checkpoint.safetensors")["step"] == 3
+
+
+def test_a_run_stops_at_its_limit_prints_what_it_measured_and_resumes(built, tmp_path, capsys):
+    # a short run to measure speed needs nobody to stop it: the speed and the
+    # time of the whole run come from the updates after the first, which also
+    # compiles the kernels, and the run goes on from its checkpoint
+    command = [built.recipe("five", training=one_stage(5)), built.dataset_id, "--out", "model"]
+    with pytest.raises(SystemExit) as stopped:
+        main([*command, "--stop-after-updates", "3"])
+    assert stopped.value.code == 130
+    printed = capsys.readouterr().out
+    assert "measured 2 updates in " in printed and " tokens per second" in printed
+    assert "the run's 320 tokens of text windows take " in printed  # 5 updates of 4 windows of 16 tokens
+    assert load_state(tmp_path / "model" / "checkpoint" / "checkpoint.safetensors")["step"] == 3
+    [run] = built.records("wpt train")
+    [measured] = [e for e in run.events if e.get("name") == "training.measured"]
+    assert measured["values"]["updates"] == 2 and measured["values"]["tokens_per_second"] > 0
+    assert measured["values"]["projected_hours_left"] == pytest.approx(measured["values"]["projected_hours"] * 2 / 5)
+    assert run.end["exit_code"] == 130
+
+    main([*command, "--resume"])
+    assert (tmp_path / "model" / "config.json").is_file()
+    assert [e["attributes"]["step"] for e in built.records("wpt train")[-1].events
+            if e.get("name") == "training.resumed"] == [3]
+
+
+def test_a_store_that_fails_while_the_last_dataset_is_read_refuses_the_run_in_one_line(built, monkeypatch, capsys):
+    def failing(store, name):
+        raise StoreError("the bucket does not answer")
+
+    monkeypatch.setattr("wpt.train.last_dataset", failing)
+    with pytest.raises(SystemExit) as refused:
+        main(["d"])
+    assert refused.value.code == 2 and capsys.readouterr().err == "StoreError: the bucket does not answer\n"
+
+
+def test_wpt_train_without_a_dataset_id_reads_the_one_last_built_for_the_recipe(built, tmp_path, capsys):
+    # the id goes from the build to the training through the store, not through a person's hands
+    recipe = built.recipe("three", training=one_stage(3))
+    with pytest.raises(SystemExit) as refused:
+        main([recipe, "--out", "model"])
+    assert refused.value.code == 2 and "no dataset was built for three" in capsys.readouterr().err
+
+    dataset(["build", recipe])
+    assert capsys.readouterr().out.strip().splitlines()[-1] == built.dataset_id
+    main([recipe, "--out", "model"])
+    assert json.loads((tmp_path / "model" / "provenance.json").read_text())["dataset"] == built.dataset_id
+
+    # the recipe's data part changed since that build: the ref names a dataset that no longer matches
+    path = tmp_path / "data" / "recipes" / "models" / f"{recipe}.json"
+    document = json.loads(path.read_text())
+    path.write_text(json.dumps({**document, "data": {**document["data"], "held_out": 0.25}}))
+    with pytest.raises(SystemExit) as refused:
+        main([recipe, "--out", "other"])
+    assert refused.value.code == 2 and "another data part" in capsys.readouterr().err
+
+
 def test_a_stopped_run_saves_its_step_and_continues_on_another_machine(built, tmp_path, monkeypatch):
     # a machine taken back (SIGTERM) or Ctrl+C loses no step; with --run the
     # checkpoint is in the store, so another model folder, as on another machine
-    # using the same store, continues it and gives the model of an unbroken run.
+    # using the same store, continues it and gives the model of an unbroken run,
+    # though WPT_LINK_CHECKPOINTS leaves it at its default, step-ends.
     # SIGTERM, not SIGINT: a shell starts background commands with SIGINT
     # ignored, and an ignored signal stays ignored
     options = [*interrupting(built, tmp_path, "if os.environ.get('STOP'): signal.raise_signal(signal.SIGTERM)"),
                "--checkpoint-every", "100"]
-    monkeypatch.setenv("WPT_LINK_CHECKPOINTS", "every")  # the checkpoint the stop saves comes to the store
     main([*options, "--out", "whole"])
     forget_steps(built.store)
 

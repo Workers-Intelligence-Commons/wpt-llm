@@ -55,7 +55,7 @@ import wpt_worker
 from wpt_utils.programs import MissingTool, program
 
 from .link import PART, Connection, Key, LinkError, dial, is_loopback, is_private
-from .training import LINK, NCCL, ONE_MACHINE
+from .training import LINK, NCCL, ONE_MACHINE, STOPPED
 
 WORKERS = "WPT_GPU_WORKERS"
 SECRETS = re.compile(r"WPT_STORE\w*")  # what a local worker's environment never holds: the store and its keys
@@ -136,7 +136,8 @@ def run_jobs(workers, specs, handlers) -> int:
     ends; the exit code of the first that failed, else 0. A job that fails
     stops the others; a link that breaks stops the others, then raises
     LinkError, naming its worker. A stop signal meanwhile is passed on to
-    every job."""
+    every job, and a job that ends stopped then leaves the others alone: a
+    second stop would end a job at once, while it sends its checkpoint."""
     for worker in workers:
         worker.exit = None
         worker.link.handlers.update(handlers(worker))
@@ -161,11 +162,13 @@ def run_jobs(workers, specs, handlers) -> int:
             if worker.exit == 0:
                 return
             failed.append(worker.exit)
+            if worker.exit == STOPPED and passed.asked:
+                return
         for other in workers:
             if other is not worker:
                 other.stop()
 
-    with _Passed(workers):
+    with _Passed(workers) as passed:
         if len(workers) == 1:
             serve(workers[0])
         else:
@@ -382,7 +385,7 @@ class _Passed:
     NAMES = ("SIGINT", "SIGTERM", "SIGBREAK")
 
     def __init__(self, workers):
-        self.workers, self.previous = workers, {}
+        self.workers, self.previous, self.asked = workers, {}, False
 
     def __enter__(self):
         if threading.current_thread() is threading.main_thread():
@@ -393,6 +396,7 @@ class _Passed:
         return self
 
     def _stop(self):
+        self.asked = True
         for worker in self.workers:
             worker.stop()
 

@@ -26,12 +26,22 @@ whose lock is held alone, and refuses to start that run itself.
 A rental still named in the file of a run that ended is one the manager
 could not stop: with_rentals() lists those files, and the manager tries
 again at each start and every few minutes (wpt.manager.stop_rentals).
+
+The file also lists every rental the run ever made, with its price and the
+times it started and was stopped: spent() adds them up for the cost cap
+(rental.Cap), a rental not stopped yet counting to now, over every start
+of the run, a crash of the manager included.
+
+`wpt manager stop` reaches a running manager through this folder too: it
+leaves FOLDER/RUN.stop (ask_to_stop()), which the manager watches for
+(stop_asked()) and removes when the run ends.
 """
 
 import json
 import os
 import re
 import secrets
+import time
 from pathlib import Path
 
 from wpt_utils.files import try_lock_file, unlock_file
@@ -41,6 +51,7 @@ from wpt_worker.manager import WORKERS, keys
 from . import rental
 
 REPLACEMENTS = 3  # WPT_REPLACEMENTS: how many times a run resumes after a lost gpu worker
+STOP = ".stop"  # beside a run's file: `wpt manager stop` asked it to stop
 
 
 class WorkersError(Exception):
@@ -65,10 +76,12 @@ class Workers:
     """One run's gpu workers and their file (path), the run's lock held;
     see the module's docstring. state: {"run", "recipe", "ended",
     "workers": [{"key", "rental": {"provider", "name", "kind"} or null}],
-    "resumed"}."""
+    "resumed", "rentals": [{"name", "price": dollars an hour or null,
+    "started", "stopped": seconds since 1970, null while it is rented}]}."""
 
     def __init__(self, path, state, lock):
         self.path, self.state, self.lock = Path(path), state, lock
+        state.setdefault("rentals", [])
 
     @classmethod
     def claim(cls, path) -> "Workers | None":
@@ -107,9 +120,29 @@ class Workers:
             self.lock = None
 
     def end(self):
-        """Mark the run ended: the manager that comes back leaves it."""
+        """Mark the run ended: the manager that comes back leaves it. A
+        stop asked of it is over."""
         self.state["ended"] = True
         self.save()
+        self.path.with_suffix(STOP).unlink(missing_ok=True)
+
+    def stop_asked(self) -> bool:
+        """Whether `wpt manager stop` asked this run to stop."""
+        return self.path.with_suffix(STOP).exists()
+
+    def spent(self, now=None) -> tuple[float, float]:
+        """(the dollars, the hours) the run's rentals have cost so far; the
+        hours are those with at least one rental running. A rental with no
+        known price counts for the hours alone."""
+        now = time.time() if now is None else now
+        spans = sorted((entry["started"], entry["stopped"] or now, entry["price"] or 0.0)
+                       for entry in self.state["rentals"])
+        dollars = sum((end - start) / 3600 * price for start, end, price in spans)
+        seconds, reached = 0.0, 0.0
+        for start, end, _ in spans:
+            seconds += max(end - max(start, reached), 0.0)
+            reached = max(reached, end)
+        return dollars, seconds / 3600
 
     @property
     def run(self):
@@ -142,25 +175,28 @@ class Workers:
                 found.setdefault(rented["name"], (rented, []))[1].append(index)
         return list(found.values())
 
-    def prepare(self, settings, root, telemetry):
+    def prepare(self, settings, root, telemetry, watch):
         """The run's workers, when the file holds none yet: those the
         settings list, or as many rented as they ask (as one cluster, when
         the provider can). WorkersError for settings that name none
         usable; rental.RentalError when a rental fails (the rentals made
-        stay in the file, for stop())."""
+        stay in the file, for stop()). watch: called before each rental and
+        during its wait; what it raises ends them (the same way, for
+        stop())."""
         if self.state["workers"]:
             for rented, indexes in self.groups():
                 if any(not self.state["workers"][index].get("key") for index in indexes):
                     # a rental a crash cut short before its address: given back, rented again
                     self._stop(rented, rental.providers()[rented["provider"]](settings, root), telemetry)
-                    self._rent(rental.provider(settings, root), rented["kind"], settings, telemetry, indexes)
+                    self._rent(rental.provider(settings, root), rented["kind"], settings, telemetry, indexes, watch)
             return
         text = settings.get(WORKERS, "").strip()
         if text.isdigit():
             count = int(text)
             if count < 1:
                 raise WorkersError(f"{WORKERS}={text}: rent 1 gpu worker or more, or leave it unset for a local one")
-            self._rent(rental.provider(settings, root), rental.kind(settings), settings, telemetry, [None] * count)
+            self._rent(rental.provider(settings, root), rental.kind(settings), settings, telemetry, [None] * count,
+                       watch)
             return
         try:
             given = keys(settings)
@@ -169,16 +205,19 @@ class Workers:
         self.state["workers"] = [{"key": str(key), "rental": None} for key in given]
         self.save()
 
-    def _rent(self, chosen, kind, settings, telemetry, indexes):
+    def _rent(self, chosen, kind, settings, telemetry, indexes, watch):
         """Rent one worker for each of indexes (positions in the file, None
         for a new one at the end): all in one request, as one cluster, when
         there are several and the provider can, else one rental each."""
         if len(indexes) > 1 and not chosen.cluster:
             for index in indexes:
-                self._rent(chosen, kind, settings, telemetry, [index])
+                self._rent(chosen, kind, settings, telemetry, [index], watch)
             return
+        watch()
+        price = self._quote(chosen, kind, len(indexes), settings, telemetry)
         name, token = rental_name(self.run), secrets.token_urlsafe(32)
         rented = {"provider": settings.get("WPT_RENTAL_PROVIDER") or "skypilot", "name": name, "kind": kind}
+        self.state["rentals"].append({"name": name, "price": price, "started": time.time(), "stopped": None})
         entries = [{"key": None, "token": token, "rental": rented} for _ in indexes]
         for index, entry in zip(indexes, entries):
             if index is None:
@@ -188,7 +227,8 @@ class Workers:
         self.save()  # its name first: a rental a crash cuts short is still one to stop
         with telemetry.span("manager.rent", rental=name, kind=kind, workers=len(entries)) as span:
             chosen.rent(name, token, kind == rental.INTERRUPTIBLE, len(entries))
-            found = chosen.addresses(name, len(entries)) if len(entries) > 1 else [chosen.address(name)]
+            found = (chosen.addresses(name, len(entries), watch) if len(entries) > 1
+                     else [chosen.address(name, watch)])
             found = [Key(each.host, each.port, each.pin, token, each.place, each.private) for each in found]
             for entry, key in zip(entries, found):
                 entry["key"] = str(key)
@@ -197,13 +237,32 @@ class Workers:
             span.set(workers=[key.shown() for key in found])
         telemetry.log(f"gpu worker rented: {name}, {', '.join(key.shown() for key in found)}")
 
-    def recover(self, settings, root, telemetry) -> bool:
+    def _quote(self, chosen, kind, count, settings, telemetry) -> float | None:
+        """The provider's price of a rental about to be made, and what the
+        run then comes to, printed first. None when the provider does not
+        say, which only a cap in dollars refuses (rental.RentalError)."""
+        cap = rental.cap(settings)
+        try:
+            price = chosen.price(kind == rental.INTERRUPTIBLE, count)
+        except rental.RentalError as error:
+            if cap.dollars is not None:
+                raise rental.RentalError(f"WPT_BUDGET needs the provider's price: {error}") from None
+            telemetry.log(f"the rental's cost is not known: {error}", error=True)
+            return None
+        rate = price + sum(entry["price"] or 0.0 for entry in self.state["rentals"] if entry["stopped"] is None)
+        telemetry.event("manager.price", price=price, machines=count, kind=kind)
+        telemetry.log(f"renting {count} machine(s) at ${price:.2f} an hour together: "
+                      f"{cap.projected(rate, *self.spent())}")
+        return price
+
+    def recover(self, settings, root, telemetry, watch) -> bool:
         """After wpt train lost a gpu worker, or crashed on one of several:
         replace each worker the manager rented that is not there any more,
         so the run resumes; True when it may. A rental of several workers
         (a cluster) is replaced whole when one of them is lost. False when
         no resumption is left (WPT_REPLACEMENTS) or a lost worker is one a
-        person started, which only that person can start again."""
+        person started, which only that person can start again. watch: as
+        in prepare()."""
         limit = replacements(settings)
         if self.state["resumed"] >= limit:
             telemetry.log(f"the run resumed {limit} times already (WPT_REPLACEMENTS): it stops here", error=True)
@@ -228,7 +287,7 @@ class Workers:
             if not set(indexes) & set(lost):
                 continue
             self._stop(old, rental.providers()[old["provider"]](settings, root), telemetry)
-            self._rent(chosen, old["kind"], settings, telemetry, indexes)
+            self._rent(chosen, old["kind"], settings, telemetry, indexes, watch)
             telemetry.event("manager.worker_replaced", rental=old["name"],
                             by=self.state["workers"][indexes[0]]["rental"]["name"], workers=len(indexes))
         return True
@@ -252,11 +311,30 @@ class Workers:
             raise rental.RentalError(f"{len(failed)} rental(s) could not be stopped and are still rented: "
                                      + "; ".join(failed))
 
-    @staticmethod
-    def _stop(found, chosen, telemetry):
+    def _stop(self, found, chosen, telemetry):
         telemetry.irreversible("manager.rental_stopped", rental=found["name"], provider=found["provider"])
         chosen.stop(found["name"])
+        for entry in self.state["rentals"]:
+            if entry["name"] == found["name"] and entry["stopped"] is None:
+                entry["stopped"] = time.time()
+        self.save()
         telemetry.log(f"gpu worker stopped: {found['name']}")
+
+
+def ask_to_stop(folder, run=None) -> list[str]:
+    """Ask the manager running the run named run, or every run a manager
+    runs now, to stop; the names of the runs asked. A run no manager holds
+    is left alone: nothing would hear it, and its next start would stop."""
+    asked = []
+    for path in files(folder):
+        if run in (None, path.stem):
+            lock = try_lock_file(path.with_suffix(".lock"))
+            if lock is None:
+                path.with_suffix(STOP).touch()
+                asked.append(path.stem)
+            else:
+                unlock_file(lock)
+    return asked
 
 
 def files(folder) -> list[Path]:

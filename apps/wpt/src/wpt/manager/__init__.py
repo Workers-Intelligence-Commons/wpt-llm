@@ -5,6 +5,8 @@ the run's name (docs/machines.md).
 Usage:
     uv run wpt manager
     docker compose --env-file .env -f deploy/manager/compose.yaml up      (the same, in its container)
+    uv run wpt manager stop [RUN]
+    docker compose exec manager uv run --frozen --no-sync wpt manager stop [RUN]    (in its container)
 
 Settings, from the environment, else from the .env file at the
 repository's root (an empty value counts as unset):
@@ -37,6 +39,9 @@ repository's root (an empty value counts as unset):
     WPT_RENTAL_PROVIDER, WPT_RENTAL_KIND, WPT_RENTAL_GPUS, WPT_RENTAL_WAIT
                       how the workers are rented (rental.py); a provider's own keys come from
                       the environment or .env too
+    WPT_BUDGET, WPT_MAX_HOURS
+                      the cost cap, in dollars, in hours, or both (rental.py): the first reached
+                      stops the run as `wpt manager stop` does, over all its starts
     WPT_REPLACEMENTS  how many times a run resumes after a lost gpu worker (default 3)
     WPT_STORE, WPT_LINK_CHECKPOINTS and every WPT_ option of wpt train
                       as each command reads them: from the environment, else from the same
@@ -78,6 +83,21 @@ its run's file; the manager tries to stop every rental still named in the
 file of a run that ended at each start and, until none is left, every SWEEP
 seconds, each try recorded (stop_rentals()).
 
+`wpt manager stop` stops the run a manager runs now (RUN: that run, when
+several managers share WPT_MANAGER_STATE; refused, exit code 2, when no
+manager runs one). The manager passes the stop on to wpt train as a stop
+signal: the gpu worker finishes its update, saves a checkpoint, even inside
+a step, and sends it to the store, wpt train exits with code 130, and the
+rentals are given back. The evaluation is stopped by the same signal.
+A run that holds no rental yet waits for the download and the build, and
+then rents nothing. A run that still holds rentals when it goes on after a
+crash pays for them meanwhile, so those commands get the same signal, and
+its rentals are given back. Renting is looked at too: the provider's own
+rent() ends first, and the wait for a worker's address is cut short. The
+cost cap stops a run the same way, and a lost worker is not replaced once
+a stop is under way. The run's exit code is 130, and the same command goes
+on from the checkpoint, once a cap reached is raised.
+
 The manager records its own run in the store (records/, command
 wpt manager), each step a span, and prints the line that copies the model
 out of the store (wpt store copy-out).
@@ -103,6 +123,7 @@ import re
 import shutil
 import subprocess
 import sys
+import threading
 import time
 from datetime import UTC, datetime
 from pathlib import Path
@@ -115,6 +136,7 @@ from wpt_store.models import KIND, put_model
 from wpt_store.names import as_record_name
 from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry, set_ref
 from wpt.train import CRASHED, LOST
+from wpt_training.launch import STOPPED, ask_to_stop
 from wpt_worker.manager import WORKERS
 
 from . import machines, rental
@@ -126,6 +148,7 @@ DEFAULT_STATE = Path("runs") / "manager-state"  # the runs' gpu workers, their t
 CONTAINER_SETTING = "WPT_MANAGER_CONTAINER"
 KERNELS, RENTED_KERNELS = "WPT_KERNELS", "triton"  # wpt train's --kernels, on rented gpu workers
 SWEEP = 300.0  # seconds between two tries to stop the rentals that could not be stopped
+WATCH = 5.0  # seconds between two looks at whether a run must stop, while a command it runs goes on
 RUN_LINE = re.compile(r"# run (\S+) of the recipe (\S+);")  # the first line of RUN_FILE
 COMMAND = ["-m", "wpt"]  # the wpt command, by the Python that runs it: each step is one of its subcommands
 CONTAINER = Path("/.dockerenv")  # Docker's mark that this process runs in a container
@@ -153,30 +176,82 @@ def copy_out_line(name, environ) -> str:
     return f"{command} wpt store copy-out {name} runs/{name}"
 
 
-def run_command(step, arguments, log, last_line=False, environ=None):
+class Stops:
+    """Whether the run must stop before its end: `wpt manager stop` asked,
+    or its rentals reached the cost cap."""
+
+    def __init__(self, workers, cap, telemetry):
+        self.workers, self.cap, self.telemetry, self.reason = workers, cap, telemetry, None
+
+    def check(self) -> str | None:
+        """What stops the run, recorded once; None while nothing does."""
+        if self.reason is None:
+            self.reason = ("wpt manager stop" if self.workers.stop_asked()
+                           else self.cap.reached(*self.workers.spent()))
+            if self.reason is not None:
+                self.telemetry.event("manager.stop", reason=self.reason)
+                self.telemetry.log(f"the run stops: {self.reason}", error=True)
+        return self.reason
+
+    def halt(self, step="workers"):
+        """Failed, with STOPPED, once the run must stop."""
+        if self.check():
+            raise Failed(step, STOPPED)
+
+
+def run_command(step, arguments, log, last_line=False, environ=None, stops=None):
     """Run a subcommand of the wpt command (arguments: its name and its
     arguments), what it prints shown as it comes; with last_line, the last
     non-empty line it printed; environ: settings it gets besides this
-    process's environment. Failed when it fails."""
+    process's environment; stops: a Stops that, once it says so, sends the
+    command one stop signal. Failed when it fails, with STOPPED when that
+    stop ended it."""
     command = [sys.executable, *COMMAND, *arguments]
     log(f"{step}: wpt {' '.join(arguments)}")
     env = {**os.environ, **(environ or {})}
-    if not last_line:
-        code = subprocess.run(command, env=env).returncode
-        if code:
-            raise Failed(step, code)
-        return None
-    found = None
-    with subprocess.Popen(command, stdout=subprocess.PIPE, text=True, encoding="utf-8", errors="replace",
-                          env=env) as process:
-        for line in process.stdout:
-            sys.stdout.write(line)
-            sys.stdout.flush()
-            if line.strip():
-                found = line.strip()
-    if process.returncode:
-        raise Failed(step, process.returncode)
-    return found
+    # on Windows, the one way to reach it with a stop signal is a process group of its own
+    group = {"creationflags": subprocess.CREATE_NEW_PROCESS_GROUP} if stops and os.name == "nt" else {}
+    piped = {"stdout": subprocess.PIPE, "text": True, "encoding": "utf-8", "errors": "replace"} if last_line else {}
+    lines = []
+    with subprocess.Popen(command, env=env, **group, **piped) as process:
+        reader = threading.Thread(target=shown, args=(process.stdout, lines), daemon=True) if last_line else None
+        if reader is not None:
+            reader.start()
+        try:
+            code = watched(process, stops)
+        except BaseException:
+            process.kill()
+            raise
+        finally:
+            if reader is not None:
+                reader.join()
+    if code:
+        raise Failed(step, STOPPED if stops is not None and stops.reason else code)
+    return lines[-1] if lines else None
+
+
+def shown(stream, lines):
+    """Print what stream gives as it comes, its non-empty lines kept in
+    lines."""
+    for line in stream:
+        sys.stdout.write(line)
+        sys.stdout.flush()
+        if line.strip():
+            lines.append(line.strip())
+
+
+def watched(process, stops) -> int:
+    """Wait for process to end, looking every WATCH seconds at whether it
+    must stop: one signal, since a second one ends it at once, without
+    its checkpoint. Its exit code."""
+    asked = stops is None
+    while True:
+        try:
+            return process.wait(WATCH)
+        except subprocess.TimeoutExpired:
+            if not asked and stops.check():
+                asked = True
+                ask_to_stop(process)
 
 
 def settings(root) -> dict:
@@ -222,6 +297,9 @@ def _main(argv) -> int:
         print(f"{type(error).__name__}: {error}", file=sys.stderr)
         return REFUSED
     environ = settings(root)
+    arguments = sys.argv[1:] if argv is None else list(argv)
+    if arguments[:1] == ["stop"]:
+        return stop_command(arguments[1:], Path(environ.get("WPT_MANAGER_STATE") or root / DEFAULT_STATE))
     container = environ.get(CONTAINER_SETTING, "") in ("1", "true", "yes")
 
     def leave(code):
@@ -253,6 +331,7 @@ def _main(argv) -> int:
     try:
         rental.kind(environ)  # refused now, not when the workers are rented
         rental.wait(environ)
+        rental.cap(environ)
         machines.replacements(environ)
     except (rental.RentalError, machines.WorkersError) as error:
         print(f"{type(error).__name__}: {error}", file=sys.stderr)
@@ -271,7 +350,6 @@ def _main(argv) -> int:
     folder = Path(environ.get("WPT_MANAGER_FOLDER") or root / DEFAULT_FOLDER)
     kept = Path(environ.get("WPT_MANAGER_STATE") or root / DEFAULT_STATE)
     evaluate = environ.get("WPT_EVALUATE", "") in ("1", "true", "yes")
-    arguments = sys.argv[1:] if argv is None else list(argv)
     code, continued = 0, []
     stop_rentals(store, kept, environ, root, arguments)  # those a run that ended could not stop
     for path in machines.files(kept):  # the runs a crash or a stop cut short go on first
@@ -318,6 +396,21 @@ def _main(argv) -> int:
         time.sleep(SWEEP)
         left = stop_rentals(store, kept, environ, root, arguments)
     return leave(code)
+
+
+def stop_command(arguments, kept) -> int:
+    """`wpt manager stop [RUN]`; its exit code."""
+    if len(arguments) > 1:
+        print("wpt manager stop [RUN]: at most one run's name", file=sys.stderr)
+        return REFUSED
+    run = arguments[0] if arguments else None
+    asked = machines.ask_to_stop(kept, run)
+    if not asked:
+        print(f"no wpt manager runs {'a run' if run is None else f'the run {run}'} now (in {kept})", file=sys.stderr)
+        return REFUSED
+    print(f"asked to stop: {', '.join(asked)}; the manager saves the checkpoint, then gives the machines back",
+          flush=True)
+    return 0
 
 
 def previous_run(root, recipe, store) -> str | None:
@@ -415,11 +508,13 @@ def task_images(store, dataset) -> list[str]:
 
 def _run(recipe, name, out, evaluate, store, telemetry, environ, root, workers) -> int:
     log = telemetry.log
+    stops = Stops(workers, rental.cap(environ), telemetry)
+    held = stops if workers.groups() else None  # rentals a crash left: the commands before training pay for them too
     try:
         with telemetry.span("manager.download"):
-            run_command("download", ["dataset", "download"], log)
+            run_command("download", ["dataset", "download"], log, stops=held)
         with telemetry.span("manager.build", recipe=recipe) as span:
-            dataset = run_command("build", ["dataset", "build", recipe], log, last_line=True)
+            dataset = run_command("build", ["dataset", "build", recipe], log, last_line=True, stops=held)
             if dataset is None or not re.fullmatch(r"[0-9a-f]{64}", dataset):
                 log(f"build: wpt dataset build printed no dataset id last (it printed {dataset!r})", error=True)
                 return REFUSED
@@ -429,13 +524,13 @@ def _run(recipe, name, out, evaluate, store, telemetry, environ, root, workers) 
         if images:  # the sandboxes' images, built where the sandboxes run
             with telemetry.span("manager.images", images=images):
                 for image in images:
-                    run_command("images", ["agent", "build-image", image], log)
+                    run_command("images", ["agent", "build-image", image], log, stops=held)
         try:
-            _train(recipe, name, out, dataset, telemetry, environ, root, workers)
+            _train(recipe, name, out, dataset, telemetry, environ, root, workers, stops)
             if evaluate:  # on the run's gpu workers, rented ones included, which are given back after it
                 with telemetry.span("manager.evaluate", folder=str(out)):
                     run_command("evaluate", ["eval", str(out)], log,
-                                environ={WORKERS: workers.text(), **kernels(workers, environ)})
+                                environ={WORKERS: workers.text(), **kernels(workers, environ)}, stops=stops)
         finally:
             _stop_workers(workers, environ, root, telemetry)
     except Failed as error:
@@ -452,15 +547,18 @@ def _run(recipe, name, out, evaluate, store, telemetry, environ, root, workers) 
     return 0
 
 
-def _train(recipe, name, out, dataset, telemetry, environ, root, workers):
+def _train(recipe, name, out, dataset, telemetry, environ, root, workers, stops):
     """wpt train through the run's gpu workers, rented when the settings
     ask, resumed when a gpu worker it rented is lost or a training process
     crashed on one of several workers, a lost rented worker replaced, up to
-    WPT_REPLACEMENTS times. Failed when it fails."""
+    WPT_REPLACEMENTS times, unless stops says the run stops. Failed when it
+    fails, and with STOPPED when it must stop, before anything more is
+    rented."""
     log = telemetry.log
+    stops.halt("train")
     try:
         with telemetry.span("manager.workers"):
-            workers.prepare(environ, root, telemetry)
+            workers.prepare(environ, root, telemetry, stops.halt)
     except (rental.RentalError, machines.WorkersError) as error:
         log(f"{type(error).__name__}: {error}", error=True)
         raise Failed("workers", REFUSED) from None
@@ -468,13 +566,13 @@ def _train(recipe, name, out, dataset, telemetry, environ, root, workers):
         try:
             with telemetry.span("manager.train", dataset=dataset, folder=str(out), workers=len(workers.keys())):
                 run_command("train", ["train", recipe, dataset, "--run", name, "--resume", "--out", str(out)],
-                            log, environ={WORKERS: workers.text(), **kernels(workers, environ)})
+                            log, environ={WORKERS: workers.text(), **kernels(workers, environ)}, stops=stops)
             return
         except Failed as error:
-            if error.code not in (LOST, CRASHED):
+            if error.code not in (LOST, CRASHED) or stops.check():
                 raise
             try:
-                if not workers.recover(environ, root, telemetry):
+                if not workers.recover(environ, root, telemetry, stops.halt):
                     raise
             except rental.RentalError as failed:
                 log(f"RentalError: {failed}", error=True)

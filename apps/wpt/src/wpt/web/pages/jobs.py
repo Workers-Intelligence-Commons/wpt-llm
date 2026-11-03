@@ -73,6 +73,9 @@ JOBS = {
     "chat": (("chat",), "print a model folder's licenses and sources (--about); every other use of `wpt chat` is "
              "typed by a person", None),
     "manager": (("manager",), "download, build and train a model recipe in one command", None),
+    "manager/stop": (("manager", "stop"), "stop the run a manager runs now: its checkpoint saved, its machines "
+                     "given back", None),
+    "doctor": (("doctor",), "check this machine: what is missing and how to fix it", None),
 }
 ABOUT = "--about"
 

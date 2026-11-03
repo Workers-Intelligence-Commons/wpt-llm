@@ -109,7 +109,7 @@ def _decide(device, form):
     if form == "tilelang":
         if not (torch.version.cuda and sys.platform == "linux"):
             raise KernelUnavailable("TileLang kernels run on an NVIDIA GPU under Linux only")
-        if _nvcc() is None:
+        if nvcc() is None:
             raise KernelUnavailable("TileLang compiles its attention kernels with the CUDA compiler (nvcc), which "
                                     "is not here: install the CUDA Toolkit and put nvcc on PATH or set CUDA_HOME, "
                                     "or name the Triton kernels instead")
@@ -157,7 +157,7 @@ def _try(chosen, device):
     torch.cuda.synchronize(device)
 
 
-def _nvcc():
+def nvcc():
     """The CUDA compiler's path, looked for where TileLang looks (CUDA_HOME,
     CUDA_PATH, PATH, /usr/local/cuda), or None."""
     homes = [os.environ.get("CUDA_HOME"), os.environ.get("CUDA_PATH")]

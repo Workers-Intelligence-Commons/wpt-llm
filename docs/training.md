@@ -4,7 +4,7 @@
 
 ```sh
 uv run wpt dataset build classics-test     # prints the dataset id
-uv run wpt train classics-test <dataset id>
+uv run wpt train classics-test
 ```
 
 A run takes minutes to days, so start it detached from the terminal or SSH
@@ -16,8 +16,10 @@ output to `runs/logs/<date-time>.log` and print how to follow and stop it.
 `wpt train` takes a model recipe (`data/recipes/models/<name>.json`,
 `SERIES:SIZE`, a size of a model series, or `SERIES:SIZE:RUN`, another run
 of that size; see [model.md](model.md), "Model recipes") and the id of the dataset built from it, and never
-builds: build and training fail separately. A dataset built from another
-data part than the recipe's is refused. Everything that changes the
+builds: build and training fail separately. Without an id, it reads the
+dataset last built for that recipe, or for that series, from the store. A dataset built from another
+data part than the recipe's is refused, so a recipe that changed since that
+build is refused until it is built again. Everything that changes the
 resulting model comes from the recipe: the architecture's numbers, the
 seed, the steps ("Steps", below) with their settings, and the drafter. The
 command-line options say only how the hardware runs it; each also comes
@@ -667,6 +669,25 @@ the gradients up in `synchronize`. A model too large for one GPU needs a strateg
 model itself (PyTorch's FSDP, or a library such as DeepSpeed): it is
 written as such a file, without changes to the training loop. None ships.
 
+## A limit and a measure
+
+`--stop-after-minutes` and `--stop-after-updates` stop the run as a stop
+signal does: the update finishes, a checkpoint is saved and comes back,
+the command exits with code 130, and `--resume` continues. With both, the
+first reached stops it. They count over every step the command trains. The
+updates count from its first, and the minutes from the end of its first,
+since that update also compiles the kernels.
+
+Such a run ends by printing what it measured from the end of that first
+update, which is the short run that says what a whole one costs: its
+updates and seconds, the tokens per second, and how many hours the recipe's
+text windows take at that speed, in all and from where it stopped. The
+event `training.measured` records the same numbers in the run's record. Evaluations in that
+span are part of the speed. Longer windows run slower per token than the
+stage measured, and only steps that list their window lengths have tokens
+known in advance: the message names the steps it leaves out, and the
+drafter is not in it.
+
 ## Checkpoints and resuming
 
 Inside a step, every `--checkpoint-every` updates (default 500, 0 for none
@@ -691,8 +712,12 @@ its processes finds it. What comes back to the wpt manager is a setting,
 `WPT_LINK_CHECKPOINTS`: `step-ends` (the default) sends only each step's
 last checkpoint, with the step's end, which becomes its kept state;
 `every` sends each one as it is written, into the place below. With
-`step-ends`, a step that stops or fails leaves no checkpoint there, so
-`--resume` starts it over, and the stop's message says so. The first
+`step-ends`, a step that fails leaves no checkpoint there, so `--resume`
+starts it over. A stop always leaves one: Ctrl+C or SIGTERM lets the
+current update finish, the worker writes a checkpoint, whatever
+`--checkpoint-every` says, and sends it to that place, under either
+setting. A stop that comes after a step's last update keeps that step's
+result instead, and the run stops before the next step. The first
 start of a job removes the checkpoint folders that earlier runs' jobs
 left on the worker, which no later run reads.
 
@@ -718,8 +743,8 @@ Where it lives, on the manager's side:
 
 Ctrl+C, `SIGTERM` (a shutdown, a rented machine being taken back) or, on
 Windows, Ctrl+Break, sent to any process of the run, lets every process
-finish its update; they then write a checkpoint (unless `--checkpoint-every
-0`) and exit with code 130. `--resume` continues from that update. A second
+finish its update; they then write a checkpoint, which comes back to the
+wpt manager, and exit with code 130. `--resume` continues from that update. A second
 signal stops the run at once, losing the updates since the last checkpoint,
 as `kill -9` or a power cut does.
 

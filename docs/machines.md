@@ -145,8 +145,10 @@ state. No pickle is read from the link or from a file the link carried.
 A checkpoint that comes back is the run's checkpoint on the manager, in the
 model folder or, with `--run`, in the store ([training.md](training.md),
 "Checkpoints and resuming"). With `step-ends`, a checkpoint written inside
-a step stays on the worker: a stop says so, and `--resume` on the manager
-starts that step over. Each job keeps its checkpoints in a folder of the
+a step stays on the worker, and `--resume` on the manager starts a step
+that crashed or failed over. A stop is the exception: whatever
+`WPT_LINK_CHECKPOINTS` says, the checkpoint a stop saves comes back before
+the job ends. Each job keeps its checkpoints in a folder of the
 worker named after the run's record folder, and the first start of a job
 removes the folders earlier runs left there.
 
@@ -198,8 +200,8 @@ like a lost worker ("A lost gpu worker").
 
 `wpt manager` rents its gpu workers itself when `WPT_GPU_WORKERS` is a
 number: how many to rent. A provider is one small interface of ours, with
-three operations: rent machines running gpu workers, give their addresses,
-stop them (`apps/wpt/src/wpt/manager/rental.py`). SkyPilot
+four operations: rent machines running gpu workers, give their addresses,
+stop them, and say what they cost (`apps/wpt/src/wpt/manager/rental.py`). SkyPilot
 (Apache-2.0, its `sky` command, in the manager's image) is one
 implementation, from `deploy/gpu-worker/skypilot.yaml`. It starts the
 worker with SkyPilot's own file mounts, which copy `start.sh` and
@@ -261,6 +263,62 @@ One manager at a time runs a run: it holds the run's lock in
 `WPT_MANAGER_STATE` while it runs it, which the system releases when the
 manager ends, crash included. Another manager sharing that folder leaves
 a run whose lock is held, and refuses to start it (exit code 2).
+
+## Stopping a run on purpose
+
+```sh
+uv run wpt manager stop                 # on the manager's machine
+docker compose exec manager uv run --frozen --no-sync wpt manager stop     # in its container
+```
+
+`wpt manager stop` asks the running manager to stop its run, through a file
+beside the run's in `WPT_MANAGER_STATE`; with several managers sharing that
+folder, `wpt manager stop RUN` names the run. It is refused (exit code 2)
+when no manager runs a run. The manager looks every 5 seconds, then sends
+`wpt train` one stop signal, which goes on to the worker's job: the job
+finishes its update, saves a checkpoint, even inside a step and with
+`--checkpoint-every 0`, and sends it to the manager, which keeps it in the
+store. Then the rentals are given back, and the run ends with exit code
+130. `docker compose up` again, or `wpt manager` with the same `WPT_RUN`,
+goes on from that checkpoint, with `--resume`.
+
+The checkpoint's way back is the same as a signal to `wpt train`, so a run
+stopped by hand keeps its step under either `WPT_LINK_CHECKPOINTS`. An
+evaluation under way gets the same signal and ends there; what is kept is
+what training kept. A stop asked during the download or the build of a run
+that holds no rental waits for them to end, and then nothing is rented. A
+run that went on after a crash may hold rentals by then: those commands
+get the signal too, and the rentals are given back. A stop asked while a
+worker is being rented takes effect once the provider has started the
+machines, without waiting for the worker's address, and the rental is
+given back. A worker lost while a stop is under way is not replaced.
+
+## The cost cap
+
+`WPT_BUDGET` is the most a run may spend on rentals, in dollars, at the
+provider's price. `WPT_MAX_HOURS` is the most hours it may hold rentals.
+Either one, or both, may be set: the first reached stops the run. The cap
+stops a run the way `wpt manager stop` does ("Stopping a run on purpose"),
+and the time that stop takes is spent above the cap. Neither is set by
+default, and neither counts workers a person started.
+
+Before each rental, the manager asks the provider what the machines cost an
+hour, and prints that price, what the run has spent, and how many more
+hours and what total the cap allows. SkyPilot's price is the one `sky launch
+--dryrun` gives for the same request: the machines' own hourly price,
+without storage or traffic. How long a whole run takes is what a measured
+start of it says ([training.md](training.md), "A limit and a measure"). With
+`WPT_BUDGET` set, a provider that gives no price refuses the rental;
+without it, the rental goes on, its cost unknown, and it counts for the
+hours alone.
+
+The manager keeps every rental of a run in the run's file, with its price
+and the times it started and stopped, so the cap holds over every start of
+the run: a rental counts from the moment it is asked for until it is
+stopped, a crash of the manager included, and a replacement counts beside
+the rental it replaced. The hours are those with at least one rental
+running. A run stopped by its cap stops again at once, before renting
+anything, until a person raises the cap.
 
 ## A lost gpu worker
 
@@ -377,6 +435,8 @@ wins (`WPT_STORE`, the manager's folders, `HOME`, `DOCKER_HOST`).
 | `WPT_RENTAL_KIND` | `on-demand` (the default) or `interruptible` |
 | `WPT_RENTAL_GPUS` | what each rented machine has, in the provider's own words (SkyPilot: `H100:8`); required to rent |
 | `WPT_RENTAL_WAIT` | seconds a rented worker has to give its address; default 1800 |
+| `WPT_BUDGET` | the most a run may spend on rentals, in dollars; unset, no such limit ("The cost cap") |
+| `WPT_MAX_HOURS` | the most hours a run may hold rentals; unset, no such limit |
 | `WPT_REPLACEMENTS` | how many times a run resumes after a lost gpu worker; default 3 |
 | `WPT_WORKER_WAIT` | seconds a rented worker waits with no manager, then ends; default 3600 |
 | `WPT_LINK_CHECKPOINTS` | `every` or `step-ends` |

@@ -5,7 +5,8 @@ recipe's name goes."""
 import json
 from pathlib import Path
 
-from wpt_dataset.build import build_dataset
+from wpt_dataset import build as dataset_build
+from wpt_dataset.build import build_dataset, last_dataset
 from wpt_dataset.repo import Repo
 from wpt.train import main as train
 
@@ -49,3 +50,14 @@ def test_every_size_of_a_series_builds_one_dataset_and_a_size_trains_on_its_star
     assert step["settings"]["prefix_tokens"] == 3 * 4 * 17
     assert step["optimizer"]["settings"] == {"lr": 0.002, "warmup": 1}
     assert provenance["model"]["n_layer"] == 4 and provenance["model"]["d_model"] == 16
+
+
+def test_a_build_names_its_dataset_for_every_size_and_run_of_the_series(built, tmp_path):
+    folder = tmp_path / "data" / "recipes" / "series"
+    folder.mkdir(parents=True)
+    (folder / "tiny.json").write_text(json.dumps(TINY))
+    assert last_dataset(built.store, "tiny:small") is None
+    built_id = dataset_build.run(Repo(tmp_path), "tiny:small", built.store, ["build", "tiny:small"])
+    assert last_dataset(built.store, "tiny:large") == built_id
+    assert last_dataset(built.store, "tiny:large:lr-0.5") == built_id
+    assert last_dataset(built.store, "tiny") is None  # a model recipe of that name is another thing

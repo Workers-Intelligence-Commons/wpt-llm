@@ -641,6 +641,28 @@ def _updates(step: Step) -> int | None:
     return sum(stage["steps"] for stage in stages) if isinstance(stages, list) else None
 
 
+def window_tokens_left(steps: list[Step], number: int = 1, update: int = 0) -> tuple[int, list[str]]:
+    """(the tokens of text windows the steps still read after update of
+    step number (from 1), the names of the steps after that point whose
+    settings list no window lengths, so nothing here counts them). A step
+    that continues the one before it goes on past that step's updates."""
+    left, unknown, done = 0, [], update
+    for position, step in enumerate(steps[number - 1:], number):
+        stages = step.environment_settings.get("stages")
+        if not isinstance(stages, list):
+            unknown.append(step.name)
+            done = 0
+            continue
+        first = 1
+        for stage in stages:
+            updates = min(stage["steps"], max(first + stage["steps"] - 1 - done, 0))
+            left += updates * stage["batch_size"] * stage["block_size"]
+            first += stage["steps"]
+        following = steps[position] if position < len(steps) else None
+        done = first - 1 if following is not None and following.continues else 0
+    return left, unknown
+
+
 def check_continuations(steps: list[Step]):
     """ValueError for a step that continues the one before it (Step.continues)
     and cannot: it is the first, or its step, method, environment, optimizer

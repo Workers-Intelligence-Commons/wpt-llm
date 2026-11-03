@@ -9,6 +9,7 @@ SUBCOMMAND --help`).
     wpt scaling ...   fit the scaling curve and predict a loss
     wpt chat ...      continue text with a trained model, or chat with one
     wpt manager       download, build and train a model recipe in one command
+    wpt doctor        check this machine: what is missing and how to fix it
     wpt web ...       the local web server, on 127.0.0.1
 
 The subcommands and the web server (`wpt web`) are the app's two
@@ -23,7 +24,7 @@ import sys
 # each subcommand: the module whose main(argv) runs it
 COMMANDS = {"dataset": "wpt.dataset", "store": "wpt.store", "agent": "wpt.agent", "train": "wpt.train",
             "eval": "wpt.eval", "scaling": "wpt.eval.scaling", "chat": "wpt.chat", "manager": "wpt.manager",
-            "web": "wpt.web"}
+            "doctor": "wpt.doctor", "web": "wpt.web"}
 
 
 def main(argv=None):

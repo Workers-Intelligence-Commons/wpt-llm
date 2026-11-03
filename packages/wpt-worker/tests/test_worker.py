@@ -5,16 +5,19 @@ manager. The worker runs here on the CPU, on ports the system picks."""
 import json
 import os
 import shutil
+import signal
 import socket
 import subprocess
 import sys
+import threading
+import time
 from pathlib import Path
 
 import pytest
 
 import wpt_worker
 from wpt_worker.link import Key, LinkError, dial, probe
-from wpt_worker.manager import Worker, checkout, keys, machines
+from wpt_worker.manager import Worker, checkout, keys, machines, run_jobs
 
 GIT_ENV = {**os.environ, "GIT_AUTHOR_NAME": "T", "GIT_AUTHOR_EMAIL": "t@example.org", "GIT_COMMITTER_NAME": "T",
            "GIT_COMMITTER_EMAIL": "t@example.org", "GIT_CONFIG_GLOBAL": os.devnull}
@@ -324,3 +327,34 @@ def test_a_worker_prints_the_place_and_private_address_its_settings_give(tmp_pat
                                 "WPT_WORKER_PORT": "0", "WPT_WORKER_ADDRESS": "127.0.0.1", "WPT_WORKER_WAIT": "1",
                                 "WPT_WORKER_FOLDER": str(tmp_path / "plain")})
     assert (Key.parse(plain.stdout.splitlines()[0]).place, Key.parse(plain.stdout.splitlines()[0]).private) == (None, None)
+
+
+def test_a_job_that_ends_stopped_does_not_stop_the_others_a_second_time(monkeypatch):
+    # a stop signal reached every job; the first to end must leave the one still sending
+    # its checkpoint alone, since a second stop ends a job at once
+    class Link:
+        def __init__(self, worker):
+            self.worker, self.handlers, self.serving = worker, {}, None
+
+        def call(self, kind, body):
+            pass
+
+        def serve(self, until):
+            while not stops or (self.worker.late and len(ended) < 1):
+                time.sleep(0.01)
+            self.worker.exit = 130
+            ended.append(self.worker)
+
+    class Stub:
+        def __init__(self, late):
+            self.late, self.exit, self.link, self.stopped = late, None, Link(self), 0
+
+        def stop(self):
+            self.stopped += 1
+            stops.append(self)
+
+    stops, ended, workers = [], [], [Stub(False), Stub(True)]
+    threading.Timer(0.05, lambda: signal.raise_signal(signal.SIGTERM)).start()
+    assert run_jobs(workers, [{}, {}], lambda worker: {}) == 130
+    assert [worker.stopped for worker in workers] == [1, 1]
+

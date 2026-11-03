@@ -30,6 +30,9 @@
 #     WPT_RENTAL_KIND       on-demand (the default) or interruptible
 #     WPT_RENTAL_GPUS       what each rented machine has (SkyPilot: H100:8)
 #     WPT_RENTAL_WAIT       seconds a rented worker has to give its address (default 1800)
+#     WPT_BUDGET            the most a run may spend on rentals, in dollars
+#     WPT_MAX_HOURS         the most hours a run may hold rentals; with both, the first reached
+#                           stops the run
 #     WPT_REPLACEMENTS      how many times a run resumes after a lost gpu worker (default 3)
 #     WPT_WORKER_WAIT       seconds a rented worker waits with no manager, then ends and its
 #                           machine is given back (default 3600)
@@ -47,6 +50,10 @@
 # manager's folders, HOME, DOCKER_HOST), the container's value wins. SkyPilot
 # reads its clouds' keys from the environment or its own files, which are
 # under HOME, on the volume wpt-manager.
+#
+# `docker compose exec manager uv run --frozen --no-sync wpt manager stop`
+# stops the run on purpose: the gpu worker saves a checkpoint and sends it to
+# the store, the machines are given back, and `docker compose up` again goes on.
 #
 # The manager's container exits when its runs are over, finished or failed
 # (WPT_MANAGER_CONTAINER makes a failed run exit with 0). Docker starts it
@@ -88,6 +95,8 @@ services:
       WPT_RENTAL_KIND:
       WPT_RENTAL_GPUS:
       WPT_RENTAL_WAIT:
+      WPT_BUDGET:
+      WPT_MAX_HOURS:
       WPT_REPLACEMENTS:
       WPT_WORKER_WAIT:
       WPT_LINK_CHECKPOINTS:

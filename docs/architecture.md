@@ -1053,7 +1053,7 @@ One project, `wpt` (`apps/wpt`; the workspace's root project is
 over the same services:
 
 - the subcommands: `wpt dataset`, `wpt store`, `wpt agent`, `wpt train`,
-  `wpt eval`, `wpt scaling`, `wpt chat`, `wpt manager` and `wpt web`, each
+  `wpt eval`, `wpt scaling`, `wpt chat`, `wpt manager`, `wpt doctor` and `wpt web`, each
   with its own options (`wpt SUBCOMMAND --help`). The module `wpt`
   (`apps/wpt/src/wpt/__init__.py`) names the module whose `main` runs each
   one and imports it only when it runs, so a light subcommand never loads

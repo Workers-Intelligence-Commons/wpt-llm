@@ -209,7 +209,7 @@ def runnable_kernels():
     found = []
     if device.type != "cuda":
         return found
-    for name, needs in (("tilelang_kernels", torch.version.cuda and sparse._nvcc()), ("triton_kernels", True)):
+    for name, needs in (("tilelang_kernels", torch.version.cuda and sparse.nvcc()), ("triton_kernels", True)):
         try:
             module = importlib.import_module(f"wpt_model.{name}") if needs else None
         except ImportError:
@@ -375,7 +375,7 @@ def test_installed_kernels_that_cannot_work_stop_instead_of_falling_back(monkeyp
     monkeypatch.setattr(torch.version, "cuda", "13.0")
     monkeypatch.setattr(sys, "platform", "linux")
     monkeypatch.setattr(sparse, "_installed", lambda name: True)
-    monkeypatch.setattr(sparse, "_nvcc", lambda: None)
+    monkeypatch.setattr(sparse, "nvcc", lambda: None)
     with pytest.raises(KernelUnavailable, match="nvcc"):
         kernels(gpu)
 

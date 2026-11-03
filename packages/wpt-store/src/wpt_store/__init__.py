@@ -1028,17 +1028,27 @@ def _reopened(opening, cache, copies_only) -> Store:
     return store
 
 
+def local_folder(url: str) -> Path | None:
+    """The folder a file:// WPT_STORE value names; None for any other
+    value. StoreSettingError for a file:// value that is not local."""
+    parsed = urlparse(url)
+    if parsed.scheme != "file":
+        return None
+    if parsed.netloc not in ("", "localhost"):
+        raise StoreSettingError(f"file URLs must name a local path: {url!r}")
+    path = unquote(parsed.path)
+    if os.name == "nt" and re.match(r"/[A-Za-z]:", path):
+        path = path[1:]  # file:///C:/x -> C:/x
+    return Path(path)
+
+
 def open_store(url: str, environ=None, env_file=None) -> Store:
     """A store from a WPT_STORE value; an s3 store reads its own settings
     (s3_settings) from environ (default: the environment) and env_file."""
+    folder = local_folder(url)
+    if folder is not None:
+        return LocalStore(folder)
     parsed = urlparse(url)
-    if parsed.scheme == "file":
-        if parsed.netloc not in ("", "localhost"):
-            raise StoreSettingError(f"file URLs must name a local path: {url!r}")
-        path = unquote(parsed.path)
-        if os.name == "nt" and re.match(r"/[A-Za-z]:", path):
-            path = path[1:]  # file:///C:/x -> C:/x
-        return LocalStore(path)
     if parsed.scheme == "s3":
         if not parsed.netloc:
             raise StoreSettingError(f"s3 URLs need a bucket: {url!r}")

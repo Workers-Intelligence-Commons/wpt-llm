@@ -15,6 +15,7 @@ import torch
 from safetensors.torch import load_file
 
 from wpt.train import LOST, main
+from wpt_training import load_state
 from wpt_worker.link import Key, LinkError
 
 pytestmark = pytest.mark.usefixtures("on_the_cpu")  # gloo on every system, no GPU needed
@@ -111,3 +112,63 @@ def test_a_training_process_that_crashes_on_one_of_several_gpu_workers_ends_the_
     assert "a training process crashed (exit code 1) and the jobs on every one of the 2 gpu workers" in err
     crashes = [e for run in built.records("wpt train") for e in run.events if e.get("name") == "gpu_worker.crashed"]
     assert [e["attributes"] for e in crashes] == [{"exit_code": 1, "workers": 2}]
+
+
+def patched_recipe(built, tmp_path, name, steps, patch):
+    """A recipe whose optimizer file runs patch (Python code, with job the
+    module wpt_worker.training) in each training process that has STOP set."""
+    optimizer = tmp_path / f"{name}.py"
+    optimizer.write_text(
+        "import os\nimport signal\nimport time\nimport torch\nfrom wpt_training import Optimizer\n\n"
+        "SETTINGS = {'lr': 0.01}\n\n"
+        "class Plain(Optimizer):\n"
+        "    def __init__(self, model, settings):\n"
+        "        self.optimizer = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], "
+        "lr=settings['lr'])\n\n"
+        "def start(model, settings, run):\n"
+        "    if os.environ.get('STOP'):\n"
+        "        import wpt_worker.training as job\n"
+        + "".join(f"        {line}\n" for line in patch.splitlines())
+        + "    return Plain(model, settings)\n")
+    stages = [{"block_size": 16, "steps": steps, "batch_size": 4}]
+    return built.recipe(name, training={"stages": stages, "optimizer": str(optimizer)})
+
+
+def started(built, tmp_path, recipe, *options, **environ):
+    return subprocess.run([sys.executable, "-m", "wpt", "train", recipe, built.dataset_id, "--out", "model",
+                           "--strategy", "ddp", "--processes", "2", *options], cwd=tmp_path, capture_output=True,
+                          text=True, env={**os.environ, **environ})
+
+
+def test_a_limit_on_two_processes_waits_for_the_main_one_to_send_its_checkpoint(built, tmp_path):
+    # the other process is done at once; the checkpoint that takes its time to send must still arrive.
+    # gloo's closing waits for every process, which NCCL's need not, so here closing does not wait
+    patch = ("torch.distributed.destroy_process_group = lambda: None\n"
+             "send = job.LinkCheckpoint.send\n"
+             "job.LinkCheckpoint.send = lambda self: (time.sleep(3), send(self))[1]")
+    recipe = patched_recipe(built, tmp_path, "limited", 5, patch)
+    done = started(built, tmp_path, recipe, "--stop-after-updates", "3", STOP="1")
+    assert done.returncode == 130, done.stderr
+    assert "measured 2 updates in " in done.stdout
+    assert load_state(tmp_path / "model" / "checkpoint" / "checkpoint.safetensors")["step"] == 3
+
+
+def test_a_stop_during_a_step_s_end_keeps_its_result_stops_every_process_and_the_run_goes_on(built, tmp_path):
+    # the signal comes while the main process sends the step's result: a whole step of work
+    patch = ("upload = job.upload\n"
+             "def stopped(link, path):\n"
+             "    os.kill(os.getpid(), signal.SIGTERM)\n"
+             "    time.sleep(0.2)\n"
+             "    return upload(link, path)\n"
+             "job.upload = stopped")
+    recipe = patched_recipe(built, tmp_path, "ending", 2, patch)
+    done = started(built, tmp_path, recipe, "--max-restarts", "0", STOP="1")
+    assert done.returncode == 130, done.stderr
+    assert not (tmp_path / "model" / "config.json").exists()
+
+    done = started(built, tmp_path, recipe, "--max-restarts", "0", "--resume")
+    assert done.returncode == 0, done.stderr
+    assert (tmp_path / "model" / "config.json").is_file()
+    events = built.records("wpt train")[-1].events
+    assert [e for e in events if e.get("name") == "training.step_reused"]
+    assert not [e for e in events if e.get("name") == "training.step"]

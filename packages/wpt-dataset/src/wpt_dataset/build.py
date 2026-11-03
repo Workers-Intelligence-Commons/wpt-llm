@@ -124,7 +124,7 @@ from .errors import (CutFailed, DatasetError, NotDownloaded, PatchFailed, PoolEr
                      TrainedListMissing, VocabularyMissing)
 from .kept import kept
 from .manifest import SYMLINK
-from .repo import Repo
+from .repo import SIZE_OF, Repo
 from .sources import copied_as_records, copy_size, final_tree, fingerprint, held_manifest, held_out_group, tags_of
 
 # the failures that take a whole source out of every build, recorded and never a stop: not in the store, or a
@@ -888,8 +888,25 @@ def run(repo: Repo, name: str, store, arguments, stream=False, skip_failed=False
         with download.session(store, telemetry) as session:
             dataset_id = build_dataset(repo, name, store, log=telemetry.log, stream=stream, skip_failed=skip_failed,
                                        telemetry=telemetry, session=session)
+        kind, key = dataset_ref(name)
+        set_ref(store, kind, key, store.get_ref("datasets", dataset_id), telemetry)
         telemetry.log(dataset_id)
     return dataset_id
+
+
+def dataset_ref(name: str) -> tuple[str, str]:
+    """The ref naming the record of the dataset last built for a model
+    recipe's name: recipes/NAME, or series/SERIES for a size of a series,
+    every size of which builds the same dataset."""
+    series, separated, _ = name.partition(SIZE_OF)
+    return ("series", series) if separated else ("recipes", name)
+
+
+def last_dataset(store, name: str) -> str | None:
+    """The id of the dataset last built for a model recipe's name; None
+    when none was."""
+    record = store.get_ref(*dataset_ref(name))
+    return None if record is None else json.loads(store.get_bytes(record))["id"]
 
 
 def run_tokenizer(repo: Repo, name: str, store, arguments, stream=False) -> tuple[str, str]:

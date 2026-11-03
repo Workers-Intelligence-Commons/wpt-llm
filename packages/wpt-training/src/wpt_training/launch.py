@@ -52,7 +52,7 @@ def launch(processes: int, arguments: list[str], max_restarts: int = 0, log=None
         stopping.append(number)
         for child in running:
             if child.poll() is None:
-                _ask_to_stop(child)
+                ask_to_stop(child)
 
     previous = {}
     if threading.current_thread() is threading.main_thread():
@@ -108,7 +108,9 @@ def _run_once(processes, arguments, attempt, running, stopping, environ, first_r
                 child.wait()
 
 
-def _ask_to_stop(child):
+def ask_to_stop(child):
+    """A stop signal to a process in its own process group (on Windows, the
+    one kind it can receive)."""
     if os.name == "nt":
         child.send_signal(signal.CTRL_BREAK_EVENT)  # what a process in its own group can receive
     else:

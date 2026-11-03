@@ -29,9 +29,9 @@ class SettingsMismatch(Exception):
 
 class Interrupted(Exception):
     """The run was asked to stop (Ctrl+C, SIGTERM, a machine being shut
-    down): it finished its update, wrote a checkpoint when it keeps them,
-    and stopped. `step` is the last update done; `saved` says whether the
-    checkpoint holds it."""
+    down) or reached its Limit: it finished its update, wrote a checkpoint
+    when it has one, and stopped. `step` is the last update done; `saved`
+    says whether the checkpoint holds it."""
 
     def __init__(self, step: int, saved: bool):
         super().__init__(f"stopped after update {step}" + ("; the checkpoint holds it" if saved else ""))
@@ -120,6 +120,36 @@ class Trained:
     skipped: int = 0
 
 
+class Limit:
+    """Where a run stops by itself, as a stop signal would stop it: after
+    `updates` updates or `minutes` minutes, whichever comes first (0: no
+    such limit), over every step it trains. The minutes start when the
+    first update ends, since that update also compiles the kernels; so does
+    what it measures: `measured` updates, of `tokens` tokens of text
+    windows, in `seconds()`. One Limit lives for the whole run: every
+    step's train() adds its updates to it."""
+
+    def __init__(self, updates: int = 0, minutes: float = 0):
+        self.updates, self.minutes = updates, minutes
+        self.made, self.measured, self.tokens, self.started = 0, 0, 0, None
+
+    def count(self, tokens: int):
+        """An update was made, of that many tokens of text windows."""
+        self.made += 1
+        if self.started is None:
+            self.started = time.monotonic()
+        else:
+            self.measured += 1
+            self.tokens += tokens
+
+    def seconds(self) -> float:
+        return 0.0 if self.started is None else time.monotonic() - self.started
+
+    def reached(self) -> bool:
+        return (bool(self.updates) and self.made >= self.updates) or (
+            bool(self.minutes) and self.seconds() >= self.minutes * 60)
+
+
 def _seed(*parts) -> int:
     return int.from_bytes(hashlib.sha256(repr(parts).encode()).digest()[:8], "little") & (2**63 - 1)
 
@@ -136,7 +166,8 @@ def stage_of(stages, step) -> tuple[int, object, int, int]:
 
 def train(model, strategy, step, method, environment, seed: int, number: int, options: Options = Options(),
           checkpoint: Checkpoint | None = None, resume=False, identity=None, done=(), log=print, telemetry=None,
-          save_last=False, start: Checkpoint | None = None) -> Trained:
+          save_last=False, start: Checkpoint | None = None, limit: Limit | None = None,
+          signals: "StopSignals | None" = None) -> Trained:
     """Run one step (a wpt_training.Step, its method and environment
     started; number, its place in the recipe from 1, which dropout reads
     with the seed) on model, in place, then load the weights of the evaluation
@@ -161,7 +192,10 @@ def train(model, strategy, step, method, environment, seed: int, number: int, op
     (ValueError when it has no update left, or there is no such state),
     except that the best evaluation of the steps before it is forgotten,
     as at a new stage (Optimizer.stage): it keeps the weights of its own
-    best evaluation.
+    best evaluation. limit: where the run stops by itself (Limit). signals:
+    the StopSignals of a caller that goes on after this step and has more
+    to protect; by default the step listens for itself, until its updates
+    end.
 
     The environment's stages run in order, each drawing batches of its own
     number of examples (a batch depends only on the seeds and the update);
@@ -171,8 +205,9 @@ def train(model, strategy, step, method, environment, seed: int, number: int, op
 
     A stop signal (SIGINT, SIGTERM, and SIGBREAK on Windows) to any process
     lets every process finish the update; they then save the checkpoint,
-    when the run keeps them, and raise Interrupted. A second signal acts as
-    usual.
+    when the run has one, whatever options.checkpoint_every says, and raise
+    Interrupted. A second signal acts as usual. A limit reached stops them
+    the same way.
 
     telemetry (a wpt_telemetry.Telemetry) records, from the main process,
     every update (its loss, its duration, the learning rates), every
@@ -225,7 +260,7 @@ def train(model, strategy, step, method, environment, seed: int, number: int, op
         wrapped = strategy.wrap(model)
         return _loop(model, strategy, step, method, environment, optimizer, wrapped, (seed, number), options,
                      checkpoint, state, signature, log, record, save_last, stages, updates,
-                     BALANCING not in step.locked, start if continued else None)
+                     BALANCING not in step.locked, start if continued else None, limit, signals)
     finally:
         for parameter in frozen:
             parameter.requires_grad_(True)
@@ -246,7 +281,7 @@ def _freeze(model, names) -> list:
 
 
 def _loop(model, strategy, step, method, environment, optimizer, wrapped, draws, options, checkpoint, state,
-          signature, log, record, save_last, stages, updates, balance, continued=None):
+          signature, log, record, save_last, stages, updates, balance, continued=None, limit=None, signals=None):
     first_step, best_val, best_state, best_step, best_indexer, reached, skipped = 1, None, None, None, None, {}, 0
     if state is not None:
         model.load_state_dict(state["model"])
@@ -340,7 +375,7 @@ def _loop(model, strategy, step, method, environment, optimizer, wrapped, draws,
     model.train()
     t0 = time.time()
     last, indexer, update = first_step - 1, None, first_step
-    with _StopSignals(log) as signals:
+    with contextlib.nullcontext(signals) if signals is not None else StopSignals(log) as signals:
         while update <= updates:
             index, stage, begin, end = stage_of(stages, update)
             if update == begin and index:  # longer windows: the best so far is no longer comparable
@@ -358,23 +393,27 @@ def _loop(model, strategy, step, method, environment, optimizer, wrapped, draws,
                 while update <= end:
                     stop = _update(update, index, begin, end)
                     last, reached[index] = update, update
+                    if limit is not None:
+                        limit.count(stage.batch_size * (stage.block_size or 0))
                     next_step = end + 1 if stop else update + 1  # an optimizer's stop ends the stage
                     if keeps and update % options.checkpoint_every == 0:
                         save(update, next_step)
                     # every process must stop at the same update, wherever the signal came or the record broke
-                    asked, broken = (float(signals.asked), float(record.broken is not None))
+                    asked = signals.asked or (limit is not None and limit.reached())
+                    asked, broken = (float(asked), float(record.broken is not None))
                     if strategy.world_size > 1:
                         flags = torch.tensor([asked, broken], device=strategy.device)
                         asked, broken = strategy.reduce(flags, "max").tolist()
                     if asked or broken:
-                        if keeps and update % options.checkpoint_every:
+                        saves = keeps or (bool(asked) and checkpoint is not None)
+                        if saves and not (keeps and update % options.checkpoint_every == 0):
                             save(update, next_step)
-                        record.event("training.stopped", step=update, saved=keeps)
+                        record.event("training.stopped", step=update, saved=saves)
                         if record.broken is not None:
                             raise record.broken
                         if broken:
                             raise RecordError(f"the main process's record broke; stopped after update {update}")
-                        raise Interrupted(update, keeps)
+                        raise Interrupted(update, saves)
                     update = next_step
                     if stop:
                         log(f"stage {index + 1} ended at update {last}")
@@ -452,15 +491,17 @@ class _Unbroken:
                 self.broken = error
 
 
-class _StopSignals:
+class StopSignals:
     """While active, a stop signal only sets `asked` (and puts the usual
     action back, so a second one stops at once). Signals reach Python's main
-    thread only: elsewhere this does nothing."""
+    thread only: elsewhere this does nothing. What it says about a signal
+    goes out on a thread of its own, since the main thread may be in the
+    middle of a send on the link that line takes."""
 
     NAMES = ("SIGINT", "SIGTERM", "SIGBREAK")  # SIGBREAK: Windows' Ctrl+Break, which a launcher forwards
 
     def __init__(self, log):
-        self.log, self.asked, self.previous = log, False, {}
+        self.log, self.asked, self.previous, self.telling = log, False, {}, []
 
     def __enter__(self):
         if threading.current_thread() is threading.main_thread():
@@ -474,9 +515,24 @@ class _StopSignals:
     def _handle(self, number, frame):
         self.asked = True
         signal.signal(number, self.previous.get(number, signal.SIG_DFL))
-        self.log(f"{signal.Signals(number).name}: stopping after this update (again to stop at once)")
+        text = f"{signal.Signals(number).name}: stopping (again to stop at once)"
+        self.telling.append(threading.Thread(target=self._tell, args=(text,), daemon=True))
+        self.telling[-1].start()
+
+    def _tell(self, text):
+        try:
+            self.log(text)
+        except RecordError:  # the run's next call to its record raises it
+            pass
+
+    def anywhere(self, strategy) -> bool:
+        """Whether any process was asked to stop: every process calls this
+        at the same point, and none goes past it before all have reached it."""
+        return bool(strategy.reduce(torch.tensor([float(self.asked)], device=strategy.device), "max").item())
 
     def __exit__(self, *exc):
+        for thread in self.telling:
+            thread.join()
         for number, handler in self.previous.items():
             signal.signal(number, handler)
         return False

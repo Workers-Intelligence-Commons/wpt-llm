@@ -29,7 +29,7 @@ each batch's passes, the gradients and their exchange between processes,
 the locked parts, windows trained in parts (parts.py: segments on one
 process, slices across processes, slices in segments), evaluation,
 checkpoints (in a folder, or anywhere a Checkpoint subclass saves them),
-resuming, stopping cleanly on a signal, and the step's telemetry. The
+resuming, stopping cleanly on a signal or at a run's limit (Limit), and the step's telemetry. The
 batches and the random draws of an update are seeded by the seeds and the
 update only, so the same settings train the same way on any number of
 processes, and a resumed step continues exactly where it stopped.
@@ -37,11 +37,12 @@ processes, and a resumed step continues exactly where it stopped.
 
 from .plugins import (SENT, Context, Data, Environment, Method, Optimizer, PluginError, Run, Stage, Step, StepFailed,
                       Strategy, TextMethod, Verdict, WINDOWS, built_in, check_continuations, draw_numbers, in_process,
-                      load_step, load_strategy, step_seed, strategy_plugin)
-from .runner import Checkpoint, FolderCheckpoint, Interrupted, Options, SettingsMismatch, Trained, train, weights
+                      load_step, load_strategy, step_seed, strategy_plugin, window_tokens_left)
+from .runner import (Checkpoint, FolderCheckpoint, Interrupted, Limit, Options, SettingsMismatch, StopSignals, Trained,
+                     train, weights)
 from .states import load_state, save_state
 
-__all__ = ["SENT", "Checkpoint", "Context", "Data", "Environment", "FolderCheckpoint", "Interrupted", "Method", "Optimizer", "Options",
+__all__ = ["SENT", "Checkpoint", "Context", "Data", "Environment", "FolderCheckpoint", "Interrupted", "Limit", "Method", "Optimizer", "Options",
            "PluginError", "Run", "SettingsMismatch", "Stage", "Step", "StepFailed", "Strategy", "TextMethod",
            "Trained", "Verdict", "WINDOWS", "built_in", "check_continuations", "draw_numbers", "in_process", "load_state", "load_step", "load_strategy",
-           "save_state", "step_seed", "strategy_plugin", "train", "weights"]
+           "save_state", "step_seed", "strategy_plugin", "train", "weights", "window_tokens_left"]

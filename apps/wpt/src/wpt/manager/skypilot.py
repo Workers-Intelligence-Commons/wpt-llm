@@ -18,6 +18,9 @@ for several workers, one cluster of that many nodes rented in one request
               entry in the SSH configuration SkyPilot writes under HOME: NAME for rank 0,
               NAME-worker1 for rank 1, and so on), at the worker's port
     stop      sky down -y NAME
+    price     the COST ($) of the row SkyPilot chose, in the table that
+              sky launch --dryrun -y --gpus GPUS [--num-nodes N] [--use-spot] prints: the same
+              request as rent, renting nothing; that figure is an hour of every node together
 
 A cluster is one place: its nodes reach each other on the private addresses
 their keys give, so a run on them exchanges gradients through NCCL
@@ -50,6 +53,8 @@ PASSED = ("WPT_WORKER_WAIT",)  # the worker's settings passed on when the manage
 GONE = re.compile(r"not found|does not exist|no (existing |matching )?cluster", re.IGNORECASE)
 ENDPOINT = re.compile(r"(?:\w+://)?(\[[0-9A-Fa-f:]+\]|[\w.\-]+):(\d+)/?$")
 NODE = re.compile(r"wpt-node (\d+) (\S+)")  # start.sh: a node's rank and private address
+# sky's plan: the COST ($) cell before the CHOSEN mark, which sky colours
+CHOSEN = re.compile(r"(\d+(?:\.\d+)?)(?:\s|\x1b\[[0-9;]*m)+\u2714")
 # what sky runs with: the shell's basics, and the names of the clouds' keys (AWS_* included). The store's names
 # (WPT_STORE and its keys, WPT_STORE_*) are not among them
 BASICS = re.compile(r"PATH|HOME|USER|LOGNAME|SHELL|TERM|TZ|TMPDIR|LANG|LC_\w+|SSH_AUTH_SOCK|XDG_\w+|KUBECONFIG|"
@@ -103,11 +108,24 @@ class SkyPilot(Provider):
         return subprocess.run([sky, *arguments], cwd=self.root, capture_output=True, text=True, encoding="utf-8",
                               errors="replace", env=environment(self.settings, extra))
 
-    def rent(self, name, token, interruptible, count=1):
+    def _gpus(self) -> str:
         gpus = self.settings.get("WPT_RENTAL_GPUS")
         if not gpus:
             raise RentalError("WPT_RENTAL_GPUS is not set: name what each rented machine has, as SkyPilot writes it "
                               "(such as H100:8)")
+        return gpus
+
+    def price(self, interruptible, count=1):
+        done = self._sky("launch", "--dryrun", "-y", "--gpus", self._gpus(),
+                         *(["--num-nodes", str(count)] if count > 1 else []),
+                         *(["--use-spot"] if interruptible else []), str(TASK))
+        found = CHOSEN.search(done.stdout + done.stderr)
+        if done.returncode or found is None:
+            raise RentalError(f"sky launch --dryrun gave no price (exit code {done.returncode}): {_last(done)}")
+        return float(found[1])
+
+    def rent(self, name, token, interruptible, count=1):
+        gpus = self._gpus()
         passed = [part for setting in PASSED if self.settings.get(setting) for part in ("--env", setting)]
         cluster = ["--num-nodes", str(count), "--env", f"WPT_WORKER_PLACE={name}"] if count > 1 else []
         done = self._sky("launch", "-c", name, "-y", "-d", "--down", "--gpus", gpus, *cluster,
@@ -116,22 +134,24 @@ class SkyPilot(Provider):
         if done.returncode:
             raise RentalError(f"sky launch {name} failed (exit code {done.returncode}): {_last(done)}")
 
-    def address(self, name):
-        return self._until(name, lambda: self._one(name))
+    def address(self, name, watch):
+        return self._until(name, lambda: self._one(name), watch)
 
-    def addresses(self, name, count):
-        return self._until(name, lambda: self._cluster(name, count))
+    def addresses(self, name, count, watch):
+        return self._until(name, lambda: self._cluster(name, count), watch)
 
     def stop(self, name):
         done = self._sky("down", "-y", name)
         if done.returncode and not GONE.search(done.stdout + done.stderr):
             raise RentalError(f"sky down {name} failed (exit code {done.returncode}): {_last(done)}")
 
-    def _until(self, name, look):
+    def _until(self, name, look, watch):
         """What look() finds, once it finds something: it is called again
-        every POLL seconds, until WPT_RENTAL_WAIT is over."""
+        every POLL seconds, until WPT_RENTAL_WAIT is over, each time after
+        watch()."""
         deadline = time.monotonic() + wait(self.settings)
         while True:
+            watch()
             found = look()
             if found:
                 return found

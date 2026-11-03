@@ -25,7 +25,9 @@ them, or the first process alone otherwise:
        else the reused one the plan names, and draws as that step does.
        The first start of a job removes the checkpoint folders earlier
        runs' jobs left on this machine (after a stop or a crash), which no
-       later run reads
+       later run reads. A stop signal from the first step on waits for what
+       is being sent: one that comes at a step's end stops the run once
+       step.done is answered
     4. trains the drafter, measures or replays the pass times, writes a
        sample's token ids, and sends them with the drafter (finished)
 
@@ -76,9 +78,9 @@ from wpt_model.sparse import KernelUnavailable, kernels
 from wpt_store import StoreError
 from wpt_store.shards import documents
 from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry
-from wpt_training import (SENT, WINDOWS, Checkpoint, Data, FolderCheckpoint, Interrupted, Options, PluginError,
-                          SettingsMismatch, StepFailed, draw_numbers, load_state, load_step, load_strategy, save_state,
-                          train, weights)
+from wpt_training import (SENT, WINDOWS, Checkpoint, Data, FolderCheckpoint, Interrupted, Limit, Options, PluginError,
+                          SettingsMismatch, StepFailed, StopSignals, draw_numbers, load_state, load_step, load_strategy,
+                          save_state, train, weights, window_tokens_left)
 from wpt_training.launch import REFUSED, STOPPED, launch
 from wpt_utils.device import describe
 
@@ -92,8 +94,6 @@ CHECKPOINTS = (EVERY, STEP_ENDS)
 NCCL, LINK = "nccl", "link"  # spec["machines"]["transport"]: how a run's gpu workers exchange gradients
 ONE_MACHINE = {"index": 0, "count": 1, "transport": None}
 BRIDGED = "WPT_BRIDGED"  # set for the processes of a run across places: their strategy is wpt_worker.peers.Bridged
-WORKER_ONLY = ("; with step-ends, that checkpoint is on the gpu worker's disk only, where only this job's restarts "
-               "read it: the manager's checkpoint does not hold it, so --resume starts the step over")
 # the outside libraries the gpu worker trains with, whose versions the model's provenance names; a step's
 # fingerprint holds the code instead (wpt_utils.programs.code, on the manager, whose checkout the worker runs)
 LIBRARIES = ("torch", "numpy", "pyarrow")
@@ -223,10 +223,7 @@ def _run(spec, link, store, work, telemetry) -> int:
         if strategy.is_main:
             telemetry.log(str(error), error=True)
         return REFUSED
-    except Interrupted as error:
-        if strategy.is_main:
-            telemetry.log(str(error) + (WORKER_ONLY if error.saved and spec["checkpoints"] != EVERY else ""),
-                          error=True)
+    except Interrupted:  # _train said so
         return STOPPED
     finally:
         strategy.close()
@@ -261,7 +258,11 @@ class LinkCheckpoint(Checkpoint):
     def save(self, state):
         self.local.save(state)
         if self.every:
-            call(self.link, "checkpoint.save", upload=upload(self.link, self.local.path))
+            self.send()
+
+    def send(self):
+        """The local checkpoint, to the manager's."""
+        call(self.link, "checkpoint.save", upload=upload(self.link, self.local.path))
 
     def remove(self):
         self.local.remove()
@@ -361,49 +362,95 @@ def _train(spec, link, store, work, strategy, telemetry):
         _remove_others(local.folder, log)
     checkpoint = LinkCheckpoint(link, local, spec["checkpoints"] == EVERY, spec["checkpoint"])
     writing = Writing(link)
+    limit = None
+    if options["stop_after_updates"] or options["stop_after_minutes"]:
+        limit = Limit(options["stop_after_updates"], options["stop_after_minutes"])
     data_options = {"stream_shards": options["stream_shards"] if options["stream"] else None,
                     "micro_batch": options["micro_batch"] or 0}
-    for number, (step, mark) in enumerate(zip(steps, marks), 1):
-        if number <= reused:
-            continue
-        data = Data(step.name, store, record, model_config, strategy, telemetry, log, seed, draws[number - 1],
-                    **data_options, call=environment_call(link, number), writing=writing)
+    # a stop signal waits from here on until what the steps sent has arrived: a step's result, or a stop's checkpoint
+    with StopSignals(log) as signals:
         try:
-            with telemetry.span("step", step=step.name, number=number, fingerprint=mark) as span:
-                method = step.start_method()
-                environment = step.start_environment(data)
+            for number, (step, mark) in enumerate(zip(steps, marks), 1):
+                if number <= reused:
+                    continue
+                data = Data(step.name, store, record, model_config, strategy, telemetry, log, seed, draws[number - 1],
+                            **data_options, call=environment_call(link, number), writing=writing)
                 try:
-                    trained = train(model, strategy, step, method, environment, seed, draws[number - 1],
-                                    Options(options["checkpoint_every"], options["segment"]), checkpoint=checkpoint,
-                                    resume=resume, identity=mark, done=marks[:number - 1], log=log,
-                                    telemetry=telemetry, save_last=True,  # its result is kept from the checkpoint
-                                    start=continued if step.continues else None)
-                    sources = environment.sources if strategy.is_main else {}
-                finally:
-                    environment.close()
-                span.set(**asdict(trained))
-        except StepFailed as error:
-            left = strategy.is_main and checkpoint.exists()
-            raise Refused(f"StepFailed: step {number} {step.name}: {error.reason}; "
-                          + (f"its checkpoint stays in {checkpoint}: --resume continues the step from it, and "
-                             "deleting it starts the step over" if left else "nothing of it is kept")
-                          + (f"; the results of the {number - 1} steps before it stay in the store"
-                             if number > 1 else "")) from None
-        except (ValueError, SettingsMismatch, PluginError, StoreError) as error:
-            raise Refused(f"{type(error).__name__}: step {number} {step.name}: {error}") from None
-        if strategy.is_main:
-            about = {"number": number, "reached": _reached(trained), "sources": dict(sorted(sources.items()))}
-            sent_state = None if checkpoint.every else upload(link, local.path)
-            call(link, "step.done", json.dumps(about).encode(), state=sent_state)
-            continued.remove()
-            if number < len(steps) and steps[number].continues:  # the next step goes on from this state
-                continued.save_file(local.path)
-            local.remove()  # the manager keeps the step's result
-        strategy.barrier()
-        resume = False  # the step that stopped, when one did, is done
+                    with telemetry.span("step", step=step.name, number=number, fingerprint=mark) as span:
+                        method = step.start_method()
+                        environment = step.start_environment(data)
+                        try:
+                            trained = train(model, strategy, step, method, environment, seed, draws[number - 1],
+                                            Options(options["checkpoint_every"], options["segment"]),
+                                            checkpoint=checkpoint, resume=resume, identity=mark,
+                                            done=marks[:number - 1], log=log, telemetry=telemetry,
+                                            save_last=True,  # its result is kept from the checkpoint
+                                            start=continued if step.continues else None, limit=limit, signals=signals)
+                            sources = environment.sources if strategy.is_main else {}
+                        finally:
+                            environment.close()
+                        span.set(**asdict(trained))
+                except StepFailed as error:
+                    left = strategy.is_main and checkpoint.exists()
+                    raise Refused(f"StepFailed: step {number} {step.name}: {error.reason}; "
+                                  + (f"its checkpoint stays in {checkpoint}: --resume continues the step from it, and "
+                                     "deleting it starts the step over" if left else "nothing of it is kept")
+                                  + (f"; the results of the {number - 1} steps before it stay in the store"
+                                     if number > 1 else "")) from None
+                except (ValueError, SettingsMismatch, PluginError, StoreError) as error:
+                    raise Refused(f"{type(error).__name__}: step {number} {step.name}: {error}") from None
+                if strategy.is_main:
+                    about = {"number": number, "reached": _reached(trained), "sources": dict(sorted(sources.items()))}
+                    sent_state = None if checkpoint.every else upload(link, local.path)
+                    call(link, "step.done", json.dumps(about).encode(), state=sent_state)
+                    continued.remove()
+                    if number < len(steps) and steps[number].continues:  # the next step goes on from this state
+                        continued.save_file(local.path)
+                    local.remove()  # the manager keeps the step's result
+                resume = False  # the step that stopped, when one did, is done
+                if signals.anywhere(strategy):  # also waits for the main process: the step's result is kept
+                    raise Interrupted(trained.steps, False)
+        except Interrupted as error:
+            try:
+                if strategy.is_main:
+                    if error.saved and not checkpoint.every:  # the worker's machine may be given back next
+                        checkpoint.send()
+                    if limit is not None:
+                        _measured(limit, steps, number, error.step, telemetry)
+                    telemetry.log(str(error) + (f", in {spec['checkpoint']}: --resume continues from it"
+                                                if error.saved else ""), error=True)
+            finally:
+                strategy.barrier()  # one process's end stops the others, so none ends while the main one sends
+            raise
     if strategy.is_main:
         _finish(spec, link, store, work, model, model_config, drafter_config, drafting, setup, plan, steps,
                 strategy, telemetry)
+
+
+def _measured(limit, steps, number, update, telemetry):
+    """What a run stopped by its Limit measured, recorded and printed: the
+    speed, and the time of the run's text windows at that speed. Steps that
+    read something else have no tokens known in advance, so their time is
+    not in it, nor is the drafter's."""
+    seconds = limit.seconds()
+    if not limit.measured:
+        telemetry.log("measured nothing: the first update, which also compiles the kernels, is not counted")
+        return
+    updates = limit.measured / seconds
+    values = {"seconds": seconds, "updates": limit.measured, "updates_per_second": updates}
+    text = f"measured {limit.measured:,} updates in {seconds:,.0f} s: {updates:.3f} updates per second"
+    if limit.tokens:
+        speed = limit.tokens / seconds
+        whole, unknown = window_tokens_left(steps)
+        left, _ = window_tokens_left(steps, number, update)
+        values |= {"tokens_per_second": speed, "projected_hours": whole / speed / 3600,
+                   "projected_hours_left": left / speed / 3600}
+        text += (f", {speed:,.0f} tokens per second; at that speed the run's {whole:,} tokens of text windows take "
+                 f"{whole / speed / 3600:,.2f} hours, {left / speed / 3600:,.2f} of them left")
+        if unknown:
+            text += f"; steps not counted: {', '.join(unknown)}"
+    telemetry.event("training.measured", values=values, step=update)
+    telemetry.log(text)
 
 
 def _remove_others(own: Path, log):
