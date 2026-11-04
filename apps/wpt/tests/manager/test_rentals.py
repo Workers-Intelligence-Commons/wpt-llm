@@ -5,6 +5,7 @@ SkyPilot is a fake `sky` command."""
 
 import json
 import os
+import signal
 import socket
 import stat
 import subprocess
@@ -169,7 +170,8 @@ def test_a_lost_worker_a_person_started_is_not_replaced(built, fake, tmp_path, m
 
 def test_bad_rental_settings_are_refused_before_anything_runs(built, fake, monkeypatch, capsys):
     for setting, value, said in (("WPT_RENTAL_KIND", "cheap", "one of on-demand, interruptible"),
-                                 ("WPT_REPLACEMENTS", "many", "a number of times")):
+                                 ("WPT_REPLACEMENTS", "many", "a number of times"),
+                                 ("WPT_STOP_DEADLINE", "soon", "a number of seconds above 0")):
         monkeypatch.setenv(setting, value)
         with pytest.raises(SystemExit) as refused:
             main([])
@@ -684,8 +686,10 @@ def checkpoint_step(built, name) -> int:
     return load_state(built.store.path(built.store.get_ref("checkpoints", name)))["step"]
 
 
-def test_wpt_manager_stop_saves_the_checkpoint_gives_the_machines_back_and_the_same_command_goes_on(
-        built, fake, tmp_path, monkeypatch):
+@pytest.mark.parametrize("reason, ask", [("wpt manager stop", lambda: main(["stop"])),
+                                         ("SIGTERM", lambda: os.kill(os.getpid(), signal.SIGTERM))])
+def test_a_stop_saves_the_checkpoint_gives_the_machines_back_and_the_same_command_goes_on(
+        built, fake, tmp_path, monkeypatch, reason, ask):
     # the machines go back with nothing lost, from the middle of a step, under the default WPT_LINK_CHECKPOINTS
     monkeypatch.setattr(wpt.manager, "WATCH", 0.1)
     update_3 = tmp_path / "update-3"
@@ -697,7 +701,7 @@ def test_wpt_manager_stop_saves_the_checkpoint_gives_the_machines_back_and_the_s
     def person():
         while not update_3.exists():
             time.sleep(0.05)
-        main(["stop"])
+        ask()
 
     asking = threading.Thread(target=person, daemon=True)
     asking.start()
@@ -710,7 +714,7 @@ def test_wpt_manager_stop_saves_the_checkpoint_gives_the_machines_back_and_the_s
     assert checkpoint_step(built, "wanted") == 3
     assert built.store.get_ref("models", "wanted") is None
     [run] = built.records("wpt manager")
-    assert [e["attributes"]["reason"] for e in run.events if e.get("name") == "manager.stop"] == ["wpt manager stop"]
+    assert [e["attributes"]["reason"] for e in run.events if e.get("name") == "manager.stop"] == [reason]
     assert not (tmp_path / "runs" / "manager-state" / "wanted.stop").exists()  # the next start is not stopped by it
 
     monkeypatch.delenv("STOP_AT")
@@ -800,6 +804,132 @@ def test_a_run_that_comes_back_holding_rentals_is_stopped_during_its_commands_be
     assert stopped.value.code == 130 and time.monotonic() - started < 30
     assert ("stop", "wpt-cut-1") in fake.calls and state(tmp_path, "cut")["workers"] == []
     assert built.records("wpt train") == []
+
+
+def test_no_other_run_starts_after_a_sigterm(built, fake, tmp_path, monkeypatch):
+    # the container is going away: the run the settings ask for must not rent anything first
+    monkeypatch.setenv("WPT_RUN", "next")
+    monkeypatch.setattr(wpt.manager, "WATCH", 0.1)
+    monkeypatch.setattr(wpt.manager, "COMMAND", ["-c", "import time; time.sleep(60)"])
+    cut_run(built, tmp_path)
+    real = wpt.manager.run_command
+
+    def signalled(step, arguments, log, last_line=False, environ=None, stops=None):
+        os.kill(os.getpid(), signal.SIGTERM)
+        return real(step, arguments, log, last_line, environ, stops)
+
+    monkeypatch.setattr(wpt.manager, "run_command", signalled)
+    with pytest.raises(SystemExit) as stopped:
+        main([])
+    assert stopped.value.code == 130 and ("stop", "wpt-cut-1") in fake.calls
+    assert not (tmp_path / "runs" / "manager-state" / "next.json").exists()
+
+
+def sigterm_at_the_first_look_at_the_rentals(monkeypatch):
+    """A SIGTERM before the manager claimed any run."""
+    real = wpt.manager.stop_rentals
+
+    def signalled(*arguments):
+        monkeypatch.setattr(wpt.manager, "stop_rentals", real)
+        os.kill(os.getpid(), signal.SIGTERM)
+        return real(*arguments)
+
+    monkeypatch.setattr(wpt.manager, "stop_rentals", signalled)
+
+
+def test_a_sigterm_before_a_run_went_on_gives_its_rentals_back_and_leaves_a_run_that_holds_none(
+        built, fake, tmp_path, monkeypatch):
+    # the machines bill until someone gives them back, and the container is going away
+    monkeypatch.delenv("WPT_RUN", raising=False)
+    monkeypatch.setattr(wpt.manager, "COMMAND", ["-c", "raise SystemExit('no command may start')"])
+    cut_run(built, tmp_path)
+    idle = Workers.new(tmp_path / "runs" / "manager-state", "idle", "d")
+    idle.release()
+    sigterm_at_the_first_look_at_the_rentals(monkeypatch)
+    with pytest.raises(SystemExit) as stopped:
+        main([])
+    assert stopped.value.code == 130 and ("stop", "wpt-cut-1") in fake.calls
+    assert state(tmp_path, "cut")["workers"] == [] and state(tmp_path, "cut")["ended"]
+    assert not state(tmp_path, "idle")["ended"] and unfinished(built.store, "idle")
+    assert not (tmp_path / RUN_FILE).exists()
+    run = [record for record in built.records("wpt manager") if record.end is not None
+           and record.start["inputs"].get("run") == "cut"][-1]
+    assert run.end["exit_code"] == 130
+    assert [e["attributes"]["reason"] for e in run.events if e.get("name") == "manager.stop"] == ["SIGTERM"]
+
+
+def test_a_sigterm_with_no_run_to_go_on_with_starts_no_run(built, fake, tmp_path, monkeypatch):
+    monkeypatch.setenv("WPT_RUN", "next")
+    sigterm_at_the_first_look_at_the_rentals(monkeypatch)
+    with pytest.raises(SystemExit) as stopped:
+        main([])
+    assert stopped.value.code == 130 and not fake.calls and not built.records("wpt manager")
+
+
+@pytest.mark.parametrize("asked, code", [(None, 0), ("next", 130)])
+def test_a_sigterm_after_a_run_s_training_keeps_its_exit_code_unless_it_keeps_another_run_from_starting(
+        built, fake, tmp_path, monkeypatch, asked, code):
+    # a run that finished is not gone on with: 130 would have `docker compose up` start a new one
+    if asked:
+        monkeypatch.setenv("WPT_RUN", asked)
+    else:
+        monkeypatch.delenv("WPT_RUN", raising=False)
+    cut_run(built, tmp_path)
+    real = wpt.manager.put_model
+
+    def signalled(*arguments):
+        os.kill(os.getpid(), signal.SIGTERM)
+        return real(*arguments)
+
+    monkeypatch.setattr(wpt.manager, "put_model", signalled)
+    if code:
+        with pytest.raises(SystemExit) as stopped:
+            main([])
+        assert stopped.value.code == code
+    else:
+        main([])
+    assert built.store.get_ref("models", "cut") is not None
+    assert built.records("wpt manager")[-1].end["exit_code"] == 0
+    assert not (tmp_path / "runs" / "manager-state" / "next.json").exists()
+
+
+def test_a_command_that_outlives_the_stop_s_deadline_is_ended_and_the_machines_go_back(
+        built, fake, tmp_path, monkeypatch, capfd):
+    # the command ignores the stop signal, and a process it started outlives it holding its output: neither may
+    # keep the machines rented
+    monkeypatch.delenv("WPT_RUN", raising=False)
+    monkeypatch.setenv("WPT_STOP_DEADLINE", "0.5")
+    monkeypatch.setattr(wpt.manager, "WATCH", 0.1)
+    ready, left = tmp_path / "ready", tmp_path / "left"
+    monkeypatch.setattr(wpt.manager, "COMMAND", ["-c", f"""
+import pathlib, signal, subprocess, sys, time
+if 'build' in sys.argv:
+    signal.signal(signal.SIGTERM, signal.SIG_IGN)
+    left = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(60)'])
+    pathlib.Path({str(left)!r}).write_text(str(left.pid))
+    pathlib.Path({str(ready)!r}).touch()
+    time.sleep(60)
+"""])
+    cut_run(built, tmp_path)
+
+    def person():
+        while not ready.exists():
+            time.sleep(0.01)
+        (tmp_path / "runs" / "manager-state" / "cut.stop").touch()
+
+    threading.Thread(target=person, daemon=True).start()
+    started = time.monotonic()
+    try:
+        with pytest.raises(SystemExit) as stopped:
+            main([])
+    finally:
+        if left.exists():
+            os.kill(int(left.read_text()), signal.SIGKILL)
+    assert stopped.value.code == 130 and time.monotonic() - started < 30
+    assert ("stop", "wpt-cut-1") in fake.calls and state(tmp_path, "cut")["workers"] == []
+    assert "the updates since the last checkpoint sent are lost" in capfd.readouterr().err
+    run = [record for record in built.records("wpt manager") if record.start["inputs"].get("run") == "cut"][-1]
+    assert [e["attributes"]["deadline"] for e in run.events if e.get("name") == "manager.stop_deadline"] == [0.5]
 
 
 def test_a_stop_during_a_rental_s_wait_for_its_address_gives_the_rental_back_before_training(

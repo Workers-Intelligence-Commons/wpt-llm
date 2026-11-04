@@ -28,6 +28,8 @@ reads them):
     WPT_BUDGET           the most a run may spend on rentals, in dollars, at the provider's price
     WPT_MAX_HOURS        the most hours a run may hold rentals; with both, the first reached stops
                          the run (docs/machines.md, "The cost cap")
+    WPT_STOP_DEADLINE    seconds a stop or a cap gives the command it stops, then the manager ends
+                         it (default 600; docs/machines.md, "The stop's deadline")
 """
 
 from dataclasses import dataclass
@@ -35,6 +37,7 @@ from dataclasses import dataclass
 ON_DEMAND, INTERRUPTIBLE = "on-demand", "interruptible"
 KINDS = (ON_DEMAND, INTERRUPTIBLE)
 WAIT = 1800.0
+DEADLINE = 600.0
 
 
 class RentalError(Exception):
@@ -157,6 +160,19 @@ def wait(settings) -> float:
         return float(settings.get("WPT_RENTAL_WAIT") or WAIT)
     except ValueError:
         raise RentalError(f"WPT_RENTAL_WAIT={settings['WPT_RENTAL_WAIT']!r}: a number of seconds") from None
+
+
+def deadline(settings) -> float:
+    """The seconds WPT_STOP_DEADLINE gives. RentalError for one that is
+    not a number above 0."""
+    text = settings.get("WPT_STOP_DEADLINE") or str(DEADLINE)
+    try:
+        found = float(text)
+    except ValueError:
+        found = 0.0
+    if not 0 < found < float("inf"):
+        raise RentalError(f"WPT_STOP_DEADLINE={text!r}: a number of seconds above 0")
+    return found
 
 
 def cap(settings) -> Cap:

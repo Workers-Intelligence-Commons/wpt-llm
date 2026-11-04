@@ -271,6 +271,21 @@ uv run wpt manager stop                 # on the manager's machine
 docker compose exec manager uv run --frozen --no-sync wpt manager stop     # in its container
 ```
 
+`docker compose stop`, or a SIGTERM to `wpt manager`, is the same stop. No
+other run starts after it. A run a crash cut short that the manager had not
+gone on with yet starts no command: its rentals are given back, and a run
+that holds none is left for the next start. The exit code of `wpt manager`
+is 130 when the SIGTERM stopped a run or kept one from starting. A run that
+finished before the stop reached it keeps its exit code 0, and its model.
+The manager's container exits with code 0, as
+it does after any run that ended, and Docker does not start it again.
+During the setup that comes before the manager in its container, the stop
+ends the container, and the manager does not start.
+Compose's `stop_grace_period` for the manager is 20 minutes: the stop's
+deadline and the time to give the machines back. Once it is over, Docker
+kills the container, and the next start goes on as after a crash ("The
+manager comes back"). A SIGINT is not this stop.
+
 `wpt manager stop` asks the running manager to stop its run, through a file
 beside the run's in `WPT_MANAGER_STATE`; with several managers sharing that
 folder, `wpt manager stop RUN` names the run. It is refused (exit code 2)
@@ -293,13 +308,38 @@ worker is being rented takes effect once the provider has started the
 machines, without waiting for the worker's address, and the rental is
 given back. A worker lost while a stop is under way is not replaced.
 
+### The stop's deadline
+
+A stop gives the command it signals `WPT_STOP_DEADLINE` seconds (default
+600) to end. The manager then kills that command and gives the machines
+back, and its log says that the updates since the last checkpoint sent are
+lost (`manager.stop_deadline`). A checkpoint that had not fully reached the
+store does not count: the run's checkpoint stays the one before it. A gpu
+worker that loses its manager stops the job. Sandboxes the killed command
+was running are left on their Docker host.
+
+The deadline covers `wpt train`, `wpt eval`, and the commands before them
+when they got the signal. It does not cover a download or a build that gets
+no signal, which holds no rental. It does not cover the provider's launch
+either. `sky launch` runs in SkyPilot's own server, which goes on when the
+command is killed, and `sky down` finds no cluster to stop until the launch
+has recorded one, so ending the launch early could leave a cluster that is
+billed and that no file names as stopped. A stop during a launch waits for
+it to return. With Compose, a launch that outlasts `stop_grace_period` is
+killed with the container, and its rental stays named in the run's file,
+for the next start to give back.
+
+A larger `WPT_STOP_DEADLINE` under Compose needs a larger
+`stop_grace_period` in `deploy/manager/compose.yaml`.
+
 ## The cost cap
 
 `WPT_BUDGET` is the most a run may spend on rentals, in dollars, at the
 provider's price. `WPT_MAX_HOURS` is the most hours it may hold rentals.
 Either one, or both, may be set: the first reached stops the run. The cap
 stops a run the way `wpt manager stop` does ("Stopping a run on purpose"),
-and the time that stop takes is spent above the cap. Neither is set by
+and the time that stop takes, at most the stop's deadline, is spent above
+the cap, apart from a launch under way. Neither is set by
 default, and neither counts workers a person started.
 
 Before each rental, the manager asks the provider what the machines cost an
@@ -424,6 +464,7 @@ wins (`WPT_STORE`, the manager's folders, `HOME`, `DOCKER_HOST`).
 | Setting | Meaning |
 | --- | --- |
 | `WPT_RECIPE` | the model recipe, `SERIES:SIZE` for a size of a model series, or `SERIES:SIZE:RUN` for another run of it; required, Compose refuses to start without it |
+| `WPT_DATASET` | the id of a dataset the store holds: the manager skips the download and the build and trains on it, whatever code built it; unset, it builds the recipe's dataset from this checkout |
 | `WPT_RUN` | the run's name; unset, the manager makes one and writes it into `wpt-run.txt` at the repository's root (git-ignored), with the line that copies its model out of the store |
 | `WPT_EVALUATE` | `1`: evaluate the model at the end; off by default |
 | `WPT_STORE` | the store; unset, a folder on the Compose volume `wpt-store`. A `file://` store must name a folder on a volume or a mounted folder: the manager refuses one in the container's own files, which go with the container |
@@ -437,6 +478,7 @@ wins (`WPT_STORE`, the manager's folders, `HOME`, `DOCKER_HOST`).
 | `WPT_RENTAL_WAIT` | seconds a rented worker has to give its address; default 1800 |
 | `WPT_BUDGET` | the most a run may spend on rentals, in dollars; unset, no such limit ("The cost cap") |
 | `WPT_MAX_HOURS` | the most hours a run may hold rentals; unset, no such limit |
+| `WPT_STOP_DEADLINE` | seconds a stop or a cap gives the command it stops, then the manager ends it; default 600 ("The stop's deadline") |
 | `WPT_REPLACEMENTS` | how many times a run resumes after a lost gpu worker; default 3 |
 | `WPT_WORKER_WAIT` | seconds a rented worker waits with no manager, then ends; default 3600 |
 | `WPT_LINK_CHECKPOINTS` | `every` or `step-ends` |

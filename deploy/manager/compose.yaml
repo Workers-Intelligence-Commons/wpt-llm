@@ -14,6 +14,7 @@
 # Settings, from the environment or the .env file given:
 #
 #     WPT_RECIPE            the model recipe; required
+#     WPT_DATASET           the id of a dataset the store holds: nothing is downloaded or built
 #     WPT_RUN               the run's name; unset, the manager makes one and writes it, with the
 #                           lines to copy, into wpt-run.txt at the repository's root
 #     WPT_EVALUATE          1: evaluate the model at the end; off by default
@@ -33,6 +34,8 @@
 #     WPT_BUDGET            the most a run may spend on rentals, in dollars
 #     WPT_MAX_HOURS         the most hours a run may hold rentals; with both, the first reached
 #                           stops the run
+#     WPT_STOP_DEADLINE     seconds a stop or a cap gives the job, then the manager ends it
+#                           (default 600); stop_grace_period below must stay longer
 #     WPT_REPLACEMENTS      how many times a run resumes after a lost gpu worker (default 3)
 #     WPT_WORKER_WAIT       seconds a rented worker waits with no manager, then ends and its
 #                           machine is given back (default 3600)
@@ -54,6 +57,8 @@
 # `docker compose exec manager uv run --frozen --no-sync wpt manager stop`
 # stops the run on purpose: the gpu worker saves a checkpoint and sends it to
 # the store, the machines are given back, and `docker compose up` again goes on.
+# `docker compose stop` does the same, and stop_grace_period is how long Docker
+# lets it take: WPT_STOP_DEADLINE, then the time to give the machines back.
 #
 # The manager's container exits when its runs are over, finished or failed
 # (WPT_MANAGER_CONTAINER makes a failed run exit with 0). Docker starts it
@@ -72,11 +77,15 @@
 services:
   manager:
     build: .
+    # during scripts/setup.py the first process is otherwise sh, whose SIGTERM the kernel drops, so that
+    # `docker compose stop` would be lost and the manager would start anyway
+    init: true
     # the PyTorch build for this machine's GPU (scripts/setup.py), then the run
     command: ["sh", "-c", "uv run --frozen scripts/setup.py && exec uv run --frozen --no-sync wpt manager"]
     environment:
       WPT_RECIPE: ${WPT_RECIPE:?set WPT_RECIPE, the model recipe to train (docs/machines.md)}
       WPT_RUN: ${WPT_RUN:-}
+      WPT_DATASET: ${WPT_DATASET:-}
       WPT_EVALUATE: ${WPT_EVALUATE:-}
       WPT_STORE: ${WPT_STORE:-file:///store}
       WPT_MANAGER_FOLDER: /manager/models
@@ -94,6 +103,7 @@ services:
       WPT_RENTAL_WAIT:
       WPT_BUDGET:
       WPT_MAX_HOURS:
+      WPT_STOP_DEADLINE:
       WPT_REPLACEMENTS:
       WPT_WORKER_WAIT:
       WPT_LINK_CHECKPOINTS:
@@ -109,6 +119,7 @@ services:
       - wpt-manager:/manager
       - /var/run/docker.sock:/var/run/docker.sock  # the sandboxes, on this machine's Docker
     restart: on-failure
+    stop_grace_period: 20m  # WPT_STOP_DEADLINE's default, 10 minutes, and 10 to give the machines back
 
 volumes:
   wpt-store:

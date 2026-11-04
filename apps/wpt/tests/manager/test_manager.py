@@ -47,6 +47,28 @@ def test_one_command_downloads_builds_trains_and_keeps_the_model_under_the_run_s
     assert train.start["arguments"][:1] == ["d"] and "--run" in train.start["arguments"]
 
 
+def test_a_dataset_the_settings_name_is_trained_on_with_no_download_or_build(built, monkeypatch, capsys):
+    # a dataset built by other code stays usable: the manager trains on it as it is
+    monkeypatch.setenv("WPT_RECIPE", "d")
+    monkeypatch.setenv("WPT_DATASET", built.dataset_id)
+    main([])
+    [run] = built.records("wpt manager")
+    assert run.end["status"] == "succeeded"
+    assert [e["name"] for e in run.events if e["kind"] == "span_start" and e["name"].startswith("manager.")] == [
+        "manager.workers", "manager.train", "manager.model"]
+    [train] = built.records("wpt train")
+    assert built.dataset_id in train.start["arguments"]
+
+
+def test_a_dataset_the_store_does_not_hold_stops_the_run_before_anything_starts(built, monkeypatch, capsys):
+    monkeypatch.setenv("WPT_RECIPE", "d")
+    monkeypatch.setenv("WPT_DATASET", "0" * 64)
+    with pytest.raises(SystemExit) as refused:
+        main([])
+    assert refused.value.code == 2 and "WPT_DATASET" in capsys.readouterr().err
+    assert built.records("wpt train") == []
+
+
 def test_the_manager_reads_its_settings_from_dot_env_when_the_environment_leaves_them_unset(built, tmp_path,
                                                                                           monkeypatch, capsys):
     monkeypatch.setenv("WPT_RECIPE", "")  # empty, as Compose passes an unset setting: the .env file's counts
