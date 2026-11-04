@@ -283,10 +283,25 @@ fn rewrite(words: &mut [Vec<u32>], base: usize, freq: &[i64], affected: &[usize]
             continue;
         }
         let merged = merge_word(word, pair, new_id);
-        for p in pairs_of(word) {
-            *out.delta.entry(p).or_insert(0) -= freq[i];
+        // only the pairs at a merge change: a pair of two tokens no merge took stays, with its count and its
+        // holders, and adding them again for every merge of a long word would outgrow the memory
+        let mut taken = vec![false; word.len()]; // the tokens a merge takes, left to right as merge_word does
+        let mut at = 0;
+        while at + 1 < word.len() {
+            if (word[at], word[at + 1]) == pair {
+                taken[at] = true;
+                taken[at + 1] = true;
+                at += 2;
+            } else {
+                at += 1;
+            }
         }
-        for p in pairs_of(&merged) {
+        for at in 0..word.len() - 1 {
+            if taken[at] || taken[at + 1] {
+                *out.delta.entry((word[at], word[at + 1])).or_insert(0) -= freq[i];
+            }
+        }
+        for p in pairs_of(&merged).filter(|p| p.0 == new_id || p.1 == new_id) {
             *out.delta.entry(p).or_insert(0) += freq[i];
             let held = out.holders.entry(p).or_default();
             if held.last() != Some(&i) {
