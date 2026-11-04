@@ -503,7 +503,9 @@ way within rounding. It covers the passes over whole text windows, whose
 shape stays the same for a stage. Evaluations, windows in segments or
 slices, conversations and task attempts run uncompiled, since their length
 or their place in a window changes from pass to pass and each new one would
-compile again. The run's log says so when the option is on.
+compile again. The run's log says so when the option is on. The option needs
+a C++ compiler where the run happens: a gpu worker installs `g++` when it
+starts, and on Windows the run starts from the Visual Studio build tools' shell.
 
 The attention kernels, flash-linear-attention's KDA kernel, the routing and
 the routed experts stay out of the compiled graphs: each is marked with

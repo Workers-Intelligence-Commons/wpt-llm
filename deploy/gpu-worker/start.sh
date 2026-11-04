@@ -8,6 +8,9 @@ if [ ! -f /start/wpt_worker/server.py ]; then
     echo "start.sh: /start/wpt_worker holds no gpu worker: copy packages/wpt-worker/src/wpt_worker from the repository beside compose.yaml (docs/machines.md)" >&2
     exit 2
 fi
+# torch.compile (wpt train --compile) needs a C++ compiler, which the public image lacks; every other run works without
+command -v g++ >/dev/null || { apt-get update -qq && apt-get install -y -qq --no-install-recommends g++; } >/dev/null 2>&1 ||
+    echo "start.sh: g++ could not be installed: a run with --compile will stop"
 # a node of a cluster the manager rented in one request: its private address is its rank's line of the nodes'
 # list, printed (with its rank) for the manager and given to the worker for its key
 if [ "${SKYPILOT_NUM_NODES:-1}" -gt 1 ]; then
