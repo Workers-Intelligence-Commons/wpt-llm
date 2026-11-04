@@ -32,6 +32,12 @@ const END: u32 = 256;
 const LAST_SPECIAL: u32 = 512;
 const FIRST_MERGE: u32 = LAST_SPECIAL + 1;
 
+/// Marks a token merged into the one before it.
+const DEAD: u32 = u32::MAX;
+
+/// From this many bytes a chunk is encoded with a heap rather than by rescanning its word.
+const HEAP_FROM: usize = 12;
+
 type Pair = (u32, u32);
 
 fn is_space(b: u8) -> bool {
@@ -457,7 +463,14 @@ struct Codec {
 }
 
 impl Codec {
+    /// The tokens of one chunk: the best pair (lowest rank) merges everywhere, left to right, before any
+    /// higher rank does. Short chunks rescan their word, which is cheapest for a few bytes; long ones use a
+    /// heap, so the cost grows with length x log(length) instead of its square.
     fn encode_chunk(&self, chunk: &[u8]) -> Vec<u32> {
+        if chunk.len() < HEAP_FROM { self.encode_by_scans(chunk) } else { self.encode_by_heap(chunk) }
+    }
+
+    fn encode_by_scans(&self, chunk: &[u8]) -> Vec<u32> {
         let mut word: Vec<u32> = chunk.iter().map(|&b| b as u32).collect();
         loop {
             let best = pairs_of(&word).filter_map(|p| self.ranks.get(&p).map(|&r| (r, p))).min();
@@ -465,6 +478,47 @@ impl Codec {
             word = merge_word(&word, pair, FIRST_MERGE + rank);
         }
         word
+    }
+
+    /// The tokens sit in a doubly linked list over arrays, each named by the place of its first byte. A heap
+    /// holds the (rank, place) of every pair that can merge; an entry whose pair has changed since it was
+    /// pushed is skipped when popped. A merge's rank is above the ranks of the merges that made its parts, so
+    /// the pairs a merge creates rank above it and never come before the entries still waiting at its rank:
+    /// popping by (rank, place) merges all occurrences of a rank left to right, as the scans do.
+    fn encode_by_heap(&self, chunk: &[u8]) -> Vec<u32> {
+        let n = chunk.len();
+        let mut token: Vec<u32> = chunk.iter().map(|&b| b as u32).collect();
+        let mut next: Vec<usize> = (1..=n).collect(); // n: no next token
+        let mut prev: Vec<usize> = (0..n).map(|i| i.wrapping_sub(1)).collect(); // usize::MAX: no previous token
+        let mut heap: BinaryHeap<Reverse<(u32, usize)>> =
+            (0..n.saturating_sub(1)).filter_map(|i| self.ranks.get(&(token[i], token[i + 1])).map(|&r| Reverse((r, i)))).collect();
+        while let Some(Reverse((rank, at))) = heap.pop() {
+            let right = next[at];
+            if token[at] == DEAD || right >= n || self.ranks.get(&(token[at], token[right])) != Some(&rank) {
+                continue;
+            }
+            token[at] = FIRST_MERGE + rank;
+            token[right] = DEAD;
+            let after = next[right];
+            next[at] = after;
+            if after < n {
+                prev[after] = at;
+            }
+            if after < n && let Some(&r) = self.ranks.get(&(token[at], token[after])) {
+                heap.push(Reverse((r, at)));
+            }
+            let before = prev[at];
+            if before != usize::MAX && let Some(&r) = self.ranks.get(&(token[before], token[at])) {
+                heap.push(Reverse((r, before)));
+            }
+        }
+        let mut out = Vec::new();
+        let mut at = 0;
+        while at < n {
+            out.push(token[at]);
+            at = next[at];
+        }
+        out
     }
 
     /// The calling thread's cache, made on its first call and removed when the thread ends. A thread that is
@@ -680,5 +734,47 @@ mod tests {
         let split = slices(10, 4, 1);
         assert_eq!(split, vec![0..3, 3..6, 6..9, 9..10]);
         assert_eq!(slices(3, 4, 1).into_iter().flatten().collect::<Vec<_>>(), vec![0, 1, 2]);
+    }
+
+    /// The encoder as a plain loop: find the lowest-rank pair of the whole word, merge all of it, repeat.
+    fn reference_encode(ranks: &HashMap<Pair, u32>, chunk: &[u8]) -> Vec<u32> {
+        let mut word: Vec<u32> = chunk.iter().map(|&b| b as u32).collect();
+        while let Some((rank, pair)) = pairs_of(&word).filter_map(|p| ranks.get(&p).map(|&r| (r, p))).min() {
+            word = merge_word(&word, pair, FIRST_MERGE + rank);
+        }
+        word
+    }
+
+    #[test]
+    fn both_encoders_give_the_tokens_of_the_plain_loop() {
+        let mut texts: Vec<Vec<u8>> = vec![
+            b"aaa".to_vec(),
+            b"aaaa".to_vec(),
+            b"ab".repeat(100),
+            b"a".repeat(HEAP_FROM * 20),
+            b"abc".repeat(HEAP_FROM * 10),
+            b"aab".repeat(700),
+        ];
+        for (seed, alphabet, longest) in [(11, 2, 40), (12, 3, 120), (13, 4, 300), (14, 6, 80)] {
+            texts.extend(random_chunks(seed, 150, alphabet, longest, 1).into_iter().map(|(w, _)| w));
+        }
+        // lengths well past HEAP_FROM, and chunks made of repeated pieces
+        texts.extend(random_chunks(15, 6, 3, 6000, 1).into_iter().map(|(w, _)| w));
+        texts.extend(random_chunks(16, 40, 3, 6, 1).into_iter().map(|(w, _)| w.repeat(HEAP_FROM * 3)));
+        for (name, learned_from) in [
+            ("small alphabet", random_chunks(21, 1500, 3, 14, 20)),
+            ("larger alphabet", random_chunks(22, 1500, 5, 20, 3)),
+            ("repeats", (0..30).map(|k| (b"aab".repeat(5 + k), 1 + k as u64 % 4)).collect()),
+        ] {
+            let merges = recounted(&borrowed(&learned_from), 400);
+            assert!(merges.len() > 20, "{name} learns merges");
+            let codec = Codec::new(merges).unwrap();
+            for text in &texts {
+                let expected = reference_encode(&codec.ranks, text);
+                assert_eq!(codec.encode_by_scans(text), expected, "{name}: scans on {} bytes", text.len());
+                assert_eq!(codec.encode_by_heap(text), expected, "{name}: heap on {} bytes", text.len());
+                assert_eq!(codec.encode_chunk(text), expected, "{name}: encode_chunk on {} bytes", text.len());
+            }
+        }
     }
 }
