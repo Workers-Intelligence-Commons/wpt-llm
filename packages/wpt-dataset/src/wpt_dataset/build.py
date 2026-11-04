@@ -51,7 +51,7 @@ The index applies every source's format map to its file list, through the
 function the conversion calls later (markdown.format_of), so the two cannot
 disagree: a path that matches no format entry or several fails there, in
 the minutes the lists take, and every failing source is named at once. A
-build asked to skip failing sources leaves those out and lists them.
+build that is not strict leaves those out and lists them.
 
 With plan, a build stops after the first choice and says what it would
 read and compute.
@@ -64,16 +64,13 @@ them train, and a task whose pointer no longer holds its passage, are
 each left out alone; the record says which and why (each source's
 `check`, and `left_out_tasks`). The record speaks of the files the build
 read: a file it did not choose was never checked for text. A whole source
-is left out, and the record lists it with its error under `skipped`, when
-it is not in the store (NotDownloaded) or a cut or a patch of it does not
-apply (CutFailed, PatchFailed): a person makes the cut again or writes the
-patch again. Any other source that fails (a file is broken) stops the
-build, unless the build is asked to skip such sources: the record then
-lists each one the same way. A missing program stops it anyway, since it
-fails every source that needs it. A vocabulary is frozen for good, and
-shared through the store, so a build that trains one leaves a source out
-only when asked to skip failing sources, and the lock lists each one
-(build_tokenizer).
+that fails (it is not in the store, a cut or a patch of it does not apply,
+its format map fails, a file is broken) is left out, and the record lists
+it with its error under `skipped`; a build that trains a vocabulary lists
+each one in the lock too (build_tokenizer). A strict build stops at a
+failing source instead, and names every source the index could not take
+before any text is read. A missing program stops a build in either case,
+since it fails every source that needs it.
 
 The record also names, for each source, the session (its run record's
 folder) and the time of the download that put the files it used in the
@@ -138,15 +135,11 @@ from . import choice as choosing
 from . import conversations as chat_files
 from . import download, license_check, pools, reading, store_history, trained, workers
 from . import tasks as task_files
-from .errors import (CutFailed, DatasetError, NotDownloaded, PatchFailed, PoolError, TokenizerVersionNeeded,
+from .errors import (DatasetError, PoolError, TokenizerVersionNeeded,
                      TrainedListMissing, VocabularyMissing)
 from .kept import kept, skipped_values
 from .repo import SIZE_OF, Repo
 from .sources import fingerprint, held_manifest, held_out_group, tags_of
-
-# the failures that take a whole source out of every build, recorded and never a stop: not in the store, or a
-# cut or a patch that does not apply, until a person acts
-OUT = (NotDownloaded, CutFailed, PatchFailed)
 
 DEFAULT_MAX_EPOCHS = 4
 SHARD_TOKENS = 1 << 26  # about 64M tokens (256 MB of uint32) per shard
@@ -242,14 +235,12 @@ def source_info(source, tree: str, store, check: dict) -> dict:
             "licenses": source.data["licenses"], "check": check}
 
 
-def _skip(source, error, skipped, skip_failed, log):
-    """Record a source that failed, or raise its error: with a list as
-    skipped, a source that is out of every build (OUT: not in the store, a
-    cut or a patch that does not apply) is always recorded, any other
-    failure only with skip_failed. A missing program
-    (wpt_utils.programs.MissingTool), which would fail every source using
-    it, is not caught here and always stops the build."""
-    if skipped is None or not (skip_failed or isinstance(error, OUT)):
+def _skip(source, error, skipped, strict, log):
+    """Record a source that failed in skipped, or with strict raise its
+    error. A missing program (wpt_utils.programs.MissingTool), which would
+    fail every source using it, is not caught here and always stops the
+    build."""
+    if strict:
         raise error
     skipped.append({"source": source.id, "error": f"{type(error).__name__}: {error}"})
     log(f"skipped {source.id}: {type(error).__name__}: {error}")
@@ -284,18 +275,17 @@ def markdown_cache(store, stream: bool):
     return contextlib.nullcontext(store.cache / "markdown")
 
 
-def chosen_first(repo: Repo, recipe: dict, mixture: dict, store, log, skipped, telemetry, skip_failed):
+def chosen_first(repo: Repo, recipe: dict, mixture: dict, store, log, skipped, telemetry, strict):
     """(the Choice of a dataset recipe, the rows of its first round). A
-    source the index could not take goes into skipped when it is out of
-    every build (OUT) or with skip_failed; otherwise DatasetError names
-    every such source, with no text read."""
+    source the index could not take goes into skipped; with strict,
+    DatasetError names every such source, with no text read."""
     index = choosing.build(repo, store, telemetry, log)
-    failing = [f"{type(error).__name__}: {error}" for _, error in index.failed if not isinstance(error, OUT)]
-    if failing and not skip_failed:
-        raise DatasetError(f"{len(failing)} of {len(index.sources) + len(index.failed)} admitted sources fail their "
-                           f"format map; nothing was read:\n" + "\n".join(failing))
+    if strict and index.failed:
+        failing = [f"{type(error).__name__}: {error}" for _, error in index.failed]
+        raise DatasetError(f"{len(failing)} of {len(index.sources) + len(index.failed)} admitted sources fail in the "
+                           f"index; nothing was read:\n" + "\n".join(failing))
     for source, error in index.failed:
-        _skip(source, error, skipped, True, log)
+        _skip(source, error, skipped, False, log)
         telemetry.event("source.skipped", source=source.id, error=f"{type(error).__name__}: {error}")
     found = choosing.Choice(index, mixture)
     rows = found.take(choosing.first_wanted(mixture, recipe))
@@ -331,7 +321,7 @@ class Gathered:
     tokens: "PackedDocuments"
 
 
-def read_rounds(repo, recipe, mixture, found, rows, vocabulary, store, cache, skipped, skip_failed, failed, log,
+def read_rounds(repo, recipe, mixture, found, rows, vocabulary, store, cache, skipped, strict, failed, log,
                 telemetry) -> Gathered:
     """Read a build's rows, then draw and read until every pool holds its
     share in training tokens or the index has no more of it (see the
@@ -352,7 +342,7 @@ def read_rounds(repo, recipe, mixture, found, rows, vocabulary, store, cache, sk
                 source = done.item
                 with telemetry.finish(span):
                     if done.error is not None:
-                        _skip(source, done.error, skipped, skip_failed, log)
+                        _skip(source, done.error, skipped, strict, log)
                         span.set(skipped=f"{type(done.error).__name__}: {done.error}")
                         failed.add(source.id)
                         continue
@@ -540,7 +530,7 @@ def locked_vocabulary(repo: Repo, name: str, store):
     return Tokenizer.from_bytes(store.get_bytes(vocabulary)), vocabulary, key
 
 
-def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skipped, skip_failed, failed, log, telemetry,
+def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skipped, strict, failed, log, telemetry,
                      session=None):
     """(tokenizer, vocabulary object sha256, fingerprint) of the tokenizer
     recipe name, trained on the sample its sample_bytes draws out of the
@@ -551,8 +541,7 @@ def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skippe
     The lock names those documents by one object of the store, their sorted
     list (wpt_dataset.trained), with its sha256 and its number of lines, and
     lists the sources left out (skipped) by their ids and the kinds of
-    their errors. A source is left out only with skip_failed: without it,
-    DatasetError names the sources. Training reads every document of the
+    their errors. Training reads every document of the
     sample and counts chunks in a table of a fixed number of slots
     (wpt_tokenizer): while the documents have no more distinct chunks than
     that, the vocabulary is the same whatever their order; beyond it, it
@@ -562,10 +551,6 @@ def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skippe
     With a session (wpt_store.sessions), a `reused` line for each source
     the training read."""
     recipe = repo.recipe("tokenizer", name)
-    if skipped and not skip_failed:
-        raise DatasetError(f"tokenizer {name}: a vocabulary is frozen for good, and these sources are left out: "
-                           f"{', '.join(failed_one['source'] for failed_one in skipped)}; build it with --skip-failed "
-                           f"to leave them out and list them in the lock")
     sources, positions, sizes = _chosen_sources(found, found.sample(mixture, recipe["sample_bytes"]), failed)
     reads, seen = [], {}  # seen: {sha256 of a Markdown: the document that keeps it}
     with trained.TrainedList() as listed:
@@ -577,7 +562,7 @@ def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skippe
             for done, span in converted:
                 with telemetry.finish(span):
                     if done.error is not None:
-                        _skip(done.item, done.error, skipped, skip_failed, log)
+                        _skip(done.item, done.error, skipped, strict, log)
                         span.set(skipped=f"{type(done.error).__name__}: {done.error}")
                         failed.add(done.item.id)
                         continue
@@ -634,7 +619,7 @@ def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skippe
     return tokenizer, vocabulary, key
 
 
-def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, skip_failed=False, telemetry=None,
+def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, strict=False, telemetry=None,
                     session=None, plan=False):
     """(tokenizer, vocabulary object sha256, fingerprint) of the vocabulary
     a dataset recipe names (name: a model recipe's, or SERIES:SIZE,
@@ -651,14 +636,14 @@ def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, skip_
             return None
         return locked
     mixture, skipped = repo.recipe("mixture", recipe["mixture"]), []
-    found, rows = chosen_first(repo, recipe, mixture, store, log, skipped, telemetry, skip_failed)
+    found, rows = chosen_first(repo, recipe, mixture, store, log, skipped, telemetry, strict)
     if plan:
         sample = found.sample_of_pools(mixture, repo.recipe("tokenizer", recipe["tokenizer"])["sample_bytes"])
         for line in vocabulary_plan_lines(mixture, sample, recipe["tokenizer"]):
             log(line)
         return None
     with markdown_cache(store, stream) as cache:
-        return train_vocabulary(repo, recipe["tokenizer"], mixture, found, store, cache, skipped, skip_failed, set(),
+        return train_vocabulary(repo, recipe["tokenizer"], mixture, found, store, cache, skipped, strict, set(),
                                 log, telemetry, session)
 
 
@@ -675,12 +660,12 @@ def _training_part(recipe) -> dict:
 # -- dataset ----------------------------------------------------------------------
 
 def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TOKENS, stream=False,
-                  skip_failed=False, telemetry=None, session=None, plan=False) -> str | None:
+                  strict=False, telemetry=None, session=None, plan=False) -> str | None:
     """Build (or find) the dataset of a model recipe's data part (name: a
     model recipe's, or SERIES:SIZE, Repo.model_recipe) and return its id;
     with stream, keeping no document's Markdown on this machine; leaving out
-    the sources not in the store, and with skip_failed every source that
-    fails (see the module's docstring). With a session
+    the sources that fail, unless
+    strict (see the module's docstring). With a session
     (wpt_store.sessions), a `reused` line for each source whose upstream
     tree the dataset holds. Only the data part counts: recipes with the same
     data share one dataset, as every size of a series does. With plan, None
@@ -690,7 +675,7 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
     mixture = repo.recipe("mixture", recipe["mixture"])
     telemetry.event("dataset.recipe", recipe_name=name, recipe=recipe, mixture=mixture)
     skipped, failed = [], set()
-    found, rows = chosen_first(repo, recipe, mixture, store, log, skipped, telemetry, skip_failed)
+    found, rows = chosen_first(repo, recipe, mixture, store, log, skipped, telemetry, strict)
     locked = locked_vocabulary(repo, recipe["tokenizer"], store)
     if plan:
         sample = found.sample(mixture, repo.recipe("tokenizer", recipe["tokenizer"])["sample_bytes"])
@@ -701,11 +686,11 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
     with markdown_cache(store, stream) as cache:
         with telemetry.span("tokenizer", recipe=recipe["tokenizer"], stream=stream) as span:
             tokenizer, vocabulary, tokenizer_key = locked or train_vocabulary(
-                repo, recipe["tokenizer"], mixture, found, store, cache, skipped, skip_failed, failed, log, telemetry)
+                repo, recipe["tokenizer"], mixture, found, store, cache, skipped, strict, failed, log, telemetry)
             span.set(vocabulary=vocabulary, fingerprint=tokenizer_key, vocab_size=tokenizer.vocab_size)
         telemetry.input(recipe=name, tokenizer=recipe["tokenizer"], vocabulary=vocabulary)
-        with telemetry.span("documents", stream=stream, skip_failed=skip_failed) as span:
-            gathered = read_rounds(repo, recipe, mixture, found, rows, vocabulary, store, cache, skipped, skip_failed,
+        with telemetry.span("documents", stream=stream, strict=strict) as span:
+            gathered = read_rounds(repo, recipe, mixture, found, rows, vocabulary, store, cache, skipped, strict,
                                    failed, lambda _: None, telemetry)
             span.set(documents=len(gathered.documents), sources=len(gathered.info), duplicates=gathered.duplicates,
                      skipped=skipped)
@@ -812,7 +797,7 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
     return dataset_id
 
 
-def run(repo: Repo, name: str, store, arguments, stream=False, skip_failed=False, plan=False) -> str | None:
+def run(repo: Repo, name: str, store, arguments, stream=False, strict=False, plan=False) -> str | None:
     """`wpt dataset build`: build_dataset of the model recipe name, recorded
     in the store (wpt_telemetry: records/<UTC>-wpt-dataset-build-<name>-.../)
     with a session whose lines name each source it read (`reused`), the
@@ -822,7 +807,7 @@ def run(repo: Repo, name: str, store, arguments, stream=False, skip_failed=False
     with Telemetry.start(store, "wpt dataset build", arguments, name, inputs={"recipe": name},
                          env_file=repo.root / ".env") as telemetry:
         with download.session(store, telemetry) as session:
-            dataset_id = build_dataset(repo, name, store, log=telemetry.log, stream=stream, skip_failed=skip_failed,
+            dataset_id = build_dataset(repo, name, store, log=telemetry.log, stream=stream, strict=strict,
                                        telemetry=telemetry, session=session, plan=plan)
         if dataset_id is not None:
             kind, key = dataset_ref(name)
@@ -846,7 +831,7 @@ def last_dataset(store, name: str) -> str | None:
     return None if record is None else json.loads(store.get_bytes(record))["id"]
 
 
-def run_tokenizer(repo: Repo, name: str, store, arguments, stream=False, skip_failed=False,
+def run_tokenizer(repo: Repo, name: str, store, arguments, stream=False, strict=False,
                   plan=False) -> tuple[str, str] | None:
     """`wpt dataset build-tokenizer`: build_tokenizer of the dataset recipe
     name, recorded and with a session as run does. Returns (vocabulary
@@ -855,7 +840,7 @@ def run_tokenizer(repo: Repo, name: str, store, arguments, stream=False, skip_fa
     with Telemetry.start(store, "wpt dataset build-tokenizer", arguments, name, inputs={"recipe": name},
                          env_file=repo.root / ".env") as telemetry:
         with download.session(store, telemetry) as session:
-            built = build_tokenizer(repo, name, store, log=telemetry.log, stream=stream, skip_failed=skip_failed,
+            built = build_tokenizer(repo, name, store, log=telemetry.log, stream=stream, strict=strict,
                                     telemetry=telemetry, session=session, plan=plan)
         if built is None:
             return None

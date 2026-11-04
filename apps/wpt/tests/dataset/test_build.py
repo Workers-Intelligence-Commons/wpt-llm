@@ -336,7 +336,7 @@ def test_a_source_missing_from_the_store_is_left_out_listed_and_recorded(kit, re
         kit.download(repo, store, changed)
 
     for stream in (False, True):
-        without = build_dataset(repo, "small", store, log=lambda _: None, stream=stream)  # no --skip-failed needed
+        without = build_dataset(repo, "small", store, log=lambda _: None, stream=stream)  # no --strict: the build goes on
         record = record_of(store, without)
         assert [s["source"] for s in record["skipped"]] == [changed]
         assert record["skipped"][0]["error"].startswith("NotDownloaded: ")
@@ -405,9 +405,9 @@ def test_each_file_that_fails_a_check_is_left_out_alone_and_reported_in_the_reco
         in logged
 
 
-def test_a_broken_source_stops_the_build_unless_skipping_is_asked(kit, repo, store, corpus, tmp_path):
-    # a source in the store whose files are broken is a fault to look at:
-    # leaving it out is a choice someone makes, and the record says so
+def test_a_build_goes_on_past_a_failing_source_and_lists_it_unless_strict(kit, repo, store, corpus, tmp_path):
+    # a source in the store whose files are broken is left out and the record says so;
+    # a strict build stops at it
     setup_recipes(kit, repo, store, corpus, total_tokens=2000)
     first = build_dataset(repo, "small", store, log=lambda _: None)  # also locks the vocabulary
     folder, commit = kit.git_project(tmp_path / "other", files={"en/other.txt": b"owls hunt at night. " * 30},
@@ -418,9 +418,9 @@ def test_a_broken_source_stops_the_build_unless_skipping_is_asked(kit, repo, sto
         bundle.write_bytes(bytes(b ^ 0xFF for b in bundle.read_bytes()))  # every byte changed
 
     with pytest.raises(CorruptObject):
-        build_dataset(repo, "small", store, log=lambda _: None)
+        build_dataset(repo, "small", store, log=lambda _: None, strict=True)
     for stream in (False, True):
-        skipped = build_dataset(repo, "small", store, log=lambda _: None, stream=stream, skip_failed=True)
+        skipped = build_dataset(repo, "small", store, log=lambda _: None, stream=stream)
         record = record_of(store, skipped)
         assert [s["source"] for s in record["skipped"]] == [broken]
         assert record["skipped"][0]["error"].startswith("CorruptObject: ")
@@ -448,35 +448,19 @@ def nothing_converted(monkeypatch):
 
 
 @pytest.mark.parametrize("stream", [False, True])
-def test_a_broken_format_map_stops_every_build_before_a_text_is_read_and_names_each_source(
+def test_a_strict_build_with_a_broken_format_map_stops_before_a_text_is_read_and_names_each_source(
         kit, repo, store, corpus, tmp_path, monkeypatch, stream):
     setup_recipes(kit, repo, store, corpus, total_tokens=2000)
     twice = broken_sources(kit, repo, store, tmp_path)
     nothing_converted(monkeypatch)
 
-    for run in (lambda: build.build_tokenizer(repo, "small", store, log=lambda _: None, stream=stream),
-                lambda: build_dataset(repo, "small", store, log=lambda _: None, stream=stream)):
+    for run in (lambda: build.build_tokenizer(repo, "small", store, log=lambda _: None, stream=stream, strict=True),
+                lambda: build_dataset(repo, "small", store, log=lambda _: None, stream=stream, strict=True)):
         with pytest.raises(DatasetError) as stopped:
             run()
         message = str(stopped.value)
         assert all(f"{sid}: en/a.txt matches 2 format entries" in message for sid in twice)
         assert message.count("matches 2 format entries") == 2  # the corpus is not named: its map is sound
-
-
-@pytest.mark.parametrize("stream", [False, True])
-def test_skipping_failed_sources_lists_a_broken_format_map_and_builds_the_others(
-        kit, repo, store, corpus, tmp_path, stream):
-    setup_recipes(kit, repo, store, corpus, total_tokens=2000)
-    first = build_dataset(repo, "small", store, log=lambda _: None)  # also locks the vocabulary
-    twice = broken_sources(kit, repo, store, tmp_path)
-
-    with pytest.raises(DatasetError, match="fail their format map"):
-        build_dataset(repo, "small", store, log=lambda _: None, stream=stream)
-    record = record_of(store, build_dataset(repo, "small", store, log=lambda _: None, stream=stream,
-                                            skip_failed=True))
-    assert [s["source"] for s in record["skipped"]] == twice
-    assert all("matches 2 format entries" in s["error"] for s in record["skipped"])
-    assert record["documents"] == record_of(store, first)["documents"]
 
 
 class Machine:
@@ -1146,29 +1130,23 @@ def test_markdown_read_for_the_vocabulary_is_not_read_again_for_the_tokens(kit, 
     assert sorted((store.cache / "markdown").rglob("*.zst")) == packs  # no file was read into a new one
 
 
-def test_a_vocabulary_build_leaves_a_failing_source_out_only_when_asked_and_its_lock_lists_it(
-        kit, repo, store, corpus, tmp_path):
+def test_a_vocabulary_build_goes_on_past_a_failing_source_and_its_lock_lists_it(kit, repo, store, corpus, tmp_path):
     setup_recipes(kit, repo, store, corpus, total_tokens=2000)
     twice = broken_sources(kit, repo, store, tmp_path)
-    with pytest.raises(DatasetError, match="fail their format map"):
-        build.build_tokenizer(repo, "small", store, log=lambda _: None)
-    assert repo.generated("lock", "main") is None
-
-    build.build_tokenizer(repo, "small", store, log=lambda _: None, skip_failed=True)
+    build.build_tokenizer(repo, "small", store, log=lambda _: None)
     assert repo.generated("lock", "main")["left_out"] == [{"source": sid, "error": "FormatMapError"}
                                                           for sid in sorted(twice)]
 
 
-def test_a_vocabulary_build_refuses_a_source_not_in_the_store_without_skip_failed(kit, repo, store, corpus, tmp_path):
+def test_a_strict_build_stops_at_a_source_not_in_the_store_and_locks_no_vocabulary(kit, repo, store, corpus, tmp_path):
     setup_recipes(kit, repo, store, corpus, total_tokens=2000)
     folder, _ = kit.git_project(tmp_path / "later", files={"en/later.txt": b"not downloaded yet. " * 30},
                                 executable=set(), symlinks={})
-    missing = kit.add_source(repo, store, "example", "later", {
+    kit.add_source(repo, store, "example", "later", {
         "type": "git", "address": folder, "tags": [{"tags": ["en"], "paths": ["**"]}]}, fetch=False)
-    with pytest.raises(DatasetError, match=f"left out: {missing}"):
-        build_dataset(repo, "small", store, log=lambda _: None)
-    build_dataset(repo, "small", store, log=lambda _: None, skip_failed=True)
-    assert repo.generated("lock", "main")["left_out"] == [{"source": missing, "error": "NotDownloaded"}]
+    with pytest.raises(DatasetError, match="NotDownloaded"):
+        build_dataset(repo, "small", store, log=lambda _: None, strict=True)
+    assert repo.generated("lock", "main") is None
 
 
 def test_a_vocabulary_s_plan_gives_each_pool_s_part_of_its_sample(two_kilobyte_groups, kit, repo, store, tmp_path, monkeypatch, capsys):

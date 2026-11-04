@@ -373,14 +373,14 @@ repeats the list as `skipped_sources`. A cut or a patch that does not
 apply leaves the whole source out the same way, until a person makes the
 cut or the patch again.
 
-A source in the store that fails in the build for another reason (a file
-is broken) stops `wpt dataset build`. With `--skip-failed` (or
-`WPT_SKIP_FAILED=1`), the build leaves it out instead and lists it the
-same way. A missing program (such as `hg`) stops the build anyway, since
-it fails every source that needs it. Training a new vocabulary never
-skips a source: its lock freezes the vocabulary for every later model of
-that version, so the first build of a new tokenizer version needs every
-source.
+A source in the store that fails in the build for another reason (its
+format map fails, a file is broken) is left out and listed the same way.
+A build that trains a new vocabulary lists each source it left out in the
+lock (`left_out`). With `--strict` (or `WPT_STRICT=1`), any failing
+source stops the build instead, including one that is not in the store
+or whose cut or patch does not apply; every source whose format map fails
+is named before any text is read. A missing program (such as `hg`) stops
+the build either way, since it fails every source that needs it.
 
 `wpt dataset download` and `wpt dataset check --fetch` try every source
 they were given, even after one failed, and end with the list of failures
@@ -485,7 +485,7 @@ outside its project enters by its own bytes.
 | the Markdown of a source's chosen files (on this machine) | the fingerprint of what the source keeps for training, the code of the modules `reading.py` imports, the source's `type` |
 | a source's tokens | that Markdown's fingerprint, the code of the modules `reading.py` imports, the vocabulary, the paths of the chosen files |
 | vocabulary | the code of the modules `build.py` imports, the tokenizer recipe (with its `version`), the sha256 of the list of the documents it is trained on (id and sha256 of their Markdown); frozen by the recipe's lock until `version` is raised ([tokenizer.md](tokenizer.md)) |
-| dataset | the code of the modules `build.py` imports, the model recipe's data part, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, the manifest of its upstream tree, its final tree, licenses (with attribution) and check result, the sources skipped (not in the store, or failing with `--skip-failed`: each by its id and the kind of its error), and the objects of its conversations and tasks |
+| dataset | the code of the modules `build.py` imports, the model recipe's data part, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, the manifest of its upstream tree, its final tree, licenses (with attribution) and check result, the sources skipped (each failing source: by its id and the kind of its error), and the objects of its conversations and tasks |
 | training step's result | the fingerprint of the step before it, the step (its files, method, environment, optimizer, settings and locked parts), the fingerprint of the dataset part it reads (`text`, `conversations` or `tasks`, in the record's `fingerprints`), the recipe's seed and the code; no hardware option ([training.md](training.md), "Step results and reuse") |
 
 So "already done" is a lookup for the same code and data: nothing is

@@ -37,7 +37,7 @@
     wpt dataset exclude-unusable ID       fetch one source and write every file upstream does not
                                           give or that is not text as an exact-path exclude, its
                                           reason in extract.note, for review before the commit
-    wpt dataset build-tokenizer NAME [--stream] [--skip-failed] [--plan]
+    wpt dataset build-tokenizer NAME [--stream] [--strict] [--plan]
                                           index, choose the documents of a dataset recipe (a
                                           model recipe's NAME, or SERIES:SIZE), and train and
                                           lock the vocabulary it names on a sample of them, or
@@ -45,7 +45,7 @@
     wpt dataset tokenizer-check NAME      encode and decode every admitted document with the
                                           locked vocabulary of a tokenizer recipe: exact round
                                           trip, characters per token
-    wpt dataset build NAME [--stream] [--skip-failed] [--plan]
+    wpt dataset build NAME [--stream] [--strict] [--plan]
                                           build (or find) the data of a model recipe (NAME, or
                                           SERIES:SIZE for a size of a series: every size of a
                                           series has the same data); prints the dataset id
@@ -140,12 +140,11 @@ upstream, and leaves out each item that fails a check alone (a file no
 license entry covers, a file that is not text, the files and records of a
 license entry that does not let them train, a task whose pointer no
 longer holds its passage), saying which and why in the dataset record. It
-leaves out a whole source that is not in the store, or whose cut or patch
-does not apply, and lists it, with its error, in the dataset record; any
-other failing source stops it, unless --skip-failed (or
-WPT_SKIP_FAILED=1) leaves it out and lists it the same way. A build that
-trains a vocabulary leaves a source out only with --skip-failed, and lists
-it in the lock too. A build is
+leaves out a whole source that fails (not in the store, a cut or a patch that
+does not apply, a format map that fails, a broken file) and lists it, with
+its error, in the dataset record, and in the lock of a vocabulary the build
+trains; with --strict (or WPT_STRICT=1) any failing source stops it
+instead. A missing program stops it either way. A build is
 recorded in the store, in its own folder under records/ (wpt_telemetry;
 docs/observability.md); when that record
 cannot be written, it stops with exit code 3. A download that fails for a reason that may pass (timeout, cut
@@ -331,7 +330,7 @@ def cmd_exclude_unusable(args, repo):
 
 def cmd_build_tokenizer(args, repo):
     build.run_tokenizer(repo, args.name, _store(repo), args.arguments, stream=args.stream,
-                        skip_failed=args.skip_failed, plan=args.plan)
+                        strict=args.strict, plan=args.plan)
     return 0
 
 
@@ -348,7 +347,7 @@ def cmd_tokenizer_check(args, repo):
 
 
 def cmd_build(args, repo):
-    build.run(repo, args.name, _store(repo), args.arguments, stream=args.stream, skip_failed=args.skip_failed,
+    build.run(repo, args.name, _store(repo), args.arguments, stream=args.stream, strict=args.strict,
               plan=args.plan)
     return 0
 
@@ -649,7 +648,9 @@ def main(argv=None):
     markdown_check.set_defaults(run=cmd_markdown_check)
     stream = os.environ.get("WPT_STREAM", "") in ("1", "true", "yes")
     stream_help = "keep no Markdown of the chosen documents on this machine once the build ends (WPT_STREAM)"
-    skip_failed = os.environ.get("WPT_SKIP_FAILED", "") in ("1", "true", "yes")
+    strict = os.environ.get("WPT_STRICT", "") in ("1", "true", "yes")
+    strict_help = ("stop at any failing source, naming first every source the index could not take, instead of leaving "
+                   "it out and listing it (WPT_STRICT)")
     plan_help = "stop after the choice and print what the build would read and compute"
     fetching = commands.add_parser("download")
     fetching.add_argument("ids", nargs="*", metavar="ID")
@@ -662,9 +663,7 @@ def main(argv=None):
     vocab = commands.add_parser("build-tokenizer")
     vocab.add_argument("name")
     vocab.add_argument("--stream", action="store_true", default=stream, help=stream_help)
-    vocab.add_argument("--skip-failed", action="store_true", default=skip_failed,
-                       help="leave out admitted sources that fail and list them in the lock, instead of stopping "
-                            "(WPT_SKIP_FAILED)")
+    vocab.add_argument("--strict", action="store_true", default=strict, help=strict_help)
     vocab.add_argument("--plan", action="store_true", help=plan_help)
     vocab.set_defaults(run=cmd_build_tokenizer)
     vocab_check = commands.add_parser("tokenizer-check")
@@ -673,11 +672,7 @@ def main(argv=None):
     build = commands.add_parser("build")
     build.add_argument("name")
     build.add_argument("--stream", action="store_true", default=stream, help=stream_help)
-    build.add_argument("--skip-failed", action="store_true", default=skip_failed,
-                       help="leave out admitted sources that fail and list them in the dataset record, and in the "
-                            "lock of a vocabulary the build trains, instead of stopping (a source not in the store, "
-                            "or whose cut or patch does not apply, is always left out and listed, but trains a "
-                            "vocabulary only with this) (WPT_SKIP_FAILED)")
+    build.add_argument("--strict", action="store_true", default=strict, help=strict_help)
     build.add_argument("--plan", action="store_true", help=plan_help)
     build.set_defaults(run=cmd_build)
     commands.add_parser("migrate").set_defaults(run=cmd_migrate)

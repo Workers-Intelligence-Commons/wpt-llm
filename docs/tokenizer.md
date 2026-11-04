@@ -62,9 +62,8 @@ vocabulary on it (each document once), and writes
 sha256, and the list of the documents it was trained on, named by its sha256
 (`documents_sha256`) and its number of lines (`document_count`). `wpt dataset
 build-tokenizer <dataset recipe>` does the same and stops before any token.
-A vocabulary is frozen for good, so such a build stops when a source is left
-out, unless `--skip-failed` asks for it; the lock then lists each source left
-out with the kind of its error (`left_out`). The list is
+The lock lists each source the build left out with the kind of its error
+(`left_out`); with `--strict`, a failing source stops the build instead. The list is
 one object of the store: a line per document, the JSON array
 `["<id>", "<sha256 of its Markdown>"]`, sorted by the line's bytes, written while the documents are read
 and sorted on disk, so it is never held in memory whole. Commit the lock.
