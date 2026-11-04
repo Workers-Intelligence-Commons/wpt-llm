@@ -44,6 +44,16 @@ def select_device() -> torch.device:
     return torch.device("cpu")
 
 
+def train_in_tf32(device: torch.device):
+    """On a CUDA device, FP32 matrix products and convolutions run in TF32,
+    which rounds their inputs for the GPU's matrix units. Elsewhere nothing
+    changes: the CPU's results stay bit for bit."""
+    if device.type == "cuda":
+        torch.backends.cuda.matmul.allow_tf32 = True
+        torch.backends.cudnn.allow_tf32 = True
+        torch.set_float32_matmul_precision("high")
+
+
 def describe(device: torch.device) -> str:
     """'cuda:0 (AMD Radeon 860M)', or 'cpu'."""
     if device.type == "cpu":

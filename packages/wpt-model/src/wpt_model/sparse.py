@@ -264,6 +264,7 @@ class _KernelAttention(torch.autograd.Function):
         return dq.to(q_type), dkv.to(kv_type), d_sink.to(sink_type), None, None, None, None
 
 
+@torch.compiler.disable
 def sparse_attention(q, kv, sink, idx, scale, weights=False):
     """q: (B, T, H, c); kv: (B, N, c); sink: (H,); idx: (B, T, K), -1 for
     none. Returns the output (B, T, H, c) in FP32, and with weights, each
@@ -278,6 +279,7 @@ def sparse_attention(q, kv, sink, idx, scale, weights=False):
     return out, summed if weights else None
 
 
+@torch.compiler.disable
 @torch.no_grad()
 def top_entries(q, w, keys, visible, k):
     """The indexer's choice: for each query, the indices of its k best
@@ -378,6 +380,7 @@ def _index_scores(q, w, keys, chosen):
     return scores, (entries, a)
 
 
+@torch.compiler.disable
 def index_alignment(q, w, keys, chosen, target):
     """The indexer's loss (DeepSeek-V3.2's sparse stage): over the chosen
     entries (B, T, K), the KL divergence from target, the main attention's

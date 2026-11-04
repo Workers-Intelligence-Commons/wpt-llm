@@ -153,9 +153,16 @@ class Experts(nn.Module):
             raise ValueError("routes are recorded and replayed for one sequence at a time")
         flat = x.reshape(-1, D)
         y = sum(expert(flat) for expert in self.shared)
-        chosen, weights = self.route(flat, ids.reshape(-1), collect, record, replay)
+        u = self._routed(flat, self.down(flat), ids.reshape(-1), collect, record, replay)
+        return (y + self.up(self.latent_norm(u))).view(B, T, D)
+
+    @torch.compiler.disable
+    def _routed(self, x, z, ids, collect, record, replay):
+        """u for the m tokens x and their latents z: the choice, the dispatch
+        and the experts, whose sizes depend on the tokens, stay out of a
+        compiled pass."""
+        chosen, weights = self.route(x, ids, collect, record, replay)
         m, k = chosen.shape
-        z = self.down(flat)
         order = chosen.reshape(-1).argsort(stable=True)  # the m * k copies, grouped by expert
         inverse = torch.empty_like(order)
         inverse[order] = torch.arange(len(order), device=order.device)
@@ -163,5 +170,4 @@ class Experts(nn.Module):
         sizes = torch.bincount(chosen.reshape(-1), minlength=self.n).tolist()
         out = torch.cat([expert_forward(part, self.w_gate[j], self.w_up[j], self.w_down[j])
                          for j, part in enumerate(copies.split(sizes))])
-        u = (out[inverse].view(m, k, -1) * weights[..., None].to(out.dtype)).sum(1)
-        return (y + self.up(self.latent_norm(u))).view(B, T, D)
+        return (out[inverse].view(m, k, -1) * weights[..., None].to(out.dtype)).sum(1)

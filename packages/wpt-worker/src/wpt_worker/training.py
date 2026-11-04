@@ -82,7 +82,7 @@ from wpt_training import (SENT, WINDOWS, Checkpoint, Data, FolderCheckpoint, Int
                           SettingsMismatch, StepFailed, StopSignals, draw_numbers, load_state, load_step, load_strategy,
                           save_state, train, weights, window_tokens_left)
 from wpt_training.launch import REFUSED, STOPPED, launch
-from wpt_utils.device import describe
+from wpt_utils.device import describe, train_in_tf32
 
 from .job import LinkStore, call, download, remote, upload
 from .link import RemoteError, addresses, is_private
@@ -334,6 +334,12 @@ def _train(spec, link, store, work, strategy, telemetry):
         log("attention: " + (f"{chosen.NAME} kernels" if chosen
                              else "PyTorch (--kernels pytorch)" if named
                              else "PyTorch (neither TileLang nor Triton is installed)"))
+    if options["compile"]:
+        if strategy.device.type != "cuda":
+            raise Refused(f"--compile runs on a CUDA device, and this process runs on {strategy.device.type}: "
+                          "run without it")
+        log("compile: text windows that run whole train through torch.compile; every other pass runs as it is")
+    train_in_tf32(strategy.device)
     model = model.to(strategy.device)
     parameters = sum(p.numel() for p in model.parameters())
     log(f"parameters: {parameters:,}")
@@ -379,6 +385,7 @@ def _train(spec, link, store, work, strategy, telemetry):
                     with telemetry.span("step", step=step.name, number=number, fingerprint=mark) as span:
                         method = step.start_method()
                         environment = step.start_environment(data)
+                        model.compile_training(options["compile"] and step.reads == WINDOWS)  # its shapes come back
                         try:
                             trained = train(model, strategy, step, method, environment, seed, draws[number - 1],
                                             Options(options["checkpoint_every"], options["segment"]),

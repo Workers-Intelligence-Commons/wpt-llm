@@ -289,6 +289,12 @@ update rule, the rule the model names for each of its parameters (model.md,
 - Adam at `table_lr_factor` times the rate, without weight decay, for
   Engram's tables.
 
+On a CUDA device (an NVIDIA or AMD GPU, the two PyTorch names `cuda`), AdamW
+and Adam run as PyTorch's fused AdamW, and Muon's momentum and weight decay
+as PyTorch's foreach operations: the same update within rounding, in fewer
+GPU kernels. The optimizer's state is the same on every
+device, so a run resumes on another.
+
 `schedule` chooses how the learning rate moves. With `steps`, it warms up
 over `warmup` updates to `lr`, then falls to `first_factor` of it after
 `first_drop` of the step's updates and to `second_factor` after
@@ -488,6 +494,27 @@ without `--recompute` crashes the process (a segmentation fault in the GPU
 stack). The `watery-tardigrade` and `unimpaired-axolotl` recipes, 32K-token
 windows on one 16 GB or one 8 GB GPU, need it with `--micro-batch 1`.
 
+## Compiling the passes
+
+`--compile` (or `WPT_COMPILE=1`) runs each layer and the multi-token
+prediction block through `torch.compile`, forward and backward, which joins
+the model's many small operations into few GPU kernels. It trains the same
+way within rounding. It covers the passes over whole text windows, whose
+shape stays the same for a stage. Evaluations, windows in segments or
+slices, conversations and task attempts run uncompiled, since their length
+or their place in a window changes from pass to pass and each new one would
+compile again. The run's log says so when the option is on.
+
+The attention kernels, flash-linear-attention's KDA kernel, the routing and
+the routed experts stay out of the compiled graphs: each is marked with
+`torch.compiler.disable`, and computes what it computes without the option.
+The first update takes longer, and so does the first update at a new window
+length. `--stop-after-updates` with and without the option compares the
+speeds, since what it measures leaves the first update out.
+
+The weights keep their names, so a checkpoint resumes with the option or
+without it. On anything but a CUDA device the option refuses the run.
+
 ## Long windows: segments and slices
 
 A window too long for one GPU's memory, even with `--recompute`, runs in
@@ -676,7 +703,8 @@ signal does: the update finishes, a checkpoint is saved and comes back,
 the command exits with code 130, and `--resume` continues. With both, the
 first reached stops it. They count over every step the command trains. The
 updates count from its first, and the minutes from the end of its first,
-since that update also compiles the kernels.
+since that update also compiles the kernels and, with `--compile`, the
+passes.
 
 Such a run ends by printing what it measured from the end of that first
 update, which is the short run that says what a whole one costs: its
@@ -2197,7 +2225,9 @@ tables, and the tokenizer uses none.
 
 **Training is not bit-exact**: GPU arithmetic differs between GPUs, drivers
 and PyTorch versions, so the same inputs give equivalent but not identical
-weights. On a GPU, the attention kernels also add up the entries' gradients
+weights. On a CUDA device, training also computes FP32 matrix products in
+TF32, and `--compile` joins operations in its own order; on the CPU, training
+computes them in FP32 and repeats bit for bit. On a GPU, the attention kernels also add up the entries' gradients
 in the order the GPU's atomic additions take, so two runs on one GPU can
 differ slightly too (docs/model.md, "Attention"); `wpt train` logs whether
 TileLang, Triton or PyTorch computes the attention, which `--kernels` names. The updates themselves are the same: each update's

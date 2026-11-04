@@ -105,6 +105,7 @@ the same command with `--resume` continues.
 | teach the model to finish tasks as an agent | tasks tagged `finish-tasks` in a source, downloaded and the dataset built again, their images in `data/images/` locked with `wpt agent lock-image NAME` and built with `wpt agent build-image NAME`, and a recipe whose `steps` hold `finish-tasks` (needs Docker; [training](docs/training.md)) |
 | teach the agent to reach the same result with fewer tokens | `finish-tasks-with-less-writing` after `finish-tasks` in the recipe's `steps`: it trains on the same tasks ([training](docs/training.md)) |
 | train long windows on a small GPU | `--recompute`: layers run again in the backward pass instead of keeping their values |
+| train faster on a CUDA device (an NVIDIA or AMD GPU) | `--compile`: the passes over whole text windows run through `torch.compile` ([training](docs/training.md), "Compiling the passes") |
 | write your own texts, conversations and tasks, and edit recipes, in a browser | `wpt web` (needs Bun), then http://127.0.0.1:8410/ (this machine only; another one reaches it through an SSH tunnel or Tailscale); the same through `wpt dataset` commands, and the page "Jobs" starts the other commands and follows what they print ([architecture](docs/architecture.md), "Two interfaces") |
 
 Every option also comes from the environment (`--micro-batch` is

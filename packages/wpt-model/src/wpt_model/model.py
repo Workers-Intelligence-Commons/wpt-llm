@@ -14,6 +14,16 @@ computed: the same result with much less memory, for about a third more
 time. The second run records no statistics (expert balancing), so a step
 counts every token once.
 
+compile_training runs each layer and the multi-token prediction block
+through torch.compile in training passes over whole windows, one window
+shape at a time. Each module keeps its name, so the weights and checkpoints
+are the same in either mode. The custom kernels, the routing and the
+routed experts stay out of the compiled graphs (torch.compiler.disable on
+sparse.py's and kda.py's entry points and on experts.Experts._routed). A
+pass over part of a window, without gradients or in evaluation runs
+uncompiled: a part's place changes from pass to pass, and every new place
+would compile again.
+
 record and replay (experts.Routes) keep the experts the routers chose for
 one sequence and route a later pass the same way (R3).
 
@@ -48,6 +58,7 @@ from .optimizer import roles
 from .sequence import WHOLE, Carried, Split
 
 HASH_LAYERS = 3   # the first 3 layers' experts are hash-routed
+COMPILED_FORMS = 256  # torch.compile's forms of one piece of code: kinds of layer, times window lengths, times steps
 RATIOS = {"CSA": CSA_RATIO, "HCA": HCA_RATIO}
 
 # the model's parts, by the names a training step locks them by (docs/model.md, "Parts"): every parameter
@@ -176,6 +187,20 @@ class WPT(nn.Module):
         # Engram's canonical id of each token id, from the vocabulary (engram.canonical_ids); saved with the weights
         self.register_buffer("canonical", torch.arange(config.vocab_size))
         self.recompute = False  # how training uses memory, not part of the model: see the module's docstring
+        self.compiled = {}  # each module compile_training compiled: a plain dict, so no name of the weights changes
+
+    def compile_training(self, on=True):
+        """Whether training passes over whole windows run through
+        torch.compile from here on (see the module's docstring)."""
+        self.compiled = {}
+        if on:
+            torch._dynamo.config.recompile_limit = COMPILED_FORMS
+            self.compiled = {module: torch.compile(module, dynamic=False) for module in (*self.layers, self.mtp)}
+
+    def _running(self, module, sequence):
+        """module as this pass runs it: compiled for a training pass over whole windows."""
+        whole = sequence is WHOLE and self.training and torch.is_grad_enabled()
+        return self.compiled.get(module, module) if whole else module
 
     def set_canonical_ids(self, ids: torch.Tensor):
         self.canonical.copy_(ids)
@@ -201,7 +226,8 @@ class WPT(nn.Module):
             hidden, total, found = self._hidden(idx, indexer_loss, record, replay, sequence, features)
             outputs = [self.head(self.final_norm(hidden)).float()]
             if next_tokens is not None:
-                outputs.append(self.head(self.mtp(hidden, self.embedding(next_tokens), sequence)).float())
+                mtp = self._running(self.mtp, sequence)
+                outputs.append(self.head(mtp(hidden, self.embedding(next_tokens), sequence)).float())
             if indexer_loss:
                 outputs.append(total)
             if features:
@@ -218,11 +244,12 @@ class WPT(nn.Module):
         total = streams.new_zeros(())
         found = {}
         for number, layer in enumerate(self.layers, start=1):
+            running = self._running(layer, sequence)
             streams, alignment = (
-                checkpoint(_first_run_collects(layer, record, replay), streams, idx, canonical, indexer_loss,
+                checkpoint(_first_run_collects(running, record, replay), streams, idx, canonical, indexer_loss,
                            sequence, use_reentrant=False)
-                if recompute else layer(streams, idx, canonical, indexer_loss, collect=sequence.collect,
-                                        record=record, replay=replay, sequence=sequence))
+                if recompute else running(streams, idx, canonical, indexer_loss, collect=sequence.collect,
+                                          record=record, replay=replay, sequence=sequence))
             if alignment is not None:
                 total = total + alignment
             if number in features:

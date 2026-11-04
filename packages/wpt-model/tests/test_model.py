@@ -1,3 +1,5 @@
+import shutil
+
 import pytest
 import torch
 
@@ -5,6 +7,8 @@ from wpt_model import BALANCING, MULTI_TOKEN_PREDICTION, PARTS, ROUTERS, WPT, Mo
 from wpt_model.attention import CSA_RATIO, HCA_RATIO, Attention
 from wpt_model.experts import Experts
 from wpt_model.kda import _fla_chunk_kda, chunked_kda, delta_attention, recurrent_kda
+from wpt_model import optimizer as update_rule
+from wpt_model.optimizer import MuonAdamW
 from wpt_utils.device import select_device
 
 TINY = dict(vocab_size=50, block_size=16, n_layer=4, global_attention=["CSA"], d_model=16, kda_heads=2, kda_head_dim=8,
@@ -143,6 +147,82 @@ def test_recomputing_layers_trains_the_same_and_counts_each_token_once():
     assert loss > 0 and torch.allclose(loss, loss_again)
     assert all(torch.allclose(a, b, atol=1e-6) for a, b in zip(grads, grads_again))
     assert torch.equal(counts, counts_again)
+
+
+def training_pass(model, ids, after):
+    """One forward and backward pass as text windows train: (scores, gradients
+    by name, the last layer's balancing counts)."""
+    model.zero_grad()
+    logits, ahead, indexers = model(ids, next_tokens=after, indexer_loss=True)
+    (logits.logsumexp(-1).mean() + ahead.logsumexp(-1).mean() + indexers).backward()
+    experts = model.layers[3].experts
+    found = logits.detach(), {name: p.grad.clone() for name, p in model.named_parameters()}, experts.histogram.clone()
+    experts.histogram = None
+    return found
+
+
+@pytest.mark.skipif(shutil.which("g++") is None, reason="torch.compile needs a C++ compiler on the CPU")
+@pytest.mark.parametrize("recompute", [False, True], ids=["kept", "recomputed"])
+def test_a_compiled_training_pass_trains_as_the_uncompiled_one_under_the_same_names(recompute):
+    # docs/training.md, "Compiling the passes": the same scores and gradients
+    # within rounding, balancing counting each token once, and weights
+    # that load in either mode; evaluation and a window in parts stay uncompiled
+    torch.manual_seed(0)
+    model = WPT(ModelConfig(**{**TINY, "block_size": 256})).train()
+    model.recompute = recompute
+    ids, after = torch.randint(50, (2, 128)), torch.randint(50, (2, 128))
+    names = list(model.state_dict())
+    scores, grads, counts = training_pass(model, ids, after)
+    with torch.no_grad():
+        carried = model(ids[:, :64], sequence=model.carried(0, {}, collect=False)), model.eval()(ids)
+    model.train()
+
+    model.compile_training()
+    scores_again, grads_again, counts_again = training_pass(model, ids, after)
+    assert torch.allclose(scores, scores_again, atol=2e-3)
+    assert grads.keys() == grads_again.keys()
+    assert all(torch.allclose(grads[name], grads_again[name], atol=2e-3) for name in grads)
+    assert counts.sum() == counts_again.sum()
+
+    assert list(model.state_dict()) == names
+    other = WPT(ModelConfig(**{**TINY, "block_size": 256}))
+    other.load_state_dict(model.state_dict())
+
+    with torch.no_grad():
+        model.train()
+        assert torch.equal(model(ids[:, :64], sequence=model.carried(0, {}, collect=False)), carried[0])
+        assert torch.equal(model.eval()(ids), carried[1])
+
+
+def test_the_one_pass_update_moves_the_weights_as_the_plain_one_and_their_states_are_interchangeable(monkeypatch):
+    # docs/training.md, "Optimizers": a CUDA device's fused and foreach forms give
+    # the same update within rounding, and a checkpoint of one continues in
+    # the other (a run resumes on other hardware); a weight without a
+    # gradient is left alone. PyTorch offers both forms on the CPU too
+    def trained(*forms):
+        torch.manual_seed(0)
+        model = WPT(ModelConfig(**TINY)).train()
+        rule = MuonAdamW(model.optimizer_roles(), 0.01, 0.1, table_lr_factor=5.0)
+        for number, form in enumerate(forms):
+            monkeypatch.setattr(update_rule, "ONE_PASS", form)
+            for parameter in model.parameters():
+                parameter.grad = torch.randn_like(parameter)
+            if number == 0:
+                model.embedding.weight.grad = None
+            rule.step()
+        return model, rule
+
+    plain, rule = trained((), (), ())
+    one_pass, one_pass_rule = trained(("cpu",), ("cpu",), ("cpu",))
+    mixed, _ = trained((), ("cpu",), ())
+    for other in (one_pass, mixed):
+        assert all(torch.allclose(a, b, atol=1e-5) for a, b in zip(plain.parameters(), other.parameters()))
+    state, state_again = rule.state_dict()["state"], one_pass_rule.state_dict()["state"]
+    assert state.keys() == state_again.keys()
+    assert all(type(state[p]["step"]) is int and state[p]["step"] == state_again[p]["step"]
+               for p in state if "step" in state[p])
+    embedding = rule.state[plain.embedding.weight]
+    assert embedding["step"] == 2  # the update without its gradient does not count
 
 
 def test_the_recipe_names_the_kind_of_each_global_layer():

@@ -117,6 +117,7 @@ def chunked_kda(q, k, v, g, beta, initial=None, chunk=CHUNK):
         return torch.stack(out, 1).transpose(2, 3).reshape(B, N * chunk, H, dv)[:, :T], S
 
 
+@torch.compiler.disable
 def delta_attention(q, k, v, g, beta, initial=None):
     """KDA's output for (B, T, H, d) inputs, and the memory after the last
     token, starting from initial (B, H, dk, dv; zeros when None):

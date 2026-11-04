@@ -143,6 +143,19 @@ def test_drafter_feature_layers_the_model_does_not_have_are_refused_before_train
     assert not [e for e in built.records("wpt train")[-1].events if e.get("name") == "training.step"]
 
 
+@pytest.mark.parametrize("given", ["option", "environment"])
+def test_compiling_off_a_cuda_device_refuses_the_run_before_training(built, on_the_cpu, monkeypatch, capsys, given):
+    # docs/training.md, "Compiling the passes": as --kernels names what cannot work here
+    if given == "environment":
+        monkeypatch.setenv("WPT_COMPILE", "1")
+    with pytest.raises(SystemExit) as refused:
+        main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model",
+              *(["--compile"] if given == "option" else [])])
+    assert refused.value.code == 2
+    assert "--compile runs on a CUDA device, and this process runs on cpu" in capsys.readouterr().err
+    assert not [e for e in built.records("wpt train")[-1].events if e.get("name") == "training.step"]
+
+
 def test_kernels_named_that_cannot_work_on_the_gpu_worker_refuse_the_run_before_training(built, on_the_cpu, monkeypatch,
                                                                                          capsys):
     # docs/model.md, "Attention": a named form is the one that runs or the

@@ -2,8 +2,10 @@ import platform
 import subprocess
 import sys
 
+import torch
+
 import wpt_utils.programs
-from wpt_utils.device import cpuinfo_name, processor_name
+from wpt_utils.device import cpuinfo_name, processor_name, train_in_tf32
 
 X86 = """processor\t: 0
 vendor_id\t: AuthenticAMD
@@ -69,3 +71,19 @@ def test_a_missing_sysctl_on_macos_names_the_architecture(monkeypatch):
     monkeypatch.setattr(wpt_utils.programs, "program", missing)
     monkeypatch.setattr(subprocess, "run", never)
     assert processor_name() == platform.machine()
+
+
+def test_training_uses_tf32_on_a_cuda_device_and_leaves_the_cpu_exact():
+    # docs/training.md, "What is exactly repeatable": bit-for-bit results on the CPU
+    precision = torch.get_float32_matmul_precision()
+    cuda, cudnn = torch.backends.cuda.matmul.allow_tf32, torch.backends.cudnn.allow_tf32
+    torch.set_float32_matmul_precision("highest")
+    try:
+        train_in_tf32(torch.device("cpu"))
+        assert torch.get_float32_matmul_precision() == "highest"
+        train_in_tf32(torch.device("cuda", 0))
+        assert torch.get_float32_matmul_precision() == "high"
+        assert torch.backends.cuda.matmul.allow_tf32 and torch.backends.cudnn.allow_tf32
+    finally:
+        torch.set_float32_matmul_precision(precision)
+        torch.backends.cuda.matmul.allow_tf32, torch.backends.cudnn.allow_tf32 = cuda, cudnn

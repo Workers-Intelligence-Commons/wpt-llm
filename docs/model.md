@@ -795,7 +795,8 @@ themselves, the optimizer state, the attention scores and output, the
 merging of entries, KDA's memory, routing scores and mHC's mapping
 coefficients; the attention's entries in the FP8 and FP4 formats above,
 simulated in FP32. The kernels, where they run, read queries and entries
-in BF16 and the indexer's in FP8. CPUs compute in FP32. No layer uses dropout, as in the
+in BF16 and the indexer's in FP8. CPUs compute in FP32. Training on a CUDA
+device computes FP32 matrix products in TF32. No layer uses dropout, as in the
 papers.
 
 **Memory.** `wpt train --recompute` keeps only each layer's input during a

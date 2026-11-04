@@ -13,12 +13,19 @@ are orthogonalized head by head, routed experts one by one and the other
 logically separate matrices (an output group, a merging's projection pair)
 apart. No QK-Clip: CSA and HCA normalize their queries and key-value
 entries, which keeps their scores bounded (DeepSeek-V4).
+
+On a device of ONE_PASS, AdamW and Adam run as PyTorch's fused AdamW, and
+Muon's momentum and weight decay as PyTorch's foreach operations, one call
+for every matrix, the same update within rounding. The state is the same on
+every device, so a run resumes on another. PyTorch offers no form of the
+orthogonalization, which runs matrix by matrix.
 """
 
 import math
 
 import torch
 import torch.nn as nn
+from torch.optim.adamw import adamw
 
 from .attention import Attention, Compressor
 from .engram import Engram
@@ -27,6 +34,7 @@ from .mhc import Connection
 
 NEWTON_SCHULZ = [(3.4445, -4.7750, 2.0315)] * 8 + [(2.0, -1.5, 0.5)] * 2  # DeepSeek-V4's hybrid steps
 UPDATE_RMS = 0.18  # DeepSeek-V4's gamma
+ONE_PASS = ("cuda",)  # the device types whose updates take PyTorch's fused and foreach forms
 
 
 def orthogonalize(G):
@@ -116,30 +124,46 @@ class MuonAdamW(torch.optim.Optimizer):
 
     def _muon(self, group):
         lr, wd, mu = group["lr"], group["weight_decay"], group["momentum"]
-        for p, view in zip(group["params"], group["views"]):
-            if p.grad is None:
-                continue
-            state = self.state[p]
-            if "momentum" not in state:
-                state["momentum"] = torch.zeros_like(p, dtype=torch.float32)
-            g = p.grad.float()
-            state["momentum"].mul_(mu).add_(g)
-            update = orthogonalize(g.add(state["momentum"], alpha=mu).view(view)).view(p.shape)  # Nesterov
-            p.mul_(1 - lr * wd)
+        trained = [(p, view) for p, view in zip(group["params"], group["views"]) if p.grad is not None]
+        for p, _ in trained:
+            if "momentum" not in self.state[p]:
+                self.state[p]["momentum"] = torch.zeros_like(p, dtype=torch.float32)
+        params = [p for p, _ in trained]
+        momenta = [self.state[p]["momentum"] for p in params]
+        grads = [p.grad.float() for p in params]
+        if params and params[0].device.type in ONE_PASS:
+            torch._foreach_mul_(momenta, mu)
+            torch._foreach_add_(momenta, grads)
+            torch._foreach_mul_(params, 1 - lr * wd)
+        else:
+            for p, momentum, g in zip(params, momenta, grads):
+                momentum.mul_(mu).add_(g)
+                p.mul_(1 - lr * wd)
+        for (p, view), momentum, g in zip(trained, momenta, grads):
+            update = orthogonalize(g.add(momentum, alpha=mu).view(view)).view(p.shape)  # Nesterov
             p.add_(update.to(p.dtype), alpha=-lr * UPDATE_RMS * math.sqrt(max(view[-2:])))
 
     def _adamw(self, group):
         lr, wd, eps = group["lr"], group["weight_decay"], group["eps"]
         beta1, beta2 = group["betas"]
-        for p in group["params"]:
-            if p.grad is None:
-                continue
+        params = [p for p in group["params"] if p.grad is not None]
+        for p in params:
             state = self.state[p]
             if "step" not in state:
                 state["step"] = 0
                 state["mean"] = torch.zeros_like(p, dtype=torch.float32)
                 state["square"] = torch.zeros_like(p, dtype=torch.float32)
             state["step"] += 1
+        if params and params[0].device.type in ONE_PASS:
+            # the count stays a number in the state, so that a checkpoint reads on any device; adamw adds this update
+            done = torch.tensor([self.state[p]["step"] - 1 for p in params], dtype=torch.float32,
+                                device=params[0].device)
+            adamw(params, [p.grad for p in params], [self.state[p]["mean"] for p in params],
+                  [self.state[p]["square"] for p in params], [], list(done.unbind()), fused=True, amsgrad=False,
+                  beta1=beta1, beta2=beta2, lr=lr, weight_decay=wd, eps=eps, maximize=False)
+            return
+        for p in params:
+            state = self.state[p]
             g = p.grad.float()
             state["mean"].lerp_(g, 1 - beta1)
             state["square"].mul_(beta2).addcmul_(g, g, value=1 - beta2)

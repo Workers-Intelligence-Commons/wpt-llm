@@ -59,7 +59,10 @@ many tokens; with `split`, each process runs its slice of a longer window
 in segments of that many tokens. Each gives the same training as whole
 windows. --kernels names what computes the attention on the gpu worker
 (wpt_model.sparse; docs/model.md, "Attention"); one that cannot work there
-refuses the run.
+refuses the run. --compile runs the passes over whole text windows through
+torch.compile on a CUDA device, and anywhere else refuses the run; a
+checkpoint resumes with it or without it (docs/training.md, "Compiling
+the passes").
 
 A step's batch is the number of examples per update over every process
 together, so the same recipe trains the same way on any hardware. Each
@@ -280,6 +283,11 @@ def parse_args(argv=None, environ=None):
                         default=environ.get("WPT_RECOMPUTE", "") in ("1", "true", "yes"),
                         help="keep only each layer's input and run the layer again for the backward pass: the same "
                              "training with much less memory, about a third slower (WPT_RECOMPUTE)")
+    parser.add_argument("--compile", action="store_true",
+                        default=environ.get("WPT_COMPILE", "") in ("1", "true", "yes"),
+                        help="run the passes over whole text windows through torch.compile, on a CUDA device: "
+                             "the same training within rounding, faster once the first update has compiled it; "
+                             "on any other device it stops the run (WPT_COMPILE)")
     parser.add_argument("--resume", action="store_true", default=environ.get("WPT_RESUME", "") in ("1", "true", "yes"),
                         help="continue the step that stopped from its checkpoint: the model folder's, or with --run "
                              "the store's (WPT_RESUME)")
@@ -726,8 +734,9 @@ def _train(args, recipe, strategy_file, steps, context, store, telemetry, enviro
             "options": {"strategy": args.strategy, "processes": args.processes, "max_restarts": args.max_restarts,
                         "micro_batch": args.micro_batch, "checkpoint_every": args.checkpoint_every,
                         "segment": args.segment, "stream": args.stream, "stream_shards": args.stream_shards,
-                        "recompute": args.recompute, "resume": args.resume, "scheduler_costs": args.scheduler_costs,
-                        "kernels": args.kernels, "stop_after_minutes": args.stop_after_minutes,
+                        "recompute": args.recompute, "compile": args.compile, "resume": args.resume,
+                        "scheduler_costs": args.scheduler_costs, "kernels": args.kernels,
+                        "stop_after_minutes": args.stop_after_minutes,
                         "stop_after_updates": args.stop_after_updates}}
     try:
         checkout_root = code_root()
