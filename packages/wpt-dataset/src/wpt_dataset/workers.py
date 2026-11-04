@@ -38,8 +38,9 @@ from wpt_utils.programs import codes, set_code
 from .license_check import LicenseTexts
 
 # the modules whose code (wpt_utils.programs.code_of) the fingerprints a worker computes hold: the final tree and
-# its text check (sources), what a source keeps (kept), a source's Markdown and tokens (reading)
-KEYED = ("wpt_dataset.sources", "wpt_dataset.kept", "wpt_dataset.reading")
+# its text check (sources), what a source keeps (kept), a source's Markdown and tokens (reading), the index of a
+# records entry under `newest` (records)
+KEYED = ("wpt_dataset.sources", "wpt_dataset.kept", "wpt_dataset.reading", "wpt_dataset.records")
 # every file that is not Python in the src folders of the packages of the KEYED modules, and whether it enters the
 # keys. None does: the schemas only refuse a document, and the site list only decides which sites a download
 # may reach, so neither decides a saved result. (A compiled module is no entry: it enters by the files that build it.)

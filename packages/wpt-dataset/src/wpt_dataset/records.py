@@ -25,6 +25,14 @@ and when dates are equal the later one (in path order, then in its file),
 as a dataset that holds several revisions of one document needs; the
 others are left out and counted, before any other rule.
 
+That choice reads every file the entry covers, so it is made once and saved
+in the store: the positions of the records to read, file by file, a 4-byte
+number each, under the ref newest-index/<fingerprint of the entry, the path
+and sha256 of each file it covers and of its joined file, in path order, and
+the code of this module (wpt_utils.programs.code_of)>. Nothing else enters
+that fingerprint, so any read of the same files finds the index, whatever
+build or machine saved it.
+
 The file kind comes from its name: `.jsonl`, `.json` or `.ndjson` (JSON
 Lines: one object per line), each optionally compressed as `.gz` or `.zst`,
 `.parquet`, or `.xml`. Records are read one at a time from the store's
@@ -63,8 +71,12 @@ from dataclasses import dataclass, field as dataclass_field
 from datetime import datetime, timezone
 from pathlib import Path
 
+import numpy as np
 import pyarrow.parquet as pq
 from lxml import etree
+
+from wpt_telemetry import Telemetry, set_result_ref
+from wpt_utils.programs import code_of, fingerprint
 
 from .errors import InvalidFile
 from .manifest import Stored, glob_match_any
@@ -201,7 +213,7 @@ def joined_file(entry: dict, path: str, tree, indexes: dict):
 
 
 def records(file: "Path | Stored", name: str, entry: dict, license_field: str | None, licenses: dict, skipped: Skipped,
-            joined: "Path | Stored | None" = None, newest: dict | None = None) -> Iterator[Record]:
+            joined: "Path | Stored | None" = None, newest: dict[str, np.ndarray] | None = None) -> Iterator[Record]:
     """The records of one file that enter: license_field is the field the
     license entries covering the file read (their field place), and
     licenses maps each value they expect to its entry's SPDX expression
@@ -210,15 +222,19 @@ def records(file: "Path | Stored", name: str, entry: dict, license_field: str | 
     counted as untrained); joined is the file the entry's `join` reads with
     this one, if any. Ids repeat at no
     point in a file, except under `newest`, where only the newest record of
-    each id is read: newest is newest_index over every file of the source
-    the entry covers."""
+    each id is read: newest is saved_newest_index over every file of the
+    source the entry covers."""
     if ("newest" in entry) != (newest is not None):
-        raise ValueError(f"{name}: an entry with `newest` is read with its newest_index, and only such an entry")
+        raise ValueError(f"{name}: an entry with `newest` is read with its saved_newest_index, and only such an entry")
     seen = set()
+    wanted = iter(() if newest is None else newest.get(name, ()))  # the positions still to come, ascending
+    following = next(wanted, None)
     for position, value_of in enumerate(_records_of(file, name, entry, joined), start=1):
-        if newest is not None and newest[_id(entry, value_of, position, name)][1:] != (name, position):
-            skipped.older += 1  # a newer record of its id is read instead
-            continue
+        if newest is not None:
+            if position != following:
+                skipped.older += 1  # a newer record of its id is read instead
+                continue
+            following = next(wanted, None)
         refused = next(((rule["field"], value) for rule in entry.get("keep", [])
                         for value in [_text(value_of(rule["field"]))] if value not in rule["in"]), None)
         if refused:
@@ -271,6 +287,47 @@ def newest_index(entry: dict, paths, read: Callable) -> dict[str, tuple[datetime
             if record_id not in best or date >= best[record_id][0]:
                 best[record_id] = date, path, position
     return best
+
+
+def saved_newest_index(entry: dict, paths, read: Callable, store, telemetry=None) -> dict[str, np.ndarray]:
+    """{path: the ascending positions of the records to read} of newest_index
+    (paths and read as there, read giving manifest.Stored files), found under
+    its ref, or scanned once and saved there. A path none of whose records is
+    read is not in it. The ref is recorded before it is set
+    (wpt_telemetry.set_result_ref)."""
+    files = []
+    for path in sorted(paths, key=str.encode):
+        file, joined = read(path)
+        files.append([path, file.entry.sha256, joined.entry.sha256 if joined else None])
+    key = fingerprint({"kind": "newest-index", "code": code_of(__name__), "entry": entry, "files": files})
+    known = store.get_ref("newest-index", key)
+    if not known:
+        known = store.put_bytes(_packed(newest_index(entry, paths, read)))
+        set_result_ref(store, "newest-index", key, known, telemetry or Telemetry.off())
+    return _unpacked(store.get_bytes(known))
+
+
+def _packed(index: dict) -> bytes:
+    """A newest_index as an object: the length of a JSON object {path: how
+    many records of it are read} in 8 bytes, that object, then the positions
+    of each path, ascending, in 4 bytes each. Its dates and ids are left out:
+    a reader of the file needs only the positions."""
+    positions = {}
+    for _, path, position in index.values():
+        positions.setdefault(path, []).append(position)
+    counts = json.dumps({path: len(found) for path, found in positions.items()}, ensure_ascii=False).encode()
+    return b"".join([len(counts).to_bytes(8, "little"), counts,
+                     *(np.sort(np.array(found, dtype="<u4")).tobytes() for found in positions.values())])
+
+
+def _unpacked(data: bytes) -> dict[str, np.ndarray]:
+    """The positions of each path of a _packed index, read in place."""
+    at = 8 + int.from_bytes(data[:8], "little")
+    found = {}
+    for path, count in json.loads(data[8:at]).items():
+        found[path] = np.frombuffer(data, "<u4", count, at)
+        at += 4 * count
+    return found
 
 
 def _date(value, name: str, record_id: str, field_name: str) -> datetime:

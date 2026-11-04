@@ -576,9 +576,14 @@ The build takes a source once all its parts are read: its documents, its
 check result and its failure are those of one read, and a part that fails
 takes the whole source out. The parts after a failed part are not read; those
 before it are, so the source's error is the first in part order, whichever
-part failed first in time. A source with a records entry under `newest`
-stays one part, since that entry's index reads every file it covers. A file
-is never split.
+part failed first in time. A file is never split.
+
+The index of a records entry under `newest` reads every file the entry covers,
+so it is saved in the store under a ref of its own, named after the entry, the
+files it covers and its code, and any later read, build or round loads it. A
+source with such an entry read in parts starts with one more item in the same
+workers, which saves the index while other sources are read. Its other parts
+wait for that item, and its failure is the source's failure.
 
 ### The download step
 

@@ -194,6 +194,13 @@ def each_source(function, parts, repo, store, telemetry, progress, args, disk, f
     counts any more. The parts before a failed one still run, so the source's
     error does not depend on which part failed first in time.
 
+    A part that saves its source's `newest` indexes (Part.indexes) runs
+    reading.save_newest instead of function, as a part in every other way:
+    the source's other parts start once it saved them or failed with the
+    source's error, its failure is the source's, other sources are read
+    meanwhile, and it adds nothing to the list given. An error that stops
+    every source leaves those parts unstarted, so none scans the files itself.
+
     The span opens under the caller's current span when the source's first
     part starts, so what the workers record lands under it, and it says how
     many seconds the work took, its parts' added (converting_seconds); the
@@ -205,6 +212,7 @@ def each_source(function, parts, repo, store, telemetry, progress, args, disk, f
         parent, spans = telemetry.current(), {}  # spans: each source begun and not yet given to the caller
         seconds, lock = collections.Counter(), threading.Lock()  # lock: a source's parts run on several threads
         failed = {}  # {source id: the number of its first part that failed so far}
+        indexing = {part.source.id for part in parts if part.indexes}  # the sources whose indexes are not saved yet
 
         def run(part):
             source = part.source
@@ -219,10 +227,16 @@ def each_source(function, parts, repo, store, telemetry, progress, args, disk, f
             started = time.monotonic()
             try:
                 with telemetry.within(span):
-                    return pool.call(function, source, store, *args(part), telemetry=telemetry)
+                    if not part.indexes:
+                        return pool.call(function, source, store, *args(part), telemetry=telemetry)
+                    pool.call(reading.save_newest, source, store, part.positions, telemetry=telemetry)
+                with lock:
+                    indexing.discard(source.id)
+                return None
             except SOURCE_ERRORS:
                 with lock:
                     failed[source.id] = min(part.number, failed.get(source.id, part.number))
+                    indexing.discard(source.id)
                 raise
             finally:
                 with lock:
@@ -232,12 +246,14 @@ def each_source(function, parts, repo, store, telemetry, progress, args, disk, f
 
         try:
             gathered = []  # what the parts of the source under way gave
-            for done in each(run, parts, SOURCE_ERRORS, pool.sizing):
+            for done in each(run, parts, SOURCE_ERRORS, pool.sizing,
+                             ready=lambda part: part.indexes or part.source.id not in indexing):
                 gathered.append(done)
                 if len(gathered) == done.item.of:
                     source = done.item.source
                     error = next((one.error for one in gathered if one.error is not None), None)
-                    yield Done(source, [one.value for one in gathered], error), spans.pop(source.id)
+                    yield Done(source, [one.value for one in gathered if not one.item.indexes], error), \
+                        spans.pop(source.id)
                     gathered = []
         finally:
             stopped = RuntimeError("the sources stopped before this source's turn")

@@ -433,7 +433,7 @@ def _temporary():
     return tempfile.gettempdir()
 
 
-def in_order(work, items, executor, sizing, poll=POLL, settle=SETTLE, group=None):
+def in_order(work, items, executor, sizing, poll=POLL, settle=SETTLE, group=None, ready=lambda item: True):
     """Run work(item) for each item on executor (a concurrent.futures
     executor of at least sizing.limit threads or processes, which the
     caller owns), starting each item only when sizing.may_start allows,
@@ -442,7 +442,9 @@ def in_order(work, items, executor, sizing, poll=POLL, settle=SETTLE, group=None
     results in the items' order. group, when given, gives an item's
     (group, the most items of that group running at once), such as a site
     and its limit: an item whose group is full waits, and the items after
-    it may start meanwhile. While no item may start, it measures again
+    it may start meanwhile. ready says whether an item may start yet: one
+    that may not waits the same way, until an item that ended lets it. While
+    no item may start, it measures again
     every poll seconds or as soon as an item ends. An item's exception is
     raised when its turn to be yielded comes; no new item starts after
     that, and the items still running finish on the executor."""
@@ -459,7 +461,7 @@ def in_order(work, items, executor, sizing, poll=POLL, settle=SETTLE, group=None
     while more or slots:
         running = {future: value for future, value in running.items() if not future.done()}
         while True:
-            chosen = next((waited for waited in waiting if fits(*waited[2])), None)
+            chosen = next((waited for waited in waiting if fits(*waited[2]) and ready(waited[1])), None)
             if chosen is None:
                 if drawn is None:
                     item = next(items, _END) if more else _END
@@ -469,7 +471,7 @@ def in_order(work, items, executor, sizing, poll=POLL, settle=SETTLE, group=None
                     slot = [None]
                     slots.append(slot)
                     drawn = (slot, item, group(item) if group else (None, 0), sizing.need(item))
-                if not fits(*drawn[2]):
+                if not fits(*drawn[2]) or not ready(drawn[1]):
                     waiting.append(drawn)
                     drawn = None
                     continue
@@ -500,9 +502,9 @@ class Done:
     error: Exception | None = None
 
 
-def each(work, items, errors, sizing, group=None):
+def each(work, items, errors, sizing, group=None, ready=lambda item: True):
     """Done of work(item) for each item, in the items' order, run on a pool
-    of sizing.limit threads as in_order allows (group as there). An
+    of sizing.limit threads as in_order allows (group and ready as there). An
     exception of errors (a class, or a tuple of them) that work raises is
     its item's error; any other is raised at its item's turn, as in_order
     raises it, and no new item starts."""
@@ -513,4 +515,4 @@ def each(work, items, errors, sizing, group=None):
             return Done(item, error=error)
 
     with ThreadPoolExecutor(sizing.limit) as executor:
-        yield from in_order(run, items, executor, sizing, group=group)
+        yield from in_order(run, items, executor, sizing, group=group, ready=ready)

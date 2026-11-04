@@ -7,6 +7,7 @@ import json
 import re
 import shutil
 import threading
+import types
 from pathlib import Path
 
 import numpy as np
@@ -927,29 +928,83 @@ def reads_here(monkeypatch, repo):
     monkeypatch.setattr(workers, "license_texts", lambda: license_check.LicenseTexts(repo.license_texts()))
 
 
-def test_a_read_builds_a_source_s_newest_index_once_however_many_batches_it_takes(kit, repo, store, tmp_path,
-                                                                                  monkeypatch):
-    # the index reads every file of its entry: built per batch, a source of N large files would be read N times
-    def lines(*rows):
-        return "".join(json.dumps({"id": name, "date": date, "text": f"{name} at {date}"}) + "\n"
-                       for name, date in rows).encode()
+def revisions(rows) -> bytes:
+    """A records file: a line for each (id, date) of rows."""
+    return "".join(json.dumps({"id": name, "date": date, "text": f"{name} at {date}. " * 20}) + "\n"
+                   for name, date in rows).encode()
 
-    files = {f"part-{i}.ndjson": lines((f"only-{i}", "2025-01-01"), ("shared", f"2025-0{i + 1}-01")) for i in range(4)}
-    folder, _ = kit.git_project(tmp_path / "revisions", files=files, executable=set(), symlinks={})
-    sid = kit.add_source(repo, store, "example", "revisions", {
-        "type": "git", "address": folder,
+
+def newest_source(kit, repo, store, folder, name, files):
+    """A source whose records files keep the newest record of each id; returns its id."""
+    upstream, _ = kit.git_project(folder, files=files, executable=set(), symlinks={})
+    return kit.add_source(repo, store, "example", name, {
+        "type": "git", "address": upstream, "tags": [{"tags": ["en"], "paths": ["**"]}],
         "formats": [{"format": "records", "paths": ["*.ndjson"], "text": "text", "id": "id", "newest": "date"}]})
+
+
+@pytest.fixture
+def scans(monkeypatch):
+    """Each scan of a source's files for its `newest` index in this process, as the files it read."""
+    found, index = [], records.newest_index
+    monkeypatch.setattr(records, "newest_index", lambda entry, paths, read: found.append(paths) or index(entry, paths, read))
+    return found
+
+
+FOUR_PARTS = {f"part-{i}.ndjson": revisions([(f"only-{i}", "2025-01-01"), ("shared", f"2025-0{i + 1}-01")])
+              for i in range(4)}
+FOUR_PARTS_DOCUMENTS = {**{f"part-{i}.ndjson#only-{i}": markdown.text("only-%d at 2025-01-01. " % i * 20).rstrip() + b"\n"
+                           for i in range(4)},
+                        "part-3.ndjson#shared": markdown.text("shared at 2025-04-01. " * 20).rstrip() + b"\n"}
+
+
+def test_a_read_builds_a_source_s_newest_index_once_however_many_batches_it_takes(kit, repo, store, tmp_path,
+                                                                                  monkeypatch, scans):
+    # the index reads every file of its entry: built per batch, a source of N large files would be read N times
+    sid = newest_source(kit, repo, store, tmp_path / "revisions", "revisions", FOUR_PARTS)
     reads_here(monkeypatch, repo)
     monkeypatch.setattr(reading, "BATCH_BYTES", 1)  # each file a batch alone
-    indexes, index = [], records.newest_index
-    monkeypatch.setattr(records, "newest_index", lambda *a: indexes.append(a) or index(*a))
 
     read = reading.read_markdown(repo.source(sid), store, list(range(4)), tmp_path / "markdown", Telemetry.off())
 
-    assert len(read.packs) == 4 and len(indexes) == 1
-    assert {entry["path"]: text for entry, text in read.documents()} == {
-        **{f"part-{i}.ndjson#only-{i}": markdown.text(f"only-{i} at 2025-01-01") for i in range(4)},
-        "part-3.ndjson#shared": markdown.text("shared at 2025-04-01")}
+    assert len(read.packs) == 4 and len(scans) == 1
+    assert {entry["path"]: text for entry, text in read.documents()} == FOUR_PARTS_DOCUMENTS
+
+
+def newest_refs(store) -> list[str]:
+    folder = store.root / "refs" / "newest-index"
+    return sorted(path.name for path in folder.iterdir()) if folder.is_dir() else []
+
+
+def test_a_later_read_finds_the_saved_newest_index_and_scans_nothing(kit, repo, store, tmp_path, monkeypatch, scans):
+    # a scan of a dump takes many minutes: no later read, of any part of the files, by any source that holds them,
+    # pays it again
+    sid = newest_source(kit, repo, store, tmp_path / "revisions", "revisions", FOUR_PARTS)
+    same = newest_source(kit, repo, store, tmp_path / "same", "same-files", FOUR_PARTS)
+    reads_here(monkeypatch, repo)
+    reading.read_markdown(repo.source(sid), store, list(range(4)), tmp_path / "first", Telemetry.off())
+
+    again = reading.read_markdown(repo.source(sid), store, list(range(4)), tmp_path / "again", Telemetry.off())
+    one_file = reading.read_markdown(repo.source(same), store, [3], tmp_path / "one", Telemetry.off())
+
+    assert len(scans) == 1 and len(newest_refs(store)) == 1
+    assert {entry["path"]: text for entry, text in again.documents()} == FOUR_PARTS_DOCUMENTS
+    assert {entry["path"]: text for entry, text in one_file.documents()} == {
+        path: text for path, text in FOUR_PARTS_DOCUMENTS.items() if path.startswith("part-3")}
+
+
+def test_a_changed_file_gets_another_newest_index(kit, repo, store, tmp_path, monkeypatch, scans):
+    # an index of other bytes would read the wrong positions: a file that now holds a newer revision moves the choice
+    sid = newest_source(kit, repo, store, tmp_path / "revisions", "revisions", FOUR_PARTS)
+    changed = newest_source(kit, repo, store, tmp_path / "changed", "changed", {
+        **FOUR_PARTS, "part-0.ndjson": revisions([("only-0", "2025-01-01"), ("shared", "2025-09-01")])})
+    reads_here(monkeypatch, repo)
+    reading.read_markdown(repo.source(sid), store, list(range(4)), tmp_path / "first", Telemetry.off())
+
+    read = reading.read_markdown(repo.source(changed), store, list(range(4)), tmp_path / "second", Telemetry.off())
+
+    assert len(scans) == 2 and len(newest_refs(store)) == 2
+    assert {entry["path"] for entry, _ in read.documents()} == {
+        *(path for path in FOUR_PARTS_DOCUMENTS if "only" in path), "part-0.ndjson#shared"}
 
 
 LF, CRLF = b"one line\nand another\n" * 20, b"one line\r\nand another\r\n" * 20  # other bytes, one Markdown
@@ -980,16 +1035,20 @@ def test_a_large_source_is_cut_every_few_batches_from_its_sizes_alone(kit, repo,
     assert [part.positions for part in small] == [positions[:8]]
 
 
-def test_a_source_under_newest_stays_one_part_however_large(kit, repo, store, tmp_path, monkeypatch):
-    # the index of its records reads every file of the entry: each part would read the whole source again
-    monkeypatch.setattr(reading, "BATCH_BYTES", 1)
-    folder, _ = kit.git_project(tmp_path / "revisions", files={"a.ndjson": b"{}"}, executable=set(), symlinks={})
-    sid = kit.add_source(repo, store, "example", "revisions", {
-        "type": "git", "address": folder,
-        "formats": [{"format": "records", "paths": ["*.ndjson"], "text": "text", "id": "id", "newest": "date"}]})
+def test_a_source_under_newest_is_cut_like_any_other_after_a_part_that_saves_its_index(kit, repo, store, tmp_path,
+                                                                                       monkeypatch):
+    monkeypatch.setattr(reading, "BATCH_BYTES", 10)
+    sid = newest_source(kit, repo, store, tmp_path / "revisions", "revisions", {"a.ndjson": b"{}"})
+    positions = list(range(100, 130))
 
-    [part] = reading.parts_of(repo.source(sid), list(range(20)), [5] * 20)
-    assert part.positions == list(range(20)) and part.size == 100 and part.of == 1
+    index, *parts = reading.parts_of(repo.source(sid), positions, [5] * 30)  # 8 files a part
+
+    assert index.indexes and index.positions == positions and index.size == 0
+    assert [part.positions for part in parts] == [positions[start:start + 8] for start in range(0, 30, 8)]
+    assert [part.number for part in [index, *parts]] == [0, 1, 2, 3, 4] and {part.of for part in parts} == {5}
+    assert not any(part.indexes for part in parts)
+    [alone] = reading.parts_of(repo.source(sid), positions[:8], [5] * 8)  # one part saves its index itself
+    assert not alone.indexes and alone.of == 1
 
 
 def ids_of_tokens(store) -> int:
@@ -1035,6 +1094,152 @@ def test_a_source_read_in_parts_gives_the_dataset_of_one_read_and_a_saved_part_i
     events = [json.loads(line) for line in split.read_record(telemetry.folder, "events.jsonl").splitlines()]
     assert len([e for e in events if e["kind"] == "event" and e["name"] == "store.ref_set"
                 and e["attributes"]["ref"].startswith("source-tokens")]) == 1
+
+
+def many_revisions(count=30):
+    """{file: its records}, about 1 KB each: an id of its own, and an id whose newest record lies in the last file."""
+    return {f"part-{i:02d}.ndjson": revisions([(f"only-{i}", "2025-01-01"), ("shared", f"2025-01-{i + 1:02d}")])
+            for i in range(count)}
+
+
+def index_refs_set(store, folder) -> int:
+    events = [json.loads(line) for line in store.read_record(folder, "events.jsonl").splitlines()]
+    return len([e for e in events if e["kind"] == "event" and e["name"] == "store.ref_set"
+                and e["attributes"]["ref"].startswith("newest-index")])
+
+
+def test_a_source_under_newest_read_in_parts_gives_what_one_read_gives_from_one_index(kit, repo, store, tmp_path,
+                                                                                      monkeypatch):
+    # a record replaced by one in another part stays out, the lock, the documents and the tokens are those of one
+    # read, and the parts of the split source share one index, which a following build does not make again
+    sid = newest_source(kit, repo, store, tmp_path / "revisions", "revisions", many_revisions())
+    one_pool(kit, repo, 30000)
+    kit.write_recipe(repo, "mixture", "main", {"pools": [{"name": "en", "select": "en", "weight": 1, "max_epochs": 1000}]})
+    whole = build_dataset(repo, "small", store, log=lambda _: None)
+    assert ids_of_tokens(store) == 1
+    lock = repo.generated("lock", "main")
+    (repo.root / repo.relative("lock", "main")).unlink()  # the parts train it again
+
+    monkeypatch.setattr(reading, "BATCH_BYTES", 2048)  # the asking process cuts: about 2 files a batch
+    split = open_store((tmp_path / "split").as_uri())
+    kit.download(repo, split, sid)
+    with Telemetry.start(split, "wpt dataset build", [], "small", env_file=tmp_path / ".env", environ={}) as telemetry:
+        assert build_dataset(repo, "small", split, log=lambda _: None, telemetry=telemetry) == whole
+    assert ids_of_tokens(split) > 1 and index_refs_set(split, telemetry.folder) == 1
+
+    assert repo.generated("lock", "main") == lock
+    assert document_list(split, whole) == document_list(store, whole)
+    ids = [document["id"] for document in document_list(split, whole)]
+    assert f"{sid}/part-29.ndjson#shared" in ids and len(ids) == 31
+    one, parts = record_of(store, whole), record_of(split, whole)
+    for field in ("sources", "documents", "pools", "skipped"):
+        assert parts[field] == one[field]
+    assert [s["token_sha256"] for s in parts["shards"] + parts["held_out_shards"]] == \
+           [s["token_sha256"] for s in one["shards"] + one["held_out_shards"]]
+
+
+def test_a_source_whose_index_fails_is_left_out_as_a_failing_read_is(kit, repo, store, tmp_path, monkeypatch):
+    # its parts do not run, the other source stays, and a strict build stops
+    every_file_chosen(kit, repo)
+    other = lines_source(kit, repo, store, tmp_path / "other", "z-other", {"copy.txt": CRLF})
+    before = build_dataset(repo, "small", store, log=lambda _: None)  # locks the vocabulary
+    broken = newest_source(kit, repo, store, tmp_path / "broken", "a-broken", {
+        **many_revisions(), "part-29.ndjson": revisions([("late", "not a date")])})
+    monkeypatch.setattr(reading, "BATCH_BYTES", 2048)
+
+    record = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))
+
+    assert [s["source"] for s in record["skipped"]] == [broken] and "not a date" in record["skipped"][0]["error"]
+    assert [d["id"] for d in document_list(store, record["id"])] == [d["id"] for d in document_list(store, before)]
+    assert broken < other and ids_of_tokens(store) == 1
+    with pytest.raises(DatasetError):
+        build_dataset(repo, "small", store, log=lambda _: None, strict=True)
+
+
+class ThreadsAsWorkers:
+    """A workers.Pool that runs each call on the asking thread and always lets another start, so a test can hold a
+    call back. What a real worker process adds, the build tests above go through."""
+
+    def __init__(self, repo, what, disk=None, folder=None):
+        self.sizing = types.SimpleNamespace(limit=4, why="", need=lambda item: 0, may_start=lambda *measures: True)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *stopped):
+        return False
+
+    def call(self, function, *arguments, telemetry=None):
+        return function(*arguments, telemetry=telemetry)
+
+
+def indexed_and_other_parts():
+    source, other = types.SimpleNamespace(id="dump"), types.SimpleNamespace(id="other")
+    return [reading.Part(source, [0, 1], 0, 3, 0, indexes=True), reading.Part(source, [0], 1, 3, 1),
+            reading.Part(source, [1], 1, 3, 2), reading.Part(other, [0], 1)]
+
+
+def read_each(parts, work):
+    telemetry = Telemetry.off()
+    with telemetry.progress("read", len(parts), "parts") as progress:
+        return [done for done, _ in build.each_source(work, parts, None, None, telemetry, progress,
+                                                      lambda part: (part.source.id, part.number), lambda part: 0, None)]
+
+
+def test_a_source_s_parts_wait_for_its_index_while_other_sources_are_read(monkeypatch):
+    # the scan of a dump takes many minutes: it holds back its own source and nothing else, and a part that started
+    # before it ended would scan the dump itself
+    other_read, started = threading.Event(), []
+
+    def index(source, store, positions, telemetry):
+        assert other_read.wait(60)
+        started.append("index")
+
+    def work(source, store, name, number, telemetry):
+        started.append(name)
+        if name == "other":
+            other_read.set()
+        return number
+
+    monkeypatch.setattr(workers, "Pool", ThreadsAsWorkers)
+    monkeypatch.setattr(reading, "save_newest", index)
+
+    dump, other = read_each(indexed_and_other_parts(), work)
+
+    assert started[:2] == ["other", "index"] and started[2:] == ["dump", "dump"]
+    assert dump.value == [1, 2] and dump.error is None and other.value == [0]
+
+
+def test_a_failed_index_is_its_source_s_error_and_its_parts_do_not_run(monkeypatch):
+    def index(source, store, positions, telemetry):
+        raise DatasetError("no date")
+
+    monkeypatch.setattr(workers, "Pool", ThreadsAsWorkers)
+    monkeypatch.setattr(reading, "save_newest", index)
+
+    dump, other = read_each(indexed_and_other_parts(), lambda source, store, name, number, telemetry: name)
+
+    assert str(dump.error) == "no date" and dump.value == [None, None]
+    assert other.error is None and other.value == ["other"]
+
+
+def test_an_index_stopped_by_an_error_of_every_source_starts_none_of_its_parts(monkeypatch):
+    # with no index saved, each part that started would scan the whole dump before the stop could be raised
+    started = []
+
+    def index(source, store, positions, telemetry):
+        raise RuntimeError("the store refused the write")
+
+    def work(source, store, name, number, telemetry):
+        started.append(name)
+
+    monkeypatch.setattr(workers, "Pool", ThreadsAsWorkers)
+    monkeypatch.setattr(reading, "save_newest", index)
+
+    with pytest.raises(RuntimeError, match="the store refused the write"):
+        read_each(indexed_and_other_parts(), work)
+
+    assert "dump" not in started
 
 
 def test_a_part_that_fails_takes_its_whole_source_out_once_and_nothing_of_it_counts(kit, repo, store, tmp_path,

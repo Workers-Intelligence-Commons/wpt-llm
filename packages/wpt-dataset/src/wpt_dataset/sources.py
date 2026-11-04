@@ -37,7 +37,7 @@ from pathlib import Path
 from wpt_store import parse_file_list
 from wpt_telemetry import Telemetry, set_result_ref
 from wpt_utils.parallel import in_order
-from wpt_utils.programs import code_of
+from wpt_utils.programs import code_of, fingerprint
 
 from . import checks, erasure, license_check, manifest, records, workers
 from .errors import CutFailed, NotDownloaded, NotText, PatchFailed
@@ -49,10 +49,6 @@ UPSTREAM, UPSTREAM_FILES, UPSTREAM_PAGES = "upstream", "upstream-files", "upstre
 # what a download reads from a source's description, besides its id and its license pages: a change to any of
 # them is a new download
 FETCHED = ("type", "address", "addresses", "revision", "extract", "history", "submodules")
-
-
-def fingerprint(inputs) -> str:
-    return hashlib.sha256(json.dumps(inputs, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
 # -- upstream -----------------------------------------------------------------

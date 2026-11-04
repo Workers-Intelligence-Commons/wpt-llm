@@ -10,8 +10,9 @@ batch's files (kept.py), and the batch's documents go into one pack: a
 zstd file of a JSON line and the Markdown's bytes per document, with a
 JSON file beside it, written last, naming the files it covers, those that
 are not text and the records left out. The index of a records entry with
-`newest` covers every file of that entry, so it is built once per read of
-a source and every batch shares it.
+`newest` covers every file of that entry, so it is saved in the store
+(records.py): the first read of those files builds it, any later read, build
+or round loads it, and a read's batches share it.
 
 While a batch is converted and its documents turned into tokens, one thread
 fetches the small files of the next batch, and never of the one after it. A
@@ -25,10 +26,13 @@ A source of more than PART_BATCHES batches is read in parts (parts_of), each
 a run of whole batches in bundle order, so several workers read and turn it
 into tokens at once. The parts follow from the chosen files and their sizes
 alone, never from the machine. A part opens the source's whole final tree, so
-a note in another file reads as it does in one read. A source with a records
-entry under `newest` stays one part, whatever its size: its index needs every
-file of the entry. A file is never split, so a single file larger than a part
-stays one long part.
+a note in another file reads as it does in one read. A file is never split,
+so a single file larger than a part stays one long part.
+
+A source with a records entry under `newest` read in several parts starts with
+one more part that reads no document and only saves the entry's index
+(save_newest): the other parts wait for it, so they load the index instead of
+each scanning the files of the entry.
 
 Packs live in a folder of the cache folder named by the fingerprint of what
 decides a conversion: the key of the source's Kept (kept.kept_key), its
@@ -111,7 +115,7 @@ def _fetchable(source, batch: dict) -> list:
             and checks.asks_text(source, path, entry)]
 
 
-def _write_pack(source, batch: dict, held: Kept, store, folder: Path, newest_indexes: dict) -> Pack:
+def _write_pack(source, batch: dict, held: Kept, store, folder: Path, newest_indexes: dict, telemetry) -> Pack:
     """Read one batch of a source's files, {path: entry}, fetched already,
     into a new pack of folder; store is a view of copies_in, newest_indexes
     what the read's batches share (markdown.documents)."""
@@ -126,7 +130,7 @@ def _write_pack(source, batch: dict, held: Kept, store, folder: Path, newest_ind
         with zstd.open(partial, "wb") as out:
             for converted in markdown.documents(source, held.less(not_text).tree, store, workers.repo(), skipped,
                                                 only=batch.keys() - not_text.keys(), trains=held.trains,
-                                                newest_indexes=newest_indexes):
+                                                newest_indexes=newest_indexes, telemetry=telemetry):
                 entry = {"path": converted.path, "file": converted.file, "length": len(converted.markdown),
                          "sha256": _sha256(converted.markdown)}
                 if converted.record:
@@ -178,17 +182,20 @@ class Part:
     size: int = 0  # their bytes
     of: int = 1  # how many parts the source has
     number: int = 0  # its place among them, from 0
+    indexes: bool = False  # it only saves the source's `newest` indexes for its other parts (save_newest)
 
 
 def parts_of(source, positions: list[int], sizes: list[int]) -> list[Part]:
     """The Parts of a source's chosen files, in their order (bundle order,
     so that a frame is fetched by one part), sizes being their bytes: every
-    PART_BATCHES batches, or one for a source that needs its files together
-    (see the module's docstring)."""
-    together = any("newest" in entry for entry in source.data["formats"])
-    starts = [0] if together else [start for start, _ in _cuts(sizes)][::PART_BATCHES]
-    return [Part(source, positions[start:stop], sum(sizes[start:stop]), len(starts), number)
-            for number, (start, stop) in enumerate(zip(starts, [*starts[1:], len(positions)]))]
+    PART_BATCHES batches, after a part that saves the source's `newest`
+    indexes when there are several (see the module's docstring). That part
+    counts no bytes: it reads its files as streams."""
+    starts = [start for start, _ in _cuts(sizes)][::PART_BATCHES]
+    first = int(len(starts) > 1 and any("newest" in entry for entry in source.data["formats"]))
+    parts = [Part(source, positions[start:stop], sum(sizes[start:stop]), len(starts) + first, number)
+             for number, (start, stop) in enumerate(zip(starts, [*starts[1:], len(positions)]), start=first)]
+    return [Part(source, positions, 0, len(parts) + 1, 0, indexes=True), *parts] if first else parts
 
 
 def _in_order(found):
@@ -235,7 +242,7 @@ def _opened(source, store, positions, telemetry):
                                            "type": source.data["type"]})
 
 
-def _read(source, store, tree, held, paths, key, cache, ready=lambda documents: None) -> Read:
+def _read(source, store, tree, held, paths, key, cache, telemetry, ready=lambda documents: None) -> Read:
     """The chosen paths' documents, each file not in a pack of the folder of
     key read into a new one, the next batch fetched meanwhile. ready gets
     each lot of documents as soon as it can be read: those of the packs found,
@@ -262,7 +269,7 @@ def _read(source, store, tree, held, paths, key, cache, ready=lambda documents: 
             fetched.result()
             if following is not None:
                 fetched = fetching.submit(store.fetch_files, _fetchable(source, following))
-            pack = _write_pack(source, batch, held, store, folder, newest_indexes)
+            pack = _write_pack(source, batch, held, store, folder, newest_indexes, telemetry)
             ready(pack.documents(use(pack)))
     check = held.less(not_text).result()
     if records:
@@ -275,7 +282,16 @@ def read_markdown(source, store, positions, cache, telemetry) -> Read:
     in a worker process."""
     with tempfile.TemporaryDirectory(prefix="wpt-read-") as tmp:
         copies = store.copies_in(tmp)
-        return _read(source, copies, *_opened(source, copies, positions, telemetry), cache)
+        return _read(source, copies, *_opened(source, copies, positions, telemetry), cache, telemetry)
+
+
+def save_newest(source, store, positions, telemetry) -> None:
+    """The `newest` indexes a source's chosen files need, found or built and
+    saved, in a worker process."""
+    with tempfile.TemporaryDirectory(prefix="wpt-read-") as tmp:
+        copies = store.copies_in(tmp)
+        _, held, paths, _ = _opened(source, copies, positions, telemetry)
+        markdown.save_newest(source, held.tree, copies, paths, telemetry)
 
 
 _TOKENIZERS = {}  # in a worker process: each vocabulary object it read, as a Tokenizer
@@ -316,7 +332,7 @@ def read_tokens(source, store, positions, vocabulary: str, cache, telemetry) -> 
                                       "start": out.tell(), "tokens": len(data) // 4, "token_sha256": _sha256(data)})
                     out.write(data)
 
-            read = _read(source, copies, tree, held, paths, key, cache, encoded)
+            read = _read(source, copies, tree, held, paths, key, cache, telemetry, encoded)
         documents.sort(key=lambda entry: entry["file"].encode())  # stable: a records file's stay in the file's order
         summary = {"tree": read.tree, "tokens": copies.put_file(Path(tmp) / "tokens.u32"), "documents": documents,
                    "check": read.check}

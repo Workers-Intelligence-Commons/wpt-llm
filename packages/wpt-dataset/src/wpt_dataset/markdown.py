@@ -79,6 +79,10 @@ history's order file (`.git/history/order`): it stays in the source's tree
 and its manifest, and the builder reads it, but it is not a training
 document.
 
+A `newest` index is built on the first read of its entry's files and saved in
+the store (records.py), so every later read loads it. save_newest builds it
+without reading a document, for a source read in parts (reading.py).
+
 The packs of a build's Markdown (reading.py) are keyed by the code of the
 modules reading imports, this one among them (wpt_utils.programs.code_of),
 so a change to what this module makes of a file makes the Markdown again
@@ -133,8 +137,41 @@ class Converted(NamedTuple):
     record: records.Record | None  # for a records file, the record it comes from
 
 
+def _record_files(files: dict, formats: dict, store):
+    """A function giving a records file of files in the store, and the file
+    its entry's join reads with it, both read as streams."""
+    join_indexes = {}  # one index per join rule, for every records file of this tree
+
+    def read(path):
+        joined = records.joined_file(formats[path], path, files, join_indexes)
+        return (manifest.Stored(store, files[path], path),
+                manifest.Stored(store, joined, f"{path} (joined)") if joined else None)
+
+    return read
+
+
+def _newest_index(entry: dict, files: dict, formats: dict, read, store, telemetry):
+    """records.saved_newest_index of a records entry: every file it covers,
+    whatever a read asks for."""
+    return records.saved_newest_index(entry, [path for path in files if formats[path] is entry
+                                              and not records.joined_by(entry, path)], read, store, telemetry)
+
+
+def save_newest(source, tree, store, only, telemetry=None) -> None:
+    """Find or build the `newest` index of each entry that documents needs
+    to read the files of only, without reading a document. Raises what
+    documents raises for these indexes."""
+    files = {path: entry for path, entry in tree.items() if entry.mode != SYMLINK}
+    formats = {path: format_of(source, path) for path in files}
+    read = _record_files(files, formats, store)
+    entries = {id(formats[path]): formats[path] for path in sorted(files.keys() & only, key=str.encode)
+               if "newest" in formats[path] and not records.joined_by(formats[path], path)}
+    for entry in entries.values():
+        _newest_index(entry, files, formats, read, store, telemetry)
+
+
 def documents(source, tree, store, repo, skipped: dict | None = None, only=None,
-              trains=None, newest_indexes: dict | None = None) -> Iterator[Converted]:
+              trains=None, newest_indexes: dict | None = None, telemetry=None) -> Iterator[Converted]:
     """Each document of a final tree, in file path order; links, chat,
     task, rating and probe files, a git history's order file (ORDER) and documents whose
     Markdown is empty are left out; repo holds the images task folders
@@ -145,8 +182,9 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None,
     entries whose records train (kept.Kept.trains): a record of any other
     entry is left out and counted (records.Skipped.untrained); every
     entry's without it. newest_indexes, when given, keeps each `newest`
-    index (records.newest_index reads every file its entry covers) for the
-    next call on the same source and tree, as a batch of its files.
+    index (records.saved_newest_index) for the next call on the same source
+    and tree, as a batch of its files; telemetry records the ref of an index
+    it saves.
     Raises FormatMapError when a path matches no format entry or several,
     NotText when a file is not text (encoding.py) or an xhtml file is not
     well-formed, InvalidFile when a chat, rating, probe or records file holds a
@@ -154,21 +192,15 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None,
     files = {path: entry for path, entry in tree.items() if entry.mode != SYMLINK}
     formats = {path: format_of(source, path) for path in files}
     pages = {}  # parsed xhtml and html files, xhtml ones also read for the notes they hold
-    join_indexes = {}  # one index per join rule, for every records file of this tree
+    read = _record_files(files, formats, store)
     newest_indexes = {} if newest_indexes is None else newest_indexes  # per records entry with `newest`, over its files
-
-    def read(path):  # a records file in the store, and the file its entry's join reads with it, read as streams
-        joined = records.joined_file(formats[path], path, files, join_indexes)
-        return (manifest.Stored(store, files[path], path),
-                manifest.Stored(store, joined, f"{path} (joined)") if joined else None)
 
     def newest(entry):
         if "newest" not in entry:
             return None
-        rule = id(entry)  # the entry itself: every file it covers, whatever `only` asks for
+        rule = id(entry)  # the entry itself
         if rule not in newest_indexes:
-            newest_indexes[rule] = records.newest_index(entry, [
-                path for path in files if formats[path] is entry and not records.joined_by(entry, path)], read)
+            newest_indexes[rule] = _newest_index(entry, files, formats, read, store, telemetry)
         return newest_indexes[rule]
 
     def page(path):

@@ -104,6 +104,15 @@ def set_code(found: dict):
     _CODE, _MODULES, _GIVEN = dict(found["code"]), dict(found["modules"]), True
 
 
+def fingerprint(inputs) -> str:
+    """The sha256 of inputs as canonical JSON: the name of a saved result,
+    inputs being everything that decides it."""
+    import hashlib
+    import json
+
+    return hashlib.sha256(json.dumps(inputs, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+
 def code_name(found=None) -> str:
     """code() as one line: the commit, then +<the first 12 hex digits of
     the changes> when there are some."""

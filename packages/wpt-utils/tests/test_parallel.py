@@ -131,6 +131,29 @@ def test_a_group_never_runs_more_items_than_its_limit_and_the_others_go_on_meanw
     assert started.index(("other.example", 0)) < started.index(("slow.example", 7))  # it did not wait for them
 
 
+def test_an_item_that_may_not_start_yet_waits_while_the_items_after_it_run():
+    # the item it waits for ends only once a later item ran: an item that held the line would never let it
+    later_ran, first_ended, started = threading.Event(), threading.Event(), []
+
+    def work(item):
+        started.append(item)
+        if item == "first":
+            assert later_ran.wait(60)
+            first_ended.set()
+        elif item == "later":
+            later_ran.set()
+        return item
+
+    items = ["first", "waiting", "later"]
+    sizing = sizing_of(Fake(cores=16))
+    sizing.item_memory = 1  # no need to measure one before several run
+    with ThreadPoolExecutor(sizing.limit) as executor:
+        results = list(in_order(work, items, executor, sizing, poll=0.01, settle=0.0,
+                                ready=lambda item: item != "waiting" or first_ended.is_set()))
+
+    assert results == items and started.index("later") < started.index("waiting")
+
+
 def test_a_busy_machine_runs_one_item_at_a_time_and_still_finishes():
     sizing = sizing_of(Fake(cores=8, idle=0.0))
     results, peak = run(sizing, range(6), slow_square)
