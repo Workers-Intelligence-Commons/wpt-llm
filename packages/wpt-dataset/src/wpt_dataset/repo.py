@@ -85,10 +85,12 @@ from importlib import resources
 from pathlib import Path
 
 import jsonschema
+from wpt_telemetry import Telemetry
 from wpt_utils.files import lock_file, unlock_file
+from wpt_utils.parallel import each
 from wpt_utils.programs import program
 
-from . import series
+from . import series, workers
 from .errors import DataAccessRefused, InvalidFile, NotFound, OutdatedSchema, RuleViolation, StaleFile
 from .licenses import check_license
 from .license_check import Coverage, check_pattern, field_of, pattern_for, text_id
@@ -121,6 +123,7 @@ SOURCE_FILE = "source.json"
 # a license text's id, the sha256 of its normalized text (license_check.text_id), and the files of its folder
 TEXT_ID = re.compile(r"[0-9a-f]{64}")
 TEXT_FILE, TEXT_ITSELF = "license-text.json", "license-text.txt"
+SOURCES_PART = 64  # the sources a worker process reads and validates at a time (Repo.sources); fewer are read here
 # a key type of an allowed-signers line (ssh-keygen ALLOWED SIGNERS), followed by the key in base64
 SIGNER_KEY = re.compile(r"(?:^|\s)(?:ssh-[a-z0-9-]+|ecdsa-sha2-[a-z0-9-]+|sk-[a-z0-9@.-]+)\s+[A-Za-z0-9+/]+=*(?:\s|$)")
 GPG_BLOCK = re.compile(r"-----BEGIN PGP PUBLIC KEY BLOCK-----.+?-----END PGP PUBLIC KEY BLOCK-----", re.DOTALL)
@@ -630,6 +633,11 @@ def _is_test(name: str) -> bool:
     return "tests" in Path(name[len(_PROJECT) + 1:]).parts
 
 
+def _sources_of(ids: list[str], telemetry) -> list[Source]:
+    """The sources of ids, in a worker process (Repo._source_parts)."""
+    return [workers.repo().source(sid) for sid in ids]
+
+
 class Located:
     """Where a file being migrated lives, for a migration step: str() names
     it in messages, and the step may read or remove a file beside it (the
@@ -800,17 +808,47 @@ class Repo:
             raise NotFound(f"no source {sid}")
         return [Patch(p.name, p.read_bytes()) for p in sorted(folder.iterdir()) if p.suffix == ".patch"]
 
-    def sources(self, note=None) -> list[Source]:
-        """Every source. With a function as note, a source whose license text
-        is empty (Source.unwritten) is left out and note(Source.note) is
-        called for it: readers skip it instead of failing."""
-        found = [self.source(sid) for sid in self.source_ids()]
+    def sources(self, note=None, read=None) -> list[Source]:
+        """Every source, in id order, validated in worker processes, since
+        the schema check takes far longer than the reading. The first file
+        that fails raises what source() raises for it. With a function as
+        note, a source whose license text is empty (Source.unwritten) is left
+        out and note(Source.note) is called for it: readers skip it instead
+        of failing. read, when given, is called with the number of sources
+        each part just gave (a Progress's advance)."""
+        found = []
+        for part in self._source_parts(self.source_ids()):
+            found += part
+            if read is not None:
+                read(len(part))
         if note is None:
             return found
         for source in found:
             if source.unwritten:
                 note(source.note)
         return [source for source in found if not source.unwritten]
+
+    def admitted(self, telemetry, note) -> list[Source]:
+        """The admitted sources of sources(note), for a stage of a command:
+        reading them all takes minutes on a large repository, so that stage
+        prints that it starts and how far it is, through telemetry, or
+        Telemetry.off when it is None."""
+        telemetry = telemetry or Telemetry.off()
+        total = len(self.source_ids())
+        telemetry.log(f"source files: reading and validating {total:,}")
+        with telemetry.progress("source files", total, "sources") as progress:
+            return [source for source in self.sources(note, progress.advance) if source.admitted]
+
+    def _source_parts(self, ids: list[str]):
+        """The sources of ids, SOURCES_PART at a time, in their order: in
+        worker processes when there are several parts."""
+        parts = [ids[start:start + SOURCES_PART] for start in range(0, len(ids), SOURCES_PART)]
+        if len(parts) < 2:
+            yield from ([self.source(sid) for sid in part] for part in parts)
+            return
+        with workers.Pool(self, f"parts of {SOURCES_PART} sources read at once") as pool:
+            for done in each(lambda part: pool.call(_sources_of, part), parts, (), pool.sizing):
+                yield done.value
 
     def recipe(self, kind: str, name: str) -> dict:
         path = self._path(kind, name)

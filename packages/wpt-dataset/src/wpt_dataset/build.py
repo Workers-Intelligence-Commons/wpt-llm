@@ -922,7 +922,7 @@ def conversations_and_tasks(repo: Repo, store, built: set[str], share: float, he
         span.set(**parts.get("conversations", {"count": 0}))
     with telemetry.span("tasks") as span:
         found, sources = task_files.read(repo, store, None, share, log=lambda _: None, held=held, only=built,
-                                        copies=copies, pointable=built, left_out=left_out)
+                                        copies=copies, pointable=built, left_out=left_out, telemetry=telemetry)
         if found:
             lines = (json.dumps(task_files.to_json(task), ensure_ascii=False, sort_keys=True) for task in found)
             parts["tasks"] = {"object": store.put_bytes("".join(f"{line}\n" for line in lines).encode()),

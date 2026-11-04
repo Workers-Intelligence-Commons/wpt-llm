@@ -1,3 +1,4 @@
+import dataclasses
 import hashlib
 import importlib
 import importlib.machinery
@@ -14,9 +15,10 @@ from wpt_dataset import (build, choice, conversations, kept, license_check, mark
                          trained, workers)
 from wpt_dataset.build import build_dataset, document_list, is_held_out
 from wpt.dataset import main
-from wpt_dataset.errors import DatasetError, PoolError, SourceGone, TokenizerVersionNeeded, TrainedListMissing, VocabularyMissing
+from wpt_dataset.errors import DatasetError, NotDownloaded, PoolError, SourceGone, TokenizerVersionNeeded, TrainedListMissing, VocabularyMissing
 from wpt_dataset.sources import stored_files, upstream_key
 from wpt_store import CorruptObject, open_store
+from wpt_store.sessions import file_list_bytes
 from wpt_store.shards import read_shard, token_hash
 import wpt_telemetry
 from wpt_telemetry import Telemetry
@@ -287,6 +289,7 @@ def test_tokenizer_check_round_trips_every_document_and_reports_each_source(kit,
     lines = capsys.readouterr().out.splitlines()
     corpus_line = next(line for line in lines if line.startswith("example-corpus-"))
     assert ": 10 documents, " in corpus_line and "not in the vocabulary" not in corpus_line
+    assert "source files: reading and validating 2" in lines
     assert next(line for line in lines if line.startswith(late)).endswith("(not in the vocabulary's training)")
     assert lines[-1].startswith("every document decodes back exactly: 11 documents, ")
     documents, _ = kit.converted(repo, store)
@@ -1010,6 +1013,18 @@ def test_every_stage_of_a_vocabulary_says_how_far_it_is(kit, repo, store, tmp_pa
     assert any(re.match(r"vocabulary chunks: (\d+) of \1 documents", line) for line in printed)
 
 
+def test_every_reading_of_the_source_files_in_a_build_says_how_far_it_is(kit, repo, store, tmp_path, monkeypatch):
+    # the index, the conversations and the tasks each read every source file: minutes on a large repository
+    many_files(kit, repo, store, tmp_path)
+    one_pool(kit, repo, 700)
+    monkeypatch.setattr(wpt_telemetry, "PROGRESS_SECONDS", 0)  # every advance prints
+    printed = []
+    build_dataset(repo, "small", store, log=lambda _: None,
+                  telemetry=Telemetry.off(echo=lambda text, error: printed.append(text)))
+    assert sum(line == "source files: reading and validating 1" for line in printed) == 3
+    assert sum(line.startswith("source files: 1 of 1 sources") for line in printed) >= 3
+
+
 def test_the_index_and_the_choice_read_no_text(kit, repo, store, tmp_path):
     # the files of the store are gone, only its records stay: the index and the choice still answer
     sid = many_files(kit, repo, store, tmp_path)
@@ -1022,6 +1037,76 @@ def test_the_index_and_the_choice_read_no_text(kit, repo, store, tmp_path):
     found = choice.Choice(index, repo.recipe("mixture", "main"))
     assert sum(found.take({"en": 400})["bytes"]) >= 400 > found.taken["en"]
     assert [source.id for source in index.sources] == [sid]
+
+
+def index_of(repo, store):
+    return choice.build(repo, store, log=lambda _: None)
+
+
+def same_index(one, other):
+    return (one.rows.tobytes() == other.rows.tobytes() and one.tag_sets == other.tag_sets
+            and one.bundles == other.bundles and one.duplicates == other.duplicates
+            and one.sources == other.sources and not one.failed and not other.failed)
+
+
+def no_worker(monkeypatch):
+    def refused(*_):
+        raise AssertionError("a source was computed again")
+
+    monkeypatch.setattr(workers, "Pool", refused)
+
+
+def test_a_second_index_computes_no_source_and_is_the_same(kit, repo, store, tmp_path, monkeypatch):
+    # every build and every --plan asks for the index: only the sources' saved parts are read again
+    many_files(kit, repo, store, tmp_path, "one")
+    many_files(kit, repo, store, tmp_path, "two", tag="fr")
+    first = index_of(repo, store)
+    no_worker(monkeypatch)
+    assert len(first.rows) == 60 and same_index(index_of(repo, store), first)
+
+
+def test_an_index_computes_only_the_source_whose_json_changed(kit, repo, store, tmp_path):
+    many_files(kit, repo, store, tmp_path, "one")
+    sid = many_files(kit, repo, store, tmp_path, "two")
+    index_of(repo, store)
+    document = repo.read("source", sid).document
+    repo.save("source", sid, {**document, "tags": [{"tags": ["fr"], "paths": ["**"]}]}, repo.version("source", sid))
+    index = index_of(repo, store)
+    assert index.tag_sets == [frozenset({"en"}), frozenset({"fr"})] and len(index.rows) == 60
+
+
+def test_a_saved_index_part_is_not_used_for_another_code(kit, repo, store, tmp_path, monkeypatch):
+    sid = many_files(kit, repo, store, tmp_path)
+    key = choice.index_key(repo.source(sid), store)
+    monkeypatch.setattr(choice, "code_of", lambda module: "another code")
+    assert choice.index_key(repo.source(sid), store) != key
+
+
+def test_the_same_files_placed_elsewhere_move_the_index_with_them(kit, repo, store, tmp_path):
+    # the upstream manifest and the final tree stay the same: the file list alone says where the files lie
+    sid = many_files(kit, repo, store, tmp_path)
+    index_of(repo, store)
+    key = upstream_key(repo.source(sid))
+    moved = {path: (mode, dataclasses.replace(placed, bundle="elsewhere/000001"))
+             for path, (mode, placed) in stored_files(key, store).items()}
+    store.set_ref("upstream-files", key, store.put_bytes(file_list_bytes(moved)))
+    assert index_of(repo, store).bundles == ["elsewhere/000001"]
+
+
+def test_a_source_that_fails_in_the_index_stays_failed_and_named_until_it_works(kit, repo, store, tmp_path):
+    good = many_files(kit, repo, store, tmp_path, "good")
+    sid = many_files(kit, repo, store, tmp_path, "bad")
+    key = upstream_key(repo.source(sid))
+    held = store.get_ref("upstream", key)
+    store.delete_ref("upstream", key)
+    answers = [index_of(repo, store) for _ in range(2)]
+    assert [[(source.id, type(error), str(error)) for source, error in index.failed] for index in answers] == \
+        [[(sid, NotDownloaded, f"{sid}: its upstream files are not in {store}; `wpt dataset download {sid}` fetches "
+           "them")]] * 2
+    assert [source.id for source in answers[1].sources] == [good]
+    store.set_ref("upstream", key, held)
+    index = index_of(repo, store)
+    assert not index.failed and len(index.rows) == 60
 
 
 def test_a_build_reads_only_the_documents_its_pools_need(two_kilobyte_groups, kit, repo, store, tmp_path):

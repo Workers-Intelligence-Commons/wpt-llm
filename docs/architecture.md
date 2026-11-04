@@ -422,8 +422,8 @@ here first; a path without a format stops the check.
 Every result is stored under the fingerprint of what produced it: the sha256
 of its inputs, including WPT's own code. No version number identifies the
 code. A result of the data pipeline (a source's final tree and its text
-check, what a source keeps for training, a source's tokens, a vocabulary,
-a dataset) holds the code of the module that computes it
+check, what a source gives the index, what a source keeps for training, a
+source's tokens, a vocabulary, a dataset) holds the code of the module that computes it
 (`wpt_utils.programs.code_of`): the sha256 of the source files, as they
 are on disk with each CRLF line end read as LF (so a Windows checkout
 keys its results as Linux does), of that module and of every WPT module it imports, directly
@@ -481,6 +481,7 @@ outside its project enters by its own bytes.
 | --- | --- |
 | upstream tree (what the download stored) | the source's id and what its download reads: its `type`, `address`, `addresses`, `revision`, `extract`, `history`, `submodules`, and the outside license pages its entries declare |
 | final source tree (and the check that its files are text) | the upstream tree's manifest, the license pages stored with it, cuts (and the cut key), each patch's sha256, the formats (they decide each file's encoding), the code of the modules `sources.py` imports |
+| what a source gives the index | the source's id and its whole `source.json`, the fingerprint of its final tree, its upstream file list (which says where each file lies, and which a new download of the same files may change), the code of the modules `choice.py` imports |
 | what a source keeps for training, and its check result | the final tree, the license entries (with their decisions), the formats, the license check's answer (for each entry, the license text found at its place and that text's decision), the code of the modules `kept.py` imports |
 | the Markdown of a source's chosen files (on this machine) | the fingerprint of what the source keeps for training, the code of the modules `reading.py` imports, the source's `type` |
 | a source's tokens | that Markdown's fingerprint, the code of the modules `reading.py` imports, the vocabulary, the paths of the chosen files |
@@ -508,7 +509,10 @@ A build works in three steps, and only the last reads text:
    position, size and sha256, and each source's formats, licenses and tags.
    The index holds every file that can give a document, from those records
    alone. Files with the same sha256 are one document: the index keeps the
-   first in source id order.
+   first in source id order. What each source gives is kept under the ref
+   `source-index/<fingerprint>`, so a build computes only the sources whose
+   inputs changed. A source that fails keeps nothing: every build computes it
+   again and lists it.
 2. Choose. The recipe's mixture draws its documents from the index, by
    bytes, in a seeded order of its own for each pool. The unit of the draw is
    a frame: the files of a pool that start in the same 1 MiB frame of the

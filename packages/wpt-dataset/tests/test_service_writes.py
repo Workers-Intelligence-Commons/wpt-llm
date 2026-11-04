@@ -273,6 +273,32 @@ def test_an_empty_license_text_is_allowed_only_while_the_source_is_not_admitted(
     assert [n for n in notes if n == repo.source(sid).note] == [repo.source(sid).note] * 3 and sid in notes[0]
 
 
+def several_sources(kit, repo, store, monkeypatch):
+    """Three empty sources, each read in a worker process of its own part; their ids."""
+    monkeypatch.setattr(service, "SOURCES_PART", 1)
+    return sorted(kit.add_source(repo, store, "mine", name, {"type": "empty", "address": f"empty:{name}"})
+                  for name in ("a", "b", "c"))
+
+
+def test_every_source_read_in_worker_processes_comes_in_id_order_and_counted(kit, repo, store, monkeypatch):
+    ids = several_sources(kit, repo, store, monkeypatch)
+    read = []
+    found = repo.sources(read=read.append)
+    assert found == [repo.source(sid) for sid in ids] and read == [1, 1, 1]
+
+
+def test_a_source_a_worker_process_finds_invalid_stops_the_reading_with_its_error(kit, repo, store, monkeypatch):
+    ids = several_sources(kit, repo, store, monkeypatch)
+    path = repo.root / repo.relative("source", ids[1])
+    path.write_text(json.dumps({**json.loads(path.read_text(encoding="utf-8")), "type": "no such type"}),
+                    encoding="utf-8", newline="\n")
+    with pytest.raises(InvalidFile) as raised:
+        repo.source(ids[1])
+    with pytest.raises(InvalidFile) as in_a_worker:
+        repo.sources()
+    assert str(in_a_worker.value) == str(raised.value)
+
+
 def test_a_new_source_that_fails_leaves_nothing_and_keeps_its_error(kit, repo, store, monkeypatch):
     document = empty_source("notes", license="CC0-1.0", attribution="A. Person, notes", text="CC0 1.0 Universal\n",
                             by="A. Person", formats={"notes.txt": "text"})

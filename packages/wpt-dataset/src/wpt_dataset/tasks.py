@@ -713,7 +713,7 @@ def pointed_sources(source, tree, store, repo: Repo) -> set[str]:
 def read(repo: Repo, store, tag: str | None, held_out: float, log=print, measure=False,
          dataset: str | None = None, held: set | None = None,
          only: set[str] | None = None, copies=None, pointable: set[str] | None = None,
-         left_out: list | None = None) -> tuple[list[Task], dict]:
+         left_out: list | None = None, telemetry=None) -> tuple[list[Task], dict]:
     """([Task], {source id: address, manifest, licenses}) for every task of
     an admitted source whose task.json is tagged `tag` (any tag or none,
     when tag is None: the measures read every measure-only task, and a
@@ -732,8 +732,9 @@ def read(repo: Repo, store, tag: str | None, held_out: float, log=print, measure
     sources are read at once, each through its own store from copies
     (each_read), and so are the sources pointed into (fill, with
     pointable and left_out: a task that cannot be filled is left out and
-    reported in left_out when it is a list)."""
-    chosen = [source for source in repo.sources(log) if source.admitted and has_tasks(source)
+    reported in left_out when it is a list). telemetry prints the reading
+    of the source files (Repo.admitted)."""
+    chosen = [source for source in repo.admitted(telemetry, log) if has_tasks(source)
               and (only is None or source.id in only)]  # no tree read for a source without tasks
     sources = {}
     read_tasks = each_read(_tagged, chosen, repo, store, copies, what="task sources read at once", args=(tag,))

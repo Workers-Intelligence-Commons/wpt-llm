@@ -11,6 +11,15 @@ are one document, and the index keeps the first in source id order. A
 source whose format map fails, or that a final tree cannot be made for, is
 named in `failed`.
 
+What a source gives the index is kept in the store under the ref
+source-index/<index_key: its source.json, the fingerprint of its final tree,
+its upstream file list and the code of this module>, so that a build computes
+only the sources where one of them changed, and the duplicates are taken out
+of the parts on every build. The index_key is found in the asking process,
+since a worker process holds only the codes of workers.KEYED, and before
+the source is computed. A source that fails keeps nothing: it is computed on
+every build, so it stays failed, with its own error, for as long as it fails.
+
 The choice draws a mixture's documents from the index. Each row goes to the
 first pool, in mixture order, whose expression matches its tags. Inside a
 pool, rows are grouped by the frame their file starts in (the bundle and
@@ -29,23 +38,28 @@ pool's weight of the sample's bytes, ending on whole groups.
 """
 
 import hashlib
+import json
 import math
 from dataclasses import dataclass, field
 
 import numpy as np
 
 from wpt_store import CorruptObject, MissingObject, blocks
-from wpt_telemetry import Telemetry
-from wpt_utils.parallel import each
+from wpt_telemetry import Telemetry, set_result_ref
+from wpt_utils.parallel import Sizing, each
+from wpt_utils.programs import code_of
 
 from . import license_check, markdown, pools, records, workers
 from .errors import DatasetError
 from .manifest import ORDER, SYMLINK
-from .sources import final_tree, tags_of
+from .sources import UPSTREAM_FILES, final_tree, fingerprint, tags_of, tree_key, upstream_key
 
 BYTES_PER_TOKEN = 4  # the first round's guess of the file bytes one token takes
 MARGIN = 1.1  # how much more a later round reads than its measure asks, so that few rounds are needed
 NO_DOCUMENT = ("chat", "task", "rating", "probe")  # formats whose files give no document
+SOURCE_INDEX = "source-index"  # the kind of the ref of what a source gives the index
+LOOKUPS = 24  # sources whose saved parts are looked for at once: each only waits on the store's answers
+FAILURES = (DatasetError, CorruptObject, MissingObject)  # what takes one source out of the index
 ROW = np.dtype([("source", "<i4"), ("position", "<i4"), ("sha256", "S32"), ("bytes", "<i8"), ("tags", "<i4"),
                 ("bundle", "<i4"), ("start", "<i8")])  # position: in the final tree; bundle -1: an object of the store
 
@@ -62,9 +76,38 @@ def _refused(licenses: list[dict], covered: license_check.Covered) -> bool:
     return covered.problem is not None or (covered.field is None and not license_check.admitted(licenses[covered.entry]))
 
 
-def _indexed(source, store, telemetry):
+def index_key(source, store) -> str:
+    """The fingerprint of what a source gives the index: everything its
+    computation reads, the source's whole source.json (its type, licenses,
+    formats, tags and cuts), its final tree (sources.tree_key: the upstream
+    manifest, the cuts and their key, the patches), the upstream file list,
+    which alone says in which bundle and where each file lies and which a
+    new download of the same files changes, and the code of this module
+    (wpt_utils.programs.code_of). The sizes of files that are store objects
+    follow from their sha256."""
+    return fingerprint({"kind": SOURCE_INDEX, "code": code_of(__name__), "source": source.id, "data": source.data,
+                        "tree": tree_key(source, store), "files": store.get_ref(UPSTREAM_FILES, upstream_key(source))})
+
+
+def _part_bytes(rows: np.ndarray, tag_sets: list[frozenset[str]], bundles: list[str]) -> bytes:
+    """A source's part of the index as it is kept: its numbers on one line
+    of JSON, then its rows."""
+    numbers = {"tag_sets": [sorted(tags) for tags in tag_sets], "bundles": bundles}
+    return json.dumps(numbers, ensure_ascii=False).encode() + b"\n" + rows.tobytes()
+
+
+def _parsed_part(data: bytes) -> tuple[np.ndarray, list[frozenset[str]], list[str]]:
+    """The part _part_bytes wrote, its rows writable."""
+    line, _, rows = data.partition(b"\n")
+    numbers = json.loads(line)
+    return (np.frombuffer(rows, dtype=ROW).copy(), [frozenset(tags) for tags in numbers["tag_sets"]],
+            numbers["bundles"])
+
+
+def _indexed(source, store, key, telemetry):
     """(rows, the tag sets their `tags` number, the bundles their `bundle`
-    numbers) of one source, source numbered 0, in a worker process."""
+    numbers) of one source, source numbered 0, in a worker process, kept
+    under key."""
     tree, _ = final_tree(source, store, telemetry)
     licenses = source.data["licenses"]
     coverage = license_check.Coverage(licenses)
@@ -82,7 +125,9 @@ def _indexed(source, store, telemetry):
                       tag_sets.setdefault(tags_of(source, path), len(tag_sets)),
                       bundles.setdefault(placed.bundle, len(bundles)) if placed is not None else -1,
                       placed.start if placed is not None else 0))
-    return np.array(found, dtype=ROW), list(tag_sets), list(bundles)
+    part = np.array(found, dtype=ROW), list(tag_sets), list(bundles)
+    set_result_ref(store, SOURCE_INDEX, key, store.put_bytes(_part_bytes(*part)), telemetry)
+    return part
 
 
 @dataclass
@@ -95,26 +140,63 @@ class Index:
     failed: list = field(default_factory=list)  # [(source, error)], each source no row comes from
 
 
-def build(repo, store, telemetry=None, log=print) -> Index:
-    """The Index of every admitted source, several sources at once, in
-    worker processes, none of whose texts is read."""
-    telemetry = telemetry or Telemetry.off()
-    admitted = [source for source in repo.sources(log) if source.admitted]
-    parts, sources, tag_sets, bundles, failed = [], [], {}, {}, []
-    with (telemetry.span("index", sources=len(admitted)) as span, workers.Pool(repo, "sources indexed at once") as pool,
-          telemetry.progress("index", len(admitted), "sources") as progress):
+def _saved(admitted, store, telemetry) -> tuple[dict, dict]:
+    """({source id: the Done of its saved part, or of the error finding it
+    failed with}, {source id: its index_key}), several sources at once."""
+    found, keys = {}, {}
+    with telemetry.progress("index, saved parts", len(admitted), "sources") as progress:
+        def look(source):
+            try:
+                keys[source.id] = index_key(source, store)
+                held = store.get_ref(SOURCE_INDEX, keys[source.id])
+                return _parsed_part(store.get_bytes(held)) if held else None
+            finally:
+                progress.advance()
+
+        for done in each(look, admitted, FAILURES, Sizing("saved parts looked for at once", network=LOOKUPS)):
+            if done.value is not None or done.error is not None:
+                found[done.item.id] = done
+    return found, keys
+
+
+def _computed(sources, keys, repo, store, telemetry) -> dict:
+    """{source id: the Done of its part}, several sources at once, in worker
+    processes."""
+    found = {}
+    with (workers.Pool(repo, "sources indexed at once") as pool,
+          telemetry.progress("index", len(sources), "sources") as progress):
         parent = telemetry.current()
 
         def run(source):
             try:
                 with telemetry.within(parent):
-                    return pool.call(_indexed, source, store, telemetry=telemetry)
+                    return pool.call(_indexed, source, store, keys[source.id], telemetry=telemetry)
             finally:
                 progress.advance()
 
-        for done in each(run, admitted, (DatasetError, CorruptObject, MissingObject), pool.sizing):
+        for done in each(run, sources, FAILURES, pool.sizing):
+            found[done.item.id] = done
+    return found
+
+
+def build(repo, store, telemetry=None, log=print) -> Index:
+    """The Index of every admitted source, from what the store keeps of each
+    (see the module's docstring), the others computed in worker processes,
+    none of whose texts is read."""
+    telemetry = telemetry or Telemetry.off()
+    admitted = repo.admitted(telemetry, log)
+    parts, sources, tag_sets, bundles, failed = [], [], {}, {}, []
+    with telemetry.span("index", sources=len(admitted)) as span:
+        results, keys = _saved(admitted, store, telemetry)
+        reused = sum(done.error is None for done in results.values())
+        missing = [source for source in admitted if source.id not in results]
+        telemetry.log(f"index: {reused:,} of {len(admitted):,} sources saved, {len(missing):,} to compute")
+        if missing:
+            results |= _computed(missing, keys, repo, store, telemetry)
+        for source in admitted:
+            done = results[source.id]
             if done.error is not None:
-                failed.append((done.item, done.error))
+                failed.append((source, done.error))
                 continue
             rows, tags, names = done.value
             if len(rows):
@@ -123,10 +205,10 @@ def build(repo, store, telemetry=None, log=print) -> Index:
                 numbers = np.array([bundles.setdefault(name, len(bundles)) for name in names] + [-1])
                 rows["bundle"] = numbers[rows["bundle"]]
                 parts.append(rows)
-            sources.append(done.item)
+            sources.append(source)
         rows = np.concatenate(parts) if parts else np.empty(0, dtype=ROW)
         first = np.sort(np.unique(rows["sha256"], return_index=True)[1])
-        span.set(files=len(rows), documents=len(first), failed=[source.id for source, _ in failed])
+        span.set(files=len(rows), documents=len(first), reused=reused, failed=[source.id for source, _ in failed])
     return Index(rows[first], sources, list(tag_sets), list(bundles), len(rows) - len(first), failed)
 
 

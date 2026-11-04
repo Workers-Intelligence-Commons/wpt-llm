@@ -184,7 +184,8 @@ def read(repo: Repo, store, tag: str | None, telemetry=None, log=print) -> tuple
     licenses}) for every chat file tagged `tag` in an admitted source, in
     source and path order. A conversation id is "<source>/<path>:<line>", or
     with `tree` "<source>/<path>:<id of its last message>". telemetry: as
-    for kept.kept. A source whose license text is empty is left out, and
+    for kept.kept, and it prints the reading of the source files
+    (Repo.admitted). A source whose license text is empty is left out, and
     log is called with a note naming it."""
     found, sources = tagged(repo, store, tag, telemetry, log)
     return [(conversation_id, conversation) for conversation_id, _, conversation in found], sources
@@ -197,8 +198,8 @@ def tagged(repo: Repo, store, tag: str | None = None, telemetry=None, log=print,
     chat file, whatever its tags (what a dataset's build keeps). With
     only, the sources of those ids alone are read. Several sources are
     read at once, each through its own store from copies (each_read)."""
-    chosen = [source for source in repo.sources(log)
-              if source.admitted and any(entry["format"] == "chat" for entry in source.data["formats"])
+    chosen = [source for source in repo.admitted(telemetry, log)
+              if any(entry["format"] == "chat" for entry in source.data["formats"])
               and (only is None or source.id in only)]  # no tree read for a source without chat files
     conversations, sources = [], {}
     read = each_read(_of_source, chosen, repo, store, copies, telemetry, "chat sources read at once", (tag,),

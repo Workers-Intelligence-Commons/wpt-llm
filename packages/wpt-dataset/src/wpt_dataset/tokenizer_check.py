@@ -71,8 +71,8 @@ def check_tokenizer(repo: Repo, name: str, store, log=print) -> list[SourceRepor
                            f"recipe that names it trains it")
     lock = repo.generated("lock", name)
     trained = {doc_id.split("/", 1)[0] for doc_id, _ in trained_documents.read(store, lock["documents_sha256"])}
-    admitted = [source for source in repo.sources(log) if source.admitted]
     telemetry = Telemetry.off(echo=lambda text, error: log(text))
+    admitted = repo.admitted(telemetry, log)
     reports, seen = {}, set()
     # closed at once when a source stops the others, so the sources still running end first
     with (telemetry.progress("tokenizer check", len(admitted), "sources") as progress,
