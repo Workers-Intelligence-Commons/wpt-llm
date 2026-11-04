@@ -84,9 +84,13 @@ dataset holds.
 Sources are read, turned into tokens, and their conversations and tasks
 read in worker processes (workers.py), several at once, as many as
 wpt_utils.parallel allows, each item's memory measured as it runs and each
-source's chosen bytes counted on the disk its local copies go to; the
+item's chosen bytes counted on the disk its local copies go to; the
 results are put together in the documents' order, so the dataset id and the
-shards are the ones a build of one source at a time gives.
+shards are the ones a build of one source at a time gives. A large source is
+read in parts (reading.parts_of), each an item of its own, and the build
+takes a source only once all its parts are read, as if one item had read it:
+a part that fails takes the whole source out, and the parts after it are not
+read.
 
 No document's Markdown goes to the store, and no source's files stay on this
 machine: only the files a conversion needs as files (a Parquet file, whose
@@ -108,8 +112,10 @@ pool, each shard written, the contamination check and the dataset record,
 and a long stage says how far it is every few minutes (Telemetry.progress).
 """
 
+import collections
 import concurrent.futures
 import contextlib
+import functools
 import hashlib
 import importlib.metadata
 import json
@@ -117,6 +123,7 @@ import math
 import platform
 import subprocess
 import tempfile
+import threading
 import time
 import tomllib
 from dataclasses import dataclass
@@ -128,7 +135,7 @@ from wpt_store import CorruptObject, MissingObject
 from wpt_store.shards import write_shard
 from wpt_telemetry import Telemetry, set_ref
 from wpt_tokenizer import BASE_SIZE, RUSTC_VERSION, Tokenizer
-from wpt_utils.parallel import each
+from wpt_utils.parallel import Done, each
 from wpt_utils.programs import code, code_of
 
 from . import choice as choosing
@@ -153,6 +160,7 @@ RECORD_FIELDS = ("id", "recipe_name", "recipe", "mixture", "tokenizer", "sources
                  "left_out_tasks", "documents",
                  "pools", "total_tokens", "shards", "held_out_shards", "contamination", "fingerprints", "tools",
                  "tool_differences")
+SOURCE_ERRORS = (DatasetError, CorruptObject, MissingObject)  # what fails one source, and not the others
 
 
 @dataclass(frozen=True)
@@ -169,42 +177,68 @@ class Document:
         return self.group or self.id
 
 
-def each_source(function, sources, repo, store, telemetry, progress, args, disk, folder):
-    """(wpt_utils.parallel.Done of function(source, store, *args(source),
-    telemetry=...), the source's "source" span) for each source, in the
-    sources' order, each source in a worker process (workers.py), as many
-    at once as wpt_utils.parallel allows, reserving on the disk of folder
-    disk(source) bytes, the conversion stating them beforehand (the event
-    "sources.at_once" says how many and why). progress (Telemetry.progress)
-    advances as each source's work ends, in whatever order they end. A
-    DatasetError, CorruptObject or MissingObject the function raises is the
-    source's error; anything else (a missing program, a store that refuses a
-    write) stops every source.
+def each_source(function, parts, repo, store, telemetry, progress, args, disk, folder):
+    """(wpt_utils.parallel.Done of the source with [function(source, store,
+    *args(part), telemetry=...) of each of its parts], the source's "source"
+    span) for each source, in the parts' order, a source's parts (reading.Part)
+    next to each other and given together once the last ends. Each part runs
+    in a worker process (workers.py), as many at once as wpt_utils.parallel
+    allows, reserving on the disk of folder disk(part) bytes, the conversion
+    stating them beforehand (the event "sources.at_once" says how many and
+    why). progress (Telemetry.progress) advances as each part's work ends, in
+    whatever order they end. A DatasetError, CorruptObject or MissingObject
+    the function raises is the source's error, the first of its parts' in
+    their order; anything else (a missing program, a store that refuses a
+    write) stops every source. A part whose turn comes after an earlier part
+    of its source failed does not run and gives None: nothing of the source
+    counts any more. The parts before a failed one still run, so the source's
+    error does not depend on which part failed first in time.
 
-    The span opens under the caller's current span when the source's work
-    starts, so what the worker records lands under it, and it says how
-    many seconds the work took (converting_seconds); the caller ends it
-    (telemetry.finish) once it has put the source's result together. The
-    spans of the sources whose turn never came, because something stopped
-    the sources, end with an error saying so."""
+    The span opens under the caller's current span when the source's first
+    part starts, so what the workers record lands under it, and it says how
+    many seconds the work took, its parts' added (converting_seconds); the
+    caller ends it (telemetry.finish) once it has put the source's result
+    together. The spans of the sources whose turn never came, because
+    something stopped the sources, end with an error saying so."""
     with workers.Pool(repo, "sources at once", disk=disk, folder=folder) as pool:
         telemetry.event("sources.at_once", limit=pool.sizing.limit, why=pool.sizing.why)
         parent, spans = telemetry.current(), {}  # spans: each source begun and not yet given to the caller
+        seconds, lock = collections.Counter(), threading.Lock()  # lock: a source's parts run on several threads
+        failed = {}  # {source id: the number of its first part that failed so far}
 
-        def run(source):
-            with telemetry.within(parent):
-                spans[source.id] = span = telemetry.begin("source", source=source.id)
+        def run(part):
+            source = part.source
+            with lock:
+                if failed.get(source.id, part.number) < part.number:
+                    progress.advance()
+                    return None
+                if source.id not in spans:
+                    with telemetry.within(parent):
+                        spans[source.id] = telemetry.begin("source", source=source.id)
+                span = spans[source.id]
             started = time.monotonic()
             try:
                 with telemetry.within(span):
-                    return pool.call(function, source, store, *args(source), telemetry=telemetry)
+                    return pool.call(function, source, store, *args(part), telemetry=telemetry)
+            except SOURCE_ERRORS:
+                with lock:
+                    failed[source.id] = min(part.number, failed.get(source.id, part.number))
+                raise
             finally:
-                span.set(converting_seconds=round(time.monotonic() - started, 3))
+                with lock:
+                    seconds[source.id] += time.monotonic() - started
+                    span.set(converting_seconds=round(seconds[source.id], 3))
                 progress.advance()
 
         try:
-            for done in each(run, sources, (DatasetError, CorruptObject, MissingObject), pool.sizing):
-                yield done, spans.pop(done.item.id)
+            gathered = []  # what the parts of the source under way gave
+            for done in each(run, parts, SOURCE_ERRORS, pool.sizing):
+                gathered.append(done)
+                if len(gathered) == done.item.of:
+                    source = done.item.source
+                    error = next((one.error for one in gathered if one.error is not None), None)
+                    yield Done(source, [one.value for one in gathered], error), spans.pop(source.id)
+                    gathered = []
         finally:
             stopped = RuntimeError("the sources stopped before this source's turn")
             for span in spans.values():
@@ -294,18 +328,17 @@ def chosen_first(repo: Repo, recipe: dict, mixture: dict, store, log, skipped, t
     return found, rows
 
 
-def _chosen_sources(found, rows, without=frozenset()):
-    """(the sources of the rows, in bundle order, their positions {id: [..]}, their bytes {id: n})."""
-    parts = choosing.by_source(found.index, rows, without)
-    return ([source for source, _ in parts], {source.id: part["position"].tolist() for source, part in parts},
-            {source.id: int(part["bytes"].sum()) for source, part in parts})
+def _chosen_parts(found, rows, without=frozenset()) -> list[reading.Part]:
+    """The parts of the sources of the rows, in bundle order."""
+    return [part for source, its in choosing.by_source(found.index, rows, without)
+            for part in reading.parts_of(source, its["position"].tolist(), its["bytes"].tolist())]
 
 
 def _merged_check(known: dict, new: dict) -> dict:
-    """One check result out of those of two rounds of a source: the files
-    left out of either, the records left out of either."""
-    left_out = known["left_out"] + [item for item in new["left_out"] if item not in known["left_out"]]
-    files = sorted((item for item in left_out if "path" in item), key=lambda item: item["path"].encode())
+    """One check result out of those of two parts or rounds of a source: the
+    files left out of either, the records left out of either."""
+    paths = {item["path"]: item for item in new["left_out"] + known["left_out"] if "path" in item}
+    files = sorted(paths.values(), key=lambda item: item["path"].encode())
     merged = {**new, "left_out": files + [item for item in new["left_out"] if "path" not in item]}
     if records := {**known.get("records", {}), **new.get("records", {})}:
         merged["records"] = records
@@ -332,12 +365,12 @@ def read_rounds(repo, recipe, mixture, found, rows, vocabulary, store, cache, sk
     duplicates, trees, tokens, round_ = found.index.duplicates, _pool_trees(mixture), PackedDocuments(store), 0
     while len(rows):
         round_ += 1
-        sources, positions, sizes = _chosen_sources(found, rows, failed)
+        parts = _chosen_parts(found, rows, failed)
         # closed at once when a source stops the others, so the sources still running end first
-        with (telemetry.progress(f"read, round {round_}", len(sources), "sources") as progress,
-              contextlib.closing(each_source(reading.read_tokens, sources, repo, store, telemetry, progress,
-                                             lambda source: (positions[source.id], vocabulary, str(cache)),
-                                             lambda source: sizes[source.id], tempfile.gettempdir())) as converted):
+        with (telemetry.progress(f"read, round {round_}", len(parts), "parts") as progress,
+              contextlib.closing(each_source(reading.read_tokens, parts, repo, store, telemetry, progress,
+                                             lambda part: (part.positions, vocabulary, str(cache)),
+                                             lambda part: part.size, tempfile.gettempdir())) as converted):
             for done, span in converted:
                 source = done.item
                 with telemetry.finish(span):
@@ -346,12 +379,14 @@ def read_rounds(repo, recipe, mixture, found, rows, vocabulary, store, cache, sk
                         span.set(skipped=f"{type(done.error).__name__}: {done.error}")
                         failed.add(source.id)
                         continue
-                    summary = done.value
+                    summaries = done.value
+                    check = functools.reduce(_merged_check, [summary["check"] for summary in summaries])
                     if source.id in info:
-                        summary = {**summary, "check": _merged_check(info[source.id]["check"], summary["check"])}
-                    info[source.id] = source_info(source, summary["tree"], store, summary["check"])
+                        check = _merged_check(info[source.id]["check"], check)
+                    tree = summaries[0]["tree"]
+                    info[source.id] = source_info(source, tree, store, check)
                     before = duplicates
-                    for entry in summary["documents"]:
+                    for summary, entry in ((summary, entry) for summary in summaries for entry in summary["documents"]):
                         document_id, held = f"{source.id}/{entry['path']}", seen.get(entry["sha256"])
                         if held is not None:
                             duplicates += 1
@@ -367,9 +402,9 @@ def read_rounds(repo, recipe, mixture, found, rows, vocabulary, store, cache, sk
                         if "record" in entry:
                             credits[document_id] = json.dumps({"document": document_id, **entry["record"]},
                                                               ensure_ascii=False, sort_keys=True)
-                    span.set(tree=summary["tree"], tokens_object=summary["tokens"],
-                             documents=len(summary["documents"]) - (duplicates - before),
-                             duplicates=duplicates - before)
+                    span.set(tree=tree, tokens_objects=[summary["tokens"] for summary in summaries],
+                             documents=sum(len(summary["documents"]) for summary in summaries)
+                             - (duplicates - before), duplicates=duplicates - before)
         kept_tokens = dict.fromkeys(found.names, 0)
         for document in documents.values():
             if document.source not in failed and not is_held_out(document.held_out_key, recipe["held_out"]) \
@@ -546,19 +581,19 @@ def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skippe
     (wpt_tokenizer): while the documents have no more distinct chunks than
     that, the vocabulary is the same whatever their order; beyond it, it
     depends on the order, the sources' by bundle and each source's documents
-    by path (reading.Read.documents).
+    by path (reading.documents_of).
 
     With a session (wpt_store.sessions), a `reused` line for each source
     the training read."""
     recipe = repo.recipe("tokenizer", name)
-    sources, positions, sizes = _chosen_sources(found, found.sample(mixture, recipe["sample_bytes"]), failed)
-    reads, seen = [], {}  # seen: {sha256 of a Markdown: the document that keeps it}
+    parts = _chosen_parts(found, found.sample(mixture, recipe["sample_bytes"]), failed)
+    reads, seen = [], {}  # reads: each source's, its parts' Reads; seen: {sha256 of a Markdown: the document keeping it}
     with trained.TrainedList() as listed:
         # closed at once when a source stops the others, so the sources still running end first
-        with (telemetry.progress("vocabulary sample", len(sources), "sources") as progress,
-              contextlib.closing(each_source(reading.read_markdown, sources, repo, store, telemetry, progress,
-                                             lambda source: (positions[source.id], str(cache)),
-                                             lambda source: sizes[source.id], tempfile.gettempdir())) as converted):
+        with (telemetry.progress("vocabulary sample", len(parts), "parts") as progress,
+              contextlib.closing(each_source(reading.read_markdown, parts, repo, store, telemetry, progress,
+                                             lambda part: (part.positions, str(cache)),
+                                             lambda part: part.size, tempfile.gettempdir())) as converted):
             for done, span in converted:
                 with telemetry.finish(span):
                     if done.error is not None:
@@ -567,7 +602,7 @@ def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skippe
                         failed.add(done.item.id)
                         continue
                     reads.append(done.value)
-                    for entry, _ in done.value.documents():
+                    for entry, _ in reading.documents_of(done.value):
                         document_id, held = f"{done.item.id}/{entry['path']}", seen.get(entry["sha256"])
                         if held is None or _place(document_id) < _place(held):
                             seen[entry["sha256"]] = document_id
@@ -580,7 +615,7 @@ def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skippe
     def texts():
         repeated = set()
         for read in reads:
-            for entry, text in read.documents():
+            for entry, text in reading.documents_of(read):
                 if entry["sha256"] not in repeated:
                     repeated.add(entry["sha256"])
                     yield text
@@ -606,7 +641,7 @@ def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skippe
     set_ref(store, "vocabularies", key, vocabulary, telemetry)
 
     if session is not None:
-        for source in sorted(source.id for source in sources if source.id not in failed):
+        for source in sorted({part.source.id for part in parts} - failed):
             download.used(repo.source(source), store, session)
     # recorded, and in the store, before the lock changes: a record that cannot be written leaves it as it was
     telemetry.irreversible("tokenizer.lock", path=repo.relative("lock", name), vocabulary=vocabulary)

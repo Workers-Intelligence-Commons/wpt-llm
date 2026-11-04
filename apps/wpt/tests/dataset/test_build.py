@@ -6,6 +6,7 @@ import importlib.util
 import json
 import re
 import shutil
+import threading
 from pathlib import Path
 
 import numpy as np
@@ -17,7 +18,7 @@ from wpt_dataset.build import build_dataset, document_list, is_held_out
 from wpt.dataset import main
 from wpt_dataset.errors import DatasetError, NotDownloaded, PoolError, SourceGone, TokenizerVersionNeeded, TrainedListMissing, VocabularyMissing
 from wpt_dataset.sources import stored_files, upstream_key
-from wpt_store import CorruptObject, open_store
+from wpt_store import CorruptObject, Store, open_store
 from wpt_store.sessions import file_list_bytes
 from wpt_store.shards import read_shard, token_hash
 import wpt_telemetry
@@ -966,6 +967,259 @@ def every_file_chosen(kit, repo):
     kit.write_recipe(repo, "mixture", "main", {"pools": [{"name": "en", "select": "en", "weight": 1, "max_epochs": 1000}]})
 
 
+def test_a_large_source_is_cut_every_few_batches_from_its_sizes_alone(kit, repo, store, tmp_path, monkeypatch):
+    monkeypatch.setattr(reading, "BATCH_BYTES", 10)
+    sid = many_files(kit, repo, store, tmp_path)
+    source = repo.source(sid)
+    positions = list(range(100, 130))
+    parts = reading.parts_of(source, positions, [5] * 30)  # 2 files a batch, 8 files a part
+
+    assert [part.positions for part in parts] == [positions[start:start + 8] for start in range(0, 30, 8)]
+    assert [part.size for part in parts] == [40, 40, 40, 30] and {part.of for part in parts} == {4}
+    small = reading.parts_of(source, positions[:8], [5] * 8)
+    assert [part.positions for part in small] == [positions[:8]]
+
+
+def test_a_source_under_newest_stays_one_part_however_large(kit, repo, store, tmp_path, monkeypatch):
+    # the index of its records reads every file of the entry: each part would read the whole source again
+    monkeypatch.setattr(reading, "BATCH_BYTES", 1)
+    folder, _ = kit.git_project(tmp_path / "revisions", files={"a.ndjson": b"{}"}, executable=set(), symlinks={})
+    sid = kit.add_source(repo, store, "example", "revisions", {
+        "type": "git", "address": folder,
+        "formats": [{"format": "records", "paths": ["*.ndjson"], "text": "text", "id": "id", "newest": "date"}]})
+
+    [part] = reading.parts_of(repo.source(sid), list(range(20)), [5] * 20)
+    assert part.positions == list(range(20)) and part.size == 100 and part.of == 1
+
+
+def ids_of_tokens(store) -> int:
+    return len(list((store.root / "refs" / "source-tokens").iterdir()))
+
+
+def test_a_source_read_in_parts_gives_the_dataset_of_one_read_and_a_saved_part_is_not_read_again(
+        kit, repo, store, tmp_path, monkeypatch):
+    # the same recipe, on the same code, whether a source is one item or several that several workers read: the lock,
+    # the dataset id, its documents and its shards are the same, a file that is not text and a Markdown another
+    # source repeats included; a build that finds some parts saved reads the others only
+    files = {f"en/many-{i:02d}.txt": f"many page {i} tells of a long road. ".encode() * 30 for i in range(30)}
+    files |= {"en/many-00.txt": LF, "en/many-15.txt": b"\x80 not text " * 30}
+    folder, _ = kit.git_project(tmp_path / "many", files=files, executable=set(), symlinks={})
+    many = kit.add_source(repo, store, "example", "many", {"type": "git", "address": folder,
+                                                           "tags": [{"tags": ["en"], "paths": ["**"]}]})
+    other = lines_source(kit, repo, store, tmp_path / "other", "other", {"copy.txt": CRLF})
+    one_pool(kit, repo, 30000)
+    kit.write_recipe(repo, "mixture", "main", {"pools": [{"name": "en", "select": "en", "weight": 1, "max_epochs": 1000}]})
+    whole = build_dataset(repo, "small", store, log=lambda _: None)
+    assert ids_of_tokens(store) == 2
+    lock = repo.generated("lock", "main")
+    (repo.root / repo.relative("lock", "main")).unlink()  # the parts train it again
+
+    monkeypatch.setattr(reading, "BATCH_BYTES", 2048)  # the asking process cuts: about 2 files a batch
+    split = open_store((tmp_path / "split").as_uri())
+    kit.download(repo, split, many, other)
+    assert build_dataset(repo, "small", split, log=lambda _: None) == whole
+    assert ids_of_tokens(split) > 3  # the large source's parts, each saved, and the other source
+
+    assert repo.generated("lock", "main") == lock
+    assert document_list(split, whole) == document_list(store, whole)
+    one, parts = record_of(store, whole), record_of(split, whole)
+    for field in ("sources", "documents", "pools", "contamination", "skipped"):
+        assert parts[field] == one[field]
+    assert [s["token_sha256"] for s in parts["shards"] + parts["held_out_shards"]] == \
+           [s["token_sha256"] for s in one["shards"] + one["held_out_shards"]]
+    assert [item["path"] for item in parts["sources"][many]["check"]["left_out"]] == ["en/many-15.txt"]
+
+    next(iter((split.root / "refs" / "source-tokens").iterdir())).unlink()
+    with Telemetry.start(split, "wpt dataset build", [], "small", env_file=tmp_path / ".env", environ={}) as telemetry:
+        assert build_dataset(repo, "small", split, log=lambda _: None, telemetry=telemetry) == whole
+    events = [json.loads(line) for line in split.read_record(telemetry.folder, "events.jsonl").splitlines()]
+    assert len([e for e in events if e["kind"] == "event" and e["name"] == "store.ref_set"
+                and e["attributes"]["ref"].startswith("source-tokens")]) == 1
+
+
+def test_a_part_that_fails_takes_its_whole_source_out_once_and_nothing_of_it_counts(kit, repo, store, tmp_path,
+                                                                                    monkeypatch):
+    # as one read: the source is listed once, however many of its parts fail, and the page it shares with a later
+    # source stays in that source, though a part of the failing one read that page without trouble
+    other = lines_source(kit, repo, store, tmp_path / "other", "z-other", {"copy.txt": CRLF})
+    every_file_chosen(kit, repo)
+    before = build_dataset(repo, "small", store, log=lambda _: None)  # locks the vocabulary
+    files = {f"en/many-{i:02d}.txt": f"many page {i} tells of a long road. ".encode() * 30 for i in range(30)}
+    files |= {"en/many-00.txt": LF, "en/many-12.xhtml": b"<p>never closed", "en/many-28.xhtml": b"<p>nor this"}
+    folder, _ = kit.git_project(tmp_path / "broken", files=files, executable=set(), symlinks={})
+    broken = kit.add_source(repo, store, "example", "a-broken", {
+        "type": "git", "address": folder, "tags": [{"tags": ["en"], "paths": ["**"]}],
+        "formats": [{"format": "text", "paths": ["**/*.txt"]}, {"format": "xhtml", "paths": ["**/*.xhtml"]}]})
+    assert broken < other
+    monkeypatch.setattr(reading, "BATCH_BYTES", 2048)
+
+    record = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))
+
+    assert [s["source"] for s in record["skipped"]] == [broken]
+    assert [d["id"] for d in document_list(store, record["id"])] == [d["id"] for d in document_list(store, before)]
+    with pytest.raises(DatasetError):
+        build_dataset(repo, "small", store, log=lambda _: None, strict=True)
+
+
+def test_the_parts_after_one_that_failed_are_not_read(kit, repo, store, tmp_path, monkeypatch):
+    # they would be fetched, converted and stored for a source that no longer counts: on one worker, parts run in
+    # order, so only the parts before the broken one leave tokens
+    lines_source(kit, repo, store, tmp_path / "other", "z-other", {"copy.txt": CRLF})
+    every_file_chosen(kit, repo)
+    build_dataset(repo, "small", store, log=lambda _: None)  # locks the vocabulary
+    files = {f"en/many-{i:02d}.txt": f"many page {i} tells of a long road. ".encode() * 30 for i in range(30)}
+    files |= {"en/many-12.xhtml": b"<p>never closed"}
+    folder, _ = kit.git_project(tmp_path / "broken", files=files, executable=set(), symlinks={})
+    broken = kit.add_source(repo, store, "example", "a-broken", {
+        "type": "git", "address": folder, "tags": [{"tags": ["en"], "paths": ["**"]}],
+        "formats": [{"format": "text", "paths": ["**/*.txt"]}, {"format": "xhtml", "paths": ["**/*.xhtml"]}]})
+    monkeypatch.setattr(reading, "BATCH_BYTES", 2048)
+    on_cores(monkeypatch, 1)
+    before = ids_of_tokens(store)
+
+    record = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))
+
+    assert [s["source"] for s in record["skipped"]] == [broken]
+    assert ids_of_tokens(store) - before == 1
+
+
+class PoolHere:
+    """workers.Pool on threads alone, two at once: a worker process can share no event with a test."""
+
+    def __init__(self, repo, what, disk=None, folder=None):
+        self.sizing = Sizing(what, Machine(3), disk=disk, folder=folder)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *stopped):
+        return False
+
+    def call(self, function, *arguments, telemetry=None):
+        return function(*arguments)
+
+
+def test_a_source_s_error_is_its_first_part_s_in_their_order_whichever_fails_first_in_time(kit, repo, store, tmp_path,
+                                                                                          monkeypatch):
+    # the record and the dataset id hold the error, so it cannot depend on the timing: part 1 is running while part 2
+    # fails, and goes on to fail itself; part 3 comes after both and is not read, though the progress counts it
+    monkeypatch.setattr(reading, "BATCH_BYTES", 1)
+    monkeypatch.setattr(workers, "Pool", PoolHere)
+    source = repo.source(many_files(kit, repo, store, tmp_path, count=16))
+    parts = reading.parts_of(source, list(range(16)), [1] * 16)
+    assert [part.number for part in parts] == [0, 1, 2, 3]
+    second_failed, read = threading.Event(), []
+
+    def reading_a_part(source, store, number, telemetry=None):
+        read.append(number)
+        if number == 1:
+            assert second_failed.wait(30)
+            raise DatasetError("part 1")
+        if number == 2:
+            second_failed.set()
+            raise DatasetError("part 2")
+        return number
+
+    telemetry = Telemetry.off()
+    with telemetry.progress("parts", len(parts), "parts") as progress:
+        [(done, span)] = build.each_source(reading_a_part, parts, repo, store, telemetry, progress,
+                                           lambda part: (part.number,), lambda part: 0, tmp_path)
+        telemetry.end(span)
+
+    assert str(done.error) == "part 1" and sorted(read) == [0, 1, 2] and progress.done == 4
+
+
+def test_the_parts_of_a_source_give_its_documents_in_the_order_of_one_read(kit, repo, store, tmp_path, monkeypatch):
+    # bundle order is not path order: the vocabulary reads a source's documents in path order, however it was cut
+    sid = many_files(kit, repo, store, tmp_path, count=12)
+    reads_here(monkeypatch, repo)
+    source = repo.source(sid)
+    order = list(range(12))[::-1]
+    one = reading.read_markdown(source, store, order, tmp_path / "one", Telemetry.off())
+    monkeypatch.setattr(reading, "BATCH_BYTES", 1)  # each file a batch: 3 parts of 4
+    parts = reading.parts_of(source, order, [1] * 12)
+    assert len(parts) == 3
+    reads = [reading.read_markdown(source, store, part.positions, tmp_path / "parts", Telemetry.off()) for part in parts]
+
+    assert [(entry["path"], text) for entry, text in reading.documents_of(reads)] == \
+           [(entry["path"], text) for entry, text in one.documents()]
+
+
+class Encoding:
+    """A Tokenizer that notes how many packs were written at each document it encodes."""
+
+    def __init__(self, tokenizer, written):
+        self.tokenizer, self.written, self.seen = tokenizer, written, []
+
+    def encode(self, text):
+        self.seen.append(len(self.written))
+        return self.tokenizer.encode(text)
+
+
+def test_a_worker_fetches_the_next_batch_while_it_converts_the_current_one_and_goes_no_further(
+        kit, repo, store, tmp_path, monkeypatch):
+    # memory and disk hold one batch more at most, and the tokens a source gets do not depend on the batches
+    sid = many_files(kit, repo, store, tmp_path, count=6)
+    one_pool(kit, repo, 700)
+    _, vocabulary, _ = build.build_tokenizer(repo, "small", store, log=lambda _: None)
+    reads_here(monkeypatch, repo)
+    source, count = repo.source(sid), 6
+    whole = reading.read_tokens(source, store, list(range(count)), vocabulary, tmp_path / "whole", None)
+    for ref in (store.root / "refs" / "source-tokens").glob("*"):
+        ref.unlink()
+
+    converting, written, asked = [threading.Event() for _ in range(count)], [], []
+    fetch, write_pack = Store.fetch_files, reading._write_pack
+
+    def fetched(self, places):
+        asked.append(len(written))
+        if len(asked) > 1:  # goes on only while the batch before it is being converted: it would wait in vain otherwise
+            assert converting[len(asked) - 2].wait(30)
+        fetch(self, places)
+
+    def wrote(*arguments):
+        converting[len(written)].set()
+        written.append(write_pack(*arguments))
+        return written[-1]
+
+    monkeypatch.setattr(Store, "fetch_files", fetched)
+    monkeypatch.setattr(reading, "_write_pack", wrote)
+    encoding = Encoding(reading.tokenizer_of(vocabulary, store), written)
+    monkeypatch.setattr(reading, "tokenizer_of", lambda *_: encoding)
+    monkeypatch.setattr(reading, "BATCH_BYTES", 1)  # each file a batch
+
+    batched = reading.read_tokens(source, store, list(range(count)), vocabulary, tmp_path / "batched", None)
+
+    assert asked == [0, 0, 1, 2, 3, 4]  # at each fetch, the packs done: one batch ahead, never two
+    assert encoding.seen == [1, 2, 3, 4, 5, 6]  # a batch's documents become tokens before the next batch is converted
+
+    def listed(summary):
+        return [{name: value for name, value in entry.items() if name != "start"} for entry in summary["documents"]]
+
+    assert listed(batched) == listed(whole)
+    for entry in batched["documents"]:
+        assert hashlib.sha256(store.read_range(batched["tokens"], entry["start"], entry["tokens"] * 4)).hexdigest() \
+            == entry["token_sha256"]
+
+
+def test_a_fetch_ahead_that_fails_fails_the_source_with_its_own_error(kit, repo, store, tmp_path, monkeypatch):
+    sid = many_files(kit, repo, store, tmp_path, count=3)
+    reads_here(monkeypatch, repo)
+    fetch, calls = Store.fetch_files, []
+
+    def fetched(self, places):
+        calls.append(places)
+        if len(calls) == 2:
+            raise CorruptObject("the second batch's bundle is broken")
+        fetch(self, places)
+
+    monkeypatch.setattr(Store, "fetch_files", fetched)
+    monkeypatch.setattr(reading, "BATCH_BYTES", 1)
+
+    with pytest.raises(CorruptObject, match="second batch"):
+        reading.read_markdown(repo.source(sid), store, [0, 1, 2], tmp_path / "markdown", Telemetry.off())
+
+
 def test_the_packs_a_cache_holds_change_nothing_a_build_makes(kit, repo, store, tmp_path, monkeypatch):
     # an earlier read left b.txt alone in a pack: the same recipe gives the same documents, on any machine
     sid = lines_source(kit, repo, store, tmp_path / "lines", "lines", {"a.txt": LF, "b.txt": CRLF})
@@ -1009,7 +1263,7 @@ def test_every_stage_of_a_vocabulary_says_how_far_it_is(kit, repo, store, tmp_pa
     printed = []
     build.build_tokenizer(repo, "small", store, log=lambda _: None,
                           telemetry=Telemetry.off(echo=lambda text, error: printed.append(text)))
-    assert any(line.startswith("vocabulary sample: 1 of 1 sources") for line in printed)
+    assert any(line.startswith("vocabulary sample: 1 of 1 parts") for line in printed)
     assert any(re.match(r"vocabulary chunks: (\d+) of \1 documents", line) for line in printed)
 
 

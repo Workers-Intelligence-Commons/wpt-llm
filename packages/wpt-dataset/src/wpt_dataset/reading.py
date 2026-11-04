@@ -13,17 +13,38 @@ are not text and the records left out. The index of a records entry with
 `newest` covers every file of that entry, so it is built once per read of
 a source and every batch shares it.
 
+While a batch is converted and its documents turned into tokens, one thread
+fetches the small files of the next batch, and never of the one after it. A
+worker's fetched files thus take two batches on the disk at most, and what
+fetching adds to its memory is what fetch_files holds: REQUESTS runs of
+frames of about RUN_BYTES each, never more than the batch's own bytes
+(wpt_store). A file read as a stream is not fetched: wpt_store.ahead reads
+ahead of it.
+
+A source of more than PART_BATCHES batches is read in parts (parts_of), each
+a run of whole batches in bundle order, so several workers read and turn it
+into tokens at once. The parts follow from the chosen files and their sizes
+alone, never from the machine. A part opens the source's whole final tree, so
+a note in another file reads as it does in one read. A source with a records
+entry under `newest` stays one part, whatever its size: its index needs every
+file of the entry. A file is never split, so a single file larger than a part
+stays one long part.
+
 Packs live in a folder of the cache folder named by the fingerprint of what
 decides a conversion: the key of the source's Kept (kept.kept_key), its
 type and the code of this module (wpt_utils.programs.code_of). A file found in
 a pack of that folder is not read again, by this build or the next. Which
 packs a read finds depends on the reads before it, so a Read gives its
 documents in file path order whatever packs hold them, one open file per
-pack: what a build makes of them never depends on the cache.
+pack: what a build makes of them never depends on the cache. The Reads of a
+source's parts give theirs in that same order together (documents_of).
 
-A source's tokens are one store object per set of chosen files, kept under
-the ref source-tokens/<that fingerprint, the vocabulary and the files>, so a
-build of the same recipe finds them without reading a file.
+A part's tokens are one store object per set of chosen files, kept under the
+ref source-tokens/<that fingerprint, the vocabulary and the files>, so a build
+of the same recipe finds them without reading a file, and one stopped halfway
+through a source reads only the parts it has no ref for. The object holds a
+document's tokens where reading reached it; its summary lists the documents in
+file path order.
 """
 
 import hashlib
@@ -32,6 +53,7 @@ import json
 import os
 import tempfile
 from compression import zstd
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -47,6 +69,9 @@ from .sources import final_tree, fingerprint
 
 BATCH_BYTES = 256 << 20  # file bytes of one batch: what its fetched files take on the disk at most
 FETCHED_AT_MOST = 64 << 20  # the size from which a file is read alone, as a stream
+# batches of one part: enough for the reading ahead to pay and for a part's own opening of the source to stay small
+# next to its reading, few enough that a round's last part ends soon after the others
+PART_BATCHES = 4
 
 
 @dataclass(frozen=True)
@@ -78,18 +103,18 @@ def _packs(folder: Path) -> list[Pack]:
     return found
 
 
-def _fetched(source, batch: dict, store):
-    """Fetch the files of a batch that are read whole and are small enough."""
-    store.fetch_files([entry.placed for path, entry in batch.items()
-                       if entry.placed is not None and entry.placed.length < FETCHED_AT_MOST
-                       and checks.asks_text(source, path, entry)])
+def _fetchable(source, batch: dict) -> list:
+    """The places of the files of a batch that are read whole and are small
+    enough to fetch."""
+    return [entry.placed for path, entry in batch.items()
+            if entry.placed is not None and entry.placed.length < FETCHED_AT_MOST
+            and checks.asks_text(source, path, entry)]
 
 
 def _write_pack(source, batch: dict, held: Kept, store, folder: Path, newest_indexes: dict) -> Pack:
-    """Read one batch of a source's files, {path: entry}, into a new pack of
-    folder; store is a view of copies_in, newest_indexes what the read's
-    batches share (markdown.documents)."""
-    _fetched(source, batch, store)
+    """Read one batch of a source's files, {path: entry}, fetched already,
+    into a new pack of folder; store is a view of copies_in, newest_indexes
+    what the read's batches share (markdown.documents)."""
     not_text = {path: why for path, entry in batch.items() if checks.asks_text(source, path, entry)
                 and (why := checks.not_text(source, path, manifest.content(store, entry))) is not None}
     folder.mkdir(parents=True, exist_ok=True)
@@ -124,19 +149,66 @@ def _sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def _cuts(sizes: list[int]):
+    """(start, stop) of each run of the sizes, in their order, of BATCH_BYTES
+    at most, or one size alone."""
+    start, total = 0, 0
+    for at, size in enumerate(sizes):
+        if at > start and total + size > BATCH_BYTES:
+            yield start, at
+            start, total = at, 0
+        total += size
+    if sizes:
+        yield start, len(sizes)
+
+
 def _batches(paths: list[str], tree: dict):
     """The paths, in their order, as {path: entry} of BATCH_BYTES at most,
     or one file alone."""
-    batch, size = {}, 0
-    for path in paths:
-        length = tree[path].placed.length if tree[path].placed is not None else 0
-        if batch and size + length > BATCH_BYTES:
-            yield batch
-            batch, size = {}, 0
-        batch[path] = tree[path]
-        size += length
-    if batch:
-        yield batch
+    sizes = [tree[path].placed.length if tree[path].placed is not None else 0 for path in paths]
+    for start, stop in _cuts(sizes):
+        yield {path: tree[path] for path in paths[start:stop]}
+
+
+@dataclass(frozen=True)
+class Part:
+    """What one worker process reads of a source."""
+    source: object
+    positions: list[int] = ()  # its chosen files, by their positions in the final tree
+    size: int = 0  # their bytes
+    of: int = 1  # how many parts the source has
+    number: int = 0  # its place among them, from 0
+
+
+def parts_of(source, positions: list[int], sizes: list[int]) -> list[Part]:
+    """The Parts of a source's chosen files, in their order (bundle order,
+    so that a frame is fetched by one part), sizes being their bytes: every
+    PART_BATCHES batches, or one for a source that needs its files together
+    (see the module's docstring)."""
+    together = any("newest" in entry for entry in source.data["formats"])
+    starts = [0] if together else [start for start, _ in _cuts(sizes)][::PART_BATCHES]
+    return [Part(source, positions[start:stop], sum(sizes[start:stop]), len(starts), number)
+            for number, (start, stop) in enumerate(zip(starts, [*starts[1:], len(positions)]))]
+
+
+def _in_order(found):
+    """(entry, Markdown) of each document of found, [(pack, its files)], in
+    file path order (a records file's in the file's order): a pack gives its
+    files in that order and a file lies whole in one pack."""
+    return heapq.merge(*(pack.documents(files) for pack, files in found), key=lambda one: one[0]["file"].encode())
+
+
+def documents_of(reads):
+    """_in_order of the documents of several Reads of one source, its parts,
+    whatever packs hold them: as one Read of their files gives them."""
+    found = []
+    for read in reads:
+        files = set(read.files)
+        for pack in read.packs:
+            mine = files & pack.files
+            files -= mine
+            found.append((pack, mine))
+    return _in_order(found)
 
 
 @dataclass(frozen=True)
@@ -148,15 +220,8 @@ class Read:
     check: dict  # its check result, as a dataset's record keeps it
 
     def documents(self):
-        """(entry, Markdown) of each document, in file path order (a records
-        file's in the file's order), whatever packs hold them: a pack gives
-        its files in that order and a file lies whole in one pack."""
-        files, parts = set(self.files), []
-        for pack in self.packs:
-            mine = files & pack.files
-            files -= mine
-            parts.append(pack.documents(mine))
-        yield from heapq.merge(*parts, key=lambda found: found[0]["file"].encode())
+        """(entry, Markdown) of each document (documents_of)."""
+        return documents_of([self])
 
 
 def _opened(source, store, positions, telemetry):
@@ -170,9 +235,12 @@ def _opened(source, store, positions, telemetry):
                                            "type": source.data["type"]})
 
 
-def _read(source, store, tree, held, paths, key, cache) -> Read:
+def _read(source, store, tree, held, paths, key, cache, ready=lambda documents: None) -> Read:
     """The chosen paths' documents, each file not in a pack of the folder of
-    key read into a new one."""
+    key read into a new one, the next batch fetched meanwhile. ready gets
+    each lot of documents as soon as it can be read: those of the packs found,
+    then those of each new pack. An error leaves once the fetch under way
+    ended, so nothing writes into store's folder after it."""
     folder, wanted = Path(cache) / key, set(paths)
     used, covered, not_text, records = [], set(), {}, {}
 
@@ -183,12 +251,19 @@ def _read(source, store, tree, held, paths, key, cache) -> Read:
             covered.update(mine)
             not_text.update({path: why for path, why in pack.not_text.items() if path in mine})
             records.update({path: found for path, found in pack.records.items() if path in mine})
+        return mine
 
-    for pack in _packs(folder):
-        use(pack)
-    newest_indexes = {}
-    for batch in _batches([path for path in paths if path not in covered], tree):
-        use(_write_pack(source, batch, held, store, folder, newest_indexes))
+    found = [(pack, mine) for pack in _packs(folder) if (mine := use(pack))]
+    waiting, newest_indexes = list(_batches([path for path in paths if path not in covered], tree)), {}
+    with ThreadPoolExecutor(1, thread_name_prefix="fetch-ahead") as fetching:
+        fetched = fetching.submit(store.fetch_files, _fetchable(source, waiting[0])) if waiting else None
+        ready(_in_order(found))
+        for batch, following in zip(waiting, [*waiting[1:], None]):
+            fetched.result()
+            if following is not None:
+                fetched = fetching.submit(store.fetch_files, _fetchable(source, following))
+            pack = _write_pack(source, batch, held, store, folder, newest_indexes)
+            ready(pack.documents(use(pack)))
     check = held.less(not_text).result()
     if records:
         check["records"] = records
@@ -214,12 +289,14 @@ def tokenizer_of(vocabulary: str, store) -> Tokenizer:
 
 
 def read_tokens(source, store, positions, vocabulary: str, cache, telemetry) -> dict:
-    """A source's chosen files as tokens, in a worker process: {"tree": its
-    final manifest object, "tokens": one object holding every document's
-    tokens (each ending with END) one after the other, "documents": [{path,
-    file, sha256 of its Markdown, start (byte offset), tokens, token_sha256,
-    record}], "check": its check result}, its files and records left out
-    as kept.py decides. Found under its ref when it is known. The ref is
+    """A source's chosen files, or a part's, as tokens, in a worker process:
+    {"tree": its final manifest object, "tokens": one object holding every
+    document's tokens (each ending with END) one after the other, "documents":
+    [{path, file, sha256 of its Markdown, start (byte offset), tokens,
+    token_sha256, record}] in file path order, "check": its check result},
+    its files and records left out as kept.py decides. Each lot of documents
+    becomes tokens as soon as it is read, so the next batch is fetched
+    meanwhile. Found under its ref when it is known. The ref is
     recorded before it is set (wpt_telemetry.set_result_ref)."""
     telemetry = telemetry or Telemetry.off()
     tokenizer = tokenizer_of(vocabulary, store)
@@ -230,15 +307,17 @@ def read_tokens(source, store, positions, vocabulary: str, cache, telemetry) -> 
                            "vocabulary": vocabulary, "files": sorted(paths)})
         if known := store.get_ref("source-tokens", ref):
             return json.loads(store.get_bytes(known))
-        read = _read(source, copies, tree, held, paths, key, cache)
-        documents, offset = [], 0
+        documents = []
         with open(Path(tmp) / "tokens.u32", "wb") as out:
-            for entry, text in read.documents():
-                data = np.asarray(tokenizer.encode(text) + [Tokenizer.END], dtype="<u4").tobytes()
-                out.write(data)
-                documents.append({**{name: value for name, value in entry.items() if name != "length"},
-                                  "start": offset, "tokens": len(data) // 4, "token_sha256": _sha256(data)})
-                offset += len(data)
+            def encoded(found):
+                for entry, text in found:
+                    data = np.asarray(tokenizer.encode(text) + [Tokenizer.END], dtype="<u4").tobytes()
+                    documents.append({**{name: value for name, value in entry.items() if name != "length"},
+                                      "start": out.tell(), "tokens": len(data) // 4, "token_sha256": _sha256(data)})
+                    out.write(data)
+
+            read = _read(source, copies, tree, held, paths, key, cache, encoded)
+        documents.sort(key=lambda entry: entry["file"].encode())  # stable: a records file's stay in the file's order
         summary = {"tree": read.tree, "tokens": copies.put_file(Path(tmp) / "tokens.u32"), "documents": documents,
                    "check": read.check}
     known = store.put_bytes(json.dumps(summary, ensure_ascii=False, sort_keys=True).encode())

@@ -76,15 +76,15 @@ def check_tokenizer(repo: Repo, name: str, store, log=print) -> list[SourceRepor
     reports, seen = {}, set()
     # closed at once when a source stops the others, so the sources still running end first
     with (telemetry.progress("tokenizer check", len(admitted), "sources") as progress,
-          contextlib.closing(each_source(_measured, admitted, repo, store, telemetry, progress,
-                                         lambda source: (name, locked[1]),
-                                         lambda source: copy_size(source, store, copied_as_records(source)),
+          contextlib.closing(each_source(_measured, [reading.Part(source) for source in admitted], repo, store,
+                                         telemetry, progress, lambda part: (name, locked[1]),
+                                         lambda part: copy_size(part.source, store, copied_as_records(part.source)),
                                          store.cache)) as measured):
         for done, span in measured:
             with telemetry.finish(span):
                 if done.error is not None:
                     raise done.error
-                for sha256, characters, tokens in done.value:
+                for sha256, characters, tokens in done.value[0]:
                     if sha256 not in seen:
                         seen.add(sha256)
                         report = reports.setdefault(done.item.id, SourceReport(done.item.id, 0, 0, 0,

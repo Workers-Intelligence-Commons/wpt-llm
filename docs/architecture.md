@@ -484,7 +484,7 @@ outside its project enters by its own bytes.
 | what a source gives the index | the source's id and its whole `source.json`, the fingerprint of its final tree, its upstream file list (which says where each file lies, and which a new download of the same files may change), the code of the modules `choice.py` imports |
 | what a source keeps for training, and its check result | the final tree, the license entries (with their decisions), the formats, the license check's answer (for each entry, the license text found at its place and that text's decision), the code of the modules `kept.py` imports |
 | the Markdown of a source's chosen files (on this machine) | the fingerprint of what the source keeps for training, the code of the modules `reading.py` imports, the source's `type` |
-| a source's tokens | that Markdown's fingerprint, the code of the modules `reading.py` imports, the vocabulary, the paths of the chosen files |
+| a part of a source's tokens | that Markdown's fingerprint, the code of the modules `reading.py` imports, the vocabulary, the paths of the part's chosen files |
 | vocabulary | the code of the modules `build.py` imports, the tokenizer recipe (with its `version`), the sha256 of the list of the documents it is trained on (id and sha256 of their Markdown); frozen by the recipe's lock until `version` is raised ([tokenizer.md](tokenizer.md)) |
 | dataset | the code of the modules `build.py` imports, the model recipe's data part, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, the manifest of its upstream tree, its final tree, licenses (with attribution) and check result, the sources skipped (each failing source: by its id and the kind of its error), and the objects of its conversations and tasks |
 | training step's result | the fingerprint of the step before it, the step (its files, method, environment, optimizer, settings and locked parts), the fingerprint of the dataset part it reads (`text`, `conversations` or `tasks`, in the record's `fingerprints`), the recipe's seed and the code; no hardware option ([training.md](training.md), "Step results and reuse") |
@@ -528,6 +528,8 @@ A build works in three steps, and only the last reads text:
    frames next to each other, and each request's frames leave memory once
    its files are copied. Their Markdown is kept in packs, compressed files
    on this machine, so the vocabulary and the tokens read each file once.
+   A worker fetches the next batch of files while it converts the current
+   batch and turns it into tokens, and never goes further ahead.
    A source's documents come out in file path order, whichever packs hold
    them.
 
@@ -546,10 +548,12 @@ file its conversion needs as a file (a Parquet records file, a message
 tree, a file its patches change) is copied from the store into a temporary
 folder on this machine, deleted once the source is read; every other file
 is read from the store by range, so a conversion never opens a file of the
-store itself. The store keeps one token object per source and round (every
-document's tokens, one after the other), its final manifest and a summary,
-under a ref named after the Markdown's fingerprint, the vocabulary and the
-chosen paths; a source whose inputs did not change is never read again.
+store itself. The store keeps one token object per part of a source and
+round (every document's tokens, one after the other), its final manifest and
+a summary, under a ref named after the Markdown's fingerprint, the vocabulary
+and the part's chosen paths; a part whose inputs did not change is never read
+again, so a build stopped halfway through a source reads only the parts not
+yet saved.
 
 `--plan` on `build` and `build-tokenizer` stops after the first choice and
 prints what the build would read and compute: each pool's documents and
@@ -561,9 +565,20 @@ processes, several at once, as many as `wpt_utils.parallel` allows. Each
 source is read on its own, and the results are put together in the order
 of the source ids and of the documents, so the dataset id and the shards
 are the same on any machine and with any number of workers. How many run at
-once counts each source's chosen bytes on the disk its copies go to. The
+once counts each part's chosen bytes on the disk its copies go to. The
 conversations and tasks do not depend on the choice: every indexed source
 that holds some is read.
+
+A source of more than four batches of chosen files (1 GiB) is read in parts,
+each four batches in bundle order, by several workers at once. The size of a
+part is a constant of the code, so the parts are the same on every machine.
+The build takes a source once all its parts are read: its documents, its
+check result and its failure are those of one read, and a part that fails
+takes the whole source out. The parts after a failed part are not read; those
+before it are, so the source's error is the first in part order, whichever
+part failed first in time. A source with a records entry under `newest`
+stays one part, since that entry's index reads every file it covers. A file
+is never split.
 
 ### The download step
 
