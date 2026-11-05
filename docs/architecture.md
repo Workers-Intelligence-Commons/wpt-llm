@@ -553,7 +553,13 @@ round (every document's tokens, one after the other), its final manifest and
 a summary, under a ref named after the Markdown's fingerprint, the vocabulary
 and the part's chosen paths; a part whose inputs did not change is never read
 again, so a build stopped halfway through a source reads only the parts not
-yet saved.
+yet saved. The shard stage copies every token object its rows lie in to this
+machine first, several at once (the copy counts its disk as `wpt_utils.parallel`
+does), writes the training and held-out shards from the copies, and removes
+the copies afterwards, also when the stage fails; the shards are the same as
+if each row were read by range from the store. The contamination check runs
+before the copies go: it reads from them too, and the training documents are
+searched in worker processes, as many at once as `wpt_utils.parallel` allows.
 
 `--plan` on `build` and `build-tokenizer` stops after the first choice and
 prints what the build would read and compute: each pool's documents and

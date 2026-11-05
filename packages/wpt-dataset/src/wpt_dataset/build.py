@@ -26,7 +26,16 @@ share or the index has no more of it. What a round reads becomes:
                    documents, then a partial pass; more passes than max_epochs
                    (default 4) is refused
     shards         Parquet files in the store (see wpt_store.shards), rows in a
-                   fixed pseudo-random order derived from the dataset id
+                   fixed pseudo-random order derived from the dataset id; the
+                   token objects the rows lie in are copied to this machine
+                   first (PackedDocuments.local), several at once, and the
+                   copies removed when both parts are written, so no row is
+                   read by range from the store
+    contamination  runs of NGRAM words that held-out documents share with
+                   training documents, checked before those copies are removed:
+                   the held-out runs are listed once, and batches of training
+                   documents are searched in worker processes
+                   (_recorded_contamination)
 
 The dataset id is the fingerprint of every input, the code of this module
 (wpt_utils.programs.code_of: the source files of the WPT modules it
@@ -135,7 +144,7 @@ from wpt_store import CorruptObject, MissingObject
 from wpt_store.shards import write_shard
 from wpt_telemetry import Telemetry, set_ref
 from wpt_tokenizer import BASE_SIZE, RUSTC_VERSION, Tokenizer
-from wpt_utils.parallel import Done, each
+from wpt_utils.parallel import Done, Sizing, each, in_order
 from wpt_utils.programs import code, code_of
 
 from . import choice as choosing
@@ -152,6 +161,11 @@ DEFAULT_MAX_EPOCHS = 4
 SHARD_TOKENS = 1 << 26  # about 64M tokens (256 MB of uint32) per shard
 NGRAM = 13  # contamination check: runs of 13 words, as in the GPT-3 paper
 TOKEN_READERS = 16  # documents read at once from the token objects
+# token objects made local at once for the shards. Each copy already fetches up to Sizing("downloads").limit parts at
+# once (Store._copy), and an S3 store holds UPLOADS + that limit + REQUESTS connections: 3 objects at once stay within
+# them up to 20 parts each
+OBJECTS_AT_ONCE = 3
+CONTAMINATION_BATCH_TOKENS = 1 << 22  # tokens of the training documents one worker checks in one call (a longer document alone)
 DOCUMENT_LIST = "dataset-documents"  # the kind of the ref, named by the dataset id, of a dataset's document list
 TRAINING, HELD_OUT = "training", "held-out"  # a listed document's tag
 # the top-level fields every record this code writes holds (conversations and tasks only when the sources hold
@@ -482,7 +496,8 @@ def vocabulary_plan_lines(mixture, sample: dict, name: str) -> list[str]:
 class PackedDocuments:
     """Documents' tokens read from the token objects of reading.read_tokens, a
     part of the object each, checked against the document's own token
-    sha256; nothing is copied to disk."""
+    sha256. Each document is read by range from the store, unless its token
+    object has a local copy (local), which the store's read_range reads."""
 
     def __init__(self, store):
         self.store, self._where = store, {}
@@ -499,6 +514,42 @@ class PackedDocuments:
         if hashlib.sha256(data).hexdigest() != sha256:
             raise CorruptObject(f"tokens of {document_id} in {tokens_object} do not match their sha256")
         return np.frombuffer(data, dtype="<u4")
+
+    @contextlib.contextmanager
+    def local(self, document_ids, telemetry):
+        """A with block in which every token object these documents lie in
+        has a local copy in the store's cache folder (Store.path: checked
+        against its sha256; a local store's uncompressed object is its own
+        file and gets none), made several at once, so reading the documents
+        takes no range from the store. The copies are released when the
+        block ends, also when it or the copying fails. The disk the copies
+        take is counted as wpt_utils.parallel.Sizing counts it: the copies
+        in flight stay within what the free disk of the cache folder allows,
+        and the first always starts."""
+        objects = sorted({self._where[document_id][0] for document_id in document_ids})
+        try:
+            sizes = {sha: self.store.size(sha) for sha in objects}
+            sizing = Sizing("token objects made local at once", disk=sizes.__getitem__, folder=self.store.cache,
+                            network=OBJECTS_AT_ONCE)
+            progress = telemetry.progress("token objects made local", sum(sizes.values()), "bytes")
+
+            def make(sha):
+                self.store.path(sha)
+                return sha
+
+            with progress, concurrent.futures.ThreadPoolExecutor(sizing.limit) as executor:
+                for sha in in_order(make, objects, executor, sizing):
+                    progress.advance(sizes[sha])
+            yield
+        finally:
+            for sha in objects:
+                self.store.release(sha)
+
+    def of(self, document_ids) -> "PackedDocuments":
+        """The documents of document_ids alone, over the same store, small enough to send to a worker process."""
+        part = PackedDocuments(self.store)
+        part._where = {document_id: self._where[document_id] for document_id in document_ids}
+        return part
 
     def many(self, document_ids) -> dict[str, np.ndarray]:
         with concurrent.futures.ThreadPoolExecutor(TOKEN_READERS) as pool:
@@ -791,21 +842,26 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
 
     held_out = [d for d in documents if d.id in held_ids]
     training = [d for d in documents if d.id not in held_ids]
-    with tempfile.TemporaryDirectory(prefix="wpt-build-") as tmp:
-        with telemetry.span("pools"):
-            rows, pool_report = _fill_pools(text_id, recipe, mixture, training, packed, log)
-            for report in pool_report:
-                telemetry.event("pool", **report)
-        with telemetry.span("shards"):
-            shards = _write_shards(rows, packed, store, Path(tmp), shard_tokens, telemetry, "training")
-            held_shards = _write_shards([(d, "held-out", 0) for d in held_out], packed, store, Path(tmp), shard_tokens,
-                                        telemetry, "held_out")
 
     def texts(chosen):
         """The Markdown of these documents, in order, decoded from their tokens."""
         for i in range(0, len(chosen), 1024):
             part = packed.many([d.id for d in chosen[i:i + 1024]])
             yield from (tokenizer.decode(part[d.id].tolist()) for d in chosen[i:i + 1024])
+
+    with tempfile.TemporaryDirectory(prefix="wpt-build-") as tmp:
+        with telemetry.span("pools"):
+            rows, pool_report = _fill_pools(text_id, recipe, mixture, training, packed, log)
+            for report in pool_report:
+                telemetry.event("pool", **report)
+        with telemetry.span("shards"):
+            held_rows = [(d, "held-out", 0) for d in held_out]
+            with packed.local([d.id for d, _, _ in rows + held_rows], telemetry):
+                shards = _write_shards(rows, packed, store, Path(tmp), shard_tokens, telemetry, "training")
+                held_shards = _write_shards(held_rows, packed, store, Path(tmp), shard_tokens, telemetry, "held_out")
+                # from the same local copies; the worker processes read them through the same cache folder
+                checked = _recorded_contamination(repo, training, held_out, packed, texts, vocabulary, Path(tmp),
+                                                  telemetry)
 
     record = {
         "id": dataset_id,
@@ -825,7 +881,7 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
         "total_tokens": sum(s["tokens"] for s in shards),
         "shards": shards,
         "held_out_shards": held_shards,
-        "contamination": _recorded_contamination(training, held_out, texts, telemetry),
+        "contamination": checked,
         **steps_read,  # conversations and tasks, each part only when the sources hold some
         "fingerprints": part_fingerprints(vocabulary, shards, held_shards, steps_read),
         "tools": tool_versions(),
@@ -994,11 +1050,61 @@ def _with_parts(repo: Repo, store, info: dict, parts: dict, telemetry) -> dict:
     return dict(sorted(info.items()))
 
 
-def _recorded_contamination(training, held_out, texts, telemetry):
+def _recorded_contamination(repo, training, held_out, packed, texts, vocabulary, folder: Path, telemetry):
+    """contamination() with the training side searched in worker processes (workers.py), as many at once as
+    wpt_utils.parallel allows. Each takes a batch of training documents (CONTAMINATION_BATCH_TOKENS tokens), reads their
+    tokens through the store's cache folder, decodes them and gives back which held-out runs each holds. The held-out
+    runs reach the workers as one file in folder, which each worker maps once."""
     with (telemetry.span("contamination") as span,
-          telemetry.progress("contamination", len(training) + len(held_out), "documents") as progress):
-        found = contamination(training, held_out, lambda chosen: _counted(texts(chosen), progress))
+          telemetry.progress("contamination", len(training) + len(held_out), "documents") as progress,
+          workers.Pool(repo, "contamination batches at once") as pool):
+        def search(documents, runs):
+            path = folder / "held-out-runs.npy"
+            np.save(path, runs)
+
+            def look(batch):
+                ids = [d.id for d in batch]
+                return pool.call(_runs_found, packed.of(ids), ids, vocabulary, str(path), telemetry=telemetry)
+
+            # no error is an item's result: any stops the check
+            for done in each(look, _batches(documents, packed), (), pool.sizing):
+                yield from done.value
+                progress.advance(len(done.item))
+
+        found = contamination(training, held_out, lambda chosen: _counted(texts(chosen), progress), search)
         span.set(**{k: v for k, v in found.items() if k != "examples"})
+    return found
+
+
+def _batches(documents, tokens):
+    """The documents in runs of CONTAMINATION_BATCH_TOKENS tokens at least (the last may hold fewer), in order."""
+    batch, size = [], 0
+    for document in documents:
+        batch.append(document)
+        size += tokens.length(document.id)
+        if size >= CONTAMINATION_BATCH_TOKENS:
+            yield batch
+            batch, size = [], 0
+    if batch:
+        yield batch
+
+
+_HELD_OUT_RUNS = {}  # in a worker process: the held-out runs file it mapped, by path
+
+
+def _runs_found(documents, ids, vocabulary: str, path: str, telemetry) -> list[np.ndarray]:
+    """In a worker process: for each of ids (read from documents, a PackedDocuments of just those), the positions
+    in the held-out runs (the file at path) of the runs its text holds."""
+    if path not in _HELD_OUT_RUNS:
+        _HELD_OUT_RUNS.clear()
+        _HELD_OUT_RUNS[path] = np.load(path, mmap_mode="r")
+    runs = _HELD_OUT_RUNS[path]
+    tokenizer = reading.tokenizer_of(vocabulary, documents.store)
+    found = []
+    for document_id in ids:
+        here = runs_of(tokenizer.decode(documents[document_id].tolist()))
+        at = np.minimum(np.searchsorted(runs, here), len(runs) - 1)
+        found.append(at[runs[at] == here])
     return found
 
 
@@ -1066,24 +1172,31 @@ def _write_shards(rows, tokens, store, folder: Path, shard_tokens, telemetry, pa
     return shards
 
 
-def contamination(training, held_out, texts) -> dict:
-    """Held-out documents sharing a run of NGRAM words with training text.
-    texts(documents) yields their Markdown, in order."""
-    def grams(data: bytes):
-        words = data.split()
-        return {hashlib.blake2b(b" ".join(words[i:i + NGRAM]), digest_size=8).digest()
-                for i in range(len(words) - NGRAM + 1)}
+def runs_of(text: bytes) -> np.ndarray:
+    """The distinct runs of NGRAM words of a text, each as the 8 bytes of its hash read as a uint64."""
+    words = text.split()
+    return np.frombuffer(b"".join({hashlib.blake2b(b" ".join(words[i:i + NGRAM]), digest_size=8).digest()
+                                   for i in range(len(words) - NGRAM + 1)}), dtype="<u8")
 
-    owner = {}
-    for document, text in zip(held_out, texts(held_out)):
-        for gram in grams(text):
-            owner.setdefault(gram, document.id)
+
+def contamination(training, held_out, texts, search) -> dict:
+    """Held-out documents sharing a run of NGRAM words with training text.
+    texts(documents) yields their Markdown, in order. search(training, runs)
+    gives, for each training document in order, the positions in runs (the
+    sorted array of every run the held-out documents hold) of the runs its
+    text holds. Each held-out document is paired with the first training
+    document, in order, that shares a run with it."""
+    pieces = [runs_of(text) for text in texts(held_out)]
+    everything = np.concatenate(pieces) if pieces else np.empty(0, dtype="<u8")
+    owners = np.concatenate([np.full(len(piece), i, dtype=np.int64) for i, piece in enumerate(pieces)]) \
+        if pieces else np.empty(0, dtype=np.int64)
+    runs, first = np.unique(everything, return_index=True)  # first: where each run first occurs, in held-out order
+    owners = owners[first]
     found = {}
-    if owner:
-        for document, text in zip(training, texts(training)):
-            for gram in grams(text):
-                if gram in owner:
-                    found.setdefault(owner[gram], document.id)
+    if len(runs):
+        for document, positions in zip(training, search(training, runs)):
+            for owner in np.unique(owners[positions]):
+                found.setdefault(held_out[owner].id, document.id)
     return {"ngram_words": NGRAM, "held_out_documents": len(held_out), "overlapping": len(found),
             "examples": [{"held_out": h, "training": t} for h, t in sorted(found.items())[:20]]}
 

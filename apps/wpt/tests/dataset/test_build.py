@@ -1395,7 +1395,8 @@ def test_a_worker_fetches_the_next_batch_while_it_converts_the_current_one_and_g
 
     batched = reading.read_tokens(source, store, list(range(count)), vocabulary, tmp_path / "batched", None)
 
-    assert asked == [0, 0, 1, 2, 3, 4]  # at each fetch, the packs done: one batch ahead, never two
+    # at each fetch, the packs done: one batch ahead, never two (a fetch may start late, never early)
+    assert len(asked) == count and all(done >= number - 1 for number, done in enumerate(asked))
     assert encoding.seen == [1, 2, 3, 4, 5, 6]  # a batch's documents become tokens before the next batch is converted
 
     def listed(summary):
@@ -1719,3 +1720,105 @@ def test_a_plan_says_what_a_build_would_do_and_does_nothing(kit, repo, store, tm
     assert repo.generated("lock", "main") is None
     assert not list((store.root / "refs").glob("datasets/*")) and not list((store.root / "refs").glob("source-tokens/*"))
     assert not (store.cache / "markdown").exists()
+
+
+def packed_objects(store, objects=3, documents=4):
+    """PackedDocuments over `objects` token objects of `documents` documents each, and every document's tokens."""
+    packed, expected = build.PackedDocuments(store), {}
+    for o in range(objects):
+        tokens = [np.arange(10 * (d + 1), dtype="<u4") + 1000 * o + 100 * d for d in range(documents)]
+        sha = store.put_bytes(b"".join(t.tobytes() for t in tokens))
+        start = 0
+        for d, one in enumerate(tokens):
+            name = f"s/{o}/{d}"
+            packed.add(name, sha, {"start": start, "tokens": len(one), "token_sha256": hashlib.sha256(one.tobytes()).hexdigest()})
+            expected[name] = one
+            start += one.nbytes
+    return packed, expected
+
+
+def copies_of(store, packed):
+    return [sha for sha in {w[0] for w in packed._where.values()} if (store.cache / sha[:2] / sha).exists()]
+
+
+def test_the_shard_stage_reads_a_remote_store_from_local_copies_and_removes_them_afterwards(s3, monkeypatch):
+    store = s3.store
+    packed, expected = packed_objects(store)
+    ranges = []
+    real = type(store)._range
+    monkeypatch.setattr(type(store), "_range", lambda self, *arguments, **options: ranges.append(arguments) or real(self, *arguments, **options))
+    with packed.local(list(expected), Telemetry.off()):
+        assert len(copies_of(store, packed)) == 3
+        for name, tokens in expected.items():
+            assert packed[name].tolist() == tokens.tolist()
+    assert ranges == []  # the remote store was asked for no range
+    assert copies_of(store, packed) == []
+    assert packed["s/0/1"].tolist() == expected["s/0/1"].tolist()  # without copies, a range read answers as before
+    assert len(ranges) == 1
+
+
+def test_the_copies_of_the_shard_stage_are_removed_also_when_it_or_a_copy_fails(s3, monkeypatch):
+    store = s3.store
+    packed, expected = packed_objects(store)
+    with pytest.raises(RuntimeError, match="shard failed"):
+        with packed.local(list(expected), Telemetry.off()):
+            assert len(copies_of(store, packed)) == 3
+            raise RuntimeError("shard failed")
+    assert copies_of(store, packed) == []
+
+    real = type(store).path
+    failing = sorted({w[0] for w in packed._where.values()})[1]
+
+    def path(self, sha):
+        if sha == failing:
+            raise CorruptObject("broken copy")
+        return real(self, sha)
+
+    monkeypatch.setattr(type(store), "path", path)
+    with pytest.raises(CorruptObject, match="broken copy"):
+        with packed.local(list(expected), Telemetry.off()):
+            pytest.fail("the block must not run when a copy failed")
+    assert copies_of(store, packed) == []
+
+
+def test_the_contamination_searched_in_worker_processes_is_the_plain_definition_s(repo, store, tmp_path, monkeypatch):
+    # a run the held-out documents share with several training documents pairs them with the first of those in order
+    def words(start):
+        return " ".join(f"w{i}" for i in range(start, start + 30)).encode()
+
+    held_texts = [words(0), words(100), words(200)]
+    training_texts = [words(500), words(10), words(0) + b" x y z", words(205), words(110), words(10)]
+    tokenizer = Tokenizer.train(held_texts + training_texts, 516)
+    vocabulary = store.put_bytes(tokenizer.to_bytes())
+    packed = build.PackedDocuments(store)
+    held_out = [build.Document(f"h{i}", "s", "0", frozenset()) for i in range(3)]
+    training = [build.Document(f"t{i}", "s", "0", frozenset()) for i in range(6)]
+    for document, text in zip(held_out + training, held_texts + training_texts):
+        tokens = np.asarray(tokenizer.encode(text) + [Tokenizer.END], dtype="<u4").tobytes()
+        packed.add(document.id, store.put_bytes(tokens), {"start": 0, "tokens": len(tokens) // 4,
+                                                          "token_sha256": hashlib.sha256(tokens).hexdigest()})
+
+    def runs(text):
+        words = text.split()
+        return {b" ".join(words[i:i + build.NGRAM]) for i in range(len(words) - build.NGRAM + 1)}
+
+    owner = {}  # the definition: the first held-out document with each run, then the first training document with it
+    for document, text in zip(held_out, held_texts):
+        for run in runs(text):
+            owner.setdefault(run, document.id)
+    expected = {}
+    for document, text in zip(training, training_texts):
+        for run in runs(text):
+            if run in owner:
+                expected.setdefault(owner[run], document.id)
+    assert expected == {"h0": "t1", "h1": "t4", "h2": "t3"}  # h0's runs are also in t2 and t5
+
+    def texts(chosen):
+        return (tokenizer.decode(packed[d.id].tolist()) for d in chosen)
+
+    monkeypatch.setattr(build, "CONTAMINATION_BATCH_TOKENS", 1)  # one document per batch, so batches end in any order
+    with packed.local([d.id for d in held_out + training], Telemetry.off()):
+        report = build._recorded_contamination(repo, training, held_out, packed, texts, vocabulary, tmp_path,
+                                               Telemetry.off())
+    assert report == {"ngram_words": build.NGRAM, "held_out_documents": 3, "overlapping": 3,
+                      "examples": [{"held_out": h, "training": t} for h, t in sorted(expected.items())]}
