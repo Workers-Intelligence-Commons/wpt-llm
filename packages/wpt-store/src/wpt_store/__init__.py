@@ -310,8 +310,9 @@ class Store:
         made. Only a file the work asks for as a file (path(), file_path())
         is copied, a local store's own files too, so the work never opens
         a file of the store itself; everything else is read from the store
-        (get_bytes, read_range, read_file, file_parts). Copies already in
-        the cache folder are not read. For objects and refs only, not
+        (get_bytes, read_range, read_file, file_parts). A copy folder already
+        holds is read instead. Copies already in the cache folder are not
+        read. For objects and refs only, not
         record folders."""
         self.compressing()  # made before the copy, so every view shares this store's one
         view = copy.copy(self)
@@ -371,8 +372,7 @@ class Store:
         """One file a session stored, checked against its sha256: from the
         copy fetch_files made, when there is one. MissingObject when its
         bundle is not in the store (or not sealed)."""
-        local = self.cache / placed.sha256[:2] / placed.sha256
-        if self.copies_only and local.is_file():
+        if (local := self._held(placed)) is not None:
             return local.read_bytes()
         key, kind = self._bundle(placed)
         with self._reading(f"bundle {placed.bundle}", key):
@@ -382,15 +382,22 @@ class Store:
                                 f"do not match their sha256 {placed.sha256}")
         return data
 
+    def _held(self, placed: Placed) -> Path | None:
+        """The local copy of one file a session stored that a view of
+        copies_in holds, None without one."""
+        local = self.cache / placed.sha256[:2] / placed.sha256
+        return local if self.copies_only and local.is_file() else None
+
     def fetch_files(self, places: list[Placed]):
         """In a view of copies_in, a local copy of each of these files of a
-        session, each checked against its sha256, for read_file to read:
+        session it does not hold, each checked against its sha256, for read_file to read:
         only the frames that hold them are fetched, and the frames next to
         each other go in one request, up to REQUESTS requests at once. A
         frame is fetched once, however many files it holds, or once more
         where two runs of frames meet (_runs). Each request's frames are let
         go once its files are copied, so memory holds REQUESTS runs at most,
         however many frames the files touch."""
+        places = [placed for placed in places if self._held(placed) is None]
         for bundle, placed in itertools.groupby(sorted(places, key=lambda p: p.bundle), key=lambda p: p.bundle):
             placed = list(placed)
             key, kind = self._bundle(placed[0])
@@ -456,9 +463,15 @@ class Store:
 
     def file_parts(self, placed: Placed, size=DOWNLOAD):
         """One file a session stored, in parts of at most size bytes, read
-        one at a time, so a large file is never in memory whole;
+        one at a time, so a large file is never in memory whole: from the
+        copy a view of copies_in holds, when there is one;
         CorruptObject, at the latest after the last part, when the bytes do
         not match its sha256 (the parts given are then not that file)."""
+        if (local := self._held(placed)) is not None:
+            with open(local, "rb") as copy:
+                while data := copy.read(size):
+                    yield data
+            return
         key, kind = self._bundle(placed)
         digest, done = hashlib.sha256(), 0
         with self._reading(f"bundle {placed.bundle}", key):

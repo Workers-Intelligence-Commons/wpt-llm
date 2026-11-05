@@ -1,7 +1,9 @@
 """Files and folders on this machine's disk that one live process owns: a
 bundle being filled (wpt_store.sessions), a temporary copy of the store
 database and a session's rows (wpt_store.database), all in the store's
-cache folder, and a download's temporary folder (wpt_dataset.download).
+cache folder, a round's downloaders' temporary folder
+(wpt_dataset.downloaders), also there, and a download's temporary folder
+(wpt_dataset.download).
 
 Each one lies beside a lock file (its name, then LOCK) that the owning
 process holds; the system releases the lock when the process ends, crash

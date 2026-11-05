@@ -98,7 +98,7 @@ class Pack:
                     yield entry, text
 
 
-def _packs(folder: Path) -> list[Pack]:
+def packs(folder: Path) -> list[Pack]:
     """Every whole pack of a folder, in the order of their names."""
     found = []
     for described in sorted(folder.glob("*.json")) if folder.is_dir() else ():
@@ -231,7 +231,7 @@ class Read:
         return documents_of([self])
 
 
-def _opened(source, store, positions, telemetry):
+def opened(source, store, positions, telemetry):
     """(final tree, Kept before the text check, the chosen paths it keeps,
     the fingerprint of what decides their conversion)."""
     tree, known = final_tree(source, store, telemetry)
@@ -260,7 +260,7 @@ def _read(source, store, tree, held, paths, key, cache, telemetry, ready=lambda 
             records.update({path: found for path, found in pack.records.items() if path in mine})
         return mine
 
-    found = [(pack, mine) for pack in _packs(folder) if (mine := use(pack))]
+    found = [(pack, mine) for pack in packs(folder) if (mine := use(pack))]
     waiting, newest_indexes = list(_batches([path for path in paths if path not in covered], tree)), {}
     with ThreadPoolExecutor(1, thread_name_prefix="fetch-ahead") as fetching:
         fetched = fetching.submit(store.fetch_files, _fetchable(source, waiting[0])) if waiting else None
@@ -282,7 +282,7 @@ def read_markdown(source, store, positions, cache, telemetry) -> Read:
     in a worker process."""
     with tempfile.TemporaryDirectory(prefix="wpt-read-") as tmp:
         copies = store.copies_in(tmp)
-        return _read(source, copies, *_opened(source, copies, positions, telemetry), cache, telemetry)
+        return _read(source, copies, *opened(source, copies, positions, telemetry), cache, telemetry)
 
 
 def save_newest(source, store, positions, telemetry) -> None:
@@ -290,7 +290,7 @@ def save_newest(source, store, positions, telemetry) -> None:
     saved, in a worker process."""
     with tempfile.TemporaryDirectory(prefix="wpt-read-") as tmp:
         copies = store.copies_in(tmp)
-        _, held, paths, _ = _opened(source, copies, positions, telemetry)
+        _, held, paths, _ = opened(source, copies, positions, telemetry)
         markdown.save_newest(source, held.tree, copies, paths, telemetry)
 
 
@@ -302,6 +302,13 @@ def tokenizer_of(vocabulary: str, store) -> Tokenizer:
     if vocabulary not in _TOKENIZERS:
         _TOKENIZERS[vocabulary] = Tokenizer.from_bytes(store.get_bytes(vocabulary))
     return _TOKENIZERS[vocabulary]
+
+
+def tokens_ref(key: str, vocabulary: str, paths: list[str]) -> str:
+    """The name of the source-tokens ref of the chosen paths, key being
+    their conversion's fingerprint (opened)."""
+    return fingerprint({"kind": "source-tokens", "code": code_of(__name__), "markdown": key,
+                        "vocabulary": vocabulary, "files": sorted(paths)})
 
 
 def read_tokens(source, store, positions, vocabulary: str, cache, telemetry) -> dict:
@@ -318,9 +325,8 @@ def read_tokens(source, store, positions, vocabulary: str, cache, telemetry) -> 
     tokenizer = tokenizer_of(vocabulary, store)
     with tempfile.TemporaryDirectory(prefix="wpt-read-") as tmp:
         copies = store.copies_in(Path(tmp) / "copies")
-        tree, held, paths, key = _opened(source, copies, positions, telemetry)
-        ref = fingerprint({"kind": "source-tokens", "code": code_of(__name__), "markdown": key,
-                           "vocabulary": vocabulary, "files": sorted(paths)})
+        tree, held, paths, key = opened(source, copies, positions, telemetry)
+        ref = tokens_ref(key, vocabulary, paths)
         if known := store.get_ref("source-tokens", ref):
             return json.loads(store.get_bytes(known))
         documents = []

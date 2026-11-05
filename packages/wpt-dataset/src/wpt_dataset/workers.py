@@ -121,12 +121,12 @@ def _run(function, arguments, record_store, command, environment):
 class Pool:
     """Worker processes for one piece of work, at most sizing.limit of
     them, each started when first needed; sizing is the work's
-    wpt_utils.parallel.Sizing (what names its items; disk and folder as
-    there), measuring the workers' memory. A with block owns them: leaving
+    wpt_utils.parallel.Sizing (what names its items; disk, folder and
+    network as there), measuring the workers' memory. A with block owns them: leaving
     it ends them, at once when it is left by an error or a stop."""
 
-    def __init__(self, repo, what: str, disk=None, folder=None):
-        self.sizing = Sizing(what, disk=disk, folder=folder)
+    def __init__(self, repo, what: str, disk=None, folder=None, network=None):
+        self.sizing = Sizing(what, disk=disk, folder=folder, network=network)
         self._opener, self._root = type(repo), str(repo.root)
         self._pool = None
 

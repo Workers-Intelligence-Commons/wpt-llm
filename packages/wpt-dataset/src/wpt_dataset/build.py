@@ -99,12 +99,13 @@ shards are the ones a build of one source at a time gives. A large source is
 read in parts (reading.parts_of), each an item of its own, and the build
 takes a source only once all its parts are read, as if one item had read it:
 a part that fails takes the whole source out, and the parts after it are not
-read.
+read. On a store whose reads wait, downloaders copy the files of the coming
+parts to this machine ahead of the workers (downloaders.py).
 
 No document's Markdown goes to the store, and no source's files stay on this
 machine: only the files a conversion needs as files (a Parquet file, whose
-reader seeks) are copied, into a temporary folder removed once the source is
-read; every other file, records and message trees included, is read from
+reader seeks) and those the downloaders fetch ahead are copied, into temporary
+folders removed once the part is read; every other file, records and message trees included, is read from
 the store as a stream or by range (wpt_store's copies_in). The Markdown
 of the chosen documents stays in the cache folder of the store, for the
 next build. With stream=True it goes to a temporary folder instead, removed
@@ -149,7 +150,7 @@ from wpt_utils.programs import code, code_of
 
 from . import choice as choosing
 from . import conversations as chat_files
-from . import download, license_check, pools, reading, store_history, trained, workers
+from . import download, downloaders, license_check, pools, reading, store_history, trained, workers
 from . import tasks as task_files
 from .errors import (DatasetError, PoolError, TokenizerVersionNeeded,
                      TrainedListMissing, VocabularyMissing)
@@ -191,7 +192,7 @@ class Document:
         return self.group or self.id
 
 
-def each_source(function, parts, repo, store, telemetry, progress, args, disk, folder):
+def each_source(function, parts, repo, store, telemetry, progress, args, disk, folder, download=None):
     """(wpt_utils.parallel.Done of the source with [function(source, store,
     *args(part), telemetry=...) of each of its parts], the source's "source"
     span) for each source, in the parts' order, a source's parts (reading.Part)
@@ -208,6 +209,11 @@ def each_source(function, parts, repo, store, telemetry, progress, args, disk, f
     counts any more. The parts before a failed one still run, so the source's
     error does not depend on which part failed first in time.
 
+    download, when given, says what the downloaders copy ahead of each part:
+    the positions, vocabulary and cache folder of downloaders.download. A
+    part then waits for a download under way, runs on the folder it filled,
+    and that folder goes when the part ends.
+
     A part that saves its source's `newest` indexes (Part.indexes) runs
     reading.save_newest instead of function, as a part in every other way:
     the source's other parts start once it saved them or failed with the
@@ -221,7 +227,8 @@ def each_source(function, parts, repo, store, telemetry, progress, args, disk, f
     caller ends it (telemetry.finish) once it has put the source's result
     together. The spans of the sources whose turn never came, because
     something stopped the sources, end with an error saying so."""
-    with workers.Pool(repo, "sources at once", disk=disk, folder=folder) as pool:
+    with (workers.Pool(repo, "sources at once", disk=disk, folder=folder) as pool,
+          downloaders.ahead_of(parts, download, repo, store, telemetry) as ahead):
         telemetry.event("sources.at_once", limit=pool.sizing.limit, why=pool.sizing.why)
         parent, spans = telemetry.current(), {}  # spans: each source begun and not yet given to the caller
         seconds, lock = collections.Counter(), threading.Lock()  # lock: a source's parts run on several threads
@@ -231,9 +238,12 @@ def each_source(function, parts, repo, store, telemetry, progress, args, disk, f
         def run(part):
             source = part.source
             with lock:
-                if failed.get(source.id, part.number) < part.number:
-                    progress.advance()
-                    return None
+                passed = failed.get(source.id, part.number) < part.number
+            if passed:
+                ahead.release(part)
+                progress.advance()
+                return None
+            with lock:
                 if source.id not in spans:
                     with telemetry.within(parent):
                         spans[source.id] = telemetry.begin("source", source=source.id)
@@ -242,7 +252,7 @@ def each_source(function, parts, repo, store, telemetry, progress, args, disk, f
             try:
                 with telemetry.within(span):
                     if not part.indexes:
-                        return pool.call(function, source, store, *args(part), telemetry=telemetry)
+                        return pool.call(function, source, ahead.take(part), *args(part), telemetry=telemetry)
                     pool.call(reading.save_newest, source, store, part.positions, telemetry=telemetry)
                 with lock:
                     indexing.discard(source.id)
@@ -253,6 +263,7 @@ def each_source(function, parts, repo, store, telemetry, progress, args, disk, f
                     indexing.discard(source.id)
                 raise
             finally:
+                ahead.release(part)
                 with lock:
                     seconds[source.id] += time.monotonic() - started
                     span.set(converting_seconds=round(seconds[source.id], 3))
@@ -400,7 +411,8 @@ def read_rounds(repo, recipe, mixture, found, rows, vocabulary, store, cache, sk
         with (telemetry.progress(f"read, round {round_}", len(parts), "parts") as progress,
               contextlib.closing(each_source(reading.read_tokens, parts, repo, store, telemetry, progress,
                                              lambda part: (part.positions, vocabulary, str(cache)),
-                                             lambda part: part.size, tempfile.gettempdir())) as converted):
+                                             lambda part: part.size, tempfile.gettempdir(),
+                                             lambda part: (part.positions, vocabulary, str(cache)))) as converted):
             for done, span in converted:
                 source = done.item
                 with telemetry.finish(span):
@@ -660,7 +672,8 @@ def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skippe
         with (telemetry.progress("vocabulary sample", len(parts), "parts") as progress,
               contextlib.closing(each_source(reading.read_markdown, parts, repo, store, telemetry, progress,
                                              lambda part: (part.positions, str(cache)),
-                                             lambda part: part.size, tempfile.gettempdir())) as converted):
+                                             lambda part: part.size, tempfile.gettempdir(),
+                                             lambda part: (part.positions, None, str(cache)))) as converted):
             for done, span in converted:
                 with telemetry.finish(span):
                     if done.error is not None:

@@ -529,7 +529,7 @@ A build works in three steps, and only the last reads text:
    its files are copied. Their Markdown is kept in packs, compressed files
    on this machine, so the vocabulary and the tokens read each file once.
    A worker fetches the next batch of files while it converts the current
-   batch and turns it into tokens, and never goes further ahead.
+   batch and turns it into tokens, and never goes further ahead by itself.
    A source's documents come out in file path order, whichever packs hold
    them.
 
@@ -590,6 +590,27 @@ files it covers and its code, and any later read, build or round loads it. A
 source with such an entry read in parts starts with one more item in the same
 workers, which saves the index while other sources are read. Its other parts
 wait for that item, and its failure is the source's failure.
+
+On a bucket store, downloaders run ahead of the workers, so that the link
+stays busy across the ends of parts and no worker waits for the store. These
+are worker processes of their own, at most twelve, that take the coming parts
+in the order the workers will. Each copies a part's chosen files, small and
+large, and the license statements its opening reads, into a folder of that
+part under a temporary folder of the store's cache folder. A file a pack
+already holds is not copied, nor any file of a part whose tokens the store
+holds. Every copied file is checked against its sha256 first.
+
+What is downloaded and not yet used stays within 100 GiB, and within a quarter
+of the disk's free bytes when the round starts. At that limit the downloaders
+wait. A part that starts takes its folder, waiting for a download under way;
+a part whose download never started fetches for itself, so a part never waits
+on the limit. A read releases each file once used and the folder goes when the
+part ends. Ending a round, a failure and a stop remove the temporary folder.
+A process killed outright leaves it behind, and the next round on that machine
+removes it.
+A failed download changes only timing: the part reads what the folder lacks
+for itself, and meets the error itself when the error is its own. On a folder
+store the files are local already, and no downloader runs.
 
 ### The download step
 

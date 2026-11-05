@@ -4,6 +4,7 @@ import importlib
 import importlib.machinery
 import importlib.util
 import json
+import queue
 import re
 import shutil
 import threading
@@ -13,13 +14,14 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from wpt_dataset import (build, choice, conversations, kept, license_check, markdown, reading, records, sources, tasks,
-                         trained, workers)
+from wpt_dataset import (build, choice, conversations, downloaders, kept, license_check, markdown, reading, records,
+                         sources, tasks, trained, workers)
 from wpt_dataset.build import build_dataset, document_list, is_held_out
+from wpt_dataset.downloaders import Downloads
 from wpt.dataset import main
 from wpt_dataset.errors import DatasetError, NotDownloaded, PoolError, SourceGone, TokenizerVersionNeeded, TrainedListMissing, VocabularyMissing
-from wpt_dataset.sources import stored_files, upstream_key
-from wpt_store import CorruptObject, Store, open_store
+from wpt_dataset.sources import final_tree, stored_files, upstream_key
+from wpt_store import CorruptObject, Store, kinds, open_store
 from wpt_store.sessions import file_list_bytes
 from wpt_store.shards import read_shard, token_hash
 import wpt_telemetry
@@ -1156,11 +1158,156 @@ def test_a_source_whose_index_fails_is_left_out_as_a_failing_read_is(kit, repo, 
         build_dataset(repo, "small", store, log=lambda _: None, strict=True)
 
 
+@pytest.fixture
+def reads_wait(monkeypatch):
+    """A folder store taken for one whose reads wait, so a build in this test runs its downloaders."""
+    monkeypatch.setattr(kinds.Folder, "ahead", True)
+
+
+def left_ahead(store) -> list[Path]:
+    return list(store.cache.glob("ahead-*"))
+
+
+def ahead_events(store, folder) -> list[dict]:
+    events = [json.loads(line) for line in store.read_record(folder, "events.jsonl").splitlines()]
+    return [event for event in events if event["kind"] == "event" and event["name"] == "sources.ahead"]
+
+
+def test_a_build_with_downloaders_gives_the_dataset_of_one_without_and_records_them(kit, repo, store, tmp_path,
+                                                                                    monkeypatch):
+    # downloading ahead changes timing only: the same lock, dataset id, documents and shards, a file that is not text
+    # and a Markdown another source repeats included, each part accounted for and nothing left on this machine, not
+    # even the folder of a killed build
+    files = {f"en/many-{i:02d}.txt": f"many page {i} tells of a long road. ".encode() * 30 for i in range(30)}
+    files |= {"en/many-00.txt": LF, "en/many-15.txt": b"\x80 not text " * 30}
+    folder, _ = kit.git_project(tmp_path / "many", files=files, executable=set(), symlinks={})
+    many = kit.add_source(repo, store, "example", "many", {"type": "git", "address": folder,
+                                                           "tags": [{"tags": ["en"], "paths": ["**"]}]})
+    other = lines_source(kit, repo, store, tmp_path / "other", "other", {"copy.txt": CRLF})
+    one_pool(kit, repo, 30000)
+    kit.write_recipe(repo, "mixture", "main", {"pools": [{"name": "en", "select": "en", "weight": 1, "max_epochs": 1000}]})
+    monkeypatch.setattr(reading, "BATCH_BYTES", 2048)
+    without = build_dataset(repo, "small", store, log=lambda _: None)
+    lock = repo.generated("lock", "main")
+    (repo.root / repo.relative("lock", "main")).unlink()
+
+    monkeypatch.setattr(kinds.Folder, "ahead", True)
+    ahead = open_store((tmp_path / "ahead").as_uri())
+    kit.download(repo, ahead, many, other)
+    (ahead.cache / "ahead-killed" / "0").mkdir(parents=True)
+    with Telemetry.start(ahead, "wpt dataset build", [], "small", env_file=tmp_path / ".env", environ={}) as telemetry:
+        assert build_dataset(repo, "small", ahead, log=lambda _: None, telemetry=telemetry) == without
+
+    assert repo.generated("lock", "main") == lock
+    assert document_list(ahead, without) == document_list(store, without)
+    one, two = record_of(store, without), record_of(ahead, without)
+    for field in ("sources", "documents", "pools", "contamination", "skipped"):
+        assert two[field] == one[field]
+    assert [s["token_sha256"] for s in two["shards"] + two["held_out_shards"]] == \
+           [s["token_sha256"] for s in one["shards"] + one["held_out_shards"]]
+    events = ahead_events(ahead, telemetry.folder)
+    assert sum(event["values"].get("bytes", 0) for event in events) > 0
+    for event in events:
+        taken = sum(event["values"].get(name, 0) for name in ("ready", "waited", "alone"))
+        assert taken == event["attributes"]["parts"]
+    assert not left_ahead(ahead)
+
+
+def test_a_part_read_from_its_download_reads_nothing_more_from_the_bundles(kit, repo, store, tmp_path, monkeypatch):
+    # a small file, a file read alone as a stream, the records file read as a stream and the license statement are
+    # all on this machine when the part starts, and it gives what a read of its own gives
+    upstream, _ = kit.git_project(tmp_path / "revisions", executable=set(), symlinks={}, files={
+        **FOUR_PARTS, "a-note.txt": b"a note of a line. " * 100, "b-large.txt": b"a large file. " * 300})
+    sid = kit.add_source(repo, store, "example", "revisions", {
+        "type": "git", "address": upstream, "tags": [{"tags": ["en"], "paths": ["**"]}],
+        "formats": [{"format": "text", "paths": ["*.txt"]},
+                    {"format": "records", "paths": ["*.ndjson"], "text": "text", "id": "id", "newest": "date"}]})
+    one_pool(kit, repo, 30000)
+    _, vocabulary, _ = build.build_tokenizer(repo, "small", store, log=lambda _: None)
+    reads_here(monkeypatch, repo)
+    monkeypatch.setattr(reading, "FETCHED_AT_MOST", 2000)
+    source = repo.source(sid)
+    positions = list(range(len(final_tree(source, store)[0])))
+    alone = reading.read_tokens(source, store, positions, vocabulary, tmp_path / "alone", None)
+    assert downloaders.download(source, store, positions, vocabulary, tmp_path / "ahead", tmp_path / "known",
+                                Telemetry.off()) == 0  # a part whose tokens are saved reads nothing: nothing to download
+    for ref in (store.root / "refs" / "source-tokens").iterdir():
+        ref.unlink()
+
+    folder = tmp_path / "part"
+    copied = downloaders.download(source, store, positions, vocabulary, tmp_path / "ahead", folder, Telemetry.off())
+    assert copied > 2000
+
+    def refused(*_):
+        raise AssertionError("read from the bundles")
+
+    monkeypatch.setattr(Store, "_range", refused)
+    monkeypatch.setattr(Store, "_fetch_frames", refused)
+    assert reading.read_tokens(source, downloaders.Downloaded(store, folder), positions, vocabulary,
+                               tmp_path / "ahead", None) == alone
+
+
+def test_a_failed_download_changes_nothing_and_leaves_nothing_behind(kit, repo, store, corpus, tmp_path, reads_wait):
+    # the downloader meets the broken bundle first: the source's error is still the one a read of its own meets, in a
+    # build that goes on past it and in one that stops, and no downloaded file stays
+    setup_recipes(kit, repo, store, corpus, total_tokens=2000)
+    first = build_dataset(repo, "small", store, log=lambda _: None)
+    folder, _ = kit.git_project(tmp_path / "other", files={"en/other.txt": b"owls hunt at night. " * 30},
+                                executable=set(), symlinks={})
+    broken = kit.add_source(repo, store, "example", "broken", {"type": "git", "address": folder,
+                                                               "tags": [{"tags": ["en"], "paths": ["**"]}]})
+    [placed] = {placed for _, placed in stored_files(upstream_key(repo.source(broken)), store).values()}
+    for bundle in (store.root / "bundles").glob(f"{placed.bundle}*"):
+        bundle.write_bytes(bytes(b ^ 0xFF for b in bundle.read_bytes()))  # every byte changed
+
+    with pytest.raises(CorruptObject):
+        build_dataset(repo, "small", store, log=lambda _: None, strict=True)
+    assert not left_ahead(store)
+    record = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))
+    assert [s["source"] for s in record["skipped"]] == [broken]
+    assert record["skipped"][0]["error"].startswith("CorruptObject: ")
+    assert record["documents"] == record_of(store, first)["documents"]
+    assert not left_ahead(store)
+
+
+def test_the_limit_stops_the_downloaders_until_a_part_is_used_and_no_part_waits_on_it(tmp_path):
+    # a part that holds the limit frees it when it ends; a part whose turn comes while the downloaders wait reads for
+    # itself at once, since the parts that hold the limit may be waiting for its place among the workers
+    store = object()
+    parts = [reading.Part(types.SimpleNamespace(id=name), [0], 6) for name in "abcd"]
+    downloads = Downloads(store, Telemetry.off(), parts, tmp_path, limit=10)
+    given = queue.Queue()
+
+    def fed():
+        for part in downloads.upcoming(parts):
+            downloads.run(part, lambda folder: folder.mkdir() or part.size)
+            given.put(part)
+        given.put(None)
+
+    feeding = threading.Thread(target=fed)
+    feeding.start()
+    assert given.get(timeout=60) is parts[0]
+    with pytest.raises(queue.Empty):
+        given.get(timeout=0.2)  # 6 + 6 bytes would pass the limit
+    assert downloads.take(parts[1]) is store
+
+    assert downloads.take(parts[0]).folder == tmp_path / "0"
+    downloads.release(parts[0])
+    assert given.get(timeout=60) is parts[2]
+    assert not (tmp_path / "0").exists() and (tmp_path / "2").is_dir()
+    downloads.release(parts[1])
+    downloads.release(parts[2])
+    assert given.get(timeout=60) is parts[3]
+    assert given.get(timeout=60) is None
+    feeding.join()
+    assert downloads.counts["alone"] == 1 and downloads.counts["ready"] == 1
+
+
 class ThreadsAsWorkers:
     """A workers.Pool that runs each call on the asking thread and always lets another start, so a test can hold a
     call back. What a real worker process adds, the build tests above go through."""
 
-    def __init__(self, repo, what, disk=None, folder=None):
+    def __init__(self, repo, what, disk=None, folder=None, network=None):
         self.sizing = types.SimpleNamespace(limit=4, why="", need=lambda item: 0, may_start=lambda *measures: True)
 
     def __enter__(self):
@@ -1291,8 +1438,8 @@ def test_the_parts_after_one_that_failed_are_not_read(kit, repo, store, tmp_path
 class PoolHere:
     """workers.Pool on threads alone, two at once: a worker process can share no event with a test."""
 
-    def __init__(self, repo, what, disk=None, folder=None):
-        self.sizing = Sizing(what, Machine(3), disk=disk, folder=folder)
+    def __init__(self, repo, what, disk=None, folder=None, network=None):
+        self.sizing = Sizing(what, Machine(3), disk=disk, folder=folder, network=network)
 
     def __enter__(self):
         return self
