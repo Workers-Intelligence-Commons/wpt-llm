@@ -24,6 +24,7 @@ if [ "${SKYPILOT_NUM_NODES:-1}" -gt 1 ]; then
     export WPT_WORKER_PRIVATE
     echo "wpt-node $rank $WPT_WORKER_PRIVATE"
 fi
-pip install --no-cache-dir --quiet uv==0.13.5
+# the image's Python refuses a plain install (PEP 668), and this machine exists only for the worker
+pip install --no-cache-dir --quiet --break-system-packages uv==0.13.5
 exec uv run --no-project --python 3.14 --with "cryptography>=46,<51" python -c \
     "import sys; sys.path.insert(0, '/start'); from wpt_worker.server import main; sys.exit(main())"
