@@ -841,9 +841,9 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
     # the text's own id orders and picks its rows. It names the sources that hold documents only, no part and no
     # skipped source, so a change to the conversations or tasks (their sources included), or a source left out that
     # held no documents, never changes the text
+    holding = {d.source for d in documents}
     text_id = fingerprint({**{k: v for k, v in text_inputs.items() if k != "skipped"},
-                           "sources": {sid: info for sid, info in sources_info.items()
-                                       if sid in {d.source for d in documents}}})
+                           "sources": {sid: info for sid, info in sources_info.items() if sid in holding}})
     # each part by its object only when it holds something, so earlier ids stay the same
     dataset_id = fingerprint({**text_inputs, **{part: found["object"] for part, found in steps_read.items()}})
     known = store.get_ref("datasets", dataset_id)
