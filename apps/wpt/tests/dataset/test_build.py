@@ -151,7 +151,6 @@ def test_held_out_documents_never_reach_training(kit, repo, store, tmp_path):
     trained = {doc for _, _, doc, _, _ in rows_of(store, record["shards"])}
     assert held and trained and not held & trained
     assert record["documents"]["held_out"] == len(held)
-    assert record["contamination"]["held_out_documents"] == len(held)
 
     # the build keeps, found from the
     # dataset id, every document's id, Markdown sha256 and tag, so a task
@@ -320,7 +319,7 @@ def test_a_streamed_build_gives_the_same_dataset_and_keeps_no_markdown(kit, repo
 
     assert streamed_id == normal_id
     streamed, normal = record_of(streamed_store, streamed_id), record_of(normal_store, normal_id)
-    for part in ("tokenizer", "sources", "documents", "pools", "contamination"):
+    for part in ("tokenizer", "sources", "documents", "pools"):
         assert streamed[part] == normal[part]
     assert [s["token_sha256"] for s in streamed["shards"] + streamed["held_out_shards"]] == \
            [s["token_sha256"] for s in normal["shards"] + normal["held_out_shards"]]
@@ -554,7 +553,7 @@ def test_sources_converted_at_once_give_the_dataset_converted_one_at_a_time(kit,
     (one_id, one, one_list), (many_id, many, many_list) = built[1], built[16]
     assert many_id == one_id and many_list == one_list
     assert one["documents"]["duplicates_removed"] == 3 and len(one["sources"]) == 4
-    for part in ("sources", "documents", "pools", "contamination"):
+    for part in ("sources", "documents", "pools"):
         assert many[part] == one[part]
     assert [s["token_sha256"] for s in many["shards"] + many["held_out_shards"]] == \
            [s["token_sha256"] for s in one["shards"] + one["held_out_shards"]]
@@ -1085,7 +1084,7 @@ def test_a_source_read_in_parts_gives_the_dataset_of_one_read_and_a_saved_part_i
     assert repo.generated("lock", "main") == lock
     assert document_list(split, whole) == document_list(store, whole)
     one, parts = record_of(store, whole), record_of(split, whole)
-    for field in ("sources", "documents", "pools", "contamination", "skipped"):
+    for field in ("sources", "documents", "pools", "skipped"):
         assert parts[field] == one[field]
     assert [s["token_sha256"] for s in parts["shards"] + parts["held_out_shards"]] == \
            [s["token_sha256"] for s in one["shards"] + one["held_out_shards"]]
@@ -1202,7 +1201,7 @@ def test_a_build_with_downloaders_gives_the_dataset_of_one_without_and_records_t
     assert repo.generated("lock", "main") == lock
     assert document_list(ahead, without) == document_list(store, without)
     one, two = record_of(store, without), record_of(ahead, without)
-    for field in ("sources", "documents", "pools", "contamination", "skipped"):
+    for field in ("sources", "documents", "pools", "skipped"):
         assert two[field] == one[field]
     assert [s["token_sha256"] for s in two["shards"] + two["held_out_shards"]] == \
            [s["token_sha256"] for s in one["shards"] + one["held_out_shards"]]
@@ -1927,46 +1926,3 @@ def test_the_copies_of_the_shard_stage_are_removed_also_when_it_or_a_copy_fails(
         with packed.local(list(expected), Telemetry.off()):
             pytest.fail("the block must not run when a copy failed")
     assert copies_of(store, packed) == []
-
-
-def test_the_contamination_searched_in_worker_processes_is_the_plain_definition_s(repo, store, tmp_path, monkeypatch):
-    # a run the held-out documents share with several training documents pairs them with the first of those in order
-    def words(start):
-        return " ".join(f"w{i}" for i in range(start, start + 30)).encode()
-
-    held_texts = [words(0), words(100), words(200)]
-    training_texts = [words(500), words(10), words(0) + b" x y z", words(205), words(110), words(10)]
-    tokenizer = Tokenizer.train(held_texts + training_texts, 516)
-    vocabulary = store.put_bytes(tokenizer.to_bytes())
-    packed = build.PackedDocuments(store)
-    held_out = [build.Document(f"h{i}", "s", "0", frozenset()) for i in range(3)]
-    training = [build.Document(f"t{i}", "s", "0", frozenset()) for i in range(6)]
-    for document, text in zip(held_out + training, held_texts + training_texts):
-        tokens = np.asarray(tokenizer.encode(text) + [Tokenizer.END], dtype="<u4").tobytes()
-        packed.add(document.id, store.put_bytes(tokens), {"start": 0, "tokens": len(tokens) // 4,
-                                                          "token_sha256": hashlib.sha256(tokens).hexdigest()})
-
-    def runs(text):
-        words = text.split()
-        return {b" ".join(words[i:i + build.NGRAM]) for i in range(len(words) - build.NGRAM + 1)}
-
-    owner = {}  # the definition: the first held-out document with each run, then the first training document with it
-    for document, text in zip(held_out, held_texts):
-        for run in runs(text):
-            owner.setdefault(run, document.id)
-    expected = {}
-    for document, text in zip(training, training_texts):
-        for run in runs(text):
-            if run in owner:
-                expected.setdefault(owner[run], document.id)
-    assert expected == {"h0": "t1", "h1": "t4", "h2": "t3"}  # h0's runs are also in t2 and t5
-
-    def texts(chosen):
-        return (tokenizer.decode(packed[d.id].tolist()) for d in chosen)
-
-    monkeypatch.setattr(build, "CONTAMINATION_BATCH_TOKENS", 1)  # one document per batch, so batches end in any order
-    with packed.local([d.id for d in held_out + training], Telemetry.off()):
-        report = build._recorded_contamination(repo, training, held_out, packed, texts, vocabulary, tmp_path,
-                                               Telemetry.off())
-    assert report == {"ngram_words": build.NGRAM, "held_out_documents": 3, "overlapping": 3,
-                      "examples": [{"held_out": h, "training": t} for h, t in sorted(expected.items())]}

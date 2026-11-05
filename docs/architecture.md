@@ -75,6 +75,7 @@ calls the same services.
 | license check | changes nothing: given a source's entries, its files or records and the license texts, it answers which entry covers each file or record, and for each entry whether the statement at its place matches a text it expects, which one, and that text's decision | `license_check.py` |
 | shared checks | change nothing; defined once and used by every command that applies them | `checks.py`, `erasure.py` |
 | build | asks the store for bytes, the shared checks and the license check; decides what is left out; writes its results to the store; never contacts upstream | `build.py`, `kept.py` |
+| contamination check | reads a built dataset's shards and saves a report in the store; removes nothing, and nothing later reads the report | `contamination.py` |
 | task builder | builds pointer tasks from stored bytes, through the service layer | `builder.py` |
 
 A controller asks a service; download asks protocols and the store; the
@@ -560,9 +561,15 @@ yet saved. The shard stage copies every token object its rows lie in to this
 machine first, several at once (the copy counts its disk as `wpt_utils.parallel`
 does), writes the training and held-out shards from the copies, and removes
 the copies afterwards, also when the stage fails; the shards are the same as
-if each row were read by range from the store. The contamination check runs
-before the copies go: it reads from them too, and the training documents are
-searched in worker processes, as many at once as `wpt_utils.parallel` allows.
+if each row were read by range from the store.
+
+`wpt dataset contamination` (`contamination.py`) reads a built dataset's
+shards, one at a time, each copied to a temporary folder and removed once
+read, also when the command fails. The training documents are searched in
+worker processes, as many at once as `wpt_utils.parallel` allows. Its report
+goes under the ref `dataset-contamination/<id>`. `build.py` does not import
+it, so its code stays out of the dataset id
+([data-selection.md](data-selection.md), "Held-out text and contamination").
 
 `--plan` on `build` and `build-tokenizer` stops after the first choice and
 prints what the build would read and compute: each pool's documents and
@@ -938,7 +945,7 @@ The store also keeps the cut key that erasure cuts are matched under
 matches no cut and uses no locked vocabulary.
 
 The store also holds the record of every run of `wpt dataset download`,
-`check --fetch`, `manifest`, `build` and `build-tokenizer`, `wpt train`,
+`check --fetch`, `manifest`, `build`, `build-tokenizer` and `contamination`, `wpt train`,
 `wpt eval` and `wpt manager`: one folder per run under
 `records/`, written by name rather than by content, each file compressed
 (a local store adds a record file's lines to one plain file while the
@@ -1118,7 +1125,7 @@ tree and starting jobs. Nothing is committed by `wpt web`, so every change shows
 
 | Package | Role |
 | --- | --- |
-| `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; the service layer (`repo.py`), the only code that reads or writes `data/`; a source as read (`source_data.py`); the protocols (`protocols/`), the download step (`download.py`), the license check (`license_check.py`), the shared checks (`checks.py`, `erasure.py`), the build (`build.py`, `kept.py`); the task builder (`builder.py`, run by `scripts/build_tasks.py`) |
+| `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; the service layer (`repo.py`), the only code that reads or writes `data/`; a source as read (`source_data.py`); the protocols (`protocols/`), the download step (`download.py`), the license check (`license_check.py`), the shared checks (`checks.py`, `erasure.py`), the build (`build.py`, `kept.py`); the contamination check (`contamination.py`); the task builder (`builder.py`, run by `scripts/build_tasks.py`) |
 | `wpt-store` | the content-addressed store (its kinds: a local folder or S3), its compression, its sessions with their bundles, the store database, its record folders, the model folders kept under a run's name (`models/<name>`), and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules; what the store database says (`listing.py`), and a kept model folder copied out, checked against its sha256s (`models.py`) |
 | `wpt-telemetry` | the record of one command run in the store, sent live to an OpenTelemetry backend when one is set ([observability.md](observability.md)) |
 | `wpt-tokenizer` | the byte-level BPE tokenizer, Rust inside |

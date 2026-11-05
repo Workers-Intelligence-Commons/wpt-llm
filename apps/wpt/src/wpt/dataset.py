@@ -49,6 +49,10 @@
                                           build (or find) the data of a model recipe (NAME, or
                                           SERIES:SIZE for a size of a series: every size of a
                                           series has the same data); prints the dataset id
+    wpt dataset contamination DATASET_ID  find the runs of 13 words a built dataset's held-out
+                                          documents share with its training documents, save the
+                                          report in the store and print it; a dataset with a
+                                          report prints that report; run by hand, reports only
     wpt dataset migrate                   rewrite data files to the current shapes
 
 Reading and writing the data files, through the service layer (wpt_dataset.repo;
@@ -147,7 +151,8 @@ trains; with --strict (or WPT_STRICT=1) any failing source stops it
 instead. A missing program stops it either way. A build is
 recorded in the store, in its own folder under records/ (wpt_telemetry;
 docs/observability.md); when that record
-cannot be written, it stops with exit code 3. A download that fails for a reason that may pass (timeout, cut
+cannot be written, it stops with exit code 3. So is a contamination check,
+whose findings never set the exit code. A download that fails for a reason that may pass (timeout, cut
 connection, server error) is tried again, up to 5 times (see retry.py); a
 session records each new try.
 """
@@ -163,7 +168,7 @@ from wpt_telemetry import RECORD_FAILED, RecordError
 from wpt_utils.lines import ERROR, WARNING, say
 from wpt_utils.programs import MissingTool
 
-from wpt_dataset import build, checking, download, edit, manifest, migrate, unusable
+from wpt_dataset import build, checking, contamination, download, edit, manifest, migrate, unusable
 from wpt_dataset.commits import check_commits
 from wpt_dataset.errors import DatasetError, InvalidFile
 from wpt_dataset.repo import KINDS, Repo, empty_source, line_number, source_id
@@ -352,6 +357,11 @@ def cmd_tokenizer_check(args, repo):
 def cmd_build(args, repo):
     build.run(repo, args.name, _store(repo), args.arguments, stream=args.stream, strict=args.strict,
               plan=args.plan)
+    return 0
+
+
+def cmd_contamination(args, repo):
+    contamination.run(repo, args.dataset, _store(repo), args.arguments)
     return 0
 
 
@@ -678,6 +688,9 @@ def main(argv=None):
     build.add_argument("--strict", action="store_true", default=strict, help=strict_help)
     build.add_argument("--plan", action="store_true", help=plan_help)
     build.set_defaults(run=cmd_build)
+    checked = commands.add_parser("contamination")
+    checked.add_argument("dataset", metavar="DATASET_ID")
+    checked.set_defaults(run=cmd_contamination)
     commands.add_parser("migrate").set_defaults(run=cmd_migrate)
     _data_commands(commands)
     args = parser.parse_args(argv)

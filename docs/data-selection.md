@@ -119,8 +119,8 @@ data. Model size is the recipe's `model` part.
 
 The build record (in the store) lists the sources and their trees, the
 download each source's files came from (its session and time), the pools
-with their documents, tokens, shares and passes, the shards, the
-contamination report and the tool versions used. It also gives a
+with their documents, tokens, shares and passes, the shards and the tool
+versions used. It also gives a
 fingerprint (a sha256) for each part the training steps read: `text` (the
 shards, training and held-out), and `conversations` and `tasks` when the
 dataset holds some. Each holds the vocabulary too, since every part becomes
@@ -171,12 +171,18 @@ used with the repository at the commit that built it. Nothing
 falls back and nothing is rebuilt. A dataset the store does not hold at
 all is refused the same way, the message saying it is not in the store.
 
-Contamination is evaluation text that also appears in training text. The
-build checks held-out documents for runs of 13 words also found in training
-documents (as in the GPT-3 paper) and **reports** them; it removes nothing,
-so training data never depends on evaluation sets. External benchmarks are
-not part of this repository. Training on a benchmark follows the normal
-license rules.
+Contamination is evaluation text that also appears in training text.
+`wpt dataset contamination DATASET_ID`, run by hand on a built dataset, checks
+held-out documents for runs of 13 words also found in the training documents
+of its shards (as in the GPT-3 paper) and **reports** them; it removes
+nothing, so training data never depends on evaluation sets. The report is
+saved in the store under the dataset, and it takes no part in the dataset id
+or in any later step. An overlap is a finding, not a failure: it never sets
+the command's exit code. A dataset with a saved report prints that report
+and is not checked again. A report inside the dataset's own record counts as
+saved; that one covers every training document, also those no pool drew.
+External benchmarks are not part of this repository. Training on a benchmark
+follows the normal license rules.
 
 ## Languages and translation
 

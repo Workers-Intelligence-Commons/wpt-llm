@@ -2,6 +2,8 @@
 and trains a recipe through a local gpu worker, and keeps the model in the
 store under the run's name."""
 
+import json
+
 import pytest
 
 from wpt.manager import RUN_FILE, main, mount_point
@@ -58,6 +60,20 @@ def test_a_dataset_the_settings_name_is_trained_on_with_no_download_or_build(bui
         "manager.workers", "manager.train", "manager.model"]
     [train] = built.records("wpt train")
     assert built.dataset_id in train.start["arguments"]
+
+
+def test_a_dataset_whose_record_holds_a_contamination_report_is_trained_on_as_it_is(built, monkeypatch, capsys):
+    record = json.loads(built.store.get_bytes(built.store.get_ref("datasets", built.dataset_id)))
+    report = {"ngram_words": 13, "held_out_documents": 1, "overlapping": 0, "examples": []}
+    built.store.set_ref("datasets", built.dataset_id,
+                        built.store.put_bytes(json.dumps({**record, "contamination": report}).encode()))
+    monkeypatch.setenv("WPT_RECIPE", "d")
+    monkeypatch.setenv("WPT_DATASET", built.dataset_id)
+    main([])
+    [run] = built.records("wpt manager")
+    assert run.end["status"] == "succeeded"
+    [train] = built.records("wpt train")
+    assert built.dataset_id in train.start["arguments"] and train.end["status"] == "succeeded"
 
 
 def test_a_dataset_the_store_does_not_hold_stops_the_run_before_anything_starts(built, monkeypatch, capsys):

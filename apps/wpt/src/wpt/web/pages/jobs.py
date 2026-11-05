@@ -41,6 +41,8 @@ JOBS = {
                                 "vocabulary", None),
     "dataset/build": (("dataset", "build"), "build (or find) the data of a model recipe; prints the dataset id",
                       None),
+    "dataset/contamination": (("dataset", "contamination"), "the runs of words a dataset's held-out documents share "
+                              "with its training documents, saved in the store", None),
     "dataset/migrate": (("dataset", "migrate"), "rewrite data files to the current shapes", None),
     "dataset/kinds": (("dataset", "kinds"), "the kinds of data files, and who writes each", None),
     "dataset/list": (("dataset", "list"), "the names of the files of a kind", None),
