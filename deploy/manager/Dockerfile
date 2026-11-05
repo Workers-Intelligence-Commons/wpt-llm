@@ -1,6 +1,6 @@
 # The wpt manager's image (compose.yaml beside it): Python, uv, the docker
 # command for the sandboxes, SkyPilot's sky command for the gpu workers it
-# rents, and what the commands it runs need (git and mercurial for
+# rents with the rsync and ssh it provisions them through, and what the commands it runs need (git and mercurial for
 # downloads, GnuPG for signed commits, rustup for the tokenizer, built from
 # source with the toolchain rust-toolchain.toml names).
 # The repository is not in the image: Compose mounts the checkout, and uv
@@ -12,7 +12,7 @@ FROM docker:29.9.2-cli@sha256:5e6baf67325a79f64ed3bed6863954d5e05d0f3d4e57cbdb14
 FROM python:3.14-slim-trixie@sha256:35caba83af2fe6da9a5d922f9b0156f21d1246a48278c58a08bd253303ba42e8
 COPY --from=docker /usr/local/bin/docker /usr/local/bin/docker
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends git mercurial gnupg rustup build-essential ca-certificates \
+    && apt-get install -y --no-install-recommends git mercurial gnupg rustup build-essential ca-certificates rsync openssh-client \
     && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir uv==0.13.5
 # SkyPilot in an environment of its own, on the Python it supports, with every cloud it reaches
