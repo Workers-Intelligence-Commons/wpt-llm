@@ -24,6 +24,7 @@ resources:
 file_mounts:
   /start/start.sh: deploy/gpu-worker/start.sh
   /start/wpt_worker: packages/wpt-worker/src/wpt_worker
+  /start/wpt_utils: packages/wpt-utils/src/wpt_utils
 
 envs:
   WPT_WORKER_FOLDER: /tmp/wpt-worker

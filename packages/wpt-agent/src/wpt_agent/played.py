@@ -24,11 +24,13 @@ rate it.
 
 import difflib
 import hashlib
+import sys
 from dataclasses import dataclass
 
 from wpt_dataset.errors import DatasetError
 from wpt_dataset.manifest import SYMLINK, glob_match_any
 from wpt_dataset.repo import Repo
+from wpt_utils.lines import WARNING, say
 
 from . import images
 from .check import CORRECT, score
@@ -159,7 +161,7 @@ def play(task, offers, keep, *, tokenizer, built, sampling: Sampling, check_seco
                 except SandboxError as error:
                     outcome = error
             if why and not isinstance(outcome, SandboxError):  # score() gives "" with a score
-                print(f"{name}: {task.id}: no score, counted as 0: {why}")
+                say(f"{name}: {task.id}: no score, counted as 0: {why}", WARNING, sys.stdout)
             kept.append(keep(i + 1, outcome))  # its line, before the next attempt is scored
     finally:
         for box in boxes.values():  # left open only when an error stops the attempts

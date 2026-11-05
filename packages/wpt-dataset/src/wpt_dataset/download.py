@@ -90,6 +90,7 @@ from wpt_store.database import DOWNLOADED, FAILED, REUSED  # the store database'
 from wpt_store.local_files import LocalFile, unowned
 from wpt_telemetry import Telemetry, set_ref
 from wpt_utils.files import sha256_file
+from wpt_utils.lines import say
 from wpt_utils.parallel import Done, Sizing, each as each_item
 from wpt_utils.programs import MissingTool, code_name, repository
 
@@ -212,7 +213,7 @@ class Bundled:
         return self.staging.get_bytes(sha256)
 
 
-def each(work, ids, address_of, log=print):
+def each(work, ids, address_of, log=say):
     """[wpt_utils.parallel.Done] of work(id) for every id, in the ids'
     order, as many at once as wpt_utils.parallel allows and each site's
     limit (address_of(id) gives its address, None when it has none). A
@@ -313,7 +314,7 @@ def run(repo, ids, store, command: str, arguments, stream=False) -> list[Done]:
             return download(repo, ids, store, opened, telemetry, log=telemetry.log)
 
 
-def download(repo, ids, store, session, telemetry=None, log=print) -> list[Done]:
+def download(repo, ids, store, session, telemetry=None, log=say) -> list[Done]:
     """The download step for the sources ids names, into session (see the
     module's docstring): each one's Done, whose value is its outcome
     (one)."""

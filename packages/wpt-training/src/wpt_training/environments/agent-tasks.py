@@ -85,6 +85,7 @@ import torch
 
 from wpt_model import Routes
 from wpt_training import Environment, Stage, StepFailed, agentic
+from wpt_utils.lines import WARNING
 
 GIVES = "attempts"
 REWARDS = ("weighed", "shorter")
@@ -194,7 +195,7 @@ class AgentTasks:
             if best <= 0:
                 self.data.log(f"{self.data.step}: {task.id}: left out, "
                               + (f"its {len(scored)} reference attempts all scored 0" if scored
-                                 else "Docker failed every reference attempt"))
+                                 else "Docker failed every reference attempt"), WARNING)
                 continue
             lengths = [length for score, length in scored if score >= best]
             references[task.id] = (best, sum(lengths) / len(lengths))
@@ -248,7 +249,7 @@ class AgentTasks:
             group = [kept for kept in played if kept.reward is not None]
             round_.rewards += [kept.reward for kept in group]
             if len(group) < 2:
-                self.data.log(f"{self.data.step}: {task.id}: group skipped, {len(group)} attempt left")
+                self.data.log(f"{self.data.step}: {task.id}: group skipped, {len(group)} attempt left", WARNING)
                 self.small += 1
                 outcome = "skipped: fewer than 2 attempts"
             elif len({kept.reward for kept in group}) == 1:  # every advantage is 0: nothing to learn

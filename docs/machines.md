@@ -29,7 +29,8 @@ decodes, and sends the stop tokens the job needs.
 Started with `python -m wpt_worker` (`deploy/gpu-worker/compose.yaml`; see
 "Starting a gpu worker by hand"), it makes its own certificate, kept in its folder
 so the certificate stays the same from one start to the next, and prints
-its key:
+its key, after the time and level every printed line starts with
+([observability.md](observability.md), "Printed lines"):
 
 ```
 wpt-worker://TOKEN@HOST:PORT#PIN
@@ -59,13 +60,15 @@ neither side ever runs what the other sends.
 ### Starting a gpu worker by hand
 
 `deploy/gpu-worker/compose.yaml` starts a worker on any machine with
-Docker. The worker's server files are two things the person copies from the
+Docker. The worker's server files are three things the person copies from the
 repository to the machine, beside the Compose file: `start.sh`
-(`deploy/gpu-worker/`) and the folder `wpt_worker`
-(`packages/wpt-worker/src/`). Compose mounts both read-only from there into
-the container. Without `wpt_worker`, `start.sh` says so and exits with
-code 2. There is no mount of a checkout: the libraries the jobs need come
-from the manager's checkout, which the manager sends (below).
+(`deploy/gpu-worker/`), the folder `wpt_worker`
+(`packages/wpt-worker/src/`) and the folder `wpt_utils`
+(`packages/wpt-utils/src/`), for the form of its printed lines. Compose mounts
+them read-only from there into the container. Without `wpt_worker` or
+`wpt_utils`, `start.sh` says so and exits with code 2. There is no mount of a
+checkout: the libraries the jobs need come from the manager's checkout, which
+the manager sends (below).
 
 The main file asks for no GPU and installs the CPU build of PyTorch. A GPU
 kind adds a small file of its own, by the command or by a setting:
@@ -204,8 +207,8 @@ four operations: rent machines running gpu workers, give their addresses,
 stop them, and say what they cost (`apps/wpt/src/wpt/manager/rental.py`). SkyPilot
 (Apache-2.0, its `sky` command, in the manager's image) is one
 implementation, from `deploy/gpu-worker/skypilot.yaml`. It starts the
-worker with SkyPilot's own file mounts, which copy `start.sh` and
-`wpt_worker` onto the machine. Code of our own for a provider SkyPilot
+worker with SkyPilot's own file mounts, which copy `start.sh`, `wpt_worker`
+and `wpt_utils` onto the machine. Code of our own for a provider SkyPilot
 lacks or handles badly is another implementation of the same interface.
 
 Several workers at one provider are rented as one cluster in one request,

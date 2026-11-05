@@ -242,7 +242,7 @@ def test_two_identical_steps_of_one_recipe_draw_other_conversations_and_tasks(bu
     def task_orders(number):
         found, _ = environment({"rounds": 4, "tasks_per_update": 2}, [fake_task(f"t{i}") for i in range(6)],
                                lambda *_: [])
-        found.data = SimpleNamespace(step="x", log=lambda _: None, telemetry=Telemetry.off(),
+        found.data = SimpleNamespace(step="x", log=lambda *_: None, telemetry=Telemetry.off(),
                                      step_seed=step_seed(1337, number))
         found.begin()
         return found.orders
@@ -456,11 +456,11 @@ def tiny_image(request, docker_runs):
         if kept and kept["key"] == key:
             (folder / "lock.json").write_text(kept["lock"])
             (folder / "licenses.json").write_text(kept["licenses"])
-            return images.build(root, "tiny", log=lambda _: None)  # at once when Docker has it
+            return images.build(root, "tiny", log=lambda *_: None)  # at once when Docker has it
         if kept:
             subprocess.run(["docker", "rmi", "-f", kept["tag"]], capture_output=True)
-        images.lock(root, "tiny", force=True, log=lambda _: None)
-        tag = images.build(root, "tiny", log=lambda _: None)
+        images.lock(root, "tiny", force=True, log=lambda *_: None)
+        tag = images.build(root, "tiny", log=lambda *_: None)
         cache.set(TINY_IMAGE, {"key": key, "tag": tag, "lock": (folder / "lock.json").read_text(),
                                "licenses": (folder / "licenses.json").read_text()})
         return tag
@@ -652,7 +652,7 @@ def environment(settings, tasks, plays):
     found.settings = {**AGENT_TASKS.SETTINGS, **settings}
     found.tasks, found.references, found.round = tasks, None, AGENT_TASKS._Round()
     found.updates = found.equal = found.small = 0
-    found.data = SimpleNamespace(step="x", log=lambda _: None, telemetry=Telemetry.off(), step_seed=0)
+    found.data = SimpleNamespace(step="x", log=lambda *_: None, telemetry=Telemetry.off(), step_seed=0)
     found.lines = {"folder": None, "count": 0}
     player = FakePlayer(plays)
     found._player = lambda: player

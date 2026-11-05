@@ -17,7 +17,11 @@ names"): 4,619 adjectives and 2,497 animals, about 11.5 million names.
 import os
 import secrets
 import subprocess
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "packages" / "wpt-utils" / "src"))  # no library here
+from wpt_utils.lines import bare, say
 
 ROOT = Path(__file__).resolve().parent.parent
 NAMES = ROOT / "scripts" / "names"
@@ -31,13 +35,13 @@ def words(name):
 
 def main():
     adjectives, animals = words("adjectives"), words("animals")
-    taken = {name for kind in ("model", "series")
-             for name in subprocess.run([UV, "run", "wpt", "dataset", "list", kind], cwd=ROOT, env=ENVIRON, check=True,
-                                        capture_output=True, text=True).stdout.split()}
+    taken = {bare(line) for kind in ("model", "series")
+             for line in subprocess.run([UV, "run", "wpt", "dataset", "list", kind], cwd=ROOT, env=ENVIRON, check=True,
+                                        capture_output=True, text=True).stdout.splitlines()}
     while True:
         name = f"{secrets.choice(adjectives)}-{secrets.choice(animals)}"
         if name not in taken:
-            print(name)
+            say(name)
             return
 
 

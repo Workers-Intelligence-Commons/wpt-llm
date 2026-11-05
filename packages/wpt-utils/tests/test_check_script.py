@@ -6,6 +6,8 @@ from pathlib import Path
 
 import pytest
 
+from wpt_utils.lines import bare
+
 SCRIPT = Path(__file__).resolve().parents[3] / "scripts" / "check.py"
 
 
@@ -86,7 +88,7 @@ def test_the_working_tree_mode_runs_every_check_but_the_commits_and_says_so(chec
         check.main()
     assert ended.value.code == 0 and asked == [True]
     out = capsys.readouterr().out
-    assert [line.split()[1] for line in out.splitlines() if line.startswith("passed")] == [
+    assert [line.split()[1] for line in map(bare, out.splitlines()) if line.startswith("passed")] == [
         "lock", "tests", "rust", "data", "sources"]
     assert "left out  commits" in out
     assert not any("check-commits" in command for command in ran)

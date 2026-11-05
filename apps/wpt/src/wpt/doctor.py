@@ -27,6 +27,7 @@ from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
 from wpt_store import local_folder, read_env_file, store_from_settings
 from wpt_store.listing import listing
+from wpt_utils.lines import ERROR, INFO, say
 from wpt_utils.programs import MissingTool, program
 
 MISSING, REFUSED = 1, 2
@@ -139,7 +140,7 @@ def _main(argv) -> int:
     try:
         root = Repo.find().root
     except DatasetError as error:
-        print(f"{type(error).__name__}: {error}", file=sys.stderr)
+        say(f"{type(error).__name__}: {error}", ERROR)
         return REFUSED
     environ = {**read_env_file(root / ".env"), **{key: value for key, value in os.environ.items() if value}}
     found, store = check_store(root, environ)
@@ -149,9 +150,10 @@ def _main(argv) -> int:
         found += check_attention(device, environ)
     found += check_rust() + check_disk(root, store) + check_checkout(root)
     for good, text, fix in found:
-        print(f"{'ok' if good else 'MISSING'}  {text}")
+        level = INFO if good else ERROR
+        say(f"{'ok' if good else 'MISSING'}  {text}", level, sys.stdout)
         if fix:
-            print(f"    fix: {fix}")
+            say(f"    fix: {fix}", level, sys.stdout)
     missing = sum(not good for good, _, _ in found)
-    print("nothing is missing" if not missing else f"{missing} thing(s) missing")
+    say("nothing is missing" if not missing else f"{missing} thing(s) missing", ERROR if missing else INFO, sys.stdout)
     return MISSING if missing else 0

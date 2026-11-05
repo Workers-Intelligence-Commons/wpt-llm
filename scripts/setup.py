@@ -27,6 +27,9 @@ import tempfile
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "packages" / "wpt-utils" / "src"))  # no library here
+from wpt_utils.lines import WARNING, say
+
 ROOT = Path(__file__).resolve().parent.parent
 # PCI vendor ids, in order of preference when a machine has several GPUs
 VENDORS = [("10de", "NVIDIA", "cuda"), ("1002", "AMD", "rocm"), ("8086", "Intel", "xpu")]
@@ -62,7 +65,7 @@ def pick_backend(vendors):
     for vendor_id, name, backend in VENDORS:
         if vendor_id in vendors:
             if backend == "rocm" and sys.platform != "linux":
-                print(f"{name} GPU found, but PyTorch's AMD build exists for Linux only")
+                say(f"{name} GPU found, but PyTorch's AMD build exists for Linux only", WARNING, sys.stdout)
                 continue
             return name, backend
     return None, "cpu"
@@ -87,11 +90,11 @@ def amd_note(chips):
     command, as lines to copy."""
     for chip in sorted(chips & AMD_SETTINGS.keys()):
         name, settings = AMD_SETTINGS[chip]
-        print(f"\nThis machine's GPU ({name}) needs these settings for GPU work. Set them in the environment "
-              f"(ROCm reads them from there, never from .env):\n")
+        say(f"\nThis machine's GPU ({name}) needs these settings for GPU work. Set them in the environment "
+            f"(ROCm reads them from there, never from .env):\n")
         for setting, value, why in settings:
-            print(f"    export {setting}={value}    # {why}")
-        print("\nThis script changed nothing.")
+            say(f"    export {setting}={value}    # {why}")
+        say("\nThis script changed nothing.")
 
 
 def store_folder():
@@ -121,12 +124,12 @@ def defender_note():
     folders = ([str(Path(store))] if store else []) + [tempfile.gettempdir()]
     named = ("the store (WPT_STORE) and " if store else "") + "the temporary folder where fetches clone"
     quoted = ",".join("'" + folder.replace("'", "''") + "'" for folder in folders)
-    print(f"\nMicrosoft Defender scans every file and process the fetches create, which can slow them. To leave "
-          f"{named} out of its scanning, run in a PowerShell opened as administrator:\n\n"
-          f"    Add-MpPreference -ExclusionPath {quoted}\n\n"
-          f"Defender then never scans the files in these folders. This script changed nothing.")
+    say(f"\nMicrosoft Defender scans every file and process the fetches create, which can slow them. To leave "
+        f"{named} out of its scanning, run in a PowerShell opened as administrator:\n\n"
+        f"    Add-MpPreference -ExclusionPath {quoted}\n\n"
+        f"Defender then never scans the files in these folders. This script changed nothing.")
     if not store:
-        print("WPT_STORE names no local folder (file://...), so only the temporary folder is listed.")
+        say("WPT_STORE names no local folder (file://...), so only the temporary folder is listed.")
 
 
 def main():
@@ -136,10 +139,10 @@ def main():
 
     if args.backend:
         backend = args.backend
-        print(f"PyTorch build: {backend} (forced)")
+        say(f"PyTorch build: {backend} (forced)")
     else:
         name, backend = pick_backend(gpu_vendors())
-        print(f"PyTorch build: {backend} ({f'{name} GPU found' if name else 'no supported GPU found'})")
+        say(f"PyTorch build: {backend} ({f'{name} GPU found' if name else 'no supported GPU found'})")
 
     uv = os.environ.get("UV", "uv")  # uv tells the scripts it runs where it is
     code = subprocess.run([uv, "sync", "--group", backend], cwd=ROOT).returncode

@@ -8,6 +8,9 @@
     follow(store, folder)  the lines of a run as they reach the store, until
                            its end.json is there
 
+Each line read back for people is its text and the level of wpt_utils.lines
+it prints at (described).
+
 A run whose end.json is missing is running, or it crashed: its record cannot
 tell which. The lines of a run reach the store in groups (wpt_telemetry), so
 a run that is going shows up to FLUSH_SECONDS late.
@@ -20,6 +23,7 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 
 from wpt_store import MissingObject
+from wpt_utils.lines import ERROR, INFO
 
 from . import END, EVENTS, START
 
@@ -46,8 +50,8 @@ class Summary:
     spans: dict[str, int]  # how many of each span ended
     events: dict[str, int]  # how many of each event
     lines: int  # how many printed lines
-    last: list[str] = field(default_factory=list)  # its last events and printed lines, each as one line
-    errors: list[str] = field(default_factory=list)  # its last spans that failed and error lines
+    last: list[tuple[str, str]] = field(default_factory=list)  # its last events and printed lines (described)
+    errors: list[tuple[str, str]] = field(default_factory=list)  # its last spans that failed and error lines
 
 
 def _json_file(store, folder, name) -> dict | None:
@@ -81,17 +85,17 @@ def find(store, given: str) -> str:
     return found[0]
 
 
-def described(line: dict) -> str | None:
-    """One recorded line as one line for people, None for a line that only
-    opens or closes a span without a failure."""
+def described(line: dict) -> tuple[str, str] | None:
+    """One recorded line as one line for people and the level it prints at,
+    None for a line that only opens or closes a span without a failure."""
     time_ = line.get("time", "")
     match line.get("kind"):
         case "log":
-            return f"{time_} {line.get('text')}"
+            return f"{time_} {line.get('text')}", line.get("severity", "info").upper()
         case "event":
-            return f"{time_} {line.get('name')} {json.dumps(line.get('attributes', {}), ensure_ascii=False)}"
+            return f"{time_} {line.get('name')} {json.dumps(line.get('attributes', {}), ensure_ascii=False)}", INFO
         case "span_end" if line.get("status") == "error":
-            return f"{time_} {line.get('name')} failed: {line.get('error')}"
+            return f"{time_} {line.get('name')} failed: {line.get('error')}", ERROR
     return None
 
 
@@ -119,30 +123,30 @@ def summary(store, folder) -> Summary:
             events[line["name"]] += 1
         elif kind == "log":
             lines += 1
-        text = described(line)
-        if text is not None:
-            last.append(text)
-            if kind == "span_end" or line.get("severity") == "error":
-                errors.append(text)
+        shown = described(line)
+        if shown is not None:
+            last.append(shown)
+            if shown[1] == ERROR:
+                errors.append(shown)
     return Summary(run_of(store, folder), start.get("arguments", []), end.get("error"),
                    [line["name"] for line in opened.values()], dict(spans), dict(events), lines, list(last),
                    list(errors))
 
 
 def follow(store, folder, seconds=FOLLOW_SECONDS, wait=time.sleep):
-    """Each line of the run as one line for people (described), as it
-    reaches the store, from the run's first; it ends once the run's end.json
-    is there and every line is read."""
+    """Each line of the run as described gives it, as it reaches the store,
+    from the run's first; it ends once the run's end.json is there and every
+    line is read."""
     reader = store.record_reader(folder, EVENTS)
     while True:
         ended = END in store.record_files(folder)
         for raw in reader.read().splitlines():
             try:
-                text = described(json.loads(raw))
+                shown = described(json.loads(raw))
             except ValueError:
                 continue  # a line a crash left cut
-            if text is not None:
-                yield text
+            if shown is not None:
+                yield shown
         if ended:
             return
         wait(seconds)

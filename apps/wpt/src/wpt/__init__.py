@@ -21,6 +21,8 @@ store`) never loads PyTorch.
 import importlib
 import sys
 
+from wpt_utils.lines import ERROR, say
+
 # each subcommand: the module whose main(argv) runs it
 COMMANDS = {"dataset": "wpt.dataset", "store": "wpt.store", "agent": "wpt.agent", "train": "wpt.train",
             "eval": "wpt.eval", "scaling": "wpt.eval.scaling", "chat": "wpt.chat", "manager": "wpt.manager",
@@ -35,8 +37,14 @@ def main(argv=None):
         return 0
     if not argv or argv[0] not in COMMANDS:
         known = ", ".join(COMMANDS)
-        print(f"wpt: {f'unknown subcommand {argv[0]!r}' if argv else 'no subcommand'}; one of {known} "
-              "(wpt --help)", file=sys.stderr)
+        say(f"wpt: {f'unknown subcommand {argv[0]!r}' if argv else 'no subcommand'}; one of {known} "
+            "(wpt --help)", ERROR)
         return 2
     name, *rest = argv
-    return importlib.import_module(COMMANDS[name]).main(rest)
+    try:
+        return importlib.import_module(COMMANDS[name]).main(rest)
+    except SystemExit as stopped:
+        if isinstance(stopped.code, str):  # a refusal's text, which Python would print as it is
+            say(stopped.code, ERROR)
+            return 1
+        raise

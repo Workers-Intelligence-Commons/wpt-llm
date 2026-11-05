@@ -10,6 +10,8 @@
     wpt_utils.parallel   how much parallel work this machine takes, measured
                          again before each new item, and items run that way
                          with their results in the items' order
+    wpt_utils.lines      the form of every printed line: its time, its level,
+                         its text
 
 Import the submodule you need: this package itself imports nothing, so
 wpt_utils.programs works where PyTorch is not installed (wpt dataset).

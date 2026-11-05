@@ -29,6 +29,7 @@ from wpt_dataset.builder import KINDS, build, shares, write
 from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
 from wpt_store import store_from_settings
+from wpt_utils.lines import ERROR, INFO, line, say
 
 
 def main():
@@ -43,15 +44,15 @@ def main():
     store = store_from_settings(repo.root / ".env")
     try:
         built = build(repo, store, arguments.kind, arguments.count, arguments.seed, arguments.select,
-                      log=lambda line: print(line, file=sys.stderr))
+                      log=lambda text, level=INFO: say(text, level, sys.stderr))
         write(repo, store, arguments.source, arguments.kind, built, repo.source_version(arguments.source))
         report = shares(repo, store, arguments.source)
     except DatasetError as error:
-        sys.exit(f"build_tasks: {error}")
-    print(f"{len(built)} {arguments.kind} tasks written into {arguments.source}")
+        sys.exit(line(f"build_tasks: {error}", ERROR))
+    say(f"{len(built)} {arguments.kind} tasks written into {arguments.source}")
     counts = ", ".join(f"{kind} {count:,}" for kind, count in report["tasks"].items())
-    print(f"{arguments.source} holds {sum(report['tasks'].values()):,} built tasks ({counts}): "
-          f"acting only {report['act']:.1%}, checking only {report['check']:.1%}, both {report['both']:.1%}")
+    say(f"{arguments.source} holds {sum(report['tasks'].values()):,} built tasks ({counts}): "
+        f"acting only {report['act']:.1%}, checking only {report['check']:.1%}, both {report['both']:.1%}")
 
 
 if __name__ == "__main__":

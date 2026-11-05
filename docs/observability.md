@@ -99,7 +99,7 @@ span it happened in:
 | `span_start` | `name`, `parent` (the enclosing span), `attributes` |
 | `span_end` | `name`, `status` (`ok` or `error`), `seconds`, `attributes` set during the span, `error` and `traceback` |
 | `event` | `name`, `attributes`, `values` (its numbers) |
-| `log` | `severity` (`info`, or `error` for a line printed to stderr), `text`: a line the command printed |
+| `log` | `severity` (`info`, `warning` or `error`, the level it printed with), `text`: a line the command printed, without its time and level |
 | `input`, `output` | `ids`: what `ids.json` gained |
 | `file` | `name`, `bytes`, `sha256` of a file written whole into the folder (a file added to line by line has no such line: it is its own record) |
 
@@ -278,6 +278,40 @@ reads one level of names: it does not list every part of every file.
 - **No store at all** (`WPT_STORE` unset or wrong): the command stops
   before it starts.
 
+## Printed lines
+
+Every line a command prints has one form, which `wpt_utils/lines.py` alone
+writes:
+
+```
+2026-11-05 15:27:29 INFO read, round 2: 2,273 of 3,636 parts
+```
+
+It starts with its UTC time to the second and its level. `INFO` is the
+ordinary line, `WARNING` something the work goes on past, and `ERROR` a
+failure. Each line of a text of several lines starts this way, a blank one
+included. A line goes to standard output at `INFO` and to standard error at
+the other levels, unless the command chooses the stream of a line itself.
+
+The record and the live view carry the same level: `severity` in
+`events.jsonl`, in lower case, and the OpenTelemetry severity, where
+`WARNING` is `WARN`. Their text has no time and no level, since each of
+them has its own.
+
+What a command gives as its result is a line like any other: a dataset id,
+the names of `wpt dataset list`, a gpu worker's key. A program that reads
+such a line takes its text back with `wpt_utils.lines.bare`.
+
+Four kinds of output are not lines of a log and keep their own form:
+
+- the conversation of `wpt chat`;
+- `--help`, and the usage errors of a command's arguments;
+- a document or a file's content written for a program or a person to keep:
+  the standard output of `wpt dataset manifest`, `show`, `read`,
+  `conversation` and `task`, and `wpt chat --about`;
+- what another program prints and a command passes on, and the lines of the
+  shell scripts `start.sh` and `detach.sh`.
+
 ## Following a run
 
 `wpt store runs` lists the runs of the store, the latest last: each one's
@@ -393,6 +427,7 @@ def run(context):
     telemetry.append_file("attempts.jsonl", line.encode())  # a file of this run's folder, one line at a time
     telemetry.write_file("summary.json", data)               # or written whole
     telemetry.log("a line to print and record")
+    telemetry.log("a line that names a problem", WARNING)  # a level of wpt_utils.lines: INFO by default
 ```
 
 Attributes are anything JSON holds. A file's name uses letters, digits,

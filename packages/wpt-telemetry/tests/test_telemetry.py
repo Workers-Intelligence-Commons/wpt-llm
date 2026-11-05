@@ -2,16 +2,20 @@ import contextlib
 import http.server
 import json
 import logging
+import re
 import signal
 import socket
 import threading
 import time
 
 import pytest
+from opentelemetry._logs import SeverityNumber
+from opentelemetry.sdk._logs.export import InMemoryLogRecordExporter, SimpleLogRecordProcessor
 
 import wpt_telemetry
 from wpt_store import LocalStore, open_store
 from wpt_telemetry import ENDPOINT, FLUSH_THREAD, RecordError, Telemetry, runs
+from wpt_utils.lines import ERROR, WARNING, bare
 
 # Seconds a test gives what it waits for, far more than a loaded machine holds a thread back: it
 # costs nothing, since the wait ends when the thing happens; only a test that fails waits them out.
@@ -65,6 +69,32 @@ def test_a_backend_that_cannot_be_reached_gets_one_warning_and_the_run_goes_on(t
     assert record(store, folder, "end.json")["status"] == "succeeded"
     steps = [e for e in events(store, folder) if e.get("name") == "training.step"]
     assert [(e["attributes"]["step"], e["values"]["train_loss"]) for e in steps] == [(1, 2.0), (2, 1.0)]
+
+
+def test_a_level_reaches_the_printed_line_the_record_and_opentelemetry(tmp_path, capfd):
+    store = open_store((tmp_path / "store").as_uri())
+    sent = InMemoryLogRecordExporter()
+    with Telemetry.start(store, "wpt-example", [], "d", env_file=tmp_path / ".env",
+                         environ={ENDPOINT: "http://127.0.0.1:9"}) as telemetry:
+        telemetry._live.logs.add_log_record_processor(SimpleLogRecordProcessor(sent))
+        telemetry.log("all is well")
+        telemetry.log("look at this", WARNING)
+        telemetry.log("it broke\non two lines", ERROR)
+
+    printed = capfd.readouterr()
+    assert [bare(text) for text in printed.out.splitlines()] == ["all is well"]
+    assert re.fullmatch(r"\S+ \S+ INFO all is well\n", printed.out)
+    assert re.search(r"^\S+ \S+ WARNING look at this\n\S+ \S+ ERROR it broke\n\S+ \S+ ERROR on two lines$",
+                     printed.err, re.M)
+
+    recorded = [e for e in events(store, telemetry.folder) if e["kind"] == "log"]
+    assert [(e["severity"], e["text"]) for e in recorded] == [
+        ("info", "all is well"), ("warning", "look at this"), ("error", "it broke\non two lines")]
+
+    logs = [found.log_record for found in sent.get_finished_logs()]
+    assert [(log.severity_number, log.severity_text, log.body) for log in logs] == [
+        (SeverityNumber.INFO, "INFO", "all is well"), (SeverityNumber.WARN, "WARNING", "look at this"),
+        (SeverityNumber.ERROR, "ERROR", "it broke\non two lines")]
 
 
 def test_the_exporters_own_messages_are_silenced_only_while_wpt_sends(tmp_path, capsys, caplog, monkeypatch):
@@ -504,6 +534,7 @@ def test_a_run_is_listed_shown_and_followed_from_its_record(tmp_path):
         with Telemetry.start(store, "wpt dataset build", ["small"], "small", env_file=tmp_path / ".env", environ={},
                              echo=lambda *_: None) as telemetry:
             telemetry.log("reading")
+            telemetry.log("a source is gone", WARNING)
             with telemetry.span("documents"):
                 telemetry.event("pool", name="en")
                 telemetry.event("pool", name="fr")
@@ -527,16 +558,17 @@ def test_a_run_is_listed_shown_and_followed_from_its_record(tmp_path):
         going.close()
 
     going_lines = runs.follow(store, going.folder, wait=run_ends)
-    assert "update 1" in next(going_lines)
-    lines = list(going_lines)
+    assert "update 1" in next(going_lines)[0]
+    lines = [text for text, _ in going_lines]
     assert sum("update 3" in line for line in lines) == 1 and sum("update 2" in line for line in lines) == 1
     assert sum("update 1" in line for line in lines) == 0  # no line twice, when the end makes the plain file a part
 
     found = runs.summary(store, runs.find(store, "wpt-dataset-build"))
     assert found.arguments == ["small"] and found.error.startswith("ValueError: boom")
     assert found.spans == {"documents": 1, "shards": 1, "wpt dataset build": 1}
-    assert found.events == {"pool": 2} and found.lines == 1
-    assert any("shards failed" in line for line in found.errors)
+    assert found.events == {"pool": 2} and found.lines == 2
+    assert [level for text, level in found.last if "reading" in text or "source is gone" in text] == ["INFO", "WARNING"]
+    assert [level for text, level in found.errors if "shards failed" in text] == ["ERROR"]
     with pytest.raises(ValueError, match="0 record folders"):
         runs.find(store, "no such run")
 
@@ -544,7 +576,7 @@ def test_a_run_is_listed_shown_and_followed_from_its_record(tmp_path):
 def test_a_long_stage_says_how_far_it_is_every_few_minutes(tmp_path, monkeypatch):
     # done out of total, the rate, the time left and the memory, at most once per period
     printed = []
-    telemetry = Telemetry.off(echo=lambda text, error: printed.append(text))
+    telemetry = Telemetry.off(echo=lambda text, level: printed.append(text))
     moments = iter([0, 60, 200, 210, 400])
     monkeypatch.setattr(wpt_telemetry.time, "monotonic", lambda: next(moments))
     monkeypatch.setattr(wpt_telemetry, "memory", lambda: (2 * 2**30, 8 * 2**30))
@@ -558,7 +590,7 @@ def test_a_long_stage_says_how_far_it_is_every_few_minutes(tmp_path, monkeypatch
 def test_a_stage_stuck_on_one_long_item_still_prints_until_it_ends(monkeypatch):
     # a source that runs for hours in one worker advances nothing, and the line still comes; once the stage ends, none
     printed = []
-    telemetry = Telemetry.off(echo=lambda text, error: printed.append(text))
+    telemetry = Telemetry.off(echo=lambda text, level: printed.append(text))
     monkeypatch.setattr(wpt_telemetry, "PROGRESS_SECONDS", 0.01)
     with telemetry.progress("reading", 10, "sources"):
         while len(printed) < 2:
@@ -572,7 +604,7 @@ def test_a_stage_stuck_on_one_long_item_still_prints_until_it_ends(monkeypatch):
 def test_a_stage_s_rate_counts_from_its_with_block_not_from_before_it(monkeypatch):
     # a stage made before its work starts: the time before the block is not in the rate or the time left
     printed = []
-    telemetry = Telemetry.off(echo=lambda text, error: printed.append(text))
+    telemetry = Telemetry.off(echo=lambda text, level: printed.append(text))
     moments = iter([1000, 1200, 1200])
     monkeypatch.setattr(wpt_telemetry.time, "monotonic", lambda: next(moments))
     monkeypatch.setattr(wpt_telemetry, "memory", lambda: None)

@@ -78,6 +78,7 @@ from wpt_store.shards import documents as documents_of
 from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry, short
 from wpt_tokenizer import Tokenizer
 from wpt_utils.files import sha256_file
+from wpt_utils.lines import ERROR, say
 from wpt_utils.programs import code
 from wpt_worker.link import LinkError
 
@@ -345,5 +346,5 @@ def main(argv=None):
                 sys.exit(f"{type(error).__name__}: {error}")  # end.json records it
             telemetry.log(f"\nresults in {Path(args.model) / EVALS_NAME}, model card {Path(args.model) / 'README.md'}")
     except RecordError as error:
-        print(f"RecordError: {error}\nstopped; nothing more was written", file=sys.stderr)
+        say(f"RecordError: {error}\nstopped; nothing more was written", ERROR)
         sys.exit(RECORD_FAILED)

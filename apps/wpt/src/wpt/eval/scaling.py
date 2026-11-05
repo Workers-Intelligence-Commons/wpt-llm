@@ -51,6 +51,7 @@ from wpt_dataset.series import flops_per_token, parameters
 from wpt_model.notice import EVALS_NAME
 from wpt_store import StoreError, store_from_settings
 from wpt_store.models import KIND
+from wpt_utils.lines import ERROR, say
 
 HELD_OUT_LOSS = f"{EVALS_NAME}/held-out-loss.json"  # the evaluation whose overall loss is a point's loss
 IRREDUCIBLE_FROM = 4  # points from which the fit has an irreducible loss E
@@ -281,9 +282,9 @@ def main(argv=None) -> int:
             for name in args.predict:
                 predictions[name] = planned(repo.model_recipe(name))
     except (ScalingError, DatasetError, StoreError) as error:
-        print(f"{type(error).__name__}: {error}", file=sys.stderr)
+        say(f"{type(error).__name__}: {error}", ERROR)
         return 2
-    print(report(found, curve, predictions, left_out))
+    say(report(found, curve, predictions, left_out))
     return 0
 
 

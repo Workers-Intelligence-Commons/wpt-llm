@@ -29,6 +29,7 @@ from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
 
 from wpt_agent import images
+from wpt_utils.lines import say
 
 
 def main(argv=None):
@@ -46,6 +47,6 @@ def main(argv=None):
         if args.command == "lock-image":
             images.lock(root, args.name, force=args.force)
         else:
-            print(images.build(root, args.name))
+            say(images.build(root, args.name))
     except (images.ImageError, DatasetError) as error:
         sys.exit(f"{type(error).__name__}: {error}")

@@ -93,6 +93,6 @@ the run with the same command plus `--run NAME --resume`. Use it when a run
 may move to another machine.
 
 The GPUs may be on another machine than the store: start a gpu worker
-there (`docker compose -f compose.yaml -f compose.nvidia.yaml up` with the files of `deploy/gpu-worker/` and `wpt_worker/` copied beside them, or `compose.amd.yaml`) and give its
+there (`docker compose -f compose.yaml -f compose.nvidia.yaml up` with the files of `deploy/gpu-worker/` and `wpt_worker/` and `wpt_utils/` copied beside them, or `compose.amd.yaml`) and give its
 key to `wpt train` as `WPT_GPU_WORKERS` (docs/machines.md). The run is
 started, followed, stopped and resumed on the manager's machine, as above.

@@ -38,7 +38,7 @@ def test_a_lock_pins_the_base_the_archive_date_and_packages_and_every_machine_bu
     # the lock records what the image holds, and apt reads the dated
     # archive, so a build from the lock installs exactly the pinned versions
     root, tags = root
-    lock = root / images.lock(root, "tiny", log=lambda _: None)
+    lock = root / images.lock(root, "tiny", log=lambda *_: None)
     pinned = json.loads(lock.read_text())
     assert pinned["base"].startswith("ubuntu@sha256:") and re.fullmatch(r"\d{8}T\d{6}Z", pinned["snapshot"])
     assert pinned["packages"]["hello"] and pinned["packages"]["bash"]
@@ -48,13 +48,13 @@ def test_a_lock_pins_the_base_the_archive_date_and_packages_and_every_machine_bu
     assert licenses["bash"]["licenses"]  # bash's copyright file is machine-readable
     assert Repo(root).check() == []  # both files match their schemas
     with pytest.raises(ImageError, match="lock.json exists; pass --force"):
-        images.lock(root, "tiny", log=lambda _: None)
+        images.lock(root, "tiny", log=lambda *_: None)
 
     tag = images.tag(root, "tiny")
     tags.append(tag)
     with pytest.raises(ImageError, match="not built on this machine.*run `uv run wpt agent build-image tiny`"):
         images.built(root, "tiny")
-    assert images.build(root, "tiny", log=lambda _: None) == tag == images.built(root, "tiny")
+    assert images.build(root, "tiny", log=lambda *_: None) == tag == images.built(root, "tiny")
     run = ["docker", "run", "--rm", "--network", "none", tag, "sh", "-c",
            "cat /packages.txt; apt-config dump APT::Snapshot"]
     shown = subprocess.run(run, capture_output=True, text=True, check=True).stdout
@@ -65,7 +65,7 @@ def test_a_lock_pins_the_base_the_archive_date_and_packages_and_every_machine_bu
     lock.write_text(json.dumps(pinned))
     tags.append(images.tag(root, "tiny"))
     with pytest.raises(ImageError, match="the build installed other packages than"):
-        images.build(root, "tiny", log=lambda _: None)
+        images.build(root, "tiny", log=lambda *_: None)
 
 
 def test_an_image_without_a_lock_is_not_built(root):
@@ -108,7 +108,7 @@ def test_a_base_whose_apt_ignores_the_snapshot_is_neither_locked_nor_built(root)
     dockerfile = root / "data" / "images" / "tiny" / "Dockerfile"
     dockerfile.write_text(DOCKERFILE.replace("ubuntu:24.04", "debian:bookworm-slim"))
     with pytest.raises(ImageError, match=IGNORES_SNAPSHOT):
-        images.lock(root, "tiny", log=lambda _: None)
+        images.lock(root, "tiny", log=lambda *_: None)
     assert not (dockerfile.parent / "lock.json").exists()
 
     base = subprocess.run(["docker", "image", "inspect", "--format", "{{index .RepoDigests 0}}",
@@ -117,7 +117,7 @@ def test_a_base_whose_apt_ignores_the_snapshot_is_neither_locked_nor_built(root)
         {"base": base, "snapshot": "20260101T000000Z", "packages": {"hello": "2.10-3"}}))
     tags.append(images.tag(root, "tiny"))
     with pytest.raises(ImageError, match=IGNORES_SNAPSHOT):
-        images.build(root, "tiny", log=lambda _: None)
+        images.build(root, "tiny", log=lambda *_: None)
 
 
 UPDATE_ERROR = "apt-get update failed\nE: Failed to fetch https://snapshot.debian.org/ 503  Service Unavailable\n"

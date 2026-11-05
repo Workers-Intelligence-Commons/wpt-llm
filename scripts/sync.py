@@ -27,6 +27,9 @@ import tarfile
 import tempfile
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "packages" / "wpt-utils" / "src"))  # no library here
+from wpt_utils.lines import ERROR, line, say
+
 ROOT = Path(__file__).resolve().parent.parent
 ENV_FILE = ROOT / ".env"
 MANIFEST = ".sync-manifest"
@@ -88,7 +91,7 @@ def main():
     args.dest = args.dest or settings.get("WPT_SYNC_DEST")
     missing = [name for name, value in [("WPT_SYNC_HOST", args.host), ("WPT_SYNC_DEST", args.dest)] if not value]
     if missing:
-        sys.exit(f"missing {', '.join(missing)}: pass --host/--dest, or copy .env.example to .env and fill it in")
+        sys.exit(line(f"missing {', '.join(missing)}: pass --host/--dest, or copy .env.example to .env and fill it in", ERROR))
 
     files = tracked_files()
     with tempfile.TemporaryDirectory() as tmp:
@@ -99,15 +102,15 @@ def main():
             for path in files:
                 tar.add(ROOT / path, arcname=path)
             tar.add(manifest, arcname=MANIFEST)
-        print(f"packed {len(files)} files ({archive.stat().st_size / 1e6:.1f} MB)", flush=True)
+        say(f"packed {len(files)} files ({archive.stat().st_size / 1e6:.1f} MB)")
 
         if ssh_powershell(args.host, f"New-Item -ItemType Directory -Force -Path '{args.dest}' | Out-Null"):
-            sys.exit("could not create the destination folder")
+            sys.exit(line("could not create the destination folder", ERROR))
         if subprocess.run(["scp", "-q", str(archive), f"{args.host}:/{args.dest}/{ARCHIVE}"]).returncode:
-            sys.exit("copy failed; the destination is unchanged")
+            sys.exit(line("copy failed; the destination is unchanged", ERROR))
     script = UNPACK.format(dest=args.dest, manifest=MANIFEST, archive=ARCHIVE)
     if ssh_powershell(args.host, script):
-        sys.exit("unpacking failed; files may be partly updated, run the sync again")
+        sys.exit(line("unpacking failed; files may be partly updated, run the sync again", ERROR))
 
 
 if __name__ == "__main__":

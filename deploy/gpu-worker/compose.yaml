@@ -6,13 +6,14 @@
 # give it to the manager in WPT_GPU_WORKERS, with this machine's address
 # (one worker per machine).
 #
-# The server files are two things beside this file, which the person copies
+# The server files are three things beside this file, which the person copies
 # from the repository to the machine (the wpt manager sends them to a worker
 # it rents itself, through the provider's own start mechanism, skypilot.yaml):
 #
 #     compose.yaml  and the file of the GPU kind (below)   from deploy/gpu-worker/
 #     start.sh                                             from deploy/gpu-worker/
 #     wpt_worker/                                          from packages/wpt-worker/src/
+#     wpt_utils/                                           from packages/wpt-utils/src/
 #
 # This file asks for no GPU: it starts anywhere, with the CPU build of
 # PyTorch. A GPU kind adds a small file of its own, by the command or by a
@@ -61,6 +62,7 @@ services:
     volumes:
       - ./start.sh:/start/start.sh:ro
       - ./wpt_worker:/start/wpt_worker:ro
+      - ./wpt_utils:/start/wpt_utils:ro
       - wpt-worker:/worker
     shm_size: 8gb  # the processes of a job share tensors through /dev/shm
     restart: on-failure

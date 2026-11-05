@@ -23,6 +23,7 @@ from wpt_dataset.manifest import EXECUTABLE, FILE, SYMLINK, Entry
 from wpt_dataset.sources import source_tree
 from wpt_store import open_store
 from wpt_store.sessions import Session
+from wpt_utils.lines import bare
 
 README, GUIDE, RUN = b"the cat sat on the mat\n", b"le chat est sur le tapis\n" * 40, b"#!/bin/sh\necho hello\n"
 
@@ -152,7 +153,7 @@ def test_an_archive_read_while_it_downloads_gives_what_a_copy_on_the_disk_gives(
 
         code = main(["--root", str(repo.root), "check", "--fetch", sid])
 
-        out = [line for line in capsys.readouterr().out.splitlines() if line.startswith(sid)]
+        out = [line for line in bare(capsys.readouterr().out).splitlines() if line.startswith(sid)]
         tree, _ = source_tree(repo.source(sid), store)
         documents, _ = kit.converted(repo, store)
         results[way] = (code, out, manifest.manifest_bytes(tree),

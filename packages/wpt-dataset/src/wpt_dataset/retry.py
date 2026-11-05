@@ -23,9 +23,10 @@ import contextlib
 import http.client
 import random
 import subprocess
-import sys
 import time
 import urllib.error
+
+from wpt_utils.lines import WARNING, say
 
 ATTEMPTS = 5
 BASE = 4.0
@@ -39,17 +40,13 @@ TRANSIENT_MESSAGES = ("could not resolve host", "connection timed out", "connect
                       "gnutls", "ssl_read", "timed out")
 
 
-def _print(text, error=True):
-    print(text, file=sys.stderr)
-
-
-_report = _print  # where call() announces a new try; set by reporting()
+_report = say  # where call() announces a new try; set by reporting()
 
 
 @contextlib.contextmanager
 def reporting(log):
     """Announce every new try inside the block, from any thread, through
-    log(text, error=True) instead of printing it."""
+    log(text, WARNING) instead of printing it."""
     global _report
     previous, _report = _report, log
     try:
@@ -67,7 +64,7 @@ def call(action, what: str, sleep=time.sleep):
             if attempt == ATTEMPTS or not transient(error):
                 raise
             wait = _wait(error, attempt)
-            _report(f"{what}: {_describe(error)}; trying again in {wait:.0f}s ({attempt + 1}/{ATTEMPTS})", error=True)
+            _report(f"{what}: {_describe(error)}; trying again in {wait:.0f}s ({attempt + 1}/{ATTEMPTS})", WARNING)
             sleep(wait)
 
 
@@ -77,7 +74,7 @@ def resume(what: str, error, position: int, stalls: int, sleep=time.sleep):
     this one included."""
     wait = _wait(error, max(stalls, 1))
     _report(f"{what}: {_describe(error)}; resuming at byte {position} in {wait:.0f}s ({stalls + 1}/{ATTEMPTS})",
-            error=True)
+            WARNING)
     sleep(wait)
 
 

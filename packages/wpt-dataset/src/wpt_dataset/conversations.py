@@ -27,6 +27,8 @@ from .migrate import upgrade
 from .repo import Repo, validate
 from .sources import copied_as_trees, copy_size, each_read, held_manifest, tags_of
 
+from wpt_utils.lines import say
+
 
 def content_sha256(content: list) -> str:
     """The sha256 of a message's content, as a model draft records it: its
@@ -179,7 +181,7 @@ def of_file(source_id: str, path: str, entry: dict, store, file) -> list[tuple[s
     return list(enumerate(parse(source_id, path, manifest.content(store, file)), start=1))
 
 
-def read(repo: Repo, store, tag: str | None, telemetry=None, log=print) -> tuple[list[tuple[str, dict]], dict]:
+def read(repo: Repo, store, tag: str | None, telemetry=None, log=say) -> tuple[list[tuple[str, dict]], dict]:
     """([(conversation id, conversation)], {source id: address, manifest,
     licenses}) for every chat file tagged `tag` in an admitted source, in
     source and path order. A conversation id is "<source>/<path>:<line>", or
@@ -191,7 +193,7 @@ def read(repo: Repo, store, tag: str | None, telemetry=None, log=print) -> tuple
     return [(conversation_id, conversation) for conversation_id, _, conversation in found], sources
 
 
-def tagged(repo: Repo, store, tag: str | None = None, telemetry=None, log=print,
+def tagged(repo: Repo, store, tag: str | None = None, telemetry=None, log=say,
            only: set[str] | None = None, copies=None) -> tuple[list[tuple[str, list[str], dict]], dict]:
     """read's conversations, each with the sorted tags of its file:
     [(conversation id, tags, conversation)]; with tag None, those of every

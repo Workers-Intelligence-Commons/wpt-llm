@@ -94,6 +94,8 @@ from .repo import Repo
 from .sources import held_manifest, in_store, tags_of
 from .tasks import CHECK, EVAL, FILES, LOOKING, REMOTE, TASK, Pointer, looks, repository, undoable
 
+from wpt_utils.lines import WARNING, say
+
 READ_THE_MANUAL = "read-the-manual"
 KINDS = ("find-the-passage", "evidence-removed", "look-or-ask", "commit-and-push", READ_THE_MANUAL)
 ACT, CHECK_KIND, BOTH = "act", "check", "both"
@@ -199,7 +201,7 @@ class Text:
     paragraphs: list  # (start, end) of each paragraph in the window
 
 
-def build(repo: Repo, store, kind: str, count: int, seed: int, select: str | None = None, log=print) -> dict:
+def build(repo: Repo, store, kind: str, count: int, seed: int, select: str | None = None, log=say) -> dict:
     """{task folder: (task.json's document, check text, {path under files/:
     text})} of `count` tasks of `kind` (fewer when the sources do not hold
     enough, with a note), drawn with `seed` from the admitted sources in the
@@ -223,7 +225,7 @@ def build(repo: Repo, store, kind: str, count: int, seed: int, select: str | Non
              (task, check, files) for task, check, files in made}
     if len(built) < count:
         log(f"{kind}: {len(built)} tasks of the {count} asked; the sources in the store hold no more, "
-            f"or drew the same task twice")
+            f"or drew the same task twice", WARNING)
     return built
 
 
@@ -371,7 +373,7 @@ def _documents(repo, store, expression, wanted, rng, log):
             found[source.id] = taken
     if absent:
         log(f"{absent} admitted sources are not in the store and gave no task (wpt dataset check --fetch fetches "
-            f"them)")
+            f"them)", WARNING)
     return found
 
 
@@ -551,10 +553,10 @@ def _commits(repo, store, count, rng, log) -> list:
         candidates += [(source, tree, path) for path in undoable(tree, store)]
     if absent:
         log(f"{absent} git sources with a history are not in the store and gave no task (wpt dataset check --fetch "
-            f"fetches them)")
+            f"fetches them)", WARNING)
     if unordered:
         log(f"{unordered} git sources with a history have no {ORDER} in the store and gave no task (their history "
-            f"was stored before histories kept their order; they give tasks once downloaded again)")
+            f"was stored before histories kept their order; they give tasks once downloaded again)", WARNING)
     rng.shuffle(candidates)
     made = []
     for source, tree, document in candidates:
@@ -572,7 +574,7 @@ def _kept(source, store, texts, log):
     try:
         return kept(source, store, texts)
     except (CutFailed, PatchFailed) as error:
-        log(f"{source.id}: left out, {type(error).__name__}: {error}")
+        log(f"{source.id}: left out, {type(error).__name__}: {error}", WARNING)
         return None
 
 
@@ -587,7 +589,7 @@ def _commit(source, tree, document, store, log):
         repository(source.id, Pointer("repository", "", source.id, document, None, "",
                                       manifest=pointer["manifest"]), tree, store)
     except InvalidFile as error:  # a commit that cannot be made is left out, named
-        log(f"{source.id}/{document}: left out, {error}")
+        log(f"{source.id}/{document}: left out, {error}", WARNING)
         return None
     return ({"instructions": INSTRUCTIONS["commit-and-push"],
              # one way to push per attempt: git through bash, or the push tool with the remote hidden

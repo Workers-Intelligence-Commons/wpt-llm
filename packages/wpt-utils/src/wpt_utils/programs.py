@@ -11,8 +11,8 @@ its uncommitted changes. code_of(module) identifies only the code a
 module runs: the sha256 of the source files of the WPT modules it
 imports, found from its import statements (modules_code), which the
 fingerprint of a result that module computes holds, so a change to a
-document, a test or a module it does not import leaves that fingerprint
-the same. repository() gives the commit, and whether there are changes,
+document, a test, a module it does not import or a module that only
+records and prints (RECORDING) leaves that fingerprint the same. repository() gives the commit, and whether there are changes,
 in the shape provenance.json and each run's record name them.
 """
 
@@ -54,6 +54,9 @@ _CODE = None
 _MODULES = {}
 _GIVEN = False
 WPT = "wpt_"  # how the top-level name of every module of WPT's libraries starts (none imports the app's `wpt`)
+# The modules, and those inside a package named here, that modules_code neither hashes nor follows: they record and
+# print, and compute no result, so a change to them must not make a result unknown.
+RECORDING = ("wpt_telemetry", "wpt_utils.lines")
 
 
 def code() -> dict:
@@ -127,7 +130,9 @@ def modules_code(module: str) -> str:
     Linux's code) of that module and of every WPT module (whose top-level
     name starts with WPT) it imports, directly or through another, the
     packages that hold them included, wherever in a module an import
-    statement stands. A compiled module among them enters by the files
+    statement stands, except the modules of RECORDING (they record and
+    print, and compute no result), which are neither hashed nor followed:
+    what only they import leaves the key too. A compiled module among them enters by the files
     that build it (compiled_from), read as source files are; each other
     top-level module they import (not of the standard library) by the
     version of every installed distribution that provides it. The Python
@@ -206,10 +211,17 @@ def _imported(entry: str) -> tuple[dict[str, Path], set[str]]:
                 continue
             for imported in names:
                 if imported.startswith(WPT):
+                    if _recording(imported):
+                        continue
                     waiting += _with_packages(imported)
                 elif imported:
                     others.add(imported.split(".")[0])
     return found, others
+
+
+def _recording(name: str) -> bool:
+    """Whether the module name is one of RECORDING, or inside one."""
+    return any(name == recording or name.startswith(recording + ".") for recording in RECORDING)
 
 
 def _with_packages(name: str) -> list[str]:

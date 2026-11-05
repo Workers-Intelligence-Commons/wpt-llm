@@ -27,6 +27,7 @@ import threading
 import time
 
 from wpt_telemetry import RECORD_FAILED
+from wpt_utils.lines import WARNING, say
 
 REFUSED = 2
 STOPPED = 130
@@ -45,7 +46,7 @@ def launch(processes: int, arguments: list[str], max_restarts: int = 0, log=None
     world_size, and master, (address, port), is where every machine's
     processes meet; by default this machine alone, on a free port of its
     own."""
-    log = log or (lambda text: print(text, file=sys.stderr, flush=True))
+    log = log or say
     running, stopping = [], []
 
     def forward(number, frame):
@@ -67,7 +68,7 @@ def launch(processes: int, arguments: list[str], max_restarts: int = 0, log=None
             if code == 0 or stopping or code in (REFUSED, RECORD_FAILED, STOPPED) or attempt == max_restarts:
                 return STOPPED if stopping and code != 0 else code
             log(f"a training process failed (exit code {code}): starting every process again "
-                f"({attempt + 1} of {max_restarts} restarts)")
+                f"({attempt + 1} of {max_restarts} restarts)", WARNING)
         return code
     finally:
         for number, handler in previous.items():

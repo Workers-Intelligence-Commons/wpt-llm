@@ -24,37 +24,38 @@ from wpt_store import StoreError, store_from_settings
 from wpt_store.listing import listing
 from wpt_store.models import copy_out
 from wpt_telemetry import runs
+from wpt_utils.lines import ERROR, say
 
 
 def cmd_list(args, store):
     sources, sessions = listing(store)
-    print(f"{len(sessions)} sessions:")
+    say(f"{len(sessions)} sessions:")
     for row in sessions:
-        print(f"  {row.started} to {row.ended or '(not ended)'} {row.command} at {row.commit or '?'}"
-              f"{' (changed)' if row.dirty else ''}: records/{row.folder}/")
-    print(f"{len(sources)} sources:")
+        say(f"  {row.started} to {row.ended or '(not ended)'} {row.command} at {row.commit or '?'}"
+            f"{' (changed)' if row.dirty else ''}: records/{row.folder}/")
+    say(f"{len(sources)} sources:")
     for state in sources:
         last = (f"downloaded {state.downloaded} from {state.address} at {state.commit or '?'}"
                 f"{f', {state.size:,} bytes' if state.size is not None else ''}"
                 f"{''.join(f', {key} {value}' for key, value in sorted((state.got or {}).items()))}"
                 if state.downloaded else "never downloaded")
-        print(f"  {state.source}: {state.outcome}{'; marked for a new download' if state.marked else ''}; {last}")
+        say(f"  {state.source}: {state.outcome}{'; marked for a new download' if state.marked else ''}; {last}")
     return 0
 
 
 def cmd_mark(args, store):
     if bool(args.ids) == args.all:
-        print("wpt store mark: give source ids or --all, not both", file=sys.stderr)
+        say("wpt store mark: give source ids or --all, not both", ERROR)
         return 2
     store.mark(None if args.all else args.ids)
-    print("every source marked for a new download" if args.all else
-          f"{len(args.ids)} sources marked for a new download")
+    say("every source marked for a new download" if args.all else
+        f"{len(args.ids)} sources marked for a new download")
     return 0
 
 
 def cmd_copy_out(args, store):
     count = copy_out(store, args.name, args.folder)
-    print(f"model {args.name}: {count} files in {args.folder}")
+    say(f"model {args.name}: {count} files in {args.folder}")
     return 0
 
 
@@ -62,8 +63,8 @@ def cmd_runs(args, store):
     found = runs.runs(store)
     for run in found:
         took = f" in {run.seconds:,.0f} s" if run.seconds is not None else ""
-        print(f"{run.started or '?'} {run.command or '?'}: {run.status}{took}: {run.folder}")
-    print(f"{len(found)} runs")
+        say(f"{run.started or '?'} {run.command or '?'}: {run.status}{took}: {run.folder}")
+    say(f"{len(found)} runs")
     return 0
 
 
@@ -71,24 +72,24 @@ def cmd_run(args, store):
     try:
         folder = runs.find(store, args.folder)
     except ValueError as error:
-        print(f"wpt store run: {error}", file=sys.stderr)
+        say(f"wpt store run: {error}", ERROR)
         return 2
     if args.follow:
-        for line in runs.follow(store, folder):
-            print(line, flush=True)
+        for text, level in runs.follow(store, folder):
+            say(text, level, sys.stdout)
     found = runs.summary(store, folder)
-    print(f"{found.run.folder}: {found.run.command or '?'} {' '.join(found.arguments)}")
-    print(f"started {found.run.started or '?'}; {found.run.status}"
-          + (f" in {found.run.seconds:,.0f} s" if found.run.seconds is not None else ""))
+    say(f"{found.run.folder}: {found.run.command or '?'} {' '.join(found.arguments)}")
+    say(f"started {found.run.started or '?'}; {found.run.status}"
+        + (f" in {found.run.seconds:,.0f} s" if found.run.seconds is not None else ""))
     if found.error:
-        print(f"error: {found.error}")
-    print(f"stage: {' > '.join(found.stage) or '(no span open)'}")
-    print(f"{found.lines:,} printed lines; spans: {_counts(found.spans)}; events: {_counts(found.events)}")
+        say(f"error: {found.error}")
+    say(f"stage: {' > '.join(found.stage) or '(no span open)'}")
+    say(f"{found.lines:,} printed lines; spans: {_counts(found.spans)}; events: {_counts(found.events)}")
     for title, lines in (("last events", found.last), ("errors", found.errors)):
         if lines:
-            print(f"{title}:")
-            for line in lines:
-                print(f"  {line}")
+            say(f"{title}:")
+            for text, level in lines:
+                say(f"  {text}", level, sys.stdout)
     return 0
 
 
@@ -120,7 +121,7 @@ def main(argv=None) -> int:
         store = store_from_settings(Path.cwd() / ".env")
         return args.run(args, store)
     except (StoreError, FileExistsError) as error:
-        print(f"{type(error).__name__}: {error}", file=sys.stderr)
+        say(f"{type(error).__name__}: {error}", ERROR)
         return 2
 
 

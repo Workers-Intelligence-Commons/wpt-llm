@@ -28,6 +28,7 @@ from typing import Callable, NamedTuple
 
 from wpt_store import StoreError
 from wpt_store.listing import listing
+from wpt_utils.lines import WARNING, say
 
 from . import trained
 from .errors import DatasetError, OutdatedSchema
@@ -541,7 +542,7 @@ def upgrade(document, kind: str, path, steps=None):
     return _applied(document, kind, path, STEPS if steps is None else steps)[0]
 
 
-def migrate(repo: Repo, steps=None, log=print, open_store=None) -> list[str]:
+def migrate(repo: Repo, steps=None, log=say, open_store=None) -> list[str]:
     """Rewrite every file that is of an earlier shape, through the service
     layer (Repo.rewrite). Returns the places of the files changed
     (data/...). A file a step cannot rewrite (a DatasetError) stays as it
@@ -557,7 +558,7 @@ def migrate(repo: Repo, steps=None, log=print, open_store=None) -> list[str]:
             migrated, applied = _applied(repo.raw(kind, name), kind, where, steps)
         except DatasetError as error:
             left.append(f"{type(error).__name__}: {error}")
-            log(f"left in its earlier shape: {left[-1]}")  # the error names the file
+            log(f"left in its earlier shape: {left[-1]}", WARNING)  # the error names the file
             continue
         if not applied:
             continue

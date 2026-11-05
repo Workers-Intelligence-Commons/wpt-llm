@@ -466,7 +466,7 @@ def agent(docker_runs, tmp_path_factory):
     clean-up of folders named data."""
     root = tmp_path_factory.mktemp("repository")
     shutil.copytree(FOLDER, root / "data" / "images" / "agent", ignore=shutil.ignore_patterns("__pycache__"))
-    return root, images.build(root, "agent", log=lambda _: None)
+    return root, images.build(root, "agent", log=lambda *_: None)
 
 
 @pytest.mark.image_build

@@ -8,6 +8,7 @@ and ui/dist, both ignored by git.
 import subprocess
 from pathlib import Path
 
+from wpt_utils.lines import say
 from wpt_utils.programs import program
 
 UI = Path(__file__).resolve().parents[3] / "ui"
@@ -25,7 +26,7 @@ def _newest_source(ui: Path) -> float:
                if p.is_file() and not skip & set(p.relative_to(ui).parts))
 
 
-def built(ui: Path = UI, log=print) -> Path:
+def built(ui: Path = UI, log=say) -> Path:
     """The folder of built files, building it first when any source is newer
     than the last build. MissingTool if Bun is not installed."""
     dist, stamp = ui / "dist", ui / "dist" / STAMP

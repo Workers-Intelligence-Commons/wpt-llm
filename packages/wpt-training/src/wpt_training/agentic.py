@@ -40,6 +40,7 @@ import random
 from dataclasses import dataclass
 
 from wpt_telemetry import Telemetry
+from wpt_utils.lines import WARNING
 
 CORRECT = "correct"  # the check's part for the task's own judgement (wpt_agent.check)
 
@@ -164,8 +165,8 @@ class Player:
             with self.telemetry.span(f"{self.name}.attempt", task=task.id, round=round_, group=group,
                                      attempt=index, terse=terse) as span:
                 if isinstance(outcome, wpt_agent.SandboxError):
-                    print(f"{self.name}: {task.id}: {'reference ' if round_ is None else ''}attempt dropped, "
-                          f"Docker failed: {outcome}")
+                    self.telemetry.log(f"{self.name}: {task.id}: {'reference ' if round_ is None else ''}"
+                                       f"attempt dropped, Docker failed: {outcome}", WARNING)
                     one = Kept(0, None, None, None, None, outcome)
                 else:
                     one = Kept(0, outcome.attempt, outcome.routes, outcome.score,

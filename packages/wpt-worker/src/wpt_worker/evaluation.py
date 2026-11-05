@@ -27,7 +27,6 @@ the names the manager's side has (config, device, generator, writer,
 greedy and losses): a test cannot tell where the model is.
 """
 
-import sys
 import threading
 
 import numpy as np
@@ -40,6 +39,7 @@ from wpt_model import WPT, ModelConfig
 from wpt_model.sparse import KernelUnavailable, kernels
 from wpt_training.launch import REFUSED
 from wpt_utils.device import describe, select_device
+from wpt_utils.lines import ERROR, say
 
 from .job import call, download
 from .writing import LocalWriter, Writers, Writing
@@ -112,10 +112,10 @@ def run(spec, link, work: Path) -> int:
         try:
             chosen = kernels(device, named)
         except KernelUnavailable as error:
-            print(f"KernelUnavailable: {error}", file=sys.stderr)
+            say(f"KernelUnavailable: {error}", ERROR)
             return REFUSED
-        print("attention: " + (f"{chosen.NAME} kernels" if chosen else "PyTorch (--kernels pytorch)" if named
-                               else "PyTorch (neither TileLang nor Triton is installed)"))
+        say("attention: " + (f"{chosen.NAME} kernels" if chosen else "PyTorch (--kernels pytorch)" if named
+                             else "PyTorch (neither TileLang nor Triton is installed)"))
     state = {}
     for name, offer in spec["weights"].items():
         path = download(link, offer, work / "weights" / name)

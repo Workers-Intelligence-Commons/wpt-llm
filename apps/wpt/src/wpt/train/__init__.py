@@ -193,6 +193,7 @@ from wpt_tokenizer import RUSTC_VERSION, Tokenizer, chat
 from wpt_training import (WINDOWS, Checkpoint, FolderCheckpoint, PluginError, check_continuations, load_state,
                           load_step, save_state, strategy_plugin, weights)
 from wpt_training.launch import REFUSED, STOPPED
+from wpt_utils.lines import ERROR, WARNING, say
 from wpt_utils.programs import code, repository
 from wpt_worker.link import LinkError
 from wpt_worker.manager import Files, NoCheckout, code_root, keys, machines, run_jobs, start_workers
@@ -460,11 +461,11 @@ def main(argv=None):
         if args.dataset is None:
             args.dataset = last_dataset(store, args.recipe)
     except StoreError as error:  # no store, no record: nothing has started
-        print(f"{type(error).__name__}: {error}", file=sys.stderr)
+        say(f"{type(error).__name__}: {error}", ERROR)
         sys.exit(REFUSED)
     if args.dataset is None:
-        print(f"no dataset was built for {args.recipe}: run `wpt dataset build {args.recipe}`, or give a dataset id",
-              file=sys.stderr)
+        say(f"no dataset was built for {args.recipe}: run `wpt dataset build {args.recipe}`, or give a dataset id",
+            ERROR)
         sys.exit(REFUSED)
     try:
         with Telemetry.start(store, "wpt train", arguments, short(args.dataset),
@@ -476,7 +477,7 @@ def main(argv=None):
             if code:
                 sys.exit(code)
     except RecordError as error:
-        print(f"RecordError: {error}; stopped, nothing more was recorded", file=sys.stderr)
+        say(f"RecordError: {error}; stopped, nothing more was recorded", ERROR)
         sys.exit(RECORD_FAILED)
 
 
@@ -504,7 +505,7 @@ def _run(args, store, telemetry, environ) -> int:
 
 
 def _refuse(text, telemetry) -> int:
-    telemetry.log(text, error=True)
+    telemetry.log(text, ERROR)
     return REFUSED
 
 
@@ -617,7 +618,7 @@ def _replace_folder(new, target: Path, telemetry):
     except (OSError, KeyboardInterrupt) as error:
         telemetry.event("model.replaced_folder_left", folder=str(aside), error=_describe(error))
         telemetry.log(f"warning: the earlier {target}, moved to {aside}, could not be removed "
-                      f"({_describe(error)}): remove it by hand", error=True)
+                      f"({_describe(error)}): remove it by hand", WARNING)
         if isinstance(error, KeyboardInterrupt):
             raise
 
@@ -779,7 +780,7 @@ def _crashed(code, workers, telemetry) -> int:
     telemetry.event("gpu_worker.crashed", exit_code=code, workers=workers)
     telemetry.log(f"a training process crashed (exit code {code}) and the jobs on every one of the {workers} gpu "
                   "workers were stopped; what the manager holds stays: --resume continues from its checkpoint",
-                  error=True)
+                  ERROR)
     return CRASHED
 
 
@@ -787,7 +788,7 @@ def _lost(error, telemetry) -> int:
     """A gpu worker lost: recorded, and the exit code that says so."""
     telemetry.event("gpu_worker.lost", error=str(error))
     telemetry.log(f"gpu worker lost: {error}; what the manager holds stays: --resume continues from its checkpoint",
-                  error=True)
+                  ERROR)
     return LOST
 
 
@@ -849,14 +850,14 @@ def _finish(args, recipe, record, record_object, model_config, drafter_config, a
         if renaming and not out.exists() and staging.exists():
             if not isinstance(error, RestoreFailed):  # its own message already names both folders
                 earlier = sorted(out.parent.glob(f".{out.name}-replaced-*"))
-                print(f"{out} is missing: the new model is kept in {staging}"
-                      + "".join(f", the earlier one in {folder.absolute()}" for folder in earlier)
-                      + f"; move one of them to {out} by hand", file=sys.stderr)
+                say(f"{out} is missing: the new model is kept in {staging}"
+                    + "".join(f", the earlier one in {folder.absolute()}" for folder in earlier)
+                    + f"; move one of them to {out} by hand", ERROR)
         elif (renaming and not args.run and staging.exists() and out.is_dir()
               and {path.name for path in out.iterdir()} <= {CHECKPOINT_FOLDER}):
             # the target holds only what this run's checkpoint left there: no other model to go back to
-            print(f"the new model could not take the place of {out}, which holds no other model: it is kept in "
-                  f"{staging}; move it to {out} by hand", file=sys.stderr)
+            say(f"the new model could not take the place of {out}, which holds no other model: it is kept in "
+                f"{staging}; move it to {out} by hand", ERROR)
         else:
             shutil.rmtree(staging, ignore_errors=True)
         raise

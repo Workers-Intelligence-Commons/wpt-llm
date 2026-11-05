@@ -59,7 +59,7 @@ def books(kit, repo, store, tmp_path):
 def built(repo, store, kind, count, seed=1, measure=False):
     """The tasks built and the tasks read back, those a training step reads
     or, with measure, those the measures read."""
-    made = builder.build(repo, store, kind, count, seed, "en", log=lambda _: None)
+    made = builder.build(repo, store, kind, count, seed, "en", log=lambda *_: None)
     sid = task_source(repo, store)
     builder.write(repo, store, sid, kind, made, repo.source_version(sid))
     # the model's dataset, its document list kept, and nothing held out
@@ -103,7 +103,7 @@ def test_find_the_passage_tasks_ask_for_the_rest_of_a_paragraph_that_one_text_ho
         assert task.area == () and task.gates == () and b"sources_first=wpt_check.sources_first(conversation)" in task.check
         assert task.answered_in == ()  # no question to the user, so nothing to look in before one
     assert sorted(bool(task.tool_files) for task in found) == [False, False, True, True]
-    assert builder.build(repo, store, "find-the-passage", 4, 1, "en", log=lambda _: None) == made
+    assert builder.build(repo, store, "find-the-passage", 4, 1, "en", log=lambda *_: None) == made
 
 
 def test_evidence_removed_tasks_are_half_without_the_paragraph(kit, repo, store, tmp_path):
@@ -264,13 +264,13 @@ def test_an_older_commit_s_task_starts_from_the_real_state_just_before_it(kit, r
     head = commit(kit, folder, COMMIT, {"lamps.py": b"LAMPS = 3\n", "docs/count.md": b"# Count\n"})
     lamps(kit, repo, store, folder, head, since)
 
-    def drawn(count, log=lambda _: None):
+    def drawn(count, log=lambda *_: None):
         made = builder.build(repo, store, "commit-and-push", count, 1, log=log)
         return sorted(task["pointers"][0]["document"] for task, _, _ in made.values())
 
     # since, side and hours sit behind the merge: dropped before drawing, and nothing is logged about them
     logged = []
-    assert drawn(5, log=logged.append) == sorted([f".git/history/{head}", f".git/history/{older}"])
+    assert drawn(5, log=lambda text, *_: logged.append(text)) == sorted([f".git/history/{head}", f".git/history/{older}"])
     assert not [line for line in logged if hours in line or since in line or "left out" in line]
     assert len(drawn(1)) == 1 and drawn(1) == drawn(1)
     _, found = built(repo, store, "commit-and-push", 3)
@@ -301,7 +301,7 @@ def test_a_commit_whose_undo_fails_is_logged_and_the_next_one_is_drawn(kit, repo
                                                    **erasure.cut(b" noon", erasure.made_key(store))}])
     for seed in range(64):
         logged = []
-        made = builder.build(repo, store, "commit-and-push", 1, seed, log=logged.append)
+        made = builder.build(repo, store, "commit-and-push", 1, seed, log=lambda text, *_: logged.append(text))
         assert [task["pointers"][0]["document"] for task, _, _ in made.values()] == [f".git/history/{head}"]
         if any(f".git/history/{older}: left out" in line and "undoing" in line for line in logged):
             break
@@ -331,7 +331,7 @@ def test_a_stored_history_without_its_order_gives_no_task(kit, repo, store, tmp_
     tree, _ = source_tree(repo.source(sid), store)
     assert f".git/history/{head}" in tree and manifest.ORDER not in tree
     logged = []
-    assert builder.build(repo, store, "commit-and-push", 3, 1, log=logged.append) == {}
+    assert builder.build(repo, store, "commit-and-push", 3, 1, log=lambda text, *_: logged.append(text)) == {}
     assert [line for line in logged if manifest.ORDER in line] == [
         f"1 git sources with a history have no {manifest.ORDER} in the store and gave no task (their history was "
         f"stored before histories kept their order; they give tasks once downloaded again)"]
@@ -381,7 +381,7 @@ def test_the_builder_reports_the_act_and_check_shares_of_a_task_source(kit, repo
     assert builder.shares(repo, store, sid) == {"tasks": dict.fromkeys(builder.KINDS, 0), "act": 0.0, "check": 0.0,
                                                 "both": 0.0}
     for kind, count in (("find-the-passage", 3), ("commit-and-push", 1), ("read-the-manual", 2)):
-        builder.write(repo, store, sid, kind, builder.build(repo, store, kind, count, 1, "en", log=lambda _: None),
+        builder.write(repo, store, sid, kind, builder.build(repo, store, kind, count, 1, "en", log=lambda *_: None),
                       repo.source_version(sid))
     assert builder.shares(repo, store, sid) == {
         "tasks": {"find-the-passage": 3, "evidence-removed": 0, "look-or-ask": 0, "commit-and-push": 1,

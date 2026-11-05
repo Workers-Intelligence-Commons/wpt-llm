@@ -46,6 +46,7 @@ import numpy as np
 
 from wpt_store import CorruptObject, MissingObject, blocks
 from wpt_telemetry import Telemetry, set_result_ref
+from wpt_utils.lines import say
 from wpt_utils.parallel import Sizing, each
 from wpt_utils.programs import code_of
 
@@ -179,7 +180,7 @@ def _computed(sources, keys, repo, store, telemetry) -> dict:
     return found
 
 
-def build(repo, store, telemetry=None, log=print) -> Index:
+def build(repo, store, telemetry=None, log=say) -> Index:
     """The Index of every admitted source, from what the store keeps of each
     (see the module's docstring), the others computed in worker processes,
     none of whose texts is read."""

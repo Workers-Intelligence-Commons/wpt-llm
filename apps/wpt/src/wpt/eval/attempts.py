@@ -51,6 +51,7 @@ from wpt_agent import Unready
 from wpt_dataset import tasks as task_files
 from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
+from wpt_utils.lines import WARNING
 
 ATTEMPTS = 4  # attempts per task, unless wpt eval's --attempts says otherwise
 # how the attempts are checked: the finish-tasks step's values (wpt_training/environments/agent-tasks.py)
@@ -115,7 +116,7 @@ def run(context, plain: bool, count: int = ATTEMPTS) -> list[Record]:
 
         def keep(index, outcome, task=task, offers=offers):
             if isinstance(outcome, wpt_agent.SandboxError):
-                print(f"eval: {task.id}: attempt {index} dropped, Docker failed: {outcome}")
+                telemetry.log(f"eval: {task.id}: attempt {index} dropped, Docker failed: {outcome}", WARNING)
                 telemetry.event("eval.attempt_dropped", task=task.id, attempt=index, plain=plain, error=str(outcome))
                 line = {"task": task.id, "kind": kind(task), "index": index, "plain": plain, "dropped": True,
                         "error": str(outcome), "conversation": wpt_agent.opening(task, offers[index - 1])}

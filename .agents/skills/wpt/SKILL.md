@@ -78,7 +78,7 @@ interfaces").
 | what the store holds and when it was downloaded | `uv run wpt store list` | the store database | prints every session and each source's last outcome, whether it is marked, and last download |
 | copy a kept model out of the store | `uv run wpt store copy-out NAME FOLDER` (NAME: the run's name; FOLDER must not exist; every file checked against its sha256) | the store's `models/NAME` | FOLDER |
 | download, build and train in one command | `docker compose up` with `COMPOSE_FILE=deploy/manager/compose.yaml` in `.env` (or `uv run wpt manager`), `WPT_RECIPE` required, `WPT_RUN` the run's name (unset: a new one, written into the git-ignored `wpt-run.txt` with its copy-out line), `WPT_EVALUATE=1` to evaluate at the end; `WPT_GPU_WORKERS`: the gpu workers' keys, or how many to rent (rented workers run the training and the evaluation with `WPT_KERNELS=triton` unless the settings set `WPT_KERNELS`; `WPT_RENTAL_GPUS`, `WPT_RENTAL_KIND`, `WPT_RENTAL_PROVIDER`; a lost rented worker, or a crash on several workers, resumes the run up to `WPT_REPLACEMENTS` times; `WPT_BUDGET` in dollars, `WPT_MAX_HOURS`, or both: the first reached stops the run, its checkpoint saved, and the cost is printed before each rental; `wpt manager stop [RUN]`, or a SIGTERM (`docker compose stop`), stops a run on purpose the same way, and `WPT_STOP_DEADLINE` seconds later (default 600) the manager ends what has not ended and gives the machines back, docs/machines.md; the container exits when the runs are over, and `docker compose up` again continues a failed run); goes on first with its own runs a crash cut short; builds the images of the dataset's tasks where `DOCKER_HOST` reaches Docker; settings from the environment, else from `.env` (docs/machines.md) | the recipe, the upstreams, the store | the store: its sources, dataset, checkpoint and the model under `models/NAME` (the manager's own copy of the folder removed); the tasks' images on the Docker host; its run record `records/<folder>/`; its runs' gpu workers, tokens included, in `WPT_MANAGER_STATE` (never the store); rentals at the provider, stopped once the evaluation or training ends, and tried again until stopped |
-| a gpu worker on a machine with GPUs | `docker compose -f compose.yaml -f compose.nvidia.yaml up` (or `compose.amd.yaml`; the files of `deploy/gpu-worker/` plus `wpt_worker/` copied beside them; prints its key `wpt-worker://TOKEN@HOST:PORT#PIN`; give it, one per machine, to `wpt train` in `WPT_GPU_WORKERS`; docs/machines.md) | what the wpt manager sends it | its own folder (certificate, checkout, libraries, checkpoints); never the store |
+| a gpu worker on a machine with GPUs | `docker compose -f compose.yaml -f compose.nvidia.yaml up` (or `compose.amd.yaml`; the files of `deploy/gpu-worker/` plus `wpt_worker/` and `wpt_utils/` copied beside them; prints its key `wpt-worker://TOKEN@HOST:PORT#PIN`; give it, one per machine, to `wpt train` in `WPT_GPU_WORKERS`; docs/machines.md) | what the wpt manager sends it | its own folder (certificate, checkout, libraries, checkpoints); never the store |
 | check a machine before work | `uv run wpt doctor` (the store and its credentials, the GPU and the PyTorch build, the attention kernels and nvcc, the Rust toolchain, free disk beside the sources the store holds, uncommitted or untracked files; exit code 1 when something is missing) | the settings, the store, the checkout | prints what is missing and how to fix it |
 | manifest of a source's stored tree | `uv run wpt dataset manifest ID` (downloads it as `download` does, or finds it in the store) | the upstream, the store | the store; prints the list of the tree's files and the tree's manifest (the sha256 of that list) |
 | erase a passage | `uv run wpt dataset cut ID PATH START END --version V` (bytes of the file as the cuts before left it; the cut names the passage by its length and two hashes keyed by the store's cut key, never its text; docs/erasure.md) | the store | `data/sources/ID/source.json`; the store's cut key on the first cut (keep a backup) |
@@ -142,7 +142,7 @@ Every run of `wpt dataset download`, `check --fetch`, `manifest`, `build`,
 `build-tokenizer`, `wpt train`, `wpt eval` and `wpt manager` writes its record into its own store folder, `records/<UTC
 time>-<command>-<main id>-<random>/` (main id: the source id or `<count>-sources`, the recipe name, a short
 dataset id or a short weights hash): `start.json`, `events.jsonl` (spans, events,
-every printed line), `ids.json` (the ids read and written, which chain the
+every printed line, with its level and without the time and level it prints with), `ids.json` (the ids read and written, which chain the
 runs together), `end.json`. With `OTEL_EXPORTER_OTLP_ENDPOINT` set
 (environment or `.env`), the same goes live to an OpenTelemetry backend
 (`deploy/otel-lgtm/compose.yaml`). A backend failure is one warning; a
@@ -430,6 +430,10 @@ what the whole text gives (docs/model.md, "What a layer passes on").
   produce the same bytes as Linux.
 - Start external programs through `wpt_utils.programs.program(name)`,
   which reports a missing tool clearly.
+- Print a line through `telemetry.log(text, level)` in a recorded run, else
+  through `wpt_utils.lines.say(text, level)`, never `print`: every line starts
+  with its time and level (docs/observability.md, "Printed lines"). Code that
+  reads a line a command printed takes its text with `wpt_utils.lines.bare`.
 - A fingerprint never holds a version number of WPT's own code. A result
   of the data pipeline holds `wpt_utils.programs.code_of(__name__)` of the
   module that computes it, and holds in its fingerprint every input of
@@ -438,7 +442,9 @@ what the whole text gives (docs/model.md, "What a layer passes on").
   changes). A worker process that computes such a fingerprint gets its
   starter's codes (`wpt_utils.programs.codes`, `set_code`): add the module
   to `wpt_dataset.workers.KEYED`. The code of a module is that of the
-  modules its import statements reach, wherever they stand: keep the
+  modules its import statements reach, wherever they stand, except those
+  that only record and print (`wpt_utils.programs.RECORDING`: `wpt_telemetry`,
+  `wpt_utils.lines`), which no key holds: keep the
   tree and license-check stages (`sources.py`, `kept.py`) from importing
   the build, tasks, Markdown or download code, and name a new file that
   is not Python in a keyed package in `wpt_dataset.workers.NOT_PYTHON`.

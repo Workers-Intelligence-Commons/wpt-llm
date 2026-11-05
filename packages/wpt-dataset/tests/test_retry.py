@@ -23,5 +23,5 @@ def test_a_download_tried_again_inside_a_command_is_in_its_record(tmp_path, caps
 
     lines = [json.loads(line) for line in store.read_record(telemetry.folder, "events.jsonl").splitlines()]
     [tried] = [line for line in lines if line["kind"] == "log"]
-    assert tried["severity"] == "error" and tried["text"].startswith("https://example.org/book.txt: the server did not")
+    assert tried["severity"] == "warning" and tried["text"].startswith("https://example.org/book.txt: the server did not")
     assert tried["text"] in capsys.readouterr().err  # still printed

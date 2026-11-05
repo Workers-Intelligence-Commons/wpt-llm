@@ -51,6 +51,7 @@ import threading
 from compression import zstd
 from pathlib import Path
 
+from wpt_utils.lines import bare, say
 import wpt_worker
 from wpt_utils.programs import MissingTool, program
 
@@ -109,7 +110,7 @@ def _reached(hosts, what, fix):
                          "the other workers reach it at")
 
 
-def start_workers(environ=None, log=print) -> list["Worker"]:
+def start_workers(environ=None, log=say) -> list["Worker"]:
     """The workers the settings (environ) name, each reached; with none, a
     local worker. ValueError for a key that is not one; LinkError for a
     worker that cannot be reached or refuses the link (the ones reached
@@ -313,7 +314,7 @@ class Worker:
                                    text=True, encoding="utf-8", **group)
         line = process.stdout.readline()
         try:
-            key = Key.parse(line)
+            key = Key.parse(bare(line))
         except ValueError:
             process.kill()
             process.wait()

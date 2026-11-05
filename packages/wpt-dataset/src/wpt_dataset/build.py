@@ -145,6 +145,7 @@ from wpt_store import CorruptObject, MissingObject
 from wpt_store.shards import write_shard
 from wpt_telemetry import Telemetry, set_ref
 from wpt_tokenizer import BASE_SIZE, RUSTC_VERSION, Tokenizer
+from wpt_utils.lines import WARNING, say
 from wpt_utils.parallel import Done, Sizing, each, in_order
 from wpt_utils.programs import code, code_of
 
@@ -318,7 +319,7 @@ def _skip(source, error, skipped, strict, log):
     if strict:
         raise error
     skipped.append({"source": source.id, "error": f"{type(error).__name__}: {error}"})
-    log(f"skipped {source.id}: {type(error).__name__}: {error}")
+    log(f"skipped {source.id}: {type(error).__name__}: {error}", WARNING)
 
 
 def assign(documents, mixture) -> dict[str, list[Document]]:
@@ -734,7 +735,7 @@ def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skippe
     return tokenizer, vocabulary, key
 
 
-def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, strict=False, telemetry=None,
+def build_tokenizer(repo: Repo, name: str, store, log=say, stream=False, strict=False, telemetry=None,
                     session=None, plan=False):
     """(tokenizer, vocabulary object sha256, fingerprint) of the vocabulary
     a dataset recipe names (name: a model recipe's, or SERIES:SIZE,
@@ -774,7 +775,7 @@ def _training_part(recipe) -> dict:
 
 # -- dataset ----------------------------------------------------------------------
 
-def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TOKENS, stream=False,
+def build_dataset(repo: Repo, name: str, store, log=say, shard_tokens=SHARD_TOKENS, stream=False,
                   strict=False, telemetry=None, session=None, plan=False) -> str | None:
     """Build (or find) the dataset of a model recipe's data part (name: a
     model recipe's, or SERIES:SIZE, Repo.model_recipe) and return its id;
@@ -806,16 +807,16 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
         telemetry.input(recipe=name, tokenizer=recipe["tokenizer"], vocabulary=vocabulary)
         with telemetry.span("documents", stream=stream, strict=strict) as span:
             gathered = read_rounds(repo, recipe, mixture, found, rows, vocabulary, store, cache, skipped, strict,
-                                   failed, lambda _: None, telemetry)
+                                   failed, lambda *_: None, telemetry)
             span.set(documents=len(gathered.documents), sources=len(gathered.info), duplicates=gathered.duplicates,
                      skipped=skipped)
     documents, sources_info, duplicates, packed = (gathered.documents, gathered.info, gathered.duplicates,
                                                    gathered.tokens)
     for failed_one in skipped:
-        log(f"skipped {failed_one['source']}: {failed_one['error']}")
+        log(f"skipped {failed_one['source']}: {failed_one['error']}", WARNING)
     for sid, info in sorted(sources_info.items()):
         if info["check"]["left_out"] or info["check"].get("records"):
-            log(f"{sid}: left out {_left_out_summary(info['check'])}")
+            log(f"{sid}: left out {_left_out_summary(info['check'])}", WARNING)
     held_ids = {d.id for d in documents if is_held_out(d.held_out_key, recipe["held_out"])}
     built = {source.id for source in found.index.sources} - failed
     steps_read, left_out_tasks = conversations_and_tasks(repo, store, built, recipe["held_out"],
@@ -901,7 +902,7 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
         "tool_differences": tool_differences(repo),
     }
     for difference in record["tool_differences"]:
-        log(f"tool version differs from the repository's reference: {difference}")
+        log(f"tool version differs from the repository's reference: {difference}", WARNING)
     if record["contamination"]["overlapping"]:
         log(f"contamination: {record['contamination']['overlapping']} held-out documents share a run of "
             f"{NGRAM} words with training documents (reported only)")
@@ -1032,7 +1033,7 @@ def conversations_and_tasks(repo: Repo, store, built: set[str], share: float, he
     sources' order."""
     parts, left_out = {}, []
     with telemetry.span("conversations") as span:
-        found, sources = chat_files.tagged(repo, store, None, telemetry, log=lambda _: None, only=built,
+        found, sources = chat_files.tagged(repo, store, None, telemetry, log=lambda *_: None, only=built,
                                            copies=copies)
         if found:
             lines = (json.dumps({"id": cid, "tags": tags, "conversation": conversation}, ensure_ascii=False,
@@ -1041,7 +1042,7 @@ def conversations_and_tasks(repo: Repo, store, built: set[str], share: float, he
                                       "count": len(found), "sources": sorted(sources)}
         span.set(**parts.get("conversations", {"count": 0}))
     with telemetry.span("tasks") as span:
-        found, sources = task_files.read(repo, store, None, share, log=lambda _: None, held=held, only=built,
+        found, sources = task_files.read(repo, store, None, share, log=lambda *_: None, held=held, only=built,
                                         copies=copies, pointable=built, left_out=left_out, telemetry=telemetry)
         if found:
             lines = (json.dumps(task_files.to_json(task), ensure_ascii=False, sort_keys=True) for task in found)

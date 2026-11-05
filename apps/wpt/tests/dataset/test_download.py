@@ -15,6 +15,7 @@ from wpt_dataset.kept import kept
 from wpt_dataset.sources import (license_page, source_tree, stored_upstream, upstream_key, upstream_manifest,
                                  upstream_tree)
 from wpt.store import main as store_command
+from wpt_utils.lines import bare
 
 
 def two_sources(kit, repo, store, tmp_path, http_folder):
@@ -63,7 +64,7 @@ def test_download_keeps_each_source_in_bundles_records_its_session_and_reuses_it
     capsys.readouterr()
 
     assert store_command(["list"]) == 0
-    out = capsys.readouterr().out.splitlines()
+    out = bare(capsys.readouterr().out).splitlines()
     assert out[0] == "2 sessions:" and len([line for line in out if "wpt dataset download" in line]) == 2
     for sid in (git, book):
         [line] = [line for line in out if line.startswith(f"  {sid}: ")]

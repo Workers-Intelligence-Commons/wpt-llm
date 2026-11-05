@@ -16,6 +16,7 @@ from pathlib import Path
 import pytest
 
 import wpt_worker
+from wpt_utils.lines import bare
 from wpt_worker.link import Key, LinkError, dial, probe
 from wpt_worker.manager import Worker, checkout, keys, machines, run_jobs
 
@@ -253,7 +254,7 @@ def test_a_token_set_for_a_worker_is_never_printed_whole_and_a_worker_with_no_ma
                                   "WPT_WORKER_FOLDER": str(tmp_path / "worker")})
     assert started.returncode == 0
     assert token not in started.stdout + started.stderr
-    shown = Key.parse(started.stdout.splitlines()[0])
+    shown = Key.parse(bare(started.stdout.splitlines()[0]))
     assert shown.token == "mana********" and "no manager for 1 s" in started.stdout
 
 
@@ -320,13 +321,14 @@ def test_a_worker_prints_the_place_and_private_address_its_settings_give(tmp_pat
                              env={**os.environ, "WPT_WORKER_PORT": "0", "WPT_WORKER_ADDRESS": "127.0.0.1",
                                   "WPT_WORKER_WAIT": "1", "WPT_WORKER_PLACE": "wpt-run-1a2b3c",
                                   "WPT_WORKER_PRIVATE": "10.0.0.7", "WPT_WORKER_FOLDER": str(tmp_path / "worker")})
-    key = Key.parse(started.stdout.splitlines()[0])
+    key = Key.parse(bare(started.stdout.splitlines()[0]))
     assert (key.place, key.private) == ("wpt-run-1a2b3c", "10.0.0.7")
     plain = subprocess.run([sys.executable, "-m", "wpt_worker"], capture_output=True, text=True, timeout=120,
                            env={**{n: v for n, v in os.environ.items() if not n.startswith("WPT_WORKER_")},
                                 "WPT_WORKER_PORT": "0", "WPT_WORKER_ADDRESS": "127.0.0.1", "WPT_WORKER_WAIT": "1",
                                 "WPT_WORKER_FOLDER": str(tmp_path / "plain")})
-    assert (Key.parse(plain.stdout.splitlines()[0]).place, Key.parse(plain.stdout.splitlines()[0]).private) == (None, None)
+    shown = Key.parse(bare(plain.stdout.splitlines()[0]))
+    assert (shown.place, shown.private) == (None, None)
 
 
 def test_a_job_that_ends_stopped_does_not_stop_the_others_a_second_time(monkeypatch):

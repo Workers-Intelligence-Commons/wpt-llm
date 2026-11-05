@@ -37,6 +37,7 @@ import torch
 from wpt_store.shards import ShardStream, prefix_shards, sources_of, token_file
 from wpt_training import WINDOWS, Environment, Stage
 from wpt_training import parts as windows_in_parts
+from wpt_utils.lines import WARNING
 
 GIVES = WINDOWS
 SETTINGS = {"stages": [], "eval_every": 200, "eval_batches": 20, "prefix_tokens": 0}
@@ -128,7 +129,7 @@ class TextWindows(Environment):
     def stage(self, index):
         self.index = index
         if len(self.val_tokens) <= self.stage_list[index].block_size + 1:
-            self.data.log("text is small: validation loss is measured on training data")
+            self.data.log("text is small: validation loss is measured on training data", WARNING)
 
     def _tokens_at(self, tokens, step):
         """The tokens update `step` draws its windows from: the array itself,

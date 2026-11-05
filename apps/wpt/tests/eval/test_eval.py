@@ -10,6 +10,7 @@ from wpt.eval import main, open_context, run_eval
 from wpt_store import LocalStore
 from wpt_telemetry import FLUSH_THREAD
 from wpt_tokenizer import Tokenizer
+from wpt_utils.lines import bare
 from wpt_worker.evaluation import Served
 
 class Recall(torch.nn.Module):
@@ -67,7 +68,7 @@ def test_the_command_runs_every_built_in_test_into_the_model_card(trained, capsy
     assert 0 < result["data"]["training"]["documents"] <= counts["training"]
     card = (folder / "README.md").read_text()
     assert "### memorization" in card and result["text"].rstrip() in card
-    assert result["text"].rstrip() in capsys.readouterr().out
+    assert result["text"].rstrip() in bare(capsys.readouterr().out)
 
 
 def test_any_python_file_can_be_a_test(trained, tmp_path):

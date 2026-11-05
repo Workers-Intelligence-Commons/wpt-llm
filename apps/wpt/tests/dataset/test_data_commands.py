@@ -7,12 +7,13 @@ from datetime import date
 
 from wpt.dataset import main
 from wpt_dataset.license_check import text_id
+from wpt_utils.lines import bare
 
 
 def run(capsys, *args):
     """(exit code, standard output, the version printed on standard error)."""
     code = main(list(args))
-    out, err = capsys.readouterr()
+    out, err = map(bare, capsys.readouterr())
     versions = [line.removeprefix("version: ") for line in err.splitlines() if line.startswith("version: ")]
     return code, out, versions[0] if versions else None
 

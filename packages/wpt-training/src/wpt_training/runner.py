@@ -14,6 +14,7 @@ from pathlib import Path
 import torch
 
 from wpt_telemetry import RecordError, Telemetry
+from wpt_utils.lines import WARNING, say
 
 from .plugins import PluginError, Run
 from .states import load_state, save_state
@@ -165,7 +166,7 @@ def stage_of(stages, step) -> tuple[int, object, int, int]:
 
 
 def train(model, strategy, step, method, environment, seed: int, number: int, options: Options = Options(),
-          checkpoint: Checkpoint | None = None, resume=False, identity=None, done=(), log=print, telemetry=None,
+          checkpoint: Checkpoint | None = None, resume=False, identity=None, done=(), log=say, telemetry=None,
           save_last=False, start: Checkpoint | None = None, limit: Limit | None = None,
           signals: "StopSignals | None" = None) -> Trained:
     """Run one step (a wpt_training.Step, its method and environment
@@ -235,7 +236,7 @@ def train(model, strategy, step, method, environment, seed: int, number: int, op
             raise SettingsMismatch(f"the checkpoint in {checkpoint} was written by another step or with other "
                                    "settings")
         if state is None and start is None:
-            log(f"no checkpoint of {step.name} in {checkpoint}: starting at update 1")
+            log(f"no checkpoint of {step.name} in {checkpoint}: starting at update 1", WARNING)
     continued = state is None and start is not None
     if continued:
         state = strategy.broadcast(start.load() if strategy.is_main else None)

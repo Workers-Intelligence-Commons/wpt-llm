@@ -93,6 +93,8 @@ from .repo import Repo, validate
 from .sources import (copied_by_pointers, copied_for_repository, copy_size, each_read, final_tree, held_manifest,
                       held_out_group, load_index, tags_of, temporary_git)
 
+from wpt_utils.lines import say
+
 TASK, CHECK, FILES = "task.json", "check", "files/"
 # the containers' sizes when task.json asks for no more: MiB of memory (the files in /work and /tmp included),
 # MiB that /work and /tmp may each hold, processes and threads at once, CPUs' worth of time
@@ -710,7 +712,7 @@ def pointed_sources(source, tree, store, repo: Repo) -> set[str]:
     return {pointer.source for task in of_source(source, tree, store, repo).values() for pointer in task.pointers}
 
 
-def read(repo: Repo, store, tag: str | None, held_out: float, log=print, measure=False,
+def read(repo: Repo, store, tag: str | None, held_out: float, log=say, measure=False,
          dataset: str | None = None, held: set | None = None,
          only: set[str] | None = None, copies=None, pointable: set[str] | None = None,
          left_out: list | None = None, telemetry=None) -> tuple[list[Task], dict]:

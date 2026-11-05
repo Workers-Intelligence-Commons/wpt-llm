@@ -82,6 +82,8 @@ from pathlib import Path
 from . import certificate
 from .link import PROTOCOL, Key, LinkError, keep_alive, pin, receive, send, server_context
 
+from wpt_utils.lines import ERROR, say
+
 PORT = 8470
 WAIT = 3600.0
 GRACE = 30.0  # seconds the job gets to stop once its manager is gone, before it is killed
@@ -119,7 +121,7 @@ def main(argv=None):
     try:
         settings = Settings(environ, local=args.local)
     except ValueError as error:
-        print(error, file=sys.stderr)
+        say(error, ERROR)
         return 2
     try:
         return Server(settings).run()
@@ -146,12 +148,12 @@ class Server:
         shown = "127.0.0.1" if host == "0.0.0.0" else host
         key = Key(shown, port, self.pin, self.settings.token, self.settings.place, self.settings.private)
         # a token set for it is never printed whole: who set it knows it
-        print(key.shown() if self.settings.given else key, flush=True)
+        say(key.shown() if self.settings.given else key)
         if not self.settings.local:
-            print(f"gpu worker listening on {host}:{port}: give the line above to the wpt manager (WPT_GPU_WORKERS), "
-                  f"with this machine's address in place of {shown} when it runs elsewhere"
-                  + (", and the token WPT_WORKER_TOKEN holds in place of the stars" if self.settings.given else "")
-                  + f"; it ends after {self.settings.wait:.0f} s with no manager connected", flush=True)
+            say(f"gpu worker listening on {host}:{port}: give the key in the line above to the wpt manager "
+                f"(WPT_GPU_WORKERS), with this machine's address in place of {shown} when it runs elsewhere"
+                + (", and the token WPT_WORKER_TOKEN holds in place of the stars" if self.settings.given else "")
+                + f"; it ends after {self.settings.wait:.0f} s with no manager connected")
         idle_since = time.monotonic()
         try:
             while True:
@@ -162,7 +164,7 @@ class Server:
                 elif self.settings.local and session is not None:  # its one manager is gone
                     return 0
                 elif time.monotonic() - idle_since > self.settings.wait:
-                    print(f"no manager for {self.settings.wait:.0f} s: the gpu worker ends", flush=True)
+                    say(f"no manager for {self.settings.wait:.0f} s: the gpu worker ends")
                     return 0
                 try:
                     raw, _ = listener.accept()

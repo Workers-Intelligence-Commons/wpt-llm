@@ -31,10 +31,10 @@ commits stay in git.
 """
 
 import argparse
-import sys
 
 from wpt_dataset.errors import RuleViolation
 from wpt_dataset.repo import Repo
+from wpt_utils.lines import ERROR, say
 from wpt_utils.programs import MissingTool
 
 from . import pages, ui
@@ -53,9 +53,9 @@ def main(argv=None):
         jobs = Jobs(repo.root)
         server = make_server(pages.routes(repo, running=jobs), static, args.port)
     except (MissingTool, RuleViolation, ui.UiBuildFailed, OSError) as error:
-        print(f"wpt web: {error}", file=sys.stderr)
+        say(f"wpt web: {error}", ERROR)
         return 1
-    print(f"wpt web: http://127.0.0.1:{server.server_address[1]}/ (Ctrl+C stops it)", flush=True)
+    say(f"wpt web: http://127.0.0.1:{server.server_address[1]}/ (Ctrl+C stops it)")
     try:
         server.serve_forever()
     except KeyboardInterrupt:

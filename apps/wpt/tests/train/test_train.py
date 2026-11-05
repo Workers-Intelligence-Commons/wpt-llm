@@ -25,6 +25,7 @@ from wpt_utils.device import select_device
 from wpt.dataset import main as dataset
 from wpt.train import main
 from wpt_training import load_state
+from wpt_utils.lines import bare
 
 ROOT = Path(__file__).resolve().parents[4]
 
@@ -72,7 +73,7 @@ def test_a_training_run_records_what_it_read_every_step_and_what_it_wrote(built,
     # afterwards one must know exactly what happened, from the store alone:
     # the dataset read, each step's loss, the evaluations, the files written
     main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model"])
-    printed = capsys.readouterr().out
+    printed = bare(capsys.readouterr().out)
 
     [run] = built.records("wpt train")
     assert run.end["status"] == "succeeded" and run.end["exit_code"] == 0
@@ -735,7 +736,7 @@ def test_a_store_that_fails_while_the_last_dataset_is_read_refuses_the_run_in_on
     monkeypatch.setattr("wpt.train.last_dataset", failing)
     with pytest.raises(SystemExit) as refused:
         main(["d"])
-    assert refused.value.code == 2 and capsys.readouterr().err == "StoreError: the bucket does not answer\n"
+    assert refused.value.code == 2 and bare(capsys.readouterr().err) == "StoreError: the bucket does not answer\n"
 
 
 def test_wpt_train_without_a_dataset_id_reads_the_one_last_built_for_the_recipe(built, tmp_path, capsys):
@@ -746,7 +747,7 @@ def test_wpt_train_without_a_dataset_id_reads_the_one_last_built_for_the_recipe(
     assert refused.value.code == 2 and "no dataset was built for three" in capsys.readouterr().err
 
     dataset(["build", recipe])
-    assert capsys.readouterr().out.strip().splitlines()[-1] == built.dataset_id
+    assert bare(capsys.readouterr().out).strip().splitlines()[-1] == built.dataset_id
     main([recipe, "--out", "model"])
     assert json.loads((tmp_path / "model" / "provenance.json").read_text())["dataset"] == built.dataset_id
 

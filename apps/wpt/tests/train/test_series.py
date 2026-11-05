@@ -54,8 +54,8 @@ def test_every_size_of_a_series_builds_one_dataset_and_a_size_trains_on_its_star
     folder.mkdir(parents=True)
     (folder / "tiny.json").write_text(json.dumps(TINY))
     repo = Repo(tmp_path)
-    small = build_dataset(repo, "tiny:small", built.store, log=lambda _: None)
-    assert build_dataset(repo, "tiny:large", built.store, log=lambda _: None) == small  # one build for the series
+    small = build_dataset(repo, "tiny:small", built.store, log=lambda *_: None)
+    assert build_dataset(repo, "tiny:large", built.store, log=lambda *_: None) == small  # one build for the series
     record = json.loads(built.store.get_bytes(built.store.get_ref("datasets", small)))
     assert record["recipe"]["total_tokens"] == 15 * 4 * 17  # the large size's prefix
     train(["tiny:small", small, "--out", "model"])

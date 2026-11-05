@@ -160,6 +160,7 @@ from pathlib import Path
 
 from wpt_store import StoreError, store_from_settings
 from wpt_telemetry import RECORD_FAILED, RecordError
+from wpt_utils.lines import ERROR, WARNING, say
 from wpt_utils.programs import MissingTool
 
 from wpt_dataset import build, checking, download, edit, manifest, migrate, unusable
@@ -197,18 +198,18 @@ def cmd_download(args, repo):
 def cmd_check(args, repo):
     problems = repo.check()
     if problems:
-        print("\n".join(problems), file=sys.stderr)
+        say("\n".join(problems), ERROR)
         return 1
     selection = checking.to_fetch(repo, lambda: _store(repo), changed=args.changed, fetch=args.fetch)
     for note in selection.unwritten.values():  # the check names them; they are not a failure
-        print(note)
+        say(note)
     failed = []
     if selection.ids:
         store = _store(repo)
         fetched = _downloaded(download.run(repo, selection.ids, store, "check", args.arguments), failed)
         for sid in fetched:  # every source is checked, so one run names every failure
             _check_fetched(repo, sid, store, failed)
-    print(f"checked {len(repo.source_ids())} sources and their recipes")
+    say(f"checked {len(repo.source_ids())} sources and their recipes")
     return _failures(failed, len(selection.ids))
 
 
@@ -220,23 +221,24 @@ def _check_fetched(repo, sid, store, failed: list[str]):
     except (DatasetError, StoreError, MissingTool) as error:
         _failed(sid, error, failed)
         return
-    print(f"{sid}: {entries} entries, cuts, patches, license and format maps OK; "
-          f"{converted} Markdown documents")
+    say(f"{sid}: {entries} entries, cuts, patches, license and format maps OK; "
+        f"{converted} Markdown documents")
     for statement in unmatched:
-        print(f"  left out: the files of license entry {statement.entry} ({statement.problem})")
+        say(f"  left out: the files of license entry {statement.entry} ({statement.problem})", WARNING,
+            sys.stdout)
     _print_skipped(skipped)
 
 
 def _failed(sid, error, failed: list[str]):
     failed.append(f"{sid}: {type(error).__name__}: {error}")
-    print(f"{sid}: FAILED ({type(error).__name__})", file=sys.stderr)
+    say(f"{sid}: FAILED ({type(error).__name__})", ERROR)
 
 
 def _failures(failed: list[str], count: int) -> int:
     """Exit code 1 and the list of failures, if any."""
     if failed:
-        print(f"{len(failed)} of {count} fetched sources failed:", file=sys.stderr)
-        print("\n".join(failed), file=sys.stderr)
+        say(f"{len(failed)} of {count} fetched sources failed:", ERROR)
+        say("\n".join(failed), ERROR)
         return 1
     return 0
 
@@ -254,29 +256,30 @@ def _print_skipped(skipped):
         for key, count in report.outside.items():
             outside[key] = outside.get(key, 0) + count
     for (name, value), count in sorted(outside.items(), key=lambda item: -item[1]):
-        print(f"  left out: {count} records whose {name} is {value!r} (not kept by `keep`)")
+        say(f"  left out: {count} records whose {name} is {value!r} (not kept by `keep`)")
     for value, count in sorted(unlisted.items(), key=lambda item: -item[1]):
-        print(f"  left out: {count} records with license value {value!r} (listed by no license entry: a person "
-              f"adds an entry for that value, under review)")
+        say(f"  left out: {count} records with license value {value!r} (listed by no license entry: a person "
+            f"adds an entry for that value, under review)", WARNING, sys.stdout)
     for value, count in sorted(untrained.items(), key=lambda item: -item[1]):
-        print(f"  left out: {count} records with license value {value!r} (its license entry does not train)")
+        say(f"  left out: {count} records with license value {value!r} (its license entry does not train)", WARNING,
+            sys.stdout)
     if older:
-        print(f"  left out: {older} records replaced by a newer record of the same id (`newest`)")
+        say(f"  left out: {older} records replaced by a newer record of the same id (`newest`)")
     if empty:
-        print(f"  left out: {empty} records with empty text")
+        say(f"  left out: {empty} records with empty text")
 
 
 def cmd_check_commits(args, repo):
     problems = check_commits(repo, args.range)
     if problems:
-        print("\n".join(problems), file=sys.stderr)
+        say("\n".join(problems), ERROR)
         return 1
-    print("commits OK")
+    say("commits OK")
     return 0
 
 
 def cmd_source_id(args, repo):
-    print(source_id(args.origin, args.item, args.address))
+    say(source_id(args.origin, args.item, args.address))
     return 0
 
 
@@ -286,25 +289,25 @@ def cmd_manifest(args, repo):
         return _failures(failed, 1)
     tree = upstream_tree(source, store)
     sys.stdout.write(manifest.manifest_bytes(tree).decode())
-    print(f"manifest: {manifest.digest(tree)}", file=sys.stderr)
+    say(f"manifest: {manifest.digest(tree)}", file=sys.stderr)
     return 0
 
 
 def cmd_cut(args, repo):
     cut, version = edit.add_cut(repo, args.id, _store(repo), args.path, args.start, args.end, args.note, args.version)
-    print(f"{args.id}: cut {cut['length']:,} bytes of {args.path}, wherever they occur in it; version {version}")
+    say(f"{args.id}: cut {cut['length']:,} bytes of {args.path}, wherever they occur in it; version {version}")
     return 0
 
 
 def cmd_unpack(args, repo):
     count = edit.unpack(repo, repo.source(args.id), _store(repo), args.folder)
-    print(f"{args.folder}: {count} files of {args.id}; edit them, then `wpt dataset patch {args.id} {args.folder} <name>`")
+    say(f"{args.folder}: {count} files of {args.id}; edit them, then `wpt dataset patch {args.id} {args.folder} <name>`")
     return 0
 
 
 def cmd_patch(args, repo):
     written = edit.write_patch(repo, repo.source(args.id), _store(repo), args.folder, args.name)
-    print(f"wrote {written}; it applies and gives exactly the folder's files")
+    say(f"wrote {written}; it applies and gives exactly the folder's files")
     return 0
 
 
@@ -313,18 +316,18 @@ def cmd_markdown_check(args, repo):
     for sid in args.ids or repo.source_ids():
         report = check_markdown(repo, repo.source(sid), store)
         for problem in report.problems:
-            print(f"{sid}: {problem}", file=sys.stderr)
+            say(f"{sid}: {problem}", ERROR)
         failed = failed or bool(report.problems)
-        print(f"{sid}: {report.documents:,} documents checked, {report.notes:,} notes, "
-              + (f"{len(report.problems):,} problems" if report.problems else "OK"))
+        say(f"{sid}: {report.documents:,} documents checked, {report.notes:,} notes, "
+            + (f"{len(report.problems):,} problems" if report.problems else "OK"))
     return 1 if failed else 0
 
 
 def cmd_exclude_unusable(args, repo):
     found = unusable.exclude(repo, args.id)
     for path, why in found.items():
-        print(f"{path}: {why}")
-    print(f"{args.id}: {len(found):,} files excluded; review source.json before the commit")
+        say(f"{path}: {why}")
+    say(f"{args.id}: {len(found):,} files excluded; review source.json before the commit")
     return 0
 
 
@@ -337,12 +340,12 @@ def cmd_build_tokenizer(args, repo):
 def cmd_tokenizer_check(args, repo):
     reports = check_tokenizer(repo, args.name, _store(repo))
     for r in reports:
-        print(f"{r.source}: {r.documents:,} documents, {r.characters:,} characters, {r.tokens:,} tokens, "
-              f"{r.characters_per_token:.2f} characters per token" + ("" if r.in_vocabulary else
-                                                                      " (not in the vocabulary's training)"))
+        say(f"{r.source}: {r.documents:,} documents, {r.characters:,} characters, {r.tokens:,} tokens, "
+            f"{r.characters_per_token:.2f} characters per token" + ("" if r.in_vocabulary else
+                                                                    " (not in the vocabulary's training)"))
     characters, tokens = sum(r.characters for r in reports), sum(r.tokens for r in reports)
-    print(f"every document decodes back exactly: {sum(r.documents for r in reports):,} documents, "
-          f"{characters:,} characters, {tokens:,} tokens, {characters / max(tokens, 1):.2f} characters per token")
+    say(f"every document decodes back exactly: {sum(r.documents for r in reports):,} documents, "
+        f"{characters:,} characters, {tokens:,} tokens, {characters / max(tokens, 1):.2f} characters per token")
     return 0
 
 
@@ -354,7 +357,7 @@ def cmd_build(args, repo):
 
 def cmd_migrate(args, repo):
     changed = migrate.migrate(repo, open_store=lambda: _store(repo))
-    print(f"{len(changed)} files rewritten")
+    say(f"{len(changed)} files rewritten")
     return 0
 
 
@@ -372,21 +375,21 @@ def _json(data: bytes, where):
 
 
 def _versioned(version, problems=()):
-    print(f"version: {version}", file=sys.stderr)
+    say(f"version: {version}", file=sys.stderr)
     for problem in problems:
-        print(f"problem: {problem}", file=sys.stderr)
+        say(f"problem: {problem}", WARNING)
 
 
 def cmd_kinds(args, repo):
     for kind in KINDS.values():
         writer = f"written by `{kind.made_by}`" if kind.made_by else "written by people"
-        print(f"{kind.name}: {kind.form}, {writer}; {kind.description}")
+        say(f"{kind.name}: {kind.form}, {writer}; {kind.description}")
     return 0
 
 
 def cmd_list(args, repo):
     for name in repo.names(args.kind):
-        print(name)
+        say(name)
     return 0
 
 
@@ -401,21 +404,21 @@ def cmd_show(args, repo):
 
 def cmd_series(args, repo):
     plans = repo.series_plans(args.name)
-    print(f"series {args.name}: one dataset of {repo.series_total_tokens(args.name):,} training tokens; "
-          f"wpt train {args.name}:SIZE reads its first prefix tokens")
+    say(f"series {args.name}: one dataset of {repo.series_total_tokens(args.name):,} training tokens; "
+        f"wpt train {args.name}:SIZE reads its first prefix tokens")
     for plan in plans:
         model = plan.model
-        print(f"{plan.size}: width {model['d_model']}, {model['n_layer']} layers, global "
-              f"{'/'.join(model['global_attention'])}, Engram at {', '.join(map(str, model['engram_layers']))}; "
-              f"{plan.parameters:,} parameters without the vocabulary tables, {plan.total_parameters:,} with them; "
-              f"M {plan.flops_per_token:.4g} FLOPs per token, C {plan.compute:.4g}, D {plan.tokens:.4g} tokens; "
-              f"learning rate {plan.learning_rate:g}, batch {plan.batch_size} windows of {plan.block_size:,} "
-              f"(the law: {plan.batch_tokens:,.0f} tokens), {plan.updates:,} updates, warm-up {plan.warmup:,}, "
-              f"prefix {plan.prefix_tokens:,} tokens")
+        say(f"{plan.size}: width {model['d_model']}, {model['n_layer']} layers, global "
+            f"{'/'.join(model['global_attention'])}, Engram at {', '.join(map(str, model['engram_layers']))}; "
+            f"{plan.parameters:,} parameters without the vocabulary tables, {plan.total_parameters:,} with them; "
+            f"M {plan.flops_per_token:.4g} FLOPs per token, C {plan.compute:.4g}, D {plan.tokens:.4g} tokens; "
+            f"learning rate {plan.learning_rate:g}, batch {plan.batch_size} windows of {plan.block_size:,} "
+            f"(the law: {plan.batch_tokens:,.0f} tokens), {plan.updates:,} updates, warm-up {plan.warmup:,}, "
+            f"prefix {plan.prefix_tokens:,} tokens")
         for run in repo.series_runs(args.name, plan):
-            print(f"  {args.name}:{plan.size}:{run['run']}: {run['updates']:,} updates"
-                  + (f", decaying after update {run['start']:,} of the trunk" if run["start"] is not None else "")
-                  + f", learning rate {run['learning_rate']:g}")
+            say(f"  {args.name}:{plan.size}:{run['run']}: {run['updates']:,} updates"
+                + (f", decaying after update {run['start']:,} of the trunk" if run["start"] is not None else "")
+                + f", learning rate {run['learning_rate']:g}")
     return 0
 
 
@@ -424,17 +427,17 @@ def cmd_save(args, repo):
     json_kind = args.kind in KINDS and KINDS[args.kind].form == "json"  # save names an unknown kind itself
     content = _json(data, args.file) if json_kind else data.decode("utf-8")
     version = repo.save(args.kind, args.name, content, args.version)
-    print(f"saved {repo.relative(args.kind, args.name)}, version {version}")
+    say(f"saved {repo.relative(args.kind, args.name)}, version {version}")
     return 0
 
 
 def cmd_status(args, repo):
     found = repo.status()
     if found is None:
-        print("not a git working tree", file=sys.stderr)
+        say("not a git working tree", ERROR)
         return 1
     for entry in found:
-        print(f"{entry['state']} {entry['path']}")
+        say(f"{entry['state']} {entry['path']}")
     return 0
 
 
@@ -461,14 +464,14 @@ def cmd_new_source(args, repo):
     document = empty_source(args.name, license=args.license, attribution=args.attribution, text=text, by=args.by,
                             formats=formats, tags=args.tag)
     sid = repo.create_source(args.origin, args.item, document, files, args.patch, _store(repo) if files else None)
-    print(sid)
+    say(sid)
     return 0
 
 
 def cmd_files(args, repo):
     version, files = repo.source_files(args.id, _store(repo))
     for path, file in files.items():
-        print(f"{file['mode']} {file['size']:>9} {file['format'] or '?'} [{' '.join(file['tags'])}] {path}")
+        say(f"{file['mode']} {file['size']:>9} {file['format'] or '?'} [{' '.join(file['tags'])}] {path}")
     _versioned(version)
     return 0
 
@@ -482,27 +485,27 @@ def cmd_read(args, repo):
 
 def cmd_write(args, repo):
     version = repo.change_source_files(args.id, {args.path: _input(args.file)}, args.patch, args.version, _store(repo))
-    print(f"recorded as the next patch of {args.id}, version {version}")
+    say(f"recorded as the next patch of {args.id}, version {version}")
     return 0
 
 
 def cmd_remove(args, repo):
     version = repo.change_source_files(args.id, {args.path: None}, args.patch, args.version, _store(repo))
-    print(f"recorded as the next patch of {args.id}, version {version}")
+    say(f"recorded as the next patch of {args.id}, version {version}")
     return 0
 
 
 def cmd_tags(args, repo):
     version = repo.set_tags(args.id, args.path, args.tags, args.version)
-    print(f"saved {repo.relative('source', args.id)}, version {version}")
+    say(f"saved {repo.relative('source', args.id)}, version {version}")
     return 0
 
 
 def cmd_add_license_text(args, repo):
     place = {"file": args.file} if args.file is not None else {"page": args.page}
     text, written = repo.add_found_license_text(args.id, place, _store(repo))
-    print(f"added {written}, under review" if written else f"a license text holds it already: {text}")
-    print(text)
+    say(f"added {written}, under review" if written else f"a license text holds it already: {text}")
+    say(text)
     return 0
 
 
@@ -512,9 +515,9 @@ def cmd_conversations(args, repo):
         messages = conversation["messages"]
         drafts = [m["metadata"]["draft"] for m in messages if "draft" in m.get("metadata", {})]
         roles = ", ".join(m["role"] for m in messages)
-        print(f"line {line}: {len(messages)} messages ({roles}); {len(conversation.get('tools', []))} tools; "
-              f"{len(drafts)} model drafts, {sum(d['edited'] for d in drafts)} of them changed; "
-              f"metadata: {', '.join(sorted(conversation.get('metadata', {}))) or 'none'}")
+        say(f"line {line}: {len(messages)} messages ({roles}); {len(conversation.get('tools', []))} tools; "
+            f"{len(drafts)} model drafts, {sum(d['edited'] for d in drafts)} of them changed; "
+            f"metadata: {', '.join(sorted(conversation.get('metadata', {}))) or 'none'}")
     _versioned(version)
     return 0
 
@@ -534,7 +537,7 @@ def cmd_save_conversation(args, repo):
         raise InvalidFile("give FILE, or --remove")
     conversation = None if args.remove else _json(_input(args.file), args.file)
     version = repo.save_conversation(args.id, args.path, line, conversation, args.patch, args.version, _store(repo))
-    print(f"recorded as the next patch of {args.id}, version {version}")
+    say(f"recorded as the next patch of {args.id}, version {version}")
     return 0
 
 
@@ -542,9 +545,9 @@ def cmd_tasks(args, repo):
     version, found = repo.tasks(args.id, _store(repo))
     for folder, task in found.items():
         document = task["task"] if isinstance(task["task"], dict) else {}
-        print(f"{folder}: image {document.get('image', '?')}, limits {json.dumps(document.get('limits'))}, "
-              f"container {json.dumps(document.get('container', {}))}, {len(task['files'])} files, "
-              f"{len(task['kept'])} links kept as they are, check {'present' if task['check'] else 'missing'}")
+        say(f"{folder}: image {document.get('image', '?')}, limits {json.dumps(document.get('limits'))}, "
+            f"container {json.dumps(document.get('container', {}))}, {len(task['files'])} files, "
+            f"{len(task['kept'])} links kept as they are, check {'present' if task['check'] else 'missing'}")
     _versioned(version)
     return 0
 
@@ -566,15 +569,15 @@ def cmd_save_task(args, repo):
         raise InvalidFile(f"{args.file}: a JSON object {{task, check, files}}, as `wpt dataset task` prints it")
     version = repo.save_task(args.id, args.folder, given["task"], given["check"], given["files"], args.patch,
                              args.version, _store(repo))
-    print(f"recorded as the next patch of {args.id}, version {version}")
+    say(f"recorded as the next patch of {args.id}, version {version}")
     return 0
 
 
 def cmd_ratings(args, repo):
     version, found = repo.ratings(args.id, args.path, _store(repo))
     for line, rating in enumerate(found, start=1):  # the verdict is the person's: not shown here
-        print(f"line {line}: {rating['task']}, attempt {rating['attempt']}{' (plain)' if rating['plain'] else ''} "
-              f"of record {rating['record']}; by {rating['by']}, {rating['date']}")
+        say(f"line {line}: {rating['task']}, attempt {rating['attempt']}{' (plain)' if rating['plain'] else ''} "
+            f"of record {rating['record']}; by {rating['by']}, {rating['date']}")
     _versioned(version)
     return 0
 
@@ -585,14 +588,14 @@ def cmd_save_rating(args, repo):
         raise InvalidFile("give FILE, or --remove")
     rating = None if args.remove else _json(_input(args.file), args.file)
     version = repo.save_rating(args.id, args.path, line, rating, args.patch, args.version, _store(repo))
-    print(f"recorded as the next patch of {args.id}, version {version}")
+    say(f"recorded as the next patch of {args.id}, version {version}")
     return 0
 
 
 def cmd_probes(args, repo):
     version, found = repo.probes(args.id, args.path, _store(repo))
     for line, probe in enumerate(found, start=1):  # the question and the patterns are the person's: not shown here
-        print(f"line {line}: {len(probe['patterns'])} patterns")
+        say(f"line {line}: {len(probe['patterns'])} patterns")
     _versioned(version)
     return 0
 
@@ -603,7 +606,7 @@ def cmd_save_probe(args, repo):
         raise InvalidFile("give FILE, or --remove")
     probe = None if args.remove else _json(_input(args.file), args.file)
     version = repo.save_probe(args.id, args.path, line, probe, args.patch, args.version, _store(repo))
-    print(f"recorded as the next patch of {args.id}, version {version}")
+    say(f"recorded as the next patch of {args.id}, version {version}")
     return 0
 
 
@@ -691,10 +694,10 @@ def main(argv=None):
         repo = Repo(args.root) if args.root else Repo.find()
         return args.run(args, repo)
     except (DatasetError, StoreError, MissingTool) as error:
-        print(f"{type(error).__name__}: {error}", file=sys.stderr)
+        say(f"{type(error).__name__}: {error}", ERROR)
         return 1
     except RecordError as error:
-        print(f"RecordError: {error}; stopped, nothing more was done", file=sys.stderr)
+        say(f"RecordError: {error}; stopped, nothing more was done", ERROR)
         return RECORD_FAILED
 
 

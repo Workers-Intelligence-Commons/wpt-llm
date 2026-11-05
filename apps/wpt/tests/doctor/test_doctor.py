@@ -8,6 +8,7 @@ import pytest
 import torch
 
 from wpt.doctor import main
+from wpt_utils.lines import bare
 
 GIT = ["git", "-c", "user.name=T", "-c", "user.email=t@example.org"]
 
@@ -25,7 +26,7 @@ def clean(built, tmp_path, monkeypatch):
 
 def test_a_ready_machine_has_nothing_missing(clean, built, capsys):
     main([])
-    printed = capsys.readouterr().out
+    printed = bare(capsys.readouterr().out)
     assert "MISSING" not in printed and printed.splitlines()[-1] == "nothing is missing"
     assert "store: " in printed and "no GPU here, and WPT_GPU_WORKERS names the gpu workers" in printed
     assert "attention" not in printed  # decided on the gpu workers
@@ -37,7 +38,7 @@ def test_a_machine_that_trains_here_names_what_computes_the_attention(clean, mon
     monkeypatch.setenv("WPT_KERNELS", "pytorch")
     monkeypatch.setattr("wpt.doctor.check_torch", lambda environ: ([], torch.device("cpu")))
     main([])
-    assert "ok  attention: PyTorch" in capsys.readouterr().out
+    assert "ok  attention: PyTorch" in bare(capsys.readouterr().out)
 
 
 def test_every_gap_is_named_with_its_fix_in_one_pass(clean, built, tmp_path, monkeypatch, capsys):
@@ -51,7 +52,7 @@ def test_every_gap_is_named_with_its_fix_in_one_pass(clean, built, tmp_path, mon
     with pytest.raises(SystemExit) as gaps:
         main([])
     assert gaps.value.code == 1
-    printed = capsys.readouterr().out
+    printed = bare(capsys.readouterr().out)
     assert "MISSING  store: " in printed and "fix: set WPT_STORE" in printed
     assert "MISSING  rustc: not found" in printed and "MISSING  cargo: not found" in printed
     assert "fix: install a Rust toolchain" in printed
@@ -66,6 +67,6 @@ def test_a_file_store_whose_folder_does_not_exist_is_missing_and_stays_absent(cl
     with pytest.raises(SystemExit) as gaps:
         main([])
     assert gaps.value.code == 1
-    printed = capsys.readouterr().out
+    printed = bare(capsys.readouterr().out)
     assert f"MISSING  store: {absent} does not exist" in printed and "fix: correct WPT_STORE" in printed
     assert not absent.parent.exists()

@@ -16,6 +16,7 @@ from safetensors.torch import load_file
 
 from wpt.train import LOST, main
 from wpt_training import load_state
+from wpt_utils.lines import bare
 from wpt_worker.link import Key, LinkError
 
 pytestmark = pytest.mark.usefixtures("on_the_cpu")  # gloo on every system, no GPU needed
@@ -32,7 +33,7 @@ def start_worker(stack, tmp_path, name) -> Key:
                                env={**os.environ, "WPT_WORKER_FOLDER": str(tmp_path / name)})
     stack.callback(process.wait, 120)
     stack.callback(process.stdout.close)
-    return Key.parse(process.stdout.readline())
+    return Key.parse(bare(process.stdout.readline()))
 
 
 def train(built, tmp_path, recipe, out, workers="", *options):

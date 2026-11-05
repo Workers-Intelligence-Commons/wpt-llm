@@ -43,6 +43,31 @@ def test_a_module_s_code_changes_with_every_module_it_imports_and_with_nothing_e
         assert programs.modules_code("wpt_keyed.stage") != before, path
 
 
+def test_a_module_that_only_records_and_prints_takes_no_part_in_a_module_s_code(tmp_path, monkeypatch):
+    # the modules of RECORDING (telemetry, printed lines) compute no result:
+    # a change to one, or to a module only it imports, leaves the code the
+    # same; a module another path imports still moves it
+    monkeypatch.syspath_prepend(str(tmp_path / "src"))
+    monkeypatch.setattr(programs, "RECORDING", ("wpt_keyed.telemetry", "wpt_keyed.log"))
+    _package(tmp_path, {
+        "src/wpt_keyed/__init__.py": b"",
+        "src/wpt_keyed/stage.py": b"from wpt_keyed.telemetry import runs\nfrom wpt_keyed import log\nfrom . import shared\n",
+        "src/wpt_keyed/telemetry/__init__.py": b"from wpt_keyed import only_recording, shared\n",
+        "src/wpt_keyed/telemetry/runs.py": b"value = 1\n",
+        "src/wpt_keyed/log.py": b"value = 2\n",
+        "src/wpt_keyed/only_recording.py": b"value = 3\n",
+        "src/wpt_keyed/shared.py": b"value = 4\n",
+    })
+    first = programs.modules_code("wpt_keyed.stage")
+
+    for path in ("telemetry/__init__.py", "telemetry/runs.py", "log.py", "only_recording.py"):
+        _package(tmp_path, {f"src/wpt_keyed/{path}": (tmp_path / "src/wpt_keyed" / path).read_bytes() + b"# changed\n"})
+        assert programs.modules_code("wpt_keyed.stage") == first, path
+
+    _package(tmp_path, {"src/wpt_keyed/shared.py": b"value = 5\n"})
+    assert programs.modules_code("wpt_keyed.stage") != first
+
+
 def test_a_compiled_module_enters_by_the_files_that_build_it(tmp_path, monkeypatch):
     # a compiled module (the tokenizer's Rust extension) has no imports to
     # read: it enters by the sources its project builds it from (the

@@ -45,6 +45,7 @@ import time
 from pathlib import Path
 
 from wpt_utils.files import try_lock_file, unlock_file
+from wpt_utils.lines import ERROR, WARNING
 from wpt_worker.link import Key, probe
 from wpt_worker.manager import WORKERS, keys
 
@@ -247,7 +248,7 @@ class Workers:
         except rental.RentalError as error:
             if cap.dollars is not None:
                 raise rental.RentalError(f"WPT_BUDGET needs the provider's price: {error}") from None
-            telemetry.log(f"the rental's cost is not known: {error}", error=True)
+            telemetry.log(f"the rental's cost is not known: {error}", WARNING)
             return None
         rate = price + sum(entry["price"] or 0.0 for entry in self.state["rentals"] if entry["stopped"] is None)
         telemetry.event("manager.price", price=price, machines=count, kind=kind)
@@ -265,7 +266,7 @@ class Workers:
         in prepare()."""
         limit = replacements(settings)
         if self.state["resumed"] >= limit:
-            telemetry.log(f"the run resumed {limit} times already (WPT_REPLACEMENTS): it stops here", error=True)
+            telemetry.log(f"the run resumed {limit} times already (WPT_REPLACEMENTS): it stops here", ERROR)
             return False
         lost = [index for index, key in enumerate(self.keys()) if not probe(key)]
         for index in lost:
@@ -276,7 +277,7 @@ class Workers:
                  if self.state["workers"][index]["rental"] is None]
         if given:
             telemetry.log(f"lost gpu workers a person started: {', '.join(given)}; start them again (or others, "
-                          f"in {WORKERS}), then run the same command with the same WPT_RUN", error=True)
+                          f"in {WORKERS}), then run the same command with the same WPT_RUN", ERROR)
             return False
         self.state["resumed"] += 1
         self.save()

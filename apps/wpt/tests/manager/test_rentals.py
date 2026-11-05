@@ -24,6 +24,7 @@ from wpt.manager.machines import Workers
 from wpt.manager.rental import Address, Cap, Provider, RentalError
 from wpt.manager.skypilot import SkyPilot
 from wpt_training import load_state
+from wpt_utils.lines import INFO, bare
 from wpt_worker.link import Key
 
 
@@ -55,14 +56,14 @@ class Fake(Provider):
 
     def address(self, name, watch):
         process, line, _ = Fake.processes[name]
-        key = Key.parse(line)  # what the worker printed: its token hidden
+        key = Key.parse(bare(line))  # what the worker printed: its token hidden
         if Fake.lose and len(Fake.processes) == 1:
             process.kill()
             process.wait()
         return Address(key.host, key.port, key.pin)
 
     def addresses(self, name, count, watch):
-        keys = [Key.parse(line) for _, line, _ in Fake.cluster_of[name]]
+        keys = [Key.parse(bare(line)) for _, line, _ in Fake.cluster_of[name]]
         return [Address(key.host, key.port, key.pin, key.place, key.private) for key in keys]
 
     def stop(self, name):
@@ -234,7 +235,7 @@ with open({str(calls)!r}, "a") as out:
                           "cwd": os.getcwd(), "names": sorted(os.environ)}}) + "\\n")
 if arguments[0] == "logs":
     print("installing...")
-    print("wpt-worker://secr********@127.0.0.1:8470#{pin}")
+    print("2026-11-05 15:27:29 INFO wpt-worker://secr********@127.0.0.1:8470#{pin}")
 elif arguments[0] == "status":
     print("http://34.0.0.9:30123")
 elif arguments[0] == "down" and arguments[-1] == "wpt-gone":
@@ -356,9 +357,9 @@ with open({str(tmp_path / "calls.jsonl")!r}, "a") as out:
     out.write(json.dumps(sys.argv[1:]) + "\\n")
 if sys.argv[1] == "logs":
     print("wpt-node 0 10.0.0.1")
-    print("wpt-worker://clus********@0.0.0.0:8470?place=wpt-big&private=10.0.0.1#{pins[0]}")
+    print("2026-11-05 15:27:29 INFO wpt-worker://clus********@0.0.0.0:8470?place=wpt-big&private=10.0.0.1#{pins[0]}")
     print("wpt-node 1 10.0.0.2")
-    print("wpt-worker://clus********@0.0.0.0:8470?place=wpt-big&private=10.0.0.2#{pins[1]}")
+    print("2026-11-05 15:27:29 INFO wpt-worker://clus********@0.0.0.0:8470?place=wpt-big&private=10.0.0.2#{pins[1]}")
 """)
     (bin_folder / "sky").chmod(0o755)
     settings = {**os.environ, "PATH": f"{bin_folder}{os.pathsep}{os.environ['PATH']}", "WPT_RENTAL_GPUS": "A100:4",
@@ -410,7 +411,7 @@ class Recorder:
 
     irreversible = event
 
-    def log(self, text, /, error=False, **attributes):
+    def log(self, text, level=INFO, /, **attributes):
         self.logs.append(text)
 
     def span(self, name, /, **attributes):

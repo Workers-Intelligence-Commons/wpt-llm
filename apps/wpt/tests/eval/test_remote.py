@@ -14,6 +14,7 @@ from wpt.eval import main
 from wpt.eval.remote import Remote
 from wpt_model import load_model
 from wpt_tokenizer import END
+from wpt_utils.lines import bare
 from wpt_worker.evaluation import Served
 from wpt_worker.link import Key
 
@@ -57,7 +58,7 @@ def start_worker(stack, tmp_path, name) -> Key:
                                env={**os.environ, "WPT_WORKER_FOLDER": str(tmp_path / name)})
     stack.callback(process.wait, 120)
     stack.callback(process.stdout.close)
-    return Key.parse(process.stdout.readline())
+    return Key.parse(bare(process.stdout.readline()))
 
 
 def test_the_command_uses_the_first_gpu_worker_listed_and_reaches_no_other(trained, tmp_path, monkeypatch):

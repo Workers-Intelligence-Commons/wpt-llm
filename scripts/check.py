@@ -47,6 +47,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+from wpt_utils.lines import ERROR, INFO, line, say
 from wpt_utils.parallel import limit, peak
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -90,7 +91,7 @@ def upstream_base():
         found = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
         if found.returncode == 0:
             return found.stdout.strip()
-    sys.exit("no upstream branch to compare with: pass --base, and --range without --working-tree")
+    sys.exit(line("no upstream branch to compare with: pass --base, and --range without --working-tree", ERROR))
 
 
 def changed_paths(base, working_tree):
@@ -103,7 +104,7 @@ def changed_paths(base, working_tree):
     for command in commands:
         found = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
         if found.returncode:
-            sys.exit(f"{' '.join(command)} failed: {found.stderr.strip()}")
+            sys.exit(line(f"{' '.join(command)} failed: {found.stderr.strip()}", ERROR))
         paths += found.stdout.splitlines()
     return paths
 
@@ -113,7 +114,7 @@ def images_changed(base, working_tree):
     folders = subprocess.run([UV, "run", "python", "-c", IMAGES_DIFFER if working_tree else IMAGES_CHANGED, base],
                              cwd=ROOT, env=ENVIRON, capture_output=True, text=True)
     if folders.returncode:
-        sys.exit(f"cannot tell whether an image's folder changed since {base}: {folders.stderr.strip()}")
+        sys.exit(line(f"cannot tell whether an image's folder changed since {base}: {folders.stderr.strip()}", ERROR))
     return folders.stdout.strip() == "True"
 
 
@@ -141,7 +142,7 @@ def collected(deselect):
     found = subprocess.run([UV, "run", "pytest", "--collect-only", "-q", "-n", "0", *deselect], cwd=ROOT,
                            env=ENVIRON, capture_output=True, text=True)
     if found.returncode:
-        sys.exit(f"pytest --collect-only failed:\n{found.stdout}{found.stderr}")
+        sys.exit(line(f"pytest --collect-only failed:\n{found.stdout}{found.stderr}", ERROR))
     return [line for line in found.stdout.splitlines() if "::" in line]
 
 
@@ -150,7 +151,7 @@ def test_processes(deselect):
     tests runs alone, its memory is measured, and limit() sizes the
     processes from it, one test process being taken to hold that much."""
     sample = sample_of(collected(deselect))
-    print(f"$ pytest {len(sample)} sample tests alone, to measure their memory", flush=True)
+    say(f"$ pytest {len(sample)} sample tests alone, to measure their memory")
     code, most = peak([UV, "run", "pytest", "-q", "-n", "0", *sample], cwd=ROOT, env=ENVIRON)
     count, why = limit(most, "test workers")
     held = "its memory could not be measured" if most is None else f"it held {most / 1e9:.1f} GB at most"
@@ -187,12 +188,12 @@ def checks(base, range_, working_tree=False):
 
 def run(commands, folder, env):
     for command in commands:
-        print(f"$ {' '.join(command)}", flush=True)
+        say(f"$ {' '.join(command)}")
         try:
             if subprocess.run(command, cwd=folder, env=env).returncode != 0:
                 return False
         except FileNotFoundError:
-            print(f"{command[0]}: not found on this machine", flush=True)
+            say(f"{command[0]}: not found on this machine", ERROR, sys.stdout)
             return False
     return True
 
@@ -211,14 +212,16 @@ def main():
 
     results = []
     for name, prepare in checks(base, range_, args.working_tree):
-        print(f"\n== {name}", flush=True)
+        say(f"\n== {name}")
         commands, folder, why, env = prepare()
         if why:
-            print(why, flush=True)
+            say(why)
         results.append((name, run(commands, folder, env)))
-    print("\n" + "\n".join(f"{'passed' if ok else 'FAILED'}  {name}" for name, ok in results))
+    say("")
+    for name, ok in results:
+        say(f"{'passed' if ok else 'FAILED'}  {name}", INFO if ok else ERROR, sys.stdout)
     if args.working_tree:
-        print("left out  commits: a push still needs a run without --working-tree", flush=True)
+        say("left out  commits: a push still needs a run without --working-tree")
     sys.exit(0 if all(ok for _, ok in results) else 1)
 
 

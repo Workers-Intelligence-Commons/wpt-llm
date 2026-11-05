@@ -13,6 +13,7 @@ from wpt_dataset.pools import matches, parse
 from wpt_dataset.repo import Repo, dump_json, validate
 from wpt_dataset.sources import upstream_manifest
 from wpt_tokenizer import Tokenizer
+from wpt_utils.lines import bare
 
 
 def test_pool_expressions_follow_usual_precedence():
@@ -108,12 +109,12 @@ def test_migrate_rewrites_the_files_a_step_recognizes_by_their_fields(kit, repo,
     steps = {"source": [rename]}
 
     assert outdated(json.loads(path.read_text()), "source", steps) == ["a source with `type`"]
-    changed = migrate(repo, steps=steps, log=lambda _: None)
+    changed = migrate(repo, steps=steps, log=lambda *_: None)
     assert changed == [path.relative_to(repo.root).as_posix()]
     document = json.loads(path.read_text())
     assert document["kind"] == "git" and "type" not in document
     assert path.read_text() == dump_json(document)
-    assert outdated(document, "source", steps) == [] and migrate(repo, steps=steps, log=lambda _: None) == []
+    assert outdated(document, "source", steps) == [] and migrate(repo, steps=steps, log=lambda *_: None) == []
 
 
 def test_upgrade_brings_a_document_to_the_current_shape_in_memory(kit):
@@ -151,7 +152,7 @@ def test_migrate_drops_the_shape_number_of_every_kind_of_file(kit, repo, store, 
     with pytest.raises(OutdatedSchema, match="an earlier shape"):
         validate(json.loads(source.read_text()), "source", source)
 
-    assert sorted(migrate(repo, log=lambda _: None)) == sorted(p.relative_to(repo.root).as_posix() for p in paths)
+    assert sorted(migrate(repo, log=lambda *_: None)) == sorted(p.relative_to(repo.root).as_posix() for p in paths)
     assert not any("schema" in json.loads(path.read_text()) for path in paths) and repo.check() == []
 
 
@@ -166,16 +167,16 @@ def test_migrating_a_lock_puts_the_list_of_its_documents_in_the_store(kit, repo,
     path.write_text(dump_json({"recipe": recipe, "documents": documents, "vocabulary_sha256": vocabulary}))
 
     with pytest.raises(MigrationIncomplete, match="needs the store"):  # nothing to put the list in
-        migrate(repo, log=lambda _: None)
+        migrate(repo, log=lambda *_: None)
     assert "documents" in json.loads(path.read_text())
 
-    assert migrate(repo, log=lambda _: None, open_store=lambda: store) == [path.relative_to(repo.root).as_posix()]
+    assert migrate(repo, log=lambda *_: None, open_store=lambda: store) == [path.relative_to(repo.root).as_posix()]
     lock = json.loads(path.read_text())
     assert lock == {"recipe": recipe, "documents_sha256": lock["documents_sha256"], "document_count": 3,
                     "vocabulary_sha256": vocabulary}
     assert store.get_bytes(lock["documents_sha256"]) == ('["a-b/three.txt", "' + "3" * 64 + '"]\n["a/one.txt", "'
                                                          + "1" * 64 + '"]\n["b/two.txt", "' + "2" * 64 + '"]\n').encode()
-    assert migrate(repo, log=lambda _: None) == []
+    assert migrate(repo, log=lambda *_: None) == []
 
 
 def test_migrating_a_source_renames_the_old_training_step_tags(kit, repo, store, git_upstream):
@@ -191,13 +192,13 @@ def test_migrating_a_source_renames_the_old_training_step_tags(kit, repo, store,
                    {"tags": ["sft", "answer-as-assistant"], "paths": ["c/**"]}]
     path.write_text(dump_json(old))
 
-    assert migrate(repo, log=lambda _: None) == [path.relative_to(repo.root).as_posix()]
+    assert migrate(repo, log=lambda *_: None) == [path.relative_to(repo.root).as_posix()]
     document = json.loads(path.read_text())
     assert document["tags"] == [{"tags": ["en", "answer-as-assistant"], "paths": ["a/**"]},
                                 {"tags": ["finish-tasks", "finish-tasks-with-less-writing"], "paths": ["b/**"],
                                  "note": "tasks"},
                                 {"tags": ["answer-as-assistant"], "paths": ["c/**"]}]
-    assert migrate(repo, log=lambda _: None) == [] and repo.check() == []
+    assert migrate(repo, log=lambda *_: None) == [] and repo.check() == []
 
 
 def test_migrating_a_source_without_credit_text_or_formats_asks_a_person_for_attribution_text_and_formats(kit, repo, store, git_upstream):
@@ -211,7 +212,7 @@ def test_migrating_a_source_without_credit_text_or_formats_asks_a_person_for_att
     path.write_text(dump_json(old))
 
     with pytest.raises(InvalidFile, match=re.escape(str(path))):
-        migrate(repo, log=lambda _: None)
+        migrate(repo, log=lambda *_: None)
     document = json.loads(path.read_text())
     assert document["licenses"] == [{**old["licenses"][0], "attribution": "", "text": ""}]
     assert document["formats"] == []
@@ -220,10 +221,10 @@ def test_migrating_a_source_without_credit_text_or_formats_asks_a_person_for_att
     document["licenses"][0]["text"] = kit.LICENSE_TEXT
     path.write_text(dump_json(document))
     with pytest.raises(InvalidFile, match=re.escape(f"{path}: at formats")):
-        migrate(repo, log=lambda _: None)
+        migrate(repo, log=lambda *_: None)
     document["formats"] = [{"format": "text", "paths": ["**"]}]  # the person names each file's format
     path.write_text(dump_json(document))
-    assert migrate(repo, log=lambda _: None) == [] and repo.check() == []
+    assert migrate(repo, log=lambda *_: None) == [] and repo.check() == []
 
 
 def test_a_git_source_without_a_full_commit_as_its_revision_is_refused(kit, repo, store, git_upstream):
@@ -276,7 +277,7 @@ def test_migrating_a_git_source_gives_it_the_commit_it_was_reviewed_at_else_its_
             running.line(sid, "downloaded", "test", got={"commit": downloaded, "manifest": "0" * 64})
 
     with pytest.raises(InvalidFile, match=re.escape(str(paths[2]))):
-        migrate(repo, log=lambda _: None, open_store=lambda: store)
+        migrate(repo, log=lambda *_: None, open_store=lambda: store)
     assert [json.loads(path.read_text())["revision"] for path in paths] == [reviewed, downloaded, ""]
     assert [problem for problem in repo.check() if "revision" in problem] and \
         all(ids[2] in problem for problem in repo.check() if "revision" in problem)
@@ -335,7 +336,7 @@ def test_migrating_moves_a_licenseref_text_into_source_json(kit, repo, store, gi
     proof = "Public domain: the author died in 1850.\n"
     (folder / "LicenseRef-public-domain.txt").write_text(proof, encoding="utf-8", newline="\n")
 
-    assert migrate(repo, log=lambda _: None) == [path.relative_to(repo.root).as_posix()]
+    assert migrate(repo, log=lambda *_: None) == [path.relative_to(repo.root).as_posix()]
     assert json.loads(path.read_text())["licenses"][0]["text"] == proof
     assert not (folder / "LicenseRef-public-domain.txt").exists()
     assert repo.check() == []
@@ -356,7 +357,7 @@ def test_migrating_gives_each_source_one_of_three_states(kit, repo, store, git_u
         paths[item] = repo.root / "data" / "sources" / sid / "source.json"
         paths[item].write_text(dump_json({**json.loads(paths[item].read_text()), "decision": decision}))
 
-    changed = sorted(migrate(repo, log=lambda _: None))  # a decision already of the current kinds stays as it is
+    changed = sorted(migrate(repo, log=lambda *_: None))  # a decision already of the current kinds stays as it is
     assert changed == sorted(paths[item].relative_to(repo.root).as_posix() for item in ("review", "moved"))
     decisions = {item: json.loads(path.read_text())["decision"] for item, path in paths.items()}
     assert decisions == {"review": {"decision": "under-review", **by},
@@ -377,7 +378,7 @@ def test_command_line_builds_a_dataset_and_prints_its_id(kit, repo, store, git_u
 
     assert main(["--root", str(repo.root), "check", "--fetch"]) == 0
     assert main(["--root", str(repo.root), "build", "d"]) == 0
-    dataset_id = capsys.readouterr().out.strip().splitlines()[-1]
+    dataset_id = bare(capsys.readouterr().out).strip().splitlines()[-1]
     assert store.get_ref("datasets", dataset_id)
     assert (repo.root / "data" / "recipes" / "tokenizers" / "t.lock.json").exists()
     # the build's record names the dataset it wrote, which training records as its input,
@@ -472,11 +473,11 @@ def test_migrating_tokenizer_files(kit, repo):
     lock.write_text(json.dumps({"fingerprint": "0" * 64, "vocabulary_sha256": "1" * 64}))
     with pytest.raises(MigrationIncomplete, match=re.escape(f"OutdatedSchema: {lock}: the lock does not list the "
                                                             f"documents")):
-        migrate(repo, log=lambda _: None)
+        migrate(repo, log=lambda *_: None)
     assert json.loads(recipe.read_text()) == {"sample_bytes": 10_000_000_000, "vocab_size": 556, "version": 1}
     lock.unlink()  # what the message asks; the next build writes a current lock
     kit.write_recipe(repo, "mixture", "m", {"pools": [{"name": "a", "select": "a", "weight": 1}]})
-    assert migrate(repo, log=lambda _: None) == []
+    assert migrate(repo, log=lambda *_: None) == []
 
 
 def test_a_vocabulary_recipe_and_its_lock_lose_their_mixture_together_and_the_lock_stays_valid(kit, repo, store):
@@ -487,7 +488,7 @@ def test_a_vocabulary_recipe_and_its_lock_lose_their_mixture_together_and_the_lo
     lock.write_text(json.dumps({"recipe": {"schema": 2, "version": 2, "mixture": "m", "vocab_size": 556},
                                 "vocabulary_sha256": vocabulary, "documents_sha256": documents, "document_count": 1}))
 
-    migrate(repo, log=lambda _: None)
+    migrate(repo, log=lambda *_: None)
 
     assert json.loads(recipe.read_text()) == {"version": 2, "sample_bytes": 10_000_000_000, "vocab_size": 556}
     assert json.loads(lock.read_text())["recipe"] == json.loads(recipe.read_text())
@@ -503,7 +504,7 @@ def test_migrating_a_lock_drops_the_tokenizer_code_s_version(kit, repo):
                "vocabulary_sha256": "1" * 64}
     lock.write_text(dump_json({**current, "wpt_tokenizer": "0.1.0"}))
     assert outdated(json.loads(lock.read_text()), "lock") == ["the tokenizer code's version"]
-    assert migrate(repo, log=lambda _: None) == [lock.relative_to(repo.root).as_posix()]
+    assert migrate(repo, log=lambda *_: None) == [lock.relative_to(repo.root).as_posix()]
     assert json.loads(lock.read_text()) == current
 
 
@@ -538,7 +539,7 @@ def test_migrating_a_model_recipe_with_gated_mla_asks_a_person_for_the_new_atten
                                "model": old}))
 
     with pytest.raises(InvalidFile, match=re.escape(f"{path}: at model/")):
-        migrate(repo, log=lambda _: None)
+        migrate(repo, log=lambda *_: None)
     document = json.loads(path.read_text())
     assert "training" not in document
     assert not any(key.startswith("mla_") for key in document["model"])
@@ -547,7 +548,7 @@ def test_migrating_a_model_recipe_with_gated_mla_asks_a_person_for_the_new_atten
 
     document["model"].update({key: kit.MODEL[key] for key in (*NEW_ATTENTION, "global_attention")})  # the person's choice
     path.write_text(dump_json(document))
-    assert migrate(repo, log=lambda _: None) == []
+    assert migrate(repo, log=lambda *_: None) == []
 
 
 def test_migrating_a_model_recipe_with_its_window_in_the_architecture_makes_its_window_and_steps_one_stage(kit, repo):
@@ -559,7 +560,7 @@ def test_migrating_a_model_recipe_with_its_window_in_the_architecture_makes_its_
     training = {key: value for key, value in TRAINING.items() if key != "stages"}
     path.write_text(dump_json({**with_training(new, {**training, "steps": 1, "batch_size": 4}),
                                "model": {"block_size": 16, **kit.MODEL}}))
-    assert migrate(repo, log=lambda _: None) == [path.relative_to(repo.root).as_posix()]
+    assert migrate(repo, log=lambda *_: None) == [path.relative_to(repo.root).as_posix()]
     assert json.loads(path.read_text()) == new
 
 
@@ -569,7 +570,7 @@ def test_migrating_a_model_recipe_without_a_drafter_adds_the_drafter_s_training_
     path = kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
     new = json.loads(path.read_text())
     path.write_text(dump_json({key: value for key, value in with_training(new).items() if key != "drafter"}))
-    assert migrate(repo, log=lambda _: None) == [path.relative_to(repo.root).as_posix()]
+    assert migrate(repo, log=lambda *_: None) == [path.relative_to(repo.root).as_posix()]
     migrated = json.loads(path.read_text())
     assert migrated["drafter"] == {"prompts": 256, "prompt_tokens": 64, "answer_tokens": 256, "epochs": 10,
                                    "learning_rate": 6e-4, "held_out": 0.1, "anchors": 512, "batch": 8, "seed": 0}
@@ -589,7 +590,7 @@ def test_migrating_a_model_recipe_with_training_and_post_training_apart_makes_it
     path.write_text(dump_json(with_training(new, training, [
         "sft", {"step": "grpo", "settings": {"learning_rate": 1e-6, "rounds": 2}},
         {"step": "token-efficiency", "settings": {"tag": "grpo", "weight_decay": 0.1}}])))
-    assert migrate(repo, log=lambda _: None) == [path.relative_to(repo.root).as_posix()]
+    assert migrate(repo, log=lambda *_: None) == [path.relative_to(repo.root).as_posix()]
     migrated = json.loads(path.read_text())
     assert list(migrated) == ["data", "model", "seed", "steps", "drafter"]
     assert migrated["seed"] == 1337
@@ -613,7 +614,7 @@ def test_migrating_a_model_recipe_whose_steps_name_muon_or_adamw_renames_them_by
     path.write_text(dump_json({**new, "steps": [
         text, {"step": "answer-as-assistant", "optimizer": {"name": "muon", "settings": {"warmup": 5}}},
         {"step": "finish-tasks", "optimizer": {"name": "adamw"}}, {"step": "finish-tasks-with-less-writing"}]}))
-    assert migrate(repo, log=lambda _: None) == [path.relative_to(repo.root).as_posix()]
+    assert migrate(repo, log=lambda *_: None) == [path.relative_to(repo.root).as_posix()]
     assert json.loads(path.read_text())["steps"] == [
         {**text, "optimizer": {"name": "by-part", "settings": {"lr": 1e-3}}},
         {"step": "answer-as-assistant", "optimizer": {"name": "by-part", "settings": {"warmup": 5}}},

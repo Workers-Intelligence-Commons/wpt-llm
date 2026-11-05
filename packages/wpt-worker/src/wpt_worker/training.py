@@ -62,7 +62,6 @@ import json
 import os
 import platform
 import shutil
-import sys
 import tempfile
 from dataclasses import asdict
 from pathlib import Path
@@ -83,6 +82,7 @@ from wpt_training import (SENT, WINDOWS, Checkpoint, Data, FolderCheckpoint, Int
                           save_state, train, weights, window_tokens_left)
 from wpt_training.launch import REFUSED, STOPPED, launch
 from wpt_utils.device import describe, train_in_tf32
+from wpt_utils.lines import ERROR, WARNING, say
 
 from .job import LinkStore, call, download, remote, upload
 from .link import RemoteError, addresses, is_private
@@ -124,17 +124,17 @@ def run(spec, link, work: Path) -> int:
         several = machines["count"] > 1
         if (options["processes"] > 1 or options["max_restarts"] > 0 or several) and "LOCAL_RANK" not in os.environ:
             with Telemetry.join(store, "wpt train", environ) as telemetry:
-                log = lambda text: telemetry.log(text, error=True)  # noqa: E731
+                log = telemetry.log
                 try:
                     placed = placement(machines, options)
                 except Refused as error:
-                    log(str(error))
+                    log(str(error), ERROR)
                     return REFUSED
                 restarts = options["max_restarts"]
                 if several and restarts:
                     log(f"{machines['count']} gpu workers: a crashed process ends the job on every one of them, "
                         "with no restart here (restarts stay on one machine); wpt train then exits with code 5, "
-                        "which wpt manager resumes from the checkpoint")
+                        "which wpt manager resumes from the checkpoint", WARNING)
                     restarts = 0
                 return launch(options["processes"], ["-m", "wpt_worker.job"], max_restarts=restarts, log=log,
                               environ={**telemetry.child_environment(), **placed["environ"]},
@@ -144,7 +144,7 @@ def run(spec, link, work: Path) -> int:
         with (Telemetry.join(store, "wpt train", environ) if main else Telemetry.off()) as telemetry:
             return _run(spec, link, store, work, telemetry)
     except RecordError as error:
-        print(f"RecordError: {error}; stopped, nothing more was recorded", file=sys.stderr)
+        say(f"RecordError: {error}; stopped, nothing more was recorded", ERROR)
         return RECORD_FAILED
 
 
@@ -214,14 +214,14 @@ def _run(spec, link, store, work, telemetry) -> int:
         else:
             strategy_plugin, strategy = load_strategy(spec["options"]["strategy"])
     except PluginError as error:
-        telemetry.log(f"PluginError: {error}", error=True)
+        telemetry.log(f"PluginError: {error}", ERROR)
         return REFUSED
     try:
         _train(spec, link, store, work, strategy, telemetry)
         return 0
     except Refused as error:
         if strategy.is_main:
-            telemetry.log(str(error), error=True)
+            telemetry.log(str(error), ERROR)
         return REFUSED
     except Interrupted:  # _train said so
         return STOPPED
@@ -425,7 +425,7 @@ def _train(spec, link, store, work, strategy, telemetry):
                     if limit is not None:
                         _measured(limit, steps, number, error.step, telemetry)
                     telemetry.log(str(error) + (f", in {spec['checkpoint']}: --resume continues from it"
-                                                if error.saved else ""), error=True)
+                                                if error.saved else ""), WARNING)
             finally:
                 strategy.barrier()  # one process's end stops the others, so none ends while the main one sends
             raise

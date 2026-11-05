@@ -56,6 +56,7 @@ from pathlib import Path
 
 from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
+from wpt_utils.lines import say
 
 from . import docker
 from .docker import DockerFailed
@@ -113,7 +114,7 @@ def tag(root, name) -> str:
     return f"wpt-agent/{name}:{digest.hexdigest()[:16]}"
 
 
-def lock(root, name, *, force=False, log=print) -> str:
+def lock(root, name, *, force=False, log=say) -> str:
     """Pin the image's inputs: write lock.json and licenses.json; with
     force, replace earlier ones. Returns lock.json's place in the
     repository (data/images/<name>/lock.json)."""
@@ -144,7 +145,7 @@ def lock(root, name, *, force=False, log=print) -> str:
     return locked
 
 
-def build(root, name, log=print) -> str:
+def build(root, name, log=say) -> str:
     """Build the image from the folder and its lock, unless this machine
     has it already. Returns its tag."""
     where, wanted, repo = files(root, name), tag(root, name), Repo(root)

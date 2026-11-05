@@ -12,6 +12,7 @@ from wpt_dataset.repo import Repo
 from wpt.eval.scaling import fit, main, planned, point
 from wpt_store import LocalStore
 from wpt_store.models import KIND, put_model
+from wpt_utils.lines import bare
 
 ROOT = Path(__file__).resolve().parents[4]
 COMPUTE = [1e18, 4e18, 2e19, 7e19, 3e20]
@@ -71,7 +72,7 @@ def test_the_command_fits_the_trained_sizes_and_predicts_the_loss_of_a_larger_si
     monkeypatch.chdir(ROOT)
 
     assert main([*models, "--predict", "eldest-titmouse:640x13"]) == 0
-    out = capsys.readouterr().out
+    out = bare(capsys.readouterr().out)
     printed = out.split("fit: L = ", 1)[1].split("\n", 1)[0]
     found_a, found_b = float(printed.split(" x C^-")[0]), float(printed.split(" x C^-")[1].split()[0])
     assert found_a == pytest.approx(a, rel=1e-4) and found_b == pytest.approx(b, rel=1e-4)
@@ -93,7 +94,7 @@ def test_a_model_without_a_held_out_loss_evaluation_is_named_and_left_out_of_the
                             a * compute[size] ** -b if size != "640x13" else None)
                for size in ("256x5", "384x8", "512x10", "640x13")]
     assert main(folders) == 0
-    out = capsys.readouterr().out
+    out = bare(capsys.readouterr().out)
     assert out.startswith("3 points")
     assert f"left out of the fit, with no evals/held-out-loss.json: {folders[3]}" in out
     assert "WPT_EVALUATE=1" in out and "wpt eval" in out

@@ -2,10 +2,15 @@
 # The gpu worker's start (compose.yaml beside it, and skypilot.yaml): uv,
 # then the worker, run by Python 3.14 with the only library the worker itself
 # needs (cryptography, for its certificate); its jobs get their own
-# environment. The server files are /start/start.sh and /start/wpt_worker.
+# environment. The server files are /start/start.sh, /start/wpt_worker and
+# /start/wpt_utils (the form of its printed lines).
 set -e
 if [ ! -f /start/wpt_worker/server.py ]; then
     echo "start.sh: /start/wpt_worker holds no gpu worker: copy packages/wpt-worker/src/wpt_worker from the repository beside compose.yaml (docs/machines.md)" >&2
+    exit 2
+fi
+if [ ! -f /start/wpt_utils/lines.py ]; then
+    echo "start.sh: /start/wpt_utils holds no lines.py: copy packages/wpt-utils/src/wpt_utils from the repository beside compose.yaml (docs/machines.md)" >&2
     exit 2
 fi
 # torch.compile (wpt train --compile) needs a C++ compiler, which the public image lacks; every other run works without

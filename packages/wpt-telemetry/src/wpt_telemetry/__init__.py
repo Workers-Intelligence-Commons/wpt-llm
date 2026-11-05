@@ -92,7 +92,6 @@ import os
 import platform
 import secrets
 import signal
-import sys
 import threading
 import time
 import traceback
@@ -113,6 +112,7 @@ from opentelemetry.trace import NonRecordingSpan, SpanContext, Status, StatusCod
 
 from wpt_store import MissingObject, MixedRecord, as_record_name, check_record_name, read_env_file
 from wpt_utils.files import sha256_file
+from wpt_utils.lines import ERROR, INFO, WARNING, say
 from wpt_utils.parallel import memory
 from wpt_utils.programs import code, repository
 
@@ -127,6 +127,7 @@ PROGRESS_SECONDS = 180  # a long stage prints how far it is at most this often
 FLUSH_THREAD = "wpt-telemetry-flush"
 PROGRESS_THREAD = "wpt-telemetry-progress"
 SHORT = 8  # characters of a hash or a dataset id in a record folder's name
+SEVERITY = {INFO: SeverityNumber.INFO, WARNING: SeverityNumber.WARN, ERROR: SeverityNumber.ERROR}  # by printed level
 METRIC_INTERVAL_MS = 10_000  # live values are sent every 10 s unless OTEL_METRIC_EXPORT_INTERVAL says otherwise
 PACKAGES = ("torch",)  # the outside packages whose version start.json names; the code itself is code()
 
@@ -252,8 +253,8 @@ class Telemetry:
         refuses them)."""
         moment = datetime.now(UTC)
         folder = f"{moment:%Y%m%dT%H%M%SZ}-{as_record_name(command)}-{as_record_name(main_id)}-{secrets.token_hex(4)}"
-        live = _Live(command, folder, _endpoint(env_file, environ), echo or _print)
-        telemetry = cls(store, folder, command, live, echo or _print, owner=True)
+        live = _Live(command, folder, _endpoint(env_file, environ), echo or say)
+        telemetry = cls(store, folder, command, live, echo or say, owner=True)
         try:
             job = (os.environ if environ is None else environ).get(JOB)
             telemetry._write(START, _json({"command": command, "arguments": list(arguments),
@@ -281,8 +282,8 @@ class Telemetry:
         except Exception as error:
             raise RecordError(f"the record {folder} of this run could not be read from {store}: "
                               f"{type(error).__name__}: {error}") from None
-        live = _Live(command, folder, _endpoint(env_file, environ), echo or _print)
-        telemetry = cls(store, folder, command, live, echo or _print, owner=False, parent=parent)
+        live = _Live(command, folder, _endpoint(env_file, environ), echo or say)
+        telemetry = cls(store, folder, command, live, echo or say, owner=False, parent=parent)
         try:
             telemetry._line({"kind": "span_start", "span": telemetry._root.id, "parent": f"{span_id:016x}",
                              "name": command, "attributes": {"process": "joined"}})
@@ -295,9 +296,9 @@ class Telemetry:
     @classmethod
     def off(cls, echo=None):
         """Records nothing; log() still prints, through echo (default:
-        stdout, stderr for errors). For a process whose events the main
+        wpt_utils.lines.say). For a process whose events the main
         one records, and for code run outside a command."""
-        return cls(None, None, "", None, echo or _print, owner=False)
+        return cls(None, None, "", None, echo or say, owner=False)
 
     def child_environment(self, flush=True) -> dict:
         """What a process started for this run needs to join its record,
@@ -317,14 +318,17 @@ class Telemetry:
 
     # the names before / are positional only, so any attribute name is free
 
-    def log(self, text, /, error=False, **attributes):
-        """Record a printed line, then print it (stderr when error)."""
+    def log(self, text, level=INFO, /, **attributes):
+        """Record a printed line at a level of wpt_utils.lines, then print
+        it (wpt_utils.lines.say, or echo(text, level) when given): the
+        time and level the line prints with stay out of the record, whose
+        line has its own."""
         self._check_open()
-        self._line({"kind": "log", "span": self._span(), "severity": "error" if error else "info", "text": str(text),
+        self._line({"kind": "log", "span": self._span(), "severity": level.lower(), "text": str(text),
                     **({"attributes": attributes} if attributes else {})})
         if self._live:
-            self._live.emit(self._top(), None, str(text), attributes, error)
-        self._echo(str(text), error)
+            self._live.emit(self._top(), None, str(text), attributes, level)
+        self._echo(str(text), level)
 
     def event(self, name, /, values=None, **attributes):
         """Record that something happened: attributes say what (anything
@@ -334,7 +338,7 @@ class Telemetry:
         self._line({"kind": "event", "span": self._span(), "name": name, "attributes": attributes,
                     **({"values": values} if values else {})})
         if self._live:
-            self._live.emit(self._top(), name, None, {**attributes, **(values or {})}, False)
+            self._live.emit(self._top(), name, None, {**attributes, **(values or {})}, INFO)
             for key, value in (values or {}).items():
                 self._live.gauge(f"wpt.{name}.{key}", value)
 
@@ -657,10 +661,10 @@ class _Live:
             span.set_status(Status(StatusCode.ERROR, error))
         span.end()
 
-    def emit(self, span, name, text, attributes, error):
+    def emit(self, span, name, text, attributes, level):
         self.logger.emit(timestamp=time.time_ns(), context=trace.set_span_in_context(span) if span else Context(),
-                         severity_number=SeverityNumber.ERROR if error else SeverityNumber.INFO,
-                         severity_text="ERROR" if error else "INFO", body=text if text is not None else name,
+                         severity_number=SEVERITY[level], severity_text=level,
+                         body=text if text is not None else name,
                          attributes=_attributes(attributes), event_name=name)
 
     def gauge(self, name, value):
@@ -707,7 +711,7 @@ class _Failure:
             if not warned:
                 self.echo(f"warning: the OpenTelemetry backend at {self.endpoint} failed ({reason}); the run goes "
                           "on with its record in the store, and the live data is sent again quietly while it fails",
-                          True)
+                          WARNING)
         return result
 
 
@@ -846,10 +850,6 @@ def _attributes(attributes) -> dict:
 
 def _span_id(span) -> str:
     return f"{span.get_span_context().span_id:016x}"
-
-
-def _print(text, error):
-    print(text, file=sys.stderr if error else sys.stdout, flush=True)
 
 
 def _json(document) -> bytes:

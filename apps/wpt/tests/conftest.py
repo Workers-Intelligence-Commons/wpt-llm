@@ -172,7 +172,7 @@ def built(tmp_path, monkeypatch):
 
     write("mixture", "m", {"pools": [{"name": "en", "select": "en", "weight": 1}]})
     write("tokenizer", "t", {"version": 1, "sample_bytes": 10**9, "vocab_size": 556})
-    dataset_id = build_dataset(repo, recipe(), store, log=lambda _: None)
+    dataset_id = build_dataset(repo, recipe(), store, log=lambda *_: None)
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())  # where each command run also writes its record
     monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)  # no live backend, whatever this machine sets
     monkeypatch.setenv("WPT_MAX_RESTARTS", "0")  # wpt train runs in the test's own process, unless a test says
@@ -192,7 +192,7 @@ def built(tmp_path, monkeypatch):
     return SimpleNamespace(store=store, dataset_id=dataset_id, source_id=source_id, attribution=ATTRIBUTION,
                            license_text=LICENSE_TEXT, recipe=recipe, records=records, covered=lambda data: covered(data, root),
                            download=lambda sid: download(root, store, sid), source=source,
-                           build=lambda name="d": build_dataset(repo, name, store, log=lambda _: None))
+                           build=lambda name="d": build_dataset(repo, name, store, log=lambda *_: None))
 
 
 @pytest.fixture

@@ -46,7 +46,7 @@ def test_branches_share_the_trunk_and_the_full_branch_trains_as_the_size_s_own_r
     folder = tmp_path / "data" / "recipes" / "series"
     folder.mkdir(parents=True)
     (folder / "tiny.json").write_text(json.dumps(TINY))
-    dataset = build_dataset(Repo(tmp_path), "tiny:small:branch-1", built.store, log=lambda _: None)
+    dataset = build_dataset(Repo(tmp_path), "tiny:small:branch-1", built.store, log=lambda *_: None)
     # on the CPU, where the same updates give the same bits
     (tmp_path / "cpu.py").write_text("import torch\nfrom wpt_training import Strategy\n\n"
                                      "def start():\n    return Strategy(torch.device('cpu'))\n")

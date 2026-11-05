@@ -37,6 +37,7 @@ import numpy as np
 from wpt_dataset.repo import Repo
 from wpt_model import ModelConfig, weight_files
 from wpt_model.checkpoint import CONFIG_NAME
+from wpt_utils.lines import say
 from wpt_worker.link import LinkError
 from wpt_worker.manager import WORKERS, Files, NoCheckout, code_root, keys, start_workers
 from wpt_worker.writing import RemoteWriter, worker_generator
@@ -48,7 +49,7 @@ class WorkerError(Exception):
 
 
 class Remote:
-    def __init__(self, folder, environ, log=print, kernels=None):
+    def __init__(self, folder, environ, log=say, kernels=None):
         self.folder, self.environ, self.log, self.kernels = Path(folder), environ, log, kernels
         self.config = ModelConfig.load(self.folder / CONFIG_NAME)
         self.worker = self.channel = self.thread = self.files = None

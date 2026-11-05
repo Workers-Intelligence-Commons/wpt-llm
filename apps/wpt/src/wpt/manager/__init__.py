@@ -153,6 +153,7 @@ from wpt_store.names import as_record_name
 from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry, set_ref
 from wpt.train import CRASHED, LOST
 from wpt_training.launch import STOPPED, ask_to_stop
+from wpt_utils.lines import ERROR, WARNING, bare, say
 from wpt_worker.manager import WORKERS
 
 from . import machines, rental
@@ -235,7 +236,7 @@ class Stops:
             if self.reason is not None:
                 self.ends = time.monotonic() + self.deadline
                 self.telemetry.event("manager.stop", reason=self.reason)
-                self.telemetry.log(f"the run stops: {self.reason}", error=True)
+                self.telemetry.log(f"the run stops: {self.reason}", WARNING)
         return self.reason
 
     def left(self) -> float | None:
@@ -247,7 +248,7 @@ class Stops:
         self.telemetry.event("manager.stop_deadline", deadline=self.deadline)
         self.telemetry.log(f"the stop's deadline of {self.deadline:.0f} s passed (WPT_STOP_DEADLINE): the manager ends "
                            "the command and gives the machines back; the updates since the last checkpoint sent "
-                           "are lost", error=True)
+                           "are lost", ERROR)
 
     def halt(self, step="workers"):
         """Failed, with STOPPED, once the run must stop."""
@@ -285,7 +286,7 @@ def run_command(step, arguments, log, last_line=False, environ=None, stops=None)
                     process.stdout = None
     if code:
         raise Failed(step, STOPPED if stops is not None and stops.reason else code)
-    return lines[-1] if lines else None
+    return bare(lines[-1]) if lines else None
 
 
 def shown(stream, lines):
@@ -359,7 +360,7 @@ def _main(argv, signalled) -> int:
     try:
         root = Repo.find().root
     except DatasetError as error:
-        print(f"{type(error).__name__}: {error}", file=sys.stderr)
+        say(f"{type(error).__name__}: {error}", ERROR)
         return REFUSED
     environ = settings(root)
     arguments = sys.argv[1:] if argv is None else list(argv)
@@ -372,26 +373,25 @@ def _main(argv, signalled) -> int:
         refused, whatever its outcome, so that restart: on-failure restarts
         only a crash."""
         if code and container:
-            print(f"wpt manager stopped with exit code {code}; this container exits with 0, so Docker does not "
-                  "start it again: `docker compose up` goes on with the run", file=sys.stderr, flush=True)
+            say(f"wpt manager stopped with exit code {code}; this container exits with 0, so Docker does not "
+                "start it again: `docker compose up` goes on with the run", ERROR)
             return 0
         return code
 
     recipe = environ.get("WPT_RECIPE", "")
     if not recipe:
-        print("WPT_RECIPE is not set: name the model recipe to train (a file name in data/recipes/models/, without "
-              ".json, or SERIES:SIZE[:RUN], a size of a series of data/recipes/series/ or another run of it), in the "
-              "environment or in .env",
-              file=sys.stderr)
+        say("WPT_RECIPE is not set: name the model recipe to train (a file name in data/recipes/models/, without "
+            ".json, or SERIES:SIZE[:RUN], a size of a series of data/recipes/series/ or another run of it), in the "
+            "environment or in .env", ERROR)
         return leave(REFUSED)
     try:
         Repo(root).model_recipe(recipe)  # refused now, not after the download
     except DatasetError as error:
-        print(f"{type(error).__name__}: {error}", file=sys.stderr)
+        say(f"{type(error).__name__}: {error}", ERROR)
         return leave(REFUSED)
     name = environ.get("WPT_RUN") or None
     if name is not None and not STORE_NAME.fullmatch(name):
-        print(f"WPT_RUN={name!r}: use letters, digits, '.', '_' and '-' only", file=sys.stderr)
+        say(f"WPT_RUN={name!r}: use letters, digits, '.', '_' and '-' only", ERROR)
         return leave(REFUSED)
     try:
         rental.kind(environ)  # refused now, not when the workers are rented
@@ -400,18 +400,18 @@ def _main(argv, signalled) -> int:
         rental.deadline(environ)
         machines.replacements(environ)
     except (rental.RentalError, machines.WorkersError) as error:
-        print(f"{type(error).__name__}: {error}", file=sys.stderr)
+        say(f"{type(error).__name__}: {error}", ERROR)
         return leave(REFUSED)
     layer = store_in_layer(environ.get("WPT_STORE", ""))
     if layer is not None:
-        print(f"WPT_STORE names {layer}, which is in this container's own files, deleted with the container: name "
-              "a bucket, or leave WPT_STORE unset for the volume wpt-store, or set WPT_STORE_FOLDER to that folder "
-              "on this machine to mount it at the same path", file=sys.stderr)
+        say(f"WPT_STORE names {layer}, which is in this container's own files, deleted with the container: name "
+            "a bucket, or leave WPT_STORE unset for the volume wpt-store, or set WPT_STORE_FOLDER to that folder "
+            "on this machine to mount it at the same path", ERROR)
         return leave(REFUSED)
     try:
         store = store_from_settings(root / ".env")
     except StoreError as error:
-        print(f"{type(error).__name__}: {error}", file=sys.stderr)
+        say(f"{type(error).__name__}: {error}", ERROR)
         return leave(REFUSED)
     folder = Path(environ.get("WPT_MANAGER_FOLDER") or root / DEFAULT_FOLDER)
     kept = Path(environ.get("WPT_MANAGER_STATE") or root / DEFAULT_STATE)
@@ -428,7 +428,7 @@ def _main(argv, signalled) -> int:
             elif signalled.asked and not workers.groups():
                 postponed = True  # it costs nothing: the next start goes on with it
             else:  # after a SIGTERM, one_run() starts no command and its rentals are given back
-                print(f"run {workers.run} did not end: it goes on, reconnecting to its gpu workers", flush=True)
+                say(f"run {workers.run} did not end: it goes on, reconnecting to its gpu workers")
                 code = one_run(workers.state["recipe"], workers.run, folder, evaluate, store, environ, root,
                                workers, arguments, signalled)
                 continued.append(workers.run)
@@ -444,17 +444,17 @@ def _main(argv, signalled) -> int:
         if name is None:
             name = previous_run(root, recipe, store)
             if name is not None:
-                print(f"run {name} (named in {root / RUN_FILE}, its model is not in the store yet)", flush=True)
+                say(f"run {name} (named in {root / RUN_FILE}, its model is not in the store yet)")
             else:
                 name = made_name(recipe)
                 (root / RUN_FILE).write_text(f"# run {name} of the recipe {recipe}; once it is done, this copies its "
                                              f"model out of the store:\n{copy_out_line(name, environ)}\n",
                                              encoding="utf-8")
-                print(f"run {name} (written into {root / RUN_FILE})", flush=True)
+                say(f"run {name} (written into {root / RUN_FILE})")
         workers = machines.Workers.new(kept, name, recipe)
         if workers is None:
-            print(f"run {name} is another wpt manager's, which runs it now (its lock in {kept} is held): this "
-                  "one leaves it", file=sys.stderr)
+            say(f"run {name} is another wpt manager's, which runs it now (its lock in {kept} is held): this "
+                "one leaves it", ERROR)
             code = REFUSED
         else:
             try:
@@ -463,8 +463,8 @@ def _main(argv, signalled) -> int:
                 workers.release()
     left = stop_rentals(store, kept, environ, root, arguments)
     while left:  # money is spent while a rental runs: the manager stays, trying
-        print(f"{left} rental(s) are still rented: the manager tries to stop them again in {SWEEP:.0f} s",
-              flush=True)
+        say(f"{left} rental(s) are still rented: the manager tries to stop them again in {SWEEP:.0f} s", WARNING,
+            sys.stdout)
         time.sleep(SWEEP)
         left = stop_rentals(store, kept, environ, root, arguments)
     return leave(code)
@@ -473,15 +473,14 @@ def _main(argv, signalled) -> int:
 def stop_command(arguments, kept) -> int:
     """`wpt manager stop [RUN]`; its exit code."""
     if len(arguments) > 1:
-        print("wpt manager stop [RUN]: at most one run's name", file=sys.stderr)
+        say("wpt manager stop [RUN]: at most one run's name", ERROR)
         return REFUSED
     run = arguments[0] if arguments else None
     asked = machines.ask_to_stop(kept, run)
     if not asked:
-        print(f"no wpt manager runs {'a run' if run is None else f'the run {run}'} now (in {kept})", file=sys.stderr)
+        say(f"no wpt manager runs {'a run' if run is None else f'the run {run}'} now (in {kept})", ERROR)
         return REFUSED
-    print(f"asked to stop: {', '.join(asked)}; the manager saves the checkpoint, then gives the machines back",
-          flush=True)
+    say(f"asked to stop: {', '.join(asked)}; the manager saves the checkpoint, then gives the machines back")
     return 0
 
 
@@ -521,12 +520,12 @@ def stop_rentals(store, kept, environ, root, arguments) -> int:
                     try:
                         workers.stop(environ, root, telemetry)
                     except rental.RentalError as error:
-                        telemetry.log(f"RentalError: {error}", error=True)
+                        telemetry.log(f"RentalError: {error}", ERROR)
                     left += len(workers.groups())
                 finally:
                     workers.release()
     except RecordError as error:
-        print(f"RecordError: {error}; the rentals are not stopped without a record of each try", file=sys.stderr)
+        say(f"RecordError: {error}; the rentals are not stopped without a record of each try", ERROR)
         return len(waiting)
     return left
 
@@ -564,7 +563,7 @@ def one_run(recipe, name, folder, evaluate, store, environ, root, workers, argum
     except SystemExit as ended:
         code = ended.code
     except RecordError as error:
-        print(f"RecordError: {error}; stopped, nothing more was recorded", file=sys.stderr)
+        say(f"RecordError: {error}; stopped, nothing more was recorded", ERROR)
         return RECORD_FAILED  # no end recorded: the manager that comes back goes on with it
     workers.end()
     return code
@@ -588,7 +587,7 @@ def _run(recipe, name, out, evaluate, store, telemetry, environ, root, workers, 
         dataset = environ.get("WPT_DATASET") or None
         if dataset is not None:
             if not re.fullmatch(r"[0-9a-f]{64}", dataset) or store.get_ref("datasets", dataset) is None:
-                log(f"WPT_DATASET: the store holds no dataset {dataset!r}", error=True)
+                log(f"WPT_DATASET: the store holds no dataset {dataset!r}", ERROR)
                 return REFUSED
             log(f"dataset {dataset}, as WPT_DATASET names: nothing downloaded or built")
         else:
@@ -597,7 +596,7 @@ def _run(recipe, name, out, evaluate, store, telemetry, environ, root, workers, 
             with telemetry.span("manager.build", recipe=recipe) as span:
                 dataset = run_command("build", ["dataset", "build", recipe], log, last_line=True, stops=held)
                 if dataset is None or not re.fullmatch(r"[0-9a-f]{64}", dataset):
-                    log(f"build: wpt dataset build printed no dataset id last (it printed {dataset!r})", error=True)
+                    log(f"build: wpt dataset build printed no dataset id last (it printed {dataset!r})", ERROR)
                     return REFUSED
                 span.set(dataset=dataset)
         telemetry.input(dataset=dataset)
@@ -615,7 +614,7 @@ def _run(recipe, name, out, evaluate, store, telemetry, environ, root, workers, 
         finally:
             _stop_workers(workers, environ, root, telemetry)
     except Failed as error:
-        log(f"{error}: the run stops here; the same command goes on from what is kept", error=True)
+        log(f"{error}: the run stops here; the same command goes on from what is kept", ERROR)
         return error.code
     with telemetry.span("manager.model", folder=str(out)) as span:
         manifest = put_model(store, out)
@@ -641,7 +640,7 @@ def _train(recipe, name, out, dataset, telemetry, environ, root, workers, stops)
         with telemetry.span("manager.workers"):
             workers.prepare(environ, root, telemetry, stops.halt)
     except (rental.RentalError, machines.WorkersError) as error:
-        log(f"{type(error).__name__}: {error}", error=True)
+        log(f"{type(error).__name__}: {error}", ERROR)
         raise Failed("workers", REFUSED) from None
     while True:
         try:
@@ -656,7 +655,7 @@ def _train(recipe, name, out, dataset, telemetry, environ, root, workers, stops)
                 if not workers.recover(environ, root, telemetry, stops.halt):
                     raise
             except rental.RentalError as failed:
-                log(f"RentalError: {failed}", error=True)
+                log(f"RentalError: {failed}", ERROR)
                 raise error from None
             log("the run resumes from the last checkpoint in the store")
 
@@ -675,4 +674,4 @@ def _stop_workers(workers, environ, root, telemetry):
         workers.stop(environ, root, telemetry)
     except rental.RentalError as error:
         telemetry.log(f"RentalError: {error}; they stay named in the run's file, and the manager tries to stop them "
-                      f"again every {SWEEP:.0f} s", error=True)
+                      f"again every {SWEEP:.0f} s", ERROR)
