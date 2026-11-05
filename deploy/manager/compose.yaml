@@ -81,7 +81,7 @@ services:
     # `docker compose stop` would be lost and the manager would start anyway
     init: true
     # the PyTorch build for this machine's GPU (scripts/setup.py), then the run
-    command: ["sh", "-c", "uv run --frozen scripts/setup.py && exec uv run --frozen --no-sync wpt manager"]
+    command: ["sh", "-c", "uv run scripts/setup.py && exec uv run --frozen --no-sync wpt manager"]
     environment:
       WPT_RECIPE: ${WPT_RECIPE:?set WPT_RECIPE, the model recipe to train (docs/machines.md)}
       WPT_RUN: ${WPT_RUN:-}
