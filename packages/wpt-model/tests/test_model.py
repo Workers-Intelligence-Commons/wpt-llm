@@ -6,6 +6,7 @@ import torch
 from wpt_model import BALANCING, MULTI_TOKEN_PREDICTION, PARTS, ROUTERS, WPT, ModelConfig, Routes
 from wpt_model.attention import CSA_RATIO, HCA_RATIO, Attention
 from wpt_model.experts import Experts
+from wpt_model.layers import expert_forward, grouped_experts
 from wpt_model.kda import _fla_chunk_kda, chunked_kda, delta_attention, recurrent_kda
 from wpt_model import optimizer as update_rule
 from wpt_model.optimizer import MuonAdamW
@@ -105,6 +106,36 @@ def test_quantile_balancing_gives_each_expert_its_share():
         experts(x, ids)
         experts.balance(lambda tensor, op: tensor)
     assert torch.allclose(shares(), torch.full((8,), 1 / 8), atol=0.02)
+
+
+@pytest.mark.skipif(not torch.cuda.is_available(), reason="grouped matrix multiplications need a CUDA device")
+def test_grouped_experts_equal_each_expert_on_its_own_tokens_with_an_expert_that_has_none():
+    # the CUDA path of Experts._routed (BF16 tokens) must give what the loop
+    # over experts gives, in outputs and in every weight's gradient, the
+    # gradient of an expert no token chose being zero
+    torch.manual_seed(0)
+    n, E, L = 4, 16, 8
+    sizes = [5, 0, 7, 3]  # expert 1 has no token
+    weights = [torch.randn(n, E, L, device="cuda") for _ in range(2)] + [torch.randn(n, L, E, device="cuda")]
+    x = torch.randn(sum(sizes), L, device="cuda").bfloat16()
+
+    def run(compute):
+        for w in weights:
+            w.grad = None
+        out = compute()
+        out.float().square().sum().backward()
+        return out, [w.grad for w in weights]
+
+    ends = torch.tensor(sizes, device="cuda").cumsum(0).to(torch.int32)
+    for w in weights:
+        w.requires_grad_()
+    grouped, grouped_grads = run(lambda: grouped_experts(x, ends, *weights))
+    loop, loop_grads = run(lambda: torch.cat([expert_forward(part, *(w[j].bfloat16() for w in weights))
+                                              for j, part in enumerate(x.split(sizes))]))
+    torch.testing.assert_close(grouped, loop)
+    for a, b in zip(grouped_grads, loop_grads):
+        torch.testing.assert_close(a, b)
+        assert not a[1].any()
 
 
 def test_a_replayed_pass_routes_each_token_through_the_experts_recorded_while_writing_it():

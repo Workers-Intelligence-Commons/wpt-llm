@@ -61,3 +61,15 @@ class FeedForward(nn.Module):
 def expert_forward(x, w_gate, w_up, w_down):
     """One routed expert, whose weights are slices of the stacked tensors."""
     return F.linear(situ_glu(F.linear(x, w_gate), F.linear(x, w_up)), w_down)
+
+
+def grouped_experts(x, ends, w_gate, w_up, w_down):
+    """All routed experts at once: x holds the tokens grouped by expert in
+    expert order, and expert j's tokens end at row ends[j] (int32; an expert
+    with no tokens ends where the one before it does). The weights are the
+    stacked tensors, cast to x's dtype, which must be BF16 on a CUDA device.
+    Each width must be a multiple of 8, so that every row is a multiple of
+    16 bytes."""
+    w_gate, w_up, w_down = (w.to(x.dtype).transpose(1, 2) for w in (w_gate, w_up, w_down))
+    hidden = situ_glu(F.grouped_mm(x, w_gate, offs=ends), F.grouped_mm(x, w_up, offs=ends))
+    return F.grouped_mm(hidden, w_down, offs=ends)

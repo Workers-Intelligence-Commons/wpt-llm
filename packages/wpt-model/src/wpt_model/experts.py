@@ -16,7 +16,10 @@ bins. A bin is about 0.00024 wide, and one step moves a bias by at most 0.5.
 Every step's dispatch is in a fixed order: each token's k copies are sorted
 by expert with a stable sort and put back by the inverse permutation, so
 gradients are sums in a fixed order, and every expert runs, even on no
-token, so every process has a gradient for every weight.
+token, so every process has a gradient for every weight. On a CUDA device
+with BF16 tokens the experts run as grouped matrix multiplications, one
+call for each of the three weights; elsewhere each expert runs on its own
+tokens.
 
 A forward pass can record the experts its routers chose for each position
 of one sequence (Routes), and a later pass can replay them instead of
@@ -28,7 +31,7 @@ the current router scores. Hash-routed layers need no record.
 import torch
 import torch.nn as nn
 
-from .layers import EPS, FeedForward, expert_forward
+from .layers import EPS, FeedForward, expert_forward, grouped_experts
 
 SHARED_EXPERTS = 2
 HASH_MULTIPLIER = 2654435761  # h(t) = (t * 2654435761 mod 2^32) mod n
@@ -167,7 +170,10 @@ class Experts(nn.Module):
         inverse = torch.empty_like(order)
         inverse[order] = torch.arange(len(order), device=order.device)
         copies = z.unsqueeze(1).expand(m, k, z.shape[-1]).reshape(m * k, -1)[order]
-        sizes = torch.bincount(chosen.reshape(-1), minlength=self.n).tolist()
-        out = torch.cat([expert_forward(part, self.w_gate[j], self.w_up[j], self.w_down[j])
-                         for j, part in enumerate(copies.split(sizes))])
+        sizes = torch.bincount(chosen.reshape(-1), minlength=self.n)
+        if copies.is_cuda and copies.dtype == torch.bfloat16:  # grouped matrix multiplications: no wait for the sizes
+            out = grouped_experts(copies, sizes.cumsum(0).to(torch.int32), self.w_gate, self.w_up, self.w_down)
+        else:
+            out = torch.cat([expert_forward(part, self.w_gate[j], self.w_up[j], self.w_down[j])
+                             for j, part in enumerate(copies.split(sizes.tolist()))])
         return (out[inverse].view(m, k, -1) * weights[..., None].to(out.dtype)).sum(1)
