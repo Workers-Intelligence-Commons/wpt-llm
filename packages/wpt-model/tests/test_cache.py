@@ -4,6 +4,9 @@ rounding, for each kind of layer and the whole model, past block_size; and
 so do a prompt shared by several rows, rows read together at different
 places, and undoing rejected draft tokens."""
 
+import sys
+import types
+
 import pytest
 import torch
 
@@ -11,7 +14,8 @@ from wpt_model import WPT, ModelConfig
 from wpt_model.attention import CSA_RATIO, HCA_RATIO, Attention
 from wpt_model.cache import Rows
 from wpt_model.engram import Engram
-from wpt_model.kda import KDA, _fla_kernels, delta_step, recurrent_kda
+from wpt_model import kda
+from wpt_model.kda import KDA, _fla_kernels, delta_step, fla_failure, recurrent_kda
 from wpt_model.mhc import STREAMS
 from wpt_model.sequence import WHOLE, Carried
 from wpt_utils.device import select_device
@@ -249,3 +253,17 @@ def test_the_gpu_kernels_carry_kda_s_memory_as_the_formula():
         expected, S = recurrent_kda(q, k, v, g, beta, initial=initial, final=True)
         out, got_S = delta_step(*(t.to(device) for t in (q, k, v, g, beta, initial)))
         assert torch.allclose(out.cpu(), expected, atol=5e-2) and torch.allclose(got_S.cpu(), S, atol=5e-2)
+
+
+def test_a_failed_import_of_flash_linear_attention_keeps_its_reason(monkeypatch):
+    # the reason is what tells a run that KDA is on its slow form, and why
+    monkeypatch.setattr(kda, "_fla", None)
+    monkeypatch.setitem(sys.modules, "fla.ops.kda", None)  # an import of it then fails
+    assert _fla_kernels() is False
+    assert fla_failure() == "ModuleNotFoundError: import of fla.ops.kda halted; None in sys.modules"
+
+    monkeypatch.setattr(kda, "_fla", None)
+    present = types.ModuleType("fla.ops.kda")
+    present.chunk_kda = present.fused_recurrent_kda = object()
+    monkeypatch.setitem(sys.modules, "fla.ops.kda", present)
+    assert _fla_kernels() and fla_failure() is None

@@ -73,6 +73,7 @@ from wpt_inference import COSTS_FILE, costs_file, costs_setup, measure_costs, sa
 from wpt_inference.drafting import DrafterFailed, train_drafter
 from wpt_inference.drafting import settings as drafter_settings
 from wpt_model import PARTS, WPT, ModelConfig
+from wpt_model.kda import fla_failure
 from wpt_model.sparse import KernelUnavailable, kernels
 from wpt_store import StoreError
 from wpt_store.shards import documents, prefix_shards
@@ -334,6 +335,12 @@ def _train(spec, link, store, work, strategy, telemetry):
         log("attention: " + (f"{chosen.NAME} kernels" if chosen
                              else "PyTorch (--kernels pytorch)" if named
                              else "PyTorch (neither TileLang nor Triton is installed)"))
+    if strategy.device.type == "cuda":
+        if failure := fla_failure():
+            log("KDA: flash-linear-attention does not import, so KDA runs its slow PyTorch form "
+                f"({failure})", WARNING)
+        else:
+            log("KDA: flash-linear-attention's kernel")
     if options["compile"]:
         if strategy.device.type != "cuda":
             raise Refused(f"--compile runs on a CUDA device, and this process runs on {strategy.device.type}: "

@@ -34,19 +34,28 @@ DECAY_BOUND = 5.0  # g = -5 sigmoid(...): every decay stays above exp(-5)
 CHUNK = 16         # 16 tokens of at most -5 each keep exp(+-40) inside FP32 when factored at the middle
 
 _fla = None
+_fla_error = None  # why _fla is False
 
 
 def _fla_kernels():
     """flash-linear-attention's (chunk_kda, fused_recurrent_kda), or False
     when it does not import here (no Triton, or no GPU support)."""
-    global _fla
+    global _fla, _fla_error
     if _fla is None:
         try:
             from fla.ops.kda import chunk_kda, fused_recurrent_kda
             _fla = chunk_kda, fused_recurrent_kda
-        except Exception:  # ImportError, or a Triton that fails to start: either way the PyTorch form runs
-            _fla = False
+        except Exception as error:  # ImportError, or a Triton that fails to start: either way the PyTorch form runs
+            _fla, _fla_error = False, error
     return _fla
+
+
+def fla_failure():
+    """None when flash-linear-attention's kernels import here; else why they
+    do not, as the error's type and message."""
+    if _fla_kernels():
+        return None
+    return f"{type(_fla_error).__name__}: {_fla_error}"
 
 
 def _fla_chunk_kda():

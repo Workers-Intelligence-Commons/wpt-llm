@@ -68,6 +68,8 @@ Where flash-linear-attention cannot run (it needs Triton: torch brings it on
 Linux, triton-windows on Windows, and CPUs have no kernel), the same chunked
 computation runs in plain PyTorch, 16 tokens at a time, factored at each chunk's middle token so no exponential leaves FP32's
 range; it agrees with the reference too, and is much slower.
+A training run on a GPU logs which form KDA runs; when it is the PyTorch one, the line is a WARNING
+with the type and message of the error that stopped flash-linear-attention from importing.
 
 **CSA and HCA layers** ([DeepSeek-V4][v4], section 2.3). Every fourth layer,
 and the last, reads the whole text, but through merged entries, so its cost
