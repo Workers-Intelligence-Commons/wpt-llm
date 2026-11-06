@@ -94,6 +94,23 @@ def test_a_training_run_records_what_it_read_every_step_and_what_it_wrote(built,
     assert logged == printed  # every line it printed, nothing else
 
 
+def test_what_the_gpu_worker_records_reaches_the_live_backend_once_through_this_side(built, otlp_backend, monkeypatch,
+                                                                                     capsys):
+    # the local worker's environment names the backend too: it must still send nothing itself, or its spans come twice
+    monkeypatch.setenv("OTEL_EXPORTER_OTLP_ENDPOINT", otlp_backend.endpoint)
+    main(["d", built.dataset_id, "--out", "model"])
+
+    run = built.records("wpt train")[-1]
+    update = next(line for line in run.events if line["kind"] == "event" and line["name"] == "training.step")
+    assert otlp_backend.gauges()["wpt.training.step.train_loss"] == update["values"]["train_loss"]
+    in_the_record = sorted(line["span"] for line in run.events if line["kind"] == "span_end")
+    assert sorted(span.span_id.hex() for _, span in otlp_backend.spans()) == in_the_record
+    assert {resource["service.instance.id"] for resource, _ in otlp_backend.spans()} == {run.folder}
+    printed = sum(line["kind"] in ("log", "event") for line in run.events)
+    assert len(otlp_backend.logs()) == printed
+    assert "OpenTelemetry" not in capsys.readouterr().err
+
+
 def test_training_ends_with_the_drafter_against_the_final_weights_and_the_scheduler_s_times(built, tmp_path,
                                                                                              capsys):
     # a model and its drafter are one

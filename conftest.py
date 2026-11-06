@@ -5,7 +5,7 @@ on this machine and a Debian-based image the sandbox tests run in, how two
 passes over the same tokens may differ in routing, and the builders of throwaway repositories,
 upstream projects and HTTP servers (the `kit` fixture and the fixtures
 beside it), which the tests of wpt-dataset and those of the app's
-`wpt dataset` use. Test files reach them as fixtures (they cannot import
+`wpt dataset` use, and a local OpenTelemetry backend. Test files reach them as fixtures (they cannot import
 this file under --import-mode=importlib)."""
 
 import functools
@@ -512,3 +512,66 @@ def kit():
     """This module's builders and constants (test files cannot import
     conftest under --import-mode=importlib)."""
     return SimpleNamespace(**globals())
+
+
+class OtlpBackend:
+    """A local OpenTelemetry backend: an HTTP server that keeps what it is
+    sent over OTLP (the protocol), decoded."""
+
+    def __init__(self):
+        backend = self
+        self.requests = []
+
+        class Handler(http.server.BaseHTTPRequestHandler):
+            def do_POST(self):
+                backend.requests.append((self.path, self.rfile.read(int(self.headers["Content-Length"]))))
+                self.send_response(200)
+                self.send_header("Content-Type", "application/x-protobuf")
+                self.end_headers()
+
+            def log_message(self, *_):
+                pass
+
+        self.server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        self.endpoint = f"http://127.0.0.1:{self.server.server_address[1]}"
+        threading.Thread(target=self.server.serve_forever, daemon=True).start()
+
+    def _received(self, path, kind):
+        for sent, body in list(self.requests):
+            if sent == path:
+                request = kind()
+                request.ParseFromString(body)
+                yield request
+
+    def spans(self) -> list:
+        """(the resource's attributes, the span) of each span received."""
+        from opentelemetry.proto.collector.trace.v1.trace_service_pb2 import ExportTraceServiceRequest
+
+        return [(_attributes(group.resource), span) for request in self._received("/v1/traces", ExportTraceServiceRequest)
+                for group in request.resource_spans for scope in group.scope_spans for span in scope.spans]
+
+    def logs(self) -> list:
+        """(the resource's attributes, the log record) of each one received."""
+        from opentelemetry.proto.collector.logs.v1.logs_service_pb2 import ExportLogsServiceRequest
+
+        return [(_attributes(group.resource), log) for request in self._received("/v1/logs", ExportLogsServiceRequest)
+                for group in request.resource_logs for scope in group.scope_logs for log in scope.log_records]
+
+    def gauges(self) -> dict:
+        """{a gauge's name: its last value received}."""
+        from opentelemetry.proto.collector.metrics.v1.metrics_service_pb2 import ExportMetricsServiceRequest
+
+        return {metric.name: metric.gauge.data_points[-1].as_double
+                for request in self._received("/v1/metrics", ExportMetricsServiceRequest)
+                for group in request.resource_metrics for scope in group.scope_metrics for metric in scope.metrics}
+
+
+def _attributes(resource) -> dict:
+    return {attribute.key: attribute.value.string_value for attribute in resource.attributes}
+
+
+@pytest.fixture
+def otlp_backend():
+    backend = OtlpBackend()
+    yield backend
+    backend.server.shutdown()

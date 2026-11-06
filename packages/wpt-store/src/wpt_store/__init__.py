@@ -961,7 +961,8 @@ class RecordReader:
     """The new lines of one record file (Store.record_reader): each read()
     fetches only the parts it has not read yet and, for a local store's run
     that is still going, the end of its plain file. When the run ends, that
-    file becomes a part that repeats what was read of it, which is left out."""
+    file becomes a part that repeats what was read of it, which is left out.
+    A read that raises moves nothing: the next one fetches the same lines."""
 
     def __init__(self, store, folder, name):
         self.store, self.seen, self.plain = store, set(), 0
@@ -970,14 +971,14 @@ class RecordReader:
     def read(self) -> bytes:
         kind = self.store.kind
         new = [key for key in kind.list(self.prefix) if key not in self.seen]
-        self.seen.update(new)
         data = b"".join(self.store._joined_parts(new))
         try:
             more = kind.read(self.open_key, self.plain)[0]
         except Absent:
+            more = b""
             if new:
                 data, self.plain = data[self.plain:], 0
-            return data
+        self.seen.update(new)
         self.plain += len(more)
         return data + more
 

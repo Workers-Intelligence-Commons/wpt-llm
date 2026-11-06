@@ -7,6 +7,7 @@ import signal
 import socket
 import threading
 import time
+from datetime import datetime
 
 import pytest
 from opentelemetry._logs import SeverityNumber
@@ -14,7 +15,7 @@ from opentelemetry.sdk._logs.export import InMemoryLogRecordExporter, SimpleLogR
 
 import wpt_telemetry
 from wpt_store import LocalStore, open_store
-from wpt_telemetry import ENDPOINT, FLUSH_THREAD, RecordError, Telemetry, runs
+from wpt_telemetry import ENDPOINT, FLUSH_THREAD, RELAY_THREAD, RecordError, Telemetry, runs
 from wpt_utils.lines import ERROR, WARNING, bare
 
 # Seconds a test gives what it waits for, far more than a loaded machine holds a thread back: it
@@ -175,6 +176,205 @@ def test_after_a_backend_failure_the_live_data_is_still_sent(tmp_path, capsys):
 
     assert capsys.readouterr().err.count("warning: the OpenTelemetry backend") == 1
     assert len(Collector.received) == FailsFirst.answered - 1 >= 2  # every later batch was sent and accepted
+
+
+def relay_threads():
+    return [thread for thread in threading.enumerate() if thread.name == RELAY_THREAD]
+
+
+def wait_for(found):
+    limit = time.monotonic() + 60
+    while not found():
+        assert time.monotonic() < limit, "it never happened"
+        time.sleep(0.01)
+
+
+@pytest.fixture
+def quick_relay(monkeypatch):
+    """The relay and the batches of spans and logs go every few milliseconds."""
+    monkeypatch.setattr(wpt_telemetry, "RELAY_SECONDS", 0.01)
+    monkeypatch.setenv("OTEL_BSP_SCHEDULE_DELAY", "10")
+    monkeypatch.setenv("OTEL_BLRP_SCHEDULE_DELAY", "10")
+
+
+def nanoseconds(moment):
+    return round(datetime.fromisoformat(moment).timestamp() * 1_000_000) * 1000
+
+
+def joined_to(run, store, tmp_path):
+    """A process of run's on a gpu worker, whose settings name a backend it
+    cannot reach."""
+    environ = run.child_environment(live=False)
+    assert ENDPOINT not in environ
+    return Telemetry.join(store, "wpt train", {**environ, ENDPOINT: "http://127.0.0.1:9"}, env_file=tmp_path / ".env",
+                          echo=lambda *_: None, live=False)
+
+
+def test_a_relay_sends_a_joined_process_s_lines_as_it_would_have_and_ends_with_the_block(tmp_path, otlp_backend,
+                                                                                         quick_relay, capsys):
+    store = LocalStore(tmp_path / "store")
+    with Telemetry.start(store, "wpt train", [], "d", env_file=tmp_path / ".env", environ={ENDPOINT: otlp_backend.endpoint},
+                         echo=lambda *_: None) as run:
+        run.log("from this side")
+        with run.relay():
+            assert len(relay_threads()) == 1
+            with joined_to(run, store, tmp_path) as joined:
+                with joined.span("step", number=1):
+                    joined.log("a source is gone", WARNING)
+                    joined.event("training.step", values={"train_loss": 2.5}, step=1)
+                failed = joined.begin("drafter")
+                joined.end(failed, ValueError("boom"))
+                wait_for(lambda: any(log.body.string_value == "a source is gone" for _, log in otlp_backend.logs()))
+            joined_id = joined._root.id
+            joined_parent = run._root.id
+        assert relay_threads() == []
+        with run.span("after the job"):
+            run.log("after the job")
+
+    lines = events(store, run.folder)
+    step_start = next(line for line in lines if line["kind"] == "span_start" and line["name"] == "step")
+    step_end = next(line for line in lines if line["kind"] == "span_end" and line["name"] == "step")
+    warned = next(line for line in lines if line.get("text") == "a source is gone")
+
+    spans = {span.name: span for _, span in otlp_backend.spans()}
+    assert sorted(span.name for _, span in otlp_backend.spans()) == ["after the job", "drafter", "step", "wpt train",
+                                                                     "wpt train"]  # each one once
+    step = spans["step"]
+    assert (step.span_id.hex(), step.trace_id.hex()) == (step_start["span"], run.trace)
+    assert step.parent_span_id.hex() == step_start["parent"] == joined_id
+    assert (step.start_time_unix_nano, step.end_time_unix_nano) == (nanoseconds(step_start["time"]),
+                                                                    nanoseconds(step_end["time"]))
+    assert {attribute.key: attribute.value.int_value for attribute in step.attributes} == {"number": 1}
+    assert spans["drafter"].status.message == "ValueError: boom"
+    joined_span = next(span for _, span in otlp_backend.spans() if span.span_id.hex() == joined_id)
+    assert joined_span.parent_span_id.hex() == joined_parent
+
+    logs = {log.body.string_value: log for _, log in otlp_backend.logs()}
+    assert sorted(log.body.string_value for _, log in otlp_backend.logs()) == sorted(
+        ["from this side", "after the job", "a source is gone", "training.step"])  # each one once
+    log = logs["a source is gone"]
+    assert (log.severity_number, log.severity_text) == (SeverityNumber.WARN.value, "WARNING")
+    assert (log.span_id.hex(), log.time_unix_nano) == (step_start["span"], nanoseconds(warned["time"]))
+    assert logs["training.step"].event_name == "training.step"
+
+    assert otlp_backend.gauges() == {"wpt.training.step.train_loss": 2.5}
+    resources = [resource for resource, _ in otlp_backend.spans() + otlp_backend.logs()]
+    assert all(resource["service.name"] == "wpt train" and resource["service.instance.id"] == run.folder
+               for resource in resources)
+    assert "warning" not in capsys.readouterr().err
+
+
+def test_a_stopped_run_s_relay_sends_the_last_lines_and_ends(tmp_path, otlp_backend, quick_relay):
+    store = LocalStore(tmp_path / "store")
+    with pytest.raises(KeyboardInterrupt):
+        with Telemetry.start(store, "wpt train", [], "d", env_file=tmp_path / ".env",
+                             environ={ENDPOINT: otlp_backend.endpoint}, echo=lambda *_: None) as run:
+            with run.relay():
+                with joined_to(run, store, tmp_path) as joined:
+                    joined.log("the last line")
+                raise KeyboardInterrupt
+    assert relay_threads() == []
+    assert [log.body.string_value for _, log in otlp_backend.logs()] == ["the last line"]
+
+
+def test_a_record_that_cannot_be_read_gets_one_warning_and_its_lines_go_once_it_can(tmp_path, monkeypatch, otlp_backend,
+                                                                                    quick_relay):
+    import boto3
+    from moto import mock_aws
+
+    for name, value in {"WPT_STORE_ACCESS_KEY_ID": "test", "WPT_STORE_SECRET_ACCESS_KEY": "test", "AWS_DEFAULT_REGION": "us-east-1",
+                        "XDG_CACHE_HOME": str(tmp_path / "cache"), "LOCALAPPDATA": str(tmp_path / "cache")}.items():
+        monkeypatch.setenv(name, value)
+    monkeypatch.delenv("AWS_ENDPOINT_URL", raising=False)
+    monkeypatch.delenv("AWS_PROFILE", raising=False)
+    printed = []
+    with mock_aws():
+        boto3.client("s3").create_bucket(Bucket="wpt-test")
+        store = open_store("s3://wpt-test/records")
+        read, refused = store.kind.read, []
+
+        with Telemetry.start(store, "wpt train", [], "d", env_file=tmp_path / ".env",
+                             environ={ENDPOINT: otlp_backend.endpoint},
+                             echo=lambda text, level: printed.append((text, level))) as run:
+            with run.relay(), joined_to(run, store, tmp_path) as joined:
+                def failing(key, *rest):
+                    if "events.jsonl/" in key and len(refused) < 3:
+                        refused.append(key)
+                        raise OSError("the bucket did not answer")
+                    return read(key, *rest)
+
+                monkeypatch.setattr(store.kind, "read", failing)
+                joined.log("kept")
+                joined.irreversible("sent")  # the store's lines reach the bucket
+                wait_for(lambda: len(refused) == 3)  # the run goes on, and each read is tried again
+                wait_for(lambda: any(log.body.string_value == "kept" for _, log in otlp_backend.logs()))
+
+    warnings = [text for text, level in printed if level == WARNING]
+    assert len(warnings) == 1 and "the bucket did not answer" in warnings[0]
+    assert [log.body.string_value for _, log in otlp_backend.logs()].count("kept") == 1
+
+
+def test_a_read_of_a_long_backlog_sends_every_line(tmp_path, otlp_backend):
+    store = LocalStore(tmp_path / "store")
+    with Telemetry.start(store, "wpt train", [], "d", env_file=tmp_path / ".env",
+                         environ={ENDPOINT: otlp_backend.endpoint}, echo=lambda *_: None) as run:
+        with run.relay(), joined_to(run, store, tmp_path) as joined:  # the relay's one read comes at the end
+            for number in range(5000):
+                joined.log(f"line {number}")
+    assert len(otlp_backend.logs()) == 5000
+
+
+def relay_listing(store, monkeypatch, listed):
+    """Calls listed each time the relay's thread lists the store."""
+    listing = store.kind.list
+
+    def noted(prefix, **options):
+        if threading.current_thread().name == RELAY_THREAD:
+            listed()
+        return listing(prefix, **options)
+
+    monkeypatch.setattr(store.kind, "list", noted)
+
+
+def test_a_store_that_stops_answering_does_not_hold_up_the_end_of_a_relay(tmp_path, monkeypatch, otlp_backend,
+                                                                          quick_relay):
+    monkeypatch.setattr(wpt_telemetry, "RELAY_END_SECONDS", 0.01)
+    store = LocalStore(tmp_path / "store")
+    answers = threading.Event()
+    relay_listing(store, monkeypatch, lambda: answers.wait(PATIENCE))
+    printed = []
+    with Telemetry.start(store, "wpt train", [], "d", env_file=tmp_path / ".env",
+                         environ={ENDPOINT: otlp_backend.endpoint},
+                         echo=lambda text, level: printed.append((text, level))) as run:
+        with run.relay():
+            pass
+        assert len(relay_threads()) == 1
+        answers.set()
+        wait_for(lambda: relay_threads() == [])
+    assert len([text for text, level in printed if level == WARNING]) == 1
+
+
+def test_a_relay_whose_record_broke_ends_without_a_last_read(tmp_path, monkeypatch, otlp_backend):
+    store = LocalStore(tmp_path / "store")
+    reads = []
+    relay_listing(store, monkeypatch, lambda: reads.append(1))
+
+    def refuse(self):
+        raise OSError(28, "No space left on device")
+
+    with pytest.raises(RecordError):
+        with Telemetry.start(store, "wpt train", [], "d", env_file=tmp_path / ".env",
+                             environ={ENDPOINT: otlp_backend.endpoint}, echo=lambda *_: None) as run:
+            with run.relay():
+                monkeypatch.setattr(LocalStore, "_raw_flush_records", refuse)
+    assert relay_threads() == [] and reads == []
+
+
+def test_a_relay_without_a_backend_starts_nothing(tmp_path):
+    store = LocalStore(tmp_path / "store")
+    with Telemetry.start(store, "wpt train", [], "d", env_file=tmp_path / ".env", environ={},
+                         echo=lambda *_: None) as run, run.relay():
+        assert relay_threads() == []
 
 
 def test_a_failure_is_recorded_with_its_traceback(tmp_path):

@@ -123,7 +123,7 @@ def run(spec, link, work: Path) -> int:
     try:
         several = machines["count"] > 1
         if (options["processes"] > 1 or options["max_restarts"] > 0 or several) and "LOCAL_RANK" not in os.environ:
-            with Telemetry.join(store, "wpt train", environ) as telemetry:
+            with Telemetry.join(store, "wpt train", environ, live=False) as telemetry:
                 log = telemetry.log
                 try:
                     placed = placement(machines, options)
@@ -141,7 +141,7 @@ def run(spec, link, work: Path) -> int:
                               first_rank=placed["first_rank"], world_size=placed["world_size"],
                               master=placed["master"])
         main = os.environ.get("RANK", "0") == "0"
-        with (Telemetry.join(store, "wpt train", environ) if main else Telemetry.off()) as telemetry:
+        with (Telemetry.join(store, "wpt train", environ, live=False) if main else Telemetry.off()) as telemetry:
             return _run(spec, link, store, work, telemetry)
     except RecordError as error:
         say(f"RecordError: {error}; stopped, nothing more was recorded", ERROR)

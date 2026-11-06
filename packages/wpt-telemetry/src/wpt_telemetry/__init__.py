@@ -75,6 +75,18 @@ A process started by another one for the same run (wpt train's launcher
 starts the training processes) joins its record: the launcher writes
 start.json and end.json, the joined process its own spans, events and ids.
 
+A process joined with live=False sends nothing live, since the backend may
+be out of its reach: wpt train's processes on a gpu worker. The command that
+holds the endpoint sends their part instead: inside relay(), a thread reads
+the record's new lines every RELAY_SECONDS and sends each line the way the
+process that wrote it would have, with the time, span ids and parents the
+line holds. A gauge alone carries the time it is sent, which the OpenTelemetry
+SDK sets. Lines of the command's own spans are left out, since it sent them
+itself. A record it cannot read gets one warning, and a read that failed is
+tried again at the next one. Its end waits at most RELAY_END_SECONDS for the
+last read, and a record that broke gets no last read: the live view never
+holds up the end of a run.
+
 progress() gives a long stage's Progress: every PROGRESS_SECONDS while the
 stage's with block runs, one printed line says how much is done out of the
 total, the rate, an estimate of the time left and the memory in use.
@@ -108,6 +120,7 @@ from opentelemetry.sdk.metrics.export import MetricExporter, MetricExportResult,
 from opentelemetry.sdk.resources import Resource
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor, SpanExporter, SpanExportResult
+from opentelemetry.sdk.trace.id_generator import RandomIdGenerator
 from opentelemetry.trace import NonRecordingSpan, SpanContext, Status, StatusCode, TraceFlags
 
 from wpt_store import MissingObject, MixedRecord, as_record_name, check_record_name, read_env_file
@@ -126,6 +139,10 @@ FLUSH_SECONDS = 30  # the store is sent the lines it holds back at least this of
 PROGRESS_SECONDS = 180  # a long stage prints how far it is at most this often
 FLUSH_THREAD = "wpt-telemetry-flush"
 PROGRESS_THREAD = "wpt-telemetry-progress"
+RELAY_THREAD = "wpt-telemetry-relay"
+RELAY_SECONDS = 10  # how often relay() reads the record's new lines
+RELAY_END_SECONDS = 10  # how long the end of relay() waits for its last read
+LIVE_QUEUE = 65_536  # spans, and log records, waiting to be sent: one relay read hands over a whole backlog at once
 SHORT = 8  # characters of a hash or a dataset id in a record folder's name
 SEVERITY = {INFO: SeverityNumber.INFO, WARNING: SeverityNumber.WARN, ERROR: SeverityNumber.ERROR}  # by printed level
 METRIC_INTERVAL_MS = 10_000  # live values are sent every 10 s unless OTEL_METRIC_EXPORT_INTERVAL says otherwise
@@ -270,10 +287,11 @@ class Telemetry:
         return telemetry
 
     @classmethod
-    def join(cls, store, command, environ, env_file=".env", echo=None):
+    def join(cls, store, command, environ, env_file=".env", echo=None, live=True):
         """The record a launcher opened for this run (environ[JOIN_FOLDER]),
         under its span; this process writes events and ids, not start.json
-        nor end.json."""
+        nor end.json. With live=False, it sends nothing live, whatever the
+        settings say: the launcher's relay() sends its lines."""
         folder = environ[JOIN_FOLDER]
         trace_id, span_id = (int(part, 16) for part in environ[JOIN_PARENT].split("-"))
         parent = SpanContext(trace_id, span_id, is_remote=True, trace_flags=TraceFlags(TraceFlags.SAMPLED))
@@ -282,8 +300,9 @@ class Telemetry:
         except Exception as error:
             raise RecordError(f"the record {folder} of this run could not be read from {store}: "
                               f"{type(error).__name__}: {error}") from None
-        live = _Live(command, folder, _endpoint(env_file, environ), echo or say)
-        telemetry = cls(store, folder, command, live, echo or say, owner=False, parent=parent)
+        endpoint = _endpoint(env_file, environ) if live else None
+        telemetry = cls(store, folder, command, _Live(command, folder, endpoint, echo or say), echo or say,
+                        owner=False, parent=parent)
         try:
             telemetry._line({"kind": "span_start", "span": telemetry._root.id, "parent": f"{span_id:016x}",
                              "name": command, "attributes": {"process": "joined"}})
@@ -300,17 +319,17 @@ class Telemetry:
         one records, and for code run outside a command."""
         return cls(None, None, "", None, echo or say, owner=False)
 
-    def child_environment(self, flush=True) -> dict:
+    def child_environment(self, flush=True, live=True) -> dict:
         """What a process started for this run needs to join its record,
-        under this thread's current span, and to send to the same live
-        backend. With flush, the lines held back are sent first, so the
+        under this thread's current span, and, with live, to send to the same
+        live backend. With flush, the lines held back are sent first, so the
         record is whole up to here."""
         self._check_open()
         if self.store is None:
             return {}
         if flush:
             self._flush()
-        endpoint = self._live.failure.endpoint if self._live and self._live.failure else None
+        endpoint = self._live.failure.endpoint if live and self._live and self._live.failure else None
         return {JOIN_FOLDER: self.folder, JOIN_PARENT: f"{self.trace}-{self._stack[-1].id}",
                 **({ENDPOINT: endpoint} if endpoint else {})}
 
@@ -338,9 +357,7 @@ class Telemetry:
         self._line({"kind": "event", "span": self._span(), "name": name, "attributes": attributes,
                     **({"values": values} if values else {})})
         if self._live:
-            self._live.emit(self._top(), name, None, {**attributes, **(values or {})}, INFO)
-            for key, value in (values or {}).items():
-                self._live.gauge(f"wpt.{name}.{key}", value)
+            self._live.event(self._top(), name, attributes, values or {})
 
     def span(self, name, /, **attributes):
         """A part of the run, from the with block's start to its end; spans
@@ -448,6 +465,28 @@ class Telemetry:
         the store refuses it, and the caller must not take the step."""
         self.event(name, values, **attributes)
         self._flush()
+
+    @contextlib.contextmanager
+    def relay(self):
+        """For the with block's length, send live what the processes joined
+        with live=False add to this record; see the module's docstring. When
+        it ends, the last lines are read and sent, and its thread is gone,
+        unless the store does not answer in RELAY_END_SECONDS: one warning,
+        and the thread ends with the process. A record that broke gets no
+        last read. Without a live backend, it does nothing."""
+        if self._live is None or self._live.failure is None:
+            yield
+            return
+        relay = _Relay(self.store, self.folder, self.trace, self._live, self._echo)
+        try:
+            yield
+        finally:
+            try:
+                self._flush()  # the last lines a store holds back become readable
+            except BaseException:
+                relay.end(last_read=False)
+                raise
+            relay.end()
 
     # -- ending --------------------------------------------------------------------
 
@@ -615,14 +654,28 @@ class Telemetry:
                 raise RecordError(self._broken) from error
 
 
+class _Ids(RandomIdGenerator):
+    """New span ids, except for the span this thread starts under a span id
+    the record already holds (named)."""
+
+    def __init__(self):
+        self.named = threading.local()
+
+    def generate_span_id(self):
+        return getattr(self.named, "id", None) or super().generate_span_id()
+
+
 class _Live:
     """The OpenTelemetry side: spans, log records and gauges, sent to the
     backend at endpoint when there is one. Without one, it only gives the
-    spans their ids."""
+    spans their ids. A span, a log record or an event takes the moment it
+    happened as at (nanoseconds since 1970), by default now."""
 
     def __init__(self, command, folder, endpoint, echo):
         resource = Resource.create({"service.name": command, "service.instance.id": folder, "wpt.record": folder})
-        self.traces = TracerProvider(resource=resource)
+        self.ids = _Ids()
+        self.own = set()  # the ids of the spans this process opened, which are not relayed
+        self.traces = TracerProvider(resource=resource, id_generator=self.ids)
         self.logs = LoggerProvider(resource=resource)
         readers = []
         self.failure = None
@@ -634,9 +687,10 @@ class _Live:
 
             failure = self.failure = _Failure(endpoint, echo)
             base = endpoint.rstrip("/")
-            self.traces.add_span_processor(BatchSpanProcessor(_Spans(OTLPSpanExporter(f"{base}/v1/traces"), failure)))
+            self.traces.add_span_processor(BatchSpanProcessor(_Spans(OTLPSpanExporter(f"{base}/v1/traces"), failure),
+                                                              max_queue_size=LIVE_QUEUE))
             self.logs.add_log_record_processor(
-                BatchLogRecordProcessor(_Logs(OTLPLogExporter(f"{base}/v1/logs"), failure)))
+                BatchLogRecordProcessor(_Logs(OTLPLogExporter(f"{base}/v1/logs"), failure), max_queue_size=LIVE_QUEUE))
             readers.append(PeriodicExportingMetricReader(_Metrics(OTLPMetricExporter(f"{base}/v1/metrics"), failure),
                                                          export_interval_millis=_metric_interval()))
         self.metrics = MeterProvider(resource=resource, metric_readers=readers)
@@ -646,26 +700,39 @@ class _Live:
         self.gauges = {}
         self.open = [self.traces, self.logs, self.metrics]  # the providers not yet shut down
 
-    def start(self, name, parent, attributes):
+    def start(self, name, parent, attributes, at=None, known=None):
+        """A new span under parent, or, with known, the span of that id
+        another process opened."""
         if parent is None:
             context = Context()
         elif isinstance(parent, SpanContext):
             context = trace.set_span_in_context(NonRecordingSpan(parent))
         else:
             context = trace.set_span_in_context(parent)
-        return self.tracer.start_span(name, context=context, attributes=_attributes(attributes))
+        self.ids.named.id = known
+        span = self.tracer.start_span(name, context=context, attributes=_attributes(attributes), start_time=at)
+        self.ids.named.id = None
+        if known is None:
+            self.own.add(_span_id(span))
+        return span
 
-    def end(self, span, attributes, error):
+    def end(self, span, attributes, error, at=None):
         span.set_attributes(_attributes(attributes))
         if error:
             span.set_status(Status(StatusCode.ERROR, error))
-        span.end()
+        span.end(end_time=at)
 
-    def emit(self, span, name, text, attributes, level):
-        self.logger.emit(timestamp=time.time_ns(), context=trace.set_span_in_context(span) if span else Context(),
+    def emit(self, span, name, text, attributes, level, at=None):
+        self.logger.emit(timestamp=at or time.time_ns(),
+                         context=trace.set_span_in_context(span) if span else Context(),
                          severity_number=SEVERITY[level], severity_text=level,
                          body=text if text is not None else name,
                          attributes=_attributes(attributes), event_name=name)
+
+    def event(self, span, name, attributes, values, at=None):
+        self.emit(span, name, None, {**attributes, **values}, INFO, at)
+        for key, value in values.items():
+            self.gauge(f"wpt.{name}.{key}", value)
 
     def gauge(self, name, value):
         if name not in self.gauges:
@@ -679,6 +746,73 @@ class _Live:
             self.failure.closing = True
         while self.open:
             self.open.pop(0).shutdown()
+
+
+class _Relay:
+    """The thread of Telemetry.relay: it follows the record from its first
+    line, until end()."""
+
+    def __init__(self, store, folder, trace_id, live, echo):
+        self.folder, self.trace, self.live, self.echo = folder, int(trace_id, 16), live, echo
+        self.reader = store.record_reader(folder, EVENTS)
+        self.spans = {}  # the open spans of the lines read, by id
+        self.cut = b""  # the start of a line whose end the next read brings
+        self.warned = False
+        self.last_read = True
+        self.ended = threading.Event()
+        self.thread = threading.Thread(target=self._follow, name=RELAY_THREAD, daemon=True)
+        self.thread.start()
+
+    def end(self, last_read=True):
+        self.last_read = last_read
+        self.ended.set()
+        self.thread.join(RELAY_END_SECONDS)
+        if self.thread.is_alive():
+            self.echo(f"warning: the record {self.folder} was not read in {RELAY_END_SECONDS} seconds to send its "
+                      "last lines live; the run ends without them", WARNING)
+
+    def _follow(self):
+        while not self.ended.wait(RELAY_SECONDS):
+            self._read()
+        if self.last_read:
+            self._read()
+
+    def _read(self):
+        try:
+            data = self.reader.read()
+        except Exception as error:  # whatever the folder or the bucket raised
+            if not self.warned:
+                self.warned = True
+                self.echo(f"warning: the record {self.folder} could not be read to send it live "
+                          f"({type(error).__name__}: {error}); the run goes on, and it is read again quietly",
+                          WARNING)
+            return
+        *lines, self.cut = (self.cut + data).split(b"\n")
+        for raw in lines:
+            try:
+                line = json.loads(raw)
+            except ValueError:
+                continue  # a line a crash left cut
+            if line["span"] not in self.live.own:
+                self._send(line)
+
+    def _context(self, span_id):
+        return SpanContext(self.trace, int(span_id, 16), is_remote=True, trace_flags=TraceFlags(TraceFlags.SAMPLED))
+
+    def _send(self, line):
+        """What the process that wrote line would have sent itself."""
+        kind, at, span_id = line["kind"], _nanoseconds(line["time"]), line["span"]
+        if kind == "span_start":
+            self.spans[span_id] = self.live.start(line["name"], self._context(line["parent"]), line["attributes"],
+                                                  at, int(span_id, 16))
+        elif kind == "span_end":
+            self.live.end(self.spans.pop(span_id), line["attributes"], line.get("error"), at)
+        elif kind == "log":
+            self.live.emit(NonRecordingSpan(self._context(span_id)), None, line["text"], line.get("attributes", {}),
+                           line["severity"].upper(), at)
+        elif kind == "event":
+            self.live.event(NonRecordingSpan(self._context(span_id)), line["name"], line["attributes"],
+                            line.get("values", {}), at)
 
 
 class _Failure:
@@ -858,6 +992,11 @@ def _json(document) -> bytes:
 
 def _iso(moment) -> str:
     return moment.isoformat(timespec="microseconds").replace("+00:00", "Z")
+
+
+def _nanoseconds(moment) -> int:
+    """_iso's text as nanoseconds since 1970."""
+    return round(datetime.fromisoformat(moment).timestamp() * 1_000_000) * 1000
 
 
 def _describe(error) -> str:

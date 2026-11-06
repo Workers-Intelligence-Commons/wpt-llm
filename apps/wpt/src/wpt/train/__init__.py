@@ -731,7 +731,7 @@ def _train(args, recipe, strategy_file, steps, context, store, telemetry, enviro
             "model": asdict(model_config), "seed": recipe["seed"], "drafter": recipe["drafter"],
             "canonical": canonical_ids(tokenizer.decode, tokenizer.vocab_size).tolist(),
             "tokens": {"end": Tokenizer.END, "im_end": chat.IM_END}, "checkpoints": mode,
-            "checkpoint": str(checkpoint), "join": telemetry.child_environment(),
+            "checkpoint": str(checkpoint), "join": telemetry.child_environment(live=False),
             "options": {"strategy": args.strategy, "processes": args.processes, "max_restarts": args.max_restarts,
                         "micro_batch": args.micro_batch, "checkpoint_every": args.checkpoint_every,
                         "segment": args.segment, "stream": args.stream, "stream_shards": args.stream_shards,
@@ -755,7 +755,7 @@ def _train(args, recipe, strategy_file, steps, context, store, telemetry, enviro
             for worker in workers:
                 worker.send_checkout(Repo(checkout_root).data_folder(), checkout_root)
         with telemetry.span("gpu_worker.job", checkpoints=mode, workers=len(workers),
-                            transport=placed[0]["transport"]):
+                            transport=placed[0]["transport"]), telemetry.relay():
             code = run_jobs(workers, [{**spec, "machines": where} for where in placed], answers.handlers)
         if len(workers) > 1 and code not in (0, REFUSED, RECORD_FAILED, STOPPED):
             code = _crashed(code, len(workers), telemetry)

@@ -407,6 +407,31 @@ the image turns it on by default, as Admin, and the compose file sets
   10 seconds with its last value, so the live curve can skip steps; the
   record has every one.
 
+`wpt train`'s processes on a gpu worker send nothing live, wherever the
+worker runs, so the backend's port stays closed to it and a rented worker
+never learns its address. `wpt train` holds the endpoint and sends their
+part for them: while the job runs, a thread reads the new lines of the run's
+`events.jsonl` every 10 seconds and sends each one as the process that wrote
+it would have, under the same service, `service.instance.id` and trace, with
+the line's level, time, span id and parent. A span goes once its `span_end`
+line is read, with its real start and end; a process that crashed leaves its
+open spans unsent. Lines of `wpt train`'s own spans are left out: it sent
+those itself. When the job ends or is stopped, the thread reads the last
+lines and ends. The end waits at most 10 seconds for that read: a store that
+does not answer gets one warning, and the run ends without those lines. A
+record that broke gets no last read. Without an endpoint, no thread starts.
+
+What a gpu worker records therefore arrives a little late: within 10
+seconds on a local store, and on S3 within 10 seconds of the store sending
+the lines it holds back, every 30 seconds. A gauge carries the time it was
+sent, unlike a log record or a span. A backend that fails gets the one
+warning of "When something fails". A record that cannot be read gets one warning of its own,
+the training goes on, and each later read tries again from the same line.
+A read that brings a backlog goes out as fast as the backend takes it: up to
+65,536 spans and as many log records wait in memory, and what passes that is
+dropped from the live view, with one line on stderr from OpenTelemetry's
+library. The store record keeps it.
+
 To watch a run on another machine, start the backend there, set
 `WPT_OTEL_ADDRESS` as above, or forward its ports
 (`ssh -L 3000:127.0.0.1:3000 -L 4318:127.0.0.1:4318 HOST`).
