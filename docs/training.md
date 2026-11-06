@@ -718,6 +718,23 @@ stage measured, and only steps that list their window lengths have tokens
 known in advance: the message names the steps it leaves out, and the
 drafter is not in it.
 
+`--profile-update N` (`WPT_PROFILE_UPDATE`, 0: none) runs update N of each
+step, numbered in the step from 1, under `torch.profiler` (CPU and CUDA
+activities, without stacks or shapes) in the main process, and gives the run's
+record the file `profile.txt`; a step that does not reach N, or a resumed
+step that starts past it, has none. Evaluation is part of the update when one is due at it. The file holds, in this
+order: the update's number, its wall seconds, the sum of its self device time
+and its count of device kernel entries; the seconds of its parts, taken with a
+device synchronize at each time stamp (the batch, each pass's `learn`, the
+optimizer's step with the gradient exchange before it, and everything after);
+the machine's facts (CPUs and those the process may use, the cgroup's
+`cpu.max`, the versions of PyTorch, CUDA and Triton, the GPU, its clock and
+power draw when PyTorch reads them); the allocator's counts (retries, out of
+memory errors, segment allocations) and the peaks of allocated and reserved
+memory; then the 40 operations with the most self CUDA time and the 40 with the
+most self CPU time. A failure of the profiler is a warning, and the training
+goes on. The other updates run without any of it.
+
 ## Checkpoints and resuming
 
 Inside a step, every `--checkpoint-every` updates (default 500, 0 for none

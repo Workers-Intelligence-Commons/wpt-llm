@@ -746,6 +746,21 @@ def test_a_run_stops_at_its_limit_prints_what_it_measured_and_resumes(built, tmp
             if e.get("name") == "training.resumed"] == [3]
 
 
+def test_the_update_asked_for_is_profiled_into_the_record_and_training_goes_on(built, tmp_path):
+    # the profile of update 2 lands in the run's record, whatever the device; a run that does not ask has none
+    recipe = built.recipe("three", training=one_stage(3))
+    main([recipe, built.dataset_id, "--out", "model", "--profile-update", "2"])
+    [run] = built.records("wpt train")
+    text = built.store.read_record(run.folder, "profile.txt").decode()
+    assert text.startswith("update 2: ") and "seconds by part:" in text and "data (environment.batch)" in text
+    assert "learn 1" in text and "optimizer step" in text and "everything after" in text
+    assert "top 40 by self CPU time:" in text and "os.cpu_count()" in text
+    assert load_model(tmp_path / "model").config.block_size == 16  # the run finished
+
+    main([recipe, built.dataset_id, "--out", "other"])
+    assert "profile.txt" not in built.store.record_files(built.records("wpt train")[-1].folder)
+
+
 def test_a_store_that_fails_while_the_last_dataset_is_read_refuses_the_run_in_one_line(built, monkeypatch, capsys):
     def failing(store, name):
         raise StoreError("the bucket does not answer")

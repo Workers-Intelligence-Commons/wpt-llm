@@ -104,7 +104,10 @@ whatever WPT_LINK_CHECKPOINTS says, and --resume continues from it.
 whichever comes first, counted over every step it trains from the end of
 its first update, which also compiles the kernels. Such a run ends by
 printing and recording what it measured from there: the tokens per second
-and the time its text windows take at that speed. After a crash, every process on the gpu worker starts again, up
+and the time its text windows take at that speed.
+--profile-update N runs update N of each step under torch.profiler and gives the
+run's record profile.txt (docs/training.md, "A limit and a measure").
+After a crash, every process on the gpu worker starts again, up
 to --max-restarts times (default 3), and continues from the worker's own
 checkpoint; 0 starts no launcher there.
 
@@ -254,6 +257,9 @@ OPTIONS = [
                                      "whole run takes at that speed (0: no limit)"),
     ("stop-after-updates", int, 0, "stop as a stop signal does after this many updates, over every step this "
                                    "command trains, and print what --stop-after-minutes prints (0: no limit)"),
+    ("profile-update", int, 0, "run the update with this number in its step (from 1) under torch.profiler, and give "
+                               "the run's record profile.txt: where its time goes, the machine's facts and the "
+                               "memory's (0: no profile)"),
     ("kernels", named_form, None, f"what computes the attention: {', '.join(FORMS)}; one that cannot work on the "
                                    "gpu worker stops the run (default: the first kernels installed for its GPU, "
                                    "else pytorch)"),
@@ -297,6 +303,8 @@ def parse_args(argv=None, environ=None):
         parser.error("give the model recipe (or set WPT_RECIPE)")
     if args.stop_after_minutes < 0 or args.stop_after_updates < 0:
         parser.error("--stop-after-minutes and --stop-after-updates: 0 (no limit) or more")
+    if args.profile_update < 0:
+        parser.error("--profile-update: 0 (no profile) or an update's number")
     if args.run is not None and not STORE_NAME.fullmatch(args.run):
         parser.error(f"--run {args.run!r}: use letters, digits, '.', '_' and '-' only")
     return args
@@ -738,7 +746,7 @@ def _train(args, recipe, strategy_file, steps, context, store, telemetry, enviro
                         "recompute": args.recompute, "compile": args.compile, "resume": args.resume,
                         "scheduler_costs": args.scheduler_costs, "kernels": args.kernels,
                         "stop_after_minutes": args.stop_after_minutes,
-                        "stop_after_updates": args.stop_after_updates}}
+                        "stop_after_updates": args.stop_after_updates, "profile_update": args.profile_update}}
     try:
         checkout_root = code_root()
         placed = machines(keys(environ))  # refused before any worker is reached

@@ -388,7 +388,8 @@ def _train(spec, link, store, work, strategy, telemetry):
                         model.compile_training(options["compile"] and step.reads == WINDOWS)  # its shapes come back
                         try:
                             trained = train(model, strategy, step, method, environment, seed, draws[number - 1],
-                                            Options(options["checkpoint_every"], options["segment"]),
+                                            Options(options["checkpoint_every"], options["segment"],
+                                                    options["profile_update"]),
                                             checkpoint=checkpoint, resume=resume, identity=mark,
                                             done=marks[:number - 1], log=log, telemetry=telemetry,
                                             save_last=True,  # its result is kept from the checkpoint

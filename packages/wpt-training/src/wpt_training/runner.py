@@ -17,6 +17,7 @@ from wpt_telemetry import RecordError, Telemetry
 from wpt_utils.lines import WARNING, say
 
 from .plugins import PluginError, Run
+from .profiling import profiled
 from .states import load_state, save_state
 
 CHECKPOINT = "checkpoint.safetensors"
@@ -99,9 +100,11 @@ class Options:
     """How the hardware runs a step, which never changes what it learns:
     checkpoint_every (write a checkpoint every N updates, 0 never),
     segment (tokens per pass of a longer window, in segments: parts.py; 0
-    whole windows)."""
+    whole windows), profile_update (the update, numbered in its step from 1,
+    that runs under the profiler: profiling.py; 0 none)."""
     checkpoint_every: int = 0
     segment: int = 0
+    profile_update: int = 0
 
 
 @dataclass(frozen=True)
@@ -392,7 +395,9 @@ def _loop(model, strategy, step, method, environment, optimizer, wrapped, draws,
                              batch_size=stage.batch_size, first_step=begin,
                              last_step=end, resumed_at=update):
                 while update <= end:
-                    stop = _update(update, index, begin, end)
+                    with (profiled(update, strategy.device, record, log, environment, method, optimizer)
+                          if update == options.profile_update and strategy.is_main else contextlib.nullcontext()):
+                        stop = _update(update, index, begin, end)
                     last, reached[index] = update, update
                     if limit is not None:
                         limit.count(stage.batch_size * (stage.block_size or 0))
