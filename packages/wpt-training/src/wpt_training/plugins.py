@@ -248,11 +248,11 @@ class TextMethod(Method):
         windows; following is the token after y's last (B, 1), None at the
         windows' end; window is the windows' length. A method that defines
         its own loss defines this too, or trains whole windows only."""
-        logits, ahead, indexers = model(x, next_tokens=y, indexer_loss=True)
         B, t = y.shape
         targets = y[:, 1:] if following is None else torch.cat([y[:, 1:], following], 1)  # the token after next
-        loss = (_cross_entropy(logits, y, "sum") / (B * window)
-                + self.mtp_weight * _cross_entropy(ahead[:, :targets.shape[1]], targets, "sum") / (B * (window - 1)))
+        # the model sums the two cross-entropies without holding every token's scores at once
+        next_sum, ahead_sum, indexers = model(x, next_tokens=y, indexer_loss=True, targets=(y, targets))
+        loss = next_sum / (B * window) + self.mtp_weight * ahead_sum / (B * (window - 1))
         share = indexers * (t / window)  # the model's is the mean over the part's queries
         return loss + (share - share.detach()), share.detach()
 

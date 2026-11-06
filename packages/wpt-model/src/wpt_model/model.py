@@ -44,6 +44,7 @@ limit.
 
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from torch.utils.checkpoint import checkpoint
 
 from .attention import CSA_RATIO, HCA_RATIO, Attention
@@ -58,6 +59,7 @@ from .optimizer import roles
 from .sequence import WHOLE, Carried, Split
 
 HASH_LAYERS = 3   # the first 3 layers' experts are hash-routed
+CHUNK = 4096  # tokens whose scores a summed loss holds at once: the 32,768 scores of each take most of a pass's memory
 COMPILED_FORMS = 256  # torch.compile's forms of one piece of code: kinds of layer, times window lengths, times steps
 RATIOS = {"CSA": CSA_RATIO, "HCA": HCA_RATIO}
 
@@ -137,6 +139,10 @@ def _counts(ids, counts):
     return torch.as_tensor(counts, dtype=torch.long, device=ids.device)
 
 
+def _chunk_loss(head, hidden, targets):
+    return F.cross_entropy(head(hidden).float(), targets, reduction="sum")
+
+
 def _first_run_collects(layer, record, replay):
     """The layer as a function whose first call records statistics and
     whose later call, the run again for the backward pass, does not."""
@@ -206,7 +212,7 @@ class WPT(nn.Module):
         self.canonical.copy_(ids)
 
     def forward(self, idx, next_tokens=None, indexer_loss=False, *, record: Routes | None = None,
-                replay: Routes | None = None, sequence=None, features=()):
+                replay: Routes | None = None, sequence=None, features=(), targets=None):
         """(B, T) token ids -> (B, T, vocab_size) next-token scores. With
         next_tokens, the (B, T) tokens that follow idx, also returns the
         multi-token prediction block's scores for the token after each next
@@ -214,7 +220,13 @@ class WPT(nn.Module):
         pass, summed over CSA layers (0 without one); only the indexers'
         parameters get a gradient from it. Returns the scores alone, or the
         tuple (scores, [mtp scores], [indexer loss], [features]) of what was
-        asked. With record or replay (B = 1), the routed layers record their
+        asked. With targets, a pair (tokens, tokens after next) of (B, t)
+        token ids, which needs next_tokens, no scores come back: the tuple
+        starts instead with two cross-entropies summed over the tokens (the
+        next-token scores against the first, the multi-token prediction
+        scores of the first t positions against the second), computed CHUNK
+        tokens at a time so that the scores of all the tokens are never held
+        at once (the backward pass computes each chunk's scores again). With record or replay (B = 1), the routed layers record their
         choices into it, or route as it holds. sequence: where idx sits in a
         longer window (carried, split), the whole window when None; the
         indexer loss is then the mean over idx's queries. features: layer
@@ -224,15 +236,38 @@ class WPT(nn.Module):
         sequence = WHOLE if sequence is None else sequence
         with torch.autocast("cuda", dtype=torch.bfloat16, enabled=idx.is_cuda):
             hidden, total, found = self._hidden(idx, indexer_loss, record, replay, sequence, features)
-            outputs = [self.head(self.final_norm(hidden)).float()]
-            if next_tokens is not None:
-                mtp = self._running(self.mtp, sequence)
-                outputs.append(self.head(mtp(hidden, self.embedding(next_tokens), sequence)).float())
+            if targets is None:
+                outputs = [self.head(self.final_norm(hidden)).float()]
+                if next_tokens is not None:
+                    mtp = self._running(self.mtp, sequence)
+                    outputs.append(self.head(mtp(hidden, self.embedding(next_tokens), sequence)).float())
+            else:
+                if next_tokens is None:
+                    raise ValueError("targets need next_tokens")
+                ahead = self._running(self.mtp, sequence)(hidden, self.embedding(next_tokens), sequence)
+                outputs = [self._summed(self.final_norm(hidden), targets[0]),
+                           self._summed(ahead[:, :targets[1].shape[1]], targets[1])]
             if indexer_loss:
                 outputs.append(total)
             if features:
                 outputs.append(found)
             return outputs[0] if len(outputs) == 1 else tuple(outputs)
+
+    def _summed(self, hidden, targets):
+        """The cross-entropy of the head's scores for hidden (B, t, d_model)
+        against targets (B, t), summed, CHUNK tokens at a time. With
+        gradients, each chunk is a checkpoint: it keeps only its hidden
+        states, and the backward pass computes its scores again, in the same
+        autocast, through the one head weight, whose gradient adds up over
+        the chunks. A chunk holds only the head and the loss: no routing,
+        statistic or random draw runs twice."""
+        hidden, targets = hidden.reshape(-1, hidden.shape[-1]), targets.reshape(-1)
+        grads = torch.is_grad_enabled()
+        total = 0
+        for a in range(0, len(targets), CHUNK):
+            args = (self.head, hidden[a:a + CHUNK], targets[a:a + CHUNK])
+            total = total + (checkpoint(_chunk_loss, *args, use_reentrant=False) if grads else _chunk_loss(*args))
+        return total
 
     def _hidden(self, idx, indexer_loss, record, replay, sequence, features):
         """(the final hidden states, the indexers' loss, the features' hidden

@@ -226,6 +226,10 @@ A method on text windows is a `wpt_training.TextMethod`: its
 giving the indexer loss when asked (`model(x, next_tokens=y,
 indexer_loss=True)` returns the scores, the multi-token prediction scores
 and that loss); a method that does not ask leaves the indexers untrained.
+With `targets=(y, after_next)` in that call, the model returns the two
+cross-entropies summed over the tokens instead of the scores, 4,096 tokens
+at a time, each chunk's scores computed again in the backward pass: the
+built-in loss never holds every token's scores at once.
 A method that defines its own `loss` defines `part_loss(model, x, y,
 following, window)` too, the share of a part of the windows (`following`:
 the token after `y`'s last, or None at the windows' end; `window`: the

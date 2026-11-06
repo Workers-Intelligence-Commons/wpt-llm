@@ -8,8 +8,10 @@ from types import SimpleNamespace
 
 import pytest
 import torch
+import torch.nn.functional as F
 
 from wpt_model import WPT, ModelConfig
+from wpt_model import model as wpt_model
 from wpt_model.experts import BINS, WINDOW, Experts
 from wpt_training import Strategy, TextMethod, parts
 from wpt_training.launch import launch
@@ -174,6 +176,37 @@ def test_routing_and_balancing_counts_may_differ_only_at_near_ties(routing):
     counts[j, bins[2, j] + 1] += 1
     with pytest.raises(AssertionError):
         assert_routed_alike([(*got[:4], counts)], [expected], routing)
+
+
+def plain_window(T):
+    """The loss and gradients of a window with every token's scores held at once: full scores, then the cross-entropies."""
+    model, x, y = model_and_window(T)
+    logits, ahead, indexers = model(x, next_tokens=y, indexer_loss=True)
+    B = x.shape[0]
+    ce = lambda scores, targets: F.cross_entropy(scores.reshape(-1, scores.shape[-1]), targets.reshape(-1), reduction="sum")
+    loss = ce(logits, y) / (B * T) + TextMethod.mtp_weight * ce(ahead[:, :T - 1], y[:, 1:]) / (B * (T - 1))
+    (loss + indexers).backward()
+    return float(loss.detach()), [p.grad.clone() for p in model.parameters()]
+
+
+@pytest.mark.parametrize("segment", [None, 128], ids=["whole", "segments"])
+def test_the_loss_in_chunks_is_the_loss_of_all_the_scores(segment, monkeypatch):
+    # 2 windows of 448 tokens, chunks of 100 tokens: 896 and 894 tokens (the multi-token prediction's targets) are not
+    # multiples of the chunk, and a segment's tokens (256, 256, 256, 128) are not either
+    monkeypatch.setattr(wpt_model, "CHUNK", 100)
+    expected_loss, expected_grads = plain_window(448)
+    model, x, y = model_and_window(448)
+    if segment is None:
+        loss, indexer = TextMethod().loss(model, x, y)
+        loss.backward()
+    else:
+        loss, indexer = parts.learn(TextMethod(), model, model, x, y, 1.0, Strategy(torch.device("cpu")), segment,
+                                    lambda last: contextlib.nullcontext())
+    assert abs(float(loss.detach()) - expected_loss) < 1e-5 * abs(expected_loss)
+    scale = max(g.abs().max().item() for g in expected_grads)
+    for p, g in zip(model.parameters(), expected_grads, strict=True):
+        assert torch.allclose(p.grad, g, rtol=1e-3, atol=2e-5 * scale)
+    assert model.head.weight.grad.abs().sum() > 0
 
 
 RECOMPUTE = pytest.mark.parametrize("recompute", [False, True], ids=["kept", "recomputed"])  # --recompute
