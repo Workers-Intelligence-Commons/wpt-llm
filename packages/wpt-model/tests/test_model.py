@@ -7,9 +7,10 @@ from wpt_model import BALANCING, MULTI_TOKEN_PREDICTION, PARTS, ROUTERS, WPT, Mo
 from wpt_model.attention import CSA_RATIO, HCA_RATIO, Attention
 from wpt_model.experts import Experts
 from wpt_model.layers import expert_forward, grouped_experts
-from wpt_model.kda import _fla_chunk_kda, chunked_kda, delta_attention, recurrent_kda
+from wpt_model.kda import _fla_chunk_kda, _fla_fused_loss, chunked_kda, delta_attention, recurrent_kda
+from wpt_model import model as model_module
 from wpt_model import optimizer as update_rule
-from wpt_model.optimizer import MuonAdamW
+from wpt_model.optimizer import UPDATE_RMS, MuonAdamW, orthogonalize
 from wpt_utils.device import select_device
 
 TINY = dict(vocab_size=50, block_size=16, n_layer=4, global_attention=["CSA"], d_model=16, kda_heads=2, kda_head_dim=8,
@@ -254,6 +255,53 @@ def test_the_one_pass_update_moves_the_weights_as_the_plain_one_and_their_states
                for p in state if "step" in state[p])
     embedding = rule.state[plain.embedding.weight]
     assert embedding["step"] == 2  # the update without its gradient does not count
+
+
+def test_muon_orthogonalizes_matrices_of_one_shape_together_as_it_does_one_by_one():
+    # docs/model.md, "Training": each matrix of a view is orthogonalized on its own, so
+    # grouping the matrices of the same rows and columns changes nothing but speed
+    torch.manual_seed(0)
+    views = [(1, 6, 4), (1, 6, 4), (3, 6, 4), (2, 4, 6), (1, 8, 8), (1, 3, 8), (2, 3, 8)]
+    parameters = [torch.nn.Parameter(torch.randn(view[0] * view[1], view[2])) for view in views]
+    lr, wd, mu = 0.1, 0.1, 0.95
+    rule = MuonAdamW([(str(i), p, "matrix", view) for i, (p, view) in enumerate(zip(parameters, views))], lr, wd, mu)
+    weights, momenta = [p.detach().clone() for p in parameters], [torch.zeros_like(p) for p in parameters]
+    for _ in range(2):
+        for i, p in enumerate(parameters):
+            p.grad = torch.randn_like(p)
+            momenta[i] = mu * momenta[i] + p.grad
+        rule.step()
+        for i, view in enumerate(views):
+            nesterov = (parameters[i].grad + mu * momenta[i]).view(view)
+            update = torch.cat([orthogonalize(matrix[None]) for matrix in nesterov]).view(weights[i].shape)
+            weights[i] = weights[i] * (1 - lr * wd) - lr * UPDATE_RMS * max(view[1:]) ** 0.5 * update
+    assert all(torch.allclose(p, w, atol=1e-5) for p, w in zip(parameters, weights))
+
+
+@pytest.mark.skipif(select_device().type != "cuda" or not _fla_fused_loss(),
+                    reason="needs a GPU where flash-linear-attention imports")
+def test_the_fused_head_and_loss_give_the_checkpointed_form_s_loss_and_gradients(monkeypatch):
+    # docs/model.md, "Training": the summed loss and its gradients, scaled by the incoming gradient
+    # as training scales them, are the checkpointed chunks' within BF16 rounding
+    device = select_device()
+    monkeypatch.setattr(model_module, "CHUNK", 8)  # several chunks in a few tokens
+    ids = torch.randint(0, 50, (3, 2, 16), generator=torch.Generator().manual_seed(0)).to(device)
+
+    def run(fused):
+        torch.manual_seed(0)
+        model = WPT(ModelConfig(**TINY)).to(device).train()
+        monkeypatch.setattr(model_module, "_fla_fused_loss", _fla_fused_loss if fused else lambda: False)
+        next_sum, ahead_sum = model(ids[0], next_tokens=ids[1], targets=(ids[1], ids[2, :, :15]))
+        (next_sum / 3 + 0.3 * ahead_sum / 7).backward()
+        return next_sum.item(), ahead_sum.item(), {n: p.grad for n, p in model.named_parameters()}
+
+    *losses, grads = run(True)
+    *expected, expected_grads = run(False)
+    assert losses == pytest.approx(expected, rel=2e-3)
+    # the head, the norm before it and the embedding: deeper weights differ between two identical runs
+    # already (atomic additions in the kernels), whichever form computes the loss
+    for name in ("head.weight", "final_norm.weight", "embedding.weight"):
+        assert (grads[name] - expected_grads[name]).abs().max() <= 0.05 * expected_grads[name].abs().max(), name
 
 
 def test_the_recipe_names_the_kind_of_each_global_layer():

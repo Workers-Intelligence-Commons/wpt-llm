@@ -38,13 +38,15 @@ _fla_error = None  # why _fla is False
 
 
 def _fla_kernels():
-    """flash-linear-attention's (chunk_kda, fused_recurrent_kda), or False
-    when it does not import here (no Triton, or no GPU support)."""
+    """flash-linear-attention's (chunk_kda, fused_recurrent_kda,
+    fused_linear_cross_entropy_loss), or False when it does not import here
+    (no Triton, or no GPU support)."""
     global _fla, _fla_error
     if _fla is None:
         try:
             from fla.ops.kda import chunk_kda, fused_recurrent_kda
-            _fla = chunk_kda, fused_recurrent_kda
+            from fla.modules.fused_linear_cross_entropy import fused_linear_cross_entropy_loss
+            _fla = chunk_kda, fused_recurrent_kda, fused_linear_cross_entropy_loss
         except Exception as error:  # ImportError, or a Triton that fails to start: either way the PyTorch form runs
             _fla, _fla_error = False, error
     return _fla
@@ -62,6 +64,13 @@ def _fla_chunk_kda():
     """flash-linear-attention's chunk_kda, or False when it does not import."""
     kernels = _fla_kernels()
     return kernels and kernels[0]
+
+
+def _fla_fused_loss():
+    """flash-linear-attention's fused_linear_cross_entropy_loss, or False
+    when it does not import."""
+    kernels = _fla_kernels()
+    return kernels and kernels[2]
 
 
 def recurrent_kda(q, k, v, g, beta, initial=None, final=False):
@@ -147,7 +156,7 @@ def delta_step(q, k, v, g, beta, initial):
     few = q.shape[1] < CHUNK
     with torch.autocast(q.device.type, enabled=False):
         if q.is_cuda and (fla := _fla_kernels()):
-            chunk, fused = fla
+            chunk, fused, _ = fla
             q, k, v, beta = (t.to(torch.bfloat16).contiguous() for t in (q, k, v, beta))
             g, initial = g.float().contiguous(), initial.float().contiguous()
             if few:

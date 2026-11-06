@@ -18,7 +18,9 @@ On a device of ONE_PASS, AdamW and Adam run as PyTorch's fused AdamW, and
 Muon's momentum and weight decay as PyTorch's foreach operations, one call
 for every matrix, the same update within rounding. The state is the same on
 every device, so a run resumes on another. PyTorch offers no form of the
-orthogonalization, which runs matrix by matrix.
+orthogonalization, which runs on every device in one batch for each shape of
+matrix (the same rows and columns), each matrix normalized on its own; a
+batch is a temporary FP32 copy of its matrices' updates.
 """
 
 import math
@@ -139,9 +141,15 @@ class MuonAdamW(torch.optim.Optimizer):
             for p, momentum, g in zip(params, momenta, grads):
                 momentum.mul_(mu).add_(g)
                 p.mul_(1 - lr * wd)
-        for (p, view), momentum, g in zip(trained, momenta, grads):
-            update = orthogonalize(g.add(momentum, alpha=mu).view(view)).view(p.shape)  # Nesterov
-            p.add_(update.to(p.dtype), alpha=-lr * UPDATE_RMS * math.sqrt(max(view[-2:])))
+        shapes = {}  # matrices of the same rows and columns are orthogonalized in one batch, one group at a time
+        for number, (_, view) in enumerate(trained):
+            shapes.setdefault(view[-2:], []).append(number)
+        for shape, numbers in shapes.items():
+            nesterov = [grads[i].add(momenta[i], alpha=mu).view(trained[i][1]) for i in numbers]  # Nesterov
+            updates = orthogonalize(torch.cat(nesterov)).split([len(m) for m in nesterov])
+            for i, update in zip(numbers, updates):
+                p = params[i]
+                p.add_(update.reshape(p.shape).to(p.dtype), alpha=-lr * UPDATE_RMS * math.sqrt(max(shape)))
 
     def _adamw(self, group):
         lr, wd, eps = group["lr"], group["weight_decay"], group["eps"]

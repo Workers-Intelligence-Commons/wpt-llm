@@ -52,7 +52,7 @@ from .cache import Cache, Recorder
 from .config import ModelConfig, global_layers
 from .engram import Engram
 from .experts import SHARED_EXPERTS, Experts, Routes
-from .kda import KDA
+from .kda import KDA, _fla_fused_loss
 from .layers import EPS, FeedForward
 from .mhc import STREAMS, Connection
 from .optimizer import roles
@@ -226,7 +226,7 @@ class WPT(nn.Module):
         next-token scores against the first, the multi-token prediction
         scores of the first t positions against the second), computed CHUNK
         tokens at a time so that the scores of all the tokens are never held
-        at once (the backward pass computes each chunk's scores again). With record or replay (B = 1), the routed layers record their
+        at once (a fused kernel, or the backward pass computing each chunk's scores again; see _summed). With record or replay (B = 1), the routed layers record their
         choices into it, or route as it holds. sequence: where idx sits in a
         longer window (carried, split), the whole window when None; the
         indexer loss is then the mean over idx's queries. features: layer
@@ -256,13 +256,24 @@ class WPT(nn.Module):
     def _summed(self, hidden, targets):
         """The cross-entropy of the head's scores for hidden (B, t, d_model)
         against targets (B, t), summed, CHUNK tokens at a time. With
-        gradients, each chunk is a checkpoint: it keeps only its hidden
-        states, and the backward pass computes its scores again, in the same
-        autocast, through the one head weight, whose gradient adds up over
-        the chunks. A chunk holds only the head and the loss: no routing,
-        statistic or random draw runs twice."""
+        gradients on a GPU where flash-linear-attention imports, its fused
+        head and loss does it: the gradients come out of its forward pass,
+        and the head weight is cast to the autocast dtype (the hidden
+        states' without autocast), so that its gradient reaches the FP32
+        parameter. Otherwise, with gradients, each chunk is a checkpoint: it
+        keeps only its hidden states, and the backward pass computes its
+        scores again, in the same autocast, through the one head weight,
+        whose gradient adds up over the chunks. A chunk holds only the head
+        and the loss: no routing, statistic or random draw runs twice."""
         hidden, targets = hidden.reshape(-1, hidden.shape[-1]), targets.reshape(-1)
         grads = torch.is_grad_enabled()
+        if grads and hidden.is_cuda and (fused := _fla_fused_loss()):
+            # flash-linear-attention's kernel, which computes the gradients inside its forward pass: only with
+            # gradients, and outside autocast so that its matrix products keep the dtypes given here
+            dtype = torch.get_autocast_dtype("cuda") if torch.is_autocast_enabled("cuda") else hidden.dtype
+            with torch.autocast("cuda", enabled=False):
+                return fused(hidden.to(dtype), targets, self.head.weight.to(dtype),
+                             num_chunks=-(-len(targets) // CHUNK), reduction="sum")
         total = 0
         for a in range(0, len(targets), CHUNK):
             args = (self.head, hidden[a:a + CHUNK], targets[a:a + CHUNK])

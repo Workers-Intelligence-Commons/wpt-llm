@@ -228,8 +228,10 @@ indexer_loss=True)` returns the scores, the multi-token prediction scores
 and that loss); a method that does not ask leaves the indexers untrained.
 With `targets=(y, after_next)` in that call, the model returns the two
 cross-entropies summed over the tokens instead of the scores, 4,096 tokens
-at a time, each chunk's scores computed again in the backward pass: the
-built-in loss never holds every token's scores at once.
+at a time: the built-in loss never holds every token's scores at once. On
+a GPU where flash-linear-attention imports, a pass with gradients runs its
+fused head and loss, which computes the gradients in its forward pass;
+elsewhere each chunk's scores are computed again in the backward pass.
 A method that defines its own `loss` defines `part_loss(model, x, y,
 following, window)` too, the share of a part of the windows (`following`:
 the token after `y`'s last, or None at the windows' end; `window`: the
