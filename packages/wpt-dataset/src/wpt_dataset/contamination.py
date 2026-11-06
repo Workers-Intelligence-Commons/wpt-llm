@@ -2,9 +2,8 @@
 held-out documents share with its training documents.
 
 The check only reports: it removes nothing, and nothing but this command
-reads its report. A build never runs it, and build.py does not import this
-module, so the dataset id (which holds the code of build.py and of what it
-imports) depends neither on this code nor on a report.
+reads its report. A build never runs it, so the dataset id does not depend
+on a report.
 
 The documents come from the dataset's shards, the one place a dataset id
 leads to their tokens: the held-out shards hold every held-out document, the

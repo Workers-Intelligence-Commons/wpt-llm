@@ -391,6 +391,14 @@ step tests keep their pinned and built image in `.pytest_cache/` and in Docker, 
 only the first check on a machine, and every CI run, which starts empty, pays
 for locking and building it (`docs/architecture.md`, "Checks").
 
+Stored results of the data pipeline hold no code, so a change to the code leaves
+them found. When your change makes a stage give something else for the same
+inputs, raise that stage's version in the same commit: every later build on any
+machine then does that stage again (`docs/architecture.md`, "Fingerprints and
+the store", names them). A package or Python upgrade that changes what a stage
+gives counts as such a change. A locked vocabulary is the exception: it is never
+trained again, so `VOCABULARY_VERSION` acts only on a recipe with no lock.
+
 A test checks that the code works, not that it works well: it runs without crashing, its computation is valid
 (finite numbers, values in their range, tokens come out, training changes
 the weights it reaches), and two routes the code says are the same give the

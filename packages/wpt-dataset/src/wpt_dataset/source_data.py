@@ -1,8 +1,7 @@
 """A source as the rest of WPT reads it: its source.json and its patches.
 
 It stands apart from the service layer (repo.py), which reads and writes the
-files, so a result computed from a source (sources.py, kept.py) holds the
-code of this module in its key and not that of everything repo.py imports.
+files.
 """
 
 from dataclasses import dataclass, field

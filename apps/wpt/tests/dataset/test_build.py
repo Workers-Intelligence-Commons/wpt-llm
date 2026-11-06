@@ -1,8 +1,6 @@
 import dataclasses
 import hashlib
 import importlib
-import importlib.machinery
-import importlib.util
 import json
 import queue
 import re
@@ -262,10 +260,11 @@ def test_the_locked_vocabulary_stays_until_its_version_is_raised(kit, repo, stor
     assert new_lock["vocabulary_sha256"] != lock["vocabulary_sha256"] and new_lock["document_count"] == 11
 
 
-def test_a_change_of_the_tokenizer_code_asks_for_no_version_and_leaves_the_lock_as_it_is(kit, repo, store, corpus,
-                                                                                         monkeypatch):
-    # the lock holds no version of the tokenizer code; the code's hash is in the fingerprints, so changed code
-    # builds the locked vocabulary again, and only a change of the recipe asks a person for a version
+def test_a_raised_code_version_leaves_the_lock_as_it_is_and_builds_the_dataset_again(kit, repo, store, corpus,
+                                                                                    monkeypatch):
+    # the lock holds no version of the code: a vocabulary found from its lock is not trained again, whatever the
+    # code's versions say, and only a change of the recipe asks a person for the recipe's version. The tokens enter
+    # the dataset by their version alone, so raising it, or the dataset's, makes another dataset
     setup_recipes(kit, repo, store, corpus, total_tokens=1000)
     first = record_of(store, build_dataset(repo, "small", store, log=lambda *_: None))
     lock_path = repo.root / "data" / "recipes" / "tokenizers" / "main.lock.json"
@@ -273,10 +272,20 @@ def test_a_change_of_the_tokenizer_code_asks_for_no_version_and_leaves_the_lock_
     assert set(json.loads(locked)) == {"recipe", "documents_sha256", "document_count", "vocabulary_sha256"}
     assert "version" not in first["tokenizer"] and "recipe_version" in first["tokenizer"]
 
-    monkeypatch.setattr(build, "code_of", lambda module: "another tokenizer code")
+    def refused(*_):
+        raise AssertionError("a locked vocabulary is never trained again")
+
+    monkeypatch.setattr(build.Tokenizer, "train", refused)
+    monkeypatch.setattr(build, "VOCABULARY_VERSION", build.VOCABULARY_VERSION + 1)
     second = record_of(store, build_dataset(repo, "small", store, log=lambda *_: None))
     assert second["tokenizer"]["vocabulary"] == first["tokenizer"]["vocabulary"] and lock_path.read_bytes() == locked
-    assert second["fingerprints"] != first["fingerprints"]  # the code is part of what made the tokens
+    assert second["id"] == first["id"]
+
+    ids = {first["id"]}
+    for module, name in ((reading, "TOKENS_VERSION"), (build, "DATASET_VERSION")):
+        monkeypatch.setattr(module, name, getattr(module, name) + 1)
+        ids.add(build_dataset(repo, "small", store, log=lambda *_: None))
+    assert len(ids) == 3 and lock_path.read_bytes() == locked
 
 
 def test_tokenizer_check_round_trips_every_document_and_reports_each_source(kit, repo, store, corpus, tmp_path,
@@ -565,17 +574,14 @@ def test_a_source_s_kept_files_and_tokens_are_made_again_only_when_its_own_input
     # whose inputs changed: another source, with a license text this
     # source does not match, leaves this source's source-kept and
     # source-tokens refs found again; a change to the decision of the text
-    # this source matched, or to the code of the modules kept.py and
-    # reading.py import (wpt_utils.programs.code_of), makes both again
+    # this source matched, or a raised version of a stage, makes that stage
+    # and the stages that read it again
     sid = setup_recipes(kit, repo, store, corpus, total_tokens=500)
     _, vocabulary, _ = build.build_tokenizer(repo, "small", store, log=lambda *_: None)
     monkeypatch.setattr(workers, "_REPO", repo)  # read_tokens runs here, as in a worker process
     monkeypatch.setattr(workers, "license_texts", lambda: license_check.LicenseTexts(repo.license_texts()))
     for ref in (store.root / "refs" / "source-tokens").glob("*"):
         ref.unlink()
-    for name in ("_CODE", "_MODULES", "_GIVEN"):  # put back as they were when the test ends
-        monkeypatch.setattr(programs, name, getattr(programs, name))
-    keyed = programs.codes(*workers.KEYED)["modules"]
 
     def made() -> dict[str, int]:
         source = repo.source(sid)
@@ -589,54 +595,69 @@ def test_a_source_s_kept_files_and_tokens_are_made_again_only_when_its_own_input
     other = kit.add_source(repo, store, "example", "other", {"type": "git", "address": folder})
     matched = repo.source(sid).data["licenses"][0]["expected"][0]
     assert repo.source(other).data["licenses"][0]["expected"] != [matched]  # a text this source does not match
-    # the commit that adds it: a new whole commit (code()), the same code of the modules
-    programs.set_code({"code": {"commit": "0" * 40, "changes": None}, "modules": keyed})
     assert made() == {"source-kept": 1, "source-tokens": 1}
 
     item = repo.license_texts()[matched]
     kit.write_texts(repo.root, {matched: {**item, "decision": {**item["decision"], "decision": "refused",
                                                                "reason": "a test's refusal"}}})
     assert made() == {"source-kept": 2, "source-tokens": 2}
-    programs.set_code({"code": {"commit": "1" * 40, "changes": None},
-                       "modules": {**keyed, "wpt_dataset.kept": "1" * 64}})
+    monkeypatch.setattr(kept, "KEPT_VERSION", kept.KEPT_VERSION + 1)
     assert made() == {"source-kept": 3, "source-tokens": 3}
-    programs.set_code({"code": {"commit": "1" * 40, "changes": None},
-                       "modules": {**keyed, "wpt_dataset.kept": "1" * 64, "wpt_dataset.reading": "1" * 64}})
+    monkeypatch.setattr(reading, "MARKDOWN_VERSION", reading.MARKDOWN_VERSION + 1)
     assert made() == {"source-kept": 3, "source-tokens": 4}
+    monkeypatch.setattr(reading, "TOKENS_VERSION", reading.TOKENS_VERSION + 1)
+    assert made() == {"source-kept": 3, "source-tokens": 5}
+    monkeypatch.setattr(records, "NEWEST_VERSION", records.NEWEST_VERSION + 1)
+    assert made() == {"source-kept": 3, "source-tokens": 5}  # no entry under `newest`: nothing is made again
+    monkeypatch.setattr(sources, "NOT_TEXT_VERSION", sources.NOT_TEXT_VERSION + 1)
+    assert made() == {"source-kept": 4, "source-tokens": 6}
 
 
-def test_a_worker_process_finds_what_its_starter_kept_under_the_starter_s_codes(kit, repo, store, corpus,
-                                                                              monkeypatch):
-    # a source's conversion runs in a worker process, which must find the
-    # results its starter keyed: given its starter's codes, the worker
-    # computes the starter's key, even codes that differ from what it would
-    # find from the files itself, and so finds the starter's result
-    sid = setup_recipes(kit, repo, store, corpus, total_tokens=500)
-    for name in ("_CODE", "_MODULES", "_GIVEN"):  # put back as they were when the test ends
-        monkeypatch.setattr(programs, name, getattr(programs, name))
-    programs.set_code({"code": programs.code(), "modules": {module: "1" * 64 for module in workers.KEYED}})
-    texts = license_check.LicenseTexts(repo.license_texts())
-    here = kept.kept(repo.source(sid), store, texts)
-    with workers.Pool(repo, "sources at once") as pool:
-        there = pool.call(kept.kept, repo.source(sid), store, texts)
-    assert there.key == here.key
-    assert len(list((store.root / "refs" / "source-kept").iterdir())) == 1
+def test_a_build_that_reuses_another_commit_s_results_warns_once_per_stage_and_carries_on(kit, repo, store, corpus,
+                                                                                         capsys):
+    # results outlive the commit that made them: a build finds them, says so in one warning per stage, however many
+    # sources and workers found them, and gives the same dataset. A result of this very commit says nothing
+    setup_recipes(kit, repo, store, corpus, total_tokens=1000)
+    dataset = build.run(repo, "small", store, [])
+    refs = store.root / "refs"
+    tokens = next((refs / "source-tokens").iterdir()).name
+    assert store.get_made_ref("source-tokens", tokens)[1] == programs.code_name()
+
+    capsys.readouterr()
+    assert build.run(repo, "small", store, []) == dataset
+    assert " reused " not in "".join(capsys.readouterr())
+
+    counts = {}
+    for stage in ("source-trees", "source-index", "source-tokens"):
+        counts[stage] = 0
+        for ref in (refs / stage).iterdir():
+            sha = store.get_ref(stage, ref.name)
+            store.set_ref(stage, ref.name, sha, made_by="0" * 40 if counts[stage] else "1" * 40)
+            counts[stage] += 1
+    record = {**record_of(store, dataset)}
+    record["tools"] = {**record["tools"], "code": {"commit": "2" * 40, "changes": None}}
+    store.set_ref("datasets", dataset, store.put_bytes(json.dumps(record).encode()))
+
+    assert build.run(repo, "small", store, []) == dataset
+    lines = [line for line in map(bare, "".join(capsys.readouterr()).splitlines()) if " reused " in line]
+    assert len(lines) == 4
+    for stage, count in counts.items():
+        others = f"{'0' * 40}: {count - 1:,}, " if count > 1 else ""
+        assert f"{stage}: reused {count:,} results made by other commits ({others}{'1' * 40}: 1)" in lines
+    assert f"datasets: reused 1 results made by other commits ({'2' * 40}: 1)" in lines
 
 
-def test_every_file_that_is_not_python_in_a_keyed_package_is_named_with_whether_it_enters_the_keys():
-    # a key holds Python files and compiled modules only: a new file of another kind in a keyed package (a table
-    # the code reads, say) would change results without changing a key, until someone says whether it enters
-    packages = {}
-    for module in workers.KEYED:
-        for name in programs._imported(module)[0]:
-            top = name.partition(".")[0]
-            packages[top] = Path(importlib.util.find_spec(top).submodule_search_locations[0])
-    suffixes = tuple(importlib.machinery.EXTENSION_SUFFIXES)
-    found = {file.relative_to(folder.parent).as_posix()
-             for folder in packages.values() for file in folder.rglob("*")
-             if file.is_file() and file.suffix != ".py" and not file.name.endswith(suffixes)
-             and "__pycache__" not in file.parts}
-    assert found == set(workers.NOT_PYTHON)
+def test_a_vocabulary_found_with_no_lock_keeps_the_commit_that_made_it(kit, repo, store, corpus):
+    # its lock not committed, a later commit finds it again: the ref goes on naming its true maker
+    setup_recipes(kit, repo, store, corpus, total_tokens=1000)
+    build.build_tokenizer(repo, "small", store, log=lambda *_: None)
+    name = next((store.root / "refs" / "vocabularies").iterdir()).name
+    store.set_ref("vocabularies", name, store.get_ref("vocabularies", name), made_by="1" * 40)
+    (repo.root / "data" / "recipes" / "tokenizers" / "main.lock.json").unlink()
+
+    build.build_tokenizer(repo, "small", store, log=lambda *_: None)
+
+    assert store.get_made_ref("vocabularies", name)[1] == "1" * 40
 
 
 def test_a_streamed_build_leaves_no_copy_of_a_source_s_files_on_this_machine(kit, repo, store, tmp_path):
@@ -1007,6 +1028,17 @@ def test_a_changed_file_gets_another_newest_index(kit, repo, store, tmp_path, mo
     assert len(scans) == 2 and len(newest_refs(store)) == 2
     assert {entry["path"] for entry, _ in read.documents()} == {
         *(path for path in FOUR_PARTS_DOCUMENTS if "only" in path), "part-0.ndjson#shared"}
+
+
+def test_a_raised_version_scans_a_newest_index_again(kit, repo, store, tmp_path, monkeypatch, scans):
+    sid = newest_source(kit, repo, store, tmp_path / "revisions", "revisions", FOUR_PARTS)
+    reads_here(monkeypatch, repo)
+    reading.read_markdown(repo.source(sid), store, list(range(4)), tmp_path / "first", Telemetry.off())
+
+    monkeypatch.setattr(records, "NEWEST_VERSION", records.NEWEST_VERSION + 1)
+    reading.read_markdown(repo.source(sid), store, list(range(4)), tmp_path / "first", Telemetry.off())
+
+    assert len(scans) == 2 and len(newest_refs(store)) == 2
 
 
 LF, CRLF = b"one line\nand another\n" * 20, b"one line\r\nand another\r\n" * 20  # other bytes, one Markdown
@@ -1682,10 +1714,10 @@ def test_an_index_computes_only_the_source_whose_json_changed(kit, repo, store, 
     assert index.tag_sets == [frozenset({"en"}), frozenset({"fr"})] and len(index.rows) == 60
 
 
-def test_a_saved_index_part_is_not_used_for_another_code(kit, repo, store, tmp_path, monkeypatch):
+def test_a_saved_index_part_is_not_used_after_its_version_is_raised(kit, repo, store, tmp_path, monkeypatch):
     sid = many_files(kit, repo, store, tmp_path)
     key = choice.index_key(repo.source(sid), store)
-    monkeypatch.setattr(choice, "code_of", lambda module: "another code")
+    monkeypatch.setattr(choice, "INDEX_VERSION", choice.INDEX_VERSION + 1)
     assert choice.index_key(repo.source(sid), store) != key
 
 

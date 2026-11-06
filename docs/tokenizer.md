@@ -80,10 +80,10 @@ From then on, every build of that version uses that vocabulary:
   replaces the lock (git history keeps the old one). Editing the recipe
   (other than its `note`) without raising `version` stops the build
   (`TokenizerVersionNeeded`), so one name and version always mean one
-  vocabulary. A change of the tokenizer's code asks for no version: the
-  lock keeps the vocabulary, and the code's hash, its Rust sources
-  included, is in the fingerprint of what the code makes, so a build never
-  reuses a result an older code made.
+  vocabulary. A change of the tokenizer's code asks for no `version` of the
+  recipe: the lock keeps the vocabulary. A change of that code that changes
+  the tokens of the same text raises `TOKENS_VERSION` instead
+  ([architecture.md](architecture.md), "Fingerprints and the store").
 - **The vocabulary is shared through the store.** A locked vocabulary is
   never trained again from the documents its lock lists, on this machine
   or another: every build reads it from the store, checked against the

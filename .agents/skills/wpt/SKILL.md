@@ -256,7 +256,8 @@ one and replaces the lock; it is a person's decision (it makes later models
 incompatible with earlier ones), so never raise it unasked. A build that
 stops with `TokenizerVersionNeeded` means the recipe changed: ask whether to
 raise the version or undo the change. A change of the tokenizer's code asks
-for no version. Commit the
+for no `version` of the recipe; one that changes the tokens of the same text
+raises `TOKENS_VERSION`. Commit the
 lock file a build writes.
 
 ## Changing a file's shape
@@ -435,23 +436,26 @@ what the whole text gives (docs/model.md, "What a layer passes on").
   through `wpt_utils.lines.say(text, level)`, never `print`: every line starts
   with its time and level (docs/observability.md, "Printed lines"). Code that
   reads a line a command printed takes its text with `wpt_utils.lines.bare`.
-- A fingerprint never holds a version number of WPT's own code. A result
-  of the data pipeline holds `wpt_utils.programs.code_of(__name__)` of the
-  module that computes it, and holds in its fingerprint every input of
-  `data/` its computation reads; any other result holds
-  `wpt_utils.programs.code()` (the commit and a hash of the uncommitted
-  changes). A worker process that computes such a fingerprint gets its
-  starter's codes (`wpt_utils.programs.codes`, `set_code`): add the module
-  to `wpt_dataset.workers.KEYED`. The code of a module is that of the
-  modules its import statements reach, wherever they stand, except those
-  that only record and print (`wpt_utils.programs.RECORDING`: `wpt_telemetry`,
-  `wpt_utils.lines`), which no key holds: keep the
-  tree and license-check stages (`sources.py`, `kept.py`) from importing
-  the build, tasks, Markdown or download code, and name a new file that
-  is not Python in a keyed package in `wpt_dataset.workers.NOT_PYTHON`.
-  A file of `data/` that every source
-  shares enters only as what the source found in it, found again on
-  every build, as the license check's answer enters what a source keeps.
+- A result of the data pipeline holds in its fingerprint every input of
+  `data/` its computation reads and its stage's version, never WPT's code:
+  a code change leaves stored results found. A training step's result
+  holds `wpt_utils.programs.code()` (the commit and a hash of the uncommitted
+  changes). A file of `data/` that every source shares enters only as what
+  the source found in it, found again on every build, as the license
+  check's answer enters what a source keeps.
+- When a change to the code changes what a stage of the data pipeline gives
+  for the same inputs, raise that stage's version in the same commit
+  (`TREE_VERSION`, `NOT_TEXT_VERSION`, `KEPT_VERSION`, `INDEX_VERSION`,
+  `NEWEST_VERSION`, `MARKDOWN_VERSION`, `TOKENS_VERSION`,
+  `VOCABULARY_VERSION`, `DATASET_VERSION`; docs/architecture.md,
+  "Fingerprints and the store"). Every later build on any machine then does
+  that stage again, so raise none for a change that gives the same results.
+  A package or Python upgrade that changes what a stage gives counts as such
+  a change. A locked vocabulary is the exception: it is never trained again,
+  so `VOCABULARY_VERSION` acts only on a recipe with no lock.
+  A new stage gets a version, and sets and finds its ref through
+  `wpt_telemetry.set_result_ref` and `get_result_ref`, so a build warns when
+  it reuses another commit's result.
 - Parallel work sizes itself with `wpt_utils.parallel.Sizing`, which
   measures each item's memory as it runs: never give a memory figure per
   item. A source's conversion or reading goes through

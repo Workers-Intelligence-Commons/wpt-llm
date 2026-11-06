@@ -13,11 +13,9 @@ named in `failed`.
 
 What a source gives the index is kept in the store under the ref
 source-index/<index_key: its source.json, the fingerprint of its final tree,
-its upstream file list and the code of this module>, so that a build computes
-only the sources where one of them changed, and the duplicates are taken out
-of the parts on every build. The index_key is found in the asking process,
-since a worker process holds only the codes of workers.KEYED, and before
-the source is computed. A source that fails keeps nothing: it is computed on
+its upstream file list and INDEX_VERSION>, so that a build computes only the
+sources where one of them changed, and the duplicates are taken out of the
+parts on every build. A source that fails keeps nothing: it is computed on
 every build, so it stays failed, with its own error, for as long as it fails.
 
 The choice draws a mixture's documents from the index. Each row goes to the
@@ -45,16 +43,16 @@ from dataclasses import dataclass, field
 import numpy as np
 
 from wpt_store import CorruptObject, MissingObject, blocks
-from wpt_telemetry import Telemetry, set_result_ref
+from wpt_telemetry import Telemetry, get_result_ref, set_result_ref
 from wpt_utils.lines import say
 from wpt_utils.parallel import Sizing, each
-from wpt_utils.programs import code_of
 
 from . import license_check, markdown, pools, records, workers
 from .errors import DatasetError
 from .manifest import ORDER, SYMLINK
 from .sources import UPSTREAM_FILES, final_tree, fingerprint, tags_of, tree_key, upstream_key
 
+INDEX_VERSION = 1  # raised by hand when a change to the code changes what a source gives the index
 BYTES_PER_TOKEN = 4  # the first round's guess of the file bytes one token takes
 MARGIN = 1.1  # how much more a later round reads than its measure asks, so that few rounds are needed
 NO_DOCUMENT = ("chat", "task", "rating", "probe")  # formats whose files give no document
@@ -83,10 +81,9 @@ def index_key(source, store) -> str:
     formats, tags and cuts), its final tree (sources.tree_key: the upstream
     manifest, the cuts and their key, the patches), the upstream file list,
     which alone says in which bundle and where each file lies and which a
-    new download of the same files changes, and the code of this module
-    (wpt_utils.programs.code_of). The sizes of files that are store objects
-    follow from their sha256."""
-    return fingerprint({"kind": SOURCE_INDEX, "code": code_of(__name__), "source": source.id, "data": source.data,
+    new download of the same files changes, and INDEX_VERSION. The sizes of
+    files that are store objects follow from their sha256."""
+    return fingerprint({"kind": SOURCE_INDEX, "version": INDEX_VERSION, "source": source.id, "data": source.data,
                         "tree": tree_key(source, store), "files": store.get_ref(UPSTREAM_FILES, upstream_key(source))})
 
 
@@ -149,7 +146,7 @@ def _saved(admitted, store, telemetry) -> tuple[dict, dict]:
         def look(source):
             try:
                 keys[source.id] = index_key(source, store)
-                held = store.get_ref(SOURCE_INDEX, keys[source.id])
+                held = get_result_ref(store, SOURCE_INDEX, keys[source.id], telemetry)
                 return _parsed_part(store.get_bytes(held)) if held else None
             finally:
                 progress.advance()

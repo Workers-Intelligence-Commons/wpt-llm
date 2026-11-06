@@ -35,9 +35,9 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from wpt_store import parse_file_list
-from wpt_telemetry import Telemetry, set_result_ref
+from wpt_telemetry import Telemetry, get_result_ref, set_result_ref
 from wpt_utils.parallel import in_order
-from wpt_utils.programs import code_of, fingerprint
+from wpt_utils.programs import fingerprint
 
 from . import checks, erasure, license_check, manifest, records, workers
 from .errors import CutFailed, NotDownloaded, NotText, PatchFailed
@@ -45,6 +45,8 @@ from .manifest import SYMLINK, Entry
 from .source_data import Patch, Source
 
 # the kinds of the refs naming an upstream tree and the license pages downloaded with it (upstream_key)
+TREE_VERSION = 1  # raised by hand when a change to the code changes a source's final tree
+NOT_TEXT_VERSION = 1  # raised by hand when a change to the code changes what the text check finds
 UPSTREAM, UPSTREAM_FILES, UPSTREAM_PAGES = "upstream", "upstream-files", "upstream-pages"
 # what a download reads from a source's description, besides its id and its license pages: a change to any of
 # them is a new download
@@ -374,15 +376,13 @@ def tree_key(source: Source, store) -> str:
     """The fingerprint of a source's final tree: its upstream tree as the
     store holds it (its manifest's sha256) and the license pages downloaded
     with it, cuts (and the cut key they are matched under), patches,
-    formats (which decide each file's encoding), and the code of this
-    module (wpt_utils.programs.code_of: the source files of the WPT modules
-    it imports). It holds nothing else of the checkout, so a commit that
-    changes only other files of data/, a document, a test or a module this
-    one does not import leaves it the same."""
+    formats (which decide each file's encoding), and TREE_VERSION. It holds
+    nothing else of the checkout, so a commit that changes only other files
+    of data/ or the code leaves it the same."""
     cuts = source.data.get("cuts", [])
     return fingerprint({
         "kind": "source-tree",
-        "code": code_of(__name__),
+        "version": TREE_VERSION,
         "upstream": upstream_manifest(source, store),
         **({"pages": store.get_ref(UPSTREAM_PAGES, upstream_key(source))} if license_pages(source) else {}),
         "formats": source.data["formats"],
@@ -401,7 +401,7 @@ def final_tree(source: Source, store, telemetry=None) -> tuple[dict[str, Entry],
     patch does not apply. Kept under the ref source-trees/<tree_key>. With
     a telemetry, every ref it sets is recorded first (wpt_telemetry.set_result_ref)."""
     key = tree_key(source, store)
-    known = store.get_ref("source-trees", key)
+    known = get_result_ref(store, "source-trees", key, telemetry or Telemetry.off())
     if known:
         tree = manifest.parse_manifest(store.get_bytes(known))
         if source.data["type"] != "empty":
@@ -431,12 +431,10 @@ def source_tree(source: Source, store, telemetry=None) -> tuple[dict[str, Entry]
 def not_text(source: Source, tree: dict[str, Entry], known: str, store, telemetry=None) -> dict[str, str]:
     """{path: why} of the files of a final tree (known: its manifest
     object) that the text check (checks.py) finds are not text, in the
-    tree's order. Kept under the ref source-not-text/<fingerprint of the
-    tree, the formats and the code of this module
-    (wpt_utils.programs.code_of)>, so a tree is read for it once."""
-    key = fingerprint({"kind": "source-not-text", "code": code_of(__name__), "tree": known,
-                       "formats": source.data["formats"]})
-    held = store.get_ref("source-not-text", key)
+    tree's order. Kept under the ref source-not-text/<not_text_key>, so a
+    tree is read for it once."""
+    key = not_text_key(source, known)
+    held = get_result_ref(store, "source-not-text", key, telemetry or Telemetry.off())
     if held:
         return json.loads(store.get_bytes(held))
     found = {}
@@ -447,6 +445,13 @@ def not_text(source: Source, tree: dict[str, Entry], known: str, store, telemetr
     set_result_ref(store, "source-not-text", key, store.put_bytes(json.dumps(found, ensure_ascii=False).encode()),
             telemetry or Telemetry.off())
     return found
+
+
+def not_text_key(source: Source, known: str) -> str:
+    """The fingerprint of the text check of a final tree (known: its
+    manifest object): the tree, the formats and NOT_TEXT_VERSION."""
+    return fingerprint({"kind": "source-not-text", "version": NOT_TEXT_VERSION, "tree": known,
+                        "formats": source.data["formats"]})
 
 
 def is_records(source: Source, path: str) -> bool:

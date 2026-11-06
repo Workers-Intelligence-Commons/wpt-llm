@@ -12,7 +12,6 @@ from wpt_dataset import build, contamination
 from wpt_dataset.build import build_dataset
 from wpt_store.shards import read_shard
 from wpt_tokenizer import Tokenizer
-from wpt_utils import programs
 from wpt_utils.lines import bare
 
 PASSAGES = 5  # each document ends with one of them, so documents on both sides of the split share runs
@@ -170,9 +169,3 @@ def test_a_record_that_holds_a_report_stays_current_and_the_command_prints_that_
     assert store.get_ref(contamination.REPORT, dataset) is None
     [events] = runs_of_command(store, "wpt dataset contamination")
     assert "contamination" not in spans(events)
-
-
-def test_the_dataset_id_holds_none_of_the_check_s_code():
-    # the id's fingerprint holds the code of build.py and of what it imports
-    found, _ = programs._imported("wpt_dataset.build")
-    assert "wpt_dataset.build" in found and "wpt_dataset.contamination" not in found

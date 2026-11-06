@@ -39,8 +39,7 @@ Only a store whose reads wait (a bucket) gets downloaders: a folder store's
 files are on this machine already. The event "sources.ahead" says, for each
 round, what the downloaders did.
 
-All of this changes timing only, so it stays out of reading.py, whose code
-enters the key of every pack and every source-tokens ref.
+All of this changes timing only, so it changes no result.
 """
 
 import collections

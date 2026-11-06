@@ -293,7 +293,9 @@ It starts with its UTC time to the second and its level. `INFO` is the
 ordinary line, `WARNING` something the work goes on past, and `ERROR` a
 failure. Each line of a text of several lines starts this way, a blank one
 included. A line goes to standard output at `INFO` and to standard error at
-the other levels, unless the command chooses the stream of a line itself.
+the other levels, unless the command chooses the stream of a line itself. A
+build that reuses results of other commits gives one `WARNING` line per stage
+(`Telemetry.reused_lines`).
 
 The record and the live view carry the same level: `severity` in
 `events.jsonl`, in lower case, and the OpenTelemetry severity, where

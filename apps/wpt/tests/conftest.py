@@ -228,7 +228,8 @@ def s3(tmp_path, monkeypatch):
             for path in sorted((local.root / "objects").glob("*/*")):
                 store.put_file(local.path(path.name.removesuffix(".zst")))  # a compressed one as its own bytes
             for path in sorted((local.root / "refs").glob("*/*")):
-                store.set_ref(path.parent.name, path.name, path.read_text().strip())
+                sha, _, made_by = path.read_text().strip().partition(" ")
+                store.set_ref(path.parent.name, path.name, sha, made_by=made_by or None)
 
         def refuse(marker):
             real = S3Store._raw_flush_records

@@ -19,6 +19,10 @@ def exercise(store):
     assert store.get_ref("builds", "abc") is None
     store.set_ref("builds", "abc", sha)
     assert store.get_ref("builds", "abc") == sha
+    assert store.get_made_ref("builds", "abc") == (sha, None)
+    store.set_ref("results", "abc", sha, made_by="the-commit")  # the ref says what made it, at no further read
+    assert store.get_ref("results", "abc") == sha and store.get_made_ref("results", "abc") == (sha, "the-commit")
+    assert store.get_made_ref("results", "absent") == (None, None)
     with pytest.raises(MissingObject):
         store.get_bytes("0" * 64)
     # a checkpoint replaced by a newer one is removed, or a long run fills the store

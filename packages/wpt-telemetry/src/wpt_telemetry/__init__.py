@@ -95,6 +95,7 @@ wpt_telemetry.runs reads a store's records back.
 """
 
 import _thread
+import collections
 import contextlib
 import hashlib
 import importlib.metadata
@@ -127,7 +128,7 @@ from wpt_store import MissingObject, MixedRecord, as_record_name, check_record_n
 from wpt_utils.files import sha256_file
 from wpt_utils.lines import ERROR, INFO, WARNING, say
 from wpt_utils.parallel import memory
-from wpt_utils.programs import code, repository
+from wpt_utils.programs import code, code_name, repository
 
 RECORD_FAILED = 3  # the exit code of a command whose record could not be written; never restarted
 ENDPOINT = "OTEL_EXPORTER_OTLP_ENDPOINT"
@@ -259,6 +260,7 @@ class Telemetry:
             self.trace = f"{root.get_span_context().trace_id:032x}"
         self._stop = threading.Event()
         self._flusher = None  # started by start() and join() once their first parts are in the store
+        self.reused_results = {}  # {(stage, name): what made it} of the results another commit made (note_reused)
 
     # -- making one ----------------------------------------------------------------
 
@@ -452,6 +454,23 @@ class Telemetry:
         self._check_open()
         for name, data in lines:
             self._append(name, data)
+
+    def note_reused(self, stage, name, made_by):
+        """Note that this run found a result of a stage (its ref's kind),
+        made by made_by, when another commit made it. Found several times,
+        it counts once."""
+        if made_by != code_name():
+            self.reused_results[stage, name] = made_by
+
+    def reused_lines(self) -> list[str]:
+        """One line per stage, in stage order, saying how many results of
+        other commits this run reused and which commits made them."""
+        stages = {}
+        for (stage, _), made_by in self.reused_results.items():
+            stages.setdefault(stage, collections.Counter())[made_by or "an unknown commit"] += 1
+        return [f"{stage}: reused {sum(found.values()):,} results made by other commits ("
+                + ", ".join(f"{made_by}: {count:,}" for made_by, count in found.most_common()) + ")"
+                for stage, found in sorted(stages.items())]
 
     def progress(self, what, total, unit="items") -> Progress:
         """A Progress for a long stage of total units, to run as a with
@@ -947,9 +966,19 @@ def set_result_ref(store, kind, name, sha, telemetry):
     """store.set_ref(kind, name, sha) of a result the build can compute
     again: the event "store.ref_set" goes with the next group of lines, so a
     run that sets one ref per source writes no part of the record for each.
-    A crash may leave such a ref unrecorded; the ref then only saves work."""
+    A crash may leave such a ref unrecorded; the ref then only saves work.
+    The ref holds the commit that made the result (Store.set_ref)."""
     telemetry.event("store.ref_set", ref=f"{kind}/{name}", object=sha)
-    store.set_ref(kind, name, sha)
+    store.set_ref(kind, name, sha, made_by=code_name())
+
+
+def get_result_ref(store, kind, name, telemetry):
+    """store.get_ref(kind, name) of a result set_result_ref set, noting it
+    in telemetry when another commit made it (Telemetry.note_reused)."""
+    sha, made_by = store.get_made_ref(kind, name)
+    if sha is not None:
+        telemetry.note_reused(kind, name, made_by)
+    return sha
 
 
 def set_ref(store, kind, name, sha, telemetry):

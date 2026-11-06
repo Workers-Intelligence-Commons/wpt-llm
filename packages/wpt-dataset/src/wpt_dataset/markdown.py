@@ -83,9 +83,8 @@ A `newest` index is built on the first read of its entry's files and saved in
 the store (records.py), so every later read loads it. save_newest builds it
 without reading a document, for a source read in parts (reading.py).
 
-The packs of a build's Markdown (reading.py) are keyed by the code of the
-modules reading imports, this one among them (wpt_utils.programs.code_of),
-so a change to what this module makes of a file makes the Markdown again
+A change to what this module makes of a file raises
+reading.MARKDOWN_VERSION, which makes the Markdown again
 (docs/architecture.md).
 """
 

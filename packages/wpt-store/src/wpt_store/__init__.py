@@ -11,7 +11,8 @@ for both kinds.
 
 An object is stored under the sha256 of its bytes and checked against it on
 every read. A ref is a small named pointer to an object (for example a build
-fingerprint to its result), so "already done" is a lookup.
+fingerprint to its result), so "already done" is a lookup. A ref may hold what
+made its result after the object's sha256 (set_ref, get_made_ref).
 
 Every file a store writes is compressed while it is written, with zstd in
 frames of about 1 MB that a range read takes a few at a time (wpt_store.blocks),
@@ -337,23 +338,32 @@ class Store:
 
     # Refs
 
-    def set_ref(self, kind: str, name: str, sha: str):
+    def set_ref(self, kind: str, name: str, sha: str, made_by: str | None = None):
+        """Point a ref at an object. made_by, one word, says what made the
+        result it names (wpt_utils.programs.code_name); the ref holds it
+        after the object, so finding the ref says it at no further read."""
         check_ref(kind, name)
         _check_sha(sha)
         if not self.has(sha):
             raise MissingObject(f"ref {kind}/{name} would point at missing object {sha}")
-        self.kind.write(f"refs/{kind}/{name}", sha.encode())
+        self.kind.write(f"refs/{kind}/{name}", f"{sha} {made_by}".encode() if made_by else sha.encode())
 
     def get_ref(self, kind: str, name: str) -> str | None:
         """The object a ref points at, or None when the ref does not exist."""
+        return self.get_made_ref(kind, name)[0]
+
+    def get_made_ref(self, kind: str, name: str) -> tuple[str | None, str | None]:
+        """(the object a ref points at, what made it, as set_ref got it);
+        (None, None) when the ref does not exist."""
         check_ref(kind, name)
         try:
-            sha = self.kind.read(f"refs/{kind}/{name}")[0].decode().strip()
+            held = self.kind.read(f"refs/{kind}/{name}")[0].decode().strip()
         except Absent:
-            return None
+            return None, None
+        sha, _, made_by = held.partition(" ")
         if not SHA256.fullmatch(sha):
-            raise CorruptObject(f"ref {kind}/{name} holds {sha!r}, not a sha256")
-        return sha
+            raise CorruptObject(f"ref {kind}/{name} holds {held!r}, not a sha256")
+        return sha, made_by or None
 
     def delete_ref(self, kind: str, name: str):
         """Remove a ref (not its object); nothing when it is absent."""

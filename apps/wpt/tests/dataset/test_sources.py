@@ -15,7 +15,7 @@ from types import SimpleNamespace
 import pytest
 
 from wpt import dataset as cli
-from wpt_dataset import erasure, manifest
+from wpt_dataset import erasure, manifest, sources
 from wpt_dataset.errors import (AccessRefused, BadPath, CrawlForbidden, CutFailed, CutKeyMissing, FetchFailed, HostUnreachable, Incomplete,
                                 LicenseMapError, NotDownloaded, NotText, PatchFailed, RobotsUnreadable, ServerError,
                                 SourceGone, TooManyRequests, UnsupportedEntry)
@@ -23,7 +23,6 @@ from protego import Protego
 
 from wpt_dataset import lfs, retry, robots, unusable
 from wpt_dataset.sources import source_tree
-from wpt_utils import programs
 
 
 def test_git_mercurial_and_tar_of_one_project_give_one_manifest(kit, repo, store, git_upstream, hg_upstream, http_folder):
@@ -205,20 +204,15 @@ def test_a_cut_removes_every_run_of_its_passage_and_one_not_found_takes_the_sour
         source_tree(repo.source(sid), other)
 
 
-def test_a_commit_that_changes_only_data_finds_a_source_s_tree_again_and_a_change_to_the_code_does_not(
+def test_a_change_to_other_data_finds_a_source_s_tree_again_and_a_raised_version_makes_it_again(
         kit, repo, store, git_upstream, monkeypatch):
     # a source's final tree and its text check are keyed by its own files
-    # and the code of the modules sources.py imports
-    # (wpt_utils.programs.code_of): a commit that adds another source
-    # changes the whole commit (code()) but not that, so neither is made
-    # again; a change to that code makes both again
+    # and each stage's version: a commit that adds another source makes
+    # neither again, and a person who raises a version makes that stage again
     patch = ("diff --git a/README.md b/README.md\n--- a/README.md\n+++ b/README.md\n@@ -1 +1 @@\n"
              "-the cat sat on the mat and the dog sat on the log\n+the cat sat on the mat.\n")
     sid = kit.add_source(repo, store, "example", "project", {"type": "git", "address": git_upstream[0]},
                          patches=[patch])
-    keyed = programs.code_of("wpt_dataset.sources")
-    for name in ("_CODE", "_MODULES", "_GIVEN"):  # put back as they were when the test ends
-        monkeypatch.setattr(programs, name, getattr(programs, name))
 
     def made() -> dict[str, int]:
         source_tree(repo.source(sid), store)
@@ -227,10 +221,11 @@ def test_a_commit_that_changes_only_data_finds_a_source_s_tree_again_and_a_chang
     first = made()
     assert first == {"source-trees": 1, "source-not-text": 1}
     kit.add_source(repo, store, "example", "other", {"type": "git", "address": git_upstream[0] + "/"})
-    programs.set_code({"code": {"commit": "0" * 40, "changes": None}, "modules": {"wpt_dataset.sources": keyed}})
     assert made() == first
-    programs.set_code({"code": {"commit": "0" * 40, "changes": None}, "modules": {"wpt_dataset.sources": "1" * 64}})
-    assert made() == {"source-trees": 2, "source-not-text": 2}
+    monkeypatch.setattr(sources, "NOT_TEXT_VERSION", sources.NOT_TEXT_VERSION + 1)
+    assert made() == {"source-trees": 1, "source-not-text": 2}
+    monkeypatch.setattr(sources, "TREE_VERSION", sources.TREE_VERSION + 1)
+    assert made() == {"source-trees": 2, "source-not-text": 2}  # the same tree: its text check is found again
 
 
 def test_a_patch_that_does_not_apply_is_refused(kit, repo, store, git_upstream):

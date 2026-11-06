@@ -36,7 +36,8 @@ each scanning the files of the entry.
 
 Packs live in a folder of the cache folder named by the fingerprint of what
 decides a conversion: the key of the source's Kept (kept.kept_key), its
-type and the code of this module (wpt_utils.programs.code_of). A file found in
+type, MARKDOWN_VERSION and, for a source with a records entry under `newest`,
+records.NEWEST_VERSION. A file found in
 a pack of that folder is not read again, by this build or the next. Which
 packs a read finds depends on the reads before it, so a Read gives its
 documents in file path order whatever packs hold them, one open file per
@@ -44,7 +45,8 @@ pack: what a build makes of them never depends on the cache. The Reads of a
 source's parts give theirs in that same order together (documents_of).
 
 A part's tokens are one store object per set of chosen files, kept under the
-ref source-tokens/<that fingerprint, the vocabulary and the files>, so a build
+ref source-tokens/<that fingerprint, the vocabulary, the files and
+TOKENS_VERSION>, so a build
 of the same recipe finds them without reading a file, and one stopped halfway
 through a source reads only the parts it has no ref for. The object holds a
 document's tokens where reading reached it; its summary lists the documents in
@@ -63,14 +65,16 @@ from pathlib import Path
 
 import numpy as np
 
-from wpt_telemetry import Telemetry, set_result_ref
+from wpt_telemetry import Telemetry, get_result_ref, set_result_ref
 from wpt_tokenizer import Tokenizer
-from wpt_utils.programs import code_of
+from wpt_utils.programs import code_name
 
-from . import checks, manifest, markdown, workers
+from . import checks, manifest, markdown, records, workers
 from .kept import Kept, kept_files, skipped_values
 from .sources import final_tree, fingerprint
 
+MARKDOWN_VERSION = 1  # raised by hand when a change to the code changes a file's Markdown
+TOKENS_VERSION = 1  # raised by hand when a change to the code changes the tokens of the same Markdown
 BATCH_BYTES = 256 << 20  # file bytes of one batch: what its fetched files take on the disk at most
 FETCHED_AT_MOST = 64 << 20  # the size from which a file is read alone, as a stream
 # batches of one part: enough for the reading ahead to pay and for a part's own opening of the source to stay small
@@ -84,6 +88,7 @@ class Pack:
     files: frozenset[str]  # the files it covers
     not_text: dict[str, str]  # {path: why} of those the text check refused
     records: dict  # kept.skipped_values of its records files
+    made_by: str  # the code that wrote it (wpt_utils.programs.code_name)
 
     def documents(self, files):
         """(entry, Markdown) of each document of these files: entry says
@@ -103,7 +108,8 @@ def packs(folder: Path) -> list[Pack]:
     found = []
     for described in sorted(folder.glob("*.json")) if folder.is_dir() else ():
         pack = json.loads(described.read_text(encoding="utf-8"))
-        found.append(Pack(described.with_suffix(".zst"), frozenset(pack["files"]), pack["not_text"], pack["records"]))
+        found.append(Pack(described.with_suffix(".zst"), frozenset(pack["files"]), pack["not_text"], pack["records"],
+                          pack["made_by"]))
     return found
 
 
@@ -141,12 +147,12 @@ def _write_pack(source, batch: dict, held: Kept, store, folder: Path, newest_ind
         Path(partial).unlink(missing_ok=True)
         raise
     records = skipped_values(skipped)
-    described = {"files": sorted(batch), "not_text": not_text, "records": records}
+    described = {"files": sorted(batch), "not_text": not_text, "records": records, "made_by": code_name()}
     (folder / f".{name}").write_text(json.dumps(described, ensure_ascii=False), encoding="utf-8", newline="\n")
     os.replace(folder / f".{name}", folder / f"{name}.json")
     for entry in batch.values():
         store.release(entry.sha256)
-    return Pack(folder / f"{name}.zst", frozenset(batch), not_text, records)
+    return Pack(folder / f"{name}.zst", frozenset(batch), not_text, records, described["made_by"])
 
 
 def _sha256(data: bytes) -> str:
@@ -238,8 +244,17 @@ def opened(source, store, positions, telemetry):
     held = kept_files(source, tree, known, store, workers.license_texts())
     names = list(tree)
     paths = [names[position] for position in positions if names[position] in held.tree]
-    return tree, held, paths, fingerprint({"kind": "markdown", "code": code_of(__name__), "kept": held.key,
-                                           "type": source.data["type"]})
+    return tree, held, paths, markdown_key(source, held.key)
+
+
+def markdown_key(source, kept_key: str) -> str:
+    """The fingerprint of what decides a conversion: the key of the source's
+    Kept (kept.kept_key), its type, MARKDOWN_VERSION and, for a source with
+    a records entry under `newest`, NEWEST_VERSION: the index reaches the
+    Markdown by nothing else, and a source without one is not made again."""
+    newest = {"newest": records.NEWEST_VERSION} if any("newest" in entry for entry in source.data["formats"]) else {}
+    return fingerprint({"kind": "markdown", "version": MARKDOWN_VERSION, "kept": kept_key,
+                        "type": source.data["type"], **newest})
 
 
 def _read(source, store, tree, held, paths, key, cache, telemetry, ready=lambda documents: None) -> Read:
@@ -261,6 +276,8 @@ def _read(source, store, tree, held, paths, key, cache, telemetry, ready=lambda 
         return mine
 
     found = [(pack, mine) for pack in packs(folder) if (mine := use(pack))]
+    for pack, _ in found:
+        telemetry.note_reused("markdown", f"{key}/{pack.path.name}", pack.made_by)
     waiting, newest_indexes = list(_batches([path for path in paths if path not in covered], tree)), {}
     with ThreadPoolExecutor(1, thread_name_prefix="fetch-ahead") as fetching:
         fetched = fetching.submit(store.fetch_files, _fetchable(source, waiting[0])) if waiting else None
@@ -307,7 +324,7 @@ def tokenizer_of(vocabulary: str, store) -> Tokenizer:
 def tokens_ref(key: str, vocabulary: str, paths: list[str]) -> str:
     """The name of the source-tokens ref of the chosen paths, key being
     their conversion's fingerprint (opened)."""
-    return fingerprint({"kind": "source-tokens", "code": code_of(__name__), "markdown": key,
+    return fingerprint({"kind": "source-tokens", "version": TOKENS_VERSION, "markdown": key,
                         "vocabulary": vocabulary, "files": sorted(paths)})
 
 
@@ -327,7 +344,7 @@ def read_tokens(source, store, positions, vocabulary: str, cache, telemetry) -> 
         copies = store.copies_in(Path(tmp) / "copies")
         tree, held, paths, key = opened(source, copies, positions, telemetry)
         ref = tokens_ref(key, vocabulary, paths)
-        if known := store.get_ref("source-tokens", ref):
+        if known := get_result_ref(store, "source-tokens", ref, telemetry):
             return json.loads(store.get_bytes(known))
         documents = []
         with open(Path(tmp) / "tokens.u32", "wb") as out:

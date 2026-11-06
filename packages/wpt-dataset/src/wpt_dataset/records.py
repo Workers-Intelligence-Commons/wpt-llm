@@ -27,11 +27,10 @@ others are left out and counted, before any other rule.
 
 That choice reads every file the entry covers, so it is made once and saved
 in the store: the positions of the records to read, file by file, a 4-byte
-number each, under the ref newest-index/<fingerprint of the entry, the path
-and sha256 of each file it covers and of its joined file, in path order, and
-the code of this module (wpt_utils.programs.code_of)>. Nothing else enters
-that fingerprint, so any read of the same files finds the index, whatever
-build or machine saved it.
+number each, under the ref newest-index/<newest_key: the entry, the path and
+sha256 of each file it covers and of its joined file, in path order, and
+NEWEST_VERSION>. Nothing else enters that fingerprint, so any read of the same
+files finds the index, whatever build or machine saved it.
 
 The file kind comes from its name: `.jsonl`, `.json` or `.ndjson` (JSON
 Lines: one object per line), each optionally compressed as `.gz` or `.zst`,
@@ -75,12 +74,13 @@ import numpy as np
 import pyarrow.parquet as pq
 from lxml import etree
 
-from wpt_telemetry import Telemetry, set_result_ref
-from wpt_utils.programs import code_of, fingerprint
+from wpt_telemetry import Telemetry, get_result_ref, set_result_ref
+from wpt_utils.programs import fingerprint
 
 from .errors import InvalidFile
 from .manifest import Stored, glob_match_any
 
+NEWEST_VERSION = 1  # raised by hand when a change to the code changes which records a `newest` index reads
 JSON_LINES = (".jsonl", ".json", ".ndjson")
 XML = ".xml"
 COMPRESSED = {".gz": gzip.open, ".zst": zstd.open}
@@ -295,16 +295,30 @@ def saved_newest_index(entry: dict, paths, read: Callable, store, telemetry=None
     its ref, or scanned once and saved there. A path none of whose records is
     read is not in it. The ref is recorded before it is set
     (wpt_telemetry.set_result_ref)."""
+    telemetry = telemetry or Telemetry.off()
+    key = newest_key(entry, paths, read)
+    known = get_result_ref(store, "newest-index", key, telemetry)
+    if not known:
+        known = store.put_bytes(_packed(newest_index(entry, paths, read)))
+        set_result_ref(store, "newest-index", key, known, telemetry)
+    return _unpacked(store.get_bytes(known))
+
+
+def newest_files(paths, read) -> list:
+    """[path, its sha256, its joined file's] of each of paths (read as in
+    saved_newest_index), in path order."""
     files = []
     for path in sorted(paths, key=str.encode):
         file, joined = read(path)
         files.append([path, file.entry.sha256, joined.entry.sha256 if joined else None])
-    key = fingerprint({"kind": "newest-index", "code": code_of(__name__), "entry": entry, "files": files})
-    known = store.get_ref("newest-index", key)
-    if not known:
-        known = store.put_bytes(_packed(newest_index(entry, paths, read)))
-        set_result_ref(store, "newest-index", key, known, telemetry or Telemetry.off())
-    return _unpacked(store.get_bytes(known))
+    return files
+
+
+def newest_key(entry: dict, paths, read) -> str:
+    """The fingerprint of a `newest` index: the entry, its files
+    (newest_files) and NEWEST_VERSION."""
+    return fingerprint({"kind": "newest-index", "version": NEWEST_VERSION, "entry": entry,
+                        "files": newest_files(paths, read)})
 
 
 def _packed(index: dict) -> bytes:

@@ -32,13 +32,15 @@ share or the index has no more of it. What a round reads becomes:
                    copies removed when both parts are written, so no row is
                    read by range from the store
 
-The dataset id is the fingerprint of every input, the code of this module
-(wpt_utils.programs.code_of: the source files of the WPT modules it
-imports) among them, so building the same recipe on the same data with
-the same code again reads no file, and a change to a file of the checkout
-this module does not import (a document, a test, another application)
-leaves it the same. A dataset whose record has
-another shape than the current one (current_record) is built again, its record replaced.
+The dataset id is the fingerprint of every input, DATASET_VERSION and
+reading.TOKENS_VERSION among them (the tokens enter it by nothing else), so
+building the same recipe on the same data again reads no file, and a change
+to the code leaves it the same until a person raises one of the two. A
+dataset whose record has another shape than the current one (current_record)
+is built again, its record replaced.
+
+A build that reuses results another commit made says so and carries on: one
+warning per stage, with its counts (Telemetry.reused_lines).
 
 Beside its record, every dataset keeps its document list (write_document_list): each document's id, the sha256 of its
 Markdown and its tag, training or held-out, under a ref named by the
@@ -138,11 +140,11 @@ import numpy as np
 
 from wpt_store import CorruptObject, MissingObject
 from wpt_store.shards import write_shard
-from wpt_telemetry import Telemetry, set_ref
+from wpt_telemetry import Telemetry, get_result_ref, set_result_ref, set_ref
 from wpt_tokenizer import BASE_SIZE, RUSTC_VERSION, Tokenizer
 from wpt_utils.lines import WARNING, say
 from wpt_utils.parallel import Done, Sizing, each, in_order
-from wpt_utils.programs import code, code_of
+from wpt_utils.programs import code, code_name
 
 from . import choice as choosing
 from . import conversations as chat_files
@@ -154,6 +156,10 @@ from .kept import kept, skipped_values
 from .repo import SIZE_OF, Repo
 from .sources import fingerprint, held_manifest, held_out_group, tags_of
 
+# raised by hand when a change to the code changes the vocabulary of the same documents. A locked vocabulary is never
+# trained again, so this acts only on a recipe with no lock: a new vocabulary takes raising the recipe's `version`
+VOCABULARY_VERSION = 1
+DATASET_VERSION = 1  # raised by hand when a change to the code changes the shards made of the same documents
 DEFAULT_MAX_EPOCHS = 4
 SHARD_TOKENS = 1 << 26  # about 64M tokens (256 MB of uint32) per shard
 TOKEN_READERS = 16  # documents read at once from the token objects
@@ -628,18 +634,23 @@ def locked_vocabulary(repo: Repo, name: str, store):
         raise TrainedListMissing(f"tokenizer {name} version {recipe['version']}: the list of the documents it "
                                  f"was trained on, {lock['documents_sha256']}, is not in {store}; it is shared "
                                  f"through the store that holds the vocabulary")
-    key = fingerprint({"kind": "vocabulary", "code": code_of(__name__), "recipe": recipe,
-                       "documents": lock["documents_sha256"]})
+    key = vocabulary_key(recipe, lock["documents_sha256"])
     return Tokenizer.from_bytes(store.get_bytes(vocabulary)), vocabulary, key
+
+
+def vocabulary_key(recipe: dict, documents_sha256: str) -> str:
+    """The fingerprint of a vocabulary: VOCABULARY_VERSION, the tokenizer
+    recipe and the sha256 of the list of the documents it is trained on."""
+    return fingerprint({"kind": "vocabulary", "version": VOCABULARY_VERSION, "recipe": recipe,
+                        "documents": documents_sha256})
 
 
 def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skipped, strict, failed, log, telemetry,
                      session=None):
     """(tokenizer, vocabulary object sha256, fingerprint) of the tokenizer
     recipe name, trained on the sample its sample_bytes draws out of the
-    rows found took, and locked. The fingerprint, the key of the ref
-    vocabularies/<fingerprint>, holds the code of this module, the recipe and
-    the sha256 of the list of the documents it is trained on.
+    rows found took, and locked. The fingerprint is the key of the ref
+    vocabularies/<fingerprint> (vocabulary_key).
 
     The lock names those documents by one object of the store, their sorted
     list (wpt_dataset.trained), with its sha256 and its number of lines, and
@@ -689,9 +700,8 @@ def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skippe
                     repeated.add(entry["sha256"])
                     yield text
 
-    key = fingerprint({"kind": "vocabulary", "code": code_of(__name__), "recipe": recipe,
-                       "documents": documents_sha256})
-    vocabulary = store.get_ref("vocabularies", key)
+    key = vocabulary_key(recipe, documents_sha256)
+    vocabulary = get_result_ref(store, "vocabularies", key, telemetry)
     if vocabulary is not None and store.has(vocabulary):
         tokenizer = Tokenizer.from_bytes(store.get_bytes(vocabulary))
     else:
@@ -707,7 +717,7 @@ def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skippe
             tokenizer = Tokenizer.train(counted(), recipe["vocab_size"],
                                         merged=lambda done: merges.advance(done - merges.done))
         vocabulary = store.put_bytes(tokenizer.to_bytes())
-    set_ref(store, "vocabularies", key, vocabulary, telemetry)
+        set_result_ref(store, "vocabularies", key, vocabulary, telemetry)
 
     if session is not None:
         for source in sorted({part.source.id for part in parts} - failed):
@@ -723,6 +733,12 @@ def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skippe
     return tokenizer, vocabulary, key
 
 
+def _reused_warnings(telemetry, log):
+    """The run's one line per stage about results other commits made."""
+    for line in telemetry.reused_lines():
+        log(line, WARNING)
+
+
 def build_tokenizer(repo: Repo, name: str, store, log=say, stream=False, strict=False, telemetry=None,
                     session=None, plan=False):
     """(tokenizer, vocabulary object sha256, fingerprint) of the vocabulary
@@ -732,6 +748,13 @@ def build_tokenizer(repo: Repo, name: str, store, log=say, stream=False, strict=
     (train_vocabulary), stopping before any token. With plan, None after
     logging what it would read and compute (vocabulary_plan_lines)."""
     telemetry = telemetry or Telemetry.off()
+    try:
+        return _built_tokenizer(repo, name, store, log, stream, strict, telemetry, session, plan)
+    finally:
+        _reused_warnings(telemetry, log)
+
+
+def _built_tokenizer(repo, name, store, log, stream, strict, telemetry, session, plan):
     recipe = repo.model_recipe(name)["data"]
     locked = locked_vocabulary(repo, recipe["tokenizer"], store)
     if locked is not None:
@@ -773,8 +796,16 @@ def build_dataset(repo: Repo, name: str, store, log=say, shard_tokens=SHARD_TOKE
     (wpt_store.sessions), a `reused` line for each source whose upstream
     tree the dataset holds. Only the data part counts: recipes with the same
     data share one dataset, as every size of a series does. With plan, None
-    after logging what it would read and compute (plan_lines)."""
+    after logging what it would read and compute (plan_lines). A dataset
+    found already built gives the id its record holds."""
     telemetry = telemetry or Telemetry.off()
+    try:
+        return _built_dataset(repo, name, store, log, shard_tokens, stream, strict, telemetry, session, plan)
+    finally:
+        _reused_warnings(telemetry, log)
+
+
+def _built_dataset(repo, name, store, log, shard_tokens, stream, strict, telemetry, session, plan):
     recipe = repo.model_recipe(name)["data"]
     mixture = repo.recipe("mixture", recipe["mixture"])
     telemetry.event("dataset.recipe", recipe_name=name, recipe=recipe, mixture=mixture)
@@ -816,17 +847,7 @@ def build_dataset(repo: Repo, name: str, store, log=say, shard_tokens=SHARD_TOKE
     if session is not None:
         for sid in sorted(sources_info):
             download.used(repo.source(sid), store, session)
-    text_inputs = {
-        "kind": "dataset", "code": code_of(__name__), "recipe": recipe, "mixture": mixture, "vocabulary": vocabulary,
-        # a document's held-out group only when it has one, so earlier ids stay the same
-        "documents": [[d.id, d.sha256, sorted(d.tags), *([d.group] if d.group is not None else [])] for d in documents],
-        # the record copies their licenses and attribution: a change rebuilds it
-        "sources": sources_info,
-        # each by its id and the kind of its error alone: the message may name this machine's store. Absent when
-        # none, so earlier ids stay the same
-        **({"skipped": [{"source": failed["source"], "error": failed["error"].split(":", 1)[0]} for failed in skipped]}
-           if skipped else {}),
-    }
+    text_inputs = dataset_inputs(recipe, mixture, vocabulary, documents, sources_info, skipped)
     # the text's own id orders and picks its rows. It names the sources that hold documents only, no part and no
     # skipped source, so a change to the conversations or tasks (their sources included), or a source left out that
     # held no documents, never changes the text
@@ -836,11 +857,13 @@ def build_dataset(repo: Repo, name: str, store, log=say, shard_tokens=SHARD_TOKE
     # each part by its object only when it holds something, so earlier ids stay the same
     dataset_id = fingerprint({**text_inputs, **{part: found["object"] for part, found in steps_read.items()}})
     known = store.get_ref("datasets", dataset_id)
+    found_record = json.loads(store.get_bytes(known)) if known else None
     # a record of another shape is built again: its readers read this shape only
-    if known and current_record(json.loads(store.get_bytes(known))):
-        telemetry.output(dataset=dataset_id, dataset_record=known)
-        log(f"dataset {dataset_id} is already built")
-        return dataset_id
+    if current_record(found_record):
+        telemetry.output(dataset=found_record["id"], dataset_record=known)
+        telemetry.note_reused("datasets", dataset_id, code_name(found_record["tools"]["code"]))
+        log(f"dataset {found_record['id']} is already built")
+        return found_record["id"]
 
     held_out = [d for d in documents if d.id in held_ids]
     training = [d for d in documents if d.id not in held_ids]
@@ -891,6 +914,23 @@ def build_dataset(repo: Repo, name: str, store, log=say, shard_tokens=SHARD_TOKE
         set_ref(store, "datasets", dataset_id, record_object, telemetry)
     log(f"dataset {dataset_id}: {record['total_tokens']:,} training tokens in {len(shards)} shards")
     return dataset_id
+
+
+def dataset_inputs(recipe, mixture, vocabulary: str, documents, sources: dict, skipped: list) -> dict:
+    """What a dataset's id and its text's own id read of a build, but for
+    its conversations and tasks."""
+    return {
+        "kind": "dataset", "version": DATASET_VERSION, "tokens": reading.TOKENS_VERSION, "recipe": recipe,
+        "mixture": mixture, "vocabulary": vocabulary,
+        # a document's held-out group only when it has one, so earlier ids stay the same
+        "documents": [[d.id, d.sha256, sorted(d.tags), *([d.group] if d.group is not None else [])] for d in documents],
+        # the record copies their licenses and attribution: a change rebuilds it
+        "sources": sources,
+        # each by its id and the kind of its error alone: the message may name this machine's store. Absent when
+        # none, so earlier ids stay the same
+        **({"skipped": [{"source": failed["source"], "error": failed["error"].split(":", 1)[0]} for failed in skipped]}
+           if skipped else {}),
+    }
 
 
 def run(repo: Repo, name: str, store, arguments, stream=False, strict=False, plan=False) -> str | None:
