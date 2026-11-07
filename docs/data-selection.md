@@ -45,8 +45,9 @@ content. Near-duplicates stay.
 ## Tags and pools
 
 Tags describe paths in `source.json` (language, domain...). They come from
-the source's own statements or from a person, never from a guess: GitHub
-repositories carry only `code`, since their human language is not stated.
+the source's own statements, from a person, from a measure of the source
+or of the file, or from an AI assistant that looked at the source: its statements,
+its pages and its text.
 A pool selects documents by a tag
 expression:
 
@@ -63,6 +64,65 @@ expression:
 A document matching several pools of one mixture goes to the **first**
 matching pool, in the order the mixture lists them. Reordering pools
 therefore changes the dataset (and its id).
+
+### The list of tags
+
+A tag is a language code, a training tag (the `tag` setting of a training
+step, [chat-format.md](chat-format.md) and [training.md](training.md)) or
+one of these words. Names are flat: a tag has no parent, and a pool for a
+wider area lists its tags.
+
+An AI assistant takes tags only from this list and never makes one up. A
+tag it finds missing stays a suggestion for the maintainer, written apart
+from the sources.
+
+| Family | What it says | Tags |
+| --- | --- | --- |
+| Form | the kind of document | `novel`, `short-story`, `poetry`, `drama`, `essay`, `letters`, `speech`, `biography`, `memoir`, `diary`, `scripture`, `encyclopedia`, `dictionary`, `textbook`, `research-paper`, `news`, `periodical`, `government`, `manual`, `guidebook`, `conversation`, `web`, `code` |
+| Subject | what it is about | `history`, `philosophy`, `religion`, `mythology`, `politics`, `economics`, `society`, `law`, `education`, `language`, `art`, `music`, `travel`, `nature`, `agriculture`, `cookery`, `medicine`, `science`, `biology`, `physics`, `chemistry`, `mathematics`, `astronomy`, `earth-science`, `engineering`, `computing`, `technical`, `warfare` |
+| Fiction genre | the kind of story and its readers | `adventure`, `romance`, `mystery`, `science-fiction`, `fantasy`, `horror`, `historical-fiction`, `humour`, `children` |
+| Broad group | a wide grouping of books | `literature`, `books` |
+| Period | when the text was written | `ancient`, `medieval`, `early-modern`, `19th-century`, `20th-century`, `21st-century` |
+| Text state | how the text reached the corpus | `scanned`, `translated`, `verse-numbers` |
+| Code language | the programming language of a file | `code-<language>` |
+| Length | how big the whole source is | `short`, `medium`, `long`, `huge` |
+| File format | the file's format | `format-html`, `format-xhtml`, `format-text`, `format-markdown`, `format-code`, `format-records` |
+| Structure | what the text holds | `with-images`, `with-tables`, `with-footnotes`, `with-dialogue` |
+
+A word that is also a language code means the language, so a topic never
+takes a language code in use: `warfare` has that name because `war` is
+Waray's code. The exceptions are `law` and `web`, which are topics.
+
+Meanings the word alone does not give:
+
+- `memoir`: a first-person account of the writer's own life.
+- `periodical`: one issue of a magazine or a journal.
+- `government`: published by a government or a public body.
+- `science`: science with no narrower subject stated.
+- `technical`: technical writing outside the other subjects.
+- `literature`: literary works, and writing about language and literature.
+- `books`: books outside `literature`.
+- `ancient`: written before 500. `medieval`: from 500 to 1499.
+  `early-modern`: from 1500 to 1799. Each century tag covers its own
+  hundred years.
+- `scanned`: machine-read from paper, so it can hold reading errors.
+- `translated`: a translation of a text first written in another language.
+- `verse-numbers`: each verse starts with its reference.
+- `code-<language>`: the language's name in Linguist, GitHub's list of
+  languages and their file endings, in lower case. `+` becomes `p`, `#`
+  becomes `sharp`, and any other character the tag syntax refuses becomes
+  `-`.
+- `short`: the whole source is under 100 KB. `medium`: from 100 KB to
+  1 MB. `long`: from 1 MB to 1 GB. `huge`: over 1 GB. A Length tag covers
+  all of a source's files, whatever the size of each document. The size
+  is what the source's address serves: a compressed file counts
+  compressed, and a git repository counts as its host reports it, with
+  its history and its images.
+- `format-<name>`: the `formats` entry that covers the file names that
+  format.
+- `with-images`: holds at least one image marker. `with-tables`: holds at
+  least one table. `with-footnotes`: holds at least one footnote.
+  `with-dialogue`: a large part of it is speech between people.
 
 ## Mixtures
 
@@ -209,7 +269,9 @@ open to review.
 
 Other companies' models stay completely forbidden: no output of theirs
 enters the data or the training, and they take no role in it, not as
-data, a simulator or a judge. Synthetic data not made by a WPT model is
+data, a simulator or a judge. Setting a source's tags is the one
+exception: an AI assistant may choose them, and only the tag words enter
+`source.json`. Synthetic data not made by a WPT model is
 forbidden too; puzzles and tasks a program generates are not that kind of
 synthetic data ([licenses.md](licenses.md), "No distillation from another
 company's model").

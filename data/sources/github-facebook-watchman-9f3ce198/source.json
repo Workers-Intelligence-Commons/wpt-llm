@@ -1512,10 +1512,312 @@
   "tags": [
     {
       "tags": [
-        "code"
+        "code",
+        "long"
       ],
       "paths": [
         "**"
+      ]
+    },
+    {
+      "tags": [
+        "code-cpp"
+      ],
+      "paths": [
+        "**/*.cpp",
+        "**/*.c++",
+        "**/*.cc",
+        "**/*.cp",
+        "**/*.cppm",
+        "**/*.cxx",
+        "**/*.h",
+        "**/*.h++",
+        "**/*.hh",
+        "**/*.hpp",
+        "**/*.hxx",
+        "**/*.inc",
+        "**/*.inl",
+        "**/*.ino",
+        "**/*.ipp",
+        "**/*.ixx",
+        "**/*.re",
+        "**/*.tcc",
+        "**/*.tpp",
+        "**/*.txx"
+      ]
+    },
+    {
+      "tags": [
+        "code-python"
+      ],
+      "paths": [
+        "**/*.py",
+        "**/*.cgi",
+        "**/*.fcgi",
+        "**/*.gyp",
+        "**/*.gypi",
+        "**/*.lmi",
+        "**/*.py3",
+        "**/*.pyde",
+        "**/*.pyi",
+        "**/*.pyp",
+        "**/*.pyt",
+        "**/*.pyw",
+        "**/*.rpy",
+        "**/*.spec",
+        "**/*.tac",
+        "**/*.vpy",
+        "**/*.wsgi",
+        "**/*.xpy",
+        "**/.gclient",
+        "**/DEPS",
+        "**/SConscript",
+        "**/SConstruct",
+        "**/wscript"
+      ]
+    },
+    {
+      "tags": [
+        "code-rust"
+      ],
+      "paths": [
+        "**/*.rs",
+        "**/*.rs.in"
+      ]
+    },
+    {
+      "tags": [
+        "code-cmake"
+      ],
+      "paths": [
+        "**/*.cmake",
+        "**/*.cmake.in",
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "tags": [
+        "code-java"
+      ],
+      "paths": [
+        "**/*.java",
+        "**/*.jav",
+        "**/*.jsh"
+      ]
+    },
+    {
+      "tags": [
+        "code-thrift"
+      ],
+      "paths": [
+        "**/*.thrift"
+      ]
+    },
+    {
+      "tags": [
+        "code-starlark"
+      ],
+      "paths": [
+        "**/*.bzl",
+        "**/*.star",
+        "**/BUCK",
+        "**/BUILD",
+        "**/BUILD.bazel",
+        "**/MODULE.bazel",
+        "**/Tiltfile",
+        "**/WORKSPACE",
+        "**/WORKSPACE.bazel",
+        "**/WORKSPACE.bzlmod"
+      ]
+    },
+    {
+      "tags": [
+        "code-c"
+      ],
+      "paths": [
+        "**/*.c",
+        "**/*.cats",
+        "**/*.h",
+        "**/*.h.in",
+        "**/*.idc"
+      ]
+    },
+    {
+      "tags": [
+        "code-javascript"
+      ],
+      "paths": [
+        "**/*.js",
+        "**/*._js",
+        "**/*.bones",
+        "**/*.cjs",
+        "**/*.es",
+        "**/*.es6",
+        "**/*.frag",
+        "**/*.gs",
+        "**/*.jake",
+        "**/*.javascript",
+        "**/*.jsb",
+        "**/*.jscad",
+        "**/*.jsfl",
+        "**/*.jslib",
+        "**/*.jsm",
+        "**/*.jspre",
+        "**/*.jss",
+        "**/*.jsx",
+        "**/*.mjs",
+        "**/*.njs",
+        "**/*.pac",
+        "**/*.sjs",
+        "**/*.ssjs",
+        "**/*.xsjs",
+        "**/*.xsjslib",
+        "**/Jakefile"
+      ]
+    },
+    {
+      "tags": [
+        "code-ruby"
+      ],
+      "paths": [
+        "**/*.rb",
+        "**/*.builder",
+        "**/*.eye",
+        "**/*.fcgi",
+        "**/*.gemspec",
+        "**/*.god",
+        "**/*.jbuilder",
+        "**/*.mspec",
+        "**/*.pluginspec",
+        "**/*.podspec",
+        "**/*.prawn",
+        "**/*.rabl",
+        "**/*.rake",
+        "**/*.rbi",
+        "**/*.rbuild",
+        "**/*.rbw",
+        "**/*.rbx",
+        "**/*.ru",
+        "**/*.ruby",
+        "**/*.spec",
+        "**/*.thor",
+        "**/*.watchr",
+        "**/.irbrc",
+        "**/.pryrc",
+        "**/.simplecov",
+        "**/Appraisals",
+        "**/Berksfile",
+        "**/Brewfile",
+        "**/Buildfile",
+        "**/Capfile",
+        "**/Dangerfile",
+        "**/Deliverfile",
+        "**/Fastfile",
+        "**/Gemfile",
+        "**/Guardfile",
+        "**/Jarfile",
+        "**/Mavenfile",
+        "**/Podfile",
+        "**/Puppetfile",
+        "**/Rakefile",
+        "**/Snapfile",
+        "**/Steepfile",
+        "**/Thorfile",
+        "**/Vagrantfile",
+        "**/buildfile"
+      ]
+    },
+    {
+      "tags": [
+        "code-shell"
+      ],
+      "paths": [
+        "**/*.sh",
+        "**/*.bash",
+        "**/*.bats",
+        "**/*.cgi",
+        "**/*.command",
+        "**/*.fcgi",
+        "**/*.ksh",
+        "**/*.pacscript",
+        "**/*.sbatch",
+        "**/*.sh.in",
+        "**/*.slurm",
+        "**/*.tmux",
+        "**/*.tool",
+        "**/*.trigger",
+        "**/*.zsh",
+        "**/*.zsh-theme",
+        "**/.bash_aliases",
+        "**/.bash_functions",
+        "**/.bash_history",
+        "**/.bash_logout",
+        "**/.bash_profile",
+        "**/.bashrc",
+        "**/.cshrc",
+        "**/.envrc",
+        "**/.flaskenv",
+        "**/.kshrc",
+        "**/.login",
+        "**/.profile",
+        "**/.tmux.conf",
+        "**/.xinitrc",
+        "**/.xsession",
+        "**/.zlogin",
+        "**/.zlogout",
+        "**/.zprofile",
+        "**/.zshenv",
+        "**/.zshrc",
+        "**/9fs",
+        "**/PKGBUILD",
+        "**/bash_aliases",
+        "**/bash_logout",
+        "**/bash_profile",
+        "**/bashrc",
+        "**/cshrc",
+        "**/gradlew",
+        "**/kshrc",
+        "**/login",
+        "**/man",
+        "**/mvnw",
+        "**/profile",
+        "**/tmux.conf",
+        "**/xinitrc",
+        "**/xsession",
+        "**/zlogin",
+        "**/zlogout",
+        "**/zprofile",
+        "**/zshenv",
+        "**/zshrc"
+      ]
+    },
+    {
+      "tags": [
+        "code-css"
+      ],
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "tags": [
+        "code-jinja"
+      ],
+      "paths": [
+        "**/*.jinja",
+        "**/*.j2",
+        "**/*.jinja2"
+      ]
+    },
+    {
+      "tags": [
+        "code-batchfile"
+      ],
+      "paths": [
+        "**/*.bat",
+        "**/*.cmd",
+        "**/gradlew.bat",
+        "**/mvnw.cmd"
       ]
     }
   ],

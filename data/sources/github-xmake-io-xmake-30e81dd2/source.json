@@ -1730,10 +1730,563 @@
   "tags": [
     {
       "tags": [
-        "code"
+        "code",
+        "long"
       ],
       "paths": [
         "**"
+      ]
+    },
+    {
+      "tags": [
+        "code-lua"
+      ],
+      "paths": [
+        "**/*.lua",
+        "**/*.fcgi",
+        "**/*.nse",
+        "**/*.p8",
+        "**/*.pd_lua",
+        "**/*.rbxs",
+        "**/*.rockspec",
+        "**/*.wlua",
+        "**/.luacheckrc"
+      ]
+    },
+    {
+      "tags": [
+        "code-c"
+      ],
+      "paths": [
+        "**/*.c",
+        "**/*.cats",
+        "**/*.h",
+        "**/*.h.in",
+        "**/*.idc"
+      ]
+    },
+    {
+      "tags": [
+        "code-cpp"
+      ],
+      "paths": [
+        "**/*.cpp",
+        "**/*.c++",
+        "**/*.cc",
+        "**/*.cp",
+        "**/*.cppm",
+        "**/*.cxx",
+        "**/*.h",
+        "**/*.h++",
+        "**/*.hh",
+        "**/*.hpp",
+        "**/*.hxx",
+        "**/*.inc",
+        "**/*.inl",
+        "**/*.ino",
+        "**/*.ipp",
+        "**/*.ixx",
+        "**/*.re",
+        "**/*.tcc",
+        "**/*.tpp",
+        "**/*.txx"
+      ]
+    },
+    {
+      "tags": [
+        "code-xmake"
+      ],
+      "paths": [
+        "**/xmake.lua"
+      ]
+    },
+    {
+      "tags": [
+        "code-shell"
+      ],
+      "paths": [
+        "**/*.sh",
+        "**/*.bash",
+        "**/*.bats",
+        "**/*.cgi",
+        "**/*.command",
+        "**/*.fcgi",
+        "**/*.ksh",
+        "**/*.pacscript",
+        "**/*.sbatch",
+        "**/*.sh.in",
+        "**/*.slurm",
+        "**/*.tmux",
+        "**/*.tool",
+        "**/*.trigger",
+        "**/*.zsh",
+        "**/*.zsh-theme",
+        "**/.bash_aliases",
+        "**/.bash_functions",
+        "**/.bash_history",
+        "**/.bash_logout",
+        "**/.bash_profile",
+        "**/.bashrc",
+        "**/.cshrc",
+        "**/.envrc",
+        "**/.flaskenv",
+        "**/.kshrc",
+        "**/.login",
+        "**/.profile",
+        "**/.tmux.conf",
+        "**/.xinitrc",
+        "**/.xsession",
+        "**/.zlogin",
+        "**/.zlogout",
+        "**/.zprofile",
+        "**/.zshenv",
+        "**/.zshrc",
+        "**/9fs",
+        "**/PKGBUILD",
+        "**/bash_aliases",
+        "**/bash_logout",
+        "**/bash_profile",
+        "**/bashrc",
+        "**/cshrc",
+        "**/gradlew",
+        "**/kshrc",
+        "**/login",
+        "**/man",
+        "**/mvnw",
+        "**/profile",
+        "**/tmux.conf",
+        "**/xinitrc",
+        "**/xsession",
+        "**/zlogin",
+        "**/zlogout",
+        "**/zprofile",
+        "**/zshenv",
+        "**/zshrc"
+      ]
+    },
+    {
+      "tags": [
+        "code-perl"
+      ],
+      "paths": [
+        "**/*.pl",
+        "**/*.al",
+        "**/*.cgi",
+        "**/*.fcgi",
+        "**/*.perl",
+        "**/*.ph",
+        "**/*.plx",
+        "**/*.pm",
+        "**/*.psgi",
+        "**/*.t",
+        "**/.latexmkrc",
+        "**/Makefile.PL",
+        "**/Rexfile",
+        "**/ack",
+        "**/cpanfile",
+        "**/latexmkrc"
+      ]
+    },
+    {
+      "tags": [
+        "code-objective-c"
+      ],
+      "paths": [
+        "**/*.m",
+        "**/*.h"
+      ]
+    },
+    {
+      "tags": [
+        "code-assembly"
+      ],
+      "paths": [
+        "**/*.asm",
+        "**/*.a51",
+        "**/*.i",
+        "**/*.inc",
+        "**/*.nas",
+        "**/*.nasm",
+        "**/*.s"
+      ]
+    },
+    {
+      "tags": [
+        "code-cuda"
+      ],
+      "paths": [
+        "**/*.cu",
+        "**/*.cuh"
+      ]
+    },
+    {
+      "tags": [
+        "code-euphoria"
+      ],
+      "paths": [
+        "**/*.e",
+        "**/*.ex"
+      ]
+    },
+    {
+      "tags": [
+        "code-powershell"
+      ],
+      "paths": [
+        "**/*.ps1",
+        "**/*.psd1",
+        "**/*.psm1"
+      ]
+    },
+    {
+      "tags": [
+        "code-roff"
+      ],
+      "paths": [
+        "**/*.roff",
+        "**/*.1",
+        "**/*.1in",
+        "**/*.1m",
+        "**/*.1x",
+        "**/*.2",
+        "**/*.3",
+        "**/*.3in",
+        "**/*.3m",
+        "**/*.3p",
+        "**/*.3pm",
+        "**/*.3qt",
+        "**/*.3x",
+        "**/*.4",
+        "**/*.5",
+        "**/*.6",
+        "**/*.7",
+        "**/*.8",
+        "**/*.9",
+        "**/*.l",
+        "**/*.man",
+        "**/*.mdoc",
+        "**/*.me",
+        "**/*.ms",
+        "**/*.n",
+        "**/*.nr",
+        "**/*.rno",
+        "**/*.tmac",
+        "**/eqnrc",
+        "**/mmn",
+        "**/mmt",
+        "**/troffrc",
+        "**/troffrc-end"
+      ]
+    },
+    {
+      "tags": [
+        "code-nsis"
+      ],
+      "paths": [
+        "**/*.nsi",
+        "**/*.nsh"
+      ]
+    },
+    {
+      "tags": [
+        "code-cmake"
+      ],
+      "paths": [
+        "**/*.cmake",
+        "**/*.cmake.in",
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "tags": [
+        "code-python"
+      ],
+      "paths": [
+        "**/*.py",
+        "**/*.cgi",
+        "**/*.fcgi",
+        "**/*.gyp",
+        "**/*.gypi",
+        "**/*.lmi",
+        "**/*.py3",
+        "**/*.pyde",
+        "**/*.pyi",
+        "**/*.pyp",
+        "**/*.pyt",
+        "**/*.pyw",
+        "**/*.rpy",
+        "**/*.spec",
+        "**/*.tac",
+        "**/*.vpy",
+        "**/*.wsgi",
+        "**/*.xpy",
+        "**/.gclient",
+        "**/DEPS",
+        "**/SConscript",
+        "**/SConstruct",
+        "**/wscript"
+      ]
+    },
+    {
+      "tags": [
+        "code-linker-script"
+      ],
+      "paths": [
+        "**/*.ld",
+        "**/*.lds",
+        "**/*.x",
+        "**/ld.script"
+      ]
+    },
+    {
+      "tags": [
+        "code-swift"
+      ],
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "tags": [
+        "code-batchfile"
+      ],
+      "paths": [
+        "**/*.bat",
+        "**/*.cmd",
+        "**/gradlew.bat",
+        "**/mvnw.cmd"
+      ]
+    },
+    {
+      "tags": [
+        "code-vala"
+      ],
+      "paths": [
+        "**/*.vala",
+        "**/*.vapi"
+      ]
+    },
+    {
+      "tags": [
+        "code-nim"
+      ],
+      "paths": [
+        "**/*.nim",
+        "**/*.nim.cfg",
+        "**/*.nimble",
+        "**/*.nimrod",
+        "**/*.nims",
+        "**/nim.cfg"
+      ]
+    },
+    {
+      "tags": [
+        "code-inno-setup"
+      ],
+      "paths": [
+        "**/*.iss",
+        "**/*.isl"
+      ]
+    },
+    {
+      "tags": [
+        "code-qml"
+      ],
+      "paths": [
+        "**/*.qml",
+        "**/*.qbs"
+      ]
+    },
+    {
+      "tags": [
+        "code-makefile"
+      ],
+      "paths": [
+        "**/*.mak",
+        "**/*.d",
+        "**/*.make",
+        "**/*.makefile",
+        "**/*.mk",
+        "**/*.mkfile",
+        "**/BSDmakefile",
+        "**/GNUmakefile",
+        "**/Kbuild",
+        "**/Makefile",
+        "**/Makefile.am",
+        "**/Makefile.boot",
+        "**/Makefile.frag",
+        "**/Makefile.in",
+        "**/Makefile.inc",
+        "**/Makefile.pc",
+        "**/Makefile.wat",
+        "**/makefile",
+        "**/makefile.sco",
+        "**/mkfile"
+      ]
+    },
+    {
+      "tags": [
+        "code-csharp"
+      ],
+      "paths": [
+        "**/*.cs",
+        "**/*.cake",
+        "**/*.cs.pp",
+        "**/*.csx",
+        "**/*.linq"
+      ]
+    },
+    {
+      "tags": [
+        "code-metal"
+      ],
+      "paths": [
+        "**/*.metal"
+      ]
+    },
+    {
+      "tags": [
+        "code-yacc"
+      ],
+      "paths": [
+        "**/*.y",
+        "**/*.yacc",
+        "**/*.yy"
+      ]
+    },
+    {
+      "tags": [
+        "code-vbscript"
+      ],
+      "paths": [
+        "**/*.vbs"
+      ]
+    },
+    {
+      "tags": [
+        "code-d"
+      ],
+      "paths": [
+        "**/*.d",
+        "**/*.di"
+      ]
+    },
+    {
+      "tags": [
+        "code-zig"
+      ],
+      "paths": [
+        "**/*.zig",
+        "**/*.zig.zon"
+      ]
+    },
+    {
+      "tags": [
+        "code-rust"
+      ],
+      "paths": [
+        "**/*.rs",
+        "**/*.rs.in"
+      ]
+    },
+    {
+      "tags": [
+        "code-smarty"
+      ],
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "tags": [
+        "code-elixir"
+      ],
+      "paths": [
+        "**/*.ex",
+        "**/*.exs",
+        "**/mix.lock"
+      ]
+    },
+    {
+      "tags": [
+        "code-ags-script"
+      ],
+      "paths": [
+        "**/*.asc",
+        "**/*.ash"
+      ]
+    },
+    {
+      "tags": [
+        "code-fortran"
+      ],
+      "paths": [
+        "**/*.f",
+        "**/*.f77",
+        "**/*.for",
+        "**/*.fpp"
+      ]
+    },
+    {
+      "tags": [
+        "code-objective-cpp"
+      ],
+      "paths": [
+        "**/*.mm"
+      ]
+    },
+    {
+      "tags": [
+        "code-swig"
+      ],
+      "paths": [
+        "**/*.i",
+        "**/*.swg",
+        "**/*.swig"
+      ]
+    },
+    {
+      "tags": [
+        "code-kotlin"
+      ],
+      "paths": [
+        "**/*.kt",
+        "**/*.ktm",
+        "**/*.kts"
+      ]
+    },
+    {
+      "tags": [
+        "code-hlsl"
+      ],
+      "paths": [
+        "**/*.hlsl",
+        "**/*.cginc",
+        "**/*.fx",
+        "**/*.fxh",
+        "**/*.hlsli"
+      ]
+    },
+    {
+      "tags": [
+        "code-pascal"
+      ],
+      "paths": [
+        "**/*.pas",
+        "**/*.dfm",
+        "**/*.dpr",
+        "**/*.inc",
+        "**/*.lpr",
+        "**/*.pascal",
+        "**/*.pp"
+      ]
+    },
+    {
+      "tags": [
+        "code-go"
+      ],
+      "paths": [
+        "**/*.go"
       ]
     }
   ],

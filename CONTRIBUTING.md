@@ -316,8 +316,9 @@ a WPT model wrote the draft, and its model, weights and sha256. See
 An AI assistant (a coding agent helping you) uses the `wpt dataset`
 commands only for structure and metadata: the kinds and names of files,
 `source.json`, recipes, file lists, tags, git's status; never to read or
-write people's texts, so it never runs the commands and options that do
-(`read`, `write`, `conversation`, `save-conversation`, `task`,
+write people's texts, except that it may read a source's text to choose
+its tags, and then changes only the tags. Otherwise it never runs the
+commands and options that do (`read`, `write`, `conversation`, `save-conversation`, `task`,
 `save-task`, `save-rating`, `save-probe`, and `new-source`'s `--file` and
 `--license-text`, marked `*`
 in `uv run wpt dataset --help`). It may start a new source with

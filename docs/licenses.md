@@ -843,3 +843,7 @@ It does not cover work that people published under an allowed license,
 such as a repository's code, even when its authors used an AI assistant:
 the license of the person who published it decides, and repositories are
 not filtered for signs of such tools.
+
+It does not cover a source's tags either: an AI assistant may choose them
+([data-selection.md](data-selection.md), "Tags and pools"), since a tag
+labels a text and adds nothing to it.
