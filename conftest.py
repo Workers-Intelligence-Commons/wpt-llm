@@ -301,7 +301,7 @@ def unannounced_ranged_folder(tmp_path):
 
 @pytest.fixture
 def store(tmp_path):
-    return open_store((tmp_path / "store").as_uri())
+    return open_store((tmp_path / "store").as_uri()).at("test-session")
 
 
 DECISION = {"decision": "admitted", "by": "Test Reviewer", "date": "2026-10-14"}  # an admission needs no reason
@@ -377,16 +377,19 @@ PROJECT = covering([*FILES, *SYMLINKS])
 
 class Objects:
     """A store as a fetch stores into it (manifest.Extractor): each kept
-    entry an object under its sha256."""
+    entry a file of the store's cache under its sha256."""
 
     def __init__(self, store):
         self.store = store
 
-    def keep(self, data):
-        return self.store.put_bytes(data), None
+    def keep(self, _path, _mode, data):
+        return self.store.put_bytes(data)
 
-    def put_file(self, path):
-        return self.store.put_file(path)
+    def keep_file(self, _path, _mode, file):
+        return self.store.put_file(file)
+
+    def keep_same(self, _path, _mode, sha256):
+        return sha256
 
 
 def head(address) -> str:
@@ -411,16 +414,10 @@ def upstream(data, address, store):
         return protocols.fetch(pinned(data, address), address, sink, Path(tmp)).tree
 
 
-def session(store, command="test"):
-    """A new session of store, named like a run record folder."""
-    return store.session(f"20261025T120000Z-{command}-{secrets.token_hex(4)}", command, "abc123", False)
-
-
 def download(repo, store, *ids):
-    """The download step on ids, in a session of its own, as `wpt dataset
+    """The download step on ids, in the session of store, as `wpt dataset
     download` runs it: each source's error raised, the first first."""
-    with session(store, "download") as running:
-        done = downloading.download(repo, list(ids), store, running, log=lambda *_: None)
+    done = downloading.download(repo, list(ids), store, log=lambda *_: None)
     for result in done:
         if result.error is not None:
             raise result.error

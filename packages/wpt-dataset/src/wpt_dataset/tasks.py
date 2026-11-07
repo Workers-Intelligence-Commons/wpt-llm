@@ -93,6 +93,7 @@ from .repo import Repo, validate
 from .sources import (copied_by_pointers, copied_for_repository, copy_size, each_read, final_tree, held_manifest,
                       held_out_group, load_index, tags_of, temporary_git)
 
+from wpt_store import find_dataset
 from wpt_utils.lines import say
 
 TASK, CHECK, FILES = "task.json", "check", "files/"
@@ -611,22 +612,20 @@ def held_out_texts(store, dataset: str | None) -> set[str]:
     """The sha256 of the Markdown of every held-out document of the dataset
     `dataset` (the model's, which its provenance names), read from the
     dataset's document list (build.document_list): no source is converted. DocumentListMissing when the
-    dataset has no list, built before builds wrote one, when the store does
-    not hold the dataset, or when none is named; nothing falls back and
-    nothing is rebuilt."""
+    dataset has no list, when the session does not hold the dataset, or when
+    none is named; nothing falls back and nothing is rebuilt."""
     from .build import HELD_OUT, document_list
 
     if not dataset:
         raise DocumentListMissing("pointer tasks need the model's dataset, to keep held-out texts out of "
                                   "training, and none is named")
     listed = document_list(store, dataset)
-    if listed is None and store.get_ref("datasets", dataset) is None:
+    if listed is None and find_dataset(store, dataset) is None:
         raise DocumentListMissing(f"dataset {dataset}, the model's, is not in this store, so its document "
                                   f"list cannot say which texts it held out, and pointer tasks need that")
     if listed is None:
-        raise DocumentListMissing(f"dataset {dataset} predates document lists, so it cannot say which texts it held "
-                                  f"out, and pointer tasks need that; this model is used with the repository "
-                                  f"at the commit that built it")
+        raise DocumentListMissing(f"dataset {dataset} holds no document list, so it cannot say which texts it held "
+                                  f"out, and pointer tasks need that")
     return {entry["sha256"] for entry in listed if entry["tag"] == HELD_OUT}
 
 

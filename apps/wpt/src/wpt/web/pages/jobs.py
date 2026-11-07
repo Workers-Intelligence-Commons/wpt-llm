@@ -63,13 +63,14 @@ JOBS = {
     "dataset/ratings": (("dataset", "ratings"), "the ratings of a rating file: the attempt each rates, who, when",
                         None),
     "dataset/probes": (("dataset", "probes"), "the probes of a probe file: how many patterns each holds", None),
-    "store/list": (("store", "list"), "every session and every source the store database knows", None),
-    "store/runs": (("store", "runs"), "every run recorded in the store", None),
+    "store/list": (("store", "list"), "every session, or the one given, and what it holds", None),
+    "store/runs": (("store", "runs"), "every run recorded in the store, or in the session given", None),
     "store/run": (("store", "run"), "one run: its stage, counts, last events and errors; --follow prints its lines "
                   "until it ends", None),
-    "store/mark": (("store", "mark"), "mark sources for a new download in full", None),
     "store/copy-out": (("store", "copy-out"), "a model folder the store keeps, into a new folder of this machine",
                        None),
+    "store/rebuild-index": (("store", "rebuild-index"), "the store's index made again from the files of every "
+                            "session", None),
     "agent/lock-image": (("agent", "lock-image"), "pin an image's base, archive date and packages in its "
                          "lock.json (needs Docker)", None),
     "agent/build-image": (("agent", "build-image"), "build an image from its lock.json on this machine (needs "
@@ -130,7 +131,7 @@ def routes(context, jobs: Jobs):
 
     @refusals
     def records(values, body):
-        return 200, {"records": jobs.records(jobs.get(values["id"]), context.store)}
+        return 200, {"records": jobs.records(jobs.get(values["id"]), context.whole)}
 
     def starting(words):
         def start(values, body):

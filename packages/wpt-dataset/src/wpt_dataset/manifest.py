@@ -9,11 +9,10 @@ sha256 is that of the target text). Empty folders do not appear. A tree
 is named by the sha256 of that list's bytes (manifest_bytes), its
 `manifest`, as a plain hex digest wherever it appears (digest).
 
-A tree is a mapping path -> Entry. A downloaded file lies in one of its
-session's bundles (wpt_store.sessions), and its entry says where
-(Entry.placed); any other content (a cut's or a patch's result, a file
-of a tree downloaded before bundles) is a store object under its sha256.
-content() and local_file() read either. Readers build trees from the downloaded data itself (archive
+A tree is a mapping path -> Entry. A downloaded file lies in its source's
+tar (wpt_store.sessions), and its entry says where (Entry.placed); any
+other content (a cut's or a patch's result) is a file of the store's cache
+under its sha256. content() and local_file() read either. Readers build trees from the downloaded data itself (archive
 headers, git or mercurial objects), never from files written to a disk, so
 Linux and Windows compute the same manifest.
 """
@@ -42,7 +41,7 @@ import zipfile
 from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
 
-from wpt_store import CorruptObject
+from wpt_store import CorruptFile
 from wpt_utils.programs import program
 
 from .errors import BadPath, FetchFailed, Incomplete, UnsupportedEntry
@@ -56,13 +55,9 @@ SUBMODULE = "160000"  # a git tree's pointer to a commit of another repository
 class Entry:
     mode: str
     sha256: str
-    # where a downloaded file lies (wpt_store.Placed); None for a store object. Not part of what the entry is:
-    # two entries with the same mode and content are equal wherever their bytes lie
+    # where a downloaded file lies (wpt_store.Placed); None for a file of the store's cache. Not part of what the
+    # entry is: two entries with the same mode and content are equal wherever their bytes lie
     placed: object = field(default=None, compare=False, repr=False)
-    # the git object id of the blob a git source's entry holds as it was fetched (None otherwise): what the store
-    # database's map from git object id to sha256 learns. Not part of what the entry is either, and never in a
-    # manifest; an entry a cut or a patch changes is a new entry, without it
-    git: str | None = field(default=None, compare=False, repr=False)
 
 
 def content(store, entry: Entry) -> bytes:
@@ -79,8 +74,8 @@ def local_file(store, entry: Entry) -> Path:
 class Stored:
     """One file of a tree as a reader of many records needs it: open()
     reads its bytes from the store as a stream, part by part (a downloaded
-    file through wpt_store's file_parts, a store object, such as a patched
-    file, through its read_range), never whole in memory and never copied
+    file through wpt_store's file_parts, a file of the cache, such as a
+    patched file, through its read_range), never whole in memory and never copied
     to the disk, checked against its sha256 at its end; local() is a local
     file holding them, for a reader that must seek (Parquet)."""
 
@@ -108,7 +103,7 @@ BLOCK = 1 << 20  # bytes a stored file's stream reads at once
 
 
 def _object_parts(store, sha256: str):
-    """A store object's bytes in parts of at most BLOCK bytes; CorruptObject
+    """A cached file's bytes in parts of at most BLOCK bytes; CorruptFile
     after the last part when they do not match its sha256."""
     digest, length = hashlib.sha256(), store.size(sha256)
     for start in range(0, length, BLOCK):
@@ -116,7 +111,7 @@ def _object_parts(store, sha256: str):
         digest.update(part)
         yield part
     if digest.hexdigest() != sha256:
-        raise CorruptObject(f"object {sha256} reads back as {digest.hexdigest()}")
+        raise CorruptFile(f"object {sha256} reads back as {digest.hexdigest()}")
 
 
 class _Parts(io.RawIOBase):
@@ -152,9 +147,9 @@ def size(store, entry: Entry) -> int:
 
 
 def placed_tree(tree: dict[str, Entry], files: dict) -> dict[str, Entry]:
-    """The tree with each entry whose content a source's file list
-    (wpt_store.parse_file_list: {path: (mode, Placed)}) holds placed where
-    that list says; the others stay store objects."""
+    """The tree with each entry whose content a source's files
+    (wpt_store.Held.files: {path: (mode, Placed)}) hold placed where they
+    say; the others stay files of the cache."""
     where = {placed.sha256: placed for _, placed in files.values()}
     return {path: dataclasses.replace(e, placed=where[e.sha256]) if e.sha256 in where else e
             for path, e in tree.items()}
@@ -295,9 +290,9 @@ def check_paths(tree: dict[str, Entry]):
 class Extractor:
     """Applies a source's `extract` rules while entries are read, storing
     each kept entry's content in store: what a download stores into
-    (download.Staging, download.Bundled), whose keep(content) gives the
-    content's sha256 and where it lies (a wpt_store.Placed, or None for
-    an object under its sha256), and put_file(path) a local file's sha256."""
+    (wpt_store.Packing, download.Staging), whose keep(path, mode, content),
+    keep_file(path, mode, file) and keep_same(path, mode, sha256) each take
+    one path and give the sha256 of its content."""
 
     def __init__(self, store, extract: dict):
         self.store = store
@@ -342,12 +337,12 @@ class Extractor:
             return None
         return path
 
-    def add(self, raw_path: bytes | str, mode: str, content: bytes, git: str | None = None) -> Entry | None:
+    def add(self, raw_path: bytes | str, mode: str, content: bytes) -> Entry | None:
         """Store an entry's content when its path is kept: its Entry, or
-        None. git: the id of the git blob it holds (Entry.git)."""
+        None."""
         path = self.kept(raw_path)
         if path is not None:
-            return self._record(path, mode, *self.store.keep(content), git=git)
+            return self._record(path, mode, self.store.keep(path, mode, content))
         return None
 
     def add_same(self, raw_path: bytes | str, mode: str, like: Entry) -> Entry | None:
@@ -355,37 +350,18 @@ class Extractor:
         hard link), when its path is kept: its Entry, or None."""
         path = self.kept(raw_path)
         if path is not None:
-            return self._record(path, mode, like.sha256, like.placed)
+            return self._record(path, mode, self.store.keep_same(path, mode, like.sha256))
         return None
 
-    def add_placed(self, raw_path: bytes | str, mode: str, placed, git: str | None = None) -> Entry | None:
-        """An entry whose content the store holds already where placed (a
-        wpt_store.Placed) says, when its path is kept: its Entry, or None.
-        Its content is neither read nor stored again. git: as add's."""
-        path = self.kept(raw_path)
-        if path is not None:
-            return self._record(path, mode, placed.sha256, placed, git)
-        return None
-
-    def keep_blobs(self, repo: Path, object_ids: list[str]):
-        """Store git blobs no entry holds, the ones the history's patches
-        need (a store that has no use for them, one that does not give
-        keep_mapped, ignores them): what a download keeps, so the store
-        database's map of git objects learns them (download.Staging)."""
-        if object_ids and hasattr(self.store, "keep_mapped"):
-            with contextlib.closing(_git_blobs(repo, object_ids)) as contents:
-                for object_id, content in zip(object_ids, contents):
-                    self.store.keep_mapped(object_id, content)
-
-    def add_file(self, path: str, mode: str, file: Path, git: str | None = None):
+    def add_file(self, path: str, mode: str, file: Path):
         """A kept path (see kept) whose content is a file on disk, stored
-        without reading it into memory. git: as add's."""
-        self._record(path, mode, self.store.put_file(file), git=git)
+        without reading it into memory."""
+        self._record(path, mode, self.store.keep_file(path, mode, file))
 
-    def _record(self, path: str, mode: str, sha256: str, placed=None, git=None) -> Entry:
+    def _record(self, path: str, mode: str, sha256: str) -> Entry:
         if path in self.tree:
             raise BadPath(f"{path!r} appears twice")
-        self.tree[path] = Entry(mode, sha256, placed, git)
+        self.tree[path] = Entry(mode, sha256)
         return self.tree[path]
 
     @contextlib.contextmanager
@@ -514,20 +490,16 @@ FILE_NOT_GIVEN = (FetchFailed, urllib.error.URLError, ConnectionError, TimeoutEr
                   http.client.HTTPException)
 
 
-def read_git(repo: Path, revision: str, extractor: Extractor, prefix: str = "", known=None,
-             large=None) -> dict[str, str]:
+def read_git(repo: Path, revision: str, extractor: Extractor, prefix: str = "", large=None) -> dict[str, str]:
     """Entries of a commit, from git's own objects, each path after `prefix`
     (a submodule's folder, ending in "/"). An excluded file is never read, so
-    a partial fetch need not hold it; nor is a blob whose content the store
-    holds already (known: {git object id: wpt_store.Placed}), whose entry
-    is placed where the store holds it, its sha256 taken from there. Each
-    kept entry holds its blob's id (Entry.git). large(blob), when given,
-    is a local file holding the file a blob stands for when the blob is not
-    the file itself (an LFS pointer), None otherwise: that file's bytes are
-    the entry's. A failure of large to get that file (FILE_NOT_GIVEN) goes
-    into extractor.unusable, when it has one, and the file is left out. Returns the kept submodules, each
-    path with the commit it pins; an excluded submodule is skipped."""
-    known = known or {}
+    a partial fetch need not hold it. large(blob), when given, is a local
+    file holding the file a blob stands for when the blob is not the file
+    itself (an LFS pointer), None otherwise: that file's bytes are the
+    entry's. A failure of large to get that file (FILE_NOT_GIVEN) goes into
+    extractor.unusable, when it has one, and the file is left out. Returns
+    the kept submodules, each path with the commit it pins; an excluded
+    submodule is skipped."""
     entries, submodules = [], {}
     for path, mode, kind, object_id in _git_tree(repo, revision, prefix):
         if extractor.kept(path) is None:
@@ -536,12 +508,10 @@ def read_git(repo: Path, revision: str, extractor: Extractor, prefix: str = "", 
             submodules[path.decode()] = object_id
         elif kind != "blob" or mode not in MODES:
             raise UnsupportedEntry(f"{path.decode(errors='replace')}: git {kind} with mode {mode}")
-        elif object_id in known:
-            extractor.add_placed(path, mode, known[object_id], object_id)
         else:
             entries.append((path, mode, object_id))
     with contextlib.closing(_git_blobs(repo, [e[2] for e in entries])) as contents:
-        for (path, mode, object_id), content in zip(entries, contents):
+        for (path, mode, _), content in zip(entries, contents):
             try:
                 file = large(content) if large is not None and mode != SYMLINK else None
             except FILE_NOT_GIVEN as error:
@@ -550,9 +520,9 @@ def read_git(repo: Path, revision: str, extractor: Extractor, prefix: str = "", 
                 extractor.unusable[extractor.kept(path)] = f"{type(error).__name__}: {error}"
                 continue
             if file is None:
-                extractor.add(path, mode, content, object_id)
+                extractor.add(path, mode, content)
             elif (kept := extractor.kept(path)) is not None:
-                extractor.add_file(kept, mode, file, object_id)
+                extractor.add_file(kept, mode, file)
     return submodules
 
 
@@ -575,16 +545,6 @@ def git_history_blobs(repo: Path, revision: str, extractor: Extractor, since: st
     for changes in _changed_paths(repo, _history_commits(repo, since, revision)).values():
         needed += [object_id for path, blobs in changes if extractor.kept(path) is not None for object_id in blobs]
     return list(dict.fromkeys(needed))
-
-
-def put_blobs(repo: Path, files: list[Path]) -> list[str]:
-    """Write local files into a repository as git blobs, in one git call:
-    contents the store holds already, so git can diff them without
-    downloading them. Their object ids, in order."""
-    if not files:
-        return []
-    return _git(repo, "hash-object", "-w", "--no-filters", "--stdin-paths",
-                input="".join(f"{file}\n" for file in files).encode()).decode().split()
 
 
 def missing_objects(repo: Path, object_ids: list[str]) -> list[str]:

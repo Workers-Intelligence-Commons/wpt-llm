@@ -6,7 +6,7 @@ wpt_utils.programs.MissingTool."""
 
 class DatasetError(Exception):
     """Base class; nothing below leaves the store or the repository changed
-    except objects added to the content-addressed store, which are harmless."""
+    except files added to the store's cache, which are harmless."""
 
 
 class InvalidFile(DatasetError):

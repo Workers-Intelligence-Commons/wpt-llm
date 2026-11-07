@@ -17,11 +17,11 @@ def routes(context):
 
     @refusals
     def listed(values, body):
-        return 200, attempts.runs(context.store)
+        return 200, attempts.runs(context.whole)
 
     @refusals
     def attempts_of(values, body):
-        weights, found = attempts.attempts(context.store, values["folder"])
+        weights, found = attempts.attempts(context.whole, values["folder"])
         return 200, {"weights": weights, "attempts": found}
 
     @refusals

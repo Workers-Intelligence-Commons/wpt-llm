@@ -160,16 +160,18 @@ that name (or of `SERIES:SIZE`, a size of a model series, whose data part
 every size of the series shares) and prints the dataset id: the fingerprint of the data part, the
 mixture, the vocabulary and every document. Recipes with the same data
 part share one dataset, and `wpt train` refuses a dataset built from
-another data part than its recipe's. The store's ref `recipes/<name>`, or
-`series/<series>` for a size of a series, names the record of the dataset
-last built for it, which `wpt train` reads when it is given no id. It reads the sources `wpt dataset
-download` put in the store and downloads none; a source that is not
-there is left out and listed in the record. A task pointing into a
+another data part than its recipe's. The session's dataset of the recipe's
+name, or `series-<series>` for a size of a series, with the first 8 hex
+characters of the dataset id, is the folder of the dataset (a build with
+other content writes another); the dataset last built for the recipe or the
+series is the one `wpt train` reads when it is given no id. It reads the sources `wpt dataset
+download` put in the session it is given and downloads none; a source that is
+missing or failed there is left out and listed in the record. A task pointing into a
 source the build left out, one not downloaded among them, stops the build,
 naming the task and the source. It reads only the documents its pools need:
-each pool draws them from an index of the store's records, in a seeded
+each pool draws them from an index of the sources' records, in a seeded
 order of whole frames (the 1 MiB unit the store fetches: the files that
-start in one frame of one bundle go together, a file stored on its own
+start in one frame of one source's tar go together, a file stored on its own
 alone), by bytes, in rounds until its share is met, so a build fetches about
 the bytes it chooses. A pool's share is passed by one frame's files at most. With `--stream`, it
 keeps none of their Markdown on the machine; the dataset is the same

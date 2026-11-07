@@ -29,8 +29,8 @@ repository is public:
   `[START, END)` of the file as the cuts before it left it, read from the
   store. A person checks the range on the stored file first.
 - `hmac` is the HMAC-SHA256 of the passage, and `rolling` its rolling hash,
-  whose parameters come from the same key. The key is a secret kept in the
-  store (`wpt_dataset/erasure.py`), so a guess at a short passage, such as
+  whose parameters come from the same key. The key is a secret kept at the
+  store's root, in the file `cut-key` (`wpt_dataset/erasure.py`), so a guess at a short passage, such as
   a name or a phone number, cannot be confirmed from the repository. The
   first cut makes the key. Making a cut needs store access, and so does
   matching one.

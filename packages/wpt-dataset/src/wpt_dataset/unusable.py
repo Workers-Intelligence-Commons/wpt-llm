@@ -34,7 +34,7 @@ def find(source: Source) -> dict[str, str]:
     failures = []
     with download.work_folder() as tmp:
         for number, address in enumerate(download.addresses(source)):
-            staging, folder = download.folders(Path(tmp) / f"address-{number}", None)
+            staging, folder = download.folders(Path(tmp) / f"address-{number}")
             found = {}
             try:
                 fetched = protocols.fetch(source.data, address, staging, folder, unusable=found)

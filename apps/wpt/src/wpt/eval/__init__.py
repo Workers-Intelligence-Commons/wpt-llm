@@ -46,7 +46,10 @@ Each result goes to MODEL_FOLDER/evals/<name>.json, and the model card
 (README.md) is written again to show it. A test that fails stops the run;
 results already written stay.
 
-The run is recorded in the store, in its own folder under records/
+It works in the session --session ID or WPT_SESSION names, and refuses to
+start without one; --from OLD_ID (WPT_FROM) also reads what the session does
+not hold from that other session. The run is recorded in the session, in its
+own folder of <id>/runs/
 (wpt_telemetry; docs/observability.md): the weights it measured, each test
 with its file's sha256 and its result, and every file written. A test can
 record its own events through context.telemetry. When the record cannot be
@@ -73,6 +76,7 @@ from wpt_agent import Unready
 from wpt_model import DrafterMismatch, TokenizerMismatch, check_drafter, load_tokenizer, weight_hashes
 from wpt_model.sparse import FORMS, named_form
 from wpt_model.notice import CARD_NAME, EVALS_NAME, documents
+from wpt import sessions
 from wpt_store import Store, StoreError, read_env_file, store_from_settings
 from wpt_store.shards import documents as documents_of
 from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry, short
@@ -312,10 +316,11 @@ def main(argv=None):
                         help=f"what computes the attention on the gpu worker: {', '.join(FORMS)}; one that cannot "
                              "work there refuses the evaluation (WPT_KERNELS; default: the first kernels installed "
                              "for its GPU, else pytorch)")
+    sessions.options(parser)
     args = parser.parse_args(argv)
     environ = {**read_env_file(Path.cwd() / ".env"), **{key: value for key, value in os.environ.items() if value}}
     try:
-        store = store_from_settings(Path.cwd() / ".env")
+        store = sessions.opened(store_from_settings(Path.cwd() / ".env"), args, Path.cwd() / ".env")
     except StoreError as error:  # no store, no record: nothing has started
         sys.exit(f"{type(error).__name__}: {error}")
     evals = args.evals or built_in_names()

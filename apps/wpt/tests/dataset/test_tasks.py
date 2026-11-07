@@ -13,6 +13,7 @@ from wpt_dataset.errors import DocumentListMissing, InvalidFile
 from wpt_dataset.manifest import EXECUTABLE, FILE
 from wpt_dataset.markdown import documents
 from wpt_dataset.sources import held_manifest, source_tree
+from wpt_store import keep_dataset
 from wpt_telemetry import Telemetry
 
 TASK = {"instructions": "Write hello into out.txt.", "image": "tiny",
@@ -92,7 +93,10 @@ def listed(store, documents=(), share=0.0, name="d" * 64) -> str:
     them out."""
     listing = [Document(f"{sid}/{path}", sid, hashlib.sha256(text).hexdigest(), frozenset())
                for sid, path, text in documents]
-    write_document_list(store, name, listing, {d.id for d in listing if is_held_out(d.id, share)}, Telemetry.off())
+    folder = f"d-{name[:8]}"
+    reference = write_document_list(store, folder, listing, {d.id for d in listing if is_held_out(d.id, share)},
+                                    Telemetry.off())
+    keep_dataset(store, folder, {"id": name, "names": ["d"], "document_list": reference})
     return name
 
 
@@ -201,6 +205,7 @@ def test_a_changed_source_checks_the_task_sources_that_point_into_it(kit, repo, 
     kit.run("git", "commit", "-q", "-m", "sources", cwd=repo.root)
     repo.save("source", book.id, {**book.data, "note": "changed"}, repo.version("source", book.id))
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     assert main(["--root", str(repo.root), "check", "--changed", "HEAD"]) == 0
     out = capsys.readouterr().out
     assert f"{book.id}: " in out and f"{task.id}: " in out and f"{other.id}: " not in out
@@ -221,6 +226,7 @@ def test_a_deleted_source_gets_the_task_sources_that_pointed_into_it_checked(
     kit.run("git", "commit", "-q", "-m", "sources", cwd=repo.root)
     shutil.rmtree(repo.root / "data" / "sources" / book.id)
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     assert main(["--root", str(repo.root), "check", "--changed", "HEAD"]) == 1
     captured = capsys.readouterr()
     assert f"{task.id}: FAILED" in captured.err and "which does not exist" in captured.err
@@ -356,9 +362,8 @@ def test_pointer_tasks_are_refused_when_the_base_dataset_kept_no_document_list(k
     # a dataset this store does not hold is named as absent, not as old
     with pytest.raises(DocumentListMissing, match=f"dataset {'e' * 64}, the model's, is not in this store"):
         tasks.read(repo, store, "finish-tasks", 0, dataset="e" * 64)
-    store.set_ref("datasets", "e" * 64, store.put_bytes(b"{}\n"))  # the dataset's record, and no document list
-    with pytest.raises(DocumentListMissing, match=f"dataset {'e' * 64} predates document lists.*used with the "
-                                                   f"repository at the commit that built it$"):
+    keep_dataset(store, "d-eeeeeeee", {"id": "e" * 64, "names": ["d"]})  # the dataset's record, and no document list
+    with pytest.raises(DocumentListMissing, match=f"dataset {'e' * 64} holds no document list"):
         tasks.read(repo, store, "finish-tasks", 0, dataset="e" * 64)
 
 
@@ -434,6 +439,7 @@ def test_a_changed_image_folder_checks_every_source_with_tasks(kit, repo, store,
     kit.run("git", "add", "-A", cwd=repo.root)
     kit.run("git", "commit", "-q", "-m", "tasks", cwd=repo.root)
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     assert main(["--root", str(repo.root), "check", "--changed", "HEAD"]) == 0  # nothing changed, nothing fetched
     assert "entries" not in capsys.readouterr().out
 

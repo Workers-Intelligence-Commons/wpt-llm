@@ -9,8 +9,9 @@ A shard is a Parquet file with one row per document pass:
     pool      string         the mixture pool it was drawn for ("held-out" for evaluation)
     pass      int32          which repetition of the pool this row belongs to
 
-A shard is identified twice: by the sha256 of its file (the store object)
-and by its token hash, which covers only the rows' content. A newer pyarrow
+A dataset's record names each shard by its key in the store and the sha256
+of its file (`key`, `sha256`), which every read checks. A shard is also
+identified by its token hash, which covers only the rows' content. A newer pyarrow
 may write different file bytes for the same rows; the token hash stays the
 same, so it is what repeatability checks compare.
 """
@@ -28,7 +29,8 @@ import numpy as np
 import pyarrow as pa
 import pyarrow.parquet as pq
 
-from wpt_store import CorruptObject
+from .errors import CorruptFile
+from .names import File
 from wpt_utils.files import sha256_file
 
 SCHEMA = pa.schema([
@@ -82,16 +84,21 @@ def read_shard(path):
             yield (tokens[j].values.to_numpy(zero_copy_only=False), *(column[j] for column in others))
 
 
+def shard_file(shard) -> File:
+    """The stored file of a shard a dataset's record names."""
+    return File(shard["key"], shard["sha256"])
+
+
 def read_verified(store, shard) -> list:
-    """The rows of a shard recorded as {"object": sha256, "token_sha256": ...},
-    in order. The store checks the file; this checks the rows against the
-    token hash. Raises CorruptObject when they differ."""
+    """The rows of a shard recorded as {"key": ..., "sha256": ...,
+    "token_sha256": ...}, in order. The store checks the file; this checks
+    the rows against the token hash. Raises CorruptFile when they differ."""
     rows, digest = [], TokenHash()
-    for row in read_shard(store.path(shard["object"])):
+    for row in read_shard(store.path(shard_file(shard))):
         digest.add(*row)
         rows.append(row)
     if digest.hexdigest() != shard["token_sha256"]:
-        raise CorruptObject(f"shard {shard['object']}: its rows do not match their recorded token hash")
+        raise CorruptFile(f"shard {shard['key']}: its rows do not match their recorded token hash")
     return rows
 
 
@@ -110,7 +117,7 @@ def documents(store, shards, passes=None):
     seen = set()
     for shard in shards:
         rows = read_verified(store, shard)
-        store.release(shard["object"])  # its rows are in memory now
+        store.release(shard_file(shard))  # its rows are in memory now
         for tokens, source, document, _, _ in rows:
             if passes is not None:
                 passes[document] += 1
@@ -126,9 +133,9 @@ def token_file(store, shards) -> Path:
     It is built from the shards, each checked against its token hash, into
     the store's scratch folder, and named after the shards. A later call
     reuses it only if it still matches the sha256 recorded when it was built;
-    otherwise it is built again. Raises CorruptObject (leaving no file) when
+    otherwise it is built again. Raises CorruptFile (leaving no file) when
     a shard's rows do not match their token hash."""
-    key = hashlib.sha256(json.dumps([[s["object"], s["token_sha256"]] for s in shards]).encode()).hexdigest()
+    key = hashlib.sha256(json.dumps([[s["sha256"], s["token_sha256"]] for s in shards]).encode()).hexdigest()
     folder = store.scratch / "tokens"
     path, mark = folder / f"{key}.u32", folder / f"{key}.sha256"
     if path.is_file() and mark.is_file() and sha256_file(path) == mark.read_text().strip():
@@ -139,11 +146,11 @@ def token_file(store, shards) -> Path:
         with open(partial, "wb") as out:
             for shard in shards:
                 digest = TokenHash()
-                for row in read_shard(store.path(shard["object"])):
+                for row in read_shard(store.path(shard_file(shard))):
                     digest.add(*row)
                     out.write(np.asarray(row[0], dtype="<u4").tobytes())
                 if digest.hexdigest() != shard["token_sha256"]:
-                    raise CorruptObject(f"shard {shard['object']}: its rows do not match their recorded token hash")
+                    raise CorruptFile(f"shard {shard['key']}: its rows do not match their recorded token hash")
         os.replace(partial, path)
     finally:
         partial.unlink(missing_ok=True)
@@ -223,7 +230,7 @@ class ShardStream:
     def _prepare(self, index):
         shard = self.shards[index]
         path = token_file(self.store, [shard])
-        self.store.release(shard["object"])  # its tokens are in the token file now
+        self.store.release(shard_file(shard))  # its tokens are in the token file now
         return path
 
     def _close(self, index):
@@ -290,7 +297,7 @@ def sources_of(store, shards) -> set[str]:
         if "sources" in shard:
             found |= set(shard["sources"])
         else:
-            found |= set(pq.read_table(store.path(shard["object"]), columns=["source"]).column("source").to_pylist())
+            found |= set(pq.read_table(store.path(shard_file(shard)), columns=["source"]).column("source").to_pylist())
     return found
 
 

@@ -123,7 +123,7 @@ def check(settings):
 def tagged(record, store, tag) -> list[dict]:
     """The dataset's tasks (tasks.to_json) whose task.json carries tag."""
     part = record.get("tasks")
-    lines = [] if part is None else store.get_bytes(part["object"]).decode("utf-8").splitlines()
+    lines = [] if part is None else store.get_bytes(part["file"]).decode("utf-8").splitlines()
     return [found for found in map(json.loads, lines) if tag in found["tags"]]
 
 

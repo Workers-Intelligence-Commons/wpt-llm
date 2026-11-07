@@ -8,6 +8,7 @@ from wpt_dataset.build import write_document_list
 from wpt_dataset.repo import empty_source
 from wpt_dataset.sources import held_manifest, source_tree
 from wpt_dataset.tasks import EVAL
+from wpt_store import keep_dataset
 from wpt_telemetry import Telemetry
 
 # a book of plain paragraphs, each long enough to be asked for, their starts all different
@@ -63,7 +64,8 @@ def built(repo, store, kind, count, seed=1, measure=False):
     sid = task_source(repo, store)
     builder.write(repo, store, sid, kind, made, repo.source_version(sid))
     # the model's dataset, its document list kept, and nothing held out
-    write_document_list(store, "d" * 64, [], set(), Telemetry.off())
+    keep_dataset(store, "d-dddddddd", {"id": "d" * 64, "names": ["d"], "document_list": write_document_list(
+        store, "d-dddddddd", [], set(), Telemetry.off())})
     found, _ = tasks.read(repo, store, "finish-tasks", 0, measure=measure, dataset="d" * 64)
     # the final reply is the answer, as text; no instructions ask for JSON
     assert not any("JSON" in task.instructions or "confidence" in task.instructions for task in found)

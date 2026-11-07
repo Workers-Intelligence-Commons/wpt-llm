@@ -1,59 +1,50 @@
-"""What the store database (database.py) says about the sources'
-downloads and the sessions that made them, read from it alone: the
-listing `wpt store list` prints."""
+"""What the store's index (index.py) says about its sessions, read from it
+alone: the listing `wpt store list` prints."""
 
 import json
 from dataclasses import dataclass
 
-from .database import DOWNLOADED, marked
-
-# 1 for each source's last line: the latest time, then session, then place in it
-LATEST = "ROW_NUMBER() OVER (PARTITION BY source ORDER BY time DESC, session DESC, number DESC) AS latest"
+from .index import SOURCES
 
 
 @dataclass(frozen=True)
 class SourceState:
-    """One source as the store database knows it: its last line's
-    outcome, whether it is marked for a new download (database.marked),
-    and its last download's time, what it got (a dict, for the record),
-    address, repository commit and size (None when it was never
-    downloaded)."""
+    """One source as one session holds it: the time of its file or its
+    failure, the address used, its bytes, what the download got (a dict,
+    for the record), and the error that failed it, None when it did not."""
 
+    session: str
     source: str
-    outcome: str
-    marked: bool
-    downloaded: str | None
-    got: dict | None
+    time: str
     address: str | None
-    commit: str | None
     size: int | None
+    got: dict | None
+    error: str | None
 
 
 @dataclass(frozen=True)
 class SessionRow:
-    folder: str
-    command: str
-    started: str
-    ended: str | None
-    commit: str
-    dirty: bool
+    """One session: its ID, and how many things of each kind it holds."""
+
+    session: str
+    held: dict[str, int]
 
 
 def listing(store) -> tuple[list[SourceState], list[SessionRow]]:
-    """(every source the database has a line for, by id; every session, in
-    the order they started)."""
-    with store.database() as found:
-        # each source's last line, of all and of its downloads: one pass over the lines each, not one per line
-        last = found.execute(
-            f"SELECT source, outcome FROM (SELECT *, {LATEST} FROM lines) WHERE latest = 1 ORDER BY source").fetchall()
-        downloads = {row[0]: (row[1], json.loads(row[2]) if row[2] else None, *row[3:]) for row in found.execute(
-            "SELECT source, time, got, address, wpt_commit, size FROM ("
-            f" SELECT line.*, sessions.wpt_commit, {LATEST} FROM lines AS line"
-            " JOIN sessions ON sessions.folder = line.session WHERE outcome = ?) WHERE latest = 1", (DOWNLOADED,))}
-        sessions = [SessionRow(folder, command, started, ended, commit, bool(dirty))
-                    for folder, command, started, ended, commit, dirty in found.execute(
-                        "SELECT folder, command, started, ended, wpt_commit, dirty FROM sessions"
-                        " ORDER BY started, folder")]
-        states = [SourceState(source, outcome, marked(found, source), *downloads.get(source, (None,) * 5))
-                  for source, outcome in last]
-    return states, sessions
+    """(every source of every session, by session then id; every session,
+    by ID)."""
+    with store.index() as found:
+        rows = found.execute("SELECT session, name, time, about FROM held WHERE kind = ? ORDER BY session, name",
+                             (SOURCES,)).fetchall()
+        counts = found.execute("SELECT session, kind, COUNT(*) FROM held GROUP BY session, kind ORDER BY session, kind"
+                               ).fetchall()
+    states = []
+    for session, name, time, about in rows:
+        about = json.loads(about)
+        error = about.get("error")
+        states.append(SourceState(session, name, time, about.get("address"), about.get("size"), about.get("got"),
+                                  f"{error['kind']}: {error['message']}" if error else None))
+    sessions = {}
+    for session, kind, count in counts:
+        sessions.setdefault(session, {})[kind] = count
+    return states, [SessionRow(session, held) for session, held in sessions.items()]

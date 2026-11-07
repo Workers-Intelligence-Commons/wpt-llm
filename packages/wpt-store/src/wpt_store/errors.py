@@ -9,11 +9,16 @@ class StoreSettingError(StoreError):
     pass
 
 
-class MissingObject(StoreError):
+class SessionNeeded(StoreError):
+    """A command that touches the store was given no session ID (--session,
+    WPT_SESSION). Nothing was read or written."""
+
+
+class MissingFile(StoreError):
     pass
 
 
-class CorruptObject(StoreError):
+class CorruptFile(StoreError):
     pass
 
 

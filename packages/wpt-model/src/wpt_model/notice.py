@@ -72,16 +72,17 @@ def write_documents(folder):
         (Path(folder) / name).write_text(text, encoding="utf-8", newline="\n")
 
 
-def write_credits(folder, provenance, read_object):
+def write_credits(folder, provenance, read_file):
     """Write CREDITS/<source id>.jsonl for every source the model learned
-    from whose dataset record lists `credits`; read_object(sha256) gives
-    that object's bytes. Replaces earlier copies."""
+    from whose dataset record lists `credits`; read_file(reference) gives
+    the bytes of the file a record's reference ({"key", "sha256"}) names.
+    Replaces earlier copies."""
     folder = Path(folder) / CREDITS_NAME
     shutil.rmtree(folder, ignore_errors=True)
     for sid, source in sorted(learned_from(provenance).items()):
         if source.get("credits"):
             folder.mkdir(exist_ok=True)
-            (folder / f"{sid}.jsonl").write_bytes(read_object(source["credits"]))
+            (folder / f"{sid}.jsonl").write_bytes(read_file(source["credits"]))
 
 
 def notice(provenance) -> str:

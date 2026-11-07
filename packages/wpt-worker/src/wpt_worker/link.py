@@ -64,7 +64,7 @@ class LinkError(Exception):
 
 class RemoteError(LinkError):
     """The other side's handler failed: kind is the name of its exception's
-    type (such as "StepFailed", "MissingObject", "RecordError"), message
+    type (such as "StepFailed", "MissingFile", "RecordError"), message
     its text."""
 
     def __init__(self, kind, message):

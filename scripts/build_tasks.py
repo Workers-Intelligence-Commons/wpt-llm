@@ -25,10 +25,11 @@ both (read-the-manual), which sum to 100% (builder.CLASSES).
 import argparse
 import sys
 
+from wpt import sessions
 from wpt_dataset.builder import KINDS, build, shares, write
 from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
-from wpt_store import store_from_settings
+from wpt_store import StoreError, store_from_settings
 from wpt_utils.lines import ERROR, INFO, line, say
 
 
@@ -39,9 +40,13 @@ def main():
     parser.add_argument("--count", type=int, required=True, help="tasks to build")
     parser.add_argument("--seed", type=int, default=1)
     parser.add_argument("--select", help="a pool expression: the documents the texts come from")
+    sessions.options(parser)
     arguments = parser.parse_args()
     repo = Repo.find()
-    store = store_from_settings(repo.root / ".env")
+    try:
+        store = sessions.opened(store_from_settings(repo.root / ".env"), arguments, repo.root / ".env")
+    except StoreError as error:
+        sys.exit(line(f"{type(error).__name__}: {error}", ERROR))
     try:
         built = build(repo, store, arguments.kind, arguments.count, arguments.seed, arguments.select,
                       log=lambda text, level=INFO: say(text, level, sys.stderr))

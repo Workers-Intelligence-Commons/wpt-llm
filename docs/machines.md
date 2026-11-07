@@ -111,8 +111,8 @@ gets the manager's environment without `WPT_STORE` and the store's keys
 (`WPT_STORE_*`). Everything
 the job reads, the manager sends:
 
-- the objects of the run's dataset and of the states it starts from,
-  checked against their sha256 when they arrive, and no other object;
+- the files of the run's dataset and of the states it starts from,
+  checked against their sha256 when they arrive, and no other file;
 - the files of the recipe's steps and strategy that live outside the
   repository.
 
@@ -434,7 +434,7 @@ through a short-lived container with no network
 `wpt manager` runs the whole pipeline as one command, each step its own
 command:
 
-1. `wpt dataset download`: every admitted source into the store;
+1. `wpt dataset download`: every admitted source into the run's session;
 2. `wpt dataset build RECIPE`: the dataset, then `wpt agent build-image
    NAME` for each image the dataset's tasks name, where `DOCKER_HOST`
    reaches Docker (nothing without tasks);
@@ -468,6 +468,8 @@ wins (`WPT_STORE`, the manager's folders, `HOME`, `DOCKER_HOST`).
 | --- | --- |
 | `WPT_RECIPE` | the model recipe, `SERIES:SIZE` for a size of a model series, or `SERIES:SIZE:RUN` for another run of it; required, Compose refuses to start without it |
 | `WPT_DATASET` | the id of a dataset the store holds: the manager skips the download and the build and trains on it, whatever code built it; unset, it builds the recipe's dataset from this checkout |
+| `WPT_SESSION` | the session the run works in, passed to each of its commands and written into `wpt-run.txt`; unset, the one of the run it goes on with, else a new ID, which it prints ([architecture.md](architecture.md), "The store") |
+| `WPT_FROM` | another session, which every command of the run reads what its own does not hold from |
 | `WPT_RUN` | the run's name; unset, the manager makes one and writes it into `wpt-run.txt` at the repository's root (git-ignored), with the line that copies its model out of the store |
 | `WPT_EVALUATE` | `1`: evaluate the model at the end; off by default |
 | `WPT_STORE` | the store; unset, a folder on the Compose volume `wpt-store`. A `file://` store must name a folder on a volume or a mounted folder: the manager refuses one in the container's own files, which go with the container |
@@ -500,17 +502,16 @@ the libraries, and its `HOME`, where SkyPilot keeps its clusters and keys.
 
 ## The final model
 
-The model folder goes into the store under the run's name: each file is an
-object, and the ref `models/NAME` names the folder's manifest, which lists
-each file's sha256 and size. At the end, the manager prints the line that
-copies it out:
+The model folder goes into the run's session under the run's name: its real
+files lie in `<id>/models/NAME/`, beside `files.json`, which lists each file's
+sha256 and size and is written last. At the end, the manager prints the line
+that copies it out:
 
 ```sh
-uv run wpt store copy-out NAME runs/NAME
+uv run wpt store copy-out NAME runs/NAME --session ID
 ```
 
 `wpt store copy-out` writes the folder into a new folder, beside it first,
 then renames it into place, and checks every file against its sha256 and
 size: a file that differs stops it and leaves no folder. `wpt store list`
-lists what the store database says: every session and each source's last
-outcome and download.
+lists what the store's index says of a session: each source it holds.

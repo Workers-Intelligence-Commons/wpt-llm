@@ -1,12 +1,13 @@
 import http.client
 import json
+import os
 import threading
 
 import pytest
 
 from wpt_dataset.license_check import text_id
 from wpt_dataset.repo import Repo, address_hash, dump_json
-from wpt.web import pages
+from wpt.web import main, pages
 from wpt.web.server import make_server
 
 ADDRESS = "https://example.org/book.git"
@@ -51,6 +52,32 @@ def web(tmp_path):
     yield request, path
     server.shutdown()
     server.server_close()
+
+
+def test_the_command_starts_and_hands_its_session_options_to_the_routes_and_jobs(tmp_path, monkeypatch):
+    # the settings are set first, so the test's end puts back what the command changes
+    monkeypatch.setenv("WPT_SESSION", "before")
+    monkeypatch.setenv("WPT_FROM", "before")
+    (tmp_path / "data" / "sources").mkdir(parents=True)
+    static = tmp_path / "static"
+    static.mkdir()
+    (static / "index.html").write_text("<p>interface</p>")
+    monkeypatch.setattr("wpt.web.ui.built", lambda: static)
+    served = []
+
+    class Stopped:
+        server_address = ("127.0.0.1", 0)
+
+        def serve_forever(self):
+            served.append((os.environ["WPT_SESSION"], os.environ["WPT_FROM"]))
+            raise KeyboardInterrupt
+
+        def server_close(self):
+            pass
+
+    monkeypatch.setattr("wpt.web.make_server", lambda *_: Stopped())
+    assert main(["--root", str(tmp_path), "--session", "new", "--from", "old"]) == 0
+    assert served == [("new", "old")]
 
 
 def test_a_source_is_listed_read_and_saved_only_through_the_source_rules(web):

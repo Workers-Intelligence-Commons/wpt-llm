@@ -77,7 +77,7 @@ the current folder; the command line wins, then the environment. The
 recipe may come from WPT_RECIPE and the dataset id from WPT_DATASET.
 WPT_GPU_WORKERS and WPT_LINK_CHECKPOINTS are read the same way.
 
-After each step, the store keeps its result (ref steps/<fingerprint>): the
+After each step, the store keeps its result (cache/steps/<fingerprint>): the
 weights and the optimizer's state, under a fingerprint of the step before
 it, the step itself (method, optimizer, environment, settings, locked
 parts), the fingerprint of the part of the dataset it reads, the seed and
@@ -111,8 +111,10 @@ After a crash, every process on the gpu worker starts again, up
 to --max-restarts times (default 3), and continues from the worker's own
 checkpoint; 0 starts no launcher there.
 
-This command records the run in the store, in its own folder under
-records/ (wpt_telemetry; docs/observability.md), and the gpu worker's main
+It works in the session --session ID or WPT_SESSION names, and refuses to
+start without one; --from OLD_ID (WPT_FROM) also reads what the session does
+not hold from that other session. This command records the run in the
+session, in its own folder of <id>/runs/ (wpt_telemetry; docs/observability.md), and the gpu worker's main
 process adds to the same folder through the link: what it read, every
 step, update, evaluation and checkpoint, every step result kept or reused,
 and every file it wrote, one folder over the worker's restarts. When that
@@ -179,6 +181,7 @@ import tempfile
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
+from wpt import sessions
 from wpt_dataset.build import current_record, last_dataset
 from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
@@ -190,12 +193,14 @@ from wpt_model.drafter import Drafter
 from wpt_model.notice import WEIGHT_METADATA, write_credits, write_documents
 from wpt_model.sparse import FORMS, named_form
 from wpt_store import NAME as STORE_NAME
-from wpt_store import StoreError, read_env_file, store_from_settings
-from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry, file_hashes, set_ref, short
+from wpt_store import StoreError, find_dataset, read_env_file, store_from_settings
+from wpt_store.models import checkpoint_keys, state_key
+from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry, file_hashes, set_result, short
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer, chat
 from wpt_training import (WINDOWS, Checkpoint, FolderCheckpoint, PluginError, check_continuations, load_state,
                           load_step, save_state, strategy_plugin, weights)
 from wpt_training.launch import REFUSED, STOPPED
+from wpt_utils.files import sha256_file
 from wpt_utils.lines import ERROR, WARNING, say
 from wpt_utils.programs import code, repository
 from wpt_worker.link import LinkError
@@ -221,7 +226,7 @@ class InputError(Exception):
     part than the recipe's, the recipe's steps cannot run as asked, or the
     batch does not split over the processes. Nothing has been trained. (A
     shard or vocabulary that does not match its hash is the store's
-    CorruptObject.)"""
+    CorruptFile.)"""
 
 
 def parse_size(text):
@@ -266,9 +271,13 @@ OPTIONS = [
 ]
 
 
+SHARD_FIELDS = ("key", "sha256", "token_sha256")  # what a model's provenance keeps of each shard of its dataset
+
+
 def parse_args(argv=None, environ=None):
     environ = os.environ if environ is None else environ
     parser = argparse.ArgumentParser(prog="wpt train", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    sessions.options(parser)
     parser.add_argument("recipe", nargs="?", default=environ.get("WPT_RECIPE"),
                         help="model recipe: a file name in data/recipes/models/, without .json, or SERIES:SIZE[:RUN], "
                              "a size of a series file of data/recipes/series/ or another run of it (WPT_RECIPE)")
@@ -320,14 +329,13 @@ def load_recipe(name):
 
 
 def load_dataset(store, dataset_id, recipe):
-    """(record, record object, tokenizer), the record and vocabulary checked,
-    and the dataset built from the recipe's data part."""
-    record_object = store.get_ref("datasets", dataset_id)
-    if record_object is None:
-        raise InputError(f"no dataset {dataset_id} in {store}; build it with `wpt dataset build <recipe>`")
-    record = json.loads(store.get_bytes(record_object))
-    if record.get("id") != dataset_id:
-        raise InputError(f"dataset record {record_object} describes {record.get('id')}, not {dataset_id}")
+    """(record, the key of the record, tokenizer), the record and vocabulary
+    checked, and the dataset built from the recipe's data part."""
+    found = find_dataset(store, dataset_id)
+    if found is None:
+        raise InputError(f"no dataset {dataset_id} in session {store.session} of {store}; build it with "
+                         "`wpt dataset build <recipe>`")
+    record_key, record = found
     if not current_record(record):
         raise InputError(f"dataset {dataset_id} has a record of another shape than this wpt train reads; build the "
                          "recipe again with the current wpt dataset")
@@ -335,7 +343,7 @@ def load_dataset(store, dataset_id, recipe):
         raise InputError(f"dataset {dataset_id} was built from {record.get('recipe_name')!r} with another data part "
                          "than this recipe's; build this recipe with `wpt dataset build`")
     tokenizer = Tokenizer.from_bytes(store.get_bytes(record["tokenizer"]["vocabulary"]))  # sha256-checked by the store
-    return record, record_object, tokenizer
+    return record, record_key, tokenizer
 
 
 def plan(recipe) -> tuple[list, int]:
@@ -392,42 +400,38 @@ def fingerprints(steps, model_config, record, seed, code) -> list[str]:
 
 
 class StepResults:
-    """The results of the steps runs made, in the store: ref steps/<the
-    step's fingerprint> names a JSON object, {"about": what the run recorded
-    of the step, "state": the object of its checkpoint state} (the weights,
-    those of its best evaluation, the optimizer's, method's and
-    environment's state, and the step's fingerprint as its signature;
-    wpt_training.train), the bytes of the step's last checkpoint as they
-    are. Setting a ref is recorded in the run's record first (RecordError
-    otherwise, and the ref is not set). The main process alone reads and
-    writes them."""
+    """The results of the steps runs made, in the store: the result
+    cache/steps/<the step's fingerprint> is a JSON record, {"about": what
+    the run recorded of the step, "state": the file of its checkpoint
+    state, {"key", "sha256"}} (the weights, those of its best evaluation, the optimizer's,
+    method's and environment's state, and the step's fingerprint as its
+    signature; wpt_training.train), the bytes of the step's last checkpoint
+    as they are. The main process alone reads and writes them."""
 
-    KIND = "steps"
+    STAGE = "steps"
 
     def __init__(self, store, telemetry):
         self.store, self.telemetry = store, telemetry
 
-    def object(self, mark) -> str | None:
-        """The result object of the step of fingerprint mark, None when none is kept."""
-        return self.store.get_ref(self.KIND, mark)
-
-    def read(self, sha) -> dict:
-        return json.loads(self.store.get_bytes(sha))
+    def found(self, mark) -> dict | None:
+        """The result of the step of fingerprint mark, its own sha256 in
+        "result"; None when none is kept."""
+        data, _ = self.store.get_result(self.STAGE, mark)
+        return None if data is None else {**json.loads(data), "result": hashlib.sha256(data).hexdigest()}
 
     def state(self, result: dict) -> dict:
-        sha = result["state"]
-        state = load_state(self.store.path(sha))  # path() checks the sha256
-        self.store.release(sha)
+        state = load_state(self.store.path(result["state"]))  # path() checks the sha256
+        self.store.release(result["state"])
         return state
 
-    def keep(self, mark, state_sha, about) -> str:
-        """Keep a step's checkpoint state, the store object state_sha; its result object."""
-        sha = self.store.put_bytes(json.dumps({"about": about, "state": state_sha}, sort_keys=True).encode())
-        set_ref(self.store, self.KIND, mark, sha, self.telemetry)
-        return sha
+    def keep(self, mark, state, about) -> str:
+        """Keep a step's checkpoint state, the file state (a reference {"key",
+        "sha256"}); the sha256 of its result."""
+        return set_result(self.store, self.STAGE, mark, json.dumps({"about": about, "state": state},
+                                                                   sort_keys=True).encode(), self.telemetry)
 
 
-def provenance(args, recipe, record, record_object, model_config, n_params, worker, strategy_file, done):
+def provenance(args, recipe, record, record_key, model_config, n_params, worker, strategy_file, done):
     """What produced the model; worker: what the gpu worker said of itself
     when it was ready (its device, its processes, its Python and the
     versions of the libraries it trained with)."""
@@ -437,13 +441,13 @@ def provenance(args, recipe, record, record_object, model_config, n_params, work
         "recipe_name": args.recipe,
         "recipe": recipe,  # everything that changes the model: data, architecture, seed, steps, drafter
         "dataset": record["id"],
-        "dataset_record": record_object,
+        "dataset_record": record_key,
         "sources": dict(sorted(sources.items())),  # every step's, as the dataset record describes them
         "skipped_sources": record.get("skipped", []),  # admitted, but left out of the build: it failed
         "vocabulary": record["tokenizer"]["vocabulary"],
-        "shards": [{"object": s["object"], "token_sha256": s["token_sha256"]} for s in record["shards"]],
-        "held_out_shards": [{"object": s["object"], "token_sha256": s["token_sha256"]} for s in record["held_out_shards"]],
-        "options": {k: v for k, v in vars(args).items() if k not in ("recipe", "dataset")},  # how the hardware ran it
+        "shards": [{name: s[name] for name in SHARD_FIELDS} for s in record["shards"]],
+        "held_out_shards": [{name: s[name] for name in SHARD_FIELDS} for s in record["held_out_shards"]],
+        "options": {k: v for k, v in vars(args).items() if k not in ("recipe", "dataset", "session", "from_id")},  # how the hardware ran it
         "strategy": {"name": strategy_file.name, "file": strategy_file.file, "file_sha256": strategy_file.sha256,
                      "processes": processes},
         # each step in order: what it is, its fingerprint and kept result, whether this run reused it, what it
@@ -465,7 +469,7 @@ def main(argv=None):
     args = parse_args(argv, environ)
     arguments = sys.argv[1:] if argv is None else list(argv)
     try:
-        store = store_from_settings(Path.cwd() / ".env")
+        store = sessions.opened(store_from_settings(Path.cwd() / ".env"), args, Path.cwd() / ".env")
         if args.dataset is None:
             args.dataset = last_dataset(store, args.recipe)
     except StoreError as error:  # no store, no record: nothing has started
@@ -518,34 +522,48 @@ def _refuse(text, telemetry) -> int:
 
 
 class StoreCheckpoint(Checkpoint):
-    """The checkpoint of a named run in the store (ref checkpoints/NAME):
-    any machine using the same store continues it. Each save replaces the
-    previous one, which is then deleted. The ref's change and every
-    deletion are recorded in the run's record, naming the object, and that
-    line is in the store before the step (RecordError otherwise). When the
-    record breaks, a save still sets the ref, unrecorded, then raises the
-    RecordError; nothing is deleted then: the previous object stays. kept:
-    the objects that are also a kept step's state (StepResults), which only
-    lose the ref, never their object."""
-
-    KIND = "checkpoints"
+    """The checkpoint of a named run in the store: a record beside the
+    session's model NAME (wpt_store.models.CHECKPOINT) names the state's
+    file ({"state": {"key", "sha256"}}), which lies in the same folder, read
+    from the session, else from the one it started from, so any machine
+    using the same store continues it and emptying the store's cache folder
+    loses nothing of it. Each save replaces the session's record and deletes
+    the file it named, one a record of the session it started from names
+    staying. Every change of the record and every deletion are recorded in
+    the run's record, naming the file, and that line is in the store before
+    the step (RecordError otherwise). When the record breaks, a save still
+    writes the checkpoint's, unrecorded, then raises the RecordError;
+    nothing is deleted then: the previous file stays. kept: the keys of the
+    files that are also a kept step's state (StepResults), which only stop
+    being named, and are never deleted."""
 
     def __init__(self, store, name, telemetry, kept: set):
         self.store, self.name, self.telemetry, self.kept = store, name, telemetry, kept
+        self.keys = checkpoint_keys(store, name)
 
     def __str__(self):
-        return f"{self.store} as {self.KIND}/{self.name}"
+        return f"{self.store} as {self.keys[0]}"
+
+    def _state(self, keys) -> dict | None:
+        """The reference of the file the first of keys that holds a record names."""
+        for key in keys:
+            if (record := self.store.get_json(key)) is not None:
+                return record["state"]
+        return None
+
+    def _named(self, state):
+        self.store.put_json(self.keys[0], {"state": state})
 
     def exists(self):
-        return self.store.get_ref(self.KIND, self.name) is not None
+        return self.state_file() is not None
 
     def load(self):
-        sha = self.store.get_ref(self.KIND, self.name)
-        if sha is None:
+        state = self.state_file()
+        if state is None:
             return None
-        state = load_state(self.store.path(sha))  # path() checks the sha256
-        self.store.release(sha)
-        return state
+        loaded = load_state(self.store.path(state))  # path() checks the sha256
+        self.store.release(state)
+        return loaded
 
     def save(self, state):
         self.store.scratch.mkdir(parents=True, exist_ok=True)
@@ -557,32 +575,33 @@ class StoreCheckpoint(Checkpoint):
             partial.unlink(missing_ok=True)
 
     def save_file(self, path):
-        sha = self.store.put_file(path)
-        previous = self.store.get_ref(self.KIND, self.name)
+        state = self.store.put_named(state_key(self.store, self.name, sha256_file(path)), path).reference()
+        previous = self._state(self.keys[:1])
         try:
-            set_ref(self.store, self.KIND, self.name, sha, self.telemetry)  # the previous one stays until this
+            self.telemetry.irreversible("training.checkpoint_saved", state=state["key"], checkpoint=str(self))
         except RecordError:
-            self.store.set_ref(self.KIND, self.name, sha)  # the checkpoint is saved all the same, unrecorded
+            self._named(state)  # the checkpoint is saved all the same, unrecorded
             raise
-        if previous and previous != sha and previous not in self.kept:
+        self._named(state)  # the previous one stays until this
+        if previous and previous != state and previous["key"] not in self.kept:
             self._record_deletion(previous)
             self.store.delete(previous)
 
     def remove(self):
-        sha = self.store.get_ref(self.KIND, self.name)
-        deleted = sha if sha and sha not in self.kept else None
+        state = self._state(self.keys[:1])
+        deleted = state if state and state["key"] not in self.kept else None
         if deleted:
             self._record_deletion(deleted)
-        self.store.delete_ref(self.KIND, self.name)
+        self.store.delete_json(self.keys[0])
         if deleted:
             self.store.delete(deleted)
 
-    def state_object(self) -> str:
-        """The object of the saved state."""
-        return self.store.get_ref(self.KIND, self.name)
+    def state_file(self) -> dict | None:
+        """The reference of the file of the saved state, None when none is saved."""
+        return self._state(self.keys)
 
-    def _record_deletion(self, sha):
-        self.telemetry.irreversible("training.checkpoint_deleted", object=sha, checkpoint=str(self))
+    def _record_deletion(self, state):
+        self.telemetry.irreversible("training.checkpoint_deleted", state=state["key"], checkpoint=str(self))
 
 
 class RestoreFailed(Exception):
@@ -649,7 +668,7 @@ class _Run:
     tokenizer: Tokenizer
     model_config: ModelConfig
     checkpoint: Checkpoint  # a StoreCheckpoint with --run, else a FolderCheckpoint in the model folder
-    kept_states: set  # the objects of the kept steps' states, which a store checkpoint never deletes
+    kept_states: set  # the keys of the kept steps' state files, which a store checkpoint never deletes
     results: StepResults
     strategy_file: object
     replayed: bytes | None  # the scheduler's pass times an earlier run recorded, with --scheduler-costs
@@ -661,11 +680,11 @@ class _Run:
     def fingerprints(self, code) -> list[str]:
         return fingerprints(self.steps, self.model_config, self.record, self.recipe["seed"], code)
 
-    def checkpoint_object(self) -> str | None:
-        """With a store checkpoint, the object of its saved state (None when
-        none is saved); with a folder checkpoint, None: its file is
-        checkpoint_file()."""
-        return self.checkpoint.state_object() if isinstance(self.checkpoint, StoreCheckpoint) else None
+    def checkpoint_state(self) -> dict | None:
+        """With a store checkpoint, the reference of its saved state's file
+        (None when none is saved); with a folder checkpoint, None: its file
+        is checkpoint_file()."""
+        return self.checkpoint.state_file() if isinstance(self.checkpoint, StoreCheckpoint) else None
 
     def checkpoint_file(self) -> Path | None:
         """With a folder checkpoint, its saved file (None when none is
@@ -674,13 +693,14 @@ class _Run:
             return None
         return self.checkpoint.path
 
-    def kept_state(self) -> str:
-        """The store object of the step's last checkpoint, which becomes its
-        kept state: a store checkpoint's own object, or a folder
-        checkpoint's file put into the store."""
+    def kept_state(self) -> dict:
+        """The reference of the file of the step's last checkpoint, which
+        becomes its kept state: a store checkpoint's own file, or a folder
+        checkpoint's file put into the store's cache folder (where a state
+        lies that nothing but the step's result names)."""
         if isinstance(self.checkpoint, StoreCheckpoint):
-            return self.checkpoint.state_object()
-        return self.store.put_file(self.checkpoint.path)
+            return self.checkpoint.state_file()
+        return self.store.file(self.store.put_file(self.checkpoint.path)).reference()
 
 
 def link_checkpoints(environ) -> str:
@@ -709,18 +729,18 @@ def _train(args, recipe, strategy_file, steps, context, store, telemetry, enviro
     mode = link_checkpoints(environ)
     try:
         with telemetry.span("inputs.dataset", dataset=args.dataset, stream=args.stream) as span:
-            kept_states = set()  # the objects of the kept steps' states, which a store checkpoint never deletes
+            kept_states = set()  # the keys of the kept steps' state files, which a store checkpoint never deletes
             checkpoint = (StoreCheckpoint(store, args.run, telemetry, kept_states) if args.run
                           else FolderCheckpoint(out / CHECKPOINT_FOLDER))
             if checkpoint.exists() and not args.resume:
                 raise Refused(f"{checkpoint} holds an unfinished step: add --resume to continue it, or delete it")
-            record, record_object, tokenizer = load_dataset(store, args.dataset, recipe)
+            record, record_key, tokenizer = load_dataset(store, args.dataset, recipe)
             check_dataset(steps, record, store)  # what every step reads is there before the first one trains
             span.set(shards=len(record["shards"]), held_out_shards=len(record["held_out_shards"]),
                      conversations=record.get("conversations", {}).get("count", 0),
                      tasks=record.get("tasks", {}).get("count", 0))
-        telemetry.input(recipe=args.recipe, dataset=args.dataset, dataset_record=record_object,
-                        vocabulary=record["tokenizer"]["vocabulary"])
+        telemetry.input(recipe=args.recipe, dataset=args.dataset, dataset_record=record_key,
+                        vocabulary=record["tokenizer"]["vocabulary"]["sha256"])
     except (StoreError, InputError) as error:
         raise Refused(f"{type(error).__name__}: {error}") from None
     log(f"dataset {args.dataset}: vocabulary {tokenizer.vocab_size:,} tokens")
@@ -768,7 +788,7 @@ def _train(args, recipe, strategy_file, steps, context, store, telemetry, enviro
         if len(workers) > 1 and code not in (0, REFUSED, RECORD_FAILED, STOPPED):
             code = _crashed(code, len(workers), telemetry)
         if code == 0:
-            _finish(args, recipe, record, record_object, model_config, drafter_config, answers, tokenizer,
+            _finish(args, recipe, record, record_key, model_config, drafter_config, answers, tokenizer,
                     checkpoint, out, store, telemetry, log)
     except LinkError as error:
         code = _lost(error, telemetry)
@@ -800,7 +820,7 @@ def _lost(error, telemetry) -> int:
     return LOST
 
 
-def _finish(args, recipe, record, record_object, model_config, drafter_config, answers, tokenizer, checkpoint, out,
+def _finish(args, recipe, record, record_key, model_config, drafter_config, answers, tokenizer, checkpoint, out,
             store, telemetry, log):
     """The model folder, from the last step's kept state and what the gpu
     worker sent at the end (the drafter, a sample's token ids)."""
@@ -835,7 +855,7 @@ def _finish(args, recipe, record, record_object, model_config, drafter_config, a
                              metadata=WEIGHT_METADATA,
                              provenance={**drafter.provenance, "target": {"weights": weight_hashes(staging)}})
             with telemetry.span("model.provenance") as span:
-                written = provenance(args, recipe, record, record_object, model_config, n_params,
+                written = provenance(args, recipe, record, record_key, model_config, n_params,
                                      answers.ready_found, answers.run.strategy_file, done)
                 (staging / "provenance.json").write_text(json.dumps(written, indent=2) + "\n", encoding="utf-8",
                                                          newline="\n")

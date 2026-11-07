@@ -36,7 +36,7 @@ if words[:1] == ["eval"]:
     from pathlib import Path
     from wpt_store import open_store
     from wpt_telemetry import Telemetry
-    with Telemetry.start(open_store(words[1]), "wpt eval", words[1:], "tiny", env_file=Path("no.env")) as telemetry:
+    with Telemetry.start(open_store(words[1]).at("test-session"), "wpt eval", words[1:], "tiny", env_file=Path("no.env")) as telemetry:
         telemetry.log("measured")
 if words[:1] == ["manager"]:
     print("waiting", flush=True)
@@ -178,7 +178,7 @@ def test_every_job_of_the_command_line_has_a_route(web):
     started = {pattern.removeprefix("/api/jobs/") for pattern, methods in operations.items()
                if pattern.startswith("/api/jobs/") and "post" in methods}
     assert started == set(JOBS)
-    for subcommand in ("train", "eval", "scaling", "chat", "manager", "store/list", "store/mark", "store/copy-out",
+    for subcommand in ("train", "eval", "scaling", "chat", "manager", "store/list", "store/copy-out",
                        "agent/lock-image", "agent/build-image", "dataset/download", "dataset/build",
                        "dataset/migrate"):
         assert subcommand in started

@@ -216,6 +216,7 @@ def test_markdown_check_command_passes_on_converted_pages(kit, repo, store, tmp_
              "code/run.py": b"print('<b>')\n"}
     markdown_of(kit, repo, store, tmp_path, files)
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     assert main(["--root", str(repo.root), "markdown-check"]) == 0
     assert capsys.readouterr().out.endswith(": 2 documents checked, 1 notes, OK\n")  # the page and plain.txt
 

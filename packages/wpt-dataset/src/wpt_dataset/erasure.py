@@ -6,8 +6,8 @@ by its text, since the repository is public:
     hmac      the HMAC-SHA256 of the passage under the cut key, in hex
     rolling   the passage's keyed rolling hash (below), an integer
 
-The cut key is a secret kept in the store (the ref erasure-key/key, an
-object of KEY_BYTES random bytes), so a guess at a short passage (a name, a
+The cut key is a secret kept in the store (the record KEY_FILE at its root,
+KEY_BYTES random bytes), so a guess at a short passage (a name, a
 phone number) cannot be confirmed from the repository alone. Making a cut
 needs it (cut: the key is made on the first cut); matching a cut needs it
 too, and a store without it matches no cut (CutKeyMissing).
@@ -37,7 +37,7 @@ import numpy as np
 
 from .errors import CutFailed, CutKeyMissing
 
-KEY_KIND, KEY_NAME = "erasure-key", "key"  # the ref of the cut key in the store
+KEY_FILE = "cut-key"  # the record of the cut key in the store
 KEY_BYTES = 32
 MODULUS = (1 << 31) - 1  # a prime below 2^31, so every product of two residues fits in 63 bits
 PART = 1 << 20  # positions of a file whose rolling hash is computed at once
@@ -45,19 +45,26 @@ PART = 1 << 20  # positions of a file whose rolling hash is computed at once
 
 def key(store) -> bytes:
     """The cut key the store keeps; CutKeyMissing when it keeps none."""
-    held = store.get_ref(KEY_KIND, KEY_NAME)
+    held = store.get_json(KEY_FILE)
     if held is None:
-        raise CutKeyMissing(f"{store} keeps no cut key (the ref {KEY_KIND}/{KEY_NAME}): no cut can be matched; "
+        raise CutKeyMissing(f"{store} keeps no cut key (the file {KEY_FILE}): no cut can be matched; "
                             f"restore the key from its backup, or make every cut again")
-    return store.get_bytes(held)
+    return bytes.fromhex(held["key"])
+
+
+def key_id(store) -> str | None:
+    """The sha256 of the cut key the store keeps, None when it keeps none:
+    what a fingerprint holds of it."""
+    held = store.get_json(KEY_FILE)
+    return None if held is None else hashlib.sha256(bytes.fromhex(held["key"])).hexdigest()
 
 
 def made_key(store) -> bytes:
     """The store's cut key, made (KEY_BYTES random bytes) and kept when it
     has none: what the first cut does. Keep a backup of it: losing it makes
     every cut unmatchable."""
-    if store.get_ref(KEY_KIND, KEY_NAME) is None:
-        store.set_ref(KEY_KIND, KEY_NAME, store.put_bytes(secrets.token_bytes(KEY_BYTES)))
+    if store.get_json(KEY_FILE) is None:
+        store.put_json(KEY_FILE, {"key": secrets.token_hex(KEY_BYTES)})
     return key(store)
 
 

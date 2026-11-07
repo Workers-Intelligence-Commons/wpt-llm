@@ -2,6 +2,7 @@
 "Model series"): the series counts the parameters the model has, and a
 size reads exactly the start of the series' one dataset."""
 
+from dataclasses import asdict
 from pathlib import Path
 
 import numpy as np
@@ -64,15 +65,15 @@ def dataset(tmp_path):
     """A store holding 4 shards of 100 training tokens each, token i at
     place i of the training tokens, each shard its own source, and a
     held-out shard; and its record."""
-    store = LocalStore(tmp_path / "store")
+    store = LocalStore(tmp_path / "store").at("test-session")
     shards = []
     for i in range(4):
         path = tmp_path / f"{i}.parquet"
         digest = write_shard(path, [(list(range(100 * i, 100 * i + 100)), f"s{i}", f"s{i}/d", "p", 0)])
-        shards.append({"object": store.put_file(path), "token_sha256": digest, "rows": 1, "tokens": 100})
+        shards.append({**asdict(store.put_named(f"test-session/datasets/d/{digest}.parquet", path)), "token_sha256": digest, "rows": 1, "tokens": 100})
     path = tmp_path / "held.parquet"
     digest = write_shard(path, [(list(range(1000, 1100)), "s0", "s0/h", "held-out", 0)])
-    held = [{"object": store.put_file(path), "token_sha256": digest, "rows": 1, "tokens": 100}]
+    held = [{**asdict(store.put_named(f"test-session/datasets/d/{digest}.parquet", path)), "token_sha256": digest, "rows": 1, "tokens": 100}]
     record = {"shards": shards, "held_out_shards": held, "total_tokens": 400,
               "sources": {f"s{i}": {"name": f"s{i}"} for i in range(4)}}
     return store, record

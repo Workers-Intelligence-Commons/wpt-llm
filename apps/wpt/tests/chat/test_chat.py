@@ -81,25 +81,29 @@ def test_the_scheduler_s_times_can_be_read_from_a_run_s_record_on_the_same_setup
     # --scheduler-costs reads a record's
     # times instead of measuring them; another setup is refused
     folder = model_folder(tmp_path / "model")
-    store = LocalStore(tmp_path / "store")
+    store = LocalStore(tmp_path / "store").at("test-session")
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     monkeypatch.chdir(tmp_path)
     config = load_model(folder).config
     block = load_drafter(folder).block
-    store.write_record("run", COSTS_FILE, costs_file([1.0] * (block + 1), costs_setup(config, 1, block, "cpu")))
-    store.write_record("other", COSTS_FILE, costs_file([1.0] * 5, costs_setup(config, 1, block - 1, "cpu")))
+    store.write_record("test-session/run", COSTS_FILE, costs_file([1.0] * (block + 1), costs_setup(config, 1, block, "cpu")))
+    store.write_record("test-session/other", COSTS_FILE, costs_file([1.0] * 5, costs_setup(config, 1, block - 1, "cpu")))
     monkeypatch.setattr("wpt.chat.measure_costs", lambda *args: pytest.fail("the times are read, not measured"))
     monkeypatch.setattr("wpt.chat.select_device", lambda: torch.device("cpu"))
     answers = iter(["the", ""])
     monkeypatch.setattr("builtins.input", lambda prompt: next(answers))
-    main([str(folder), "--scheduler-costs", "run", "--max-new-tokens", "3"])
+    main([str(folder), "--scheduler-costs", "test-session/run", "--max-new-tokens", "3"])
     # the 3 tokens are random and may hold line breaks, so "the" starts a line
     # of the output but that line is not always the last one
     assert "\nthe" in capsys.readouterr().out
     with pytest.raises(SystemExit, match=f"ValueError: .*another setup: draft {block - 1}, here {block}"):
-        main([str(folder), "--scheduler-costs", "other"])
-    with pytest.raises(SystemExit, match="MissingObject"):
-        main([str(folder), "--scheduler-costs", "none"])
+        main([str(folder), "--scheduler-costs", "test-session/other"])
+    with pytest.raises(SystemExit, match="MissingFile"):
+        main([str(folder), "--scheduler-costs", "test-session/none"])
+    monkeypatch.delenv("WPT_SESSION")
+    with pytest.raises(SystemExit, match="SessionNeeded"):
+        main([str(folder), "--scheduler-costs", "test-session/run"])
 
 
 def test_a_chat_is_a_conversation_in_the_current_shape(tmp_path, monkeypatch):

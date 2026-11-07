@@ -26,6 +26,7 @@ from wpt_tokenizer import chat
 from wpt_training import Context, Data, Strategy, in_process, load_step, step_seed
 from wpt_training import agentic
 from wpt.train import main as train
+from wpt_store import find_dataset
 
 
 def one_stage(steps, block_size=16, batch_size=4):
@@ -60,13 +61,13 @@ def test_answer_as_assistant_learns_from_the_conversations_tagged_for_it_and_cre
     err = refused(capsys, [recipe, built.dataset_id, "--out", "model"])
     assert ("InputError: step 2 answer-as-assistant: no conversations: the dataset holds no chat file tagged "
             "answer-as-assistant") in err
-    assert not (tmp_path / "model").exists() and not (built.store.root / "refs" / "steps").exists()
+    assert not (tmp_path / "model").exists() and not (built.store.root / "cache" / "steps").exists()
 
     sid = built.source(tmp_path / "talks", {"talks.jsonl": (json.dumps(TALK) + "\n").encode()},
                        [{"format": "chat", "paths": ["**"]}], [{"tags": ["answer-as-assistant"], "paths": ["**"]}],
                        "Talks, by Bo Speaker, 2026", "Bo Speaker dedicates these talks to the public domain.\n")
     dataset = built.build("chat")
-    record = json.loads(built.store.get_bytes(built.store.get_ref("datasets", dataset)))
+    record = find_dataset(built.store, dataset)[1]
     assert record["conversations"]["count"] == 1 and list(record["conversations"]["sources"]) == [sid]
     train([built.recipe("base", training=one_stage(1, 64)), dataset, "--out", "base"])
 
@@ -100,13 +101,13 @@ def test_a_change_to_the_conversations_leaves_the_fingerprint_of_read_text_uncha
     # id: a dataset with conversations added has another id and the same text,
     # so read-text is reused, while answer-as-assistant reads the new part
     train([built.recipe("base", training=one_stage(1, 64)), built.dataset_id, "--out", "base"])
+    before = find_dataset(built.store, built.dataset_id)[1]["fingerprints"]  # the build below replaces that dataset
     sid = built.source(tmp_path / "talks", {"talks.jsonl": (json.dumps(TALK) + "\n").encode()},
                        [{"format": "chat", "paths": ["**"]}], [{"tags": ["answer-as-assistant"], "paths": ["**"]}],
                        "Talks, by Bo Speaker, 2026", "Bo Speaker dedicates these talks to the public domain.\n")
     dataset = built.build("d")
     assert dataset != built.dataset_id
-    fingerprints = [json.loads(built.store.get_bytes(built.store.get_ref("datasets", found)))["fingerprints"]
-                    for found in (built.dataset_id, dataset)]
+    fingerprints = [before, find_dataset(built.store, dataset)[1]["fingerprints"]]
     assert sorted(fingerprints[0]) == ["text"] and sorted(fingerprints[1]) == ["conversations", "text"]
     assert fingerprints[0]["text"] == fingerprints[1]["text"]
     assert all(len(sha) == 64 for sha in fingerprints[1].values())
@@ -168,7 +169,7 @@ def test_the_steps_after_a_reused_one_train_as_in_a_run_of_every_step(built, on_
     steps = [{"step": "answer-as-assistant", "settings": {"epochs": 1}}]
     train([built.recipe("base", training=one_stage(1, 64)), dataset, "--out", "base"])
     train([built.recipe("chat", training=one_stage(1, 64), steps=steps), dataset, "--out", "reused"])
-    shutil.rmtree(built.store.root / "refs" / "steps")  # a store that never saw these recipes
+    shutil.rmtree(built.store.root / "cache" / "steps")  # a store that never saw these recipes
     train([built.recipe("chat", training=one_stage(1, 64), steps=steps), dataset, "--out", "fresh"])
 
     reused, fresh = (json.loads((tmp_path / name / "provenance.json").read_text())["steps"]
@@ -197,7 +198,7 @@ def test_two_text_steps_of_one_recipe_draw_other_windows(built):
     # a second read-text step of the same settings goes on learning from
     # other windows than the first, while each step draws the same windows
     # on every run
-    record = json.loads(built.store.get_bytes(built.store.get_ref("datasets", built.dataset_id)))
+    record = find_dataset(built.store, built.dataset_id)[1]
     step = load_step({"step": "read-text", "settings": one_stage(1)}, PARTS)
     strategy = Strategy(torch.device("cpu"))
 
@@ -223,7 +224,7 @@ def test_two_identical_steps_of_one_recipe_draw_other_conversations_and_tasks(bu
                  [{"format": "chat", "paths": ["**"]}], [{"tags": ["answer-as-assistant"], "paths": ["**"]}],
                  "Talks, by Bo Speaker, 2026", "Bo Speaker dedicates these talks to the public domain.\n")
     dataset = built.build("d")
-    record = json.loads(built.store.get_bytes(built.store.get_ref("datasets", dataset)))
+    record = find_dataset(built.store, dataset)[1]
     tokenizer = wpt.train.Tokenizer.from_bytes(built.store.get_bytes(record["tokenizer"]["vocabulary"]))
     strategy = Strategy(torch.device("cpu"))
 
@@ -309,7 +310,7 @@ def test_finish_tasks_says_so_when_the_dataset_holds_no_tasks(built, tmp_path, c
     err = refused(capsys, [built.recipe("agent", steps=[{"step": "finish-tasks"}]), built.dataset_id,
                            "--out", "model"])
     assert "InputError: step 2 finish-tasks: no tasks: the dataset holds no task tagged finish-tasks" in err
-    assert not (tmp_path / "model").exists() and not (built.store.root / "refs" / "steps").exists()
+    assert not (tmp_path / "model").exists() and not (built.store.root / "cache" / "steps").exists()
 
 
 TASK = {"instructions": "Write hello into out.txt.", "image": "tiny",
@@ -354,7 +355,7 @@ def test_finish_tasks_fails_when_every_attempt_of_a_round_is_dropped(built, tmp_
     # have started from, and the round's event names their lines
     sid = task_source(built, tmp_path)
     dataset = built.build("d")
-    record = json.loads(built.store.get_bytes(built.store.get_ref("datasets", dataset)))
+    record = find_dataset(built.store, dataset)[1]
     assert record["tasks"]["count"] == 1 and list(record["tasks"]["sources"]) == [sid]
     no_sandbox(monkeypatch)
     recipe = built.recipe("agent", training=one_stage(1, 1024), steps=[{"step": "finish-tasks"}])

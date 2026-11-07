@@ -63,7 +63,7 @@ def test_the_command_runs_every_built_in_test_into_the_model_card(trained, capsy
 
     result = json.loads((folder / "evals" / "memorization.json").read_text())
     assert result["name"] == "memorization" and result["file"] == "wpt/eval/evals/memorization.py"
-    counts = json.loads(trained.store.get_bytes(json.loads((folder / "provenance.json").read_text())["dataset_record"]))["documents"]
+    counts = trained.store.get_json(json.loads((folder / "provenance.json").read_text())["dataset_record"])["documents"]
     assert result["data"]["held_out"]["documents"] == counts["held_out"]  # every one is long enough
     assert 0 < result["data"]["training"]["documents"] <= counts["training"]
     card = (folder / "README.md").read_text()

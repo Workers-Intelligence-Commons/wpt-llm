@@ -48,7 +48,7 @@ class Fetched(NamedTuple):
 def fetch(data: dict, address: str, store, tmp: Path, unusable: dict | None = None) -> Fetched:
     """The files a source's protocol gives at one address (with `addresses`,
     each of them into its own folder of the one tree, and of tmp), each
-    kept file's content put into store (what a download stores into:
+    kept file put into store (what a download stores into:
     manifest.Extractor). A failure to reach upstream is a named protocol
     failure (base.named) whose message starts with the address it was
     for. With a dict as unusable, a file upstream does not give goes into

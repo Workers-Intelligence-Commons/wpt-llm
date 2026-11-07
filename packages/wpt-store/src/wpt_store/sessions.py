@@ -1,172 +1,369 @@
-"""Sessions: one run of one downloading command, start to end, at one
-repository commit, and what it stored.
+"""Sessions: an ID a store's files are stored under, and what a session
+holds of its sources and datasets.
 
-A session is named by its run record's folder (records/<folder>/, see
-wpt_telemetry). The files it downloads go into its bundles,
-bundles/<folder>/<number> (six digits, from 000001), each one file of the
-store holding many downloaded files one after the other, compressed as
-the store compresses every file (wpt_store.Store), in frames of about
-1 MB, so one downloaded file is read back alone (Store.read_file). With
-keep_local, a store whose files are not on this machine (S3) keeps a copy
-of each stored bundle in its cache folder; without it, the only copy left
-is the store's. A bundle is cut only between files, once it holds BUNDLE
-bytes or more; a file bigger than BUNDLE gets a bundle of its own. Where a
-file went is a Placed: its bundle, start and length in the bundle's
-original bytes, and its sha256, which every read checks. Session.read
-gives a file back before its bundle is full too, from the bundle's
-partial copy on this machine. A file several sources hold is stored again
-for each of them: no table of every file the store holds, but for git
-files, which the store database's git_objects table maps from their git
-object id to where the store holds them (known_objects), so a git source
-reuses what another one stored. That table gives out only places that
-stay: in a bundle of a session that has ended (its bundles are sealed for
-good, see the end below) or of this session. A session reads it from the
-copy of the store database it reads once, on this machine's disk, and
-writes into that copy the git objects of each list it names, so it finds
-them again without holding them in memory.
+A session is only an ID: nothing opens it, nothing closes it, it has no
+status. Files are stored under it and a record says what happened. One ID
+covers the whole store: every command that touches the store takes it
+(--session ID, or WPT_SESSION in the environment or in .env: given, needed),
+and Store.at(session, start) is the store as that command works in it. A
+download given none makes a new short one (new_id). With start, the ID a
+command began from (--from), it reads from start what the session does not
+hold, and writes under the session; whatever it writes names start
+(Store.put_json). No rule protects an ID another one started from.
 
-A bundle fills on this machine's disk first, in the store's cache folder,
-as PARTIAL<random>, owned by the session through a lock file beside it
-(wpt_store.local_files) while it fills. Every new session removes the
-unfinished bundles no live session owns.
+    <id>/sources/<source>.tar.zst      a source's files: a normal tar (wpt_store.tars), compressed in
+                                       frames of about 1 MiB at SOURCE_LEVEL, with its seek table
+                                       (wpt_store.blocks), so one file is read alone by range
+    <id>/sources/<source>.json         when, address, size, or the error, and what reading needs (Held)
+    <id>/datasets/<name>/              dataset.json, its shards and every other file it needs: its vocabulary,
+                                       document list, credits, conversations and tasks (<name> is
+                                       <recipe or series>-<its dataset id's first 8 hex characters>)
 
-A source's file list (file_list_bytes, parse_file_list) says where each of
-its files went, one line per file, sorted by the UTF-8 bytes of the path:
+Packing writes one source's .tar.zst: on this machine's disk first, in the
+store's cache folder, as PARTIAL<random>, owned by its process through a
+lock file beside it (wpt_store.local_files) while it fills, compressed as
+the members come (keep, keep_file, keep_same). finish() sends the tar, then
+its record; until the record is written the session reads what it held. A
+store whose files are not on this machine keeps a copy of the tar in its
+cache folder, unless the download streams; the copy's name holds the tar's
+sha256, so a tar replaced elsewhere is never read through an old copy.
+discard() removes the partial tar and leaves the session as it was. Every
+new download run removes the partial tars no live process owns.
 
-    <mode> <sha256> <bundle> <start> <length> <path>
+A source's record, Held, is one JSON file (Store.put_json), read by
+Store.get_json, and held(store, source, key) finds it. Another process may replace
+a record and its tar at any time, so every read asks the store for the
+record's version (Store.version), and only a parsed record of that version
+is reused. A record read anew makes the store forget what it keeps in memory
+of the tar. A file in it is
+[path, mode, sha256, start, length], sorted by the UTF-8 bytes of the path,
+or for a symlink [path, mode, sha256, target]. Downloading a source again
+in a session replaces its files. A download that fails keeps what the
+session held for the source, and its record gains the `error`
+(keep_failure); a source whose record has an `error` is not held: the next
+download fetches it. A build reads the good file such a record still names
+(Held.provides) and leaves out a source that has none. Should a crash fall
+between the tar and the record, the record names another key or an error,
+so the next download fetches the source again, and a read until then
+refuses the bytes against their sha256 (CorruptFile).
 
-mode is the caller's, kept as it is (wpt_dataset's manifest modes). A file
-list is handed to name(), which stores it once its files are, and tells
-the caller where it lies.
-
-A full bundle is handed over, together with the session's lines (one per
-download, use of a source already in the store, failure), the actions
-handed to then() or name() and the git objects of the file lists named
-since the previous handover; the end hands over the last bundle the same
-way. The add that filled the bundle stores it while the other threads go
-on filling the next one, and up to STORING full bundles are stored at
-once; an add that would begin a new bundle while STORING are being stored
-waits for one of them. A Session.read of a file in a bundle handed over
-waits only for that bundle to be stored.
-
-Once a bundle is stored, its handover is recorded, after every earlier
-handover, in the order they were handed over: its actions run (such as
-setting the refs that name a downloaded source's files), once every file
-added before them is stored, then its rows go into the session's own file
-on this machine's disk (database.Rows, in the store's cache folder) with
-the session's own row. From that file they go into the store database
-(wpt_store.database, database.put) at the end, and when a handover is
-recorded once the bundles recorded since the last put hold DATABASE_SHARE
-times the bytes the database takes in the store or more: every put reads
-and stores the database whole, so its copies stay about a tenth of what a
-session stores. One thread at a time records, so a put holds back the
-recording of later handovers but not their storing, nor a read. A bundle
-is on the disk (local store) or held by S3 before the database names it.
-A crash loses the rows and the bundles of every handover not yet
-recorded, a stored bundle included when an earlier one was still being
-stored. A bundle stored whose handover is never recorded, after a crash
-or a failure, stays in the store: the database names none of its files,
-and nothing removes it. Rows that reached the session's file but not the
-database stay in that file, and the next session that starts on this
-machine puts them in, then removes the file.
-
-The session's row goes into the database when it starts, so that a session
-that ends later sees it running. A session that cannot put it in removes
-its file and raises. The end (end()) seals the bundles for good: a bundle holding bytes that
-no named file list names (a try that failed, a download that failed and
-named nothing) is rewritten without them. The one
-being filled is rewritten before it is stored; one stored earlier becomes
-a new bundle of the session, every file list naming it is stored again
-with its files' new places and its action runs again, and the old bundle
-is marked for removal in the database together with the new places (the
-`removals` table). A bundle no file list names at all is marked too.
-Another session may still hold the old places, so the old copy stays until
-no session that started before the mark is still running: the end of a
-later session (or of this one, when no other runs) removes it. A session
-that crashed never ends, and so keeps the copies marked after it started.
-A list named with no action (name(files, None, ...)) only keeps its files:
-the bytes the git map names that no file list of a tree names, such as the
-blobs a git source's history needs, are kept by the rewrite and move with
-it, and their rows follow them.
-
-Failures: what the store raised while storing a bundle or putting the
-rows in the database. The session cannot go on: every later add, line
-and end raises that same failure and writes nothing. The handovers before
-the one that failed are still recorded as their bundles are stored; that
-one and every later one are lost: none of their actions runs past the
-failure, and their rows that had not reached the session's file never do
-(the rows in it go in with the next session). A failing action stops the session the same way. ValueError
-for an outcome the database does not know, or a file added after the end.
+Failures: SessionNeeded (no ID given), ValueError for an ID that cannot be
+one; CorruptFile, MissingFile (a record or tar that is damaged or gone);
+what the store raised while storing: the session then holds what it held
+for that source, or the tar without its record (above).
 """
 
-import collections
 import hashlib
-import json
 import os
 import secrets
-import threading
-from dataclasses import dataclass, field
-from datetime import UTC, datetime
 from pathlib import Path
 
-from . import blocks, database
-from .errors import CorruptObject
+from . import blocks
+from .errors import SessionNeeded
+from .index import DATASETS, SOURCES, held_row
 from .local_files import LocalFile, unowned
-from .names import check_record_name
+from .names import check_name, check_session
+from .settings import now, read_env_file
+from .tars import Placed, Tar
 
-BUNDLE = 4 << 30  # bytes: a bundle is handed over once it holds this many or more
-CHUNK = 1 << 20  # bytes of a local file read at once
-PARTIAL = ".partial-bundle-"  # the start of the name of a bundle being filled on this machine's disk
-PART = 64 << 20  # bytes of one file copied at once when a bundle is rewritten
-QUERY = 500  # git object ids asked for in one query of the store database
-DATABASE_SHARE = 10  # bytes of bundles stored between two puts, per byte the store database takes in the store
-# full bundles being stored at once, at most: two of about 1 GB stored keep wpt_store.kinds.UPLOADS parts going, and
-# two more keep them going while one sends its last parts and the next one compresses its last frames; each is a
-# compressed file in the cache folder until it is stored
-STORING = 4
-
-
-@dataclass(frozen=True)
-class Placed:
-    """Where one downloaded file lies: bytes [start, start + length) of
-    its bundle's original bytes; sha256 is the file's own."""
-
-    bundle: str  # <session folder>/<number>
-    start: int
-    length: int
-    sha256: str
+SESSION = "WPT_SESSION"  # the setting naming a command's session, as --session does
+START = "WPT_FROM"  # the setting naming the session a command starts from, as --from does
+ID_BYTES = 4  # random bytes of a new session ID: eight hex digits
+PARTIAL = ".partial-source-"  # the start of the name of a source's tar being filled on this machine's disk
+SYMLINK = "120000"
+DATASET = "dataset.json"
+NO_SESSION = (f"this command needs a session: give --session ID or set {SESSION}; "
+              "`wpt dataset download` makes a new one and prints it")
 
 
-def file_list_bytes(files: dict) -> bytes:
-    """A file list from {path: (mode, Placed)}."""
-    lines = []
-    for path in sorted(files, key=lambda path: path.encode()):
-        mode, placed = files[path]
-        lines.append(f"{mode} {placed.sha256} {placed.bundle} {placed.start} {placed.length} {path}\n")
-    return "".join(lines).encode()
+def new_id() -> str:
+    return secrets.token_hex(ID_BYTES)
 
 
-def parse_file_list(data: bytes) -> dict:
-    """{path: (mode, Placed)} from a file list. ValueError for a line not
-    in its format."""
-    files = {}
-    for line in data.decode().splitlines():
+def given(value=None, environ=None, env_file=".env") -> str | None:
+    """The session a command names: value (--session), else WPT_SESSION in
+    the environment, else in env_file; None when none does. ValueError for
+    one that cannot be an ID."""
+    environ = os.environ if environ is None else environ
+    session = value or environ.get(SESSION) or read_env_file(env_file).get(SESSION) or None
+    if session is not None:
+        check_session(session)
+    return session
+
+
+def needed(value=None, environ=None, env_file=".env") -> str:
+    """given, for a command that cannot make its own: SessionNeeded when no
+    session is named."""
+    session = given(value, environ, env_file)
+    if session is None:
+        raise SessionNeeded(NO_SESSION)
+    return session
+
+
+def started(value=None, environ=None, env_file=".env") -> str | None:
+    """The session a command starts from: value (--from), else WPT_FROM in
+    the environment, else in env_file; None when none does. ValueError for
+    one that cannot be an ID."""
+    environ = os.environ if environ is None else environ
+    start = value or environ.get(START) or read_env_file(env_file).get(START) or None
+    if start is not None:
+        check_session(start)
+    return start
+
+
+def source_key(session: str, source: str, ending: str) -> str:
+    check_name(source)
+    return f"{session}/{SOURCES}/{source}{ending}"
+
+
+class Held:
+    """What a source's record says: the session that holds it, and what
+    any reader of it needs. A failed source's record keeps what the session
+    held for it, if anything, beside its `error`."""
+
+    def __init__(self, session: str, record: dict):
+        self.session, self.record = session, record
+        self.source = record["source"]
+        self.key, self.address, self.error = record.get("key"), record.get("address"), record.get("error")
+        self.time, self.size, self.stored = record.get("time"), record.get("size"), record.get("stored")
+        self.sha256, self.manifest, self.got = record.get("sha256"), record.get("manifest"), record.get("got")
+        self.archive = source_key(session, self.source, ".tar.zst")
+        self._files = None
+
+    def holds(self, key: str) -> bool:
+        """Whether this is that download (its upstream key), not failed: the
+        download of a session that holds it is not fetched again."""
+        return self.error is None and self.key == key
+
+    def provides(self, key: str) -> bool:
+        """Whether this holds a good file of that download (its upstream
+        key), even when a later attempt at it failed: what a build reads.
+        A record of a download that failed with no file held before has
+        none."""
+        return self.sha256 is not None and self.key == key
+
+    def _placed(self, listed) -> tuple[str, Placed]:
+        if len(listed) == 4:
+            _, mode, sha256, target = listed
+            text = target.encode("utf-8", "surrogateescape")
+            return mode, Placed(self.archive, self.sha256, 0, len(text), sha256, text)
+        _, mode, sha256, start, length = listed
+        return mode, Placed(self.archive, self.sha256, start, length, sha256)
+
+    @property
+    def files(self) -> dict[str, tuple[str, Placed]]:
+        """{path: (mode, where it lies)}, sorted as the tree's manifest is."""
+        if self._files is None:
+            self._files = {listed[0]: self._placed(listed) for listed in self.record.get("files", [])}
+        return self._files
+
+    @property
+    def pages(self) -> dict[str, Placed]:
+        """{address: where it lies} of the license pages downloaded with it."""
+        return {address: self._placed(listed)[1] for address, listed in self.record.get("pages", {}).items()}
+
+
+def held_here(store, source: str) -> Held | None:
+    """The record of a source in the session itself (the one a download
+    writes under), or None."""
+    return _read(store, store.needed(), source)
+
+
+def held_all(store, source: str) -> list[Held]:
+    """The records of a source in the sessions the store reads, in the order
+    it reads them: its own session's, then the one it started from. A
+    record with an `error` is given too: holds() and provides() tell them
+    apart."""
+    return [found for session in store.reading() if (found := _read(store, session, source)) is not None]
+
+
+def held(store, source: str, key: str | None = None) -> Held | None:
+    """The record of a source the session reads: with key (its upstream
+    key), the first that provides a good file of that download; else, or
+    when none does, the first there is, whose `error` says why a build
+    leaves the source out; None without any."""
+    found = held_all(store, source)
+    for record in found:
+        if key is not None and record.provides(key):
+            return record
+    return found[0] if found else None
+
+
+def _read(store, session, source) -> Held | None:
+    key = source_key(session, source, ".json")
+    version = store.version(key)  # asked first: a record replaced meanwhile is read again next time
+    if version is None:
+        return None
+    kept = store.held_records.get((session, source))
+    if kept is not None and kept[0] == version:
+        return kept[1]
+    record = store.get_json(key)
+    if record is None:
+        return None
+    found = Held(session, record)
+    store.forget(found.archive)
+    store.held_records.put((session, source), (version, found))
+    return found
+
+
+class _Hashing:
+    """A binary file open for writing that also hashes what goes in."""
+
+    def __init__(self, out):
+        self.out, self.digest = out, hashlib.sha256()
+
+    def write(self, data):
+        self.digest.update(data)
+        return self.out.write(data)
+
+
+class Packing:
+    """One source's .tar.zst being made: what a fetch stores into. keep,
+    keep_file and keep_same each add one path and give the sha256 of its
+    content; a content written already under the same mode is a hard link,
+    and a path written already with the same content adds nothing, so a new
+    try of a read puts nothing more in the tar. replaced is True once a
+    path came again with other bytes: the tar then holds them twice."""
+
+    def __init__(self, store, source: str, stream=False):
+        store.needed()
+        self.store, self.source, self.stream = store, source, stream
+        self.local = LocalFile(store.cache / (PARTIAL + secrets.token_hex(8)))  # a new name: taken at once
+        self.replaced, self.members, self._first, self._content = False, {}, {}, {}
         try:
-            mode, sha256, bundle, start, length, path = line.split(" ", 5)
-            files[path] = (mode, Placed(bundle, int(start), int(length), sha256))
-        except ValueError:
-            raise ValueError(f"not a file list line: {line!r}") from None
-    return files
+            self._file = open(self.local.path(), "xb")
+        except BaseException:
+            self.local.remove()
+            raise
+        self._out = _Hashing(self._file)
+        self._writer = blocks.Writer(self._out, *store.compressing(), level=blocks.SOURCE_LEVEL)
+        self._tar = Tar(self._writer)
+
+    def _new(self, path, sha256) -> bool:
+        """Whether a path is to be written: False for one that holds this
+        content already."""
+        known = self.members.get(path)
+        if known is not None and known[1] == sha256:
+            return False
+        self.replaced = self.replaced or known is not None
+        return True
+
+    def _same(self, path, mode, sha256) -> bool:
+        """Whether the path went in as a hard link to the same content,
+        written earlier under that mode."""
+        first = self._first.get((sha256, mode))
+        if first is None:
+            return False
+        self._tar.link(path, mode, first)
+        self.members[path] = (mode, *self.members[first][1:])
+        return True
+
+    def _written(self, path, mode, sha256, start, length):
+        self.members[path] = (mode, sha256, start, length, None)
+        self._first[sha256, mode] = self._content[sha256] = path
+
+    def keep(self, path: str, mode: str, data: bytes) -> str:
+        sha256 = hashlib.sha256(data).hexdigest()
+        if self._new(path, sha256):
+            if mode == SYMLINK:
+                self._tar.symlink(path, data)
+                self.members[path] = (mode, sha256, 0, len(data), data)
+            elif not self._same(path, mode, sha256):
+                self._written(path, mode, sha256, self._tar.add(path, mode, data), len(data))
+        return sha256
+
+    def keep_file(self, path: str, mode: str, file, sha256: str | None = None) -> str:
+        """A local file, never whole in memory."""
+        sha256 = sha256 or _sha256_file(file)
+        if self._new(path, sha256) and not self._same(path, mode, sha256):
+            length = os.path.getsize(file)
+            self._written(path, mode, sha256, self._tar.add_file(path, mode, file, length), length)
+        return sha256
+
+    def matches(self, tree) -> bool:
+        """Whether the tar holds the paths of tree (a mapping by path) and no
+        others, each once."""
+        return not self.replaced and self.members.keys() == tree.keys()
+
+    def keep_same(self, path: str, mode: str, sha256: str) -> str:
+        """A path holding a content kept already (a tar's hard link)."""
+        if self._new(path, sha256):
+            first = self._content[sha256]
+            self._tar.link(path, mode, first)
+            self.members[path] = (mode, *self.members[first][1:])
+        return sha256
+
+    def finish(self, tree: dict, pages: dict, about: dict, previous: Held | None = None) -> Held:
+        """The tar sent to the store under the session, then its record: the
+        paths of tree ({path: mode}), pages ({address: its path in the tar})
+        and about (the record's own fields: key, address, manifest, got,
+        code). previous: what the session held, whose local copy goes. The
+        partial tar is gone afterwards, stored or not."""
+        store, session = self.store, self.store.needed()
+        try:
+            self._tar.close()
+            original, stored = self._writer.close()
+            self._file.close()
+            version = self._out.digest.hexdigest()
+            key = source_key(session, self.source, ".tar.zst")
+            store.keep_archive(key, self.local.path(), version, previous.sha256 if previous else None, not self.stream)
+            files = [self._listed(path) for path in sorted(tree, key=str.encode)]
+            size = sum({self.members[path][1]: self.members[path][3] for path in tree}.values())
+            record = {"source": self.source, "session": session, "time": now(), "size": size, "stored": stored,
+                      "original": original, "sha256": version, **about, "files": files,
+                      "pages": {address: self._listed(path) for address, path in pages.items()}}
+            record = store.put_json(source_key(session, self.source, ".json"), record)
+        finally:
+            self.discard()
+        return Held(session, record)
+
+    def _listed(self, path) -> list:
+        mode, sha256, start, length, text = self.members[path]
+        if text is not None:
+            return [path, mode, sha256, text.decode("utf-8", "surrogateescape")]
+        return [path, mode, sha256, start, length]
+
+    def discard(self):
+        """The partial tar gone, if still there, and its lock released."""
+        self._file.close()
+        self.local.remove()
 
 
-def now() -> str:
-    """This moment in UTC, as the store database writes times."""
-    return datetime.now(UTC).isoformat(timespec="microseconds").replace("+00:00", "Z")
+def _sha256_file(path) -> str:
+    digest = hashlib.sha256()
+    with open(path, "rb") as file:
+        while block := file.read(1 << 20):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def failed_addresses(failures) -> list[dict]:
+    """Each of failures, an address's (address, failure), as a record holds it."""
+    return [{"address": address, "kind": type(failed).__name__, "message": str(failed)} for address, failed in failures]
+
+
+def keep_failure(store, source: str, previous: Held | None, key: str, address: str, error: Exception,
+                 failures=()) -> Held:
+    """The source's record, in the session, says that its download failed:
+    error (a failure of a download of the upstream key), each of failures
+    an address's (address, failure). What the session held stays."""
+    session = store.needed()
+    record = {name: value for name, value in previous.record.items() if name != "error"} if previous else \
+        {"source": source, "session": session, "address": address}
+    record["error"] = {"time": now(), "key": key, "address": address, "kind": type(error).__name__,
+                       "message": str(error), "failures": failed_addresses(failures)}
+    record = store.put_json(source_key(session, source, ".json"), record)
+    return Held(session, record)
+
+
+def source_row(found: Held) -> tuple:
+    """What the index says of a source's record."""
+    return held_row(found.session, SOURCES, found.source, found.record)
 
 
 def remove_unowned_partials(cache: Path) -> list[str]:
-    """Remove every unfinished bundle in cache (PARTIAL...) that no live
-    session owns (local_files.unowned). Their names."""
+    """Remove every partial tar in cache (PARTIAL...) that no live process
+    owns (local_files.unowned). Their names."""
     removed = []
     for left in unowned(cache, PARTIAL):
         if left.path().exists():
@@ -175,649 +372,67 @@ def remove_unowned_partials(cache: Path) -> list[str]:
     return removed
 
 
-class _Partial:
-    """A bundle being filled on this machine's disk: its file, its
-    blocks.Writer, the original bytes written so far, its number, and the
-    lock that says a live session owns it."""
-
-    def __init__(self, store, number):
-        self.local = LocalFile(store.cache / (PARTIAL + secrets.token_hex(8)))  # a new name: taken at once
-        self.path = self.local.path()
-        try:
-            self.out = open(self.path, "xb")
-        except BaseException:
-            self.local.remove()
-            raise
-        self.writer = blocks.Writer(self.out, *store.compressing())
-        self.size, self.number = 0, number
-
-    def write(self, block):
-        self.writer.write(block)
-        self.size += len(block)
-
-    def read(self, start, length) -> bytes:
-        """Original bytes of the partial copy; the frame being filled ends there early."""
-        self.writer.flush()
-        self.out.flush()
-        with open(self.path, "rb") as partial:
-            return blocks.read(partial, blocks.SeekTable(self.writer.sizes), start, length)
-
-    def seal(self):
-        """(original size, stored size), the file whole and closed."""
-        sizes = self.writer.close()
-        self.out.close()
-        return sizes
-
-    def remove(self):
-        """The file gone, if still there, and the lock released."""
-        self.out.close()
-        self.local.remove()
+def dataset_key(session: str, name: str, file: str = DATASET) -> str:
+    """The key of a file of the dataset name of a session."""
+    check_name(name)
+    return f"{session}/{DATASETS}/{name}/{file}"
 
 
-@dataclass(eq=False)
-class _List:
-    """A file list handed to name(): its files, its action, its git
-    objects, the bundles of this session it touches whose bytes are not
-    all named yet, and whether its action ran."""
-
-    files: dict
-    action: object
-    git_objects: dict
-    touching: set = field(default_factory=set)
-    ran: bool = False
+def keep_dataset(store, name: str, record: dict) -> dict:
+    """The session's dataset name is record, stamped with this moment as its
+    `time`: its dataset.json written, last of its files, and the index told.
+    The record as stored."""
+    session = store.needed()
+    record = store.put_json(dataset_key(session, name), {**record, "time": now()})
+    store.note([held_row(session, DATASETS, name, record)])
+    return record
 
 
-@dataclass(eq=False)
-class _Handed:
-    """One handover: a full bundle (a _Partial, or None at an end with
-    nothing to store) and what is recorded once it is stored, after every
-    earlier handover. settled is set once its bundle is stored or it is
-    lost; size is the bytes its bundle takes in the store."""
-
-    index: int  # its place in the order of handing over, from 1
-    bundle: object
-    row: dict
-    lines: list
-    actions: list
-    rows: list
-    marks: list
-    put: bool
-    settled: threading.Event = field(default_factory=threading.Event)
-    size: int = 0
-    lost: bool = False  # never recorded: it, or one before it, failed
+def find_dataset(store, dataset_id: str) -> tuple[str, dict] | None:
+    """(the key of its record, the record) of the dataset of that id, from
+    the session, else from the one it started from, found through the
+    index; None when neither holds it."""
+    with store.index() as found:
+        rows = found.execute("SELECT session, name FROM held WHERE kind = ? AND json_extract(about, '$.id') = ?",
+                             (DATASETS, dataset_id)).fetchall()
+    for session in store.reading():
+        for name in sorted(name for holder, name in rows if holder == session):
+            key = dataset_key(session, name)
+            if (record := store.get_json(key)) is not None and record.get("id") == dataset_id:
+                return key, record
+    return None
 
 
-class Session:
-    """A session of one command: add() files into its bundles, read() them
-    back, name() the file lists that say where they lie, line() what
-    happened to each source, end() when the command ends (or use it as a
-    context manager). Several threads may add and record at once; full
-    bundles are stored while the others go on filling the next one."""
-
-    def __init__(self, store, folder, command, commit, dirty, bundle=BUNDLE, keep_local=True):
-        check_record_name(folder)
-        self.store, self.folder, self.bundle, self.keep_local = store, folder, bundle, keep_local
-        self.row = {"folder": folder, "command": command, "started": now(), "ended": None, "wpt_commit": commit,
-                    "dirty": int(bool(dirty))}
-        remove_unowned_partials(store.cache)
-        # the session's row goes in at once, so that a later session's end sees it running (what decides when it
-        # removes the old copy of a rewritten bundle), with the rows sessions that crashed on this machine left;
-        # the bundles marked that no session still running could read go now
-        self._row_file, left = database.Rows.begin(store.cache, folder), []
-        try:
-            left = database.unowned_rows(store.cache)
-            self._row_file.add(dict(self.row))
-            removable, self._database_size = database.put(store.kind, store.cache, [self._row_file, *left])
-        except BaseException:
-            self._row_file.discard()  # a session that could not start ran nothing: its row alone is not kept
-            raise
-        finally:
-            for rows in left:
-                rows.close()  # removed once put in, kept otherwise
-        self._remove(removable)
-        # _lock guards everything below but the git objects' lookup and what only the thread holding _recording
-        # touches (_stored, _database_size, _removable). _changed is signalled whenever a handover's bundle is
-        # stored or lost, a handover is recorded, or the session ends
-        self._lock = threading.Lock()
-        self._changed = threading.Condition(self._lock)
-        self._recording = threading.Lock()  # held by the one thread recording handovers, in their order
-        self._handed = collections.deque()  # the handovers not yet recorded, in the order they were handed over
-        self._storing = {}  # bundle number -> its handover, for the bundles handed over and not yet stored
-        self._lost = None  # the index of the first handover that will never be recorded
-        self._removable = []  # what the last put gave: bundles no running session can read any more
-        self._handovers = 0  # how many handovers there were
-        self._number = 0  # the last bundle begun
-        self._filling = None  # the bundle being filled: a _Partial
-        self._lines, self._counted = [], 0  # lines not yet handed over with a bundle, and how many were added
-        self._actions = []  # then()'s and name()'s actions not yet handed over with a bundle
-        self._rows = []  # remember()'s git object rows not yet handed over with a bundle
-        self._ended = False
-        self._stored = 0  # bytes of bundles recorded since the last put
-        self._failure = None  # what storing a bundle, an action or a put raised: the session cannot go on
-        # what the named file lists name, for the end's rewrite: each bundle's original bytes once handed over,
-        # and for each bundle not known to be named whole, {(start, length): sha256} of its files named so far
-        self._sizes, self._open = {}, {}
-        self._lists, self._touching, self._listed = {}, {}, 0  # _List by number; bundle -> numbers of lists in it
-        # the database read once (with what this session named and remembered since, _learn), the sessions that had
-        # ended then, and which bundles the store holds
-        self._known, self._ended_sessions, self._known_lock, self._bundles = None, set(), threading.Lock(), {}
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, kind, error, trace):
-        try:
-            self.end()
-        except Exception as failure:
-            if error is None:
-                raise
-            if failure is not error:
-                error.add_note(f"the session's end could not be recorded either: {type(failure).__name__}: {failure}")
-
-    def add(self, source) -> Placed:
-        """Store one downloaded file (bytes, or a local file's path) in this
-        session's bundles. A call that fills the bundle stores it before it
-        returns; one that would begin a new bundle while STORING others are
-        still being stored waits for one of them."""
-        size = len(source) if isinstance(source, (bytes, bytearray, memoryview)) else os.path.getsize(source)
-        placed = None
-        while placed is None:
-            with self._lock:
-                self._check()
-                if self._ended:
-                    raise ValueError(f"session {self.folder} has ended")
-                if self._filling is None and len(self._storing) >= STORING:
-                    self._changed.wait()  # _lock is free meanwhile: reads and lines go on
-                    continue
-                if self._filling is not None and self._filling.size + size > self.bundle:
-                    full = self._hand_over()  # the file does not fit: it goes into the next bundle
-                else:
-                    placed = self._write(source)
-                    full = self._hand_over() if placed.start + placed.length >= self.bundle else None
-            if full is not None:
-                try:
-                    self._store(full)
-                finally:
-                    self._record()
-        return placed
-
-    def _write(self, source) -> Placed:
-        """Under _lock: the file at the end of the bundle being filled,
-        begun when there is none."""
-        if self._filling is None:
-            self._number += 1
-            self._filling = _Partial(self.store, self._number)
-            self._open[self._number] = {}
-        filling, start = self._filling, self._filling.size
-        digest = hashlib.sha256()
-        for block in _blocks(source):
-            digest.update(block)
-            filling.write(block)  # what was read counts, should the file have changed since its size was taken
-        return Placed(self._name(filling.number), start, filling.size - start, digest.hexdigest())
-
-    def _name(self, number) -> str:
-        return f"{self.folder}/{number:06d}"
-
-    def _own(self, placed) -> int | None:
-        """The number of a bundle of this session, or None for another session's."""
-        folder, _, number = placed.bundle.rpartition("/")
-        return int(number) if folder == self.folder else None
-
-    def read(self, placed: Placed) -> bytes:
-        """One file of the store, checked against its sha256: one this
-        session added whether its bundle is stored or not (one in the
-        bundle being filled is read from that bundle's partial copy on this
-        machine; one in a bundle handed over once that bundle is stored,
-        whatever else is being stored or put meanwhile), one of another
-        session's bundle from the store. CorruptObject when the bytes do
-        not match their sha256."""
-        number = self._own(placed)
-        data = storing = None
-        with self._lock:
-            self._check()
-            if number is not None and self._filling is not None and number == self._filling.number:
-                data = self._filling.read(placed.start, placed.length)
-            elif number is not None:
-                storing = self._storing.get(number)
-        if data is None:
-            if storing is not None:
-                storing.settled.wait()  # its bundle stored, or lost
-                with self._lock:
-                    self._check()
-            return self.store.read_file(placed)
-        if len(data) != placed.length or hashlib.sha256(data).hexdigest() != placed.sha256:
-            raise CorruptObject(f"bundle {placed.bundle}: the {placed.length} bytes at {placed.start} "
-                                f"do not match their sha256 {placed.sha256}")
-        return data
-
-    def line(self, source, outcome, code, *, got=None, address=None, size=None, time=None):
-        """Record what happened to one source: outcome is downloaded, reused
-        or failed (wpt_store.database.OUTCOMES); got, what a download got
-        (a dict JSON can hold, such as the commit), for the record only;
-        time is now unless given."""
-        if outcome not in database.OUTCOMES:
-            raise ValueError(f"outcome must be one of {', '.join(database.OUTCOMES)}: {outcome!r}")
-        with self._lock:
-            self._check()
-            self._counted += 1
-            self._lines.append({"session": self.folder, "number": self._counted, "source": source,
-                                "got": json.dumps(got, sort_keys=True) if got is not None else None,
-                                "address": address,
-                                "time": time or now(), "outcome": outcome, "size": size,
-                                "code": code})
-
-    def then(self, action):
-        """Run action() once every file added so far is stored: when the
-        handover of the bundle being filled (or, when none is, of the next
-        one or of the end) is recorded, after the actions handed over
-        before it and before the rows recorded so far go into the
-        database."""
-        with self._lock:
-            self._check()
-            if self._ended:
-                raise ValueError(f"session {self.folder} has ended")
-            self._actions.append(action)
-
-    def name(self, files: dict, action, git_objects=None):
-        """Name a file list ({path: (mode, Placed)}) once every file added
-        so far is stored, when then() would run an action: its bytes
-        (file_list_bytes) are stored as an object, then action(that
-        object's sha256) runs. With no action (None), no list is stored: the
-        files are only kept, with their git objects (the bytes the git map
-        names that no tree names; the keys of files are then the caller's
-        own). git_objects, {git object id: path} of files
-        of the list that are git blobs: those this session placed go into
-        the store database's git_objects table with where they lie, and
-        known_objects() gives them from now on. Should the end rewrite a
-        bundle stored earlier that the list's files lie in, the list is
-        stored again with their new places and action runs again with it.
-        KeyError for a git object whose path the list does not hold."""
-        named = _List(dict(files), action, dict(git_objects or {}))
-        for object_id, path in named.git_objects.items():
-            if path not in named.files:
-                raise KeyError(f"git object {object_id}: {path!r} is not a file of the list")
-        with self._lock:
-            self._check()
-            if self._ended:
-                raise ValueError(f"session {self.folder} has ended")
-        # known before the list is named, so that a list named is always known; outside _lock: adds and reads go on
-        self._learn({object_id: named.files[path][1] for object_id, path in named.git_objects.items()})
-        with self._lock:
-            self._check()
-            if self._ended:
-                raise ValueError(f"session {self.folder} has ended")
-            self._listed += 1
-            for _, placed in named.files.values():
-                number = self._own(placed)
-                if number in self._open:
-                    self._open[number][(placed.start, placed.length)] = placed.sha256
-                    named.touching.add(number)
-                    self._touching.setdefault(number, set()).add(self._listed)
-            if named.touching:
-                self._lists[self._listed] = named
-            for number in list(named.touching):
-                self._whole_yet(number)
-            self._actions.append(lambda: self._store_list(named))
-
-    def remember(self, git_objects: dict):
-        """Put {git object id: Placed} of files the store holds already (a
-        tree an earlier session stored) into the store database's
-        git_objects table, with the rows of the next handover, and
-        give them from known_objects() from now on: those in a bundle of a
-        session that has ended. The others are left out: a session still
-        running may yet rewrite its bundle and remove it, and this
-        session's own files go in with the lists that name them."""
-        lasting = {object_id: placed for object_id, placed in git_objects.items() if self._lasting(placed.bundle)}
-        with self._lock:
-            self._check()
-        self._learn(lasting)
-        with self._lock:
-            self._check()
-            self._rows += [{"object_id": object_id, "sha256": placed.sha256, "bundle": placed.bundle,
-                            "start": placed.start, "length": placed.length}
-                           for object_id, placed in sorted(lasting.items())]
-
-    def marked(self, source: str) -> bool:
-        """Whether the store database, as read once per session, marks
-        source for a new download (database.marked)."""
-        with self._known_lock:
-            self._read_known()
-            return database.marked(self._known, source)
-
-    def known_objects(self, object_ids) -> dict[str, Placed]:
-        """{git object id: where the store holds its content} for each of
-        object_ids the git_objects table of this session's read copy of the
-        store database knows (_read_known; with what this session named and
-        remembered, _learn), whose bundle is this session's or one of a
-        session that had ended when the table was read (no other session
-        can then remove it), and is held by the store."""
-        object_ids = list(dict.fromkeys(object_ids))
-        found = {}
-        with self._known_lock:
-            self._read_known()
-            for at in range(0, len(object_ids), QUERY):
-                part = object_ids[at:at + QUERY]
-                for object_id, sha256, bundle, start, length in self._known.execute(
-                        f"SELECT object_id, sha256, bundle, start, length FROM git_objects WHERE object_id IN "
-                        f"({', '.join('?' * len(part))})", part):
-                    folder = bundle.rpartition("/")[0]
-                    if folder == self.folder or folder in self._ended_sessions:
-                        found[object_id] = Placed(bundle, start, length, sha256)
-        return {object_id: placed for object_id, placed in found.items() if self._held(placed.bundle)}
-
-    def _learn(self, git_objects: dict):
-        """{git object id: Placed} written into the git_objects table of
-        this session's read copy of the store database, replacing what it
-        held for them: what known_objects gives from now on. The copy lies
-        on this machine's disk, so what a long session names takes no
-        memory; it never goes back into the store (the session's rows do)."""
-        if not git_objects:
-            return
-        with self._known_lock:
-            self._read_known()
-            self._known.executemany(
-                "INSERT OR REPLACE INTO git_objects (object_id, sha256, bundle, start, length) VALUES (?, ?, ?, ?, ?)",
-                [(object_id, placed.sha256, placed.bundle, placed.start, placed.length)
-                 for object_id, placed in git_objects.items()])
-            self._known.commit()
-
-    def _read_known(self):
-        """Under _known_lock: the store database read, once per session,
-        into a copy on this machine's disk (database.read), with the
-        sessions that had ended then."""
-        if self._known is None:
-            self._known = self.store.database(threads=True)
-            self._ended_sessions = {folder for folder, in self._known.execute(
-                "SELECT folder FROM sessions WHERE ended IS NOT NULL")}
-
-    def _lasting(self, bundle) -> bool:
-        """Whether a bundle is another session's that had ended when the
-        store database was read: sealed for good, never removed."""
-        folder = bundle.rpartition("/")[0]
-        with self._known_lock:
-            self._read_known()
-            return folder != self.folder and folder in self._ended_sessions
-
-    def _held(self, bundle) -> bool:
-        """Whether the store holds a bundle (this session's always are)."""
-        if bundle.rpartition("/")[0] == self.folder:
-            return True
-        with self._known_lock:
-            if bundle not in self._bundles:
-                self._bundles[bundle] = self.store.has_bundle(bundle)
-            return self._bundles[bundle]
-
-    def end(self):
-        """Seal the bundles for good, the last one included, rewriting each
-        that holds bytes no named file list names (see the module's
-        docstring), and put the session's end and its last rows in the
-        database. Nothing more once ended."""
-        with self._lock:
-            if self._ended:
-                self._check()
-                return
-            self._ended = True
-            self._changed.notify_all()  # an add waiting for room raises now
-        try:
-            self._settle()  # the bundles other threads handed over are recorded first
-            marks, rows = [], []
-            try:
-                with self._lock:
-                    self._check()
-                    earlier = [number for number in sorted(self._open) if number in self._sizes]
-                for number in earlier:
-                    rows += self._rewrite_sealed(number)
-                    marks.append(self._name(number))
-                with self._lock:
-                    self._check()
-                    self._rewrite_filling()
-                    self.row["ended"] = now()
-                    last = self._hand_over(rows, [{"bundle": bundle, "marked": now()} for bundle in marks], put=True)
-            except BaseException as error:
-                with self._lock:
-                    if self._failure is None:
-                        self._failure = error
-                raise
-            try:
-                self._store(last)
-            finally:
-                self._record()
-            self._settle()
-        finally:
-            # the rows file goes once the database holds all of it, and stays for a later session otherwise
-            self._row_file.close()
-            with self._known_lock:
-                if self._known is not None:
-                    self._known.close()
-        self._remove(self._removable)
-
-    def _settle(self):
-        """Wait until every handover is recorded, then raise the failure
-        that stopped the session, if any. Once a handover is lost, no
-        later one is ever recorded, and none is being recorded: the wait
-        ends there."""
-        with self._lock:
-            while self._handed and not self._handed[0].lost:
-                self._changed.wait()
-            self._check()
-
-    def _remove(self, removable):
-        """Remove the bundles the database marks that no session which
-        started before the mark still runs (put and Session.end give them),
-        and their marks."""
-        for bundle in removable:
-            self.store.drop_bundle(bundle)
-        database.forget(self.store.kind, self.store.cache, removable)
-
-    def _rewrite_sealed(self, number) -> list[dict]:
-        """A bundle stored earlier rewritten as a new bundle of the session
-        holding only its named files (none when it holds none), every list
-        naming it stored again with their new places and its action run
-        again: the git object rows to put."""
-        named = sorted(self._open.pop(number).items())
-        moved = {}
-        if named:
-            self._number += 1
-            rewritten = _Partial(self.store, self._number)
-            try:
-                for (start, length), sha256 in named:
-                    moved[(start, length)] = Placed(self._name(rewritten.number), rewritten.size, length, sha256)
-                    for data in self.store.file_parts(Placed(self._name(number), start, length, sha256), PART):
-                        rewritten.write(data)
-                original, stored = rewritten.seal()
-                self.store.keep_compressed(f"bundles/{self._name(rewritten.number)}", rewritten.path, original,
-                                           stored, self.keep_local)
-            finally:
-                rewritten.remove()
-        rows = []
-        for named_list in self._moved(number, moved):
-            if named_list.ran:
-                rows += self._store_list(named_list)
-        return rows
-
-    def _rewrite_filling(self):
-        """Under _lock: the bundle being filled rewritten on this machine's
-        disk without the bytes no named list names, before it is stored;
-        dropped when it holds no named file."""
-        filling = self._filling
-        if filling is None:
-            return
-        named = sorted(self._open.pop(filling.number, {}).items())
-        if sum(length for (_, length), _ in named) == filling.size:
-            return
-        moved = {}
-        if named:
-            rewritten = _Partial(self.store, filling.number)
-            try:
-                for (start, length), sha256 in named:
-                    moved[(start, length)] = Placed(self._name(filling.number), rewritten.size, length, sha256)
-                    for at in range(0, length, PART):
-                        rewritten.write(filling.read(start + at, min(PART, length - at)))
-            except BaseException:
-                rewritten.remove()
-                raise
-            self._filling = rewritten
-        else:
-            self._filling = None
-        filling.remove()
-        self._moved(filling.number, moved)
-
-    def _moved(self, number, moved) -> list:
-        """The lists naming files of a rewritten bundle, each file given its
-        new place (moved: {(start, length): Placed})."""
-        lists = [self._lists[listed] for listed in sorted(self._touching.pop(number, ()))]
-        for named_list in lists:
-            named_list.files = {path: (mode, moved.get((p.start, p.length), p) if self._own(p) == number else p)
-                                for path, (mode, p) in named_list.files.items()}
-            named_list.touching.discard(number)
-        return lists
-
-    def _store_list(self, named_list) -> list[dict]:
-        """Outside _lock, when a handover is recorded or at the end's
-        rewrite: a named list stored and its action run;
-        the git object rows of its files this session placed."""
-        if named_list.action is not None:
-            named_list.action(self.store.put_bytes(file_list_bytes(named_list.files)))
-        named_list.ran = True
-        placed = {object_id: named_list.files[path][1] for object_id, path in named_list.git_objects.items()}
-        return [{"object_id": object_id, "sha256": where.sha256, "bundle": where.bundle, "start": where.start,
-                 "length": where.length}
-                for object_id, where in sorted(placed.items()) if self._own(where) is not None]
-
-    def _whole_yet(self, number):
-        """Under _lock: once a bundle handed over has every byte named, it
-        needs no rewrite; the lists kept for it alone are let go."""
-        if number not in self._sizes or number not in self._open:
-            return
-        if sum(length for _, length in self._open[number]) != self._sizes[number]:
-            return
-        del self._open[number]
-        for listed in self._touching.pop(number, ()):
-            named_list = self._lists[listed]
-            named_list.touching.discard(number)
-            if not named_list.touching:
-                del self._lists[listed]
-
-    def _check(self):
-        """Under _lock: raise the failure that stopped the session, after
-        dropping what would only have gone with it (the bundle being filled
-        and the rows not handed over)."""
-        if self._failure is None:
-            return
-        if self._filling is not None:
-            self._filling.remove()
-            self._filling = None
-        self._lines, self._actions, self._rows = [], [], []
-        raise self._failure
-
-    def _hand_over(self, rows=(), marks=(), put=False):
-        """Under _lock: a _Handed of the bundle being filled (or None), the
-        session's row, the lines and the actions so far, and rows (git
-        objects) and marks (bundles to remove), to store and record
-        together, after every earlier handover; the next add begins a new
-        bundle. put: the rows go into the database whatever DATABASE_SHARE
-        says."""
-        filling = self._filling
-        if filling is not None:
-            self._sizes[filling.number] = filling.size
-            self._whole_yet(filling.number)
-        self._handovers += 1
-        handed = _Handed(self._handovers, filling, dict(self.row), self._lines, self._actions,
-                         self._rows + list(rows), list(marks), put)
-        self._filling, self._lines, self._actions, self._rows = None, [], [], []
-        self._handed.append(handed)
-        if filling is not None:
-            self._storing[filling.number] = handed
-        return handed
-
-    def _store(self, handed):
-        """Outside _lock: the bundle handed over stored, while others are
-        stored and recorded, unless an earlier handover was lost (this one
-        then goes with it). A failure stops the session."""
-        filling, error = handed.bundle, None
-        try:
-            if filling is not None and not self._lost_before(handed):
-                original, handed.size = filling.seal()
-                self.store.keep_compressed(f"bundles/{self._name(filling.number)}", filling.path, original,
-                                           handed.size, self.keep_local)
-        except BaseException as caught:
-            error = caught
-        finally:
-            if filling is not None:
-                filling.remove()
-            with self._lock:
-                if error is not None or self._lost_before(handed):
-                    self._lose(handed, error)
-                if filling is not None:
-                    del self._storing[filling.number]
-                handed.settled.set()
-                self._changed.notify_all()
-        if error is not None:
-            raise error
-
-    def _record(self):
-        """Record every handover whose turn has come, in the order they were
-        handed over, unless another thread is recording them (it then
-        records these too): the next one's turn comes once its bundle is
-        stored and the one before it is recorded. Recording one runs its
-        actions, then puts its rows and marks in the session's file, and
-        that file in the database when the handover says so or the bundles
-        recorded since the last put hold DATABASE_SHARE times the bytes the
-        database takes in the store. A failure stops the session; no later
-        handover is recorded."""
-        while self._recording.acquire(blocking=False):
-            try:
-                while (handed := self._turn()) is not None:
-                    try:
-                        rows = handed.rows
-                        for action in handed.actions:
-                            rows += action() or []
-                        self._row_file.add(handed.row, handed.lines, rows, handed.marks)
-                        self._stored += handed.size
-                        if handed.put or self._stored >= DATABASE_SHARE * self._database_size:
-                            self._removable, self._database_size = database.put(self.store.kind, self.store.cache,
-                                                                                [self._row_file])
-                            self._stored = 0
-                    except BaseException as error:
-                        with self._lock:
-                            self._lose(handed, error)
-                            self._changed.notify_all()
-                        raise
-                    with self._lock:
-                        self._handed.popleft()
-                        self._changed.notify_all()
-            finally:
-                self._recording.release()
-            if self._turn() is None:  # a turn that came while _recording was released is recorded by this thread
-                return
-
-    def _turn(self):
-        """The handover whose turn to be recorded has come, or None."""
-        with self._lock:
-            handed = self._handed[0] if self._handed else None
-            return handed if handed is not None and handed.settled.is_set() and not handed.lost else None
-
-    def _lost_before(self, handed) -> bool:
-        """Under _lock or not: whether the session stopped at a handover
-        before this one, or at no handover."""
-        lost = self._lost
-        return self._failure is not None and (lost is None or lost < handed.index)
-
-    def _lose(self, handed, error):
-        """Under _lock: no handover from this one on is recorded; error (or
-        the failure that came first) stops the session."""
-        handed.lost = True
-        self._lost = handed.index if self._lost is None else min(self._lost, handed.index)
-        if self._failure is None:
-            self._failure = error
+def latest_dataset(store, title: str) -> dict | None:
+    """The record of the dataset last built for a recipe or a series (its
+    `names`, which dataset_title gives), found through the index: the
+    session's own latest, else the one the session started from; None when
+    neither holds one."""
+    with store.index() as found:
+        rows = found.execute("SELECT session, name FROM held WHERE kind = ? AND EXISTS "
+                             "(SELECT 1 FROM json_each(held.about, '$.names') WHERE value = ?) "
+                             "ORDER BY time DESC, name", (DATASETS, title)).fetchall()
+    for session in store.reading():
+        for name in (name for holder, name in rows if holder == session):
+            record = store.get_json(dataset_key(session, name))
+            if record is not None and title in record.get("names", ()):
+                return record
+    return None
 
 
-def _blocks(source):
-    if isinstance(source, (bytes, bytearray, memoryview)):  # in parts, so a large file is never copied whole
-        view = memoryview(source)
-        for at in range(0, len(view), CHUNK):
-            yield view[at:at + CHUNK]
-        return
-    with open(source, "rb") as file:
-        while block := file.read(CHUNK):
-            yield block
+def dataset_vocabulary(store, sha256: str) -> dict | None:
+    """The reference ({"key", "sha256"}) of a vocabulary file of that sha256
+    that a dataset of the session, or of the one it started from, holds in
+    its folder, found through the index; None when none does. A locked
+    vocabulary is found there again when the store's cache folder is
+    empty."""
+    with store.index() as found:
+        rows = found.execute("SELECT session, name FROM held WHERE kind = ? AND json_extract(about, '$.vocabulary') = ?",
+                             (DATASETS, sha256)).fetchall()
+    for session in store.reading():
+        for name in sorted(name for holder, name in rows if holder == session):
+            record = store.get_json(dataset_key(session, name))
+            reference = None if record is None else record.get("tokenizer", {}).get("vocabulary")
+            if isinstance(reference, dict) and reference.get("sha256") == sha256:
+                return reference
+    return None

@@ -17,9 +17,9 @@ into the run's record under the span the asking thread is in
 asking process adds them to the record when the item ends, so an item
 writes no part of the record of its own, and a worker that dies loses the
 lines of its item. The results of other commits an item reused come back
-with it, for the run's warnings (Telemetry.reused_lines). A ref a worker
-sets names a result that can be computed again
-(wpt_telemetry.set_result_ref), never a step that cannot be undone.
+with it, for the run's warnings (Telemetry.reused_lines). What a worker
+keeps is a result that can be computed again (wpt_telemetry.set_result),
+never a step that cannot be undone.
 
     with Pool(repo, "sources at once") as pool:
         pool.call(function, *arguments, telemetry=telemetry)   # from any thread

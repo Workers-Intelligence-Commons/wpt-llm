@@ -64,7 +64,7 @@ sha256, and the list of the documents it was trained on, named by its sha256
 build-tokenizer <dataset recipe>` does the same and stops before any token.
 The lock lists each source the build left out with the kind of its error
 (`left_out`); with `--strict`, a failing source stops the build instead. The list is
-one object of the store: a line per document, the JSON array
+one file of the store: a line per document, the JSON array
 `["<id>", "<sha256 of its Markdown>"]`, sorted by the line's bytes, written while the documents are read
 and sorted on disk, so it is never held in memory whole. Commit the lock.
 From then on, every build of that version uses that vocabulary:
@@ -89,8 +89,11 @@ From then on, every build of that version uses that vocabulary:
   or another: every build reads it from the store, checked against the
   sha256 the lock keeps. A store that does not hold it stops the build
   (`VocabularyMissing`), so a machine without access to the store that
-  holds it cannot use it. The list of the trained documents is shared the
-  same way: a store without it stops the build (`TrainedListMissing`).
+  holds it cannot use it. Each dataset keeps the vocabulary it was built
+  with in its folder, and a build finds a locked vocabulary there again
+  when the store's `cache/files/` does not hold it. The list of the trained
+  documents is shared through the store the same way: a store without it
+  stops the build (`TrainedListMissing`).
 - **Erasure does not reach a locked vocabulary** until `version` is raised:
   merges learned from text that was erased later stay in it (see
   [erasure.md](erasure.md)).
@@ -102,8 +105,9 @@ mean other tokens.
 ### Where the vocabulary is checked
 
 - The dataset build uses only the locked vocabulary; the dataset record
-  names the recipe, its version and the vocabulary's sha256, and the
-  dataset id covers it.
+  names the recipe, its version and the vocabulary's file (`{"key",
+  "sha256"}`, in the dataset's folder), and the dataset id covers its
+  sha256.
 - Training reads the vocabulary from the store, checked against that
   sha256, and writes it into the model folder as `tokenizer.json`. Every
   weight file's header names it: `tokenizer` (such as

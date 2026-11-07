@@ -83,8 +83,7 @@ def covered(data, root: Path) -> dict:
 def download(root, store, sid):
     """The download step on one source, as `wpt dataset download` runs it,
     in a session of its own; its error raised."""
-    with store.session(f"20261025T120000Z-test-download-{sid}", "test", "abc123", False) as session:
-        [done] = downloading.download(Repo(root), [sid], store, session, log=lambda *_: None)
+    [done] = downloading.download(Repo(root), [sid], store, log=lambda *_: None)
     if done.error is not None:
         raise done.error
 
@@ -125,7 +124,7 @@ def built(tmp_path, monkeypatch):
     root = tmp_path
     write_texts(root)
     repo = Repo(root)
-    store = open_store((tmp_path / "store").as_uri())
+    store = open_store((tmp_path / "store").as_uri()).at("test-session")
     def admitted(name, upstream, commit, license, attribution, text, formats, tags, held_out_by=None):
         data = {"type": "git", "address": str(upstream), "revision": commit, "licenses": [{"license": license, "paths": ["**"], "attribution": attribution, "text": text}],
                 "formats": formats, "tags": tags, **({"held_out_by": held_out_by} if held_out_by else {}),
@@ -174,6 +173,7 @@ def built(tmp_path, monkeypatch):
     write("tokenizer", "t", {"version": 1, "sample_bytes": 10**9, "vocab_size": 556})
     dataset_id = build_dataset(repo, recipe(), store, log=lambda *_: None)
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())  # where each command run also writes its record
+    monkeypatch.setenv("WPT_SESSION", store.session)
     monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)  # no live backend, whatever this machine sets
     monkeypatch.setenv("WPT_MAX_RESTARTS", "0")  # wpt train runs in the test's own process, unless a test says
     monkeypatch.chdir(tmp_path)
@@ -205,9 +205,9 @@ def trained(built, tmp_path):
 @pytest.fixture
 def s3(tmp_path, monkeypatch):
     """An S3 store that WPT_STORE now names (moto answers its requests inside
-    the test process). Gives store, copy(local), which puts a local store's
-    objects and refs into it (the built dataset, for a command that reads
-    it), and refuse(marker), after which the bucket refuses every group of
+    the test process), at the session test-session, which WPT_SESSION names.
+    Gives store, copy(local), which puts a local store's files into it (the
+    built dataset, for a command that reads it), and refuse(marker), after which the bucket refuses every group of
     record lines that holds marker."""
     import boto3
     from moto import mock_aws
@@ -221,15 +221,13 @@ def s3(tmp_path, monkeypatch):
     monkeypatch.delenv("AWS_PROFILE", raising=False)
     with mock_aws():
         boto3.client("s3").create_bucket(Bucket="wpt-test")
-        store = open_store("s3://wpt-test/store")
+        store = open_store("s3://wpt-test/store").at("test-session")
         monkeypatch.setenv("WPT_STORE", "s3://wpt-test/store")
+        monkeypatch.setenv("WPT_SESSION", "test-session")
 
         def copy(local):
-            for path in sorted((local.root / "objects").glob("*/*")):
-                store.put_file(local.path(path.name.removesuffix(".zst")))  # a compressed one as its own bytes
-            for path in sorted((local.root / "refs").glob("*/*")):
-                sha, _, made_by = path.read_text().strip().partition(" ")
-                store.set_ref(path.parent.name, path.name, sha, made_by=made_by or None)
+            for key in local.kind.list(""):
+                store.kind.write(key, local.root / key)
 
         def refuse(marker):
             real = S3Store._raw_flush_records

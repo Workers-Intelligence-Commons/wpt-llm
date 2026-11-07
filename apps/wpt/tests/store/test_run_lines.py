@@ -11,8 +11,9 @@ from wpt.store import main
 
 
 def test_a_run_s_lines_print_at_the_level_of_its_record(tmp_path, monkeypatch, capsys):
-    store = open_store((tmp_path / "store").as_uri())
+    store = open_store((tmp_path / "store").as_uri()).at("test-session")
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     with pytest.raises(ValueError, match="boom"):
         with Telemetry.start(store, "wpt train", [], "failed", env_file=tmp_path / ".env", environ={},
                              echo=lambda *_: None) as telemetry:

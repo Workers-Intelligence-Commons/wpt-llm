@@ -160,7 +160,7 @@ uv run wpt scaling run-256x5 run-384x8 runs/512x10 --predict eldest-titmouse:640
 ```
 
 Each model is a model folder, or the name of a run whose model folder the
-store keeps (`models/NAME`). Nothing is written. Each model's
+session keeps (`<id>/models/NAME/`). Nothing is written. Each model's
 `provenance.json` and `evals/held-out-loss.json` give one point:
 
 - Compute: C = M x D. M, the training compute per token, is the one a
@@ -483,7 +483,7 @@ the `rating` format holds one rating per line, each a JSON object matching
 
 ```json
 {"task": "<source id>/<task folder>", "weights": {"model.safetensors": "<sha256>"},
- "record": "<wpt eval run record folder>", "attempt": 1, "plain": false, "verdict": "pass",
+ "record": "<session>/<wpt eval run record folder>", "attempt": 1, "plain": false, "verdict": "pass",
  "by": "A. Person", "date": "2026-10-23"}
 ```
 

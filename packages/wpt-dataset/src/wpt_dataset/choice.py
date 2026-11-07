@@ -1,7 +1,7 @@
 """A build's first two steps, which read no text: the index and the choice.
 
 The index is built from what the store's records already say: each source's
-final tree, with each file's bundle, position, size and sha256, and the
+final tree, with each file's tar, position, size and sha256, and the
 source's formats, licenses and tags. It holds every file that can give a
 document: no symbolic link, no chat, task, rating or probe file, no git
 history's order file, no file a records entry joins to another, and no
@@ -11,7 +11,7 @@ are one document, and the index keeps the first in source id order. A
 source whose format map fails, or that a final tree cannot be made for, is
 named in `failed`.
 
-What a source gives the index is kept in the store under the ref
+What a source gives the index is kept in the store as the result
 source-index/<index_key: its source.json, the fingerprint of its final tree,
 its upstream file list and INDEX_VERSION>, so that a build computes only the
 sources where one of them changed, and the duplicates are taken out of the
@@ -20,13 +20,13 @@ every build, so it stays failed, with its own error, for as long as it fails.
 
 The choice draws a mixture's documents from the index. Each row goes to the
 first pool, in mixture order, whose expression matches its tags. Inside a
-pool, rows are grouped by the frame their file starts in (the bundle and
+pool, rows are grouped by the frame their file starts in (the tar and
 start // wpt_store.blocks.FRAME), the unit the store fetches, so that a
-build reads about the bytes it chooses; a row with no bundle is a group of
+build reads about the bytes it chooses; a row with no tar is a group of
 its own. Each pool holds its groups in one seeded order, from a seed fixed
-by the pool's name and the group's own name (the bundle's name and the
+by the pool's name and the group's own name (the tar's name and the
 frame number, or the row's sha256), so a source added later moves no group
-before another; a group's rows keep their order in the bundle. take() gives
+before another; a group's rows keep their order in the tar. take() gives
 the next whole groups of each pool, by file bytes, so a pool's share may be
 passed by one group at most, and a build calls it in rounds until every pool
 has its share: the first round guesses BYTES_PER_TOKEN, each later one uses
@@ -42,25 +42,25 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from wpt_store import CorruptObject, MissingObject, blocks
-from wpt_telemetry import Telemetry, get_result_ref, set_result_ref
+from wpt_store import CorruptFile, MissingFile, blocks
+from wpt_telemetry import Telemetry, get_result, set_result
 from wpt_utils.lines import say
 from wpt_utils.parallel import Sizing, each
 
 from . import license_check, markdown, pools, records, workers
 from .errors import DatasetError
 from .manifest import ORDER, SYMLINK
-from .sources import UPSTREAM_FILES, final_tree, fingerprint, tags_of, tree_key, upstream_key
+from .sources import final_tree, fingerprint, held_source, tags_of, tree_key
 
-INDEX_VERSION = 1  # raised by hand when a change to the code changes what a source gives the index
+INDEX_VERSION = 2  # raised by hand when a change to the code changes what a source gives the index
 BYTES_PER_TOKEN = 4  # the first round's guess of the file bytes one token takes
 MARGIN = 1.1  # how much more a later round reads than its measure asks, so that few rounds are needed
 NO_DOCUMENT = ("chat", "task", "rating", "probe")  # formats whose files give no document
-SOURCE_INDEX = "source-index"  # the kind of the ref of what a source gives the index
+SOURCE_INDEX = "source-index"  # the stage of what a source gives the index
 LOOKUPS = 24  # sources whose saved parts are looked for at once: each only waits on the store's answers
-FAILURES = (DatasetError, CorruptObject, MissingObject)  # what takes one source out of the index
+FAILURES = (DatasetError, CorruptFile, MissingFile)  # what takes one source out of the index
 ROW = np.dtype([("source", "<i4"), ("position", "<i4"), ("sha256", "S32"), ("bytes", "<i8"), ("tags", "<i4"),
-                ("bundle", "<i4"), ("start", "<i8")])  # position: in the final tree; bundle -1: an object of the store
+                ("tar", "<i4"), ("start", "<i8")])  # position: in the final tree; tar -1: a file outside a tar
 
 
 def gives_document(source, path: str, found: dict) -> bool:
@@ -79,18 +79,17 @@ def index_key(source, store) -> str:
     """The fingerprint of what a source gives the index: everything its
     computation reads, the source's whole source.json (its type, licenses,
     formats, tags and cuts), its final tree (sources.tree_key: the upstream
-    manifest, the cuts and their key, the patches), the upstream file list,
-    which alone says in which bundle and where each file lies and which a
-    new download of the same files changes, and INDEX_VERSION. The sizes of
-    files that are store objects follow from their sha256."""
+    manifest, the cuts and their key, the patches), the sha256 of the
+    source's tar, which alone says where each file lies, and INDEX_VERSION.
+    The sizes of files outside a tar follow from their sha256."""
     return fingerprint({"kind": SOURCE_INDEX, "version": INDEX_VERSION, "source": source.id, "data": source.data,
-                        "tree": tree_key(source, store), "files": store.get_ref(UPSTREAM_FILES, upstream_key(source))})
+                        "tree": tree_key(source, store), "tar": found.sha256 if (found := held_source(source, store)) else None})
 
 
-def _part_bytes(rows: np.ndarray, tag_sets: list[frozenset[str]], bundles: list[str]) -> bytes:
+def _part_bytes(rows: np.ndarray, tag_sets: list[frozenset[str]], tars: list[str]) -> bytes:
     """A source's part of the index as it is kept: its numbers on one line
     of JSON, then its rows."""
-    numbers = {"tag_sets": [sorted(tags) for tags in tag_sets], "bundles": bundles}
+    numbers = {"tag_sets": [sorted(tags) for tags in tag_sets], "tars": tars}
     return json.dumps(numbers, ensure_ascii=False).encode() + b"\n" + rows.tobytes()
 
 
@@ -99,17 +98,17 @@ def _parsed_part(data: bytes) -> tuple[np.ndarray, list[frozenset[str]], list[st
     line, _, rows = data.partition(b"\n")
     numbers = json.loads(line)
     return (np.frombuffer(rows, dtype=ROW).copy(), [frozenset(tags) for tags in numbers["tag_sets"]],
-            numbers["bundles"])
+            numbers["tars"])
 
 
 def _indexed(source, store, key, telemetry):
-    """(rows, the tag sets their `tags` number, the bundles their `bundle`
+    """(rows, the tag sets their `tags` number, the tars their `tar`
     numbers) of one source, source numbered 0, in a worker process, kept
     under key."""
     tree, _ = final_tree(source, store, telemetry)
     licenses = source.data["licenses"]
     coverage = license_check.Coverage(licenses)
-    found, tag_sets, bundles = [], {}, {}
+    found, tag_sets, tars = [], {}, {}
     for position, (path, entry) in enumerate(tree.items()):
         if entry.mode == SYMLINK:
             continue
@@ -121,10 +120,10 @@ def _indexed(source, store, key, telemetry):
         found.append((0, position, bytes.fromhex(entry.sha256),
                       placed.length if placed is not None else store.size(entry.sha256),
                       tag_sets.setdefault(tags_of(source, path), len(tag_sets)),
-                      bundles.setdefault(placed.bundle, len(bundles)) if placed is not None else -1,
+                      tars.setdefault(source.id, len(tars)) if placed is not None else -1,
                       placed.start if placed is not None else 0))
-    part = np.array(found, dtype=ROW), list(tag_sets), list(bundles)
-    set_result_ref(store, SOURCE_INDEX, key, store.put_bytes(_part_bytes(*part)), telemetry)
+    part = np.array(found, dtype=ROW), list(tag_sets), list(tars)
+    set_result(store, SOURCE_INDEX, key, _part_bytes(*part), telemetry)
     return part
 
 
@@ -133,7 +132,7 @@ class Index:
     rows: np.ndarray  # of ROW, duplicates gone, in source and tree order
     sources: list  # the sources `source` numbers
     tag_sets: list[frozenset[str]]  # what `tags` numbers
-    bundles: list[str]  # the names of the bundles `bundle` numbers
+    tars: list[str]  # the names of the tars `tar` numbers
     duplicates: int  # the rows the same sha256 took out
     failed: list = field(default_factory=list)  # [(source, error)], each source no row comes from
 
@@ -146,8 +145,8 @@ def _saved(admitted, store, telemetry) -> tuple[dict, dict]:
         def look(source):
             try:
                 keys[source.id] = index_key(source, store)
-                held = get_result_ref(store, SOURCE_INDEX, keys[source.id], telemetry)
-                return _parsed_part(store.get_bytes(held)) if held else None
+                held = get_result(store, SOURCE_INDEX, keys[source.id], telemetry)
+                return _parsed_part(held) if held is not None else None
             finally:
                 progress.advance()
 
@@ -183,7 +182,7 @@ def build(repo, store, telemetry=None, log=say) -> Index:
     none of whose texts is read."""
     telemetry = telemetry or Telemetry.off()
     admitted = repo.admitted(telemetry, log)
-    parts, sources, tag_sets, bundles, failed = [], [], {}, {}, []
+    parts, sources, tag_sets, tars, failed = [], [], {}, {}, []
     with telemetry.span("index", sources=len(admitted)) as span:
         results, keys = _saved(admitted, store, telemetry)
         reused = sum(done.error is None for done in results.values())
@@ -200,14 +199,14 @@ def build(repo, store, telemetry=None, log=say) -> Index:
             if len(rows):
                 rows["source"] = len(sources)
                 rows["tags"] = np.array([tag_sets.setdefault(found, len(tag_sets)) for found in tags])[rows["tags"]]
-                numbers = np.array([bundles.setdefault(name, len(bundles)) for name in names] + [-1])
-                rows["bundle"] = numbers[rows["bundle"]]
+                numbers = np.array([tars.setdefault(name, len(tars)) for name in names] + [-1])
+                rows["tar"] = numbers[rows["tar"]]
                 parts.append(rows)
             sources.append(source)
         rows = np.concatenate(parts) if parts else np.empty(0, dtype=ROW)
         first = np.sort(np.unique(rows["sha256"], return_index=True)[1])
         span.set(files=len(rows), documents=len(first), reused=reused, failed=[source.id for source, _ in failed])
-    return Index(rows[first], sources, list(tag_sets), list(bundles), len(rows) - len(first), failed)
+    return Index(rows[first], sources, list(tag_sets), list(tars), len(rows) - len(first), failed)
 
 
 def _seed(name: str) -> np.uint64:
@@ -221,21 +220,21 @@ def _mixed(values: np.ndarray) -> np.ndarray:
     return values ^ (values >> np.uint64(31))
 
 
-def _ordered(rows: np.ndarray, bundles: list[str], seed: np.uint64) -> tuple[np.ndarray, np.ndarray]:
+def _ordered(rows: np.ndarray, tars: list[str], seed: np.uint64) -> tuple[np.ndarray, np.ndarray]:
     """(the rows' positions in their seeded order, the number of the group
     each of them is in, which never falls): the rows that start in one frame
-    of one bundle are a group, and so is each row of no bundle. Groups come
+    of one tar are a group, and so is each row of no tar. Groups come
     in the order of their name mixed with the seed, a group's rows in the
     order of their start."""
-    names = np.array([int.from_bytes(hashlib.sha256(name.encode()).digest()[:8]) for name in bundles] + [0], dtype="<u8")
+    names = np.array([int.from_bytes(hashlib.sha256(name.encode()).digest()[:8]) for name in tars] + [0], dtype="<u8")
     frames = (rows["start"] // blocks.FRAME).astype("<u8")
     own = np.ascontiguousarray(rows["sha256"]).view("u1").reshape(-1, 32)[:, :8].copy().view("<u8").ravel()
-    named = np.where(rows["bundle"] >= 0, _mixed(names[rows["bundle"]] + frames * np.uint64(0x9e3779b97f4a7c15)), own)
+    named = np.where(rows["tar"] >= 0, _mixed(names[rows["tar"]] + frames * np.uint64(0x9e3779b97f4a7c15)), own)
     ranks = _mixed(named ^ seed)
-    order = np.lexsort((rows["start"], frames, rows["bundle"], ranks))
-    ranks, bundle, frames = ranks[order], rows["bundle"][order], frames[order]
+    order = np.lexsort((rows["start"], frames, rows["tar"], ranks))
+    ranks, tar, frames = ranks[order], rows["tar"][order], frames[order]
     starts = np.ones(len(order), dtype=bool)
-    starts[1:] = (ranks[1:] != ranks[:-1]) | (bundle[1:] != bundle[:-1]) | (frames[1:] != frames[:-1]) | (bundle[1:] < 0)
+    starts[1:] = (ranks[1:] != ranks[:-1]) | (tar[1:] != tar[:-1]) | (frames[1:] != frames[:-1]) | (tar[1:] < 0)
     return order, np.cumsum(starts)
 
 
@@ -252,7 +251,7 @@ class Choice:
         self.orders, self.groups = {}, {}  # per pool: its rows' positions in order, and each one's group number
         for number, name in enumerate(self.names):
             rows = np.flatnonzero(of_row == number)
-            order, self.groups[name] = _ordered(index.rows[rows], index.bundles, _seed(name))
+            order, self.groups[name] = _ordered(index.rows[rows], index.tars, _seed(name))
             self.orders[name] = rows[order]
         self.taken = dict.fromkeys(self.names, 0)  # how many rows of each pool's order the rounds took
 
@@ -320,11 +319,11 @@ def next_wanted(mixture: dict, recipe: dict, read: dict[str, int], tokens: dict[
 
 
 def by_source(index: Index, rows: np.ndarray, without=frozenset()) -> list:
-    """[(source, its rows in bundle order)] in bundle order, of the rows of
+    """[(source, its rows in tar order)] in tar order, of the rows of
     the sources whose ids are not in without."""
     if not len(rows):
         return []
-    rows = rows[np.lexsort((rows["start"], rows["bundle"]))]
+    rows = rows[np.lexsort((rows["start"], rows["tar"]))]
     numbers, first = np.unique(rows["source"], return_index=True)
     grouped = rows[np.argsort(rows["source"], kind="stable")]
     parts = np.split(grouped, np.searchsorted(grouped["source"], numbers)[1:])
@@ -333,6 +332,6 @@ def by_source(index: Index, rows: np.ndarray, without=frozenset()) -> list:
 
 
 def in_numbers(rows: np.ndarray) -> dict[str, int]:
-    """How much the rows hold, for a plan: {files, bytes, sources, bundles}."""
+    """How much the rows hold, for a plan: {files, bytes, sources, tars}."""
     return {"files": len(rows), "bytes": int(rows["bytes"].sum()), "sources": len(np.unique(rows["source"])),
-            "bundles": len(np.unique(rows["bundle"][rows["bundle"] >= 0]))}
+            "tars": len(np.unique(rows["tar"][rows["tar"] >= 0]))}

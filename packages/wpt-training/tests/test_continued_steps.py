@@ -3,6 +3,8 @@ steps"): a decay branch of a model series is a trunk at the peak rate
 and a decay that goes on from its last state, and together they must
 train as the one step whose schedule drops at the same updates."""
 
+from dataclasses import asdict
+
 import pytest
 import torch
 
@@ -24,14 +26,14 @@ CPU = Strategy(torch.device("cpu"))
 @pytest.fixture
 def dataset(tmp_path):
     """A store with 2 training shards of 300 random tokens and a held-out shard; and its record."""
-    store = LocalStore(tmp_path / "store")
+    store = LocalStore(tmp_path / "store").at("test-session")
     generator = torch.Generator().manual_seed(0)
 
     def shard(name, part):
         path = tmp_path / f"{name}.parquet"
         digest = write_shard(path, [(torch.randint(50, (300,), generator=generator).tolist(), "s", f"s/{name}",
                                      part, 0)])
-        return {"object": store.put_file(path), "token_sha256": digest, "rows": 1, "tokens": 300}
+        return {**asdict(store.put_named(f"test-session/datasets/d/{digest}.parquet", path)), "token_sha256": digest, "rows": 1, "tokens": 300}
 
     record = {"shards": [shard("a", "p"), shard("b", "p")], "held_out_shards": [shard("h", "held-out")],
               "total_tokens": 600, "sources": {"s": {"name": "s"}}}

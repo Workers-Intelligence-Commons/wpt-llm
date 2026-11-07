@@ -8,7 +8,7 @@ request for its compressed bytes. Fetch(key, table, first, last, read)
 gives the compressed bytes of frames first to last, the blocks that hold
 them requested together on REQUESTS threads at most. When a read starts
 where the one before it ended on the same file, or at the start of a file (a reader going through a
-file or a bundle in order), the blocks that follow are requested too, as
+file in order), the blocks that follow are requested too, as
 long as the compressed bytes of the blocks requested and not yet taken
 stay within LIMIT (also when a read takes frames of the last block taken, past its middle); a reader that has gone elsewhere leaves its blocks to
 the next reader that needs room (they are dropped first). The bytes a

@@ -1,7 +1,7 @@
 """Files and folders on this machine's disk that one live process owns: a
-bundle being filled (wpt_store.sessions), a temporary copy of the store
-database and a session's rows (wpt_store.database), all in the store's
-cache folder, a round's downloaders' temporary folder
+source's tar being filled (wpt_store.sessions) and a temporary copy of the
+store's index (wpt_store.index), both in the store's cache folder, a
+round's downloaders' temporary folder
 (wpt_dataset.downloaders), also there, and a download's temporary folder
 (wpt_dataset.download).
 

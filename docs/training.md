@@ -17,7 +17,8 @@ output to `runs/logs/<date-time>.log` and print how to follow and stop it.
 `SERIES:SIZE`, a size of a model series, or `SERIES:SIZE:RUN`, another run
 of that size; see [model.md](model.md), "Model recipes") and the id of the dataset built from it, and never
 builds: build and training fail separately. Without an id, it reads the
-dataset last built for that recipe, or for that series, from the store. A dataset built from another
+latest dataset built for that recipe, or for that series, which the store's
+index gives. A dataset built from another
 data part than the recipe's is refused, so a recipe that changed since that
 build is refused until it is built again. Everything that changes the
 resulting model comes from the recipe: the architecture's numbers, the
@@ -47,7 +48,7 @@ process's record breaks (a record call refused, or on S3 a group of its
 lines refused in the background), it finishes its update unrecorded and
 every process stops after it, as for Ctrl+C: the checkpoint is saved, and
 `--resume` continues from it without losing an update. The broken record
-does not name that checkpoint (nor, with `--run`, its store ref). When
+does not name that checkpoint (nor, with `--run`, the store's record of it). When
 `wpt train`'s own record breaks while the job trains (on S3, a group of
 its lines refused in the background), it stops the job as Ctrl+C does: its
 processes finish their update and save the checkpoint, and `wpt train`
@@ -140,9 +141,9 @@ nothing to train is refused.
 
 ### Step results and reuse
 
-After each step, the store keeps its result under the ref
-`steps/<fingerprint>`: a JSON object holding what the run recorded of the
-step and the object of its state, the weights (and those of its best
+After each step, the store keeps its result as
+`cache/steps/<fingerprint>`: a JSON record holding what the run recorded of the
+step and its state's file (`{"key", "sha256"}`), the weights (and those of its best
 evaluation) with the optimizer's, method's and environment's state: the
 step's last checkpoint, as it is. The fingerprint covers the fingerprint
 of the step before it (for the first step, the model's shape and
@@ -750,7 +751,7 @@ environment's state and the best weights so far. After the step's last
 update it always writes one, unless that update's own was just written,
 and that checkpoint, as it is, becomes the step's kept state ("Step
 results and reuse", above); the checkpoint's place is then emptied: the
-folder is removed, and a store checkpoint loses its name while its object
+folder is removed, and a store checkpoint loses its record while its file
 stays as the step's state. The same command with `--resume`
 continues the step that stopped from its checkpoint, on other hardware
 too: the number of processes, `--micro-batch`, `--recompute` and
@@ -780,16 +781,20 @@ Where it lives, on the manager's side:
   wpt manager's machine; a run that fails leaves `checkpoint/` in an
   earlier folder at that place, and a model folder that did not exist
   before the run and holds nothing else goes with the checkpoint;
-- with `--run NAME` (or `WPT_RUN`), in the store, under the ref
-  `checkpoints/NAME`. Any machine using the same `WPT_STORE` continues the
+- with `--run NAME` (or `WPT_RUN`), in the store: the record
+  `<id>/models/NAME/checkpoint.json` names the state's file, which lies beside
+  it in `<id>/models/NAME/`. Any machine using
+  the same `WPT_STORE` and session continues the
   run with the same command, `--run NAME --resume` and any `--out`: a run
-  can move from one machine to another between sessions. Each save
-  replaces the previous checkpoint of that name, which is then deleted;
-  a crash while saving leaves the previous one. The ref's change and every
-  deletion are recorded with the object's sha256, and that line is in the
+  can move from one machine to another. With `--from`, a run that has no
+  checkpoint in its own session continues the one of that session, and that
+  session's record and file stay as they are. Each save
+  replaces the previous record of that name, and the previous file is then
+  deleted; a crash while saving leaves the previous one. The record's change and every
+  deletion are recorded with the file's key, and that line is in the
   store before the deletion: a deletion whose record breaks leaves the
-  object in the store. A save once the record broke still sets the ref,
-  unrecorded, and leaves the previous object beside the new one. With an
+  file in the store. A save once the record broke still writes the checkpoint's
+  record, unrecorded, and leaves the previous file beside the new one. With an
   S3 store, every save is an upload of about four times the model's size.
 
 ### Stopping a run

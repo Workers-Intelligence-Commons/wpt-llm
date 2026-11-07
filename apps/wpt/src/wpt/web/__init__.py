@@ -31,9 +31,12 @@ commits stay in git.
 """
 
 import argparse
+import os
 
+from wpt import sessions
 from wpt_dataset.errors import RuleViolation
 from wpt_dataset.repo import Repo
+from wpt_store.sessions import SESSION, START
 from wpt_utils.lines import ERROR, say
 from wpt_utils.programs import MissingTool
 
@@ -46,7 +49,11 @@ def main(argv=None):
     parser = argparse.ArgumentParser(prog="wpt web", description=__doc__)
     parser.add_argument("--port", type=int, default=8410)
     parser.add_argument("--root", help="the repository (default: the one holding the current folder)")
+    sessions.options(parser)
     args = parser.parse_args(argv)
+    for setting, value in ((SESSION, args.session), (START, args.from_id)):  # read by the routes and by every job
+        if value:
+            os.environ[setting] = value
     try:
         repo = Repo.find(args.root)
         static = ui.built()

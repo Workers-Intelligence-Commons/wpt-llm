@@ -182,7 +182,7 @@ def documents(source, tree, store, repo, skipped: dict | None = None, only=None,
     entry is left out and counted (records.Skipped.untrained); every
     entry's without it. newest_indexes, when given, keeps each `newest`
     index (records.saved_newest_index) for the next call on the same source
-    and tree, as a batch of its files; telemetry records the ref of an index
+    and tree, as a batch of its files; telemetry records the result of an index
     it saves.
     Raises FormatMapError when a path matches no format entry or several,
     NotText when a file is not text (encoding.py) or an xhtml file is not

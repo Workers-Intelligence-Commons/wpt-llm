@@ -2,7 +2,7 @@
 SUBCOMMAND --help`).
 
     wpt dataset ...   sources, the data rules, vocabularies and dataset builds
-    wpt store ...     what the store holds, sources marked for a new download, a kept model copied out
+    wpt store ...     what the store holds, its runs, a kept model copied out
     wpt agent ...     the images of agentic tasks, locked and built
     wpt train ...     train a model recipe on the dataset built from it
     wpt eval ...      run tests on a trained model, into its model card

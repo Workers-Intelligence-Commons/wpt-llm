@@ -1,12 +1,12 @@
 """wpt dataset: check, fetch and build WPT data.
 
     wpt dataset download [ID ...] [--stream]
-                                          fetch sources into the store (all admitted, or the ids
+                                          fetch sources into the session (all admitted, or the ids
                                           given), each as its address serves it when asked (a git
-                                          source at its `revision`), several at once; a source
-                                          already there is not fetched again
-                                          unless it is marked for a new download (`wpt store mark`);
-                                          every source is tried, and the failures listed at the end
+                                          source at its `revision`), several at once; a source the
+                                          session holds with the same address, revision and fetch
+                                          options is not fetched again; every source is tried, and
+                                          the failures listed at the end
     wpt dataset check                     every rule that needs no download
     wpt dataset check --fetch [ID ...]    also download sources (all admitted, or the ids given),
                                           then check them: cuts, patches, license map,
@@ -122,19 +122,20 @@ over it: download.run, checking.to_fetch, build.run, edit, migrate.migrate,
 own, so a command and wpt web's route for the same work cannot disagree.
 
 The store comes from WPT_STORE (environment or .env at the repository root).
+Every command that touches it works in one session: --session ID, or
+WPT_SESSION. A command that downloads (download, check --fetch, manifest)
+makes a new short ID when none is named, and prints it; any other is refused
+(SessionNeeded). --from OLD_ID (WPT_FROM) reads from that other session what
+this one does not hold, and what the command writes names OLD_ID.
 Only download, check --fetch, manifest and exclude-unusable read upstream; every other command
-reads them from the store, and a source not there is NotDownloaded. Each
-run of these three, and each build and build-tokenizer is a session:
-its record in the
-store, in its own folder under records/, and its lines (one per source
-downloaded, found in the store, or failed; a build's or a build-tokenizer's,
-one per source it read, found in the store) in the store database; the other commands that
-read sources write none. Several sources download at once, as
+reads sources from the session, and a source not there is NotDownloaded. Each
+run of these three, and each build and build-tokenizer, has its record in the
+session, in its own folder of <id>/runs/. Several sources download at once, as
 wpt_utils.parallel allows and at most as many from one site as sites.txt
 (in this package) says, which also paces the requests to a site with a
 limit per time. download --stream (or
 WPT_STREAM=1) leaves no copy of what it stored on this machine (an S3
-store's bundles are otherwise kept in its cache folder too). A build
+store's tars are otherwise kept in its cache folder too). A build
 reads only the documents it chose, and keeps their Markdown in the store's
 cache folder, for the vocabulary, the tokens and the next build; with
 --stream (or WPT_STREAM=1) it goes to a temporary folder, deleted when the
@@ -149,15 +150,16 @@ does not apply, a format map that fails, a broken file) and lists it, with
 its error, in the dataset record, and in the lock of a vocabulary the build
 trains; with --strict (or WPT_STRICT=1) any failing source stops it
 instead. A missing program stops it either way. A build is
-recorded in the store, in its own folder under records/ (wpt_telemetry;
+recorded in the session, in its own folder of <id>/runs/ (wpt_telemetry;
 docs/observability.md); when that record
 cannot be written, it stops with exit code 3. So is a contamination check,
 whose findings never set the exit code. A download that fails for a reason that may pass (timeout, cut
 connection, server error) is tried again, up to 5 times (see retry.py); a
-session records each new try.
+run's record holds each new try.
 """
 
 import argparse
+import functools
 import json
 import os
 import sys
@@ -168,6 +170,7 @@ from wpt_telemetry import RECORD_FAILED, RecordError
 from wpt_utils.lines import ERROR, WARNING, say
 from wpt_utils.programs import MissingTool
 
+from wpt import sessions
 from wpt_dataset import build, checking, contamination, download, edit, manifest, migrate, unusable
 from wpt_dataset.commits import check_commits
 from wpt_dataset.errors import DatasetError, InvalidFile
@@ -177,14 +180,25 @@ from wpt_dataset.sources import upstream_tree
 from wpt_dataset.tokenizer_check import check_tokenizer
 
 
-def _store(repo):
-    return store_from_settings(repo.root / ".env")
+def _store(args, repo):
+    """The store at the session the command names; SessionNeeded without one."""
+    return sessions.opened(store_from_settings(repo.root / ".env"), args, repo.root / ".env")
+
+
+def _fetching(args, repo):
+    """The store at the session a downloading command works in: the one it
+    names, or a new one, printed."""
+    return sessions.fetching(store_from_settings(repo.root / ".env"), args, repo.root / ".env")
+
+
+NO_STORE = ("check-commits", "source-id", "exclude-unusable", "kinds", "list", "show", "series", "save", "status",
+            "tags")  # the commands that never touch the store
 
 
 def _downloaded(results, failed: list[str]) -> list[str]:
     """The ids of download results that are in the store; each failure
-    printed and added to failed. Each source's outcome is the session's line
-    in the store database, not part of the run's record."""
+    printed and added to failed. Each source's outcome is in its record in
+    the session."""
     done = []
     for result in results:
         if result.error is not None:
@@ -195,7 +209,7 @@ def _downloaded(results, failed: list[str]) -> list[str]:
 
 
 def cmd_download(args, repo):
-    ids, store, failed = download.wanted(repo, args.ids), _store(repo), []
+    ids, store, failed = download.wanted(repo, args.ids), _fetching(args, repo), []
     _downloaded(download.run(repo, ids, store, "download", args.arguments, stream=args.stream), failed)
     return _failures(failed, len(ids))
 
@@ -205,12 +219,13 @@ def cmd_check(args, repo):
     if problems:
         say("\n".join(problems), ERROR)
         return 1
-    selection = checking.to_fetch(repo, lambda: _store(repo), changed=args.changed, fetch=args.fetch)
+    fetching = functools.cache(lambda: _fetching(args, repo))  # one session, made only when something needs it
+    selection = checking.to_fetch(repo, fetching, changed=args.changed, fetch=args.fetch)
     for note in selection.unwritten.values():  # the check names them; they are not a failure
         say(note)
     failed = []
     if selection.ids:
-        store = _store(repo)
+        store = fetching()
         fetched = _downloaded(download.run(repo, selection.ids, store, "check", args.arguments), failed)
         for sid in fetched:  # every source is checked, so one run names every failure
             _check_fetched(repo, sid, store, failed)
@@ -289,7 +304,7 @@ def cmd_source_id(args, repo):
 
 
 def cmd_manifest(args, repo):
-    source, store, failed = repo.source(args.id), _store(repo), []
+    source, store, failed = repo.source(args.id), _fetching(args, repo), []
     if not _downloaded(download.run(repo, [args.id], store, "manifest", args.arguments), failed):
         return _failures(failed, 1)
     tree = upstream_tree(source, store)
@@ -299,25 +314,25 @@ def cmd_manifest(args, repo):
 
 
 def cmd_cut(args, repo):
-    cut, version = edit.add_cut(repo, args.id, _store(repo), args.path, args.start, args.end, args.note, args.version)
+    cut, version = edit.add_cut(repo, args.id, _store(args, repo), args.path, args.start, args.end, args.note, args.version)
     say(f"{args.id}: cut {cut['length']:,} bytes of {args.path}, wherever they occur in it; version {version}")
     return 0
 
 
 def cmd_unpack(args, repo):
-    count = edit.unpack(repo, repo.source(args.id), _store(repo), args.folder)
+    count = edit.unpack(repo, repo.source(args.id), _store(args, repo), args.folder)
     say(f"{args.folder}: {count} files of {args.id}; edit them, then `wpt dataset patch {args.id} {args.folder} <name>`")
     return 0
 
 
 def cmd_patch(args, repo):
-    written = edit.write_patch(repo, repo.source(args.id), _store(repo), args.folder, args.name)
+    written = edit.write_patch(repo, repo.source(args.id), _store(args, repo), args.folder, args.name)
     say(f"wrote {written}; it applies and gives exactly the folder's files")
     return 0
 
 
 def cmd_markdown_check(args, repo):
-    store, failed = _store(repo), False
+    store, failed = _store(args, repo), False
     for sid in args.ids or repo.source_ids():
         report = check_markdown(repo, repo.source(sid), store)
         for problem in report.problems:
@@ -337,13 +352,13 @@ def cmd_exclude_unusable(args, repo):
 
 
 def cmd_build_tokenizer(args, repo):
-    build.run_tokenizer(repo, args.name, _store(repo), args.arguments, stream=args.stream,
+    build.run_tokenizer(repo, args.name, _store(args, repo), args.arguments, stream=args.stream,
                         strict=args.strict, plan=args.plan)
     return 0
 
 
 def cmd_tokenizer_check(args, repo):
-    reports = check_tokenizer(repo, args.name, _store(repo))
+    reports = check_tokenizer(repo, args.name, _store(args, repo))
     for r in reports:
         say(f"{r.source}: {r.documents:,} documents, {r.characters:,} characters, {r.tokens:,} tokens, "
             f"{r.characters_per_token:.2f} characters per token" + ("" if r.in_vocabulary else
@@ -355,18 +370,18 @@ def cmd_tokenizer_check(args, repo):
 
 
 def cmd_build(args, repo):
-    build.run(repo, args.name, _store(repo), args.arguments, stream=args.stream, strict=args.strict,
+    build.run(repo, args.name, _store(args, repo), args.arguments, stream=args.stream, strict=args.strict,
               plan=args.plan)
     return 0
 
 
 def cmd_contamination(args, repo):
-    contamination.run(repo, args.dataset, _store(repo), args.arguments)
+    contamination.run(repo, args.dataset, _store(args, repo), args.arguments)
     return 0
 
 
 def cmd_migrate(args, repo):
-    changed = migrate.migrate(repo, open_store=lambda: _store(repo))
+    changed = migrate.migrate(repo, open_store=lambda: _store(args, repo))
     say(f"{len(changed)} files rewritten")
     return 0
 
@@ -473,13 +488,13 @@ def cmd_new_source(args, repo):
                               f"option out for a person to write it later")
     document = empty_source(args.name, license=args.license, attribution=args.attribution, text=text, by=args.by,
                             formats=formats, tags=args.tag)
-    sid = repo.create_source(args.origin, args.item, document, files, args.patch, _store(repo) if files else None)
+    sid = repo.create_source(args.origin, args.item, document, files, args.patch, _store(args, repo) if files else None)
     say(sid)
     return 0
 
 
 def cmd_files(args, repo):
-    version, files = repo.source_files(args.id, _store(repo))
+    version, files = repo.source_files(args.id, _store(args, repo))
     for path, file in files.items():
         say(f"{file['mode']} {file['size']:>9} {file['format'] or '?'} [{' '.join(file['tags'])}] {path}")
     _versioned(version)
@@ -487,20 +502,20 @@ def cmd_files(args, repo):
 
 
 def cmd_read(args, repo):
-    version, data = repo.read_source_file(args.id, args.path, _store(repo))
+    version, data = repo.read_source_file(args.id, args.path, _store(args, repo))
     sys.stdout.buffer.write(data)
     _versioned(version)
     return 0
 
 
 def cmd_write(args, repo):
-    version = repo.change_source_files(args.id, {args.path: _input(args.file)}, args.patch, args.version, _store(repo))
+    version = repo.change_source_files(args.id, {args.path: _input(args.file)}, args.patch, args.version, _store(args, repo))
     say(f"recorded as the next patch of {args.id}, version {version}")
     return 0
 
 
 def cmd_remove(args, repo):
-    version = repo.change_source_files(args.id, {args.path: None}, args.patch, args.version, _store(repo))
+    version = repo.change_source_files(args.id, {args.path: None}, args.patch, args.version, _store(args, repo))
     say(f"recorded as the next patch of {args.id}, version {version}")
     return 0
 
@@ -513,14 +528,14 @@ def cmd_tags(args, repo):
 
 def cmd_add_license_text(args, repo):
     place = {"file": args.file} if args.file is not None else {"page": args.page}
-    text, written = repo.add_found_license_text(args.id, place, _store(repo))
+    text, written = repo.add_found_license_text(args.id, place, _store(args, repo))
     say(f"added {written}, under review" if written else f"a license text holds it already: {text}")
     say(text)
     return 0
 
 
 def cmd_conversations(args, repo):
-    version, found = repo.conversations(args.id, args.path, _store(repo))
+    version, found = repo.conversations(args.id, args.path, _store(args, repo))
     for line, conversation in enumerate(found, start=1):
         messages = conversation["messages"]
         drafts = [m["metadata"]["draft"] for m in messages if "draft" in m.get("metadata", {})]
@@ -533,7 +548,7 @@ def cmd_conversations(args, repo):
 
 
 def cmd_conversation(args, repo):
-    version, found = repo.conversations(args.id, args.path, _store(repo))
+    version, found = repo.conversations(args.id, args.path, _store(args, repo))
     if not 1 <= args.line <= len(found):
         raise InvalidFile(f"{args.id}/{args.path} has no line {args.line}")
     print(json.dumps(found[args.line - 1], indent=2, ensure_ascii=False))
@@ -546,13 +561,13 @@ def cmd_save_conversation(args, repo):
     if args.remove == bool(args.file):
         raise InvalidFile("give FILE, or --remove")
     conversation = None if args.remove else _json(_input(args.file), args.file)
-    version = repo.save_conversation(args.id, args.path, line, conversation, args.patch, args.version, _store(repo))
+    version = repo.save_conversation(args.id, args.path, line, conversation, args.patch, args.version, _store(args, repo))
     say(f"recorded as the next patch of {args.id}, version {version}")
     return 0
 
 
 def cmd_tasks(args, repo):
-    version, found = repo.tasks(args.id, _store(repo))
+    version, found = repo.tasks(args.id, _store(args, repo))
     for folder, task in found.items():
         document = task["task"] if isinstance(task["task"], dict) else {}
         say(f"{folder}: image {document.get('image', '?')}, limits {json.dumps(document.get('limits'))}, "
@@ -563,7 +578,7 @@ def cmd_tasks(args, repo):
 
 
 def cmd_task(args, repo):
-    version, found = repo.tasks(args.id, _store(repo))
+    version, found = repo.tasks(args.id, _store(args, repo))
     if args.folder not in found:
         raise InvalidFile(f"{args.id} has no task folder {args.folder}")
     print(json.dumps(found[args.folder], indent=2, ensure_ascii=False))
@@ -578,13 +593,13 @@ def cmd_save_task(args, repo):
     if not isinstance(given, dict) or not {"task", "check", "files"} <= set(given):
         raise InvalidFile(f"{args.file}: a JSON object {{task, check, files}}, as `wpt dataset task` prints it")
     version = repo.save_task(args.id, args.folder, given["task"], given["check"], given["files"], args.patch,
-                             args.version, _store(repo))
+                             args.version, _store(args, repo))
     say(f"recorded as the next patch of {args.id}, version {version}")
     return 0
 
 
 def cmd_ratings(args, repo):
-    version, found = repo.ratings(args.id, args.path, _store(repo))
+    version, found = repo.ratings(args.id, args.path, _store(args, repo))
     for line, rating in enumerate(found, start=1):  # the verdict is the person's: not shown here
         say(f"line {line}: {rating['task']}, attempt {rating['attempt']}{' (plain)' if rating['plain'] else ''} "
             f"of record {rating['record']}; by {rating['by']}, {rating['date']}")
@@ -597,13 +612,13 @@ def cmd_save_rating(args, repo):
     if args.remove == bool(args.file):
         raise InvalidFile("give FILE, or --remove")
     rating = None if args.remove else _json(_input(args.file), args.file)
-    version = repo.save_rating(args.id, args.path, line, rating, args.patch, args.version, _store(repo))
+    version = repo.save_rating(args.id, args.path, line, rating, args.patch, args.version, _store(args, repo))
     say(f"recorded as the next patch of {args.id}, version {version}")
     return 0
 
 
 def cmd_probes(args, repo):
-    version, found = repo.probes(args.id, args.path, _store(repo))
+    version, found = repo.probes(args.id, args.path, _store(args, repo))
     for line, probe in enumerate(found, start=1):  # the question and the patterns are the person's: not shown here
         say(f"line {line}: {len(probe['patterns'])} patterns")
     _versioned(version)
@@ -615,7 +630,7 @@ def cmd_save_probe(args, repo):
     if args.remove == bool(args.file):
         raise InvalidFile("give FILE, or --remove")
     probe = None if args.remove else _json(_input(args.file), args.file)
-    version = repo.save_probe(args.id, args.path, line, probe, args.patch, args.version, _store(repo))
+    version = repo.save_probe(args.id, args.path, line, probe, args.patch, args.version, _store(args, repo))
     say(f"recorded as the next patch of {args.id}, version {version}")
     return 0
 
@@ -693,6 +708,9 @@ def main(argv=None):
     checked.set_defaults(run=cmd_contamination)
     commands.add_parser("migrate").set_defaults(run=cmd_migrate)
     _data_commands(commands)
+    for name, command in commands.choices.items():
+        if name not in NO_STORE:
+            sessions.options(command)
     args = parser.parse_args(argv)
     args.arguments = sys.argv[1:] if argv is None else list(argv)  # as the run's record names them
     if args.command == "source-id":

@@ -106,7 +106,11 @@ together.
    copyright line, then an Apache `NOTICE` file's content; for public
    domain, why). Every model trained on the source repeats both in its
    notice.
-4. `uv run wpt dataset download <id>` puts it in the store. A file is
+4. `uv run wpt dataset download <id>` puts it in the store, in a new
+   session whose ID it prints; give that ID to the commands after it, through
+   `--session ID` or `WPT_SESSION` (`uv run wpt store list` shows every
+   session when the ID is lost). With `--from OLD_ID` it fetches only the
+   sources the old session does not hold. A file is
    text when it is UTF-8, or when it states its own encoding (a
    byte-order mark, an HTML page's `<meta charset>`, an XML declaration,
    Project Gutenberg's `Character set encoding:` line, a Python coding
@@ -195,7 +199,8 @@ hand:
 3. `uv run wpt dataset unpack <id> <folder>` (a folder outside the
    repository), write or edit your files there, then
    `uv run wpt dataset patch <id> <folder> <name>`. Each later change is the
-   same two commands and one more patch.
+   same two commands and one more patch. Both work in a session of the store:
+   give `--session ID` or set `WPT_SESSION`, and any new ID will do.
 
 Committed text stays public in the repository's history, clones and forks:
 an erasure can remove it from future builds, never from that history (see
@@ -267,9 +272,10 @@ decisions.
   id, its decisions and its history; the next download fetches the new
   address or commit. A cut or patch that no longer applies takes the
   source out of the builds until it is made again.
-- **Fresh content at the same address**: `uv run wpt store mark <id>`
-  (or `--all`) marks it for a new download; the next `download` fetches it
-  in full. A git source then gets the same commit again.
+- **Fresh content at the same address**: a download into a new session
+  fetches it in full (`uv run wpt dataset download <id>` with no session
+  makes one and prints its ID), and the old session stays. A git source then
+  gets the same commit again.
 - **A license that changed**: changing an entry's license, place or
   expected texts sends that entry back to `under-review`; the source's
   decision and its other entries stay.

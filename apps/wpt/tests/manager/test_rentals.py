@@ -19,13 +19,14 @@ import pytest
 
 import wpt.manager
 from wpt.manager import RUN_FILE, Failed, main, rental, unfinished
-from wpt.train import LOST
+from wpt.train import LOST, StoreCheckpoint
 from wpt.manager.machines import Workers
 from wpt.manager.rental import Address, Cap, Provider, RentalError
 from wpt.manager.skypilot import SkyPilot
 from wpt_training import load_state
 from wpt_utils.lines import INFO, bare
 from wpt_worker.link import Key
+from wpt_store.models import has_model
 
 
 class Fake(Provider):
@@ -121,7 +122,7 @@ def test_the_manager_rents_its_gpu_workers_sets_their_tokens_never_shows_them_an
     # the workers' keys stay on the manager's disk, readable by its owner only; a run that ended has none left
     path = tmp_path / "runs" / "manager-state" / "rented.json"
     assert stat.S_IMODE(path.stat().st_mode) == 0o600 and state(tmp_path, "rented")["workers"] == []
-    assert built.store.get_ref("models", "rented") is not None
+    assert has_model(built.store, "rented")
 
 
 def test_a_lost_rented_worker_is_reported_replaced_and_the_run_resumes_from_the_store(built, fake, tmp_path,
@@ -153,7 +154,7 @@ def test_a_run_stops_once_its_replacements_are_used_up_and_its_rentals_are_given
     assert stopped.value.code == 4
     [name] = [call[1] for call in fake.calls if call[0] == "rent"]
     assert ("stop", name) in fake.calls and "resumed 0 times already" in capsys.readouterr().err
-    assert built.store.get_ref("models", "spent") is None
+    assert not has_model(built.store, "spent")
 
 
 def test_a_lost_worker_a_person_started_is_not_replaced(built, fake, tmp_path, monkeypatch, capsys):
@@ -189,12 +190,12 @@ def cut_run(built, tmp_path) -> Workers:
     found = provider.address("wpt-cut-1", lambda: None)
     key = Key(found.host, found.port, found.pin, "token-of-the-cut-run")
     kept = tmp_path / "runs" / "manager-state"
-    workers = Workers.new(kept, "cut", "d")
+    workers = Workers.new(kept, "cut", "d", "test-session")
     workers.state["workers"] = [{"key": str(key), "rental": {"provider": "fake", "name": "wpt-cut-1",
                                                              "kind": "on-demand"}}]
     workers.save()
     workers.release()  # the manager that ran it crashed: the system gave its lock back
-    folder = "20261025T120000Z-wpt-manager-cut-0000aaaa"
+    folder = "test-session/20261025T120000Z-wpt-manager-cut-0000aaaa"
     built.store.write_record(folder, "start.json", json.dumps({"command": "wpt manager", "started": "2026-10-25T12:00:00Z",
                                                                "arguments": [], "inputs": {"run": "cut"}}).encode())
     built.store.write_record(folder, "ids.json", json.dumps({"inputs": {"run": "cut"}, "outputs": {}}).encode())
@@ -289,7 +290,7 @@ def test_every_rental_is_tried_at_the_end_and_those_still_rented_are_named_and_k
             stopped.append(name)
 
     monkeypatch.setattr(rental, "providers", lambda: {"stubborn": Stubborn})
-    workers = Workers.new(tmp_path, "three", "d")
+    workers = Workers.new(tmp_path, "three", "d", "test-session")
     entries = [{"key": None, "rental": {"provider": "stubborn", "name": name, "kind": "on-demand"}}
                for name in ("wpt-a", "wpt-b", "wpt-c")]
     workers.state["workers"] = entries
@@ -303,7 +304,7 @@ def test_a_run_another_manager_runs_is_left_to_it(built, fake, tmp_path, monkeyp
     # two managers on one state folder: the second neither goes on with the
     # first one's run nor starts it, so it never gives back its rentals
     kept = tmp_path / "runs" / "manager-state"
-    busy = Workers.new(kept, "busy", "d")  # the other manager, holding the run's lock
+    busy = Workers.new(kept, "busy", "d", "test-session")  # the other manager, holding the run's lock
     busy.state["workers"] = [{"key": None, "rental": {"provider": "fake", "name": "wpt-busy-1", "kind": "on-demand"}}]
     busy.save()
     assert unfinished(built.store, "busy")  # no record yet: it looks cut short
@@ -425,7 +426,7 @@ def test_a_lost_worker_of_a_cluster_replaces_the_whole_cluster_and_a_crash_with_
         fake, tmp_path, monkeypatch):
     monkeypatch.setenv("WPT_RENTAL_GPUS", "x")
     settings = dict(os.environ)
-    workers = Workers.new(tmp_path / "state", "pair", "d")
+    workers = Workers.new(tmp_path / "state", "pair", "d", "test-session")
     recorder = Recorder()
     workers.prepare({**settings, "WPT_GPU_WORKERS": "2"}, tmp_path, recorder, lambda: None)
     [first] = [call[1] for call in fake.calls if call[0] == "rent"]
@@ -472,7 +473,7 @@ def test_a_crash_of_a_training_process_on_several_workers_resumes_the_run_within
     monkeypatch.setenv("WPT_RUN", "crashy")
     main([])
     assert len(tried) == 2 and tried[0] == tried[1] and "--resume" in tried[0]
-    assert built.store.get_ref("models", "crashy") is not None
+    assert has_model(built.store, "crashy")
     assert [call[0] for call in fake.calls] == ["rent", "stop"]  # nothing was lost: no new rental
     assert "the run resumes from the last checkpoint in the store" in capsys.readouterr().out
 
@@ -483,7 +484,7 @@ def test_a_crash_of_a_training_process_on_several_workers_resumes_the_run_within
     with pytest.raises(SystemExit) as stopped:
         main([])
     assert stopped.value.code == 5 and len(tried) == 2
-    assert "resumed 1 times already" in capsys.readouterr().err and built.store.get_ref("models", "crashier") is None
+    assert "resumed 1 times already" in capsys.readouterr().err and not has_model(built.store, "crashier")
 
 
 def test_rentals_that_could_not_be_stopped_are_tried_again_at_each_start_and_every_few_minutes_each_try_recorded(
@@ -507,7 +508,7 @@ def test_rentals_that_could_not_be_stopped_are_tried_again_at_each_start_and_eve
     assert state(tmp_path, "sweep")["workers"] == []
 
     # a rental an earlier manager could not stop is tried again when the next one starts
-    left = Workers.new(tmp_path / "runs" / "manager-state", "old", "d")
+    left = Workers.new(tmp_path / "runs" / "manager-state", "old", "d", "test-session")
     left.state["workers"] = [{"key": None, "rental": {"provider": "fake", "name": "wpt-old-1", "kind": "on-demand"}}]
     left.end()
     left.release()
@@ -615,19 +616,19 @@ def test_a_failed_run_is_continued_by_the_same_command_under_the_name_wpt_run_tx
     assert stopped.value.code == 1
     written = (tmp_path / RUN_FILE).read_text()
     [name] = [line.split()[2] for line in written.splitlines() if line.startswith("# run ")]
-    assert built.store.get_ref("models", name) is None
+    assert not has_model(built.store, name)
 
     main([])  # the same command again: the same run, from what was kept
     assert (tmp_path / RUN_FILE).read_text() == written
-    assert built.store.get_ref("models", name) is not None
+    assert has_model(built.store, name)
     assert f"run {name} (named in" in capsys.readouterr().out
 
     main([])  # its model is in the store now: a new run under a new name
     assert (tmp_path / RUN_FILE).read_text() != written
     # another recipe's run name is never taken over
-    (tmp_path / RUN_FILE).write_text("# run other-20260101T000000Z of the recipe not-d; once it is done\n")
-    assert wpt.manager.previous_run(tmp_path, "d", built.store) is None
-    assert wpt.manager.previous_run(tmp_path, "not-d", built.store) == "other-20260101T000000Z"
+    (tmp_path / RUN_FILE).write_text("# run other-20260101T000000Z of the recipe not-d in session s1; once it is done\n")
+    assert wpt.manager.previous_run(tmp_path, "d", built.store, None, None, None) is None
+    assert wpt.manager.previous_run(tmp_path, "not-d", built.store, None, None, None) == ("other-20260101T000000Z", "s1")
 
 
 def test_in_the_container_a_run_that_failed_or_was_refused_exits_with_0_and_says_why(built, tmp_path, monkeypatch,
@@ -684,7 +685,7 @@ def stopping_recipe(built, tmp_path, at_update_3):
 
 
 def checkpoint_step(built, name) -> int:
-    return load_state(built.store.path(built.store.get_ref("checkpoints", name)))["step"]
+    return load_state(built.store.path(StoreCheckpoint(built.store, name, None, set()).state_file()))["step"]
 
 
 @pytest.mark.parametrize("reason, ask", [("wpt manager stop", lambda: main(["stop"])),
@@ -713,14 +714,14 @@ def test_a_stop_saves_the_checkpoint_gives_the_machines_back_and_the_same_comman
     [(_, name, _), stop] = fake.calls
     assert stop == ("stop", name) and fake.cluster_of[name][0][0].poll() is not None
     assert checkpoint_step(built, "wanted") == 3
-    assert built.store.get_ref("models", "wanted") is None
+    assert not has_model(built.store, "wanted")
     [run] = built.records("wpt manager")
     assert [e["attributes"]["reason"] for e in run.events if e.get("name") == "manager.stop"] == [reason]
     assert not (tmp_path / "runs" / "manager-state" / "wanted.stop").exists()  # the next start is not stopped by it
 
     monkeypatch.delenv("STOP_AT")
     main([])
-    assert built.store.get_ref("models", "wanted") is not None
+    assert has_model(built.store, "wanted")
     assert [e["attributes"]["step"] for e in built.records("wpt train")[-1].events
             if e.get("name") == "training.resumed"] == [3]
 
@@ -764,7 +765,7 @@ def test_the_cost_cap_prints_the_projection_first_stops_the_run_like_a_stop_and_
     assert stopped.value.code == 130 and len(fake.calls) == 2
     monkeypatch.setenv("WPT_BUDGET", "10")
     main([])
-    assert built.store.get_ref("models", "capped") is not None
+    assert has_model(built.store, "capped")
 
 
 def test_a_lost_worker_is_not_replaced_once_a_stop_is_under_way(built, fake, tmp_path, monkeypatch):
@@ -844,7 +845,7 @@ def test_a_sigterm_before_a_run_went_on_gives_its_rentals_back_and_leaves_a_run_
     monkeypatch.delenv("WPT_RUN", raising=False)
     monkeypatch.setattr(wpt.manager, "COMMAND", ["-c", "raise SystemExit('no command may start')"])
     cut_run(built, tmp_path)
-    idle = Workers.new(tmp_path / "runs" / "manager-state", "idle", "d")
+    idle = Workers.new(tmp_path / "runs" / "manager-state", "idle", "d", "test-session")
     idle.release()
     sigterm_at_the_first_look_at_the_rentals(monkeypatch)
     with pytest.raises(SystemExit) as stopped:
@@ -889,7 +890,7 @@ def test_a_sigterm_after_a_run_s_training_keeps_its_exit_code_unless_it_keeps_an
         assert stopped.value.code == code
     else:
         main([])
-    assert built.store.get_ref("models", "cut") is not None
+    assert has_model(built.store, "cut")
     assert built.records("wpt manager")[-1].end["exit_code"] == 0
     assert not (tmp_path / "runs" / "manager-state" / "next.json").exists()
 
@@ -962,7 +963,7 @@ def test_workers_rented_one_by_one_stop_being_rented_once_a_stop_comes(fake, tmp
 
     monkeypatch.setattr(rental, "providers", lambda: {"fake": Alone})
     monkeypatch.setenv("WPT_RENTAL_GPUS", "x")
-    workers = Workers.new(tmp_path / "state", "pair", "d")
+    workers = Workers.new(tmp_path / "state", "pair", "d", "test-session")
     recorder = Recorder()
     with pytest.raises(Failed):
         workers.prepare({**os.environ, "WPT_GPU_WORKERS": "2"}, tmp_path, recorder, watch)

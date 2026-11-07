@@ -49,8 +49,9 @@ from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
 from wpt_dataset.series import flops_per_token, parameters
 from wpt_model.notice import EVALS_NAME
+from wpt import sessions
 from wpt_store import StoreError, store_from_settings
-from wpt_store.models import KIND
+from wpt_store.models import has_model, model_file
 from wpt_utils.lines import ERROR, say
 
 HELD_OUT_LOSS = f"{EVALS_NAME}/held-out-loss.json"  # the evaluation whose overall loss is a point's loss
@@ -194,11 +195,9 @@ def file_of(given: str, path: str, store) -> bytes | None:
         found = folder / path
         return found.read_bytes() if found.is_file() else None
     store = store()
-    manifest = store.get_ref(KIND, given)
-    if manifest is None:
-        raise ScalingError(f"{given}: neither a model folder nor a model the store keeps ({KIND}/{given})")
-    entry = json.loads(store.get_bytes(manifest)).get(path)
-    return None if entry is None else store.get_bytes(entry["sha256"])
+    if not has_model(store, given):
+        raise ScalingError(f"{given}: neither a model folder nor a model session {store.session} keeps")
+    return model_file(store, given, path)
 
 
 def provenance_of(given: str, store) -> dict:
@@ -266,9 +265,12 @@ def main(argv=None) -> int:
                         help="model folders wpt train wrote, or names of runs whose model the store keeps")
     parser.add_argument("--predict", action="append", default=[], metavar="RECIPE",
                         help="a model recipe's name or SERIES:SIZE whose loss the fit predicts; may repeat")
+    sessions.options(parser)
     args = parser.parse_args(argv)
+    env_file = Path.cwd() / ".env"
     try:
-        store = functools.cache(lambda: store_from_settings(Path.cwd() / ".env"))  # opened only for a run's name
+        # opened only for a run's name
+        store = functools.cache(lambda: sessions.opened(store_from_settings(env_file), args, env_file))
         found, left_out = points(args.models, store)
         try:
             curve = fit([p.compute for p in found], [p.loss for p in found])

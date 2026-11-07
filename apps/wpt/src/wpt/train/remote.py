@@ -9,7 +9,7 @@ answers are the same for every worker, and only the run's main process
                       with the plan: each step's fingerprint (on this side's code,
                       wpt_utils.programs.code: the checkout the worker runs), the steps reused, the state the
                       run starts from, the scheduler's pass times to replay
-    object.offer      an object of the run's dataset or of a state it starts from
+    file.offer        a file of the run's dataset or of a state it starts from
     record.*          a file of the run's record folder (read, write, append), and only of it;
                       flush: the lines the manager's store holds back, sent
     checkpoint.*      the run's checkpoint: exists, load, save (a file the job sent), remove
@@ -27,25 +27,25 @@ part gets (Context.writer): the model on the gpu worker writes its tokens.
 
 import functools
 import json
-import re
 import threading
 from dataclasses import asdict
 
 from wpt_inference import replayed_costs
+from wpt_store import File
 from wpt_training import Context
 from wpt_utils.programs import code
 from wpt_worker.writing import RemoteWriter
 
-SHA = re.compile(r"[0-9a-f]{64}")
-
-
-def named_objects(value) -> set:
-    """Every sha256 a dataset record names: the objects of the dataset."""
+def named_files(value) -> dict[str, File]:
+    """{sha256: File} of every file a dataset record refers to: each
+    reference {"key", "sha256"} in it, shards included."""
     if isinstance(value, dict):
-        return set().union(*map(named_objects, value.values()))
+        if set(value) >= {"key", "sha256"}:
+            return {value["sha256"]: File.of(value)}
+        return {sha: file for part in value.values() for sha, file in named_files(part).items()}
     if isinstance(value, list):
-        return set().union(*map(named_objects, value))
-    return {value} if isinstance(value, str) and SHA.fullmatch(value) else set()
+        return {sha: file for part in value for sha, file in named_files(part).items()}
+    return {}
 
 
 class Training:
@@ -56,16 +56,16 @@ class Training:
 
     def __init__(self, run, workers, files, refuse):
         self.run, self.workers, self.files, self.refuse = run, workers, files, refuse
-        self.allowed = named_objects(run.record)
+        self.allowed = named_files(run.record)  # the files the gpu worker may ask for, by their sha256
         self.parts = {}  # (worker's number, channel, step number): the environment's part on the manager
         self.lock = threading.Lock()  # around self.parts, which every worker's thread changes
         self.plan = self.ready_found = self.finished = None
         self.done, self.outputs = list(run.done), {}
-        self.offered = []  # the store objects copied to this machine for the job, released at the end
+        self.offered = []  # the files of the store copied to this machine for the job, released at the end
 
     def handlers(self, worker) -> dict:
         """The answers to worker's job."""
-        return {"ready": self._ready, "object.offer": self._object, "record.read": self._read,
+        return {"ready": self._ready, "file.offer": self._file, "record.read": self._read,
                 "record.write": self._write, "record.append": self._append, "record.flush": self._flush,
                 "checkpoint.exists": self._exists,
                 "checkpoint.load": self._load, "checkpoint.save": self._save, "checkpoint.remove": self._remove,
@@ -73,13 +73,14 @@ class Training:
                 "finished": self._finished, **self.files.handlers()}
 
     def close(self):
-        for sha in self.offered:
-            self.run.store.release(sha)
+        for file in self.offered:
+            self.run.store.release(file)
         self.files.close()
 
-    def _offer(self, sha) -> dict:
-        path = self.run.store.path(sha)  # checked against its sha256
-        self.offered.append(sha)
+    def _offer(self, file: File) -> dict:
+        sha = file.sha256
+        path = self.run.store.path(file)  # checked against its sha256
+        self.offered.append(file)
         return self.files.offer(path, sha)
 
     def _ready(self, header, body):
@@ -100,35 +101,35 @@ class Training:
                         strategy={"name": run.strategy_file.name, "file_sha256": run.strategy_file.sha256},
                         steps=[{**step.record(), "fingerprint": mark} for step, mark in zip(run.steps, marks)],
                         resume=run.args.resume, checkpoint=str(run.checkpoint))
-        kept = [run.results.object(mark) for mark in marks]
-        reused = max((number for number, sha in enumerate(kept, 1) if sha), default=0)
+        kept = [run.results.found(mark) for mark in marks]
+        reused = max((number for number, result in enumerate(kept, 1) if result), default=0)
         state = None
         if reused:
-            run.kept_states.update(run.results.read(sha)["state"] for sha in kept if sha)
-            found = [run.results.read(sha) for sha in kept[:reused]]
-            self.done = [{**result["about"], "result": sha, "reused": True} for result, sha in zip(found, kept)]
-            telemetry.input(reused_steps=dict(zip(marks[:reused], kept[:reused])))
+            run.kept_states.update(result["state"]["key"] for result in kept if result)
+            found = kept[:reused]
+            self.done = [{**result["about"], "result": result["result"], "reused": True} for result in found]
+            telemetry.input(reused_steps={mark: result["result"] for mark, result in zip(marks, found)})
             for step, about in zip(run.steps, self.done):
                 telemetry.event("training.step_reused", step=step.name, number=about["number"],
                                 fingerprint=about["fingerprint"], result=about["result"])
                 run.log(f"step {about['number']} {step.name}: reused, result {about['result'][:12]}")
-            state = found[-1]["state"]
-            self.allowed.add(state)
+            state = File.of(found[-1]["state"])
+            self.allowed[state.sha256] = state
         self.marks, self.last_state = marks, state
         self.plan = {"marks": marks, "reused": reused, "state": None if state is None else self._offer(state),
                      "costs": costs}
         return self.plan, b""
 
-    def _object(self, header, body):
+    def _file(self, header, body):
         sha = header["sha"]
         if sha not in self.allowed:
-            raise ValueError(f"object {sha} is not one of this run's: the gpu worker reads only the dataset's "
-                             "objects and the states the run starts from")
-        return self._offer(sha), b""
+            raise ValueError(f"file {sha} is not one of this run's: the gpu worker reads only the dataset's "
+                             "files and the states the run starts from")
+        return self._offer(self.allowed[sha]), b""
 
     def _folder(self, header):
         if header["folder"] != self.run.telemetry.folder:
-            raise ValueError(f"records/{header['folder']} is not this run's record folder")
+            raise ValueError(f"{header['folder']} is not this run's record folder")
         return header["folder"]
 
     def _read(self, header, body):
@@ -147,10 +148,10 @@ class Training:
         return {"exists": self.run.checkpoint.exists()}, b""
 
     def _load(self, header, body):
-        sha, path = self.run.checkpoint_object(), self.run.checkpoint_file()
-        if sha is not None:
-            self.allowed.add(sha)
-            return self._offer(sha), b""
+        state, path = self.run.checkpoint_state(), self.run.checkpoint_file()
+        if state is not None:
+            self.allowed[state["sha256"]] = File.of(state)
+            return self._offer(File.of(state)), b""
         if path is not None:
             return self.files.offer(path), b""
         return {"file": None}, b""
@@ -199,13 +200,13 @@ class Training:
             if header.get("state") is not None:  # the job sent the step's last checkpoint with its end
                 path = self.files.received(header["state"])
                 try:
-                    state = run.store.put_file(path)
+                    state = run.store.file(run.store.put_file(path)).reference()
                 finally:
                     path.unlink(missing_ok=True)
             else:
                 state = run.kept_state()
             sha = run.results.keep(mark, state, kept)
-            run.kept_states.add(state)  # the checkpoint's ref goes, its object stays as the step's state
+            run.kept_states.add(state["key"])  # the checkpoint's record goes, its file stays as the step's state
             span.set(result=sha)
         self.outputs[mark] = sha
         run.telemetry.output(step_results=self.outputs)

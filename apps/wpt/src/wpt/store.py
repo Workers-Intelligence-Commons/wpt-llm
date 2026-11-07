@@ -1,26 +1,32 @@
 """wpt store: what the store named by WPT_STORE (environment or .env)
 holds.
 
-    wpt store list                    every session (the commands that wrote the store) and every
-                                      source the store database knows, with its last outcome
-    wpt store mark ID [ID ...]        mark sources for a new download: the next session that meets one
-    wpt store mark --all              downloads it in full, though the store holds it (a person's way
-                                      to ask for fresh content); --all marks every source
-    wpt store copy-out NAME FOLDER    the model folder kept under the run's name NAME (what the wpt
-                                      manager prints at the end of a run) into the new FOLDER, each
-                                      file checked against its sha256
-    wpt store runs                    every run recorded in the store: its folder, command, start and
-                                      how it ended
+    wpt store list                    every session of the store's index, or with an ID the session and
+                                      the one it started from: what each holds, and each source of it
+                                      with its time, address and size, or its error
+    wpt store copy-out NAME FOLDER    the model folder the session keeps under the run's name NAME
+                                      (what the wpt manager prints at the end of a run) into the new
+                                      FOLDER, each file checked against its sha256
+    wpt store runs                    every run recorded in the store, or with an ID in the session and the
+                                      one it started from: its folder, command, start and how it ended
     wpt store run FOLDER [--follow]   one run (FOLDER, or a part of its name only that folder holds):
                                       its stage, its counts, its last events and its errors; --follow
                                       prints its lines as they reach the store until it ends
+    wpt store rebuild-index           the store's index made again from the files of every session
+
+Each takes --session ID (WPT_SESSION) and --from OLD_ID. `list`, `runs` and
+`run` work with no ID: they show every session, which is how a person finds
+an ID, and an ID narrows them to it. `rebuild-index` needs none and ignores
+it, since it covers the whole store. `copy-out` is refused (SessionNeeded)
+with no ID.
 """
 
 import argparse
 import sys
 from pathlib import Path
 
-from wpt_store import StoreError, store_from_settings
+from wpt import sessions
+from wpt_store import StoreError, index, store_from_settings
 from wpt_store.listing import listing
 from wpt_store.models import copy_out
 from wpt_telemetry import runs
@@ -28,28 +34,20 @@ from wpt_utils.lines import ERROR, say
 
 
 def cmd_list(args, store):
-    sources, sessions = listing(store)
-    say(f"{len(sessions)} sessions:")
-    for row in sessions:
-        say(f"  {row.started} to {row.ended or '(not ended)'} {row.command} at {row.commit or '?'}"
-            f"{' (changed)' if row.dirty else ''}: records/{row.folder}/")
-    say(f"{len(sources)} sources:")
-    for state in sources:
-        last = (f"downloaded {state.downloaded} from {state.address} at {state.commit or '?'}"
-                f"{f', {state.size:,} bytes' if state.size is not None else ''}"
-                f"{''.join(f', {key} {value}' for key, value in sorted((state.got or {}).items()))}"
-                if state.downloaded else "never downloaded")
-        say(f"  {state.source}: {state.outcome}{'; marked for a new download' if state.marked else ''}; {last}")
-    return 0
-
-
-def cmd_mark(args, store):
-    if bool(args.ids) == args.all:
-        say("wpt store mark: give source ids or --all, not both", ERROR)
-        return 2
-    store.mark(None if args.all else args.ids)
-    say("every source marked for a new download" if args.all else
-        f"{len(args.ids)} sources marked for a new download")
+    states, rows = listing(store)
+    if store.session:
+        shown = store.reading()
+        states = [state for state in states if state.session in shown]
+        rows = [row for row in rows if row.session in shown]
+    say(f"{len(rows)} sessions:")
+    for row in rows:
+        say(f"  {row.session}: {_counts(row.held)}")
+    say(f"{len(states)} sources:")
+    for state in states:
+        last = (f"failed: {state.error}" if state.error else
+                f"from {state.address}{f', {state.size:,} bytes' if state.size is not None else ''}"
+                f"{''.join(f', {key} {value}' for key, value in sorted((state.got or {}).items()))}")
+        say(f"  {state.session}/{state.source}: {state.time} {last}")
     return 0
 
 
@@ -93,6 +91,11 @@ def cmd_run(args, store):
     return 0
 
 
+def cmd_rebuild_index(args, store):
+    say(f"the index holds {index.rebuild(store):,} things")
+    return 0
+
+
 def _counts(counted: dict) -> str:
     return ", ".join(f"{name} {count:,}" for name, count in sorted(counted.items())) or "none"
 
@@ -101,24 +104,28 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(prog="wpt store", description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     commands = parser.add_subparsers(dest="command", required=True)
-    commands.add_parser("list", help="the sessions and the sources the store database knows").set_defaults(
-        run=cmd_list)
-    marking = commands.add_parser("mark", help="mark sources for a new download in full")
-    marking.add_argument("ids", nargs="*", help="the source ids")
-    marking.add_argument("--all", action="store_true", help="every source")
-    marking.set_defaults(run=cmd_mark)
+    commands.add_parser("list", help="every session, or the one given, and what it holds").set_defaults(run=cmd_list)
     copying = commands.add_parser("copy-out", help="a model folder the store keeps, into a new folder")
     copying.add_argument("name", help="the run's name, which the wpt manager printed")
     copying.add_argument("folder", type=Path, help="the folder to write, which must not exist yet")
     copying.set_defaults(run=cmd_copy_out)
-    commands.add_parser("runs", help="every run recorded in the store").set_defaults(run=cmd_runs)
+    commands.add_parser("runs", help="every run recorded in the store, or in the session given").set_defaults(run=cmd_runs)
     showing = commands.add_parser("run", help="one run: its stage, counts, last events and errors")
     showing.add_argument("folder", help="its record folder, or a part of the name only that folder holds")
     showing.add_argument("--follow", action="store_true", help="print its lines as they reach the store until it ends")
     showing.set_defaults(run=cmd_run)
+    commands.add_parser("rebuild-index", help="the store's index made again from the files of every session"
+                        ).set_defaults(run=cmd_rebuild_index)
+    for command in commands.choices.values():
+        sessions.options(command)
     args = parser.parse_args(argv)
+    env_file = Path.cwd() / ".env"
     try:
-        store = store_from_settings(Path.cwd() / ".env")
+        store = store_from_settings(env_file)
+        if args.run is cmd_copy_out:
+            store = sessions.opened(store, args, env_file)
+        elif args.run is not cmd_rebuild_index:
+            store = sessions.viewed(store, args, env_file)
         return args.run(args, store)
     except (StoreError, FileExistsError) as error:
         say(f"{type(error).__name__}: {error}", ERROR)

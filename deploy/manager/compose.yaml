@@ -15,6 +15,9 @@
 #
 #     WPT_RECIPE            the model recipe; required
 #     WPT_DATASET           the id of a dataset the store holds: nothing is downloaded or built
+#     WPT_SESSION           the session the run works in; unset, the one of the run it goes on with,
+#                           else a new ID, which it prints and writes into wpt-run.txt
+#     WPT_FROM              another session, which the run reads what its own does not hold from
 #     WPT_RUN               the run's name; unset, the manager makes one and writes it, with the
 #                           lines to copy, into wpt-run.txt at the repository's root
 #     WPT_EVALUATE          1: evaluate the model at the end; off by default
@@ -84,6 +87,8 @@ services:
     command: ["sh", "-c", "uv run scripts/setup.py && exec uv run --frozen --no-sync wpt manager"]
     environment:
       WPT_RECIPE: ${WPT_RECIPE:?set WPT_RECIPE, the model recipe to train (docs/machines.md)}
+      WPT_SESSION: ${WPT_SESSION:-}
+      WPT_FROM: ${WPT_FROM:-}
       WPT_RUN: ${WPT_RUN:-}
       WPT_DATASET: ${WPT_DATASET:-}
       WPT_EVALUATE: ${WPT_EVALUATE:-}

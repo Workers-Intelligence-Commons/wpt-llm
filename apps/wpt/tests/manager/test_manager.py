@@ -9,6 +9,9 @@ import pytest
 from wpt.manager import RUN_FILE, main, mount_point
 from wpt.store import main as store_command
 from wpt_telemetry import file_hashes
+from wpt_store import find_dataset, keep_dataset
+from wpt_store.models import has_model
+from wpt_utils.lines import bare
 
 
 def test_the_manager_refuses_to_start_without_a_recipe(built, monkeypatch, capsys):
@@ -29,8 +32,9 @@ def test_one_command_downloads_builds_trains_and_keeps_the_model_under_the_run_s
     monkeypatch.delenv("WPT_RUN", raising=False)
     main([])
     [copy_out] = [line for line in (tmp_path / RUN_FILE).read_text().splitlines() if not line.startswith("#")]
-    name = copy_out.split()[-2]
-    assert name.startswith("d-") and copy_out == f"uv run wpt store copy-out {name} runs/{name}"
+    name = copy_out.split()[5]
+    assert name.startswith("d-")
+    assert copy_out == f"uv run wpt store copy-out {name} runs/{name} --session {built.store.session}"
     assert copy_out in capsys.readouterr().out
 
     assert not (tmp_path / "runs" / "manager" / name).exists()
@@ -45,7 +49,7 @@ def test_one_command_downloads_builds_trains_and_keeps_the_model_under_the_run_s
     assert run.end["status"] == "succeeded"
     assert [e["name"] for e in run.events if e["kind"] == "span_start" and e["name"].startswith("manager.")] == [
         "manager.download", "manager.build", "manager.workers", "manager.train", "manager.model"]
-    assert [e["attributes"]["ref"] for e in run.events if e.get("name") == "store.ref_set"] == [f"models/{name}"]
+    assert [e["attributes"]["model"] for e in run.events if e.get("name") == "store.model_kept"] == [name]
     assert train.start["arguments"][:1] == ["d"] and "--run" in train.start["arguments"]
 
 
@@ -62,11 +66,26 @@ def test_a_dataset_the_settings_name_is_trained_on_with_no_download_or_build(bui
     assert built.dataset_id in train.start["arguments"]
 
 
+def test_a_run_given_no_session_makes_one_and_says_which_in_the_lines_it_writes(built, tmp_path, monkeypatch, capsys):
+    # the whole run works under the new ID, and the printed line copies its model out of that session
+    monkeypatch.setenv("WPT_RECIPE", "d")
+    monkeypatch.delenv("WPT_RUN", raising=False)
+    monkeypatch.delenv("WPT_SESSION")
+    monkeypatch.setenv("WPT_FROM", built.store.session)  # the sources and the dataset lie in the session of `built`
+    main([])
+    [copy_out] = [line for line in (tmp_path / RUN_FILE).read_text().splitlines() if not line.startswith("#")]
+    words = copy_out.split()
+    session = words[-1]
+    assert session != built.store.session and f"session {session}" in bare(capsys.readouterr().out)
+    assert store_command(words[4:7] + ["--session", session]) == 0
+    assert (tmp_path / words[6] / "config.json").is_file()
+    assert not has_model(built.store, words[5])  # the session it started from is left as it was
+
+
 def test_a_dataset_whose_record_holds_a_contamination_report_is_trained_on_as_it_is(built, monkeypatch, capsys):
-    record = json.loads(built.store.get_bytes(built.store.get_ref("datasets", built.dataset_id)))
+    record = find_dataset(built.store, built.dataset_id)[1]
     report = {"ngram_words": 13, "held_out_documents": 1, "overlapping": 0, "examples": []}
-    built.store.set_ref("datasets", built.dataset_id,
-                        built.store.put_bytes(json.dumps({**record, "contamination": report}).encode()))
+    keep_dataset(built.store, "d", {**record, "contamination": report})
     monkeypatch.setenv("WPT_RECIPE", "d")
     monkeypatch.setenv("WPT_DATASET", built.dataset_id)
     main([])

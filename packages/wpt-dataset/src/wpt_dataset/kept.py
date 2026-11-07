@@ -28,7 +28,7 @@ reading a file of it.
 Nothing here asks upstream or changes the source. The license check's
 answer (statements: for each entry, the license text found at its place
 and that text's decision) is computed on every call, a few small reads of
-the stored bytes. The rest is kept in the store under the ref
+the stored bytes. The rest is kept in the store as the result
 source-kept/<kept_key: the final tree, the license entries, the formats,
 that answer, KEPT_VERSION and sources.NOT_TEXT_VERSION, since the text check's
 answer is kept in that result>, so a source is checked again only when one of
@@ -40,7 +40,7 @@ import dataclasses
 import json
 from dataclasses import dataclass
 
-from wpt_telemetry import Telemetry, get_result_ref, set_result_ref
+from wpt_telemetry import Telemetry, get_result, set_result
 
 from . import license_check, manifest, sources
 from .manifest import Entry
@@ -55,7 +55,7 @@ UNCOVERED, NOT_TEXT, ENTRY = "uncovered", "not-text", "entry"  # why something i
 class Kept:
     """A source's kept tree and its check result."""
     tree: dict[str, Entry]  # the final tree's files that are kept, symbolic links included
-    final: str  # the sha256 of the final tree's manifest object
+    final: str  # the sha256 of the final tree's manifest file
     trains: frozenset[int]  # the numbers of the license entries whose files and records train
     statements: list[dict]  # the license check of each entry, in order (license_check.Statement as a dict)
     left_out: list[dict]  # [{"why": UNCOVERED or NOT_TEXT, "path", "detail"}, {"why": ENTRY, "entry", "license",
@@ -88,22 +88,21 @@ def kept(source: Source, store, texts: license_check.LicenseTexts, telemetry=Non
     tree, known = final_tree(source, store, telemetry)
     found = [dataclasses.asdict(statement) for statement in statements(source, tree, store, texts)]
     key = kept_key(source, known, found)
-    held = get_result_ref(store, "source-kept", key, telemetry)
-    if held:
-        checked = json.loads(store.get_bytes(held))
+    held = get_result(store, "source-kept", key, telemetry)
+    if held is not None:
+        checked = json.loads(held)
     else:
         checked = _checked(source, tree, known, store, found, telemetry)
-        set_result_ref(store, "source-kept", key, store.put_bytes(json.dumps(checked, ensure_ascii=False).encode()),
-                telemetry)
+        set_result(store, "source-kept", key, json.dumps(checked, ensure_ascii=False).encode(), telemetry)
     out = set(checked["out"])
     return Kept({path: entry for path, entry in tree.items() if path not in out}, known,
                 frozenset(checked["trains"]), found, checked["left_out"], key)
 
 
 def kept_files(source: Source, tree: dict[str, Entry], known: str, store, texts: license_check.LicenseTexts) -> Kept:
-    """A final tree's Kept (known: its manifest object) before any text
-    check: nothing but the statements is read, and nothing is kept under a
-    ref. Kept.less leaves out what a text check finds."""
+    """A final tree's Kept (known: its manifest file) before any text
+    check: nothing but the statements is read, and nothing is kept as a
+    result. Kept.less leaves out what a text check finds."""
     found = [dataclasses.asdict(statement) for statement in statements(source, tree, store, texts)]
     checked = _left_out(source, tree, found, {})
     out = set(checked["out"])

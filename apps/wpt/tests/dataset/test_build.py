@@ -18,9 +18,10 @@ from wpt_dataset.build import build_dataset, document_list, is_held_out
 from wpt_dataset.downloaders import Downloads
 from wpt.dataset import main
 from wpt_dataset.errors import DatasetError, NotDownloaded, PoolError, SourceGone, TokenizerVersionNeeded, TrainedListMissing, VocabularyMissing
-from wpt_dataset.sources import final_tree, stored_files, upstream_key
-from wpt_store import CorruptObject, Store, kinds, open_store
-from wpt_store.sessions import file_list_bytes
+from wpt_dataset.sources import final_tree
+from wpt_store import CorruptFile, Store, dataset_key, held, held_here, keep_dataset, kinds, open_store
+from wpt_store.shards import shard_file
+from wpt_store.sessions import source_key
 from wpt_store.shards import read_shard, token_hash
 import wpt_telemetry
 from wpt_telemetry import Telemetry
@@ -28,6 +29,7 @@ from wpt_tokenizer import Tokenizer
 from wpt_utils import programs
 from wpt_utils.lines import bare
 from wpt_utils.parallel import Sizing
+from wpt_store import find_dataset
 
 FRENCH = ["le chat dort sur le tapis rouge", "la pluie tombe sur la ville grise", "un enfant lit un livre ancien",
           "le vent souffle dans les arbres", "une femme chante dans la rue"]
@@ -77,7 +79,7 @@ def fresh_store(kit, repo, folder, sid, shared=None):
     and the locked vocabularies of shared, with the lists of their documents,
     copied into it: a locked vocabulary reaches another machine through the
     store, never by training again."""
-    fresh = open_store(folder.as_uri())
+    fresh = open_store(folder.as_uri()).at("fresh-session")
     kit.download(repo, fresh, sid)
     for name in repo.names("lock") if shared is not None else ():
         lock = repo.generated("lock", name)
@@ -86,12 +88,17 @@ def fresh_store(kit, repo, folder, sid, shared=None):
     return fresh
 
 
+def result_name(path) -> str:
+    """The name of a result from its file in the store's cache."""
+    return path.name.removesuffix(".zst")
+
+
 def record_of(store, dataset_id):
-    return json.loads(store.get_bytes(store.get_ref("datasets", dataset_id)))
+    return find_dataset(store, dataset_id)[1]
 
 
 def rows_of(store, shards):
-    return [row for shard in shards for row in read_shard(store.path(shard["object"]))]
+    return [row for shard in shards for row in read_shard(store.path(shard_file(shard)))]
 
 
 def test_build_fills_pools_and_is_repeatable_on_another_machine(kit, repo, store, corpus, tmp_path):
@@ -108,7 +115,7 @@ def test_build_fills_pools_and_is_repeatable_on_another_machine(kit, repo, store
         assert pool["share"] <= drawn < pool["share"] + max(len(t) for t, *_ in rows)  # whole documents
         assert pool["epochs"] <= 4
     for shard in record["shards"]:
-        assert token_hash(store.path(shard["object"])) == shard["token_sha256"]
+        assert token_hash(store.path(shard_file(shard))) == shard["token_sha256"]
     vocabulary = Tokenizer.from_bytes(store.get_bytes(record["tokenizer"]["vocabulary"]))
     tokens, _, document, *_ = rows[0]
     assert tokens[-1] == Tokenizer.END
@@ -122,15 +129,87 @@ def test_build_fills_pools_and_is_repeatable_on_another_machine(kit, repo, store
     fresh = fresh_store(kit, repo, tmp_path / "other-store", sid, shared=store)
     assert build_dataset(repo, "small", fresh, log=lambda *_: None) == dataset_id
     again = record_of(fresh, dataset_id)
-    assert again["tokenizer"]["vocabulary"] == record["tokenizer"]["vocabulary"]
+    assert again["tokenizer"]["vocabulary"]["sha256"] == record["tokenizer"]["vocabulary"]["sha256"]
     assert [s["token_sha256"] for s in again["shards"]] == [s["token_sha256"] for s in record["shards"]]
     # each record names the download its files came from, which the dataset id leaves out
     for built, record_ in ((store, record), (fresh, again)):
-        with built.database() as found:
-            downloaded = found.execute("SELECT session, time FROM lines WHERE source = ? AND outcome = 'downloaded'",
-                                       (sid,)).fetchall()
-        assert [(record_["downloads"][sid]["session"], record_["downloads"][sid]["time"])] == downloaded
+        found = held(built, sid)
+        assert record_["downloads"][sid] == {"session": found.session, "time": found.time}
     assert again["downloads"][sid]["session"] != record["downloads"][sid]["session"]
+
+
+def test_a_dataset_lives_in_a_folder_named_by_its_recipe_and_id_and_the_latest_build_is_the_one_train_reads(
+        kit, repo, store, corpus):
+    sid = setup_recipes(kit, repo, store, corpus, total_tokens=500)
+    first = build_dataset(repo, "small", store, log=lambda *_: None)
+    folder = f"{store.session}/datasets/small-{first[:8]}"
+    key, record = find_dataset(store, first)
+    assert key == f"{folder}/dataset.json" and record["names"] == ["small"]
+    # every file the dataset needs lies in its folder, none in the cache folder
+    named = [shard["key"] for shard in record["shards"] + record["held_out_shards"]] + \
+        [record["tokenizer"]["vocabulary"]["key"], record["document_list"]["key"]]
+    assert named and all(name.startswith(f"{folder}/") for name in named)
+    assert build.last_dataset(store, "small") == first
+
+    # other content is another, complete folder; the first stays as it was
+    kit.write_model_recipe(repo, "small", {**repo.model_recipe("small")["data"], "total_tokens": 900})
+    second = build_dataset(repo, "small", store, log=lambda *_: None)
+    assert second != first and find_dataset(store, second)[0] == f"{store.session}/datasets/small-{second[:8]}/dataset.json"
+    assert all(store.has(shard) for shard in record_of(store, first)["shards"])
+    assert build.last_dataset(store, "small") == second
+
+    # the same content finds the same folder, builds and writes no other, and is the latest build again
+    kit.write_model_recipe(repo, "small", {**repo.model_recipe("small")["data"], "total_tokens": 500})
+    before = store.kind.list(f"{store.session}/datasets/")
+    assert build_dataset(repo, "small", store, log=lambda *_: None) == first
+    assert store.kind.list(f"{store.session}/datasets/").keys() == before.keys()
+    assert build.last_dataset(store, "small") == first
+    assert sorted(store.kind.list(f"{store.session}/datasets/", deep=False)) == sorted(
+        [f"{store.session}/datasets/small-{first[:8]}/", f"{store.session}/datasets/small-{second[:8]}/"])
+
+
+def test_the_credit_of_each_document_of_a_records_source_is_a_file_of_the_dataset_s_folder(kit, repo, store, corpus,
+                                                                                         tmp_path):
+    setup_recipes(kit, repo, store, corpus, total_tokens=1500)  # enough to draw the records too
+    lines = [{"id": name, "text": f"words of {name} " * 20, "license": "CC0", "url": f"https://example.org/{name}"}
+             for name in ("a", "b")]
+    folder, commit = kit.git_project(tmp_path / "records", executable=set(), symlinks={},
+                                     files={"data.jsonl": "".join(json.dumps(line) + "\n" for line in lines).encode()})
+    sid = kit.add_source(repo, store, "example", "records", {
+        "type": "git", "address": folder, "tags": [{"tags": ["en"], "paths": ["**"]}],
+        "formats": [{"format": "records", "paths": ["*.jsonl"], "text": "text", "id": "id", "credit": ["url"]}],
+        "licenses": [kit.entry(["*.jsonl"], license="CC0-1.0", place={"field": "license"}, expected=["CC0"])]})
+    dataset = build_dataset(repo, "small", store, log=lambda *_: None)
+    credits = record_of(store, dataset)["sources"][sid]["credits"]
+    assert credits["key"] == f"{store.session}/datasets/small-{dataset[:8]}/credits/{sid}.jsonl"
+    assert [json.loads(line)["credit"] for line in store.get_bytes(credits).decode().splitlines()] == [
+        {"url": "https://example.org/a"}, {"url": "https://example.org/b"}]
+
+
+def test_a_source_whose_last_download_failed_is_built_from_its_good_file_and_the_record_says_so(
+        kit, repo, store, corpus, tmp_path):
+    sid = setup_recipes(kit, repo, store, corpus, total_tokens=500)
+    first = build_dataset(repo, "small", store, log=lambda *_: None)
+    assert "failed" not in record_of(store, first)["downloads"][sid]
+
+    # a download is attempted again once an attempt failed: one at another revision does, then upstream is gone
+    path = repo.root / "data" / "sources" / sid / "source.json"
+    description = repo.source(sid).data
+    path.write_text(kit.dump_json({**description, "revision": "1" * 40}), encoding="utf-8", newline="\n")
+    with pytest.raises(DatasetError):
+        kit.download(repo, store, sid)
+    path.write_text(kit.dump_json(description), encoding="utf-8", newline="\n")
+    shutil.rmtree(corpus[0])
+    with pytest.raises(SourceGone):
+        kit.download(repo, store, sid)
+    assert held_here(store, sid).error and held_here(store, sid).provides(held_here(store, sid).key)
+
+    again = build_dataset(repo, "small", store, log=lambda *_: None)  # the good file is read: the same dataset
+    record = record_of(store, again)
+    assert again == first and record["skipped"] == [] and record["documents"]["total"] == 10
+    failed = record["downloads"][sid]["failed"]
+    assert failed["kind"] == "SourceGone" and failed["time"] == held_here(store, sid).error["time"]
+    assert record["downloads"][sid]["session"] == store.session
 
 
 def test_held_out_documents_never_reach_training(kit, repo, store, tmp_path):
@@ -219,7 +298,7 @@ def test_the_locked_vocabulary_stays_until_its_version_is_raised(kit, repo, stor
     first = record_of(store, build_dataset(repo, "small", store, log=lambda *_: None))
     lock_path = (repo.root / "data" / "recipes" / "tokenizers" / "main.lock.json")
     lock = json.loads(lock_path.read_text())
-    assert lock["vocabulary_sha256"] == first["tokenizer"]["vocabulary"] and lock["document_count"] == 10
+    assert lock["vocabulary_sha256"] == first["tokenizer"]["vocabulary"]["sha256"] and lock["document_count"] == 10
     assert "documents" not in lock
     assert store.get_bytes(lock["documents_sha256"]) == listed_documents(store, first["id"])
     assert first["tokenizer"]["recipe_version"] == 1
@@ -229,7 +308,7 @@ def test_the_locked_vocabulary_stays_until_its_version_is_raised(kit, repo, stor
     more = kit.add_source(repo, store, "example", "more", {"type": "git", "address": folder, "tags": [{"tags": ["en"], "paths": ["**"]}]})
     second = record_of(store, build_dataset(repo, "small", store, log=lambda *_: None))
     assert second["documents"]["total"] == 11  # the new source is in the dataset...
-    assert second["tokenizer"]["vocabulary"] == first["tokenizer"]["vocabulary"]  # ...but not in the vocabulary
+    assert second["tokenizer"]["vocabulary"]["sha256"] == first["tokenizer"]["vocabulary"]["sha256"]  # ...but not in the vocabulary
     assert json.loads(lock_path.read_text()) == lock
     # the locked vocabulary is shared through the store, never trained again
     # from the documents the lock lists: a store without it refuses the build,
@@ -242,8 +321,8 @@ def test_the_locked_vocabulary_stays_until_its_version_is_raised(kit, repo, stor
     with pytest.raises(TrainedListMissing, match=lock["documents_sha256"]):  # the list of its documents is shared too
         build_dataset(repo, "small", fresh, log=lambda *_: None)
     assert fresh.put_bytes(store.get_bytes(lock["documents_sha256"])) == lock["documents_sha256"]
-    assert record_of(fresh, build_dataset(repo, "small", fresh, log=lambda *_: None))["tokenizer"]["vocabulary"] \
-        == lock["vocabulary_sha256"]
+    assert record_of(fresh, build_dataset(repo, "small", fresh, log=lambda *_: None))["tokenizer"]["vocabulary"][
+        "sha256"] == lock["vocabulary_sha256"]
 
     recipe_path = (repo.root / "data" / "recipes" / "tokenizers" / "main.json")
     recipe = json.loads(recipe_path.read_text())
@@ -256,7 +335,7 @@ def test_the_locked_vocabulary_stays_until_its_version_is_raised(kit, repo, stor
     recipe_path.write_text(json.dumps({**recipe, "vocab_size": 706, "version": 2}))
     third = record_of(store, build_dataset(repo, "small", store, log=lambda *_: None))
     new_lock = json.loads(lock_path.read_text())
-    assert third["tokenizer"]["recipe_version"] == 2 and third["tokenizer"]["vocabulary"] == new_lock["vocabulary_sha256"]
+    assert third["tokenizer"]["recipe_version"] == 2 and third["tokenizer"]["vocabulary"]["sha256"] == new_lock["vocabulary_sha256"]
     assert new_lock["vocabulary_sha256"] != lock["vocabulary_sha256"] and new_lock["document_count"] == 11
 
 
@@ -278,7 +357,8 @@ def test_a_raised_code_version_leaves_the_lock_as_it_is_and_builds_the_dataset_a
     monkeypatch.setattr(build.Tokenizer, "train", refused)
     monkeypatch.setattr(build, "VOCABULARY_VERSION", build.VOCABULARY_VERSION + 1)
     second = record_of(store, build_dataset(repo, "small", store, log=lambda *_: None))
-    assert second["tokenizer"]["vocabulary"] == first["tokenizer"]["vocabulary"] and lock_path.read_bytes() == locked
+    assert second["tokenizer"]["vocabulary"]["sha256"] == first["tokenizer"]["vocabulary"]["sha256"]
+    assert lock_path.read_bytes() == locked
     assert second["id"] == first["id"]
 
     ids = {first["id"]}
@@ -297,6 +377,7 @@ def test_tokenizer_check_round_trips_every_document_and_reports_each_source(kit,
                                      executable=set(), symlinks={})
     late = kit.add_source(repo, store, "example", "more", {"type": "git", "address": folder})
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
 
     assert main(["--root", str(repo.root), "tokenizer-check", "main"]) == 0
     lines = bare(capsys.readouterr().out).splitlines()
@@ -351,16 +432,18 @@ def test_a_source_missing_from_the_store_is_left_out_listed_and_recorded(kit, re
     with pytest.raises(SourceGone, match=changed):  # upstream no longer serves it: nothing kept
         kit.download(repo, store, changed)
 
+    documents = record_of(store, first)["documents"]  # a build under the same name replaces this one
     for stream in (False, True):
         without = build_dataset(repo, "small", store, log=lambda *_: None, stream=stream)  # no --strict: the build goes on
         record = record_of(store, without)
         assert [s["source"] for s in record["skipped"]] == [changed]
         assert record["skipped"][0]["error"].startswith("NotDownloaded: ")
-        assert changed not in record["sources"] and record["documents"] == record_of(store, first)["documents"]
+        assert changed not in record["sources"] and record["documents"] == documents
         assert without != first  # the id says something is missing
 
     # the build's record names the missing source and why
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)
     assert main(["--root", str(repo.root), "build", "small"]) == 0
     [folder] = [name for name in store.record_folders() if "-wpt-dataset-build-small-" in name]
@@ -371,6 +454,7 @@ def test_a_source_missing_from_the_store_is_left_out_listed_and_recorded(kit, re
 
     # the check goes on past a failure, so one run names every source to fix
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     capsys.readouterr()
     assert main(["--root", str(repo.root), "check", "--fetch", *repo.source_ids()]) == 1
     out, err = map(bare, capsys.readouterr())
@@ -429,18 +513,18 @@ def test_a_build_goes_on_past_a_failing_source_and_lists_it_unless_strict(kit, r
     folder, commit = kit.git_project(tmp_path / "other", files={"en/other.txt": b"owls hunt at night. " * 30},
                                      executable=set(), symlinks={})
     broken = kit.add_source(repo, store, "example", "broken", {"type": "git", "address": folder, "tags": [{"tags": ["en"], "paths": ["**"]}]})
-    [placed] = {placed for _, placed in stored_files(upstream_key(repo.source(broken)), store).values()}
-    for bundle in (store.root / "bundles").glob(f"{placed.bundle}*"):
-        bundle.write_bytes(bytes(b ^ 0xFF for b in bundle.read_bytes()))  # every byte changed
+    tar = store.root / f"{source_key(store.session, broken, '.tar.zst')}"
+    tar.write_bytes(bytes(b ^ 0xFF for b in tar.read_bytes()))  # every byte changed
 
-    with pytest.raises(CorruptObject):
+    documents = record_of(store, first)["documents"]  # a build under the same name replaces this one
+    with pytest.raises(CorruptFile):
         build_dataset(repo, "small", store, log=lambda *_: None, strict=True)
     for stream in (False, True):
         skipped = build_dataset(repo, "small", store, log=lambda *_: None, stream=stream)
         record = record_of(store, skipped)
         assert [s["source"] for s in record["skipped"]] == [broken]
-        assert record["skipped"][0]["error"].startswith("CorruptObject: ")
-        assert record["documents"] == record_of(store, first)["documents"]
+        assert record["skipped"][0]["error"].startswith("CorruptFile: ")
+        assert record["documents"] == documents
 
 
 def broken_sources(kit, repo, store, tmp_path, count=2):
@@ -555,8 +639,8 @@ def test_sources_converted_at_once_give_the_dataset_converted_one_at_a_time(kit,
         at_once = [e["attributes"]["limit"] for e in events if e["kind"] == "event" and e["name"] == "sources.at_once"]
         assert at_once and set(at_once) == {max(1, int(cores * 0.75))}
         refs = [source_of(events, e["span"]) for e in events  # what each source's conversion stores once
-                if e["kind"] == "event" and e["name"] == "store.ref_set"
-                and e["attributes"]["ref"].startswith("source-tokens")]
+                if e["kind"] == "event" and e["name"] == "store.result_set"
+                and e["attributes"]["stage"] == "source-tokens"]
         assert sorted(refs) == sorted(ids)  # recorded by the worker, under its source's span
     assert ended_out_of_order(log, sorted(ids)[0])
     (one_id, one, one_list), (many_id, many, many_list) = built[1], built[16]
@@ -580,14 +664,14 @@ def test_a_source_s_kept_files_and_tokens_are_made_again_only_when_its_own_input
     _, vocabulary, _ = build.build_tokenizer(repo, "small", store, log=lambda *_: None)
     monkeypatch.setattr(workers, "_REPO", repo)  # read_tokens runs here, as in a worker process
     monkeypatch.setattr(workers, "license_texts", lambda: license_check.LicenseTexts(repo.license_texts()))
-    for ref in (store.root / "refs" / "source-tokens").glob("*"):
+    for ref in (store.root / "cache" / "source-tokens").glob("*"):
         ref.unlink()
 
     def made() -> dict[str, int]:
         source = repo.source(sid)
         kept.kept(source, store, workers.license_texts())
         reading.read_tokens(source, store, [0, 1], vocabulary, tmp_path / "markdown", None)
-        return {kind: len(list((store.root / "refs" / kind).iterdir())) for kind in ("source-kept", "source-tokens")}
+        return {kind: len(list((store.root / "cache" / kind).iterdir())) for kind in ("source-kept", "source-tokens")}
 
     assert made() == {"source-kept": 1, "source-tokens": 1}
     folder, _ = kit.git_project(tmp_path / "other", files={"notes.txt": b"another source's own text. " * 20},
@@ -619,9 +703,9 @@ def test_a_build_that_reuses_another_commit_s_results_warns_once_per_stage_and_c
     # sources and workers found them, and gives the same dataset. A result of this very commit says nothing
     setup_recipes(kit, repo, store, corpus, total_tokens=1000)
     dataset = build.run(repo, "small", store, [])
-    refs = store.root / "refs"
-    tokens = next((refs / "source-tokens").iterdir()).name
-    assert store.get_made_ref("source-tokens", tokens)[1] == programs.code_name()
+    results = store.root / "cache"
+    tokens = result_name(next((results / "source-tokens").iterdir()))
+    assert store.get_result("source-tokens", tokens)[1] == programs.code_name()
 
     capsys.readouterr()
     assert build.run(repo, "small", store, []) == dataset
@@ -630,13 +714,13 @@ def test_a_build_that_reuses_another_commit_s_results_warns_once_per_stage_and_c
     counts = {}
     for stage in ("source-trees", "source-index", "source-tokens"):
         counts[stage] = 0
-        for ref in (refs / stage).iterdir():
-            sha = store.get_ref(stage, ref.name)
-            store.set_ref(stage, ref.name, sha, made_by="0" * 40 if counts[stage] else "1" * 40)
+        for path in sorted((results / stage).iterdir()):
+            name = result_name(path)
+            store.put_result(stage, name, store.get_result(stage, name)[0], made_by="0" * 40 if counts[stage] else "1" * 40)
             counts[stage] += 1
     record = {**record_of(store, dataset)}
     record["tools"] = {**record["tools"], "code": {"commit": "2" * 40, "changes": None}}
-    store.set_ref("datasets", dataset, store.put_bytes(json.dumps(record).encode()))
+    keep_dataset(store, "small", record)
 
     assert build.run(repo, "small", store, []) == dataset
     lines = [line for line in map(bare, "".join(capsys.readouterr()).splitlines()) if " reused " in line]
@@ -651,13 +735,13 @@ def test_a_vocabulary_found_with_no_lock_keeps_the_commit_that_made_it(kit, repo
     # its lock not committed, a later commit finds it again: the ref goes on naming its true maker
     setup_recipes(kit, repo, store, corpus, total_tokens=1000)
     build.build_tokenizer(repo, "small", store, log=lambda *_: None)
-    name = next((store.root / "refs" / "vocabularies").iterdir()).name
-    store.set_ref("vocabularies", name, store.get_ref("vocabularies", name), made_by="1" * 40)
+    name = result_name(next((store.root / "cache" / "vocabularies").iterdir()))
+    store.put_result("vocabularies", name, store.get_result("vocabularies", name)[0], made_by="1" * 40)
     (repo.root / "data" / "recipes" / "tokenizers" / "main.lock.json").unlink()
 
     build.build_tokenizer(repo, "small", store, log=lambda *_: None)
 
-    assert store.get_made_ref("vocabularies", name)[1] == "1" * 40
+    assert store.get_result("vocabularies", name)[1] == "1" * 40
 
 
 def test_a_streamed_build_leaves_no_copy_of_a_source_s_files_on_this_machine(kit, repo, store, tmp_path):
@@ -708,9 +792,9 @@ def test_a_streamed_build_keeps_the_conversations_and_leaves_no_copy_of_their_fi
     kit.download(repo, normal, talks)
     assert build_dataset(repo, "small", normal, log=lambda *_: None) == streamed_id
     streamed, built = record_of(store, streamed_id), record_of(normal, streamed_id)
-    assert streamed["conversations"] == built["conversations"]
+    assert streamed["conversations"]["file"]["sha256"] == built["conversations"]["file"]["sha256"]
     assert streamed["conversations"]["count"] == 1 and streamed["conversations"]["sources"] == [talks]
-    [line] = store.get_bytes(streamed["conversations"]["object"]).decode().splitlines()
+    [line] = store.get_bytes(streamed["conversations"]["file"]).decode().splitlines()
     assert json.loads(line)["id"] == f"{talks}/messages.jsonl:a"
 
 
@@ -749,7 +833,7 @@ def test_a_source_left_out_gives_the_same_dataset_on_any_machine_and_never_moves
     missing = record_of(store, here)
     assert [s["source"] for s in missing["skipped"]] == [talks]
     assert held["fingerprints"]["text"] == missing["fingerprints"]["text"]
-    assert held["shards"] == missing["shards"]
+    assert [s["token_sha256"] for s in held["shards"]] == [s["token_sha256"] for s in missing["shards"]]
 
 
 def test_a_dataset_whose_record_lacks_a_field_is_built_again(kit, repo, store, corpus):
@@ -760,7 +844,7 @@ def test_a_dataset_whose_record_lacks_a_field_is_built_again(kit, repo, store, c
     current = record_of(store, dataset_id)
     older = {k: v for k, v in current.items() if k != "fingerprints"}
     assert not build.current_record(older) and build.current_record(current)
-    store.set_ref("datasets", dataset_id, store.put_bytes(json.dumps(older).encode()))
+    keep_dataset(store, f"small-{dataset_id[:8]}", older)
 
     assert build_dataset(repo, "small", store, log=lambda *_: None) == dataset_id
     assert build.current_record(record_of(store, dataset_id))
@@ -785,7 +869,8 @@ def test_conversations_read_at_once_give_the_dataset_read_one_at_a_time(kit, rep
         kit.download(repo, fresh, *ids)
         dataset_id = build_dataset(repo, "small", fresh, log=lambda *_: None, stream=stream)
         record = record_of(fresh, dataset_id)
-        built[cores] = dataset_id, record["conversations"], fresh.get_bytes(record["conversations"]["object"])
+        built[cores] = dataset_id, {**record["conversations"], "file": record["conversations"]["file"]["sha256"]}, \
+            fresh.get_bytes(record["conversations"]["file"])
     assert ended_out_of_order(log, sorted(ids)[0])
     assert built[1] == built[16]
     assert built[1][1]["sources"] == sorted(ids) and built[1][1]["count"] == 4
@@ -843,7 +928,8 @@ def test_task_sources_read_at_once_give_the_dataset_read_one_at_a_time(kit, repo
         kit.download(repo, fresh, book, *ids)
         dataset_id = build_dataset(repo, "small", fresh, log=lambda *_: None)
         record = record_of(fresh, dataset_id)
-        built[cores] = dataset_id, record["tasks"], fresh.get_bytes(record["tasks"]["object"])
+        built[cores] = dataset_id, {**record["tasks"], "file": record["tasks"]["file"]["sha256"]}, \
+            fresh.get_bytes(record["tasks"]["file"])
     assert ended_out_of_order(log, sorted(ids)[0])
     assert built[1] == built[16]
     assert built[1][1]["count"] == 8 and built[1][1]["sources"] == sorted([book, *ids])
@@ -994,7 +1080,7 @@ def test_a_read_builds_a_source_s_newest_index_once_however_many_batches_it_take
 
 
 def newest_refs(store) -> list[str]:
-    folder = store.root / "refs" / "newest-index"
+    folder = store.root / "cache" / "newest-index"
     return sorted(path.name for path in folder.iterdir()) if folder.is_dir() else []
 
 
@@ -1086,7 +1172,7 @@ def test_a_source_under_newest_is_cut_like_any_other_after_a_part_that_saves_its
 
 
 def ids_of_tokens(store) -> int:
-    return len(list((store.root / "refs" / "source-tokens").iterdir()))
+    return len(list((store.root / "cache" / "source-tokens").iterdir()))
 
 
 def test_a_source_read_in_parts_gives_the_dataset_of_one_read_and_a_saved_part_is_not_read_again(
@@ -1108,7 +1194,7 @@ def test_a_source_read_in_parts_gives_the_dataset_of_one_read_and_a_saved_part_i
     (repo.root / repo.relative("lock", "main")).unlink()  # the parts train it again
 
     monkeypatch.setattr(reading, "BATCH_BYTES", 2048)  # the asking process cuts: about 2 files a batch
-    split = open_store((tmp_path / "split").as_uri())
+    split = open_store((tmp_path / "split").as_uri()).at("test-session")
     kit.download(repo, split, many, other)
     assert build_dataset(repo, "small", split, log=lambda *_: None) == whole
     assert ids_of_tokens(split) > 3  # the large source's parts, each saved, and the other source
@@ -1122,12 +1208,12 @@ def test_a_source_read_in_parts_gives_the_dataset_of_one_read_and_a_saved_part_i
            [s["token_sha256"] for s in one["shards"] + one["held_out_shards"]]
     assert [item["path"] for item in parts["sources"][many]["check"]["left_out"]] == ["en/many-15.txt"]
 
-    next(iter((split.root / "refs" / "source-tokens").iterdir())).unlink()
+    next(iter((split.root / "cache" / "source-tokens").iterdir())).unlink()
     with Telemetry.start(split, "wpt dataset build", [], "small", env_file=tmp_path / ".env", environ={}) as telemetry:
         assert build_dataset(repo, "small", split, log=lambda *_: None, telemetry=telemetry) == whole
     events = [json.loads(line) for line in split.read_record(telemetry.folder, "events.jsonl").splitlines()]
-    assert len([e for e in events if e["kind"] == "event" and e["name"] == "store.ref_set"
-                and e["attributes"]["ref"].startswith("source-tokens")]) == 1
+    assert len([e for e in events if e["kind"] == "event" and e["name"] == "store.result_set"
+                and e["attributes"]["stage"] == "source-tokens"]) == 1
 
 
 def many_revisions(count=30):
@@ -1138,8 +1224,8 @@ def many_revisions(count=30):
 
 def index_refs_set(store, folder) -> int:
     events = [json.loads(line) for line in store.read_record(folder, "events.jsonl").splitlines()]
-    return len([e for e in events if e["kind"] == "event" and e["name"] == "store.ref_set"
-                and e["attributes"]["ref"].startswith("newest-index")])
+    return len([e for e in events if e["kind"] == "event" and e["name"] == "store.result_set"
+                and e["attributes"]["stage"] == "newest-index"])
 
 
 def test_a_source_under_newest_read_in_parts_gives_what_one_read_gives_from_one_index(kit, repo, store, tmp_path,
@@ -1155,7 +1241,7 @@ def test_a_source_under_newest_read_in_parts_gives_what_one_read_gives_from_one_
     (repo.root / repo.relative("lock", "main")).unlink()  # the parts train it again
 
     monkeypatch.setattr(reading, "BATCH_BYTES", 2048)  # the asking process cuts: about 2 files a batch
-    split = open_store((tmp_path / "split").as_uri())
+    split = open_store((tmp_path / "split").as_uri()).at("test-session")
     kit.download(repo, split, sid)
     with Telemetry.start(split, "wpt dataset build", [], "small", env_file=tmp_path / ".env", environ={}) as telemetry:
         assert build_dataset(repo, "small", split, log=lambda *_: None, telemetry=telemetry) == whole
@@ -1224,7 +1310,7 @@ def test_a_build_with_downloaders_gives_the_dataset_of_one_without_and_records_t
     (repo.root / repo.relative("lock", "main")).unlink()
 
     monkeypatch.setattr(kinds.Folder, "ahead", True)
-    ahead = open_store((tmp_path / "ahead").as_uri())
+    ahead = open_store((tmp_path / "ahead").as_uri()).at("test-session")
     kit.download(repo, ahead, many, other)
     (ahead.cache / "ahead-killed" / "0").mkdir(parents=True)
     with Telemetry.start(ahead, "wpt dataset build", [], "small", env_file=tmp_path / ".env", environ={}) as telemetry:
@@ -1245,7 +1331,7 @@ def test_a_build_with_downloaders_gives_the_dataset_of_one_without_and_records_t
     assert not left_ahead(ahead)
 
 
-def test_a_part_read_from_its_download_reads_nothing_more_from_the_bundles(kit, repo, store, tmp_path, monkeypatch):
+def test_a_part_read_from_its_download_reads_nothing_more_from_the_tars(kit, repo, store, tmp_path, monkeypatch):
     # a small file, a file read alone as a stream, the records file read as a stream and the license statement are
     # all on this machine when the part starts, and it gives what a read of its own gives
     upstream, _ = kit.git_project(tmp_path / "revisions", executable=set(), symlinks={}, files={
@@ -1263,7 +1349,7 @@ def test_a_part_read_from_its_download_reads_nothing_more_from_the_bundles(kit, 
     alone = reading.read_tokens(source, store, positions, vocabulary, tmp_path / "alone", None)
     assert downloaders.download(source, store, positions, vocabulary, tmp_path / "ahead", tmp_path / "known",
                                 Telemetry.off()) == 0  # a part whose tokens are saved reads nothing: nothing to download
-    for ref in (store.root / "refs" / "source-tokens").iterdir():
+    for ref in (store.root / "cache" / "source-tokens").iterdir():
         ref.unlink()
 
     folder = tmp_path / "part"
@@ -1271,7 +1357,7 @@ def test_a_part_read_from_its_download_reads_nothing_more_from_the_bundles(kit, 
     assert copied > 2000
 
     def refused(*_):
-        raise AssertionError("read from the bundles")
+        raise AssertionError("read from the tars")
 
     monkeypatch.setattr(Store, "_range", refused)
     monkeypatch.setattr(Store, "_fetch_frames", refused)
@@ -1280,7 +1366,7 @@ def test_a_part_read_from_its_download_reads_nothing_more_from_the_bundles(kit, 
 
 
 def test_a_failed_download_changes_nothing_and_leaves_nothing_behind(kit, repo, store, corpus, tmp_path, reads_wait):
-    # the downloader meets the broken bundle first: the source's error is still the one a read of its own meets, in a
+    # the downloader meets the broken tar first: the source's error is still the one a read of its own meets, in a
     # build that goes on past it and in one that stops, and no downloaded file stays
     setup_recipes(kit, repo, store, corpus, total_tokens=2000)
     first = build_dataset(repo, "small", store, log=lambda *_: None)
@@ -1288,17 +1374,17 @@ def test_a_failed_download_changes_nothing_and_leaves_nothing_behind(kit, repo, 
                                 executable=set(), symlinks={})
     broken = kit.add_source(repo, store, "example", "broken", {"type": "git", "address": folder,
                                                                "tags": [{"tags": ["en"], "paths": ["**"]}]})
-    [placed] = {placed for _, placed in stored_files(upstream_key(repo.source(broken)), store).values()}
-    for bundle in (store.root / "bundles").glob(f"{placed.bundle}*"):
-        bundle.write_bytes(bytes(b ^ 0xFF for b in bundle.read_bytes()))  # every byte changed
+    tar = store.root / f"{source_key(store.session, broken, '.tar.zst')}"
+    tar.write_bytes(bytes(b ^ 0xFF for b in tar.read_bytes()))  # every byte changed
 
-    with pytest.raises(CorruptObject):
+    documents = record_of(store, first)["documents"]  # a build under the same name replaces this one
+    with pytest.raises(CorruptFile):
         build_dataset(repo, "small", store, log=lambda *_: None, strict=True)
     assert not left_ahead(store)
     record = record_of(store, build_dataset(repo, "small", store, log=lambda *_: None))
     assert [s["source"] for s in record["skipped"]] == [broken]
-    assert record["skipped"][0]["error"].startswith("CorruptObject: ")
-    assert record["documents"] == record_of(store, first)["documents"]
+    assert record["skipped"][0]["error"].startswith("CorruptFile: ")
+    assert record["documents"] == documents
     assert not left_ahead(store)
 
 
@@ -1514,7 +1600,7 @@ def test_a_source_s_error_is_its_first_part_s_in_their_order_whichever_fails_fir
 
 
 def test_the_parts_of_a_source_give_its_documents_in_the_order_of_one_read(kit, repo, store, tmp_path, monkeypatch):
-    # bundle order is not path order: the vocabulary reads a source's documents in path order, however it was cut
+    # tar order is not path order: the vocabulary reads a source's documents in path order, however it was cut
     sid = many_files(kit, repo, store, tmp_path, count=12)
     reads_here(monkeypatch, repo)
     source = repo.source(sid)
@@ -1549,7 +1635,7 @@ def test_a_worker_fetches_the_next_batch_while_it_converts_the_current_one_and_g
     reads_here(monkeypatch, repo)
     source, count = repo.source(sid), 6
     whole = reading.read_tokens(source, store, list(range(count)), vocabulary, tmp_path / "whole", None)
-    for ref in (store.root / "refs" / "source-tokens").glob("*"):
+    for ref in (store.root / "cache" / "source-tokens").glob("*"):
         ref.unlink()
 
     converting, written, asked = [threading.Event() for _ in range(count)], [], []
@@ -1595,13 +1681,13 @@ def test_a_fetch_ahead_that_fails_fails_the_source_with_its_own_error(kit, repo,
     def fetched(self, places):
         calls.append(places)
         if len(calls) == 2:
-            raise CorruptObject("the second batch's bundle is broken")
+            raise CorruptFile("the second batch's tar is broken")
         fetch(self, places)
 
     monkeypatch.setattr(Store, "fetch_files", fetched)
     monkeypatch.setattr(reading, "BATCH_BYTES", 1)
 
-    with pytest.raises(CorruptObject, match="second batch"):
+    with pytest.raises(CorruptFile, match="second batch"):
         reading.read_markdown(repo.source(sid), store, [0, 1, 2], tmp_path / "markdown", Telemetry.off())
 
 
@@ -1616,7 +1702,7 @@ def test_the_packs_a_cache_holds_change_nothing_a_build_makes(kit, repo, store, 
     assert len(reading.read_markdown(source, store, [1], cache, Telemetry.off()).packs) == 1
     read = reading.read_markdown(source, store, [0, 1], cache, Telemetry.off())
     assert [entry["path"] for entry, _ in read.documents()] == ["a.txt", "b.txt"]
-    for ref in (store.root / "refs" / "source-tokens").glob("*"):
+    for ref in (store.root / "cache" / "source-tokens").glob("*"):
         ref.unlink()
 
     assert build_dataset(repo, "small", store, log=lambda *_: None) == clean
@@ -1634,8 +1720,7 @@ def test_of_two_sources_with_the_same_markdown_the_first_by_id_keeps_it_whicheve
     assert [found for found, _ in trained.read(store, repo.generated("lock", "main")["documents_sha256"])] == \
         [f"{first}/a.txt"]
     monkeypatch.setattr(choice, "by_source", in_order)
-    for ref in (store.root / "refs" / "datasets").glob("*"):
-        ref.unlink()
+    store.delete_json(dataset_key(store.session, "small"))
 
     assert build_dataset(repo, "small", store, log=lambda *_: None) == backward
     assert [d["id"] for d in document_list(store, backward)] == [f"{first}/a.txt"]
@@ -1668,9 +1753,8 @@ def test_the_index_and_the_choice_read_no_text(kit, repo, store, tmp_path):
     # the files of the store are gone, only its records stay: the index and the choice still answer
     sid = many_files(kit, repo, store, tmp_path)
     one_pool(kit, repo, 100)
-    for bundle in (store.root / "bundles").rglob("*"):
-        if bundle.is_file():
-            bundle.unlink()
+    for tar in store.root.glob("*/sources/*.tar.zst"):
+        tar.unlink()
     index = choice.build(repo, store, log=lambda *_: None)
     assert len(index.rows) == 30 and not index.failed
     found = choice.Choice(index, repo.recipe("mixture", "main"))
@@ -1684,7 +1768,7 @@ def index_of(repo, store):
 
 def same_index(one, other):
     return (one.rows.tobytes() == other.rows.tobytes() and one.tag_sets == other.tag_sets
-            and one.bundles == other.bundles and one.duplicates == other.duplicates
+            and one.tars == other.tars and one.duplicates == other.duplicates
             and one.sources == other.sources and not one.failed and not other.failed)
 
 
@@ -1722,28 +1806,27 @@ def test_a_saved_index_part_is_not_used_after_its_version_is_raised(kit, repo, s
 
 
 def test_the_same_files_placed_elsewhere_move_the_index_with_them(kit, repo, store, tmp_path):
-    # the upstream manifest and the final tree stay the same: the file list alone says where the files lie
+    # the upstream manifest and the final tree stay the same: the tar's sha256 alone says where the files lie
     sid = many_files(kit, repo, store, tmp_path)
-    index_of(repo, store)
-    key = upstream_key(repo.source(sid))
-    moved = {path: (mode, dataclasses.replace(placed, bundle="elsewhere/000001"))
-             for path, (mode, placed) in stored_files(key, store).items()}
-    store.set_ref("upstream-files", key, store.put_bytes(file_list_bytes(moved)))
-    assert index_of(repo, store).bundles == ["elsewhere/000001"]
+    key = choice.index_key(repo.source(sid), store)
+    record = source_key(store.session, sid, ".json")
+    store.put_json(record, {**store.get_json(record), "sha256": "0" * 64})
+    assert choice.index_key(repo.source(sid), kit.open_store(store.root.as_uri()).at(store.session)) != key
 
 
 def test_a_source_that_fails_in_the_index_stays_failed_and_named_until_it_works(kit, repo, store, tmp_path):
     good = many_files(kit, repo, store, tmp_path, "good")
     sid = many_files(kit, repo, store, tmp_path, "bad")
-    key = upstream_key(repo.source(sid))
-    held = store.get_ref("upstream", key)
-    store.delete_ref("upstream", key)
+    key = source_key(store.session, sid, ".json")
+    kept_record = store.get_json(key)
+    store.delete_json(key)
+    store.held_records.drop(lambda _: True)
     answers = [index_of(repo, store) for _ in range(2)]
     assert [[(source.id, type(error), str(error)) for source, error in index.failed] for index in answers] == \
-        [[(sid, NotDownloaded, f"{sid}: its upstream files are not in {store}; `wpt dataset download {sid}` fetches "
-           "them")]] * 2
+        [[(sid, NotDownloaded, f"{sid}: its upstream files are not in session {store.session} of {store}; "
+           f"`wpt dataset download {sid}` fetches them")]] * 2
     assert [source.id for source in answers[1].sources] == [good]
-    store.set_ref("upstream", key, held)
+    store.put_json(key, kept_record)
     index = index_of(repo, store)
     assert not index.failed and len(index.rows) == 60
 
@@ -1771,41 +1854,41 @@ def test_a_source_added_later_moves_no_document_before_another(kit, repo, store,
     assert len(after) == 60 and [sha for sha in after if sha in set(before)] == before
 
 
-def synthetic_index(bundles, per_bundle, size=1000, first=0):
-    """An Index of one pool "en": per_bundle files of size bytes, one after the other, in each of the named bundles."""
-    rows = np.zeros(len(bundles) * per_bundle, dtype=choice.ROW)
-    for number, name in enumerate(bundles):
-        part = rows[number * per_bundle:(number + 1) * per_bundle]
-        part["bundle"] = first + number
-        part["start"] = np.arange(per_bundle) * size
+def synthetic_index(tars, per_tar, size=1000, first=0):
+    """An Index of one pool "en": per_tar files of size bytes, one after the other, in each of the named tars."""
+    rows = np.zeros(len(tars) * per_tar, dtype=choice.ROW)
+    for number, name in enumerate(tars):
+        part = rows[number * per_tar:(number + 1) * per_tar]
+        part["tar"] = first + number
+        part["start"] = np.arange(per_tar) * size
         part["bytes"] = size
-        part["sha256"] = [hashlib.sha256(f"{name} {i}".encode()).digest() for i in range(per_bundle)]
-    names = ["x"] * first + list(bundles)
+        part["sha256"] = [hashlib.sha256(f"{name} {i}".encode()).digest() for i in range(per_tar)]
+    names = ["x"] * first + list(tars)
     return choice.Index(rows, [], [frozenset({"en"})], names, 0)
 
 
 def test_the_choice_takes_whole_frames_and_a_source_added_later_moves_no_group(tmp_path):
     from wpt_store.blocks import FRAME
     mixture = {"pools": [{"name": "en", "select": "en", "weight": 1}]}
-    per_bundle = 4 * FRAME // 1000  # 4 frames of 1 KB files in each of 3 bundles: 12 frames, about 12,000 files
-    index = synthetic_index(["s/0", "s/1", "s/2"], per_bundle)
+    per_tar = 4 * FRAME // 1000  # 4 frames of 1 KB files in each of 3 tars: 12 frames, about 12,000 files
+    index = synthetic_index(["s/0", "s/1", "s/2"], per_tar)
     found = choice.Choice(index, mixture)
     rows = found.take({"en": 3 * FRAME})
-    touched = len(set(zip(rows["bundle"].tolist(), (rows["start"] // FRAME).tolist())))
+    touched = len(set(zip(rows["tar"].tolist(), (rows["start"] // FRAME).tolist())))
     assert 3 <= touched <= 4 and int(rows["bytes"].sum()) >= 0.99 * touched * FRAME  # its frames are full, not sparse
     assert touched <= int(rows["bytes"].sum()) // FRAME + 1  # about as many frames as its bytes need
 
     def groups(found):
         rows = found.index.rows[found.orders["en"]]
-        names = np.array(found.index.bundles)[rows["bundle"]]
+        names = np.array(found.index.tars)[rows["tar"]]
         pairs = list(zip(names.tolist(), (rows["start"] // FRAME).tolist()))
         return [pair for at, pair in enumerate(pairs) if not at or pairs[at - 1] != pair]
 
     before = groups(found)
     assert len(before) == 12
-    # another source, whose bundle is numbered before the others: no group of the first moves before another
-    later = synthetic_index(["t/0", "t/1"], per_bundle, first=0)
-    shifted = synthetic_index(["s/0", "s/1", "s/2"], per_bundle, first=2)
+    # another source, whose tar is numbered before the others: no group of the first moves before another
+    later = synthetic_index(["t/0", "t/1"], per_tar, first=0)
+    shifted = synthetic_index(["s/0", "s/1", "s/2"], per_tar, first=2)
     both = choice.Index(np.concatenate([later.rows, shifted.rows]), [], later.tag_sets, ["t/0", "t/1", "s/0", "s/1", "s/2"], 0)
     after = groups(choice.Choice(both, mixture))
     assert len(after) == 20 and [pair for pair in after if pair in set(before)] == before
@@ -1820,7 +1903,7 @@ def test_a_pool_short_of_its_share_draws_again_until_its_share_is_exact(two_kilo
     assert record["pools"][0]["epochs"] <= 1 and record["pools"][0]["share"] == 2000
     drawn = sum(len(tokens) for tokens, *_ in rows_of(store, record["shards"]))
     assert drawn >= 2000
-    assert len(list(store.root.joinpath("refs", "source-tokens").iterdir())) > 1  # one object per round
+    assert len(list(store.root.joinpath("cache", "source-tokens").iterdir())) > 1  # one file per round
 
 
 def test_a_vocabulary_trains_on_its_sample_in_the_pools_proportions(two_kilobyte_groups, kit, repo, store, tmp_path):
@@ -1846,7 +1929,7 @@ def test_markdown_read_for_the_vocabulary_is_not_read_again_for_the_tokens(kit, 
     one_pool(kit, repo, 2000)
     build.build_tokenizer(repo, "small", store, log=lambda *_: None)
     assert (repo.root / "data" / "recipes" / "tokenizers" / "main.lock.json").exists()
-    assert not list((store.root / "refs").glob("source-tokens/*"))  # it stopped before any token
+    assert not list((store.root / "cache").glob("source-tokens/*"))  # it stopped before any token
     packs = sorted((store.cache / "markdown").rglob("*.zst"))
     assert packs
     record = record_of(store, build_dataset(repo, "small", store, log=lambda *_: None))
@@ -1878,6 +1961,7 @@ def test_a_vocabulary_s_plan_gives_each_pool_s_part_of_its_sample(two_kilobyte_g
     many_files(kit, repo, store, tmp_path)
     one_pool(kit, repo, 7000, sample_bytes=6000)
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)
     assert main(["--root", str(repo.root), "build-tokenizer", "small", "--plan"]) == 0
     line = next(line for line in bare(capsys.readouterr().out).splitlines() if line.startswith("pool en:"))
@@ -1890,6 +1974,7 @@ def test_a_plan_says_what_a_build_would_do_and_does_nothing(kit, repo, store, tm
     many_files(kit, repo, store, tmp_path)
     one_pool(kit, repo, 700)
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)
     assert main(["--root", str(repo.root), command, "small", "--plan"]) == 0
     out = capsys.readouterr().out
@@ -1897,14 +1982,14 @@ def test_a_plan_says_what_a_build_would_do_and_does_nothing(kit, repo, store, tm
     assert ("draws again" in out) == (command == "build")  # a vocabulary has no rounds
     assert ("computes no token" in out) == (command == "build-tokenizer")
     assert repo.generated("lock", "main") is None
-    assert not list((store.root / "refs").glob("datasets/*")) and not list((store.root / "refs").glob("source-tokens/*"))
+    assert not list(store.root.glob("*/datasets/*")) and not list((store.root / "cache").glob("source-tokens/*"))
     assert not (store.cache / "markdown").exists()
 
 
-def packed_objects(store, objects=3, documents=4):
-    """PackedDocuments over `objects` token objects of `documents` documents each, and every document's tokens."""
+def packed_files(store, files=3, documents=4):
+    """PackedDocuments over `files` token files of `documents` documents each, and every document's tokens."""
     packed, expected = build.PackedDocuments(store), {}
-    for o in range(objects):
+    for o in range(files):
         tokens = [np.arange(10 * (d + 1), dtype="<u4") + 1000 * o + 100 * d for d in range(documents)]
         sha = store.put_bytes(b"".join(t.tobytes() for t in tokens))
         start = 0
@@ -1922,7 +2007,7 @@ def copies_of(store, packed):
 
 def test_the_shard_stage_reads_a_remote_store_from_local_copies_and_removes_them_afterwards(s3, monkeypatch):
     store = s3.store
-    packed, expected = packed_objects(store)
+    packed, expected = packed_files(store)
     ranges = []
     real = type(store)._range
     monkeypatch.setattr(type(store), "_range", lambda self, *arguments, **options: ranges.append(arguments) or real(self, *arguments, **options))
@@ -1938,7 +2023,7 @@ def test_the_shard_stage_reads_a_remote_store_from_local_copies_and_removes_them
 
 def test_the_copies_of_the_shard_stage_are_removed_also_when_it_or_a_copy_fails(s3, monkeypatch):
     store = s3.store
-    packed, expected = packed_objects(store)
+    packed, expected = packed_files(store)
     with pytest.raises(RuntimeError, match="shard failed"):
         with packed.local(list(expected), Telemetry.off()):
             assert len(copies_of(store, packed)) == 3
@@ -1950,11 +2035,11 @@ def test_the_copies_of_the_shard_stage_are_removed_also_when_it_or_a_copy_fails(
 
     def path(self, sha):
         if sha == failing:
-            raise CorruptObject("broken copy")
+            raise CorruptFile("broken copy")
         return real(self, sha)
 
     monkeypatch.setattr(type(store), "path", path)
-    with pytest.raises(CorruptObject, match="broken copy"):
+    with pytest.raises(CorruptFile, match="broken copy"):
         with packed.local(list(expected), Telemetry.off()):
             pytest.fail("the block must not run when a copy failed")
     assert copies_of(store, packed) == []

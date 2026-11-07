@@ -33,6 +33,26 @@ def test_a_ready_machine_has_nothing_missing(clean, built, capsys):
     assert "GB free in" in printed and "GB of sources" in printed
 
 
+def test_a_machine_check_runs_every_check_with_no_session_and_counts_a_given_one_in_its_disk_line(clean, monkeypatch,
+                                                                                                    capsys):
+    monkeypatch.delenv("WPT_SESSION")
+    main([])
+    printed = bare(capsys.readouterr().out)
+    assert printed.splitlines()[-1] == "nothing is missing"
+    assert "store: " in printed and "GB free in" in printed and "GB of sources" not in printed
+    main(["--session", "named"])
+    printed = bare(capsys.readouterr().out)
+    assert printed.splitlines()[-1] == "nothing is missing" and "GB of sources" in printed
+
+
+def test_a_start_with_no_session_is_refused(clean, monkeypatch, capsys):
+    monkeypatch.delenv("WPT_SESSION")
+    with pytest.raises(SystemExit) as refused:
+        main(["--from", "old"])
+    assert refused.value.code == 2
+    assert "StoreSettingError" in capsys.readouterr().err
+
+
 def test_a_machine_that_trains_here_names_what_computes_the_attention(clean, monkeypatch, capsys):
     monkeypatch.delenv("WPT_GPU_WORKERS")
     monkeypatch.setenv("WPT_KERNELS", "pytorch")

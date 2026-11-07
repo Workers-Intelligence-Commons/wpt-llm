@@ -6,6 +6,7 @@ question many times and flags replies by patterns, on the same stand-in."""
 
 import importlib.util
 import json
+from dataclasses import asdict
 import os
 import subprocess
 from fractions import Fraction
@@ -113,13 +114,13 @@ def context_of(tmp_path, tokenizer, model, training=(), held_out=(), held_share=
     """A Context whose dataset is these documents: training as (id, text,
     passes), each repeated passes times, held_out as (id, text)."""
     tmp_path.mkdir(exist_ok=True)
-    store = open_store((tmp_path / "store").as_uri())
+    store = open_store((tmp_path / "store").as_uri()).at("test-session")
 
     def shard(rows, name):
         path = tmp_path / f"{name}.parquet"
         digest = write_shard(path, [(np.asarray(tokenizer.encode(text.encode()) + [END], dtype="<u4"),
                                      doc.split("/")[0], doc, "all", n) for doc, text, n in rows])
-        return [{"object": store.put_file(path), "token_sha256": digest}] if rows else []
+        return [{**asdict(store.put_named(f"test-session/datasets/d/{digest}.parquet", path)), "token_sha256": digest}] if rows else []
 
     provenance = {"shards": shard([(d, t, n) for d, t, passes in training for n in range(passes)], "training"),
                   "held_out_shards": shard([(d, t, 0) for d, t in held_out], "held"),
@@ -260,8 +261,7 @@ def git_source(tmp_path, root, store, folder_name, files, data, fetched=True):
     (root / "data" / "sources" / sid).mkdir()
     (root / "data" / "sources" / sid / "source.json").write_text(dump_json(data), encoding="utf-8", newline="\n")
     if fetched:  # as `wpt dataset download` would
-        with store.session(f"20261025T120000Z-test-download-{sid}", "test", "abc123", False) as session:
-            [done] = download.download(Repo(root), [sid], store, session, log=lambda *_: None)
+        [done] = download.download(Repo(root), [sid], store, log=lambda *_: None)
         assert done.error is None, done.error
     return sid
 
@@ -295,7 +295,7 @@ def test_bible_verses_translates_held_out_chapters_only_and_scores_with_chrf(tok
     # from the read-aloud twin's tags, named by the tags the other lacks; and
     # every verse asked is in a chapter the twin's held-out rule holds out
     # ("BOOK C"), as the build holds the twin's chapter files out
-    store = open_store((tmp_path / "store").as_uri())
+    store = open_store((tmp_path / "store").as_uri()).at("test-session")
     texts = {language: verses(language) for language in ("de", "en")}
     for code, language in (("deu", "de"), ("eng", "en")):
         translation(tmp_path, root, store, code, language, texts[language])
@@ -390,7 +390,7 @@ def test_each_question_is_asked_ceil_3_over_the_rate_times_and_its_flagged_repli
     # every reply flagged and the other none; each is asked ceil(3 / rate)
     # times, and the model card shows each flagged reply word for word
     # with the pattern that matched, its thinking included
-    store = open_store((tmp_path / "store").as_uri())
+    store = open_store((tmp_path / "store").as_uri()).at("test-session")
     sid = probe_source(root, store, [{"question": "First placeholder?", "patterns": ["nothing", "(?i)ALARM"]},
                                          {"question": "Second placeholder?", "patterns": ["alarm"]},
                                          {"question": "Third placeholder?", "patterns": ["alarm"]}])

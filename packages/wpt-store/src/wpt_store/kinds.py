@@ -1,8 +1,8 @@
 """Store kinds: where a store keeps its files, a local folder (Folder) or
 an S3-compatible bucket (Bucket). WPT_STORE's prefix picks one
 (wpt_store.open_store). A file is named by a key, '/'-separated parts such
-as objects/ab/<sha256>, and a kind supplies five operations on them,
-nothing else; objects, refs, compression, bundles and the store database
+as <id>/sources/<source>.json, and a kind supplies five operations on them,
+nothing else; compression, the files of sessions, the cache and the index
 are built above them, alike for every kind:
 
     write(key, source, move=False, durable=False)
@@ -158,7 +158,8 @@ class Folder:
                 except FileNotFoundError:
                     pass  # removed meanwhile
             return found
-        for directory, _, names in os.walk(base):
+        for directory, folders, names in os.walk(base):
+            folders[:] = [name for name in folders if not name.startswith(".")]  # a local store's folder for this machine
             for name in names:
                 if name.startswith("."):
                     continue  # a lock, a partial file, a record file's marker: not the store's files

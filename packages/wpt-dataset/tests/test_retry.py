@@ -8,7 +8,7 @@ from wpt_telemetry import Telemetry
 def test_a_download_tried_again_inside_a_command_is_in_its_record(tmp_path, capsys):
     # a build's record must show the downloads that failed and were tried
     # again, not only the terminal that printed them
-    store = open_store((tmp_path / "store").as_uri())
+    store = open_store((tmp_path / "store").as_uri()).at("s1")
     attempts = []
 
     def download():

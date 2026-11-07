@@ -24,7 +24,7 @@ from collections import deque
 from datetime import UTC, datetime
 
 from wpt_dataset.errors import NotFound
-from wpt_store import MissingObject
+from wpt_store import MissingFile
 from wpt_telemetry import END, IDS, JOB, START
 
 LINES = 20_000  # the printed lines a job keeps; an older line is dropped when a newer one does not fit
@@ -129,11 +129,11 @@ class Jobs:
         stamp = job.started.strftime(STAMP)
         found = []
         for folder in store.record_folders():
-            if folder[:len(stamp)] < stamp:  # opened before the job started
+            if folder.partition("/")[2][:len(stamp)] < stamp:  # opened before the job started
                 continue
             try:
                 start = json.loads(store.read_record(folder, START))
-            except (MissingObject, ValueError):  # not written yet, or not a run's folder
+            except (MissingFile, ValueError):  # not written yet, or not a run's folder
                 continue
             if start.get("job") != job.id:
                 continue

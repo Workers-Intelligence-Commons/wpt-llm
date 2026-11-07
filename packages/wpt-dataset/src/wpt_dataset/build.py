@@ -4,7 +4,7 @@
                    store's records alone, each content once (choice.py)
     choose         the recipe's mixture draws its documents from the index,
                    by bytes, with a fixed seed per pool (choice.py)
-    read           only the chosen files are read, in bundle order, and
+    read           only the chosen files are read, in tar order, and
                    their Markdown is kept so the vocabulary and the tokens
                    read it once (reading.py)
 
@@ -27,7 +27,7 @@ share or the index has no more of it. What a round reads becomes:
                    (default 4) is refused
     shards         Parquet files in the store (see wpt_store.shards), rows in a
                    fixed pseudo-random order derived from the dataset id; the
-                   token objects the rows lie in are copied to this machine
+                   token files the rows lie in are copied to this machine
                    first (PackedDocuments.local), several at once, and the
                    copies removed when both parts are written, so no row is
                    read by range from the store
@@ -42,10 +42,10 @@ is built again, its record replaced.
 A build that reuses results another commit made says so and carries on: one
 warning per stage, with its counts (Telemetry.reused_lines).
 
-Beside its record, every dataset keeps its document list (write_document_list): each document's id, the sha256 of its
-Markdown and its tag, training or held-out, under a ref named by the
-dataset id, so a model's provenance finds it. A dataset built
-before builds wrote one never gets one.
+Beside its record, every dataset keeps in its folder its document list (write_document_list): each document's id, the
+sha256 of its Markdown and its tag, training or held-out, so a model's provenance finds it. The folder holds every file
+the dataset needs: its shards, its vocabulary, the document list, each source's credits, and the conversations and the
+tasks, so emptying the store's cache folder leaves the dataset whole.
 
 A dataset recipe names its vocabulary. A build that finds no lock for it
 trains it on a seeded sample of the first round's chosen documents, in the
@@ -78,14 +78,26 @@ failing source instead, and names every source the index could not take
 before any text is read. A missing program stops a build in either case,
 since it fails every source that needs it.
 
-The record also names, for each source, the session (its run record's
-folder) and the time of the download that put the files it used in the
-store, from the store database (`downloads`; None for a source with no
-such download, an empty one or one downloaded before the store kept
-sessions). It is not part of the dataset id: the same files downloaded
-again give the same dataset. `wpt dataset build` runs as a session of its
-own, which holds a `reused` line for each source whose upstream tree the
-dataset holds.
+The record also names, for each source, the session and the time of the
+download that put the files it used in the store, from the source's record
+(`downloads`; None for a source with no such download or an empty one), and,
+when the last attempt at that download failed and the session still holds a
+good file of it, which the build then read, that attempt (`failed`: its
+time, the kind of its error and its message). It is not part of the dataset
+id: the same files downloaded again give the same dataset. A build that
+finds its dataset in its own session writes `downloads` again.
+
+A build reads the session it is given, and the one that session started
+from, and writes the dataset under the session, as <id>/datasets/<name>/,
+name being what dataset_name gives for the recipe or the series, a hyphen
+and the first SHORT_ID hex characters of the dataset id. A build with other
+content writes another, complete folder; the same content finds the folder
+it was written in, by the dataset id, and builds nothing. The dataset
+record is stamped with the time of each build, and the dataset last built
+for a recipe or a series is the one `wpt train` reads when it is given none
+(last_dataset). The shards lie beside dataset.json, each named by its token
+hash, and dataset.json is written last, so a build that fails leaves no
+dataset.
 
 Sources are read, turned into tokens, and their conversations and tasks
 read in worker processes (workers.py), several at once, as many as
@@ -138,9 +150,10 @@ from pathlib import Path
 
 import numpy as np
 
-from wpt_store import CorruptObject, MissingObject
+from wpt_store import (CorruptFile, MissingFile, dataset_key, dataset_vocabulary, find_dataset, keep_dataset,
+                       latest_dataset)
 from wpt_store.shards import write_shard
-from wpt_telemetry import Telemetry, get_result_ref, set_result_ref, set_ref
+from wpt_telemetry import Telemetry, get_result, set_result
 from wpt_tokenizer import BASE_SIZE, RUSTC_VERSION, Tokenizer
 from wpt_utils.lines import WARNING, say
 from wpt_utils.parallel import Done, Sizing, each, in_order
@@ -148,7 +161,7 @@ from wpt_utils.programs import code, code_name
 
 from . import choice as choosing
 from . import conversations as chat_files
-from . import download, downloaders, license_check, pools, reading, store_history, trained, workers
+from . import downloaders, license_check, pools, reading, store_history, trained, workers
 from . import tasks as task_files
 from .errors import (DatasetError, PoolError, TokenizerVersionNeeded,
                      TrainedListMissing, VocabularyMissing)
@@ -159,24 +172,25 @@ from .sources import fingerprint, held_manifest, held_out_group, tags_of
 # raised by hand when a change to the code changes the vocabulary of the same documents. A locked vocabulary is never
 # trained again, so this acts only on a recipe with no lock: a new vocabulary takes raising the recipe's `version`
 VOCABULARY_VERSION = 1
-DATASET_VERSION = 1  # raised by hand when a change to the code changes the shards made of the same documents
+DATASET_VERSION = 2  # raised by hand when a change to the code changes the shards made of the same documents
+SHORT_ID = 8  # hex characters of the dataset id its folder's name ends with
 DEFAULT_MAX_EPOCHS = 4
 SHARD_TOKENS = 1 << 26  # about 64M tokens (256 MB of uint32) per shard
-TOKEN_READERS = 16  # documents read at once from the token objects
-# token objects made local at once for the shards. Each copy already fetches up to Sizing("downloads").limit parts at
-# once (Store._copy), and an S3 store holds UPLOADS + that limit + REQUESTS connections: 3 objects at once stay within
+TOKEN_READERS = 16  # documents read at once from the token files
+# token files made local at once for the shards. Each copy already fetches up to Sizing("downloads").limit parts at
+# once (Store._copy), and an S3 store holds UPLOADS + that limit + REQUESTS connections: 3 files at once stay within
 # them up to 20 parts each
-OBJECTS_AT_ONCE = 3
-DOCUMENT_LIST = "dataset-documents"  # the kind of the ref, named by the dataset id, of a dataset's document list
+FILES_AT_ONCE = 3
+DATASET_FILES = {"vocabulary": "vocabulary", "document_list": "documents.jsonl"}  # the files of a dataset's folder
 TRAINING, HELD_OUT = "training", "held-out"  # a listed document's tag
 # the top-level fields every record this code writes holds (conversations and tasks only when the sources hold
 # some): a record without one is of another shape, which its readers refuse and a build writes again. A record that
 # holds more, such as a contamination report (contamination.py reads it there), is of this shape too
-RECORD_FIELDS = ("id", "recipe_name", "recipe", "mixture", "tokenizer", "sources", "downloads", "skipped",
-                 "left_out_tasks", "documents",
+RECORD_FIELDS = ("id", "names", "time", "recipe_name", "recipe", "mixture", "tokenizer", "sources", "downloads",
+                 "skipped", "left_out_tasks", "documents", "document_list",
                  "pools", "total_tokens", "shards", "held_out_shards", "fingerprints", "tools",
                  "tool_differences")
-SOURCE_ERRORS = (DatasetError, CorruptObject, MissingObject)  # what fails one source, and not the others
+SOURCE_ERRORS = (DatasetError, CorruptFile, MissingFile)  # what fails one source, and not the others
 
 
 @dataclass(frozen=True)
@@ -202,7 +216,7 @@ def each_source(function, parts, repo, store, telemetry, progress, args, disk, f
     allows, reserving on the disk of folder disk(part) bytes, the conversion
     stating them beforehand (the event "sources.at_once" says how many and
     why). progress (Telemetry.progress) advances as each part's work ends, in
-    whatever order they end. A DatasetError, CorruptObject or MissingObject
+    whatever order they end. A DatasetError, CorruptFile or MissingFile
     the function raises is the source's error, the first of its parts' in
     their order; anything else (a missing program, a store that refuses a
     write) stops every source. A part whose turn comes after an earlier part
@@ -371,7 +385,7 @@ def chosen_first(repo: Repo, recipe: dict, mixture: dict, store, log, skipped, t
 
 
 def _chosen_parts(found, rows, without=frozenset()) -> list[reading.Part]:
-    """The parts of the sources of the rows, in bundle order."""
+    """The parts of the sources of the rows, in tar order."""
     return [part for source, its in choosing.by_source(found.index, rows, without)
             for part in reading.parts_of(source, its["position"].tolist(), its["bytes"].tolist())]
 
@@ -445,7 +459,7 @@ def read_rounds(repo, recipe, mixture, found, rows, vocabulary, store, cache, sk
                         if "record" in entry:
                             credits[document_id] = json.dumps({"document": document_id, **entry["record"]},
                                                               ensure_ascii=False, sort_keys=True)
-                    span.set(tree=tree, tokens_objects=[summary["tokens"] for summary in summaries],
+                    span.set(tree=tree, token_files=[summary["tokens"] for summary in summaries],
                              documents=sum(len(summary["documents"]) for summary in summaries)
                              - (duplicates - before), duplicates=duplicates - before)
         kept_tokens = dict.fromkeys(found.names, 0)
@@ -479,7 +493,7 @@ def _reads(rows) -> str:
     """What reading these rows takes, for a plan."""
     numbers = choosing.in_numbers(rows)
     return (f"reads {numbers['files']:,} files, {numbers['bytes']:,} bytes, of {numbers['sources']:,} sources in "
-            f"{numbers['bundles']:,} bundles")
+            f"{numbers['tars']:,} tars")
 
 
 def plan_lines(found, mixture, recipe, rows, vocabulary: str) -> list[str]:
@@ -507,55 +521,55 @@ def vocabulary_plan_lines(mixture, sample: dict, name: str) -> list[str]:
 
 
 class PackedDocuments:
-    """Documents' tokens read from the token objects of reading.read_tokens, a
-    part of the object each, checked against the document's own token
+    """Documents' tokens read from the token files of reading.read_tokens, a
+    part of the file each, checked against the document's own token
     sha256. Each document is read by range from the store, unless its token
-    object has a local copy (local), which the store's read_range reads."""
+    file has a local copy (local), which the store's read_range reads."""
 
     def __init__(self, store):
         self.store, self._where = store, {}
 
-    def add(self, document_id, tokens_object, entry):
-        self._where[document_id] = (tokens_object, entry["start"], entry["tokens"], entry["token_sha256"])
+    def add(self, document_id, token_file, entry):
+        self._where[document_id] = (token_file, entry["start"], entry["tokens"], entry["token_sha256"])
 
     def length(self, document_id) -> int:
         return self._where[document_id][2]
 
     def __getitem__(self, document_id) -> np.ndarray:
-        tokens_object, start, count, sha256 = self._where[document_id]
-        data = self.store.read_range(tokens_object, start, count * 4)
+        token_file, start, count, sha256 = self._where[document_id]
+        data = self.store.read_range(token_file, start, count * 4)
         if hashlib.sha256(data).hexdigest() != sha256:
-            raise CorruptObject(f"tokens of {document_id} in {tokens_object} do not match their sha256")
+            raise CorruptFile(f"tokens of {document_id} in {token_file} do not match their sha256")
         return np.frombuffer(data, dtype="<u4")
 
     @contextlib.contextmanager
     def local(self, document_ids, telemetry):
-        """A with block in which every token object these documents lie in
+        """A with block in which every token file these documents lie in
         has a local copy in the store's cache folder (Store.path: checked
-        against its sha256; a local store's uncompressed object is its own
+        against its sha256; a local store's uncompressed file is its own
         file and gets none), made several at once, so reading the documents
         takes no range from the store. The copies are released when the
         block ends, also when it or the copying fails. The disk the copies
         take is counted as wpt_utils.parallel.Sizing counts it: the copies
         in flight stay within what the free disk of the cache folder allows,
         and the first always starts."""
-        objects = sorted({self._where[document_id][0] for document_id in document_ids})
+        token_files = sorted({self._where[document_id][0] for document_id in document_ids})
         try:
-            sizes = {sha: self.store.size(sha) for sha in objects}
-            sizing = Sizing("token objects made local at once", disk=sizes.__getitem__, folder=self.store.cache,
-                            network=OBJECTS_AT_ONCE)
-            progress = telemetry.progress("token objects made local", sum(sizes.values()), "bytes")
+            sizes = {sha: self.store.size(sha) for sha in token_files}
+            sizing = Sizing("token files made local at once", disk=sizes.__getitem__, folder=self.store.cache,
+                            network=FILES_AT_ONCE)
+            progress = telemetry.progress("token files made local", sum(sizes.values()), "bytes")
 
             def make(sha):
                 self.store.path(sha)
                 return sha
 
             with progress, concurrent.futures.ThreadPoolExecutor(sizing.limit) as executor:
-                for sha in in_order(make, objects, executor, sizing):
+                for sha in in_order(make, token_files, executor, sizing):
                     progress.advance(sizes[sha])
             yield
         finally:
-            for sha in objects:
+            for sha in token_files:
                 self.store.release(sha)
 
     def many(self, document_ids) -> dict[str, np.ndarray]:
@@ -573,36 +587,35 @@ def is_held_out(key: str, share: float) -> bool:
     return int.from_bytes(hashlib.sha256(key.encode()).digest()) < share * 2**256
 
 
-def write_document_list(store, dataset_id: str, documents, held_ids, telemetry) -> str:
-    """Store a dataset's document list and return its object: one JSON line
-    per document, in the build's order, holding its id, the sha256 of its
-    Markdown (the one the dataset id's fingerprint reads) and its tag,
-    HELD_OUT for the ids in held_ids (the split the build cut its shards
-    by), TRAINING otherwise, kept under the ref DOCUMENT_LIST/<dataset id>.
-    The ref is recorded in telemetry's record before it is set
-    (wpt_telemetry.set_ref)."""
+def write_document_list(store, folder: str, documents, held_ids, telemetry) -> dict:
+    """Store a dataset's document list in its folder (folder: the dataset's
+    name in the session) and return the reference its record keeps ({"key",
+    "sha256"}): one JSON line per document, in the build's order, holding
+    its id, the sha256 of its Markdown (the one the dataset id's
+    fingerprint reads) and its tag, HELD_OUT for the ids in held_ids (the
+    split the build cut its shards by), TRAINING otherwise."""
     lines = (json.dumps({"id": d.id, "sha256": d.sha256, "tag": HELD_OUT if d.id in held_ids else TRAINING},
                         ensure_ascii=False, sort_keys=True) for d in documents)
-    listed = store.put_bytes("".join(f"{line}\n" for line in lines).encode())
-    telemetry.output(dataset_documents=listed)
-    set_ref(store, DOCUMENT_LIST, dataset_id, listed, telemetry)
-    return listed
+    listed = store.put_named(dataset_key(store.needed(), folder, DATASET_FILES["document_list"]),
+                             "".join(f"{line}\n" for line in lines).encode())
+    telemetry.output(dataset_documents=listed.sha256)
+    return listed.reference()
 
 
 def document_list(store, dataset_id: str) -> list[dict] | None:
     """[{id, sha256, tag}] of every document of a dataset, as
-    write_document_list stored them; None for a dataset built before builds
-    wrote its list."""
-    listed = store.get_ref(DOCUMENT_LIST, dataset_id)
-    if listed is None:
+    write_document_list stored them; None when the store holds no such
+    dataset, or the dataset's record names no list."""
+    found = find_dataset(store, dataset_id)
+    if found is None or "document_list" not in found[1]:
         return None
-    return [json.loads(line) for line in store.get_bytes(listed).splitlines()]
+    return [json.loads(line) for line in store.get_bytes(found[1]["document_list"]).splitlines()]
 
 
 # -- tokenizer ------------------------------------------------------------------
 
 def locked_vocabulary(repo: Repo, name: str, store):
-    """(tokenizer, vocabulary object sha256, fingerprint) of the lock of the
+    """(tokenizer, vocabulary file's sha256, fingerprint) of the lock of the
     tokenizer recipe name, or None when it has none for this `version`.
 
     The lock file freezes one vocabulary per recipe version, so adding or
@@ -626,6 +639,8 @@ def locked_vocabulary(repo: Repo, name: str, store):
         raise TokenizerVersionNeeded(f"tokenizer {name}: the recipe changed since version {recipe['version']} was "
                                      f"locked; raise `version` in {name}.json")
     vocabulary = lock["vocabulary_sha256"]
+    if not store.has(vocabulary) and (kept := dataset_vocabulary(store, vocabulary)) is not None:
+        store.put_bytes(store.get_bytes(kept))  # the cache folder's copy, made again from the dataset's folder
     if not store.has(vocabulary):
         raise VocabularyMissing(f"tokenizer {name} version {recipe['version']}: its locked vocabulary {vocabulary} "
                                 f"is not in {store}; a locked vocabulary is shared through the store that holds "
@@ -645,25 +660,21 @@ def vocabulary_key(recipe: dict, documents_sha256: str) -> str:
                         "documents": documents_sha256})
 
 
-def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skipped, strict, failed, log, telemetry,
-                     session=None):
-    """(tokenizer, vocabulary object sha256, fingerprint) of the tokenizer
+def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skipped, strict, failed, log, telemetry):
+    """(tokenizer, vocabulary file's sha256, fingerprint) of the tokenizer
     recipe name, trained on the sample its sample_bytes draws out of the
-    rows found took, and locked. The fingerprint is the key of the ref
-    vocabularies/<fingerprint> (vocabulary_key).
+    rows found took, and locked. The fingerprint names the result
+    vocabularies/<fingerprint> (vocabulary_key), the file's sha256.
 
-    The lock names those documents by one object of the store, their sorted
+    The lock names those documents by one file of the store, their sorted
     list (wpt_dataset.trained), with its sha256 and its number of lines, and
     lists the sources left out (skipped) by their ids and the kinds of
     their errors. Training reads every document of the
     sample and counts chunks in a table of a fixed number of slots
     (wpt_tokenizer): while the documents have no more distinct chunks than
     that, the vocabulary is the same whatever their order; beyond it, it
-    depends on the order, the sources' by bundle and each source's documents
-    by path (reading.documents_of).
-
-    With a session (wpt_store.sessions), a `reused` line for each source
-    the training read."""
+    depends on the order, the sources' by tar and each source's documents
+    by path (reading.documents_of)."""
     recipe = repo.recipe("tokenizer", name)
     parts = _chosen_parts(found, found.sample(mixture, recipe["sample_bytes"]), failed)
     reads, seen = [], {}  # reads: each source's, its parts' Reads; seen: {sha256 of a Markdown: the document keeping it}
@@ -701,7 +712,8 @@ def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skippe
                     yield text
 
     key = vocabulary_key(recipe, documents_sha256)
-    vocabulary = get_result_ref(store, "vocabularies", key, telemetry)
+    known = get_result(store, "vocabularies", key, telemetry)
+    vocabulary = None if known is None else known.decode()
     if vocabulary is not None and store.has(vocabulary):
         tokenizer = Tokenizer.from_bytes(store.get_bytes(vocabulary))
     else:
@@ -717,11 +729,8 @@ def train_vocabulary(repo: Repo, name: str, mixture, found, store, cache, skippe
             tokenizer = Tokenizer.train(counted(), recipe["vocab_size"],
                                         merged=lambda done: merges.advance(done - merges.done))
         vocabulary = store.put_bytes(tokenizer.to_bytes())
-        set_result_ref(store, "vocabularies", key, vocabulary, telemetry)
+        set_result(store, "vocabularies", key, vocabulary.encode(), telemetry)
 
-    if session is not None:
-        for source in sorted({part.source.id for part in parts} - failed):
-            download.used(repo.source(source), store, session)
     # recorded, and in the store, before the lock changes: a record that cannot be written leaves it as it was
     telemetry.irreversible("tokenizer.lock", path=repo.relative("lock", name), vocabulary=vocabulary)
     left_out = [{"source": one["source"], "error": one["error"].split(":", 1)[0]} for one in skipped]
@@ -739,9 +748,8 @@ def _reused_warnings(telemetry, log):
         log(line, WARNING)
 
 
-def build_tokenizer(repo: Repo, name: str, store, log=say, stream=False, strict=False, telemetry=None,
-                    session=None, plan=False):
-    """(tokenizer, vocabulary object sha256, fingerprint) of the vocabulary
+def build_tokenizer(repo: Repo, name: str, store, log=say, stream=False, strict=False, telemetry=None, plan=False):
+    """(tokenizer, vocabulary file's sha256, fingerprint) of the vocabulary
     a dataset recipe names (name: a model recipe's, or SERIES:SIZE,
     Repo.model_recipe): the locked one (locked_vocabulary), or with no lock
     the one it indexes, chooses, samples, trains and locks
@@ -749,12 +757,12 @@ def build_tokenizer(repo: Repo, name: str, store, log=say, stream=False, strict=
     logging what it would read and compute (vocabulary_plan_lines)."""
     telemetry = telemetry or Telemetry.off()
     try:
-        return _built_tokenizer(repo, name, store, log, stream, strict, telemetry, session, plan)
+        return _built_tokenizer(repo, name, store, log, stream, strict, telemetry, plan)
     finally:
         _reused_warnings(telemetry, log)
 
 
-def _built_tokenizer(repo, name, store, log, stream, strict, telemetry, session, plan):
+def _built_tokenizer(repo, name, store, log, stream, strict, telemetry, plan):
     recipe = repo.model_recipe(name)["data"]
     locked = locked_vocabulary(repo, recipe["tokenizer"], store)
     if locked is not None:
@@ -771,7 +779,7 @@ def _built_tokenizer(repo, name, store, log, stream, strict, telemetry, session,
         return None
     with markdown_cache(store, stream) as cache:
         return train_vocabulary(repo, recipe["tokenizer"], mixture, found, store, cache, skipped, strict, set(),
-                                log, telemetry, session)
+                                log, telemetry)
 
 
 def _sample_line(name: str, sample) -> str:
@@ -787,25 +795,23 @@ def _training_part(recipe) -> dict:
 # -- dataset ----------------------------------------------------------------------
 
 def build_dataset(repo: Repo, name: str, store, log=say, shard_tokens=SHARD_TOKENS, stream=False,
-                  strict=False, telemetry=None, session=None, plan=False) -> str | None:
+                  strict=False, telemetry=None, plan=False) -> str | None:
     """Build (or find) the dataset of a model recipe's data part (name: a
-    model recipe's, or SERIES:SIZE, Repo.model_recipe) and return its id;
-    with stream, keeping no document's Markdown on this machine; leaving out
-    the sources that fail, unless
-    strict (see the module's docstring). With a session
-    (wpt_store.sessions), a `reused` line for each source whose upstream
-    tree the dataset holds. Only the data part counts: recipes with the same
-    data share one dataset, as every size of a series does. With plan, None
-    after logging what it would read and compute (plan_lines). A dataset
-    found already built gives the id its record holds."""
+    model recipe's, or SERIES:SIZE, Repo.model_recipe) in the session of
+    store, and return its id; with stream, keeping no document's Markdown
+    on this machine; leaving out the sources that fail, unless strict (see
+    the module's docstring). Only the data part counts: recipes with the
+    same data share one dataset, as every size of a series does. With plan,
+    None after logging what it would read and compute (plan_lines). A
+    dataset found already built gives the id its record holds."""
     telemetry = telemetry or Telemetry.off()
     try:
-        return _built_dataset(repo, name, store, log, shard_tokens, stream, strict, telemetry, session, plan)
+        return _built_dataset(repo, name, store, log, shard_tokens, stream, strict, telemetry, plan)
     finally:
         _reused_warnings(telemetry, log)
 
 
-def _built_dataset(repo, name, store, log, shard_tokens, stream, strict, telemetry, session, plan):
+def _built_dataset(repo, name, store, log, shard_tokens, stream, strict, telemetry, plan):
     recipe = repo.model_recipe(name)["data"]
     mixture = repo.recipe("mixture", recipe["mixture"])
     telemetry.event("dataset.recipe", recipe_name=name, recipe=recipe, mixture=mixture)
@@ -844,9 +850,6 @@ def _built_dataset(repo, name, store, log, shard_tokens, stream, strict, telemet
     sources_info = _with_parts(repo, store, sources_info, steps_read, telemetry)
     telemetry.input(sources={sid: info["manifest"] for sid, info in sorted(sources_info.items())},
                     skipped_sources=[failed_one["source"] for failed_one in skipped])
-    if session is not None:
-        for sid in sorted(sources_info):
-            download.used(repo.source(sid), store, session)
     text_inputs = dataset_inputs(recipe, mixture, vocabulary, documents, sources_info, skipped)
     # the text's own id orders and picks its rows. It names the sources that hold documents only, no part and no
     # skipped source, so a change to the conversations or tasks (their sources included), or a source left out that
@@ -854,14 +857,25 @@ def _built_dataset(repo, name, store, log, shard_tokens, stream, strict, telemet
     holding = {d.source for d in documents}
     text_id = fingerprint({**{k: v for k, v in text_inputs.items() if k != "skipped"},
                            "sources": {sid: info for sid, info in sources_info.items() if sid in holding}})
-    # each part by its object only when it holds something, so earlier ids stay the same
-    dataset_id = fingerprint({**text_inputs, **{part: found["object"] for part, found in steps_read.items()}})
-    known = store.get_ref("datasets", dataset_id)
-    found_record = json.loads(store.get_bytes(known)) if known else None
+    # each part by its file only when it holds something, so earlier ids stay the same
+    dataset_id = fingerprint({**text_inputs, **{part: found["sha256"] for part, found in steps_read.items()}})
+    downloads = store_history.downloads_used(store, {sid: info["manifest"] for sid, info in sources_info.items()})
+    title = dataset_name(name)
+    folder = f"{title}-{dataset_id[:SHORT_ID]}"
+    place = dataset_key(store.needed(), folder)
+    known = find_dataset(store, dataset_id)
     # a record of another shape is built again: its readers read this shape only
-    if current_record(found_record):
-        telemetry.output(dataset=found_record["id"], dataset_record=known)
+    if known is not None and current_record(known[1]):
+        found_record = known[1]
+        telemetry.output(dataset=found_record["id"], dataset_record=known[0])
         telemetry.note_reused("datasets", dataset_id, code_name(found_record["tools"]["code"]))
+        own = known[0].startswith(f"{store.needed()}/")
+        if own or title not in found_record["names"]:  # kept in the session again: the latest build for this recipe
+            # or series now (a dataset of the same content goes by every name that built it), with the downloads its
+            # sources have now (they are no part of its id); one of another session that already goes by this name
+            # stays where it lies
+            keep_dataset(store, known[0].split("/")[2],
+                         {**found_record, "names": sorted({*found_record["names"], title}), "downloads": downloads})
         log(f"dataset {found_record['id']} is already built")
         return found_record["id"]
 
@@ -876,11 +890,13 @@ def _built_dataset(repo, name, store, log, shard_tokens, stream, strict, telemet
         with telemetry.span("shards"):
             held_rows = [(d, "held-out", 0) for d in held_out]
             with packed.local([d.id for d, _, _ in rows + held_rows], telemetry):
-                shards = _write_shards(rows, packed, store, Path(tmp), shard_tokens, telemetry, "training")
-                held_shards = _write_shards(held_rows, packed, store, Path(tmp), shard_tokens, telemetry, "held_out")
+                shards = _write_shards(rows, packed, store, folder, Path(tmp), shard_tokens, telemetry, "training")
+                held_shards = _write_shards(held_rows, packed, store, folder, Path(tmp), shard_tokens, telemetry,
+                                            "held_out")
 
     record = {
         "id": dataset_id,
+        "names": [title],
         "recipe_name": name,
         "recipe": recipe,
         "mixture": mixture,
@@ -888,7 +904,7 @@ def _built_dataset(repo, name, store, log, shard_tokens, stream, strict, telemet
                       "fingerprint": tokenizer_key, "vocabulary": vocabulary,
                       "vocab_size": tokenizer.vocab_size},
         "sources": sources_info,
-        "downloads": store_history.downloads_used(store, {sid: info["manifest"] for sid, info in sources_info.items()}),
+        "downloads": downloads,
         "skipped": skipped,
         "left_out_tasks": left_out_tasks,
         "documents": {"total": len(documents), "duplicates_removed": duplicates,
@@ -905,13 +921,13 @@ def _built_dataset(repo, name, store, log, shard_tokens, stream, strict, telemet
     for difference in record["tool_differences"]:
         log(f"tool version differs from the repository's reference: {difference}", WARNING)
     with telemetry.span("dataset.record"):
-        record_object = store.put_bytes(json.dumps(record, indent=2).encode() + b"\n")
-        # recorded, and in the store, before the ref is set: a record that cannot be written leaves no dataset
-        # under this id
-        telemetry.output(dataset=dataset_id, dataset_record=record_object)
-        # before the dataset's ref: a dataset is never there without its list
-        write_document_list(store, dataset_id, documents, held_ids, telemetry)
-        set_ref(store, "datasets", dataset_id, record_object, telemetry)
+        # recorded before dataset.json is written, last of the dataset's files: a run's record that cannot be
+        # written leaves no dataset under this name
+        telemetry.output(dataset=dataset_id, dataset_record=place)
+        # before dataset.json: a dataset is never there without the files its record names
+        record = {**record, **in_folder(store, folder, record), "document_list":
+                  write_document_list(store, folder, documents, held_ids, telemetry)}
+        keep_dataset(store, folder, record)
     log(f"dataset {dataset_id}: {record['total_tokens']:,} training tokens in {len(shards)} shards")
     return dataset_id
 
@@ -935,49 +951,66 @@ def dataset_inputs(recipe, mixture, vocabulary: str, documents, sources: dict, s
 
 def run(repo: Repo, name: str, store, arguments, stream=False, strict=False, plan=False) -> str | None:
     """`wpt dataset build`: build_dataset of the model recipe name, recorded
-    in the store (wpt_telemetry: records/<UTC>-wpt-dataset-build-<name>-.../)
-    with a session whose lines name each source it read (`reused`), the
-    session ended before the record. Returns the dataset id, None with plan.
-    The failures of build_dataset, RecordError when the record cannot be
-    written, and StoreError when the session cannot."""
+    in the store (wpt_telemetry: <id>/runs/<UTC>-wpt-dataset-build-<name>-.../).
+    Returns the dataset id, None with plan. The failures of build_dataset,
+    and RecordError when the record cannot be written."""
     with Telemetry.start(store, "wpt dataset build", arguments, name, inputs={"recipe": name},
                          env_file=repo.root / ".env") as telemetry:
-        with download.session(store, telemetry) as session:
-            dataset_id = build_dataset(repo, name, store, log=telemetry.log, stream=stream, strict=strict,
-                                       telemetry=telemetry, session=session, plan=plan)
+        dataset_id = build_dataset(repo, name, store, log=telemetry.log, stream=stream, strict=strict,
+                                   telemetry=telemetry, plan=plan)
         if dataset_id is not None:
-            kind, key = dataset_ref(name)
-            set_ref(store, kind, key, store.get_ref("datasets", dataset_id), telemetry)
             telemetry.log(dataset_id)
     return dataset_id
 
 
-def dataset_ref(name: str) -> tuple[str, str]:
-    """The ref naming the record of the dataset last built for a model
-    recipe's name: recipes/NAME, or series/SERIES for a size of a series,
-    every size of which builds the same dataset."""
+def dataset_name(name: str) -> str:
+    """The name a session's dataset goes by for a model recipe's name: the
+    recipe's, or series-SERIES for a size of a series, every size of which
+    builds the same dataset."""
     series, separated, _ = name.partition(SIZE_OF)
-    return ("series", series) if separated else ("recipes", name)
+    return f"series-{series}" if separated else name
 
 
 def last_dataset(store, name: str) -> str | None:
-    """The id of the dataset last built for a model recipe's name; None
-    when none was."""
-    record = store.get_ref(*dataset_ref(name))
-    return None if record is None else json.loads(store.get_bytes(record))["id"]
+    """The id of the dataset last built for a model recipe's name, or for
+    the series a size's name belongs to, in the session, else in the one it
+    started from, found through the store's index; None when none was."""
+    record = latest_dataset(store, dataset_name(name))
+    return None if record is None else record["id"]
+
+
+def in_folder(store, folder: str, record: dict) -> dict:
+    """The fields of a dataset's record that name a file other than a
+    shard, with every file put into the dataset's folder (folder: its name
+    in the session) and named as the shards are, by a reference {"key",
+    "sha256"}: the tokenizer (its vocabulary), each source's credits, and the
+    conversations and tasks parts (`file`). The build worked on them from
+    the store's cache folder, where only a content that can be made again
+    may lie."""
+    session = store.needed()
+
+    def put(file: str, name) -> dict:
+        return store.put_named(dataset_key(session, folder, file), store.get_bytes(name)).reference()
+
+    sources = {sid: {**info, "credits": put(f"credits/{sid}.jsonl", info["credits"])} if "credits" in info else info
+               for sid, info in record["sources"].items()}
+    parts = {part: {"file": put(f"{part}.jsonl", record[part]["sha256"]), "count": record[part]["count"],
+                    "sources": record[part]["sources"]} for part in ("conversations", "tasks") if part in record}
+    return {"tokenizer": {**record["tokenizer"], "vocabulary": put(DATASET_FILES["vocabulary"],
+                                                                   record["tokenizer"]["vocabulary"])},
+            "sources": sources, **parts}
 
 
 def run_tokenizer(repo: Repo, name: str, store, arguments, stream=False, strict=False,
                   plan=False) -> tuple[str, str] | None:
     """`wpt dataset build-tokenizer`: build_tokenizer of the dataset recipe
-    name, recorded and with a session as run does. Returns (vocabulary
-    object sha256, fingerprint), None with plan. The failures of
-    build_tokenizer, and those of the record and the session, as run."""
+    name, recorded as run does. Returns (vocabulary file's sha256,
+    fingerprint), None with plan. The failures of build_tokenizer, and
+    RecordError as run."""
     with Telemetry.start(store, "wpt dataset build-tokenizer", arguments, name, inputs={"recipe": name},
                          env_file=repo.root / ".env") as telemetry:
-        with download.session(store, telemetry) as session:
-            built = build_tokenizer(repo, name, store, log=telemetry.log, stream=stream, strict=strict,
-                                    telemetry=telemetry, session=session, plan=plan)
+        built = build_tokenizer(repo, name, store, log=telemetry.log, stream=stream, strict=strict,
+                                telemetry=telemetry, plan=plan)
         if built is None:
             return None
         _, vocabulary, key = built
@@ -1006,11 +1039,11 @@ def part_fingerprints(vocabulary: str, shards: list, held_shards: list, steps_re
     """{part: sha256} of what each kind of training step reads, so that a
     step's fingerprint changes only with its own part: "text" (the training
     and held-out shards, by the hashes of their tokens), and "conversations"
-    and "tasks" (their objects), each only when the dataset holds the part.
+    and "tasks" (their files), each only when the dataset holds the part.
     Each holds the vocabulary too, since every part becomes tokens with it."""
     parts = {"text": {"shards": [s["token_sha256"] for s in shards],
                       "held_out_shards": [s["token_sha256"] for s in held_shards]},
-             **{part: {"object": found["object"]} for part, found in steps_read.items()}}
+             **{part: {"file": found["sha256"]} for part, found in steps_read.items()}}
     return {part: fingerprint({"part": part, "vocabulary": vocabulary, **content}) for part, content in parts.items()}
 
 
@@ -1029,10 +1062,12 @@ def conversations_and_tasks(repo: Repo, store, built: set[str], share: float, he
                             copies=None) -> tuple[dict, list]:
     """(the parts of a dataset that the training steps read besides its
     shards, the tasks left out). The parts, each only when the sources hold
-    some: {"conversations": {object, count, sources}, "tasks": {object,
-    count, sources}}, sources the sorted
+    some: {"conversations": {sha256, count, sources}, "tasks": {sha256,
+    count, sources}}, sha256 that of the part's file (a working copy in the
+    store's cache folder, which in_folder puts into the dataset's folder),
+    sources the sorted
     ids of the sources the part holds or points into, each described in the
-    record's own `sources`. Each object holds
+    record's own `sources`. Each file holds
     one JSON line per conversation ({id, tags, conversation}: every chat
     file, whatever its tags) or per task (tasks.to_json: every task, its
     pointers filled in, but the measure-only ones, which share and held
@@ -1053,7 +1088,7 @@ def conversations_and_tasks(repo: Repo, store, built: set[str], share: float, he
         if found:
             lines = (json.dumps({"id": cid, "tags": tags, "conversation": conversation}, ensure_ascii=False,
                                 sort_keys=True) for cid, tags, conversation in found)
-            parts["conversations"] = {"object": store.put_bytes("".join(f"{line}\n" for line in lines).encode()),
+            parts["conversations"] = {"sha256": store.put_bytes("".join(f"{line}\n" for line in lines).encode()),
                                       "count": len(found), "sources": sorted(sources)}
         span.set(**parts.get("conversations", {"count": 0}))
     with telemetry.span("tasks") as span:
@@ -1061,7 +1096,7 @@ def conversations_and_tasks(repo: Repo, store, built: set[str], share: float, he
                                         copies=copies, pointable=built, left_out=left_out, telemetry=telemetry)
         if found:
             lines = (json.dumps(task_files.to_json(task), ensure_ascii=False, sort_keys=True) for task in found)
-            parts["tasks"] = {"object": store.put_bytes("".join(f"{line}\n" for line in lines).encode()),
+            parts["tasks"] = {"sha256": store.put_bytes("".join(f"{line}\n" for line in lines).encode()),
                               "count": len(found), "sources": sorted(sources)}
         span.set(**parts.get("tasks", {"count": 0}), left_out=len(left_out))
     return parts, left_out
@@ -1117,7 +1152,9 @@ def _fill_pools(text_id, recipe, mixture, training, tokens, log):
     return rows, pool_report
 
 
-def _write_shards(rows, tokens, store, folder: Path, shard_tokens, telemetry, part):
+def _write_shards(rows, tokens, store, name, folder: Path, shard_tokens, telemetry, part):
+    """Write rows as the shards of the session's dataset name, each named by
+    its token hash; each shard's record."""
     shards, batch, size = [], [], 0
     progress = telemetry.progress(f"{part} shards", sum(tokens.length(row[0].id) for row in rows), "tokens")
 
@@ -1125,8 +1162,9 @@ def _write_shards(rows, tokens, store, folder: Path, shard_tokens, telemetry, pa
         path = folder / f"shard-{len(shards):05d}.parquet"
         read = tokens.many(list(dict.fromkeys(d.id for d, _, _ in batch)))
         digest = write_shard(path, [(read[d.id], d.source, d.id, pool, p) for d, pool, p in batch])
-        shards.append({"object": store.put_file(path), "token_sha256": digest, "rows": len(batch), "tokens": size,
-                       "sources": sorted({d.source for d, _, _ in batch})})
+        file = store.put_named(dataset_key(store.needed(), name, f"{digest}.parquet"), path)
+        shards.append({"key": file.key, "sha256": file.sha256, "token_sha256": digest, "rows": len(batch),
+                       "tokens": size, "sources": sorted({d.source for d, _, _ in batch})})
         telemetry.event("shard", part=part, index=len(shards) - 1, **shards[-1])
         path.unlink()
         progress.advance(size)

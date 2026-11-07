@@ -19,13 +19,15 @@ from wpt_inference import COSTS_FILE, DRAFT, costs_setup, replayed_costs
 from wpt_model import load_drafter, load_model, load_tokenizer, tokenizer_identity, weight_hashes
 import wpt_telemetry
 from wpt_store import LocalStore, StoreError
-from wpt_telemetry import FLUSH_THREAD
+from wpt_telemetry import FLUSH_THREAD, Telemetry
 from wpt_tokenizer import Tokenizer
 from wpt_utils.device import select_device
 from wpt.dataset import main as dataset
-from wpt.train import main
+from wpt.train import StoreCheckpoint, main
 from wpt_training import load_state
 from wpt_utils.lines import bare
+from wpt_store import find_dataset
+from wpt_store.shards import shard_file
 
 ROOT = Path(__file__).resolve().parents[4]
 
@@ -35,10 +37,15 @@ def one_stage(steps, block_size=16, batch_size=4):
     return {"stages": [{"block_size": block_size, "steps": steps, "batch_size": batch_size}]}
 
 
+def checkpoint(store, name):
+    """The file of the checkpoint of the run name, None without one."""
+    return StoreCheckpoint(store, name, None, set()).state_file()
+
+
 def forget_steps(store):
     """Forget every step result the store keeps, as a store that never saw
     these recipes: the next run trains every step again."""
-    shutil.rmtree(store.root / "refs" / "steps", ignore_errors=True)
+    shutil.rmtree(store.root / "cache" / "steps", ignore_errors=True)
 
 
 def test_training_writes_a_model_with_its_provenance(built, tmp_path, monkeypatch, capsys):
@@ -51,21 +58,22 @@ def test_training_writes_a_model_with_its_provenance(built, tmp_path, monkeypatc
     assert "| indexer loss " in capsys.readouterr().out  # beside the training loss, at each evaluation
     model = load_model(tmp_path / "model")
     assert model.config.n_layer == 4 and model.config.block_size == 16  # the recipe's numbers
-    record = json.loads(store.get_bytes(store.get_ref("datasets", dataset_id)))
+    record = find_dataset(store, dataset_id)[1]
     # the weights name the dataset's vocabulary, and only that file loads with them
-    assert tokenizer_identity(tmp_path / "model") == ("t version 1", record["tokenizer"]["vocabulary"])
+    assert tokenizer_identity(tmp_path / "model") == ("t version 1", record["tokenizer"]["vocabulary"]["sha256"])
     tokenizer = Tokenizer.from_bytes(load_tokenizer(tmp_path / "model"))
     assert model.config.vocab_size == tokenizer.vocab_size
     provenance = json.loads((tmp_path / "model" / "provenance.json").read_text())
     assert provenance["dataset"] == dataset_id
-    assert provenance["vocabulary"] == record["tokenizer"]["vocabulary"]
+    assert provenance["vocabulary"] == record["tokenizer"]["vocabulary"] and provenance["dataset_record"].startswith(
+        f"{store.session}/datasets/d-{dataset_id[:8]}/")
     assert provenance["recipe_name"] == "three"
     assert provenance["recipe"]["steps"][0]["settings"]["stages"] == [{"block_size": 16, "steps": 3, "batch_size": 4}]
     [step] = provenance["steps"]
     assert step["step"]["name"] == "read-text" and step["updates"] == 3 and not step["reused"]
     assert isinstance(step["indexer_loss"], float)  # the CSA indexers' loss at the kept update
     # the step's result is kept in the store, under its fingerprint
-    assert store.get_ref("steps", step["fingerprint"]) == step["result"]
+    assert hashlib.sha256(store.get_result("steps", step["fingerprint"])[0]).hexdigest() == step["result"]
     assert [s["token_sha256"] for s in provenance["shards"]] == [s["token_sha256"] for s in record["shards"]]
 
 
@@ -140,7 +148,7 @@ def test_training_ends_with_the_drafter_against_the_final_weights_and_the_schedu
     replayed = built.records("wpt train")[-1]
     assert built.store.read_record(replayed.folder, COSTS_FILE) == recorded
     # refused before training, not after: no such record, or times measured on another setup
-    for recipe, record, why in ((built.recipe("three", training=one_stage(3)), "no-such-run", "MissingObject"),
+    for recipe, record, why in ((built.recipe("three", training=one_stage(3)), "test-session/no-such-run", "MissingFile"),
                                 (built.recipe("block", training=one_stage(3), drafter={"block": 4}), run.folder,
                                  "another setup: draft 5, here 4"),
                                 (built.recipe("longer", training=one_stage(3, block_size=32)), run.folder,
@@ -207,7 +215,7 @@ def test_a_drafter_that_cannot_be_trained_refuses_the_run_and_its_steps_stay_kep
     assert not (tmp_path / "model" / "config.json").exists() and not (tmp_path / "model" / "checkpoint").exists()
     [run] = built.records("wpt train")
     names = [e.get("name") for e in run.events if e["kind"] != "span_start"]
-    assert names.count("training.checkpoint") == 1 and names.count("store.ref_set") == 1  # the step's result
+    assert names.count("training.checkpoint") == 1 and names.count("store.result_set") == 1  # the step's result
     assert names.index("training.checkpoint") > max(i for i, name in enumerate(names) if name == "training.step")
     # the drafter's section takes no part in a step's fingerprint: a fixed one reuses the kept step
     main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model"])
@@ -270,17 +278,17 @@ def test_a_send_refused_in_the_background_keeps_the_step_in_the_store_checkpoint
     monkeypatch.delenv("REFUSE")
     now.unlink()
     assert stopped.value.code == 3 and "No space left on device" in capsys.readouterr().err
-    saved = built.store.get_ref("checkpoints", "fox-1")
+    saved = checkpoint(built.store, "fox-1")
     assert load_state(built.store.path(saved))["step"] == 3
     run = built.records("wpt train")[-1]
-    named = [e["attributes"]["object"] for e in run.events
-             if e.get("name") == "store.ref_set" and e["attributes"]["ref"] == "checkpoints/fox-1"]
-    assert len(named) == 2 and saved not in named and built.store.has(named[-1])  # steps 1 and 2; 2's object stays
+    named = [e["attributes"]["state"] for e in run.events
+             if e.get("name") == "training.checkpoint_saved"]
+    assert len(named) == 2 and saved["key"] not in named and built.store.version(named[-1])  # steps 1 and 2; 2's file stays
 
     main([*options, "--out", "there", "--run", "fox-1", "--resume"])
     whole, there = weights(tmp_path / "whole"), weights(tmp_path / "there")
     assert all(torch.equal(whole[k], there[k]) for k in whole)
-    assert built.store.get_ref("checkpoints", "fox-1") is None and built.store.has(named[-1])
+    assert checkpoint(built.store, "fox-1") is None and built.store.version(named[-1])
 
 
 def test_training_into_a_model_folder_replaces_it_whole_and_only_once_recorded(built, tmp_path, monkeypatch):
@@ -339,26 +347,27 @@ def test_on_s3_the_model_folder_is_replaced_only_once_its_record_is_in_the_bucke
 
 
 def test_every_checkpoint_deleted_from_the_store_is_named_in_the_record_first(built, tmp_path, monkeypatch):
-    # an object leaves the store only once the record says which one went:
-    # each replaced checkpoint; the last one loses its name only, its object
+    # a file leaves the store only once the record says which one went:
+    # each replaced checkpoint; the last one loses its name only, its file
     # kept as it is as the step's state
     real, deleted = LocalStore.delete, []
 
-    def delete(self, sha):
+    def delete(self, state):
         [run] = built.records("wpt train")
-        named = [e["attributes"]["object"] for e in run.events if e.get("name") == "training.checkpoint_deleted"]
-        deleted.append((sha, sha in named))
-        real(self, sha)
+        named = [e["attributes"]["state"] for e in run.events if e.get("name") == "training.checkpoint_deleted"]
+        deleted.append((state["key"], state["key"] in named))
+        real(self, state)
 
     monkeypatch.setattr(LocalStore, "delete", delete)
     monkeypatch.setenv("WPT_LINK_CHECKPOINTS", "every")  # each checkpoint comes to the store
     main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model", "--checkpoint-every", "1",
           "--run", "fox-1"])
     assert len({sha for sha, _ in deleted}) == 2 and all(named for _, named in deleted)
-    assert built.store.get_ref("checkpoints", "fox-1") is None
+    assert checkpoint(built.store, "fox-1") is None
     [step] = json.loads((tmp_path / "model" / "provenance.json").read_text())["steps"]
-    state = json.loads(built.store.get_bytes(step["result"]))["state"]
-    assert built.store.has(state) and state not in {sha for sha, _ in deleted}
+    state = json.loads(built.store.get_result("steps", step["fingerprint"])[0])["state"]
+    assert built.store.has(state) and state["key"] not in {key for key, _ in deleted}
+    assert state["key"].startswith(f"{built.store.session}/models/fox-1/")  # beside the run's checkpoint record
 
 
 def test_on_s3_a_checkpoint_is_deleted_only_once_its_deletion_is_in_the_bucket(built, s3, tmp_path, monkeypatch):
@@ -368,14 +377,14 @@ def test_on_s3_a_checkpoint_is_deleted_only_once_its_deletion_is_in_the_bucket(b
 
     s3.copy(built.store)
     deleted = []
-    monkeypatch.setattr(S3Store, "delete", lambda self, sha: deleted.append(sha))
+    monkeypatch.setattr(S3Store, "delete", lambda self, state: deleted.append(state))
     monkeypatch.setenv("WPT_LINK_CHECKPOINTS", "every")
     s3.refuse(b'"training.checkpoint_deleted"')
     with pytest.raises(SystemExit) as stopped:
         main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model",
               "--checkpoint-every", "1", "--run", "fox-1"])
     assert stopped.value.code == 3 and deleted == []
-    assert s3.store.get_ref("checkpoints", "fox-1") is not None
+    assert checkpoint(s3.store, "fox-1") is not None
 
 
 @pytest.mark.parametrize("error", [PermissionError(13, "Permission denied"), KeyboardInterrupt()],
@@ -474,13 +483,12 @@ def test_a_trained_model_folder_names_its_licenses_and_sources(built, tmp_path):
 
 def test_a_damaged_shard_stops_training_before_it_starts(built, tmp_path, capsys):
     store, dataset_id = built.store, built.dataset_id
-    record = json.loads(store.get_bytes(store.get_ref("datasets", dataset_id)))
-    shard = record["shards"][0]["object"]
-    path = store.path(shard)  # the shard's own bytes, whether the store keeps it compressed or not
+    record = find_dataset(store, dataset_id)[1]
+    path = store.path(shard_file(record["shards"][0]))  # the shard's own bytes, whether the store keeps it compressed or not
     path.write_bytes(path.read_bytes()[:-10] + b"0123456789")
     with pytest.raises(SystemExit) as refused:
         main(["d", dataset_id, "--out", "model"])
-    assert refused.value.code == 2 and "CorruptObject" in capsys.readouterr().err  # 2: never restarted
+    assert refused.value.code == 2 and "CorruptFile" in capsys.readouterr().err  # 2: never restarted
     assert not (tmp_path / "model").exists()
 
 
@@ -704,7 +712,7 @@ def test_streamed_training_never_copies_the_whole_dataset_to_disk(built, tmp_pat
     monkeypatch.setenv("WPT_WORKER_FOLDER", str(tmp_path / "worker"))  # the local worker's, kept
     main([built.recipe("two", training=one_stage(2)), dataset_id, "--out", "model", "--stream", "--stream-shards", "1"])
 
-    record = json.loads(store.get_bytes(store.get_ref("datasets", dataset_id)))
+    record = find_dataset(store, dataset_id)[1]
     held_out_only = [p.name for p in (tmp_path / "worker" / "job" / "scratch" / "tokens").glob("*.u32")]
     assert len(held_out_only) == 1  # the held-out tokens; no file of every training shard
     provenance = json.loads((tmp_path / "model" / "provenance.json").read_text())
@@ -809,13 +817,13 @@ def test_a_stopped_run_saves_its_step_and_continues_on_another_machine(built, tm
         main([*options, "--out", "here", "--run", "fox-1"])
     monkeypatch.delenv("STOP")
     assert stopped.value.code == 130 and not (tmp_path / "here" / "checkpoint").exists()
-    saved = built.store.get_ref("checkpoints", "fox-1")
+    saved = checkpoint(built.store, "fox-1")
     assert load_state(built.store.path(saved))["step"] == 3  # not a multiple of 100: the signal
     main([*options, "--out", "there", "--run", "fox-1", "--resume"])
 
     whole, there = weights(tmp_path / "whole"), weights(tmp_path / "there")
     assert all(torch.equal(whole[k], there[k]) for k in whole)
-    assert built.store.get_ref("checkpoints", "fox-1") is None and not built.store.has(saved)
+    assert checkpoint(built.store, "fox-1") is None and not built.store.has(saved)
 
 
 def test_a_crashed_run_starts_again_on_its_own(built, on_the_cpu, tmp_path):
@@ -938,7 +946,7 @@ def test_only_each_step_s_end_comes_back_from_the_gpu_worker_unless_every_checkp
         assert [e["attributes"]["step"] for e in run.events
                 if e["kind"] == "span_start" and e["name"] == "training.step_kept"] == ["read-text"]
         return len([e for e in run.events
-                    if e.get("name") == "store.ref_set" and e["attributes"]["ref"] == "checkpoints/fox-1"])
+                    if e.get("name") == "training.checkpoint_saved"])
 
     assert checkpoints_set("ends", "") == 0
     assert checkpoints_set("every", "every") == 3
@@ -948,3 +956,20 @@ def test_only_each_step_s_end_comes_back_from_the_gpu_worker_unless_every_checkp
         main(["d", built.dataset_id, "--out", "model"])
     assert refused.value.code == 2 and "WPT_LINK_CHECKPOINTS='sometimes': one of every, step-ends" in \
         capsys.readouterr().err
+
+
+def test_a_run_started_from_another_session_finds_its_checkpoint_and_leaves_that_session_s_in_place(store, tmp_path):
+    # --from reads the old checkpoint; each save and the end of the run change only the new session
+    first, second = tmp_path / "first", tmp_path / "second"
+    first.write_bytes(b"the old session's state")
+    second.write_bytes(b"the new session's state")
+    old = StoreCheckpoint(store, "fox-1", Telemetry.off(), set())
+    old.save_file(first)
+    saved = old.state_file()
+
+    new = StoreCheckpoint(store.at("next", store.session), "fox-1", Telemetry.off(), set())
+    assert new.exists() and new.state_file() == saved
+    new.save_file(second)
+    assert new.state_file() != saved and old.state_file() == saved and store.has(saved)
+    new.remove()
+    assert new.state_file() == saved and store.has(saved)

@@ -15,6 +15,10 @@ repository's root (an empty value counts as unset):
                       SERIES:SIZE, a size of a series file of data/recipes/series/, or
                       SERIES:SIZE:RUN, another run of that size;
                       required: the manager refuses to start without it
+    WPT_SESSION       the session the run works in; unset, the one of the run it goes on with
+                      (the run's file, or RUN_FILE), else a new ID, which it prints
+    WPT_FROM          another session, which every command of the run reads what the session
+                      does not hold from
     WPT_RUN           the run's name (letters, digits, '.', '_', '-'); unset, the manager goes on
                       with the run RUN_FILE names (at the repository's root, git-ignored) when
                       it is a run of this recipe whose model is not in the store yet, else makes
@@ -56,9 +60,9 @@ container, so the manager refuses it.
 The steps, each its own command, in order, each stopping the run with its
 exit code when it fails:
 
-    1. wpt dataset download              every admitted source, into the store
+    1. wpt dataset download              every admitted source, into the session
     2. wpt dataset build RECIPE          the dataset; its id is the last line it prints
-                                         (WPT_DATASET names a dataset the store holds: neither
+                                         (WPT_DATASET names a dataset the session holds: neither
                                          step runs, and the run trains on that one)
        wpt agent build-image NAME        each image the dataset's tasks name, where DOCKER_HOST
                                          reaches Docker (the sandboxes' machine); none without tasks
@@ -78,7 +82,7 @@ exit code when it fails:
     4. wpt eval FOLDER/NAME              with WPT_EVALUATE only, on the run's first gpu worker,
                                          with WPT_KERNELS=triton on a rented one unless the
                                          settings set WPT_KERNELS
-    5. the model folder into the store, ref models/NAME (wpt_store.models), recorded first;
+    5. the model folder into the session, as models/NAME (wpt_store.models), recorded first;
        then the folder is removed: the store holds it
 
 The rentals are stopped once the evaluation (or, without one, the training)
@@ -113,7 +117,7 @@ which the log says. rent() is outside the deadline: a provider's launch
 goes on after the command that asked for it is killed, so only its return
 can be waited for.
 
-The manager records its own run in the store (records/, command
+The manager records its own run in the session (<id>/runs/, command
 wpt manager), each step a span, and prints the line that copies the model
 out of the store (wpt store copy-out).
 
@@ -147,10 +151,12 @@ from pathlib import Path
 from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
 from wpt_store import NAME as STORE_NAME
-from wpt_store import MissingObject, StoreError, read_env_file, store_from_settings
-from wpt_store.models import KIND, put_model
+from wpt_store import (MissingFile, StoreError, find_dataset, given, new_id, read_env_file, started,
+                       store_from_settings)
+from wpt_store.sessions import SESSION
+from wpt_store.models import has_model, keep_model, put_model
 from wpt_store.names import as_record_name
-from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry, set_ref
+from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry
 from wpt.train import CRASHED, LOST
 from wpt_training.launch import STOPPED, ask_to_stop
 from wpt_utils.lines import ERROR, WARNING, bare, say
@@ -166,7 +172,7 @@ CONTAINER_SETTING = "WPT_MANAGER_CONTAINER"
 KERNELS, RENTED_KERNELS = "WPT_KERNELS", "triton"  # wpt train's --kernels, on rented gpu workers
 SWEEP = 300.0  # seconds between two tries to stop the rentals that could not be stopped
 WATCH = 5.0  # seconds between two looks at whether a run must stop, while a command it runs goes on
-RUN_LINE = re.compile(r"# run (\S+) of the recipe (\S+);")  # the first line of RUN_FILE
+RUN_LINE = re.compile(r"# run (\S+) of the recipe (\S+) in session (\S+);")  # the first line of RUN_FILE
 COMMAND = ["-m", "wpt"]  # the wpt command, by the Python that runs it: each step is one of its subcommands
 CONTAINER = Path("/.dockerenv")  # Docker's mark that this process runs in a container
 MOUNTS = Path("/proc/self/mountinfo")
@@ -186,11 +192,11 @@ def made_name(recipe, moment=None) -> str:
     return f"{as_record_name(recipe)}-{moment:%Y%m%dT%H%M%SZ}"
 
 
-def copy_out_line(name, environ) -> str:
+def copy_out_line(name, session, environ) -> str:
     """The command a person copies to have the run's model in runs/NAME of
     the repository, once the run is done."""
     command = environ.get("WPT_MANAGER_COMMAND") or "uv run"
-    return f"{command} wpt store copy-out {name} runs/{name}"
+    return f"{command} wpt store copy-out {name} runs/{name} --session {session}"
 
 
 class StopSignal:
@@ -408,13 +414,21 @@ def _main(argv, signalled) -> int:
             "a bucket, or leave WPT_STORE unset for the volume wpt-store, or set WPT_STORE_FOLDER to that folder "
             "on this machine to mount it at the same path", ERROR)
         return leave(REFUSED)
-    try:
-        store = store_from_settings(root / ".env")
-    except StoreError as error:
-        say(f"{type(error).__name__}: {error}", ERROR)
-        return leave(REFUSED)
     folder = Path(environ.get("WPT_MANAGER_FOLDER") or root / DEFAULT_FOLDER)
     kept = Path(environ.get("WPT_MANAGER_STATE") or root / DEFAULT_STATE)
+    try:
+        whole = store_from_settings(root / ".env")
+        named = given(environ=environ, env_file=root / ".env")
+        start = started(environ=environ, env_file=root / ".env")
+        previous = previous_run(root, recipe, whole, name, named, start)
+        session = named or (previous and previous[1]) or (name and machines.session_of(kept, name))
+        if not session:
+            session = new_id()
+            say(f"session {session}")
+        store = whole.at(session, start)
+    except (StoreError, ValueError) as error:
+        say(f"{type(error).__name__}: {error}", ERROR)
+        return leave(REFUSED)
     evaluate = environ.get("WPT_EVALUATE", "") in ("1", "true", "yes")
     code, continued, postponed = 0, [], False
     stop_rentals(store, kept, environ, root, arguments)  # those a run that ended could not stop
@@ -423,13 +437,14 @@ def _main(argv, signalled) -> int:
         if workers is None:  # another manager runs it now
             continue
         try:
-            if not unfinished(store, workers.run):
+            own = whole.at(workers.state["session"], start)
+            if not unfinished(own, workers.run):
                 workers.end()
             elif signalled.asked and not workers.groups():
                 postponed = True  # it costs nothing: the next start goes on with it
             else:  # after a SIGTERM, one_run() starts no command and its rentals are given back
                 say(f"run {workers.run} did not end: it goes on, reconnecting to its gpu workers")
-                code = one_run(workers.state["recipe"], workers.run, folder, evaluate, store, environ, root,
+                code = one_run(workers.state["recipe"], workers.run, folder, evaluate, own, environ, root,
                                workers, arguments, signalled)
                 continued.append(workers.run)
         finally:
@@ -441,17 +456,16 @@ def _main(argv, signalled) -> int:
         if wanted or postponed:
             code = code or STOPPED
     elif wanted:
-        if name is None:
-            name = previous_run(root, recipe, store)
-            if name is not None:
-                say(f"run {name} (named in {root / RUN_FILE}, its model is not in the store yet)")
-            else:
-                name = made_name(recipe)
-                (root / RUN_FILE).write_text(f"# run {name} of the recipe {recipe}; once it is done, this copies its "
-                                             f"model out of the store:\n{copy_out_line(name, environ)}\n",
-                                             encoding="utf-8")
-                say(f"run {name} (written into {root / RUN_FILE})")
-        workers = machines.Workers.new(kept, name, recipe)
+        if name is None and previous is not None:
+            name = previous[0]
+            say(f"run {name} (named in {root / RUN_FILE}, its model is not in the store yet)")
+        elif name is None:
+            name = made_name(recipe)
+            (root / RUN_FILE).write_text(f"# run {name} of the recipe {recipe} in session {session}; once it is done, "
+                                         f"this copies its model out of the store:\n"
+                                         f"{copy_out_line(name, session, environ)}\n", encoding="utf-8")
+            say(f"run {name} (written into {root / RUN_FILE})")
+        workers = machines.Workers.new(kept, name, recipe, session)
         if workers is None:
             say(f"run {name} is another wpt manager's, which runs it now (its lock in {kept} is held): this "
                 "one leaves it", ERROR)
@@ -484,17 +498,19 @@ def stop_command(arguments, kept) -> int:
     return 0
 
 
-def previous_run(root, recipe, store) -> str | None:
-    """The name RUN_FILE holds when it is a run of recipe whose model is not
-    in the store: a run that did not end well, which the same command goes
-    on with."""
+def previous_run(root, recipe, store, name, session, start) -> tuple[str, str] | None:
+    """(the run, its session) RUN_FILE names when it is a run of recipe
+    whose model is not in that session: a run that did not end well, which
+    the same command goes on with. name, session: what the settings name,
+    which it must then be. start: the session the run starts from."""
     try:
         first = (root / RUN_FILE).read_text(encoding="utf-8").splitlines()[0]
     except (OSError, IndexError):
         return None
     found = RUN_LINE.match(first)
-    if found and found[2] == recipe and STORE_NAME.fullmatch(found[1]) and store.get_ref(KIND, found[1]) is None:
-        return found[1]
+    if (found and found[2] == recipe and STORE_NAME.fullmatch(found[1]) and name in (None, found[1])
+            and session in (None, found[3]) and not has_model(store.at(found[3], start), found[1])):
+        return found[1], found[3]
     return None
 
 
@@ -534,7 +550,7 @@ def unfinished(store, name) -> bool:
     """Whether the run name did not end: no model of that name in the
     store, and no record of a wpt manager run of it, or the last one has no
     end (a crash or a stop cut it short)."""
-    if store.get_ref(KIND, name) is not None:
+    if has_model(store, name):
         return False
     found = []
     for folder in store.record_folders():
@@ -542,7 +558,7 @@ def unfinished(store, name) -> bool:
             continue
         try:
             start = json.loads(store.read_record(folder, "start.json"))
-        except (MissingObject, ValueError):
+        except (MissingFile, ValueError):
             continue
         if start.get("command") == "wpt manager" and start.get("inputs", {}).get("run") == name:
             found.append((start.get("started", ""), folder))
@@ -571,14 +587,14 @@ def one_run(recipe, name, folder, evaluate, store, environ, root, workers, argum
 
 def task_images(store, dataset) -> list[str]:
     """The images the dataset's tasks name, each once, in order."""
-    record = json.loads(store.get_bytes(store.get_ref("datasets", dataset)))
+    _, record = find_dataset(store, dataset)
     part = record.get("tasks")
-    lines = [] if part is None else store.get_bytes(part["object"]).decode("utf-8").splitlines()
+    lines = [] if part is None else store.get_bytes(part["file"]).decode("utf-8").splitlines()
     return sorted({json.loads(line)["image"] for line in lines if line.strip()})
 
 
 def _run(recipe, name, out, evaluate, store, telemetry, environ, root, workers, signalled) -> int:
-    log = telemetry.log
+    log, in_session = telemetry.log, {SESSION: store.session}
     stops = Stops(workers, rental.cap(environ), rental.deadline(environ), telemetry, signalled)
     held = stops if workers.groups() else None  # rentals a crash left: the commands before training pay for them too
     try:
@@ -586,15 +602,16 @@ def _run(recipe, name, out, evaluate, store, telemetry, environ, root, workers, 
             held.halt("download")
         dataset = environ.get("WPT_DATASET") or None
         if dataset is not None:
-            if not re.fullmatch(r"[0-9a-f]{64}", dataset) or store.get_ref("datasets", dataset) is None:
-                log(f"WPT_DATASET: the store holds no dataset {dataset!r}", ERROR)
+            if not re.fullmatch(r"[0-9a-f]{64}", dataset) or find_dataset(store, dataset) is None:
+                log(f"WPT_DATASET: session {store.session} holds no dataset {dataset!r}", ERROR)
                 return REFUSED
             log(f"dataset {dataset}, as WPT_DATASET names: nothing downloaded or built")
         else:
             with telemetry.span("manager.download"):
-                run_command("download", ["dataset", "download"], log, stops=held)
+                run_command("download", ["dataset", "download"], log, environ=in_session, stops=held)
             with telemetry.span("manager.build", recipe=recipe) as span:
-                dataset = run_command("build", ["dataset", "build", recipe], log, last_line=True, stops=held)
+                dataset = run_command("build", ["dataset", "build", recipe], log, last_line=True, environ=in_session,
+                                      stops=held)
                 if dataset is None or not re.fullmatch(r"[0-9a-f]{64}", dataset):
                     log(f"build: wpt dataset build printed no dataset id last (it printed {dataset!r})", ERROR)
                     return REFUSED
@@ -604,26 +621,28 @@ def _run(recipe, name, out, evaluate, store, telemetry, environ, root, workers, 
         if images:  # the sandboxes' images, built where the sandboxes run
             with telemetry.span("manager.images", images=images):
                 for image in images:
-                    run_command("images", ["agent", "build-image", image], log, stops=held)
+                    run_command("images", ["agent", "build-image", image], log, environ=in_session, stops=held)
         try:
-            _train(recipe, name, out, dataset, telemetry, environ, root, workers, stops)
+            _train(recipe, name, out, dataset, telemetry, {**environ, **in_session}, root, workers, stops)
             if evaluate:  # on the run's gpu workers, rented ones included, which are given back after it
                 with telemetry.span("manager.evaluate", folder=str(out)):
                     run_command("evaluate", ["eval", str(out)], log,
-                                environ={WORKERS: workers.text(), **kernels(workers, environ)}, stops=stops)
+                                environ={**in_session, WORKERS: workers.text(), **kernels(workers, environ)},
+                                stops=stops)
         finally:
             _stop_workers(workers, environ, root, telemetry)
     except Failed as error:
         log(f"{error}: the run stops here; the same command goes on from what is kept", ERROR)
         return error.code
     with telemetry.span("manager.model", folder=str(out)) as span:
-        manifest = put_model(store, out)
-        set_ref(store, KIND, name, manifest, telemetry)
-        span.set(manifest=manifest)
-    telemetry.output(model=manifest)
+        files = put_model(store, name, out)
+        telemetry.irreversible("store.model_kept", model=name, session=store.session, files=len(files))
+        keep_model(store, name, files)
+        span.set(files=len(files))
+    telemetry.output(model=f"{store.session}/{name}")
     shutil.rmtree(out)  # the store holds it: copy-out gives it back
-    log(f"model {name} kept in {store} (ref {KIND}/{name}); copy it out with:")
-    log(copy_out_line(name, environ))
+    log(f"model {name} kept in session {store.session} of {store}; copy it out with:")
+    log(copy_out_line(name, store.session, environ))
     return 0
 
 
@@ -646,7 +665,8 @@ def _train(recipe, name, out, dataset, telemetry, environ, root, workers, stops)
         try:
             with telemetry.span("manager.train", dataset=dataset, folder=str(out), workers=len(workers.keys())):
                 run_command("train", ["train", recipe, dataset, "--run", name, "--resume", "--out", str(out)],
-                            log, environ={WORKERS: workers.text(), **kernels(workers, environ)}, stops=stops)
+                            log, environ={SESSION: environ[SESSION], WORKERS: workers.text(),
+                                          **kernels(workers, environ)}, stops=stops)
             return
         except Failed as error:
             if error.code not in (LOST, CRASHED) or stops.check():

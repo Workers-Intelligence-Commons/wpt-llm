@@ -338,7 +338,7 @@ def prepared(tmp_path):
     git("commit", "-q", "-m", COMMIT.strip())
     head = git("rev-parse", "HEAD").decode().strip()
     patch = git("format-patch", "-1", "--stdout", head)
-    store = open_store((tmp_path / "store").as_uri())
+    store = open_store((tmp_path / "store").as_uri()).at("test-session")
     tree = {path: Entry(FILE, store.put_bytes((upstream / path).read_bytes())) for path in ("lamps.py", "count.md")}
     tree[f".git/history/{head}"] = Entry(FILE, store.put_bytes(patch))
     tree[ORDER] = Entry(FILE, store.put_bytes(f"{head}\n{start}\n".encode()))

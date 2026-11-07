@@ -20,6 +20,7 @@ def run(capsys, *args):
 
 def test_the_commands_write_a_new_source_its_files_and_a_conversation(kit, repo, store, tmp_path, monkeypatch, capsys):
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     root = ["--root", str(repo.root)]
     (tmp_path / "license.txt").write_text("CC0 1.0 Universal\n")
     (tmp_path / "poem.txt").write_text("the night falls on the town\n")
@@ -61,6 +62,7 @@ def test_new_source_without_its_texts_leaves_the_license_text_to_a_person(kit, r
     # what an AI assistant may run: new-source without --file and --license-text; the check names the source
     # until a person writes the license text, and files given without that text are refused, leaving nothing
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     root = ["--root", str(repo.root)]
     common = ["--license", "CC0-1.0", "--attribution", "A. Person", "--by", "A. Person"]
     (tmp_path / "poem.txt").write_text("the night falls on the town\n")
@@ -94,6 +96,7 @@ def test_new_source_without_its_texts_leaves_the_license_text_to_a_person(kit, r
 def test_new_source_refuses_an_empty_license_text_file_and_declares_formats_without_files(
         kit, repo, store, tmp_path, monkeypatch, capsys):
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     root = ["--root", str(repo.root)]
     common = ["--license", "CC0-1.0", "--attribution", "A. Person", "--by", "A. Person"]
     (tmp_path / "empty.txt").write_bytes(b"")
@@ -122,6 +125,7 @@ def test_check_fetch_names_a_license_text_no_item_holds_and_add_license_text_add
     # out and the id of the text found; `add-license-text` adds that text under review and prints its id; the
     # next `check --fetch` names it under review, until a person admits it
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     root = ["--root", str(repo.root)]
     words = b"Copyright 2026 Someone\n\nYou may copy this work, for any purpose, with this notice.\n"
     folder, _ = kit.git_project(tmp_path / "upstream", files={"COPYING": words, "a.txt": b"some words. " * 20},

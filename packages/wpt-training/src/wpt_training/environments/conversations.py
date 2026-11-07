@@ -45,7 +45,7 @@ def check(settings):
 def tagged(record, store, tag) -> list[dict]:
     """The dataset's conversations ({id, tags, conversation}) whose chat file carries tag."""
     part = record.get("conversations")
-    lines = [] if part is None else store.get_bytes(part["object"]).decode("utf-8").splitlines()
+    lines = [] if part is None else store.get_bytes(part["file"]).decode("utf-8").splitlines()
     return [one for one in map(json.loads, lines) if tag in one["tags"]]
 
 

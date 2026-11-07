@@ -20,7 +20,7 @@ EVAL = "-wpt-eval-"  # in the name of every wpt eval run's record folder (wpt_te
 
 def runs(store) -> list[str]:
     """The record folders of the wpt eval runs in the store that wrote
-    attempts, oldest first (the folders' names start with their UTC time)."""
+    attempts, oldest first."""
     return [folder for folder in store.record_folders() if EVAL in folder and ATTEMPTS in store.record_files(folder)]
 
 

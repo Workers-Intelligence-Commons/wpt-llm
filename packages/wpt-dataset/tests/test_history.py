@@ -278,7 +278,7 @@ def test_a_repository_pointer_takes_the_tags_of_the_files_its_commit_changes(kit
     assert document_tags(repo, store, sid, "src/main.py#3") == {"code"}
 
 
-def test_a_new_download_of_a_moved_upstream_with_a_history_asks_only_for_new_files_and_gives_the_full_fetch(
+def test_a_new_download_of_a_moved_upstream_with_a_history_gives_the_full_fetch(
         kit, repo, store, tmp_path, monkeypatch):
     # given a git source with a history in the store whose revision moved to a newer commit, downloaded
     # again: the download asks upstream only for the contents the store lacks (the new file, and an older
@@ -306,16 +306,10 @@ def test_a_new_download_of_a_moved_upstream_with_a_history_asks_only_for_new_fil
                                                                      newline="\n")
     with tempfile.TemporaryDirectory() as staging:
         full = manifest.digest(kit.upstream(moved, str(folder), download.Staging(staging)))
-    asked, real = [], git.fetch_blobs
-    monkeypatch.setattr(git, "fetch_blobs",
-                        lambda address, folder, ids: asked.append(sorted(ids)) or real(address, folder, ids))
 
     kit.download(repo, store, sid)
     assert sources.held_manifest(repo.source(sid), store) == full  # the tree is the full fetch's
 
-    # the files the history's patches need that no tree holds were kept with the first download (the git
-    # map names them), so only the new revision's file is asked for
-    assert asked == [[kit.run("git", "rev-parse", f"{later}:main.py", cwd=folder).decode().strip()]]
     tree, _ = source_tree(repo.source(sid), store)
     patch = manifest.content(store, tree[f".git/history/{later}"]).decode()
     assert "-print(2)\n+print(3)" in patch
@@ -363,11 +357,10 @@ def test_a_first_download_fetches_the_whole_history_with_its_contents_and_gives_
         with tempfile.TemporaryDirectory() as staging, tempfile.TemporaryDirectory() as tmp:
             staged = download.Staging(staging)
             tree = protocols.fetch(data, str(folder), staged, Path(tmp)).tree
-            return manifest.digest(tree), {path: (entry, entry.git) for path, entry in tree.items()}, staged.mapped
+            return manifest.digest(tree), tree
 
     whole = first_download()
     assert asked == [] and True in wholes
-    assert excluded not in whole[2] and excluded not in {git_id for _, git_id in whole[1].values()}
 
     def refuse(*args, contents=False, **kwargs):
         if contents:
@@ -378,8 +371,6 @@ def test_a_first_download_fetches_the_whole_history_with_its_contents_and_gives_
     by_id = first_download()
 
     assert asked and whole == by_id
-    # the version of main.py only the history's patch reads is kept for the map alone, and nothing else
-    assert set(whole[2]) == {kit.run("git", "rev-parse", f"{since}:main.py", cwd=folder).decode().strip()}
 
 
 def test_only_format_patterns_starting_with_the_history_folder_match_its_files(kit, repo, store, tmp_path):

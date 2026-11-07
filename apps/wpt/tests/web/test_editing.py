@@ -29,7 +29,7 @@ def web(tmp_path):
     root = tmp_path / "wpt"
     (root / "data" / "sources").mkdir(parents=True)
     subprocess.run(["git", "init", "-q", str(root)], check=True)
-    store = open_store((tmp_path / "store").as_uri())
+    store = open_store((tmp_path / "store").as_uri()).at("test-session")
     static = tmp_path / "static"
     static.mkdir()
     (static / "index.html").write_text("<p>interface</p>")
@@ -296,7 +296,7 @@ def test_the_rating_page_lists_a_runs_attempts_and_records_a_persons_verdict(web
     # attempt Docker dropped is listed as its line says, and a last line a
     # stopped run cut short is left out instead of failing the page
     request, repo, store = web
-    folder, weights = "20261023T090000Z-wpt-eval-aaaaaaaa-0123abcd", {"model.safetensors": "a" * 64}
+    folder, weights = "test-session/20261023T090000Z-wpt-eval-aaaaaaaa-0123abcd", {"model.safetensors": "a" * 64}
     tried = {"task": "mine-tasks-0123abcd/tasks/hello", "kind": "tasks", "index": 1, "plain": False, "dropped": False,
              "score": 1.0, "changes": "--- /dev/null\n+++ b/out.txt\n@@ -0,0 +1 @@\n+hello\n",
              "conversation": {"messages": [text("user", "Say hello."), text("assistant", "Hello.")],
@@ -308,10 +308,10 @@ def test_the_rating_page_lists_a_runs_attempts_and_records_a_persons_verdict(web
     store.append_record(folder, "attempts.jsonl", (json.dumps(tried) + "\n" + json.dumps(dropped) + "\n").encode())
     store.append_record(folder, "attempts.jsonl", json.dumps(tried).encode()[:40])
     store.flush_records()  # added lines reach the store together
-    store.write_record("20261023T080000Z-wpt-train-tiny-0123abcd", "ids.json", b"{}")
+    store.write_record("test-session/20261023T080000Z-wpt-train-tiny-0123abcd", "ids.json", b"{}")
     assert request("GET", "/api/runs") == (200, [folder])
-    assert request("GET", f"/api/runs/{folder}/attempts") == (200, {"weights": weights, "attempts": [tried, dropped]})
-    assert request("GET", "/api/runs/20261023T080000Z-wpt-train-tiny-0123abcd/attempts")[0] == 404
+    assert request("GET", f"/api/runs/{quote(folder, safe='')}/attempts") == (200, {"weights": weights, "attempts": [tried, dropped]})
+    assert request("GET", "/api/runs/test-session%2F20261023T080000Z-wpt-train-tiny-0123abcd/attempts")[0] == 404
 
     sid = new_source(request, {"notes.txt": {"format": "text", "text": TEXT}})
     status, listing = request("GET", f"/api/sources/{sid}/ratings/{path('ratings/terse.jsonl')}")

@@ -1,79 +1,70 @@
 """The download step: sources fetched into the store, each as its address
-serves it when asked (a git source at the commit its `revision` names), in
-one session (wpt_store.sessions) of the command that runs it. It decides
-which sources to fetch, asks their protocol (protocols/) and writes what
-they give into the store; it never judges licenses or content.
+serves it when asked (a git source at the commit its `revision` names), under
+one session ID (wpt_store.sessions). It decides which sources to fetch, asks
+their protocol (protocols/) and writes what they give into the session; it
+never judges licenses or content.
 
-A source is downloaded when, and only when (its triggers):
+A source is downloaded when, and only when neither the session nor the one
+it started from (--from) holds it: each one's record is missing, failed, or
+names another download (sources.upstream_key: its address and how it is
+fetched: `revision`, `extract`, `history.since`, `submodules`, its protocol,
+its license pages). So a rerun, or one new source, costs only what the
+session lacks, a redo is a new ID, whose every source is fetched again, and
+a new ID started from an old one fetches only what the old one lacks. No
+question goes to upstream about changes. What the old session holds stays
+there: a build under the new ID reads it from there.
 
-    the store does not hold it          the store keys what it holds by sources.upstream_key: its
-                                        address and how it is fetched (`revision`, `extract`,
-                                        `history.since`, `submodules`, its protocol, its license
-                                        pages), so a source whose address, revision or fetch options
-                                        changed is not held either
-    it is marked                        the store database holds a mark for it, or for every source,
-                                        made after its last download (Session.marked; `wpt store
-                                        mark`): a person's way to ask for fresh content
+Every source follows one path. For each, several at once:
 
-Nothing else: no question to upstream about changes, no server hint. A
-stale store is accepted.
-
-For each source, several at once (each):
-
-    held and not marked                 -> a `reused` line; nothing is downloaded
+    held, here or in the session it  -> nothing is downloaded (the index learns of it again,
+    started from                        when it is the session's own)
     otherwise, its license pages        -> each outside page its entries give as their place
                                            (sources.license_pages), through the HTTP protocol, into a
-                                           staging folder on this machine
-    then each address in turn           -> its protocol's files, into the staging folder, or for an
-    (address, then each mirror)            http source, each member straight into the session's bundles
-                                           as it is read (Bundled)
-    the first that gives its files      -> its files and pages go into the session's bundles, in path
-                                           order, each content once; once the bundles holding them are
-                                           stored, the refs upstream-pages/<key>, upstream-files/<key>
-                                           and upstream/<key> name them (sources.py), the last one last;
-                                           a `downloaded` line with what it got, for the record only:
-                                           the protocol's answer (the commit, for example) and the
-                                           tree's manifest (`manifest`; a `reused` line names it too)
-    none, or a page that failed         -> the source fails, its failure named (below); a `failed` line
-                                           for each address or page that failed
+                                           folder on this machine
+    then each address in turn           -> its protocol's files go straight into the source's tar as
+    (address, then each mirror)            they are read (wpt_store.Packing), compressed on this machine's
+                                           disk
+    the first that gives its files      -> its license pages join its files in the tar (PAGES), the tar
+                                           and then the source's record go into the session, once the
+                                           event store.source_kept is in the run's record; the record
+                                           says what it got, for the record only: the protocol's answer
+                                           (the commit, for example) and the tree's manifest
+    none, or a page that failed         -> the source fails, its failure named (below); its record gains
+                                           the `error`, each address's failure in it, and the session
+                                           keeps any file it held for the source, which a build
+                                           still reads (wpt_store.sessions)
 
-A failed download stores nothing for that source: nothing it fetched is
-named, so the session's end leaves it out of the bundles (wpt_store.sessions),
-and the store keeps what it held before.
+An empty source has no upstream: it needs no download and gets no record.
 
-Upstream git repositories fetch only the objects whose ids are new: the
-git object ids the store database maps to the contents it holds are taken
-from the store (protocols/git.py).
-
-An empty source has no upstream: it needs no download and gets no line.
+The index learns of every source of a run when the run ends.
 
 Each download works in a temporary folder of its own, WORK<random> in the
-system's temporary folder: its staging folders and what its protocol
-fetches lie there. The process holds a lock file beside it while the
-download runs (wpt_store.local_files), and removes it, then the lock file,
-once the download ends, whatever its outcome. A process that a signal
-stops or that crashes leaves both: every new session on the machine
-(session()) removes each such folder no live process owns, and never one
-a live process owns. A folder the session cannot open or remove, such as
-another user's in a temporary folder several users share, stays.
+system's temporary folder: what its protocol fetches lies there. The process
+holds a lock file beside it while the download runs (wpt_store.local_files),
+and removes it, then the lock file, once the download ends, whatever its
+outcome. A process that a signal stops or that crashes leaves both: every
+new run on the machine (run()) removes each such folder no live process
+owns, and never one a live process owns, and each partial tar likewise. A
+folder it cannot open or remove, such as another user's in a temporary
+folder several users share, stays.
 
 How many run at once: the rule of wpt_utils.parallel, each download's
 memory measured as it runs (its git processes' too), and at most the limit at once sites.txt gives the source's site (the
 host of its address; sites.py), whose limits per time pace every request.
-The results come in the order of the ids, whatever ran at once; only where
-the files lie in the bundles depends on it.
+The results come in the order of the ids, whatever ran at once.
 
 Failures: each source's own is its result, so one run names every failure:
 the protocol failures (SourceGone: upstream gone; TooManyRequests: refused
 for too many requests; CrawlForbidden: refused by robots rules;
 RobotsUnreadable: robots rules unreadable; HostUnreachable: host
 unreachable; ServerError: server error through every try; AccessRefused:
-access refused; Incomplete: the stream stopped before its end;
-FetchFailed, their base: any other), of the kind its main address failed
-with, every address and its failure named;
+access refused; Incomplete: the stream stopped before its end, or gave other
+bytes on a new try; FetchFailed, their base: any other), of the kind its
+main address failed with, every address and its failure named;
 a DatasetError for files the tree cannot hold; StoreError, MissingTool. A
-failure of the session (the store refused a bundle or the database) stops
-the run.
+failure of the store while a source is kept is that source's result, and
+the session holds what wpt_store.sessions says. Each of these goes into the
+source's record; only a store that refuses that write leaves it unrecorded.
 """
 
 import contextlib
@@ -85,50 +76,36 @@ import tempfile
 from pathlib import Path
 from urllib.parse import urlparse
 
-from wpt_store import StoreError
-from wpt_store.database import DOWNLOADED, FAILED, REUSED  # the store database's outcomes
+from wpt_store import (Packing, StoreError, failed_addresses, held_all, held_here, keep_failure,
+                       remove_unowned_partials, source_row)
 from wpt_store.local_files import LocalFile, unowned
-from wpt_telemetry import Telemetry, set_ref
+from wpt_telemetry import Telemetry
 from wpt_utils.files import sha256_file
 from wpt_utils.lines import say
 from wpt_utils.parallel import Done, Sizing, each as each_item
-from wpt_utils.programs import MissingTool, code_name, repository
+from wpt_utils.programs import MissingTool, code_name
 
 from . import manifest, retry, sites
-from .errors import DatasetError, FetchFailed
+from .errors import BadPath, DatasetError, FetchFailed, Incomplete
 from .protocols import EMPTY, fetch, http, named
 from .protocols.base import UNREACHABLE
 from .source_data import Source
-from .sources import (UPSTREAM, UPSTREAM_FILES, UPSTREAM_PAGES, license_pages, stored_files, stored_upstream,
-                      upstream_key)
+from .sources import license_pages, upstream_key
 
 WORK = "wpt-download-"  # the start of the name of a download's temporary folder
+PAGES = ".wpt-license-pages/"  # the folder of a source's tar that its license pages lie in, by their number
+DOWNLOADED, REUSED = "downloaded", "reused"  # what a download did for a source
+FAILURES = (DatasetError, StoreError, MissingTool)  # what fails one source and leaves the others going
 
 
 class Staging:
-    """A download's files on this machine, each under its sha256, until
-    they are checked and kept: what protocols.fetch stores into, and what
-    cuts, patches and the text check read, as they read a store. With a
-    session, a git source's files the store holds already
-    (known_objects) are read from the store, through the session."""
+    """A fetch's files on this machine, each under its sha256: what
+    protocols.fetch stores into when nothing is to be kept in a session
+    (unusable.py), and what the text check then reads, as it reads a store."""
 
-    def __init__(self, folder, session=None):
-        self.folder, self.session = Path(folder), session
+    def __init__(self, folder):
+        self.folder = Path(folder)
         self.folder.mkdir(parents=True, exist_ok=True)
-        self.mapped = {}  # git object id -> sha256 of the blobs kept for the map alone (keep_mapped)
-
-    def known_objects(self, object_ids) -> dict:
-        """{git object id: wpt_store.Placed} of those the store holds (none without a session)."""
-        return self.session.known_objects(object_ids) if self.session is not None else {}
-
-    def read_file(self, placed) -> bytes:
-        return self.session.read(placed)
-
-    def file_path(self, placed) -> Path:
-        """A local file holding a stored file's bytes: a copy in the staging folder."""
-        if not self.has(placed.sha256):
-            self.put_bytes(self.read_file(placed))
-        return self.path(placed.sha256)
 
     def path(self, sha256: str) -> Path:
         return self.folder / sha256
@@ -136,89 +113,37 @@ class Staging:
     def has(self, sha256: str) -> bool:
         return self.path(sha256).is_file()
 
-    def put_bytes(self, data: bytes) -> str:
+    def keep(self, _path, _mode, data: bytes) -> str:
         sha256 = hashlib.sha256(data).hexdigest()
         if not self.has(sha256):
             self.path(sha256).write_bytes(data)
         return sha256
 
-    def put_file(self, path) -> str:
+    def keep_file(self, _path, _mode, file) -> str:
         """Keep a downloaded file as a second name of the same bytes (a hard
         link: a file of several GB is not copied), or a copy where linking
         fails (another file system). Its writer may remove the file or
         write a new one in its place, never rewrite it."""
-        sha256 = sha256_file(path)
+        sha256 = sha256_file(file)
         if not self.has(sha256):
             try:
-                os.link(path, self.path(sha256))
+                os.link(file, self.path(sha256))
             except OSError:
-                shutil.copyfile(path, self.path(sha256))
+                shutil.copyfile(file, self.path(sha256))
         return sha256
 
-    def keep_mapped(self, object_id: str, data: bytes):
-        """A git blob no tree entry holds (one the history's patches read),
-        kept so that _keep puts it in the bundles and the store database's
-        map of git objects names it."""
-        self.mapped[object_id] = self.put_bytes(data)
-
-    def keep(self, data: bytes) -> tuple[str, None]:
-        """data kept as a file under its sha256 (manifest.Extractor)."""
-        return self.put_bytes(data), None
+    def keep_same(self, _path, _mode, sha256: str) -> str:
+        return sha256
 
     def get_bytes(self, sha256: str) -> bytes:
         return self.path(sha256).read_bytes()
-
-    def size(self, sha256: str) -> int:
-        return self.path(sha256).stat().st_size
-
-
-class Bundled:
-    """What an http source's fetch stores into: each entry the
-    extractor keeps goes straight into the session's bundles, and is read
-    back from the session, its bundle sealed or not; anything else (a cut's or a patch's result) goes into the
-    staging folder, as with Staging. A content it placed once is never
-    added again, so a new try of a read (retry.call, a tar read again
-    for its hard links) puts nothing more in the bundles."""
-
-    def __init__(self, staging: Staging, session):
-        self.staging, self.session = staging, session
-        self.placed = {}  # sha256 -> the wpt_store.Placed of each content this object put in the bundles
-
-    def keep(self, data: bytes):
-        """(sha256, where it lies: a wpt_store.Placed)."""
-        sha256 = hashlib.sha256(data).hexdigest()
-        if sha256 not in self.placed:
-            self.placed[sha256] = self.session.add(data)
-        return sha256, self.placed[sha256]
-
-    def read_file(self, placed) -> bytes:
-        return self.session.read(placed)
-
-    def file_path(self, placed) -> Path:
-        """A local file holding a kept entry's bytes: a copy in the staging folder."""
-        if not self.staging.has(placed.sha256):
-            self.staging.put_bytes(self.read_file(placed))
-        return self.staging.path(placed.sha256)
-
-    def put_bytes(self, data: bytes) -> str:
-        return self.staging.put_bytes(data)
-
-    def put_file(self, path) -> str:
-        return self.staging.put_file(path)
-
-    def path(self, sha256: str) -> Path:
-        return self.staging.path(sha256)
-
-    def get_bytes(self, sha256: str) -> bytes:
-        return self.staging.get_bytes(sha256)
 
 
 def each(work, ids, address_of, log=say):
     """[wpt_utils.parallel.Done] of work(id) for every id, in the ids'
     order, as many at once as wpt_utils.parallel allows and each site's
-    limit (address_of(id) gives its address, None when it has none). A
-    DatasetError, StoreError or MissingTool work raises is the id's
-    error."""
+    limit (address_of(id) gives its address, None when it has none). One
+    of FAILURES work raises is the id's error."""
     limits, default, _ = sites.limits()
     sizing = Sizing("downloads")
     log(sizing.why)
@@ -228,31 +153,19 @@ def each(work, ids, address_of, log=say):
         site = sites.site_of(address, limits) if address else None
         return (site or f"default:{urlparse(address or '').hostname}"), limits.get(site, default)
 
-    return list(each_item(work, ids, (DatasetError, StoreError, MissingTool), sizing, group=group))
+    return list(each_item(work, ids, FAILURES, sizing, group=group))
 
 
 @contextlib.contextmanager
 def recorded(store, command, arguments, ids, env_file):
     """The telemetry of one downloading command's run: its record,
-    records/<UTC>-wpt-dataset-<command>-<the id, or how many>-<random>/,
-    with every new try of a download in it (retry.reporting). Its session
-    (session()) opens inside it and ends before it."""
+    <id>/runs/<UTC>-wpt-dataset-<command>-<the id, or how many>-<random>/,
+    with every new try of a download in it (retry.reporting)."""
     main_id = ids[0] if len(ids) == 1 else f"{len(ids)}-sources"
     with (Telemetry.start(store, f"wpt dataset {command}", arguments, main_id, inputs={"sources": list(ids)},
                           env_file=env_file) as telemetry,
           retry.reporting(telemetry.log)):
         yield telemetry
-
-
-def session(store, telemetry, stream=False):
-    """A new session of store named by telemetry's run record, at this
-    repository's commit (wpt_store.sessions): the session a downloading
-    command's run downloads into, once the temporary folders that no
-    live process owns are removed (remove_unowned_folders)."""
-    remove_unowned_folders()
-    where = repository()
-    return store.session(telemetry.folder, telemetry.command, where["repository_commit"] or "",
-                         bool(where["repository_dirty"]), stream=stream)
 
 
 def remove_unowned_folders() -> list[str]:
@@ -303,50 +216,73 @@ def wanted(repo, ids) -> list[str]:
 
 
 def run(repo, ids, store, command: str, arguments, stream=False) -> list[Done]:
-    """One downloading command's run (download, check --fetch, manifest):
-    its record (recorded) and its session (session), the download step for
-    the sources ids names into that session (download), the session ended
-    (its last bundle sealed) before the record ends. Each source's Done, as
-    download gives it; a failure of the record (RecordError) or of the
-    session (StoreError) stops the run."""
+    """One downloading command's run (download, check --fetch, manifest),
+    in the session of store (a view of Store.at): its record (recorded),
+    the machine cleaned of what stopped processes left, the download step
+    for the sources ids names (download). Each source's Done, as download
+    gives it; a failure of the record (RecordError) stops the run. stream:
+    no copy of a tar stays on this machine."""
     with recorded(store, command, arguments, ids, repo.root / ".env") as telemetry:
-        with session(store, telemetry, stream) as opened:
-            return download(repo, ids, store, opened, telemetry, log=telemetry.log)
+        remove_unowned_folders()
+        remove_unowned_partials(store.cache)
+        return download(repo, ids, store, telemetry, stream, log=telemetry.log)
 
 
-def download(repo, ids, store, session, telemetry=None, log=say) -> list[Done]:
-    """The download step for the sources ids names, into session (see the
-    module's docstring): each one's Done, whose value is its outcome
-    (one)."""
-    return each(lambda sid: one(repo.source(sid), store, session, telemetry), ids, address_in(repo), log)
+def download(repo, ids, store, telemetry=None, stream=False, log=say) -> list[Done]:
+    """The download step for the sources ids names, into the session of
+    store (see the module's docstring): each one's Done, whose value is its
+    outcome (one). The index learns of them at the end."""
+    rows = []
+    try:
+        return each(lambda sid: one(repo.source(sid), store, rows, telemetry, stream), ids, address_in(repo), log)
+    finally:
+        store.note(rows)
 
 
-def one(source: Source, store, session, telemetry=None) -> str | None:
-    """Download one source into session, or find it in the store: its
-    outcome (see the module's docstring)."""
+def one(source: Source, store, rows: list, telemetry=None, stream=False) -> str | None:
+    """Download one source into the session, or find it there: DOWNLOADED,
+    REUSED, or None for an empty source (see the module's docstring). What
+    the index is to learn goes into rows."""
     if source.data["type"] == EMPTY:
         return None
-    telemetry = telemetry or Telemetry.off()
-    key = upstream_key(source)
-    if stored_upstream(key, store) is not None and not session.marked(source.id):
-        _reused(source, key, store, session)
+    key, previous, failures = upstream_key(source), held_here(store, source.id), []
+    if previous is not None and previous.holds(key):
+        rows.append(source_row(previous))
         return REUSED
-    failures = []
+    if any(found.holds(key) for found in held_all(store, source.id)):  # the session it started from holds it
+        return REUSED
+    try:
+        rows.append(source_row(_fetched(source, key, previous, store, failures, telemetry or Telemetry.off(), stream)))
+    except FAILURES as error:
+        rows.append(source_row(keep_failure(store, source.id, previous, key, source.data["address"], error, failures)))
+        raise
+    return DOWNLOADED
+
+
+def _fetched(source, key, previous, store, failures, telemetry, stream):
+    """The source fetched from the first address that gives it, and kept:
+    its record (wpt_store.Held). Each address or page that failed goes into
+    failures, (address, failure)."""
     with work_folder() as tmp:
-        pages = _pages(session, source, Path(tmp) / "pages")
+        pages = _pages(source, Path(tmp) / "pages", failures)
         for number, address in enumerate(addresses(source)):
-            staging, folder = folders(Path(tmp) / f"address-{number}", session)
-            sink = _sink(source.data, staging, session)
+            _, folder = folders(Path(tmp) / f"address-{number}")
+            packing = Packing(store, source.id, stream)
             try:
-                fetched = _fetch(session, source, address, sink, folder)
-            except FetchFailed as error:  # this address only; another may work
-                failures.append(error)
-                continue
-            size, described = _keep(fetched.tree, pages, sink, key, store, session, telemetry)
-            session.line(source.id, DOWNLOADED, code_name(), got={**fetched.got, "manifest": described},
-                         address=address, size=size)
-            return DOWNLOADED
-    raise failure(source, failures)
+                try:
+                    fetched = fetch(source.data, address, packing, folder)
+                    if not packing.matches(fetched.tree):
+                        raise Incomplete(f"{address}: gave other files on a new try")
+                except FetchFailed as error:  # this address only; another may work
+                    failures.append((address, error))
+                    continue
+                except DatasetError as error:  # what it serves cannot be taken
+                    failures.append((address, error))
+                    raise
+                return _keep(source, fetched, pages, packing, key, address, previous, failures, telemetry)
+            finally:
+                packing.discard()
+    raise failure(source, [error for _, error in failures])
 
 
 def addresses(source: Source) -> list[str]:
@@ -355,10 +291,10 @@ def addresses(source: Source) -> list[str]:
     return [source.data["address"]] + [mirror["address"] for mirror in source.data.get("mirrors", [])]
 
 
-def _pages(session, source, folder) -> dict[str, Path]:
+def _pages(source, folder, failures) -> dict[str, Path]:
     """{address: a local file holding it} of the source's license pages
     (sources.license_pages), each fetched through the HTTP protocol; the
-    first that fails is the source's failure, with a `failed` line."""
+    first that fails is the source's failure, and goes into failures."""
     pages = {}
     for number, address in enumerate(license_pages(source)):
         folder.mkdir(exist_ok=True)
@@ -368,7 +304,7 @@ def _pages(session, source, folder) -> dict[str, Path]:
             except UNREACHABLE as error:
                 raise named(error, address) from error
         except FetchFailed as error:
-            _failed(session, source, address)
+            failures.append((address, error))
             raise type(error)(f"{source.id}: license page {error}") from error
     return pages
 
@@ -380,95 +316,27 @@ def failure(source, failures: list[FetchFailed]) -> FetchFailed:
     return type(failures[0])(f"{source.id}: every address failed: " + "; ".join(f"{type(e).__name__}: {e}" for e in failures))
 
 
-def used(source: Source, store, session):
-    """A `reused` line for a source whose upstream tree a reading command
-    (a build) used from the store; none for an empty source, which has no
-    upstream."""
-    if source.data["type"] != EMPTY:
-        _reused(source, upstream_key(source), store, session)
-
-
-def _reused(source, key, store, session):
-    """A `reused` line naming the tree the store holds under key (its
-    manifest, as got records it), None when it holds none."""
-    described = store.get_ref(UPSTREAM, key)
-    session.line(source.id, REUSED, code_name(), got={"manifest": described} if described else None,
-                 size=_stored_size(stored_files(key, store)))
-
-
-def folders(tmp, session):
-    """(the staging folder, reading what the store holds through session,
-    and the folder downloads go into) inside tmp, made new."""
+def folders(tmp):
+    """(a Staging, and the folder downloads go into) inside tmp, made new."""
     folder = Path(tmp) / "download"
     folder.mkdir(parents=True)
-    return Staging(Path(tmp) / "files", session), folder
+    return Staging(Path(tmp) / "files"), folder
 
 
-def _sink(data, staging, session):
-    """What a fetch of data stores into: Bundled into session for an http
-    source (an archive's members go there as they are read), staging for
-    any other."""
-    return Bundled(staging, session) if data["type"] == "http" else staging
-
-
-def _fetch(session, source, address, sink, folder):
-    """protocols.fetch, with a `failed` line for the address when what it
-    serves cannot be taken (a DatasetError: a protocol failure, an entry
-    the tree cannot hold). Any other error (the store's, a missing
-    program, an interrupt) is not the address's failure: no line."""
-    try:
-        return fetch(source.data, address, sink, folder)
-    except DatasetError:
-        _failed(session, source, address)
-        raise
-
-
-def _keep(tree, pages, sink, key, store, session, telemetry) -> int:
-    """Put a fetched tree's files and its license pages ({address: local
-    file}) into the session's bundles (an entry placed already, in this
-    session's bundles or an earlier one's, stays where it lies), and once
-    they are stored, name them by the source's key (sources.upstream_key):
-    the pages' list first, then the tree's file list and manifest; the git
-    object id each of its git files holds (Entry.git) goes into the store
-    database's map with them, and so do the blobs its history needed (they
-    stay in the bundles, though no tree holds them). Returns (the bytes its
-    files take, each content once; the sha256 the store names its manifest
-    by)."""
-    placed = {}
-    for path in sorted(tree, key=str.encode):
-        entry = tree[path]
-        if entry.sha256 not in placed:
-            placed[entry.sha256] = entry.placed or session.add(sink.path(entry.sha256))
-    size = sum(where.length for where in placed.values())
-    # the blobs the history's patches read that no entry of the tree holds go into the bundles and the map too,
-    # named by no file list: the session's end keeps them (Session.name with no action)
-    mapped = {}
-    for object_id, sha256 in getattr(sink, "mapped", {}).items():
-        if sha256 not in placed:
-            placed[sha256] = session.add(sink.path(sha256))
-        mapped[object_id] = placed[sha256]
-    if pages:
-        session.name({address: (manifest.FILE, session.add(file)) for address, file in pages.items()},
-                     lambda listed: set_ref(store, UPSTREAM_PAGES, key, listed, telemetry))
-    described = store.put_bytes(manifest.manifest_bytes(tree))
-
-    def name_it(listed):  # the file list first: a tree named by upstream/ always has its files
-        set_ref(store, UPSTREAM_FILES, key, listed, telemetry)
-        set_ref(store, UPSTREAM, key, described, telemetry)
-
-    session.name({path: (entry.mode, placed[entry.sha256]) for path, entry in tree.items()}, name_it,
-                 {entry.git: path for path, entry in tree.items() if entry.git})
-    if mapped:
-        session.name({object_id: (manifest.FILE, where) for object_id, where in mapped.items()}, None,
-                     {object_id: object_id for object_id in mapped})
-    return size, described
-
-
-def _failed(session, source, address):
-    session.line(source.id, FAILED, code_name(), address=address)
-
-
-def _stored_size(files) -> int | None:
-    """The bytes a file list's files take, each content once; None for a
-    tree downloaded before bundles."""
-    return sum({placed.sha256: placed.length for _, placed in files.values()}.values()) if files else None
+def _keep(source, fetched, pages, packing, key, address, previous, failures, telemetry):
+    """The license pages ({address: local file}) added to the fetched tree's
+    tar, then both kept in the session (Packing.finish), once the event
+    store.source_kept is in the run's record: the source's record, which
+    names the addresses that failed before this one gave it (failures)."""
+    paths = {}
+    for number, (page, file) in enumerate(pages.items()):
+        paths[page] = f"{PAGES}{number}"
+        if paths[page] in fetched.tree:
+            raise BadPath(f"{paths[page]!r} is where the source's license pages go")
+        packing.keep_file(paths[page], manifest.FILE, file)
+    described = manifest.digest(fetched.tree)
+    telemetry.irreversible("store.source_kept", source=source.id, manifest=described)
+    return packing.finish({path: entry.mode for path, entry in fetched.tree.items()}, paths,
+                          {"key": key, "address": address, "manifest": described, "got": fetched.got,
+                           "code": code_name(), **({"failures": failed_addresses(failures)} if failures else {})},
+                          previous)

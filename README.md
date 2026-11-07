@@ -56,7 +56,8 @@ uv run scripts/setup.py                            # the PyTorch build for this 
 echo "WPT_STORE=file://$HOME/wpt-store" >> .env    # where fetched and built data lives
 uv run wpt doctor                                  # what this machine still lacks, and how to fix it
 
-uv run wpt dataset download                        # every admitted source, into the store
+uv run wpt dataset download                        # every admitted source, into the store; prints a new session ID
+echo "WPT_SESSION=ID" >> .env                      # the session every later command works in
 uv run wpt dataset build classics-test --stream    # choose, convert, tokenize; prints a dataset id
 scripts/detach.sh uv run wpt train classics-test --stream --out runs/first
 uv run wpt eval runs/first                         # memorization and other tests, into the model card
@@ -65,6 +66,12 @@ uv run wpt chat runs/first                         # continue text with the mode
 
 Every job is a subcommand of one command, `wpt` (`uv run wpt --help`
 lists them, and `uv run wpt SUBCOMMAND --help` gives each one's options).
+Every command that touches the store works in a session, an ID its files are
+stored under, named by `--session ID` or `WPT_SESSION`. Four need no ID:
+`wpt doctor`, and `wpt store list`, `runs` and `run`, which show every
+session of the store when given none, so `wpt store list` is how to find an
+ID. `wpt dataset download --from OLD_ID` into a new ID fetches only what the
+old one lacks.
 
 `classics-test` is a small model recipe over the admitted public-domain
 books, enough to see every step work on one machine. A model recipe
@@ -99,7 +106,7 @@ the same command with `--resume` continues.
 | use several GPUs | `--strategy ddp --processes N`, on the gpu worker's machine |
 | train on another machine's GPUs | a gpu worker on each machine (`deploy/gpu-worker/compose.yaml`, with `compose.nvidia.yaml` or `compose.amd.yaml` for GPUs), their keys in `WPT_GPU_WORKERS` ([machines](docs/machines.md)) |
 | rent the GPUs | `WPT_GPU_WORKERS=N` and `WPT_RENTAL_GPUS` for `wpt manager`, which rents N gpu workers through SkyPilot (as one cluster in one request), replaces a lost one and gives them back at the end ([machines](docs/machines.md)) |
-| download, build and train in one command | `docker compose up`, with `COMPOSE_FILE=deploy/manager/compose.yaml` and `WPT_RECIPE` set in `.env`; then `wpt store copy-out NAME runs/NAME` ([machines](docs/machines.md)) |
+| download, build and train in one command | `docker compose up`, with `COMPOSE_FILE=deploy/manager/compose.yaml` and `WPT_RECIPE` set in `.env`; then `wpt store copy-out NAME runs/NAME --session ID` ([machines](docs/machines.md)) |
 | stop a build at a broken source | `wpt dataset build --strict`: any failing source stops it (without the flag it is left out and listed in the record) |
 | teach the model to chat | conversations tagged `answer-as-assistant` in a source, downloaded (`wpt dataset download`) and the dataset built again, and a recipe whose `steps` add `answer-as-assistant` after `read-text`: `wpt train RECIPE DATASET_ID --out runs/chat`, then `wpt chat runs/chat --chat` ([training](docs/training.md)) |
 | teach the model to finish tasks as an agent | tasks tagged `finish-tasks` in a source, downloaded and the dataset built again, their images in `data/images/` locked with `wpt agent lock-image NAME` and built with `wpt agent build-image NAME`, and a recipe whose `steps` hold `finish-tasks` (needs Docker; [training](docs/training.md)) |

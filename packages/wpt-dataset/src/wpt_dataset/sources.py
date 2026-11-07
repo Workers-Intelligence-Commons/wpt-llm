@@ -8,21 +8,20 @@
     patches, in file-name order           -> applied with `git apply`
 
 Nothing here downloads a source: a source whose upstream tree is not in
-the store is NotDownloaded. Every result is stored under the fingerprint
+the session is NotDownloaded. Every result is stored under the fingerprint
 of what produced it, so a step that already ran is a lookup: nothing is
 applied twice, and changing one patch rebuilds only that source.
 
-The store names a source's upstream tree by upstream_key, the fingerprint
-of the source's id and of what its download reads (its type, which names
-its protocol, its addresses, extract rules, history and submodules, and
-the outside license pages its entries declare): the ref upstream/<key>
-points at its manifest, an object named by its content, and
-upstream-files/<key> at its file list (wpt_store.sessions), which says
-where each downloaded file lies in its session's bundles. The license
-pages downloaded with it are named by upstream-pages/<key>, a file list
-whose paths are the pages' addresses (stored_pages, license_page). A tree
-downloaded before bundles has no file list: its files are store objects. Which license entry covers each
-file is the license check's answer (license_check.py).
+A source's upstream tree lies in the session the store reads, as
+<id>/sources/<source>.tar.zst and <source>.json (wpt_store.sessions): held
+reads that record, and a tree is held only as the download named by
+upstream_key made it, the fingerprint of the source's id and of what its
+download reads (its type, which names its protocol, its addresses, extract
+rules, history and submodules, and the outside license pages its entries
+declare). A source missing from the session, or whose download failed, is
+NotDownloaded. The license pages downloaded with it lie in the same tar
+(stored_pages, license_page). Which license entry covers each file is the
+license check's answer (license_check.py).
 """
 
 import contextlib
@@ -34,8 +33,8 @@ import tempfile
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from wpt_store import parse_file_list
-from wpt_telemetry import Telemetry, get_result_ref, set_result_ref
+from wpt_store import Held, held
+from wpt_telemetry import Telemetry, get_result, set_result
 from wpt_utils.parallel import in_order
 from wpt_utils.programs import fingerprint
 
@@ -44,10 +43,8 @@ from .errors import CutFailed, NotDownloaded, NotText, PatchFailed
 from .manifest import SYMLINK, Entry
 from .source_data import Patch, Source
 
-# the kinds of the refs naming an upstream tree and the license pages downloaded with it (upstream_key)
 TREE_VERSION = 1  # raised by hand when a change to the code changes a source's final tree
 NOT_TEXT_VERSION = 1  # raised by hand when a change to the code changes what the text check finds
-UPSTREAM, UPSTREAM_FILES, UPSTREAM_PAGES = "upstream", "upstream-files", "upstream-pages"
 # what a download reads from a source's description, besides its id and its license pages: a change to any of
 # them is a new download
 FETCHED = ("type", "address", "addresses", "revision", "extract", "history", "submodules")
@@ -56,9 +53,9 @@ FETCHED = ("type", "address", "addresses", "revision", "extract", "history", "su
 # -- upstream -----------------------------------------------------------------
 
 def upstream_key(source: Source) -> str:
-    """The name the store gives the source's upstream tree: the fingerprint
-    of its id and of what its download reads (FETCHED, and its license
-    pages when it declares any)."""
+    """What tells one download of a source from another: the fingerprint of
+    its id and of what its download reads (FETCHED, and its license pages
+    when it declares any). Its record holds it."""
     pages = license_pages(source)
     return fingerprint({"kind": "upstream", "source": source.id, **({"pages": pages} if pages else {}),
                         **{key: source.data[key] for key in FETCHED if key in source.data}})
@@ -72,53 +69,62 @@ def license_pages(source: Source) -> list[str]:
                    if isinstance(entry.get("place"), dict) and "page" in entry["place"]})
 
 
+def held_source(source: Source, store) -> Held | None:
+    """The record of the source's upstream tree in the sessions the store
+    reads, None when they hold none: a source never downloaded, one whose
+    address or fetch options changed since, and one whose download failed
+    with no good file of it held before. A record whose last attempt failed
+    is given when it still names a good file of this download."""
+    found = held(store, source.id, upstream_key(source))
+    return found if found is not None and found.provides(upstream_key(source)) else None
+
+
 def stored_pages(source: Source, store) -> dict:
-    """{address: wpt_store.Placed} of the license pages the store holds with
-    the source's upstream tree; {} when it holds none."""
-    listed = store.get_ref(UPSTREAM_PAGES, upstream_key(source))
-    return {address: placed for address, (_, placed) in parse_file_list(store.get_bytes(listed)).items()} \
-        if listed else {}
+    """{address: wpt_store.Placed} of the license pages the session holds
+    with the source's upstream tree; {} when it holds none."""
+    found = held_source(source, store)
+    return found.pages if found is not None else {}
 
 
 def license_page(source: Source, store, address: str) -> bytes | None:
     """The bytes of a license page downloaded with the source, checked
-    against their sha256; None when the store holds no such page for it
+    against their sha256; None when the session holds no such page for it
     (what the license check reads at a page place, license_check.statement)."""
     placed = stored_pages(source, store).get(address)
     return store.read_file(placed) if placed is not None else None
 
 
 def upstream_tree(source: Source, store) -> dict[str, Entry]:
-    """The source's upstream tree as the store holds it, each downloaded
-    file placed in its bundle. An empty source's is empty, and needs no
-    download. NotDownloaded when the store does not hold it."""
+    """The source's upstream tree as the session holds it, each file placed
+    in its tar. An empty source's is empty, and needs no download.
+    NotDownloaded when the session does not hold it."""
     if source.data["type"] == "empty":
         return {}
-    tree = stored_upstream(upstream_key(source), store)
+    tree = stored_upstream(source, store)
     if tree is None:
         raise _not_downloaded(source, store)
     return tree
 
 
 def _not_downloaded(source: Source, store) -> NotDownloaded:
-    return NotDownloaded(f"{source.id}: its upstream files are not in {store}; `wpt dataset download {source.id}` "
-                         f"fetches them")
+    return NotDownloaded(f"{source.id}: its upstream files are not in session {store.session} of {store}; "
+                         f"`wpt dataset download {source.id}` fetches them")
 
 
-def stored_upstream(key: str, store) -> dict[str, Entry] | None:
-    """The upstream tree the store holds under a key (upstream_key), each
-    downloaded file placed in its bundle, or None."""
-    known = store.get_ref(UPSTREAM, key)
-    if not known:
+def stored_upstream(source: Source, store) -> dict[str, Entry] | None:
+    """The upstream tree the session holds for the source, each file placed
+    in its tar, or None."""
+    found = held_source(source, store)
+    if found is None:
         return None
-    return manifest.placed_tree(manifest.parse_manifest(store.get_bytes(known)), stored_files(key, store))
+    return {path: Entry(mode, placed.sha256, placed) for path, (mode, placed) in found.files.items()}
 
 
-def stored_files(key: str, store) -> dict:
-    """The file list (wpt_store.parse_file_list) of the upstream tree the
-    store holds under a key; {} for one downloaded before bundles."""
-    listed = store.get_ref(UPSTREAM_FILES, key)
-    return parse_file_list(store.get_bytes(listed)) if listed else {}
+def stored_files(source: Source, store) -> dict:
+    """{path: (mode, wpt_store.Placed)} of the upstream tree the session
+    holds for the source; {} when it holds none."""
+    found = held_source(source, store)
+    return found.files if found is not None else {}
 
 
 def exact_pattern(path: str) -> str:
@@ -300,11 +306,11 @@ def each_read(function, items, repo, store, copies=None, telemetry=None, what="s
 
 def held_manifest(source: Source, store) -> str:
     """The source's manifest as the records and tasks name it: the sha256
-    of the manifest of its upstream tree as the store holds it
+    of the manifest of its upstream tree as the session holds it
     (upstream_manifest), or the empty tree's (manifest.digest of no
     files) for an empty source; what its download got, for the record
-    only; nothing decides on it. Read from the store's name for the tree,
-    never computed again. NotDownloaded when the store does not hold it."""
+    only; nothing decides on it. Read from its record, never computed
+    again. NotDownloaded when the session does not hold it."""
     if source.data["type"] == "empty":
         return manifest.digest({})
     known = upstream_manifest(source, store)
@@ -315,15 +321,15 @@ def held_manifest(source: Source, store) -> str:
 
 def copy_size(source: Source, store, wanted) -> int:
     """The bytes a conversion will copy to the disk, stated beforehand: the
-    size, from the source's file list, of its upstream files whose path
+    size, from the source's record, of its upstream files whose path
     wanted accepts, each content once. The conversion says which files it
     copies (copied_as_records, copied_as_trees, copied_for_repository),
     and each_read reserves that on the disk its copies go to. 0 for an
-    empty source and for one whose file list the store does not hold."""
+    empty source and for one the session does not hold."""
     if source.data["type"] == "empty":
         return 0
     return sum({placed.sha256: placed.length for path, (_, placed) in
-                stored_files(upstream_key(source), store).items() if wanted(path)}.values())
+                stored_files(source, store).items() if wanted(path)}.values())
 
 
 def copied_as_records(source: Source):
@@ -366,16 +372,17 @@ def copied_for_repository(source: Source):
 # -- the final tree -------------------------------------------------------------
 
 def upstream_manifest(source: Source, store) -> str | None:
-    """The sha256 of the manifest object the store holds as the source's
-    upstream tree, None for an empty source (no upstream) and for one the
-    store does not hold."""
-    return None if source.data["type"] == "empty" else store.get_ref(UPSTREAM, upstream_key(source))
+    """The manifest of the source's upstream tree as the session holds it,
+    None for an empty source (no upstream) and for one the session does not
+    hold."""
+    found = None if source.data["type"] == "empty" else held_source(source, store)
+    return None if found is None else found.manifest
 
 
 def tree_key(source: Source, store) -> str:
     """The fingerprint of a source's final tree: its upstream tree as the
-    store holds it (its manifest's sha256) and the license pages downloaded
-    with it, cuts (and the cut key they are matched under), patches,
+    session holds it (its manifest) and the license pages downloaded with
+    it, cuts (and the cut key they are matched under), patches,
     formats (which decide each file's encoding), and TREE_VERSION. It holds
     nothing else of the checkout, so a commit that changes only other files
     of data/ or the code leaves it the same."""
@@ -384,35 +391,35 @@ def tree_key(source: Source, store) -> str:
         "kind": "source-tree",
         "version": TREE_VERSION,
         "upstream": upstream_manifest(source, store),
-        **({"pages": store.get_ref(UPSTREAM_PAGES, upstream_key(source))} if license_pages(source) else {}),
+        **({"pages": {address: placed.sha256 for address, placed in stored_pages(source, store).items()}}
+           if license_pages(source) else {}),
         "formats": source.data["formats"],
         "cuts": cuts,
-        **({"cut_key": store.get_ref(erasure.KEY_KIND, erasure.KEY_NAME)} if cuts else {}),
+        **({"cut_key": erasure.key_id(store)} if cuts else {}),
         "patches": [[p.name, hashlib.sha256(p.data).hexdigest()] for p in source.patches],
     })
 
 
 def final_tree(source: Source, store, telemetry=None) -> tuple[dict[str, Entry], str]:
     """The source's final tree, its upstream tree with its cuts and patches
-    applied, and the sha256 of its manifest object, each file its patches
-    left as it was placed where the download put it; nothing checked.
-    NotDownloaded when the store does not hold its upstream files,
-    CutFailed (CutKeyMissing among them) or PatchFailed when a cut or a
-    patch does not apply. Kept under the ref source-trees/<tree_key>. With
-    a telemetry, every ref it sets is recorded first (wpt_telemetry.set_result_ref)."""
+    applied, and its manifest, each file its patches left as it was placed
+    where the download put it; nothing checked. NotDownloaded when the
+    session does not hold its upstream files, CutFailed (CutKeyMissing
+    among them) or PatchFailed when a cut or a patch does not apply. Kept
+    as the result source-trees/<tree_key>, shared by every session that
+    holds the same files. With a telemetry, every result it keeps is
+    recorded (wpt_telemetry.set_result)."""
     key = tree_key(source, store)
-    known = get_result_ref(store, "source-trees", key, telemetry or Telemetry.off())
-    if known:
-        tree = manifest.parse_manifest(store.get_bytes(known))
+    held_bytes = get_result(store, "source-trees", key, telemetry or Telemetry.off())
+    if held_bytes is not None:
+        tree = manifest.parse_manifest(held_bytes)
         if source.data["type"] != "empty":
-            tree = manifest.placed_tree(tree, stored_files(upstream_key(source), store))
-        return tree, known
+            tree = manifest.placed_tree(tree, stored_files(source, store))
+        return tree, hashlib.sha256(held_bytes).hexdigest()
     tree = upstream_tree(source, store)
     tree = apply_cuts(source.id, tree, source.data.get("cuts", []), store)
     tree = apply_patches(source.id, tree, source.patches, store)
-    known = store.put_bytes(manifest.manifest_bytes(tree))
-    set_result_ref(store, "source-trees", key, known, telemetry or Telemetry.off())
-    return tree, known
+    return tree, set_result(store, "source-trees", key, manifest.manifest_bytes(tree), telemetry or Telemetry.off())
 
 
 def source_tree(source: Source, store, telemetry=None) -> tuple[dict[str, Entry], str]:
@@ -429,27 +436,27 @@ def source_tree(source: Source, store, telemetry=None) -> tuple[dict[str, Entry]
 
 
 def not_text(source: Source, tree: dict[str, Entry], known: str, store, telemetry=None) -> dict[str, str]:
-    """{path: why} of the files of a final tree (known: its manifest
-    object) that the text check (checks.py) finds are not text, in the
-    tree's order. Kept under the ref source-not-text/<not_text_key>, so a
-    tree is read for it once."""
+    """{path: why} of the files of a final tree (known: its manifest) that
+    the text check (checks.py) finds are not text, in the tree's order.
+    Kept as the result source-not-text/<not_text_key>, so a tree is read
+    for it once."""
     key = not_text_key(source, known)
-    held = get_result_ref(store, "source-not-text", key, telemetry or Telemetry.off())
-    if held:
-        return json.loads(store.get_bytes(held))
+    kept = get_result(store, "source-not-text", key, telemetry or Telemetry.off())
+    if kept is not None:
+        return json.loads(kept)
     found = {}
     for path, entry in tree.items():
         if checks.asks_text(source, path, entry):
             if (why := checks.not_text(source, path, manifest.content(store, entry))) is not None:
                 found[path] = why
-    set_result_ref(store, "source-not-text", key, store.put_bytes(json.dumps(found, ensure_ascii=False).encode()),
-            telemetry or Telemetry.off())
+    set_result(store, "source-not-text", key, json.dumps(found, ensure_ascii=False).encode(),
+               telemetry or Telemetry.off())
     return found
 
 
 def not_text_key(source: Source, known: str) -> str:
     """The fingerprint of the text check of a final tree (known: its
-    manifest object): the tree, the formats and NOT_TEXT_VERSION."""
+    manifest): the tree, the formats and NOT_TEXT_VERSION."""
     return fingerprint({"kind": "source-not-text", "version": NOT_TEXT_VERSION, "tree": known,
                         "formats": source.data["formats"]})
 
@@ -499,6 +506,6 @@ def held_out_group(source: Source, path: str) -> str | None:
 
 
 def in_store(source: Source, store) -> bool:
-    """Whether the store holds the source's upstream files, so its tree
+    """Whether the session holds the source's upstream files, so its tree
     can be read."""
-    return source.data["type"] == "empty" or store.get_ref(UPSTREAM, upstream_key(source)) is not None
+    return source.data["type"] == "empty" or held_source(source, store) is not None

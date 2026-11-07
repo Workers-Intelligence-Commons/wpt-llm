@@ -3,6 +3,7 @@ refusal of the service layer."""
 
 from functools import wraps
 
+from wpt import sessions
 from wpt_dataset.errors import DatasetError, NotFound, StaleFile
 from wpt_store import StoreError, store_from_settings
 from wpt_utils.programs import MissingTool
@@ -11,17 +12,24 @@ from wpt_utils.programs import MissingTool
 class Context:
     """The repository the routes serve, and its store (WPT_STORE, from the
     environment or the repository's .env), opened when a route first needs
-    it: a source's files are read from the store, as `wpt dataset unpack`
-    reads them."""
+    it: `whole`, as every session shares it, for the run records, and
+    `store`, at the session WPT_SESSION names (wpt web --session sets it),
+    which a source's files are read from, as `wpt dataset unpack` reads
+    them. SessionNeeded without one."""
 
     def __init__(self, repo, store=None):
         self.repo, self._store = repo, store
 
     @property
-    def store(self):
+    def whole(self):
         if self._store is None:
             self._store = store_from_settings(self.repo.root / ".env")
         return self._store
+
+    @property
+    def store(self):
+        opened = self.whole
+        return opened if opened.session else sessions.from_settings(opened, self.repo.root / ".env")
 
 
 def refusals(handler):

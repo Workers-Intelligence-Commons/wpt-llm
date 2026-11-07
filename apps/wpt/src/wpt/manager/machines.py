@@ -73,9 +73,18 @@ def replacements(settings) -> int:
     return int(text)
 
 
+def session_of(folder, run) -> str | None:
+    """The session the file of the run named run says it works in; None
+    without one."""
+    try:
+        return json.loads((Path(folder) / f"{run}.json").read_text(encoding="utf-8")).get("session")
+    except (OSError, ValueError):
+        return None
+
+
 class Workers:
     """One run's gpu workers and their file (path), the run's lock held;
-    see the module's docstring. state: {"run", "recipe", "ended",
+    see the module's docstring. state: {"run", "recipe", "session", "ended",
     "workers": [{"key", "rental": {"provider", "name", "kind"} or null}],
     "resumed", "rentals": [{"name", "price": dollars an hour or null,
     "started", "stopped": seconds since 1970, null while it is rented}]}."""
@@ -99,17 +108,18 @@ class Workers:
             raise
 
     @classmethod
-    def new(cls, folder, run, recipe) -> "Workers | None":
-        """The run named run, started (again), its lock taken; None when
-        another manager holds it."""
+    def new(cls, folder, run, recipe, session) -> "Workers | None":
+        """The run named run, started (again) in session, its lock taken;
+        None when another manager holds it."""
         path = Path(folder) / f"{run}.json"
         path.parent.mkdir(parents=True, exist_ok=True)
         lock = try_lock_file(path.with_suffix(".lock"))
         if lock is None:
             return None
-        state = {"run": run, "recipe": recipe, "ended": False, "workers": [], "resumed": 0}
+        state = {"run": run, "recipe": recipe, "session": session, "ended": False, "workers": [], "resumed": 0}
         if path.is_file():  # the same run started again (WPT_RUN): its workers are still its own
-            state = {**json.loads(path.read_text(encoding="utf-8")), "recipe": recipe, "ended": False, "resumed": 0}
+            state = {**json.loads(path.read_text(encoding="utf-8")), "recipe": recipe, "session": session,
+                     "ended": False, "resumed": 0}
         found = cls(path, state, lock)
         found.save()
         return found

@@ -23,6 +23,7 @@ from protego import Protego
 
 from wpt_dataset import lfs, retry, robots, unusable
 from wpt_dataset.sources import source_tree
+from wpt_store import held
 
 
 def test_git_mercurial_and_tar_of_one_project_give_one_manifest(kit, repo, store, git_upstream, hg_upstream, http_folder):
@@ -54,9 +55,9 @@ def test_a_mirror_is_used_when_the_main_address_is_down(kit, repo, store, http_f
 
     tree, _ = source_tree(repo.source(sid), store)
     assert list(tree) == ["book.txt"]
-    with store.database() as found:  # the main address failed, then the mirror gave it
-        assert found.execute("SELECT address, outcome FROM lines").fetchall() == [
-            (f"{base}/gone.txt", "failed"), (f"{base}/book.txt", "downloaded")]
+    found = held(store, sid)  # the main address failed, then the mirror gave it
+    assert found.address == f"{base}/book.txt"
+    assert [failed["address"] for failed in found.record["failures"]] == [f"{base}/gone.txt"]
 
 
 def test_a_source_takes_what_its_address_serves_and_keeps_it_when_upstream_changes(kit, repo, store, http_folder):
@@ -75,23 +76,21 @@ def test_a_source_takes_what_its_address_serves_and_keeps_it_when_upstream_chang
     tree, _ = source_tree(repo.source(sid), store)
     assert manifest.content(store, tree["book.txt"]) == b"version one\n"
 
-    store.mark([sid])  # a person asks for fresh content: the next download takes what upstream serves now
-    kit.download(repo, store, sid)
-    kit.download(repo, store, sid)  # the mark holds until that download: then the store is used again
+    # a person asks for fresh content with a new ID: the old one stays as it was
+    fresh = store.at("fresh")
+    kit.download(repo, fresh, sid)
+    tree, _ = source_tree(repo.source(sid), fresh)
+    assert manifest.content(fresh, tree["book.txt"]) == b"upstream changed it\n"
     tree, _ = source_tree(repo.source(sid), store)
-    assert manifest.content(store, tree["book.txt"]) == b"upstream changed it\n"
+    assert manifest.content(store, tree["book.txt"]) == b"version one\n"
 
     def named(content):  # the sha256 the store names a tree's manifest by
         entry = manifest.Entry(manifest.FILE, hashlib.sha256(content).hexdigest())
         return manifest.digest({"book.txt": entry})
 
-    with store.database() as found:  # each line records which tree it got or used, for the record only
-        assert [(source, outcome, json.loads(got)) for source, outcome, got in found.execute(
-            "SELECT source, outcome, got FROM lines ORDER BY time")] == [
-            (sid, "downloaded", {"manifest": named(b"version one\n")}),
-            (sid, "reused", {"manifest": named(b"version one\n")}),
-            (sid, "downloaded", {"manifest": named(b"upstream changed it\n")}),
-            (sid, "reused", {"manifest": named(b"upstream changed it\n")})]
+    # each record says which tree it got, for the record only
+    assert held(store, sid).manifest == named(b"version one\n")
+    assert held(fresh, sid).manifest == named(b"upstream changed it\n")
 
 
 def offer_partial_fetches(folder):
@@ -118,7 +117,6 @@ def test_a_git_source_never_stores_the_content_of_an_excluded_file_and_downloads
     assert manifest.digest(tree) == manifest.digest(
         kit.upstream({"type": "git"}, without, store))
     assert "video.bin" not in tree
-    assert blob not in {entry.git for entry in tree.values()}
     assert hashlib.sha256(b"large\n").hexdigest() not in {entry.sha256 for entry in tree.values()}
 
 
@@ -168,6 +166,7 @@ def test_cuts_then_patches_produce_the_final_tree(kit, repo, store, git_upstream
                          patches=[patch], fetch=False)
     kit.download(repo, store, sid)
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     assert cli.main(["--root", str(repo.root), "cut", sid, "README.md", str(start), str(end),
                  "--version", repo.version("source", sid)]) == 0
 
@@ -198,7 +197,7 @@ def test_a_cut_removes_every_run_of_its_passage_and_one_not_found_takes_the_sour
                                                             "cuts": [missing]})
     with pytest.raises(CutFailed, match="not in the file"):
         source_tree(repo.source(gone), store)
-    other = kit.open_store((tmp_path / "keyless").as_uri())
+    other = kit.open_store((tmp_path / "keyless").as_uri()).at("keyless")
     kit.download(repo, other, sid)
     with pytest.raises(CutKeyMissing):
         source_tree(repo.source(sid), other)
@@ -216,7 +215,7 @@ def test_a_change_to_other_data_finds_a_source_s_tree_again_and_a_raised_version
 
     def made() -> dict[str, int]:
         source_tree(repo.source(sid), store)
-        return {kind: len(list((store.root / "refs" / kind).iterdir())) for kind in ("source-trees", "source-not-text")}
+        return {kind: len(list((store.root / "cache" / kind).iterdir())) for kind in ("source-trees", "source-not-text")}
 
     first = made()
     assert first == {"source-trees": 1, "source-not-text": 1}
@@ -463,7 +462,7 @@ def lfs_pointer(content: bytes) -> bytes:
             f"size {len(content)}\n").encode()
 
 
-def test_a_file_git_stores_with_lfs_is_read_as_the_object_it_points_to_and_fetched_once(
+def test_a_file_git_stores_with_lfs_is_read_as_the_object_it_points_to_and_fetched(
         kit, repo, store, tmp_path, monkeypatch):
     # a Hugging Face dataset is a git repository whose data files are LFS pointers: the source's file is the
     # object, fetched by its sha256, and a new download of the same commit fetches no object the store holds.
@@ -487,10 +486,6 @@ def test_a_file_git_stores_with_lfs_is_read_as_the_object_it_points_to_and_fetch
     assert manifest.content(store, tree["data.jsonl"]) == records
     assert manifest.content(store, tree["README.md"]) == b"# a dataset\n"
     assert fetched == [(address, hashlib.sha256(records).hexdigest(), len(records))]
-
-    store.mark([sid])  # a person asks for fresh content: downloaded again, its LFS object taken from the store
-    assert [done.value for done in kit.download(repo, store, sid)] == ["downloaded"]
-    assert len(fetched) == 1
 
 
 def test_every_unusable_file_of_a_source_is_found_in_one_pass_and_excluded_for_review(
@@ -519,6 +514,7 @@ def test_every_unusable_file_of_a_source_is_found_in_one_pass_and_excluded_for_r
         "type": "git", "address": address, "extract": {"exclude": ["old/**"], "note": "old/ is not ours."},
         "licenses": [kit.entry(["README.md", "data/**", "picture.txt"])]}, fetch=False)
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
 
     assert cli.main(["--root", str(repo.root), "exclude-unusable", sid]) == 0
 
@@ -540,6 +536,7 @@ def test_unusable_files_are_found_through_a_mirror_when_the_main_address_is_dead
         "type": "git", "address": str(tmp_path / "gone"), "revision": commit, "mirrors": [{"address": address}],
         "licenses": [kit.entry(["good.txt", "picture.txt"])]}, fetch=False)
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
 
     assert list(unusable.exclude(repo, sid)) == ["picture.txt"]
 

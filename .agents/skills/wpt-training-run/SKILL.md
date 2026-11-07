@@ -27,8 +27,12 @@ from the repository folder:
 
 | System | Command |
 | --- | --- |
-| Windows (PowerShell) | `.\scripts\detach.ps1 uv run wpt train RECIPE DATASET_ID --out runs/NAME [options]` |
-| Linux, macOS | `scripts/detach.sh uv run wpt train RECIPE DATASET_ID --out runs/NAME [options]` |
+| Windows (PowerShell) | `.\scripts\detach.ps1 uv run wpt train RECIPE DATASET_ID --session ID --out runs/NAME [options]` |
+| Linux, macOS | `scripts/detach.sh uv run wpt train RECIPE DATASET_ID --session ID --out runs/NAME [options]` |
+
+`--session ID` names the store's session that holds the dataset; with
+`WPT_SESSION` set in the environment or in `.env`, it can be left out. Without
+either, the command is refused (`SessionNeeded`); `uv run wpt store list` shows every session when the ID is lost.
 
 On a Windows machine, use the Windows row from PowerShell, never a WSL
 shell (the `wpt` skill, "Setting up a machine").
@@ -85,10 +89,11 @@ whose window does not fit the GPU, even with `--recompute --micro-batch
 
 Any of them may be added or changed when resuming.
 
-## A run over several machines or sessions
+## A run over several machines
 
 With `--run NAME`, the checkpoint is kept in the store (`WPT_STORE`)
-instead of the model folder: any machine using the same store continues
+instead of the model folder: any machine using the same store and session
+ID (`--session ID` or `WPT_SESSION`) continues
 the run with the same command plus `--run NAME --resume`. Use it when a run
 may move to another machine.
 

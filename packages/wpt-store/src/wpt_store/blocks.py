@@ -10,6 +10,9 @@ number of frames, a descriptor byte (0: no per-frame checksums) and the
 format's magic number. The whole file is ordinary zstd: `zstd -d` gives
 back the original bytes.
 
+Every frame holds about FRAME bytes, whatever the file: the build's choice by
+whole frames (wpt_dataset.choice) reads a source's tar by them.
+
 Writer compresses while the bytes come, several frames at once as
 wpt_utils.parallel allows, the frames written in order. SeekTable reads a
 file's table and says which compressed bytes hold a range; read() reads
@@ -17,6 +20,7 @@ a range of a local file through its table.
 """
 
 import bisect
+import functools
 import struct
 from compression import zstd
 from concurrent.futures import ThreadPoolExecutor
@@ -24,7 +28,10 @@ from concurrent.futures import ThreadPoolExecutor
 from wpt_utils.parallel import Sizing, in_order
 
 FRAME = 1 << 20  # original bytes per frame: the unit a range read decompresses
-LEVEL = 3  # zstd's own default
+LEVEL = 3  # zstd's own default, for whatever is not a source's text: checkpoints, shards, records
+# a source's tar is written once and read many times, so it takes the level where zstd stops gaining: in frames of
+# 1 MiB of text, level 19 keeps 17% less than level 3, levels 20 to 22 no less than 19, and reads as fast
+SOURCE_LEVEL = 19
 SKIPPABLE = 0x184D2A5E  # the magic number of the skippable frame holding the seek table
 SEEKABLE = 0x8F92EAB1  # the seekable format's magic number, last in the file
 FOOTER = 9  # number of frames (4 bytes), descriptor (1), magic (4)
@@ -41,10 +48,11 @@ class Writer:
     size). flush() ends the frame being filled early, so every byte
     written so far is in out and in `sizes`. Up to `batch` frames wait to be compressed together; with an
     executor and a sizing they are compressed side by side
-    (wpt_utils.parallel.in_order), otherwise one after the other."""
+    (wpt_utils.parallel.in_order), otherwise one after the other, at zstd's
+    level `level`."""
 
-    def __init__(self, out, executor=None, sizing=None, batch=64):
-        self.out, self.executor, self.sizing, self.batch = out, executor, sizing, batch
+    def __init__(self, out, executor=None, sizing=None, batch=64, level=LEVEL):
+        self.out, self.executor, self.sizing, self.batch, self.level = out, executor, sizing, batch, level
         self.sizes = []  # (compressed, original) of every frame written
         self._block = bytearray()  # bytes not yet a whole frame
         self._waiting = []  # whole frames not yet compressed
@@ -72,17 +80,18 @@ class Writer:
 
     def _compress(self):
         blocks, self._waiting = self._waiting, []
+        work = functools.partial(compress, level=self.level)
         if self.executor is not None and len(blocks) > 1:
-            frames = in_order(compress, blocks, self.executor, self.sizing)
+            frames = in_order(work, blocks, self.executor, self.sizing)
         else:
-            frames = map(compress, blocks)
+            frames = map(work, blocks)
         for block, frame in zip(blocks, frames):
             self.out.write(frame)
             self.sizes.append((len(frame), len(block)))
 
 
-def compress(block: bytes) -> bytes:
-    return zstd.compress(block, LEVEL)
+def compress(block: bytes, level=LEVEL) -> bytes:
+    return zstd.compress(block, level)
 
 
 def compressed(data: bytes, executor=None, sizing=None) -> bytes:

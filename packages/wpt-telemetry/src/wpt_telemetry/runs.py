@@ -1,6 +1,6 @@
 """What a store's records say about its runs, read back for people.
 
-    runs(store)            every record folder with its command, its start
+    runs(store)            every run, <id>/<run>, with its command, its start
                            and how it ended, from its start.json and end.json
     summary(store, folder) one run: its stage (the spans open at the last
                            line read), how many spans, events and lines it
@@ -22,7 +22,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 
-from wpt_store import MissingObject
+from wpt_store import MissingFile
 from wpt_utils.lines import ERROR, INFO
 
 from . import END, EVENTS, START
@@ -57,7 +57,7 @@ class Summary:
 def _json_file(store, folder, name) -> dict | None:
     try:
         return json.loads(store.read_record(folder, name))
-    except MissingObject:
+    except MissingFile:
         return None
 
 
@@ -104,7 +104,7 @@ def summary(store, folder) -> Summary:
     end = _json_file(store, folder, END) or {}
     try:
         data = store.read_record(folder, EVENTS)
-    except MissingObject:
+    except MissingFile:
         data = b""
     opened, spans, events, lines = {}, collections.Counter(), collections.Counter(), 0
     last, errors = collections.deque(maxlen=LAST), collections.deque(maxlen=LAST)

@@ -12,7 +12,9 @@ scheduler's pass times are measured once, when the model is loaded;
 --scheduler-costs RECORD_FOLDER reads instead those a run recorded
 (scheduler-costs.json in that record folder of the store WPT_STORE
 names, environment or .env), refused when they were measured on another
-setup (the model's config, the drafter's block, the device).
+setup (the model's config, the drafter's block, the device). That read
+touches the store, so it takes --session ID (WPT_SESSION) and --from OLD_ID,
+and is refused (SessionNeeded) with no ID.
 
 --kernels FORM (WPT_KERNELS: tilelang, triton or pytorch) names what computes
 the model's attention on the GPU, as for wpt train (docs/model.md,
@@ -36,6 +38,7 @@ import os
 import sys
 from pathlib import Path
 
+from wpt import sessions
 from wpt_inference import COSTS_FILE, costs_setup, measure_costs, next_message, replayed_costs, sample_tokens
 from wpt_model import TokenizerMismatch, load_drafter, load_model, load_tokenizer
 from wpt_model.sparse import FORMS, KernelUnavailable, kernels, named_form
@@ -99,6 +102,7 @@ def main(argv=None):
     parser.add_argument("--scheduler-costs", metavar="RECORD_FOLDER",
                         help="read the drafter scheduler's pass times that a run recorded on the same setup: the name "
                              f"of its record folder in the store, which holds {COSTS_FILE} (default: measure them)")
+    sessions.options(parser)
     try:
         default = named_form(os.environ["WPT_KERNELS"]) if "WPT_KERNELS" in os.environ else None
     except argparse.ArgumentTypeError as error:
@@ -128,7 +132,9 @@ def main(argv=None):
     model.eval()
     if args.scheduler_costs:  # a run's recorded pass times, on this setup only
         try:
-            recorded = store_from_settings(Path.cwd() / ".env").read_record(args.scheduler_costs, COSTS_FILE)
+            env_file = Path.cwd() / ".env"
+            store = sessions.opened(store_from_settings(env_file), args, env_file)
+            recorded = store.read_record(args.scheduler_costs, COSTS_FILE)
             costs = replayed_costs(recorded, costs_setup(model.config, 1, drafter.block, device))
         except (StoreError, ValueError) as error:
             sys.exit(f"{type(error).__name__}: {error}")

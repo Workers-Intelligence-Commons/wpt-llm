@@ -399,7 +399,7 @@ def test_an_image_s_pool_of_tools_is_written_and_read_after_the_check(repo):
 
 
 RATING = {"task": "mine-tasks-0123abcd/tasks/hello", "weights": {"model.safetensors": "a" * 64},
-          "record": "20261023T090000Z-wpt-eval-aaaaaaaa-0123abcd", "attempt": 0, "plain": False, "verdict": "pass",
+          "record": "s1/20261023T090000Z-wpt-eval-aaaaaaaa-0123abcd", "attempt": 0, "plain": False, "verdict": "pass",
           "by": "A. Person", "date": "2026-10-23"}
 
 

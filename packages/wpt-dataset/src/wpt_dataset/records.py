@@ -27,7 +27,7 @@ others are left out and counted, before any other rule.
 
 That choice reads every file the entry covers, so it is made once and saved
 in the store: the positions of the records to read, file by file, a 4-byte
-number each, under the ref newest-index/<newest_key: the entry, the path and
+number each, as the result newest-index/<newest_key: the entry, the path and
 sha256 of each file it covers and of its joined file, in path order, and
 NEWEST_VERSION>. Nothing else enters that fingerprint, so any read of the same
 files finds the index, whatever build or machine saved it.
@@ -74,7 +74,7 @@ import numpy as np
 import pyarrow.parquet as pq
 from lxml import etree
 
-from wpt_telemetry import Telemetry, get_result_ref, set_result_ref
+from wpt_telemetry import Telemetry, get_result, set_result
 from wpt_utils.programs import fingerprint
 
 from .errors import InvalidFile
@@ -291,17 +291,16 @@ def newest_index(entry: dict, paths, read: Callable) -> dict[str, tuple[datetime
 
 def saved_newest_index(entry: dict, paths, read: Callable, store, telemetry=None) -> dict[str, np.ndarray]:
     """{path: the ascending positions of the records to read} of newest_index
-    (paths and read as there, read giving manifest.Stored files), found under
-    its ref, or scanned once and saved there. A path none of whose records is
-    read is not in it. The ref is recorded before it is set
-    (wpt_telemetry.set_result_ref)."""
+    (paths and read as there, read giving manifest.Stored files), found as a
+    result of the store, or scanned once and kept as one. A path none of whose
+    records is read is not in it."""
     telemetry = telemetry or Telemetry.off()
     key = newest_key(entry, paths, read)
-    known = get_result_ref(store, "newest-index", key, telemetry)
-    if not known:
-        known = store.put_bytes(_packed(newest_index(entry, paths, read)))
-        set_result_ref(store, "newest-index", key, known, telemetry)
-    return _unpacked(store.get_bytes(known))
+    known = get_result(store, "newest-index", key, telemetry)
+    if known is None:
+        known = _packed(newest_index(entry, paths, read))
+        set_result(store, "newest-index", key, known, telemetry)
+    return _unpacked(known)
 
 
 def newest_files(paths, read) -> list:

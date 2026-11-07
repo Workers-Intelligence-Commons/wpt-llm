@@ -1,10 +1,10 @@
-"""The documents a vocabulary was trained on, as one object of the store.
+"""The documents a vocabulary was trained on, as one file of the store.
 
 The list is one line per document, the JSON array `["<id>", "<sha256 of its
 Markdown>"]` (JSON escapes any line break in an id), sorted by the line's bytes. A build writes the lines while it reads the documents,
 into runs of a temporary folder that are sorted one at a time and merged, so
 the list is never held in memory whole, and puts the sorted file in the
-store. The lock names the object by its sha256 and the number of its lines.
+store. The lock names the file by its sha256 and the number of its lines.
 """
 
 import heapq
@@ -56,7 +56,7 @@ class TrainedList:
         self._lines = []
 
     def put(self, store) -> tuple[str, int]:
-        """(the sha256 of the sorted list, the number of its lines), the list now an object of the store."""
+        """(the sha256 of the sorted list, the number of its lines), the list now a file of the store."""
         if self._lines:
             self._run()
         merged = Path(self._folder.name) / "list"

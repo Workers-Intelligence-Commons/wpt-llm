@@ -18,12 +18,10 @@ from pathlib import Path
 import pytest
 
 from wpt_dataset import archives, manifest, retry
-from wpt.dataset import main
 from wpt_dataset.manifest import EXECUTABLE, FILE, SYMLINK, Entry
 from wpt_dataset.sources import source_tree
 from wpt_store import open_store
-from wpt_store.sessions import Session
-from wpt_utils.lines import bare
+from wpt_store.sessions import Packing
 
 README, GUIDE, RUN = b"the cat sat on the mat\n", b"le chat est sur le tapis\n" * 40, b"#!/bin/sh\necho hello\n"
 
@@ -108,23 +106,22 @@ def on_disk(address, extractor, tmp, user_agent):
     manifest.read_archive(tmp / "download", extractor)
 
 
-def added_to_bundles(monkeypatch) -> list[str]:
-    """The sha256 of every content a session adds to its bundles from now on."""
-    added, add = [], Session.add
+def added_to_the_tar(monkeypatch) -> list[str]:
+    """The sha256 of every content a download adds to a source's tar from now on."""
+    added, written = [], Packing._written
 
-    def counted(self, source):
-        placed = add(self, source)
-        added.append(placed.sha256)
-        return placed
+    def counted(self, path, mode, sha256, start, length):
+        added.append(sha256)
+        written(self, path, mode, sha256, start, length)
 
-    monkeypatch.setattr(Session, "add", counted)
+    monkeypatch.setattr(Packing, "_written", counted)
     return added
 
 
 @pytest.mark.parametrize("name", ["tar.gz", "tar", "zip, ranges served", "zip, ranges served unannounced",
                                   "zip, no ranges", "records, newest rule"])
 def test_an_archive_read_while_it_downloads_gives_what_a_copy_on_the_disk_gives(
-        name, kit, repo, tmp_path, http_folder, ranged_folder, unannounced_ranged_folder, monkeypatch, capsys):
+        name, kit, repo, tmp_path, http_folder, ranged_folder, unannounced_ranged_folder, monkeypatch):
     # a zip's end is asked for through a range request even from a server that does not say it serves
     # ranges: a range in answer means it is read in pieces, the whole file in answer means it is saved
     file, data, ranges, fields, expected = case(name, kit)
@@ -141,31 +138,29 @@ def test_an_archive_read_while_it_downloads_gives_what_a_copy_on_the_disk_gives(
     monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)
     results, asked, saved, save = {}, ranged_folder[2], [], archives._save
     monkeypatch.setattr(archives, "_save", lambda *a: saved.append(a[2]) or save(*a))
-    added = added_to_bundles(monkeypatch)
+    added = added_to_the_tar(monkeypatch)
     for way in ("read while it downloads", "a copy on the disk"):
-        store = open_store((tmp_path / way).as_uri())
+        store = open_store((tmp_path / way).as_uri()).at("test-session")
         monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+        monkeypatch.setenv("WPT_SESSION", store.session)
         if way == "a copy on the disk":
             monkeypatch.setattr(archives, "read", on_disk)
         asked.clear()
         added.clear()
-        capsys.readouterr()
 
-        code = main(["--root", str(repo.root), "check", "--fetch", sid])
+        kit.download(repo, store, sid)
 
-        out = [line for line in bare(capsys.readouterr().out).splitlines() if line.startswith(sid)]
         tree, _ = source_tree(repo.source(sid), store)
         documents, _ = kit.converted(repo, store)
-        results[way] = (code, out, manifest.manifest_bytes(tree),
-                        [(d.id, d.markdown) for d in documents])
+        results[way] = (manifest.manifest_bytes(tree), [(d.id, d.markdown) for d in documents])
         if way == "read while it downloads":
             archive_gets = [wanted for path, wanted in asked if path == f"/{file}"]
-            assert len(added) == len(set(added))  # each content in the bundles once
+            assert len(added) == len(set(added))  # each content in the tar once
             streamed_saves = list(saved)
 
     assert results["read while it downloads"] == results["a copy on the disk"]
-    code, out, listing, documents = results["read while it downloads"]
-    assert code == 0 and out and documents
+    listing, documents = results["read while it downloads"]
+    assert documents
     assert listing == manifest.manifest_bytes({path: Entry(mode, hashlib.sha256(content).hexdigest())
                                                for path, (mode, content) in expected.items()})
     if name == "records, newest rule":
@@ -210,7 +205,7 @@ def test_an_archive_whose_answer_is_cut_is_read_again_and_each_member_stored_onc
         "type": "http", "address": f"http://127.0.0.1:{server.server_address[1]}/project.tar.gz",
         "licenses": [kit.entry(sorted(tree))]}, fetch=False)
     monkeypatch.setattr(retry, "BASE", 0)  # no wait before the new try
-    added = added_to_bundles(monkeypatch)
+    added = added_to_the_tar(monkeypatch)
 
     kit.download(repo, store, sid)
     server.shutdown()
@@ -268,7 +263,7 @@ def test_a_tar_whose_answer_is_cut_continues_from_the_byte_reached(kit, repo, st
         "licenses": [kit.entry(sorted(tree))]}, fetch=False)
     monkeypatch.setattr(retry, "BASE", 0)  # no wait between the answers
     assert cuts > retry.ATTEMPTS or changes
-    added = added_to_bundles(monkeypatch)
+    added = added_to_the_tar(monkeypatch)
 
     kit.download(repo, store, sid)
     server.shutdown()

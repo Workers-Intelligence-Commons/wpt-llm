@@ -12,6 +12,8 @@ from wpt_dataset.migrate import NEW_ATTENTION, MigrationIncomplete, Step, migrat
 from wpt_dataset.pools import matches, parse
 from wpt_dataset.repo import Repo, dump_json, validate
 from wpt_dataset.sources import upstream_manifest
+from wpt_store import find_dataset
+from wpt_store.index import SOURCES, held_row
 from wpt_tokenizer import Tokenizer
 from wpt_utils.lines import bare
 
@@ -157,7 +159,7 @@ def test_migrate_drops_the_shape_number_of_every_kind_of_file(kit, repo, store, 
 
 
 def test_migrating_a_lock_puts_the_list_of_its_documents_in_the_store(kit, repo, store):
-    # a lock that carried the trained documents now names their list, an object of the store
+    # a lock that carried the trained documents now names their list, a file of the store
     documents = [["b/two.txt", "2" * 64], ["a/one.txt", "1" * 64], ["a-b/three.txt", "3" * 64]]
     mixture = kit.write_recipe(repo, "mixture", "main", {"pools": [{"name": "a", "select": "a", "weight": 1}]})
     recipe = {"version": 1, "sample_bytes": 10**9, "vocab_size": 600}
@@ -272,9 +274,9 @@ def test_migrating_a_git_source_gives_it_the_commit_it_was_reviewed_at_else_its_
     kit.run("git", "add", "-A", cwd=repo.root)
     kit.run("git", "commit", "-q", "-m", "sources without a revision", cwd=repo.root)
     ids, paths = zip(first, *later)
-    with kit.session(store) as running:  # a download of each of the first two, at a commit the store records
-        for sid in ids[:2]:
-            running.line(sid, "downloaded", "test", got={"commit": downloaded, "manifest": "0" * 64})
+    # a download of each of the first two, at a commit the store records
+    store.note([held_row(store.session, SOURCES, sid, {"time": "2026-10-25T12:00:00Z", "got": {"commit": downloaded}})
+                for sid in ids[:2]])
 
     with pytest.raises(InvalidFile, match=re.escape(str(paths[2]))):
         migrate(repo, log=lambda *_: None, open_store=lambda: store)
@@ -374,12 +376,13 @@ def test_command_line_builds_a_dataset_and_prints_its_id(kit, repo, store, git_u
     kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "sample_bytes": 10**9, "vocab_size": 556})
     kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)
 
     assert main(["--root", str(repo.root), "check", "--fetch"]) == 0
     assert main(["--root", str(repo.root), "build", "d"]) == 0
     dataset_id = bare(capsys.readouterr().out).strip().splitlines()[-1]
-    assert store.get_ref("datasets", dataset_id)
+    assert find_dataset(store, dataset_id)
     assert (repo.root / "data" / "recipes" / "tokenizers" / "t.lock.json").exists()
     # the build's record names the dataset it wrote, which training records as its input,
     # and each source it read
@@ -389,8 +392,8 @@ def test_command_line_builds_a_dataset_and_prints_its_id(kit, repo, store, git_u
     [folder] = [name for name in folders if "-wpt-dataset-build-d-" in name]
     assert len(folders) == 2
     ids = json.loads(store.read_record(folder, "ids.json"))
-    assert ids["outputs"] == {"dataset": dataset_id, "dataset_record": store.get_ref("datasets", dataset_id),
-                              "dataset_documents": store.get_ref("dataset-documents", dataset_id)}
+    assert ids["outputs"] == {"dataset": dataset_id, "dataset_record": find_dataset(store, dataset_id)[0],
+                              "dataset_documents": find_dataset(store, dataset_id)[1]["document_list"]["sha256"]}
     assert list(ids["inputs"]["sources"]) == repo.source_ids()
     events = [json.loads(line) for line in store.read_record(folder, "events.jsonl").splitlines()]
     fetched = {e["attributes"]["source"] for e in events if e.get("name") == "source" and e["kind"] == "span_start"}
@@ -399,22 +402,16 @@ def test_command_line_builds_a_dataset_and_prints_its_id(kit, repo, store, git_u
     assert locked == {"path": "data/recipes/tokenizers/t.lock.json",
                       "vocabulary": json.loads((repo.root / "data" / "recipes" / "tokenizers" / "t.lock.json").read_text())["vocabulary_sha256"]}
     assert json.loads(store.read_record(folder, "end.json"))["status"] == "succeeded"
-    # the build is a session too: one `reused` line for each source whose tree it used; a command that only
-    # reads sources (markdown-check, unpack) writes no session
+    # a command that only reads sources (markdown-check, unpack) writes no run
     [sid] = repo.source_ids()
     assert main(["--root", str(repo.root), "markdown-check"]) == 0
     assert main(["--root", str(repo.root), "unpack", sid, str(repo.root.parent / "unpacked")]) == 0
-    with store.database() as found:
-        sessions = found.execute("SELECT folder, command, ended IS NOT NULL FROM sessions").fetchall()
-        assert {(downloading, "wpt dataset check", 1), (folder, "wpt dataset build", 1)} <= set(sessions)
-        assert len(sessions) == 3  # and the test's own download, which put the source in the store
-        assert found.execute("SELECT source, outcome, json_extract(got, '$.manifest'), size > 0 FROM lines"
-                             " WHERE session = ?", (folder,)).fetchall() == [
-            (sid, "reused", upstream_manifest(repo.source(sid), store), 1)]
+    assert store.record_folders() == folders
+    assert downloading in folders
 
 
 @pytest.mark.parametrize("stream", [False, True])
-def test_building_a_tokenizer_is_a_session_with_a_reused_line_for_each_source_it_read(
+def test_building_a_tokenizer_is_recorded_and_locks_its_vocabulary(
         kit, repo, store, git_upstream, monkeypatch, stream):
     [sid] = [kit.add_source(repo, store, "example", "ok", {
         "type": "git", "address": git_upstream[0], "tags": [{"tags": ["text"], "paths": ["**"]}]})]
@@ -422,23 +419,19 @@ def test_building_a_tokenizer_is_a_session_with_a_reused_line_for_each_source_it
     kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "sample_bytes": 10**9, "vocab_size": 556})
     kit.write_model_recipe(repo, "t", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)
 
     assert main(["--root", str(repo.root), "build-tokenizer", "t", *(["--stream"] if stream else [])]) == 0
     [folder] = [name for name in store.record_folders() if "-wpt-dataset-build-tokenizer-t-" in name]
-    with store.database() as found:
-        assert found.execute("SELECT command, ended IS NOT NULL FROM sessions WHERE folder = ?",
-                             (folder,)).fetchall() == [("wpt dataset build-tokenizer", 1)]
-        assert found.execute("SELECT source, outcome, json_extract(got, '$.manifest') FROM lines WHERE session = ?",
-                             (folder,)).fetchall() == [(sid, "reused", upstream_manifest(repo.source(sid), store))]
+    assert json.loads(store.read_record(folder, "end.json"))["status"] == "succeeded"
     lock = repo.root / "data" / "recipes" / "tokenizers" / "t.lock.json"
     assert lock.exists()
 
-    # the vocabulary is locked now: a second command reads no source, so it writes no line
+    # the vocabulary is locked now: a second command finds it
+    written = lock.read_bytes()
     assert main(["--root", str(repo.root), "build-tokenizer", "t"]) == 0
-    [again] = [name for name in store.record_folders() if "-wpt-dataset-build-tokenizer-t-" in name and name != folder]
-    with store.database() as found:
-        assert found.execute("SELECT count(*) FROM lines WHERE session = ?", (again,)).fetchone() == (0,)
+    assert lock.read_bytes() == written
 
 
 def test_a_build_whose_record_breaks_writes_no_lock_file(kit, repo, store, git_upstream, monkeypatch, capsys):
@@ -452,6 +445,7 @@ def test_a_build_whose_record_breaks_writes_no_lock_file(kit, repo, store, git_u
     kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "sample_bytes": 10**9, "vocab_size": 556})
     kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)
     real = LocalStore._raw_append_record
 

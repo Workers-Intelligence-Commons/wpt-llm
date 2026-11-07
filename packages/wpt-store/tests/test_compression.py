@@ -6,7 +6,7 @@ import boto3
 import pytest
 from moto import mock_aws
 
-from wpt_store import CorruptObject, blocks, open_store
+from wpt_store import CorruptFile, blocks, open_store
 
 TEXT = b"".join(f"line {i} of a text that compresses well\n".encode() for i in range(150_000))  # about 6 MB
 NOISE = random.Random(1).randbytes(11 << 20)  # does not compress; on S3 it goes up in 3 parts
@@ -30,25 +30,25 @@ def store(request, tmp_path, monkeypatch):
         yield store
 
 
-def test_an_object_is_kept_compressed_only_when_that_saves_space_and_reads_back_alike(store, tmp_path):
+def test_a_file_is_kept_compressed_only_when_that_saves_space_and_reads_back_alike(store, tmp_path):
     (tmp_path / "text").write_bytes(TEXT)
     (tmp_path / "noise").write_bytes(NOISE)
     text, noise = store.put_file(tmp_path / "text"), store.put_file(tmp_path / "noise")
     small = store.put_bytes(b"too short to shrink\n")
-    stored = store.kind.list("objects/")
-    assert stored[f"objects/{text[:2]}/{text}.zst"] < len(TEXT) / 5
-    assert stored[f"objects/{noise[:2]}/{noise}"] == len(NOISE)
-    assert stored[f"objects/{small[:2]}/{small}"] == 20
+    stored = store.kind.list("cache/files/")
+    assert stored[f"cache/files/{text}.zst"] < len(TEXT) / 5
+    assert stored[f"cache/files/{noise}"] == len(NOISE)
+    assert stored[f"cache/files/{small}"] == 20
     assert len(stored) == 3
 
     # the compressed file is plain zstd: any zstd tool gives the bytes back
-    assert zstd.decompress(store.kind.read(f"objects/{text[:2]}/{text}.zst")[0]) == TEXT
+    assert zstd.decompress(store.kind.read(f"cache/files/{text}.zst")[0]) == TEXT
 
     # sizes are known without copying anything into the cache
     assert (store.size(text), store.size(noise), store.size(small)) == (len(TEXT), len(NOISE), 20)
     assert not any(store.cache.rglob(text))
 
-    # a range spanning two frames, read without the rest, then the whole object
+    # a range spanning two frames, read without the rest, then the whole file
     middle = blocks.FRAME * 3 - 100
     assert store.read_range(text, middle, 300) == TEXT[middle:middle + 300]
     assert store.read_range(noise, 10, 5) == NOISE[10:15]
@@ -60,16 +60,16 @@ def test_an_object_is_kept_compressed_only_when_that_saves_space_and_reads_back_
     assert not store.has(text)
 
 
-def test_a_damaged_compressed_object_is_refused(tmp_path):
+def test_a_damaged_compressed_file_is_refused(tmp_path):
     store = open_store((tmp_path / "store").as_uri())
     sha = store.put_bytes(TEXT)
-    packed = tmp_path / "store" / "objects" / sha[:2] / f"{sha}.zst"
+    packed = tmp_path / "store" / "cache" / "files" / f"{sha}.zst"
     data = bytearray(packed.read_bytes())
     data[100] ^= 0xFF
     packed.write_bytes(bytes(data))
-    with pytest.raises(CorruptObject):
+    with pytest.raises(CorruptFile):
         store.get_bytes(sha)
-    with pytest.raises(CorruptObject):
+    with pytest.raises(CorruptFile):
         store.path(sha)
 
 
@@ -87,7 +87,7 @@ def test_frames_compressed_side_by_side_give_the_bytes_one_at_a_time_gives():
     assert together.getvalue() == alone.getvalue()
 
 
-def test_each_object_is_looked_for_once_however_many_ranges_are_read(store):
+def test_each_file_is_looked_for_once_however_many_ranges_are_read(store):
     noise = store.put_bytes(NOISE[:1000])  # kept as it is: looked for under the compressed name first
     reader = open_store(store.root.as_uri() if hasattr(store, "root") else f"s3://{store.bucket}/{store.prefix}")
     probes = []

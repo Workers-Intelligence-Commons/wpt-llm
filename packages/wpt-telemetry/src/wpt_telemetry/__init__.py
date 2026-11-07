@@ -2,12 +2,13 @@
 wrote, so that afterwards one can know exactly what happened.
 
 wpt dataset build, wpt train and wpt eval each open one
-Telemetry per run. Its record is its own folder of the store named by
-WPT_STORE, records/<folder>/ (see wpt_store), named
+Telemetry per run. Its record is its own folder of the session it runs in,
+in the store named by WPT_STORE, <id>/runs/<run>/ (see wpt_store), named
 <UTC start>-<command>-<main id>-<8 random hex digits>, where the command is
 the one that ran (`wpt train`; as_record_name turns each space into a '-':
 `wpt-train`) and the main id is what the run is about (a recipe name, a short
-dataset id, a short weights hash: the command chooses):
+dataset id, a short weights hash: the command chooses). The run's `folder`
+is "<id>/<run>", which every read of the record takes:
 
     start.json     the command, its arguments, when it started, the job
                    that started it (the WPT_JOB setting of `wpt web`, when
@@ -26,14 +27,17 @@ dataset id, a short weights hash: the command chooses):
                    error and its traceback
     other files    written by a part of the command (write_file, append_file)
 
+The session's index learns of the run when it ends (wpt_store.index): a run
+that crashed reaches it only when the index is rebuilt.
+
 Each file written whole is in the store before the call that makes it
 returns; a run with no end.json did not reach its end. The store holds
 added lines back (see wpt_store): they are sent every FLUSH_SECONDS, before
 every step that cannot be undone (irreversible) and at the end of the run,
 so a crash loses at most the lines of the last FLUSH_SECONDS, and a long
-run writes a few large parts instead of one small part per span or ref.
-Setting a ref that names a result the build can compute again
-(set_result_ref) waits for the next group of lines. When the store does not take a part,
+run writes a few large parts instead of one small part per span or result.
+Keeping a result the build can compute again (set_result) waits for the
+next group of lines. When the store does not take a part,
 RecordError is raised, and every later call raises it again without
 writing anything: the command stops, since without its record it must do
 nothing more (wpt train's training process still saves its checkpoint
@@ -124,7 +128,8 @@ from opentelemetry.sdk.trace.export import BatchSpanProcessor, SpanExporter, Spa
 from opentelemetry.sdk.trace.id_generator import RandomIdGenerator
 from opentelemetry.trace import NonRecordingSpan, SpanContext, Status, StatusCode, TraceFlags
 
-from wpt_store import MissingObject, MixedRecord, as_record_name, check_record_name, read_env_file
+from wpt_store import MissingFile, MixedRecord, as_record_name, check_record_name, read_env_file
+from wpt_store.index import RUNS, held_row
 from wpt_utils.files import sha256_file
 from wpt_utils.lines import ERROR, INFO, WARNING, say
 from wpt_utils.parallel import memory
@@ -269,16 +274,19 @@ class Telemetry:
         """A new run's record, in a new folder named after main_id (what the
         run is about: a recipe name, short(dataset id)...): start.json and
         ids.json are written before it returns (RecordError when the store
-        refuses them)."""
+        refuses them). store is a view of Store.at: SessionNeeded without a
+        session, nothing written."""
         moment = datetime.now(UTC)
-        folder = f"{moment:%Y%m%dT%H%M%SZ}-{as_record_name(command)}-{as_record_name(main_id)}-{secrets.token_hex(4)}"
+        run = f"{moment:%Y%m%dT%H%M%SZ}-{as_record_name(command)}-{as_record_name(main_id)}-{secrets.token_hex(4)}"
+        folder = f"{store.needed()}/{run}"
         live = _Live(command, folder, _endpoint(env_file, environ), echo or say)
         telemetry = cls(store, folder, command, live, echo or say, owner=True)
         try:
             job = (os.environ if environ is None else environ).get(JOB)
             telemetry._write(START, _json({"command": command, "arguments": list(arguments),
                                            "started": _iso(moment), "trace": telemetry.trace,
-                                           "inputs": dict(inputs or {}), **({"job": job} if job else {}), **_where()}))
+                                           "inputs": dict(inputs or {}), **({"job": job} if job else {}),
+                                           **({"from": store.start} if store.start else {}), **_where()}))
             telemetry._write(IDS, _json({"inputs": dict(inputs or {}), "outputs": {}}))
             telemetry._line({"kind": "span_start", "span": telemetry._root.id, "parent": None, "name": command,
                              "attributes": {}})
@@ -456,7 +464,7 @@ class Telemetry:
             self._append(name, data)
 
     def note_reused(self, stage, name, made_by):
-        """Note that this run found a result of a stage (its ref's kind),
+        """Note that this run found a result of a stage,
         made by made_by, when another commit made it. Found several times,
         it counts once."""
         if made_by != code_name():
@@ -539,6 +547,7 @@ class Telemetry:
                                                 "ended": _iso(datetime.now(UTC)),
                                                 "seconds": round(time.time() - self._started, 3)}))
                         self._end_records()
+                        self._note_run()
             finally:
                 if self._live:
                     self._live.close()
@@ -584,7 +593,7 @@ class Telemetry:
         def merge():
             try:
                 known = json.loads(self.store.read_record(self.folder, IDS))
-            except MissingObject:
+            except MissingFile:
                 known = {"inputs": {}, "outputs": {}}
             known[part].update(ids)
             self.store.write_record(self.folder, IDS, _json(known))
@@ -615,6 +624,12 @@ class Telemetry:
         events to into one part."""
         if self.store is not None:
             self._store_call(EVENTS, lambda: self.store.end_records(self.folder))
+
+    def _note_run(self):
+        """The record ended: the session's index learns of the run."""
+        session, _, run = self.folder.partition("/")
+        self._store_call(START, lambda: self.store.note(
+            [held_row(session, RUNS, run, json.loads(self.store.read_record(self.folder, START)))]))
 
     def _flush(self):
         if self.store is not None:
@@ -669,7 +684,7 @@ class Telemetry:
                 raise
             except Exception as error:  # whatever the folder or the bucket raised: the part is not stored
                 self._broken = (f"the record of this run could not be written to {self.store} "
-                                f"(records/{self.folder}/{name}): {type(error).__name__}: {error}")
+                                f"({self.folder}/{name}): {type(error).__name__}: {error}")
                 raise RecordError(self._broken) from error
 
 
@@ -962,31 +977,25 @@ def _interrupt_main():
         signal.pthread_kill(threading.main_thread().ident, signal.SIGINT)
 
 
-def set_result_ref(store, kind, name, sha, telemetry):
-    """store.set_ref(kind, name, sha) of a result the build can compute
-    again: the event "store.ref_set" goes with the next group of lines, so a
-    run that sets one ref per source writes no part of the record for each.
-    A crash may leave such a ref unrecorded; the ref then only saves work.
-    The ref holds the commit that made the result (Store.set_ref)."""
-    telemetry.event("store.ref_set", ref=f"{kind}/{name}", object=sha)
-    store.set_ref(kind, name, sha, made_by=code_name())
-
-
-def get_result_ref(store, kind, name, telemetry):
-    """store.get_ref(kind, name) of a result set_result_ref set, noting it
-    in telemetry when another commit made it (Telemetry.note_reused)."""
-    sha, made_by = store.get_made_ref(kind, name)
-    if sha is not None:
-        telemetry.note_reused(kind, name, made_by)
+def set_result(store, stage, fingerprint, data, telemetry):
+    """Keep data, a result the build can compute again, as
+    cache/<stage>/<fingerprint> (Store.put_result): the event
+    "store.result_set" goes with the next group of lines, so a run that
+    keeps one result per source writes no part of the record for each. A
+    crash may leave such a result unrecorded; it then only saves work. The
+    result holds the commit that made it."""
+    sha = store.put_result(stage, fingerprint, data, made_by=code_name())
+    telemetry.event("store.result_set", stage=stage, fingerprint=fingerprint, sha256=sha)
     return sha
 
 
-def set_ref(store, kind, name, sha, telemetry):
-    """store.set_ref(kind, name, sha), once the event "store.ref_set",
-    naming the ref and the object it will point at, is in telemetry's
-    record (RecordError otherwise, and the ref is not set)."""
-    telemetry.irreversible("store.ref_set", ref=f"{kind}/{name}", object=sha)
-    store.set_ref(kind, name, sha)
+def get_result(store, stage, fingerprint, telemetry):
+    """The bytes of a result set_result kept, None without one, noting it
+    in telemetry when another commit made it (Telemetry.note_reused)."""
+    data, made_by = store.get_result(stage, fingerprint)
+    if data is not None:
+        telemetry.note_reused(stage, fingerprint, made_by)
+    return data
 
 
 def short(value: str) -> str:

@@ -5,6 +5,7 @@ from wpt.dataset import main
 from wpt_dataset.edit import unpack, write_patch
 from wpt_dataset.errors import EditError, LicenseMapError
 from wpt_dataset.sources import source_tree
+from wpt_store import find_dataset
 
 def contents(store, tree):
     return {path: store.get_bytes(entry.sha256) for path, entry in tree.items()}
@@ -21,6 +22,7 @@ def test_own_texts_grow_by_patches_made_from_plain_files(kit, repo, store, tmp_p
     # a source written for WPT starts empty; each edit of its files becomes the next
     # patch, and the source then gives exactly the edited files
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     sid = own_texts(kit, repo, store)
     root = ["--root", str(repo.root)]
 
@@ -49,7 +51,7 @@ def test_own_texts_grow_by_patches_made_from_plain_files(kit, repo, store, tmp_p
     kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "sample_bytes": 10**9, "vocab_size": 556})
     kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 200, "held_out": 0})
     dataset_id = build_dataset(repo, "d", store, log=lambda *_: None)
-    assert kit.json.loads(store.get_bytes(store.get_ref("datasets", dataset_id)))["documents"]["total"] == 2
+    assert find_dataset(store, dataset_id)[1]["documents"]["total"] == 2
 
 
 def test_a_removal_patch_on_an_upstream_source(kit, repo, store, tmp_path):

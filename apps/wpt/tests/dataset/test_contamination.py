@@ -13,6 +13,8 @@ from wpt_dataset.build import build_dataset
 from wpt_store.shards import read_shard
 from wpt_tokenizer import Tokenizer
 from wpt_utils.lines import bare
+from wpt_store import dataset_key, find_dataset, keep_dataset
+from wpt_store.shards import shard_file
 
 PASSAGES = 5  # each document ends with one of them, so documents on both sides of the split share runs
 
@@ -35,6 +37,7 @@ def dataset(kit, repo, store, tmp_path, monkeypatch):
     kit.write_model_recipe(repo, "split", {"mixture": "all", "tokenizer": "all", "total_tokens": 200000,
                                            "held_out": 0.5})
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)
     assert command(repo, "build", "split") == 0
     return build.last_dataset(store, "split")
@@ -45,7 +48,7 @@ def command(repo, *words) -> int:
 
 
 def record_of(store, dataset_id):
-    return json.loads(store.get_bytes(store.get_ref("datasets", dataset_id)))
+    return find_dataset(store, dataset_id)[1]
 
 
 def runs_of_command(store, name):
@@ -68,7 +71,7 @@ def plain_report(store, record):
     def texts(shards):
         found = {}
         for shard in shards:
-            for tokens, _, document, _, _ in read_shard(store.path(shard["object"])):
+            for tokens, _, document, _, _ in read_shard(store.path(shard_file(shard))):
                 found.setdefault(document, tokenizer.decode(tokens.tolist()).split())
         return found
 
@@ -94,7 +97,7 @@ def test_the_command_saves_and_prints_what_the_check_finds_and_a_second_run_prin
     assert command(repo, "contamination", dataset) == 0  # an overlap is a finding, not a failure
     first = capsys.readouterr().out
 
-    report = json.loads(store.get_bytes(store.get_ref(contamination.REPORT, dataset)))
+    report = json.loads(store.get_result(contamination.REPORT, dataset)[0])
     assert report == plain_report(store, record_of(store, dataset))
     assert report["overlapping"] >= 2 and 0 < report["held_out_documents"] < 40
     assert (f"contamination: {report['overlapping']} held-out documents share a run of 13 words with training "
@@ -112,13 +115,13 @@ def test_the_command_saves_and_prints_what_the_check_finds_and_a_second_run_prin
 
 
 def test_a_document_several_shards_repeat_is_read_once_and_the_report_is_the_same_definition(repo, store, dataset):
-    store.delete_ref("datasets", dataset)
+    store.delete_json(dataset_key(store.session, f"split-{dataset[:8]}"))
     assert build_dataset(repo, "split", store, log=lambda *_: None, shard_tokens=20000) == dataset
     record = record_of(store, dataset)
     assert len(record["shards"]) > 2
 
     assert command(repo, "contamination", dataset) == 0
-    report = json.loads(store.get_bytes(store.get_ref(contamination.REPORT, dataset)))
+    report = json.loads(store.get_result(contamination.REPORT, dataset)[0])
     assert report == plain_report(store, record) and report["overlapping"] >= 2
 
 
@@ -128,12 +131,12 @@ def test_a_check_that_fails_leaves_no_local_copy_and_no_report(repo, store, data
     monkeypatch.setattr(tempfile, "tempdir", str(temporary))
     record = record_of(store, dataset)
     broken = {**record, "shards": [{**record["shards"][0], "token_sha256": "0" * 64}]}
-    store.set_ref("datasets", dataset, store.put_bytes(json.dumps(broken).encode()))
+    keep_dataset(store, f"split-{dataset[:8]}", broken)
 
     assert command(repo, "contamination", dataset) == 1
-    assert store.get_ref(contamination.REPORT, dataset) is None
+    assert not store.has_result(contamination.REPORT, dataset)
     assert list(temporary.iterdir()) == []
-    assert not (store.cache / broken["shards"][0]["object"][:2] / broken["shards"][0]["object"]).exists()
+    assert not (store.cache / broken["shards"][0]["sha256"][:2] / broken["shards"][0]["sha256"]).exists()
 
 
 def test_a_dataset_the_store_does_not_hold_is_refused(repo, store, dataset, capsys):
@@ -146,26 +149,25 @@ def test_a_build_neither_runs_the_check_nor_records_it(store, dataset):
     assert "contamination" not in record_of(store, dataset)
     [events] = runs_of_command(store, "wpt dataset build")
     assert "shards" in spans(events) and "contamination" not in spans(events)
-    assert store.get_ref(contamination.REPORT, dataset) is None
+    assert not store.has_result(contamination.REPORT, dataset)
 
 
 def test_a_record_that_holds_a_report_stays_current_and_the_command_prints_that_report(
         repo, store, dataset, capsys):
     report = {"ngram_words": 13, "held_out_documents": 7, "overlapping": 1,
               "examples": [{"held_out": "s/held", "training": "s/trained"}]}
-    written = store.put_bytes(json.dumps({**record_of(store, dataset), "contamination": report}).encode())
-    store.set_ref("datasets", dataset, written)
+    keep_dataset(store, f"split-{dataset[:8]}", {**record_of(store, dataset), "contamination": report})
 
     assert build_dataset(repo, "split", store, log=lambda *_: None) == dataset
-    assert store.get_ref("datasets", dataset) == written  # the same code gives the same id: found, not built again
+    assert record_of(store, dataset)["contamination"] == report  # the same code gives the same id: found, not built again
     record, known, _ = train.load_dataset(store, dataset, repo.model_recipe("split"))
-    assert record["id"] == dataset and known == written
+    assert record["id"] == dataset and known == dataset_key(store.session, f"split-{dataset[:8]}")
 
     capsys.readouterr()
     assert command(repo, "contamination", dataset) == 0
     printed = bare(capsys.readouterr().out)
     assert "contamination: 1 held-out documents share a run of 13 words" in printed
     assert "s/held shares a run with s/trained" in printed
-    assert store.get_ref(contamination.REPORT, dataset) is None
+    assert not store.has_result(contamination.REPORT, dataset)
     [events] = runs_of_command(store, "wpt dataset contamination")
     assert "contamination" not in spans(events)

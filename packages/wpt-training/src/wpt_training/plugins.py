@@ -540,7 +540,7 @@ class Step:
         return getattr(self.environment.module, "context", lambda settings: None)(self.environment_settings)
 
     def check_dataset(self, record: dict, store):
-        """ValueError when the dataset (its record, and its objects in the
+        """ValueError when the dataset (its record, and its files in the
         store) holds nothing the step can learn from, from its environment
         file's check_dataset(settings, record, store); nothing when it has
         none."""

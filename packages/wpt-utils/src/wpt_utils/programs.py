@@ -8,7 +8,7 @@ command. code() is the one place that reads the repository commit: what
 a run's record and a model's provenance name as the code that made
 something, the commit of the checkout the code runs from and a hash of
 its uncommitted changes. code_name() gives it as one line, which a stored
-result of the data pipeline keeps beside its ref as what made it.
+result of the data pipeline keeps in its first line as what made it.
 repository() gives the commit, and whether there are changes, in the shape
 provenance.json and each run's record name them.
 """

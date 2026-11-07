@@ -15,7 +15,7 @@ also when it fails. The held-out runs are listed once; batches of training
 documents are searched in worker processes (workers.py), as many at once as
 wpt_utils.parallel allows, and reach them with their tokens.
 
-The report is saved as an object under the ref REPORT/<dataset id>, and a
+The report is saved as the result REPORT/<dataset id> of the store, and a
 run on a dataset with a report prints that report and checks nothing. A
 report inside the dataset's own record, under "contamination", counts as
 saved too: such a record comes from a build that ran the check itself, over
@@ -29,8 +29,9 @@ from pathlib import Path
 
 import numpy as np
 
+from wpt_store import find_dataset
 from wpt_store.shards import documents
-from wpt_telemetry import Telemetry, set_ref, short
+from wpt_telemetry import Telemetry, set_result, short
 from wpt_utils.parallel import each
 
 from . import reading, workers
@@ -40,13 +41,13 @@ from .repo import Repo
 
 NGRAM = 13  # runs of 13 words, as in the GPT-3 paper
 BATCH_TOKENS = 1 << 22  # tokens of the training documents one worker checks in one call (a longer document alone)
-REPORT = "dataset-contamination"  # the kind of the ref, named by the dataset id, of a dataset's report
+REPORT = "dataset-contamination"  # the stage of a dataset's report, which its dataset id names
 
 
 def run(repo: Repo, dataset_id: str, store, arguments) -> dict:
     """`wpt dataset contamination`: the dataset's saved report, or else its
     check, saved; prints it either way, recorded in the store
-    (wpt_telemetry: records/<UTC>-wpt-dataset-contamination-<id>-.../).
+    (wpt_telemetry: <id>/runs/<UTC>-wpt-dataset-contamination-<dataset>-.../).
     Returns the report. Overlap is a finding and raises nothing. NotFound
     for a dataset the store does not hold, DatasetError for a record of
     another shape, RecordError when the record cannot be written."""
@@ -59,9 +60,8 @@ def run(repo: Repo, dataset_id: str, store, arguments) -> dict:
         else:
             report = _checked(repo, store, record, telemetry)
             with telemetry.span("contamination.report"):
-                written = store.put_bytes(json.dumps(report, indent=2).encode() + b"\n")
-                telemetry.output(contamination=written)
-                set_ref(store, REPORT, dataset_id, written, telemetry)
+                telemetry.output(contamination=set_result(store, REPORT, dataset_id,
+                                                          json.dumps(report, indent=2).encode() + b"\n", telemetry))
         for line in summary(report):
             telemetry.log(line)
     return report
@@ -69,8 +69,8 @@ def run(repo: Repo, dataset_id: str, store, arguments) -> dict:
 
 def saved(store, record: dict) -> dict | None:
     """The report saved for the dataset of this record; None when it has none."""
-    known = store.get_ref(REPORT, record["id"])
-    return record.get("contamination") if known is None else json.loads(store.get_bytes(known))
+    known, _ = store.get_result(REPORT, record["id"])
+    return record.get("contamination") if known is None else json.loads(known)
 
 
 def summary(report: dict) -> list[str]:
@@ -82,10 +82,10 @@ def summary(report: dict) -> list[str]:
 
 def _record(store, dataset_id: str) -> dict:
     """The record of a dataset the store holds, of the shape this code reads."""
-    known = store.get_ref("datasets", dataset_id)
+    known = find_dataset(store, dataset_id)
     if known is None:
-        raise NotFound(f"no dataset {dataset_id} in {store}")
-    record = json.loads(store.get_bytes(known))
+        raise NotFound(f"no dataset {dataset_id} in session {store.session} of {store}")
+    _, record = known
     if not current_record(record):
         raise DatasetError(f"dataset {dataset_id} has a record of another shape than this code reads; build its "
                            "recipe again")

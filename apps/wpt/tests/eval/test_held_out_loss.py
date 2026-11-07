@@ -4,10 +4,12 @@ kind of text --kind-by names; and the model's losses as the gpu worker
 computes them."""
 
 import importlib.util
+from dataclasses import asdict
 from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
+
 import pytest
 import torch
 
@@ -49,11 +51,11 @@ def test_each_held_out_token_counts_once_toward_its_source_and_its_kind_of_text(
     held_out = {"gutenberg-1-aaaaaaaa/a.txt": [7, 9, 11, 13, 15, 17, 19, END],
                 "github-x-bbbbbbbb/main.py": [100, 200, END],
                 "gutenberg-2-cccccccc/b.txt": [3, 4, 5, 6, END]}
-    store = open_store((tmp_path / "store").as_uri())
+    store = open_store((tmp_path / "store").as_uri()).at("test-session")
     path = tmp_path / "held.parquet"
     digest = write_shard(path, [(np.asarray(tokens, dtype="<u4"), document.split("/")[0], document, "all", 0)
                                 for document, tokens in held_out.items()])
-    provenance = {"shards": [], "held_out_shards": [{"object": store.put_file(path), "token_sha256": digest}]}
+    provenance = {"shards": [], "held_out_shards": [{**asdict(store.put_named(f"test-session/datasets/d/{digest}.parquet", path)), "token_sha256": digest}]}
     model = TokenLoss(block_size=4)
     context = Context(tmp_path, model, None, "cpu", provenance, store, kind_by="origin")
     monkeypatch.chdir(ROOT)
@@ -74,11 +76,11 @@ def test_each_held_out_token_counts_once_toward_its_source_and_its_kind_of_text(
 
 
 def test_without_a_field_only_the_whole_held_out_loss_and_each_source_s_are_given(tmp_path):
-    store = open_store((tmp_path / "store").as_uri())
+    store = open_store((tmp_path / "store").as_uri()).at("test-session")
     path = tmp_path / "held.parquet"
     digest = write_shard(path, [(np.asarray([5, 6, END], dtype="<u4"), "gutenberg-1-aaaaaaaa",
                                  "gutenberg-1-aaaaaaaa/a.txt", "all", 0)])
-    provenance = {"shards": [], "held_out_shards": [{"object": store.put_file(path), "token_sha256": digest}]}
+    provenance = {"shards": [], "held_out_shards": [{**asdict(store.put_named(f"test-session/datasets/d/{digest}.parquet", path)), "token_sha256": digest}]}
     result = held_out_loss().run(Context(tmp_path, TokenLoss(8), None, "cpu", provenance, store))
     assert result.data["by_kind"] is None and result.data["kind_by"] is None
     assert result.data["by_source"] == {"gutenberg-1-aaaaaaaa": {"documents": 1, "tokens": 3,

@@ -109,11 +109,11 @@ def download(source, store, positions, vocabulary, cache, folder, telemetry) -> 
     """Copy into folder what a read of a source's chosen files (read_tokens
     of that vocabulary, or read_markdown without one) will ask for, in a
     worker process: its statements, and each chosen file that no pack holds
-    and that lies in a bundle, unless the read's tokens are known. The bytes
+    and that lies in a tar, unless the read's tokens are known. The bytes
     of those files."""
     copies = _Copies(store.copies_in(folder))
     tree, _, paths, key = reading.opened(source, copies, positions, telemetry)
-    if vocabulary is not None and store.get_ref("source-tokens", reading.tokens_ref(key, vocabulary, paths)):
+    if vocabulary is not None and store.has_result("source-tokens", reading.tokens_fingerprint(key, vocabulary, paths)):
         return 0
     packed = frozenset().union(*(pack.files for pack in reading.packs(Path(cache) / key)))
     places = [tree[path].placed for path in paths if path not in packed and tree[path].placed is not None]

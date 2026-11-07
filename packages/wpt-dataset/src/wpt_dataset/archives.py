@@ -33,9 +33,9 @@ way when it has a validator, and the tar starts over at each cut.
 Each member goes to the extractor as it is read, whole in memory, as from
 a file (manifest.read_tar_members, manifest.read_zip_members), so the tree and
 its manifest are the ones a copy on the disk gives. Whatever
-the store the extractor stores into (download.Bundled: the session's
-bundles) is given a member keeps it; a try that fails leaves no entry in
-the tree (Extractor.trying), and is tried again as retry.call says.
+the store the extractor stores into (wpt_store.Packing: the source's tar)
+is given a member keeps it; a try that fails leaves no entry in the tree
+(Extractor.trying), and is tried again as retry.call says.
 
 Failures: what urllib raises (a URLError for an answer that is not 2xx,
 an OSError for a cut connection), Disagreed (a ConnectionError) for a

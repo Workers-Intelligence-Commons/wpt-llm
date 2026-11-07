@@ -1,5 +1,5 @@
 """A build's third step: only the chosen files of a source are read, in
-bundle order, and their Markdown is kept so the vocabulary and the tokens
+tar order, and their Markdown is kept so the vocabulary and the tokens
 read it once.
 
 A source's chosen files are read in batches of BATCH_BYTES. A batch's small
@@ -23,7 +23,7 @@ frames of about RUN_BYTES each, never more than the batch's own bytes
 ahead of it.
 
 A source of more than PART_BATCHES batches is read in parts (parts_of), each
-a run of whole batches in bundle order, so several workers read and turn it
+a run of whole batches in tar order, so several workers read and turn it
 into tokens at once. The parts follow from the chosen files and their sizes
 alone, never from the machine. A part opens the source's whole final tree, so
 a note in another file reads as it does in one read. A file is never split,
@@ -44,11 +44,11 @@ documents in file path order whatever packs hold them, one open file per
 pack: what a build makes of them never depends on the cache. The Reads of a
 source's parts give theirs in that same order together (documents_of).
 
-A part's tokens are one store object per set of chosen files, kept under the
-ref source-tokens/<that fingerprint, the vocabulary, the files and
+A part's tokens are one store file per set of chosen files, kept under the
+result source-tokens/<that fingerprint, the vocabulary, the files and
 TOKENS_VERSION>, so a build
 of the same recipe finds them without reading a file, and one stopped halfway
-through a source reads only the parts it has no ref for. The object holds a
+through a source reads only the parts it has no result for. The file holds a
 document's tokens where reading reached it; its summary lists the documents in
 file path order.
 """
@@ -65,7 +65,7 @@ from pathlib import Path
 
 import numpy as np
 
-from wpt_telemetry import Telemetry, get_result_ref, set_result_ref
+from wpt_telemetry import Telemetry, get_result, set_result
 from wpt_tokenizer import Tokenizer
 from wpt_utils.programs import code_name
 
@@ -192,7 +192,7 @@ class Part:
 
 
 def parts_of(source, positions: list[int], sizes: list[int]) -> list[Part]:
-    """The Parts of a source's chosen files, in their order (bundle order,
+    """The Parts of a source's chosen files, in their order (tar order,
     so that a frame is fetched by one part), sizes being their bytes: every
     PART_BATCHES batches, after a part that saves the source's `newest`
     indexes when there are several (see the module's docstring). That part
@@ -227,7 +227,7 @@ def documents_of(reads):
 @dataclass(frozen=True)
 class Read:
     """A source's chosen files, read."""
-    tree: str  # its final tree's manifest object
+    tree: str  # its final tree's manifest
     files: frozenset[str]  # the chosen files it kept
     packs: tuple[Pack, ...]  # the packs that hold their documents
     check: dict  # its check result, as a dataset's record keeps it
@@ -311,18 +311,20 @@ def save_newest(source, store, positions, telemetry) -> None:
         markdown.save_newest(source, held.tree, copies, paths, telemetry)
 
 
-_TOKENIZERS = {}  # in a worker process: each vocabulary object it read, as a Tokenizer
+_TOKENIZERS = {}  # in a worker process: each vocabulary file it read, as a Tokenizer, by the file's sha256
 
 
-def tokenizer_of(vocabulary: str, store) -> Tokenizer:
-    """The Tokenizer of a vocabulary object, read once per worker process."""
-    if vocabulary not in _TOKENIZERS:
-        _TOKENIZERS[vocabulary] = Tokenizer.from_bytes(store.get_bytes(vocabulary))
-    return _TOKENIZERS[vocabulary]
+def tokenizer_of(vocabulary, store) -> Tokenizer:
+    """The Tokenizer of a vocabulary file (its sha256, or a record's
+    reference to it), read once per worker process."""
+    sha = vocabulary["sha256"] if isinstance(vocabulary, dict) else vocabulary
+    if sha not in _TOKENIZERS:
+        _TOKENIZERS[sha] = Tokenizer.from_bytes(store.get_bytes(vocabulary))
+    return _TOKENIZERS[sha]
 
 
-def tokens_ref(key: str, vocabulary: str, paths: list[str]) -> str:
-    """The name of the source-tokens ref of the chosen paths, key being
+def tokens_fingerprint(key: str, vocabulary: str, paths: list[str]) -> str:
+    """The name of the source-tokens result of the chosen paths, key being
     their conversion's fingerprint (opened)."""
     return fingerprint({"kind": "source-tokens", "version": TOKENS_VERSION, "markdown": key,
                         "vocabulary": vocabulary, "files": sorted(paths)})
@@ -330,22 +332,21 @@ def tokens_ref(key: str, vocabulary: str, paths: list[str]) -> str:
 
 def read_tokens(source, store, positions, vocabulary: str, cache, telemetry) -> dict:
     """A source's chosen files, or a part's, as tokens, in a worker process:
-    {"tree": its final manifest object, "tokens": one object holding every
+    {"tree": its final manifest, "tokens": one file holding every
     document's tokens (each ending with END) one after the other, "documents":
     [{path, file, sha256 of its Markdown, start (byte offset), tokens,
     token_sha256, record}] in file path order, "check": its check result},
     its files and records left out as kept.py decides. Each lot of documents
     becomes tokens as soon as it is read, so the next batch is fetched
-    meanwhile. Found under its ref when it is known. The ref is
-    recorded before it is set (wpt_telemetry.set_result_ref)."""
+    meanwhile. Found as a result of the store when it is known."""
     telemetry = telemetry or Telemetry.off()
     tokenizer = tokenizer_of(vocabulary, store)
     with tempfile.TemporaryDirectory(prefix="wpt-read-") as tmp:
         copies = store.copies_in(Path(tmp) / "copies")
         tree, held, paths, key = opened(source, copies, positions, telemetry)
-        ref = tokens_ref(key, vocabulary, paths)
-        if known := get_result_ref(store, "source-tokens", ref, telemetry):
-            return json.loads(store.get_bytes(known))
+        ref = tokens_fingerprint(key, vocabulary, paths)
+        if (known := get_result(store, "source-tokens", ref, telemetry)) is not None:
+            return json.loads(known)
         documents = []
         with open(Path(tmp) / "tokens.u32", "wb") as out:
             def encoded(found):
@@ -359,6 +360,5 @@ def read_tokens(source, store, positions, vocabulary: str, cache, telemetry) -> 
         documents.sort(key=lambda entry: entry["file"].encode())  # stable: a records file's stay in the file's order
         summary = {"tree": read.tree, "tokens": copies.put_file(Path(tmp) / "tokens.u32"), "documents": documents,
                    "check": read.check}
-    known = store.put_bytes(json.dumps(summary, ensure_ascii=False, sort_keys=True).encode())
-    set_result_ref(store, "source-tokens", ref, known, telemetry)
+    set_result(store, "source-tokens", ref, json.dumps(summary, ensure_ascii=False, sort_keys=True).encode(), telemetry)
     return summary

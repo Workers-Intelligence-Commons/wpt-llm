@@ -136,7 +136,7 @@ class Revisions:
                           if isinstance(value, str) and COMMIT.fullmatch(value)}
         rest = set(lacking) - set(self.committed)
         if rest and self._open_store is not None:
-            for state in listing(self._open_store())[0]:
+            for state in sorted(listing(self._open_store())[0], key=lambda state: state.time):
                 commit = (state.got or {}).get("commit")
                 if state.source in rest and isinstance(commit, str) and COMMIT.fullmatch(commit):
                     self.downloaded[state.source] = commit
@@ -464,7 +464,7 @@ def _lock_without_documents(document, _where):
 
 
 def _lock_documents_listed(document, where):
-    """The lock's list of documents becomes one object of the store the step is given (the one WPT_STORE names),
+    """The lock's list of documents becomes one file of the store the step is given (the one WPT_STORE names),
     named in the lock by its sha256 and counted."""
     store = where.store()
     documents_sha256, count = trained.put_pairs(store, document["documents"])

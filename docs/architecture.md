@@ -50,8 +50,8 @@ schedule and no machine stays on for it:
 - A person adds a source, or moves an address to a newer version, by
   editing `source.json` (the "Sources" page of `wpt web`, `wpt dataset save
   source`), or with a script kept outside the repository.
-- A person marks sources for a new download to get fresh content
-  (`wpt store mark`).
+- A person downloads into a new session to get fresh content
+  ([The store](#the-store)).
 - A person reads a build's report and adds the license entry or the
   non-text path it names, or runs the task builder again
   ([training.md](training.md), "The task builder").
@@ -71,7 +71,7 @@ calls the same services.
 | --- | --- | --- |
 | service layer | the only code that reads or writes `data/` ([The service layer](#the-service-layer)) | `repo.py` |
 | protocols | turn an address into files; each owns its network effects and its named failures | `protocols/`, with the helpers `robots.py`, `retry.py`, `sites.py` and `lfs.py` |
-| download | decides which sources to fetch, asks their protocol, writes files and session lines into the store; never judges licenses | `download.py` |
+| download | decides which sources to fetch, asks their protocol, writes each source's file and record into a session of the store; never judges licenses | `download.py` |
 | license check | changes nothing: given a source's entries, its files or records and the license texts, it answers which entry covers each file or record, and for each entry whether the statement at its place matches a text it expects, which one, and that text's decision | `license_check.py` |
 | shared checks | change nothing; defined once and used by every command that applies them | `checks.py`, `erasure.py` |
 | build | asks the store for bytes, the shared checks and the license check; decides what is left out; writes its results to the store; never contacts upstream | `build.py`, `kept.py` |
@@ -263,8 +263,8 @@ path:
 `100644` is a file, `100755` an executable file, `120000` a symlink (its
 sha256 is that of the target text). Empty folders do not appear. The
 manifest is a plain hex digest, and it has that name and that form
-everywhere it appears: the session lines, a dataset's record, the
-conversations' and tasks' records, a task's repository pointer, and a
+everywhere it appears: a source's record in the store, a dataset's
+record, the conversations' and tasks' records, a task's repository pointer, and a
 model's `NOTICE` and card, which name each source by the manifest of the
 upstream tree it was built from.
 `wpt dataset manifest <id>` downloads a source as `download` does (or
@@ -452,9 +452,9 @@ The Markdown of a source with a records entry under `newest` holds
 Markdown.
 
 Each stored result says which code made it (`wpt_utils.programs.code_name`: the
-commit, and a hash of the uncommitted changes when there are some). The ref of a
-result holds it after the object's sha256 (`wpt_telemetry.set_result_ref`), so
-finding the ref says it at no further read; a pack of Markdown holds it in the
+commit, and a hash of the uncommitted changes when there are some). The first
+line of a result holds it after the result's sha256 (`wpt_telemetry.set_result`),
+so finding the result says it at no further read; a pack of Markdown holds it in the
 file that describes the pack, and a dataset's record in its `tools`. A build
 that reuses results another commit made prints one warning per stage, with how
 many came from which commit, and carries on: it is a person's call whether that
@@ -481,57 +481,81 @@ of `data/images/`. That check also runs on every build, so it is no part
 of any fingerprint. A commit that changes only `data/` therefore converts
 and tokenizes again only the sources whose own inputs changed.
 
-The store keeps downloads across commits. Code installed as packages,
+A session keeps its downloads across commits. Code installed as packages,
 outside a git checkout, is identified by a sha256 of the installed
 `wpt-*` packages' files instead in `code`.
 
 | Result | Fingerprint covers |
 | --- | --- |
-| upstream tree (what the download stored) | the source's id and what its download reads: its `type`, `address`, `addresses`, `revision`, `extract`, `history`, `submodules`, and the outside license pages its entries declare |
+| upstream tree (what the download stored; the source's record holds this fingerprint, which tells one download from another) | the source's id and what its download reads: its `type`, `address`, `addresses`, `revision`, `extract`, `history`, `submodules`, and the outside license pages its entries declare |
 | final source tree (and the check that its files are text) | the upstream tree's manifest, the license pages stored with it, cuts (and the cut key), each patch's sha256, the formats (they decide each file's encoding), `TREE_VERSION`; its text check the tree, the formats and `NOT_TEXT_VERSION` |
-| what a source gives the index | the source's id and its whole `source.json`, the fingerprint of its final tree, its upstream file list (which says where each file lies, and which a new download of the same files may change), `INDEX_VERSION` |
+| what a source gives the index | the source's id and its whole `source.json`, the fingerprint of its final tree, the sha256 of its tar (which alone says where each file lies, and which a new download of the same files may change), `INDEX_VERSION` |
 | what a source keeps for training, and its check result | the final tree, the license entries (with their decisions), the formats, the license check's answer (for each entry, the license text found at its place and that text's decision), `KEPT_VERSION`, `NOT_TEXT_VERSION` |
 | the Markdown of a source's chosen files (on this machine) | the fingerprint of what the source keeps for training, `MARKDOWN_VERSION`, the source's `type`, and `NEWEST_VERSION` for a source with a records entry under `newest` |
 | a part of a source's tokens | that Markdown's fingerprint, `TOKENS_VERSION`, the vocabulary, the paths of the part's chosen files |
 | vocabulary | `VOCABULARY_VERSION`, the tokenizer recipe (with its `version`), the sha256 of the list of the documents it is trained on (id and sha256 of their Markdown); frozen by the recipe's lock until `version` is raised ([tokenizer.md](tokenizer.md)) |
-| dataset | `DATASET_VERSION`, `TOKENS_VERSION`, the model recipe's data part, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, the manifest of its upstream tree, its final tree, licenses (with attribution) and check result, the sources skipped (each failing source: by its id and the kind of its error), and the objects of its conversations and tasks |
+| dataset | `DATASET_VERSION`, `TOKENS_VERSION`, the model recipe's data part, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, the manifest of its upstream tree, its final tree, licenses (with attribution) and check result, the sources skipped (each failing source: by its id and the kind of its error), and the files of its conversations and tasks |
 | training step's result | the fingerprint of the step before it, the step (its files, method, environment, optimizer, settings and locked parts), the fingerprint of the dataset part it reads (`text`, `conversations` or `tasks`, in the record's `fingerprints`), the recipe's seed and the code; no hardware option ([training.md](training.md), "Step results and reuse") |
 
-So "already done" is a lookup for the same data and versions: nothing is
-applied twice. A dataset whose record lacks a field the build writes is
+So "already done" is a lookup for the same data and versions in the store's
+`cache/`, which every session shares: nothing is applied twice. A dataset whose record lacks a field the build writes is
 built again.
 
-Beside the dataset's record (the ref `datasets/<id>`), the build keeps the
-dataset's document list under the ref `dataset-documents/<id>`: one JSON
+A build reads the session it is given, and the one that session started
+from, and writes the dataset under the session: `<id>/datasets/<name>/`
+holds the dataset whole. The name is the recipe's, or `series-<series>` for
+a size of a series, a hyphen, and the first 8 hex characters of the dataset
+id. A build with other content writes another complete folder; the same
+content finds the folder it was written in, by its id, and builds nothing;
+the record's `names` then gains the recipe or series that asked, so
+`wpt train` without a dataset reads the latest build of each of them.
+The folder holds `dataset.json`, the dataset's record, written last, so a
+build that fails leaves no dataset; its shards, each named by its token hash;
+its vocabulary; its document list; the credits of its sources
+(`credits/<source>.jsonl`); and its conversations and tasks
+(`conversations.jsonl`, `tasks.jsonl`, each only when the sources hold
+some). The record names each of these files, shards included, by one shape,
+`{"key", "sha256"}`: the file's key in the store and the sha256 every read
+checks. Each build stamps the record with its time, the same content found
+again included, and the dataset `wpt train` reads when it is given no
+dataset id is the latest build for the recipe or series (the record's
+`name`), the session's own before the one it started from, found through the
+store's index. A dataset found in the session it started from stays where it
+lies; one found in the session itself has its record written again, with the
+time and the downloads its sources have now.
+
+Beside the dataset's record, the build keeps the dataset's document list in
+the dataset's folder: one JSON
 line per document, in the build's order, with its `id`, the `sha256` of its
 Markdown (the one the dataset fingerprint reads) and its `tag`, `training`
 or `held-out`, from the same split its shards are cut by. A new build
-writes the list before the record's ref, so a dataset is never there
+writes the list before the record, so a dataset is never there
 without it. The task reader takes the held-out texts from it
 ([data-selection.md](data-selection.md), "Held-out text and
 contamination").
 
 A build works in three steps, and only the last reads text:
 
-1. Index. The store's records already say each downloaded file's bundle,
+1. Index. The sources' records already say each downloaded file's tar,
    position, size and sha256, and each source's formats, licenses and tags.
    The index holds every file that can give a document, from those records
    alone. Files with the same sha256 are one document: the index keeps the
-   first in source id order. What each source gives is kept under the ref
-   `source-index/<fingerprint>`, so a build computes only the sources whose
+   first in source id order. What each source gives is kept as the result
+   `cache/source-index/<fingerprint>`, so a build computes only the sources whose
    inputs changed. A source that fails keeps nothing: every build computes it
    again and lists it.
 2. Choose. The recipe's mixture draws its documents from the index, by
    bytes, in a seeded order of its own for each pool. The unit of the draw is
    a frame: the files of a pool that start in the same 1 MiB frame of the
-   same bundle are one group, in bundle order, and a file stored on its own
+   same source's tar are one group, in tar order, and a file stored on its own
    is a group of its own. The seed of a group is fixed by the pool's name and
-   the group's own name (the bundle's name and the frame number, or the
-   file's sha256), never a position in the index, so a source added later
+   the group's own name (the source's id and the frame number, or the
+   file's sha256), never a position in the index or a session ID, so a source
+   added later, or the same files in another session,
    moves no group before another. A build thus fetches about the bytes it
    chooses, where a draw of single files would touch nearly every frame of a
    pool of small files.
-3. Read. Only the chosen files are read, source after source in bundle
+3. Read. Only the chosen files are read, source after source in tar
    order. A source's small files are fetched together, in requests of the
    frames next to each other, and each request's frames leave memory once
    its files are copied. Their Markdown is kept in packs, compressed files
@@ -556,12 +580,13 @@ file its conversion needs as a file (a Parquet records file, a message
 tree, a file its patches change) is copied from the store into a temporary
 folder on this machine, deleted once the source is read; every other file
 is read from the store by range, so a conversion never opens a file of the
-store itself. The store keeps one token object per part of a source and
-round (every document's tokens, one after the other), its final manifest and
-a summary, under a ref named after the Markdown's fingerprint, the vocabulary
+store itself. The store keeps one token file per part of a source and
+round (every document's tokens, one after the other), and the result
+`cache/source-tokens/<fingerprint>` holds its final manifest and a summary,
+the fingerprint covering the Markdown's fingerprint, the vocabulary
 and the part's chosen paths; a part whose inputs did not change is never read
 again, so a build stopped halfway through a source reads only the parts not
-yet saved. The shard stage copies every token object its rows lie in to this
+yet saved. The shard stage copies every token file its rows lie in to this
 machine first, several at once (the copy counts its disk as `wpt_utils.parallel`
 does), writes the training and held-out shards from the copies, and removes
 the copies afterwards, also when the stage fails; the shards are the same as
@@ -571,13 +596,13 @@ if each row were read by range from the store.
 shards, one at a time, each copied to a temporary folder and removed once
 read, also when the command fails. The training documents are searched in
 worker processes, as many at once as `wpt_utils.parallel` allows. Its report
-goes under the ref `dataset-contamination/<id>`
+is the result `cache/dataset-contamination/<id>`
 ([data-selection.md](data-selection.md), "Held-out text and contamination").
 
 `--plan` on `build` and `build-tokenizer` stops after the first choice and
 prints what the build would read and compute: each pool's documents and
 bytes, whether a vocabulary would be trained, and the files, bytes, sources
-and bundles to read.
+and tars to read.
 
 The build reads sources and their conversations and tasks in worker
 processes, several at once, as many as `wpt_utils.parallel` allows. Each
@@ -589,7 +614,7 @@ conversations and tasks do not depend on the choice: every indexed source
 that holds some is read.
 
 A source of more than four batches of chosen files (1 GiB) is read in parts,
-each four batches in bundle order, by several workers at once. The size of a
+each four batches in tar order, by several workers at once. The size of a
 part is a constant of the code, so the parts are the same on every machine.
 The build takes a source once all its parts are read: its documents, its
 check result and its failure are those of one read, and a part that fails
@@ -598,7 +623,8 @@ before it are, so the source's error is the first in part order, whichever
 part failed first in time. A file is never split.
 
 The index of a records entry under `newest` reads every file the entry covers,
-so it is saved in the store under a ref of its own, named after the entry, the
+so it is saved as a result of its own, `cache/newest-index/<fingerprint>`, the
+fingerprint covering the entry, the
 files it covers and its version, and any later read, build or round loads it. A
 source with such an entry read in parts starts with one more item in the same
 workers, which saves the index while other sources are read. Its other parts
@@ -630,82 +656,80 @@ store the files are local already, and no downloader runs.
 Only `wpt dataset download`, `check --fetch` (before its other checks) and
 `manifest` download sources, through one piece of code
 (`wpt_dataset/download.py`). Every other command, the build included, reads
-the upstream files from the store, and a source that is not there fails
+the upstream files from its session, and a source that is not there fails
 with `NotDownloaded`, naming the command that fetches it. An `empty`
 source has no upstream and needs no download.
 
-A source is downloaded when, and only when:
+A download works in the session it is given ([The store](#the-store)). Given
+none, it makes a new short ID and prints it.
 
-- the store does not hold it. The store names a source's upstream tree by
-  its id and everything its download reads (its `type`, addresses,
-  `revision`, `extract`, `history.since`, `submodules` and the outside
-  license pages its entries declare), so a new source, an address that
-  changed, a revision moved to another commit and changed fetch options
-  all find nothing held; a changed license page
-  downloads the whole source again, so the tree and its pages come from
-  the same moment;
-- or it is marked in the store database for a new download, after its
-  last download (`wpt store mark ID ...`, or `--all` for every source): a
-  person's way to ask for fresh content. A marked git source downloads
-  the same commit again: only a new `revision` brings a later one.
+A source is downloaded when, and only when, neither the session nor the one
+it started from (`--from`) holds it: the source has no record in either, its
+record holds an error, or its record names another download. A record names a download by the source's id and
+everything its download reads (its `type`, addresses, `revision`, `extract`,
+`history.since`, `submodules` and the outside license pages its entries
+declare), so a new source, an address that changed, a revision moved to
+another commit and changed fetch options all find nothing held. A changed
+license page downloads the whole source again, so the tree and its pages
+come from the same moment. A rerun, or one new source, therefore costs only
+what the session lacks.
 
-Nothing else triggers it: no question to upstream about changes, no server
-hint (length, date, ETag). A stale store is accepted.
+Downloading a source again in the same session replaces its file. A redo is
+a new session, which fetches every source again and leaves the old session
+as it is. A git source gets the same commit again: only a new `revision`
+brings a later one. With `--from OLD_ID`, a source the old session holds
+with the same address, revision and fetch options is not fetched, as one
+the session itself holds is not, and a build, `check --fetch` and `manifest`
+read it from the old session's files; the download fetches the rest, and
+what it writes stays in its own session and names that ID.
 
-For each source to download, every license page its entries declare is
-fetched first, through the HTTP protocol. Then each address is fetched in
-turn (the main one, then each mirror) through the source's protocol, into
-a staging folder on the machine (an `http` source straight into the
-bundles, below). The first address that gives its files is kept: its files
-and the license pages go into the session's bundles, each content once,
-and once the bundles holding them are stored, the refs
-`upstream-pages/<key>` (the pages), `upstream-files/<key>` (the file
-list) and `upstream/<key>` (the tree's paths, modes and sha256s, stored
-under its manifest) name them, the last one last.
+Nothing else triggers a download: no question to upstream about changes, no
+server hint (length, date, ETag). A stale session is accepted.
+
+Every source follows one path, git sources included. For each source to
+download, every license page its entries declare is fetched first, through
+the HTTP protocol, into a folder on the machine. Then each address is
+fetched in turn (the main one, then each mirror) through the source's
+protocol, its files going into the source's tar as they are read. The first
+address that gives its files is kept: the license pages join its files in
+the tar, under `.wpt-license-pages/`, and the tar and then the source's
+record go into the session.
 An upstream checksum, where a protocol has one (LFS gives each file's
-sha256), only checks that the bytes arrived intact. A failed download
-stores nothing for that source: no ref names what it fetched, and the
-store keeps what it held before. A tree's files that a patch leaves as
-they were keep where they lie.
+sha256), only checks that the bytes arrived intact. A failed download keeps
+any file the session held for that source, and the source's record gains the
+`error`, with each address's failure, beside the facts of that file. A source
+whose record holds an error is not held: the next download fetches it. A
+build reads the good file such a record still names when it is the file of
+the download the source's description asks for now, and the dataset record
+notes that the source's last attempt failed (`downloads`, `failed`); a
+source with no good file is left out and listed.
 
 Each download works in a temporary folder of its own,
 `wpt-download-<random>` in the system's temporary folder, beside a lock
 file the process holds while the download runs; the download removes
 both when it ends, whatever its outcome. A process stopped by a signal or
-a crash leaves them, and every new session on the machine removes each
+a crash leaves them, and every new download run on the machine removes each
 such folder whose lock it can take, never one a live process holds. A
 folder whose lock file or files it cannot open or remove, such as another
-user's, stays, and the session goes on.
+user's, stays, and the run goes on.
 
 A git source fetches the commit its `revision` names, and only that
 commit. A server that serves only branch and tag tips is asked for those,
 and the commit must be among what they hold; an address that does not
 serve the commit fails with `FetchFailed`, naming it.
 
-A git source asks its server only for the files the store does not hold
-already: the store database maps each git object id it has stored to that
-file's sha256 and place, for every source alike, so a revision moved to
-another commit fetches only the files that changed. It learns which
-files those are from a first fetch of the commit without file contents,
-and asks for them by id. When the map lacks half or more of the files
-the source keeps, as on a first download, a second fetch brings the
-commit, and its history when the source has one, with every content
-instead, because git spends some twenty times more per file on a request
-by id. That fetch also brings files the source does not keep and versions
-older than `history.since`; they are deleted with the download's
-temporary folder and never stored. A server that cannot send every
-content fails that fetch, and the files the source keeps are then asked
-for by id. The map gives a
-session only places in its own bundles or in bundles of sessions that
-have ended, which are never rewritten or deleted, so no session's end
-deletes a bundle another session's file list names. A session reads the
-map from the copy of the store database it reads once, on the machine's
-disk, and writes into that copy the git objects of each source it
-downloads, so it finds them again without holding them in memory.
+A first fetch of the commit, without file contents, says which files the
+source keeps. A second fetch then brings the commit, and its history when the
+source has one, with every content, because git spends some twenty times
+more per file on a request by id. That fetch also brings files the source
+does not keep and versions older than `history.since`; they are deleted with
+the download's temporary folder and never stored. A server that cannot send
+every content fails that fetch, and the files the source keeps are then
+asked for by id.
 
 An archive of an `http` source is read while it downloads
-(`wpt_dataset/archives.py`): each member goes straight into the session's
-bundles as it is read, with no copy of the archive on the disk, and its
+(`wpt_dataset/archives.py`): each member goes straight into the source's
+tar as it is read, with no copy of the archive on the disk, and its
 sha256 comes from the bytes read, so its manifest is the one a copy on the
 disk gives. The store keeps the members, never the archive. A zip, whose
 table of contents is at its end, is read through range requests when its
@@ -715,32 +739,36 @@ file instead, or gives no size, has the zip saved to a file on the disk
 first. A tar is read as it arrives. A hard link to a member the source
 leaves out makes it read the archive a second time as it arrives, holding
 in memory the members such links need, since their content went by
-unread. One fetch puts each content in the bundles once, however many
+unread. One fetch puts each content in the source's tar once, however many
 times it reads the archive. An answer that ends before its announced size
 is a cut connection. A tar whose server gives its size, a validator (`ETag`,
 else `Last-Modified`) and `Accept-Ranges: bytes` continues from the byte
 reached through a range request tied to that version; a cut that came after
 new bytes uses up no try, and any answer but those bytes (the file changed)
 starts the try over. Any other archive is tried again like any other
-download. When the download fails,
-the members read stay in the bundles, in no file list.
+download. When the download fails, the unfinished tar is removed.
 
-Each run of these commands is a session: its record in the store
-([observability.md](observability.md)), and one line in the store
-database per source, `downloaded` or `reused` (found in the store), and
-one `failed` line per address or license page that failed. A
-`downloaded` line records what the download got, for the record only (the
-commit, for example); nothing decides on it. A failure that is not the
-address's (the store's, a missing program, an interrupted run) gets no
-line. With `download --stream` (or `WPT_STREAM=1`), the downloading
-machine keeps no copy of the bundles once the store holds them; without
+Each run of these commands leaves its run record in the session
+([observability.md](observability.md)), and the source's record says what
+happened to the source: when, the address used, the size, what the download
+got, for the record only (the commit, for example), and the addresses that
+failed first, or the error. Nothing decides on what the download got. A
+failure that is not the source's (the store's, a missing program, an
+interrupted run) changes no record.
+
+With `download --stream` (or `WPT_STREAM=1`), the downloading
+machine keeps no copy of a tar once the store holds it; without
 it, an S3 store keeps a copy in its local cache folder and reads it first.
-`wpt store list` lists what the database says, from the database alone:
-each source's last outcome, whether it is marked, and its last download's
-time, what it got, address, repository commit and size; then every
-session, in the order they started. A build is a session too, with no
-bundle: one `reused` line for each source it read. No other reading
-command opens a session.
+
+`wpt store list` lists what the store's index says of every session, or,
+given an ID, of that session and the one it started from, from the index
+alone: how many things of each kind each holds, then each of its sources with
+its time, its error or the address used, its size and what it got. With no
+ID it is how a person finds one.
+
+`wpt store rebuild-index` makes the index again from the files of every
+session, without reading the stored index, so it also replaces a damaged one.
+It needs no session.
 
 Several sources download at once: as many as `wpt_utils.parallel` allows,
 and at most, from one site (the host of the source's address, and the
@@ -755,15 +783,16 @@ kinds. Requests sent by git or Mercurial themselves are not counted. The
 results come in the order of the sources, whatever ran at once.
 
 A dataset's record names, for each source, the session and time of the
-download that kept the files it used (`downloads`), from the store
-database. It is not part of the dataset id, so the same files downloaded
+download that kept the files it used (`downloads`), from the source's
+record. It is not part of the dataset id, so the same files downloaded
 again give the same dataset.
 
 ### The build
 
-`wpt dataset build` turns the bytes in the store into a dataset
-(`wpt_dataset/build.py`) and never contacts upstream. For each admitted
-source, several at once:
+`wpt dataset build` turns the bytes of a session into a dataset
+(`wpt_dataset/build.py`) and never contacts upstream. A source the session
+does not hold, or whose download failed, is left out and listed. For each
+other admitted source, several at once:
 
 1. Its final tree: the upstream tree, then its erasure cuts, then its
    patches. A cut or a patch that does not apply takes the whole source
@@ -791,7 +820,7 @@ Every build runs the license check of every source again; what the
 build keeps of a source is kept in the store under the check's answer and
 its other inputs ("Fingerprints and the store"). What every build reads
 again is fast by design: the download stores an
-archive's members one by one, so the build never unpacks an archive;
+archive's members as files of the source's tar, so the build never unpacks an archive;
 sources are processed
 in parallel, sized by `wpt_utils.parallel`; and a file's format, tags and
 license entry are each found with one matcher compiled over all of a
@@ -816,6 +845,8 @@ layer), so they cannot disagree. None changes anything.
 - **Cut match** (`erasure.py`): every run of a cut's length in its file
   whose keyed hashes are the cut's ([erasure.md](erasure.md)).
 
+### The store
+
 The store is set by one setting, `WPT_STORE`, in the environment or in
 `.env` at the repository root:
 
@@ -830,20 +861,104 @@ settings, in the environment or in `.env`: `WPT_STORE_ACCESS_KEY_ID` and
 `WPT_STORE_ENDPOINT_URL` and `WPT_STORE_REGION` (default `us-east-1`). The
 store reads no `AWS_*` setting (not even `AWS_ENDPOINT_URL` or `AWS_PROFILE`)
 and no AWS configuration or credentials file, so the keys a cloud provider's
-other tools use never reach it. Objects are named by their sha256 and checked on every
-read.
+other tools use never reach it.
 
 The setting's prefix picks the store's kind, a class of `wpt-store`
 (`wpt_store/kinds.py`). A kind supplies five operations on files: write a
 whole file, read a byte range, replace a file only if it is unchanged
-since it was read, list, delete. Everything else (objects, refs,
-compression, bundles, the store database) is built on them, alike for
-every kind.
+since it was read, list, delete. Everything else (the layout, compression,
+the index) is built on them, alike for every kind.
 
-Every object is compressed with zstd while it is written, in frames of
+A store holds real named things, the same on a folder and on a bucket:
+
+```
+index                              each session ID and what it holds
+<id>/sources/<source>.tar.zst      a source's files
+<id>/sources/<source>.json         when, address, size, or the error, and what reading needs
+<id>/datasets/<name>/              dataset.json, the shards and every other file the dataset needs
+<id>/models/<name>/                the model's real files
+<id>/runs/<run>/                   each command's record
+cache/<stage>/<fingerprint>        only what can be rebuilt, shared by every ID
+cut-key                            the secret erasure cuts are matched under
+```
+
+Hashes do two jobs. Every read checks the bytes against their sha256: a
+record names each file it points at by the one shape `{"key", "sha256"}` (the
+file's key in the store and its sha256), a record holds the
+sha256 of its own fields, and a result holds its own in its first line.
+Finished work is found from its inputs: a result lies under its fingerprint
+("Fingerprints and the store"). A file known only by its content, such as a
+token file or the output of a patch, lies in `cache/files/<sha256>`.
+
+`cache/` holds only what can be rebuilt, so emptying it leaves every dataset
+and every model usable: a dataset's files and a model's files, a run's
+checkpoint included, lie in their own folders, and a record never points
+into `cache/` for a file it needs to be read.
+
+#### Sessions
+
+A session is only an ID, one for the whole store: nothing opens it, nothing
+closes it, and it has no status. Files are stored under it, and a record says
+what happened. Every command that touches the store takes it, through
+`--session ID` or `WPT_SESSION`. A download with no ID makes a new short ID
+and prints it. `wpt store list`, `wpt store runs`, `wpt store run` and
+`wpt doctor` work with no ID: with none they show every session of the
+store's index, which is how a person finds an ID, and with one they narrow to
+it (`doctor` runs every check either way, and given an ID counts that
+session's sources in its disk line). `wpt store rebuild-index` needs no ID,
+since it covers the whole store. Every other command that needs a session
+with no ID is refused with `SessionNeeded`. `wpt web` takes the same options
+and hands them to its routes and jobs.
+
+`--from OLD_ID` (or `WPT_FROM`) makes a command read from that session what
+its own does not hold, and write under its own: what it writes records the
+old ID in `from`. No rule protects an ID another one started from.
+
+A build reads the session it is given, and the one that session started
+from. A source that is missing, or failed with no good file of its download
+held, is left out and listed.
+
+#### A source's files
+
+`<source>.tar.zst` is a normal tar, which the `tar` program opens by hand: a
+regular file's bytes follow its header, a symlink is a header naming its
+target, and a content the source holds under several paths is written once,
+the other paths being hard links. Its headers hold no time and no owner, so
+they are the same on any machine. The tar is compressed in zstd frames of
+about 1 MiB, so one file is read alone by range.
+
+`<source>.json` is the source's record. It holds the fingerprint of the
+download, the time, the address, the sizes, the tar's sha256, the tree's
+manifest and what the download got, or the `error`; after a failed attempt
+at a download whose good file the session holds, both: the facts of the good
+file and the `error` of the last attempt. It also lists each file
+with its path, mode, sha256, and position and length in the tar's
+uncompressed bytes, so a reader needs nothing else to take one file.
+
+A file several sources hold is stored again for each.
+
+A source's tar is filled in a file of the store's cache folder named
+`.partial-source-<random>`, beside a lock file its process holds while the
+tar fills; the system releases the lock when the process ends, crash
+included. A download run that starts removes every such file whose lock it
+can take. The tar goes into the store first, then its record: until the
+record is written, the session reads what it held. A local store writes the
+tar to the disk for good (fsync) before the record names it. Should a crash
+fall between the two, the record still names another download or an error:
+the next download fetches the source again, and a read until then refuses the
+bytes against their sha256 (`CorruptFile`).
+
+#### Compression
+
+Every file is compressed with zstd while it is written, in frames of
 about 1 MB compressed apart (zstd's seekable format, which plain zstd
-reads), so a byte range is read without the rest. It is kept compressed
-only when that is smaller, and as it is otherwise. An S3 answer cut while
+reads, its seek table a skippable frame that standard tools pass over), so
+a byte range is read without the rest. It is kept compressed, under its key
+plus `.zst`, only when that is smaller, and as it is otherwise. A source's tar
+is always compressed, at level 19: it is written once and read many times,
+and in 1 MiB frames of text level 19 is about 17% smaller than level 3, reads
+as fast, and the levels above it are no smaller. Every other file takes
+level 3. An S3 answer cut while
 it is read is asked again, up to 5 tries in all. Large files are
 compressed several frames at once, as `wpt_utils.parallel` allows. They
 go to S3 in parts of 64 MB, and every upload of a process sends its parts
@@ -851,14 +966,13 @@ through one shared limit of 32 at once: S3-compatible stores such as R2
 give each connection a few MiB/s, so a link fills only with many
 connections at once, and uploads that run together do not multiply them.
 That limit is set for network work, not by the cores; a part starts only
-while the memory rule of `wpt_utils.parallel` allows. Refs are written as
-they are.
+while the memory rule of `wpt_utils.parallel` allows.
 
 Reads from S3 keep the same many connections busy. A compressed file's
 frames are fetched in blocks of 8 frames, one request each, and a read
 requests the blocks it needs together, at most 8 requests in flight per
 process. When a reader goes through a file in order (a large file, or a
-bundle's files one after another), the blocks after the one it works on
+tar's files one after another), the blocks after the one it works on
 are requested ahead, so its next data arrives while it processes the
 current data. The compressed bytes requested ahead and not yet taken stay
 within 64 MB per process. A request ahead that fails raises at the read
@@ -866,91 +980,47 @@ that takes its block. What a read returns, and so what a build writes,
 does not depend on the timing. A local folder reads in place, one request
 at a time.
 
-A session is one run of one downloading command, named by its run
-record's folder. The files it stores go into its own bundles of about
-4 GB, cut only between files; a larger file gets a bundle of its own.
-Each bundle is compressed as an object is, so one file is read back alone.
-A source's file list names, for each of its files, its bundle, its
-position and its sha256. The store keeps no table of every file it holds:
-a file several sources hold is stored again for each, except the files of
-git sources, which the store database's map of git objects names once.
+#### The index
 
-A session fills each bundle in a file of the store's cache folder named
-`.partial-bundle-<random>`, beside a lock file it holds while the bundle
-fills; the system releases the lock when the process ends, crash
-included. A session that starts removes every such file whose lock it
-can take, the leftovers of a session that stopped. A local store writes
-each bundle to the disk for good (fsync) before the store database names
-it. At its end, a session rewrites every bundle of its own that holds
-bytes no file list names (what a download that failed had read): only
-the named files are
-kept, in a new bundle, the file lists and the map of git objects name the
-new places, and the old bundle is deleted once the store database names
-them. A bundle no file list names at all is deleted.
+`index`, at the store's root, is one compressed SQLite file for fast lookup:
+each session ID and what it holds, a row per source, dataset, model and run,
+with its time and what its record says of it. It says nothing the files do
+not: every row comes from a file of a session, and `wpt_store.index.rebuild`
+makes the index again from the files alone.
 
-The store database, `store.sqlite.zst`, is one compressed SQLite file
-about the store and nothing else. It holds every session (its run record
-folder, command, start, end, repository commit and whether the working
-tree had changes) and its lines (source, what the download got, for the
-record only, address used, time, outcome `downloaded`, `reused` or
-`failed`, size, WPT version), the marks for a new download (a source, or
-every source, and when), and the map of git objects (each git object id,
-the sha256 of its content, its bundle and its place there).
+A source's row reaches the index when its run ends, a dataset's and a
+model's when they are kept. A run that crashed leaves its rows out; the next
+download into its ID puts them in for each source it finds held, and a
+rebuild puts in every one.
 
-A full bundle is handed over with the lines, the git objects and the
-actions (such as setting a source's refs) that came since the previous
-one, and the thread that filled it stores it while the others fill the
-next. Up to four full bundles are stored at once, so their parts keep the
-upload limit busy; a new bundle waits to begin while four are being
-stored, which bounds the cache folder to about five bundles. Once a
-bundle is stored, its handover is recorded, strictly in the order the
-bundles were handed over: its actions run, once every file added before
-them is stored, and its rows go into the session's own file (see below).
-A read of a file of the session waits only for that file's own bundle to
-be stored, never for another bundle or for the store database.
-
-A session puts its rows into the store database at its start, at its
-end, and when a handover is recorded once the bundles recorded since the
-last put hold ten times the bytes the database takes in the store. Each
-put reads and stores the whole database, so its copies stay about a
-tenth of what the session stores, and the database may lag a running
-session by several bundles. A crash loses the lines and the bundles of
-every handover not yet recorded, a stored bundle included when an earlier
-one was still being stored. A bundle that cannot be stored stops its
-session: nothing more is added or recorded, the handovers before it are
-still recorded, and the lines that went with that bundle or a later one
-are not kept. A bundle stored whose handover is never recorded stays in
-the store: the database names none of its files, and nothing removes it.
-
-Every read or change of the store database goes through a copy on the
+Every read or change of the index goes through a copy on the
 disk of the machine that runs it, in the store's cache folder, never
 through one in memory, so only the disk bounds its size. A change is made
 in that copy, and the compressed copy replaces the stored file whole, only
 if it is unchanged since it was read: a conditional upload on S3, a lock
 in a local folder. A copy larger than one part goes up in parts, and the
-request that completes them carries the condition. When another session
+request that completes them carries the condition. When another command
 replaced it meanwhile, it is read again, the change is made again, and the
-replace is tried again.
+replace is tried again. Each local copy lies beside a lock file its process
+holds; one whose lock can be taken belongs to no live process and is removed.
 
-A session's rows go first into its own SQLite file in that cache folder,
-then from it into the store database. Rows are keyed by the session and
-the line's number, so putting them in twice changes nothing. Rows that
-reached the session's file but not the store database (the session
-crashed, or the store refused the replace) stay in the file, and the next
-session that starts on the same machine puts them in. A file is removed
-only once the store database holds its rows. Each of these local files
-lies beside a lock file its process holds; one whose lock can be taken
-belongs to no live process.
+#### What else it keeps
 
 The store also keeps the cut key that erasure cuts are matched under
 ([erasure.md](erasure.md)) and the locked vocabularies
 ([tokenizer.md](tokenizer.md)): a machine without access to the store
-matches no cut and uses no locked vocabulary.
+matches no cut and uses no locked vocabulary. A locked vocabulary is a file
+of each dataset built with it; a build finds it again there when
+`cache/files/` does not hold it.
+
+A named run's checkpoint lies beside its model: `<id>/models/<name>/checkpoint.json`
+is a record that names the state's file, which lies in the same folder
+([training.md](training.md), "Checkpoints and resuming").
 
 The store also holds the record of every run of `wpt dataset download`,
 `check --fetch`, `manifest`, `build`, `build-tokenizer` and `contamination`, `wpt train`,
 `wpt eval` and `wpt manager`: one folder per run under
-`records/`, written by name rather than by content, each file compressed
+`<id>/runs/`, written by name, each file compressed
 (a local store adds a record file's lines to one plain file while the
 record runs, and compresses it into one part when the record ends;
 [observability.md](observability.md)).
@@ -1129,13 +1199,13 @@ tree and starting jobs. Nothing is committed by `wpt web`, so every change shows
 | Package | Role |
 | --- | --- |
 | `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; the service layer (`repo.py`), the only code that reads or writes `data/`; a source as read (`source_data.py`); the protocols (`protocols/`), the download step (`download.py`), the license check (`license_check.py`), the shared checks (`checks.py`, `erasure.py`), the build (`build.py`, `kept.py`); the contamination check (`contamination.py`); the task builder (`builder.py`, run by `scripts/build_tasks.py`) |
-| `wpt-store` | the content-addressed store (its kinds: a local folder or S3), its compression, its sessions with their bundles, the store database, its record folders, the model folders kept under a run's name (`models/<name>`), and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules; what the store database says (`listing.py`), and a kept model folder copied out, checked against its sha256s (`models.py`) |
+| `wpt-store` | the store (its kinds: a local folder or S3), its compression, its layout of sessions with their sources' tars and records, datasets, models and run folders, its results and index, and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules; what the index says (`listing.py`), and a kept model folder copied out, checked against its sha256s (`models.py`) |
 | `wpt-telemetry` | the record of one command run in the store, sent live to an OpenTelemetry backend when one is set ([observability.md](observability.md)) |
 | `wpt-tokenizer` | the byte-level BPE tokenizer, Rust inside |
 | `wpt-model` | the WPT network ([model.md](model.md)) and its drafter, its safetensors model folders, and their license documents (`LICENSE`, `NOTICE`, model card) |
 | `wpt-training` | the training loop (global batch, evaluation, checkpoints, resuming) that runs one training step, with its plug points: strategies (how the hardware is used), and the parts of a step ([training.md](training.md), "Steps"): methods (how the model learns from an example), environments (where the examples come from), optimizers (how an update changes the weights) and the steps that name one of each, with the model parts they lock |
 | `wpt-inference` | sampling through the model's generation cache: several rows from one prompt, the model's next chat message (`next_message`, which `wpt chat --chat` and the text measures of `wpt eval` both write with), speculative decoding with a drafter and its scheduler, the scheduler's pass times (measured, recorded, replayed); training a model's drafter (`drafting.py`), which `wpt train` runs at the end of every run, so it uses `wpt-model` |
-| `wpt-utils` | helpers several packages share, one submodule each: `wpt_utils.device` picks the best GPU, else the CPU; `wpt_utils.programs` starts the outside programs WPT runs (`program(name)`, with a clear error when one is missing), identifies the code (`code()`: the checkout's commit and a hash of its uncommitted changes, the one place that reads the commit, which records and a training step's fingerprint hold; `code_name()`: the same as one line, which a stored result of the data pipeline keeps as what made it) and gives that commit, and whether there are changes, in the shape the records name them (`repository()`), without importing PyTorch; `wpt_utils.files.sha256_file` is the one way a file is hashed, by the store, the model folders and the run records alike; `wpt_utils.files.lock_file` is the lock the operating system holds on a file for one process, which the service layer and a local store's database share; `wpt_utils.settings.typed` types the settings of a training step and of its method, environment and optimizer from the defaults each file declares; `wpt_utils.parallel` is the one rule that sizes parallel work (at most 75% of the cores; before each new item it measures again and starts it only while a quarter of the memory, of the cores and, where the items write to a disk, of the free disk stays free, one item's memory being what running items are measured taking, never a given figure; it never stops a running item) and runs items that way with their results in the items' order, an error an item may fail with becoming that item's result; `wpt_utils.lines` writes every printed line, with its time and level |
+| `wpt-utils` | helpers several packages share, one submodule each: `wpt_utils.device` picks the best GPU, else the CPU; `wpt_utils.programs` starts the outside programs WPT runs (`program(name)`, with a clear error when one is missing), identifies the code (`code()`: the checkout's commit and a hash of its uncommitted changes, the one place that reads the commit, which records and a training step's fingerprint hold; `code_name()`: the same as one line, which a stored result of the data pipeline keeps as what made it) and gives that commit, and whether there are changes, in the shape the records name them (`repository()`), without importing PyTorch; `wpt_utils.files.sha256_file` is the one way a file is hashed, by the store, the model folders and the run records alike; `wpt_utils.files.lock_file` is the lock the operating system holds on a file for one process, which the service layer and a local store's replace of a file share; `wpt_utils.settings.typed` types the settings of a training step and of its method, environment and optimizer from the defaults each file declares; `wpt_utils.parallel` is the one rule that sizes parallel work (at most 75% of the cores; before each new item it measures again and starts it only while a quarter of the memory, of the cores and, where the items write to a disk, of the free disk stays free, one item's memory being what running items are measured taking, never a given figure; it never stops a running item) and runs items that way with their results in the items' order, an error an item may fail with becoming that item's result; `wpt_utils.lines` writes every printed line, with its time and level |
 | `wpt-agent` | the agent harness of agentic training: the tools (the four built-in ones, `ask`, and those a task or its image's pool declares, answered by programs in the image) and each attempt's choice of them, one Docker container per attempt, the images of `data/images/` and their locks, the agent loop and the task's check, and the playing of a task's attempts (`wpt_agent.play`), which the `agent-tasks` environment of the `finish-tasks` and `finish-tasks-with-less-writing` steps and the agent measures of `wpt eval` share, so `wpt eval` does not depend on `wpt train`; an image's lock and build (`images.py`) |
 | `wpt-worker` | the gpu worker, which runs the GPU work of a training on its machine, the link to it from the wpt manager's side, and the gradients exchanged between gpu workers in different places ([machines.md](machines.md)) |
 | `wpt` (`apps/wpt`) | the app: the `wpt` command and its web server, two controllers over the services above ([The app](#the-app)) |

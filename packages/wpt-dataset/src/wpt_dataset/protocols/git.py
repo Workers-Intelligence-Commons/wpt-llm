@@ -8,28 +8,23 @@
                                           what they hold; a server that offers no partial fetch sends the
                                           contents too); with `history.since`, the commits since then as
                                           well, `since` an ancestor of `revision`
-    the kept files' contents           -> only those the store does not hold: the git objects the store
-                                          database's map knows (what the extractor stores into gives
-                                          them, known_objects) are taken from the store, their sha256 with
-                                          them; the others are asked for by id, in one request
-    the same, when the store lacks    -> a second fetch of the commit, and of its history when the
-    half or more of those contents (a     source has one, with every content, into a new repository
-    first download)                       that replaces the first: git spends some twenty times more per
-                                          blob on a request by id; what the source does not keep comes
-                                          with it and is never stored; a server that cannot send it all
-                                          is asked for the missing contents by id instead
+    the kept files' contents           -> a second fetch of the commit, and of its history when the source
+                                          has one, with every content, into a new repository that replaces
+                                          the first: git spends some twenty times more per blob on a request
+                                          by id; what the source does not keep comes with it and is never
+                                          stored; a server that cannot send it all is asked for the missing
+                                          contents by id instead
     a file git stores with LFS (its    -> the LFS object it names, through the repository's LFS batch
     blob a pointer)                       request (lfs.py), streamed to the disk: the file's bytes are the
-                                          object's, and the pointer's id is what the map learns
+                                          object's
     `history.since`                    -> its commits as the files .git/history/<commit> and
                                           .git/history/order (manifest.read_git_history)
     each kept submodule                -> fetched the same way, at the commit it pins, from the address
                                           `submodules` lists for it, recursively
 
 A Hugging Face dataset is such a repository: its file list comes from git,
-its large files through LFS. A first download brings the whole history with
-every content, and what the source does not keep is never stored; an update
-asks only for the files the store lacks.
+its large files through LFS. A download brings the whole history with every
+content, and what the source does not keep is never stored.
 
 What it got, for the record: {"commit": `revision`}.
 
@@ -69,7 +64,6 @@ def fetch(address: str, data: dict, extractor: Extractor, tmp: Path) -> dict:
     since = data["history"]["since"] if data.get("history") else None
     listed, found = data.get("submodules", {}), set()
     pending = [("", address, data["revision"], since, "`revision`")]
-    store = extractor.store
     for number in itertools.count():
         if not pending:
             break
@@ -78,14 +72,10 @@ def fetch(address: str, data: dict, extractor: Extractor, tmp: Path) -> dict:
         fetch_commit(address, revision, repo, named, full=since is not None)
         history = manifest.git_history_blobs(repo, revision, extractor, since)
         in_tree = manifest.git_blobs_needed(repo, revision, extractor, None, prefix)
-        needed = list(dict.fromkeys(in_tree + history))
-        known = store.known_objects(needed) if hasattr(store, "known_objects") else {}
-        missing = manifest.missing_objects(repo, [object_id for object_id in needed if object_id not in known])
-        # a first download misses nearly every blob it needs and an update nearly none, so one half of them
-        # missing tells the two apart; git spends far less per blob when one fetch brings every content than when
-        # they are asked for by id, so a first download takes that fetch: what the source does not keep comes with
-        # it and is deleted with tmp, never stored
-        if missing and 2 * len(missing) >= len(needed):
+        missing = manifest.missing_objects(repo, list(dict.fromkeys(in_tree + history)))
+        # git spends far less per blob when one fetch brings every content than when they are asked for by id, so a
+        # download takes that fetch: what the source does not keep comes with it and is deleted with tmp, never stored
+        if missing:
             shutil.rmtree(repo)  # the whole fetch makes a new repository
             whole = repo.with_name(f"{repo.name}-whole")
             try:
@@ -97,21 +87,7 @@ def fetch(address: str, data: dict, extractor: Extractor, tmp: Path) -> dict:
                 shutil.rmtree(whole, ignore_errors=True)
                 fetch_commit(address, revision, repo, named, full=since is not None)
                 fetch_blobs(address, repo, missing)
-        else:
-            fetch_blobs(address, repo, missing)
-        # the blobs only the history's patches read are kept too, so a later download asks for none of them again
-        held = set(in_tree) | set(known)
-        extractor.keep_blobs(repo, [object_id for object_id in history if object_id not in held])
-        if history:  # the patches diff both sides of each change: git must hold them
-            lacking = manifest.missing_objects(repo, [object_id for object_id in history if object_id in known])
-            # in the order the files lie in the bundles, so each bundle read serves the next files too
-            lacking.sort(key=lambda object_id: (known[object_id].bundle, known[object_id].start))
-            written = manifest.put_blobs(repo, [store.file_path(known[object_id]) for object_id in lacking])
-            # a stored copy that is not the blob itself (an LFS file's, which is the object it points to) is
-            # asked for upstream
-            if unlike := [object_id for object_id, put in zip(lacking, written) if put != object_id]:
-                fetch_blobs(address, repo, unlike)
-        submodules = manifest.read_git(repo, revision, extractor, prefix, known, _large(address, tmp / "lfs"))
+        submodules = manifest.read_git(repo, revision, extractor, prefix, _large(address, tmp / "lfs"))
         if since:
             manifest.read_git_history(repo, since, revision, extractor)
         for path, commit in submodules.items():

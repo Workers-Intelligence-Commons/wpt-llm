@@ -11,7 +11,7 @@ import pytest
 from wpt_dataset.repo import Repo
 from wpt.eval.scaling import fit, main, planned, point
 from wpt_store import LocalStore
-from wpt_store.models import KIND, put_model
+from wpt_store.models import keep_model, put_model
 from wpt_utils.lines import bare
 
 ROOT = Path(__file__).resolve().parents[4]
@@ -62,13 +62,14 @@ def test_the_command_fits_the_trained_sizes_and_predicts_the_loss_of_a_larger_si
     # updates train on
     compute = {plan.size: plan.flops_per_token * plan.updates * plan.batch_size * plan.block_size
                for plan in repo.series_plans("eldest-titmouse")}
-    store = LocalStore(tmp_path / "store")
+    store = LocalStore(tmp_path / "store").at("test-session")
     models = []
     for size in ("256x5", "384x8", "512x10"):
         models.append(model_folder(repo, tmp_path / size, f"eldest-titmouse:{size}", a * compute[size] ** -b))
-    store.set_ref(KIND, "run-512", put_model(store, tmp_path / "512x10"))
+    keep_model(store, "run-512", put_model(store, "run-512", tmp_path / "512x10"))
     models[-1] = "run-512"
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_SESSION", store.session)
     monkeypatch.chdir(ROOT)
 
     assert main([*models, "--predict", "eldest-titmouse:640x13"]) == 0

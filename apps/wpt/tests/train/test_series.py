@@ -12,6 +12,7 @@ from wpt_dataset.repo import Repo
 from wpt_training import WINDOWS
 from wpt_worker.training import drafter_shards
 from wpt.train import main as train
+from wpt_store import find_dataset
 
 # a series of two sizes of the application tests' tiny model; laws chosen so that C = M and D = M / 2000:
 # the small size (66,266 parameters, M 397,596) reads 199 tokens as 3 updates of 4 windows of 16 tokens, the
@@ -56,7 +57,7 @@ def test_every_size_of_a_series_builds_one_dataset_and_a_size_trains_on_its_star
     repo = Repo(tmp_path)
     small = build_dataset(repo, "tiny:small", built.store, log=lambda *_: None)
     assert build_dataset(repo, "tiny:large", built.store, log=lambda *_: None) == small  # one build for the series
-    record = json.loads(built.store.get_bytes(built.store.get_ref("datasets", small)))
+    record = find_dataset(built.store, small)[1]
     assert record["recipe"]["total_tokens"] == 15 * 4 * 17  # the large size's prefix
     train(["tiny:small", small, "--out", "model"])
     provenance = json.loads((Path("model") / "provenance.json").read_text())

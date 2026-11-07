@@ -1,21 +1,20 @@
-"""`wpt dataset download`: sources fetched into the store's bundles, each
-as its address serves it, in a session recorded in the store, several
-at once; and `wpt store list`, which lists what the store database says."""
+"""The download step: sources fetched into a session of the store, each
+as its address serves it, several at once."""
 
-import json
 import shutil
 import threading
+from types import SimpleNamespace
 
 import pytest
 
+from wpt import sessions
 from wpt_dataset import archives, download, license_check, manifest, robots, sites
-from wpt.dataset import main
-from wpt_dataset.errors import FetchFailed, SourceGone
+from wpt_dataset.errors import FetchFailed, NotDownloaded, SourceGone
 from wpt_dataset.kept import kept
-from wpt_dataset.sources import (license_page, source_tree, stored_upstream, upstream_key, upstream_manifest,
-                                 upstream_tree)
-from wpt.store import main as store_command
-from wpt_utils.lines import bare
+from wpt_dataset.sources import license_page, source_tree, stored_upstream, upstream_manifest, upstream_tree
+from wpt_store import held, held_here
+from wpt_store.listing import listing
+from wpt_utils.programs import MissingTool
 
 
 def two_sources(kit, repo, store, tmp_path, http_folder):
@@ -30,49 +29,48 @@ def two_sources(kit, repo, store, tmp_path, http_folder):
     return git, book
 
 
-def test_download_keeps_each_source_in_bundles_records_its_session_and_reuses_it_next_time(
-        kit, repo, store, tmp_path, http_folder, monkeypatch, capsys):
+def test_a_download_keeps_each_source_in_its_session_and_finds_it_there_next_time(
+        kit, repo, store, tmp_path, http_folder):
     git, book = two_sources(kit, repo, store, tmp_path, http_folder)
-    monkeypatch.setenv("WPT_STORE", store.root.as_uri())
-    monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)
 
-    assert main(["--root", str(repo.root), "download", git, book]) == 0
+    done = download.run(repo, [git, book], store, "download", [])
+    assert [item.value for item in done] == ["downloaded", "downloaded"]
 
     [folder] = store.record_folders()
-    assert "-wpt-dataset-download-2-sources-" in folder
+    assert folder.startswith(f"{store.session}/") and "-wpt-dataset-download-2-sources-" in folder
     for sid, files in ((git, kit.FILES), (book, {"book.txt": b"a public domain book\n"})):
         tree, _ = source_tree(repo.source(sid), store)
         for path, content in files.items():
-            assert tree[path].placed.bundle.startswith(folder + "/")  # in the session's own bundles
+            assert tree[path].placed.archive == f"{store.session}/sources/{sid}.tar.zst"
             assert manifest.content(store, tree[path]) == content
-    with store.database() as found:
-        assert found.execute("SELECT folder, command, ended IS NOT NULL FROM sessions").fetchall() == [
-            (folder, "wpt dataset download", 1)]
-        lines = [(source, outcome, json.loads(got), address, size) for source, outcome, got, address, size in
-                 found.execute("SELECT source, outcome, got, address, size FROM lines ORDER BY source")]
     commit = kit.run("git", "rev-parse", "HEAD", cwd=tmp_path / "project").decode().strip()
-    assert lines == [(sid, "downloaded", {**got, "manifest": upstream_manifest(repo.source(sid), store)},
-                      repo.source(sid).data["address"], size)
-                     for sid, got, size in sorted([(git, {"commit": commit}, sum(map(len, kit.FILES.values())) +
-                                                    len("docs/guide.txt")),
-                                                   (book, {}, len(b"a public domain book\n"))])]
+    for sid, got, size in ((git, {"commit": commit}, sum(map(len, kit.FILES.values())) + len("docs/guide.txt")),
+                           (book, {}, len(b"a public domain book\n"))):
+        found = held(store, sid)
+        assert (found.got, found.address, found.size, found.error) == (got, repo.source(sid).data["address"], size, None)
+        assert found.manifest == upstream_manifest(repo.source(sid), store)
 
-    # upstream gone: the store still holds both, so nothing is downloaded again
+    # upstream gone: the session still holds both, so nothing is downloaded again
     shutil.rmtree(tmp_path / "project")
     (http_folder[0] / "book.txt").unlink()
-    assert main(["--root", str(repo.root), "download", git, book]) == 0
-    capsys.readouterr()
+    assert [item.value for item in download.run(repo, [git, book], store, "download", [])] == ["reused", "reused"]
 
-    assert store_command(["list"]) == 0
-    out = bare(capsys.readouterr().out).splitlines()
-    assert out[0] == "2 sessions:" and len([line for line in out if "wpt dataset download" in line]) == 2
-    for sid in (git, book):
-        [line] = [line for line in out if line.startswith(f"  {sid}: ")]
-        assert line.startswith(f"  {sid}: reused; downloaded ")
-        assert f" from {repo.source(sid).data['address']} at " in line
-        assert line.endswith(f", manifest {upstream_manifest(repo.source(sid), store)}")
-    [line] = [line for line in out if line.startswith(f"  {git}: ")]
-    assert f" bytes, commit {commit}, manifest " in line  # what the download got, for the record
+    states, sessions = listing(store)  # the index says what the session holds
+    assert {(state.session, state.source, state.error) for state in states} == {
+        (store.session, git, None), (store.session, book, None)}
+    assert [(row.session, row.held["sources"], row.held["runs"]) for row in sessions] == [(store.session, 2, 2)]
+
+
+def test_a_download_given_no_session_makes_a_new_one_and_says_it(kit, store, tmp_path, monkeypatch):
+    monkeypatch.delenv("WPT_SESSION", raising=False)
+    said = []
+    plain = kit.open_store(store.root.as_uri())
+    none = SimpleNamespace(session=None, from_id=None)
+    view = sessions.fetching(plain, none, tmp_path / "none", log=said.append)
+    assert said == [f"session {view.session}"]
+    monkeypatch.setenv("WPT_SESSION", "named")
+    assert sessions.fetching(plain, none, tmp_path / "none", log=said.append).session == "named"
+    assert len(said) == 1
 
 
 def test_a_git_source_downloads_exactly_its_revision_and_downloads_again_when_it_moves(kit, repo, store, tmp_path):
@@ -93,19 +91,76 @@ def test_a_git_source_downloads_exactly_its_revision_and_downloads_again_when_it
 
     path = repo.root / "data" / "sources" / sid / "source.json"
     path.write_text(kit.dump_json({**repo.source(sid).data, "revision": later}), encoding="utf-8", newline="\n")
-    kit.download(repo, store, sid)  # not marked: the moved revision is not what the store holds
+    assert held(store, sid).got == {"commit": first}
+    kit.download(repo, store, sid)  # the moved revision is not what the session holds: it replaces the file
 
     tree = upstream_tree(repo.source(sid), store)
     assert manifest.content(store, tree["README.md"]) == b"a later readme\n" and "added.bin" in tree
-    with store.database() as found:
-        got = [json.loads(row[0])["commit"] for row in
-               found.execute("SELECT got FROM lines WHERE outcome = 'downloaded' ORDER BY time, number")]
-    assert got == [first, later]
+    assert held(store, sid).got == {"commit": later}
 
     # a commit upstream does not serve (a branch rewritten) fails the source; the store keeps what it held
     path.write_text(kit.dump_json({**repo.source(sid).data, "revision": "1" * 40}), encoding="utf-8", newline="\n")
     with pytest.raises(FetchFailed, match=f"does not serve the commit {'1' * 40}"):
         kit.download(repo, store, sid)
+    assert held_here(store, sid).got == {"commit": later} and held_here(store, sid).error["kind"] == "FetchFailed"
+
+
+def test_a_download_started_from_an_old_session_fetches_only_what_the_old_one_lacks_and_reads_the_rest_there(
+        kit, repo, store, tmp_path, http_folder):
+    git, book = two_sources(kit, repo, store, tmp_path, http_folder)
+    old = store.session
+    download.run(repo, [git], store, "download", [])  # the old session holds the git source only
+    new = kit.open_store(store.root.as_uri()).at("new", old)
+
+    shutil.rmtree(tmp_path / "project")  # upstream of the git source is gone: only the old session has it
+    done = download.run(repo, [git, book], new, "download", [])
+    assert [item.value for item in done] == ["reused", "downloaded"]
+    assert held_here(new, git) is None and held_here(new, book).session == "new"
+    # a build, `check --fetch` and `manifest` read the git source from the old session's files
+    assert held(new, git).session == old
+    tree = upstream_tree(repo.source(git), new)
+    assert manifest.content(new, tree["README.md"]) == kit.FILES["README.md"]
+    assert tree["README.md"].placed.archive == f"{old}/sources/{git}.tar.zst"
+    assert upstream_manifest(repo.source(git), new) == held(store, git).manifest
+
+    # an old download made for other fetch options is not what the new one wants: it is fetched
+    path = repo.root / "data" / "sources" / book / "source.json"
+    path.write_text(kit.dump_json({**repo.source(book).data, "address": f"{http_folder[1]}/other.txt"}),
+                    encoding="utf-8", newline="\n")
+    (http_folder[0] / "other.txt").write_bytes(b"another book\n")
+    other = kit.open_store(store.root.as_uri()).at("other", "new")
+    assert [item.value for item in download.run(repo, [book], other, "download", [])] == ["downloaded"]
+    assert held_here(other, book).session == "other"
+
+
+def test_a_source_whose_last_attempt_failed_is_read_from_the_good_file_of_the_same_download(
+        kit, repo, store, tmp_path):
+    address, first = kit.git_project(tmp_path / "project")
+    sid = kit.add_source(repo, store, "example", "project", {"type": "git", "address": address, "revision": first})
+    path = repo.root / "data" / "sources" / sid / "source.json"
+    description = repo.source(sid).data
+    good = held(store, sid)
+
+    # an attempt at another download fails: its good file is of a download this description does not name
+    path.write_text(kit.dump_json({**description, "revision": "1" * 40}), encoding="utf-8", newline="\n")
+    with pytest.raises(FetchFailed):
+        kit.download(repo, store, sid)
+    with pytest.raises(NotDownloaded):
+        upstream_tree(repo.source(sid), store)
+
+    # a new attempt at the download it holds a good file of fails: that file is still what a build reads
+    path.write_text(kit.dump_json(description), encoding="utf-8", newline="\n")
+    shutil.rmtree(tmp_path / "project")
+    with pytest.raises(FetchFailed):
+        kit.download(repo, store, sid)
+    failed = held_here(store, sid)
+    assert failed.error["kind"] == "SourceGone" and failed.sha256 == good.sha256 and failed.manifest == good.manifest
+    tree = upstream_tree(repo.source(sid), store)
+    assert manifest.content(store, tree["README.md"]) == kit.FILES["README.md"]
+    assert upstream_manifest(repo.source(sid), store) == good.manifest
+
+    # it is not held: a download fetches it again, and a source with no good file at all stays left out
+    assert not failed.holds(failed.key) and failed.provides(failed.key)
 
 
 def test_downloads_running_at_once_give_what_one_at_a_time_gives(kit, repo, store, tmp_path, http_folder,
@@ -118,10 +173,9 @@ def test_downloads_running_at_once_give_what_one_at_a_time_gives(kit, repo, stor
             "type": "http", "address": f"{base}/book-{n}.txt"}, fetch=False))
     results = {}
     for way, limits in (("at once", ({}, 6)), ("one at a time", ({}, 1))):
-        target = kit.open_store((tmp_path / way).as_uri())
+        target = kit.open_store((tmp_path / way).as_uri()).at("test-session")
         monkeypatch.setattr(sites, "limits", lambda limits=limits: (*limits, {}))
-        with kit.session(target) as session:
-            done = download.download(repo, ids, target, session, log=lambda *_: None)
+        done = download.download(repo, ids, target, log=lambda *_: None)
         results[way] = (done, [manifest.manifest_bytes(source_tree(repo.source(sid), target)[0]) for sid in ids])
     assert results["at once"] == results["one at a time"]
     assert [d.value for d in results["at once"][0]] == ["downloaded"] * 6
@@ -187,7 +241,7 @@ def test_every_request_to_a_site_with_a_limit_per_time_waits_its_turn(monkeypatc
     assert len(asked) == 2
 
 
-def test_only_an_address_that_failed_gets_a_failed_line(kit, repo, store, http_folder, monkeypatch):
+def test_only_an_address_that_failed_is_recorded_as_failed(kit, repo, store, http_folder, monkeypatch):
     folder, base = http_folder
     for part in ("main", "copy"):
         (folder / part).mkdir()
@@ -209,9 +263,10 @@ def test_only_an_address_that_failed_gets_a_failed_line(kit, repo, store, http_f
     with pytest.raises(KeyboardInterrupt):
         kit.download(repo, store, stopped)
 
-    with store.database() as found:
-        lines = found.execute("SELECT source, outcome, address FROM lines ORDER BY session, number").fetchall()
-    assert lines == [(mirrored, "failed", f"{base}/main/book.txt"), (mirrored, "downloaded", f"{base}/copy/book.txt")]
+    found = held(store, mirrored)
+    assert found.address == f"{base}/copy/book.txt"
+    assert [failed["address"] for failed in found.record["failures"]] == [f"{base}/main/book.txt"]
+    assert held_here(store, stopped) is None  # nothing says it failed
 
 
 def test_a_license_page_is_checked_from_the_store_and_one_that_does_not_match_leaves_its_files_out(
@@ -261,15 +316,13 @@ def test_a_license_page_is_stored_with_the_source_and_a_page_that_fails_stores_n
         "licenses": [{**entry, "place": {"page": f"{base}/missing.html"}}]}, fetch=False)
     with pytest.raises(SourceGone, match="license page"):
         kit.download(repo, store, gone)
-    assert stored_upstream(upstream_key(repo.source(gone)), store) is None  # its book is not kept either
-    with store.database() as found:
-        assert found.execute("SELECT outcome, address FROM lines WHERE source = ?", (gone,)).fetchall() == [
-            ("failed", f"{base}/missing.html")]
+    assert stored_upstream(repo.source(gone), store) is None  # its book is not kept either
+    assert [failed["address"] for failed in held_here(store, gone).error["failures"]] == [f"{base}/missing.html"]
 
 
-def test_a_failed_new_download_leaves_what_the_store_held(kit, repo, store, http_folder):
-    # a marked source downloaded again whose second archive is gone: the first archive's members went into
-    # the session's bundles as they were read, but nothing names them, and the source keeps its earlier files
+def test_a_failed_new_download_keeps_the_file_the_session_held_and_records_the_error(kit, repo, store, http_folder):
+    # a source downloaded again whose second archive is gone: the first archive's members went into a new tar
+    # that is dropped, and the session keeps its earlier file, with the failure in its record
     folder, base = http_folder
     (folder / "first.tar").write_bytes(kit.tar_bytes(top="a", files={"one.txt": b"version one\n"}, executable=set(),
                                                      symlinks={}))
@@ -279,17 +332,37 @@ def test_a_failed_new_download_leaves_what_the_store_held(kit, repo, store, http
         "type": "http", "address": f"{base}/first.tar", "addresses": [
             {"folder": "first", "address": f"{base}/first.tar"}, {"folder": "second", "address": f"{base}/second.tar"}],
         "licenses": [kit.entry(["first/**", "second/**"])]})
-    before = source_tree(repo.source(sid), store)[0]
+    before = held_here(store, sid)
 
     (folder / "first.tar").write_bytes(kit.tar_bytes(top="a", files={"one.txt": b"version two\n"}, executable=set(),
                                                      symlinks={}))
-    (folder / "second.tar").unlink()
-    store.mark([sid])
-    with pytest.raises(SourceGone, match="second.tar"):
+    data = repo.source(sid).data
+    moved = [data["addresses"][0], {"folder": "second", "address": f"{base}/moved.tar"}]
+    (repo.root / "data" / "sources" / sid / "source.json").write_text(kit.dump_json({**data, "addresses": moved}),
+                                                                      encoding="utf-8", newline="\n")
+    with pytest.raises(SourceGone, match="moved.tar"):
         kit.download(repo, store, sid)
 
-    after = source_tree(repo.source(sid), store)[0]
-    assert after == before and manifest.content(store, after["first/a/one.txt"]) == b"version one\n"
+    after = held_here(store, sid)
+    assert after.sha256 == before.sha256 and after.error["kind"] == "SourceGone"
+    assert store.read_file(after.files["first/a/one.txt"][1]) == b"version one\n"
+    with pytest.raises(NotDownloaded):  # a failed source is left out of a build
+        source_tree(repo.source(sid), store)
+
+
+def test_a_missing_program_is_the_source_s_failure_and_its_record_says_so(kit, repo, store, http_folder, monkeypatch):
+    folder, base = http_folder
+    (folder / "book.txt").write_bytes(b"a public domain book\n")
+    sid = kit.add_source(repo, store, "example", "book", {"type": "http", "address": f"{base}/book.txt"}, fetch=False)
+
+    def no_program(*_):
+        raise MissingTool("git is not installed")
+
+    monkeypatch.setattr("wpt_dataset.download.fetch", no_program)
+    [done] = download.run(repo, [sid], store, "download", [])
+    assert isinstance(done.error, MissingTool)
+    assert held_here(store, sid).error["kind"] == "MissingTool"
+    assert [state.error for state in listing(store)[0]] == ["MissingTool: git is not installed"]
 
 
 def test_a_new_session_removes_the_download_folders_a_stopped_process_left_and_keeps_the_others(
@@ -308,8 +381,6 @@ def test_a_new_session_removes_the_download_folders_a_stopped_process_left_and_k
     if os.name != "nt" and os.geteuid() == 0:
         pytest.skip("root opens a read-only file for writing")
     git, book = two_sources(kit, repo, store, tmp_path, http_folder)
-    monkeypatch.setenv("WPT_STORE", store.root.as_uri())
-    monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)
     # a temporary folder of this test's own, so that other tests' live downloads do not show in it; a short name,
     # so that socket paths inside it stay within the system's limit
     temporary = Path(tempfile.mkdtemp(prefix="wpt-test-"))
@@ -327,7 +398,7 @@ def test_a_new_session_removes_the_download_folders_a_stopped_process_left_and_k
     foreign_lock.touch()
     foreign_lock.chmod(stat.S_IREAD)  # this process may not open it for writing
     try:
-        assert main(["--root", str(repo.root), "download", git, book]) == 0
+        assert [item.value for item in download.run(repo, [git, book], store, "download", [])] == ["downloaded"] * 2
         left = sorted(path.name for path in temporary.glob(download.WORK + "*"))
         # the session's own folders are gone too
         assert left == sorted([foreign.name, foreign_lock.name, live.name, f"{live.name}{LOCK}"])

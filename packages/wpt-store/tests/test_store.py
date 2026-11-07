@@ -1,3 +1,4 @@
+import json
 import os
 import shutil
 import threading
@@ -8,32 +9,36 @@ import boto3
 import pytest
 from moto import mock_aws
 
-from wpt_store import (CorruptObject, MissingObject, MixedRecord, StoreSettingError, blocks, open_store,
+from wpt_store import (CorruptFile, MissingFile, MixedRecord, StoreSettingError, blocks, open_store,
                        s3_settings)
 
 
 def exercise(store):
     sha = store.put_bytes(b"some text\n")
     assert store.get_bytes(sha) == b"some text\n"
-    assert store.put_bytes(b"some text\n") == sha  # same bytes, same object
-    assert store.get_ref("builds", "abc") is None
-    store.set_ref("builds", "abc", sha)
-    assert store.get_ref("builds", "abc") == sha
-    assert store.get_made_ref("builds", "abc") == (sha, None)
-    store.set_ref("results", "abc", sha, made_by="the-commit")  # the ref says what made it, at no further read
-    assert store.get_ref("results", "abc") == sha and store.get_made_ref("results", "abc") == (sha, "the-commit")
-    assert store.get_made_ref("results", "absent") == (None, None)
-    with pytest.raises(MissingObject):
+    assert store.put_bytes(b"some text\n") == sha  # same bytes, same file
+    with pytest.raises(MissingFile):
         store.get_bytes("0" * 64)
+    # a result is found from its inputs by its fingerprint, and says what made it at no further read
+    assert store.get_result("builds", "abc") == (None, None) and not store.has_result("builds", "abc")
+    store.put_result("builds", "abc", b"what the stage gave\n")
+    assert store.get_result("builds", "abc") == (b"what the stage gave\n", None) and store.has_result("builds", "abc")
+    store.put_result("results", "abc", b"another stage\n", made_by="the-commit")
+    assert store.get_result("results", "abc") == (b"another stage\n", "the-commit")
+    # a file a record names is read back through what the record says, and a replaced one is the new one
+    file = store.put_named("s1/datasets/d/shard-0", b"first bytes\n")
+    assert store.get_bytes(file) == b"first bytes\n"
+    again = store.put_named("s1/datasets/d/shard-0", b"other bytes\n" * 1000)  # compressed now: the plain one goes
+    assert store.get_bytes(again) == b"other bytes\n" * 1000
+    assert store.get_json("s1/datasets/d/dataset.json") is None
+    store.put_json("s1/datasets/d/dataset.json", {"id": "d", "shards": [file.key]})
+    assert store.get_json("s1/datasets/d/dataset.json")["shards"] == [file.key]
     # a checkpoint replaced by a newer one is removed, or a long run fills the store
     old = store.put_bytes(b"checkpoint at step 500\n")
-    store.set_ref("checkpoints", "run", old)
     store.get_bytes(old)  # leaves a local copy for S3
     store.delete(old)
-    store.delete_ref("checkpoints", "run")
-    assert not store.has(old) and store.get_ref("checkpoints", "run") is None
+    assert not store.has(old)
     store.delete(old)  # absent: nothing to do
-    store.delete_ref("checkpoints", "run")
     assert store.get_bytes(sha) == b"some text\n"
     return sha
 
@@ -41,32 +46,32 @@ def exercise(store):
 def exercise_records(store, reopen):
     # a command's record: files written whole, and a file added to line by
     # line, by one process and then by another (a restarted training process)
-    assert store.record_folders() == [] and store.record_files("run-1") == []
-    store.write_record("run-1", "start.json", b"{}\n")
-    store.write_record("run-1", "start.json", b'{"command": "x"}\n')  # replaced whole
+    assert store.record_folders() == [] and store.record_files("s1/run-1") == []
+    store.write_record("s1/run-1", "start.json", b"{}\n")
+    store.write_record("s1/run-1", "start.json", b'{"command": "x"}\n')  # replaced whole
     for line in (b"one\n", b"two\n"):
-        store.append_record("run-1", "events.jsonl", line)
+        store.append_record("s1/run-1", "events.jsonl", line)
     store.flush_records()
     later = reopen()
-    later.append_record("run-1", "events.jsonl", b"three\n")
+    later.append_record("s1/run-1", "events.jsonl", b"three\n")
     later.flush_records()
-    assert store.read_record("run-1", "start.json") == b'{"command": "x"}\n'
-    assert store.read_record("run-1", "events.jsonl") == b"one\ntwo\nthree\n"
-    assert store.record_files("run-1") == ["events.jsonl", "start.json"]
-    store.append_record("run-2", "events.jsonl", b"other\n")
+    assert store.read_record("s1/run-1", "start.json") == b'{"command": "x"}\n'
+    assert store.read_record("s1/run-1", "events.jsonl") == b"one\ntwo\nthree\n"
+    assert store.record_files("s1/run-1") == ["events.jsonl", "start.json"]
+    store.append_record("s1/run-2", "events.jsonl", b"other\n")
     store.flush_records()
-    assert store.record_folders() == ["run-1", "run-2"]
-    with pytest.raises(MissingObject):
-        store.read_record("run-1", "end.json")
+    assert store.record_folders() == ["s1/run-1", "s1/run-2"]
+    with pytest.raises(MissingFile):
+        store.read_record("s1/run-1", "end.json")
 
     # a file is written whole or added to, never both, whichever process made it
     for writer in (store, reopen()):
         with pytest.raises(MixedRecord):
-            writer.write_record("run-1", "events.jsonl", b"replaced\n")
+            writer.write_record("s1/run-1", "events.jsonl", b"replaced\n")
         with pytest.raises(MixedRecord):
-            writer.append_record("run-1", "start.json", b"added\n")
-    assert store.read_record("run-1", "events.jsonl") == b"one\ntwo\nthree\n"
-    assert store.read_record("run-1", "start.json") == b'{"command": "x"}\n'
+            writer.append_record("s1/run-1", "start.json", b"added\n")
+    assert store.read_record("s1/run-1", "events.jsonl") == b"one\ntwo\nthree\n"
+    assert store.read_record("s1/run-1", "start.json") == b'{"command": "x"}\n'
 
     # wpt train's launcher and its training process add to one file in turn;
     # reading gives their lines in the order they were added, even when each
@@ -74,10 +79,10 @@ def exercise_records(store, reopen):
     launcher, child = reopen(), reopen()
     for writer, line in ((launcher, b"launcher 1\n"), (child, b"child 1\n"), (launcher, b"launcher 2\n"),
                          (child, b"child 2\n"), (launcher, b"launcher 3\n")):
-        writer.append_record("run-3", "events.jsonl", line)
+        writer.append_record("s1/run-3", "events.jsonl", line)
     child.flush_records()
     launcher.flush_records()
-    assert store.read_record("run-3", "events.jsonl") == b"launcher 1\nchild 1\nlauncher 2\nchild 2\nlauncher 3\n"
+    assert store.read_record("s1/run-3", "events.jsonl") == b"launcher 1\nchild 1\nlauncher 2\nchild 2\nlauncher 3\n"
 
 
 def test_local_store_round_trip_and_refuses_damaged_objects(tmp_path):
@@ -88,16 +93,29 @@ def test_local_store_round_trip_and_refuses_damaged_objects(tmp_path):
     # a process that left its last line cut (it stopped before the line's
     # end): the next process's lines start on their own, whole and readable
     cut = open_store((tmp_path / "store").as_uri())
-    cut.append_record("run-1", "events.jsonl", b'{"kind": "ev')
+    cut.append_record("s1/run-1", "events.jsonl", b'{"kind": "ev')
     cut.flush_records()
     after = open_store((tmp_path / "store").as_uri())
-    after.append_record("run-1", "events.jsonl", b"four\n")
+    after.append_record("s1/run-1", "events.jsonl", b"four\n")
     after.flush_records()
-    assert store.read_record("run-1", "events.jsonl").splitlines()[-2:] == [b'{"kind": "ev', b"four"]
+    assert store.read_record("s1/run-1", "events.jsonl").splitlines()[-2:] == [b'{"kind": "ev', b"four"]
 
-    (tmp_path / "store" / "objects" / sha[:2] / sha).write_bytes(b"tampered\n")
-    with pytest.raises(CorruptObject):
+    (tmp_path / "store" / "cache" / "files" / sha).write_bytes(b"tampered\n")
+    with pytest.raises(CorruptFile):
         store.get_bytes(sha)
+
+    # a result and a record each check themselves, whatever a damaged disk gives
+    packed = tmp_path / "store" / "cache" / "builds" / "abc"
+    packed.write_bytes(packed.read_bytes().replace(b"what", b"that"))
+    with pytest.raises(CorruptFile):
+        store.get_result("builds", "abc")
+    [record] = (tmp_path / "store" / "s1" / "datasets" / "d").glob("dataset.json*")
+    plain = store.get_json("s1/datasets/d/dataset.json")
+    record.unlink()
+    (tmp_path / "store" / "s1" / "datasets" / "d" / "dataset.json").write_text(
+        json.dumps({**plain, "id": "another"}), encoding="utf-8")
+    with pytest.raises(CorruptFile):
+        store.get_json("s1/datasets/d/dataset.json")
 
 
 def test_a_local_record_file_is_added_to_at_once_and_compressed_into_one_part_when_the_record_ends(tmp_path):
@@ -106,68 +124,68 @@ def test_a_local_record_file_is_added_to_at_once_and_compressed_into_one_part_wh
     root = tmp_path / "store"
     store = open_store(root.as_uri())
     text = b"".join(b'{"kind": "event", "number": %d}\n' % i for i in range(1000))
-    store.write_record("run-1", "start.json", text)
-    store.append_record("run-1", "events.jsonl", text[:500])
-    store.append_record("run-1", "events.jsonl", text[500:])
+    store.write_record("s1/run-1", "start.json", text)
+    store.append_record("s1/run-1", "events.jsonl", text[:500])
+    store.append_record("s1/run-1", "events.jsonl", text[500:])
     # in the file already, before any flush, for this store object and for another process
-    assert (root / "records" / "run-1" / "events.jsonl.open").read_bytes() == text
-    assert store.record_files("run-1") == ["events.jsonl", "start.json"]
-    assert open_store(root.as_uri()).read_record("run-1", "events.jsonl") == text
+    assert (root / "s1" / "runs" / "run-1" / "events.jsonl.open").read_bytes() == text
+    assert store.record_files("s1/run-1") == ["events.jsonl", "start.json"]
+    assert open_store(root.as_uri()).read_record("s1/run-1", "events.jsonl") == text
     store.flush_records()
-    assert set(store.kind.list("records/run-1/")) == {"records/run-1/start.json.zst", "records/run-1/events.jsonl.open"}
-    assert zstd.decompress((root / "records" / "run-1" / "start.json.zst").read_bytes()) == text
+    assert set(store.kind.list("s1/runs/run-1/")) == {"s1/runs/run-1/start.json.zst", "s1/runs/run-1/events.jsonl.open"}
+    assert zstd.decompress((root / "s1" / "runs" / "run-1" / "start.json.zst").read_bytes()) == text
 
-    store.end_records("run-1")
-    stored = store.kind.list("records/run-1/")
-    [part] = [key for key in stored if key.startswith("records/run-1/events.jsonl/")]
-    assert set(stored) == {"records/run-1/start.json.zst", part} and part.endswith(".zst")  # one part, no plain file
+    store.end_records("s1/run-1")
+    stored = store.kind.list("s1/runs/run-1/")
+    [part] = [key for key in stored if key.startswith("s1/runs/run-1/events.jsonl/")]
+    assert set(stored) == {"s1/runs/run-1/start.json.zst", part} and part.endswith(".zst")  # one part, no plain file
     assert stored[part] < len(text) / 4
-    assert store.record_files("run-1") == ["events.jsonl", "start.json"]
-    assert open_store(root.as_uri()).read_record("run-1", "events.jsonl") == text
-    store.end_records("run-1")  # nothing left to compress
-    assert len(store.kind.list("records/run-1/events.jsonl/")) == 1
+    assert store.record_files("s1/run-1") == ["events.jsonl", "start.json"]
+    assert open_store(root.as_uri()).read_record("s1/run-1", "events.jsonl") == text
+    store.end_records("s1/run-1")  # nothing left to compress
+    assert len(store.kind.list("s1/runs/run-1/events.jsonl/")) == 1
 
 
 def test_lines_added_to_a_local_record_file_after_its_record_ended_read_after_the_part(tmp_path):
     root = tmp_path / "store"
     store = open_store(root.as_uri())
-    store.append_record("run-1", "events.jsonl", b"one\ntwo\n")
-    store.end_records("run-1")
+    store.append_record("s1/run-1", "events.jsonl", b"one\ntwo\n")
+    store.end_records("s1/run-1")
     again = open_store(root.as_uri())  # a resumed run
-    again.append_record("run-1", "events.jsonl", b"three\n")
-    assert store.read_record("run-1", "events.jsonl") == b"one\ntwo\nthree\n"
-    again.end_records("run-1")
-    assert len(store.kind.list("records/run-1/events.jsonl/")) == 2
-    assert store.read_record("run-1", "events.jsonl") == b"one\ntwo\nthree\n"
+    again.append_record("s1/run-1", "events.jsonl", b"three\n")
+    assert store.read_record("s1/run-1", "events.jsonl") == b"one\ntwo\nthree\n"
+    again.end_records("s1/run-1")
+    assert len(store.kind.list("s1/runs/run-1/events.jsonl/")) == 2
+    assert store.read_record("s1/run-1", "events.jsonl") == b"one\ntwo\nthree\n"
     with pytest.raises(MixedRecord):
-        store.write_record("run-1", "events.jsonl", b"replaced\n")
+        store.write_record("s1/run-1", "events.jsonl", b"replaced\n")
 
 
 def test_a_line_a_crash_left_cut_in_a_local_record_file_is_ended_by_the_next_writer(tmp_path):
     root = tmp_path / "store"
     first = open_store(root.as_uri())
-    first.append_record("run-1", "events.jsonl", b'{"kind": "ev')  # the process stops here
+    first.append_record("s1/run-1", "events.jsonl", b'{"kind": "ev')  # the process stops here
     second, third = open_store(root.as_uri()), open_store(root.as_uri())
     for writer, line in ((second, b"two\n"), (third, b"three\n"), (second, b"four\n")):
-        writer.append_record("run-1", "events.jsonl", line)
-    assert first.read_record("run-1", "events.jsonl") == b'{"kind": "ev\ntwo\nthree\nfour\n'  # ended once, not twice
+        writer.append_record("s1/run-1", "events.jsonl", line)
+    assert first.read_record("s1/run-1", "events.jsonl") == b'{"kind": "ev\ntwo\nthree\nfour\n'  # ended once, not twice
 
 
 def test_a_local_record_file_that_grew_while_it_was_compressed_stays_as_it_is(tmp_path, monkeypatch):
     root = tmp_path / "store"
     store = open_store(root.as_uri())
-    store.append_record("run-1", "events.jsonl", b"one\n")
+    store.append_record("s1/run-1", "events.jsonl", b"one\n")
     compressed = blocks.compressed
 
     def with_a_line_added_meanwhile(data):
-        open_store(root.as_uri()).append_record("run-1", "events.jsonl", b"two\n")
+        open_store(root.as_uri()).append_record("s1/run-1", "events.jsonl", b"two\n")
         return compressed(data)
 
     monkeypatch.setattr(blocks, "compressed", with_a_line_added_meanwhile)
-    store.end_records("run-1")
+    store.end_records("s1/run-1")
     monkeypatch.undo()
-    assert list(store.kind.list("records/run-1/")) == ["records/run-1/events.jsonl.open"]  # no part, nothing lost
-    assert store.read_record("run-1", "events.jsonl") == b"one\ntwo\n"
+    assert list(store.kind.list("s1/runs/run-1/")) == ["s1/runs/run-1/events.jsonl.open"]  # no part, nothing lost
+    assert store.read_record("s1/run-1", "events.jsonl") == b"one\ntwo\n"
 
 
 def test_an_s3_record_file_is_sent_in_one_part_at_each_flush_and_ending_the_record_changes_nothing(tmp_path, monkeypatch):
@@ -179,48 +197,14 @@ def test_an_s3_record_file_is_sent_in_one_part_at_each_flush_and_ending_the_reco
     with mock_aws():
         boto3.client("s3").create_bucket(Bucket="wpt-test")
         store = open_store("s3://wpt-test/records")
-        store.append_record("run-1", "events.jsonl", b"one\n")
-        store.append_record("run-1", "events.jsonl", b"two\n")
-        assert store.record_files("run-1") == []  # held back until the flush
+        store.append_record("s1/run-1", "events.jsonl", b"one\n")
+        store.append_record("s1/run-1", "events.jsonl", b"two\n")
+        assert store.record_files("s1/run-1") == []  # held back until the flush
         store.flush_records()
-        [part] = store.kind.list("records/run-1/events.jsonl/")
-        store.end_records("run-1")
-        assert list(store.kind.list("records/run-1/")) == [part]  # the parts it keeps, none plain
-        assert store.read_record("run-1", "events.jsonl") == b"one\ntwo\n"
-
-
-def test_record_files_of_the_earlier_uncompressed_layout_are_listed_and_read_as_they_are(tmp_path, monkeypatch):
-    # records stored before they were compressed are never rewritten: a whole file without .zst, a local file
-    # added to line by line (one file beside a marker), and an S3 file's parts without .zst read back as they
-    # are, next to new ones
-    local = open_store((tmp_path / "store").as_uri())
-    old = tmp_path / "store" / "records" / "old-run"
-    old.mkdir(parents=True)
-    (old / "start.json").write_bytes(b'{"started": "then"}\n')
-    (old / "events.jsonl").write_bytes(b"one\ntwo\n")
-    (old / ".appended-events.jsonl").touch()
-    local.write_record("new-run", "start.json", b"now\n")
-    assert local.record_folders() == ["new-run", "old-run"]
-    assert local.record_files("old-run") == ["events.jsonl", "start.json"]
-    assert local.read_record("old-run", "start.json") == b'{"started": "then"}\n'
-    assert local.read_record("old-run", "events.jsonl") == b"one\ntwo\n"
-    for name, value in {"WPT_STORE_ACCESS_KEY_ID": "test", "WPT_STORE_SECRET_ACCESS_KEY": "test", "AWS_DEFAULT_REGION": "us-east-1",
-                        "XDG_CACHE_HOME": str(tmp_path / "cache"), "LOCALAPPDATA": str(tmp_path / "cache")}.items():
-        monkeypatch.setenv(name, value)
-    monkeypatch.delenv("AWS_ENDPOINT_URL", raising=False)
-    monkeypatch.delenv("AWS_PROFILE", raising=False)
-    with mock_aws():
-        boto3.client("s3").create_bucket(Bucket="wpt-test")
-        bucket = open_store("s3://wpt-test/records")
-        bucket.kind.write("records/old-run/start.json", b"then\n")
-        bucket.kind.write(f"records/old-run/events.jsonl/{1:020d}-aaaaaaaa-{1:010d}", b"1 1 4\none\n")
-        bucket.append_record("old-run", "events.jsonl", b"two\n")
-        bucket.flush_records()
-        again = open_store("s3://wpt-test/records")
-        assert again.record_folders() == ["old-run"] and again.record_files("old-run") == ["events.jsonl",
-                                                                                         "start.json"]
-        assert again.read_record("old-run", "start.json") == b"then\n"
-        assert again.read_record("old-run", "events.jsonl") == b"one\ntwo\n"
+        [part] = store.kind.list("s1/runs/run-1/events.jsonl/")
+        store.end_records("s1/run-1")
+        assert list(store.kind.list("s1/runs/run-1/")) == [part]  # the parts it keeps, none plain
+        assert store.read_record("s1/run-1", "events.jsonl") == b"one\ntwo\n"
 
 
 def test_a_one_level_listing_gives_the_files_and_folders_right_under_a_prefix(tmp_path):
@@ -309,13 +293,13 @@ def test_s3_store_round_trip(tmp_path, monkeypatch):
             monkeypatch.setattr(store.client, "put_object", real)
             raise KeyboardInterrupt
 
-        store.append_record("run-4", "events.jsonl", b"one\n")
+        store.append_record("s1/run-4", "events.jsonl", b"one\n")
         monkeypatch.setattr(store.client, "put_object", stored_then_interrupted)
         with pytest.raises(KeyboardInterrupt):
             store.flush_records()
-        store.append_record("run-4", "events.jsonl", b"two\n")
+        store.append_record("s1/run-4", "events.jsonl", b"two\n")
         store.flush_records()
-        assert open_store("s3://wpt-test/some/prefix").read_record("run-4", "events.jsonl") == b"one\ntwo\n"
+        assert open_store("s3://wpt-test/some/prefix").read_record("s1/run-4", "events.jsonl") == b"one\ntwo\n"
 
 
 def test_a_token_file_holds_the_shards_tokens_and_is_rebuilt_when_changed(tmp_path):
@@ -330,7 +314,8 @@ def test_a_token_file_holds_the_shards_tokens_and_is_rebuilt_when_changed(tmp_pa
     shards = []
     for i, part in enumerate(rows):
         token_sha256 = write_shard(tmp_path / f"{i}.parquet", part)
-        shards.append({"object": store.put_file(tmp_path / f"{i}.parquet"), "token_sha256": token_sha256})
+        file = store.put_named(f"s1/datasets/d/{i}.parquet", tmp_path / f"{i}.parquet")
+        shards.append({"key": file.key, "sha256": file.sha256, "token_sha256": token_sha256})
 
     path = token_file(store, shards)
     assert np.fromfile(path, dtype="<u4").tolist() == list(range(1, 10))
@@ -358,7 +343,8 @@ def test_a_shard_stream_keeps_only_the_shards_in_use_on_disk(tmp_path, monkeypat
         for i in range(4):
             path = tmp_path / f"{i}.parquet"
             token_sha256 = write_shard(path, [(list(range(10 * i, 10 * i + 10)), "s", f"s/{i}", "p", 0)])
-            shards.append({"object": store.put_file(path), "token_sha256": token_sha256, "tokens": 10})
+            file = store.put_named(f"s1/datasets/d/{i}.parquet", path)
+            shards.append({"key": file.key, "sha256": file.sha256, "token_sha256": token_sha256, "tokens": 10})
         stream = ShardStream(store, shards, window=2)
 
         def on_disk():
@@ -370,7 +356,7 @@ def test_a_shard_stream_keeps_only_the_shards_in_use_on_disk(tmp_path, monkeypat
         # after the last shard comes the first again; a window may span two shards
         assert stream.at(35)[5:15].tolist() == [35, 36, 37, 38, 39, 0, 1, 2, 3, 4]
         assert len(on_disk()) <= 3
-        assert not any((store.cache / s["object"][:2] / s["object"]).exists() for s in shards)  # copies released
+        assert not any((store.cache / s["sha256"][:2] / s["sha256"]).exists() for s in shards)  # copies released
         stream.close()
         assert on_disk() == []
 
@@ -393,10 +379,11 @@ def test_reading_documents_from_a_remote_store_keeps_at_most_one_shard_on_disk(t
             path = tmp_path / f"{i}.parquet"
             rows = [([i, 0], "s", f"s/{i}", "p", 0), ([i, 0], "s", "s/again", "p", 1)]
             token_sha256 = write_shard(path, rows)
-            shards.append({"object": store.put_file(path), "token_sha256": token_sha256, "tokens": 4})
+            file = store.put_named(f"s1/datasets/d/{i}.parquet", path)
+            shards.append({"key": file.key, "sha256": file.sha256, "token_sha256": token_sha256, "tokens": 4})
 
         def copies():
-            return [s["object"] for s in shards if (store.cache / s["object"][:2] / s["object"]).exists()]
+            return [s["key"] for s in shards if (store.cache / s["sha256"][:2] / s["sha256"]).exists()]
 
         seen = []
         for document, source, tokens in documents(store, shards):
@@ -405,20 +392,20 @@ def test_reading_documents_from_a_remote_store_keeps_at_most_one_shard_on_disk(t
         assert seen == [("s/0", "s", [0, 0]), ("s/again", "s", [0, 0]), ("s/1", "s", [1, 0]), ("s/2", "s", [2, 0])]
 
 
-def test_a_refused_replace_of_an_object_already_stored_counts_as_stored(tmp_path, monkeypatch):
-    # on Windows, two processes storing the same object at once: replacing a file
+def test_a_refused_replace_of_a_file_already_stored_counts_as_stored(tmp_path, monkeypatch):
+    # on Windows, two processes storing the same file at once: replacing a file
     # another process has open is refused, and the name is the content's hash
     store = open_store((tmp_path / "store").as_uri())
     source = tmp_path / "data.bin"
     source.write_bytes(b"same bytes\n")
     sha = store.put_file(source)
-    target = tmp_path / "store" / "objects" / sha[:2] / sha
+    target = tmp_path / "store" / "cache" / "files" / sha
 
     def refuse(tmp, to):
         raise PermissionError(5, "Access denied")
 
     monkeypatch.setattr("wpt_store.kinds.os.replace", refuse)
-    store._put(sha, source)  # what put_file does when both workers saw no object
+    store._put(sha, source)  # what put_file does when both workers saw no file
     assert target.read_bytes() == b"same bytes\n"
     assert [p.name for p in target.parent.iterdir()] == [sha]
 
@@ -430,7 +417,7 @@ def test_a_refused_replace_of_an_object_already_stored_counts_as_stored(tmp_path
 
 
 def test_a_replace_larger_than_one_part_goes_up_in_parts_under_its_condition(tmp_path, monkeypatch):
-    # a single upload is refused above 5 GiB, which the store database outgrows: a replace in parts must still
+    # a single upload is refused above 5 GiB, which the index may outgrow: a replace in parts must still
     # only replace the version it read
     from wpt_store import kinds
     from wpt_store.kinds import Changed
@@ -446,23 +433,27 @@ def test_a_replace_larger_than_one_part_goes_up_in_parts_under_its_condition(tmp
         client = boto3.client("s3")
         client.create_bucket(Bucket="wpt-test")
         bucket = kinds.Bucket(client, "wpt-test", "store", part=5 << 20)
-        first = bucket.replace("database", big, None)
-        assert bucket.read("database") == (big.read_bytes(), first)
+        first = bucket.replace("index", big, None)
+        assert bucket.read("index") == (big.read_bytes(), first)
         assert first.strip('"').endswith("-3")  # three parts, not one upload
         with pytest.raises(Changed):
-            bucket.replace("database", big, None)  # a file is there now
+            bucket.replace("index", big, None)  # a file is there now
         big.write_bytes(os.urandom(11 << 20))
-        second = bucket.replace("database", big, first)
-        assert bucket.read("database") == (big.read_bytes(), second)
+        second = bucket.replace("index", big, first)
+        assert bucket.read("index") == (big.read_bytes(), second)
 
 
 def test_uploads_in_parts_running_at_once_share_one_limit_of_parts_in_flight(tmp_path, monkeypatch):
-    # bundles stored at the same moment must not multiply the connections to S3: their parts share one limit
+    # tars stored at the same moment must not multiply the connections to S3: their parts share one limit
     from wpt_store import kinds
 
     monkeypatch.setattr(kinds, "UPLOADS", 3)
     monkeypatch.setattr(kinds, "SETTLE", 0.0)  # a started part shows in the measures at once
     monkeypatch.setattr(kinds, "_parts", None)  # this process's parts, made again with that limit
+    # the limit alone decides here: on a busy machine the free memory would keep a second part from starting
+    sizing = kinds._upload_parts().sizing
+    monkeypatch.setattr(sizing, "measure", lambda running: 1)
+    monkeypatch.setattr(sizing.machine, "memory", lambda: (1 << 40, 1 << 40))
     lock, running, peak, sent = threading.Lock(), [0], [0], {}
 
     class Client:
@@ -655,7 +646,7 @@ def test_an_error_on_a_range_fetched_ahead_is_raised_at_the_read_that_needs_it(t
 
     with mock_aws():
         client, store, sha, text = stored_text(tmp_path, monkeypatch)
-        table = store._table(store._found(sha))
+        table = store._table(store._found(store._file(sha)))
         client.fail_from, client.fail = table.stored[8], LinkDown("the link dropped")  # from the 9th frame on
         frame = table.original[1]  # the original bytes of one frame, about 1 MB
         for start in range(0, 6 * frame, frame):  # the reads before: fine, though blocks ahead already failed
